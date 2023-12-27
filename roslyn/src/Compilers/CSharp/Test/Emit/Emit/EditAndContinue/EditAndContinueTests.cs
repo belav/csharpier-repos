@@ -62,13 +62,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 )
                 .AddGeneration(
                     source: """
-                        class C
+                    class C
+                    {
+                        public C()
                         {
-                            public C()
-                            {
-                            }
                         }
-                        """,
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -133,10 +133,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -173,21 +173,21 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A000005
-                                  IL_0005:  throw
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  call       0x0A000006
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  call       0x0A000006
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -728,12 +728,12 @@ class Bad : Bad
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: """
-                        class C
-                        {
-                            public int F(ref int x) => throw null;
-                            public int G(in int y, ref readonly int z) => throw null;
-                        }
-                        """,
+                    class C
+                    {
+                        public int F(ref int x) => throw null;
+                        public int G(in int y, ref readonly int z) => throw null;
+                    }
+                    """,
                     validator: g => { }
                 )
                 .AddGeneration(
@@ -781,11 +781,11 @@ class Bad : Bad
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: """
-                        class C
-                        {
-                            public int F(ref int x) => throw null;
-                        }
-                        """,
+                    class C
+                    {
+                        public int F(ref int x) => throw null;
+                    }
+                    """,
                     validator: g => { }
                 )
                 .AddGeneration(
@@ -822,12 +822,12 @@ class Bad : Bad
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: """
-                        class C
-                        {
-                            public int F(ref int x) => throw null;
-                            public int G(ref readonly int x) => throw null;
-                        }
-                        """,
+                    class C
+                    {
+                        public int F(ref int x) => throw null;
+                        public int G(ref readonly int x) => throw null;
+                    }
+                    """,
                     validator: g => { }
                 )
                 .AddGeneration(
@@ -3165,17 +3165,17 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: """
-                        using System;
+                    using System;
 
-                        class C
+                    class C
+                    {
+                        void F()
                         {
-                            void F()
-                            {
-                                _ = new Action(() => Console.WriteLine(1));
-                                _ = new Action(<N:0>() => Console.WriteLine(2)</N:0>);
-                            } 
-                        }
-                        """,
+                            _ = new Action(() => Console.WriteLine(1));
+                            _ = new Action(<N:0>() => Console.WriteLine(2)</N:0>);
+                        } 
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTableSize(TableIndex.MethodDef, 6);
@@ -3183,16 +3183,16 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        using System;
+                    using System;
 
-                        class C
+                    class C
+                    {
+                        void F()
                         {
-                            void F()
-                            {
-                                _ = new Action(<N:0>() => Console.WriteLine(2)</N:0>);
-                            } 
-                        }
-                        """,
+                            _ = new Action(<N:0>() => Console.WriteLine(2)</N:0>);
+                        } 
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -3234,33 +3234,33 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size       30 (0x1e)
-                                  .maxstack  8
-                                  IL_0000:  nop
-                                  IL_0001:  ldsfld     0x04000003
-                                  IL_0006:  brtrue.s   IL_001d
-                                  IL_0008:  ldsfld     0x04000001
-                                  IL_000d:  ldftn      0x06000006
-                                  IL_0013:  newobj     0x0A000009
-                                  IL_0018:  stsfld     0x04000003
-                                  IL_001d:  ret
-                                }
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A00000A
-                                  IL_0005:  throw
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldc.i4.2
-                                  IL_0001:  call       0x0A00000B
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                """
+                            {
+                              // Code size       30 (0x1e)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldsfld     0x04000003
+                              IL_0006:  brtrue.s   IL_001d
+                              IL_0008:  ldsfld     0x04000001
+                              IL_000d:  ldftn      0x06000006
+                              IL_0013:  newobj     0x0A000009
+                              IL_0018:  stsfld     0x04000003
+                              IL_001d:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00000A
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldc.i4.2
+                              IL_0001:  call       0x0A00000B
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -3274,15 +3274,15 @@ class C
             using var _ = new EditAndContinueTest(options: TestOptions.DebugExe)
                 .AddBaseline(
                     source: """
-                        var <N:0>g1 = C.G1</N:0>;
-                        var <N:1>g2 = C.G2</N:1>;
+                    var <N:0>g1 = C.G1</N:0>;
+                    var <N:1>g2 = C.G2</N:1>;
 
-                        class C
-                        {
-                           public static void G1(bool a = true) { }
-                           public static void G2(bool a = false) { }
-                        }
-                        """,
+                    class C
+                    {
+                       public static void G1(bool a = true) { }
+                       public static void G2(bool a = false) { }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -3297,50 +3297,50 @@ class C
                         g.VerifyMethodBody(
                             "<top-level-statements-entry-point>",
                             """
-                                {
-                                  // Code size       57 (0x39)
-                                  .maxstack  2
-                                  .locals init (<>f__AnonymousDelegate0<bool> V_0, //g1
-                                                <>f__AnonymousDelegate1<bool> V_1) //g2
-                                  // sequence point: var      g1 = C.G1      ;
-                                  IL_0000:  ldsfld     "<anonymous delegate> Program.<>O.<0>__G1"
-                                  IL_0005:  dup
-                                  IL_0006:  brtrue.s   IL_001b
-                                  IL_0008:  pop
-                                  IL_0009:  ldnull
-                                  IL_000a:  ldftn      "void C.G1(bool)"
-                                  IL_0010:  newobj     "<>f__AnonymousDelegate0<bool>..ctor(object, System.IntPtr)"
-                                  IL_0015:  dup
-                                  IL_0016:  stsfld     "<anonymous delegate> Program.<>O.<0>__G1"
-                                  IL_001b:  stloc.0
-                                  // sequence point: var      g2 = C.G2      ;
-                                  IL_001c:  ldsfld     "<anonymous delegate> Program.<>O.<1>__G2"
-                                  IL_0021:  dup
-                                  IL_0022:  brtrue.s   IL_0037
-                                  IL_0024:  pop
-                                  IL_0025:  ldnull
-                                  IL_0026:  ldftn      "void C.G2(bool)"
-                                  IL_002c:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
-                                  IL_0031:  dup
-                                  IL_0032:  stsfld     "<anonymous delegate> Program.<>O.<1>__G2"
-                                  IL_0037:  stloc.1
-                                  IL_0038:  ret
-                                }
-                                """
+                            {
+                              // Code size       57 (0x39)
+                              .maxstack  2
+                              .locals init (<>f__AnonymousDelegate0<bool> V_0, //g1
+                                            <>f__AnonymousDelegate1<bool> V_1) //g2
+                              // sequence point: var      g1 = C.G1      ;
+                              IL_0000:  ldsfld     "<anonymous delegate> Program.<>O.<0>__G1"
+                              IL_0005:  dup
+                              IL_0006:  brtrue.s   IL_001b
+                              IL_0008:  pop
+                              IL_0009:  ldnull
+                              IL_000a:  ldftn      "void C.G1(bool)"
+                              IL_0010:  newobj     "<>f__AnonymousDelegate0<bool>..ctor(object, System.IntPtr)"
+                              IL_0015:  dup
+                              IL_0016:  stsfld     "<anonymous delegate> Program.<>O.<0>__G1"
+                              IL_001b:  stloc.0
+                              // sequence point: var      g2 = C.G2      ;
+                              IL_001c:  ldsfld     "<anonymous delegate> Program.<>O.<1>__G2"
+                              IL_0021:  dup
+                              IL_0022:  brtrue.s   IL_0037
+                              IL_0024:  pop
+                              IL_0025:  ldnull
+                              IL_0026:  ldftn      "void C.G2(bool)"
+                              IL_002c:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
+                              IL_0031:  dup
+                              IL_0032:  stsfld     "<anonymous delegate> Program.<>O.<1>__G2"
+                              IL_0037:  stloc.1
+                              IL_0038:  ret
+                            }
+                            """
                         );
                     }
                 )
                 .AddGeneration(
                     source: """
-                        var <N:1>g2 = C.G2</N:1>;
-                        var <N:0>g1 = C.G1</N:0>;
+                    var <N:1>g2 = C.G2</N:1>;
+                    var <N:0>g1 = C.G1</N:0>;
 
-                        class C
-                        {
-                           public static void G1(bool a = true) { }
-                           public static void G2(bool a = false) { }
-                        }
-                        """,
+                    class C
+                    {
+                       public static void G1(bool a = true) { }
+                       public static void G2(bool a = false) { }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -3356,34 +3356,34 @@ class C
                         g.VerifyIL(
                             "<top-level-statements-entry-point>",
                             """
-                                {
-                                  // Code size       57 (0x39)
-                                  .maxstack  2
-                                  .locals init (<>f__AnonymousDelegate0<bool> V_0, //g1
-                                                <>f__AnonymousDelegate1<bool> V_1) //g2
-                                  IL_0000:  ldsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
-                                  IL_0005:  dup
-                                  IL_0006:  brtrue.s   IL_001b
-                                  IL_0008:  pop
-                                  IL_0009:  ldnull
-                                  IL_000a:  ldftn      "void C.G2(bool)"
-                                  IL_0010:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
-                                  IL_0015:  dup
-                                  IL_0016:  stsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
-                                  IL_001b:  stloc.1
-                                  IL_001c:  ldsfld     "<anonymous delegate> Program.<>O#1.<1>__G1"
-                                  IL_0021:  dup
-                                  IL_0022:  brtrue.s   IL_0037
-                                  IL_0024:  pop
-                                  IL_0025:  ldnull
-                                  IL_0026:  ldftn      "void C.G1(bool)"
-                                  IL_002c:  newobj     "<>f__AnonymousDelegate0<bool>..ctor(object, System.IntPtr)"
-                                  IL_0031:  dup
-                                  IL_0032:  stsfld     "<anonymous delegate> Program.<>O#1.<1>__G1"
-                                  IL_0037:  stloc.0
-                                  IL_0038:  ret
-                                }
-                                """
+                            {
+                              // Code size       57 (0x39)
+                              .maxstack  2
+                              .locals init (<>f__AnonymousDelegate0<bool> V_0, //g1
+                                            <>f__AnonymousDelegate1<bool> V_1) //g2
+                              IL_0000:  ldsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
+                              IL_0005:  dup
+                              IL_0006:  brtrue.s   IL_001b
+                              IL_0008:  pop
+                              IL_0009:  ldnull
+                              IL_000a:  ldftn      "void C.G2(bool)"
+                              IL_0010:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
+                              IL_0015:  dup
+                              IL_0016:  stsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
+                              IL_001b:  stloc.1
+                              IL_001c:  ldsfld     "<anonymous delegate> Program.<>O#1.<1>__G1"
+                              IL_0021:  dup
+                              IL_0022:  brtrue.s   IL_0037
+                              IL_0024:  pop
+                              IL_0025:  ldnull
+                              IL_0026:  ldftn      "void C.G1(bool)"
+                              IL_002c:  newobj     "<>f__AnonymousDelegate0<bool>..ctor(object, System.IntPtr)"
+                              IL_0031:  dup
+                              IL_0032:  stsfld     "<anonymous delegate> Program.<>O#1.<1>__G1"
+                              IL_0037:  stloc.0
+                              IL_0038:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -3396,15 +3396,15 @@ class C
             using var _ = new EditAndContinueTest(options: TestOptions.DebugExe)
                 .AddBaseline(
                     source: """
-                        var <N:0>g1 = C.G1</N:0>;
-                        var <N:1>g2 = C.G2</N:1>;
+                    var <N:0>g1 = C.G1</N:0>;
+                    var <N:1>g2 = C.G2</N:1>;
 
-                        class C
-                        {
-                           public static void G1(bool a = true) { }
-                           public static void G2(bool a = false) { }
-                        }
-                        """,
+                    class C
+                    {
+                       public static void G1(bool a = true) { }
+                       public static void G2(bool a = false) { }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -3419,49 +3419,49 @@ class C
                         g.VerifyMethodBody(
                             "<top-level-statements-entry-point>",
                             """
-                                {
-                                  // Code size       57 (0x39)
-                                  .maxstack  2
-                                  .locals init (<>f__AnonymousDelegate0<bool> V_0, //g1
-                                                <>f__AnonymousDelegate1<bool> V_1) //g2
-                                  // sequence point: var      g1 = C.G1      ;
-                                  IL_0000:  ldsfld     "<anonymous delegate> Program.<>O.<0>__G1"
-                                  IL_0005:  dup
-                                  IL_0006:  brtrue.s   IL_001b
-                                  IL_0008:  pop
-                                  IL_0009:  ldnull
-                                  IL_000a:  ldftn      "void C.G1(bool)"
-                                  IL_0010:  newobj     "<>f__AnonymousDelegate0<bool>..ctor(object, System.IntPtr)"
-                                  IL_0015:  dup
-                                  IL_0016:  stsfld     "<anonymous delegate> Program.<>O.<0>__G1"
-                                  IL_001b:  stloc.0
-                                  // sequence point: var      g2 = C.G2      ;
-                                  IL_001c:  ldsfld     "<anonymous delegate> Program.<>O.<1>__G2"
-                                  IL_0021:  dup
-                                  IL_0022:  brtrue.s   IL_0037
-                                  IL_0024:  pop
-                                  IL_0025:  ldnull
-                                  IL_0026:  ldftn      "void C.G2(bool)"
-                                  IL_002c:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
-                                  IL_0031:  dup
-                                  IL_0032:  stsfld     "<anonymous delegate> Program.<>O.<1>__G2"
-                                  IL_0037:  stloc.1
-                                  IL_0038:  ret
-                                }
-                                """
+                            {
+                              // Code size       57 (0x39)
+                              .maxstack  2
+                              .locals init (<>f__AnonymousDelegate0<bool> V_0, //g1
+                                            <>f__AnonymousDelegate1<bool> V_1) //g2
+                              // sequence point: var      g1 = C.G1      ;
+                              IL_0000:  ldsfld     "<anonymous delegate> Program.<>O.<0>__G1"
+                              IL_0005:  dup
+                              IL_0006:  brtrue.s   IL_001b
+                              IL_0008:  pop
+                              IL_0009:  ldnull
+                              IL_000a:  ldftn      "void C.G1(bool)"
+                              IL_0010:  newobj     "<>f__AnonymousDelegate0<bool>..ctor(object, System.IntPtr)"
+                              IL_0015:  dup
+                              IL_0016:  stsfld     "<anonymous delegate> Program.<>O.<0>__G1"
+                              IL_001b:  stloc.0
+                              // sequence point: var      g2 = C.G2      ;
+                              IL_001c:  ldsfld     "<anonymous delegate> Program.<>O.<1>__G2"
+                              IL_0021:  dup
+                              IL_0022:  brtrue.s   IL_0037
+                              IL_0024:  pop
+                              IL_0025:  ldnull
+                              IL_0026:  ldftn      "void C.G2(bool)"
+                              IL_002c:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
+                              IL_0031:  dup
+                              IL_0032:  stsfld     "<anonymous delegate> Program.<>O.<1>__G2"
+                              IL_0037:  stloc.1
+                              IL_0038:  ret
+                            }
+                            """
                         );
                     }
                 )
                 .AddGeneration(
                     source: """
-                        var <N:1>g2 = C.G2</N:1>;
+                    var <N:1>g2 = C.G2</N:1>;
 
-                        class C
-                        {
-                           public static void G1(bool a = true) { }
-                           public static void G2(bool a = false) { }
-                        }
-                        """,
+                    class C
+                    {
+                       public static void G1(bool a = true) { }
+                       public static void G2(bool a = false) { }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -3477,24 +3477,24 @@ class C
                         g.VerifyIL(
                             "<top-level-statements-entry-point>",
                             """
-                                {
-                                  // Code size       29 (0x1d)
-                                  .maxstack  2
-                                  .locals init ([unchanged] V_0,
-                                                <>f__AnonymousDelegate1<bool> V_1) //g2
-                                  IL_0000:  ldsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
-                                  IL_0005:  dup
-                                  IL_0006:  brtrue.s   IL_001b
-                                  IL_0008:  pop
-                                  IL_0009:  ldnull
-                                  IL_000a:  ldftn      "void C.G2(bool)"
-                                  IL_0010:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
-                                  IL_0015:  dup
-                                  IL_0016:  stsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
-                                  IL_001b:  stloc.1
-                                  IL_001c:  ret
-                                }
-                                """
+                            {
+                              // Code size       29 (0x1d)
+                              .maxstack  2
+                              .locals init ([unchanged] V_0,
+                                            <>f__AnonymousDelegate1<bool> V_1) //g2
+                              IL_0000:  ldsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
+                              IL_0005:  dup
+                              IL_0006:  brtrue.s   IL_001b
+                              IL_0008:  pop
+                              IL_0009:  ldnull
+                              IL_000a:  ldftn      "void C.G2(bool)"
+                              IL_0010:  newobj     "<>f__AnonymousDelegate1<bool>..ctor(object, System.IntPtr)"
+                              IL_0015:  dup
+                              IL_0016:  stsfld     "<anonymous delegate> Program.<>O#1.<0>__G2"
+                              IL_001b:  stloc.1
+                              IL_001c:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -3617,45 +3617,45 @@ partial class C
 
                         g.VerifyIL(
                             """
-                                                             {
-                                  // Code size       28 (0x1c)
-                                  .maxstack  2
-                                  IL_0000:  newobj     0x06000005
-                                  IL_0005:  stloc.0
-                                  IL_0006:  nop
-                                  IL_0007:  ldloc.0
-                                  IL_0008:  ldc.i4.5
-                                  IL_0009:  stfld      0x04000002
-                                  IL_000e:  ldloc.0
-                                  IL_000f:  ldftn      0x06000006
-                                  IL_0015:  newobj     0x0A000008
-                                  IL_001a:  stloc.1
-                                  IL_001b:  ret
-                                }
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A000009
-                                  IL_0005:  throw
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  call       0x0A00000A
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                {
-                                  // Code size        9 (0x9)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldfld      0x04000002
-                                  IL_0006:  ldc.i4.4
-                                  IL_0007:  add
-                                  IL_0008:  ret
-                                }
-                                """
+                                                         {
+                              // Code size       28 (0x1c)
+                              .maxstack  2
+                              IL_0000:  newobj     0x06000005
+                              IL_0005:  stloc.0
+                              IL_0006:  nop
+                              IL_0007:  ldloc.0
+                              IL_0008:  ldc.i4.5
+                              IL_0009:  stfld      0x04000002
+                              IL_000e:  ldloc.0
+                              IL_000f:  ldftn      0x06000006
+                              IL_0015:  newobj     0x0A000008
+                              IL_001a:  stloc.1
+                              IL_001b:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000009
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  call       0x0A00000A
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            {
+                              // Code size        9 (0x9)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000002
+                              IL_0006:  ldc.i4.4
+                              IL_0007:  add
+                              IL_0008:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -5135,10 +5135,10 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -5195,11 +5195,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            public string P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get; set; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.P")),
@@ -5291,10 +5291,10 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -5350,11 +5350,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            public string P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get; set; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.P")),
@@ -5466,10 +5466,10 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -5525,11 +5525,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            public string P { get { return "2"; } set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get { return "2"; } set { } }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, c => c.GetMember("C.P")),
@@ -5619,11 +5619,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            public string P { get { return "1"; } }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get { return "1"; } }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -5662,11 +5662,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            public string P { get { return "2"; } set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get { return "2"; } set { } }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, c => c.GetMember("C.P")),
@@ -6277,10 +6277,10 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6645,19 +6645,19 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        2 (0x2)
-                                  .maxstack  8
-                                  IL_0000:  ldc.i4.1
-                                  IL_0001:  ret
-                                }
-                                {
-                                  // Code size        2 (0x2)
-                                  .maxstack  8
-                                  IL_0000:  nop
-                                  IL_0001:  ret
-                                }
-                                """
+                            {
+                              // Code size        2 (0x2)
+                              .maxstack  8
+                              IL_0000:  ldc.i4.1
+                              IL_0001:  ret
+                            }
+                            {
+                              // Code size        2 (0x2)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -6837,10 +6837,10 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6917,11 +6917,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            public event System.EventHandler F;
-                        }
-                        """,
+                    class C
+                    {
+                        public event System.EventHandler F;
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -7081,11 +7081,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            public event System.EventHandler E;
-                        }
-                        """,
+                    class C
+                    {
+                        public event System.EventHandler E;
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -14962,10 +14962,10 @@ public interface IB
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -19929,56 +19929,56 @@ namespace N
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size       29 (0x1d)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldarg.1
-                                  IL_0002:  stfld      0x04000003
-                                  IL_0007:  ldarg.0
-                                  IL_0008:  ldarg.2
-                                  IL_0009:  stfld      0x04000005
-                                  IL_000e:  ldarg.0
-                                  IL_000f:  ldarg.3
-                                  IL_0010:  stfld      0x04000004
-                                  IL_0015:  ldarg.0
-                                  IL_0016:  call       0x0A000017
-                                  IL_001b:  nop
-                                  IL_001c:  ret
-                                }
-                                {
-                                  // Code size        7 (0x7)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldfld      0x04000005
-                                  IL_0006:  ret
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldarg.1
-                                  IL_0002:  stfld      0x04000005
-                                  IL_0007:  ret
-                                }
-                                {
-                                  // Code size       25 (0x19)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.1
-                                  IL_0001:  ldarg.0
-                                  IL_0002:  call       0x06000007
-                                  IL_0007:  stind.i4
-                                  IL_0008:  ldarg.2
-                                  IL_0009:  ldarg.0
-                                  IL_000a:  call       0x06000016
-                                  IL_000f:  stind.i4
-                                  IL_0010:  ldarg.3
-                                  IL_0011:  ldarg.0
-                                  IL_0012:  call       0x06000009
-                                  IL_0017:  stind.i4
-                                  IL_0018:  ret
-                                }
-                                """
+                            {
+                              // Code size       29 (0x1d)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000003
+                              IL_0007:  ldarg.0
+                              IL_0008:  ldarg.2
+                              IL_0009:  stfld      0x04000005
+                              IL_000e:  ldarg.0
+                              IL_000f:  ldarg.3
+                              IL_0010:  stfld      0x04000004
+                              IL_0015:  ldarg.0
+                              IL_0016:  call       0x0A000017
+                              IL_001b:  nop
+                              IL_001c:  ret
+                            }
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000005
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000005
+                              IL_0007:  ret
+                            }
+                            {
+                              // Code size       25 (0x19)
+                              .maxstack  8
+                              IL_0000:  ldarg.1
+                              IL_0001:  ldarg.0
+                              IL_0002:  call       0x06000007
+                              IL_0007:  stind.i4
+                              IL_0008:  ldarg.2
+                              IL_0009:  ldarg.0
+                              IL_000a:  call       0x06000016
+                              IL_000f:  stind.i4
+                              IL_0010:  ldarg.3
+                              IL_0011:  ldarg.0
+                              IL_0012:  call       0x06000009
+                              IL_0017:  stind.i4
+                              IL_0018:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -20084,22 +20084,22 @@ namespace N
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        7 (0x7)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldfld      0x04000004
-                                  IL_0006:  ret
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldarg.1
-                                  IL_0002:  stfld      0x04000004
-                                  IL_0007:  ret
-                                }
-                                """
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000004
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000004
+                              IL_0007:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -20336,14 +20336,14 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
+                    class C
+                    {
+                    }
 
-                        class N
-                        {
-                        }
-                        """,
+                    class N
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -20405,12 +20405,12 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            void M1() { }
-                            void M2() { }
-                        }
-                        """,
+                    class C
+                    {
+                        void M1() { }
+                        void M2() { }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.M2")),
@@ -20443,11 +20443,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            void M1() { }
-                        }
-                        """,
+                    class C
+                    {
+                        void M1() { }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -20506,10 +20506,10 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -20542,11 +20542,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            void M1() { System.Console.Write(1); }
-                        }
-                        """,
+                    class C
+                    {
+                        void M1() { System.Console.Write(1); }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.M1")),
@@ -20610,13 +20610,13 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class A : System.Attribute { }
-                        class B : System.Attribute { }
+                    class A : System.Attribute { }
+                    class B : System.Attribute { }
 
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -20655,17 +20655,17 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class A : System.Attribute { }
-                        class B : System.Attribute { }
+                    class A : System.Attribute { }
+                    class B : System.Attribute { }
 
-                        class C
-                        {
-                            [B]
-                            [return: B]
-                            void M1([B]int x) { }
+                    class C
+                    {
+                        [B]
+                        [return: B]
+                        void M1([B]int x) { }
 
-                        }
-                        """,
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.M1")),
@@ -20763,12 +20763,12 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            void Goo() { }
-                            C M1(C c) { return default; }
-                        }
-                        """,
+                    class C
+                    {
+                        void Goo() { }
+                        C M1(C c) { return default; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.M1")),
@@ -20815,11 +20815,11 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            void Goo() { }
-                        }
-                        """,
+                    class C
+                    {
+                        void Goo() { }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -20855,12 +20855,12 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            void Goo() { }
-                            C M1(C b) { System.Console.Write(1); return default; }
-                        }
-                        """,
+                    class C
+                    {
+                        void Goo() { }
+                        C M1(C b) { System.Console.Write(1); return default; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.M1")),
@@ -20929,12 +20929,12 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        using System;
+                    using System;
 
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -20968,25 +20968,25 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A000008
-                                  IL_0005:  throw
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000008
+                              IL_0005:  throw
+                            }
+                            """
                         );
                     }
                 )
                 .AddGeneration(
                     source: """
-                        using System;
+                    using System;
 
-                        class C
-                        {
-                            void F() { _ = new Action(() => Console.WriteLine(2)); } 
-                        }
-                        """,
+                    class C
+                    {
+                        void F() { _ = new Action(() => Console.WriteLine(2)); } 
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Insert, symbolProvider: c => c.GetMember("C.F")),
@@ -21029,46 +21029,46 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size       30 (0x1e)
-                                  .maxstack  8
-                                  IL_0000:  nop
-                                  IL_0001:  ldsfld     0x04000003
-                                  IL_0006:  brtrue.s   IL_001d
-                                  IL_0008:  ldsfld     0x04000001
-                                  IL_000d:  ldftn      0x06000006
-                                  IL_0013:  newobj     0x0A00000A
-                                  IL_0018:  stsfld     0x04000003
-                                  IL_001d:  ret
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  call       0x0A00000B
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldc.i4.2
-                                  IL_0001:  call       0x0A00000C
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                """
+                            {
+                              // Code size       30 (0x1e)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldsfld     0x04000003
+                              IL_0006:  brtrue.s   IL_001d
+                              IL_0008:  ldsfld     0x04000001
+                              IL_000d:  ldftn      0x06000006
+                              IL_0013:  newobj     0x0A00000A
+                              IL_0018:  stsfld     0x04000003
+                              IL_001d:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  call       0x0A00000B
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldc.i4.2
+                              IL_0001:  call       0x0A00000C
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            """
                         );
                     }
                 )
                 .AddGeneration(
                     source: """
-                        using System;
+                    using System;
 
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -21107,13 +21107,13 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A00000D
-                                  IL_0005:  throw
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00000D
+                              IL_0005:  throw
+                            }
+                            """
                         );
                     }
                 )
@@ -21140,13 +21140,13 @@ class C
                 .AddGeneration(
                     // Add method with a lambda
                     source: """
-                        using System;
+                    using System;
 
-                        class C
-                        {
-                            void F() { _ = new Action(() => Console.WriteLine(1)); } 
-                        }
-                        """,
+                    class C
+                    {
+                        void F() { _ = new Action(() => Console.WriteLine(1)); } 
+                    }
+                    """,
                     edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")), },
                     validator: g =>
                     {
@@ -21162,12 +21162,12 @@ class C
                 .AddGeneration(
                     // Delete the method
                     source: """
-                        using System;
+                    using System;
 
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -21205,13 +21205,13 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A000009
-                                  IL_0005:  throw
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000009
+                              IL_0005:  throw
+                            }
+                            """
                         );
                     }
                 )
@@ -21374,13 +21374,13 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A000023
-                                  IL_0005:  throw
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000023
+                              IL_0005:  throw
+                            }
+                            """
                         );
                     }
                 )
@@ -21431,42 +21431,42 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size       30 (0x1e)
-                                  .maxstack  8
-                                  IL_0000:  nop
-                                  IL_0001:  ldsfld     0x0A000025
-                                  IL_0006:  brtrue.s   IL_001d
-                                  IL_0008:  ldsfld     0x0A000026
-                                  IL_000d:  ldftn      0x0A000027
-                                  IL_0013:  newobj     0x0A000028
-                                  IL_0018:  stsfld     0x0A000025
-                                  IL_001d:  ret
-                                }
-                                {
-                                  // Code size       11 (0xb)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A000029
-                                  IL_0005:  stsfld     0x0A00002A
-                                  IL_000a:  ret
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  call       0x0A00002B
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldc.i4.4
-                                  IL_0001:  call       0x0A00002C
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                """
+                            {
+                              // Code size       30 (0x1e)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldsfld     0x0A000025
+                              IL_0006:  brtrue.s   IL_001d
+                              IL_0008:  ldsfld     0x0A000026
+                              IL_000d:  ldftn      0x0A000027
+                              IL_0013:  newobj     0x0A000028
+                              IL_0018:  stsfld     0x0A000025
+                              IL_001d:  ret
+                            }
+                            {
+                              // Code size       11 (0xb)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000029
+                              IL_0005:  stsfld     0x0A00002A
+                              IL_000a:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  call       0x0A00002B
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldc.i4.4
+                              IL_0001:  call       0x0A00002C
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -21523,13 +21523,13 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A00002D
-                                  IL_0005:  throw
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00002D
+                              IL_0005:  throw
+                            }
+                            """
                         );
                     }
                 )
@@ -21648,13 +21648,13 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A00000C
-                                  IL_0005:  throw
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00000C
+                              IL_0005:  throw
+                            }
+                            """
                         );
                     }
                 )
@@ -21707,58 +21707,58 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size       29 (0x1d)
-                                  .maxstack  2
-                                  IL_0000:  newobj     0x0A00000E
-                                  IL_0005:  stloc.0
-                                  IL_0006:  ldloc.0
-                                  IL_0007:  ldarg.1
-                                  IL_0008:  stfld      0x0A00000F
-                                  IL_000d:  nop
-                                  IL_000e:  nop
-                                  IL_000f:  ldloc.0
-                                  IL_0010:  ldloc.0
-                                  IL_0011:  ldflda     0x0A00000F
-                                  IL_0016:  callvirt   0x0A000010
-                                  IL_001b:  pop
-                                  IL_001c:  ret
-                                }
-                                {
-                                  // Code size        2 (0x2)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ret
-                                }
-                                {
-                                  // Code size        8 (0x8)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  call       0x0A000011
-                                  IL_0006:  nop
-                                  IL_0007:  ret
-                                }
-                                {
-                                  // Code size        9 (0x9)
-                                  .maxstack  1
-                                  IL_0000:  nop
-                                  IL_0001:  nop
-                                  IL_0002:  nop
-                                  IL_0003:  ldarg.1
-                                  IL_0004:  stloc.0
-                                  IL_0005:  br.s       IL_0007
-                                  IL_0007:  ldloc.0
-                                  IL_0008:  ret
-                                }
-                                {
-                                  // Code size       12 (0xc)
-                                  .maxstack  8
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldfld      0x0A00000F
-                                  IL_0006:  call       0x0A000012
-                                  IL_000b:  ret
-                                }
-                                """
+                            {
+                              // Code size       29 (0x1d)
+                              .maxstack  2
+                              IL_0000:  newobj     0x0A00000E
+                              IL_0005:  stloc.0
+                              IL_0006:  ldloc.0
+                              IL_0007:  ldarg.1
+                              IL_0008:  stfld      0x0A00000F
+                              IL_000d:  nop
+                              IL_000e:  nop
+                              IL_000f:  ldloc.0
+                              IL_0010:  ldloc.0
+                              IL_0011:  ldflda     0x0A00000F
+                              IL_0016:  callvirt   0x0A000010
+                              IL_001b:  pop
+                              IL_001c:  ret
+                            }
+                            {
+                              // Code size        2 (0x2)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  call       0x0A000011
+                              IL_0006:  nop
+                              IL_0007:  ret
+                            }
+                            {
+                              // Code size        9 (0x9)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  nop
+                              IL_0002:  nop
+                              IL_0003:  ldarg.1
+                              IL_0004:  stloc.0
+                              IL_0005:  br.s       IL_0007
+                              IL_0007:  ldloc.0
+                              IL_0008:  ret
+                            }
+                            {
+                              // Code size       12 (0xc)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x0A00000F
+                              IL_0006:  call       0x0A000012
+                              IL_000b:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -21809,13 +21809,13 @@ class C
 
                         g.VerifyIL(
                             """
-                                {
-                                  // Code size        6 (0x6)
-                                  .maxstack  8
-                                  IL_0000:  newobj     0x0A000013
-                                  IL_0005:  throw
-                                }
-                                """
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000013
+                              IL_0005:  throw
+                            }
+                            """
                         );
                     }
                 )
@@ -22852,54 +22852,54 @@ file class C
             )
                 .AddBaseline(
                     source: """
-                        using System;
-                        class C
+                    using System;
+                    class C
+                    {
+                        void F()
                         {
-                            void F()
-                            {
-                                Span<bool> <N:0>x = stackalloc bool[64]</N:0>;
-                            }
+                            Span<bool> <N:0>x = stackalloc bool[64]</N:0>;
                         }
-                        """,
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyMethodBody(
                             "C.F",
                             """
-                                {
-                                  // Code size       17 (0x11)
-                                  .maxstack  2
-                                  .locals init (System.Span<bool> V_0, //x
-                                                System.Span<bool> V_1)
-                                  // sequence point: {
-                                  IL_0000:  nop
-                                  // sequence point: Span<bool>      x = stackalloc bool[64]      ;
-                                  IL_0001:  ldc.i4.s   64
-                                  IL_0003:  conv.u
-                                  IL_0004:  localloc
-                                  IL_0006:  ldc.i4.s   64
-                                  IL_0008:  newobj     "System.Span<bool>..ctor(void*, int)"
-                                  IL_000d:  stloc.1
-                                  IL_000e:  ldloc.1
-                                  IL_000f:  stloc.0
-                                  // sequence point: }
-                                  IL_0010:  ret
-                                }
-                                """
+                            {
+                              // Code size       17 (0x11)
+                              .maxstack  2
+                              .locals init (System.Span<bool> V_0, //x
+                                            System.Span<bool> V_1)
+                              // sequence point: {
+                              IL_0000:  nop
+                              // sequence point: Span<bool>      x = stackalloc bool[64]      ;
+                              IL_0001:  ldc.i4.s   64
+                              IL_0003:  conv.u
+                              IL_0004:  localloc
+                              IL_0006:  ldc.i4.s   64
+                              IL_0008:  newobj     "System.Span<bool>..ctor(void*, int)"
+                              IL_000d:  stloc.1
+                              IL_000e:  ldloc.1
+                              IL_000f:  stloc.0
+                              // sequence point: }
+                              IL_0010:  ret
+                            }
+                            """
                         );
                     }
                 )
                 .AddGeneration(
                     source: """
-                        using System;
-                        class C
+                    using System;
+                    class C
+                    {
+                        void F()
                         {
-                            void F()
-                            {
-                                /**/Span<bool> <N:0>x = stackalloc bool[64]</N:0>;
-                            }
+                            /**/Span<bool> <N:0>x = stackalloc bool[64]</N:0>;
                         }
-                        """,
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -22913,24 +22913,24 @@ file class C
                         g.VerifyIL(
                             "C.F",
                             """
-                                {
-                                  // Code size       17 (0x11)
-                                  .maxstack  2
-                                  .locals init (System.Span<bool> V_0, //x
-                                                [unchanged] V_1,
-                                                System.Span<bool> V_2)
-                                  IL_0000:  nop
-                                  IL_0001:  ldc.i4.s   64
-                                  IL_0003:  conv.u
-                                  IL_0004:  localloc
-                                  IL_0006:  ldc.i4.s   64
-                                  IL_0008:  newobj     "System.Span<bool>..ctor(void*, int)"
-                                  IL_000d:  stloc.2
-                                  IL_000e:  ldloc.2
-                                  IL_000f:  stloc.0
-                                  IL_0010:  ret
-                                }
-                                """
+                            {
+                              // Code size       17 (0x11)
+                              .maxstack  2
+                              .locals init (System.Span<bool> V_0, //x
+                                            [unchanged] V_1,
+                                            System.Span<bool> V_2)
+                              IL_0000:  nop
+                              IL_0001:  ldc.i4.s   64
+                              IL_0003:  conv.u
+                              IL_0004:  localloc
+                              IL_0006:  ldc.i4.s   64
+                              IL_0008:  newobj     "System.Span<bool>..ctor(void*, int)"
+                              IL_000d:  stloc.2
+                              IL_000e:  ldloc.2
+                              IL_000f:  stloc.0
+                              IL_0010:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -22966,11 +22966,11 @@ file class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            byte[] b = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-                        }
-                        """,
+                    class C
+                    {
+                        byte[] b = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -22993,59 +22993,59 @@ file class C
                         g.VerifyIL(
                             "C..ctor",
                             """
-                                {
-                                  // Code size       65 (0x41)
-                                  .maxstack  5
-                                  IL_0000:  ldarg.0
-                                  IL_0001:  ldc.i4.s   11
-                                  IL_0003:  newarr     "byte"
-                                  IL_0008:  dup
-                                  IL_0009:  ldc.i4.1
-                                  IL_000a:  ldc.i4.1
-                                  IL_000b:  stelem.i1
-                                  IL_000c:  dup
-                                  IL_000d:  ldc.i4.2
-                                  IL_000e:  ldc.i4.2
-                                  IL_000f:  stelem.i1
-                                  IL_0010:  dup
-                                  IL_0011:  ldc.i4.3
-                                  IL_0012:  ldc.i4.3
-                                  IL_0013:  stelem.i1
-                                  IL_0014:  dup
-                                  IL_0015:  ldc.i4.4
-                                  IL_0016:  ldc.i4.4
-                                  IL_0017:  stelem.i1
-                                  IL_0018:  dup
-                                  IL_0019:  ldc.i4.5
-                                  IL_001a:  ldc.i4.5
-                                  IL_001b:  stelem.i1
-                                  IL_001c:  dup
-                                  IL_001d:  ldc.i4.6
-                                  IL_001e:  ldc.i4.6
-                                  IL_001f:  stelem.i1
-                                  IL_0020:  dup
-                                  IL_0021:  ldc.i4.7
-                                  IL_0022:  ldc.i4.7
-                                  IL_0023:  stelem.i1
-                                  IL_0024:  dup
-                                  IL_0025:  ldc.i4.8
-                                  IL_0026:  ldc.i4.8
-                                  IL_0027:  stelem.i1
-                                  IL_0028:  dup
-                                  IL_0029:  ldc.i4.s   9
-                                  IL_002b:  ldc.i4.s   9
-                                  IL_002d:  stelem.i1
-                                  IL_002e:  dup
-                                  IL_002f:  ldc.i4.s   10
-                                  IL_0031:  ldc.i4.s   10
-                                  IL_0033:  stelem.i1
-                                  IL_0034:  stfld      "byte[] C.b"
-                                  IL_0039:  ldarg.0
-                                  IL_003a:  call       "object..ctor()"
-                                  IL_003f:  nop
-                                  IL_0040:  ret
-                                }
-                                """
+                            {
+                              // Code size       65 (0x41)
+                              .maxstack  5
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldc.i4.s   11
+                              IL_0003:  newarr     "byte"
+                              IL_0008:  dup
+                              IL_0009:  ldc.i4.1
+                              IL_000a:  ldc.i4.1
+                              IL_000b:  stelem.i1
+                              IL_000c:  dup
+                              IL_000d:  ldc.i4.2
+                              IL_000e:  ldc.i4.2
+                              IL_000f:  stelem.i1
+                              IL_0010:  dup
+                              IL_0011:  ldc.i4.3
+                              IL_0012:  ldc.i4.3
+                              IL_0013:  stelem.i1
+                              IL_0014:  dup
+                              IL_0015:  ldc.i4.4
+                              IL_0016:  ldc.i4.4
+                              IL_0017:  stelem.i1
+                              IL_0018:  dup
+                              IL_0019:  ldc.i4.5
+                              IL_001a:  ldc.i4.5
+                              IL_001b:  stelem.i1
+                              IL_001c:  dup
+                              IL_001d:  ldc.i4.6
+                              IL_001e:  ldc.i4.6
+                              IL_001f:  stelem.i1
+                              IL_0020:  dup
+                              IL_0021:  ldc.i4.7
+                              IL_0022:  ldc.i4.7
+                              IL_0023:  stelem.i1
+                              IL_0024:  dup
+                              IL_0025:  ldc.i4.8
+                              IL_0026:  ldc.i4.8
+                              IL_0027:  stelem.i1
+                              IL_0028:  dup
+                              IL_0029:  ldc.i4.s   9
+                              IL_002b:  ldc.i4.s   9
+                              IL_002d:  stelem.i1
+                              IL_002e:  dup
+                              IL_002f:  ldc.i4.s   10
+                              IL_0031:  ldc.i4.s   10
+                              IL_0033:  stelem.i1
+                              IL_0034:  stfld      "byte[] C.b"
+                              IL_0039:  ldarg.0
+                              IL_003a:  call       "object..ctor()"
+                              IL_003f:  nop
+                              IL_0040:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -23083,11 +23083,11 @@ file class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            void F() { System.ReadOnlySpan<byte> b = stackalloc byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }; }
-                        }
-                        """,
+                    class C
+                    {
+                        void F() { System.ReadOnlySpan<byte> b = stackalloc byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),
@@ -23117,62 +23117,62 @@ file class C
                         g.VerifyIL(
                             "C.F",
                             """
-                                {
-                                  // Code size       58 (0x3a)
-                                  .maxstack  3
-                                  .locals init (System.ReadOnlySpan<byte> V_0, //b
-                                                System.Span<byte> V_1)
-                                  IL_0000:  nop
-                                  IL_0001:  ldc.i4.8
-                                  IL_0002:  conv.u
-                                  IL_0003:  localloc
-                                  IL_0005:  dup
-                                  IL_0006:  ldc.i4.0
-                                  IL_0007:  stind.i1
-                                  IL_0008:  dup
-                                  IL_0009:  ldc.i4.1
-                                  IL_000a:  add
-                                  IL_000b:  ldc.i4.1
-                                  IL_000c:  stind.i1
-                                  IL_000d:  dup
-                                  IL_000e:  ldc.i4.2
-                                  IL_000f:  add
-                                  IL_0010:  ldc.i4.2
-                                  IL_0011:  stind.i1
-                                  IL_0012:  dup
-                                  IL_0013:  ldc.i4.3
-                                  IL_0014:  add
-                                  IL_0015:  ldc.i4.3
-                                  IL_0016:  stind.i1
-                                  IL_0017:  dup
-                                  IL_0018:  ldc.i4.4
-                                  IL_0019:  add
-                                  IL_001a:  ldc.i4.4
-                                  IL_001b:  stind.i1
-                                  IL_001c:  dup
-                                  IL_001d:  ldc.i4.5
-                                  IL_001e:  add
-                                  IL_001f:  ldc.i4.5
-                                  IL_0020:  stind.i1
-                                  IL_0021:  dup
-                                  IL_0022:  ldc.i4.6
-                                  IL_0023:  add
-                                  IL_0024:  ldc.i4.6
-                                  IL_0025:  stind.i1
-                                  IL_0026:  dup
-                                  IL_0027:  ldc.i4.7
-                                  IL_0028:  add
-                                  IL_0029:  ldc.i4.7
-                                  IL_002a:  stind.i1
-                                  IL_002b:  ldc.i4.8
-                                  IL_002c:  newobj     "System.Span<byte>..ctor(void*, int)"
-                                  IL_0031:  stloc.1
-                                  IL_0032:  ldloc.1
-                                  IL_0033:  call       "System.ReadOnlySpan<byte> System.Span<byte>.op_Implicit(System.Span<byte>)"
-                                  IL_0038:  stloc.0
-                                  IL_0039:  ret
-                                }
-                                """
+                            {
+                              // Code size       58 (0x3a)
+                              .maxstack  3
+                              .locals init (System.ReadOnlySpan<byte> V_0, //b
+                                            System.Span<byte> V_1)
+                              IL_0000:  nop
+                              IL_0001:  ldc.i4.8
+                              IL_0002:  conv.u
+                              IL_0003:  localloc
+                              IL_0005:  dup
+                              IL_0006:  ldc.i4.0
+                              IL_0007:  stind.i1
+                              IL_0008:  dup
+                              IL_0009:  ldc.i4.1
+                              IL_000a:  add
+                              IL_000b:  ldc.i4.1
+                              IL_000c:  stind.i1
+                              IL_000d:  dup
+                              IL_000e:  ldc.i4.2
+                              IL_000f:  add
+                              IL_0010:  ldc.i4.2
+                              IL_0011:  stind.i1
+                              IL_0012:  dup
+                              IL_0013:  ldc.i4.3
+                              IL_0014:  add
+                              IL_0015:  ldc.i4.3
+                              IL_0016:  stind.i1
+                              IL_0017:  dup
+                              IL_0018:  ldc.i4.4
+                              IL_0019:  add
+                              IL_001a:  ldc.i4.4
+                              IL_001b:  stind.i1
+                              IL_001c:  dup
+                              IL_001d:  ldc.i4.5
+                              IL_001e:  add
+                              IL_001f:  ldc.i4.5
+                              IL_0020:  stind.i1
+                              IL_0021:  dup
+                              IL_0022:  ldc.i4.6
+                              IL_0023:  add
+                              IL_0024:  ldc.i4.6
+                              IL_0025:  stind.i1
+                              IL_0026:  dup
+                              IL_0027:  ldc.i4.7
+                              IL_0028:  add
+                              IL_0029:  ldc.i4.7
+                              IL_002a:  stind.i1
+                              IL_002b:  ldc.i4.8
+                              IL_002c:  newobj     "System.Span<byte>..ctor(void*, int)"
+                              IL_0031:  stloc.1
+                              IL_0032:  ldloc.1
+                              IL_0033:  call       "System.ReadOnlySpan<byte> System.Span<byte>.op_Implicit(System.Span<byte>)"
+                              IL_0038:  stloc.0
+                              IL_0039:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -23189,11 +23189,11 @@ file class C
             )
                 .AddBaseline(
                     source: """
-                        class C
-                        {
-                            System.ReadOnlySpan<byte> F() => "0123456789"u8;
-                        }
-                        """,
+                    class C
+                    {
+                        System.ReadOnlySpan<byte> F() => "0123456789"u8;
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -23210,11 +23210,11 @@ file class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            System.ReadOnlySpan<byte> F() => "0123456789X"u8;
-                        }
-                        """,
+                    class C
+                    {
+                        System.ReadOnlySpan<byte> F() => "0123456789X"u8;
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),
@@ -23234,61 +23234,61 @@ file class C
                         g.VerifyIL(
                             "C.F",
                             """
-                                {
-                                  // Code size       73 (0x49)
-                                  .maxstack  4
-                                  IL_0000:  ldc.i4.s   12
-                                  IL_0002:  newarr     "byte"
-                                  IL_0007:  dup
-                                  IL_0008:  ldc.i4.0
-                                  IL_0009:  ldc.i4.s   48
-                                  IL_000b:  stelem.i1
-                                  IL_000c:  dup
-                                  IL_000d:  ldc.i4.1
-                                  IL_000e:  ldc.i4.s   49
-                                  IL_0010:  stelem.i1
-                                  IL_0011:  dup
-                                  IL_0012:  ldc.i4.2
-                                  IL_0013:  ldc.i4.s   50
-                                  IL_0015:  stelem.i1
-                                  IL_0016:  dup
-                                  IL_0017:  ldc.i4.3
-                                  IL_0018:  ldc.i4.s   51
-                                  IL_001a:  stelem.i1
-                                  IL_001b:  dup
-                                  IL_001c:  ldc.i4.4
-                                  IL_001d:  ldc.i4.s   52
-                                  IL_001f:  stelem.i1
-                                  IL_0020:  dup
-                                  IL_0021:  ldc.i4.5
-                                  IL_0022:  ldc.i4.s   53
-                                  IL_0024:  stelem.i1
-                                  IL_0025:  dup
-                                  IL_0026:  ldc.i4.6
-                                  IL_0027:  ldc.i4.s   54
-                                  IL_0029:  stelem.i1
-                                  IL_002a:  dup
-                                  IL_002b:  ldc.i4.7
-                                  IL_002c:  ldc.i4.s   55
-                                  IL_002e:  stelem.i1
-                                  IL_002f:  dup
-                                  IL_0030:  ldc.i4.8
-                                  IL_0031:  ldc.i4.s   56
-                                  IL_0033:  stelem.i1
-                                  IL_0034:  dup
-                                  IL_0035:  ldc.i4.s   9
-                                  IL_0037:  ldc.i4.s   57
-                                  IL_0039:  stelem.i1
-                                  IL_003a:  dup
-                                  IL_003b:  ldc.i4.s   10
-                                  IL_003d:  ldc.i4.s   88
-                                  IL_003f:  stelem.i1
-                                  IL_0040:  ldc.i4.0
-                                  IL_0041:  ldc.i4.s   11
-                                  IL_0043:  newobj     "System.ReadOnlySpan<byte>..ctor(byte[], int, int)"
-                                  IL_0048:  ret
-                                }
-                                """
+                            {
+                              // Code size       73 (0x49)
+                              .maxstack  4
+                              IL_0000:  ldc.i4.s   12
+                              IL_0002:  newarr     "byte"
+                              IL_0007:  dup
+                              IL_0008:  ldc.i4.0
+                              IL_0009:  ldc.i4.s   48
+                              IL_000b:  stelem.i1
+                              IL_000c:  dup
+                              IL_000d:  ldc.i4.1
+                              IL_000e:  ldc.i4.s   49
+                              IL_0010:  stelem.i1
+                              IL_0011:  dup
+                              IL_0012:  ldc.i4.2
+                              IL_0013:  ldc.i4.s   50
+                              IL_0015:  stelem.i1
+                              IL_0016:  dup
+                              IL_0017:  ldc.i4.3
+                              IL_0018:  ldc.i4.s   51
+                              IL_001a:  stelem.i1
+                              IL_001b:  dup
+                              IL_001c:  ldc.i4.4
+                              IL_001d:  ldc.i4.s   52
+                              IL_001f:  stelem.i1
+                              IL_0020:  dup
+                              IL_0021:  ldc.i4.5
+                              IL_0022:  ldc.i4.s   53
+                              IL_0024:  stelem.i1
+                              IL_0025:  dup
+                              IL_0026:  ldc.i4.6
+                              IL_0027:  ldc.i4.s   54
+                              IL_0029:  stelem.i1
+                              IL_002a:  dup
+                              IL_002b:  ldc.i4.7
+                              IL_002c:  ldc.i4.s   55
+                              IL_002e:  stelem.i1
+                              IL_002f:  dup
+                              IL_0030:  ldc.i4.8
+                              IL_0031:  ldc.i4.s   56
+                              IL_0033:  stelem.i1
+                              IL_0034:  dup
+                              IL_0035:  ldc.i4.s   9
+                              IL_0037:  ldc.i4.s   57
+                              IL_0039:  stelem.i1
+                              IL_003a:  dup
+                              IL_003b:  ldc.i4.s   10
+                              IL_003d:  ldc.i4.s   88
+                              IL_003f:  stelem.i1
+                              IL_0040:  ldc.i4.0
+                              IL_0041:  ldc.i4.s   11
+                              IL_0043:  newobj     "System.ReadOnlySpan<byte>..ctor(byte[], int, int)"
+                              IL_0048:  ret
+                            }
+                            """
                         );
                     }
                 )
@@ -23416,11 +23416,11 @@ file class C
                 )
                 .AddGeneration(
                     source: """
-                        class C
-                        {
-                            static int F(bool b) => b switch { true => 2 };
-                        }
-                        """,
+                    class C
+                    {
+                        static int F(bool b) => b switch { true => 2 };
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),
@@ -23499,24 +23499,24 @@ file class C
                 )
                 .AddGeneration(
                     source: """
-                        using System.Runtime.CompilerServices;
+                    using System.Runtime.CompilerServices;
 
-                        [InlineArray(2)]
-                        public struct Buffer
-                        {
-                            private int _element0;
-                        }
+                    [InlineArray(2)]
+                    public struct Buffer
+                    {
+                        private int _element0;
+                    }
 
-                        class C
+                    class C
+                    {
+                        static void F()
                         {
-                            static void F()
-                            {
-                                var b = new Buffer();
-                                b[0] = 1;
-                                b[1] = 2;
-                            }
+                            var b = new Buffer();
+                            b[0] = 1;
+                            b[1] = 2;
                         }
-                        """,
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),
@@ -23899,12 +23899,12 @@ file class C
             )
                 .AddBaseline(
                     source: """
-                        using System.Collections.Generic;
-                        class C
-                        {
-                            static IEnumerable<int> F(int x, int y, IEnumerable<int> e) => [x, y];
-                        }
-                        """,
+                    using System.Collections.Generic;
+                    class C
+                    {
+                        static IEnumerable<int> F(int x, int y, IEnumerable<int> e) => [x, y];
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -23954,12 +23954,12 @@ file class C
                 )
                 .AddGeneration(
                     """
-                        using System.Collections.Generic;
-                        class C
-                        {
-                            static IEnumerable<int> F(int x, int y, IEnumerable<int> e) => [x, y, default];
-                        }
-                        """,
+                    using System.Collections.Generic;
+                    class C
+                    {
+                        static IEnumerable<int> F(int x, int y, IEnumerable<int> e) => [x, y, default];
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),
@@ -24011,12 +24011,12 @@ file class C
                 )
                 .AddGeneration(
                     """
-                        using System.Collections.Generic;
-                        class C
-                        {
-                            static IEnumerable<int> F(int x, int y, IEnumerable<int> e) => [x, y, ..e];
-                        }
-                        """,
+                    using System.Collections.Generic;
+                    class C
+                    {
+                        static IEnumerable<int> F(int x, int y, IEnumerable<int> e) => [x, y, ..e];
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),

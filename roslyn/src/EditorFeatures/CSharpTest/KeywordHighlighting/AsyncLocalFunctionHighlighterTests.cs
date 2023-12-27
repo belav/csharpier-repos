@@ -21,30 +21,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class AsyncExample
+                class AsyncExample
+                {
+                    async Task<int> AsyncMethod()
                     {
-                        async Task<int> AsyncMethod()
-                        {
-                            int hours = 24;
-                            return hours;
-                        }
-
-                        async Task UseAsync()
-                        {
-                            {|Cursor:[|async|]|} Task<int> function()
-                            {
-                                return [|await|] AsyncMethod();
-                            }
-                            int result = await AsyncMethod();
-                            Task<int> resultTask = AsyncMethod();
-                            result = await resultTask;
-                            result = await function();
-                        }
+                        int hours = 24;
+                        return hours;
                     }
-                    """
+
+                    async Task UseAsync()
+                    {
+                        {|Cursor:[|async|]|} Task<int> function()
+                        {
+                            return [|await|] AsyncMethod();
+                        }
+                        int result = await AsyncMethod();
+                        Task<int> resultTask = AsyncMethod();
+                        result = await resultTask;
+                        result = await function();
+                    }
+                }
+                """
             );
         }
     }

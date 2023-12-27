@@ -5032,37 +5032,37 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             var file = dir.CreateFile("a.cs");
             file.WriteAllText(
                 """
-                    #pragma warning disable CS0436 // System.Obsolete conflict
-                    #nullable enable
-                    using System;
+                #pragma warning disable CS0436 // System.Obsolete conflict
+                #nullable enable
+                using System;
 
-                    var c1 = new C1();
-                    var c2 = new C2();
-                    var c3 = new C3();
-                    var c4 = new C4();
+                var c1 = new C1();
+                var c2 = new C2();
+                var c3 = new C3();
+                var c4 = new C4();
 
-                    [Obsolete("Do not use C1", UrlFormat = "https://example.org/{0}")]
-                    public class C1 { }
-                    [Obsolete("Do not use C2", error: true, UrlFormat = "https://example.org/2/{0}")]
-                    public class C2 { }
-                    [Obsolete("Do not use C3", error: true, DiagnosticId = "OBSOLETEC3", UrlFormat = "https://example.org/3/{0}")]
-                    public class C3 { }
-                    [Obsolete("Do not use C4", DiagnosticId = "OBSOLETEC4", UrlFormat = "https://example.org/4")]
-                    public class C4 { }
+                [Obsolete("Do not use C1", UrlFormat = "https://example.org/{0}")]
+                public class C1 { }
+                [Obsolete("Do not use C2", error: true, UrlFormat = "https://example.org/2/{0}")]
+                public class C2 { }
+                [Obsolete("Do not use C3", error: true, DiagnosticId = "OBSOLETEC3", UrlFormat = "https://example.org/3/{0}")]
+                public class C3 { }
+                [Obsolete("Do not use C4", DiagnosticId = "OBSOLETEC4", UrlFormat = "https://example.org/4")]
+                public class C4 { }
 
-                    namespace System
+                namespace System
+                {
+                    public class ObsoleteAttribute : Attribute
                     {
-                        public class ObsoleteAttribute : Attribute
-                        {
-                            public ObsoleteAttribute() { }
-                            public ObsoleteAttribute(string? message) { }
-                            public ObsoleteAttribute(string? message, bool error) { }
+                        public ObsoleteAttribute() { }
+                        public ObsoleteAttribute(string? message) { }
+                        public ObsoleteAttribute(string? message, bool error) { }
 
-                            public string? DiagnosticId { get; set; }
-                            public string? UrlFormat { get; set; }
-                        }
+                        public string? DiagnosticId { get; set; }
+                        public string? UrlFormat { get; set; }
                     }
-                    """
+                }
+                """
             );
 
             var output = VerifyOutput(
@@ -5076,11 +5076,11 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             AssertEx.Equal(
                 """
-                    a.cs(5,14): warning CS0618: 'C1' is obsolete: 'Do not use C1' (https://example.org/CS0618)
-                    a.cs(6,14): error CS0619: 'C2' is obsolete: 'Do not use C2' (https://example.org/2/CS0619)
-                    a.cs(7,14): error OBSOLETEC3: 'C3' is obsolete: 'Do not use C3' (https://example.org/3/OBSOLETEC3)
-                    a.cs(8,14): warning OBSOLETEC4: 'C4' is obsolete: 'Do not use C4' (https://example.org/4)
-                    """,
+                a.cs(5,14): warning CS0618: 'C1' is obsolete: 'Do not use C1' (https://example.org/CS0618)
+                a.cs(6,14): error CS0619: 'C2' is obsolete: 'Do not use C2' (https://example.org/2/CS0619)
+                a.cs(7,14): error OBSOLETEC3: 'C3' is obsolete: 'Do not use C3' (https://example.org/3/OBSOLETEC3)
+                a.cs(8,14): warning OBSOLETEC4: 'C4' is obsolete: 'Do not use C4' (https://example.org/4)
+                """,
                 output.Trim()
             );
 
@@ -5104,8 +5104,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             AssertEx.Equal(
                 """
-                    a.cs(1,7): warning Warning02: Throwing a diagnostic for types declared (https://example.org/analyzer)
-                    """,
+                a.cs(1,7): warning Warning02: Throwing a diagnostic for types declared (https://example.org/analyzer)
+                """,
                 output.Trim()
             );
 
@@ -21407,10 +21407,10 @@ class C
             var src = dir.CreateFile("temp.cs")
                 .WriteAllText(
                     """
-                        class C
-                        {
-                        }
-                        """
+                    class C
+                    {
+                    }
+                    """
                 );
             var generatedDir = dir.CreateDirectory("generated");
 

@@ -20,11 +20,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyPropertyAbsenceAsync(
                 """
-                    namespace Namespace
-                    {
-                        $$
-                    }
-                    """
+                namespace Namespace
+                {
+                    $$
+                }
+                """
             );
         }
 
@@ -33,10 +33,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyPropertyAbsenceAsync(
                 """
-                    namespace Namespace;
+                namespace Namespace;
 
-                    $$
-                    """
+                $$
+                """
             );
         }
 
@@ -45,9 +45,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyPropertyAbsenceAsync(
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -56,11 +56,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyDefaultPropertyAsync(
                 """
-                    class MyClass
-                    {
-                        $$
-                    }
-                    """
+                class MyClass
+                {
+                    $$
+                }
+                """
             );
         }
 
@@ -69,11 +69,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyDefaultPropertyAsync(
                 """
-                    record MyRecord
-                    {
-                        $$
-                    }
-                    """
+                record MyRecord
+                {
+                    $$
+                }
+                """
             );
         }
 
@@ -82,11 +82,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyDefaultPropertyAsync(
                 """
-                    struct MyStruct
-                    {
-                        $$
-                    }
-                    """
+                struct MyStruct
+                {
+                    $$
+                }
+                """
             );
         }
 
@@ -103,12 +103,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyDefaultPropertyAsync(
                 """
-                    class MyClass
-                    {
-                        public int MyProperty { get; set; }
-                        $$
-                    }
-                    """,
+                class MyClass
+                {
+                    public int MyProperty { get; set; }
+                    $$
+                }
+                """,
                 "MyProperty1"
             );
         }
@@ -118,11 +118,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyPropertyAbsenceAsync(
                 """
-                    enum MyEnum
-                    {
-                        $$
-                    }
-                    """
+                enum MyEnum
+                {
+                    $$
+                }
+                """
             );
         }
 
@@ -131,14 +131,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyPropertyAbsenceAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            $$
-                        }
+                        $$
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -147,14 +147,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             await VerifyPropertyAbsenceAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public Program()
                     {
-                        public Program()
-                        {
-                            $$
-                        }
+                        $$
                     }
-                    """
+                }
+                """
             );
         }
 

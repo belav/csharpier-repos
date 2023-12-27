@@ -141,16 +141,16 @@ record class Goo
         {
             var content = XElement.Parse(
                 """
-                    <Workspace>
-                        <Project Language="C#"  LanguageVersion="preview" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                    record struct Goo
-                    {
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """
+                <Workspace>
+                    <Project Language="C#"  LanguageVersion="preview" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                record struct Goo
+                {
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """
             );
             await TestAsync(
                 testHost,
@@ -179,15 +179,15 @@ record class Goo
         {
             var content = XElement.Parse(
                 """
-                    <Workspace>
-                        <Project Language="C#"  LanguageVersion="preview" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                    namespace FileScopedNS;
-                    class Goo { }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """
+                <Workspace>
+                    <Project Language="C#"  LanguageVersion="preview" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                namespace FileScopedNS;
+                class Goo { }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """
             );
             await TestAsync(
                 testHost,
@@ -1780,11 +1780,11 @@ public class Goo
                 testHost,
                 composition,
                 """
-                    public
-                    class
-                    Goo
-                    { }
-                    """,
+                public
+                class
+                Goo
+                { }
+                """,
                 async w =>
                 {
                     var item = (await _aggregator.GetItemsAsync("G")).Single(x =>
@@ -2350,29 +2350,29 @@ public class Goo
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                namespace N
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            namespace N
+                            {
+                                public partial class C
                                 {
-                                    public partial class C
-                                    {
-                                        public void VisibleMethod() { }
-                                    }
+                                    public void VisibleMethod() { }
                                 }
-                            </Document>
-                            <Document FilePath="File1.g.cs">
-                                namespace N
+                            }
+                        </Document>
+                        <Document FilePath="File1.g.cs">
+                            namespace N
+                            {
+                                public partial class C
                                 {
-                                    public partial class C
-                                    {
-                                        public void VisibleMethod_Generated() { }
-                                    }
+                                    public void VisibleMethod_Generated() { }
                                 }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2472,23 +2472,23 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                public partial class Outer
-                                {
-                                    public void VisibleMethod() { }
-                                }
-                            </Document>
-                            <Document FilePath="File2.cs">
-                                public partial class Outer
-                                {
-                                    public partial class Inner { }
-                                }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            public partial class Outer
+                            {
+                                public void VisibleMethod() { }
+                            }
+                        </Document>
+                        <Document FilePath="File2.cs">
+                            public partial class Outer
+                            {
+                                public partial class Inner { }
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2517,24 +2517,24 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                public partial class Outer
-                                {
-                                    public void VisibleMethod() { }
-                                }
-                            </Document>
-                            <Document FilePath="File2.cs">
-                                public partial class Outer
-                                {
-                                    public partial class Inner1 { }
-                                    public partial class Inner2 { }
-                                }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            public partial class Outer
+                            {
+                                public void VisibleMethod() { }
+                            }
+                        </Document>
+                        <Document FilePath="File2.cs">
+                            public partial class Outer
+                            {
+                                public partial class Inner1 { }
+                                public partial class Inner2 { }
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2563,23 +2563,23 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                public partial class Outer
-                                {
-                                    public partial class Inner1 { }
-                                }
-                            </Document>
-                            <Document FilePath="File2.cs">
-                                public partial class Outer
-                                {
-                                    public partial class Inner2 { }
-                                }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            public partial class Outer
+                            {
+                                public partial class Inner1 { }
+                            }
+                        </Document>
+                        <Document FilePath="File2.cs">
+                            public partial class Outer
+                            {
+                                public partial class Inner2 { }
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2594,23 +2594,23 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                public partial class Outer
-                                {
-                                    public void VisibleMethod() { }
-                                }
-                            </Document>
-                            <Document FilePath="File2.cs">
-                                public partial class Outer
-                                {
-                                    public void VisibleMethod2() { }
-                                }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            public partial class Outer
+                            {
+                                public void VisibleMethod() { }
+                            }
+                        </Document>
+                        <Document FilePath="File2.cs">
+                            public partial class Outer
+                            {
+                                public void VisibleMethod2() { }
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2648,24 +2648,24 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                public partial class Outer
-                                {
-                                    public void VisibleMethod() { }
-                                }
-                            </Document>
-                            <Document FilePath="File2.cs">
-                                public partial class Outer
-                                {
-                                    public void VisibleMethod2() { }
-                                    public class Inner { }
-                                }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            public partial class Outer
+                            {
+                                public void VisibleMethod() { }
+                            }
+                        </Document>
+                        <Document FilePath="File2.cs">
+                            public partial class Outer
+                            {
+                                public void VisibleMethod2() { }
+                                public class Inner { }
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2703,16 +2703,16 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                public partial class Outer
-                                {
-                                }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            public partial class Outer
+                            {
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2741,17 +2741,17 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document FilePath="File1.cs">
-                                public class Outer
-                                {
-                                    public class Inner {}
-                                }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document FilePath="File1.cs">
+                            public class Outer
+                            {
+                                public class Inner {}
+                            }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -2780,16 +2780,16 @@ class C
         {
             using var workspace = TestWorkspace.Create(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <DocumentFromSourceGenerator>
-                                public class C
-                                {
-                                }
-                            </DocumentFromSourceGenerator>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <DocumentFromSourceGenerator>
+                            public class C
+                            {
+                            }
+                        </DocumentFromSourceGenerator>
+                    </Project>
+                </Workspace>
+                """,
                 composition: DefaultComposition
             );
 
@@ -3005,29 +3005,29 @@ record Goo(int Member)
                 Composition.FirstActiveAndVisible,
                 XElement.Parse(
                     """
-                        <Workspace>
-                            <Project Language="C#" CommonReferences="true">
-                                <Document FilePath="File1.cs">
-                                    namespace N
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document FilePath="File1.cs">
+                                namespace N
+                                {
+                                    public class C
                                     {
-                                        public class C
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                                <Document FilePath="File2.cs">
-                                    namespace N
+                                }
+                            </Document>
+                            <Document FilePath="File2.cs">
+                                namespace N
+                                {
+                                    public class D
                                     {
-                                        public class D
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                            </Project>
-                        </Workspace>
-                        """
+                                }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
                 ),
                 async workspace =>
                 {
@@ -3080,29 +3080,29 @@ record Goo(int Member)
                 Composition.FirstActiveAndVisible,
                 XElement.Parse(
                     """
-                        <Workspace>
-                            <Project Language="C#" CommonReferences="true">
-                                <Document FilePath="File1.cs" Folders="A\B\C">
-                                    namespace N
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document FilePath="File1.cs" Folders="A\B\C">
+                                namespace N
+                                {
+                                    public class C
                                     {
-                                        public class C
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                                <Document FilePath="File2.cs" Folders="A\B\C">
-                                    namespace N
+                                }
+                            </Document>
+                            <Document FilePath="File2.cs" Folders="A\B\C">
+                                namespace N
+                                {
+                                    public class D
                                     {
-                                        public class D
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                            </Project>
-                        </Workspace>
-                        """
+                                }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
                 ),
                 async workspace =>
                 {
@@ -3155,29 +3155,29 @@ record Goo(int Member)
                 Composition.FirstActiveAndVisible,
                 XElement.Parse(
                     """
-                        <Workspace>
-                            <Project Language="C#" CommonReferences="true">
-                                <Document FilePath="File1.cs" Folders="A\B\C\D">
-                                    namespace N
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document FilePath="File1.cs" Folders="A\B\C\D">
+                                namespace N
+                                {
+                                    public class C
                                     {
-                                        public class C
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                                <Document FilePath="File2.cs" Folders="A\B\C">
-                                    namespace N
+                                }
+                            </Document>
+                            <Document FilePath="File2.cs" Folders="A\B\C">
+                                namespace N
+                                {
+                                    public class D
                                     {
-                                        public class D
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                            </Project>
-                        </Workspace>
-                        """
+                                }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
                 ),
                 async workspace =>
                 {
@@ -3230,29 +3230,29 @@ record Goo(int Member)
                 Composition.FirstActiveAndVisible,
                 XElement.Parse(
                     """
-                        <Workspace>
-                            <Project Language="C#" CommonReferences="true">
-                                <Document FilePath="File1.cs" Folders="A\B\C">
-                                    namespace N
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document FilePath="File1.cs" Folders="A\B\C">
+                                namespace N
+                                {
+                                    public class C
                                     {
-                                        public class C
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                                <Document FilePath="File2.cs" Folders="A\B\C\D">
-                                    namespace N
+                                }
+                            </Document>
+                            <Document FilePath="File2.cs" Folders="A\B\C\D">
+                                namespace N
+                                {
+                                    public class D
                                     {
-                                        public class D
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                            </Project>
-                        </Workspace>
-                        """
+                                }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
                 ),
                 async workspace =>
                 {
@@ -3305,29 +3305,29 @@ record Goo(int Member)
                 Composition.FirstActiveAndVisible,
                 XElement.Parse(
                     """
-                        <Workspace>
-                            <Project Language="C#" CommonReferences="true">
-                                <Document FilePath="File1.cs" Folders="A\B\C\D1">
-                                    namespace N
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document FilePath="File1.cs" Folders="A\B\C\D1">
+                                namespace N
+                                {
+                                    public class C
                                     {
-                                        public class C
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                                <Document FilePath="File2.cs" Folders="A\B\C\D2">
-                                    namespace N
+                                }
+                            </Document>
+                            <Document FilePath="File2.cs" Folders="A\B\C\D2">
+                                namespace N
+                                {
+                                    public class D
                                     {
-                                        public class D
-                                        {
-                                            public void VisibleMethod() { }
-                                        }
+                                        public void VisibleMethod() { }
                                     }
-                                </Document>
-                            </Project>
-                        </Workspace>
-                        """
+                                }
+                            </Document>
+                        </Project>
+                    </Workspace>
+                    """
                 ),
                 async workspace =>
                 {

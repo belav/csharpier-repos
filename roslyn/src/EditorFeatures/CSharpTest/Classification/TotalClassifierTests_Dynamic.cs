@@ -163,13 +163,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    extern alias dynamic;
+                extern alias dynamic;
 
-                    class C
-                    {
-                        dynamic::Goo a;
-                    }
-                    """,
+                class C
+                {
+                    dynamic::Goo a;
+                }
+                """,
                 testHost,
                 Keyword("extern"),
                 Keyword("alias"),
@@ -222,12 +222,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                    Func<string> f = delegate
-                    {
-                        int dynamic = 10;
-                        return dynamic.ToString();
-                    };
-                    """,
+                Func<string> f = delegate
+                {
+                    int dynamic = 10;
+                    return dynamic.ToString();
+                };
+                """,
                 testHost,
                 Identifier("Func"),
                 Punctuation.OpenAngle,
@@ -259,15 +259,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    partial class dynamic<T>
-                    {
-                    }
+                partial class dynamic<T>
+                {
+                }
 
-                    class C
-                    {
-                        dynamic<int> d;
-                    }
-                    """,
+                class C
+                {
+                    dynamic<int> d;
+                }
+                """,
                 testHost,
                 Keyword("partial"),
                 Keyword("class"),
@@ -295,11 +295,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class A<T>
-                    {
-                        T dynamic;
-                    }
-                    """,
+                class A<T>
+                {
+                    T dynamic;
+                }
+                """,
                 testHost,
                 Keyword("class"),
                 Class("A"),
@@ -413,9 +413,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                    var v = from dynamic in names
-                            select new { dynamic = dynamic };
-                    """,
+                var v = from dynamic in names
+                        select new { dynamic = dynamic };
+                """,
                 testHost,
                 Keyword("var"),
                 Local("v"),
@@ -463,12 +463,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                    D f = delegate
-                    {
-                        string dynamic = "a";
-                        return dynamic.Length;
-                    };
-                    """,
+                D f = delegate
+                {
+                    string dynamic = "a";
+                    return dynamic.Length;
+                };
+                """,
                 testHost,
                 Identifier("D"),
                 Local("f"),
@@ -480,8 +480,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Equals,
                 String(
                     """
-                        "a"
-                        """
+                    "a"
+                    """
                 ),
                 Punctuation.Semicolon,
                 ControlKeyword("return"),
@@ -499,10 +499,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                    dynamic dynamic()
-                    {
-                    }
-                    """,
+                dynamic dynamic()
+                {
+                }
+                """,
                 testHost,
                 Keyword("dynamic"),
                 Method("dynamic"),
@@ -518,10 +518,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                    static dynamic dynamic(params dynamic[] dynamic)
-                    {
-                    }
-                    """,
+                static dynamic dynamic(params dynamic[] dynamic)
+                {
+                }
+                """,
                 testHost,
                 Keyword("static"),
                 Keyword("dynamic"),
@@ -544,10 +544,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                    dynamic[] M(dynamic[] p, params dynamic[] pa)
-                    {
-                    }
-                    """,
+                dynamic[] M(dynamic[] p, params dynamic[] pa)
+                {
+                }
+                """,
                 testHost,
                 Keyword("dynamic"),
                 Punctuation.OpenBracket,
@@ -575,12 +575,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                    partial void F(dynamic d);
+                partial void F(dynamic d);
 
-                    partial void F(dynamic d)
-                    {
-                    }
-                    """,
+                partial void F(dynamic d)
+                {
+                }
+                """,
                 testHost,
                 Keyword("partial"),
                 Keyword("void"),
@@ -607,10 +607,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                    void F(ref dynamic r, out dynamic o)
-                    {
-                    }
-                    """,
+                void F(ref dynamic r, out dynamic o)
+                {
+                }
+                """,
                 testHost,
                 Keyword("void"),
                 Method("F"),
@@ -633,10 +633,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                    dynamic F(this dynamic self, dynamic p)
-                    {
-                    }
-                    """,
+                dynamic F(this dynamic self, dynamic p)
+                {
+                }
+                """,
                 testHost,
                 Keyword("dynamic"),
                 ExtensionMethod("F"),
@@ -658,10 +658,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class C : dynamic
-                    {
-                    }
-                    """,
+                class C : dynamic
+                {
+                }
+                """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -677,10 +677,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class C<T> where T : dynamic
-                    {
-                    }
-                    """,
+                class C<T> where T : dynamic
+                {
+                }
+                """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -701,11 +701,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInClassAsync(
                 """
-                    unsafe int M()
-                    {
-                        return sizeof(dynamic);
-                    }
-                    """,
+                unsafe int M()
+                {
+                    return sizeof(dynamic);
+                }
+                """,
                 testHost,
                 Keyword("unsafe"),
                 Keyword("int"),
@@ -810,10 +810,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    namespace dynamic
-                    {
-                    }
-                    """,
+                namespace dynamic
+                {
+                }
+                """,
                 testHost,
                 Keyword("namespace"),
                 Namespace("dynamic"),
@@ -827,10 +827,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class dynamic
-                    {
-                    }
-                    """,
+                class dynamic
+                {
+                }
+                """,
                 testHost,
                 Keyword("class"),
                 Class("dynamic"),
@@ -844,13 +844,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class dynamic
+                class dynamic
+                {
+                    dynamic()
                     {
-                        dynamic()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 testHost,
                 Keyword("class"),
                 Class("dynamic"),
@@ -883,9 +883,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """
-                    dynamic: int i = 0;
-                            goto dynamic;
-                    """,
+                dynamic: int i = 0;
+                        goto dynamic;
+                """,
                 testHost,
                 Label("dynamic"),
                 Punctuation.Colon,
@@ -921,11 +921,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    enum A
-                    {
-                        dynamic
-                    }
-                    """,
+                enum A
+                {
+                    dynamic
+                }
+                """,
                 testHost,
                 Keyword("enum"),
                 Enum("A"),
@@ -940,10 +940,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    enum dynamic
-                    {
-                    }
-                    """,
+                enum dynamic
+                {
+                }
+                """,
                 testHost,
                 Keyword("enum"),
                 Enum("dynamic"),
@@ -957,11 +957,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class C<dynamic, T> where dynamic : T
-                    {
-                        dynamic d;
-                    }
-                    """,
+                class C<dynamic, T> where dynamic : T
+                {
+                    dynamic d;
+                }
+                """,
                 testHost,
                 Keyword("class"),
                 Class("C"),
@@ -1173,10 +1173,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    interface dynamic
-                    {
-                    }
-                    """,
+                interface dynamic
+                {
+                }
+                """,
                 testHost,
                 Keyword("interface"),
                 Interface("dynamic"),
@@ -1190,10 +1190,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    struct dynamic
-                    {
-                    }
-                    """,
+                struct dynamic
+                {
+                }
+                """,
                 testHost,
                 Keyword("struct"),
                 Struct("dynamic"),

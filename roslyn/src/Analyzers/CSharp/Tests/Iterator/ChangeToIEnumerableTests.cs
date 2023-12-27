@@ -246,81 +246,81 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    namespace Asdf
+                namespace Asdf
+                {
+                    public class Test
                     {
-                        public class Test
+                        public ISet<IMyInterface> Test
                         {
-                            public ISet<IMyInterface> Test
+                            [|get|]
                             {
-                                [|get|]
-                                {
-                                    yield return TestFactory.Create<float>("yada yada yada");
-                                } ;
-                            }
-                        }
-
-                        public static class TestFactory
-                        {
-                            public static IMyInterface Create<T>(string someIdentifier)
-                            {
-                                return new MyClass<T>();
-                            }
-                        }
-
-                        public interface IMyInterface : IEquatable<IMyInterface>
-                        {
-                        }
-
-                        public class MyClass<T> : IMyInterface
-                        {
-                            public bool Equals(IMyInterface other)
-                            {
-                                throw new NotImplementedException();
-                            }
+                                yield return TestFactory.Create<float>("yada yada yada");
+                            } ;
                         }
                     }
-                    """,
+
+                    public static class TestFactory
+                    {
+                        public static IMyInterface Create<T>(string someIdentifier)
+                        {
+                            return new MyClass<T>();
+                        }
+                    }
+
+                    public interface IMyInterface : IEquatable<IMyInterface>
+                    {
+                    }
+
+                    public class MyClass<T> : IMyInterface
+                    {
+                        public bool Equals(IMyInterface other)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    namespace Asdf
+                namespace Asdf
+                {
+                    public class Test
                     {
-                        public class Test
+                        public IEnumerable<IMyInterface> Test
                         {
-                            public IEnumerable<IMyInterface> Test
+                            get
                             {
-                                get
-                                {
-                                    yield return TestFactory.Create<float>("yada yada yada");
-                                } ;
-                            }
-                        }
-
-                        public static class TestFactory
-                        {
-                            public static IMyInterface Create<T>(string someIdentifier)
-                            {
-                                return new MyClass<T>();
-                            }
-                        }
-
-                        public interface IMyInterface : IEquatable<IMyInterface>
-                        {
-                        }
-
-                        public class MyClass<T> : IMyInterface
-                        {
-                            public bool Equals(IMyInterface other)
-                            {
-                                throw new NotImplementedException();
-                            }
+                                yield return TestFactory.Create<float>("yada yada yada");
+                            } ;
                         }
                     }
-                    """
+
+                    public static class TestFactory
+                    {
+                        public static IMyInterface Create<T>(string someIdentifier)
+                        {
+                            return new MyClass<T>();
+                        }
+                    }
+
+                    public interface IMyInterface : IEquatable<IMyInterface>
+                    {
+                    }
+
+                    public class MyClass<T> : IMyInterface
+                    {
+                        public bool Equals(IMyInterface other)
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                }
+                """
             );
         }
 
@@ -329,37 +329,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
 
-                    namespace Asdf
+                namespace Asdf
+                {
+                    public class T
                     {
-                        public class T
+                        public static ISet<int> operator [|=|] (T left, T right)
                         {
-                            public static ISet<int> operator [|=|] (T left, T right)
-                            {
-                                yield return 0;
-                            }
+                            yield return 0;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
 
-                    namespace Asdf
+                namespace Asdf
+                {
+                    public class T
                     {
-                        public class T
+                        public static IEnumerable<int> operator = (T left, T right)
                         {
-                            public static IEnumerable<int> operator = (T left, T right)
-                            {
-                                yield return 0;
-                            }
+                            yield return 0;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -368,39 +368,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class T
+                class T
+                {
+                    public T[] this[int i]
                     {
-                        public T[] this[int i]
+                        [|get|]
                         {
-                            [|get|]
-                            {
-                                yield return new T();
-                            }
+                            yield return new T();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class T
+                class T
+                {
+                    public IEnumerable<T> this[int i]
                     {
-                        public IEnumerable<T> this[int i]
+                        get
                         {
-                            get
-                            {
-                                yield return new T();
-                            }
+                            yield return new T();
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

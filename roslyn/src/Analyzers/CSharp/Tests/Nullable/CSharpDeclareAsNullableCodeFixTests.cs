@@ -34,39 +34,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static string M()
                     {
-                        static string M()
-                        {
-                            return {|FixAllInDocument:null|};
-                        }
-                        static string M2(bool b)
-                        {
-                            if (b)
-                                return null;
-                            else
-                                return null;
-                        }
+                        return {|FixAllInDocument:null|};
                     }
-                    """,
-                """
-                    #nullable enable
-                    class Program
+                    static string M2(bool b)
                     {
-                        static string? M()
-                        {
+                        if (b)
                             return null;
-                        }
-                        static string? M2(bool b)
-                        {
-                            if (b)
-                                return null;
-                            else
-                                return null;
-                        }
+                        else
+                            return null;
                     }
-                    """,
+                }
+                """,
+                """
+                #nullable enable
+                class Program
+                {
+                    static string? M()
+                    {
+                        return null;
+                    }
+                    static string? M2(bool b)
+                    {
+                        if (b)
+                            return null;
+                        else
+                            return null;
+                    }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -76,25 +76,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static string M()
                     {
-                        static string M()
-                        {
-                            return [|null|];
-                        }
+                        return [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static string? M()
                     {
-                        static string? M()
-                        {
-                            return null;
-                        }
+                        return null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -104,25 +104,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static async System.Threading.Tasks.Task<string> M()
                     {
-                        static async System.Threading.Tasks.Task<string> M()
-                        {
-                            return [|null|];
-                        }
+                        return [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static async System.Threading.Tasks.Task<string?> M()
                     {
-                        static async System.Threading.Tasks.Task<string?> M()
-                        {
-                            return null;
-                        }
+                        return null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -132,31 +132,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
+                        async System.Threading.Tasks.Task<string> local()
                         {
-                            async System.Threading.Tasks.Task<string> local()
-                            {
-                                return [|null|];
-                            }
+                            return [|null|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
+                        async System.Threading.Tasks.Task<string?> local()
                         {
-                            async System.Threading.Tasks.Task<string?> local()
-                            {
-                                return null;
-                            }
+                            return null;
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -166,25 +166,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static /*before*/ string /*after*/ M()
                     {
-                        static /*before*/ string /*after*/ M()
-                        {
-                            return [|null|];
-                        }
+                        return [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static /*before*/ string? /*after*/ M()
                     {
-                        static /*before*/ string? /*after*/ M()
-                        {
-                            return null;
-                        }
+                        return null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -194,19 +194,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        static string M() => [|null|];
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    static string M() => [|null|];
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        static string? M() => null;
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    static string? M() => null;
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -216,15 +216,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string local() => [|null|];
-                        }
+                        string local() => [|null|];
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -234,31 +234,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
+                        string local()
                         {
-                            string local()
-                            {
-                                return [|null|];
-                            }
+                            return [|null|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
+                        string? local()
                         {
-                            string? local()
-                            {
-                                return null;
-                            }
+                            return null;
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -268,15 +268,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static string? M()
                     {
-                        static string? M()
-                        {
-                            return [|null|];
-                        }
+                        return [|null|];
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -286,19 +286,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string x = [|null|];
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string x = [|null|];
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string? x = null;
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string? x = null;
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -308,27 +308,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string x;
+                    void M()
                     {
-                        string x;
-                        void M()
-                        {
-                            x = [|null|];
-                        }
+                        x = [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string? x;
+                    void M()
                     {
-                        string? x;
-                        void M()
-                        {
-                            x = null;
-                        }
+                        x = null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -338,27 +338,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string x { get; set; }
+                    void M()
                     {
-                        string x { get; set; }
-                        void M()
-                        {
-                            x = [|null|];
-                        }
+                        x = [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string? x { get; set; }
+                    void M()
                     {
-                        string? x { get; set; }
-                        void M()
-                        {
-                            x = null;
-                        }
+                        x = null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -368,25 +368,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string x = [|null|];
-                        }
+                        string x = [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string? x = null;
-                        }
+                        string? x = null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -396,27 +396,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string x = "";
-                            x = [|null|];
-                        }
+                        string x = "";
+                        x = [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string? x = "";
-                            x = null;
-                        }
+                        string? x = "";
+                        x = null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -426,16 +426,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string x, y;
-                            x = [|null|];
-                        }
+                        string x, y;
+                        x = [|null|];
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -445,25 +445,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M(out string x)
                     {
-                        static void M(out string x)
-                        {
-                            x = [|null|];
-                        }
+                        x = [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M(out string? x)
                     {
-                        static void M(out string? x)
-                        {
-                            x = null;
-                        }
+                        x = null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -473,17 +473,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    partial class Program
-                    {
-                        partial void M(out string x);
+                #nullable enable
+                partial class Program
+                {
+                    partial void M(out string x);
 
-                        partial void M(out string x)
-                        {
-                            x = [|null|];
-                        }
+                    partial void M(out string x)
+                    {
+                        x = [|null|];
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -493,17 +493,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    partial class Program
-                    {
-                        public partial void M(out string x);
+                #nullable enable
+                partial class Program
+                {
+                    public partial void M(out string x);
 
-                        public partial void M(out string x)
-                        {
-                            x = [|null|];
-                        }
+                    public partial void M(out string x)
+                    {
+                        x = [|null|];
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -513,15 +513,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            var x = [|null|];
-                        }
+                        var x = [|null|];
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -531,15 +531,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string x = [|null|], y = null;
-                        }
+                        string x = [|null|], y = null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -549,19 +549,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string x { get; set; } = [|null|];
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string x { get; set; } = [|null|];
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string? x { get; set; } = null;
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string? x { get; set; } = null;
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -571,19 +571,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string x { get { return [|null|]; } }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string x { get { return [|null|]; } }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string? x { get { return null; } }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string? x { get { return null; } }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -593,19 +593,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string x => [|null|];
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string x => [|null|];
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string? x => null;
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string? x => null;
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -616,19 +616,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        static void M(string x = [|null|]) { }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    static void M(string x = [|null|]) { }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        static void M(string? x = null) { }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    static void M(string? x = null) { }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -638,25 +638,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M(object o)
                     {
-                        static void M(object o)
-                        {
-                            string x = [|o as string|];
-                        }
+                        string x = [|o as string|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static void M(object o)
                     {
-                        static void M(object o)
-                        {
-                            string? x = o as string;
-                        }
+                        string? x = o as string;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -666,25 +666,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static System.Collections.Generic.IEnumerable<string> M()
                     {
-                        static System.Collections.Generic.IEnumerable<string> M()
-                        {
-                            yield return [|null|];
-                        }
+                        yield return [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static System.Collections.Generic.IEnumerable<string?> M()
                     {
-                        static System.Collections.Generic.IEnumerable<string?> M()
-                        {
-                            yield return null;
-                        }
+                        yield return null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -694,25 +694,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static System.Collections.Generic.IEnumerator<string> M()
                     {
-                        static System.Collections.Generic.IEnumerator<string> M()
-                        {
-                            yield return [|null|];
-                        }
+                        yield return [|null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    static System.Collections.Generic.IEnumerator<string?> M()
                     {
-                        static System.Collections.Generic.IEnumerator<string?> M()
-                        {
-                            yield return null;
-                        }
+                        yield return null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -722,31 +722,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    System.Collections.Generic.IEnumerable<string> Property
                     {
-                        System.Collections.Generic.IEnumerable<string> Property
+                        get
                         {
-                            get
-                            {
-                                yield return [|null|];
-                            }
+                            yield return [|null|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    System.Collections.Generic.IEnumerable<string?> Property
                     {
-                        System.Collections.Generic.IEnumerable<string?> Property
+                        get
                         {
-                            get
-                            {
-                                yield return null;
-                            }
+                            yield return null;
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -756,31 +756,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
+                        System.Collections.Generic.IEnumerable<string> local()
                         {
-                            System.Collections.Generic.IEnumerable<string> local()
-                            {
-                                yield return [|null|];
-                            }
+                            yield return [|null|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
+                        System.Collections.Generic.IEnumerable<string?> local()
                         {
-                            System.Collections.Generic.IEnumerable<string?> local()
-                            {
-                                yield return null;
-                            }
+                            yield return null;
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -790,25 +790,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string Test(bool? value)
                     {
-                        string Test(bool? value)
-                        {
-                            return [|value?.ToString()|];
-                        }
+                        return [|value?.ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string? Test(bool? value)
                     {
-                        string? Test(bool? value)
-                        {
-                            return value?.ToString();
-                        }
+                        return value?.ToString();
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -818,55 +818,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string field;
+                    string Property { get; set; }
+
+                    string Test(bool? value)
                     {
-                        string field;
-                        string Property { get; set; }
-
-                        string Test(bool? value)
-                        {
-                            return {|FixAllInDocument:value?.ToString()|};
-                        }
-
-                        string Test1(bool? value)
-                        {
-                            return value?.ToString();
-                        }
-
-                        string Test2(bool? value)
-                        {
-                            field = null;
-                            Property = null;
-                            return null;
-                        }
+                        return {|FixAllInDocument:value?.ToString()|};
                     }
-                    """,
+
+                    string Test1(bool? value)
+                    {
+                        return value?.ToString();
+                    }
+
+                    string Test2(bool? value)
+                    {
+                        field = null;
+                        Property = null;
+                        return null;
+                    }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string field;
+                    string Property { get; set; }
+
+                    string? Test(bool? value)
                     {
-                        string field;
-                        string Property { get; set; }
-
-                        string? Test(bool? value)
-                        {
-                            return value?.ToString();
-                        }
-
-                        string? Test1(bool? value)
-                        {
-                            return value?.ToString();
-                        }
-
-                        string Test2(bool? value)
-                        {
-                            field = null;
-                            Property = null;
-                            return null;
-                        }
+                        return value?.ToString();
                     }
-                    """,
+
+                    string? Test1(bool? value)
+                    {
+                        return value?.ToString();
+                    }
+
+                    string Test2(bool? value)
+                    {
+                        field = null;
+                        Property = null;
+                        return null;
+                    }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -876,59 +876,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string field;
-                        string Property { get; set; }
+                #nullable enable
+                class Program
+                {
+                    string field;
+                    string Property { get; set; }
 
-                        void M(string value)
-                        {
-                            M({|FixAllInDocument:null|});
-                        }
-                        void M2(string value)
-                        {
-                            M2(null);
-                        }
-                        string Test(bool? value)
-                        {
-                            return value?.ToString();
-                        }
-                        string Test2(bool? value)
-                        {
-                            field = null;
-                            Property = null;
-                            return null;
-                        }
+                    void M(string value)
+                    {
+                        M({|FixAllInDocument:null|});
                     }
-                    """,
+                    void M2(string value)
+                    {
+                        M2(null);
+                    }
+                    string Test(bool? value)
+                    {
+                        return value?.ToString();
+                    }
+                    string Test2(bool? value)
+                    {
+                        field = null;
+                        Property = null;
+                        return null;
+                    }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string? field;
-                        string? Property { get; set; }
+                #nullable enable
+                class Program
+                {
+                    string? field;
+                    string? Property { get; set; }
 
-                        void M(string? value)
-                        {
-                            M(null);
-                        }
-                        void M2(string? value)
-                        {
-                            M2(null);
-                        }
-                        string Test(bool? value)
-                        {
-                            return value?.ToString();
-                        }
-                        string Test2(bool? value)
-                        {
-                            field = null;
-                            Property = null;
-                            return null;
-                        }
+                    void M(string? value)
+                    {
+                        M(null);
                     }
-                    """,
+                    void M2(string? value)
+                    {
+                        M2(null);
+                    }
+                    string Test(bool? value)
+                    {
+                        return value?.ToString();
+                    }
+                    string Test2(bool? value)
+                    {
+                        field = null;
+                        Property = null;
+                        return null;
+                    }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -938,25 +938,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string Test(bool value)
                     {
-                        string Test(bool value)
-                        {
-                            return [|value ? "text" : null|];
-                        }
+                        return [|value ? "text" : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string? Test(bool value)
                     {
-                        string? Test(bool value)
-                        {
-                            return value ? "text" : null;
-                        }
+                        return value ? "text" : null;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -966,25 +966,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string Test()
                     {
-                        string Test()
-                        {
-                            return [|default|];
-                        }
+                        return [|default|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string? Test()
                     {
-                        string? Test()
-                        {
-                            return default;
-                        }
+                        return default;
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -994,25 +994,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string Test()
                     {
-                        string Test()
-                        {
-                            return [|default(string)|];
-                        }
+                        return [|default(string)|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    string? Test()
                     {
-                        string? Test()
-                        {
-                            return default(string);
-                        }
+                        return default(string);
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1022,27 +1022,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(x: [|null|]);
-                        }
-                        void M2(string x) { }
+                        M2(x: [|null|]);
                     }
-                    """,
+                    void M2(string x) { }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(x: null);
-                        }
-                        void M2(string? x) { }
+                        M2(x: null);
                     }
-                    """,
+                    void M2(string? x) { }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1052,16 +1052,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var list = new System.Collections.Generic.List<string>();
-                            list.Add(item: [|null|]);
-                        }
+                        var list = new System.Collections.Generic.List<string>();
+                        list.Add(item: [|null|]);
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1071,27 +1071,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(x: [|null|], i: 1);
-                        }
-                        void M2(int i, string x) { }
+                        M2(x: [|null|], i: 1);
                     }
-                    """,
+                    void M2(int i, string x) { }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(x: null, i: 1);
-                        }
-                        void M2(int i, string? x) { }
+                        M2(x: null, i: 1);
                     }
-                    """,
+                    void M2(int i, string? x) { }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1101,16 +1101,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var dict = new System.Collections.Generic.Dictionary<string, int>();
-                            dict.Add(value: 0, key: [|null|]);
-                        }
+                        var dict = new System.Collections.Generic.Dictionary<string, int>();
+                        dict.Add(value: 0, key: [|null|]);
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1120,17 +1120,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    partial class Program
+                #nullable enable
+                partial class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(x: [|null|]);
-                        }
-                        partial void M2(string x);
-                        partial void M2(string x) { }
+                        M2(x: [|null|]);
                     }
-                    """,
+                    partial void M2(string x);
+                    partial void M2(string x) { }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1140,27 +1140,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2([|null|]);
-                        }
-                        void M2(string x) { }
+                        M2([|null|]);
                     }
-                    """,
+                    void M2(string x) { }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(null);
-                        }
-                        void M2(string? x) { }
+                        M2(null);
                     }
-                    """,
+                    void M2(string? x) { }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1170,16 +1170,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var list = new System.Collections.Generic.List<string>();
-                            list.Add([|null|]);
-                        }
+                        var list = new System.Collections.Generic.List<string>();
+                        list.Add([|null|]);
                     }
-                    """,
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1189,27 +1189,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(1, [|null|]);
-                        }
-                        void M2(int i, string x) { }
+                        M2(1, [|null|]);
                     }
-                    """,
+                    void M2(int i, string x) { }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2(1, null);
-                        }
-                        void M2(int i, string? x) { }
+                        M2(1, null);
                     }
-                    """,
+                    void M2(int i, string? x) { }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1219,16 +1219,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            M2("", [|null|]);
-                        }
-                        void M2(params string[] x) { }
+                        M2("", [|null|]);
                     }
-                    """,
+                    void M2(params string[] x) { }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1239,16 +1239,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
             // Not supported yet
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
+                #nullable enable
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this[[|null|]];
-                        }
-                        int this[string x] { get { throw null!; } set { throw null!; } }
+                        this[[|null|]];
                     }
-                    """,
+                    int this[string x] { get { throw null!; } set { throw null!; } }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1258,21 +1258,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
-                    {
-                        string [|S|] { get; }
-                    }
-                    """,
+                class C
+                {
+                    string [|S|] { get; }
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
-                    {
-                        string? S { get; }
-                    }
-                    """,
+                class C
+                {
+                    string? S { get; }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1282,21 +1282,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
-                    {
-                        private string [|_value|];
-                    }
-                    """,
+                class C
+                {
+                    private string [|_value|];
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
-                    {
-                        private string? _value;
-                    }
-                    """,
+                class C
+                {
+                    private string? _value;
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1306,12 +1306,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                        string [|s|], s2 = "hello";
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                    string [|s|], s2 = "hello";
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1321,27 +1321,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                      static void F1((string, string?) t)
-                      {
-                        if (t.Item2 == null) return;
-                        t.Item1 = [|null|];
-                      }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                  static void F1((string, string?) t)
+                  {
+                    if (t.Item2 == null) return;
+                    t.Item1 = [|null|];
+                  }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                      static void F1((string?, string?) t)
-                      {
-                        if (t.Item2 == null) return;
-                        t.Item1 = null;
-                      }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                  static void F1((string?, string?) t)
+                  {
+                    if (t.Item2 == null) return;
+                    t.Item1 = null;
+                  }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1351,27 +1351,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                      static void F1((string Foo, string? Bar) t)
-                      {
-                        if (t.Bar == null) return;
-                        t.Foo = [|null|];
-                      }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                  static void F1((string Foo, string? Bar) t)
+                  {
+                    if (t.Bar == null) return;
+                    t.Foo = [|null|];
+                  }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                      static void F1((string? Foo, string? Bar) t)
-                      {
-                        if (t.Bar == null) return;
-                        t.Foo = null;
-                      }
-                    }
-                    """,
+                #nullable enable
+                class Program
+                {
+                  static void F1((string? Foo, string? Bar) t)
+                  {
+                    if (t.Bar == null) return;
+                    t.Foo = null;
+                  }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }
@@ -1381,31 +1381,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
         {
             await TestInRegularAndScript1Async(
                 """
-                    #nullable enable
-                    class Program
-                    {
-                      static void F1<T>((T, T?) t) where T : class
-                      {
-                        if (t.Item2 == null) return;
-                        t.Item1 = [|null|];
+                #nullable enable
+                class Program
+                {
+                  static void F1<T>((T, T?) t) where T : class
+                  {
+                    if (t.Item2 == null) return;
+                    t.Item1 = [|null|];
 
-                        var (a, b) = t;
-                      }
-                    }
-                    """,
+                    var (a, b) = t;
+                  }
+                }
+                """,
                 """
-                    #nullable enable
-                    class Program
-                    {
-                      static void F1<T>((T?, T?) t) where T : class
-                      {
-                        if (t.Item2 == null) return;
-                        t.Item1 = null;
+                #nullable enable
+                class Program
+                {
+                  static void F1<T>((T?, T?) t) where T : class
+                  {
+                    if (t.Item2 == null) return;
+                    t.Item1 = null;
 
-                        var (a, b) = t;
-                      }
-                    }
-                    """,
+                    var (a, b) = t;
+                  }
+                }
+                """,
                 parameters: s_nullableFeature
             );
         }

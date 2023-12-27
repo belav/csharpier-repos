@@ -19,15 +19,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            // lang=json
-                            var r = @"[/*comment*/{ 'goo': 0, bar: -Infinity, ""baz"": true }, new Date(), text, 'str'] // comment";
-                        }
+                        // lang=json
+                        var r = @"[/*comment*/{ 'goo': 0, bar: -Infinity, ""baz"": true }, new Date(), text, 'str'] // comment";
                     }
-                    """,
+                }
+                """,
                 testHost,
                 Keyword("var"),
                 Json.Array("["),
@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(","),
                 Json.PropertyName(
                     """
-                        ""baz""
-                        """
+                    ""baz""
+                    """
                 ),
                 Json.Punctuation(":"),
                 Json.Keyword("true"),
@@ -69,15 +69,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            // lang=json
-                            var r = """[/*comment*/{ 'goo': 0 }]""";
-                        }
+                        // lang=json
+                        var r = """[/*comment*/{ 'goo': 0 }]""";
                     }
-                    """",
+                }
+                """",
                 testHost,
                 Keyword("var"),
                 Json.Array("["),
@@ -97,25 +97,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            // lang=json
-                            var r = @"[
-                                /*comment*/
-                                {
-                                    'goo': 0,
-                                    bar: -Infinity,
-                                    ""baz"": true,
-                                    0: null
-                                },
-                                new Date(),
-                                text,
-                                'str'] // comment";
-                        }
+                        // lang=json
+                        var r = @"[
+                            /*comment*/
+                            {
+                                'goo': 0,
+                                bar: -Infinity,
+                                ""baz"": true,
+                                0: null
+                            },
+                            new Date(),
+                            text,
+                            'str'] // comment";
                     }
-                    """,
+                }
+                """,
                 testHost,
                 Keyword("var"),
                 Json.Array("["),
@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(","),
                 Json.PropertyName(
                     """
-                        ""baz""
-                        """
+                    ""baz""
+                    """
                 ),
                 Json.Punctuation(":"),
                 Json.Keyword("true"),

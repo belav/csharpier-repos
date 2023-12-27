@@ -35,29 +35,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    void M()
                     {
-                        class Base {}
-                        class Derived : Base {}
-                        void M()
-                        {
-                            Base b;
-                            Derived d = [|b|];
-                        }
+                        Base b;
+                        Derived d = [|b|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    void M()
                     {
-                        class Base {}
-                        class Derived : Base {}
-                        void M()
-                        {
-                            Base b;
-                            Derived d = (Derived)b;
-                        }
+                        Base b;
+                        Derived d = (Derived)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -66,39 +66,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void M()
-                        {
-                            Derived d = [|returnBase()|];
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """,
+
+                    void M()
+                    {
+                        Derived d = [|returnBase()|];
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void M()
-                        {
-                            Derived d = (Derived)returnBase();
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """
+
+                    void M()
+                    {
+                        Derived d = (Derived)returnBase();
+                    }
+                }
+                """
             );
         }
 
@@ -107,29 +107,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Derived returnBase() {
-                            Base b;
-                            return b[||];
-                        }
+                    Derived returnBase() {
+                        Base b;
+                        return b[||];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Derived returnBase() {
-                            Base b;
-                            return (Derived)b;
-                        }
+                    Derived returnBase() {
+                        Base b;
+                        return (Derived)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -138,31 +138,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System.Collections.Generic;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        IEnumerable<Derived> returnBase() {
-                            Base b;
-                            return b[||];
-                        }
+                    IEnumerable<Derived> returnBase() {
+                        Base b;
+                        return b[||];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System.Collections.Generic;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        IEnumerable<Derived> returnBase() {
-                            Base b;
-                            return (IEnumerable<Derived>)b;
-                        }
+                    IEnumerable<Derived> returnBase() {
+                        Base b;
+                        return (IEnumerable<Derived>)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -171,31 +171,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System.Collections.Generic;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        IEnumerator<Derived> returnBase() {
-                            Base b;
-                            return b[||];
-                        }
+                    IEnumerator<Derived> returnBase() {
+                        Base b;
+                        return b[||];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System.Collections.Generic;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        IEnumerator<Derived> returnBase() {
-                            Base b;
-                            return (IEnumerator<Derived>)b;
-                        }
+                    IEnumerator<Derived> returnBase() {
+                        Base b;
+                        return (IEnumerator<Derived>)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -204,37 +204,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        Derived returnDerived() {
-                            return [|returnBase()|];
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """,
+
+                    Derived returnDerived() {
+                        return [|returnBase()|];
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        Derived returnDerived() {
-                            return (Derived)returnBase();
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """
+
+                    Derived returnDerived() {
+                        return (Derived)returnBase();
+                    }
+                }
+                """
             );
         }
 
@@ -243,43 +243,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void passDerived(Derived d) {}
-
-                        void M() {
-                            Base b;
-                            passDerived([|b|]);
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """,
+
+                    void passDerived(Derived d) {}
+
+                    void M() {
+                        Base b;
+                        passDerived([|b|]);
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void passDerived(Derived d) {}
-
-                        void M() {
-                            Base b;
-                            passDerived((Derived)b);
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """
+
+                    void passDerived(Derived d) {}
+
+                    void M() {
+                        Base b;
+                        passDerived((Derived)b);
+                    }
+                }
+                """
             );
         }
 
@@ -288,43 +288,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void passDerived(int i, Derived d) {}
-
-                        void M() {
-                            Base b;
-                            passDerived(1, [|b|]);
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """,
+
+                    void passDerived(int i, Derived d) {}
+
+                    void M() {
+                        Base b;
+                        passDerived(1, [|b|]);
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void passDerived(int i, Derived d) {}
-
-                        void M() {
-                            Base b;
-                            passDerived(1, (Derived)b);
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """
+
+                    void passDerived(int i, Derived d) {}
+
+                    void M() {
+                        Base b;
+                        passDerived(1, (Derived)b);
+                    }
+                }
+                """
             );
         }
 
@@ -333,41 +333,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void passDerived(Derived d) {}
-
-                        void M() {
-                            passDerived([|returnBase()|]);
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """,
+
+                    void passDerived(Derived d) {}
+
+                    void M() {
+                        passDerived([|returnBase()|]);
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Base returnBase() {
-                            Base b;
-                            return b;
-                        }
-
-                        void passDerived(Derived d) {}
-
-                        void M() {
-                            passDerived((Derived)returnBase());
-                        }
+                    Base returnBase() {
+                        Base b;
+                        return b;
                     }
-                    """
+
+                    void passDerived(Derived d) {}
+
+                    void M() {
+                        passDerived((Derived)returnBase());
+                    }
+                }
+                """
             );
         }
 
@@ -376,31 +376,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System.Collections.Generic;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        IEnumerable<Derived> returnDerived() {
-                            Base b;
-                            yield return [|b|];
-                        }
+                    IEnumerable<Derived> returnDerived() {
+                        Base b;
+                        yield return [|b|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System.Collections.Generic;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        IEnumerable<Derived> returnDerived() {
-                            Base b;
-                            yield return (Derived)b;
-                        }
+                    IEnumerable<Derived> returnDerived() {
+                        Base b;
+                        yield return (Derived)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -409,35 +409,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public Test(Derived d) {}
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t = new Test(b[||]);
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public Test(Derived d) {}
                     }
-                    """,
+
+                    void M() {
+                        Base b;
+                        Test t = new Test(b[||]);
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public Test(Derived d) {}
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t = new Test((Derived)b);
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public Test(Derived d) {}
                     }
-                    """
+
+                    void M() {
+                        Base b;
+                        Test t = new Test((Derived)b);
+                    }
+                }
+                """
             );
         }
 
@@ -446,33 +446,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        async Task<Derived> M() {
-                            Base b;
-                            return [||]b;
-                        }
+                    async Task<Derived> M() {
+                        Base b;
+                        return [||]b;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        async Task<Derived> M() {
-                            Base b;
-                            return (Derived)b;
-                        }
+                    async Task<Derived> M() {
+                        Base b;
+                        return (Derived)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -481,39 +481,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test { 
-                            public Base b;
-                            public Test(Base b) { this.b = b; }
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t = new Test(b);
-                            Derived d = [||]t.b;
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test { 
+                        public Base b;
+                        public Test(Base b) { this.b = b; }
                     }
-                    """,
+
+                    void M() {
+                        Base b;
+                        Test t = new Test(b);
+                        Derived d = [||]t.b;
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test { 
-                            public Base b;
-                            public Test(Base b) { this.b = b; }
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t = new Test(b);
-                            Derived d = (Derived)t.b;
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test { 
+                        public Base b;
+                        public Test(Base b) { this.b = b; }
                     }
-                    """
+
+                    void M() {
+                        Base b;
+                        Test t = new Test(b);
+                        Derived d = (Derived)t.b;
+                    }
+                }
+                """
             );
         }
 
@@ -522,22 +522,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test { 
-                            Base b;
-                            public Test(Base b) { this.b = b; }
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t = new Test(b);
-                            Derived d = [||]t.b;
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test { 
+                        Base b;
+                        public Test(Base b) { this.b = b; }
                     }
-                    """
+
+                    void M() {
+                        Base b;
+                        Test t = new Test(b);
+                        Derived d = [||]t.b;
+                    }
+                }
+                """
             );
         }
 
@@ -546,35 +546,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M() {
-                            Base b;
-                            List<Derived> list = new List<Derived>();
-                            list.Add(b[||]);
-                        }
+                    void M() {
+                        Base b;
+                        List<Derived> list = new List<Derived>();
+                        list.Add(b[||]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M() {
-                            Base b;
-                            List<Derived> list = new List<Derived>();
-                            list.Add((Derived)b);
-                        }
+                    void M() {
+                        Base b;
+                        List<Derived> list = new List<Derived>();
+                        list.Add((Derived)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -583,37 +583,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public void testing(Derived d) {}
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t;
-                            t.testing(b[||]);
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public void testing(Derived d) {}
                     }
-                    """,
+
+                    void M() {
+                        Base b;
+                        Test t;
+                        t.testing(b[||]);
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public void testing(Derived d) {}
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t;
-                            t.testing((Derived)b);
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public void testing(Derived d) {}
                     }
-                    """
+
+                    void M() {
+                        Base b;
+                        Test t;
+                        t.testing((Derived)b);
+                    }
+                }
+                """
             );
         }
 
@@ -622,21 +622,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            private void testing(Derived d) {}
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t;
-                            t.testing(b[||]);
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        private void testing(Derived d) {}
                     }
-                    """
+
+                    void M() {
+                        Base b;
+                        Test t;
+                        t.testing(b[||]);
+                    }
+                }
+                """
             );
         }
 
@@ -645,39 +645,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public void testing(Derived d) {}
-                            private void testing(Base b) {}
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t;
-                            t.testing(b[||]);
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public void testing(Derived d) {}
+                        private void testing(Base b) {}
                     }
-                    """,
+
+                    void M() {
+                        Base b;
+                        Test t;
+                        t.testing(b[||]);
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public void testing(Derived d) {}
-                            private void testing(Base b) {}
-                        }
-
-                        void M() {
-                            Base b;
-                            Test t;
-                            t.testing((Derived)b);
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public void testing(Derived d) {}
+                        private void testing(Base b) {}
                     }
-                    """
+
+                    void M() {
+                        Base b;
+                        Test t;
+                        t.testing((Derived)b);
+                    }
+                }
+                """
             );
         }
 
@@ -686,31 +686,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public Test(Derived d) {}
-                        }
-                        class Derived_Test : Test  {
-                            public Derived_Test (Base b) : base([||]b) {}
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public Test(Derived d) {}
                     }
-                    """,
+                    class Derived_Test : Test  {
+                        public Derived_Test (Base b) : base([||]b) {}
+                    }
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public Test(Derived d) {}
-                        }
-                        class Derived_Test : Test  {
-                            public Derived_Test (Base b) : base((Derived)b) {}
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public Test(Derived d) {}
                     }
-                    """
+                    class Derived_Test : Test  {
+                        public Derived_Test (Base b) : base((Derived)b) {}
+                    }
+                }
+                """
             );
         }
 
@@ -719,27 +719,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public Test(Derived d) {}
-                            public Test(Base b, int i) : this([||]b) {}
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public Test(Derived d) {}
+                        public Test(Base b, int i) : this([||]b) {}
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        class Test {
-                            public Test(Derived d) {}
-                            public Test(Base b, int i) : this((Derived)b) {}
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    class Test {
+                        public Test(Derived d) {}
+                        public Test(Base b, int i) : this((Derived)b) {}
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -748,29 +748,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        void M() {
-                            Func<Base, Derived> foo = d => [||]d;
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    void M() {
+                        Func<Base, Derived> foo = d => [||]d;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
-                        void M() {
-                            Func<Base, Derived> foo = d => (Derived)d;
-                        }
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+                    void M() {
+                        Func<Base, Derived> foo = d => (Derived)d;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -779,35 +779,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void Goo() {
-                            Func<Derived, Derived> func = d => d;
-                            Base b;
-                            Base b2 = func([||]b);
-                        }
+                    void Goo() {
+                        Func<Derived, Derived> func = d => d;
+                        Base b;
+                        Base b2 = func([||]b);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void Goo() {
-                            Func<Derived, Derived> func = d => d;
-                            Base b;
-                            Base b2 = func((Derived)b);
-                        }
+                    void Goo() {
+                        Func<Derived, Derived> func = d => d;
+                        Base b;
+                        Base b2 = func((Derived)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -816,35 +816,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void Goo() {
-                            Func<Base, Base> func = d => d;
-                            Base b;
-                            Derived b2 = [||]func(b);
-                        }
+                    void Goo() {
+                        Func<Base, Base> func = d => d;
+                        Base b;
+                        Derived b2 = [||]func(b);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void Goo() {
-                            Func<Base, Base> func = d => d;
-                            Base b;
-                            Derived b2 = (Derived)func(b);
-                        }
+                    void Goo() {
+                        Func<Base, Base> func = d => d;
+                        Base b;
+                        Derived b2 = (Derived)func(b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -853,35 +853,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Derived Goo() {
-                            Func<Base, Base> func = d => d;
-                            Base b;
-                            return [||]func(b);
-                        }
+                    Derived Goo() {
+                        Func<Base, Base> func = d => d;
+                        Base b;
+                        return [||]func(b);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Derived Goo() {
-                            Func<Base, Base> func = d => d;
-                            Base b;
-                            return (Derived)func(b);
-                        }
+                    Derived Goo() {
+                        Func<Base, Base> func = d => d;
+                        Base b;
+                        return (Derived)func(b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -890,18 +890,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        Action<Derived> Goo() {
-                            return [||](Base b) => { };
-                        }
+                    Action<Derived> Goo() {
+                        return [||](Base b) => { };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -910,35 +910,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M(Derived d, Action<Derived> action) { }
-                        void Goo() {
-                            Base b = new Derived();
-                            M([||]b, (Derived d) => { });
-                        }
+                    void M(Derived d, Action<Derived> action) { }
+                    void Goo() {
+                        Base b = new Derived();
+                        M([||]b, (Derived d) => { });
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M(Derived d, Action<Derived> action) { }
-                        void Goo() {
-                            Base b = new Derived();
-                            M((Derived)b, (Derived d) => { });
-                        }
+                    void M(Derived d, Action<Derived> action) { }
+                    void Goo() {
+                        Base b = new Derived();
+                        M((Derived)b, (Derived d) => { });
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -947,20 +947,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M(Derived d, Action<Derived> action) { }
-                        void Goo() {
-                            Base b = new Derived();
-                            M([||]b, (Base base) => { });
-                        }
+                    void M(Derived d, Action<Derived> action) { }
+                    void Goo() {
+                        Base b = new Derived();
+                        M([||]b, (Base base) => { });
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -969,35 +969,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M(Derived d, params Action<Derived>[] action) { }
-                        void Goo() {
-                            Base b1 = new Derived();
-                            M([||]b1, (Derived d) => { }, (Derived d) => { });
-                        }
+                    void M(Derived d, params Action<Derived>[] action) { }
+                    void Goo() {
+                        Base b1 = new Derived();
+                        M([||]b1, (Derived d) => { }, (Derived d) => { });
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M(Derived d, params Action<Derived>[] action) { }
-                        void Goo() {
-                            Base b1 = new Derived();
-                            M((Derived)b1, (Derived d) => { }, (Derived d) => { });
-                        }
+                    void M(Derived d, params Action<Derived>[] action) { }
+                    void Goo() {
+                        Base b1 = new Derived();
+                        M((Derived)b1, (Derived d) => { }, (Derived d) => { });
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1006,20 +1006,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M(Derived d, params Action<Derived>[] action) { }
-                        void Goo() {
-                            Base b1 = new Derived();
-                            M([||]b1, action: new Action<Derived>[0], (Derived d) => { }, (Derived d) => { });
-                        }
+                    void M(Derived d, params Action<Derived>[] action) { }
+                    void Goo() {
+                        Base b1 = new Derived();
+                        M([||]b1, action: new Action<Derived>[0], (Derived d) => { }, (Derived d) => { });
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1028,29 +1028,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 {}
-                        class Derived : Base1, Base2 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 {}
+                    class Derived : Base1, Base2 {}
 
-                        void Goo(Base2 b) {
-                            Derived d = [||]b;
-                        }
+                    void Goo(Base2 b) {
+                        Derived d = [||]b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 {}
-                        class Derived : Base1, Base2 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 {}
+                    class Derived : Base1, Base2 {}
 
-                        void Goo(Base2 b) {
-                            Derived d = (Derived)b;
-                        }
+                    void Goo(Base2 b) {
+                        Derived d = (Derived)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1059,31 +1059,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 {}
-                        class Derived1 : Base1, Base2 {}
-                        class Derived2 : Derived1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 {}
+                    class Derived1 : Base1, Base2 {}
+                    class Derived2 : Derived1 {}
 
-                        void Goo(Base2 b) {
-                            Derived2 d = [||]b;
-                        }
+                    void Goo(Base2 b) {
+                        Derived2 d = [||]b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 {}
-                        class Derived1 : Base1, Base2 {}
-                        class Derived2 : Derived1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 {}
+                    class Derived1 : Base1, Base2 {}
+                    class Derived2 : Derived1 {}
 
-                        void Goo(Base2 b) {
-                            Derived2 d = (Derived2)b;
-                        }
+                    void Goo(Base2 b) {
+                        Derived2 d = (Derived2)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1092,27 +1092,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 : Base1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 : Base1 {}
 
-                        Base2 Goo(Base1 b) {
-                            return [||]b;
-                        }
+                    Base2 Goo(Base1 b) {
+                        return [||]b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 : Base1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 : Base1 {}
 
-                        Base2 Goo(Base1 b) {
-                            return (Base2)b;
-                        }
+                    Base2 Goo(Base1 b) {
+                        return (Base2)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1121,27 +1121,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 : Base1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 : Base1 {}
 
-                        void Goo(Base1 b) {
-                            Base2 b2 = [||]b;
-                        }
+                    void Goo(Base1 b) {
+                        Base2 b2 = [||]b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 : Base1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 : Base1 {}
 
-                        void Goo(Base1 b) {
-                            Base2 b2 = (Base2)b;
-                        }
+                    void Goo(Base1 b) {
+                        Base2 b2 = (Base2)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1150,35 +1150,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 : Base1 {}
-                        interface Base3 {}
-                        class Derived1 : Base2, Base3 {}
-                        class Derived2 : Derived1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 : Base1 {}
+                    interface Base3 {}
+                    class Derived1 : Base2, Base3 {}
+                    class Derived2 : Derived1 {}
 
-                        void Goo(Derived2 b) {}
-                        void M(Base1 b) {
-                            Goo([||]b);
-                        }
+                    void Goo(Derived2 b) {}
+                    void M(Base1 b) {
+                        Goo([||]b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        interface Base1 {}
-                        interface Base2 : Base1 {}
-                        interface Base3 {}
-                        class Derived1 : Base2, Base3 {}
-                        class Derived2 : Derived1 {}
+                class Program
+                {
+                    interface Base1 {}
+                    interface Base2 : Base1 {}
+                    interface Base3 {}
+                    class Derived1 : Base2, Base3 {}
+                    class Derived2 : Derived1 {}
 
-                        void Goo(Derived2 b) {}
-                        void M(Base1 b) {
-                            Goo((Derived2)b);
-                        }
+                    void Goo(Derived2 b) {}
+                    void M(Base1 b) {
+                        Goo((Derived2)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1187,33 +1187,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M()
-                        {
-                            Func<Base, Base> func1 = b => b;
-                            Func<Derived, Derived> func2 = [||]func1;
-                        }
+                    void M()
+                    {
+                        Func<Base, Base> func1 = b => b;
+                        Func<Derived, Derived> func2 = [||]func1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Program
-                    {
-                        class Base {}
-                        class Derived : Base {}
+                using System;
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
 
-                        void M()
-                        {
-                            Func<Base, Base> func1 = b => b;
-                            Func<Derived, Derived> func2 = (Func<Derived, Derived>)func1;
-                        }
+                    void M()
+                    {
+                        Func<Base, Base> func1 = b => b;
+                        Func<Derived, Derived> func2 = (Func<Derived, Derived>)func1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1222,35 +1222,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
-                        void Goo(Func<Derived, Derived> func) { }
+                using System;
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    void Goo(Func<Derived, Derived> func) { }
 
-                        void M()
-                        {
-                            Func<Base, Base> func1 = b => b;
-                            Goo(func1[||]);
-                        }
+                    void M()
+                    {
+                        Func<Base, Base> func1 = b => b;
+                        Goo(func1[||]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
-                        void Goo(Func<Derived, Derived> func) { }
+                using System;
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    void Goo(Func<Derived, Derived> func) { }
 
-                        void M()
-                        {
-                            Func<Base, Base> func1 = b => b;
-                            Goo((Func<Derived, Derived>)func1);
-                        }
+                    void M()
+                    {
+                        Func<Base, Base> func1 = b => b;
+                        Goo((Func<Derived, Derived>)func1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1259,31 +1259,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    Func<Derived, Derived> Goo(Func<Derived, Derived> func)
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        Func<Derived, Derived> Goo(Func<Derived, Derived> func)
-                        {
-                            Func<Base, Base> func1 = b => b;
-                            return func1[||];
-                        }
+                        Func<Base, Base> func1 = b => b;
+                        return func1[||];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    Func<Derived, Derived> Goo(Func<Derived, Derived> func)
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        Func<Derived, Derived> Goo(Func<Derived, Derived> func)
-                        {
-                            Func<Base, Base> func1 = b => b;
-                            return (Func<Derived, Derived>)func1;
-                        }
+                        Func<Base, Base> func1 = b => b;
+                        return (Func<Derived, Derived>)func1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1292,37 +1292,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            B<CB> b = null;
-                            A<IA> c1 = [||]b;
-                        }
-
-                        public interface IA { }
-                        public class CB : IA { }
-                        public interface A<T> where T : IA { }
-
-                        public class B<T> : A<T> where T : CB { }
+                        B<CB> b = null;
+                        A<IA> c1 = [||]b;
                     }
-                    """,
+
+                    public interface IA { }
+                    public class CB : IA { }
+                    public interface A<T> where T : IA { }
+
+                    public class B<T> : A<T> where T : CB { }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            B<CB> b = null;
-                            A<IA> c1 = (A<IA>)b;
-                        }
-
-                        public interface IA { }
-                        public class CB : IA { }
-                        public interface A<T> where T : IA { }
-
-                        public class B<T> : A<T> where T : CB { }
+                        B<CB> b = null;
+                        A<IA> c1 = (A<IA>)b;
                     }
-                    """
+
+                    public interface IA { }
+                    public class CB : IA { }
+                    public interface A<T> where T : IA { }
+
+                    public class B<T> : A<T> where T : CB { }
+                }
+                """
             );
         }
 
@@ -1331,21 +1331,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            B<IB> b = null;
-                            A<IA> c1 = [||]b;
-                        }
-
-                        public interface IA { }
-                        public interface IB : IA { }
-                        public class A<T> where T : IA { }
-
-                        public class B<T> : A<T> where T : IB { }
+                        B<IB> b = null;
+                        A<IA> c1 = [||]b;
                     }
-                    """
+
+                    public interface IA { }
+                    public interface IB : IA { }
+                    public class A<T> where T : IA { }
+
+                    public class B<T> : A<T> where T : IB { }
+                }
+                """
             );
         }
 
@@ -1354,37 +1354,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            B<IB, int> b = null;
-                            A<IA, string> c1 = [||]b;
-                        }
-
-                        public interface IA { }
-                        public class IB : IA { }
-                        public interface A<T, U> where T : IA { }
-
-                        public class B<T, U> : A<T, U> where T : IB { }
+                        B<IB, int> b = null;
+                        A<IA, string> c1 = [||]b;
                     }
-                    """,
+
+                    public interface IA { }
+                    public class IB : IA { }
+                    public interface A<T, U> where T : IA { }
+
+                    public class B<T, U> : A<T, U> where T : IB { }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            B<IB, int> b = null;
-                            A<IA, string> c1 = (A<IA, string>)b;
-                        }
-
-                        public interface IA { }
-                        public class IB : IA { }
-                        public interface A<T, U> where T : IA { }
-
-                        public class B<T, U> : A<T, U> where T : IB { }
+                        B<IB, int> b = null;
+                        A<IA, string> c1 = (A<IA, string>)b;
                     }
-                    """
+
+                    public interface IA { }
+                    public class IB : IA { }
+                    public interface A<T, U> where T : IA { }
+
+                    public class B<T, U> : A<T, U> where T : IB { }
+                }
+                """
             );
         }
 
@@ -1393,20 +1393,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        void M() {
-                            Derived d = [||]new Base();
-                            Derived d2 = new Test();
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """
+                    void M() {
+                        Derived d = [||]new Base();
+                        Derived d2 = new Test();
+                    }
+                }
+                """
             );
         }
 
@@ -1415,35 +1415,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        void M() {
-                            Derived d = new Base();
-                            Derived d2 = [||]new Test();
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """,
+                    void M() {
+                        Derived d = new Base();
+                        Derived d2 = [||]new Test();
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        void M() {
-                            Derived d = new Base();
-                            Derived d2 = (Derived)new Test();
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """
+                    void M() {
+                        Derived d = new Base();
+                        Derived d2 = (Derived)new Test();
+                    }
+                }
+                """
             );
         }
 
@@ -1452,19 +1452,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        Derived returnDerived() {
-                            return [||]new Base();
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """
+                    Derived returnDerived() {
+                        return [||]new Base();
+                    }
+                }
+                """
             );
         }
 
@@ -1473,33 +1473,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        Derived returnDerived() {
-                            return [||]new Test();
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """,
+                    Derived returnDerived() {
+                        return [||]new Test();
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        Derived returnDerived() {
-                            return (Derived)new Test();
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """
+                    Derived returnDerived() {
+                        return (Derived)new Test();
+                    }
+                }
+                """
             );
         }
 
@@ -1508,20 +1508,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        void M(Derived d) { }
-                        void Goo() {
-                            M([||]new Base());
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """
+                    void M(Derived d) { }
+                    void Goo() {
+                        M([||]new Base());
+                    }
+                }
+                """
             );
         }
 
@@ -1530,35 +1530,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        void M(Derived d) { }
-                        void Goo() {
-                            M([||]new Test());
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """,
+                    void M(Derived d) { }
+                    void Goo() {
+                        M([||]new Test());
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        void M(Derived d) { }
-                        void Goo() {
-                            M((Derived)new Test());
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """
+                    void M(Derived d) { }
+                    void Goo() {
+                        M((Derived)new Test());
+                    }
+                }
+                """
             );
         }
 
@@ -1567,20 +1567,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-                        class Test
-                        {
-                            static public explicit operator Derived(Test t) { return new Derived();  }
-                        }
-                        void M(Derived d) { }
-                        void Goo() {
-                            M([||]new Base());
-                        }
+                        static public explicit operator Derived(Test t) { return new Derived();  }
                     }
-                    """
+                    void M(Derived d) { }
+                    void Goo() {
+                        M([||]new Base());
+                    }
+                }
+                """
             );
         }
 
@@ -1589,27 +1589,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
-                        void Goo() {
-                            Base b;
-                            Derived d = [||](Base)b;
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    void Goo() {
+                        Base b;
+                        Derived d = [||](Base)b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
-                        void Goo() {
-                            Base b;
-                            Derived d = (Derived)b;
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    void Goo() {
+                        Base b;
+                        Derived d = (Derived)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1618,29 +1618,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived1 : Base { }
-                        class Derived2 : Derived1 { }
-                        void Goo() {
-                            Base b;
-                            Derived2 d = [||](Derived1)b;
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived1 : Base { }
+                    class Derived2 : Derived1 { }
+                    void Goo() {
+                        Base b;
+                        Derived2 d = [||](Derived1)b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived1 : Base { }
-                        class Derived2 : Derived1 { }
-                        void Goo() {
-                            Base b;
-                            Derived2 d = (Derived2)b;
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived1 : Base { }
+                    class Derived2 : Derived1 { }
+                    void Goo() {
+                        Base b;
+                        Derived2 d = (Derived2)b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1649,29 +1649,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
-                        void M(Derived d) { }
-                        void Goo() {
-                            Base b;
-                            M([||](Base)b);
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    void M(Derived d) { }
+                    void Goo() {
+                        Base b;
+                        M([||](Base)b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
-                        void M(Derived d) { }
-                        void Goo() {
-                            Base b;
-                            M((Derived)b);
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+                    void M(Derived d) { }
+                    void Goo() {
+                        Base b;
+                        M((Derived)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1680,31 +1680,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived1 : Base { }
-                        class Derived2 : Derived1 { }
-                        void M(Derived2 d) { }
-                        void Goo() {
-                            Base b;
-                            M([||](Derived1)b);
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived1 : Base { }
+                    class Derived2 : Derived1 { }
+                    void M(Derived2 d) { }
+                    void Goo() {
+                        Base b;
+                        M([||](Derived1)b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived1 : Base { }
-                        class Derived2 : Derived1 { }
-                        void M(Derived2 d) { }
-                        void Goo() {
-                            Base b;
-                            M((Derived2)b);
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived1 : Base { }
+                    class Derived2 : Derived1 { }
+                    void M(Derived2 d) { }
+                    void Goo() {
+                        Base b;
+                        M((Derived2)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1713,25 +1713,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base
                     {
-                        class Base
-                        {
-                            public void Testing(Base d) { }
-                        }
-                        class Derived : Base
-                        {
-                            public void Testing(Derived d) { }
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Derived d = new Derived();
-                            d.Testing([||]b);
-                        }
+                        public void Testing(Base d) { }
                     }
-                    """
+                    class Derived : Base
+                    {
+                        public void Testing(Derived d) { }
+                    }
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        Derived d = new Derived();
+                        d.Testing([||]b);
+                    }
+                }
+                """
             );
         }
 
@@ -1740,37 +1740,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+
+                    void Goo(string s, Derived d) {} 
+                    void Goo(string s, int i) {}
+
+                    void M()
                     {
-                        class Base {}
-                        class Derived : Base {}
-
-                        void Goo(string s, Derived d) {} 
-                        void Goo(string s, int i) {}
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", [||]b);
-                        }
+                        Base b = new Base();
+                        Goo("", [||]b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+
+                    void Goo(string s, Derived d) {} 
+                    void Goo(string s, int i) {}
+
+                    void M()
                     {
-                        class Base {}
-                        class Derived : Base {}
-
-                        void Goo(string s, Derived d) {} 
-                        void Goo(string s, int i) {}
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", (Derived)b);
-                        }
+                        Base b = new Base();
+                        Goo("", (Derived)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1779,41 +1779,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+
+                    void Goo(string s, Derived d, out int i) {
+                        i = 1;
+                    } 
+                    void Goo(string s, Derived d) {}
+
+                    void M()
                     {
-                        class Base {}
-                        class Derived : Base {}
-
-                        void Goo(string s, Derived d, out int i) {
-                            i = 1;
-                        } 
-                        void Goo(string s, Derived d) {}
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", [||]b, out var i);
-                        }
+                        Base b = new Base();
+                        Goo("", [||]b, out var i);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+
+                    void Goo(string s, Derived d, out int i) {
+                        i = 1;
+                    } 
+                    void Goo(string s, Derived d) {}
+
+                    void M()
                     {
-                        class Base {}
-                        class Derived : Base {}
-
-                        void Goo(string s, Derived d, out int i) {
-                            i = 1;
-                        } 
-                        void Goo(string s, Derived d) {}
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", (Derived)b, out var i);
-                        }
+                        Base b = new Base();
+                        Goo("", (Derived)b, out var i);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1822,41 +1822,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    void Goo(string s, Derived d, out int i, params object[] list)
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        void Goo(string s, Derived d, out int i, params object[] list)
-                        {
-                            i = 1;
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", [||]b, out var i);
-                        }
+                        i = 1;
                     }
-                    """,
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        Goo("", [||]b, out var i);
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    void Goo(string s, Derived d, out int i, params object[] list)
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        void Goo(string s, Derived d, out int i, params object[] list)
-                        {
-                            i = 1;
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", (Derived)b, out var i);
-                        }
+                        i = 1;
                     }
-                    """
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        Goo("", (Derived)b, out var i);
+                    }
+                }
+                """
             );
         }
 
@@ -1865,41 +1865,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    void Goo(string s, Derived d, out int i, params object[] list)
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        void Goo(string s, Derived d, out int i, params object[] list)
-                        {
-                            i = 1;
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", [||]b, out var i, 1);
-                        }
+                        i = 1;
                     }
-                    """,
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        Goo("", [||]b, out var i, 1);
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    void Goo(string s, Derived d, out int i, params object[] list)
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        void Goo(string s, Derived d, out int i, params object[] list)
-                        {
-                            i = 1;
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", (Derived)b, out var i, 1);
-                        }
+                        i = 1;
                     }
-                    """
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        Goo("", (Derived)b, out var i, 1);
+                    }
+                }
+                """
             );
         }
 
@@ -1908,41 +1908,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    void Goo(string s, Derived d, out int i, params object[] list)
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        void Goo(string s, Derived d, out int i, params object[] list)
-                        {
-                            i = 1;
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", [||]b, out var i, 1, 2, 3);
-                        }
+                        i = 1;
                     }
-                    """,
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        Goo("", [||]b, out var i, 1, 2, 3);
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    void Goo(string s, Derived d, out int i, params object[] list)
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        void Goo(string s, Derived d, out int i, params object[] list)
-                        {
-                            i = 1;
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", (Derived)b, out var i, 1, 2, 3);
-                        }
+                        i = 1;
                     }
-                    """
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        Goo("", (Derived)b, out var i, 1, 2, 3);
+                    }
+                }
+                """
             );
         }
 
@@ -1951,39 +1951,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, params Derived2[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, params Derived2[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", [||]b);
-                        }
+                        Base b = new Base();
+                        Goo("", [||]b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, params Derived2[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, params Derived2[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", (Derived)b);
-                        }
+                        Base b = new Base();
+                        Goo("", (Derived)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1992,39 +1992,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, params Derived2[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, params Derived2[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", b, [||]b);
-                        }
+                        Base b = new Base();
+                        Goo("", b, [||]b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, params Derived2[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, params Derived2[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", b, (Derived2)b);
-                        }
+                        Base b = new Base();
+                        Goo("", b, (Derived2)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2033,49 +2033,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace ExtensionMethods
-                    {
-                        public class Base { }
-                        public class Derived : Base { }
+                namespace ExtensionMethods
+                {
+                    public class Base { }
+                    public class Derived : Base { }
 
-                        class Program
+                    class Program
+                    {
+                        Program()
                         {
-                            Program()
-                            {
-                                string s = "";
-                                Base b = new Derived();
-                                Derived d = new Derived();
-                                s.Goo([||]b, d);
-                            }
-                        }
-                        public static class MyExtensions
-                        {
-                            public static void Goo(this string str, Derived d, Derived d2) { }
+                            string s = "";
+                            Base b = new Derived();
+                            Derived d = new Derived();
+                            s.Goo([||]b, d);
                         }
                     }
-                    """,
+                    public static class MyExtensions
+                    {
+                        public static void Goo(this string str, Derived d, Derived d2) { }
+                    }
+                }
+                """,
                 """
-                    namespace ExtensionMethods
-                    {
-                        public class Base { }
-                        public class Derived : Base { }
+                namespace ExtensionMethods
+                {
+                    public class Base { }
+                    public class Derived : Base { }
 
-                        class Program
+                    class Program
+                    {
+                        Program()
                         {
-                            Program()
-                            {
-                                string s = "";
-                                Base b = new Derived();
-                                Derived d = new Derived();
-                                s.Goo((Derived)b, d);
-                            }
-                        }
-                        public static class MyExtensions
-                        {
-                            public static void Goo(this string str, Derived d, Derived d2) { }
+                            string s = "";
+                            Base b = new Derived();
+                            Derived d = new Derived();
+                            s.Goo((Derived)b, d);
                         }
                     }
-                    """
+                    public static class MyExtensions
+                    {
+                        public static void Goo(this string str, Derived d, Derived d2) { }
+                    }
+                }
+                """
             );
         }
 
@@ -2084,22 +2084,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived1 : Base {}
+                    class Derived2 : Derived1 {}
+
+                    void Goo(string s, Derived d) {} 
+                    void Goo(string s, int i) {}
+
+                    void M()
                     {
-                        class Base {}
-                        class Derived1 : Base {}
-                        class Derived2 : Derived1 {}
-
-                        void Goo(string s, Derived d) {} 
-                        void Goo(string s, int i) {}
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo(b[||], "");
-                        }
+                        Base b = new Base();
+                        Goo(b[||], "");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2108,39 +2108,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", d: [||]b, 1);
-                        }
+                        Base b = new Base();
+                        Goo("", d: [||]b, 1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", d: (Derived)b, 1);
-                        }
+                        Base b = new Base();
+                        Goo("", d: (Derived)b, 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2149,41 +2149,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo("", d: [||]b, 1, list: strlist);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo("", d: [||]b, 1, list: strlist);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo("", d: (Derived)b, 1, list: strlist);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo("", d: (Derived)b, 1, list: strlist);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2192,41 +2192,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo("", d: [||]b, list: strlist, i: 1);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo("", d: [||]b, list: strlist, i: 1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo("", d: (Derived)b, list: strlist, i: 1);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo("", d: (Derived)b, list: strlist, i: 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2235,23 +2235,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo(d: [||]b, "", 1, list: strlist);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo(d: [||]b, "", 1, list: strlist);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2260,41 +2260,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo(d: [||]b, s: "", list: strlist, i: 1);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo(d: [||]b, s: "", list: strlist, i: 1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo(d: (Derived)b, s: "", list: strlist, i: 1);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo(d: (Derived)b, s: "", list: strlist, i: 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2303,23 +2303,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Goo(d: "", s: [||]b, list: strlist, i: 1);
-                        }
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Goo(d: "", s: [||]b, list: strlist, i: 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2328,39 +2328,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, int j = 1) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, int j = 1) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", d: [||]b, 1);
-                        }
+                        Base b = new Base();
+                        Goo("", d: [||]b, 1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, int i, int j = 1) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, int i, int j = 1) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", d: (Derived)b, 1);
-                        }
+                        Base b = new Base();
+                        Goo("", d: (Derived)b, 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2369,41 +2369,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, params Derived2[] d2list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, params Derived2[] d2list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var dlist = new Derived[] {};
-                            Goo("", d: b, [||]dlist);
-                        }
+                        Base b = new Base();
+                        var dlist = new Derived[] {};
+                        Goo("", d: b, [||]dlist);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(string s, Derived d, params Derived2[] d2list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(string s, Derived d, params Derived2[] d2list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var dlist = new Derived[] {};
-                            Goo("", d: b, (Derived2[])dlist);
-                        }
+                        Base b = new Base();
+                        var dlist = new Derived[] {};
+                        Goo("", d: b, (Derived2[])dlist);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2412,23 +2412,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(params Derived2[] d2list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(params Derived2[] d2list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var dlist = new Derived[] {};
-                            Goo([||]dlist, new Derived2());
-                        }
+                        Base b = new Base();
+                        var dlist = new Derived[] {};
+                        Goo([||]dlist, new Derived2());
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2437,23 +2437,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    void Goo(params Derived2[] d2list) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        void Goo(params Derived2[] d2list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var dlist = new Derived[] {};
-                            Goo([||]dlist, dlist);
-                        }
+                        Base b = new Base();
+                        var dlist = new Derived[] {};
+                        Goo([||]dlist, dlist);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2462,20 +2462,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    void Goo(Derived d, int i) { }
+
+                    void M()
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        void Goo(Derived d, int i) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo([||]b, i:1, i:1);
-                        }
+                        Base b = new Base();
+                        Goo([||]b, i:1, i:1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2484,23 +2484,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base {}
+                    class Derived : Base {}
+
+                    void Goo(string s, Derived d, out Derived i) {
+                        i = new Derived();
+                    } 
+                    void Goo(string s, Derived d) {}
+
+                    void M()
                     {
-                        class Base {}
-                        class Derived : Base {}
-
-                        void Goo(string s, Derived d, out Derived i) {
-                            i = new Derived();
-                        } 
-                        void Goo(string s, Derived d) {}
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            Goo("", [||]b, out Base i);
-                        }
+                        Base b = new Base();
+                        Goo("", [||]b, out Base i);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2509,47 +2509,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        class Test
-                        {
-                            public Test(string s, Derived d, int i, params object[] list) { }
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Test t = new Test(d: [||]b, s:"", i:1, list : strlist);
-                        }
+                        public Test(string s, Derived d, int i, params object[] list) { }
                     }
-                    """,
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Test t = new Test(d: [||]b, s:"", i:1, list : strlist);
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        class Test
-                        {
-                            public Test(string s, Derived d, int i, params object[] list) { }
-                        }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Test t = new Test(d: (Derived)b, s:"", i:1, list : strlist);
-                        }
+                        public Test(string s, Derived d, int i, params object[] list) { }
                     }
-                    """
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Test t = new Test(d: (Derived)b, s:"", i:1, list : strlist);
+                    }
+                }
+                """
             );
         }
 
@@ -2558,51 +2558,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        class Test
-                        {
-                            public Test(string s, Derived d, int i, params object[] list) { }
-                        }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Test t = new Test("", d: [||]b, i:1, "1", "2", "3");
-                        }
+                        public Test(string s, Derived d, int i, params object[] list) { }
                     }
-                    """,
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Test t = new Test("", d: [||]b, i:1, "1", "2", "3");
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        class Test
-                        {
-                            public Test(string s, Derived d, int i, params object[] list) { }
-                        }
-
-                        void Goo(string s, Derived d, int i, params object[] list) { }
-
-                        void M()
-                        {
-                            Base b = new Base();
-                            var strlist = new string[1];
-                            Test t = new Test("", d: (Derived)b, i:1, "1", "2", "3");
-                        }
+                        public Test(string s, Derived d, int i, params object[] list) { }
                     }
-                    """
+
+                    void Goo(string s, Derived d, int i, params object[] list) { }
+
+                    void M()
+                    {
+                        Base b = new Base();
+                        var strlist = new string[1];
+                        Test t = new Test("", d: (Derived)b, i:1, "1", "2", "3");
+                    }
+                }
+                """
             );
         }
 
@@ -2611,35 +2611,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        class Test
-                        {
-                            public Test(string s, Base b, int i, params object[] list) : this(d : [||]b, s : s, i : i) { }
-                            Test(string s, Derived d, int i) { }
-                        }
+                        public Test(string s, Base b, int i, params object[] list) : this(d : [||]b, s : s, i : i) { }
+                        Test(string s, Derived d, int i) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
+
+                    class Derived2 : Derived { }
+
+                    class Test
                     {
-                        class Base { }
-                        class Derived : Base { }
-
-                        class Derived2 : Derived { }
-
-                        class Test
-                        {
-                            public Test(string s, Base b, int i, params object[] list) : this(d : (Derived)b, s : s, i : i) { }
-                            Test(string s, Derived d, int i) { }
-                        }
+                        public Test(string s, Base b, int i, params object[] list) : this(d : (Derived)b, s : s, i : i) { }
+                        Test(string s, Derived d, int i) { }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3199,37 +3199,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
 
-                        class Derived2 : Derived { }
+                    class Derived2 : Derived { }
 
-                        void M(Derived2 d2) { }
+                    void M(Derived2 d2) { }
 
-                        void Goo(Base b) {
-                            Derived d;
-                            M(d = [|b|]);
-                        }
+                    void Goo(Base b) {
+                        Derived d;
+                        M(d = [|b|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
 
-                        class Derived2 : Derived { }
+                    class Derived2 : Derived { }
 
-                        void M(Derived2 d2) { }
+                    void M(Derived2 d2) { }
 
-                        void Goo(Base b) {
-                            Derived d;
-                            M(d = (Derived)b);
-                        }
+                    void Goo(Base b) {
+                        Derived d;
+                        M(d = (Derived)b);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3238,37 +3238,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
 
-                        class Derived2 : Derived { }
+                    class Derived2 : Derived { }
 
-                        void M(Derived2 d2) { }
+                    void M(Derived2 d2) { }
 
-                        void Goo(Base b) {
-                            Derived d;
-                            M([||]d = b);
-                        }
+                    void Goo(Base b) {
+                        Derived d;
+                        M([||]d = b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived : Base { }
+                class Program
+                {
+                    class Base { }
+                    class Derived : Base { }
 
-                        class Derived2 : Derived { }
+                    class Derived2 : Derived { }
 
-                        void M(Derived2 d2) { }
+                    void M(Derived2 d2) { }
 
-                        void Goo(Base b) {
-                            Derived d;
-                            M((Derived2)(d = b));
-                        }
+                    void Goo(Base b) {
+                        Derived d;
+                        M((Derived2)(d = b));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3277,15 +3277,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        void M(C c) 
-                        { 
-                            TypeThatDoesntExist t = new TypeThatDoesntExist();
-                            M([||]t);
-                        }
+                class C
+                {
+                    void M(C c) 
+                    { 
+                        TypeThatDoesntExist t = new TypeThatDoesntExist();
+                        M([||]t);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3294,29 +3294,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class C
-                    {
-                        static object str = "";
+                using System;
+                class C
+                {
+                    static object str = "";
 
-                        [Obsolete([||]str, false)]
-                        void M() 
-                        {
-                        }
+                    [Obsolete([||]str, false)]
+                    void M() 
+                    {
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
-                    {
-                        static object str = "";
+                using System;
+                class C
+                {
+                    static object str = "";
 
-                        [Obsolete((string)str, false)]
-                        void M() 
-                        {
-                        }
+                    [Obsolete((string)str, false)]
+                    void M() 
+                    {
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3325,27 +3325,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public void M(object o)
                     {
-                        public void M(object o)
-                        {
-                            var array = new int[10];
+                        var array = new int[10];
 
-                            if (array[[||]o] > 0) {}
-                        }
+                        if (array[[||]o] > 0) {}
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public void M(object o)
                     {
-                        public void M(object o)
-                        {
-                            var array = new int[10];
+                        var array = new int[10];
 
-                            if (array[(int)o] > 0) {}
-                        }
+                        if (array[(int)o] > 0) {}
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3354,29 +3354,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived1 : Base { }
-                        class Derived2 : Derived1 { }
-                        void Goo() {
-                            Base b;
-                            Derived2 d = [||](Derived1)b;
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived1 : Base { }
+                    class Derived2 : Derived1 { }
+                    void Goo() {
+                        Base b;
+                        Derived2 d = [||](Derived1)b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        class Base { }
-                        class Derived1 : Base { }
-                        class Derived2 : Derived1 { }
-                        void Goo() {
-                            Base b;
-                            Derived2 d = (Derived2)b;
-                        }
+                class Program
+                {
+                    class Base { }
+                    class Derived1 : Base { }
+                    class Derived2 : Derived1 { }
+                    void Goo() {
+                        Base b;
+                        Derived2 d = (Derived2)b;
                     }
-                    """
+                }
+                """
             );
         }
     }

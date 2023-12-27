@@ -88,14 +88,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1);
-                        }
+                        int x = $$(1);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: IgnoreAllParentheses)
             );
         }
@@ -105,14 +105,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1;
-                        }
+                        int x = $$(1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -121,14 +121,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1 + $$(2 * 3);
-                        }
+                        int x = 1 + $$(2 * 3);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity)
             );
         }
@@ -138,14 +138,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var span = $$(stackalloc byte[8]);
-                        }
+                        var span = $$(stackalloc byte[8]);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -154,16 +154,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            dynamic i = 1;
-                            dynamic s = "s";
-                            Console.WriteLine(s + $$(1 + i));
-                        }
+                        dynamic i = 1;
+                        dynamic s = "s";
+                        Console.WriteLine(s + $$(1 + i));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -172,23 +172,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a || $$(b && c);
-                        }
+                        int x = a || $$(b && c);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a || b && c;
-                        }
+                        int x = a || b && c;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(
                     options: RequireArithmeticBinaryParenthesesForClarity
                 )
@@ -200,14 +200,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a || $$(b && c);
-                        }
+                        int x = a || $$(b && c);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RequireOtherBinaryParenthesesForClarity)
             );
         }
@@ -217,23 +217,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a + $$(b * c);
-                        }
+                        int x = a + $$(b * c);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a + b * c;
-                        }
+                        int x = a + b * c;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RequireOtherBinaryParenthesesForClarity)
             );
         }
@@ -243,23 +243,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1 + $$(2 + 3);
-                        }
+                        int x = 1 + $$(2 + 3);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1 + 2 + 3;
-                        }
+                        int x = 1 + 2 + 3;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -269,23 +269,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1 + 2) + 3;
-                        }
+                        int x = $$(1 + 2) + 3;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1 + 2 + 3;
-                        }
+                        int x = 1 + 2 + 3;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -295,14 +295,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1.0 + $$(2.0 + 3.0);
-                        }
+                        int x = 1.0 + $$(2.0 + 3.0);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -311,23 +311,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1.0 + 2.0) + 3.0;
-                        }
+                        int x = $$(1.0 + 2.0) + 3.0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1.0 + 2.0 + 3.0;
-                        }
+                        int x = 1.0 + 2.0 + 3.0;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -337,23 +337,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a || $$(b || c);
-                        }
+                        int x = a || $$(b || c);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a || b || c;
-                        }
+                        int x = a || b || c;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -363,23 +363,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(a || b) || c;
-                        }
+                        int x = $$(a || b) || c;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a || b || c;
-                        }
+                        int x = a || b || c;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -389,23 +389,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1);
-                        }
+                        int x = $$(1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1;
-                        }
+                        int x = 1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -415,23 +415,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            return $$(1 + 2);
-                        }
+                        return $$(1 + 2);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            return 1 + 2;
-                        }
+                        return 1 + 2;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -441,17 +441,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
-                    {
-                        int M() => $$(1 + 2);
-                    }
-                    """,
+                class C
+                {
+                    int M() => $$(1 + 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        int M() => 1 + 2;
-                    }
-                    """,
+                class C
+                {
+                    int M() => 1 + 2;
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -461,23 +461,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = checked($$(1 + 2));
-                        }
+                        int i = checked($$(1 + 2));
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = checked(1 + 2);
-                        }
+                        int i = checked(1 + 2);
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -487,23 +487,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            i = $$(1 + 2);
-                        }
+                        i = $$(1 + 2);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            i = 1 + 2;
-                        }
+                        i = 1 + 2;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -513,23 +513,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            i *= $$(1 + 2);
-                        }
+                        i *= $$(1 + 2);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            i *= 1 + 2;
-                        }
+                        i *= 1 + 2;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -539,23 +539,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            i = $$(s.Length);
-                        }
+                        i = $$(s.Length);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            i = s.Length;
-                        }
+                        i = s.Length;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -565,23 +565,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = ( $$(1 + 2) );
-                        }
+                        int i = ( $$(1 + 2) );
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = ( 1 + 2 );
-                        }
+                        int i = ( 1 + 2 );
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true,
                 index: 1
             );
@@ -592,23 +592,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = $$(x++);
-                        }
+                        int i = $$(x++);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = x++;
-                        }
+                        int i = x++;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -618,23 +618,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            Func<int> i = () => $$(1);
-                        }
+                        Func<int> i = () => $$(1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            Func<int> i = () => 1;
-                        }
+                        Func<int> i = () => 1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -644,23 +644,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int[] i = new int[] { $$(1) };
-                        }
+                        int[] i = new int[] { $$(1) };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int[] i = new int[] { 1 };
-                        }
+                        int[] i = new int[] { 1 };
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -670,27 +670,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = from c in customer
-                                    where $$(c.Age > 21)
-                                    select c;
-                        }
+                        var q = from c in customer
+                                where $$(c.Age > 21)
+                                select c;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = from c in customer
-                                    where c.Age > 21
-                                    select c;
-                        }
+                        var q = from c in customer
+                                where c.Age > 21
+                                select c;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -700,23 +700,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = (int)$$(1);
-                        }
+                        int i = (int)$$(1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = (int)1;
-                        }
+                        int i = (int)1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -726,14 +726,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            var v = $$(s?.Length).ToString();
-                        }
+                        var v = $$(s?.Length).ToString();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -743,14 +743,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            var v = $$(s?.Length)?.ToString();
-                        }
+                        var v = $$(s?.Length)?.ToString();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -760,23 +760,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            var v = $$(s?.Length);
-                        }
+                        var v = $$(s?.Length);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            var v = s?.Length;
-                        }
+                        var v = s?.Length;
                     }
-                    """,
+                }
+                """,
                 options: RemoveAllUnnecessaryParentheses
             );
         }
@@ -786,14 +786,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            var v = $$(s?[0]).ToString();
-                        }
+                        var v = $$(s?[0]).ToString();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -803,14 +803,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = (int)$$(1 + 2);
-                        }
+                        int i = (int)$$(1 + 2);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -820,23 +820,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = $$((int)1);
-                        }
+                        int i = $$((int)1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = (int)1;
-                        }
+                        int i = (int)1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -846,14 +846,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = $"{ $$(a ? b : c) }";
-                        }
+                        var s = $"{ $$(a ? b : c) }";
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -863,25 +863,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s1 = $"{ {|FixAllInDocument:(|}(a ? b : c)) }";
-                            var s2 = $"{ ((a ? b : c)) }";
-                        }
+                        var s1 = $"{ {|FixAllInDocument:(|}(a ? b : c)) }";
+                        var s2 = $"{ ((a ? b : c)) }";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s1 = $"{ (a ? b : c) }";
-                            var s2 = $"{ (a ? b : c) }";
-                        }
+                        var s1 = $"{ (a ? b : c) }";
+                        var s2 = $"{ (a ? b : c) }";
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -891,25 +891,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s1 = $"{ ({|FixAllInDocument:(|}a ? b : c)) }";
-                            var s2 = $"{ ((a ? b : c)) }";
-                        }
+                        var s1 = $"{ ({|FixAllInDocument:(|}a ? b : c)) }";
+                        var s2 = $"{ ((a ? b : c)) }";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s1 = $"{ (a ? b : c) }";
-                            var s2 = $"{ (a ? b : c) }";
-                        }
+                        var s1 = $"{ (a ? b : c) }";
+                        var s2 = $"{ (a ? b : c) }";
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -919,23 +919,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = $"{ $$(true) }";
-                        }
+                        var s = $"{ $$(true) }";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = $"{ true }";
-                        }
+                        var s = $"{ true }";
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -945,23 +945,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = $$(a * b) + c;
-                        }
+                        var q = $$(a * b) + c;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = a * b + c;
-                        }
+                        var q = a * b + c;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: false
             );
         }
@@ -971,23 +971,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = c + $$(a * b);
-                        }
+                        var q = c + $$(a * b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = c + a * b;
-                        }
+                        var q = c + a * b;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: false
             );
         }
@@ -997,14 +997,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = $$(a * b) ? (1 + 2) : (3 + 4);
-                        }
+                        var q = $$(a * b) ? (1 + 2) : (3 + 4);
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1014,14 +1014,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = (a * b) ? $$(1 + 2) : (3 + 4);
-                        }
+                        var q = (a * b) ? $$(1 + 2) : (3 + 4);
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1031,14 +1031,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = (a * b) ? (1 + 2) : $$(3 + 4);
-                        }
+                        var q = (a * b) ? (1 + 2) : $$(3 + 4);
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1048,23 +1048,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = $$(a.X()) ? (1 + 2) : (3 + 4);
-                        }
+                        var q = $$(a.X()) ? (1 + 2) : (3 + 4);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = a.X() ? (1 + 2) : (3 + 4);
-                        }
+                        var q = a.X() ? (1 + 2) : (3 + 4);
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1074,23 +1074,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = (a.X()) ? $$(x.Length) : (3 + 4);
-                        }
+                        var q = (a.X()) ? $$(x.Length) : (3 + 4);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = (a.X()) ? x.Length : (3 + 4);
-                        }
+                        var q = (a.X()) ? x.Length : (3 + 4);
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1100,23 +1100,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = (a.X()) ? (1 + 2) : $$(a[0]);
-                        }
+                        var q = (a.X()) ? (1 + 2) : $$(a[0]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = (a.X()) ? (1 + 2) : a[0];
-                        }
+                        var q = (a.X()) ? (1 + 2) : a[0];
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1126,23 +1126,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if ( $$(a[0]) is string s) { }
-                        }
+                        if ( $$(a[0]) is string s) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if ( a[0] is string s) { }
-                        }
+                        if ( a[0] is string s) { }
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1152,23 +1152,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if ( $$(a * b) is int i) { }
-                        }
+                        if ( $$(a * b) is int i) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if ( a * b is int i) { }
-                        }
+                        if ( a * b is int i) { }
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: false
             );
         }
@@ -1178,27 +1178,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(C c1, C c2, C c3)
                     {
-                        void M(C c1, C c2, C c3)
-                        {
-                            var x = $$(c1 + c2) + c3;
-                        }
-
-                        public static C operator +(C c1, C c2) => null;
+                        var x = $$(c1 + c2) + c3;
                     }
-                    """,
+
+                    public static C operator +(C c1, C c2) => null;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(C c1, C c2, C c3)
                     {
-                        void M(C c1, C c2, C c3)
-                        {
-                            var x = c1 + c2 + c3;
-                        }
-
-                        public static C operator +(C c1, C c2) => null;
+                        var x = c1 + c2 + c3;
                     }
-                    """,
+
+                    public static C operator +(C c1, C c2) => null;
+                }
+                """,
                 parameters: new TestParameters(options: RequireAllParenthesesForClarity)
             );
         }
@@ -1208,16 +1208,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(C c1, C c2, C c3)
                     {
-                        void M(C c1, C c2, C c3)
-                        {
-                            var x = c1 + $$(c2 + c3);
-                        }
-
-                        public static C operator +(C c1, C c2) => null;
+                        var x = c1 + $$(c2 + c3);
                     }
-                    """,
+
+                    public static C operator +(C c1, C c2) => null;
+                }
+                """,
                 parameters: new TestParameters(options: RequireAllParenthesesForClarity)
             );
         }
@@ -1227,14 +1227,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x =  $$(1 + 2) << 3;
-                        }
+                        int x =  $$(1 + 2) << 3;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(
                     options: RequireArithmeticBinaryParenthesesForClarity
                 )
@@ -1246,14 +1246,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1 + 2) << 3;
-                        }
+                        int x = $$(1 + 2) << 3;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RequireAllParenthesesForClarity)
             );
         }
@@ -1263,14 +1263,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1 + 2) << 3;
-                        }
+                        int x = $$(1 + 2) << 3;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1280,23 +1280,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1 << 2) << 3;
-                        }
+                        int x = $$(1 << 2) << 3;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1 << 2 << 3;
-                        }
+                        int x = 1 << 2 << 3;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1306,14 +1306,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 1 << $$(2 << 3);
-                        }
+                        int x = 1 << $$(2 << 3);
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1323,14 +1323,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(1 >> 2) << 3;
-                        }
+                        int x = $$(1 >> 2) << 3;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1340,14 +1340,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = $$(a ?? b) ?? c;
-                        }
+                        int x = $$(a ?? b) ?? c;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1357,23 +1357,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a ?? $$(b ?? c);
-                        }
+                        int x = a ?? $$(b ?? c);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = a ?? b ?? c;
-                        }
+                        int x = a ?? b ?? c;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1383,14 +1383,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = $$(a + b) & c;
-                        }
+                        var q = $$(a + b) & c;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1400,14 +1400,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = $$(a | b) & c;
-                        }
+                        var q = $$(a | b) & c;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1417,23 +1417,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = $$(a & b) & c;
-                        }
+                        var q = $$(a & b) & c;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var q = a & b & c;
-                        }
+                        var q = a & b & c;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1443,29 +1443,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case $$(default(bool)):
-                            }
+                            case $$(default(bool)):
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case default(bool):
-                            }
+                            case default(bool):
                         }
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1475,29 +1475,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case $$(default(bool)) when true:
-                            }
+                            case $$(default(bool)) when true:
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case default(bool) when true:
-                            }
+                            case default(bool) when true:
                         }
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1507,29 +1507,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case true when $$(default(bool)):
-                            }
+                            case true when $$(default(bool)):
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case true when default(bool):
-                            }
+                            case true when default(bool):
                         }
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1539,27 +1539,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        if (true is $$(default(bool)))
                         {
-                            if (true is $$(default(bool)))
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        if (true is default(bool))
                         {
-                            if (true is default(bool))
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1569,16 +1569,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true is $$(true == true))
                         {
-                            if (true is $$(true == true))
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1588,14 +1588,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$(-1);
-                        }
+                        int x = (X)$$(-1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1604,14 +1604,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$(+1);
-                        }
+                        int x = (X)$$(+1);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1621,14 +1621,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$(&1);
-                        }
+                        int x = (X)$$(&1);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1638,14 +1638,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$(*1);
-                        }
+                        int x = (X)$$(*1);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -1655,23 +1655,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)$$(-1);
-                        }
+                        int x = (int)$$(-1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)-1;
-                        }
+                        int x = (int)-1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1681,23 +1681,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)$$(+1);
-                        }
+                        int x = (int)$$(+1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)+1;
-                        }
+                        int x = (int)+1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1707,23 +1707,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)$$(&x);
-                        }
+                        int x = (int)$$(&x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)&x;
-                        }
+                        int x = (int)&x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1733,23 +1733,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)$$(*x);
-                        }
+                        int x = (int)$$(*x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (int)*x;
-                        }
+                        int x = (int)*x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1759,23 +1759,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])$$(-1);
-                        }
+                        int x = (T[])$$(-1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])-1;
-                        }
+                        int x = (T[])-1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1785,23 +1785,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])$$(+1);
-                        }
+                        int x = (T[])$$(+1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])+1;
-                        }
+                        int x = (T[])+1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1811,23 +1811,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])$$(&x);
-                        }
+                        int x = (T[])$$(&x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])&x;
-                        }
+                        int x = (T[])&x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1837,23 +1837,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])$$(*x);
-                        }
+                        int x = (T[])$$(*x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T[])*x;
-                        }
+                        int x = (T[])*x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1863,23 +1863,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)$$(-1);
-                        }
+                        int x = (T*)$$(-1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)-1;
-                        }
+                        int x = (T*)-1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1889,23 +1889,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)$$(+1);
-                        }
+                        int x = (T*)$$(+1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)+1;
-                        }
+                        int x = (T*)+1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1915,23 +1915,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)$$(&x);
-                        }
+                        int x = (T*)$$(&x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)&x;
-                        }
+                        int x = (T*)&x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1941,23 +1941,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)$$(*x);
-                        }
+                        int x = (T*)$$(*x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T*)*x;
-                        }
+                        int x = (T*)*x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1967,23 +1967,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)$$(-1);
-                        }
+                        int x = (T?)$$(-1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)-1;
-                        }
+                        int x = (T?)-1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -1993,23 +1993,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)$$(+1);
-                        }
+                        int x = (T?)$$(+1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)+1;
-                        }
+                        int x = (T?)+1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2019,23 +2019,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)$$(&x);
-                        }
+                        int x = (T?)$$(&x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)&x;
-                        }
+                        int x = (T?)&x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2045,23 +2045,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)$$(*x);
-                        }
+                        int x = (T?)$$(*x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (T?)*x;
-                        }
+                        int x = (T?)*x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2071,23 +2071,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)$$(-1);
-                        }
+                        int x = (e::N.T)$$(-1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)-1;
-                        }
+                        int x = (e::N.T)-1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2097,23 +2097,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)$$(+1);
-                        }
+                        int x = (e::N.T)$$(+1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)+1;
-                        }
+                        int x = (e::N.T)+1;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2123,23 +2123,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)$$(&x);
-                        }
+                        int x = (e::N.T)$$(&x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)&x;
-                        }
+                        int x = (e::N.T)&x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2149,23 +2149,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)$$(*x);
-                        }
+                        int x = (e::N.T)$$(*x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (e::N.T)*x;
-                        }
+                        int x = (e::N.T)*x;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2175,23 +2175,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$(a);
-                        }
+                        int x = (X)$$(a);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)a;
-                        }
+                        int x = (X)a;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2201,23 +2201,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$(a.b);
-                        }
+                        int x = (X)$$(a.b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)a.b;
-                        }
+                        int x = (X)a.b;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2227,23 +2227,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$(!a);
-                        }
+                        int x = (X)$$(!a);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)!a;
-                        }
+                        int x = (X)!a;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2253,23 +2253,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)$$((Y)a);
-                        }
+                        int x = (X)$$((Y)a);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = (X)(Y)a;
-                        }
+                        int x = (X)(Y)a;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2279,23 +2279,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object expression)
                     {
-                        void M(object expression)
-                        {
-                            if ($$(expression is bool b) && b) { }
-                        }
+                        if ($$(expression is bool b) && b) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object expression)
                     {
-                        void M(object expression)
-                        {
-                            if (expression is bool b && b) { }
-                        }
+                        if (expression is bool b && b) { }
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: false
             );
         }
@@ -2305,14 +2305,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object expression)
                     {
-                        void M(object expression)
-                        {
-                            if (!$$(expression is bool b)) { }
-                        }
+                        if (!$$(expression is bool b)) { }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2321,23 +2321,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            $$(this.Property) = Property;
-                        }
+                        $$(this.Property) = Property;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.Property = Property;
-                        }
+                        this.Property = Property;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2347,23 +2347,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            x += $$(y * z)
-                        }
+                        x += $$(y * z)
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            x += y * z
-                        }
+                        x += y * z
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2373,23 +2373,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            x *= $$(y + z)
-                        }
+                        x *= $$(y + z)
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            x *= y + z
-                        }
+                        x *= y + z
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2399,14 +2399,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            $$((short)3).ToString();
-                        }
+                        $$((short)3).ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2415,23 +2415,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 3 * $$(checked(5));
-                        }
+                        int x = 3 * $$(checked(5));
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 3 * checked(5);
-                        }
+                        int x = 3 * checked(5);
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2441,23 +2441,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 3 * $$(unchecked(5));
-                        }
+                        int x = 3 * $$(unchecked(5));
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = 3 * unchecked(5);
-                        }
+                        int x = 3 * unchecked(5);
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2467,23 +2467,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string property = "My " + $$(nameof(property));
-                        }
+                        string property = "My " + $$(nameof(property));
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string property = "My " + nameof(property);
-                        }
+                        string property = "My " + nameof(property);
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2493,23 +2493,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            bool x = $$("" is string);
-                        }
+                        bool x = $$("" is string);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            bool x = "" is string;
-                        }
+                        bool x = "" is string;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2519,14 +2519,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string x = $$("" is string).ToString();
-                        }
+                        string x = $$("" is string).ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2535,25 +2535,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string y;
-                            string x = $$(y = "text");
-                        }
+                        string y;
+                        string x = $$(y = "text");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string y;
-                            string x = y = "text";
-                        }
+                        string y;
+                        string x = y = "text";
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2563,23 +2563,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            Func<string, string> y2 = $$(v => v);
-                        }
+                        Func<string, string> y2 = $$(v => v);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            Func<string, string> y2 = v => v;
-                        }
+                        Func<string, string> y2 = v => v;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2589,23 +2589,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            Func<string, string> y2 = $$((v) => v);
-                        }
+                        Func<string, string> y2 = $$((v) => v);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            Func<string, string> y2 = (v) => v;
-                        }
+                        Func<string, string> y2 = (v) => v;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2615,14 +2615,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string y = ((Func<string, string>)$$((v) => v))("text");
-                        }
+                        string y = ((Func<string, string>)$$((v) => v))("text");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2631,14 +2631,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string y = ($$(Func<string, string>)((v) => v))("text");
-                        }
+                        string y = ($$(Func<string, string>)((v) => v))("text");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2647,14 +2647,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            string y = $$((Func<string, string>)((v) => v))("text");
-                        }
+                        string y = $$((Func<string, string>)((v) => v))("text");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2663,23 +2663,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            return$$(value);
-                        }
+                        return$$(value);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            return value;
-                        }
+                        return value;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2689,23 +2689,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            return $$(value);
-                        }
+                        return $$(value);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            return value;
-                        }
+                        return value;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2715,25 +2715,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                    #if$$(A || B)
-                    #endif
-                        }
+                #if$$(A || B)
+                #endif
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                    #if A || B
-                    #endif
-                        }
+                #if A || B
+                #endif
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2744,25 +2744,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             // Currently producing broken code.
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                    #if( $$(A || B) || C)
-                    #endif
-                        }
+                #if( $$(A || B) || C)
+                #endif
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                    #if( A || B || C)
-                    #endif
-                        }
+                #if( A || B || C)
+                #endif
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true,
                 index: 1
             );
@@ -2773,27 +2773,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                    #if C
-                    #elif$$(A || B)
-                    #endif
-                        }
+                #if C
+                #elif$$(A || B)
+                #endif
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                    #if C
-                    #elif A || B
-                    #endif
-                        }
+                #if C
+                #elif A || B
+                #endif
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -2803,14 +2803,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = (byte)$$(++x);
-                        }
+                        var v = (byte)$$(++x);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2820,14 +2820,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = (byte)$$(--x);
-                        }
+                        var v = (byte)$$(--x);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2837,23 +2837,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = (byte)$$(x++);
-                        }
+                        var v = (byte)$$(x++);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = (byte)x++;
-                        }
+                        var v = (byte)x++;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2863,23 +2863,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = (byte)$$(x--);
-                        }
+                        var v = (byte)$$(x--);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = (byte)x--;
-                        }
+                        var v = (byte)x--;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2889,23 +2889,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = $$(++x);
-                        }
+                        var v = $$(++x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = ++x;
-                        }
+                        var v = ++x;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2915,23 +2915,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int x, int v)
                     {
-                        void M(int x, int v)
-                        {
-                            v = $$(++x);
-                        }
+                        v = $$(++x);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int x, int v)
                     {
-                        void M(int x, int v)
-                        {
-                            v = ++x;
-                        }
+                        v = ++x;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2941,23 +2941,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            M($$(++x));
-                        }
+                        M($$(++x));
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            M(++x);
-                        }
+                        M(++x);
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2967,14 +2967,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = x+$$(++x);
-                        }
+                        var v = x+$$(++x);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -2984,14 +2984,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                            var v = x+$$(+x);
-                        }
+                        var v = x+$$(+x);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -3001,14 +3001,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class Bar
+                class Bar
+                {
+                    void Foo(bool cond, double a, double b)
                     {
-                        void Foo(bool cond, double a, double b)
-                        {
-                            [||](cond ? ref a : ref b) = 6.67e-11;
-                        }
+                        [||](cond ? ref a : ref b) = 6.67e-11;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -3018,23 +3018,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Bar
+                class Bar
+                {
+                    void Foo(bool cond, double a, double b)
                     {
-                        void Foo(bool cond, double a, double b)
-                        {
-                            double c = $$(cond ? a : b);
-                        }
+                        double c = $$(cond ? a : b);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Bar
+                class Bar
+                {
+                    void Foo(bool cond, double a, double b)
                     {
-                        void Foo(bool cond, double a, double b)
-                        {
-                            double c = cond ? a : b;
-                        }
+                        double c = cond ? a : b;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -3044,15 +3044,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class Bar
+                class Bar
+                {
+                    void Test(bool a)
                     {
-                        void Test(bool a)
-                        {
-                            Func<int, string> lambda =
-                                number => number + $"{ ($$a ? "foo" : "bar") }";
-                        }
+                        Func<int, string> lambda =
+                            number => number + $"{ ($$a ? "foo" : "bar") }";
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -3067,14 +3067,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             );
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = [|(1 + 2)|];
-                        }
+                        int x = [|(1 + 2)|];
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses),
                 parentheticalExpressionDiagnostic
             );
@@ -3087,15 +3087,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                 GetRemoveUnnecessaryParenthesesDiagnostic("(1 +", 4, 16);
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = [|(1 +
-                                2)|];
-                        }
+                        int x = [|(1 +
+                            2)|];
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses),
                 firstLineParentheticalExpressionDiagnostic
             );
@@ -3121,14 +3121,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             };
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = [|(1 + (2 + 3) + 4)|];
-                        }
+                        int x = [|(1 + (2 + 3) + 4)|];
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses),
                 expectedDiagnostics
             );
@@ -3151,16 +3151,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             };
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = [|(1 + 2 +
-                                (3 + 4) +
-                                5 + 6)|];
-                        }
+                        int x = [|(1 + 2 +
+                            (3 + 4) +
+                            5 + 6)|];
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses),
                 expectedDiagnostics
             );
@@ -3203,33 +3203,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                                var result = x switch
-                                {
-                                    1 => $$(5),
-                                    2 => 10 + 5,
-                                    _ => 100,
-                                }
-                        };
-                    }
-                    """,
+                            var result = x switch
+                            {
+                                1 => $$(5),
+                                2 => 10 + 5,
+                                _ => 100,
+                            }
+                    };
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int x)
                     {
-                        void M(int x)
-                        {
-                                var result = x switch
-                                {
-                                    1 => 5,
-                                    2 => 10 + 5,
-                                    _ => 100,
-                                }
-                        };
-                    }
-                    """,
+                            var result = x switch
+                            {
+                                1 => 5,
+                                2 => 10 + 5,
+                                _ => 100,
+                            }
+                    };
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3239,27 +3239,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            bool f = false;
+                        bool f = false;
 
-                            string s2 = f ? "" : $$(default);
-                        }
+                        string s2 = f ? "" : $$(default);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            bool f = false;
+                        bool f = false;
 
-                            string s2 = f ? "" : default;
-                        }
+                        string s2 = f ? "" : default;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3269,23 +3269,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            _ = s[$$(1)..];
-                        }
+                        _ = s[$$(1)..];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            _ = s[1..];
-                        }
+                        _ = s[1..];
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3295,23 +3295,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            _ = s[$$(s.Length)..];
-                        }
+                        _ = s[$$(s.Length)..];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            _ = s[s.Length..];
-                        }
+                        _ = s[s.Length..];
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3321,23 +3321,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s, int[] indices)
                     {
-                        void M(string s, int[] indices)
-                        {
-                            _ = s[$$(indices[0])..];
-                        }
+                        _ = s[$$(indices[0])..];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s, int[] indices)
                     {
-                        void M(string s, int[] indices)
-                        {
-                            _ = s[indices[0]..];
-                        }
+                        _ = s[indices[0]..];
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3347,14 +3347,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            _ = s[$$(s.Length - 5)..];
-                        }
+                        _ = s[$$(s.Length - 5)..];
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -3364,23 +3364,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            bool x = o is 1 or $$(2);
-                        }
+                        bool x = o is 1 or $$(2);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            bool x = o is 1 or 2;
-                        }
+                        bool x = o is 1 or 2;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3390,23 +3390,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            bool x = o is $$(1) or 2;
-                        }
+                        bool x = o is $$(1) or 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            bool x = o is 1 or 2;
-                        }
+                        bool x = o is 1 or 2;
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3416,18 +3416,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    public class C
+                public class C
+                {
+                    public const int Goo = 1;  
+
+                    public void M(Goo o)
                     {
-                        public const int Goo = 1;  
-
-                        public void M(Goo o)
-                        {
-                            if (o is $$(Goo)) M(1);
-                        }
+                        if (o is $$(Goo)) M(1);
                     }
+                }
 
-                    public class Goo { }
-                    """
+                public class Goo { }
+                """
             );
         }
 
@@ -3436,27 +3436,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    public class C
-                    {
-                        public const int Goo = 1;  
+                public class C
+                {
+                    public const int Goo = 1;  
 
-                        public void M(object o)
-                        {
-                            if (o is $$(Goo)) M(1);
-                        }    
-                    }
-                    """,
+                    public void M(object o)
+                    {
+                        if (o is $$(Goo)) M(1);
+                    }    
+                }
+                """,
                 """
-                    public class C
-                    {
-                        public const int Goo = 1;  
+                public class C
+                {
+                    public const int Goo = 1;  
 
-                        public void M(object o)
-                        {
-                            if (o is Goo) M(1);
-                        }    
-                    }
-                    """,
+                    public void M(object o)
+                    {
+                        if (o is Goo) M(1);
+                    }    
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3466,23 +3466,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    public class C
+                public class C
+                {
+                    public void M(string[] Strings)
                     {
-                        public void M(string[] Strings)
-                        {
-                            var v = $$(Strings!)[Strings.Count - 1];
-                        }
+                        var v = $$(Strings!)[Strings.Count - 1];
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    public void M(string[] Strings)
                     {
-                        public void M(string[] Strings)
-                        {
-                            var v = Strings![Strings.Count - 1];
-                        }
+                        var v = Strings![Strings.Count - 1];
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3492,27 +3492,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestAsync(
                 """
-                    public class C
-                    {
-                        string[] Strings;
+                public class C
+                {
+                    string[] Strings;
 
-                        public void M()
-                        {
-                            var v = $$(this.Strings!)[Strings.Count - 1];
-                        }
+                    public void M()
+                    {
+                        var v = $$(this.Strings!)[Strings.Count - 1];
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        string[] Strings;
+                public class C
+                {
+                    string[] Strings;
 
-                        public void M()
-                        {
-                            var v = this.Strings![Strings.Count - 1];
-                        }
+                    public void M()
+                    {
+                        var v = this.Strings![Strings.Count - 1];
                     }
-                    """,
+                }
+                """,
                 offeredWhenRequireForClarityIsEnabled: true
             );
         }
@@ -3522,17 +3522,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
+                        checked
                         {
-                            checked
-                            {
-                                return a + $$(int.MaxValue + -int.MaxValue);
-                            }
+                            return a + $$(int.MaxValue + -int.MaxValue);
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -3542,14 +3542,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            return a + $$(int.MaxValue + -int.MaxValue);
-                        }
+                        return a + $$(int.MaxValue + -int.MaxValue);
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(
                     options: RemoveAllUnnecessaryParentheses,
                     compilationOptions: new CSharpCompilationOptions(
@@ -3565,23 +3565,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            return a + $$(int.MaxValue + -int.MaxValue);
-                        }
+                        return a + $$(int.MaxValue + -int.MaxValue);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            return a + int.MaxValue + -int.MaxValue;
-                        }
+                        return a + int.MaxValue + -int.MaxValue;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
             );
         }
@@ -3591,29 +3591,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = ($$(N < T), (U > (5 + 0)));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = ($$(N < T), (U > (5 + 0)));
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = (N < T, (U > (5 + 0)));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = (N < T, (U > (5 + 0)));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3622,29 +3622,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = ((N < T), (U > (5 + 0)$$));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = ((N < T), (U > (5 + 0)$$));
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = ((N < T), U > (5 + 0));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = ((N < T), U > (5 + 0));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3653,29 +3653,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = ({|FixAllInDocument:$$(N < T), (U > (5 + 0))|});
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = ({|FixAllInDocument:$$(N < T), (U > (5 + 0))|});
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = (N < T, (U > (5 + 0)));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = (N < T, (U > (5 + 0)));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3684,29 +3684,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = ({|FixAllInDocument:(N < T), (U > (5 + 0)$$)|});
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = ({|FixAllInDocument:(N < T), (U > (5 + 0)$$)|});
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = ((N < T), U > (5 + 0));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = ((N < T), U > (5 + 0));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3715,29 +3715,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = Goo($$(N < T), (U > (5 + 0)));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = Goo($$(N < T), (U > (5 + 0)));
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = Goo(N < T, (U > (5 + 0)));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = Goo(N < T, (U > (5 + 0)));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3746,29 +3746,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = Goo((N < T), (U > (5 + 0)$$));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = Goo((N < T), (U > (5 + 0)$$));
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = Goo((N < T), U > (5 + 0));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = Goo((N < T), U > (5 + 0));
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3777,29 +3777,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = Goo({|FixAllInDocument:$$(N < T), (U > (5 + 0))|});
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = Goo({|FixAllInDocument:$$(N < T), (U > (5 + 0))|});
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class C {
-                        public void M()
-                        {
-                            var T = 1;
-                            var U = 8;
-                            var N = 9;
-                            var x = Goo(N < T, (U > (5 + 0)));
-                        }
+                using System;
+                public class C {
+                    public void M()
+                    {
+                        var T = 1;
+                        var U = 8;
+                        var N = 9;
+                        var x = Goo(N < T, (U > (5 + 0)));
                     }
-                    """
+                }
+                """
             );
         }
     }

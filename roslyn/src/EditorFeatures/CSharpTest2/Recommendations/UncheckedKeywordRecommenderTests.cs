@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -101,13 +101,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C
+                class C
+                {
+                    public int x, y;
+                    void M()
                     {
-                        public int x, y;
-                        void M()
-                        {
-                            var c = new C { x = 2, y = 3, $$
-                    """
+                        var c = new C { x = 2, y = 3, $$
+                """
             );
         }
 

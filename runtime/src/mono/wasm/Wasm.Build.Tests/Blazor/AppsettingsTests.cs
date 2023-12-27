@@ -36,10 +36,10 @@ public class AppsettingsTests : BlazorWasmTestBase
         programContent = programContent.Replace(
             "var builder",
             """
-                System.Console.WriteLine($"appSettings Exists '{File.Exists("/appsettings.json")}'");
-                System.Console.WriteLine($"appSettings Content '{File.ReadAllText("/appsettings.json")}'");
-                var builder
-                """
+            System.Console.WriteLine($"appSettings Exists '{File.Exists("/appsettings.json")}'");
+            System.Console.WriteLine($"appSettings Content '{File.ReadAllText("/appsettings.json")}'");
+            var builder
+            """
         );
         File.WriteAllText(programPath, programContent);
 

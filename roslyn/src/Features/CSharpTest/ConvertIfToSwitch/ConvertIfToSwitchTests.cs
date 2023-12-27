@@ -545,32 +545,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            $$if (o is int i)
-                                    return;
-                                else if (o is string s)
-                                    return;
-                        }
+                        $$if (o is int i)
+                                return;
+                            else if (o is string s)
+                                return;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        switch (o)
                         {
-                            switch (o)
-                            {
-                                case int i:
-                                    return;
-                                case string s:
-                                    return;
-                            }
+                            case int i:
+                                return;
+                            case string s:
+                                return;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -657,32 +657,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            $$if (o is string s && (s.Length > 5 && s.Length < 10))
-                                    return;
-                                else if (o is int i)
-                                    return;
-                        }
+                        $$if (o is string s && (s.Length > 5 && s.Length < 10))
+                                return;
+                            else if (o is int i)
+                                return;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        switch (o)
                         {
-                            switch (o)
-                            {
-                                case string s when s.Length > 5 && s.Length < 10:
-                                    return;
-                                case int i:
-                                    return;
-                            }
+                            case string s when s.Length > 5 && s.Length < 10:
+                                return;
+                            case int i:
+                                return;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -691,32 +691,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            $$if (o is string s && s.Length > 5 && s.Length < 10)
-                                    return;
-                                else if (o is int i)
-                                    return;
-                        }
+                        $$if (o is string s && s.Length > 5 && s.Length < 10)
+                                return;
+                            else if (o is int i)
+                                return;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        switch (o)
                         {
-                            switch (o)
-                            {
-                                case string s when s.Length > 5 && s.Length < 10:
-                                    return;
-                                case int i:
-                                    return;
-                            }
+                            case string s when s.Length > 5 && s.Length < 10:
+                                return;
+                            case int i:
+                                return;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -725,41 +725,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            $$if (o is string s && s.Length > 5 &&
-                                                     s.Length < 10)
-                                {
-                                    M(o:   0);
-
-                                }
-                                else if (o is int i)
-                                {
-                                    M(o:   0);
-                                }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        void M(object o)
-                        {
-                            switch (o)
+                        $$if (o is string s && s.Length > 5 &&
+                                                 s.Length < 10)
                             {
-                                case string s when s.Length > 5 && s.Length < 10:
-                                    M(o: 0);
+                                M(o:   0);
 
-                                    break;
-                                case int i:
-                                    M(o: 0);
-                                    break;
                             }
+                            else if (o is int i)
+                            {
+                                M(o:   0);
+                            }
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    void M(object o)
+                    {
+                        switch (o)
+                        {
+                            case string s when s.Length > 5 && s.Length < 10:
+                                M(o: 0);
+
+                                break;
+                            case int i:
+                                M(o: 0);
+                                break;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2320,36 +2320,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        $$if (o is string text &&
+                            int.TryParse(text, out var n) &&
+                            n < 5 && n > -5)
                         {
-                            $$if (o is string text &&
-                                int.TryParse(text, out var n) &&
-                                n < 5 && n > -5)
-                            {
-                            }
-                            else
-                            {
-                            }
+                        }
+                        else
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        switch (o)
                         {
-                            switch (o)
-                            {
-                                case string text when int.TryParse(text, out var n) && n < 5 && n > -5:
-                                    break;
-                                default:
-                                    break;
-                            }
+                            case string text when int.TryParse(text, out var n) && n < 5 && n > -5:
+                                break;
+                            default:
+                                break;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 

@@ -4108,17 +4108,17 @@ record Program : Base
         {
             await VerifyItemExistsAsync(
                 """
-                    abstract class C
-                    {
-                        public abstract void M();
-                    }
+                abstract class C
+                {
+                    public abstract void M();
+                }
 
-                    class D : C
-                    {
-                        [SomeAttribute]
-                        override $$;
-                    }
-                    """,
+                class D : C
+                {
+                    [SomeAttribute]
+                    override $$;
+                }
+                """,
                 "M()"
             );
         }
@@ -4128,18 +4128,18 @@ record Program : Base
         {
             await VerifyItemExistsAsync(
                 """
-                    abstract class C
-                    {
-                        public abstract void M();
-                    }
+                abstract class C
+                {
+                    public abstract void M();
+                }
 
-                    class D : C
-                    {
-                        [SomeAttribute]
-                        [SomeOtherAttribute]
-                        override $$;
-                    }
-                    """,
+                class D : C
+                {
+                    [SomeAttribute]
+                    [SomeOtherAttribute]
+                    override $$;
+                }
+                """,
                 "M()"
             );
         }
@@ -4149,17 +4149,17 @@ record Program : Base
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    abstract class C
-                    {
-                        public abstract void M();
-                    }
+                abstract class C
+                {
+                    public abstract void M();
+                }
 
-                    class D : C
-                    {
-                        public
-                        override $$;
-                    }
-                    """,
+                class D : C
+                {
+                    public
+                    override $$;
+                }
+                """,
                 "M()"
             );
         }
@@ -4169,18 +4169,18 @@ record Program : Base
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    abstract class C
-                    {
-                        public abstract void M();
-                    }
+                abstract class C
+                {
+                    public abstract void M();
+                }
 
-                    class D : C
-                    {
-                        [SomeAttribute]
-                        public
-                        override $$;
-                    }
-                    """,
+                class D : C
+                {
+                    [SomeAttribute]
+                    public
+                    override $$;
+                }
+                """,
                 "M()"
             );
         }
@@ -4190,11 +4190,11 @@ record Program : Base
         {
             await VerifyNoItemsExistAsync(
                 """
-                    namespace NS
-                    {
-                        override $$
-                    }
-                    """
+                namespace NS
+                {
+                    override $$
+                }
+                """
             );
         }
 
@@ -4203,10 +4203,10 @@ record Program : Base
         {
             await VerifyNoItemsExistAsync(
                 """
-                    System.Console.WriteLine();
+                System.Console.WriteLine();
 
-                    override $$
-                    """
+                override $$
+                """
             );
         }
 

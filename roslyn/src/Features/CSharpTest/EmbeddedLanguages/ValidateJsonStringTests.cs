@@ -34,14 +34,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = /*lang=json,strict*/ "[|new|] Json()";
-                        }     
-                    }
-                    """,
+                        var r = /*lang=json,strict*/ "[|new|] Json()";
+                    }     
+                }
+                """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -57,14 +57,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """"
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = /*lang=json,strict*/ """[|new|] Json()""";
-                        }     
-                    }
-                    """",
+                        var r = /*lang=json,strict*/ """[|new|] Json()""";
+                    }     
+                }
+                """",
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -80,14 +80,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = /*lang=json*/ "[|}|]";
-                        }     
-                    }
-                    """,
+                        var r = /*lang=json*/ "[|}|]";
+                    }     
+                }
+                """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -103,22 +103,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1[|,|]]");
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                        var r = JsonDocument.Parse(@"[1[|,|]]");
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -134,22 +134,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1[|,|]]", new JsonDocumentOptions { AllowTrailingCommas = false });
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                        var r = JsonDocument.Parse(@"[1[|,|]]", new JsonDocumentOptions { AllowTrailingCommas = false });
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -165,22 +165,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticMissingAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1[|,|]]", new JsonDocumentOptions { AllowTrailingCommas = true });
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """
+                        var r = JsonDocument.Parse(@"[1[|,|]]", new JsonDocumentOptions { AllowTrailingCommas = true });
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """
             );
         }
 
@@ -189,22 +189,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticMissingAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1[|,|]]", new() { AllowTrailingCommas = true });
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """
+                        var r = JsonDocument.Parse(@"[1[|,|]]", new() { AllowTrailingCommas = true });
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """
             );
         }
 
@@ -213,22 +213,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1][|/*comment*/|]");
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                        var r = JsonDocument.Parse(@"[1][|/*comment*/|]");
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -244,22 +244,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticInfoAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1][|/*comment*/|]", new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Disallow });
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                        var r = JsonDocument.Parse(@"[1][|/*comment*/|]", new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Disallow });
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
@@ -275,22 +275,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticMissingAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1][|/*comment*/|]", new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Allow });
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """
+                        var r = JsonDocument.Parse(@"[1][|/*comment*/|]", new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Allow });
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """
             );
         }
 
@@ -299,22 +299,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         {
             await TestDiagnosticMissingAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet6="true">
-                            <Document>
-                    using System.Text.Json;
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet6="true">
+                        <Document>
+                using System.Text.Json;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = JsonDocument.Parse(@"[1][|/*comment*/|]", new() { CommentHandling = JsonCommentHandling.Allow });
-                        }     
-                    }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """
+                        var r = JsonDocument.Parse(@"[1][|/*comment*/|]", new() { CommentHandling = JsonCommentHandling.Allow });
+                    }     
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """
             );
         }
 

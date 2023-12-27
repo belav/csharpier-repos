@@ -2100,10 +2100,10 @@ class YAttribute : System.Attribute { }
             parseOptions,
             "Class1",
             """
-                //[Generate]
-                [System.Obsolete]
-                public partial class Class1 { }
-                """
+            //[Generate]
+            [System.Obsolete]
+            public partial class Class1 { }
+            """
         );
         verify(
             ref driver,
@@ -2117,10 +2117,10 @@ class YAttribute : System.Attribute { }
             parseOptions,
             "Class2",
             """
-                [Generate]
-                [System.Obsolete]
-                internal partial class Class2 { }
-                """
+            [Generate]
+            [System.Obsolete]
+            internal partial class Class2 { }
+            """
         );
         verify(
             ref driver,

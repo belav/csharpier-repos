@@ -18,19 +18,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    ""
-                    """,
+                ""
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[0..0)" Text="" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[0..0)" Text="" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -40,23 +40,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " "
-                    """,
+                " "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile>
-                          <Trivia>
-                            <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..10)" Text=" " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..10)" Text=" " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -66,23 +66,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "  "
-                    """,
+                "  "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile>
-                          <Trivia>
-                            <WhitespaceTrivia>  </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="  " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia>  </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="  " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -92,23 +92,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?#)"
-                    """,
+                "(?#)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile>
-                          <Trivia>
-                            <CommentTrivia>(?#)</CommentTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="(?#)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile>
+                      <Trivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="(?#)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -118,23 +118,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?# )"
-                    """,
+                "(?# )"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile>
-                          <Trivia>
-                            <CommentTrivia>(?# )</CommentTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?# )" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile>
+                      <Trivia>
+                        <CommentTrivia>(?# )</CommentTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?# )" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -144,8 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?#"
-                    """,
+                "(?#"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -173,8 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?# "
-                    """,
+                "(?# "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -202,24 +202,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?#)(?#)"
-                    """,
+                "(?#)(?#)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile>
-                          <Trivia>
-                            <CommentTrivia>(?#)</CommentTrivia>
-                            <CommentTrivia>(?#)</CommentTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?#)(?#)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile>
+                      <Trivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?#)(?#)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -229,24 +229,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?#)(?#)"
-                    """,
+                "(?#)(?#)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile>
-                          <Trivia>
-                            <CommentTrivia>(?#)</CommentTrivia>
-                            <CommentTrivia>(?#)</CommentTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?#)(?#)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile>
+                      <Trivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?#)(?#)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -256,30 +256,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?#) (?#)"
-                    """,
+                "(?#) (?#)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>
-                              <Trivia>
-                                <CommentTrivia>(?#)</CommentTrivia>
-                              </Trivia> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>
                           <Trivia>
                             <CommentTrivia>(?#)</CommentTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text="(?#) (?#)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                          </Trivia> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile>
+                      <Trivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text="(?#) (?#)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -289,25 +289,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?#) (?#)"
-                    """,
+                "(?#) (?#)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence />
-                        <EndOfFile>
-                          <Trivia>
-                            <CommentTrivia>(?#)</CommentTrivia>
-                            <WhitespaceTrivia> </WhitespaceTrivia>
-                            <CommentTrivia>(?#)</CommentTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text="(?#) (?#)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence />
+                    <EndOfFile>
+                      <Trivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                        <CommentTrivia>(?#)</CommentTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text="(?#) (?#)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -317,39 +317,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a\p{Lu}(?#)b]"
-                    """,
+                @"[a\p{Lu}(?#)b]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <CategoryEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>p</TextToken>
-                                <OpenBraceToken>{</OpenBraceToken>
-                                <EscapeCategoryToken>Lu</EscapeCategoryToken>
-                                <CloseBraceToken>}</CloseBraceToken>
-                              </CategoryEscape>
-                              <Text>
-                                <TextToken>(?#)b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <CategoryEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>p</TextToken>
+                            <OpenBraceToken>{</OpenBraceToken>
+                            <EscapeCategoryToken>Lu</EscapeCategoryToken>
+                            <CloseBraceToken>}</CloseBraceToken>
+                          </CategoryEscape>
+                          <Text>
+                            <TextToken>(?#)b</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..24)" Text="[a\p{Lu}(?#)b]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..24)" Text="[a\p{Lu}(?#)b]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -359,36 +359,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a\0(?#)b]"
-                    """,
+                @"[a\0(?#)b]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <OctalEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>0</TextToken>
-                              </OctalEscape>
-                              <Text>
-                                <TextToken>(?#)b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <OctalEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>0</TextToken>
+                          </OctalEscape>
+                          <Text>
+                            <TextToken>(?#)b</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[a\0(?#)b]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[a\0(?#)b]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -398,36 +398,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a\a(?#)b]"
-                    """,
+                @"[a\a(?#)b]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <SimpleEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>a</TextToken>
-                              </SimpleEscape>
-                              <Text>
-                                <TextToken>(?#)b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <SimpleEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>a</TextToken>
+                          </SimpleEscape>
+                          <Text>
+                            <TextToken>(?#)b</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[a\a(?#)b]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[a\a(?#)b]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -437,37 +437,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a\x00(?#)b]"
-                    """,
+                @"[a\x00(?#)b]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <HexEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>x</TextToken>
-                                <TextToken>00</TextToken>
-                              </HexEscape>
-                              <Text>
-                                <TextToken>(?#)b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <HexEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>x</TextToken>
+                            <TextToken>00</TextToken>
+                          </HexEscape>
+                          <Text>
+                            <TextToken>(?#)b</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..22)" Text="[a\x00(?#)b]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..22)" Text="[a\x00(?#)b]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -477,37 +477,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a\u0000(?#)b]"
-                    """,
+                @"[a\u0000(?#)b]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <UnicodeEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>u</TextToken>
-                                <TextToken>0000</TextToken>
-                              </UnicodeEscape>
-                              <Text>
-                                <TextToken>(?#)b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <UnicodeEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>u</TextToken>
+                            <TextToken>0000</TextToken>
+                          </UnicodeEscape>
+                          <Text>
+                            <TextToken>(?#)b</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..24)" Text="[a\u0000(?#)b]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..24)" Text="[a\u0000(?#)b]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -517,36 +517,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a\](?#)b]"
-                    """,
+                @"[a\](?#)b]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <SimpleEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>]</TextToken>
-                              </SimpleEscape>
-                              <Text>
-                                <TextToken>(?#)b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <SimpleEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>]</TextToken>
+                          </SimpleEscape>
+                          <Text>
+                            <TextToken>(?#)b</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[a\](?#)b]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[a\](?#)b]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -556,8 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?"
-                    """,
+                "(?"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -593,8 +593,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?"
-                    """,
+                "(?"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -630,8 +630,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(? "
-                    """,
+                "(? "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -670,8 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(? "
-                    """,
+                "(? "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -711,26 +711,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?i)"
-                    """,
+                "(?i)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>i</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="(?i)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>i</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="(?i)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -740,26 +740,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?im)"
-                    """,
+                "(?im)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>im</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?im)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>im</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?im)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -769,26 +769,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?im-x)"
-                    """,
+                "(?im-x)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>im-x</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?im-x)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>im-x</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?im-x)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -798,26 +798,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?im-x+n)"
-                    """,
+                "(?im-x+n)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>im-x+n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text="(?im-x+n)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>im-x+n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text="(?im-x+n)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -827,29 +827,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?i) "
-                    """,
+                "(?i) "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>i</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?i) " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>i</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?i) " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -859,30 +859,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?x) "
-                    """,
+                "(?x) "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>x</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile>
-                          <Trivia>
-                            <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?x) " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>x</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?x) " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -892,33 +892,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " (?x) "
-                    """,
+                " (?x) "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>x</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile>
-                          <Trivia>
-                            <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text=" (?x) " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>x</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text=" (?x) " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -928,11 +928,52 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " (?-x) "
-                    """,
+                " (?-x) "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-x</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text=" (?-x) " />
+                  </Captures>
+                </Tree>
+                """,
+                RegexOptions.IgnorePatternWhitespace
+            );
+        }
+
+        [Fact]
+        public void TestOptionRestoredWhenGroupPops()
+        {
+            Test(
+                """
+                " ( (?-x) ) "
+                """,
+                """
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>(</OpenParenToken>
                         <Sequence>
                           <SimpleOptionsGrouping>
                             <OpenParenToken>
@@ -947,62 +988,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                             <TextToken> </TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text=" (?-x) " />
-                      </Captures>
-                    </Tree>
-                    """,
-                RegexOptions.IgnorePatternWhitespace
-            );
-        }
-
-        [Fact]
-        public void TestOptionRestoredWhenGroupPops()
-        {
-            Test(
-                """
-                    " ( (?-x) ) "
-                    """,
-                """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>(</OpenParenToken>
-                            <Sequence>
-                              <SimpleOptionsGrouping>
-                                <OpenParenToken>
-                                  <Trivia>
-                                    <WhitespaceTrivia> </WhitespaceTrivia>
-                                  </Trivia>(</OpenParenToken>
-                                <QuestionToken>?</QuestionToken>
-                                <OptionsToken>-x</OptionsToken>
-                                <CloseParenToken>)</CloseParenToken>
-                              </SimpleOptionsGrouping>
-                              <Text>
-                                <TextToken> </TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                        </Sequence>
-                        <EndOfFile>
-                          <Trivia>
-                            <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..20)" Text=" ( (?-x) ) " />
-                        <Capture Name="1" Span="[10..19)" Text="( (?-x) )" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                    </Sequence>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..20)" Text=" ( (?-x) ) " />
+                    <Capture Name="1" Span="[10..19)" Text="( (?-x) )" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1012,35 +1012,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " (?-x:) "
-                    """,
+                " (?-x:) "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NestedOptionsGrouping>
-                            <OpenParenToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-x</OptionsToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </NestedOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NestedOptionsGrouping>
+                        <OpenParenToken>
                           <Trivia>
                             <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text=" (?-x:) " />
-                      </Captures>
-                    </Tree>
-                    """,
+                          </Trivia>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-x</OptionsToken>
+                        <ColonToken>:</ColonToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </NestedOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text=" (?-x:) " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1050,39 +1050,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " (?-x: ) "
-                    """,
+                " (?-x: ) "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NestedOptionsGrouping>
-                            <OpenParenToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-x</OptionsToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken> </TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </NestedOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NestedOptionsGrouping>
+                        <OpenParenToken>
                           <Trivia>
                             <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text=" (?-x: ) " />
-                      </Captures>
-                    </Tree>
-                    """,
+                          </Trivia>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-x</OptionsToken>
+                        <ColonToken>:</ColonToken>
+                        <Sequence>
+                          <Text>
+                            <TextToken> </TextToken>
+                          </Text>
+                        </Sequence>
+                        <CloseParenToken>)</CloseParenToken>
+                      </NestedOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text=" (?-x: ) " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1092,53 +1092,53 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " (?-x: (?+x: ) ) "
-                    """,
+                " (?-x: (?+x: ) ) "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NestedOptionsGrouping>
-                            <OpenParenToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-x</OptionsToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken> </TextToken>
-                              </Text>
-                              <NestedOptionsGrouping>
-                                <OpenParenToken>(</OpenParenToken>
-                                <QuestionToken>?</QuestionToken>
-                                <OptionsToken>+x</OptionsToken>
-                                <ColonToken>:</ColonToken>
-                                <Sequence />
-                                <CloseParenToken>
-                                  <Trivia>
-                                    <WhitespaceTrivia> </WhitespaceTrivia>
-                                  </Trivia>)</CloseParenToken>
-                              </NestedOptionsGrouping>
-                              <Text>
-                                <TextToken> </TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </NestedOptionsGrouping>
-                        </Sequence>
-                        <EndOfFile>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NestedOptionsGrouping>
+                        <OpenParenToken>
                           <Trivia>
                             <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..26)" Text=" (?-x: (?+x: ) ) " />
-                      </Captures>
-                    </Tree>
-                    """,
+                          </Trivia>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-x</OptionsToken>
+                        <ColonToken>:</ColonToken>
+                        <Sequence>
+                          <Text>
+                            <TextToken> </TextToken>
+                          </Text>
+                          <NestedOptionsGrouping>
+                            <OpenParenToken>(</OpenParenToken>
+                            <QuestionToken>?</QuestionToken>
+                            <OptionsToken>+x</OptionsToken>
+                            <ColonToken>:</ColonToken>
+                            <Sequence />
+                            <CloseParenToken>
+                              <Trivia>
+                                <WhitespaceTrivia> </WhitespaceTrivia>
+                              </Trivia>)</CloseParenToken>
+                          </NestedOptionsGrouping>
+                          <Text>
+                            <TextToken> </TextToken>
+                          </Text>
+                        </Sequence>
+                        <CloseParenToken>)</CloseParenToken>
+                      </NestedOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..26)" Text=" (?-x: (?+x: ) ) " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1148,8 +1148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?-x"
-                    """,
+                "(?-x"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1180,8 +1180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?-x "
-                    """,
+                "(?-x "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1215,8 +1215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?-x :"
-                    """,
+                "(?-x :"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1250,8 +1250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?-x )"
-                    """,
+                "(?-x )"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1289,8 +1289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?-x :)"
-                    """,
+                "(?-x :)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1328,8 +1328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    ")"
-                    """,
+                ")"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1357,23 +1357,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a"
-                    """,
+                "a"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..10)" Text="a" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..10)" Text="a" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1383,23 +1383,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "ab"
-                    """,
+                "ab"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>ab</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="ab" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>ab</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="ab" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1409,26 +1409,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a*"
-                    """,
+                "a*"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ZeroOrMoreQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <AsteriskToken>*</AsteriskToken>
-                          </ZeroOrMoreQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="a*" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ZeroOrMoreQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <AsteriskToken>*</AsteriskToken>
+                      </ZeroOrMoreQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="a*" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1438,29 +1438,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a*?"
-                    """,
+                "a*?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <LazyQuantifier>
-                            <ZeroOrMoreQuantifier>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <AsteriskToken>*</AsteriskToken>
-                            </ZeroOrMoreQuantifier>
-                            <QuestionToken>?</QuestionToken>
-                          </LazyQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text="a*?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <LazyQuantifier>
+                        <ZeroOrMoreQuantifier>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <AsteriskToken>*</AsteriskToken>
+                        </ZeroOrMoreQuantifier>
+                        <QuestionToken>?</QuestionToken>
+                      </LazyQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text="a*?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1470,26 +1470,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a+"
-                    """,
+                "a+"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OneOrMoreQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <PlusToken>+</PlusToken>
-                          </OneOrMoreQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="a+" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OneOrMoreQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <PlusToken>+</PlusToken>
+                      </OneOrMoreQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="a+" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1499,29 +1499,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a+?"
-                    """,
+                "a+?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <LazyQuantifier>
-                            <OneOrMoreQuantifier>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <PlusToken>+</PlusToken>
-                            </OneOrMoreQuantifier>
-                            <QuestionToken>?</QuestionToken>
-                          </LazyQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text="a+?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <LazyQuantifier>
+                        <OneOrMoreQuantifier>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <PlusToken>+</PlusToken>
+                        </OneOrMoreQuantifier>
+                        <QuestionToken>?</QuestionToken>
+                      </LazyQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text="a+?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1531,26 +1531,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a?"
-                    """,
+                "a?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ZeroOrOneQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <QuestionToken>?</QuestionToken>
-                          </ZeroOrOneQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="a?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ZeroOrOneQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <QuestionToken>?</QuestionToken>
+                      </ZeroOrOneQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="a?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1560,29 +1560,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a??"
-                    """,
+                "a??"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <LazyQuantifier>
-                            <ZeroOrOneQuantifier>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <QuestionToken>?</QuestionToken>
-                            </ZeroOrOneQuantifier>
-                            <QuestionToken>?</QuestionToken>
-                          </LazyQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text="a??" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <LazyQuantifier>
+                        <ZeroOrOneQuantifier>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <QuestionToken>?</QuestionToken>
+                        </ZeroOrOneQuantifier>
+                        <QuestionToken>?</QuestionToken>
+                      </LazyQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text="a??" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1592,26 +1592,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "()"
-                    """,
+                "()"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="()" />
-                        <Capture Name="1" Span="[9..11)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="()" />
+                    <Capture Name="1" Span="[9..11)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1621,30 +1621,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(a)"
-                    """,
+                "(a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
                         <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text="(a)" />
-                        <Capture Name="1" Span="[9..12)" Text="(a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text="(a)" />
+                    <Capture Name="1" Span="[9..12)" Text="(a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1654,8 +1654,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "("
-                    """,
+                "("
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1686,8 +1686,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(a"
-                    """,
+                "(a"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -1722,23 +1722,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "|"
-                    """,
+                "|"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence />
-                          <BarToken>|</BarToken>
-                          <Sequence />
-                        </Alternation>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..10)" Text="|" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence />
+                      <BarToken>|</BarToken>
+                      <Sequence />
+                    </Alternation>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..10)" Text="|" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1748,27 +1748,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " |"
-                    """,
+                " |"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence>
-                            <Text>
-                              <TextToken> </TextToken>
-                            </Text>
-                          </Sequence>
-                          <BarToken>|</BarToken>
-                          <Sequence />
-                        </Alternation>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text=" |" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence>
+                        <Text>
+                          <TextToken> </TextToken>
+                        </Text>
+                      </Sequence>
+                      <BarToken>|</BarToken>
+                      <Sequence />
+                    </Alternation>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text=" |" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1778,27 +1778,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "| "
-                    """,
+                "| "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence />
-                          <BarToken>|</BarToken>
-                          <Sequence>
-                            <Text>
-                              <TextToken> </TextToken>
-                            </Text>
-                          </Sequence>
-                        </Alternation>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="| " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence />
+                      <BarToken>|</BarToken>
+                      <Sequence>
+                        <Text>
+                          <TextToken> </TextToken>
+                        </Text>
+                      </Sequence>
+                    </Alternation>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="| " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1808,31 +1808,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " | "
-                    """,
+                " | "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence>
-                            <Text>
-                              <TextToken> </TextToken>
-                            </Text>
-                          </Sequence>
-                          <BarToken>|</BarToken>
-                          <Sequence>
-                            <Text>
-                              <TextToken> </TextToken>
-                            </Text>
-                          </Sequence>
-                        </Alternation>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text=" | " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence>
+                        <Text>
+                          <TextToken> </TextToken>
+                        </Text>
+                      </Sequence>
+                      <BarToken>|</BarToken>
+                      <Sequence>
+                        <Text>
+                          <TextToken> </TextToken>
+                        </Text>
+                      </Sequence>
+                    </Alternation>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text=" | " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1842,23 +1842,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "|"
-                    """,
+                "|"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence />
-                          <BarToken>|</BarToken>
-                          <Sequence />
-                        </Alternation>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..10)" Text="|" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence />
+                      <BarToken>|</BarToken>
+                      <Sequence />
+                    </Alternation>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..10)" Text="|" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1868,26 +1868,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " |"
-                    """,
+                " |"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence />
-                          <BarToken>
-                            <Trivia>
-                              <WhitespaceTrivia> </WhitespaceTrivia>
-                            </Trivia>|</BarToken>
-                          <Sequence />
-                        </Alternation>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text=" |" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence />
+                      <BarToken>
+                        <Trivia>
+                          <WhitespaceTrivia> </WhitespaceTrivia>
+                        </Trivia>|</BarToken>
+                      <Sequence />
+                    </Alternation>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text=" |" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1897,27 +1897,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "| "
-                    """,
+                "| "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence />
-                          <BarToken>|</BarToken>
-                          <Sequence />
-                        </Alternation>
-                        <EndOfFile>
-                          <Trivia>
-                            <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="| " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence />
+                      <BarToken>|</BarToken>
+                      <Sequence />
+                    </Alternation>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="| " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1927,30 +1927,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    " | "
-                    """,
+                " | "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Sequence />
-                          <BarToken>
-                            <Trivia>
-                              <WhitespaceTrivia> </WhitespaceTrivia>
-                            </Trivia>|</BarToken>
-                          <Sequence />
-                        </Alternation>
-                        <EndOfFile>
-                          <Trivia>
-                            <WhitespaceTrivia> </WhitespaceTrivia>
-                          </Trivia>
-                        </EndOfFile>
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text=" | " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Sequence />
+                      <BarToken>
+                        <Trivia>
+                          <WhitespaceTrivia> </WhitespaceTrivia>
+                        </Trivia>|</BarToken>
+                      <Sequence />
+                    </Alternation>
+                    <EndOfFile>
+                      <Trivia>
+                        <WhitespaceTrivia> </WhitespaceTrivia>
+                      </Trivia>
+                    </EndOfFile>
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text=" | " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -1960,27 +1960,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "||"
-                    """,
+                "||"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Alternation>
-                          <Alternation>
-                            <Sequence />
-                            <BarToken>|</BarToken>
-                            <Sequence />
-                          </Alternation>
-                          <BarToken>|</BarToken>
-                          <Sequence />
-                        </Alternation>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="||" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Alternation>
+                      <Alternation>
+                        <Sequence />
+                        <BarToken>|</BarToken>
+                        <Sequence />
+                      </Alternation>
+                      <BarToken>|</BarToken>
+                      <Sequence />
+                    </Alternation>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="||" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -1990,30 +1990,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(|)"
-                    """,
+                "(|)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Alternation>
-                              <Sequence />
-                              <BarToken>|</BarToken>
-                              <Sequence />
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text="(|)" />
-                        <Capture Name="1" Span="[9..12)" Text="(|)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Alternation>
+                          <Sequence />
+                          <BarToken>|</BarToken>
+                          <Sequence />
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text="(|)" />
+                    <Capture Name="1" Span="[9..12)" Text="(|)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2023,28 +2023,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0}"
-                    """,
+                "a{0}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ExactNumericQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </ExactNumericQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="a{0}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ExactNumericQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </ExactNumericQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="a{0}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2054,29 +2054,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,}"
-                    """,
+                "a{0,}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OpenRangeNumericQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CommaToken>,</CommaToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </OpenRangeNumericQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="a{0,}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OpenRangeNumericQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CommaToken>,</CommaToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </OpenRangeNumericQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="a{0,}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2086,30 +2086,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,1}"
-                    """,
+                "a{0,1}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ClosedRangeNumericQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CommaToken>,</CommaToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </ClosedRangeNumericQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="a{0,1}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ClosedRangeNumericQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CommaToken>,</CommaToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </ClosedRangeNumericQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="a{0,1}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2119,28 +2119,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{2147483647}"
-                    """,
+                "a{2147483647}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ExactNumericQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <NumberToken value="2147483647">2147483647</NumberToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </ExactNumericQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..22)" Text="a{2147483647}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ExactNumericQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <NumberToken value="2147483647">2147483647</NumberToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </ExactNumericQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..22)" Text="a{2147483647}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None,
                 runSubTreeTests: false,
                 allowOutOfMemory: true
@@ -2152,8 +2152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{2147483648}"
-                    """,
+                "a{2147483648}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -2187,29 +2187,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{2147483647,}"
-                    """,
+                "a{2147483647,}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OpenRangeNumericQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <NumberToken value="2147483647">2147483647</NumberToken>
-                            <CommaToken>,</CommaToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </OpenRangeNumericQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..23)" Text="a{2147483647,}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OpenRangeNumericQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <NumberToken value="2147483647">2147483647</NumberToken>
+                        <CommaToken>,</CommaToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </OpenRangeNumericQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..23)" Text="a{2147483647,}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None,
                 runSubTreeTests: false,
                 allowOutOfMemory: true
@@ -2221,8 +2221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{2147483648,}"
-                    """,
+                "a{2147483648,}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -2257,30 +2257,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,2147483647}"
-                    """,
+                "a{0,2147483647}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ClosedRangeNumericQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CommaToken>,</CommaToken>
-                            <NumberToken value="2147483647">2147483647</NumberToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </ClosedRangeNumericQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..24)" Text="a{0,2147483647}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ClosedRangeNumericQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CommaToken>,</CommaToken>
+                        <NumberToken value="2147483647">2147483647</NumberToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </ClosedRangeNumericQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..24)" Text="a{0,2147483647}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None,
                 runSubTreeTests: false
             );
@@ -2291,8 +2291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,2147483648}"
-                    """,
+                "a{0,2147483648}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -2328,8 +2328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{1,0}"
-                    """,
+                "a{1,0}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -2364,31 +2364,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0}?"
-                    """,
+                "a{0}?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <LazyQuantifier>
-                            <ExactNumericQuantifier>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <OpenBraceToken>{</OpenBraceToken>
-                              <NumberToken value="0">0</NumberToken>
-                              <CloseBraceToken>}</CloseBraceToken>
-                            </ExactNumericQuantifier>
-                            <QuestionToken>?</QuestionToken>
-                          </LazyQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="a{0}?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <LazyQuantifier>
+                        <ExactNumericQuantifier>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <OpenBraceToken>{</OpenBraceToken>
+                          <NumberToken value="0">0</NumberToken>
+                          <CloseBraceToken>}</CloseBraceToken>
+                        </ExactNumericQuantifier>
+                        <QuestionToken>?</QuestionToken>
+                      </LazyQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="a{0}?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2398,32 +2398,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,}?"
-                    """,
+                "a{0,}?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <LazyQuantifier>
-                            <OpenRangeNumericQuantifier>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <OpenBraceToken>{</OpenBraceToken>
-                              <NumberToken value="0">0</NumberToken>
-                              <CommaToken>,</CommaToken>
-                              <CloseBraceToken>}</CloseBraceToken>
-                            </OpenRangeNumericQuantifier>
-                            <QuestionToken>?</QuestionToken>
-                          </LazyQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="a{0,}?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <LazyQuantifier>
+                        <OpenRangeNumericQuantifier>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <OpenBraceToken>{</OpenBraceToken>
+                          <NumberToken value="0">0</NumberToken>
+                          <CommaToken>,</CommaToken>
+                          <CloseBraceToken>}</CloseBraceToken>
+                        </OpenRangeNumericQuantifier>
+                        <QuestionToken>?</QuestionToken>
+                      </LazyQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="a{0,}?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2433,33 +2433,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,1}?"
-                    """,
+                "a{0,1}?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <LazyQuantifier>
-                            <ClosedRangeNumericQuantifier>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <OpenBraceToken>{</OpenBraceToken>
-                              <NumberToken value="0">0</NumberToken>
-                              <CommaToken>,</CommaToken>
-                              <NumberToken value="1">1</NumberToken>
-                              <CloseBraceToken>}</CloseBraceToken>
-                            </ClosedRangeNumericQuantifier>
-                            <QuestionToken>?</QuestionToken>
-                          </LazyQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="a{0,1}?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <LazyQuantifier>
+                        <ClosedRangeNumericQuantifier>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <OpenBraceToken>{</OpenBraceToken>
+                          <NumberToken value="0">0</NumberToken>
+                          <CommaToken>,</CommaToken>
+                          <NumberToken value="1">1</NumberToken>
+                          <CloseBraceToken>}</CloseBraceToken>
+                        </ClosedRangeNumericQuantifier>
+                        <QuestionToken>?</QuestionToken>
+                      </LazyQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="a{0,1}?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2469,23 +2469,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{"
-                    """,
+                "a{"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="a{" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="a{" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2495,23 +2495,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0"
-                    """,
+                "a{0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..12)" Text="a{0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..12)" Text="a{0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2521,23 +2521,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,"
-                    """,
+                "a{0,"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0,</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="a{0," />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0,</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="a{0," />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2547,23 +2547,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,1"
-                    """,
+                "a{0,1"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0,1</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="a{0,1" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0,1</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="a{0,1" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2573,29 +2573,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0 }"
-                    """,
+                "a{0 }"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0</TextToken>
-                          </Text>
-                          <Text>
-                            <TextToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="a{0 }" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0</TextToken>
+                      </Text>
+                      <Text>
+                        <TextToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="a{0 }" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -2605,29 +2605,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0, }"
-                    """,
+                "a{0, }"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0,</TextToken>
-                          </Text>
-                          <Text>
-                            <TextToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="a{0, }" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0,</TextToken>
+                      </Text>
+                      <Text>
+                        <TextToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="a{0, }" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -2637,29 +2637,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0 ,}"
-                    """,
+                "a{0 ,}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0</TextToken>
-                          </Text>
-                          <Text>
-                            <TextToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>,}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="a{0 ,}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0</TextToken>
+                      </Text>
+                      <Text>
+                        <TextToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>,}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="a{0 ,}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -2669,29 +2669,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0 ,1}"
-                    """,
+                "a{0 ,1}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0</TextToken>
-                          </Text>
-                          <Text>
-                            <TextToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>,1}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="a{0 ,1}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0</TextToken>
+                      </Text>
+                      <Text>
+                        <TextToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>,1}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="a{0 ,1}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -2701,29 +2701,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0, 1}"
-                    """,
+                "a{0, 1}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0,</TextToken>
-                          </Text>
-                          <Text>
-                            <TextToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>1}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="a{0, 1}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0,</TextToken>
+                      </Text>
+                      <Text>
+                        <TextToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>1}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="a{0, 1}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -2733,29 +2733,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a{0,1 }"
-                    """,
+                "a{0,1 }"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>a{0,1</TextToken>
-                          </Text>
-                          <Text>
-                            <TextToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="a{0,1 }" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>a{0,1</TextToken>
+                      </Text>
+                      <Text>
+                        <TextToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="a{0,1 }" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -2765,23 +2765,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"{}"
-                    """,
+                @"{}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>{}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="{}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>{}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="{}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2791,23 +2791,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"{1, 2}"
-                    """,
+                @"{1, 2}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>{1, 2}</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="{1, 2}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>{1, 2}</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="{1, 2}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2817,8 +2817,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"{1}"
-                    """,
+                @"{1}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -2849,8 +2849,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"{1,2}"
-                    """,
+                @"{1,2}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -2881,32 +2881,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a* ?"
-                    """,
+                "a* ?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <LazyQuantifier>
-                            <ZeroOrMoreQuantifier>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <AsteriskToken>*</AsteriskToken>
-                            </ZeroOrMoreQuantifier>
-                            <QuestionToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>?</QuestionToken>
-                          </LazyQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="a* ?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <LazyQuantifier>
+                        <ZeroOrMoreQuantifier>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <AsteriskToken>*</AsteriskToken>
+                        </ZeroOrMoreQuantifier>
+                        <QuestionToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>?</QuestionToken>
+                      </LazyQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="a* ?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -2916,32 +2916,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a* ?"
-                    """,
+                "a* ?"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ZeroOrMoreQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <AsteriskToken>*</AsteriskToken>
-                          </ZeroOrMoreQuantifier>
-                          <ZeroOrOneQuantifier>
-                            <Text>
-                              <TextToken> </TextToken>
-                            </Text>
-                            <QuestionToken>?</QuestionToken>
-                          </ZeroOrOneQuantifier>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="a* ?" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ZeroOrMoreQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <AsteriskToken>*</AsteriskToken>
+                      </ZeroOrMoreQuantifier>
+                      <ZeroOrOneQuantifier>
+                        <Text>
+                          <TextToken> </TextToken>
+                        </Text>
+                        <QuestionToken>?</QuestionToken>
+                      </ZeroOrOneQuantifier>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="a* ?" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -2951,8 +2951,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "*"
-                    """,
+                "*"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -2980,8 +2980,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(*)"
-                    """,
+                "(*)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3016,8 +3016,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a**"
-                    """,
+                "a**"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3051,8 +3051,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "+"
-                    """,
+                "+"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3080,8 +3080,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(+)"
-                    """,
+                "(+)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3116,8 +3116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a*+"
-                    """,
+                "a*+"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3151,8 +3151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "?"
-                    """,
+                "?"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3180,8 +3180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?)"
-                    """,
+                "(?)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3215,8 +3215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a*??"
-                    """,
+                "a*??"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3253,8 +3253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "{0}"
-                    """,
+                "{0}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -3285,8 +3285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "({0})"
-                    """,
+                "({0})"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -3324,8 +3324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a*{0}"
-                    """,
+                "a*{0}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -3362,23 +3362,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "{0"
-                    """,
+                "{0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <Text>
-                            <TextToken>{0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..11)" Text="{0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>{0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..11)" Text="{0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3388,30 +3388,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "({0)"
-                    """,
+                "({0)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
                         <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>{0</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
+                          <Text>
+                            <TextToken>{0</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="({0)" />
-                        <Capture Name="1" Span="[9..13)" Text="({0)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="({0)" />
+                    <Capture Name="1" Span="[9..13)" Text="({0)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3421,29 +3421,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "a*{0"
-                    """,
+                "a*{0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ZeroOrMoreQuantifier>
-                            <Text>
-                              <TextToken>a</TextToken>
-                            </Text>
-                            <AsteriskToken>*</AsteriskToken>
-                          </ZeroOrMoreQuantifier>
-                          <Text>
-                            <TextToken>{0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="a*{0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ZeroOrMoreQuantifier>
+                        <Text>
+                          <TextToken>a</TextToken>
+                        </Text>
+                        <AsteriskToken>*</AsteriskToken>
+                      </ZeroOrMoreQuantifier>
+                      <Text>
+                        <TextToken>{0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="a*{0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3453,8 +3453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\"
-                    """,
+                @"\"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3483,8 +3483,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\"
-                    """,
+                "\\"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3513,24 +3513,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\w"
-                    """,
+                @"\w"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>w</TextToken>
-                          </CharacterClassEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\w" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>w</TextToken>
+                      </CharacterClassEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\w" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3540,76 +3540,76 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\b\B\A\G\Z\z\w\W\s\W\s\S\d\D"
-                    """,
+                @"\b\B\A\G\Z\z\w\W\s\W\s\S\d\D"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>b</TextToken>
-                          </AnchorEscape>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>B</TextToken>
-                          </AnchorEscape>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>A</TextToken>
-                          </AnchorEscape>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>G</TextToken>
-                          </AnchorEscape>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>Z</TextToken>
-                          </AnchorEscape>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>z</TextToken>
-                          </AnchorEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>w</TextToken>
-                          </CharacterClassEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>W</TextToken>
-                          </CharacterClassEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>s</TextToken>
-                          </CharacterClassEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>W</TextToken>
-                          </CharacterClassEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>s</TextToken>
-                          </CharacterClassEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>S</TextToken>
-                          </CharacterClassEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>d</TextToken>
-                          </CharacterClassEscape>
-                          <CharacterClassEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>D</TextToken>
-                          </CharacterClassEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..38)" Text="\b\B\A\G\Z\z\w\W\s\W\s\S\d\D" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>b</TextToken>
+                      </AnchorEscape>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>B</TextToken>
+                      </AnchorEscape>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>A</TextToken>
+                      </AnchorEscape>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>G</TextToken>
+                      </AnchorEscape>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>Z</TextToken>
+                      </AnchorEscape>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>z</TextToken>
+                      </AnchorEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>w</TextToken>
+                      </CharacterClassEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>W</TextToken>
+                      </CharacterClassEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>s</TextToken>
+                      </CharacterClassEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>W</TextToken>
+                      </CharacterClassEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>s</TextToken>
+                      </CharacterClassEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>S</TextToken>
+                      </CharacterClassEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>d</TextToken>
+                      </CharacterClassEscape>
+                      <CharacterClassEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>D</TextToken>
+                      </CharacterClassEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..38)" Text="\b\B\A\G\Z\z\w\W\s\W\s\S\d\D" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3619,8 +3619,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c"
-                    """,
+                @"\c"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3650,8 +3650,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c<"
-                    """,
+                @"\c<"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3684,25 +3684,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\ca"
-                    """,
+                @"\ca"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>a</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\ca" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>a</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\ca" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3712,25 +3712,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\cA"
-                    """,
+                @"\cA"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>A</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\cA" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>A</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\cA" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3740,8 +3740,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c A"
-                    """,
+                @"\c A"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3774,8 +3774,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c(a)"
-                    """,
+                @"\c(a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3815,8 +3815,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c>"
-                    """,
+                @"\c>"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3849,8 +3849,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c?"
-                    """,
+                @"\c?"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -3883,25 +3883,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c@"
-                    """,
+                @"\c@"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>@</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\c@" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>@</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\c@" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3911,25 +3911,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c^"
-                    """,
+                @"\c^"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>^</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\c^" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>^</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\c^" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3939,25 +3939,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c_"
-                    """,
+                @"\c_"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>_</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\c_" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>_</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\c_" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -3967,8 +3967,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c`"
-                    """,
+                @"\c`"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4001,8 +4001,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c{"
-                    """,
+                @"\c{"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -4035,25 +4035,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\ca"
-                    """,
+                @"\ca"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>a</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\ca" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>a</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\ca" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4063,25 +4063,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\cA"
-                    """,
+                @"\cA"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>A</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\cA" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>A</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\cA" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4091,25 +4091,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\cz"
-                    """,
+                @"\cz"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>z</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\cz" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>z</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\cz" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4119,25 +4119,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\cZ"
-                    """,
+                @"\cZ"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>Z</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\cZ" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>Z</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\cZ" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4147,25 +4147,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c\"
-                    """,
+                @"\c\"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>\</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\c\" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>\</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\c\" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4175,25 +4175,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\c]"
-                    """,
+                @"\c]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ControlEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>c</TextToken>
-                            <TextToken>]</TextToken>
-                          </ControlEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\c]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ControlEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>c</TextToken>
+                        <TextToken>]</TextToken>
+                      </ControlEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\c]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4203,8 +4203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\m"
-                    """,
+                @"\m"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4233,8 +4233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\x"
-                    """,
+                @"\x"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4264,8 +4264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\x "
-                    """,
+                @"\x "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4298,8 +4298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\x0"
-                    """,
+                @"\x0"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4329,8 +4329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\x0 "
-                    """,
+                @"\x0 "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4363,25 +4363,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\x00"
-                    """,
+                @"\x00"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <HexEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>x</TextToken>
-                            <TextToken>00</TextToken>
-                          </HexEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\x00" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <HexEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>x</TextToken>
+                        <TextToken>00</TextToken>
+                      </HexEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\x00" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4391,28 +4391,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\x00 "
-                    """,
+                @"\x00 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <HexEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>x</TextToken>
-                            <TextToken>00</TextToken>
-                          </HexEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\x00 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <HexEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>x</TextToken>
+                        <TextToken>00</TextToken>
+                      </HexEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\x00 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4422,28 +4422,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\x000"
-                    """,
+                @"\x000"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <HexEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>x</TextToken>
-                            <TextToken>00</TextToken>
-                          </HexEscape>
-                          <Text>
-                            <TextToken>0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\x000" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <HexEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>x</TextToken>
+                        <TextToken>00</TextToken>
+                      </HexEscape>
+                      <Text>
+                        <TextToken>0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\x000" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4453,25 +4453,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\xff"
-                    """,
+                @"\xff"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <HexEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>x</TextToken>
-                            <TextToken>ff</TextToken>
-                          </HexEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\xff" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <HexEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>x</TextToken>
+                        <TextToken>ff</TextToken>
+                      </HexEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\xff" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4481,25 +4481,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\xFF"
-                    """,
+                @"\xFF"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <HexEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>x</TextToken>
-                            <TextToken>FF</TextToken>
-                          </HexEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\xFF" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <HexEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>x</TextToken>
+                        <TextToken>FF</TextToken>
+                      </HexEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\xFF" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4509,25 +4509,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\xfF"
-                    """,
+                @"\xfF"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <HexEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>x</TextToken>
-                            <TextToken>fF</TextToken>
-                          </HexEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\xfF" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <HexEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>x</TextToken>
+                        <TextToken>fF</TextToken>
+                      </HexEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\xfF" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4537,28 +4537,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\xfff"
-                    """,
+                @"\xfff"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <HexEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>x</TextToken>
-                            <TextToken>ff</TextToken>
-                          </HexEscape>
-                          <Text>
-                            <TextToken>f</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\xfff" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <HexEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>x</TextToken>
+                        <TextToken>ff</TextToken>
+                      </HexEscape>
+                      <Text>
+                        <TextToken>f</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\xfff" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4568,8 +4568,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\xgg"
-                    """,
+                @"\xgg"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4602,8 +4602,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\m "
-                    """,
+                @"\m "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4635,8 +4635,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u"
-                    """,
+                @"\u"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4666,8 +4666,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u0"
-                    """,
+                @"\u0"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4697,8 +4697,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u00"
-                    """,
+                @"\u00"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4728,8 +4728,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u000"
-                    """,
+                @"\u000"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4759,25 +4759,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u0000"
-                    """,
+                @"\u0000"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <UnicodeEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>u</TextToken>
-                            <TextToken>0000</TextToken>
-                          </UnicodeEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="\u0000" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <UnicodeEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>u</TextToken>
+                        <TextToken>0000</TextToken>
+                      </UnicodeEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="\u0000" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4787,28 +4787,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u0000 "
-                    """,
+                @"\u0000 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <UnicodeEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>u</TextToken>
-                            <TextToken>0000</TextToken>
-                          </UnicodeEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..17)" Text="\u0000 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <UnicodeEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>u</TextToken>
+                        <TextToken>0000</TextToken>
+                      </UnicodeEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..17)" Text="\u0000 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4818,8 +4818,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u "
-                    """,
+                @"\u "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4852,8 +4852,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\u0 "
-                    """,
+                @"\u0 "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4886,8 +4886,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\ugggg"
-                    """,
+                @"\ugggg"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -4920,24 +4920,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\0"
-                    """,
+                @"\0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>0</TextToken>
-                          </OctalEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>0</TextToken>
+                      </OctalEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4947,27 +4947,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\0 "
-                    """,
+                @"\0 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>0</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\0 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>0</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\0 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -4977,24 +4977,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\00"
-                    """,
+                @"\00"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>00</TextToken>
-                          </OctalEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\00" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>00</TextToken>
+                      </OctalEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\00" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5004,27 +5004,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\00 "
-                    """,
+                @"\00 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>00</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\00 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>00</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\00 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5034,24 +5034,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\000"
-                    """,
+                @"\000"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>000</TextToken>
-                          </OctalEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\000" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>000</TextToken>
+                      </OctalEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\000" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5061,27 +5061,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\000 "
-                    """,
+                @"\000 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>000</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\000 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>000</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\000 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5091,27 +5091,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\0000"
-                    """,
+                @"\0000"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>000</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken>0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\0000" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>000</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken>0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\0000" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5121,27 +5121,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\0000 "
-                    """,
+                @"\0000 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>000</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken>0 </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="\0000 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>000</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken>0 </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="\0000 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5151,8 +5151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\7"
-                    """,
+                @"\7"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5181,27 +5181,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\78"
-                    """,
+                @"\78"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>7</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken>8</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\78" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>7</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken>8</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\78" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5211,8 +5211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\8"
-                    """,
+                @"\8"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5241,24 +5241,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\40"
-                    """,
+                @"\40"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>40</TextToken>
-                          </OctalEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\40" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>40</TextToken>
+                      </OctalEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\40" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5268,27 +5268,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\401"
-                    """,
+                @"\401"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>40</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken>1</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\401" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>40</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken>1</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\401" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5298,24 +5298,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\37"
-                    """,
+                @"\37"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>37</TextToken>
-                          </OctalEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\37" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>37</TextToken>
+                      </OctalEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\37" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5325,24 +5325,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\371"
-                    """,
+                @"\371"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>371</TextToken>
-                          </OctalEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\371" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>371</TextToken>
+                      </OctalEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\371" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5352,27 +5352,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\0000"
-                    """,
+                @"\0000"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>000</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken>0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\0000" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>000</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken>0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\0000" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5382,8 +5382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k"
-                    """,
+                @"\k"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5412,8 +5412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k "
-                    """,
+                @"\k "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5445,8 +5445,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<"
-                    """,
+                @"\k<"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5478,8 +5478,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k< "
-                    """,
+                @"\k< "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5511,8 +5511,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0"
-                    """,
+                @"\k<0"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5544,8 +5544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0 "
-                    """,
+                @"\k<0 "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5577,27 +5577,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0>"
-                    """,
+                @"\k<0>"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </KCaptureEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\k&lt;0&gt;" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </KCaptureEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\k&lt;0&gt;" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5607,30 +5607,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0> "
-                    """,
+                @"\k<0> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </KCaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="\k&lt;0&gt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </KCaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="\k&lt;0&gt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5640,30 +5640,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<00> "
-                    """,
+                @"\k<00> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">00</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </KCaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..17)" Text="\k&lt;00&gt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">00</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </KCaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..17)" Text="\k&lt;00&gt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5673,8 +5673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<a> "
-                    """,
+                @"\k<a> "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5709,41 +5709,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?<a>)\k<a> "
-                    """,
+                @"(?<a>)\k<a> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </KCaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..22)" Text="(?&lt;a&gt;)\k&lt;a&gt; " />
-                        <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </KCaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..22)" Text="(?&lt;a&gt;)\k&lt;a&gt; " />
+                    <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -5753,8 +5753,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k"
-                    """,
+                @"\k"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5783,8 +5783,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k "
-                    """,
+                @"\k "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5816,8 +5816,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<"
-                    """,
+                @"\k<"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -5849,27 +5849,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k< "
-                    """,
+                @"\k< "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>&lt; </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\k&lt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>&lt; </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\k&lt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5879,27 +5879,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0"
-                    """,
+                @"\k<0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>&lt;0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\k&lt;0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>&lt;0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\k&lt;0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5909,27 +5909,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0 "
-                    """,
+                @"\k<0 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>&lt;0 </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\k&lt;0 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>&lt;0 </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\k&lt;0 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5939,27 +5939,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0>"
-                    """,
+                @"\k<0>"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </KCaptureEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\k&lt;0&gt;" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </KCaptureEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\k&lt;0&gt;" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -5969,30 +5969,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0> "
-                    """,
+                @"\k<0> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </KCaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="\k&lt;0&gt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </KCaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="\k&lt;0&gt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6002,8 +6002,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'"
-                    """,
+                @"\k'"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6035,8 +6035,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k' "
-                    """,
+                @"\k' "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6068,8 +6068,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'0"
-                    """,
+                @"\k'0"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6101,8 +6101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'0 "
-                    """,
+                @"\k'0 "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6134,27 +6134,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'0'"
-                    """,
+                @"\k'0'"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </KCaptureEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\k'0'" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </KCaptureEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\k'0'" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6164,30 +6164,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'0' "
-                    """,
+                @"\k'0' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </KCaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="\k'0' " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </KCaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="\k'0' " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6197,30 +6197,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'00' "
-                    """,
+                @"\k'00' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <NumberToken value="0">00</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </KCaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..17)" Text="\k'00' " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <NumberToken value="0">00</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </KCaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..17)" Text="\k'00' " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6230,8 +6230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'a' "
-                    """,
+                @"\k'a' "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6266,41 +6266,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?<a>)\k'a' "
-                    """,
+                @"(?<a>)\k'a' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <KCaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>k</TextToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </KCaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..22)" Text="(?&lt;a&gt;)\k'a' " />
-                        <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <KCaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>k</TextToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </KCaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..22)" Text="(?&lt;a&gt;)\k'a' " />
+                    <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6310,8 +6310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k<0' "
-                    """,
+                @"\k<0' "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6343,8 +6343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\k'0> "
-                    """,
+                @"\k'0> "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6376,8 +6376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\"
-                    """,
+                @"\"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6406,24 +6406,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\ "
-                    """,
+                @"\ "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken> </TextToken>
-                          </SimpleEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\ " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken> </TextToken>
+                      </SimpleEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\ " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6433,24 +6433,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<"
-                    """,
+                @"\<"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\&lt;" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\&lt;" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6460,27 +6460,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\< "
-                    """,
+                @"\< "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\&lt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\&lt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6490,27 +6490,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0"
-                    """,
+                @"\<0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\&lt;0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\&lt;0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6520,27 +6520,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0 "
-                    """,
+                @"\<0 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0 </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\&lt;0 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0 </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\&lt;0 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6550,26 +6550,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0>"
-                    """,
+                @"\<0>"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </CaptureEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\&lt;0&gt;" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </CaptureEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\&lt;0&gt;" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6579,29 +6579,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0> "
-                    """,
+                @"\<0> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </CaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\&lt;0&gt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </CaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\&lt;0&gt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6611,29 +6611,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<00> "
-                    """,
+                @"\<00> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">00</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </CaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="\&lt;00&gt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">00</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </CaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="\&lt;00&gt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6643,8 +6643,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<a> "
-                    """,
+                @"\<a> "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6678,40 +6678,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?<a>)\<a> "
-                    """,
+                @"(?<a>)\<a> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </CaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..21)" Text="(?&lt;a&gt;)\&lt;a&gt; " />
-                        <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </CaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..21)" Text="(?&lt;a&gt;)\&lt;a&gt; " />
+                    <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6721,8 +6721,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\"
-                    """,
+                @"\"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -6751,24 +6751,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\ "
-                    """,
+                @"\ "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken> </TextToken>
-                          </SimpleEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\ " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken> </TextToken>
+                      </SimpleEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\ " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6778,24 +6778,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<"
-                    """,
+                @"\<"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\&lt;" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\&lt;" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6805,27 +6805,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\< "
-                    """,
+                @"\< "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\&lt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\&lt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6835,27 +6835,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0"
-                    """,
+                @"\<0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\&lt;0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\&lt;0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6865,27 +6865,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0 "
-                    """,
+                @"\<0 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0 </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\&lt;0 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0 </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\&lt;0 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6895,26 +6895,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0>"
-                    """,
+                @"\<0>"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </CaptureEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\&lt;0&gt;" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </CaptureEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\&lt;0&gt;" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6924,29 +6924,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0> "
-                    """,
+                @"\<0> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                          </CaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\&lt;0&gt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                      </CaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\&lt;0&gt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -6956,24 +6956,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'"
-                    """,
+                @"\'"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>'</TextToken>
-                          </SimpleEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\'" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>'</TextToken>
+                      </SimpleEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\'" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -6983,27 +6983,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\' "
-                    """,
+                @"\' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>'</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\' " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>'</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\' " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7013,27 +7013,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'0"
-                    """,
+                @"\'0"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>'</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0</TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\'0" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>'</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0</TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\'0" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7043,27 +7043,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'0 "
-                    """,
+                @"\'0 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>'</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0 </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\'0 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>'</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0 </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\'0 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7073,26 +7073,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'0'"
-                    """,
+                @"\'0'"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </CaptureEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="\'0'" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </CaptureEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="\'0'" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7102,29 +7102,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'0' "
-                    """,
+                @"\'0' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </CaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\'0' " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </CaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\'0' " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7134,29 +7134,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'00' "
-                    """,
+                @"\'00' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <NumberToken value="0">00</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </CaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="\'00' " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <NumberToken value="0">00</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </CaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="\'00' " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7166,8 +7166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'a' "
-                    """,
+                @"\'a' "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -7201,40 +7201,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?<a>)\'a' "
-                    """,
+                @"(?<a>)\'a' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <CaptureEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                          </CaptureEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..21)" Text="(?&lt;a&gt;)\'a' " />
-                        <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <CaptureEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                      </CaptureEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..21)" Text="(?&lt;a&gt;)\'a' " />
+                    <Capture Name="1" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[10..16)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7244,27 +7244,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\<0' "
-                    """,
+                @"\<0' "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>&lt;</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0' </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\&lt;0' " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>&lt;</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0' </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\&lt;0' " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7274,27 +7274,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\'0> "
-                    """,
+                @"\'0> "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>'</TextToken>
-                          </SimpleEscape>
-                          <Text>
-                            <TextToken>0&gt; </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="\'0&gt; " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>'</TextToken>
+                      </SimpleEscape>
+                      <Text>
+                        <TextToken>0&gt; </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="\'0&gt; " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7304,27 +7304,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{Cc}"
-                    """,
+                "\\p{Cc}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CategoryEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>p</TextToken>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <EscapeCategoryToken>Cc</EscapeCategoryToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </CategoryEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="\\p{Cc}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CategoryEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>p</TextToken>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <EscapeCategoryToken>Cc</EscapeCategoryToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </CategoryEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="\\p{Cc}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7334,8 +7334,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{ Cc }"
-                    """,
+                "\\p{ Cc }"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7367,8 +7367,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{ Cc }"
-                    """,
+                "\\p{ Cc }"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7412,8 +7412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p {Cc}"
-                    """,
+                "\\p {Cc}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7448,8 +7448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{xxx}"
-                    """,
+                "\\p{xxx}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7481,8 +7481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p"
-                    """,
+                "\\p"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -7511,8 +7511,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{"
-                    """,
+                "\\p{"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7544,8 +7544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{}"
-                    """,
+                "\\p{}"
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7577,8 +7577,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{} "
-                    """,
+                "\\p{} "
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7610,8 +7610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p {} "
-                    """,
+                "\\p {} "
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7643,8 +7643,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{Cc "
-                    """,
+                "\\p{Cc "
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -7676,27 +7676,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "\\p{IsArabicPresentationForms-A}"
-                    """,
+                "\\p{IsArabicPresentationForms-A}"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CategoryEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>p</TextToken>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <EscapeCategoryToken>IsArabicPresentationForms-A</EscapeCategoryToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </CategoryEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..41)" Text="\\p{IsArabicPresentationForms-A}" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CategoryEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>p</TextToken>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <EscapeCategoryToken>IsArabicPresentationForms-A</EscapeCategoryToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </CategoryEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..41)" Text="\\p{IsArabicPresentationForms-A}" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7706,27 +7706,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?:)"
-                    """,
+                "(?:)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NonCapturingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </NonCapturingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="(?:)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NonCapturingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <ColonToken>:</ColonToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </NonCapturingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="(?:)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7736,31 +7736,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?:a)"
-                    """,
+                "(?:a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NonCapturingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <ColonToken>:</ColonToken>
                         <Sequence>
-                          <NonCapturingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </NonCapturingGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?:a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </NonCapturingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?:a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7770,8 +7770,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?:"
-                    """,
+                "(?:"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -7803,8 +7803,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?: "
-                    """,
+                "(?: "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -7840,27 +7840,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?=)"
-                    """,
+                "(?=)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <PositiveLookaheadGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <EqualsToken>=</EqualsToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </PositiveLookaheadGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="(?=)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <PositiveLookaheadGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <EqualsToken>=</EqualsToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </PositiveLookaheadGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="(?=)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7870,31 +7870,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?=a)"
-                    """,
+                "(?=a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <PositiveLookaheadGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <EqualsToken>=</EqualsToken>
                         <Sequence>
-                          <PositiveLookaheadGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <EqualsToken>=</EqualsToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </PositiveLookaheadGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?=a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </PositiveLookaheadGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?=a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -7904,8 +7904,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?="
-                    """,
+                "(?="
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -7937,8 +7937,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?= "
-                    """,
+                "(?= "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -7974,27 +7974,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?!)"
-                    """,
+                "(?!)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NegativeLookaheadGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <ExclamationToken>!</ExclamationToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </NegativeLookaheadGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="(?!)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NegativeLookaheadGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <ExclamationToken>!</ExclamationToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </NegativeLookaheadGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="(?!)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8004,31 +8004,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?!a)"
-                    """,
+                "(?!a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NegativeLookaheadGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <ExclamationToken>!</ExclamationToken>
                         <Sequence>
-                          <NegativeLookaheadGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <ExclamationToken>!</ExclamationToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </NegativeLookaheadGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?!a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </NegativeLookaheadGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?!a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8038,8 +8038,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?!"
-                    """,
+                "(?!"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8071,8 +8071,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?! "
-                    """,
+                "(?! "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8108,27 +8108,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?>)"
-                    """,
+                "(?>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <AtomicGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </AtomicGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..13)" Text="(?&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <AtomicGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </AtomicGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..13)" Text="(?&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8138,31 +8138,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?>a)"
-                    """,
+                "(?>a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <AtomicGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
                         <Sequence>
-                          <AtomicGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </AtomicGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?&gt;a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </AtomicGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?&gt;a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8172,8 +8172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?>"
-                    """,
+                "(?>"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8205,8 +8205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?> "
-                    """,
+                "(?> "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8242,28 +8242,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<=)"
-                    """,
+                "(?<=)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <PositiveLookbehindGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <EqualsToken>=</EqualsToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </PositiveLookbehindGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?&lt;=)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <PositiveLookbehindGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <EqualsToken>=</EqualsToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </PositiveLookbehindGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?&lt;=)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8273,32 +8273,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<=a)"
-                    """,
+                "(?<=a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <PositiveLookbehindGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <EqualsToken>=</EqualsToken>
                         <Sequence>
-                          <PositiveLookbehindGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <EqualsToken>=</EqualsToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </PositiveLookbehindGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="(?&lt;=a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </PositiveLookbehindGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="(?&lt;=a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8308,8 +8308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<="
-                    """,
+                "(?<="
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8342,8 +8342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<= "
-                    """,
+                "(?<= "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8380,28 +8380,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<!)"
-                    """,
+                "(?<!)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NegativeLookbehindGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <ExclamationToken>!</ExclamationToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </NegativeLookbehindGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..14)" Text="(?&lt;!)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NegativeLookbehindGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <ExclamationToken>!</ExclamationToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </NegativeLookbehindGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..14)" Text="(?&lt;!)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8411,32 +8411,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<!a)"
-                    """,
+                "(?<!a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NegativeLookbehindGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <ExclamationToken>!</ExclamationToken>
                         <Sequence>
-                          <NegativeLookbehindGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <ExclamationToken>!</ExclamationToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </NegativeLookbehindGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="(?&lt;!a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </NegativeLookbehindGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="(?&lt;!a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -8446,8 +8446,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<!"
-                    """,
+                "(?<!"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8480,8 +8480,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<! "
-                    """,
+                "(?<! "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8518,8 +8518,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<"
-                    """,
+                "(?<"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8554,8 +8554,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<>"
-                    """,
+                "(?<>"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8590,8 +8590,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a"
-                    """,
+                "(?<a"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8628,8 +8628,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>"
-                    """,
+                "(?<a>"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8665,8 +8665,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>a"
-                    """,
+                "(?<a>a"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8706,35 +8706,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>a)"
-                    """,
+                "(?<a>a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
                         <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?&lt;a&gt;a)" />
-                        <Capture Name="1" Span="[9..16)" Text="(?&lt;a&gt;a)" />
-                        <Capture Name="a" Span="[9..16)" Text="(?&lt;a&gt;a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?&lt;a&gt;a)" />
+                    <Capture Name="1" Span="[9..16)" Text="(?&lt;a&gt;a)" />
+                    <Capture Name="a" Span="[9..16)" Text="(?&lt;a&gt;a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -8744,8 +8744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a >a)"
-                    """,
+                "(?<a >a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8785,8 +8785,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a >a)"
-                    """,
+                "(?<a >a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8829,8 +8829,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?< a>a)"
-                    """,
+                "(?< a>a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8868,8 +8868,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?< a>a)"
-                    """,
+                "(?< a>a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8910,8 +8910,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?< a >a)"
-                    """,
+                "(?< a >a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8949,8 +8949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?< a >a)"
-                    """,
+                "(?< a >a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -8997,35 +8997,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<ab>a)"
-                    """,
+                "(?<ab>a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="ab">ab</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
                         <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="ab">ab</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?&lt;ab&gt;a)" />
-                        <Capture Name="1" Span="[9..17)" Text="(?&lt;ab&gt;a)" />
-                        <Capture Name="ab" Span="[9..17)" Text="(?&lt;ab&gt;a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?&lt;ab&gt;a)" />
+                    <Capture Name="1" Span="[9..17)" Text="(?&lt;ab&gt;a)" />
+                    <Capture Name="ab" Span="[9..17)" Text="(?&lt;ab&gt;a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -9035,8 +9035,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<0>a)"
-                    """,
+                "(?<0>a)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9074,34 +9074,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<1>a)"
-                    """,
+                "(?<1>a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
                         <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?&lt;1&gt;a)" />
-                        <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt;a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?&lt;1&gt;a)" />
+                    <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt;a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -9111,34 +9111,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<10>a)"
-                    """,
+                "(?<10>a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="10">10</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
                         <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="10">10</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?&lt;10&gt;a)" />
-                        <Capture Name="10" Span="[9..17)" Text="(?&lt;10&gt;a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?&lt;10&gt;a)" />
+                    <Capture Name="10" Span="[9..17)" Text="(?&lt;10&gt;a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -9148,30 +9148,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<1>)"
-                    """,
+                "(?<1>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="(?&lt;1&gt;)" />
-                        <Capture Name="1" Span="[9..15)" Text="(?&lt;1&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="(?&lt;1&gt;)" />
+                    <Capture Name="1" Span="[9..15)" Text="(?&lt;1&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -9181,34 +9181,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<1> )"
-                    """,
+                "(?<1> )"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
                         <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken> </TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
+                          <Text>
+                            <TextToken> </TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?&lt;1&gt; )" />
-                        <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt; )" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?&lt;1&gt; )" />
+                    <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt; )" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -9218,33 +9218,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<1> )"
-                    """,
+                "(?<1> )"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>
-                              <Trivia>
-                                <WhitespaceTrivia> </WhitespaceTrivia>
-                              </Trivia>)</CloseParenToken>
-                          </CaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?&lt;1&gt; )" />
-                        <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt; )" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>
+                          <Trivia>
+                            <WhitespaceTrivia> </WhitespaceTrivia>
+                          </Trivia>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?&lt;1&gt; )" />
+                    <Capture Name="1" Span="[9..16)" Text="(?&lt;1&gt; )" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -9254,8 +9254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-"
-                    """,
+                "(?<-"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9293,8 +9293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0"
-                    """,
+                "(?<-0"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9332,8 +9332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0)"
-                    """,
+                "(?<-0)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9370,8 +9370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>"
-                    """,
+                "(?<-0>"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9408,31 +9408,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>)"
-                    """,
+                "(?<-0>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?&lt;-0&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?&lt;-0&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -9443,8 +9443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0 >)"
-                    """,
+                "(?<-0 >)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9488,8 +9488,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<- 0 >)"
-                    """,
+                "(?<- 0 >)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9539,8 +9539,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<- 0>)"
-                    """,
+                "(?<- 0>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9584,31 +9584,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-00>)"
-                    """,
+                "(?<-00>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">00</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?&lt;-00&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">00</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?&lt;-00&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -9619,8 +9619,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-"
-                    """,
+                "(?<a-"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9660,8 +9660,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0"
-                    """,
+                "(?<a-0"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9701,8 +9701,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0)"
-                    """,
+                "(?<a-0)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9741,8 +9741,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0>"
-                    """,
+                "(?<a-0>"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9781,33 +9781,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0>)"
-                    """,
+                "(?<a-0>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
-                        <Capture Name="1" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
-                        <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
+                    <Capture Name="1" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
+                    <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -9818,8 +9818,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0 >)"
-                    """,
+                "(?<a-0 >)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9865,8 +9865,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a- 0 >)"
-                    """,
+                "(?<a- 0 >)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9918,8 +9918,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a- 0>)"
-                    """,
+                "(?<a- 0>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -9965,33 +9965,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-00>)"
-                    """,
+                "(?<a-00>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">00</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text="(?&lt;a-00&gt;)" />
-                        <Capture Name="1" Span="[9..18)" Text="(?&lt;a-00&gt;)" />
-                        <Capture Name="a" Span="[9..18)" Text="(?&lt;a-00&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">00</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text="(?&lt;a-00&gt;)" />
+                    <Capture Name="1" Span="[9..18)" Text="(?&lt;a-00&gt;)" />
+                    <Capture Name="a" Span="[9..18)" Text="(?&lt;a-00&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10002,8 +10002,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-1>)"
-                    """,
+                "(?<-1>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10040,37 +10040,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "()(?<-1>)"
-                    """,
+                "()(?<-1>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text="()(?&lt;-1&gt;)" />
-                        <Capture Name="1" Span="[9..11)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text="()(?&lt;-1&gt;)" />
+                    <Capture Name="1" Span="[9..11)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10081,37 +10081,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-1>)()"
-                    """,
+                "(?<-1>)()"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text="(?&lt;-1&gt;)()" />
-                        <Capture Name="1" Span="[16..18)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text="(?&lt;-1&gt;)()" />
+                    <Capture Name="1" Span="[16..18)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10122,42 +10122,42 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>)(?<-a>)"
-                    """,
+                "(?<a>)(?<-a>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..22)" Text="(?&lt;a&gt;)(?&lt;-a&gt;)" />
-                        <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..22)" Text="(?&lt;a&gt;)(?&lt;-a&gt;)" />
+                    <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10168,42 +10168,42 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-a>)(?<a>)"
-                    """,
+                "(?<-a>)(?<a>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..22)" Text="(?&lt;-a&gt;)(?&lt;a&gt;)" />
-                        <Capture Name="1" Span="[16..22)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[16..22)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..22)" Text="(?&lt;-a&gt;)(?&lt;a&gt;)" />
+                    <Capture Name="1" Span="[16..22)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[16..22)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10214,41 +10214,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<4>)(?<-4>)"
-                    """,
+                "(?<4>)(?<-4>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="4">4</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="4">4</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..22)" Text="(?&lt;4&gt;)(?&lt;-4&gt;)" />
-                        <Capture Name="4" Span="[9..15)" Text="(?&lt;4&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="4">4</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="4">4</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..22)" Text="(?&lt;4&gt;)(?&lt;-4&gt;)" />
+                    <Capture Name="4" Span="[9..15)" Text="(?&lt;4&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10259,41 +10259,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-4>)(?<4>)"
-                    """,
+                "(?<-4>)(?<4>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="4">4</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <NumberToken value="4">4</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..22)" Text="(?&lt;-4&gt;)(?&lt;4&gt;)" />
-                        <Capture Name="4" Span="[16..22)" Text="(?&lt;4&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="4">4</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <NumberToken value="4">4</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..22)" Text="(?&lt;-4&gt;)(?&lt;4&gt;)" />
+                    <Capture Name="4" Span="[16..22)" Text="(?&lt;4&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10304,64 +10304,64 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>)(?<b>)(?<-1>)(?<-2>)"
-                    """,
+                "(?<a>)(?<b>)(?<-1>)(?<-2>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="b">b</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="1">1</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="2">2</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..35)" Text="(?&lt;a&gt;)(?&lt;b&gt;)(?&lt;-1&gt;)(?&lt;-2&gt;)" />
-                        <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="2" Span="[15..21)" Text="(?&lt;b&gt;)" />
-                        <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="b" Span="[15..21)" Text="(?&lt;b&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="b">b</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="1">1</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="2">2</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..35)" Text="(?&lt;a&gt;)(?&lt;b&gt;)(?&lt;-1&gt;)(?&lt;-2&gt;)" />
+                    <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="2" Span="[15..21)" Text="(?&lt;b&gt;)" />
+                    <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="b" Span="[15..21)" Text="(?&lt;b&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -10372,8 +10372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "()()(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                    """,
+                "()()(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10455,8 +10455,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "()(?<a>)(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                    """,
+                "()(?<a>)(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10543,8 +10543,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>)()(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                    """,
+                "(?<a>)()(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10631,8 +10631,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>)(?<b>)(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
-                    """,
+                "(?<a>)(?<b>)(?<-0>)(?<-1>)(?<-2>)(?<-3>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10724,8 +10724,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()()"
-                    """,
+                "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()()"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10807,8 +10807,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()(?"
-                    """,
+                "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()(?"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10897,8 +10897,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()(?<a>)"
-                    """,
+                "(?<-0>)(?<-1>)(?<-2>)(?<-3>)()(?<a>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -10985,8 +10985,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)()"
-                    """,
+                "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)()"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11073,8 +11073,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)(?"
-                    """,
+                "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)(?"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11168,8 +11168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)(?<b>)"
-                    """,
+                "(?<-0>)(?<-1>)(?<-2>)(?<-3>)(?<a>)(?<b>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11261,46 +11261,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0>)(?<b-a>)"
-                    """,
+                "(?<a-0>)(?<b-a>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="b">b</CaptureNameToken>
-                            <MinusToken>-</MinusToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..25)" Text="(?&lt;a-0&gt;)(?&lt;b-a&gt;)" />
-                        <Capture Name="1" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
-                        <Capture Name="2" Span="[17..25)" Text="(?&lt;b-a&gt;)" />
-                        <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
-                        <Capture Name="b" Span="[17..25)" Text="(?&lt;b-a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="b">b</CaptureNameToken>
+                        <MinusToken>-</MinusToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..25)" Text="(?&lt;a-0&gt;)(?&lt;b-a&gt;)" />
+                    <Capture Name="1" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
+                    <Capture Name="2" Span="[17..25)" Text="(?&lt;b-a&gt;)" />
+                    <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
+                    <Capture Name="b" Span="[17..25)" Text="(?&lt;b-a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -11311,44 +11311,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0>)(?<-a>)"
-                    """,
+                "(?<a-0>)(?<-a>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..24)" Text="(?&lt;a-0&gt;)(?&lt;-a&gt;)" />
-                        <Capture Name="1" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
-                        <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..24)" Text="(?&lt;a-0&gt;)(?&lt;-a&gt;)" />
+                    <Capture Name="1" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
+                    <Capture Name="a" Span="[9..17)" Text="(?&lt;a-0&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -11359,33 +11359,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-a>)"
-                    """,
+                "(?<a-a>)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <MinusToken>-</MinusToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?&lt;a-a&gt;)" />
-                        <Capture Name="1" Span="[9..17)" Text="(?&lt;a-a&gt;)" />
-                        <Capture Name="a" Span="[9..17)" Text="(?&lt;a-a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <MinusToken>-</MinusToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?&lt;a-a&gt;)" />
+                    <Capture Name="1" Span="[9..17)" Text="(?&lt;a-a&gt;)" />
+                    <Capture Name="a" Span="[9..17)" Text="(?&lt;a-a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -11396,31 +11396,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?'a')"
-                    """,
+                "(?'a')"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="(?'a')" />
-                        <Capture Name="1" Span="[9..15)" Text="(?'a')" />
-                        <Capture Name="a" Span="[9..15)" Text="(?'a')" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="(?'a')" />
+                    <Capture Name="1" Span="[9..15)" Text="(?'a')" />
+                    <Capture Name="a" Span="[9..15)" Text="(?'a')" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -11430,31 +11430,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?'-0')"
-                    """,
+                "(?'-0')"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <CaptureNameToken />
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?'-0')" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <CaptureNameToken />
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?'-0')" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -11465,33 +11465,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?'a-0')"
-                    """,
+                "(?'a-0')"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <BalancingGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <MinusToken>-</MinusToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <SingleQuoteToken>'</SingleQuoteToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </BalancingGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?'a-0')" />
-                        <Capture Name="1" Span="[9..17)" Text="(?'a-0')" />
-                        <Capture Name="a" Span="[9..17)" Text="(?'a-0')" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <BalancingGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <MinusToken>-</MinusToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <SingleQuoteToken>'</SingleQuoteToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </BalancingGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?'a-0')" />
+                    <Capture Name="1" Span="[9..17)" Text="(?'a-0')" />
+                    <Capture Name="a" Span="[9..17)" Text="(?'a-0')" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace,
                 allowIndexOutOfRange: true
             );
@@ -11502,8 +11502,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a-0')"
-                    """,
+                "(?<a-0')"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11546,8 +11546,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?'a-0>)"
-                    """,
+                "(?'a-0>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11590,8 +11590,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?("
-                    """,
+                "(?("
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11627,8 +11627,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0"
-                    """,
+                "(?(0"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11663,8 +11663,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)"
-                    """,
+                "(?(0)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11698,29 +11698,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0))"
-                    """,
+                "(?(0))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalCaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OpenParenToken>(</OpenParenToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CloseParenToken>)</CloseParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalCaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="(?(0))" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalCaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OpenParenToken>(</OpenParenToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CloseParenToken>)</CloseParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalCaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="(?(0))" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -11730,33 +11730,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)a)"
-                    """,
+                "(?(0)a)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalCaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OpenParenToken>(</OpenParenToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CloseParenToken>)</CloseParenToken>
                         <Sequence>
-                          <ConditionalCaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OpenParenToken>(</OpenParenToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CloseParenToken>)</CloseParenToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalCaptureGrouping>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?(0)a)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalCaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?(0)a)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -11766,37 +11766,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)a|)"
-                    """,
+                "(?(0)a|)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalCaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OpenParenToken>(</OpenParenToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CloseParenToken>)</CloseParenToken>
-                            <Alternation>
-                              <Sequence>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </Sequence>
-                              <BarToken>|</BarToken>
-                              <Sequence />
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalCaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?(0)a|)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalCaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OpenParenToken>(</OpenParenToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CloseParenToken>)</CloseParenToken>
+                        <Alternation>
+                          <Sequence>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </Sequence>
+                          <BarToken>|</BarToken>
+                          <Sequence />
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalCaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?(0)a|)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -11806,41 +11806,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)a|b)"
-                    """,
+                "(?(0)a|b)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalCaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OpenParenToken>(</OpenParenToken>
-                            <NumberToken value="0">0</NumberToken>
-                            <CloseParenToken>)</CloseParenToken>
-                            <Alternation>
-                              <Sequence>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </Sequence>
-                              <BarToken>|</BarToken>
-                              <Sequence>
-                                <Text>
-                                  <TextToken>b</TextToken>
-                                </Text>
-                              </Sequence>
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalCaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..18)" Text="(?(0)a|b)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalCaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OpenParenToken>(</OpenParenToken>
+                        <NumberToken value="0">0</NumberToken>
+                        <CloseParenToken>)</CloseParenToken>
+                        <Alternation>
+                          <Sequence>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </Sequence>
+                          <BarToken>|</BarToken>
+                          <Sequence>
+                            <Text>
+                              <TextToken>b</TextToken>
+                            </Text>
+                          </Sequence>
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalCaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..18)" Text="(?(0)a|b)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -11850,8 +11850,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)a|b|)"
-                    """,
+                "(?(0)a|b|)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11901,8 +11901,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)a|b|c)"
-                    """,
+                "(?(0)a|b|c)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11956,8 +11956,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0 )"
-                    """,
+                "(?(0 )"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -11994,8 +11994,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(1))"
-                    """,
+                "(?(1))"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12029,29 +12029,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(00))"
-                    """,
+                "(?(00))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalCaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OpenParenToken>(</OpenParenToken>
-                            <NumberToken value="0">00</NumberToken>
-                            <CloseParenToken>)</CloseParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalCaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..16)" Text="(?(00))" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalCaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OpenParenToken>(</OpenParenToken>
+                        <NumberToken value="0">00</NumberToken>
+                        <CloseParenToken>)</CloseParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalCaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..16)" Text="(?(00))" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -12061,8 +12061,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)a|b|c|d)"
-                    """,
+                "(?(0)a|b|c|d)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12125,8 +12125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(0)a|b|c|d|e)"
-                    """,
+                "(?(0)a|b|c|d|e)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12198,35 +12198,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(a))"
-                    """,
+                "(?(a))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
-                              <Sequence>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </Sequence>
-                              <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..15)" Text="(?(a))" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..15)" Text="(?(a))" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -12236,40 +12236,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>)(?(a))"
-                    """,
+                "(?<a>)(?(a))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <ConditionalCaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OpenParenToken>(</OpenParenToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <CloseParenToken>)</CloseParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalCaptureGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..21)" Text="(?&lt;a&gt;)(?(a))" />
-                        <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <ConditionalCaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OpenParenToken>(</OpenParenToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <CloseParenToken>)</CloseParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalCaptureGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..21)" Text="(?&lt;a&gt;)(?(a))" />
+                    <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -12279,49 +12279,49 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>)(?(a ))"
-                    """,
+                "(?<a>)(?(a ))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
-                              <Sequence>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </Sequence>
-                              <CloseParenToken>
-                                <Trivia>
-                                  <WhitespaceTrivia> </WhitespaceTrivia>
-                                </Trivia>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..22)" Text="(?&lt;a&gt;)(?(a ))" />
-                        <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </Sequence>
+                          <CloseParenToken>
+                            <Trivia>
+                              <WhitespaceTrivia> </WhitespaceTrivia>
+                            </Trivia>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..22)" Text="(?&lt;a&gt;)(?(a ))" />
+                    <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -12331,49 +12331,49 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?<a>)(?( a))"
-                    """,
+                "(?<a>)(?( a))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <CaptureGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <LessThanToken>&lt;</LessThanToken>
-                            <CaptureNameToken value="a">a</CaptureNameToken>
-                            <GreaterThanToken>&gt;</GreaterThanToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </CaptureGrouping>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
-                              <Sequence>
-                                <Text>
-                                  <TextToken>
-                                    <Trivia>
-                                      <WhitespaceTrivia> </WhitespaceTrivia>
-                                    </Trivia>a</TextToken>
-                                </Text>
-                              </Sequence>
-                              <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..22)" Text="(?&lt;a&gt;)(?( a))" />
-                        <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                        <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CaptureGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <LessThanToken>&lt;</LessThanToken>
+                        <CaptureNameToken value="a">a</CaptureNameToken>
+                        <GreaterThanToken>&gt;</GreaterThanToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </CaptureGrouping>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <Text>
+                              <TextToken>
+                                <Trivia>
+                                  <WhitespaceTrivia> </WhitespaceTrivia>
+                                </Trivia>a</TextToken>
+                            </Text>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..22)" Text="(?&lt;a&gt;)(?( a))" />
+                    <Capture Name="1" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                    <Capture Name="a" Span="[9..15)" Text="(?&lt;a&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -12383,47 +12383,47 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(()a()))"
-                    """,
+                "(?(()a()))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
                             <SimpleGrouping>
                               <OpenParenToken>(</OpenParenToken>
-                              <Sequence>
-                                <SimpleGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <Sequence />
-                                  <CloseParenToken>)</CloseParenToken>
-                                </SimpleGrouping>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <SimpleGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <Sequence />
-                                  <CloseParenToken>)</CloseParenToken>
-                                </SimpleGrouping>
-                              </Sequence>
+                              <Sequence />
                               <CloseParenToken>)</CloseParenToken>
                             </SimpleGrouping>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..19)" Text="(?(()a()))" />
-                        <Capture Name="1" Span="[12..14)" Text="()" />
-                        <Capture Name="2" Span="[15..17)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <SimpleGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <Sequence />
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleGrouping>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..19)" Text="(?(()a()))" />
+                    <Capture Name="1" Span="[12..14)" Text="()" />
+                    <Capture Name="2" Span="[15..17)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -12433,57 +12433,57 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?((?<x>)a(?<y>)))"
-                    """,
+                "(?((?<x>)a(?<y>)))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <CaptureGrouping>
                               <OpenParenToken>(</OpenParenToken>
-                              <Sequence>
-                                <CaptureGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <QuestionToken>?</QuestionToken>
-                                  <LessThanToken>&lt;</LessThanToken>
-                                  <CaptureNameToken value="x">x</CaptureNameToken>
-                                  <GreaterThanToken>&gt;</GreaterThanToken>
-                                  <Sequence />
-                                  <CloseParenToken>)</CloseParenToken>
-                                </CaptureGrouping>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <CaptureGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <QuestionToken>?</QuestionToken>
-                                  <LessThanToken>&lt;</LessThanToken>
-                                  <CaptureNameToken value="y">y</CaptureNameToken>
-                                  <GreaterThanToken>&gt;</GreaterThanToken>
-                                  <Sequence />
-                                  <CloseParenToken>)</CloseParenToken>
-                                </CaptureGrouping>
-                              </Sequence>
+                              <QuestionToken>?</QuestionToken>
+                              <LessThanToken>&lt;</LessThanToken>
+                              <CaptureNameToken value="x">x</CaptureNameToken>
+                              <GreaterThanToken>&gt;</GreaterThanToken>
+                              <Sequence />
                               <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..27)" Text="(?((?&lt;x&gt;)a(?&lt;y&gt;)))" />
-                        <Capture Name="1" Span="[12..18)" Text="(?&lt;x&gt;)" />
-                        <Capture Name="2" Span="[19..25)" Text="(?&lt;y&gt;)" />
-                        <Capture Name="x" Span="[12..18)" Text="(?&lt;x&gt;)" />
-                        <Capture Name="y" Span="[19..25)" Text="(?&lt;y&gt;)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                            </CaptureGrouping>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <CaptureGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <LessThanToken>&lt;</LessThanToken>
+                              <CaptureNameToken value="y">y</CaptureNameToken>
+                              <GreaterThanToken>&gt;</GreaterThanToken>
+                              <Sequence />
+                              <CloseParenToken>)</CloseParenToken>
+                            </CaptureGrouping>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..27)" Text="(?((?&lt;x&gt;)a(?&lt;y&gt;)))" />
+                    <Capture Name="1" Span="[12..18)" Text="(?&lt;x&gt;)" />
+                    <Capture Name="2" Span="[19..25)" Text="(?&lt;y&gt;)" />
+                    <Capture Name="x" Span="[12..18)" Text="(?&lt;x&gt;)" />
+                    <Capture Name="y" Span="[19..25)" Text="(?&lt;y&gt;)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -12493,8 +12493,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?'"
-                    """,
+                "(?(?'"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12536,8 +12536,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?'x'))"
-                    """,
+                "(?(?'x'))"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12577,8 +12577,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?#"
-                    """,
+                "(?(?#"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12625,8 +12625,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?#)"
-                    """,
+                "(?(?#)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12673,8 +12673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?#))"
-                    """,
+                "(?(?#))"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12721,8 +12721,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?<"
-                    """,
+                "(?(?<"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12764,8 +12764,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?<a"
-                    """,
+                "(?(?<a"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12807,8 +12807,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?<a>"
-                    """,
+                "(?(?<a>"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12849,8 +12849,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?<a>)"
-                    """,
+                "(?(?<a>)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12891,8 +12891,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?<a>))"
-                    """,
+                "(?(?<a>))"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -12932,34 +12932,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?<=))"
-                    """,
+                "(?(?<=))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <PositiveLookbehindGrouping>
-                              <OpenParenToken>(</OpenParenToken>
-                              <QuestionToken>?</QuestionToken>
-                              <LessThanToken>&lt;</LessThanToken>
-                              <EqualsToken>=</EqualsToken>
-                              <Sequence />
-                              <CloseParenToken>)</CloseParenToken>
-                            </PositiveLookbehindGrouping>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?(?&lt;=))" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <PositiveLookbehindGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <QuestionToken>?</QuestionToken>
+                          <LessThanToken>&lt;</LessThanToken>
+                          <EqualsToken>=</EqualsToken>
+                          <Sequence />
+                          <CloseParenToken>)</CloseParenToken>
+                        </PositiveLookbehindGrouping>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?(?&lt;=))" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -12969,34 +12969,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    "(?(?<!))"
-                    """,
+                "(?(?<!))"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <NegativeLookbehindGrouping>
-                              <OpenParenToken>(</OpenParenToken>
-                              <QuestionToken>?</QuestionToken>
-                              <LessThanToken>&lt;</LessThanToken>
-                              <ExclamationToken>!</ExclamationToken>
-                              <Sequence />
-                              <CloseParenToken>)</CloseParenToken>
-                            </NegativeLookbehindGrouping>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[9..17)" Text="(?(?&lt;!))" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <NegativeLookbehindGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <QuestionToken>?</QuestionToken>
+                          <LessThanToken>&lt;</LessThanToken>
+                          <ExclamationToken>!</ExclamationToken>
+                          <Sequence />
+                          <CloseParenToken>)</CloseParenToken>
+                        </NegativeLookbehindGrouping>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[9..17)" Text="(?(?&lt;!))" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnorePatternWhitespace
             );
         }
@@ -13006,8 +13006,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\1"
-                    """,
+                @"\1"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13036,8 +13036,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\1 "
-                    """,
+                @"\1 "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13069,30 +13069,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\1"
-                    """,
+                @"()\1"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="()\1" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="()\1" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13102,33 +13102,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\1 "
-                    """,
+                @"()\1 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="()\1 " />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="()\1 " />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13138,33 +13138,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\10 "
-                    """,
+                @"()\10 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>10</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="()\10 " />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>10</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="()\10 " />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13174,24 +13174,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\1"
-                    """,
+                @"\1"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>1</TextToken>
-                          </OctalEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..12)" Text="\1" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>1</TextToken>
+                      </OctalEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..12)" Text="\1" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -13201,27 +13201,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"\1 "
-                    """,
+                @"\1 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <OctalEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>1</TextToken>
-                          </OctalEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="\1 " />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <OctalEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>1</TextToken>
+                      </OctalEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="\1 " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -13231,30 +13231,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\1"
-                    """,
+                @"()\1"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="()\1" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="()\1" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -13264,33 +13264,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\1 "
-                    """,
+                @"()\1 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="()\1 " />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="()\1 " />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -13300,33 +13300,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\10 "
-                    """,
+                @"()\10 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="10">1</NumberToken>
-                          </BackreferenceEscape>
-                          <Text>
-                            <TextToken>0 </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="()\10 " />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="10">1</NumberToken>
+                      </BackreferenceEscape>
+                      <Text>
+                        <TextToken>0 </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="()\10 " />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -13336,87 +13336,87 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()()()()()()()()()\10 "
-                    """,
+                @"()()()()()()()()()()\10 "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="10">10</NumberToken>
-                          </BackreferenceEscape>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..34)" Text="()()()()()()()()()()\10 " />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                        <Capture Name="2" Span="[12..14)" Text="()" />
-                        <Capture Name="3" Span="[14..16)" Text="()" />
-                        <Capture Name="4" Span="[16..18)" Text="()" />
-                        <Capture Name="5" Span="[18..20)" Text="()" />
-                        <Capture Name="6" Span="[20..22)" Text="()" />
-                        <Capture Name="7" Span="[22..24)" Text="()" />
-                        <Capture Name="8" Span="[24..26)" Text="()" />
-                        <Capture Name="9" Span="[26..28)" Text="()" />
-                        <Capture Name="10" Span="[28..30)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="10">10</NumberToken>
+                      </BackreferenceEscape>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..34)" Text="()()()()()()()()()()\10 " />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                    <Capture Name="2" Span="[12..14)" Text="()" />
+                    <Capture Name="3" Span="[14..16)" Text="()" />
+                    <Capture Name="4" Span="[16..18)" Text="()" />
+                    <Capture Name="5" Span="[18..20)" Text="()" />
+                    <Capture Name="6" Span="[20..22)" Text="()" />
+                    <Capture Name="7" Span="[22..24)" Text="()" />
+                    <Capture Name="8" Span="[24..26)" Text="()" />
+                    <Capture Name="9" Span="[26..28)" Text="()" />
+                    <Capture Name="10" Span="[28..30)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ECMAScript
             );
         }
@@ -13426,8 +13426,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"["
-                    """,
+                @"["
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13457,8 +13457,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[ "
-                    """,
+                @"[ "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13492,8 +13492,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[]"
-                    """,
+                @"[]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13527,8 +13527,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[] "
-                    """,
+                @"[] "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13562,29 +13562,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a]"
-                    """,
+                @"[a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="[a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="[a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13594,32 +13594,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a] "
-                    """,
+                @"[a] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>a</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="[a] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="[a] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13629,8 +13629,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-"
-                    """,
+                @"[a-"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13670,8 +13670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a- "
-                    """,
+                @"[a- "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -13712,29 +13712,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-]"
-                    """,
+                @"[a-]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a-</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a-</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="[a-]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="[a-]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13744,32 +13744,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-] "
-                    """,
+                @"[a-] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a-</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>a-</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="[a-] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="[a-] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13779,35 +13779,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-b]"
-                    """,
+                @"[a-b]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>b</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>b</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="[a-b]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="[a-b]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13817,38 +13817,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-b] "
-                    """,
+                @"[a-b] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>b</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>b</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="[a-b] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="[a-b] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13858,44 +13858,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[b]] "
-                    """,
+                @"[a-[b]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <CharacterClassSubtraction>
-                                <MinusToken>-</MinusToken>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>b</TextToken>
-                                    </Text>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </CharacterClassSubtraction>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>a</TextToken>
                           </Text>
+                          <CharacterClassSubtraction>
+                            <MinusToken>-</MinusToken>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <Text>
+                                  <TextToken>b</TextToken>
+                                </Text>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </CharacterClassSubtraction>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[a-[b]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[a-[b]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13905,50 +13905,50 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-b-[c]] "
-                    """,
+                @"[a-b-[c]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>b</TextToken>
+                            </Text>
+                          </CharacterClassRange>
+                          <CharacterClassSubtraction>
+                            <MinusToken>-</MinusToken>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
                                 <Text>
-                                  <TextToken>a</TextToken>
+                                  <TextToken>c</TextToken>
                                 </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>b</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                              <CharacterClassSubtraction>
-                                <MinusToken>-</MinusToken>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>c</TextToken>
-                                    </Text>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </CharacterClassSubtraction>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </CharacterClassSubtraction>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[a-b-[c]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[a-b-[c]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -13958,8 +13958,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[b]-c] "
-                    """,
+                @"[a-[b]-c] "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14011,32 +14011,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[[a]-b] "
-                    """,
+                @"[[a]-b] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>[a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken>-b] </TextToken>
+                            <TextToken>[a</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[[a]-b] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken>-b] </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[[a]-b] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14046,44 +14046,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[[a]-[b]] "
-                    """,
+                @"[[a]-[b]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>[a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken>-</TextToken>
-                          </Text>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
-                          <Text>
-                            <TextToken>] </TextToken>
+                            <TextToken>[a</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[[a]-[b]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken>-</TextToken>
+                      </Text>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
+                        <Sequence>
+                          <Text>
+                            <TextToken>b</TextToken>
+                          </Text>
+                        </Sequence>
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken>] </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[[a]-[b]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14093,36 +14093,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\w-a] "
-                    """,
+                @"[\w-a] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>w</TextToken>
-                              </CharacterClassEscape>
-                              <Text>
-                                <TextToken>-a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>w</TextToken>
+                          </CharacterClassEscape>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>-a</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..17)" Text="[\w-a] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..17)" Text="[\w-a] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14132,8 +14132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\w] "
-                    """,
+                @"[a-\w] "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14177,8 +14177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\p{llll}-a] "
-                    """,
+                @"[\p{llll}-a] "
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -14222,39 +14222,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\p{Lu}-a] "
-                    """,
+                @"[\p{Lu}-a] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CategoryEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>p</TextToken>
-                                <OpenBraceToken>{</OpenBraceToken>
-                                <EscapeCategoryToken>Lu</EscapeCategoryToken>
-                                <CloseBraceToken>}</CloseBraceToken>
-                              </CategoryEscape>
-                              <Text>
-                                <TextToken>-a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CategoryEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>p</TextToken>
+                            <OpenBraceToken>{</OpenBraceToken>
+                            <EscapeCategoryToken>Lu</EscapeCategoryToken>
+                            <CloseBraceToken>}</CloseBraceToken>
+                          </CategoryEscape>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>-a</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..21)" Text="[\p{Lu}-a] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..21)" Text="[\p{Lu}-a] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14264,8 +14264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\p{Lu}] "
-                    """,
+                @"[a-\p{Lu}] "
+                """,
                 $$"""
                 <Tree>
                   <CompilationUnit>
@@ -14312,44 +14312,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[:Ll:]] "
-                    """,
+                @"[a-[:Ll:]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <CharacterClassSubtraction>
-                                <MinusToken>-</MinusToken>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>:Ll:</TextToken>
-                                    </Text>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </CharacterClassSubtraction>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>a</TextToken>
                           </Text>
+                          <CharacterClassSubtraction>
+                            <MinusToken>-</MinusToken>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <Text>
+                                  <TextToken>:Ll:</TextToken>
+                                </Text>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </CharacterClassSubtraction>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..21)" Text="[a-[:Ll:]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..21)" Text="[a-[:Ll:]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14359,44 +14359,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[:Ll]] "
-                    """,
+                @"[a-[:Ll]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <CharacterClassSubtraction>
-                                <MinusToken>-</MinusToken>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>:Ll</TextToken>
-                                    </Text>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </CharacterClassSubtraction>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>a</TextToken>
                           </Text>
+                          <CharacterClassSubtraction>
+                            <MinusToken>-</MinusToken>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <Text>
+                                  <TextToken>:Ll</TextToken>
+                                </Text>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </CharacterClassSubtraction>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[a-[:Ll]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[a-[:Ll]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14406,8 +14406,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[:"
-                    """,
+                @"[a-[:"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14453,8 +14453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[:L"
-                    """,
+                @"[a-[:L"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14500,8 +14500,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[:L:"
-                    """,
+                @"[a-[:L:"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14547,8 +14547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[:L:]"
-                    """,
+                @"[a-[:L:]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14594,30 +14594,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\-]"
-                    """,
+                @"[\-]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <SimpleEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>-</TextToken>
-                              </SimpleEscape>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <SimpleEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>-</TextToken>
+                          </SimpleEscape>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="[\-]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="[\-]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14627,41 +14627,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-b-c] "
-                    """,
+                @"[a-b-c] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>b</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                              <Text>
-                                <TextToken>-c</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>b</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>-c</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[a-b-c] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[a-b-c] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14671,41 +14671,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[-b-c] "
-                    """,
+                @"[-b-c] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>-</TextToken>
-                              </Text>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>b</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>c</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>-</TextToken>
                           </Text>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>b</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>c</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..17)" Text="[-b-c] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..17)" Text="[-b-c] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14715,32 +14715,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[-[b] "
-                    """,
+                @"[-[b] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>-[b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>-[b</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="[-[b] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="[-[b] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14750,32 +14750,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[-[b]] "
-                    """,
+                @"[-[b]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>-[b</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken>] </TextToken>
+                            <TextToken>-[b</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..17)" Text="[-[b]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken>] </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..17)" Text="[-[b]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14785,8 +14785,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[--b "
-                    """,
+                @"[--b "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14829,38 +14829,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[--b] "
-                    """,
+                @"[--b] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>-</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>b</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
-                          <Text>
-                            <TextToken> </TextToken>
-                          </Text>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>-</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>b</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="[--b] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="[--b] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -14870,8 +14870,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[--[b "
-                    """,
+                @"[--[b "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14917,8 +14917,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[--[b] "
-                    """,
+                @"[--[b] "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -14968,44 +14968,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[--[b]] "
-                    """,
+                @"[--[b]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>-</TextToken>
-                              </Text>
-                              <CharacterClassSubtraction>
-                                <MinusToken>-</MinusToken>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>b</TextToken>
-                                    </Text>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </CharacterClassSubtraction>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>-</TextToken>
                           </Text>
+                          <CharacterClassSubtraction>
+                            <MinusToken>-</MinusToken>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <Text>
+                                  <TextToken>b</TextToken>
+                                </Text>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </CharacterClassSubtraction>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[--[b]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[--[b]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15015,8 +15015,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a--[b "
-                    """,
+                @"[a--[b "
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15060,41 +15060,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[,--[a] "
-                    """,
+                @"[,--[a] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>,</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>-</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                              <Text>
-                                <TextToken>[a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>,</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>-</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                           <Text>
-                            <TextToken> </TextToken>
+                            <TextToken>[a</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[,--[a] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken> </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[,--[a] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15104,41 +15104,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[,--[a]] "
-                    """,
+                @"[,--[a]] "
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>,</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>-</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                              <Text>
-                                <TextToken>[a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>,</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>-</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                           <Text>
-                            <TextToken>] </TextToken>
+                            <TextToken>[a</TextToken>
                           </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[,--[a]] " />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken>] </TextToken>
+                      </Text>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[,--[a]] " />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15148,33 +15148,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\s-a]"
-                    """,
+                @"[\s-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>s</TextToken>
-                              </CharacterClassEscape>
-                              <Text>
-                                <TextToken>-a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>s</TextToken>
+                          </CharacterClassEscape>
+                          <Text>
+                            <TextToken>-a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="[\s-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="[\s-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15184,36 +15184,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\p{Lu}-a]"
-                    """,
+                @"[\p{Lu}-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CategoryEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>p</TextToken>
-                                <OpenBraceToken>{</OpenBraceToken>
-                                <EscapeCategoryToken>Lu</EscapeCategoryToken>
-                                <CloseBraceToken>}</CloseBraceToken>
-                              </CategoryEscape>
-                              <Text>
-                                <TextToken>-a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CategoryEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>p</TextToken>
+                            <OpenBraceToken>{</OpenBraceToken>
+                            <EscapeCategoryToken>Lu</EscapeCategoryToken>
+                            <CloseBraceToken>}</CloseBraceToken>
+                          </CategoryEscape>
+                          <Text>
+                            <TextToken>-a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[\p{Lu}-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[\p{Lu}-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15223,36 +15223,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\p{Lu}-a]"
-                    """,
+                @"[\p{Lu}-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CategoryEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>p</TextToken>
-                                <OpenBraceToken>{</OpenBraceToken>
-                                <EscapeCategoryToken>Lu</EscapeCategoryToken>
-                                <CloseBraceToken>}</CloseBraceToken>
-                              </CategoryEscape>
-                              <Text>
-                                <TextToken>-a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CategoryEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>p</TextToken>
+                            <OpenBraceToken>{</OpenBraceToken>
+                            <EscapeCategoryToken>Lu</EscapeCategoryToken>
+                            <CloseBraceToken>}</CloseBraceToken>
+                          </CategoryEscape>
+                          <Text>
+                            <TextToken>-a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[\p{Lu}-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[\p{Lu}-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15262,29 +15262,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a]"
-                    """,
+                @"[a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..13)" Text="[a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..13)" Text="[a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15294,8 +15294,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\c<-\c>]"
-                    """,
+                @"[\c<-\c>]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15346,8 +15346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\c>-\c<]"
-                    """,
+                @"[\c>-\c<]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15398,8 +15398,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\c>-a]"
-                    """,
+                @"[\c>-a]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15444,8 +15444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\c>]"
-                    """,
+                @"[a-\c>]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15490,8 +15490,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a--]"
-                    """,
+                @"[a--]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15531,35 +15531,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[--a]"
-                    """,
+                @"[--a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>-</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>-</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="[--a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="[--a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15569,8 +15569,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\-]"
-                    """,
+                @"[a-\-]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15612,33 +15612,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\--a]"
-                    """,
+                @"[\--a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <SimpleEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>-</TextToken>
-                              </SimpleEscape>
-                              <Text>
-                                <TextToken>-a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <SimpleEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>-</TextToken>
+                          </SimpleEscape>
+                          <Text>
+                            <TextToken>-a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="[\--a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="[\--a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15648,37 +15648,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\0-\1]"
-                    """,
+                @"[\0-\1]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>0</TextToken>
-                                </OctalEscape>
-                                <MinusToken>-</MinusToken>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>1</TextToken>
-                                </OctalEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>0</TextToken>
+                            </OctalEscape>
+                            <MinusToken>-</MinusToken>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>1</TextToken>
+                            </OctalEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..17)" Text="[\0-\1]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..17)" Text="[\0-\1]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15688,8 +15688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\1-\0]"
-                    """,
+                @"[\1-\0]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15731,37 +15731,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\0-\01]"
-                    """,
+                @"[\0-\01]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>0</TextToken>
-                                </OctalEscape>
-                                <MinusToken>-</MinusToken>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>01</TextToken>
-                                </OctalEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>0</TextToken>
+                            </OctalEscape>
+                            <MinusToken>-</MinusToken>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>01</TextToken>
+                            </OctalEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[\0-\01]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[\0-\01]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15771,8 +15771,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\01-\0]"
-                    """,
+                @"[\01-\0]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15814,35 +15814,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[[:x:]-a]"
-                    """,
+                @"[[:x:]-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <PosixProperty>
-                                  <TextToken>[:x:]</TextToken>
-                                </PosixProperty>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <PosixProperty>
+                              <TextToken>[:x:]</TextToken>
+                            </PosixProperty>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[[:x:]-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[[:x:]-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15852,41 +15852,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-[:x:]]"
-                    """,
+                @"[a-[:x:]]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>a</TextToken>
-                              </Text>
-                              <CharacterClassSubtraction>
-                                <MinusToken>-</MinusToken>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>:x:</TextToken>
-                                    </Text>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </CharacterClassSubtraction>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <Text>
+                            <TextToken>a</TextToken>
+                          </Text>
+                          <CharacterClassSubtraction>
+                            <MinusToken>-</MinusToken>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <Text>
+                                  <TextToken>:x:</TextToken>
+                                </Text>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </CharacterClassSubtraction>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[a-[:x:]]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[a-[:x:]]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15896,38 +15896,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\0-\ca]"
-                    """,
+                @"[\0-\ca]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>0</TextToken>
-                                </OctalEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>a</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>0</TextToken>
+                            </OctalEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>a</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[\0-\ca]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[\0-\ca]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -15937,8 +15937,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\ca-\0]"
-                    """,
+                @"[\ca-\0]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -15981,39 +15981,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\ca-\cA]"
-                    """,
+                @"[\ca-\cA]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>a</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>A</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>a</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>A</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[\ca-\cA]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[\ca-\cA]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16023,39 +16023,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cA-\ca]"
-                    """,
+                @"[\cA-\ca]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>A</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>a</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>A</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>a</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[\cA-\ca]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[\cA-\ca]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16065,8 +16065,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\u0-\u1]"
-                    """,
+                @"[\u0-\u1]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16111,8 +16111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\u1-\u0]"
-                    """,
+                @"[\u1-\u0]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16157,39 +16157,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\u0000-\u0000]"
-                    """,
+                @"[\u0000-\u0000]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <UnicodeEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>u</TextToken>
-                                  <TextToken>0000</TextToken>
-                                </UnicodeEscape>
-                                <MinusToken>-</MinusToken>
-                                <UnicodeEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>u</TextToken>
-                                  <TextToken>0000</TextToken>
-                                </UnicodeEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <UnicodeEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>u</TextToken>
+                              <TextToken>0000</TextToken>
+                            </UnicodeEscape>
+                            <MinusToken>-</MinusToken>
+                            <UnicodeEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>u</TextToken>
+                              <TextToken>0000</TextToken>
+                            </UnicodeEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..25)" Text="[\u0000-\u0000]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..25)" Text="[\u0000-\u0000]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16199,39 +16199,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\u0000-\u0001]"
-                    """,
+                @"[\u0000-\u0001]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <UnicodeEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>u</TextToken>
-                                  <TextToken>0000</TextToken>
-                                </UnicodeEscape>
-                                <MinusToken>-</MinusToken>
-                                <UnicodeEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>u</TextToken>
-                                  <TextToken>0001</TextToken>
-                                </UnicodeEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <UnicodeEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>u</TextToken>
+                              <TextToken>0000</TextToken>
+                            </UnicodeEscape>
+                            <MinusToken>-</MinusToken>
+                            <UnicodeEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>u</TextToken>
+                              <TextToken>0001</TextToken>
+                            </UnicodeEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..25)" Text="[\u0000-\u0001]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..25)" Text="[\u0000-\u0001]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16241,8 +16241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\u0001-\u0000]"
-                    """,
+                @"[\u0001-\u0000]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16286,37 +16286,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\u0001-a]"
-                    """,
+                @"[\u0001-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <UnicodeEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>u</TextToken>
-                                  <TextToken>0001</TextToken>
-                                </UnicodeEscape>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <UnicodeEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>u</TextToken>
+                              <TextToken>0001</TextToken>
+                            </UnicodeEscape>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..20)" Text="[\u0001-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..20)" Text="[\u0001-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16326,8 +16326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\u0001]"
-                    """,
+                @"[a-\u0001]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16369,35 +16369,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-a]"
-                    """,
+                @"[a-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="[a-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="[a-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16407,8 +16407,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-A]"
-                    """,
+                @"[a-A]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16448,35 +16448,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[A-a]"
-                    """,
+                @"[A-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>A</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>A</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="[A-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="[A-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16486,35 +16486,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-a]"
-                    """,
+                @"[a-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="[a-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="[a-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnoreCase
             );
         }
@@ -16524,8 +16524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-A]"
-                    """,
+                @"[a-A]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16565,35 +16565,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[A-a]"
-                    """,
+                @"[A-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>A</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>A</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..15)" Text="[A-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..15)" Text="[A-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.IgnoreCase
             );
         }
@@ -16603,37 +16603,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\x61]"
-                    """,
+                @"[a-\x61]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <HexEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>x</TextToken>
-                                  <TextToken>61</TextToken>
-                                </HexEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <HexEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>x</TextToken>
+                              <TextToken>61</TextToken>
+                            </HexEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[a-\x61]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[a-\x61]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16643,37 +16643,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\x61-a]"
-                    """,
+                @"[\x61-a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <HexEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>x</TextToken>
-                                  <TextToken>61</TextToken>
-                                </HexEscape>
-                                <MinusToken>-</MinusToken>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <HexEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>x</TextToken>
+                              <TextToken>61</TextToken>
+                            </HexEscape>
+                            <MinusToken>-</MinusToken>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[\x61-a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[\x61-a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16683,8 +16683,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\x60]"
-                    """,
+                @"[a-\x60]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16726,8 +16726,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\x62-a]"
-                    """,
+                @"[\x62-a]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16769,37 +16769,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\x62]"
-                    """,
+                @"[a-\x62]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <MinusToken>-</MinusToken>
-                                <HexEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>x</TextToken>
-                                  <TextToken>62</TextToken>
-                                </HexEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <MinusToken>-</MinusToken>
+                            <HexEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>x</TextToken>
+                              <TextToken>62</TextToken>
+                            </HexEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[a-\x62]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[a-\x62]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16809,8 +16809,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\x62-a]"
-                    """,
+                @"[\x62-a]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -16852,38 +16852,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\3-\cc]"
-                    """,
+                @"[\3-\cc]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>3</TextToken>
-                                </OctalEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>c</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>3</TextToken>
+                            </OctalEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>c</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[\3-\cc]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[\3-\cc]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16893,38 +16893,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cc-\3]"
-                    """,
+                @"[\cc-\3]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>c</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>3</TextToken>
-                                </OctalEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>c</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>3</TextToken>
+                            </OctalEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[\cc-\3]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[\cc-\3]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16934,38 +16934,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\2-\cc]"
-                    """,
+                @"[\2-\cc]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>2</TextToken>
-                                </OctalEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>c</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>2</TextToken>
+                            </OctalEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>c</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[\2-\cc]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[\2-\cc]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -16975,8 +16975,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cc-\2]"
-                    """,
+                @"[\cc-\2]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17019,8 +17019,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\4-\cc]"
-                    """,
+                @"[\4-\cc]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17063,38 +17063,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cc-\4]"
-                    """,
+                @"[\cc-\4]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>c</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <OctalEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>4</TextToken>
-                                </OctalEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>c</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <OctalEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>4</TextToken>
+                            </OctalEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..18)" Text="[\cc-\4]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..18)" Text="[\cc-\4]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17104,39 +17104,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\ca-\cb]"
-                    """,
+                @"[\ca-\cb]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>a</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>b</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>a</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>b</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[\ca-\cb]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[\ca-\cb]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17146,39 +17146,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\ca-\cB]"
-                    """,
+                @"[\ca-\cB]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>a</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>B</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>a</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>B</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[\ca-\cB]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[\ca-\cB]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17188,39 +17188,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cA-\cb]"
-                    """,
+                @"[\cA-\cb]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>A</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>b</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>A</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>b</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[\cA-\cb]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[\cA-\cb]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17230,39 +17230,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cA-\cB]"
-                    """,
+                @"[\cA-\cB]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <CharacterClassRange>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>A</TextToken>
-                                </ControlEscape>
-                                <MinusToken>-</MinusToken>
-                                <ControlEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>c</TextToken>
-                                  <TextToken>B</TextToken>
-                                </ControlEscape>
-                              </CharacterClassRange>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <CharacterClassRange>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>A</TextToken>
+                            </ControlEscape>
+                            <MinusToken>-</MinusToken>
+                            <ControlEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>c</TextToken>
+                              <TextToken>B</TextToken>
+                            </ControlEscape>
+                          </CharacterClassRange>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..19)" Text="[\cA-\cB]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..19)" Text="[\cA-\cB]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17272,8 +17272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cb-\ca]"
-                    """,
+                @"[\cb-\ca]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17317,8 +17317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cb-\cA]"
-                    """,
+                @"[\cb-\cA]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17362,8 +17362,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cB-\ca]"
-                    """,
+                @"[\cB-\ca]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17407,8 +17407,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\cB-\cA]"
-                    """,
+                @"[\cB-\cA]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17452,33 +17452,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\--a]"
-                    """,
+                @"[\--a]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <SimpleEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>-</TextToken>
-                              </SimpleEscape>
-                              <Text>
-                                <TextToken>-a</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <SimpleEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>-</TextToken>
+                          </SimpleEscape>
+                          <Text>
+                            <TextToken>-a</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="[\--a]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="[\--a]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17488,33 +17488,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[\--#]"
-                    """,
+                @"[\--#]"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <SimpleEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <TextToken>-</TextToken>
-                              </SimpleEscape>
-                              <Text>
-                                <TextToken>-#</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
+                          <SimpleEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <TextToken>-</TextToken>
+                          </SimpleEscape>
+                          <Text>
+                            <TextToken>-#</TextToken>
+                          </Text>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="[\--#]" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="[\--#]" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17524,8 +17524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\-]"
-                    """,
+                @"[a-\-]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17567,8 +17567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\-b]"
-                    """,
+                @"[a-\-b]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17613,8 +17613,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\-\-b]"
-                    """,
+                @"[a-\-\-b]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17663,8 +17663,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[b-\-a]"
-                    """,
+                @"[b-\-a]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17709,8 +17709,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[b-\-\-a]"
-                    """,
+                @"[b-\-\-a]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17759,8 +17759,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\-\D]"
-                    """,
+                @"[a-\-\D]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17806,8 +17806,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a-\-\-\D]"
-                    """,
+                @"[a-\-\-\D]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17857,8 +17857,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[a -\-\b]"
-                    """,
+                @"[a -\-\b]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17904,8 +17904,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"[ab-\-a]"
-                    """,
+                @"[ab-\-a]"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -17953,30 +17953,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\1"
-                    """,
+                @"()\1"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..14)" Text="()\1" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..14)" Text="()\1" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -17986,8 +17986,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\2"
-                    """,
+                @"()\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18022,36 +18022,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()\2"
-                    """,
+                @"()()\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..16)" Text="()()\2" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                        <Capture Name="2" Span="[12..14)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..16)" Text="()()\2" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                    <Capture Name="2" Span="[12..14)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -18061,8 +18061,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\1"
-                    """,
+                @"()\1"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18096,8 +18096,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()\2"
-                    """,
+                @"()\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18131,8 +18131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()\2"
-                    """,
+                @"()()\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18171,46 +18171,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?n)\1\2"
-                    """,
+                @"()()(?n)\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..22)" Text="()()(?n)\1\2" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                        <Capture Name="2" Span="[12..14)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..22)" Text="()()(?n)\1\2" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                    <Capture Name="2" Span="[12..14)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -18220,8 +18220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()(?n)()\1\2"
-                    """,
+                @"()(?n)()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18271,8 +18271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?n)()()\1\2"
-                    """,
+                @"(?n)()()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18322,8 +18322,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?n)\1\2"
-                    """,
+                @"()()(?n)\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18373,8 +18373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()(?n)()\1\2"
-                    """,
+                @"()(?n)()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18424,8 +18424,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?n)()()\1\2"
-                    """,
+                @"(?n)()()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18475,46 +18475,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?-n)\1\2"
-                    """,
+                @"()()(?-n)\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..23)" Text="()()(?-n)\1\2" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                        <Capture Name="2" Span="[12..14)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..23)" Text="()()(?-n)\1\2" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                    <Capture Name="2" Span="[12..14)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -18524,46 +18524,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()(?-n)()\1\2"
-                    """,
+                @"()(?-n)()\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..23)" Text="()(?-n)()\1\2" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                        <Capture Name="2" Span="[17..19)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..23)" Text="()(?-n)()\1\2" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                    <Capture Name="2" Span="[17..19)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -18573,46 +18573,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?-n)()()\1\2"
-                    """,
+                @"(?-n)()()\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..23)" Text="(?-n)()()\1\2" />
-                        <Capture Name="1" Span="[15..17)" Text="()" />
-                        <Capture Name="2" Span="[17..19)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..23)" Text="(?-n)()()\1\2" />
+                    <Capture Name="1" Span="[15..17)" Text="()" />
+                    <Capture Name="2" Span="[17..19)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -18622,8 +18622,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?-n)\1\2"
-                    """,
+                @"()()(?-n)\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18673,8 +18673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()(?-n)()\1\2"
-                    """,
+                @"()(?-n)()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18724,46 +18724,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?-n)()()\1\2"
-                    """,
+                @"(?-n)()()\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..23)" Text="(?-n)()()\1\2" />
-                        <Capture Name="1" Span="[15..17)" Text="()" />
-                        <Capture Name="2" Span="[17..19)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..23)" Text="(?-n)()()\1\2" />
+                    <Capture Name="1" Span="[15..17)" Text="()" />
+                    <Capture Name="2" Span="[17..19)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ExplicitCapture
             );
         }
@@ -18773,49 +18773,49 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?n:\1\2)"
-                    """,
+                @"()()(?n:\1\2)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <NestedOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>n</OptionsToken>
+                        <ColonToken>:</ColonToken>
                         <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <NestedOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>n</OptionsToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence>
-                              <BackreferenceEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <NumberToken value="1">1</NumberToken>
-                              </BackreferenceEscape>
-                              <BackreferenceEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <NumberToken value="2">2</NumberToken>
-                              </BackreferenceEscape>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </NestedOptionsGrouping>
+                          <BackreferenceEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <NumberToken value="1">1</NumberToken>
+                          </BackreferenceEscape>
+                          <BackreferenceEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <NumberToken value="2">2</NumberToken>
+                          </BackreferenceEscape>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..23)" Text="()()(?n:\1\2)" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                        <Capture Name="2" Span="[12..14)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </NestedOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..23)" Text="()()(?n:\1\2)" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                    <Capture Name="2" Span="[12..14)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -18825,8 +18825,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?n:\1\2)"
-                    """,
+                @"()()(?n:\1\2)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18879,49 +18879,49 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?-n:\1\2)"
-                    """,
+                @"()()(?-n:\1\2)"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <NestedOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <ColonToken>:</ColonToken>
                         <Sequence>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <NestedOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence>
-                              <BackreferenceEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <NumberToken value="1">1</NumberToken>
-                              </BackreferenceEscape>
-                              <BackreferenceEscape>
-                                <BackslashToken>\</BackslashToken>
-                                <NumberToken value="2">2</NumberToken>
-                              </BackreferenceEscape>
-                            </Sequence>
-                            <CloseParenToken>)</CloseParenToken>
-                          </NestedOptionsGrouping>
+                          <BackreferenceEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <NumberToken value="1">1</NumberToken>
+                          </BackreferenceEscape>
+                          <BackreferenceEscape>
+                            <BackslashToken>\</BackslashToken>
+                            <NumberToken value="2">2</NumberToken>
+                          </BackreferenceEscape>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..24)" Text="()()(?-n:\1\2)" />
-                        <Capture Name="1" Span="[10..12)" Text="()" />
-                        <Capture Name="2" Span="[12..14)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseParenToken>)</CloseParenToken>
+                      </NestedOptionsGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..24)" Text="()()(?-n:\1\2)" />
+                    <Capture Name="1" Span="[10..12)" Text="()" />
+                    <Capture Name="2" Span="[12..14)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -18931,8 +18931,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"()()(?-n:\1\2)"
-                    """,
+                @"()()(?-n:\1\2)"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -18985,48 +18985,48 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?n:)()()\1\2"
-                    """,
+                @"(?n:)()()\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NestedOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>n</OptionsToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </NestedOptionsGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..23)" Text="(?n:)()()\1\2" />
-                        <Capture Name="1" Span="[15..17)" Text="()" />
-                        <Capture Name="2" Span="[17..19)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NestedOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>n</OptionsToken>
+                        <ColonToken>:</ColonToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </NestedOptionsGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..23)" Text="(?n:)()()\1\2" />
+                    <Capture Name="1" Span="[15..17)" Text="()" />
+                    <Capture Name="2" Span="[17..19)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -19036,8 +19036,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?n:)()()\1\2"
-                    """,
+                @"(?n:)()()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -19089,48 +19089,48 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?-n:)()()\1\2"
-                    """,
+                @"(?-n:)()()\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <NestedOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <ColonToken>:</ColonToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </NestedOptionsGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..24)" Text="(?-n:)()()\1\2" />
-                        <Capture Name="1" Span="[16..18)" Text="()" />
-                        <Capture Name="2" Span="[18..20)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <NestedOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <ColonToken>:</ColonToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </NestedOptionsGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..24)" Text="(?-n:)()()\1\2" />
+                    <Capture Name="1" Span="[16..18)" Text="()" />
+                    <Capture Name="2" Span="[18..20)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -19140,8 +19140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?-n:)()()\1\2"
-                    """,
+                @"(?-n:)()()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -19193,52 +19193,52 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?n)(?-n)()()\1\2"
-                    """,
+                @"(?n)(?-n)()()\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..27)" Text="(?n)(?-n)()()\1\2" />
-                        <Capture Name="1" Span="[19..21)" Text="()" />
-                        <Capture Name="2" Span="[21..23)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..27)" Text="(?n)(?-n)()()\1\2" />
+                    <Capture Name="1" Span="[19..21)" Text="()" />
+                    <Capture Name="2" Span="[21..23)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -19248,52 +19248,52 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?n)(?-n)()()\1\2"
-                    """,
+                @"(?n)(?-n)()()\1\2"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <SimpleOptionsGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <OptionsToken>-n</OptionsToken>
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleOptionsGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <SimpleGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <Sequence />
-                            <CloseParenToken>)</CloseParenToken>
-                          </SimpleGrouping>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="1">1</NumberToken>
-                          </BackreferenceEscape>
-                          <BackreferenceEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <NumberToken value="2">2</NumberToken>
-                          </BackreferenceEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..27)" Text="(?n)(?-n)()()\1\2" />
-                        <Capture Name="1" Span="[19..21)" Text="()" />
-                        <Capture Name="2" Span="[21..23)" Text="()" />
-                      </Captures>
-                    </Tree>
-                    """,
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <SimpleOptionsGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <OptionsToken>-n</OptionsToken>
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleOptionsGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <SimpleGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <Sequence />
+                        <CloseParenToken>)</CloseParenToken>
+                      </SimpleGrouping>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="1">1</NumberToken>
+                      </BackreferenceEscape>
+                      <BackreferenceEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <NumberToken value="2">2</NumberToken>
+                      </BackreferenceEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..27)" Text="(?n)(?-n)()()\1\2" />
+                    <Capture Name="1" Span="[19..21)" Text="()" />
+                    <Capture Name="2" Span="[21..23)" Text="()" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.ExplicitCapture
             );
         }
@@ -19303,8 +19303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?-n)(?n)()()\1\2"
-                    """,
+                @"(?-n)(?n)()()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -19360,8 +19360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"(?-n)(?n)()()\1\2"
-                    """,
+                @"(?-n)(?n)()()\1\2"
+                """,
                 $"""
                 <Tree>
                   <CompilationUnit>
@@ -19420,462 +19420,129 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 @"{And(".*[0-9].*[0-9].*", ".*[A-Z].*[A-Z].*", Not(".*(01|12).*"))}"
                 """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <CharacterClassRange>
-                                      <Text>
-                                        <TextToken>0</TextToken>
-                                      </Text>
-                                      <MinusToken>-</MinusToken>
-                                      <Text>
-                                        <TextToken>9</TextToken>
-                                      </Text>
-                                    </CharacterClassRange>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <CharacterClassRange>
-                                      <Text>
-                                        <TextToken>0</TextToken>
-                                      </Text>
-                                      <MinusToken>-</MinusToken>
-                                      <Text>
-                                        <TextToken>9</TextToken>
-                                      </Text>
-                                    </CharacterClassRange>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
+                                <CharacterClassRange>
+                                  <Text>
+                                    <TextToken>0</TextToken>
+                                  </Text>
+                                  <MinusToken>-</MinusToken>
+                                  <Text>
+                                    <TextToken>9</TextToken>
+                                  </Text>
+                                </CharacterClassRange>
                               </Sequence>
-                              <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Alternation>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <ConditionalExpressionGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <QuestionToken>?</QuestionToken>
+                                <CharacterClassRange>
+                                  <Text>
+                                    <TextToken>0</TextToken>
+                                  </Text>
+                                  <MinusToken>-</MinusToken>
+                                  <Text>
+                                    <TextToken>9</TextToken>
+                                  </Text>
+                                </CharacterClassRange>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Alternation>
+                          <Sequence>
+                            <ConditionalExpressionGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <SimpleGrouping>
+                                <OpenParenToken>(</OpenParenToken>
+                                <Sequence>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <CharacterClassRange>
+                                        <Text>
+                                          <TextToken>A</TextToken>
+                                        </Text>
+                                        <MinusToken>-</MinusToken>
+                                        <Text>
+                                          <TextToken>Z</TextToken>
+                                        </Text>
+                                      </CharacterClassRange>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <CharacterClassRange>
+                                        <Text>
+                                          <TextToken>A</TextToken>
+                                        </Text>
+                                        <MinusToken>-</MinusToken>
+                                        <Text>
+                                          <TextToken>Z</TextToken>
+                                        </Text>
+                                      </CharacterClassRange>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                </Sequence>
+                                <CloseParenToken>)</CloseParenToken>
+                              </SimpleGrouping>
+                              <Alternation>
+                                <Sequence>
                                   <SimpleGrouping>
                                     <OpenParenToken>(</OpenParenToken>
-                                    <Sequence>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <CharacterClassRange>
-                                            <Text>
-                                              <TextToken>A</TextToken>
-                                            </Text>
-                                            <MinusToken>-</MinusToken>
-                                            <Text>
-                                              <TextToken>Z</TextToken>
-                                            </Text>
-                                          </CharacterClassRange>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <CharacterClassRange>
-                                            <Text>
-                                              <TextToken>A</TextToken>
-                                            </Text>
-                                            <MinusToken>-</MinusToken>
-                                            <Text>
-                                              <TextToken>Z</TextToken>
-                                            </Text>
-                                          </CharacterClassRange>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                    </Sequence>
-                                    <CloseParenToken>)</CloseParenToken>
-                                  </SimpleGrouping>
-                                  <Alternation>
-                                    <Sequence>
-                                      <SimpleGrouping>
-                                        <OpenParenToken>(</OpenParenToken>
-                                        <Sequence>
-                                          <ConditionalExpressionGrouping>
-                                            <OpenParenToken>(</OpenParenToken>
-                                            <QuestionToken>?</QuestionToken>
-                                            <SimpleGrouping>
-                                              <OpenParenToken>(</OpenParenToken>
-                                              <Sequence>
-                                                <ZeroOrMoreQuantifier>
-                                                  <Wildcard>
-                                                    <DotToken>.</DotToken>
-                                                  </Wildcard>
-                                                  <AsteriskToken>*</AsteriskToken>
-                                                </ZeroOrMoreQuantifier>
-                                                <SimpleGrouping>
-                                                  <OpenParenToken>(</OpenParenToken>
-                                                  <Alternation>
-                                                    <Sequence>
-                                                      <Text>
-                                                        <TextToken>01</TextToken>
-                                                      </Text>
-                                                    </Sequence>
-                                                    <BarToken>|</BarToken>
-                                                    <Sequence>
-                                                      <Text>
-                                                        <TextToken>12</TextToken>
-                                                      </Text>
-                                                    </Sequence>
-                                                  </Alternation>
-                                                  <CloseParenToken>)</CloseParenToken>
-                                                </SimpleGrouping>
-                                                <ZeroOrMoreQuantifier>
-                                                  <Wildcard>
-                                                    <DotToken>.</DotToken>
-                                                  </Wildcard>
-                                                  <AsteriskToken>*</AsteriskToken>
-                                                </ZeroOrMoreQuantifier>
-                                              </Sequence>
-                                              <CloseParenToken>)</CloseParenToken>
-                                            </SimpleGrouping>
-                                            <Alternation>
-                                              <Sequence>
-                                                <CharacterClass>
-                                                  <OpenBracketToken>[</OpenBracketToken>
-                                                  <Sequence>
-                                                    <Text>
-                                                      <TextToken>0</TextToken>
-                                                    </Text>
-                                                    <CharacterClassSubtraction>
-                                                      <MinusToken>-</MinusToken>
-                                                      <CharacterClass>
-                                                        <OpenBracketToken>[</OpenBracketToken>
-                                                        <Sequence>
-                                                          <Text>
-                                                            <TextToken>0</TextToken>
-                                                          </Text>
-                                                        </Sequence>
-                                                        <CloseBracketToken>]</CloseBracketToken>
-                                                      </CharacterClass>
-                                                    </CharacterClassSubtraction>
-                                                  </Sequence>
-                                                  <CloseBracketToken>]</CloseBracketToken>
-                                                </CharacterClass>
-                                              </Sequence>
-                                              <BarToken>|</BarToken>
-                                              <Sequence>
-                                                <ZeroOrMoreQuantifier>
-                                                  <Wildcard>
-                                                    <DotToken>.</DotToken>
-                                                  </Wildcard>
-                                                  <AsteriskToken>*</AsteriskToken>
-                                                </ZeroOrMoreQuantifier>
-                                              </Sequence>
-                                            </Alternation>
-                                            <CloseParenToken>)</CloseParenToken>
-                                          </ConditionalExpressionGrouping>
-                                        </Sequence>
-                                        <CloseParenToken>)</CloseParenToken>
-                                      </SimpleGrouping>
-                                    </Sequence>
-                                    <BarToken>|</BarToken>
-                                    <Sequence>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                          <CharacterClassSubtraction>
-                                            <MinusToken>-</MinusToken>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <Text>
-                                                  <TextToken>0</TextToken>
-                                                </Text>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                          </CharacterClassSubtraction>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                    </Sequence>
-                                  </Alternation>
-                                  <CloseParenToken>)</CloseParenToken>
-                                </ConditionalExpressionGrouping>
-                              </Sequence>
-                              <BarToken>|</BarToken>
-                              <Sequence>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>0</TextToken>
-                                    </Text>
-                                    <CharacterClassSubtraction>
-                                      <MinusToken>-</MinusToken>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                    </CharacterClassSubtraction>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </Sequence>
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..96)" Text="(?(.*[0-9].*[0-9].*)(?(.*[A-Z].*[A-Z].*)((?(.*(01|12).*)[0-[0]]|.*))|[0-[0]])|[0-[0]])" />
-                        <Capture Name="1" Span="[50..78)" Text="((?(.*(01|12).*)[0-[0]]|.*))" />
-                        <Capture Name="2" Span="[56..63)" Text="(01|12)" />
-                      </Captures>
-                    </Tree>
-                    """,
-                RegexOptions.None
-            );
-        }
-
-        [Fact]
-        public void TestComplex2()
-        {
-            Test(
-                $"""
-                @"{And(".*a.*", ".*b.*")}"
-                """,
-                """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
-                              <Sequence>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                                <Text>
-                                  <TextToken>a</TextToken>
-                                </Text>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                              </Sequence>
-                              <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Alternation>
-                              <Sequence>
-                                <SimpleGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <Sequence>
-                                    <ZeroOrMoreQuantifier>
-                                      <Wildcard>
-                                        <DotToken>.</DotToken>
-                                      </Wildcard>
-                                      <AsteriskToken>*</AsteriskToken>
-                                    </ZeroOrMoreQuantifier>
-                                    <Text>
-                                      <TextToken>b</TextToken>
-                                    </Text>
-                                    <ZeroOrMoreQuantifier>
-                                      <Wildcard>
-                                        <DotToken>.</DotToken>
-                                      </Wildcard>
-                                      <AsteriskToken>*</AsteriskToken>
-                                    </ZeroOrMoreQuantifier>
-                                  </Sequence>
-                                  <CloseParenToken>)</CloseParenToken>
-                                </SimpleGrouping>
-                              </Sequence>
-                              <BarToken>|</BarToken>
-                              <Sequence>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>0</TextToken>
-                                    </Text>
-                                    <CharacterClassSubtraction>
-                                      <MinusToken>-</MinusToken>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                    </CharacterClassSubtraction>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                              </Sequence>
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..35)" Text="(?(.*a.*)(.*b.*)|[0-[0]])" />
-                        <Capture Name="1" Span="[19..26)" Text="(.*b.*)" />
-                      </Captures>
-                    </Tree>
-                    """,
-                RegexOptions.None
-            );
-        }
-
-        [Fact]
-        public void TestComplex3()
-        {
-            Test(
-                $"""
-                @"{And(".*[a-z].*", ".*[A-Z].*", ".*[0-9].*", ".{2,4}")}"
-                """,
-                """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
-                              <Sequence>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <CharacterClassRange>
-                                      <Text>
-                                        <TextToken>a</TextToken>
-                                      </Text>
-                                      <MinusToken>-</MinusToken>
-                                      <Text>
-                                        <TextToken>z</TextToken>
-                                      </Text>
-                                    </CharacterClassRange>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                              </Sequence>
-                              <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Alternation>
-                              <Sequence>
-                                <ConditionalExpressionGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <QuestionToken>?</QuestionToken>
-                                  <SimpleGrouping>
-                                    <OpenParenToken>(</OpenParenToken>
-                                    <Sequence>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <CharacterClassRange>
-                                            <Text>
-                                              <TextToken>A</TextToken>
-                                            </Text>
-                                            <MinusToken>-</MinusToken>
-                                            <Text>
-                                              <TextToken>Z</TextToken>
-                                            </Text>
-                                          </CharacterClassRange>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                    </Sequence>
-                                    <CloseParenToken>)</CloseParenToken>
-                                  </SimpleGrouping>
-                                  <Alternation>
                                     <Sequence>
                                       <ConditionalExpressionGrouping>
                                         <OpenParenToken>(</OpenParenToken>
@@ -19889,21 +19556,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                                               </Wildcard>
                                               <AsteriskToken>*</AsteriskToken>
                                             </ZeroOrMoreQuantifier>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <CharacterClassRange>
+                                            <SimpleGrouping>
+                                              <OpenParenToken>(</OpenParenToken>
+                                              <Alternation>
+                                                <Sequence>
                                                   <Text>
-                                                    <TextToken>0</TextToken>
+                                                    <TextToken>01</TextToken>
                                                   </Text>
-                                                  <MinusToken>-</MinusToken>
+                                                </Sequence>
+                                                <BarToken>|</BarToken>
+                                                <Sequence>
                                                   <Text>
-                                                    <TextToken>9</TextToken>
+                                                    <TextToken>12</TextToken>
                                                   </Text>
-                                                </CharacterClassRange>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
+                                                </Sequence>
+                                              </Alternation>
+                                              <CloseParenToken>)</CloseParenToken>
+                                            </SimpleGrouping>
                                             <ZeroOrMoreQuantifier>
                                               <Wildcard>
                                                 <DotToken>.</DotToken>
@@ -19914,25 +19583,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                                           <CloseParenToken>)</CloseParenToken>
                                         </SimpleGrouping>
                                         <Alternation>
-                                          <Sequence>
-                                            <SimpleGrouping>
-                                              <OpenParenToken>(</OpenParenToken>
-                                              <Sequence>
-                                                <ClosedRangeNumericQuantifier>
-                                                  <Wildcard>
-                                                    <DotToken>.</DotToken>
-                                                  </Wildcard>
-                                                  <OpenBraceToken>{</OpenBraceToken>
-                                                  <NumberToken value="2">2</NumberToken>
-                                                  <CommaToken>,</CommaToken>
-                                                  <NumberToken value="4">4</NumberToken>
-                                                  <CloseBraceToken>}</CloseBraceToken>
-                                                </ClosedRangeNumericQuantifier>
-                                              </Sequence>
-                                              <CloseParenToken>)</CloseParenToken>
-                                            </SimpleGrouping>
-                                          </Sequence>
-                                          <BarToken>|</BarToken>
                                           <Sequence>
                                             <CharacterClass>
                                               <OpenBracketToken>[</OpenBracketToken>
@@ -19956,74 +19606,424 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                                               <CloseBracketToken>]</CloseBracketToken>
                                             </CharacterClass>
                                           </Sequence>
+                                          <BarToken>|</BarToken>
+                                          <Sequence>
+                                            <ZeroOrMoreQuantifier>
+                                              <Wildcard>
+                                                <DotToken>.</DotToken>
+                                              </Wildcard>
+                                              <AsteriskToken>*</AsteriskToken>
+                                            </ZeroOrMoreQuantifier>
+                                          </Sequence>
                                         </Alternation>
                                         <CloseParenToken>)</CloseParenToken>
                                       </ConditionalExpressionGrouping>
                                     </Sequence>
-                                    <BarToken>|</BarToken>
+                                    <CloseParenToken>)</CloseParenToken>
+                                  </SimpleGrouping>
+                                </Sequence>
+                                <BarToken>|</BarToken>
+                                <Sequence>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
                                     <Sequence>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                          <CharacterClassSubtraction>
-                                            <MinusToken>-</MinusToken>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <Text>
-                                                  <TextToken>0</TextToken>
-                                                </Text>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                          </CharacterClassSubtraction>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                      <CharacterClassSubtraction>
+                                        <MinusToken>-</MinusToken>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
+                                          <Sequence>
+                                            <Text>
+                                              <TextToken>0</TextToken>
+                                            </Text>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                      </CharacterClassSubtraction>
                                     </Sequence>
-                                  </Alternation>
-                                  <CloseParenToken>)</CloseParenToken>
-                                </ConditionalExpressionGrouping>
-                              </Sequence>
-                              <BarToken>|</BarToken>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </Sequence>
+                              </Alternation>
+                              <CloseParenToken>)</CloseParenToken>
+                            </ConditionalExpressionGrouping>
+                          </Sequence>
+                          <BarToken>|</BarToken>
+                          <Sequence>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>0</TextToken>
-                                    </Text>
-                                    <CharacterClassSubtraction>
-                                      <MinusToken>-</MinusToken>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                    </CharacterClassSubtraction>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
+                                <Text>
+                                  <TextToken>0</TextToken>
+                                </Text>
+                                <CharacterClassSubtraction>
+                                  <MinusToken>-</MinusToken>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </CharacterClassSubtraction>
                               </Sequence>
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..84)" Text="(?(.*[a-z].*)(?(.*[A-Z].*)(?(.*[0-9].*)(.{2,4})|[0-[0]])|[0-[0]])|[0-[0]])" />
-                        <Capture Name="1" Span="[49..57)" Text="(.{2,4})" />
-                      </Captures>
-                    </Tree>
-                    """,
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </Sequence>
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..96)" Text="(?(.*[0-9].*[0-9].*)(?(.*[A-Z].*[A-Z].*)((?(.*(01|12).*)[0-[0]]|.*))|[0-[0]])|[0-[0]])" />
+                    <Capture Name="1" Span="[50..78)" Text="((?(.*(01|12).*)[0-[0]]|.*))" />
+                    <Capture Name="2" Span="[56..63)" Text="(01|12)" />
+                  </Captures>
+                </Tree>
+                """,
+                RegexOptions.None
+            );
+        }
+
+        [Fact]
+        public void TestComplex2()
+        {
+            Test(
+                $"""
+                @"{And(".*a.*", ".*b.*")}"
+                """,
+                """
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                            <Text>
+                              <TextToken>a</TextToken>
+                            </Text>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Alternation>
+                          <Sequence>
+                            <SimpleGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <Sequence>
+                                <ZeroOrMoreQuantifier>
+                                  <Wildcard>
+                                    <DotToken>.</DotToken>
+                                  </Wildcard>
+                                  <AsteriskToken>*</AsteriskToken>
+                                </ZeroOrMoreQuantifier>
+                                <Text>
+                                  <TextToken>b</TextToken>
+                                </Text>
+                                <ZeroOrMoreQuantifier>
+                                  <Wildcard>
+                                    <DotToken>.</DotToken>
+                                  </Wildcard>
+                                  <AsteriskToken>*</AsteriskToken>
+                                </ZeroOrMoreQuantifier>
+                              </Sequence>
+                              <CloseParenToken>)</CloseParenToken>
+                            </SimpleGrouping>
+                          </Sequence>
+                          <BarToken>|</BarToken>
+                          <Sequence>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <Text>
+                                  <TextToken>0</TextToken>
+                                </Text>
+                                <CharacterClassSubtraction>
+                                  <MinusToken>-</MinusToken>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </CharacterClassSubtraction>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </Sequence>
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..35)" Text="(?(.*a.*)(.*b.*)|[0-[0]])" />
+                    <Capture Name="1" Span="[19..26)" Text="(.*b.*)" />
+                  </Captures>
+                </Tree>
+                """,
+                RegexOptions.None
+            );
+        }
+
+        [Fact]
+        public void TestComplex3()
+        {
+            Test(
+                $"""
+                @"{And(".*[a-z].*", ".*[A-Z].*", ".*[0-9].*", ".{2,4}")}"
+                """,
+                """
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <CharacterClassRange>
+                                  <Text>
+                                    <TextToken>a</TextToken>
+                                  </Text>
+                                  <MinusToken>-</MinusToken>
+                                  <Text>
+                                    <TextToken>z</TextToken>
+                                  </Text>
+                                </CharacterClassRange>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Alternation>
+                          <Sequence>
+                            <ConditionalExpressionGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <SimpleGrouping>
+                                <OpenParenToken>(</OpenParenToken>
+                                <Sequence>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <CharacterClassRange>
+                                        <Text>
+                                          <TextToken>A</TextToken>
+                                        </Text>
+                                        <MinusToken>-</MinusToken>
+                                        <Text>
+                                          <TextToken>Z</TextToken>
+                                        </Text>
+                                      </CharacterClassRange>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                </Sequence>
+                                <CloseParenToken>)</CloseParenToken>
+                              </SimpleGrouping>
+                              <Alternation>
+                                <Sequence>
+                                  <ConditionalExpressionGrouping>
+                                    <OpenParenToken>(</OpenParenToken>
+                                    <QuestionToken>?</QuestionToken>
+                                    <SimpleGrouping>
+                                      <OpenParenToken>(</OpenParenToken>
+                                      <Sequence>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
+                                          <Sequence>
+                                            <CharacterClassRange>
+                                              <Text>
+                                                <TextToken>0</TextToken>
+                                              </Text>
+                                              <MinusToken>-</MinusToken>
+                                              <Text>
+                                                <TextToken>9</TextToken>
+                                              </Text>
+                                            </CharacterClassRange>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                      </Sequence>
+                                      <CloseParenToken>)</CloseParenToken>
+                                    </SimpleGrouping>
+                                    <Alternation>
+                                      <Sequence>
+                                        <SimpleGrouping>
+                                          <OpenParenToken>(</OpenParenToken>
+                                          <Sequence>
+                                            <ClosedRangeNumericQuantifier>
+                                              <Wildcard>
+                                                <DotToken>.</DotToken>
+                                              </Wildcard>
+                                              <OpenBraceToken>{</OpenBraceToken>
+                                              <NumberToken value="2">2</NumberToken>
+                                              <CommaToken>,</CommaToken>
+                                              <NumberToken value="4">4</NumberToken>
+                                              <CloseBraceToken>}</CloseBraceToken>
+                                            </ClosedRangeNumericQuantifier>
+                                          </Sequence>
+                                          <CloseParenToken>)</CloseParenToken>
+                                        </SimpleGrouping>
+                                      </Sequence>
+                                      <BarToken>|</BarToken>
+                                      <Sequence>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
+                                          <Sequence>
+                                            <Text>
+                                              <TextToken>0</TextToken>
+                                            </Text>
+                                            <CharacterClassSubtraction>
+                                              <MinusToken>-</MinusToken>
+                                              <CharacterClass>
+                                                <OpenBracketToken>[</OpenBracketToken>
+                                                <Sequence>
+                                                  <Text>
+                                                    <TextToken>0</TextToken>
+                                                  </Text>
+                                                </Sequence>
+                                                <CloseBracketToken>]</CloseBracketToken>
+                                              </CharacterClass>
+                                            </CharacterClassSubtraction>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                      </Sequence>
+                                    </Alternation>
+                                    <CloseParenToken>)</CloseParenToken>
+                                  </ConditionalExpressionGrouping>
+                                </Sequence>
+                                <BarToken>|</BarToken>
+                                <Sequence>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                      <CharacterClassSubtraction>
+                                        <MinusToken>-</MinusToken>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
+                                          <Sequence>
+                                            <Text>
+                                              <TextToken>0</TextToken>
+                                            </Text>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                      </CharacterClassSubtraction>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </Sequence>
+                              </Alternation>
+                              <CloseParenToken>)</CloseParenToken>
+                            </ConditionalExpressionGrouping>
+                          </Sequence>
+                          <BarToken>|</BarToken>
+                          <Sequence>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
+                              <Sequence>
+                                <Text>
+                                  <TextToken>0</TextToken>
+                                </Text>
+                                <CharacterClassSubtraction>
+                                  <MinusToken>-</MinusToken>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </CharacterClassSubtraction>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </Sequence>
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..84)" Text="(?(.*[a-z].*)(?(.*[A-Z].*)(?(.*[0-9].*)(.{2,4})|[0-[0]])|[0-[0]])|[0-[0]])" />
+                    <Capture Name="1" Span="[49..57)" Text="(.{2,4})" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -20037,402 +20037,402 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                         Not(".*(01|12|23|34|45|56|67|78|89).*"))}"
                 """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <CharacterClassRange>
-                                      <Text>
-                                        <TextToken>a</TextToken>
-                                      </Text>
-                                      <MinusToken>-</MinusToken>
-                                      <Text>
-                                        <TextToken>z</TextToken>
-                                      </Text>
-                                    </CharacterClassRange>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
+                                <CharacterClassRange>
+                                  <Text>
+                                    <TextToken>a</TextToken>
+                                  </Text>
+                                  <MinusToken>-</MinusToken>
+                                  <Text>
+                                    <TextToken>z</TextToken>
+                                  </Text>
+                                </CharacterClassRange>
                               </Sequence>
-                              <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Alternation>
-                              <Sequence>
-                                <ConditionalExpressionGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <QuestionToken>?</QuestionToken>
-                                  <SimpleGrouping>
-                                    <OpenParenToken>(</OpenParenToken>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Alternation>
+                          <Sequence>
+                            <ConditionalExpressionGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <SimpleGrouping>
+                                <OpenParenToken>(</OpenParenToken>
+                                <Sequence>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
                                     <Sequence>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <CharacterClassRange>
-                                            <Text>
-                                              <TextToken>A</TextToken>
-                                            </Text>
-                                            <MinusToken>-</MinusToken>
-                                            <Text>
-                                              <TextToken>Z</TextToken>
-                                            </Text>
-                                          </CharacterClassRange>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
+                                      <CharacterClassRange>
+                                        <Text>
+                                          <TextToken>A</TextToken>
+                                        </Text>
+                                        <MinusToken>-</MinusToken>
+                                        <Text>
+                                          <TextToken>Z</TextToken>
+                                        </Text>
+                                      </CharacterClassRange>
                                     </Sequence>
-                                    <CloseParenToken>)</CloseParenToken>
-                                  </SimpleGrouping>
-                                  <Alternation>
-                                    <Sequence>
-                                      <ConditionalExpressionGrouping>
-                                        <OpenParenToken>(</OpenParenToken>
-                                        <QuestionToken>?</QuestionToken>
-                                        <SimpleGrouping>
-                                          <OpenParenToken>(</OpenParenToken>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                </Sequence>
+                                <CloseParenToken>)</CloseParenToken>
+                              </SimpleGrouping>
+                              <Alternation>
+                                <Sequence>
+                                  <ConditionalExpressionGrouping>
+                                    <OpenParenToken>(</OpenParenToken>
+                                    <QuestionToken>?</QuestionToken>
+                                    <SimpleGrouping>
+                                      <OpenParenToken>(</OpenParenToken>
+                                      <Sequence>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
                                           <Sequence>
-                                            <ZeroOrMoreQuantifier>
-                                              <Wildcard>
-                                                <DotToken>.</DotToken>
-                                              </Wildcard>
-                                              <AsteriskToken>*</AsteriskToken>
-                                            </ZeroOrMoreQuantifier>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <CharacterClassRange>
-                                                  <Text>
-                                                    <TextToken>0</TextToken>
-                                                  </Text>
-                                                  <MinusToken>-</MinusToken>
-                                                  <Text>
-                                                    <TextToken>9</TextToken>
-                                                  </Text>
-                                                </CharacterClassRange>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                            <ZeroOrMoreQuantifier>
-                                              <Wildcard>
-                                                <DotToken>.</DotToken>
-                                              </Wildcard>
-                                              <AsteriskToken>*</AsteriskToken>
-                                            </ZeroOrMoreQuantifier>
+                                            <CharacterClassRange>
+                                              <Text>
+                                                <TextToken>0</TextToken>
+                                              </Text>
+                                              <MinusToken>-</MinusToken>
+                                              <Text>
+                                                <TextToken>9</TextToken>
+                                              </Text>
+                                            </CharacterClassRange>
                                           </Sequence>
-                                          <CloseParenToken>)</CloseParenToken>
-                                        </SimpleGrouping>
-                                        <Alternation>
-                                          <Sequence>
-                                            <ConditionalExpressionGrouping>
-                                              <OpenParenToken>(</OpenParenToken>
-                                              <QuestionToken>?</QuestionToken>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                      </Sequence>
+                                      <CloseParenToken>)</CloseParenToken>
+                                    </SimpleGrouping>
+                                    <Alternation>
+                                      <Sequence>
+                                        <ConditionalExpressionGrouping>
+                                          <OpenParenToken>(</OpenParenToken>
+                                          <QuestionToken>?</QuestionToken>
+                                          <SimpleGrouping>
+                                            <OpenParenToken>(</OpenParenToken>
+                                            <Sequence>
+                                              <ClosedRangeNumericQuantifier>
+                                                <Wildcard>
+                                                  <DotToken>.</DotToken>
+                                                </Wildcard>
+                                                <OpenBraceToken>{</OpenBraceToken>
+                                                <NumberToken value="4">4</NumberToken>
+                                                <CommaToken>,</CommaToken>
+                                                <NumberToken value="8">8</NumberToken>
+                                                <CloseBraceToken>}</CloseBraceToken>
+                                              </ClosedRangeNumericQuantifier>
+                                            </Sequence>
+                                            <CloseParenToken>)</CloseParenToken>
+                                          </SimpleGrouping>
+                                          <Alternation>
+                                            <Sequence>
                                               <SimpleGrouping>
                                                 <OpenParenToken>(</OpenParenToken>
                                                 <Sequence>
-                                                  <ClosedRangeNumericQuantifier>
-                                                    <Wildcard>
-                                                      <DotToken>.</DotToken>
-                                                    </Wildcard>
-                                                    <OpenBraceToken>{</OpenBraceToken>
-                                                    <NumberToken value="4">4</NumberToken>
-                                                    <CommaToken>,</CommaToken>
-                                                    <NumberToken value="8">8</NumberToken>
-                                                    <CloseBraceToken>}</CloseBraceToken>
-                                                  </ClosedRangeNumericQuantifier>
-                                                </Sequence>
-                                                <CloseParenToken>)</CloseParenToken>
-                                              </SimpleGrouping>
-                                              <Alternation>
-                                                <Sequence>
-                                                  <SimpleGrouping>
+                                                  <ConditionalExpressionGrouping>
                                                     <OpenParenToken>(</OpenParenToken>
-                                                    <Sequence>
-                                                      <ConditionalExpressionGrouping>
-                                                        <OpenParenToken>(</OpenParenToken>
-                                                        <QuestionToken>?</QuestionToken>
+                                                    <QuestionToken>?</QuestionToken>
+                                                    <SimpleGrouping>
+                                                      <OpenParenToken>(</OpenParenToken>
+                                                      <Sequence>
+                                                        <ZeroOrMoreQuantifier>
+                                                          <Wildcard>
+                                                            <DotToken>.</DotToken>
+                                                          </Wildcard>
+                                                          <AsteriskToken>*</AsteriskToken>
+                                                        </ZeroOrMoreQuantifier>
                                                         <SimpleGrouping>
                                                           <OpenParenToken>(</OpenParenToken>
-                                                          <Sequence>
-                                                            <ZeroOrMoreQuantifier>
-                                                              <Wildcard>
-                                                                <DotToken>.</DotToken>
-                                                              </Wildcard>
-                                                              <AsteriskToken>*</AsteriskToken>
-                                                            </ZeroOrMoreQuantifier>
-                                                            <SimpleGrouping>
-                                                              <OpenParenToken>(</OpenParenToken>
+                                                          <Alternation>
+                                                            <Alternation>
                                                               <Alternation>
                                                                 <Alternation>
                                                                   <Alternation>
                                                                     <Alternation>
                                                                       <Alternation>
                                                                         <Alternation>
-                                                                          <Alternation>
-                                                                            <Alternation>
-                                                                              <Sequence>
-                                                                                <Text>
-                                                                                  <TextToken>01</TextToken>
-                                                                                </Text>
-                                                                              </Sequence>
-                                                                              <BarToken>|</BarToken>
-                                                                              <Sequence>
-                                                                                <Text>
-                                                                                  <TextToken>12</TextToken>
-                                                                                </Text>
-                                                                              </Sequence>
-                                                                            </Alternation>
-                                                                            <BarToken>|</BarToken>
-                                                                            <Sequence>
-                                                                              <Text>
-                                                                                <TextToken>23</TextToken>
-                                                                              </Text>
-                                                                            </Sequence>
-                                                                          </Alternation>
+                                                                          <Sequence>
+                                                                            <Text>
+                                                                              <TextToken>01</TextToken>
+                                                                            </Text>
+                                                                          </Sequence>
                                                                           <BarToken>|</BarToken>
                                                                           <Sequence>
                                                                             <Text>
-                                                                              <TextToken>34</TextToken>
+                                                                              <TextToken>12</TextToken>
                                                                             </Text>
                                                                           </Sequence>
                                                                         </Alternation>
                                                                         <BarToken>|</BarToken>
                                                                         <Sequence>
                                                                           <Text>
-                                                                            <TextToken>45</TextToken>
+                                                                            <TextToken>23</TextToken>
                                                                           </Text>
                                                                         </Sequence>
                                                                       </Alternation>
                                                                       <BarToken>|</BarToken>
                                                                       <Sequence>
                                                                         <Text>
-                                                                          <TextToken>56</TextToken>
+                                                                          <TextToken>34</TextToken>
                                                                         </Text>
                                                                       </Sequence>
                                                                     </Alternation>
                                                                     <BarToken>|</BarToken>
                                                                     <Sequence>
                                                                       <Text>
-                                                                        <TextToken>67</TextToken>
+                                                                        <TextToken>45</TextToken>
                                                                       </Text>
                                                                     </Sequence>
                                                                   </Alternation>
                                                                   <BarToken>|</BarToken>
                                                                   <Sequence>
                                                                     <Text>
-                                                                      <TextToken>78</TextToken>
+                                                                      <TextToken>56</TextToken>
                                                                     </Text>
                                                                   </Sequence>
                                                                 </Alternation>
                                                                 <BarToken>|</BarToken>
                                                                 <Sequence>
                                                                   <Text>
-                                                                    <TextToken>89</TextToken>
+                                                                    <TextToken>67</TextToken>
                                                                   </Text>
                                                                 </Sequence>
                                                               </Alternation>
-                                                              <CloseParenToken>)</CloseParenToken>
-                                                            </SimpleGrouping>
-                                                            <ZeroOrMoreQuantifier>
-                                                              <Wildcard>
-                                                                <DotToken>.</DotToken>
-                                                              </Wildcard>
-                                                              <AsteriskToken>*</AsteriskToken>
-                                                            </ZeroOrMoreQuantifier>
-                                                          </Sequence>
-                                                          <CloseParenToken>)</CloseParenToken>
-                                                        </SimpleGrouping>
-                                                        <Alternation>
-                                                          <Sequence>
-                                                            <CharacterClass>
-                                                              <OpenBracketToken>[</OpenBracketToken>
+                                                              <BarToken>|</BarToken>
                                                               <Sequence>
                                                                 <Text>
-                                                                  <TextToken>0</TextToken>
+                                                                  <TextToken>78</TextToken>
                                                                 </Text>
-                                                                <CharacterClassSubtraction>
-                                                                  <MinusToken>-</MinusToken>
-                                                                  <CharacterClass>
-                                                                    <OpenBracketToken>[</OpenBracketToken>
-                                                                    <Sequence>
-                                                                      <Text>
-                                                                        <TextToken>0</TextToken>
-                                                                      </Text>
-                                                                    </Sequence>
-                                                                    <CloseBracketToken>]</CloseBracketToken>
-                                                                  </CharacterClass>
-                                                                </CharacterClassSubtraction>
                                                               </Sequence>
-                                                              <CloseBracketToken>]</CloseBracketToken>
-                                                            </CharacterClass>
-                                                          </Sequence>
-                                                          <BarToken>|</BarToken>
-                                                          <Sequence>
-                                                            <ZeroOrMoreQuantifier>
-                                                              <Wildcard>
-                                                                <DotToken>.</DotToken>
-                                                              </Wildcard>
-                                                              <AsteriskToken>*</AsteriskToken>
-                                                            </ZeroOrMoreQuantifier>
-                                                          </Sequence>
-                                                        </Alternation>
-                                                        <CloseParenToken>)</CloseParenToken>
-                                                      </ConditionalExpressionGrouping>
-                                                    </Sequence>
-                                                    <CloseParenToken>)</CloseParenToken>
-                                                  </SimpleGrouping>
-                                                </Sequence>
-                                                <BarToken>|</BarToken>
-                                                <Sequence>
-                                                  <CharacterClass>
-                                                    <OpenBracketToken>[</OpenBracketToken>
-                                                    <Sequence>
-                                                      <Text>
-                                                        <TextToken>0</TextToken>
-                                                      </Text>
-                                                      <CharacterClassSubtraction>
-                                                        <MinusToken>-</MinusToken>
+                                                            </Alternation>
+                                                            <BarToken>|</BarToken>
+                                                            <Sequence>
+                                                              <Text>
+                                                                <TextToken>89</TextToken>
+                                                              </Text>
+                                                            </Sequence>
+                                                          </Alternation>
+                                                          <CloseParenToken>)</CloseParenToken>
+                                                        </SimpleGrouping>
+                                                        <ZeroOrMoreQuantifier>
+                                                          <Wildcard>
+                                                            <DotToken>.</DotToken>
+                                                          </Wildcard>
+                                                          <AsteriskToken>*</AsteriskToken>
+                                                        </ZeroOrMoreQuantifier>
+                                                      </Sequence>
+                                                      <CloseParenToken>)</CloseParenToken>
+                                                    </SimpleGrouping>
+                                                    <Alternation>
+                                                      <Sequence>
                                                         <CharacterClass>
                                                           <OpenBracketToken>[</OpenBracketToken>
                                                           <Sequence>
                                                             <Text>
                                                               <TextToken>0</TextToken>
                                                             </Text>
+                                                            <CharacterClassSubtraction>
+                                                              <MinusToken>-</MinusToken>
+                                                              <CharacterClass>
+                                                                <OpenBracketToken>[</OpenBracketToken>
+                                                                <Sequence>
+                                                                  <Text>
+                                                                    <TextToken>0</TextToken>
+                                                                  </Text>
+                                                                </Sequence>
+                                                                <CloseBracketToken>]</CloseBracketToken>
+                                                              </CharacterClass>
+                                                            </CharacterClassSubtraction>
                                                           </Sequence>
                                                           <CloseBracketToken>]</CloseBracketToken>
                                                         </CharacterClass>
-                                                      </CharacterClassSubtraction>
-                                                    </Sequence>
-                                                    <CloseBracketToken>]</CloseBracketToken>
-                                                  </CharacterClass>
+                                                      </Sequence>
+                                                      <BarToken>|</BarToken>
+                                                      <Sequence>
+                                                        <ZeroOrMoreQuantifier>
+                                                          <Wildcard>
+                                                            <DotToken>.</DotToken>
+                                                          </Wildcard>
+                                                          <AsteriskToken>*</AsteriskToken>
+                                                        </ZeroOrMoreQuantifier>
+                                                      </Sequence>
+                                                    </Alternation>
+                                                    <CloseParenToken>)</CloseParenToken>
+                                                  </ConditionalExpressionGrouping>
                                                 </Sequence>
-                                              </Alternation>
-                                              <CloseParenToken>)</CloseParenToken>
-                                            </ConditionalExpressionGrouping>
-                                          </Sequence>
-                                          <BarToken>|</BarToken>
+                                                <CloseParenToken>)</CloseParenToken>
+                                              </SimpleGrouping>
+                                            </Sequence>
+                                            <BarToken>|</BarToken>
+                                            <Sequence>
+                                              <CharacterClass>
+                                                <OpenBracketToken>[</OpenBracketToken>
+                                                <Sequence>
+                                                  <Text>
+                                                    <TextToken>0</TextToken>
+                                                  </Text>
+                                                  <CharacterClassSubtraction>
+                                                    <MinusToken>-</MinusToken>
+                                                    <CharacterClass>
+                                                      <OpenBracketToken>[</OpenBracketToken>
+                                                      <Sequence>
+                                                        <Text>
+                                                          <TextToken>0</TextToken>
+                                                        </Text>
+                                                      </Sequence>
+                                                      <CloseBracketToken>]</CloseBracketToken>
+                                                    </CharacterClass>
+                                                  </CharacterClassSubtraction>
+                                                </Sequence>
+                                                <CloseBracketToken>]</CloseBracketToken>
+                                              </CharacterClass>
+                                            </Sequence>
+                                          </Alternation>
+                                          <CloseParenToken>)</CloseParenToken>
+                                        </ConditionalExpressionGrouping>
+                                      </Sequence>
+                                      <BarToken>|</BarToken>
+                                      <Sequence>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
                                           <Sequence>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <Text>
-                                                  <TextToken>0</TextToken>
-                                                </Text>
-                                                <CharacterClassSubtraction>
-                                                  <MinusToken>-</MinusToken>
-                                                  <CharacterClass>
-                                                    <OpenBracketToken>[</OpenBracketToken>
-                                                    <Sequence>
-                                                      <Text>
-                                                        <TextToken>0</TextToken>
-                                                      </Text>
-                                                    </Sequence>
-                                                    <CloseBracketToken>]</CloseBracketToken>
-                                                  </CharacterClass>
-                                                </CharacterClassSubtraction>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
+                                            <Text>
+                                              <TextToken>0</TextToken>
+                                            </Text>
+                                            <CharacterClassSubtraction>
+                                              <MinusToken>-</MinusToken>
+                                              <CharacterClass>
+                                                <OpenBracketToken>[</OpenBracketToken>
+                                                <Sequence>
+                                                  <Text>
+                                                    <TextToken>0</TextToken>
+                                                  </Text>
+                                                </Sequence>
+                                                <CloseBracketToken>]</CloseBracketToken>
+                                              </CharacterClass>
+                                            </CharacterClassSubtraction>
                                           </Sequence>
-                                        </Alternation>
-                                        <CloseParenToken>)</CloseParenToken>
-                                      </ConditionalExpressionGrouping>
-                                    </Sequence>
-                                    <BarToken>|</BarToken>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                      </Sequence>
+                                    </Alternation>
+                                    <CloseParenToken>)</CloseParenToken>
+                                  </ConditionalExpressionGrouping>
+                                </Sequence>
+                                <BarToken>|</BarToken>
+                                <Sequence>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
                                     <Sequence>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                          <CharacterClassSubtraction>
-                                            <MinusToken>-</MinusToken>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <Text>
-                                                  <TextToken>0</TextToken>
-                                                </Text>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                          </CharacterClassSubtraction>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                      <CharacterClassSubtraction>
+                                        <MinusToken>-</MinusToken>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
+                                          <Sequence>
+                                            <Text>
+                                              <TextToken>0</TextToken>
+                                            </Text>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                      </CharacterClassSubtraction>
                                     </Sequence>
-                                  </Alternation>
-                                  <CloseParenToken>)</CloseParenToken>
-                                </ConditionalExpressionGrouping>
-                              </Sequence>
-                              <BarToken>|</BarToken>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </Sequence>
+                              </Alternation>
+                              <CloseParenToken>)</CloseParenToken>
+                            </ConditionalExpressionGrouping>
+                          </Sequence>
+                          <BarToken>|</BarToken>
+                          <Sequence>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>0</TextToken>
-                                    </Text>
-                                    <CharacterClassSubtraction>
-                                      <MinusToken>-</MinusToken>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                    </CharacterClassSubtraction>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
+                                <Text>
+                                  <TextToken>0</TextToken>
+                                </Text>
+                                <CharacterClassSubtraction>
+                                  <MinusToken>-</MinusToken>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </CharacterClassSubtraction>
                               </Sequence>
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..144)" Text="(?(.*[a-z].*)(?(.*[A-Z].*)(?(.*[0-9].*)(?(.{4,8})((?(.*(01|12|23|34|45|56|67|78|89).*)[0-[0]]|.*))|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])" />
-                        <Capture Name="1" Span="[59..108)" Text="((?(.*(01|12|23|34|45|56|67|78|89).*)[0-[0]]|.*))" />
-                        <Capture Name="2" Span="[65..93)" Text="(01|12|23|34|45|56|67|78|89)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </Sequence>
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..144)" Text="(?(.*[a-z].*)(?(.*[A-Z].*)(?(.*[0-9].*)(?(.{4,8})((?(.*(01|12|23|34|45|56|67|78|89).*)[0-[0]]|.*))|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])" />
+                    <Capture Name="1" Span="[59..108)" Text="((?(.*(01|12|23|34|45|56|67|78|89).*)[0-[0]]|.*))" />
+                    <Capture Name="2" Span="[65..93)" Text="(01|12|23|34|45|56|67|78|89)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -20464,833 +20464,833 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 @"\b{all}\b"
                 """,
                 """
-                    <Tree>
-                      <CompilationUnit>
-                        <Sequence>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>b</TextToken>
-                          </AnchorEscape>
-                          <ConditionalExpressionGrouping>
-                            <OpenParenToken>(</OpenParenToken>
-                            <QuestionToken>?</QuestionToken>
-                            <SimpleGrouping>
-                              <OpenParenToken>(</OpenParenToken>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>b</TextToken>
+                      </AnchorEscape>
+                      <ConditionalExpressionGrouping>
+                        <OpenParenToken>(</OpenParenToken>
+                        <QuestionToken>?</QuestionToken>
+                        <SimpleGrouping>
+                          <OpenParenToken>(</OpenParenToken>
+                          <Sequence>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <CharacterClassRange>
-                                      <Text>
-                                        <TextToken>a</TextToken>
-                                      </Text>
-                                      <MinusToken>-</MinusToken>
-                                      <Text>
-                                        <TextToken>z</TextToken>
-                                      </Text>
-                                    </CharacterClassRange>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <CharacterClassRange>
-                                      <Text>
-                                        <TextToken>a</TextToken>
-                                      </Text>
-                                      <MinusToken>-</MinusToken>
-                                      <Text>
-                                        <TextToken>z</TextToken>
-                                      </Text>
-                                    </CharacterClassRange>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
-                                <ZeroOrMoreQuantifier>
-                                  <Wildcard>
-                                    <DotToken>.</DotToken>
-                                  </Wildcard>
-                                  <AsteriskToken>*</AsteriskToken>
-                                </ZeroOrMoreQuantifier>
+                                <CharacterClassRange>
+                                  <Text>
+                                    <TextToken>a</TextToken>
+                                  </Text>
+                                  <MinusToken>-</MinusToken>
+                                  <Text>
+                                    <TextToken>z</TextToken>
+                                  </Text>
+                                </CharacterClassRange>
                               </Sequence>
-                              <CloseParenToken>)</CloseParenToken>
-                            </SimpleGrouping>
-                            <Alternation>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <ConditionalExpressionGrouping>
-                                  <OpenParenToken>(</OpenParenToken>
-                                  <QuestionToken>?</QuestionToken>
-                                  <SimpleGrouping>
-                                    <OpenParenToken>(</OpenParenToken>
+                                <CharacterClassRange>
+                                  <Text>
+                                    <TextToken>a</TextToken>
+                                  </Text>
+                                  <MinusToken>-</MinusToken>
+                                  <Text>
+                                    <TextToken>z</TextToken>
+                                  </Text>
+                                </CharacterClassRange>
+                              </Sequence>
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                            <ZeroOrMoreQuantifier>
+                              <Wildcard>
+                                <DotToken>.</DotToken>
+                              </Wildcard>
+                              <AsteriskToken>*</AsteriskToken>
+                            </ZeroOrMoreQuantifier>
+                          </Sequence>
+                          <CloseParenToken>)</CloseParenToken>
+                        </SimpleGrouping>
+                        <Alternation>
+                          <Sequence>
+                            <ConditionalExpressionGrouping>
+                              <OpenParenToken>(</OpenParenToken>
+                              <QuestionToken>?</QuestionToken>
+                              <SimpleGrouping>
+                                <OpenParenToken>(</OpenParenToken>
+                                <Sequence>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
                                     <Sequence>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <CharacterClassRange>
-                                            <Text>
-                                              <TextToken>A</TextToken>
-                                            </Text>
-                                            <MinusToken>-</MinusToken>
-                                            <Text>
-                                              <TextToken>Z</TextToken>
-                                            </Text>
-                                          </CharacterClassRange>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <CharacterClassRange>
-                                            <Text>
-                                              <TextToken>A</TextToken>
-                                            </Text>
-                                            <MinusToken>-</MinusToken>
-                                            <Text>
-                                              <TextToken>Z</TextToken>
-                                            </Text>
-                                          </CharacterClassRange>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                      <ZeroOrMoreQuantifier>
-                                        <Wildcard>
-                                          <DotToken>.</DotToken>
-                                        </Wildcard>
-                                        <AsteriskToken>*</AsteriskToken>
-                                      </ZeroOrMoreQuantifier>
+                                      <CharacterClassRange>
+                                        <Text>
+                                          <TextToken>A</TextToken>
+                                        </Text>
+                                        <MinusToken>-</MinusToken>
+                                        <Text>
+                                          <TextToken>Z</TextToken>
+                                        </Text>
+                                      </CharacterClassRange>
                                     </Sequence>
-                                    <CloseParenToken>)</CloseParenToken>
-                                  </SimpleGrouping>
-                                  <Alternation>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
                                     <Sequence>
-                                      <ConditionalExpressionGrouping>
-                                        <OpenParenToken>(</OpenParenToken>
-                                        <QuestionToken>?</QuestionToken>
-                                        <SimpleGrouping>
-                                          <OpenParenToken>(</OpenParenToken>
+                                      <CharacterClassRange>
+                                        <Text>
+                                          <TextToken>A</TextToken>
+                                        </Text>
+                                        <MinusToken>-</MinusToken>
+                                        <Text>
+                                          <TextToken>Z</TextToken>
+                                        </Text>
+                                      </CharacterClassRange>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                  <ZeroOrMoreQuantifier>
+                                    <Wildcard>
+                                      <DotToken>.</DotToken>
+                                    </Wildcard>
+                                    <AsteriskToken>*</AsteriskToken>
+                                  </ZeroOrMoreQuantifier>
+                                </Sequence>
+                                <CloseParenToken>)</CloseParenToken>
+                              </SimpleGrouping>
+                              <Alternation>
+                                <Sequence>
+                                  <ConditionalExpressionGrouping>
+                                    <OpenParenToken>(</OpenParenToken>
+                                    <QuestionToken>?</QuestionToken>
+                                    <SimpleGrouping>
+                                      <OpenParenToken>(</OpenParenToken>
+                                      <Sequence>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
                                           <Sequence>
-                                            <ZeroOrMoreQuantifier>
-                                              <Wildcard>
-                                                <DotToken>.</DotToken>
-                                              </Wildcard>
-                                              <AsteriskToken>*</AsteriskToken>
-                                            </ZeroOrMoreQuantifier>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <CharacterClassRange>
-                                                  <Text>
-                                                    <TextToken>0</TextToken>
-                                                  </Text>
-                                                  <MinusToken>-</MinusToken>
-                                                  <Text>
-                                                    <TextToken>9</TextToken>
-                                                  </Text>
-                                                </CharacterClassRange>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                            <ZeroOrMoreQuantifier>
-                                              <Wildcard>
-                                                <DotToken>.</DotToken>
-                                              </Wildcard>
-                                              <AsteriskToken>*</AsteriskToken>
-                                            </ZeroOrMoreQuantifier>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <CharacterClassRange>
-                                                  <Text>
-                                                    <TextToken>0</TextToken>
-                                                  </Text>
-                                                  <MinusToken>-</MinusToken>
-                                                  <Text>
-                                                    <TextToken>9</TextToken>
-                                                  </Text>
-                                                </CharacterClassRange>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                            <ZeroOrMoreQuantifier>
-                                              <Wildcard>
-                                                <DotToken>.</DotToken>
-                                              </Wildcard>
-                                              <AsteriskToken>*</AsteriskToken>
-                                            </ZeroOrMoreQuantifier>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <CharacterClassRange>
-                                                  <Text>
-                                                    <TextToken>0</TextToken>
-                                                  </Text>
-                                                  <MinusToken>-</MinusToken>
-                                                  <Text>
-                                                    <TextToken>9</TextToken>
-                                                  </Text>
-                                                </CharacterClassRange>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                            <ZeroOrMoreQuantifier>
-                                              <Wildcard>
-                                                <DotToken>.</DotToken>
-                                              </Wildcard>
-                                              <AsteriskToken>*</AsteriskToken>
-                                            </ZeroOrMoreQuantifier>
+                                            <CharacterClassRange>
+                                              <Text>
+                                                <TextToken>0</TextToken>
+                                              </Text>
+                                              <MinusToken>-</MinusToken>
+                                              <Text>
+                                                <TextToken>9</TextToken>
+                                              </Text>
+                                            </CharacterClassRange>
                                           </Sequence>
-                                          <CloseParenToken>)</CloseParenToken>
-                                        </SimpleGrouping>
-                                        <Alternation>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
                                           <Sequence>
-                                            <ConditionalExpressionGrouping>
-                                              <OpenParenToken>(</OpenParenToken>
-                                              <QuestionToken>?</QuestionToken>
-                                              <SimpleGrouping>
-                                                <OpenParenToken>(</OpenParenToken>
+                                            <CharacterClassRange>
+                                              <Text>
+                                                <TextToken>0</TextToken>
+                                              </Text>
+                                              <MinusToken>-</MinusToken>
+                                              <Text>
+                                                <TextToken>9</TextToken>
+                                              </Text>
+                                            </CharacterClassRange>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
+                                          <Sequence>
+                                            <CharacterClassRange>
+                                              <Text>
+                                                <TextToken>0</TextToken>
+                                              </Text>
+                                              <MinusToken>-</MinusToken>
+                                              <Text>
+                                                <TextToken>9</TextToken>
+                                              </Text>
+                                            </CharacterClassRange>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                        <ZeroOrMoreQuantifier>
+                                          <Wildcard>
+                                            <DotToken>.</DotToken>
+                                          </Wildcard>
+                                          <AsteriskToken>*</AsteriskToken>
+                                        </ZeroOrMoreQuantifier>
+                                      </Sequence>
+                                      <CloseParenToken>)</CloseParenToken>
+                                    </SimpleGrouping>
+                                    <Alternation>
+                                      <Sequence>
+                                        <ConditionalExpressionGrouping>
+                                          <OpenParenToken>(</OpenParenToken>
+                                          <QuestionToken>?</QuestionToken>
+                                          <SimpleGrouping>
+                                            <OpenParenToken>(</OpenParenToken>
+                                            <Sequence>
+                                              <ZeroOrMoreQuantifier>
+                                                <Wildcard>
+                                                  <DotToken>.</DotToken>
+                                                </Wildcard>
+                                                <AsteriskToken>*</AsteriskToken>
+                                              </ZeroOrMoreQuantifier>
+                                              <CharacterClass>
+                                                <OpenBracketToken>[</OpenBracketToken>
                                                 <Sequence>
-                                                  <ZeroOrMoreQuantifier>
-                                                    <Wildcard>
-                                                      <DotToken>.</DotToken>
-                                                    </Wildcard>
-                                                    <AsteriskToken>*</AsteriskToken>
-                                                  </ZeroOrMoreQuantifier>
-                                                  <CharacterClass>
-                                                    <OpenBracketToken>[</OpenBracketToken>
-                                                    <Sequence>
-                                                      <CharacterClassRange>
-                                                        <HexEscape>
-                                                          <BackslashToken>\</BackslashToken>
-                                                          <TextToken>x</TextToken>
-                                                          <TextToken>21</TextToken>
-                                                        </HexEscape>
-                                                        <MinusToken>-</MinusToken>
-                                                        <HexEscape>
-                                                          <BackslashToken>\</BackslashToken>
-                                                          <TextToken>x</TextToken>
-                                                          <TextToken>2F</TextToken>
-                                                        </HexEscape>
-                                                      </CharacterClassRange>
-                                                      <CharacterClassRange>
-                                                        <HexEscape>
-                                                          <BackslashToken>\</BackslashToken>
-                                                          <TextToken>x</TextToken>
-                                                          <TextToken>3A</TextToken>
-                                                        </HexEscape>
-                                                        <MinusToken>-</MinusToken>
-                                                        <HexEscape>
-                                                          <BackslashToken>\</BackslashToken>
-                                                          <TextToken>x</TextToken>
-                                                          <TextToken>40</TextToken>
-                                                        </HexEscape>
-                                                      </CharacterClassRange>
-                                                      <CharacterClassRange>
-                                                        <HexEscape>
-                                                          <BackslashToken>\</BackslashToken>
-                                                          <TextToken>x</TextToken>
-                                                          <TextToken>5B</TextToken>
-                                                        </HexEscape>
-                                                        <MinusToken>-</MinusToken>
-                                                        <Text>
-                                                          <TextToken>x</TextToken>
-                                                        </Text>
-                                                      </CharacterClassRange>
-                                                      <Text>
-                                                        <TextToken>60</TextToken>
-                                                      </Text>
-                                                      <CharacterClassRange>
-                                                        <HexEscape>
-                                                          <BackslashToken>\</BackslashToken>
-                                                          <TextToken>x</TextToken>
-                                                          <TextToken>7B</TextToken>
-                                                        </HexEscape>
-                                                        <MinusToken>-</MinusToken>
-                                                        <HexEscape>
-                                                          <BackslashToken>\</BackslashToken>
-                                                          <TextToken>x</TextToken>
-                                                          <TextToken>7E</TextToken>
-                                                        </HexEscape>
-                                                      </CharacterClassRange>
-                                                    </Sequence>
-                                                    <CloseBracketToken>]</CloseBracketToken>
-                                                  </CharacterClass>
-                                                  <ZeroOrMoreQuantifier>
-                                                    <Wildcard>
-                                                      <DotToken>.</DotToken>
-                                                    </Wildcard>
-                                                    <AsteriskToken>*</AsteriskToken>
-                                                  </ZeroOrMoreQuantifier>
+                                                  <CharacterClassRange>
+                                                    <HexEscape>
+                                                      <BackslashToken>\</BackslashToken>
+                                                      <TextToken>x</TextToken>
+                                                      <TextToken>21</TextToken>
+                                                    </HexEscape>
+                                                    <MinusToken>-</MinusToken>
+                                                    <HexEscape>
+                                                      <BackslashToken>\</BackslashToken>
+                                                      <TextToken>x</TextToken>
+                                                      <TextToken>2F</TextToken>
+                                                    </HexEscape>
+                                                  </CharacterClassRange>
+                                                  <CharacterClassRange>
+                                                    <HexEscape>
+                                                      <BackslashToken>\</BackslashToken>
+                                                      <TextToken>x</TextToken>
+                                                      <TextToken>3A</TextToken>
+                                                    </HexEscape>
+                                                    <MinusToken>-</MinusToken>
+                                                    <HexEscape>
+                                                      <BackslashToken>\</BackslashToken>
+                                                      <TextToken>x</TextToken>
+                                                      <TextToken>40</TextToken>
+                                                    </HexEscape>
+                                                  </CharacterClassRange>
+                                                  <CharacterClassRange>
+                                                    <HexEscape>
+                                                      <BackslashToken>\</BackslashToken>
+                                                      <TextToken>x</TextToken>
+                                                      <TextToken>5B</TextToken>
+                                                    </HexEscape>
+                                                    <MinusToken>-</MinusToken>
+                                                    <Text>
+                                                      <TextToken>x</TextToken>
+                                                    </Text>
+                                                  </CharacterClassRange>
+                                                  <Text>
+                                                    <TextToken>60</TextToken>
+                                                  </Text>
+                                                  <CharacterClassRange>
+                                                    <HexEscape>
+                                                      <BackslashToken>\</BackslashToken>
+                                                      <TextToken>x</TextToken>
+                                                      <TextToken>7B</TextToken>
+                                                    </HexEscape>
+                                                    <MinusToken>-</MinusToken>
+                                                    <HexEscape>
+                                                      <BackslashToken>\</BackslashToken>
+                                                      <TextToken>x</TextToken>
+                                                      <TextToken>7E</TextToken>
+                                                    </HexEscape>
+                                                  </CharacterClassRange>
                                                 </Sequence>
-                                                <CloseParenToken>)</CloseParenToken>
-                                              </SimpleGrouping>
-                                              <Alternation>
-                                                <Sequence>
-                                                  <ConditionalExpressionGrouping>
-                                                    <OpenParenToken>(</OpenParenToken>
-                                                    <QuestionToken>?</QuestionToken>
-                                                    <SimpleGrouping>
+                                                <CloseBracketToken>]</CloseBracketToken>
+                                              </CharacterClass>
+                                              <ZeroOrMoreQuantifier>
+                                                <Wildcard>
+                                                  <DotToken>.</DotToken>
+                                                </Wildcard>
+                                                <AsteriskToken>*</AsteriskToken>
+                                              </ZeroOrMoreQuantifier>
+                                            </Sequence>
+                                            <CloseParenToken>)</CloseParenToken>
+                                          </SimpleGrouping>
+                                          <Alternation>
+                                            <Sequence>
+                                              <ConditionalExpressionGrouping>
+                                                <OpenParenToken>(</OpenParenToken>
+                                                <QuestionToken>?</QuestionToken>
+                                                <SimpleGrouping>
+                                                  <OpenParenToken>(</OpenParenToken>
+                                                  <Sequence>
+                                                    <ConditionalExpressionGrouping>
                                                       <OpenParenToken>(</OpenParenToken>
-                                                      <Sequence>
-                                                        <ConditionalExpressionGrouping>
-                                                          <OpenParenToken>(</OpenParenToken>
-                                                          <QuestionToken>?</QuestionToken>
+                                                      <QuestionToken>?</QuestionToken>
+                                                      <SimpleGrouping>
+                                                        <OpenParenToken>(</OpenParenToken>
+                                                        <Sequence>
+                                                          <ZeroOrMoreQuantifier>
+                                                            <Wildcard>
+                                                              <DotToken>.</DotToken>
+                                                            </Wildcard>
+                                                            <AsteriskToken>*</AsteriskToken>
+                                                          </ZeroOrMoreQuantifier>
                                                           <SimpleGrouping>
                                                             <OpenParenToken>(</OpenParenToken>
-                                                            <Sequence>
-                                                              <ZeroOrMoreQuantifier>
-                                                                <Wildcard>
-                                                                  <DotToken>.</DotToken>
-                                                                </Wildcard>
-                                                                <AsteriskToken>*</AsteriskToken>
-                                                              </ZeroOrMoreQuantifier>
-                                                              <SimpleGrouping>
-                                                                <OpenParenToken>(</OpenParenToken>
+                                                            <Alternation>
+                                                              <Alternation>
                                                                 <Alternation>
                                                                   <Alternation>
                                                                     <Alternation>
                                                                       <Alternation>
                                                                         <Alternation>
-                                                                          <Alternation>
-                                                                            <Alternation>
-                                                                              <Sequence>
-                                                                                <Text>
-                                                                                  <TextToken>012</TextToken>
-                                                                                </Text>
-                                                                              </Sequence>
-                                                                              <BarToken>|</BarToken>
-                                                                              <Sequence>
-                                                                                <Text>
-                                                                                  <TextToken>123</TextToken>
-                                                                                </Text>
-                                                                              </Sequence>
-                                                                            </Alternation>
-                                                                            <BarToken>|</BarToken>
-                                                                            <Sequence>
-                                                                              <Text>
-                                                                                <TextToken>234</TextToken>
-                                                                              </Text>
-                                                                            </Sequence>
-                                                                          </Alternation>
+                                                                          <Sequence>
+                                                                            <Text>
+                                                                              <TextToken>012</TextToken>
+                                                                            </Text>
+                                                                          </Sequence>
                                                                           <BarToken>|</BarToken>
                                                                           <Sequence>
                                                                             <Text>
-                                                                              <TextToken>345</TextToken>
+                                                                              <TextToken>123</TextToken>
                                                                             </Text>
                                                                           </Sequence>
                                                                         </Alternation>
                                                                         <BarToken>|</BarToken>
                                                                         <Sequence>
                                                                           <Text>
-                                                                            <TextToken>456</TextToken>
+                                                                            <TextToken>234</TextToken>
                                                                           </Text>
                                                                         </Sequence>
                                                                       </Alternation>
                                                                       <BarToken>|</BarToken>
                                                                       <Sequence>
                                                                         <Text>
-                                                                          <TextToken>567</TextToken>
+                                                                          <TextToken>345</TextToken>
                                                                         </Text>
                                                                       </Sequence>
                                                                     </Alternation>
                                                                     <BarToken>|</BarToken>
                                                                     <Sequence>
                                                                       <Text>
-                                                                        <TextToken>678</TextToken>
+                                                                        <TextToken>456</TextToken>
                                                                       </Text>
                                                                     </Sequence>
                                                                   </Alternation>
                                                                   <BarToken>|</BarToken>
                                                                   <Sequence>
                                                                     <Text>
-                                                                      <TextToken>789</TextToken>
+                                                                      <TextToken>567</TextToken>
                                                                     </Text>
                                                                   </Sequence>
                                                                 </Alternation>
-                                                                <CloseParenToken>)</CloseParenToken>
-                                                              </SimpleGrouping>
-                                                              <ZeroOrMoreQuantifier>
-                                                                <Wildcard>
-                                                                  <DotToken>.</DotToken>
-                                                                </Wildcard>
-                                                                <AsteriskToken>*</AsteriskToken>
-                                                              </ZeroOrMoreQuantifier>
-                                                            </Sequence>
-                                                            <CloseParenToken>)</CloseParenToken>
-                                                          </SimpleGrouping>
-                                                          <Alternation>
-                                                            <Sequence>
-                                                              <CharacterClass>
-                                                                <OpenBracketToken>[</OpenBracketToken>
+                                                                <BarToken>|</BarToken>
                                                                 <Sequence>
                                                                   <Text>
-                                                                    <TextToken>0</TextToken>
+                                                                    <TextToken>678</TextToken>
                                                                   </Text>
-                                                                  <CharacterClassSubtraction>
-                                                                    <MinusToken>-</MinusToken>
-                                                                    <CharacterClass>
-                                                                      <OpenBracketToken>[</OpenBracketToken>
-                                                                      <Sequence>
-                                                                        <Text>
-                                                                          <TextToken>0</TextToken>
-                                                                        </Text>
-                                                                      </Sequence>
-                                                                      <CloseBracketToken>]</CloseBracketToken>
-                                                                    </CharacterClass>
-                                                                  </CharacterClassSubtraction>
                                                                 </Sequence>
-                                                                <CloseBracketToken>]</CloseBracketToken>
-                                                              </CharacterClass>
-                                                            </Sequence>
-                                                            <BarToken>|</BarToken>
+                                                              </Alternation>
+                                                              <BarToken>|</BarToken>
+                                                              <Sequence>
+                                                                <Text>
+                                                                  <TextToken>789</TextToken>
+                                                                </Text>
+                                                              </Sequence>
+                                                            </Alternation>
+                                                            <CloseParenToken>)</CloseParenToken>
+                                                          </SimpleGrouping>
+                                                          <ZeroOrMoreQuantifier>
+                                                            <Wildcard>
+                                                              <DotToken>.</DotToken>
+                                                            </Wildcard>
+                                                            <AsteriskToken>*</AsteriskToken>
+                                                          </ZeroOrMoreQuantifier>
+                                                        </Sequence>
+                                                        <CloseParenToken>)</CloseParenToken>
+                                                      </SimpleGrouping>
+                                                      <Alternation>
+                                                        <Sequence>
+                                                          <CharacterClass>
+                                                            <OpenBracketToken>[</OpenBracketToken>
                                                             <Sequence>
-                                                              <ZeroOrMoreQuantifier>
-                                                                <Wildcard>
-                                                                  <DotToken>.</DotToken>
-                                                                </Wildcard>
-                                                                <AsteriskToken>*</AsteriskToken>
-                                                              </ZeroOrMoreQuantifier>
+                                                              <Text>
+                                                                <TextToken>0</TextToken>
+                                                              </Text>
+                                                              <CharacterClassSubtraction>
+                                                                <MinusToken>-</MinusToken>
+                                                                <CharacterClass>
+                                                                  <OpenBracketToken>[</OpenBracketToken>
+                                                                  <Sequence>
+                                                                    <Text>
+                                                                      <TextToken>0</TextToken>
+                                                                    </Text>
+                                                                  </Sequence>
+                                                                  <CloseBracketToken>]</CloseBracketToken>
+                                                                </CharacterClass>
+                                                              </CharacterClassSubtraction>
                                                             </Sequence>
-                                                          </Alternation>
-                                                          <CloseParenToken>)</CloseParenToken>
-                                                        </ConditionalExpressionGrouping>
-                                                      </Sequence>
+                                                            <CloseBracketToken>]</CloseBracketToken>
+                                                          </CharacterClass>
+                                                        </Sequence>
+                                                        <BarToken>|</BarToken>
+                                                        <Sequence>
+                                                          <ZeroOrMoreQuantifier>
+                                                            <Wildcard>
+                                                              <DotToken>.</DotToken>
+                                                            </Wildcard>
+                                                            <AsteriskToken>*</AsteriskToken>
+                                                          </ZeroOrMoreQuantifier>
+                                                        </Sequence>
+                                                      </Alternation>
                                                       <CloseParenToken>)</CloseParenToken>
-                                                    </SimpleGrouping>
-                                                    <Alternation>
-                                                      <Sequence>
-                                                        <ConditionalExpressionGrouping>
-                                                          <OpenParenToken>(</OpenParenToken>
-                                                          <QuestionToken>?</QuestionToken>
-                                                          <SimpleGrouping>
+                                                    </ConditionalExpressionGrouping>
+                                                  </Sequence>
+                                                  <CloseParenToken>)</CloseParenToken>
+                                                </SimpleGrouping>
+                                                <Alternation>
+                                                  <Sequence>
+                                                    <ConditionalExpressionGrouping>
+                                                      <OpenParenToken>(</OpenParenToken>
+                                                      <QuestionToken>?</QuestionToken>
+                                                      <SimpleGrouping>
+                                                        <OpenParenToken>(</OpenParenToken>
+                                                        <Sequence>
+                                                          <ConditionalExpressionGrouping>
                                                             <OpenParenToken>(</OpenParenToken>
-                                                            <Sequence>
-                                                              <ConditionalExpressionGrouping>
-                                                                <OpenParenToken>(</OpenParenToken>
-                                                                <QuestionToken>?</QuestionToken>
+                                                            <QuestionToken>?</QuestionToken>
+                                                            <SimpleGrouping>
+                                                              <OpenParenToken>(</OpenParenToken>
+                                                              <Sequence>
+                                                                <ZeroOrMoreQuantifier>
+                                                                  <Wildcard>
+                                                                    <DotToken>.</DotToken>
+                                                                  </Wildcard>
+                                                                  <AsteriskToken>*</AsteriskToken>
+                                                                </ZeroOrMoreQuantifier>
                                                                 <SimpleGrouping>
                                                                   <OpenParenToken>(</OpenParenToken>
-                                                                  <Sequence>
-                                                                    <ZeroOrMoreQuantifier>
-                                                                      <Wildcard>
-                                                                        <DotToken>.</DotToken>
-                                                                      </Wildcard>
-                                                                      <AsteriskToken>*</AsteriskToken>
-                                                                    </ZeroOrMoreQuantifier>
-                                                                    <SimpleGrouping>
-                                                                      <OpenParenToken>(</OpenParenToken>
+                                                                  <Alternation>
+                                                                    <Alternation>
                                                                       <Alternation>
                                                                         <Alternation>
                                                                           <Alternation>
                                                                             <Alternation>
                                                                               <Alternation>
-                                                                                <Alternation>
-                                                                                  <Alternation>
-                                                                                    <Sequence>
-                                                                                      <Text>
-                                                                                        <TextToken>987</TextToken>
-                                                                                      </Text>
-                                                                                    </Sequence>
-                                                                                    <BarToken>|</BarToken>
-                                                                                    <Sequence>
-                                                                                      <Text>
-                                                                                        <TextToken>876</TextToken>
-                                                                                      </Text>
-                                                                                    </Sequence>
-                                                                                  </Alternation>
-                                                                                  <BarToken>|</BarToken>
-                                                                                  <Sequence>
-                                                                                    <Text>
-                                                                                      <TextToken>765</TextToken>
-                                                                                    </Text>
-                                                                                  </Sequence>
-                                                                                </Alternation>
+                                                                                <Sequence>
+                                                                                  <Text>
+                                                                                    <TextToken>987</TextToken>
+                                                                                  </Text>
+                                                                                </Sequence>
                                                                                 <BarToken>|</BarToken>
                                                                                 <Sequence>
                                                                                   <Text>
-                                                                                    <TextToken>654</TextToken>
+                                                                                    <TextToken>876</TextToken>
                                                                                   </Text>
                                                                                 </Sequence>
                                                                               </Alternation>
                                                                               <BarToken>|</BarToken>
                                                                               <Sequence>
                                                                                 <Text>
-                                                                                  <TextToken>543</TextToken>
+                                                                                  <TextToken>765</TextToken>
                                                                                 </Text>
                                                                               </Sequence>
                                                                             </Alternation>
                                                                             <BarToken>|</BarToken>
                                                                             <Sequence>
                                                                               <Text>
-                                                                                <TextToken>432</TextToken>
+                                                                                <TextToken>654</TextToken>
                                                                               </Text>
                                                                             </Sequence>
                                                                           </Alternation>
                                                                           <BarToken>|</BarToken>
                                                                           <Sequence>
                                                                             <Text>
-                                                                              <TextToken>321</TextToken>
+                                                                              <TextToken>543</TextToken>
                                                                             </Text>
                                                                           </Sequence>
                                                                         </Alternation>
                                                                         <BarToken>|</BarToken>
                                                                         <Sequence>
                                                                           <Text>
-                                                                            <TextToken>210</TextToken>
+                                                                            <TextToken>432</TextToken>
                                                                           </Text>
                                                                         </Sequence>
                                                                       </Alternation>
-                                                                      <CloseParenToken>)</CloseParenToken>
-                                                                    </SimpleGrouping>
-                                                                    <ZeroOrMoreQuantifier>
-                                                                      <Wildcard>
-                                                                        <DotToken>.</DotToken>
-                                                                      </Wildcard>
-                                                                      <AsteriskToken>*</AsteriskToken>
-                                                                    </ZeroOrMoreQuantifier>
-                                                                  </Sequence>
-                                                                  <CloseParenToken>)</CloseParenToken>
-                                                                </SimpleGrouping>
-                                                                <Alternation>
-                                                                  <Sequence>
-                                                                    <CharacterClass>
-                                                                      <OpenBracketToken>[</OpenBracketToken>
+                                                                      <BarToken>|</BarToken>
                                                                       <Sequence>
                                                                         <Text>
-                                                                          <TextToken>0</TextToken>
+                                                                          <TextToken>321</TextToken>
                                                                         </Text>
-                                                                        <CharacterClassSubtraction>
-                                                                          <MinusToken>-</MinusToken>
-                                                                          <CharacterClass>
-                                                                            <OpenBracketToken>[</OpenBracketToken>
-                                                                            <Sequence>
-                                                                              <Text>
-                                                                                <TextToken>0</TextToken>
-                                                                              </Text>
-                                                                            </Sequence>
-                                                                            <CloseBracketToken>]</CloseBracketToken>
-                                                                          </CharacterClass>
-                                                                        </CharacterClassSubtraction>
                                                                       </Sequence>
-                                                                      <CloseBracketToken>]</CloseBracketToken>
-                                                                    </CharacterClass>
-                                                                  </Sequence>
-                                                                  <BarToken>|</BarToken>
+                                                                    </Alternation>
+                                                                    <BarToken>|</BarToken>
+                                                                    <Sequence>
+                                                                      <Text>
+                                                                        <TextToken>210</TextToken>
+                                                                      </Text>
+                                                                    </Sequence>
+                                                                  </Alternation>
+                                                                  <CloseParenToken>)</CloseParenToken>
+                                                                </SimpleGrouping>
+                                                                <ZeroOrMoreQuantifier>
+                                                                  <Wildcard>
+                                                                    <DotToken>.</DotToken>
+                                                                  </Wildcard>
+                                                                  <AsteriskToken>*</AsteriskToken>
+                                                                </ZeroOrMoreQuantifier>
+                                                              </Sequence>
+                                                              <CloseParenToken>)</CloseParenToken>
+                                                            </SimpleGrouping>
+                                                            <Alternation>
+                                                              <Sequence>
+                                                                <CharacterClass>
+                                                                  <OpenBracketToken>[</OpenBracketToken>
                                                                   <Sequence>
-                                                                    <ZeroOrMoreQuantifier>
-                                                                      <Wildcard>
-                                                                        <DotToken>.</DotToken>
-                                                                      </Wildcard>
-                                                                      <AsteriskToken>*</AsteriskToken>
-                                                                    </ZeroOrMoreQuantifier>
-                                                                  </Sequence>
-                                                                </Alternation>
-                                                                <CloseParenToken>)</CloseParenToken>
-                                                              </ConditionalExpressionGrouping>
-                                                            </Sequence>
-                                                            <CloseParenToken>)</CloseParenToken>
-                                                          </SimpleGrouping>
-                                                          <Alternation>
-                                                            <Sequence>
-                                                              <ConditionalExpressionGrouping>
-                                                                <OpenParenToken>(</OpenParenToken>
-                                                                <QuestionToken>?</QuestionToken>
-                                                                <SimpleGrouping>
-                                                                  <OpenParenToken>(</OpenParenToken>
-                                                                  <Sequence>
-                                                                    <ClosedRangeNumericQuantifier>
+                                                                    <Text>
+                                                                      <TextToken>0</TextToken>
+                                                                    </Text>
+                                                                    <CharacterClassSubtraction>
+                                                                      <MinusToken>-</MinusToken>
                                                                       <CharacterClass>
                                                                         <OpenBracketToken>[</OpenBracketToken>
                                                                         <Sequence>
-                                                                          <CharacterClassRange>
-                                                                            <Text>
-                                                                              <TextToken>!</TextToken>
-                                                                            </Text>
-                                                                            <MinusToken>-</MinusToken>
-                                                                            <Text>
-                                                                              <TextToken>~</TextToken>
-                                                                            </Text>
-                                                                          </CharacterClassRange>
+                                                                          <Text>
+                                                                            <TextToken>0</TextToken>
+                                                                          </Text>
                                                                         </Sequence>
                                                                         <CloseBracketToken>]</CloseBracketToken>
                                                                       </CharacterClass>
-                                                                      <OpenBraceToken>{</OpenBraceToken>
-                                                                      <NumberToken value="8">8</NumberToken>
-                                                                      <CommaToken>,</CommaToken>
-                                                                      <NumberToken value="12">12</NumberToken>
-                                                                      <CloseBraceToken>}</CloseBraceToken>
-                                                                    </ClosedRangeNumericQuantifier>
+                                                                    </CharacterClassSubtraction>
+                                                                  </Sequence>
+                                                                  <CloseBracketToken>]</CloseBracketToken>
+                                                                </CharacterClass>
+                                                              </Sequence>
+                                                              <BarToken>|</BarToken>
+                                                              <Sequence>
+                                                                <ZeroOrMoreQuantifier>
+                                                                  <Wildcard>
+                                                                    <DotToken>.</DotToken>
+                                                                  </Wildcard>
+                                                                  <AsteriskToken>*</AsteriskToken>
+                                                                </ZeroOrMoreQuantifier>
+                                                              </Sequence>
+                                                            </Alternation>
+                                                            <CloseParenToken>)</CloseParenToken>
+                                                          </ConditionalExpressionGrouping>
+                                                        </Sequence>
+                                                        <CloseParenToken>)</CloseParenToken>
+                                                      </SimpleGrouping>
+                                                      <Alternation>
+                                                        <Sequence>
+                                                          <ConditionalExpressionGrouping>
+                                                            <OpenParenToken>(</OpenParenToken>
+                                                            <QuestionToken>?</QuestionToken>
+                                                            <SimpleGrouping>
+                                                              <OpenParenToken>(</OpenParenToken>
+                                                              <Sequence>
+                                                                <ClosedRangeNumericQuantifier>
+                                                                  <CharacterClass>
+                                                                    <OpenBracketToken>[</OpenBracketToken>
+                                                                    <Sequence>
+                                                                      <CharacterClassRange>
+                                                                        <Text>
+                                                                          <TextToken>!</TextToken>
+                                                                        </Text>
+                                                                        <MinusToken>-</MinusToken>
+                                                                        <Text>
+                                                                          <TextToken>~</TextToken>
+                                                                        </Text>
+                                                                      </CharacterClassRange>
+                                                                    </Sequence>
+                                                                    <CloseBracketToken>]</CloseBracketToken>
+                                                                  </CharacterClass>
+                                                                  <OpenBraceToken>{</OpenBraceToken>
+                                                                  <NumberToken value="8">8</NumberToken>
+                                                                  <CommaToken>,</CommaToken>
+                                                                  <NumberToken value="12">12</NumberToken>
+                                                                  <CloseBraceToken>}</CloseBraceToken>
+                                                                </ClosedRangeNumericQuantifier>
+                                                              </Sequence>
+                                                              <CloseParenToken>)</CloseParenToken>
+                                                            </SimpleGrouping>
+                                                            <Alternation>
+                                                              <Sequence>
+                                                                <SimpleGrouping>
+                                                                  <OpenParenToken>(</OpenParenToken>
+                                                                  <Sequence>
+                                                                    <ZeroOrMoreQuantifier>
+                                                                      <Wildcard>
+                                                                        <DotToken>.</DotToken>
+                                                                      </Wildcard>
+                                                                      <AsteriskToken>*</AsteriskToken>
+                                                                    </ZeroOrMoreQuantifier>
+                                                                    <Text>
+                                                                      <TextToken>X</TextToken>
+                                                                    </Text>
+                                                                    <ZeroOrMoreQuantifier>
+                                                                      <Wildcard>
+                                                                        <DotToken>.</DotToken>
+                                                                      </Wildcard>
+                                                                      <AsteriskToken>*</AsteriskToken>
+                                                                    </ZeroOrMoreQuantifier>
+                                                                    <Text>
+                                                                      <TextToken>r</TextToken>
+                                                                    </Text>
+                                                                    <ZeroOrMoreQuantifier>
+                                                                      <Wildcard>
+                                                                        <DotToken>.</DotToken>
+                                                                      </Wildcard>
+                                                                      <AsteriskToken>*</AsteriskToken>
+                                                                    </ZeroOrMoreQuantifier>
                                                                   </Sequence>
                                                                   <CloseParenToken>)</CloseParenToken>
                                                                 </SimpleGrouping>
-                                                                <Alternation>
+                                                              </Sequence>
+                                                              <BarToken>|</BarToken>
+                                                              <Sequence>
+                                                                <CharacterClass>
+                                                                  <OpenBracketToken>[</OpenBracketToken>
                                                                   <Sequence>
-                                                                    <SimpleGrouping>
-                                                                      <OpenParenToken>(</OpenParenToken>
-                                                                      <Sequence>
-                                                                        <ZeroOrMoreQuantifier>
-                                                                          <Wildcard>
-                                                                            <DotToken>.</DotToken>
-                                                                          </Wildcard>
-                                                                          <AsteriskToken>*</AsteriskToken>
-                                                                        </ZeroOrMoreQuantifier>
-                                                                        <Text>
-                                                                          <TextToken>X</TextToken>
-                                                                        </Text>
-                                                                        <ZeroOrMoreQuantifier>
-                                                                          <Wildcard>
-                                                                            <DotToken>.</DotToken>
-                                                                          </Wildcard>
-                                                                          <AsteriskToken>*</AsteriskToken>
-                                                                        </ZeroOrMoreQuantifier>
-                                                                        <Text>
-                                                                          <TextToken>r</TextToken>
-                                                                        </Text>
-                                                                        <ZeroOrMoreQuantifier>
-                                                                          <Wildcard>
-                                                                            <DotToken>.</DotToken>
-                                                                          </Wildcard>
-                                                                          <AsteriskToken>*</AsteriskToken>
-                                                                        </ZeroOrMoreQuantifier>
-                                                                      </Sequence>
-                                                                      <CloseParenToken>)</CloseParenToken>
-                                                                    </SimpleGrouping>
+                                                                    <Text>
+                                                                      <TextToken>0</TextToken>
+                                                                    </Text>
+                                                                    <CharacterClassSubtraction>
+                                                                      <MinusToken>-</MinusToken>
+                                                                      <CharacterClass>
+                                                                        <OpenBracketToken>[</OpenBracketToken>
+                                                                        <Sequence>
+                                                                          <Text>
+                                                                            <TextToken>0</TextToken>
+                                                                          </Text>
+                                                                        </Sequence>
+                                                                        <CloseBracketToken>]</CloseBracketToken>
+                                                                      </CharacterClass>
+                                                                    </CharacterClassSubtraction>
                                                                   </Sequence>
-                                                                  <BarToken>|</BarToken>
-                                                                  <Sequence>
-                                                                    <CharacterClass>
-                                                                      <OpenBracketToken>[</OpenBracketToken>
-                                                                      <Sequence>
-                                                                        <Text>
-                                                                          <TextToken>0</TextToken>
-                                                                        </Text>
-                                                                        <CharacterClassSubtraction>
-                                                                          <MinusToken>-</MinusToken>
-                                                                          <CharacterClass>
-                                                                            <OpenBracketToken>[</OpenBracketToken>
-                                                                            <Sequence>
-                                                                              <Text>
-                                                                                <TextToken>0</TextToken>
-                                                                              </Text>
-                                                                            </Sequence>
-                                                                            <CloseBracketToken>]</CloseBracketToken>
-                                                                          </CharacterClass>
-                                                                        </CharacterClassSubtraction>
-                                                                      </Sequence>
-                                                                      <CloseBracketToken>]</CloseBracketToken>
-                                                                    </CharacterClass>
-                                                                  </Sequence>
-                                                                </Alternation>
-                                                                <CloseParenToken>)</CloseParenToken>
-                                                              </ConditionalExpressionGrouping>
-                                                            </Sequence>
-                                                            <BarToken>|</BarToken>
+                                                                  <CloseBracketToken>]</CloseBracketToken>
+                                                                </CharacterClass>
+                                                              </Sequence>
+                                                            </Alternation>
+                                                            <CloseParenToken>)</CloseParenToken>
+                                                          </ConditionalExpressionGrouping>
+                                                        </Sequence>
+                                                        <BarToken>|</BarToken>
+                                                        <Sequence>
+                                                          <CharacterClass>
+                                                            <OpenBracketToken>[</OpenBracketToken>
                                                             <Sequence>
-                                                              <CharacterClass>
-                                                                <OpenBracketToken>[</OpenBracketToken>
-                                                                <Sequence>
-                                                                  <Text>
-                                                                    <TextToken>0</TextToken>
-                                                                  </Text>
-                                                                  <CharacterClassSubtraction>
-                                                                    <MinusToken>-</MinusToken>
-                                                                    <CharacterClass>
-                                                                      <OpenBracketToken>[</OpenBracketToken>
-                                                                      <Sequence>
-                                                                        <Text>
-                                                                          <TextToken>0</TextToken>
-                                                                        </Text>
-                                                                      </Sequence>
-                                                                      <CloseBracketToken>]</CloseBracketToken>
-                                                                    </CharacterClass>
-                                                                  </CharacterClassSubtraction>
-                                                                </Sequence>
-                                                                <CloseBracketToken>]</CloseBracketToken>
-                                                              </CharacterClass>
+                                                              <Text>
+                                                                <TextToken>0</TextToken>
+                                                              </Text>
+                                                              <CharacterClassSubtraction>
+                                                                <MinusToken>-</MinusToken>
+                                                                <CharacterClass>
+                                                                  <OpenBracketToken>[</OpenBracketToken>
+                                                                  <Sequence>
+                                                                    <Text>
+                                                                      <TextToken>0</TextToken>
+                                                                    </Text>
+                                                                  </Sequence>
+                                                                  <CloseBracketToken>]</CloseBracketToken>
+                                                                </CharacterClass>
+                                                              </CharacterClassSubtraction>
                                                             </Sequence>
-                                                          </Alternation>
-                                                          <CloseParenToken>)</CloseParenToken>
-                                                        </ConditionalExpressionGrouping>
-                                                      </Sequence>
-                                                      <BarToken>|</BarToken>
+                                                            <CloseBracketToken>]</CloseBracketToken>
+                                                          </CharacterClass>
+                                                        </Sequence>
+                                                      </Alternation>
+                                                      <CloseParenToken>)</CloseParenToken>
+                                                    </ConditionalExpressionGrouping>
+                                                  </Sequence>
+                                                  <BarToken>|</BarToken>
+                                                  <Sequence>
+                                                    <CharacterClass>
+                                                      <OpenBracketToken>[</OpenBracketToken>
                                                       <Sequence>
-                                                        <CharacterClass>
-                                                          <OpenBracketToken>[</OpenBracketToken>
-                                                          <Sequence>
-                                                            <Text>
-                                                              <TextToken>0</TextToken>
-                                                            </Text>
-                                                            <CharacterClassSubtraction>
-                                                              <MinusToken>-</MinusToken>
-                                                              <CharacterClass>
-                                                                <OpenBracketToken>[</OpenBracketToken>
-                                                                <Sequence>
-                                                                  <Text>
-                                                                    <TextToken>0</TextToken>
-                                                                  </Text>
-                                                                </Sequence>
-                                                                <CloseBracketToken>]</CloseBracketToken>
-                                                              </CharacterClass>
-                                                            </CharacterClassSubtraction>
-                                                          </Sequence>
-                                                          <CloseBracketToken>]</CloseBracketToken>
-                                                        </CharacterClass>
+                                                        <Text>
+                                                          <TextToken>0</TextToken>
+                                                        </Text>
+                                                        <CharacterClassSubtraction>
+                                                          <MinusToken>-</MinusToken>
+                                                          <CharacterClass>
+                                                            <OpenBracketToken>[</OpenBracketToken>
+                                                            <Sequence>
+                                                              <Text>
+                                                                <TextToken>0</TextToken>
+                                                              </Text>
+                                                            </Sequence>
+                                                            <CloseBracketToken>]</CloseBracketToken>
+                                                          </CharacterClass>
+                                                        </CharacterClassSubtraction>
                                                       </Sequence>
-                                                    </Alternation>
-                                                    <CloseParenToken>)</CloseParenToken>
-                                                  </ConditionalExpressionGrouping>
-                                                </Sequence>
-                                                <BarToken>|</BarToken>
+                                                      <CloseBracketToken>]</CloseBracketToken>
+                                                    </CharacterClass>
+                                                  </Sequence>
+                                                </Alternation>
+                                                <CloseParenToken>)</CloseParenToken>
+                                              </ConditionalExpressionGrouping>
+                                            </Sequence>
+                                            <BarToken>|</BarToken>
+                                            <Sequence>
+                                              <CharacterClass>
+                                                <OpenBracketToken>[</OpenBracketToken>
                                                 <Sequence>
-                                                  <CharacterClass>
-                                                    <OpenBracketToken>[</OpenBracketToken>
-                                                    <Sequence>
-                                                      <Text>
-                                                        <TextToken>0</TextToken>
-                                                      </Text>
-                                                      <CharacterClassSubtraction>
-                                                        <MinusToken>-</MinusToken>
-                                                        <CharacterClass>
-                                                          <OpenBracketToken>[</OpenBracketToken>
-                                                          <Sequence>
-                                                            <Text>
-                                                              <TextToken>0</TextToken>
-                                                            </Text>
-                                                          </Sequence>
-                                                          <CloseBracketToken>]</CloseBracketToken>
-                                                        </CharacterClass>
-                                                      </CharacterClassSubtraction>
-                                                    </Sequence>
-                                                    <CloseBracketToken>]</CloseBracketToken>
-                                                  </CharacterClass>
+                                                  <Text>
+                                                    <TextToken>0</TextToken>
+                                                  </Text>
+                                                  <CharacterClassSubtraction>
+                                                    <MinusToken>-</MinusToken>
+                                                    <CharacterClass>
+                                                      <OpenBracketToken>[</OpenBracketToken>
+                                                      <Sequence>
+                                                        <Text>
+                                                          <TextToken>0</TextToken>
+                                                        </Text>
+                                                      </Sequence>
+                                                      <CloseBracketToken>]</CloseBracketToken>
+                                                    </CharacterClass>
+                                                  </CharacterClassSubtraction>
                                                 </Sequence>
-                                              </Alternation>
-                                              <CloseParenToken>)</CloseParenToken>
-                                            </ConditionalExpressionGrouping>
-                                          </Sequence>
-                                          <BarToken>|</BarToken>
+                                                <CloseBracketToken>]</CloseBracketToken>
+                                              </CharacterClass>
+                                            </Sequence>
+                                          </Alternation>
+                                          <CloseParenToken>)</CloseParenToken>
+                                        </ConditionalExpressionGrouping>
+                                      </Sequence>
+                                      <BarToken>|</BarToken>
+                                      <Sequence>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
                                           <Sequence>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <Text>
-                                                  <TextToken>0</TextToken>
-                                                </Text>
-                                                <CharacterClassSubtraction>
-                                                  <MinusToken>-</MinusToken>
-                                                  <CharacterClass>
-                                                    <OpenBracketToken>[</OpenBracketToken>
-                                                    <Sequence>
-                                                      <Text>
-                                                        <TextToken>0</TextToken>
-                                                      </Text>
-                                                    </Sequence>
-                                                    <CloseBracketToken>]</CloseBracketToken>
-                                                  </CharacterClass>
-                                                </CharacterClassSubtraction>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
+                                            <Text>
+                                              <TextToken>0</TextToken>
+                                            </Text>
+                                            <CharacterClassSubtraction>
+                                              <MinusToken>-</MinusToken>
+                                              <CharacterClass>
+                                                <OpenBracketToken>[</OpenBracketToken>
+                                                <Sequence>
+                                                  <Text>
+                                                    <TextToken>0</TextToken>
+                                                  </Text>
+                                                </Sequence>
+                                                <CloseBracketToken>]</CloseBracketToken>
+                                              </CharacterClass>
+                                            </CharacterClassSubtraction>
                                           </Sequence>
-                                        </Alternation>
-                                        <CloseParenToken>)</CloseParenToken>
-                                      </ConditionalExpressionGrouping>
-                                    </Sequence>
-                                    <BarToken>|</BarToken>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                      </Sequence>
+                                    </Alternation>
+                                    <CloseParenToken>)</CloseParenToken>
+                                  </ConditionalExpressionGrouping>
+                                </Sequence>
+                                <BarToken>|</BarToken>
+                                <Sequence>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
                                     <Sequence>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                          <CharacterClassSubtraction>
-                                            <MinusToken>-</MinusToken>
-                                            <CharacterClass>
-                                              <OpenBracketToken>[</OpenBracketToken>
-                                              <Sequence>
-                                                <Text>
-                                                  <TextToken>0</TextToken>
-                                                </Text>
-                                              </Sequence>
-                                              <CloseBracketToken>]</CloseBracketToken>
-                                            </CharacterClass>
-                                          </CharacterClassSubtraction>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                      <CharacterClassSubtraction>
+                                        <MinusToken>-</MinusToken>
+                                        <CharacterClass>
+                                          <OpenBracketToken>[</OpenBracketToken>
+                                          <Sequence>
+                                            <Text>
+                                              <TextToken>0</TextToken>
+                                            </Text>
+                                          </Sequence>
+                                          <CloseBracketToken>]</CloseBracketToken>
+                                        </CharacterClass>
+                                      </CharacterClassSubtraction>
                                     </Sequence>
-                                  </Alternation>
-                                  <CloseParenToken>)</CloseParenToken>
-                                </ConditionalExpressionGrouping>
-                              </Sequence>
-                              <BarToken>|</BarToken>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </Sequence>
+                              </Alternation>
+                              <CloseParenToken>)</CloseParenToken>
+                            </ConditionalExpressionGrouping>
+                          </Sequence>
+                          <BarToken>|</BarToken>
+                          <Sequence>
+                            <CharacterClass>
+                              <OpenBracketToken>[</OpenBracketToken>
                               <Sequence>
-                                <CharacterClass>
-                                  <OpenBracketToken>[</OpenBracketToken>
-                                  <Sequence>
-                                    <Text>
-                                      <TextToken>0</TextToken>
-                                    </Text>
-                                    <CharacterClassSubtraction>
-                                      <MinusToken>-</MinusToken>
-                                      <CharacterClass>
-                                        <OpenBracketToken>[</OpenBracketToken>
-                                        <Sequence>
-                                          <Text>
-                                            <TextToken>0</TextToken>
-                                          </Text>
-                                        </Sequence>
-                                        <CloseBracketToken>]</CloseBracketToken>
-                                      </CharacterClass>
-                                    </CharacterClassSubtraction>
-                                  </Sequence>
-                                  <CloseBracketToken>]</CloseBracketToken>
-                                </CharacterClass>
+                                <Text>
+                                  <TextToken>0</TextToken>
+                                </Text>
+                                <CharacterClassSubtraction>
+                                  <MinusToken>-</MinusToken>
+                                  <CharacterClass>
+                                    <OpenBracketToken>[</OpenBracketToken>
+                                    <Sequence>
+                                      <Text>
+                                        <TextToken>0</TextToken>
+                                      </Text>
+                                    </Sequence>
+                                    <CloseBracketToken>]</CloseBracketToken>
+                                  </CharacterClass>
+                                </CharacterClassSubtraction>
                               </Sequence>
-                            </Alternation>
-                            <CloseParenToken>)</CloseParenToken>
-                          </ConditionalExpressionGrouping>
-                          <AnchorEscape>
-                            <BackslashToken>\</BackslashToken>
-                            <TextToken>b</TextToken>
-                          </AnchorEscape>
-                        </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..326)" Text="\b(?(.*[a-z].*[a-z].*)(?(.*[A-Z].*[A-Z].*)(?(.*[0-9].*[0-9].*[0-9].*)(?(.*[\x21-\x2F\x3A-\x40\x5B-x60\x7B-\x7E].*)(?((?(.*(012|123|234|345|456|567|678|789).*)[0-[0]]|.*))(?((?(.*(987|876|765|654|543|432|321|210).*)[0-[0]]|.*))(?([!-~]{8,12})(.*X.*r.*)|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])\b" />
-                        <Capture Name="1" Span="[132..165)" Text="(012|123|234|345|456|567|678|789)" />
-                        <Capture Name="2" Span="[188..221)" Text="(987|876|765|654|543|432|321|210)" />
-                        <Capture Name="3" Span="[251..261)" Text="(.*X.*r.*)" />
-                      </Captures>
-                    </Tree>
-                    """,
+                              <CloseBracketToken>]</CloseBracketToken>
+                            </CharacterClass>
+                          </Sequence>
+                        </Alternation>
+                        <CloseParenToken>)</CloseParenToken>
+                      </ConditionalExpressionGrouping>
+                      <AnchorEscape>
+                        <BackslashToken>\</BackslashToken>
+                        <TextToken>b</TextToken>
+                      </AnchorEscape>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..326)" Text="\b(?(.*[a-z].*[a-z].*)(?(.*[A-Z].*[A-Z].*)(?(.*[0-9].*[0-9].*[0-9].*)(?(.*[\x21-\x2F\x3A-\x40\x5B-x60\x7B-\x7E].*)(?((?(.*(012|123|234|345|456|567|678|789).*)[0-[0]]|.*))(?((?(.*(987|876|765|654|543|432|321|210).*)[0-[0]]|.*))(?([!-~]{8,12})(.*X.*r.*)|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])|[0-[0]])\b" />
+                    <Capture Name="1" Span="[132..165)" Text="(012|123|234|345|456|567|678|789)" />
+                    <Capture Name="2" Span="[188..221)" Text="(987|876|765|654|543|432|321|210)" />
+                    <Capture Name="3" Span="[251..261)" Text="(.*X.*r.*)" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }
@@ -21300,62 +21300,62 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         {
             Test(
                 """
-                    @"pa[5\$s]{2}w[o0]rd$"
-                    """,
+                @"pa[5\$s]{2}w[o0]rd$"
+                """,
                 """
-                    <Tree>
-                      <CompilationUnit>
+                <Tree>
+                  <CompilationUnit>
+                    <Sequence>
+                      <Text>
+                        <TextToken>pa</TextToken>
+                      </Text>
+                      <ExactNumericQuantifier>
+                        <CharacterClass>
+                          <OpenBracketToken>[</OpenBracketToken>
+                          <Sequence>
+                            <Text>
+                              <TextToken>5</TextToken>
+                            </Text>
+                            <SimpleEscape>
+                              <BackslashToken>\</BackslashToken>
+                              <TextToken>$</TextToken>
+                            </SimpleEscape>
+                            <Text>
+                              <TextToken>s</TextToken>
+                            </Text>
+                          </Sequence>
+                          <CloseBracketToken>]</CloseBracketToken>
+                        </CharacterClass>
+                        <OpenBraceToken>{</OpenBraceToken>
+                        <NumberToken value="2">2</NumberToken>
+                        <CloseBraceToken>}</CloseBraceToken>
+                      </ExactNumericQuantifier>
+                      <Text>
+                        <TextToken>w</TextToken>
+                      </Text>
+                      <CharacterClass>
+                        <OpenBracketToken>[</OpenBracketToken>
                         <Sequence>
                           <Text>
-                            <TextToken>pa</TextToken>
+                            <TextToken>o0</TextToken>
                           </Text>
-                          <ExactNumericQuantifier>
-                            <CharacterClass>
-                              <OpenBracketToken>[</OpenBracketToken>
-                              <Sequence>
-                                <Text>
-                                  <TextToken>5</TextToken>
-                                </Text>
-                                <SimpleEscape>
-                                  <BackslashToken>\</BackslashToken>
-                                  <TextToken>$</TextToken>
-                                </SimpleEscape>
-                                <Text>
-                                  <TextToken>s</TextToken>
-                                </Text>
-                              </Sequence>
-                              <CloseBracketToken>]</CloseBracketToken>
-                            </CharacterClass>
-                            <OpenBraceToken>{</OpenBraceToken>
-                            <NumberToken value="2">2</NumberToken>
-                            <CloseBraceToken>}</CloseBraceToken>
-                          </ExactNumericQuantifier>
-                          <Text>
-                            <TextToken>w</TextToken>
-                          </Text>
-                          <CharacterClass>
-                            <OpenBracketToken>[</OpenBracketToken>
-                            <Sequence>
-                              <Text>
-                                <TextToken>o0</TextToken>
-                              </Text>
-                            </Sequence>
-                            <CloseBracketToken>]</CloseBracketToken>
-                          </CharacterClass>
-                          <Text>
-                            <TextToken>rd</TextToken>
-                          </Text>
-                          <EndAnchor>
-                            <DollarToken>$</DollarToken>
-                          </EndAnchor>
                         </Sequence>
-                        <EndOfFile />
-                      </CompilationUnit>
-                      <Captures>
-                        <Capture Name="0" Span="[10..29)" Text="pa[5\$s]{2}w[o0]rd$" />
-                      </Captures>
-                    </Tree>
-                    """,
+                        <CloseBracketToken>]</CloseBracketToken>
+                      </CharacterClass>
+                      <Text>
+                        <TextToken>rd</TextToken>
+                      </Text>
+                      <EndAnchor>
+                        <DollarToken>$</DollarToken>
+                      </EndAnchor>
+                    </Sequence>
+                    <EndOfFile />
+                  </CompilationUnit>
+                  <Captures>
+                    <Capture Name="0" Span="[10..29)" Text="pa[5\$s]{2}w[o0]rd$" />
+                  </Captures>
+                </Tree>
+                """,
                 RegexOptions.None
             );
         }

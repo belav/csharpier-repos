@@ -23,17 +23,17 @@ public class InterpolatedStringExpressionStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v =
-                {|hint:{|textspan:$$$@"
-                {123}
-                "|}|};
-                    }
+                    var v =
+            {|hint:{|textspan:$$$@"
+            {123}
+            "|}|};
                 }
-                """,
+            }
+            """,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -43,14 +43,14 @@ public class InterpolatedStringExpressionStructureTests
     {
         await VerifyNoBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $$$";
-                    }
+                    var v = $$$";
                 }
-                """
+            }
+            """
         );
     }
 }

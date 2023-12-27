@@ -87,32 +87,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    class B
+                class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    protected C(int x) : base(x)
                     {
-                        protected C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -121,32 +121,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    class B
+                class B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -155,32 +155,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    class B
+                class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    internal C(int x) : base(x)
                     {
-                        internal C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -189,17 +189,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringMissingAsync(
                 """
-                    class {|CS1729:C|} : [||]B
-                    {
-                    }
+                class {|CS1729:C|} : [||]B
+                {
+                }
 
-                    class B
+                class B
+                {
+                    private B(int x)
                     {
-                        private B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -208,34 +208,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    class B
+                class B
+                {
+                    internal B(ref int x, out string s, params bool[] b)
                     {
-                        internal B(ref int x, out string s, params bool[] b)
-                        {
-                            s = null;
-                        }
+                        s = null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    internal C(ref int x, out string s, params bool[] b) : base(ref x, out s, b)
                     {
-                        internal C(ref int x, out string s, params bool[] b) : base(ref x, out s, b)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    internal B(ref int x, out string s, params bool[] b)
                     {
-                        internal B(ref int x, out string s, params bool[] b)
-                        {
-                            s = null;
-                        }
+                        s = null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -244,48 +244,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS1729:C|} : [||]B
+                class {|CS1729:C|} : [||]B
+                {
+                }
+
+                class B
+                {
+                    internal B(int x)
                     {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    internal C(int x) : base(x)
                     {
-                        internal C(int x) : base(x)
-                        {
-                        }
+                    }
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -294,48 +294,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS1729:C|} : [||]B
+                class {|CS1729:C|} : [||]B
+                {
+                }
+
+                class B
+                {
+                    internal B(int x)
                     {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    protected C(string x) : base(x)
                     {
-                        protected C(string x) : base(x)
-                        {
-                        }
+                    }
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 index: 1
             );
         }
@@ -345,48 +345,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS1729:C|} : [||]B
+                class {|CS1729:C|} : [||]B
+                {
+                }
+
+                class B
+                {
+                    internal B(int x)
                     {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(bool x) : base(x)
                     {
-                        public C(bool x) : base(x)
-                        {
-                        }
+                    }
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 index: 2
             );
         }
@@ -396,56 +396,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS1729:C|} : [||]B
+                class {|CS1729:C|} : [||]B
+                {
+                }
+
+                class B
+                {
+                    internal B(int x)
                     {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(bool x) : base(x)
                     {
-                        public C(bool x) : base(x)
-                        {
-                        }
-
-                        protected C(string x) : base(x)
-                        {
-                        }
-
-                        internal C(int x) : base(x)
-                        {
-                        }
                     }
 
-                    class B
+                    protected C(string x) : base(x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    internal C(int x) : base(x)
+                    {
+                    }
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
+                    }
+
+                    protected B(string x)
+                    {
+                    }
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 index: 3
             );
         }
@@ -455,59 +455,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    class C : [||]B
+                class C : [||]B
+                {
+                    public {|CS1729:C|}(bool x)
                     {
-                        public {|CS1729:C|}(bool x)
-                        {
-                        }
+                    }
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
                     }
 
-                    class B
+                    protected B(string x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public {|CS1729:C|}(bool x)
                     {
-                        public {|CS1729:C|}(bool x)
-                        {
-                        }
-
-                        protected C(string x) : base(x)
-                        {
-                        }
-
-                        internal C(int x) : base(x)
-                        {
-                        }
                     }
 
-                    class B
+                    protected C(string x) : base(x)
                     {
-                        internal B(int x)
-                        {
-                        }
-
-                        protected B(string x)
-                        {
-                        }
-
-                        public B(bool x)
-                        {
-                        }
                     }
-                    """,
+
+                    internal C(int x) : base(x)
+                    {
+                    }
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
+                    }
+
+                    protected B(string x)
+                    {
+                    }
+
+                    public B(bool x)
+                    {
+                    }
+                }
+                """,
                 index: 2
             );
         }
@@ -517,59 +517,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    class C : [||]B
+                class C : [||]B
+                {
+                    public {|CS1729:C|}((bool, bool) x)
                     {
-                        public {|CS1729:C|}((bool, bool) x)
-                        {
-                        }
+                    }
+                }
+
+                class B
+                {
+                    internal B((int, int) x)
+                    {
                     }
 
-                    class B
+                    protected B((string, string) x)
                     {
-                        internal B((int, int) x)
-                        {
-                        }
-
-                        protected B((string, string) x)
-                        {
-                        }
-
-                        public B((bool, bool) x)
-                        {
-                        }
                     }
-                    """,
+
+                    public B((bool, bool) x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public {|CS1729:C|}((bool, bool) x)
                     {
-                        public {|CS1729:C|}((bool, bool) x)
-                        {
-                        }
-
-                        protected C((string, string) x) : base(x)
-                        {
-                        }
-
-                        internal C((int, int) x) : base(x)
-                        {
-                        }
                     }
 
-                    class B
+                    protected C((string, string) x) : base(x)
                     {
-                        internal B((int, int) x)
-                        {
-                        }
-
-                        protected B((string, string) x)
-                        {
-                        }
-
-                        public B((bool, bool) x)
-                        {
-                        }
                     }
-                    """,
+
+                    internal C((int, int) x) : base(x)
+                    {
+                    }
+                }
+
+                class B
+                {
+                    internal B((int, int) x)
+                    {
+                    }
+
+                    protected B((string, string) x)
+                    {
+                    }
+
+                    public B((bool, bool) x)
+                    {
+                    }
+                }
+                """,
                 index: 2
             );
         }
@@ -579,20 +579,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringMissingAsync(
                 """
-                    class C : [||]B
+                class C : [||]B
+                {
+                    public {|CS7036:C|}(int x)
                     {
-                        public {|CS7036:C|}(int x)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -602,39 +602,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    class C : [||]B
+                class C : [||]B
+                {
+                    public {|CS7036:C|}(int y)
                     {
-                        public {|CS7036:C|}(int y)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public {|CS7036:C|}(int y)
                     {
-                        public {|CS7036:C|}(int y)
-                        {
-                        }
-
-                        internal {|CS0111:C|}(int x) : base(x)
-                        {
-                        }
                     }
 
-                    class B
+                    internal {|CS0111:C|}(int x) : base(x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -644,39 +644,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    class C : [||]B
+                class C : [||]B
+                {
+                    private {|CS7036:C|}(int y)
                     {
-                        private {|CS7036:C|}(int y)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    internal C(int x) : base(x)
                     {
-                        internal C(int x) : base(x)
-                        {
-                        }
-
-                        private {|CS0111:{|CS7036:C|}|}(int y)
-                        {
-                        }
                     }
 
-                    class B
+                    private {|CS0111:{|CS7036:C|}|}(int y)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+
+                class B
+                {
+                    internal B(int x)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -686,33 +686,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    using System;
-                    class Program : Excep[||]tion
-                    {
-                    }
-                    """,
+                using System;
+                class Program : Excep[||]tion
+                {
+                }
+                """,
                 """
-                    using System;
-                    using System.Runtime.Serialization;
-                    class Program : Exception
+                using System;
+                using System.Runtime.Serialization;
+                class Program : Exception
+                {
+                    public Program()
                     {
-                        public Program()
-                        {
-                        }
-
-                        public Program(string message) : base(message)
-                        {
-                        }
-
-                        public Program(string message, Exception innerException) : base(message, innerException)
-                        {
-                        }
-
-                        protected Program(SerializationInfo info, StreamingContext context) : base(info, context)
-                        {
-                        }
                     }
-                    """,
+
+                    public Program(string message) : base(message)
+                    {
+                    }
+
+                    public Program(string message, Exception innerException) : base(message, innerException)
+                    {
+                    }
+
+                    protected Program(SerializationInfo info, StreamingContext context) : base(info, context)
+                    {
+                    }
+                }
+                """,
                 index: 4
             );
         }
@@ -722,50 +722,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program : [||]Exception
+                class Program : [||]Exception
+                {
+                    public Program()
                     {
-                        public Program()
-                        {
-                        }
-
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+
+                    static void Main(string[] args)
+                    {
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Runtime.Serialization;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Runtime.Serialization;
 
-                    class Program : Exception
+                class Program : Exception
+                {
+                    public Program()
                     {
-                        public Program()
-                        {
-                        }
-
-                        public Program(string message) : base(message)
-                        {
-                        }
-
-                        public Program(string message, Exception innerException) : base(message, innerException)
-                        {
-                        }
-
-                        protected Program(SerializationInfo info, StreamingContext context) : base(info, context)
-                        {
-                        }
-
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+
+                    public Program(string message) : base(message)
+                    {
+                    }
+
+                    public Program(string message, Exception innerException) : base(message, innerException)
+                    {
+                    }
+
+                    protected Program(SerializationInfo info, StreamingContext context) : base(info, context)
+                    {
+                    }
+
+                    static void Main(string[] args)
+                    {
+                    }
+                }
+                """,
                 index: 3
             );
         }
@@ -775,57 +775,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program : [||]Exception
+                class Program : [||]Exception
+                {
+                    public Program(string message) : base(message)
                     {
-                        public Program(string message) : base(message)
-                        {
-                        }
-
-                        public Program(string message, Exception innerException) : base(message, innerException)
-                        {
-                        }
-
-                        protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
-                        {
-                        }
-
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+
+                    public Program(string message, Exception innerException) : base(message, innerException)
+                    {
+                    }
+
+                    protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
+                    {
+                    }
+
+                    static void Main(string[] args)
+                    {
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program : Exception
+                class Program : Exception
+                {
+                    public Program()
                     {
-                        public Program()
-                        {
-                        }
-
-                        public Program(string message) : base(message)
-                        {
-                        }
-
-                        public Program(string message, Exception innerException) : base(message, innerException)
-                        {
-                        }
-
-                        protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
-                        {
-                        }
-
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """
+
+                    public Program(string message) : base(message)
+                    {
+                    }
+
+                    public Program(string message, Exception innerException) : base(message, innerException)
+                    {
+                    }
+
+                    protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
+                    {
+                    }
+
+                    static void Main(string[] args)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -834,53 +834,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program : [||]Exception
+                class Program : [||]Exception
+                {
+                    public Program(string message, Exception innerException) : base(message, innerException)
                     {
-                        public Program(string message, Exception innerException) : base(message, innerException)
-                        {
-                        }
-
-                        protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
-                        {
-                        }
-
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+
+                    protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
+                    {
+                    }
+
+                    static void Main(string[] args)
+                    {
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program : Exception
+                class Program : Exception
+                {
+                    public Program()
                     {
-                        public Program()
-                        {
-                        }
-
-                        public Program(string message) : base(message)
-                        {
-                        }
-
-                        public Program(string message, Exception innerException) : base(message, innerException)
-                        {
-                        }
-
-                        protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
-                        {
-                        }
-
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+
+                    public Program(string message) : base(message)
+                    {
+                    }
+
+                    public Program(string message, Exception innerException) : base(message, innerException)
+                    {
+                    }
+
+                    protected Program(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
+                    {
+                    }
+
+                    static void Main(string[] args)
+                    {
+                    }
+                }
+                """,
                 index: 2
             );
         }
@@ -894,32 +894,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    class B
+                class B
+                {
+                    public B((int, string) x)
                     {
-                        public B((int, string) x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C((int, string) x) : base(x)
                     {
-                        public C((int, string) x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    public B((int, string) x)
                     {
-                        public B((int, string) x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -932,32 +932,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    class B
+                class B
+                {
+                    public B((int a, string b) x)
                     {
-                        public B((int a, string b) x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C((int a, string b) x) : base(x)
                     {
-                        public C((int a, string b) x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    class B
+                class B
+                {
+                    public B((int a, string b) x)
                     {
-                        public B((int a, string b) x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -967,32 +967,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class Base
+                class Base
+                {
+                    public Base(string value)
                     {
-                        public Base(string value)
-                        {
-                        }
                     }
+                }
 
-                    class [||]{|CS7036:Derived|} : Base
-                    {
-                    }
-                    """,
+                class [||]{|CS7036:Derived|} : Base
+                {
+                }
+                """,
                 """
-                    class Base
+                class Base
+                {
+                    public Base(string value)
                     {
-                        public Base(string value)
-                        {
-                        }
                     }
+                }
 
-                    class Derived : Base
+                class Derived : Base
+                {
+                    public Derived(string value) : base(value)
                     {
-                        public Derived(string value) : base(value)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1002,32 +1002,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class Base
+                class Base
+                {
+                    public Base(int a, string value = null)
                     {
-                        public Base(int a, string value = null)
-                        {
-                        }
                     }
+                }
 
-                    class [||]{|CS7036:Derived|} : Base
-                    {
-                    }
-                    """,
+                class [||]{|CS7036:Derived|} : Base
+                {
+                }
+                """,
                 """
-                    class Base
+                class Base
+                {
+                    public Base(int a, string value = null)
                     {
-                        public Base(int a, string value = null)
-                        {
-                        }
                     }
+                }
 
-                    class Derived : Base
+                class Derived : Base
+                {
+                    public Derived(int a, string value = null) : base(a, value)
                     {
-                        public Derived(int a, string value = null) : base(a, value)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1037,10 +1037,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringMissingAsync(
                 """
-                    enum [||]E
-                    {
-                    }
-                    """
+                enum [||]E
+                {
+                }
+                """
             );
         }
 
@@ -1050,32 +1050,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    abstract class {|CS7036:C|} : [||]B
-                    {
-                    }
+                abstract class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    abstract class C : B
+                abstract class C : B
+                {
+                    protected C(int x) : base(x)
                     {
-                        protected C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1085,32 +1085,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1120,35 +1120,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringOnlyAsync(
                 """
-                    class {|CS7036:C|} : B
+                class {|CS7036:C|} : B
+                {
+
+                [||]
+
+                }
+
+                abstract class B
+                {
+                    protected B(int x)
                     {
-
-                    [||]
-
                     }
-
-                    abstract class B
-                    {
-                        protected B(int x)
-                        {
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1158,39 +1158,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringOnlyAsync(
                 """
-                    class {|CS7036:C|} : B
-                    {
-                        int X;
-                    [||]
-                        int Y;
-                    }
+                class {|CS7036:C|} : B
+                {
+                    int X;
+                [||]
+                    int Y;
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    int X;
+
+                    int Y;
+
+                    public C(int x) : base(x)
                     {
-                        int X;
-
-                        int Y;
-
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected B(int x)
                     {
-                        protected B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1201,32 +1201,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    abstract class {|CS7036:C|} : [||]B
-                    {
-                    }
+                abstract class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    abstract class C : B
+                abstract class C : B
+                {
+                    protected C(int x) : base(x)
                     {
-                        protected C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1236,32 +1236,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1271,32 +1271,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    abstract class {|CS7036:C|} : [||]B
-                    {
-                    }
+                abstract class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    abstract class C : B
+                abstract class C : B
+                {
+                    internal C(int x) : base(x)
                     {
-                        internal C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1306,32 +1306,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    internal B(int x)
                     {
-                        internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1341,32 +1341,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    abstract class {|CS7036:C|} : [||]B
-                    {
-                    }
+                abstract class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected internal B(int x)
                     {
-                        protected internal B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    abstract class C : B
+                abstract class C : B
+                {
+                    protected internal C(int x) : base(x)
                     {
-                        protected internal C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected internal B(int x)
                     {
-                        protected internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1376,32 +1376,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected internal B(int x)
                     {
-                        protected internal B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    protected internal B(int x)
                     {
-                        protected internal B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1411,32 +1411,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    abstract class {|CS7036:C|} : [||]B
-                    {
-                    }
+                abstract class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    private protected B(int x)
                     {
-                        private protected B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    abstract class C : B
+                abstract class C : B
+                {
+                    private protected C(int x) : base(x)
                     {
-                        private protected C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    private protected B(int x)
                     {
-                        private protected B(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1446,32 +1446,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    class {|CS7036:C|} : [||]B
-                    {
-                    }
+                class {|CS7036:C|} : [||]B
+                {
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    private protected internal {|CS0107:B|}(int x)
                     {
-                        private protected internal {|CS0107:B|}(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C : B
+                class C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    abstract class B
+                abstract class B
+                {
+                    private protected internal {|CS0107:B|}(int x)
                     {
-                        private protected internal {|CS0107:B|}(int x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1481,32 +1481,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    class Base
+                class Base
+                {
+                    protected Base()
                     {
-                        protected Base()
-                        {
-                        }
                     }
+                }
 
-                    sealed class Program : [||]Base
-                    {
-                    }
-                    """,
+                sealed class Program : [||]Base
+                {
+                }
+                """,
                 """
-                    class Base
+                class Base
+                {
+                    protected Base()
                     {
-                        protected Base()
-                        {
-                        }
                     }
+                }
 
-                    sealed class Program : Base
+                sealed class Program : Base
+                {
+                    public Program()
                     {
-                        public Program()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1516,32 +1516,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    class Base
+                class Base
+                {
+                    protected internal Base()
                     {
-                        protected internal Base()
-                        {
-                        }
                     }
+                }
 
-                    sealed class Program : [||]Base
-                    {
-                    }
-                    """,
+                sealed class Program : [||]Base
+                {
+                }
+                """,
                 """
-                    class Base
+                class Base
+                {
+                    protected internal Base()
                     {
-                        protected internal Base()
-                        {
-                        }
                     }
+                }
 
-                    sealed class Program : Base
+                sealed class Program : Base
+                {
+                    internal Program()
                     {
-                        internal Program()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1551,32 +1551,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestRefactoringAsync(
                 """
-                    class Base
+                class Base
+                {
+                    private protected Base()
                     {
-                        private protected Base()
-                        {
-                        }
                     }
+                }
 
-                    sealed class Program : [||]Base
-                    {
-                    }
-                    """,
+                sealed class Program : [||]Base
+                {
+                }
+                """,
                 """
-                    class Base
+                class Base
+                {
+                    private protected Base()
                     {
-                        private protected Base()
-                        {
-                        }
                     }
+                }
 
-                    sealed class Program : Base
+                sealed class Program : Base
+                {
+                    internal Program()
                     {
-                        internal Program()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1585,32 +1585,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         {
             await TestCodeFixAsync(
                 """
-                    record {|CS1729:C|} : [||]B
-                    {
-                    }
+                record {|CS1729:C|} : [||]B
+                {
+                }
 
-                    record B
+                record B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    record C : B
+                record C : B
+                {
+                    public C(int x) : base(x)
                     {
-                        public C(int x) : base(x)
-                        {
-                        }
                     }
+                }
 
-                    record B
+                record B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 index: 1
             );
         }

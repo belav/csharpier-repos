@@ -59,25 +59,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object goo;
+                class Class
+                {
+                    private object goo;
 
-                        void Method()
-                        {
-                            goo;
-                        }
+                    void Method()
+                    {
+                        goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -86,14 +86,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_field_0, "goo"),
@@ -110,14 +110,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|_goo|];
-                        }
+                        [|_goo|];
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_field_0, "_goo"),
@@ -131,25 +131,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly object goo;
+                class Class
+                {
+                    private readonly object goo;
 
-                        void Method()
-                        {
-                            goo;
-                        }
+                    void Method()
+                    {
+                        goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -159,25 +159,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public object goo { get; private set; }
+                class Class
+                {
+                    public object goo { get; private set; }
 
-                        void Method()
-                        {
-                            goo;
-                        }
+                    void Method()
+                    {
+                        goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -187,25 +187,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
+                        [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public object Goo { get; private set; }
+                class Class
+                {
+                    public object Goo { get; private set; }
 
-                        void Method()
-                        {
-                            Goo;
-                        }
+                    void Method()
+                    {
+                        Goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -214,25 +214,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
+                        [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object Goo;
+                class Class
+                {
+                    private object Goo;
 
-                        void Method()
-                        {
-                            Goo;
-                        }
+                    void Method()
+                    {
+                        Goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -242,25 +242,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
+                        [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly object Goo;
+                class Class
+                {
+                    private readonly object Goo;
 
-                        void Method()
-                        {
-                            Goo;
-                        }
+                    void Method()
+                    {
+                        Goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -270,25 +270,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int i)
                     {
-                        void Method(int i)
-                        {
-                            Method([|goo|]);
-                        }
+                        Method([|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int goo;
+                class Class
+                {
+                    private int goo;
 
-                        void Method(int i)
-                        {
-                            Method(goo);
-                        }
+                    void Method(int i)
+                    {
+                        Method(goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -297,29 +297,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Class
+                class Class
+                {
+                    void Method(string? s)
                     {
-                        void Method(string? s)
-                        {
-                            Method([|goo|]);
-                        }
+                        Method([|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Class
+                class Class
+                {
+                    private string? goo;
+
+                    void Method(string? s)
                     {
-                        private string? goo;
-
-                        void Method(string? s)
-                        {
-                            Method(goo);
-                        }
+                        Method(goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -328,33 +328,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Class
+                class Class
+                {
+                    void Method(IEnumerable<string?> s)
                     {
-                        void Method(IEnumerable<string?> s)
-                        {
-                            Method([|goo|]);
-                        }
+                        Method([|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Class
+                class Class
+                {
+                    private IEnumerable<string?> goo;
+
+                    void Method(IEnumerable<string?> s)
                     {
-                        private IEnumerable<string?> goo;
-
-                        void Method(IEnumerable<string?> s)
-                        {
-                            Method(goo);
-                        }
+                        Method(goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -363,14 +363,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int i)
                     {
-                        void Method(int i)
-                        {
-                            [|goo|] = 1;
-                        }
+                        [|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_field_0, "goo"),
@@ -386,19 +386,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    abstract class Base
-                    {
-                        public abstract void Method(int i);
-                    }
+                abstract class Base
+                {
+                    public abstract void Method(int i);
+                }
 
-                    class Class : Base
+                class Class : Base
+                {
+                    public override void Method(int i)
                     {
-                        public override void Method(int i)
-                        {
-                            [|goo|] = 1;
-                        }
+                        [|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_field_0, "goo"),
@@ -418,25 +418,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int i)
                     {
-                        void Method(int i)
-                        {
-                            [|goo|] = 1;
-                        }
+                        [|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int goo;
+                class Class
+                {
+                    private int goo;
 
-                        void Method(int i)
-                        {
-                            goo = 1;
-                        }
+                    void Method(int i)
+                    {
+                        goo = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -445,25 +445,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int i)
                     {
-                        void Method(int i)
-                        {
-                            [|goo|] = 1;
-                        }
+                        [|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public int goo { get; private set; }
+                class Class
+                {
+                    public int goo { get; private set; }
 
-                        void Method(int i)
-                        {
-                            goo = 1;
-                        }
+                    void Method(int i)
+                    {
+                        goo = 1;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -473,25 +473,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(ref int i)
                     {
-                        void Method(ref int i)
-                        {
-                            Method(ref this.[|goo|]);
-                        }
+                        Method(ref this.[|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int goo;
+                class Class
+                {
+                    private int goo;
 
-                        void Method(ref int i)
-                        {
-                            Method(ref this.[|goo|]);
-                        }
+                    void Method(ref int i)
+                    {
+                        Method(ref this.[|goo|]);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -500,27 +500,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Class
+                using System;
+                class Class
+                {
+                    void Method(ref int i)
                     {
-                        void Method(ref int i)
-                        {
-                            Method(ref this.[|goo|]);
-                        }
+                        Method(ref this.[|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Class
-                    {
-                        public ref int goo => throw new NotImplementedException();
+                using System;
+                class Class
+                {
+                    public ref int goo => throw new NotImplementedException();
 
-                        void Method(ref int i)
-                        {
-                            Method(ref this.goo);
-                        }
+                    void Method(ref int i)
+                    {
+                        Method(ref this.goo);
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -530,27 +530,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Class
+                using System;
+                class Class
+                {
+                    void Method(in int i)
                     {
-                        void Method(in int i)
-                        {
-                            Method(in this.[|goo|]);
-                        }
+                        Method(in this.[|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Class
-                    {
-                        public ref readonly int goo => throw new NotImplementedException();
+                using System;
+                class Class
+                {
+                    public ref readonly int goo => throw new NotImplementedException();
 
-                        void Method(in int i)
-                        {
-                            Method(in this.goo);
-                        }
+                    void Method(in int i)
+                    {
+                        Method(in this.goo);
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -560,25 +560,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(ref int i)
                     {
-                        void Method(ref int i)
-                        {
-                            Method(ref [|goo|]);
-                        }
+                        Method(ref [|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int goo;
+                class Class
+                {
+                    private int goo;
 
-                        void Method(ref int i)
-                        {
-                            Method(ref goo);
-                        }
+                    void Method(ref int i)
+                    {
+                        Method(ref goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -587,14 +587,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(out int i)
                     {
-                        void Method(out int i)
-                        {
-                            Method(out [|goo|]);
-                        }
+                        Method(out [|goo|]);
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_field_0, "goo"),
@@ -609,25 +609,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(out int i)
                     {
-                        void Method(out int i)
-                        {
-                            Method(out [|goo|]);
-                        }
+                        Method(out [|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int goo;
+                class Class
+                {
+                    private int goo;
 
-                        void Method(out int i)
-                        {
-                            Method(out goo);
-                        }
+                    void Method(out int i)
+                    {
+                        Method(out goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -636,25 +636,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    static void Method()
                     {
-                        static void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private static object goo;
+                class Class
+                {
+                    private static object goo;
 
-                        static void Method()
-                        {
-                            goo;
-                        }
+                    static void Method()
+                    {
+                        goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -663,25 +663,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    static void Method()
                     {
-                        static void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private static readonly object goo;
+                class Class
+                {
+                    private static readonly object goo;
 
-                        static void Method()
-                        {
-                            goo;
-                        }
+                    static void Method()
+                    {
+                        goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -691,25 +691,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    static void Method()
                     {
-                        static void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public static object goo { get; private set; }
+                class Class
+                {
+                    public static object goo { get; private set; }
 
-                        static void Method()
-                        {
-                            goo;
-                        }
+                    static void Method()
+                    {
+                        goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -719,25 +719,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            this.[|goo|];
-                        }
+                        this.[|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object goo;
+                class Class
+                {
+                    private object goo;
 
-                        void Method()
-                        {
-                            this.goo;
-                        }
+                    void Method()
+                    {
+                        this.goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -746,25 +746,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            this.[|goo|];
-                        }
+                        this.[|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly object goo;
+                class Class
+                {
+                    private readonly object goo;
 
-                        void Method()
-                        {
-                            this.goo;
-                        }
+                    void Method()
+                    {
+                        this.goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -774,25 +774,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            this.[|goo|];
-                        }
+                        this.[|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public object goo { get; private set; }
+                class Class
+                {
+                    public object goo { get; private set; }
 
-                        void Method()
-                        {
-                            this.goo;
-                        }
+                    void Method()
+                    {
+                        this.goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -802,25 +802,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            this.[|goo|] = 1;
-                        }
+                        this.[|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int goo;
+                class Class
+                {
+                    private int goo;
 
-                        void Method()
-                        {
-                            this.goo = 1;
-                        }
+                    void Method()
+                    {
+                        this.goo = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -829,25 +829,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            this.[|goo|] = 1;
-                        }
+                        this.[|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public int goo { get; private set; }
+                class Class
+                {
+                    public int goo { get; private set; }
 
-                        void Method()
-                        {
-                            this.goo = 1;
-                        }
+                    void Method()
+                    {
+                        this.goo = 1;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -857,25 +857,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Class.[|goo|];
-                        }
+                        Class.[|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private static object goo;
+                class Class
+                {
+                    private static object goo;
 
-                        void Method()
-                        {
-                            Class.goo;
-                        }
+                    void Method()
+                    {
+                        Class.goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -884,25 +884,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Class.[|goo|];
-                        }
+                        Class.[|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private static readonly object goo;
+                class Class
+                {
+                    private static readonly object goo;
 
-                        void Method()
-                        {
-                            Class.goo;
-                        }
+                    void Method()
+                    {
+                        Class.goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -912,25 +912,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Class.[|goo|];
-                        }
+                        Class.[|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public static object goo { get; private set; }
+                class Class
+                {
+                    public static object goo { get; private set; }
 
-                        void Method()
-                        {
-                            Class.goo;
-                        }
+                    void Method()
+                    {
+                        Class.goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -940,25 +940,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Class.[|goo|] = 1;
-                        }
+                        Class.[|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private static int goo;
+                class Class
+                {
+                    private static int goo;
 
-                        void Method()
-                        {
-                            Class.goo = 1;
-                        }
+                    void Method()
+                    {
+                        Class.goo = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -967,25 +967,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Class.[|goo|] = 1;
-                        }
+                        Class.[|goo|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public static int goo { get; private set; }
+                class Class
+                {
+                    public static int goo { get; private set; }
 
-                        void Method()
-                        {
-                            Class.goo = 1;
-                        }
+                    void Method()
+                    {
+                        Class.goo = 1;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -995,32 +995,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            new D().[|goo|];
-                        }
+                        new D().[|goo|];
                     }
+                }
 
-                    class D
-                    {
-                    }
-                    """,
+                class D
+                {
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            new D().goo;
-                        }
+                        new D().goo;
                     }
+                }
 
-                    class D
-                    {
-                        internal object goo;
-                    }
-                    """
+                class D
+                {
+                    internal object goo;
+                }
+                """
             );
         }
 
@@ -1029,31 +1029,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Outer
+                class Outer
+                {
+                    class Class
                     {
-                        class Class
+                        void Method()
                         {
-                            void Method()
-                            {
-                                new Outer().[|goo|];
-                            }
+                            new Outer().[|goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Outer
-                    {
-                        private object goo;
+                class Outer
+                {
+                    private object goo;
 
-                        class Class
+                    class Class
+                    {
+                        void Method()
                         {
-                            void Method()
-                            {
-                                new Outer().goo;
-                            }
+                            new Outer().goo;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1062,32 +1062,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class : Base
+                class Class : Base
+                {
+                    void Method(Base b)
                     {
-                        void Method(Base b)
-                        {
-                            b.[|goo|];
-                        }
+                        b.[|goo|];
                     }
+                }
 
-                    class Base
-                    {
-                    }
-                    """,
+                class Base
+                {
+                }
+                """,
                 """
-                    class Class : Base
+                class Class : Base
+                {
+                    void Method(Base b)
                     {
-                        void Method(Base b)
-                        {
-                            b.goo;
-                        }
+                        b.goo;
                     }
+                }
 
-                    class Base
-                    {
-                        internal object goo;
-                    }
-                    """
+                class Base
+                {
+                    internal object goo;
+                }
+                """
             );
         }
 
@@ -1096,32 +1096,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class : Base
+                class Class : Base
+                {
+                    void Method(Base b)
                     {
-                        void Method(Base b)
-                        {
-                            Base.[|goo|];
-                        }
+                        Base.[|goo|];
                     }
+                }
 
-                    class Base
-                    {
-                    }
-                    """,
+                class Base
+                {
+                }
+                """,
                 """
-                    class Class : Base
+                class Class : Base
+                {
+                    void Method(Base b)
                     {
-                        void Method(Base b)
-                        {
-                            Base.goo;
-                        }
+                        Base.goo;
                     }
+                }
 
-                    class Base
-                    {
-                        protected static object goo;
-                    }
-                    """
+                class Base
+                {
+                    protected static object goo;
+                }
+                """
             );
         }
 
@@ -1130,18 +1130,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestActionCountAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.[|goo|];
-                        }
+                        i.[|goo|];
                     }
+                }
 
-                    interface I
-                    {
-                    }
-                    """,
+                interface I
+                {
+                }
+                """,
                 count: 2
             );
         }
@@ -1151,32 +1151,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.[|Goo|];
-                        }
+                        i.[|Goo|];
                     }
+                }
 
-                    interface I
-                    {
-                    }
-                    """,
+                interface I
+                {
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.Goo;
-                        }
+                        i.Goo;
                     }
+                }
 
-                    interface I
-                    {
-                        object Goo { get; set; }
-                    }
-                    """,
+                interface I
+                {
+                    object Goo { get; set; }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -1186,32 +1186,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.[|Goo|];
-                        }
+                        i.[|Goo|];
                     }
+                }
 
-                    interface I
-                    {
-                    }
-                    """,
+                interface I
+                {
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.Goo;
-                        }
+                        i.Goo;
                     }
+                }
 
-                    interface I
-                    {
-                        object Goo { get; }
-                    }
-                    """
+                interface I
+                {
+                    object Goo { get; }
+                }
+                """
             );
         }
 
@@ -1220,18 +1220,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            I.[|Goo|];
-                        }
+                        I.[|Goo|];
                     }
+                }
 
-                    interface I
-                    {
-                    }
-                    """
+                interface I
+                {
+                }
+                """
             );
         }
 
@@ -1240,18 +1240,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestActionCountAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.[|Goo|] = 1;
-                        }
+                        i.[|Goo|] = 1;
                     }
+                }
 
-                    interface I
-                    {
-                    }
-                    """,
+                interface I
+                {
+                }
+                """,
                 count: 1
             );
         }
@@ -1261,32 +1261,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.[|Goo|] = 1;
-                        }
+                        i.[|Goo|] = 1;
                     }
+                }
 
-                    interface I
-                    {
-                    }
-                    """,
+                interface I
+                {
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method(I i)
                     {
-                        void Method(I i)
-                        {
-                            i.Goo = 1;
-                        }
+                        i.Goo = 1;
                     }
+                }
 
-                    interface I
-                    {
-                        int Goo { get; set; }
-                    }
-                    """
+                interface I
+                {
+                    int Goo { get; set; }
+                }
+                """
             );
         }
 
@@ -1295,25 +1295,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class<T>
+                class Class<T>
+                {
+                    void Method(T t)
                     {
-                        void Method(T t)
-                        {
-                            [|goo|] = t;
-                        }
+                        [|goo|] = t;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class<T>
-                    {
-                        private T goo;
+                class Class<T>
+                {
+                    private T goo;
 
-                        void Method(T t)
-                        {
-                            goo = t;
-                        }
+                    void Method(T t)
+                    {
+                        goo = t;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1322,25 +1322,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method<T>(T t)
                     {
-                        void Method<T>(T t)
-                        {
-                            [|goo|] = t;
-                        }
+                        [|goo|] = t;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object goo;
+                class Class
+                {
+                    private object goo;
 
-                        void Method<T>(T t)
-                        {
-                            goo = t;
-                        }
+                    void Method<T>(T t)
+                    {
+                        goo = t;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1349,25 +1349,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method<T>(IList<T> t)
                     {
-                        void Method<T>(IList<T> t)
-                        {
-                            [|goo|] = t;
-                        }
+                        [|goo|] = t;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private IList<object> goo;
+                class Class
+                {
+                    private IList<object> goo;
 
-                        void Method<T>(IList<T> t)
-                        {
-                            goo = t;
-                        }
+                    void Method<T>(IList<T> t)
+                    {
+                        goo = t;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1376,28 +1376,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        int i;
+                class Class
+                {
+                    int i;
 
-                        void Method()
-                        {
-                            [|goo|];
-                        }
+                    void Method()
+                    {
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        int i;
-                        private object goo;
+                class Class
+                {
+                    int i;
+                    private object goo;
 
-                        void Method()
-                        {
-                            goo;
-                        }
+                    void Method()
+                    {
+                        goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1406,28 +1406,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|goo|];
-                        }
-
-                        int i;
+                        [|goo|];
                     }
-                    """,
+
+                    int i;
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            goo;
-                        }
-
-                        int i;
-                        private object goo;
+                        goo;
                     }
-                    """
+
+                    int i;
+                    private object goo;
+                }
+                """
             );
         }
 
@@ -1436,29 +1436,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        int Bar;
+                class Class
+                {
+                    int Bar;
 
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
+                    void Method()
+                    {
+                        [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    int Bar;
+
+                    public object Goo { get; private set; }
+
+                    void Method()
                     {
-                        int Bar;
-
-                        public object Goo { get; private set; }
-
-                        void Method()
-                        {
-                            Goo;
-                        }
+                        Goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1467,29 +1467,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
-
-                        int Bar;
+                        [|Goo|];
                     }
-                    """,
+
+                    int Bar;
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Goo;
-                        }
-
-                        int Bar;
-
-                        public object Goo { get; private set; }
+                        Goo;
                     }
-                    """
+
+                    int Bar;
+
+                    public object Goo { get; private set; }
+                }
+                """
             );
         }
 
@@ -1498,28 +1498,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        int Quux { get; }
+                class Class
+                {
+                    int Quux { get; }
 
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
+                    void Method()
+                    {
+                        [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public object Goo { get; private set; }
-                        int Quux { get; }
+                class Class
+                {
+                    public object Goo { get; private set; }
+                    int Quux { get; }
 
-                        void Method()
-                        {
-                            Goo;
-                        }
+                    void Method()
+                    {
+                        Goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1528,32 +1528,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    int Bar;
+
+                    int Quux { get; }
+
+                    void Method()
                     {
-                        int Bar;
-
-                        int Quux { get; }
-
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
+                        [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    int Bar;
+
+                    public object Goo { get; private set; }
+                    int Quux { get; }
+
+                    void Method()
                     {
-                        int Bar;
-
-                        public object Goo { get; private set; }
-                        int Quux { get; }
-
-                        void Method()
-                        {
-                            Goo;
-                        }
+                        Goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1562,32 +1562,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    int Quux { get; }
+
+                    int Bar;
+
+                    void Method()
                     {
-                        int Quux { get; }
-
-                        int Bar;
-
-                        void Method()
-                        {
-                            [|Goo|];
-                        }
+                        [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    int Quux { get; }
+                    public object Goo { get; private set; }
+
+                    int Bar;
+
+                    void Method()
                     {
-                        int Quux { get; }
-                        public object Goo { get; private set; }
-
-                        int Bar;
-
-                        void Method()
-                        {
-                            Goo;
-                        }
+                        Goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1596,14 +1596,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|Goo|]();
-                        }
+                        [|Goo|]();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1612,14 +1612,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            new [|Goo|]();
-                        }
+                        new [|Goo|]();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1628,110 +1628,110 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|A|] a;
-                        }
+                        [|A|] a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|A.B|] a;
-                        }
+                        [|A.B|] a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|A|].B a;
-                        }
+                        [|A|].B a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            A.[|B|] a;
-                        }
+                        A.[|B|] a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|A.B.C|] a;
-                        }
+                        [|A.B.C|] a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|A.B|].C a;
-                        }
+                        [|A.B|].C a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            A.B.[|C|] a;
-                        }
+                        A.B.[|C|] a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|A|].B.C a;
-                        }
+                        [|A|].B.C a;
                     }
-                    """
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            A.[|B|].C a;
-                        }
+                        A.[|B|].C a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1740,83 +1740,83 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [[|A|]]
-                    class Class
-                    {
-                    }
-                    """
+                [[|A|]]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [[|A.B|]]
-                    class Class
-                    {
-                    }
-                    """
+                [[|A.B|]]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [[|A|].B]
-                    class Class
-                    {
-                    }
-                    """
+                [[|A|].B]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [A.[|B|]]
-                    class Class
-                    {
-                    }
-                    """
+                [A.[|B|]]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [[|A.B.C|]]
-                    class Class
-                    {
-                    }
-                    """
+                [[|A.B.C|]]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [[|A.B|].C]
-                    class Class
-                    {
-                    }
-                    """
+                [[|A.B|].C]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [A.B.[|C|]]
-                    class Class
-                    {
-                    }
-                    """
+                [A.B.[|C|]]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [[|A|].B.C]
-                    class Class
-                    {
-                    }
-                    """
+                [[|A|].B.C]
+                class Class
+                {
+                }
+                """
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [A.B.[|C|]]
-                    class Class
-                    {
-                    }
-                    """
+                [A.B.[|C|]]
+                class Class
+                {
+                }
+                """
             );
         }
 
@@ -1825,75 +1825,75 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestSpansAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.[|Goo|] }
-                    """
+                        this.[|Goo|] }
+                """
             );
 
             await TestSpansAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.[|Goo|];
-                        }
-                    """
+                        this.[|Goo|];
+                    }
+                """
             );
 
             await TestSpansAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.[|Goo|] = 1 }
-                    """
+                        this.[|Goo|] = 1 }
+                """
             );
 
             await TestSpansAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.[|Goo|] = 1 + 2 }
-                    """
+                        this.[|Goo|] = 1 + 2 }
+                """
             );
 
             await TestSpansAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.[|Goo|] = 1 + 2;
-                        }
-                    """
+                        this.[|Goo|] = 1 + 2;
+                    }
+                """
             );
 
             await TestSpansAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.[|Goo|] += Bar() }
-                    """
+                        this.[|Goo|] += Bar() }
+                """
             );
 
             await TestSpansAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.[|Goo|] += Bar();
-                        }
-                    """
+                        this.[|Goo|] += Bar();
+                    }
+                """
             );
         }
 
@@ -1902,29 +1902,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            Func<string, int> f = x => [|goo|];
-                        }
+                        Func<string, int> f = x => [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private static int goo;
+
+                    static void Main(string[] args)
                     {
-                        private static int goo;
-
-                        static void Main(string[] args)
-                        {
-                            Func<string, int> f = x => goo;
-                        }
+                        Func<string, int> f = x => goo;
                     }
-                    """,
+                }
+                """,
                 FieldIndex
             );
         }
@@ -1934,29 +1934,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            Func<int> f = () => [|goo|];
-                        }
+                        Func<int> f = () => [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private static int goo;
+
+                    static void Main(string[] args)
                     {
-                        private static int goo;
-
-                        static void Main(string[] args)
-                        {
-                            Func<int> f = () => goo;
-                        }
+                        Func<int> f = () => goo;
                     }
-                    """,
+                }
+                """,
                 FieldIndex
             );
         }
@@ -1966,31 +1966,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            Func<string, Task<int>> f = async x => [|goo|];
-                        }
+                        Func<string, Task<int>> f = async x => [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class Program
+                class Program
+                {
+                    private static int goo;
+
+                    static void Main(string[] args)
                     {
-                        private static int goo;
-
-                        static void Main(string[] args)
-                        {
-                            Func<string, Task<int>> f = async x => goo;
-                        }
+                        Func<string, Task<int>> f = async x => goo;
                     }
-                    """,
+                }
+                """,
                 FieldIndex
             );
         }
@@ -2000,31 +2000,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            Func<Task<int>> f = async () => [|goo|];
-                        }
+                        Func<Task<int>> f = async () => [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class Program
+                class Program
+                {
+                    private static int goo;
+
+                    static void Main(string[] args)
                     {
-                        private static int goo;
-
-                        static void Main(string[] args)
-                        {
-                            Func<Task<int>> f = async () => goo;
-                        }
+                        Func<Task<int>> f = async () => goo;
                     }
-                    """,
+                }
+                """,
                 FieldIndex
             );
         }
@@ -2034,29 +2034,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int i)
                     {
-                        void Method(int i)
-                        {
-                            [|goo|] = () => {
-                                return 2 };
-                        }
+                        [|goo|] = () => {
+                            return 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Class
+                class Class
+                {
+                    private Func<int> goo;
+
+                    void Method(int i)
                     {
-                        private Func<int> goo;
-
-                        void Method(int i)
-                        {
-                            goo = () => {
-                                return 2 };
-                        }
+                        goo = () => {
+                            return 2 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2066,25 +2066,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int i)
                     {
-                        void Method(int i)
-                        {
-                            System.Console.WriteLine([|goo|]);
-                        }
+                        System.Console.WriteLine([|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private bool goo;
+                class Class
+                {
+                    private bool goo;
 
-                        void Method(int i)
-                        {
-                            System.Console.WriteLine(goo);
-                        }
+                    void Method(int i)
+                    {
+                        System.Console.WriteLine(goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2094,25 +2094,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int i)
                     {
-                        void Method(int i)
-                        {
-                            System.Console.WriteLine(this.[|goo|]);
-                        }
+                        System.Console.WriteLine(this.[|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private bool goo;
+                class Class
+                {
+                    private bool goo;
 
-                        void Method(int i)
-                        {
-                            System.Console.WriteLine(this.goo);
-                        }
+                    void Method(int i)
+                    {
+                        System.Console.WriteLine(this.goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2121,26 +2121,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class : ITest
-                    {
-                        bool ITest.[|SomeProp|] { get; set; }
-                    }
+                class Class : ITest
+                {
+                    bool ITest.[|SomeProp|] { get; set; }
+                }
 
-                    interface ITest
-                    {
-                    }
-                    """,
+                interface ITest
+                {
+                }
+                """,
                 """
-                    class Class : ITest
-                    {
-                        bool ITest.SomeProp { get; set; }
-                    }
+                class Class : ITest
+                {
+                    bool ITest.SomeProp { get; set; }
+                }
 
-                    interface ITest
-                    {
-                        bool SomeProp { get; set; }
-                    }
-                    """
+                interface ITest
+                {
+                    bool SomeProp { get; set; }
+                }
+                """
             );
         }
 
@@ -2149,26 +2149,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class : ITest
-                    {
-                        bool ITest.[|SomeProp|] { }
-                    }
+                class Class : ITest
+                {
+                    bool ITest.[|SomeProp|] { }
+                }
 
-                    interface ITest
-                    {
-                    }
-                    """,
+                interface ITest
+                {
+                }
+                """,
                 """
-                    class Class : ITest
-                    {
-                        bool ITest.SomeProp { }
-                    }
+                class Class : ITest
+                {
+                    bool ITest.SomeProp { }
+                }
 
-                    interface ITest
-                    {
-                        bool SomeProp { get; set; }
-                    }
-                    """,
+                interface ITest
+                {
+                    bool SomeProp { get; set; }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -2178,26 +2178,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class : ITest
-                    {
-                        bool ITest.[|SomeProp|] { }
-                    }
+                class Class : ITest
+                {
+                    bool ITest.[|SomeProp|] { }
+                }
 
-                    interface ITest
-                    {
-                    }
-                    """,
+                interface ITest
+                {
+                }
+                """,
                 """
-                    class Class : ITest
-                    {
-                        bool ITest.SomeProp { }
-                    }
+                class Class : ITest
+                {
+                    bool ITest.SomeProp { }
+                }
 
-                    interface ITest
-                    {
-                        bool SomeProp { get; }
-                    }
-                    """
+                interface ITest
+                {
+                    bool SomeProp { get; }
+                }
+                """
             );
         }
 
@@ -2206,15 +2206,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        bool ITest.[|SomeProp|] { }
-                    }
+                class Class
+                {
+                    bool ITest.[|SomeProp|] { }
+                }
 
-                    interface ITest
-                    {
-                    }
-                    """
+                interface ITest
+                {
+                }
+                """
             );
         }
 
@@ -2223,16 +2223,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class : ITest
-                    {
-                        bool ITest.[|SomeProp|] { }
-                    }
+                class Class : ITest
+                {
+                    bool ITest.[|SomeProp|] { }
+                }
 
-                    interface ITest
-                    {
-                        bool SomeProp { get; }
-                    }
-                    """
+                interface ITest
+                {
+                    bool SomeProp { get; }
+                }
+                """
             );
         }
 
@@ -2241,25 +2241,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|@goo|];
-                        }
+                        [|@goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object goo;
+                class Class
+                {
+                    private object goo;
 
-                        void Method()
-                        {
-                            @goo;
-                        }
+                    void Method()
+                    {
+                        @goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2268,25 +2268,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|@int|];
-                        }
+                        [|@int|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object @int;
+                class Class
+                {
+                    private object @int;
 
-                        void Method()
-                        {
-                            @int;
-                        }
+                    void Method()
+                    {
+                        @int;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2295,25 +2295,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|test|] = (ref int x) => x = 10;
-                        }
+                        [|test|] = (ref int x) => x = 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object test;
+                class Class
+                {
+                    private object test;
 
-                        void Method()
-                        {
-                            test = (ref int x) => x = 10;
-                        }
+                    void Method()
+                    {
+                        test = (ref int x) => x = 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2322,14 +2322,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void F<U, V>(U u1, V v1)
                     {
-                        void F<U, V>(U u1, V v1)
-                        {
-                            Goo<string, int>([|u1|], u2);
-                        }
+                        Goo<string, int>([|u1|], u2);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2338,37 +2338,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace TestNs
+                namespace TestNs
+                {
+                    class Program
                     {
-                        class Program
+                        class Test
                         {
-                            class Test
+                            void Meth()
                             {
-                                void Meth()
-                                {
-                                    Program.[|blah|] = new Test();
-                                }
+                                Program.[|blah|] = new Test();
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace TestNs
+                namespace TestNs
+                {
+                    class Program
                     {
-                        class Program
-                        {
-                            private static Test blah;
+                        private static Test blah;
 
-                            class Test
+                        class Test
+                        {
+                            void Meth()
                             {
-                                void Meth()
-                                {
-                                    Program.blah = new Test();
-                                }
+                                Program.blah = new Test();
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2377,25 +2377,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|i|]++;
-                        }
+                        [|i|]++;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int i;
+                class Program
+                {
+                    private static int i;
 
-                        static void Main(string[] args)
-                        {
-                            i++;
-                        }
+                    static void Main(string[] args)
+                    {
+                        i++;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2404,25 +2404,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            --[|i|];
-                        }
+                        --[|i|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int i;
+                class Program
+                {
+                    private static int i;
 
-                        static void Main(string[] args)
-                        {
-                            --i;
-                        }
+                    static void Main(string[] args)
+                    {
+                        --i;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2431,24 +2431,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestAsync(
                 """
-                    using C;
+                using C;
 
-                    static class C
-                    {
-                    }
+                static class C
+                {
+                }
 
-                    C.[|i|] ++ ;
-                    """,
+                C.[|i|] ++ ;
+                """,
                 """
-                    using C;
+                using C;
 
-                    static class C
-                    {
-                        internal static int i;
-                    }
+                static class C
+                {
+                    internal static int i;
+                }
 
-                    C.i ++ ;
-                    """,
+                C.i ++ ;
+                """,
                 parseOptions: Options.Script
             );
         }
@@ -2458,33 +2458,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|Goo|]#();
-                        }
+                        [|Goo|]#();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    public static object Goo { get; private set; }
+
+                    static void Main(string[] args)
                     {
-                        public static object Goo { get; private set; }
-
-                        static void Main(string[] args)
-                        {
-                            Goo#();
-                        }
+                        Goo#();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2494,33 +2494,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            new([|goo|])();
-                        }
+                        new([|goo|])();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    public static object goo { get; private set; }
+
+                    static void Main(string[] args)
                     {
-                        public static object goo { get; private set; }
-
-                        static void Main(string[] args)
-                        {
-                            new(goo)();
-                        }
+                        new(goo)();
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -2530,28 +2530,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C { }
-                    class D
+                class C { }
+                class D
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            C.[|P|] = 10;
-                        }
+                        C.[|P|] = 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public static int P { get; internal set; }
+                }
+                class D
+                {
+                    void M()
                     {
-                        public static int P { get; internal set; }
+                        C.P = 10;
                     }
-                    class D
-                    {
-                        void M()
-                        {
-                            C.P = 10;
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -2560,14 +2560,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            [|p|]++;
-                        }
+                        [|p|]++;
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_field_0, "p"),
@@ -2579,25 +2579,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
 
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            [|p|]++;
-                        }
+                        [|p|]++;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int p;
+                class Program
+                {
+                    private static int p;
 
-                        static void Main()
-                        {
-                            p++;
-                        }
+                    static void Main()
+                    {
+                        p++;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2607,14 +2607,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            goto [|goo|];
-                        }
+                        goto [|goo|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2623,25 +2623,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            [|goo|].ToString();
-                        }
+                        [|goo|].ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static object goo;
+                class Program
+                {
+                    private static object goo;
 
-                        static void Main()
-                        {
-                            goo.ToString();
-                        }
+                    static void Main()
+                    {
+                        goo.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2650,18 +2650,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|global|]::System.String s;
-                        }
+                        [|global|]::System.String s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2670,16 +2670,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C<T>
-                    {
-                        public delegate void Goo<R>(R r);
+                class C<T>
+                {
+                    public delegate void Goo<R>(R r);
 
-                        static void M()
-                        {
-                            Goo<T> r = [|Goo<T>|];
-                        }
+                    static void M()
+                    {
+                        Goo<T> r = [|Goo<T>|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2688,29 +2688,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestAsync(
                 """
-                    class C
-                    {
-                        delegate void D();
+                class C
+                {
+                    delegate void D();
 
-                        void M()
-                        {
-                            D d = [|M1|] + M2;
-                        }
+                    void M()
+                    {
+                        D d = [|M1|] + M2;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private D M1 { get; set; }
+
+                    delegate void D();
+
+                    void M()
                     {
-                        private D M1 { get; set; }
-
-                        delegate void D();
-
-                        void M()
-                        {
-                            D d = M1 + M2;
-                        }
+                        D d = M1 + M2;
                     }
-                    """,
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -2720,32 +2720,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C<T>
+                class C<T>
+                {
+                    public void Test()
                     {
-                        public void Test()
-                        {
-                            C<T> c = A.[|M|];
-                        }
+                        C<T> c = A.[|M|];
                     }
+                }
 
-                    class A
-                    {
-                    }
-                    """,
+                class A
+                {
+                }
+                """,
                 """
-                    class C<T>
+                class C<T>
+                {
+                    public void Test()
                     {
-                        public void Test()
-                        {
-                            C<T> c = A.M;
-                        }
+                        C<T> c = A.M;
                     }
+                }
 
-                    class A
-                    {
-                        public static C<object> M { get; internal set; }
-                    }
-                    """
+                class A
+                {
+                    public static C<object> M { get; internal set; }
+                }
+                """
             );
         }
 
@@ -2754,32 +2754,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C<T>
+                class C<T>
+                {
+                    public void Test()
                     {
-                        public void Test()
-                        {
-                            C<T> c = A.[|M|];
-                        }
-
-                        class A
-                        {
-                        }
+                        C<T> c = A.[|M|];
                     }
-                    """,
+
+                    class A
+                    {
+                    }
+                }
+                """,
                 """
-                    class C<T>
+                class C<T>
+                {
+                    public void Test()
                     {
-                        public void Test()
-                        {
-                            C<T> c = A.M;
-                        }
-
-                        class A
-                        {
-                            public static C<T> M { get; internal set; }
-                        }
+                        C<T> c = A.M;
                     }
-                    """
+
+                    class A
+                    {
+                        public static C<T> M { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -2788,23 +2788,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int i = [|@|] }
-                    }
-                    """
+                        int i = [|@|] }
+                }
+                """
             );
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int i = [|@|]}
-                    }
-                    """
+                        int i = [|@|]}
+                }
+                """
             );
         }
 
@@ -2813,31 +2813,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var v in [|list|])
                         {
-                            foreach (var v in [|list|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    private IEnumerable<object> list;
+
+                    void M()
                     {
-                        private IEnumerable<object> list;
-
-                        void M()
+                        foreach (var v in list)
                         {
-                            foreach (var v in list)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2846,47 +2846,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            string s = "Hello";
-                            [|f|] = s.ExtensionMethod;
-                        }
+                        string s = "Hello";
+                        [|f|] = s.ExtensionMethod;
                     }
+                }
 
-                    public static class MyExtension
+                public static class MyExtension
+                {
+                    public static int ExtensionMethod(this String s)
                     {
-                        public static int ExtensionMethod(this String s)
-                        {
-                            return s.Length;
-                        }
+                        return s.Length;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private static Func<int> f;
+
+                    public static void Main()
                     {
-                        private static Func<int> f;
-
-                        public static void Main()
-                        {
-                            string s = "Hello";
-                            f = s.ExtensionMethod;
-                        }
+                        string s = "Hello";
+                        f = s.ExtensionMethod;
                     }
+                }
 
-                    public static class MyExtension
+                public static class MyExtension
+                {
+                    public static int ExtensionMethod(this String s)
                     {
-                        public static int ExtensionMethod(this String s)
-                        {
-                            return s.Length;
-                        }
+                        return s.Length;
                     }
-                    """,
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -2896,31 +2896,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            Func<int, int> f = x => x + 1;
-                            f([|x|]);
-                        }
+                        Func<int, int> f = x => x + 1;
+                        f([|x|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private static int x;
+
+                    static void Main(string[] args)
                     {
-                        private static int x;
-
-                        static void Main(string[] args)
-                        {
-                            Func<int, int> f = x => x + 1;
-                            f(x);
-                        }
+                        Func<int, int> f = x => x + 1;
+                        f(x);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2929,25 +2929,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|a|] = a + 10;
-                        }
+                        [|a|] = a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int a;
+                class Program
+                {
+                    private static int a;
 
-                        static void Main(string[] args)
-                        {
-                            a = a + 10;
-                        }
+                    static void Main(string[] args)
+                    {
+                        a = a + 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2956,25 +2956,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            a = [|a|] + 10;
-                        }
+                        a = [|a|] + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int a;
+                class Program
+                {
+                    private static int a;
 
-                        static void Main(string[] args)
-                        {
-                            a = a + 10;
-                        }
+                    static void Main(string[] args)
+                    {
+                        a = a + 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2983,37 +2983,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            var v = [|p|];
-                        }
+                        var v = [|p|];
                     }
+                }
 
-                    class var
-                    {
-                    }
-                    """,
+                class var
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private static var p;
+
+                    public static void Main()
                     {
-                        private static var p;
-
-                        public static void Main()
-                        {
-                            var v = p;
-                        }
+                        var v = p;
                     }
+                }
 
-                    class var
-                    {
-                    }
-                    """
+                class var
+                {
+                }
+                """
             );
         }
 
@@ -3022,45 +3022,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            MyExtension.ExMethod([|ss|]);
-                        }
+                        MyExtension.ExMethod([|ss|]);
                     }
+                }
 
-                    static class MyExtension
+                static class MyExtension
+                {
+                    public static int ExMethod(this string s)
                     {
-                        public static int ExMethod(this string s)
-                        {
-                            return s.Length;
-                        }
+                        return s.Length;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private static string ss;
+
+                    static void Main(string[] args)
                     {
-                        private static string ss;
-
-                        static void Main(string[] args)
-                        {
-                            MyExtension.ExMethod(ss);
-                        }
+                        MyExtension.ExMethod(ss);
                     }
+                }
 
-                    static class MyExtension
+                static class MyExtension
+                {
+                    public static int ExMethod(this string s)
                     {
-                        public static int ExMethod(this string s)
-                        {
-                            return s.Length;
-                        }
+                        return s.Length;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3069,12 +3069,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestMissingAsync(
                 """
-                    [|P|] = 10;
+                [|P|] = 10;
 
-                    partial class Program
-                    {
-                    }
-                    """
+                partial class Program
+                {
+                }
+                """
             );
         }
 
@@ -3083,27 +3083,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    //method
+                    static void Main(string[] args)
                     {
-                        //method
-                        static void Main(string[] args)
-                        {
-                            [|P|] = 10;
-                        }
+                        [|P|] = 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public static int P { get; private set; }
+                class Program
+                {
+                    public static int P { get; private set; }
 
-                        //method
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                        }
+                    //method
+                    static void Main(string[] args)
+                    {
+                        P = 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3112,27 +3112,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    //method
+                    static void Main(string[] args)
                     {
-                        //method
-                        static void Main(string[] args)
-                        {
-                            [|P|] = 10;
-                        }
+                        [|P|] = 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int P;
+                class Program
+                {
+                    private static int P;
 
-                        //method
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                        }
+                    //method
+                    static void Main(string[] args)
+                    {
+                        P = 10;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -3142,25 +3142,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|P|] = 10;
-                        }
+                        [|P|] = 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int P;
+                class Program
+                {
+                    private static int P;
 
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                        }
+                    static void Main(string[] args)
+                    {
+                        P = 10;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -3170,25 +3170,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|P|] = 10;
-                        }
+                        [|P|] = 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public static int P { get; private set; }
+                class Program
+                {
+                    public static int P { get; private set; }
 
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                        }
+                    static void Main(string[] args)
+                    {
+                        P = 10;
                     }
-                    """,
+                }
+                """,
                 index: 0
             );
         }
@@ -3198,30 +3198,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        private static int P;
+                class Program
+                {
+                    private static int P;
 
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                            [|A|] = 9;
-                        }
+                    static void Main(string[] args)
+                    {
+                        P = 10;
+                        [|A|] = 9;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int P;
-                        private static int A;
+                class Program
+                {
+                    private static int P;
+                    private static int A;
 
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                            A = 9;
-                        }
+                    static void Main(string[] args)
+                    {
+                        P = 10;
+                        A = 9;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -3231,30 +3231,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        public static int P { get; private set; }
+                class Program
+                {
+                    public static int P { get; private set; }
 
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                            [|A|] = 9;
-                        }
+                    static void Main(string[] args)
+                    {
+                        P = 10;
+                        [|A|] = 9;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public static int P { get; private set; }
-                        public static int A { get; private set; }
+                class Program
+                {
+                    public static int P { get; private set; }
+                    public static int A { get; private set; }
 
-                        static void Main(string[] args)
-                        {
-                            P = 10;
-                            A = 9;
-                        }
+                    static void Main(string[] args)
+                    {
+                        P = 10;
+                        A = 9;
                     }
-                    """,
+                }
+                """,
                 index: 0
             );
         }
@@ -3264,28 +3264,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C { }
-                    class D
+                class C { }
+                class D
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            C.[|P|] = 10;
-                        }
+                        C.[|P|] = 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public static int P { get; internal set; }
+                }
+                class D
+                {
+                    void M()
                     {
-                        public static int P { get; internal set; }
+                        C.P = 10;
                     }
-                    class D
-                    {
-                        void M()
-                        {
-                            C.P = 10;
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -3335,29 +3335,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class ProgramAttribute : Attribute
+                class ProgramAttribute : Attribute
+                {
+                    [Program([|Name|] = 0)]
+                    static void Main(string[] args)
                     {
-                        [Program([|Name|] = 0)]
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class ProgramAttribute : Attribute
+                class ProgramAttribute : Attribute
+                {
+                    public int Name { get; set; }
+
+                    [Program(Name = 0)]
+                    static void Main(string[] args)
                     {
-                        public int Name { get; set; }
-
-                        [Program(Name = 0)]
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3366,29 +3366,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class ProgramAttribute : Attribute
+                class ProgramAttribute : Attribute
+                {
+                    [Program([|Name|] = 0)]
+                    static void Main(string[] args)
                     {
-                        [Program([|Name|] = 0)]
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class ProgramAttribute : Attribute
+                class ProgramAttribute : Attribute
+                {
+                    public int Name;
+
+                    [Program(Name = 0)]
+                    static void Main(string[] args)
                     {
-                        public int Name;
-
-                        [Program(Name = 0)]
-                        static void Main(string[] args)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -3398,33 +3398,33 @@ class C
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        private class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    private class C
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    private static C P { get; set; }
+
+                    public static void Main()
                     {
-                        private static C P { get; set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        private class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    private class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3434,33 +3434,33 @@ class C
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        protected class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    protected class C
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    protected static C P { get; private set; }
+
+                    public static void Main()
                     {
-                        protected static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        protected class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    protected class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3470,33 +3470,33 @@ class C
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        internal class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    internal class C
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public static C P { get; private set; }
+
+                    public static void Main()
                     {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        internal class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    internal class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3506,33 +3506,33 @@ class C
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        protected internal class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    protected internal class C
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public static C P { get; private set; }
+
+                    public static void Main()
                     {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        protected internal class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    protected internal class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3542,33 +3542,33 @@ class C
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        public class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    public class C
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public static C P { get; private set; }
+
+                    public static void Main()
                     {
-                        public static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        public class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    public class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3578,33 +3578,33 @@ class C
         {
             await TestAsync(
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        internal class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    internal class C
+                    {
+                    }
+                }
+                """,
                 """
-                    public class Program
+                public class Program
+                {
+                    internal static C P { get; private set; }
+
+                    public static void Main()
                     {
-                        internal static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        internal class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    internal class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3614,33 +3614,33 @@ class C
         {
             await TestAsync(
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        protected internal class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    protected internal class C
+                    {
+                    }
+                }
+                """,
                 """
-                    public class Program
+                public class Program
+                {
+                    protected internal static C P { get; private set; }
+
+                    public static void Main()
                     {
-                        protected internal static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        protected internal class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    protected internal class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3650,33 +3650,33 @@ class C
         {
             await TestAsync(
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            C c = [|P|];
-                        }
-
-                        protected class C
-                        {
-                        }
+                        C c = [|P|];
                     }
-                    """,
+
+                    protected class C
+                    {
+                    }
+                }
+                """,
                 """
-                    public class Program
+                public class Program
+                {
+                    protected static C P { get; private set; }
+
+                    public static void Main()
                     {
-                        protected static C P { get; private set; }
-
-                        public static void Main()
-                        {
-                            C c = P;
-                        }
-
-                        protected class C
-                        {
-                        }
+                        C c = P;
                     }
-                    """,
+
+                    protected class C
+                    {
+                    }
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3686,7 +3686,45 @@ class C
         {
             await TestAsync(
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main()
+                    {
+                        C c = [|P|];
+                    }
+
+                    private class C
+                    {
+                    }
+                }
+                """,
+                """
+                public class Program
+                {
+                    private static C P { get; set; }
+
+                    public static void Main()
+                    {
+                        C c = P;
+                    }
+
+                    private class C
+                    {
+                    }
+                }
+                """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility10_PrivatePrivate()
+        {
+            await TestAsync(
+                """
+                class outer
+                {
+                    private class Program
                     {
                         public static void Main()
                         {
@@ -3697,9 +3735,180 @@ class C
                         {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
+                class outer
+                {
+                    private class Program
+                    {
+                        public static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        private class C
+                        {
+                        }
+                    }
+                }
+                """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility11_PrivateProtected()
+        {
+            await TestAsync(
+                """
+                class outer
+                {
+                    private class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        protected class C
+                        {
+                        }
+                    }
+                }
+                """,
+                """
+                class outer
+                {
+                    private class Program
+                    {
+                        public static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        protected class C
+                        {
+                        }
+                    }
+                }
+                """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility12_PrivateProtectedInternal()
+        {
+            await TestAsync(
+                """
+                class outer
+                {
+                    private class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        protected internal class C
+                        {
+                        }
+                    }
+                }
+                """,
+                """
+                class outer
+                {
+                    private class Program
+                    {
+                        public static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        protected internal class C
+                        {
+                        }
+                    }
+                }
+                """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility13_PrivateInternal()
+        {
+            await TestAsync(
+                """
+                class outer
+                {
+                    private class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        internal class C
+                        {
+                        }
+                    }
+                }
+                """,
+                """
+                class outer
+                {
+                    private class Program
+                    {
+                        public static C P { get; private set; }
+
+                        public static void Main()
+                        {
+                            C c = P;
+                        }
+
+                        internal class C
+                        {
+                        }
+                    }
+                }
+                """,
+                parseOptions: null
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
+        public async Task TestMinimalAccessibility14_ProtectedPrivate()
+        {
+            await TestAsync(
+                """
+                class outer
+                {
+                    protected class Program
+                    {
+                        public static void Main()
+                        {
+                            C c = [|P|];
+                        }
+
+                        private class C
+                        {
+                        }
+                    }
+                }
+                """,
+                """
+                class outer
+                {
+                    protected class Program
                     {
                         private static C P { get; set; }
 
@@ -3712,217 +3921,8 @@ class C
                         {
                         }
                     }
-                    """,
-                parseOptions: null
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility10_PrivatePrivate()
-        {
-            await TestAsync(
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
-
-                            private class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static C P { get; private set; }
-
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            private class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                parseOptions: null
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility11_PrivateProtected()
-        {
-            await TestAsync(
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
-
-                            protected class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static C P { get; private set; }
-
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            protected class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                parseOptions: null
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility12_PrivateProtectedInternal()
-        {
-            await TestAsync(
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
-
-                            protected internal class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static C P { get; private set; }
-
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            protected internal class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                parseOptions: null
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility13_PrivateInternal()
-        {
-            await TestAsync(
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
-
-                            internal class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class outer
-                    {
-                        private class Program
-                        {
-                            public static C P { get; private set; }
-
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            internal class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                parseOptions: null
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
-        public async Task TestMinimalAccessibility14_ProtectedPrivate()
-        {
-            await TestAsync(
-                """
-                    class outer
-                    {
-                        protected class Program
-                        {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
-
-                            private class C
-                            {
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class outer
-                    {
-                        protected class Program
-                        {
-                            private static C P { get; set; }
-
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            private class C
-                            {
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3932,39 +3932,39 @@ class C
         {
             await TestAsync(
                 """
-                    class outer
+                class outer
+                {
+                    protected class Program
                     {
-                        protected class Program
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
+                            C c = [|P|];
+                        }
 
-                            internal class C
-                            {
-                            }
+                        internal class C
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class outer
+                class outer
+                {
+                    protected class Program
                     {
-                        protected class Program
+                        public static C P { get; private set; }
+
+                        public static void Main()
                         {
-                            public static C P { get; private set; }
+                            C c = P;
+                        }
 
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            internal class C
-                            {
-                            }
+                        internal class C
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -3974,39 +3974,39 @@ class C
         {
             await TestAsync(
                 """
-                    class outer
+                class outer
+                {
+                    protected internal class Program
                     {
-                        protected internal class Program
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
+                            C c = [|P|];
+                        }
 
-                            protected class C
-                            {
-                            }
+                        protected class C
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class outer
+                class outer
+                {
+                    protected internal class Program
                     {
-                        protected internal class Program
+                        protected static C P { get; private set; }
+
+                        public static void Main()
                         {
-                            protected static C P { get; private set; }
+                            C c = P;
+                        }
 
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            protected class C
-                            {
-                            }
+                        protected class C
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -4016,39 +4016,39 @@ class C
         {
             await TestAsync(
                 """
-                    class outer
+                class outer
+                {
+                    protected internal class Program
                     {
-                        protected internal class Program
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                C c = [|P|];
-                            }
+                            C c = [|P|];
+                        }
 
-                            internal class C
-                            {
-                            }
+                        internal class C
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class outer
+                class outer
+                {
+                    protected internal class Program
                     {
-                        protected internal class Program
+                        public static C P { get; private set; }
+
+                        public static void Main()
                         {
-                            public static C P { get; private set; }
+                            C c = P;
+                        }
 
-                            public static void Main()
-                            {
-                                C c = P;
-                            }
-
-                            internal class C
-                            {
-                            }
+                        internal class C
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: null
             );
         }
@@ -4058,27 +4058,27 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var a = new { x = 5 };
-                            a = new { x = [|HERE|] };
-                        }
+                        var a = new { x = 5 };
+                        a = new { x = [|HERE|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int HERE;
+                class C
+                {
+                    private int HERE;
 
-                        void M()
-                        {
-                            var a = new { x = 5 };
-                            a = new { x = HERE };
-                        }
+                    void M()
+                    {
+                        var a = new { x = 5 };
+                        a = new { x = HERE };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -4088,15 +4088,15 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var v = new { };
-                            bool b = v.[|Bar|];
-                        }
+                        var v = new { };
+                        bool b = v.[|Bar|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4105,23 +4105,23 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public Program(string s)
                     {
-                        public Program(string s)
-                        {
-                        }
-
-                        static void Main(string[] args)
-                        {
-                            Program p = "";
-                        }
-
-                        public static implicit operator Program(string str)
-                        {
-                            return new Program([|str|]);
-                        }
                     }
-                    """
+
+                    static void Main(string[] args)
+                    {
+                        Program p = "";
+                    }
+
+                    public static implicit operator Program(string str)
+                    {
+                        return new Program([|str|]);
+                    }
+                }
+                """
             );
         }
 
@@ -4130,20 +4130,20 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class class1
+                class class1
+                {
+                    public void Test()
                     {
-                        public void Test()
-                        {
-                            Goo([|x|]: x);
-                        }
-
-                        public string Goo(int x)
-                        {
-                        }
+                        Goo([|x|]: x);
                     }
-                    """
+
+                    public string Goo(int x)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -4152,20 +4152,20 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Goo
+                class Goo
+                {
+                    public Goo(int a = 42)
                     {
-                        public Goo(int a = 42)
-                        {
-                        }
                     }
+                }
 
-                    class DogBed : Goo
+                class DogBed : Goo
+                {
+                    public DogBed(int b) : base([|a|]: b)
                     {
-                        public DogBed(int b) : base([|a|]: b)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4174,32 +4174,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { [|Gibberish|] = 24 };
-                        }
+                        var c = new Goo { [|Gibberish|] = 24 };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Goo
-                    {
-                        public int Gibberish { get; internal set; }
-                    }
+                class Goo
+                {
+                    public int Gibberish { get; internal set; }
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = 24 };
-                        }
+                        var c = new Goo { Gibberish = 24 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4208,32 +4208,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    record Goo
-                    {
-                    }
+                record Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo(Goo g)
                     {
-                        void goo(Goo g)
-                        {
-                            var c = g with { [|Gibberish|] = 24 };
-                        }
+                        var c = g with { [|Gibberish|] = 24 };
                     }
-                    """,
+                }
+                """,
                 """
-                    record Goo
-                    {
-                        public int Gibberish { get; internal set; }
-                    }
+                record Goo
+                {
+                    public int Gibberish { get; internal set; }
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo(Goo g)
                     {
-                        void goo(Goo g)
-                        {
-                            var c = g with { Gibberish = 24 };
-                        }
+                        var c = g with { Gibberish = 24 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4242,30 +4242,30 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    public class Inner
-                    {
-                    }
+                public class Inner
+                {
+                }
 
-                    public class Outer
-                    {
-                        public Inner Inner { get; set; } = new Inner();
+                public class Outer
+                {
+                    public Inner Inner { get; set; } = new Inner();
 
-                        public static Outer X() => new Outer { Inner = { [|InnerValue|] = 5 } };
-                    }
-                    """,
+                    public static Outer X() => new Outer { Inner = { [|InnerValue|] = 5 } };
+                }
+                """,
                 """
-                    public class Inner
-                    {
-                        public int InnerValue { get; internal set; }
-                    }
+                public class Inner
+                {
+                    public int InnerValue { get; internal set; }
+                }
 
-                    public class Outer
-                    {
-                        public Inner Inner { get; set; } = new Inner();
+                public class Outer
+                {
+                    public Inner Inner { get; set; } = new Inner();
 
-                        public static Outer X() => new Outer { Inner = { InnerValue = 5 } };
-                    }
-                    """
+                    public static Outer X() => new Outer { Inner = { InnerValue = 5 } };
+                }
+                """
             );
         }
 
@@ -4274,32 +4274,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { [|Gibberish|] = Gibberish };
-                        }
+                        var c = new Goo { [|Gibberish|] = Gibberish };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Goo
-                    {
-                        public object Gibberish { get; internal set; }
-                    }
+                class Goo
+                {
+                    public object Gibberish { get; internal set; }
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = Gibberish };
-                        }
+                        var c = new Goo { Gibberish = Gibberish };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4308,33 +4308,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = [|Gibberish|] };
-                        }
+                        var c = new Goo { Gibberish = [|Gibberish|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
-                    {
-                        public object Gibberish { get; private set; }
+                class Bar
+                {
+                    public object Gibberish { get; private set; }
 
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = Gibberish };
-                        }
+                    void goo()
+                    {
+                        var c = new Goo { Gibberish = Gibberish };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4343,32 +4343,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { [|Gibberish|] = 24 };
-                        }
+                        var c = new Goo { [|Gibberish|] = 24 };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Goo
-                    {
-                        internal int Gibberish;
-                    }
+                class Goo
+                {
+                    internal int Gibberish;
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = 24 };
-                        }
+                        var c = new Goo { Gibberish = 24 };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -4378,32 +4378,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { [|Gibberish|] = Gibberish };
-                        }
+                        var c = new Goo { [|Gibberish|] = Gibberish };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Goo
-                    {
-                        internal object Gibberish;
-                    }
+                class Goo
+                {
+                    internal object Gibberish;
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = Gibberish };
-                        }
+                        var c = new Goo { Gibberish = Gibberish };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -4413,33 +4413,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = [|Gibberish|] };
-                        }
+                        var c = new Goo { Gibberish = [|Gibberish|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
-                    {
-                        private object Gibberish;
+                class Bar
+                {
+                    private object Gibberish;
 
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = Gibberish };
-                        }
+                    void goo()
+                    {
+                        var c = new Goo { Gibberish = Gibberish };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -4449,18 +4449,18 @@ class C
         {
             await TestActionCountAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { . [|Gibberish|] = 24 };
-                        }
+                        var c = new Goo { . [|Gibberish|] = 24 };
                     }
-                    """,
+                }
+                """,
                 2
             );
         }
@@ -4470,32 +4470,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            var c = new Goo { Gibberish = [|blah|] };
-                        }
+                        var c = new Goo { Gibberish = [|blah|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Goo
-                    {
-                    }
+                class Goo
+                {
+                }
 
-                    class Bar
+                class Bar
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            object blah = null;
-                            var c = new Goo { Gibberish = blah };
-                        }
+                        object blah = null;
+                        var c = new Goo { Gibberish = blah };
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -4505,12 +4505,12 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Class1
-                    {
-                        Console.[|WriteLine|](); }
-                    """
+                class Class1
+                {
+                    Console.[|WriteLine|](); }
+                """
             );
         }
 
@@ -4519,12 +4519,12 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Class1
-                    { [|WriteLine|]();
-                    }
-                    """
+                class Class1
+                { [|WriteLine|]();
+                }
+                """
             );
         }
 
@@ -4533,13 +4533,13 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Class1
-                    {
-                        [|WriteLine|]
-                    }
-                    """
+                class Class1
+                {
+                    [|WriteLine|]
+                }
+                """
             );
         }
 
@@ -4548,50 +4548,50 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static int x;
+
+                    unsafe static void F(int* p)
                     {
-                        static int x;
-
-                        unsafe static void F(int* p)
-                        {
-                            *p = 1;
-                        }
-
-                        static unsafe void Main(string[] args)
-                        {
-                            int[] a = new int[10];
-                            fixed (int* p2 = &x, int* p3 = ) F(GetP2([|p2|]));
-                        }
-
-                        unsafe private static int* GetP2(int* p2)
-                        {
-                            return p2;
-                        }
+                        *p = 1;
                     }
-                    """,
+
+                    static unsafe void Main(string[] args)
+                    {
+                        int[] a = new int[10];
+                        fixed (int* p2 = &x, int* p3 = ) F(GetP2([|p2|]));
+                    }
+
+                    unsafe private static int* GetP2(int* p2)
+                    {
+                        return p2;
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static int x;
+                    private static unsafe int* p2;
+
+                    unsafe static void F(int* p)
                     {
-                        static int x;
-                        private static unsafe int* p2;
-
-                        unsafe static void F(int* p)
-                        {
-                            *p = 1;
-                        }
-
-                        static unsafe void Main(string[] args)
-                        {
-                            int[] a = new int[10];
-                            fixed (int* p2 = &x, int* p3 = ) F(GetP2(p2));
-                        }
-
-                        unsafe private static int* GetP2(int* p2)
-                        {
-                            return p2;
-                        }
+                        *p = 1;
                     }
-                    """
+
+                    static unsafe void Main(string[] args)
+                    {
+                        int[] a = new int[10];
+                        fixed (int* p2 = &x, int* p3 = ) F(GetP2(p2));
+                    }
+
+                    unsafe private static int* GetP2(int* p2)
+                    {
+                        return p2;
+                    }
+                }
+                """
             );
         }
 
@@ -4608,31 +4608,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Expression<Func<int, int>> e = x => [|Goo|];
-                        }
+                        Expression<Func<int, int>> e = x => [|Goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class C
+                class C
+                {
+                    public static int Goo { get; private set; }
+
+                    static void Main()
                     {
-                        public static int Goo { get; private set; }
-
-                        static void Main()
-                        {
-                            Expression<Func<int, int>> e = x => Goo;
-                        }
+                        Expression<Func<int, int>> e = x => Goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4641,20 +4641,20 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            int i = D.[|Bar|];
-                        }
+                        int i = D.[|Bar|];
                     }
+                }
 
-                    #line hidden
-                    class D
-                    {
-                    }
-                    #line default
-                    """
+                #line hidden
+                class D
+                {
+                }
+                #line default
+                """
             );
         }
 
@@ -4663,25 +4663,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            return [|goo|];
-                        }
+                        return [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private object goo;
+                class Program
+                {
+                    private object goo;
 
-                        void Main()
-                        {
-                            return goo;
-                        }
+                    void Main()
+                    {
+                        return goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4690,32 +4690,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            Goo([|bar|]);
-                        }
-
-                        static void Goo(int i)
-                        {
-                        }
+                        Goo([|bar|]);
                     }
-                    """,
+
+                    static void Goo(int i)
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            int bar = 0;
-                            Goo(bar);
-                        }
-
-                        static void Goo(int i)
-                        {
-                        }
+                        int bar = 0;
+                        Goo(bar);
                     }
-                    """,
+
+                    static void Goo(int i)
+                    {
+                    }
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -4725,36 +4725,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            Goo([|bar|]);
-                        }
-
-                        static void Goo(string? s)
-                        {
-                        }
+                        Goo([|bar|]);
                     }
-                    """,
+
+                    static void Goo(string? s)
+                    {
+                    }
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            string? bar = null;
-                            Goo(bar);
-                        }
-
-                        static void Goo(string? s)
-                        {
-                        }
+                        string? bar = null;
+                        Goo(bar);
                     }
-                    """,
+
+                    static void Goo(string? s)
+                    {
+                    }
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -4764,36 +4764,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            Goo([|bar|]);
-                        }
-
-                        static void Goo(IEnumerable<string?> s)
-                        {
-                        }
+                        Goo([|bar|]);
                     }
-                    """,
+
+                    static void Goo(IEnumerable<string?> s)
+                    {
+                    }
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            IEnumerable<string?> bar = null;
-                            Goo(bar);
-                        }
-
-                        static void Goo(IEnumerable<string?> s)
-                        {
-                        }
+                        IEnumerable<string?> bar = null;
+                        Goo(bar);
                     }
-                    """,
+
+                    static void Goo(IEnumerable<string?> s)
+                    {
+                    }
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -4803,32 +4803,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            Goo(out [|bar|]);
-                        }
-
-                        static void Goo(out int i)
-                        {
-                        }
+                        Goo(out [|bar|]);
                     }
-                    """,
+
+                    static void Goo(out int i)
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            int bar;
-                            Goo(out bar);
-                        }
-
-                        static void Goo(out int i)
-                        {
-                        }
+                        int bar;
+                        Goo(out bar);
                     }
-                    """,
+
+                    static void Goo(out int i)
+                    {
+                    }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -4838,32 +4838,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                    #if true
-                            // Banner Line 1
-                            // Banner Line 2
-                            int.TryParse("123", out [|local|]);
-                    #endif
-                        }
+                #if true
+                        // Banner Line 1
+                        // Banner Line 2
+                        int.TryParse("123", out [|local|]);
+                #endif
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                    #if true
-                            int local;
-                            // Banner Line 1
-                            // Banner Line 2
-                            int.TryParse("123", out [|local|]);
-                    #endif
-                        }
+                #if true
+                        int local;
+                        // Banner Line 1
+                        // Banner Line 2
+                        int.TryParse("123", out [|local|]);
+                #endif
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -4873,34 +4873,34 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                    #if true
-                            // Banner Line 1
-                            // Banner Line 2
+                #if true
+                        // Banner Line 1
+                        // Banner Line 2
 
-                            int.TryParse("123", out [|local|]);
-                    #endif
-                        }
+                        int.TryParse("123", out [|local|]);
+                #endif
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                    #if true
-                            // Banner Line 1
-                            // Banner Line 2
+                #if true
+                        // Banner Line 1
+                        // Banner Line 2
 
-                            int local;
-                            int.TryParse("123", out [|local|]);
-                    #endif
-                        }
+                        int local;
+                        int.TryParse("123", out [|local|]);
+                #endif
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -4910,33 +4910,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    #line hidden
-                    class Program
+                #line hidden
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                    #line default
-                            Goo(Program.[|X|])
-                        }
+                #line default
+                        Goo(Program.[|X|])
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    #line hidden
-                    class Program
+                #line hidden
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                    #line default
-                            Goo(Program.X)
-                        }
-
-                        public static object X { get; private set; }
+                #line default
+                        Goo(Program.X)
                     }
-                    """
+
+                    public static object X { get; private set; }
+                }
+                """
             );
         }
 
@@ -4945,22 +4945,22 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    #line hidden
-                    class Program
+                #line hidden
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                    #line default
-                            Goo(Program.[|X|])
+                #line default
+                        Goo(Program.[|X|])
 
 
-                    #line hidden
-                        }
+                #line hidden
                     }
-                    #line default
-                    """
+                }
+                #line default
+                """
             );
         }
 
@@ -4969,36 +4969,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    #line hidden
-                    class Program
+                #line hidden
+                class Program
+                {
+                #line default
+                    void Main()
                     {
-                    #line default
-                        void Main()
-                        {
-                            Goo([|x|]);
-                        }
-                    #line hidden
+                        Goo([|x|]);
                     }
-                    #line default
-                    """,
+                #line hidden
+                }
+                #line default
+                """,
                 """
-                    using System;
+                using System;
 
-                    #line hidden
-                    class Program
+                #line hidden
+                class Program
+                {
+                #line default
+                    void Main()
                     {
-                    #line default
-                        void Main()
-                        {
-                            object x = null;
-                            Goo(x);
-                        }
-                    #line hidden
+                        object x = null;
+                        Goo(x);
                     }
-                    #line default
-                    """
+                #line hidden
+                }
+                #line default
+                """
             );
         }
 
@@ -5007,40 +5007,40 @@ class C
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            bar([|xyz|]);
-                        }
-
-                        struct sfoo
-                        {
-                        }
-
-                        void bar(sfoo x)
-                        {
-                        }
+                        bar([|xyz|]);
                     }
-                    """,
+
+                    struct sfoo
+                    {
+                    }
+
+                    void bar(sfoo x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            sfoo xyz = default(sfoo);
-                            bar(xyz);
-                        }
-
-                        struct sfoo
-                        {
-                        }
-
-                        void bar(sfoo x)
-                        {
-                        }
+                        sfoo xyz = default(sfoo);
+                        bar(xyz);
                     }
-                    """,
+
+                    struct sfoo
+                    {
+                    }
+
+                    void bar(sfoo x)
+                    {
+                    }
+                }
+                """,
                 index: 3,
                 parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)
             );
@@ -5051,40 +5051,40 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            bar([|xyz|]);
-                        }
-
-                        struct sfoo
-                        {
-                        }
-
-                        void bar(sfoo x)
-                        {
-                        }
+                        bar([|xyz|]);
                     }
-                    """,
+
+                    struct sfoo
+                    {
+                    }
+
+                    void bar(sfoo x)
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void goo()
                     {
-                        void goo()
-                        {
-                            sfoo xyz = default;
-                            bar(xyz);
-                        }
-
-                        struct sfoo
-                        {
-                        }
-
-                        void bar(sfoo x)
-                        {
-                        }
+                        sfoo xyz = default;
+                        bar(xyz);
                     }
-                    """,
+
+                    struct sfoo
+                    {
+                    }
+
+                    void bar(sfoo x)
+                    {
+                    }
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -5094,25 +5094,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            int v = 1 + ([|k|]);
-                        }
+                        int v = 1 + ([|k|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int k;
+                class Program
+                {
+                    private int k;
 
-                        void Main()
-                        {
-                            int v = 1 + (k);
-                        }
+                    void Main()
+                    {
+                        int v = 1 + (k);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5121,31 +5121,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Linq;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    void Main(string[] args)
                     {
-                        void Main(string[] args)
-                        {
-                            var q = from a in args
-                                    select [|v|];
-                        }
+                        var q = from a in args
+                                select [|v|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Linq;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    private object v;
+
+                    void Main(string[] args)
                     {
-                        private object v;
-
-                        void Main(string[] args)
-                        {
-                            var q = from a in args
-                                    select v;
-                        }
+                        var q = from a in args
+                                select v;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5154,27 +5154,27 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            int[] a = null;
-                            int[] temp = checked([|goo|]);
-                        }
+                        int[] a = null;
+                        int[] temp = checked([|goo|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int[] goo;
+                class Program
+                {
+                    private int[] goo;
 
-                        void Main()
-                        {
-                            int[] a = null;
-                            int[] temp = checked(goo);
-                        }
+                    void Main()
+                    {
+                        int[] a = null;
+                        int[] temp = checked(goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5183,25 +5183,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var v = new int[[|k|]];
-                        }
+                        var v = new int[[|k|]];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int k;
+                class Program
+                {
+                    private int k;
 
-                        void Main()
-                        {
-                            var v = new int[k];
-                        }
+                    void Main()
+                    {
+                        var v = new int[k];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5210,25 +5210,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int i = [|goo|] ? bar : baz;
-                        }
+                        int i = [|goo|] ? bar : baz;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static bool goo;
+                class Program
+                {
+                    private static bool goo;
 
-                        static void Main()
-                        {
-                            int i = goo ? bar : baz;
-                        }
+                    static void Main()
+                    {
+                        int i = goo ? bar : baz;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5237,25 +5237,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int i = goo ? [|bar|] : baz;
-                        }
+                        int i = goo ? [|bar|] : baz;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int bar;
+                class Program
+                {
+                    private static int bar;
 
-                        static void Main()
-                        {
-                            int i = goo ? bar : baz;
-                        }
+                    static void Main()
+                    {
+                        int i = goo ? bar : baz;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5264,25 +5264,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int i = goo ? bar : [|baz|];
-                        }
+                        int i = goo ? bar : [|baz|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private static int baz;
+                class Program
+                {
+                    private static int baz;
 
-                        static void Main()
-                        {
-                            int i = goo ? bar : baz;
-                        }
+                    static void Main()
+                    {
+                        int i = goo ? bar : baz;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5291,25 +5291,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var x = (int)[|y|];
-                        }
+                        var x = (int)[|y|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int y;
+                class Program
+                {
+                    private int y;
 
-                        void Main()
-                        {
-                            var x = (int)y;
-                        }
+                    void Main()
+                    {
+                        var x = (int)y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5318,29 +5318,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
+                        if ([|goo|])
                         {
-                            if ([|goo|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private bool goo;
+                class Program
+                {
+                    private bool goo;
 
-                        void Main()
+                    void Main()
+                    {
+                        if (goo)
                         {
-                            if (goo)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5349,29 +5349,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
+                        switch ([|goo|])
                         {
-                            switch ([|goo|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int goo;
+                class Program
+                {
+                    private int goo;
 
-                        void Main()
+                    void Main()
+                    {
+                        switch (goo)
                         {
-                            switch (goo)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5380,14 +5380,14 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|System|].Console.WriteLine(4);
-                        }
+                        [|System|].Console.WriteLine(4);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5396,14 +5396,14 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|System.Console|].WriteLine(4);
-                        }
+                        [|System.Console|].WriteLine(4);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5412,14 +5412,14 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|base|].ToString();
-                        }
+                        [|base|].ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5428,23 +5428,23 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|undefined|] = 1;
-                        }
+                        [|undefined|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var undefined = 1;
-                        }
+                        var undefined = 1;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex,
                 options: ImplicitTypingEverywhere()
             );
@@ -5455,23 +5455,23 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|undefined|] = (x) => 2;
-                        }
+                        [|undefined|] = (x) => 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            System.Func<object, int> undefined = (x) => 2;
-                        }
+                        System.Func<object, int> undefined = (x) => 2;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -5481,23 +5481,23 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|undefined|] = 1;
-                        }
+                        [|undefined|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            int undefined = 1;
-                        }
+                        int undefined = 1;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -5507,23 +5507,23 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|undefined|] = new { P = "1" };
-                        }
+                        [|undefined|] = new { P = "1" };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var undefined = new { P = "1" };
-                        }
+                        var undefined = new { P = "1" };
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -5533,17 +5533,17 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                #line 1 "goo"
+                    void Goo()
                     {
-                    #line 1 "goo"
-                        void Goo()
-                        {
-                            this.[|Bar|] = 1;
-                        }
-                    #line default
-                    #line hidden
+                        this.[|Bar|] = 1;
                     }
-                    """
+                #line default
+                #line hidden
+                }
+                """
             );
         }
 
@@ -5574,17 +5574,17 @@ class C
             await TestInRegularAndScriptAsync(
                 code,
                 """
-                    class C
+                class C
+                {
+                #line 1 "goo"
+                    void Goo()
                     {
-                    #line 1 "goo"
-                        void Goo()
-                        {
-                            var [|Bar|] = 1;
-                        }
-                    #line default
-                    #line hidden
+                        var [|Bar|] = 1;
                     }
-                    """,
+                #line default
+                #line hidden
+                }
+                """,
                 options: ImplicitTypingEverywhere()
             );
         }
@@ -5594,32 +5594,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    [AttributeUsage(AttributeTargets.Class)]
-                    class MyAttrAttribute : Attribute
-                    {
-                    }
+                [AttributeUsage(AttributeTargets.Class)]
+                class MyAttrAttribute : Attribute
+                {
+                }
 
-                    [MyAttr(123, [|Value|] = 1)]
-                    class D
-                    {
-                    }
-                    """,
+                [MyAttr(123, [|Value|] = 1)]
+                class D
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    [AttributeUsage(AttributeTargets.Class)]
-                    class MyAttrAttribute : Attribute
-                    {
-                        public int Value { get; set; }
-                    }
+                [AttributeUsage(AttributeTargets.Class)]
+                class MyAttrAttribute : Attribute
+                {
+                    public int Value { get; set; }
+                }
 
-                    [MyAttr(123, Value = 1)]
-                    class D
-                    {
-                    }
-                    """
+                [MyAttr(123, Value = 1)]
+                class D
+                {
+                }
+                """
             );
         }
 
@@ -5628,44 +5628,44 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    namespace CSharpDemoApp
+                using System;
+                namespace CSharpDemoApp
+                {
+                    class Program
                     {
-                        class Program
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                const int MEGABYTE = 1024 * 1024;
-                                Console.WriteLine(MEGABYTE);
+                            const int MEGABYTE = 1024 * 1024;
+                            Console.WriteLine(MEGABYTE);
 
-                                Calculate([|multiplier|]);
-                            }
-                            static void Calculate(double multiplier = Math.PI)
-                            {
-                            }
+                            Calculate([|multiplier|]);
+                        }
+                        static void Calculate(double multiplier = Math.PI)
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    namespace CSharpDemoApp
+                using System;
+                namespace CSharpDemoApp
+                {
+                    class Program
                     {
-                        class Program
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                const int MEGABYTE = 1024 * 1024;
-                                Console.WriteLine(MEGABYTE);
+                            const int MEGABYTE = 1024 * 1024;
+                            Console.WriteLine(MEGABYTE);
 
-                                double multiplier = 0;
-                                Calculate(multiplier);
-                            }
-                            static void Calculate(double multiplier = Math.PI)
-                            {
-                            }
+                            double multiplier = 0;
+                            Calculate(multiplier);
+                        }
+                        static void Calculate(double multiplier = Math.PI)
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -5675,40 +5675,40 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class TestClass<T1>
+                using System;
+                class TestClass<T1>
+                {
+                    static T TestMethod<T>(T item)
                     {
-                        static T TestMethod<T>(T item)
-                        {
-                            T t = WrapFunc<T>([|NewLocal|]);
-                            return t;
-                        }
-
-                        private static T WrapFunc<T>(Func<T1, T> function)
-                        {
-                            T1 zoo = default(T1);
-                            return function(zoo);
-                        }
+                        T t = WrapFunc<T>([|NewLocal|]);
+                        return t;
                     }
-                    """,
+
+                    private static T WrapFunc<T>(Func<T1, T> function)
+                    {
+                        T1 zoo = default(T1);
+                        return function(zoo);
+                    }
+                }
+                """,
                 """
-                    using System;
-                    class TestClass<T1>
+                using System;
+                class TestClass<T1>
+                {
+                    static T TestMethod<T>(T item)
                     {
-                        static T TestMethod<T>(T item)
-                        {
-                            Func<T1, T> NewLocal = null;
-                            T t = WrapFunc<T>(NewLocal);
-                            return t;
-                        }
-
-                        private static T WrapFunc<T>(Func<T1, T> function)
-                        {
-                            T1 zoo = default(T1);
-                            return function(zoo);
-                        }
+                        Func<T1, T> NewLocal = null;
+                        T t = WrapFunc<T>(NewLocal);
+                        return t;
                     }
-                    """,
+
+                    private static T WrapFunc<T>(Func<T1, T> function)
+                    {
+                        T1 zoo = default(T1);
+                        return function(zoo);
+                    }
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -5718,41 +5718,41 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class TestClass<T1>
+                using System;
+                class TestClass<T1>
+                {
+                    static T TestMethod<T>(T item)
                     {
-                        static T TestMethod<T>(T item)
-                        {
-                            T t = WrapFunc<T>([|NewLocal|]);
-                            return t;
-                        }
-
-                        private static T WrapFunc<T>(Func<T1, T> function)
-                        {
-                            T1 zoo = default(T1);
-                            return function(zoo);
-                        }
+                        T t = WrapFunc<T>([|NewLocal|]);
+                        return t;
                     }
-                    """,
+
+                    private static T WrapFunc<T>(Func<T1, T> function)
+                    {
+                        T1 zoo = default(T1);
+                        return function(zoo);
+                    }
+                }
+                """,
                 """
-                    using System;
-                    class TestClass<T1>
+                using System;
+                class TestClass<T1>
+                {
+                    public static Func<T1, object> NewLocal { get; private set; }
+
+                    static T TestMethod<T>(T item)
                     {
-                        public static Func<T1, object> NewLocal { get; private set; }
-
-                        static T TestMethod<T>(T item)
-                        {
-                            T t = WrapFunc<T>(NewLocal);
-                            return t;
-                        }
-
-                        private static T WrapFunc<T>(Func<T1, T> function)
-                        {
-                            T1 zoo = default(T1);
-                            return function(zoo);
-                        }
+                        T t = WrapFunc<T>(NewLocal);
+                        return t;
                     }
-                    """
+
+                    private static T WrapFunc<T>(Func<T1, T> function)
+                    {
+                        T1 zoo = default(T1);
+                        return function(zoo);
+                    }
+                }
+                """
             );
         }
 
@@ -5761,31 +5761,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    IEnumerable<DayOfWeek> Goo()
                     {
-                        IEnumerable<DayOfWeek> Goo()
-                        {
-                            yield return [|abc|];
-                        }
+                        yield return [|abc|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private DayOfWeek abc;
+
+                    IEnumerable<DayOfWeek> Goo()
                     {
-                        private DayOfWeek abc;
-
-                        IEnumerable<DayOfWeek> Goo()
-                        {
-                            yield return abc;
-                        }
+                        yield return abc;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5794,31 +5794,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    async IAsyncEnumerable<DayOfWeek> Goo()
                     {
-                        async IAsyncEnumerable<DayOfWeek> Goo()
-                        {
-                            yield return [|abc|];
-                        }
+                        yield return [|abc|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private DayOfWeek abc;
+
+                    async IAsyncEnumerable<DayOfWeek> Goo()
                     {
-                        private DayOfWeek abc;
-
-                        async IAsyncEnumerable<DayOfWeek> Goo()
-                        {
-                            yield return abc;
-                        }
+                        yield return abc;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5827,37 +5827,37 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
+                        IEnumerable<DayOfWeek> F()
                         {
-                            IEnumerable<DayOfWeek> F()
-                            {
-                                yield return [|abc|];
-                            }
+                            yield return [|abc|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private DayOfWeek abc;
+
+                    void M()
                     {
-                        private DayOfWeek abc;
-
-                        void M()
+                        IEnumerable<DayOfWeek> F()
                         {
-                            IEnumerable<DayOfWeek> F()
-                            {
-                                yield return abc;
-                            }
+                            yield return abc;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5866,29 +5866,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            throw [|MyExp|];
-                        }
+                        throw [|MyExp|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private Exception MyExp;
+
+                    void Goo()
                     {
-                        private Exception MyExp;
-
-                        void Goo()
-                        {
-                            throw MyExp;
-                        }
+                        throw MyExp;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -5898,25 +5898,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int* a = goo|];
-                        }
+                        [|int* a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private unsafe int* goo;
+                class Class
+                {
+                    private unsafe int* goo;
 
-                        void Method()
-                        {
-                            int* a = goo;
-                        }
+                    void Method()
+                    {
+                        int* a = goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5925,25 +5925,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int*[] a = goo|];
-                        }
+                        [|int*[] a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private unsafe int*[] goo;
+                class Class
+                {
+                    private unsafe int*[] goo;
 
-                        void Method()
-                        {
-                            int*[] a = goo;
-                        }
+                    void Method()
+                    {
+                        int*[] a = goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5952,25 +5952,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int* a = goo|];
-                        }
+                        [|int* a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    unsafe class Class
-                    {
-                        private int* goo;
+                unsafe class Class
+                {
+                    private int* goo;
 
-                        void Method()
-                        {
-                            int* a = goo;
-                        }
+                    void Method()
+                    {
+                        int* a = goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5979,31 +5979,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    class MyClass
                     {
-                        class MyClass
+                        void Method()
                         {
-                            void Method()
-                            {
-                                [|int* a = goo|];
-                            }
+                            [|int* a = goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    class MyClass
                     {
-                        class MyClass
-                        {
-                            private int* goo;
+                        private int* goo;
 
-                            void Method()
-                            {
-                                int* a = goo;
-                            }
+                        void Method()
+                        {
+                            int* a = goo;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6012,31 +6012,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    unsafe class MyClass
                     {
-                        unsafe class MyClass
+                        void Method()
                         {
-                            void Method()
-                            {
-                                [|int* a = Class.goo|];
-                            }
+                            [|int* a = Class.goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private static unsafe int* goo;
+                class Class
+                {
+                    private static unsafe int* goo;
 
-                        unsafe class MyClass
+                    unsafe class MyClass
+                    {
+                        void Method()
                         {
-                            void Method()
-                            {
-                                int* a = Class.goo;
-                            }
+                            int* a = Class.goo;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6045,25 +6045,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int* a = goo|];
-                        }
+                        [|int* a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly unsafe int* goo;
+                class Class
+                {
+                    private readonly unsafe int* goo;
 
-                        void Method()
-                        {
-                            int* a = goo;
-                        }
+                    void Method()
+                    {
+                        int* a = goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6073,25 +6073,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int*[] a = goo|];
-                        }
+                        [|int*[] a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly unsafe int*[] goo;
+                class Class
+                {
+                    private readonly unsafe int*[] goo;
 
-                        void Method()
-                        {
-                            int*[] a = goo;
-                        }
+                    void Method()
+                    {
+                        int*[] a = goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6101,25 +6101,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int* a = goo|];
-                        }
+                        [|int* a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    unsafe class Class
-                    {
-                        private readonly int* goo;
+                unsafe class Class
+                {
+                    private readonly int* goo;
 
-                        void Method()
-                        {
-                            int* a = goo;
-                        }
+                    void Method()
+                    {
+                        int* a = goo;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6129,31 +6129,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    class MyClass
                     {
-                        class MyClass
+                        void Method()
                         {
-                            void Method()
-                            {
-                                [|int* a = goo|];
-                            }
+                            [|int* a = goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    class MyClass
                     {
-                        class MyClass
-                        {
-                            private readonly int* goo;
+                        private readonly int* goo;
 
-                            void Method()
-                            {
-                                int* a = goo;
-                            }
+                        void Method()
+                        {
+                            int* a = goo;
                         }
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6163,31 +6163,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    unsafe class MyClass
                     {
-                        unsafe class MyClass
+                        void Method()
                         {
-                            void Method()
-                            {
-                                [|int* a = Class.goo|];
-                            }
+                            [|int* a = Class.goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private static readonly unsafe int* goo;
+                class Class
+                {
+                    private static readonly unsafe int* goo;
 
-                        unsafe class MyClass
+                    unsafe class MyClass
+                    {
+                        void Method()
                         {
-                            void Method()
-                            {
-                                int* a = Class.goo;
-                            }
+                            int* a = Class.goo;
                         }
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6197,25 +6197,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int* a = goo|];
-                        }
+                        [|int* a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public unsafe int* goo { get; private set; }
+                class Class
+                {
+                    public unsafe int* goo { get; private set; }
 
-                        void Method()
-                        {
-                            int* a = goo;
-                        }
+                    void Method()
+                    {
+                        int* a = goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6225,25 +6225,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int*[] a = goo|];
-                        }
+                        [|int*[] a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public unsafe int*[] goo { get; private set; }
+                class Class
+                {
+                    public unsafe int*[] goo { get; private set; }
 
-                        void Method()
-                        {
-                            int*[] a = goo;
-                        }
+                    void Method()
+                    {
+                        int*[] a = goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6253,25 +6253,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int* a = goo|];
-                        }
+                        [|int* a = goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    unsafe class Class
-                    {
-                        public int* goo { get; private set; }
+                unsafe class Class
+                {
+                    public int* goo { get; private set; }
 
-                        void Method()
-                        {
-                            int* a = goo;
-                        }
+                    void Method()
+                    {
+                        int* a = goo;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6281,31 +6281,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    class MyClass
                     {
-                        class MyClass
+                        void Method()
                         {
-                            void Method()
-                            {
-                                [|int* a = goo|];
-                            }
+                            [|int* a = goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    unsafe class Class
+                unsafe class Class
+                {
+                    class MyClass
                     {
-                        class MyClass
-                        {
-                            public int* goo { get; private set; }
+                        public int* goo { get; private set; }
 
-                            void Method()
-                            {
-                                int* a = goo;
-                            }
+                        void Method()
+                        {
+                            int* a = goo;
                         }
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6315,31 +6315,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    unsafe class MyClass
                     {
-                        unsafe class MyClass
+                        void Method()
                         {
-                            void Method()
-                            {
-                                [|int* a = Class.goo|];
-                            }
+                            [|int* a = Class.goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public static unsafe int* goo { get; private set; }
+                class Class
+                {
+                    public static unsafe int* goo { get; private set; }
 
-                        unsafe class MyClass
+                    unsafe class MyClass
+                    {
+                        void Method()
                         {
-                            void Method()
-                            {
-                                int* a = Class.goo;
-                            }
+                            int* a = Class.goo;
                         }
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6349,25 +6349,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z|]);
-                        }
+                        var x = nameof([|Z|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public object Z { get; private set; }
+                class C
+                {
+                    public object Z { get; private set; }
 
-                        void M()
-                        {
-                            var x = nameof(Z);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6376,25 +6376,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z|]);
-                        }
+                        var x = nameof([|Z|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private object Z;
+                class C
+                {
+                    private object Z;
 
-                        void M()
-                        {
-                            var x = nameof(Z);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z);
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6404,25 +6404,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z|]);
-                        }
+                        var x = nameof([|Z|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly object Z;
+                class C
+                {
+                    private readonly object Z;
 
-                        void M()
-                        {
-                            var x = nameof(Z);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z);
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6432,24 +6432,24 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z|]);
-                        }
+                        var x = nameof([|Z|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object Z = null;
-                            var x = nameof(Z);
-                        }
+                        object Z = null;
+                        var x = nameof(Z);
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -6459,25 +6459,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X|]);
-                        }
+                        var x = nameof([|Z.X|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public object Z { get; private set; }
+                class C
+                {
+                    public object Z { get; private set; }
 
-                        void M()
-                        {
-                            var x = nameof(Z.X);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z.X);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6486,25 +6486,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X|]);
-                        }
+                        var x = nameof([|Z.X|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private object Z;
+                class C
+                {
+                    private object Z;
 
-                        void M()
-                        {
-                            var x = nameof(Z.X);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z.X);
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6514,25 +6514,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X|]);
-                        }
+                        var x = nameof([|Z.X|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly object Z;
+                class C
+                {
+                    private readonly object Z;
 
-                        void M()
-                        {
-                            var x = nameof(Z.X);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z.X);
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6542,24 +6542,24 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X|]);
-                        }
+                        var x = nameof([|Z.X|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object Z = null;
-                            var x = nameof(Z.X);
-                        }
+                        object Z = null;
+                        var x = nameof(Z.X);
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -6569,25 +6569,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X.Y|]);
-                        }
+                        var x = nameof([|Z.X.Y|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public object Z { get; private set; }
+                class C
+                {
+                    public object Z { get; private set; }
 
-                        void M()
-                        {
-                            var x = nameof(Z.X.Y);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z.X.Y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6596,25 +6596,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X.Y|]);
-                        }
+                        var x = nameof([|Z.X.Y|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private object Z;
+                class C
+                {
+                    private object Z;
 
-                        void M()
-                        {
-                            var x = nameof(Z.X.Y);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z.X.Y);
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6624,25 +6624,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X.Y|]);
-                        }
+                        var x = nameof([|Z.X.Y|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly object Z;
+                class C
+                {
+                    private readonly object Z;
 
-                        void M()
-                        {
-                            var x = nameof(Z.X.Y);
-                        }
+                    void M()
+                    {
+                        var x = nameof(Z.X.Y);
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6652,24 +6652,24 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|Z.X.Y|]);
-                        }
+                        var x = nameof([|Z.X.Y|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object Z = null;
-                            var x = nameof(Z.X.Y);
-                        }
+                        object Z = null;
+                        var x = nameof(Z.X.Y);
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -6679,14 +6679,14 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = [|nameof(1 + 2)|];
-                        }
+                        var x = [|nameof(1 + 2)|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6695,15 +6695,15 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var y = 1 + 2;
-                            var x = [|nameof(y)|];
-                        }
+                        var y = 1 + 2;
+                        var x = [|nameof(y)|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6712,16 +6712,16 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var y = 1 + 2;
-                            var z = "";
-                            var x = [|nameof(y, z)|];
-                        }
+                        var y = 1 + 2;
+                        var z = "";
+                        var x = [|nameof(y, z)|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6730,25 +6730,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|], z);
-                        }
+                        var x = nameof([|y|], z);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public object y { get; private set; }
+                class C
+                {
+                    public object y { get; private set; }
 
-                        void M()
-                        {
-                            var x = nameof(y, z);
-                        }
+                    void M()
+                    {
+                        var x = nameof(y, z);
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6758,25 +6758,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|], z);
-                        }
+                        var x = nameof([|y|], z);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private object y;
+                class C
+                {
+                    private object y;
 
-                        void M()
-                        {
-                            var x = nameof(y, z);
-                        }
+                    void M()
+                    {
+                        var x = nameof(y, z);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6785,25 +6785,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|], z);
-                        }
+                        var x = nameof([|y|], z);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly object y;
+                class C
+                {
+                    private readonly object y;
 
-                        void M()
-                        {
-                            var x = nameof(y, z);
-                        }
+                    void M()
+                    {
+                        var x = nameof(y, z);
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6813,24 +6813,24 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|], z);
-                        }
+                        var x = nameof([|y|], z);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object y = null;
-                            var x = nameof(y, z);
-                        }
+                        object y = null;
+                        var x = nameof(y, z);
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -6840,35 +6840,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|]);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        var x = nameof([|y|]);
                     }
-                    """,
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public object y { get; private set; }
+
+                    void M()
                     {
-                        public object y { get; private set; }
-
-                        void M()
-                        {
-                            var x = nameof(y);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        var x = nameof(y);
                     }
-                    """,
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -6878,35 +6878,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|]);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        var x = nameof([|y|]);
                     }
-                    """,
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private object y;
+
+                    void M()
                     {
-                        private object y;
-
-                        void M()
-                        {
-                            var x = nameof(y);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        var x = nameof(y);
                     }
-                    """
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """
             );
         }
 
@@ -6915,35 +6915,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|]);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        var x = nameof([|y|]);
                     }
-                    """,
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private readonly object y;
+
+                    void M()
                     {
-                        private readonly object y;
-
-                        void M()
-                        {
-                            var x = nameof(y);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        var x = nameof(y);
                     }
-                    """,
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -6953,34 +6953,34 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var x = nameof([|y|]);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        var x = nameof([|y|]);
                     }
-                    """,
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object y = null;
-                            var x = nameof(y);
-                        }
-
-                        private object nameof(object y)
-                        {
-                            return null;
-                        }
+                        object y = null;
+                        var x = nameof(y);
                     }
-                    """,
+
+                    private object nameof(object y)
+                    {
+                        return null;
+                    }
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -6990,25 +6990,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            C x = a?[|.Instance|];
-                        }
+                        C x = a?[|.Instance|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public C Instance { get; private set; }
+                class C
+                {
+                    public C Instance { get; private set; }
 
-                        void Main(C a)
-                        {
-                            C x = a?.Instance;
-                        }
+                    void Main(C a)
+                    {
+                        C x = a?.Instance;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7017,25 +7017,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            C x = a?[|.Instance|];
-                        }
+                        C x = a?[|.Instance|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private C Instance;
+                class C
+                {
+                    private C Instance;
 
-                        void Main(C a)
-                        {
-                            C x = a?.Instance;
-                        }
+                    void Main(C a)
+                    {
+                        C x = a?.Instance;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7045,25 +7045,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            C x = a?[|.Instance|];
-                        }
+                        C x = a?[|.Instance|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly C Instance;
+                class C
+                {
+                    private readonly C Instance;
 
-                        void Main(C a)
-                        {
-                            C x = a?.Instance;
-                        }
+                    void Main(C a)
+                    {
+                        C x = a?.Instance;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7073,25 +7073,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            var x = a?[|.Instance|];
-                        }
+                        var x = a?[|.Instance|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public object Instance { get; private set; }
+                class C
+                {
+                    public object Instance { get; private set; }
 
-                        void Main(C a)
-                        {
-                            var x = a?.Instance;
-                        }
+                    void Main(C a)
+                    {
+                        var x = a?.Instance;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7100,25 +7100,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            var x = a?[|.Instance|];
-                        }
+                        var x = a?[|.Instance|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private object Instance;
+                class C
+                {
+                    private object Instance;
 
-                        void Main(C a)
-                        {
-                            var x = a?.Instance;
-                        }
+                    void Main(C a)
+                    {
+                        var x = a?.Instance;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7128,25 +7128,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            var x = a?[|.Instance|];
-                        }
+                        var x = a?[|.Instance|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly object Instance;
+                class C
+                {
+                    private readonly object Instance;
 
-                        void Main(C a)
-                        {
-                            var x = a?.Instance;
-                        }
+                    void Main(C a)
+                    {
+                        var x = a?.Instance;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7156,25 +7156,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            int? x = a?[|.B|];
-                        }
+                        int? x = a?[|.B|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public int B { get; private set; }
+                class C
+                {
+                    public int B { get; private set; }
 
-                        void Main(C a)
-                        {
-                            int? x = a?.B;
-                        }
+                    void Main(C a)
+                    {
+                        int? x = a?.B;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7183,25 +7183,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            int? x = a?[|.B|];
-                        }
+                        int? x = a?[|.B|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int B;
+                class C
+                {
+                    private int B;
 
-                        void Main(C a)
-                        {
-                            int? x = a?.B;
-                        }
+                    void Main(C a)
+                    {
+                        int? x = a?.B;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7211,25 +7211,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main(C a)
                     {
-                        void Main(C a)
-                        {
-                            int? x = a?[|.B|];
-                        }
+                        int? x = a?[|.B|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly int B;
+                class C
+                {
+                    private readonly int B;
 
-                        void Main(C a)
-                        {
-                            int? x = a?.B;
-                        }
+                    void Main(C a)
+                    {
+                        int? x = a?.B;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7239,36 +7239,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            C x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        C x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            C x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            public C C { get; internal set; }
-                        }
+                        C x = a?.B.C;
                     }
-                    """
+
+                    public class E
+                    {
+                        public C C { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -7277,36 +7277,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        int x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            public int C { get; internal set; }
-                        }
+                        int x = a?.B.C;
                     }
-                    """
+
+                    public class E
+                    {
+                        public int C { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -7315,36 +7315,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int? x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        int? x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int? x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            public int C { get; internal set; }
-                        }
+                        int? x = a?.B.C;
                     }
-                    """
+
+                    public class E
+                    {
+                        public int C { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -7353,36 +7353,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            var x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        var x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            var x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            public object C { get; internal set; }
-                        }
+                        var x = a?.B.C;
                     }
-                    """
+
+                    public class E
+                    {
+                        public object C { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -7391,36 +7391,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            C x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        C x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            C x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal C C;
-                        }
+                        C x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal C C;
+                    }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7430,36 +7430,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        int x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal int C;
-                        }
+                        int x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal int C;
+                    }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7469,36 +7469,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int? x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        int? x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int? x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal int C;
-                        }
+                        int? x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal int C;
+                    }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7508,36 +7508,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            var x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        var x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            var x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal object C;
-                        }
+                        var x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal object C;
+                    }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7547,36 +7547,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            C x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        C x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            C x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal readonly C C;
-                        }
+                        C x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal readonly C C;
+                    }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7586,36 +7586,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        int x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal readonly int C;
-                        }
+                        int x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal readonly int C;
+                    }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7625,36 +7625,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int? x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        int? x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            int? x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal readonly int C;
-                        }
+                        int? x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal readonly int C;
+                    }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7664,36 +7664,36 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            var x = a?.B.[|C|];
-                        }
-
-                        public class E
-                        {
-                        }
+                        var x = a?.B.[|C|];
                     }
-                    """,
+
+                    public class E
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public E B { get; private set; }
+
+                    void Main(C a)
                     {
-                        public E B { get; private set; }
-
-                        void Main(C a)
-                        {
-                            var x = a?.B.C;
-                        }
-
-                        public class E
-                        {
-                            internal readonly object C;
-                        }
+                        var x = a?.B.C;
                     }
-                    """,
+
+                    public class E
+                    {
+                        internal readonly object C;
+                    }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7703,29 +7703,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        public int MyProperty { get; } = [|y|];
-                    }
-                    """,
+                class Program
+                {
+                    public int MyProperty { get; } = [|y|];
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        private static int y;
+                class Program
+                {
+                    private static int y;
 
-                        public int MyProperty { get; } = y;
-                    }
-                    """
+                    public int MyProperty { get; } = y;
+                }
+                """
             );
         }
 
@@ -7734,29 +7734,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        public int MyProperty { get; } = [|y|];
-                    }
-                    """,
+                class Program
+                {
+                    public int MyProperty { get; } = [|y|];
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        private static readonly int y;
+                class Program
+                {
+                    private static readonly int y;
 
-                        public int MyProperty { get; } = y;
-                    }
-                    """,
+                    public int MyProperty { get; } = y;
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7766,28 +7766,28 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        public int MyProperty { get; } = [|y|];
-                    }
-                    """,
+                class Program
+                {
+                    public int MyProperty { get; } = [|y|];
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Program
-                    {
-                        public static int y { get; private set; }
-                        public int MyProperty { get; } = y;
-                    }
-                    """,
+                class Program
+                {
+                    public static int y { get; private set; }
+                    public int MyProperty { get; } = y;
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7797,19 +7797,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        public int Y => [|y|];
-                    }
-                    """,
+                class Program
+                {
+                    public int Y => [|y|];
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int y;
+                class Program
+                {
+                    private int y;
 
-                        public int Y => y;
-                    }
-                    """
+                    public int Y => y;
+                }
+                """
             );
         }
 
@@ -7818,19 +7818,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        public int Y => [|y|];
-                    }
-                    """,
+                class Program
+                {
+                    public int Y => [|y|];
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private readonly int y;
+                class Program
+                {
+                    private readonly int y;
 
-                        public int Y => y;
-                    }
-                    """,
+                    public int Y => y;
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7840,19 +7840,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
-                    {
-                        public int Y => [|y|];
-                    }
-                    """,
+                class Program
+                {
+                    public int Y => [|y|];
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public int Y => y;
+                class Program
+                {
+                    public int Y => y;
 
-                        public int y { get; private set; }
-                    }
-                    """,
+                    public int y { get; private set; }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7862,19 +7862,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static C operator --(C p) => [|x|];
-                    }
-                    """,
+                class C
+                {
+                    public static C operator --(C p) => [|x|];
+                }
+                """,
                 """
-                    class C
-                    {
-                        private static C x;
+                class C
+                {
+                    private static C x;
 
-                        public static C operator --(C p) => x;
-                    }
-                    """
+                    public static C operator --(C p) => x;
+                }
+                """
             );
         }
 
@@ -7883,19 +7883,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static C operator --(C p) => [|x|];
-                    }
-                    """,
+                class C
+                {
+                    public static C operator --(C p) => [|x|];
+                }
+                """,
                 """
-                    class C
-                    {
-                        private static readonly C x;
+                class C
+                {
+                    private static readonly C x;
 
-                        public static C operator --(C p) => x;
-                    }
-                    """,
+                    public static C operator --(C p) => x;
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7905,19 +7905,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static C operator --(C p) => [|x|];
-                    }
-                    """,
+                class C
+                {
+                    public static C operator --(C p) => [|x|];
+                }
+                """,
                 """
-                    class C
-                    {
-                        public static C x { get; private set; }
+                class C
+                {
+                    public static C x { get; private set; }
 
-                        public static C operator --(C p) => x;
-                    }
-                    """,
+                    public static C operator --(C p) => x;
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7927,19 +7927,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static C GetValue(C p) => [|x|];
-                    }
-                    """,
+                class C
+                {
+                    public static C GetValue(C p) => [|x|];
+                }
+                """,
                 """
-                    class C
-                    {
-                        private static C x;
+                class C
+                {
+                    private static C x;
 
-                        public static C GetValue(C p) => x;
-                    }
-                    """
+                    public static C GetValue(C p) => x;
+                }
+                """
             );
         }
 
@@ -7948,19 +7948,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static C GetValue(C p) => [|x|];
-                    }
-                    """,
+                class C
+                {
+                    public static C GetValue(C p) => [|x|];
+                }
+                """,
                 """
-                    class C
-                    {
-                        private static readonly C x;
+                class C
+                {
+                    private static readonly C x;
 
-                        public static C GetValue(C p) => x;
-                    }
-                    """,
+                    public static C GetValue(C p) => x;
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -7970,19 +7970,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static C GetValue(C p) => [|x|];
-                    }
-                    """,
+                class C
+                {
+                    public static C GetValue(C p) => [|x|];
+                }
+                """,
                 """
-                    class C
-                    {
-                        public static C x { get; private set; }
+                class C
+                {
+                    public static C x { get; private set; }
 
-                        public static C GetValue(C p) => x;
-                    }
-                    """,
+                    public static C GetValue(C p) => x;
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -7992,19 +7992,19 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static async System.Threading.Tasks.Task<C> GetValue(C p) => [|x|];
-                    }
-                    """,
+                class C
+                {
+                    public static async System.Threading.Tasks.Task<C> GetValue(C p) => [|x|];
+                }
+                """,
                 """
-                    class C
-                    {
-                        public static C x { get; private set; }
+                class C
+                {
+                    public static C x { get; private set; }
 
-                        public static async System.Threading.Tasks.Task<C> GetValue(C p) => x;
-                    }
-                    """,
+                    public static async System.Threading.Tasks.Task<C> GetValue(C p) => x;
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -8014,29 +8014,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
-                        }
+                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private static string key;
+
+                    static void Main(string[] args)
                     {
-                        private static string key;
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { [key] = 0 };
-                        }
+                        var x = new Dictionary<string, int> { [key] = 0 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8045,29 +8045,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    public static string One { get; private set; }
+
+                    static void Main(string[] args)
                     {
-                        public static string One { get; private set; }
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8076,29 +8076,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private static int i;
+
+                    static void Main(string[] args)
                     {
-                        private static int i;
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = i };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = i };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8107,29 +8107,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
-                        }
+                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private static readonly string key;
+
+                    static void Main(string[] args)
                     {
-                        private static readonly string key;
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { [key] = 0 };
-                        }
+                        var x = new Dictionary<string, int> { [key] = 0 };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -8139,29 +8139,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private static string One;
+
+                    static void Main(string[] args)
                     {
-                        private static string One;
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -8171,29 +8171,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private static readonly int i;
+
+                    static void Main(string[] args)
                     {
-                        private static readonly int i;
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = i };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = i };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -8203,29 +8203,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
-                        }
+                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    public static string key { get; private set; }
+
+                    static void Main(string[] args)
                     {
-                        public static string key { get; private set; }
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { [key] = 0 };
-                        }
+                        var x = new Dictionary<string, int> { [key] = 0 };
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -8235,29 +8235,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    private static readonly string One;
+
+                    static void Main(string[] args)
                     {
-                        private static readonly string One;
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -8267,29 +8267,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    public static int i { get; private set; }
+
+                    static void Main(string[] args)
                     {
-                        public static int i { get; private set; }
-
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = i };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = i };
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -8299,28 +8299,28 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { [[|key|]] = 0 };
-                        }
+                        var x = new Dictionary<string, int> { [[|key|]] = 0 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            string key = null;
-                            var x = new Dictionary<string, int> { [key] = 0 };
-                        }
+                        string key = null;
+                        var x = new Dictionary<string, int> { [key] = 0 };
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -8330,28 +8330,28 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [[|One|]] = 1, ["Two"] = 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            string One = null;
-                            var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
-                        }
+                        string One = null;
+                        var x = new Dictionary<string, int> { ["Zero"] = 0, [One] = 1, ["Two"] = 2 };
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -8361,28 +8361,28 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
-                        }
+                        var x = new Dictionary<string, int> { ["Zero"] = [|i|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            int i = 0;
-                            var x = new Dictionary<string, int> { ["Zero"] = i };
-                        }
+                        int i = 0;
+                        var x = new Dictionary<string, int> { ["Zero"] = i };
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -8392,33 +8392,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|goo|] = () => {
-                                return 0;
-                            };
-                        }
+                        [|goo|] = () => {
+                            return 0;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private static Func<int> goo;
+
+                    static void Main(string[] args)
                     {
-                        private static Func<int> goo;
-
-                        static void Main(string[] args)
-                        {
-                            goo = () => {
-                                return 0;
-                            };
-                        }
+                        goo = () => {
+                            return 0;
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8427,33 +8427,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|goo|] = () => {
-                                return 0;
-                            };
-                        }
+                        [|goo|] = () => {
+                            return 0;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    public static Func<int> goo { get; private set; }
+
+                    static void Main(string[] args)
                     {
-                        public static Func<int> goo { get; private set; }
-
-                        static void Main(string[] args)
-                        {
-                            goo = () => {
-                                return 0;
-                            };
-                        }
+                        goo = () => {
+                            return 0;
+                        };
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -8463,32 +8463,32 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|goo|] = () => {
-                                return 0;
-                            };
-                        }
+                        [|goo|] = () => {
+                            return 0;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        Func<int> goo = () =>
                         {
-                            Func<int> goo = () =>
-                            {
-                                return 0;
-                            };
-                        }
+                            return 0;
+                        };
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -8498,35 +8498,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    public static int Property1
                     {
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                return [|_field|];
-                            }
+                            return [|_field|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    private static int _field;
+
+                    public static int Property1
                     {
-                        private static int _field;
-
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                return _field;
-                            }
+                            return _field;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8535,35 +8535,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    public static int Property1
                     {
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                return [|_field|];
-                            }
+                            return [|_field|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    private static readonly int _field;
+
+                    public static int Property1
                     {
-                        private static readonly int _field;
-
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                return _field;
-                            }
+                            return _field;
                         }
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -8573,35 +8573,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    public static int Property1
                     {
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                return [|goo|];
-                            }
+                            return [|goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    public static int Property1
                     {
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                return goo;
-                            }
+                            return goo;
                         }
-
-                        public static int goo { get; private set; }
                     }
-                    """,
+
+                    public static int goo { get; private set; }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -8611,34 +8611,34 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    public static int Property1
                     {
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                return [|goo|];
-                            }
+                            return [|goo|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class Test
+                public class Test
+                {
+                    public static int Property1
                     {
-                        public static int Property1
+                        get
                         {
-                            get
-                            {
-                                int goo = 0;
-                                return goo;
-                            }
+                            int goo = 0;
+                            return goo;
                         }
                     }
-                    """,
+                }
+                """,
                 index: LocalIndex
             );
         }
@@ -8648,35 +8648,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Outer
-                    {
-                        int _field;
+                class Outer
+                {
+                    int _field;
 
-                        class Inner
+                    class Inner
+                    {
+                        public Inner(int field)
                         {
-                            public Inner(int field)
-                            {
-                                [|_field|] = field;
-                            }
+                            [|_field|] = field;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Outer
+                class Outer
+                {
+                    int _field;
+
+                    class Inner
                     {
-                        int _field;
+                        private int _field;
 
-                        class Inner
+                        public Inner(int field)
                         {
-                            private int _field;
-
-                            public Inner(int field)
-                            {
-                                _field = field;
-                            }
+                            _field = field;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8685,16 +8685,16 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int _field;
+                class C
+                {
+                    int _field;
 
-                        void M()
-                        {
-                            C.[|_field|] = 42;
-                        }
+                    void M()
+                    {
+                        C.[|_field|] = 42;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8703,16 +8703,16 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int _field;
+                class C
+                {
+                    int _field;
 
-                        static C()
-                        {
-                            [|_field|] = 42;
-                        }
+                    static C()
+                    {
+                        [|_field|] = 42;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8721,25 +8721,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method((int, string) i)
                     {
-                        void Method((int, string) i)
-                        {
-                            Method([|tuple|]);
-                        }
+                        Method([|tuple|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private (int, string) tuple;
+                class Class
+                {
+                    private (int, string) tuple;
 
-                        void Method((int, string) i)
-                        {
-                            Method(tuple);
-                        }
+                    void Method((int, string) i)
+                    {
+                        Method(tuple);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8748,25 +8748,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method((int a, string) i)
                     {
-                        void Method((int a, string) i)
-                        {
-                            Method([|tuple|]);
-                        }
+                        Method([|tuple|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private (int a, string) tuple;
+                class Class
+                {
+                    private (int a, string) tuple;
 
-                        void Method((int a, string) i)
-                        {
-                            Method(tuple);
-                        }
+                    void Method((int a, string) i)
+                    {
+                        Method(tuple);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8775,25 +8775,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|tuple|] = (1, "hello");
-                        }
+                        [|tuple|] = (1, "hello");
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private (int, string) tuple;
+                class Class
+                {
+                    private (int, string) tuple;
 
-                        void Method()
-                        {
-                            tuple = (1, "hello");
-                        }
+                    void Method()
+                    {
+                        tuple = (1, "hello");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8802,25 +8802,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|tuple|] = (a: 1, "hello");
-                        }
+                        [|tuple|] = (a: 1, "hello");
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private (int a, string) tuple;
+                class Class
+                {
+                    private (int a, string) tuple;
 
-                        void Method()
-                        {
-                            tuple = (a: 1, "hello");
-                        }
+                    void Method()
+                    {
+                        tuple = (a: 1, "hello");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8829,27 +8829,27 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    public void Goo()
                     {
-                        public void Goo()
-                        {
-                            ref int i = ref this.[|Bar|];
-                        }
+                        ref int i = ref this.[|Bar|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
-                    {
-                        public ref int Bar => throw new NotImplementedException();
+                using System;
+                class C
+                {
+                    public ref int Bar => throw new NotImplementedException();
 
-                        public void Goo()
-                        {
-                            ref int i = ref this.Bar;
-                        }
+                    public void Goo()
+                    {
+                        ref int i = ref this.Bar;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8858,27 +8858,27 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    public void Goo()
                     {
-                        public void Goo()
-                        {
-                            ref int i = ref this.[|bar|];
-                        }
+                        ref int i = ref this.[|bar|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
-                    {
-                        private int bar;
+                using System;
+                class C
+                {
+                    private int bar;
 
-                        public void Goo()
-                        {
-                            ref int i = ref this.bar;
-                        }
+                    public void Goo()
+                    {
+                        ref int i = ref this.bar;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8887,29 +8887,29 @@ class C
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    public class Goo
+                public class Goo
+                {
+                    public Goo(String goo)
                     {
-                        public Goo(String goo)
-                        {
-                            [|String|] = goo;
-                        }
+                        [|String|] = goo;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class Goo
+                public class Goo
+                {
+                    public Goo(String goo)
                     {
-                        public Goo(String goo)
-                        {
-                            String = goo;
-                        }
-
-                        public string String { get; }
+                        String = goo;
                     }
-                    """
+
+                    public string String { get; }
+                }
+                """
             );
         }
 
@@ -8918,29 +8918,29 @@ class C
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    public class Goo
+                public class Goo
+                {
+                    public Goo(String goo)
                     {
-                        public Goo(String goo)
-                        {
-                            [|String|] = goo;
-                        }
+                        [|String|] = goo;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class Goo
+                public class Goo
+                {
+                    public Goo(String goo)
                     {
-                        public Goo(String goo)
-                        {
-                            String = goo;
-                        }
-
-                        public string String { get; private set; }
+                        String = goo;
                     }
-                    """,
+
+                    public string String { get; private set; }
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -8950,21 +8950,21 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class nameof
                     {
-                        class nameof
-                        {
-                        }
                     }
+                }
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|nameof|]
-                        }
+                        [|nameof|]
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8973,30 +8973,30 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        private readonly int _goo;
+                class Class
+                {
+                    private readonly int _goo;
 
-                        public Class()
-                        {
-                            _goo = 0;
-                            [|_bar|] = 1;
-                        }
+                    public Class()
+                    {
+                        _goo = 0;
+                        [|_bar|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly int _goo;
-                        private readonly int _bar;
+                class Class
+                {
+                    private readonly int _goo;
+                    private readonly int _bar;
 
-                        public Class()
-                        {
-                            _goo = 0;
-                            _bar = 1;
-                        }
+                    public Class()
+                    {
+                        _goo = 0;
+                        _bar = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9005,30 +9005,30 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        private readonly int _goo;
+                class Class
+                {
+                    private readonly int _goo;
 
-                        public Class()
-                        {
-                            [|_bar|] = 1;
-                            _goo = 0;
-                        }
+                    public Class()
+                    {
+                        [|_bar|] = 1;
+                        _goo = 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly int _bar;
-                        private readonly int _goo;
+                class Class
+                {
+                    private readonly int _bar;
+                    private readonly int _goo;
 
-                        public Class()
-                        {
-                            _bar = 1;
-                            _goo = 0;
-                        }
+                    public Class()
+                    {
+                        _bar = 1;
+                        _goo = 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9037,25 +9037,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    public Class()
                     {
-                        public Class()
-                        {
-                            [|Bar|] = 1;
-                        }
+                        [|Bar|] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    public Class()
                     {
-                        public Class()
-                        {
-                            Bar = 1;
-                        }
-
-                        public int Bar { get; }
+                        Bar = 1;
                     }
-                    """
+
+                    public int Bar { get; }
+                }
+                """
             );
         }
 
@@ -9064,34 +9064,34 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        private int _goo;
-                        private int _quux;
+                class Class
+                {
+                    private int _goo;
+                    private int _quux;
 
-                        public Class()
-                        {
-                            _goo = 0;
-                            [|_bar|] = 1;
-                            _quux = 2;
-                        }
+                    public Class()
+                    {
+                        _goo = 0;
+                        [|_bar|] = 1;
+                        _quux = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int _goo;
-                        private int _bar;
-                        private int _quux;
+                class Class
+                {
+                    private int _goo;
+                    private int _bar;
+                    private int _quux;
 
-                        public Class()
-                        {
-                            _goo = 0;
-                            _bar = 1;
-                            _quux = 2;
-                        }
+                    public Class()
+                    {
+                        _goo = 0;
+                        _bar = 1;
+                        _quux = 2;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9100,34 +9100,34 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        private int goo;
-                        private int quux;
+                class Class
+                {
+                    private int goo;
+                    private int quux;
 
-                        public Class()
-                        {
-                            this.goo = 0;
-                            this.[|bar|] = 1;
-                            this.quux = 2;
-                        }
+                    public Class()
+                    {
+                        this.goo = 0;
+                        this.[|bar|] = 1;
+                        this.quux = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private int goo;
-                        private int bar;
-                        private int quux;
+                class Class
+                {
+                    private int goo;
+                    private int bar;
+                    private int quux;
 
-                        public Class()
-                        {
-                            this.goo = 0;
-                            this.bar = 1;
-                            this.quux = 2;
-                        }
+                    public Class()
+                    {
+                        this.goo = 0;
+                        this.bar = 1;
+                        this.quux = 2;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9136,34 +9136,34 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
-                    {
-                        public int Goo { get; }
-                        public int Quuz { get; }
+                class Class
+                {
+                    public int Goo { get; }
+                    public int Quuz { get; }
 
-                        public Class()
-                        {
-                            Goo = 0;
-                            [|Bar|] = 1;
-                            Quux = 2;
-                        }
+                    public Class()
+                    {
+                        Goo = 0;
+                        [|Bar|] = 1;
+                        Quux = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public int Goo { get; }
-                        public int Bar { get; }
-                        public int Quuz { get; }
+                class Class
+                {
+                    public int Goo { get; }
+                    public int Bar { get; }
+                    public int Quuz { get; }
 
-                        public Class()
-                        {
-                            Goo = 0;
-                            Bar = 1;
-                            Quux = 2;
-                        }
+                    public Class()
+                    {
+                        Goo = 0;
+                        Bar = 1;
+                        Quux = 2;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9172,15 +9172,15 @@ class C
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    private void GetEvaluationRuleNames()
                     {
-                        private void GetEvaluationRuleNames()
-                        {
-                            [|IEnumerable|] < Int32 >
-                            return ImmutableArray.CreateRange();
-                        }
+                        [|IEnumerable|] < Int32 >
+                        return ImmutableArray.CreateRange();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9189,27 +9189,27 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    private void GetEvaluationRuleNames()
                     {
-                        private void GetEvaluationRuleNames()
-                        {
-                            [|IEnumerable|] < Int32
-                            return ImmutableArray.CreateRange();
-                        }
+                        [|IEnumerable|] < Int32
+                        return ImmutableArray.CreateRange();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public int IEnumerable { get; private set; }
+                class C
+                {
+                    public int IEnumerable { get; private set; }
 
-                        private void GetEvaluationRuleNames()
-                        {
-                            IEnumerable < Int32
-                            return ImmutableArray.CreateRange();
-                        }
+                    private void GetEvaluationRuleNames()
+                    {
+                        IEnumerable < Int32
+                        return ImmutableArray.CreateRange();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9218,33 +9218,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public bool isDisposed;
+
+                    public readonly int x;
+                    public readonly int m;
+
+                    public C()
                     {
-                        public bool isDisposed;
-
-                        public readonly int x;
-                        public readonly int m;
-
-                        public C()
-                        {
-                            this.[|y|] = 0;
-                        }
+                        this.[|y|] = 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public bool isDisposed;
-                        private int y;
-                        public readonly int x;
-                        public readonly int m;
+                class C
+                {
+                    public bool isDisposed;
+                    private int y;
+                    public readonly int x;
+                    public readonly int m;
 
-                        public C()
-                        {
-                            this.y = 0;
-                        }
+                    public C()
+                    {
+                        this.y = 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9253,33 +9253,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public readonly int x;
+                    public readonly int m;
+
+                    public bool isDisposed;
+
+                    public C()
                     {
-                        public readonly int x;
-                        public readonly int m;
-
-                        public bool isDisposed;
-
-                        public C()
-                        {
-                            this.[|y|] = 0;
-                        }
+                        this.[|y|] = 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public readonly int x;
-                        public readonly int m;
-                        private readonly int y;
-                        public bool isDisposed;
+                class C
+                {
+                    public readonly int x;
+                    public readonly int m;
+                    private readonly int y;
+                    public bool isDisposed;
 
-                        public C()
-                        {
-                            this.y = 0;
-                        }
+                    public C()
+                    {
+                        this.y = 0;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -9289,31 +9289,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Goo(out [|goo|]);
-                        }
-
-                        void Goo(int i) { }
-                        void Goo(out bool b) { }
+                        Goo(out [|goo|]);
                     }
-                    """,
+
+                    void Goo(int i) { }
+                    void Goo(out bool b) { }
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    private bool goo;
+
+                    void Method()
                     {
-                        private bool goo;
-
-                        void Method()
-                        {
-                            Goo(out goo);
-                        }
-
-                        void Goo(int i) { }
-                        void Goo(out bool b) { }
+                        Goo(out goo);
                     }
-                    """
+
+                    void Goo(int i) { }
+                    void Goo(out bool b) { }
+                }
+                """
             );
         }
 
@@ -9322,31 +9322,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Goo([|goo|]);
-                        }
-
-                        void Goo(out bool b) { }
-                        void Goo(int i) { }
+                        Goo([|goo|]);
                     }
-                    """,
+
+                    void Goo(out bool b) { }
+                    void Goo(int i) { }
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    private int goo;
+
+                    void Method()
                     {
-                        private int goo;
-
-                        void Method()
-                        {
-                            Goo(goo);
-                        }
-
-                        void Goo(out bool b) { }
-                        void Goo(int i) { }
+                        Goo(goo);
                     }
-                    """
+
+                    void Goo(out bool b) { }
+                    void Goo(int i) { }
+                }
+                """
             );
         }
 
@@ -9355,31 +9355,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Goo(ref [|goo|]);
-                        }
-
-                        void Goo(int i) { }
-                        void Goo(ref bool b) { }
+                        Goo(ref [|goo|]);
                     }
-                    """,
+
+                    void Goo(int i) { }
+                    void Goo(ref bool b) { }
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    private bool goo;
+
+                    void Method()
                     {
-                        private bool goo;
-
-                        void Method()
-                        {
-                            Goo(ref goo);
-                        }
-
-                        void Goo(int i) { }
-                        void Goo(ref bool b) { }
+                        Goo(ref goo);
                     }
-                    """
+
+                    void Goo(int i) { }
+                    void Goo(ref bool b) { }
+                }
+                """
             );
         }
 
@@ -9388,31 +9388,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            Goo([|goo|]);
-                        }
-
-                        void Goo(ref bool b) { }
-                        void Goo(int i) { }
+                        Goo([|goo|]);
                     }
-                    """,
+
+                    void Goo(ref bool b) { }
+                    void Goo(int i) { }
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    private int goo;
+
+                    void Method()
                     {
-                        private int goo;
-
-                        void Method()
-                        {
-                            Goo(goo);
-                        }
-
-                        void Goo(ref bool b) { }
-                        void Goo(int i) { }
+                        Goo(goo);
                     }
-                    """
+
+                    void Goo(ref bool b) { }
+                    void Goo(int i) { }
+                }
+                """
             );
         }
 
@@ -9421,25 +9421,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public int Property
                     {
-                        public int Property
-                        {
-                            get => [|_field|];
-                        }
+                        get => [|_field|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int _field;
+                class Program
+                {
+                    private int _field;
 
-                        public int Property
-                        {
-                            get => _field;
-                        }
+                    public int Property
+                    {
+                        get => _field;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9448,27 +9448,27 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public int Property
                     {
-                        public int Property
-                        {
-                            protected get => [|_field|];
-                            set => throw new System.NotImplementedException();
-                        }
+                        protected get => [|_field|];
+                        set => throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int _field;
+                class Program
+                {
+                    private int _field;
 
-                        public int Property
-                        {
-                            protected get => _field;
-                            set => throw new System.NotImplementedException();
-                        }
+                    public int Property
+                    {
+                        protected get => _field;
+                        set => throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9477,25 +9477,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public int Property
                     {
-                        public int Property
-                        {
-                            get => [|_readonlyField|];
-                        }
+                        get => [|_readonlyField|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private readonly int _readonlyField;
+                class Program
+                {
+                    private readonly int _readonlyField;
 
-                        public int Property
-                        {
-                            get => _readonlyField;
-                        }
+                    public int Property
+                    {
+                        get => _readonlyField;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -9505,24 +9505,24 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public int Property
                     {
-                        public int Property
-                        {
-                            get => [|prop|];
-                        }
+                        get => [|prop|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public int Property
                     {
-                        public int Property
-                        {
-                            get => prop;
-                        }
-                        public int prop { get; private set; }
+                        get => prop;
                     }
-                    """,
+                    public int prop { get; private set; }
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -9532,25 +9532,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public int Property
                     {
-                        public int Property
-                        {
-                            set => [|_field|] = value;
-                        }
+                        set => [|_field|] = value;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int _field;
+                class Program
+                {
+                    private int _field;
 
-                        public int Property
-                        {
-                            set => _field = value;
-                        }
+                    public int Property
+                    {
+                        set => _field = value;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9559,25 +9559,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            int Local() => [|_field|];
-                        }
+                        int Local() => [|_field|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int _field;
+                class Program
+                {
+                    private int _field;
 
-                        public void Method()
-                        {
-                            int Local() => _field;
-                        }
+                    public void Method()
+                    {
+                        int Local() => _field;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9586,25 +9586,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            int Local() => [|_readonlyField|];
-                        }
+                        int Local() => [|_readonlyField|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private readonly int _readonlyField;
+                class Program
+                {
+                    private readonly int _readonlyField;
 
-                        public void Method()
-                        {
-                            int Local() => _readonlyField;
-                        }
+                    public void Method()
+                    {
+                        int Local() => _readonlyField;
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -9614,25 +9614,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            int Local() => [|prop|];
-                        }
+                        int Local() => [|prop|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public int prop { get; private set; }
+                class Program
+                {
+                    public int prop { get; private set; }
 
-                        public void Method()
-                        {
-                            int Local() => prop;
-                        }
+                    public void Method()
+                    {
+                        int Local() => prop;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -9642,25 +9642,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            async System.Threading.Tasks.Task<int> Local() => [|prop|];
-                        }
+                        async System.Threading.Tasks.Task<int> Local() => [|prop|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public int prop { get; private set; }
+                class Program
+                {
+                    public int prop { get; private set; }
 
-                        public void Method()
-                        {
-                            async System.Threading.Tasks.Task<int> Local() => prop;
-                        }
+                    public void Method()
+                    {
+                        async System.Threading.Tasks.Task<int> Local() => prop;
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -9670,25 +9670,25 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            int Local() => [|_field|] = 12;
-                        }
+                        int Local() => [|_field|] = 12;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int _field;
+                class Program
+                {
+                    private int _field;
 
-                        public void Method()
-                        {
-                            int Local() => _field = 12;
-                        }
+                    public void Method()
+                    {
+                        int Local() => _field = 12;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9697,31 +9697,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
+                        int Local()
                         {
-                            int Local()
-                            {
-                                return [|_field|];
-                            }
+                            return [|_field|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int _field;
+                class Program
+                {
+                    private int _field;
 
-                        public void Method()
+                    public void Method()
+                    {
+                        int Local()
                         {
-                            int Local()
-                            {
-                                return _field;
-                            }
+                            return _field;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9730,31 +9730,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
+                        int Local()
                         {
-                            int Local()
-                            {
-                                return [|_readonlyField|];
-                            }
+                            return [|_readonlyField|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private readonly int _readonlyField;
+                class Program
+                {
+                    private readonly int _readonlyField;
 
-                        public void Method()
+                    public void Method()
+                    {
+                        int Local()
                         {
-                            int Local()
-                            {
-                                return _readonlyField;
-                            }
+                            return _readonlyField;
                         }
                     }
-                    """,
+                }
+                """,
                 index: ReadonlyFieldIndex
             );
         }
@@ -9764,31 +9764,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
+                        int Local()
                         {
-                            int Local()
-                            {
-                                return [|prop|];
-                            }
+                            return [|prop|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public int prop { get; private set; }
+                class Program
+                {
+                    public int prop { get; private set; }
 
-                        public void Method()
+                    public void Method()
+                    {
+                        int Local()
                         {
-                            int Local()
-                            {
-                                return prop;
-                            }
+                            return prop;
                         }
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -9798,31 +9798,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
+                        async System.Threading.Tasks.Task<int> Local()
                         {
-                            async System.Threading.Tasks.Task<int> Local()
-                            {
-                                return [|prop|];
-                            }
+                            return [|prop|];
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        public int prop { get; private set; }
+                class Program
+                {
+                    public int prop { get; private set; }
 
-                        public void Method()
+                    public void Method()
+                    {
+                        async System.Threading.Tasks.Task<int> Local()
                         {
-                            async System.Threading.Tasks.Task<int> Local()
-                            {
-                                return prop;
-                            }
+                            return prop;
                         }
                     }
-                    """,
+                }
+                """,
                 index: PropertyIndex
             );
         }
@@ -9832,31 +9832,31 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
+                        int Local() 
                         {
-                            int Local() 
-                            {
-                                return [|_field|] = 12;
-                            }
+                            return [|_field|] = 12;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        private int _field;
+                class Program
+                {
+                    private int _field;
 
-                        public void Method()
+                    public void Method()
+                    {
+                        int Local() 
                         {
-                            int Local() 
-                            {
-                                return _field = 12;
-                            }
+                            return _field = 12;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9865,41 +9865,41 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
+                        Action action = () => 
                         {
-                            Action action = () => 
+                            int Local()
                             {
-                                int Local()
-                                {
-                                    return [|_field|];
-                                }
-                            };
-                        }
+                                return [|_field|];
+                            }
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private int _field;
+
+                    public void Method()
                     {
-                        private int _field;
-
-                        public void Method()
+                        Action action = () => 
                         {
-                            Action action = () => 
+                            int Local()
                             {
-                                int Local()
-                                {
-                                    return _field;
-                                }
-                            };
-                        }
+                                return _field;
+                            }
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9908,35 +9908,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    public void Method()
                     {
-                        public void Method()
+                        Action action = () => 
                         {
-                            Action action = () => 
-                            {
-                                int Local() => [|_field|];
-                            };
-                        }
+                            int Local() => [|_field|];
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    private int _field;
+
+                    public void Method()
                     {
-                        private int _field;
-
-                        public void Method()
+                        Action action = () => 
                         {
-                            Action action = () => 
-                            {
-                                int Local() => _field;
-                            };
-                        }
+                            int Local() => _field;
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9945,29 +9945,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        lock ([|goo|])
                         {
-                            lock ([|goo|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private object goo;
+                class Class
+                {
+                    private object goo;
 
-                        void Method()
+                    void Method()
+                    {
+                        lock (goo)
                         {
-                            lock (goo)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9976,29 +9976,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        lock ([|goo|])
                         {
-                            lock ([|goo|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        private readonly object goo;
+                class Class
+                {
+                    private readonly object goo;
 
-                        void Method()
+                    void Method()
+                    {
+                        lock (goo)
                         {
-                            lock (goo)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 index: 1
             );
         }
@@ -10008,29 +10008,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        lock ([|goo|])
                         {
-                            lock ([|goo|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
-                    {
-                        public object goo { get; private set; }
+                class Class
+                {
+                    public object goo { get; private set; }
 
-                        void Method()
+                    void Method()
+                    {
+                        lock (goo)
                         {
-                            lock (goo)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 index: 2
             );
         }
@@ -10040,38 +10040,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: int i })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is Blah { [|X|]: int i })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: int i })
                         {
-                            object o = null;
-                            if (o is Blah { X: int i })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public int X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public int X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10080,38 +10080,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            Blah o = null;
-                            if (o is { [|X|]: int i })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        Blah o = null;
+                        if (o is { [|X|]: int i })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        Blah o = null;
+                        if (o is { X: int i })
                         {
-                            Blah o = null;
-                            if (o is { X: int i })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public int X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public int X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10120,48 +10120,48 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: { [|Y|]: int i } })
                         {
-                            object o = null;
-                            if (o is Blah { X: { [|Y|]: int i } })
-                            {
-                            }
-                        }
-
-                        class Frob
-                        {
-                        }
-
-                        class Blah
-                        {
-                            public Frob X;
                         }
                     }
-                    """,
+
+                    class Frob
+                    {
+                    }
+
+                    class Blah
+                    {
+                        public Frob X;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: { Y: int i } })
                         {
-                            object o = null;
-                            if (o is Blah { X: { Y: int i } })
-                            {
-                            }
-                        }
-
-                        class Frob
-                        {
-                            public int Y { get; internal set; }
-                        }
-
-                        class Blah
-                        {
-                            public Frob X;
                         }
                     }
-                    """
+
+                    class Frob
+                    {
+                        public int Y { get; internal set; }
+                    }
+
+                    class Blah
+                    {
+                        public Frob X;
+                    }
+                }
+                """
             );
         }
 
@@ -10170,38 +10170,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is Blah { [|X|]: })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: })
                         {
-                            object o = null;
-                            if (o is Blah { X: })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public object X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public object X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10210,46 +10210,46 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: Frob { } })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                        }
-
-                        class Frob
+                        object o = null;
+                        if (o is Blah { [|X|]: Frob { } })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+
+                    class Frob
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { X: Frob { } })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public Frob X { get; internal set; }
-                        }
-
-                        class Frob
+                        object o = null;
+                        if (o is Blah { X: Frob { } })
                         {
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public Frob X { get; internal set; }
+                    }
+
+                    class Frob
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -10258,38 +10258,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: (1, 2) })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is Blah { [|X|]: (1, 2) })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: (1, 2) })
                         {
-                            object o = null;
-                            if (o is Blah { X: (1, 2) })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public (int, int) X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public (int, int) X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10338,38 +10338,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: () })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is Blah { [|X|]: () })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: () })
                         {
-                            object o = null;
-                            if (o is Blah { X: () })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public object X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public object X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10425,43 +10425,43 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    Blah SomeBlah { get; set; }
+
+                    void M2()
                     {
-                        Blah SomeBlah { get; set; }
-
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is C { SomeBlah: [|MissingConstant|] })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is C { SomeBlah: [|MissingConstant|] })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private const Blah MissingConstant;
+
+                    Blah SomeBlah { get; set; }
+
+                    void M2()
                     {
-                        private const Blah MissingConstant;
-
-                        Blah SomeBlah { get; set; }
-
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is C { SomeBlah: MissingConstant })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is C { SomeBlah: MissingConstant })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp12
                 )
@@ -10473,45 +10473,45 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    C SomeC { get; set; }
+                    Blah SomeBlah { get; set; }
+
+                    void M2()
                     {
-                        C SomeC { get; set; }
-                        Blah SomeBlah { get; set; }
-
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is C { SomeC.SomeBlah: [|MissingConstant|] })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is C { SomeC.SomeBlah: [|MissingConstant|] })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private const Blah MissingConstant;
+
+                    C SomeC { get; set; }
+                    Blah SomeBlah { get; set; }
+
+                    void M2()
                     {
-                        private const Blah MissingConstant;
-
-                        C SomeC { get; set; }
-                        Blah SomeBlah { get; set; }
-
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is C { SomeC.SomeBlah: MissingConstant })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is C { SomeC.SomeBlah: MissingConstant })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp12
                 )
@@ -10523,38 +10523,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: (1) })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is Blah { [|X|]: (1) })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: (1) })
                         {
-                            object o = null;
-                            if (o is Blah { X: (1) })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public int X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public int X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10563,38 +10563,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: (y: 1) })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is Blah { [|X|]: (y: 1) })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: (y: 1) })
                         {
-                            object o = null;
-                            if (o is Blah { X: (y: 1) })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public object X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public object X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10603,44 +10603,44 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object? o = null;
-                            object? zToMatch = null;
-                            if (o is Blah { [|X|]: (y: 1, z: zToMatch) })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object? o = null;
+                        object? zToMatch = null;
+                        if (o is Blah { [|X|]: (y: 1, z: zToMatch) })
                         {
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object? o = null;
+                        object? zToMatch = null;
+                        if (o is Blah { X: (y: 1, z: zToMatch) })
                         {
-                            object? o = null;
-                            object? zToMatch = null;
-                            if (o is Blah { X: (y: 1, z: zToMatch) })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public (int y, object? z) X { get; internal set; }
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public (int y, object? z) X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10649,42 +10649,42 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        switch (o)
                         {
-                            object o = null;
-                            switch (o)
-                            {
-                                case Blah { [|X|]: int i }:
-                                    break;
-                            }
-                        }
-
-                        class Blah
-                        {
+                            case Blah { [|X|]: int i }:
+                                break;
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        switch (o)
                         {
-                            object o = null;
-                            switch (o)
-                            {
-                                case Blah { X: int i }:
-                                    break;
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public int X { get; internal set; }
+                            case Blah { X: int i }:
+                                break;
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public int X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10693,42 +10693,42 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        Blah o = null;
+                        switch (o)
                         {
-                            Blah o = null;
-                            switch (o)
-                            {
-                                case { [|X|]: int i }:
-                                    break;
-                            }
-                        }
-
-                        class Blah
-                        {
+                            case { [|X|]: int i }:
+                                break;
                         }
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        Blah o = null;
+                        switch (o)
                         {
-                            Blah o = null;
-                            switch (o)
-                            {
-                                case { X: int i }:
-                                    break;
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public int X { get; internal set; }
+                            case { X: int i }:
+                                break;
                         }
                     }
-                    """
+
+                    class Blah
+                    {
+                        public int X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10737,34 +10737,34 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            _ = o switch { Blah { [|X|]: int i } => 0, _ => 0 };
-                        }
-
-                        class Blah
-                        {
-                        }
+                        object o = null;
+                        _ = o switch { Blah { [|X|]: int i } => 0, _ => 0 };
                     }
-                    """,
+
+                    class Blah
+                    {
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            _ = o switch { Blah { X: int i } => 0, _ => 0 };
-                        }
-
-                        class Blah
-                        {
-                            public int X { get; internal set; }
-                        }
+                        object o = null;
+                        _ = o switch { Blah { X: int i } => 0, _ => 0 };
                     }
-                    """
+
+                    class Blah
+                    {
+                        public int X { get; internal set; }
+                    }
+                }
+                """
             );
         }
 
@@ -10773,37 +10773,37 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            _ = o switch { Blah { X: [|Y|] } => 0, _ => 0 };
-                        }
-
-                        class Blah
-                        {
-                            public int X;
-                        }
+                        object o = null;
+                        _ = o switch { Blah { X: [|Y|] } => 0, _ => 0 };
                     }
-                    """,
+
+                    class Blah
+                    {
+                        public int X;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private const int Y;
+
+                    void M2()
                     {
-                        private const int Y;
-
-                        void M2()
-                        {
-                            object o = null;
-                            _ = o switch { Blah { X: Y } => 0, _ => 0 };
-                        }
-
-                        class Blah
-                        {
-                            public int X;
-                        }
+                        object o = null;
+                        _ = o switch { Blah { X: Y } => 0, _ => 0 };
                     }
-                    """
+
+                    class Blah
+                    {
+                        public int X;
+                    }
+                }
+                """
             );
         }
 
@@ -10812,23 +10812,23 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method(object goo)
                     {
-                        void Method(object goo)
-                        {
-                            goo;
-                        }
+                        goo;
                     }
-                    """,
+                }
+                """,
                 index: Parameter
             );
         }
@@ -10838,33 +10838,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface Interface
-                    {
-                        void Method();
-                    }
+                interface Interface
+                {
+                    void Method();
+                }
 
-                    class Class
+                class Class
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    interface Interface
-                    {
-                        void Method();
-                    }
+                interface Interface
+                {
+                    void Method();
+                }
 
-                    class Class
+                class Class
+                {
+                    public void Method(object goo)
                     {
-                        public void Method(object goo)
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 index: Parameter
             );
         }
@@ -10874,33 +10874,33 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface Interface
-                    {
-                        void Method();
-                    }
+                interface Interface
+                {
+                    void Method();
+                }
 
-                    class Class : Interface
+                class Class : Interface
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 """
-                    interface Interface
-                    {
-                        void Method(object goo);
-                    }
+                interface Interface
+                {
+                    void Method(object goo);
+                }
 
-                    class Class : Interface
+                class Class : Interface
+                {
+                    public void Method(object goo)
                     {
-                        public void Method(object goo)
-                        {
-                            [|goo|];
-                        }
+                        [|goo|];
                     }
-                    """,
+                }
+                """,
                 index: ParameterAndOverrides
             );
         }
@@ -10910,27 +10910,27 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            M1([|goo|]);
-                        }
-
-                        void M1(int a);
+                        M1([|goo|]);
                     }
-                    """,
+
+                    void M1(int a);
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method(int goo)
                     {
-                        void Method(int goo)
-                        {
-                            M1(goo);
-                        }
-
-                        void M1(int a);
+                        M1(goo);
                     }
-                    """,
+
+                    void M1(int a);
+                }
+                """,
                 index: Parameter
             );
         }
@@ -10940,37 +10940,37 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface Interface
+                interface Interface
+                {
+                    void Method();
+                }
+
+                class Class : Interface
+                {
+                    public void Method()
                     {
-                        void Method();
+                        M1([|goo|]);
                     }
 
-                    class Class : Interface
-                    {
-                        public void Method()
-                        {
-                            M1([|goo|]);
-                        }
-
-                        void M1(int a);
-                    }
-                    """,
+                    void M1(int a);
+                }
+                """,
                 """
-                    interface Interface
+                interface Interface
+                {
+                    void Method(int goo);
+                }
+
+                class Class : Interface
+                {
+                    public void Method(int goo)
                     {
-                        void Method(int goo);
+                        M1(goo);
                     }
 
-                    class Class : Interface
-                    {
-                        public void Method(int goo)
-                        {
-                            M1(goo);
-                        }
-
-                        void M1(int a);
-                    }
-                    """,
+                    void M1(int a);
+                }
+                """,
                 index: ParameterAndOverrides
             );
         }
@@ -10980,19 +10980,19 @@ class C
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public C()
                     {
-                        public C()
+                        Action a = () =>
                         {
-                            Action a = () =>
-                            {
-                                this.[|Field|] = 1;
-                            };
-                        }
+                            this.[|Field|] = 1;
+                        };
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_property_0, "Field"),
@@ -11006,19 +11006,19 @@ class C
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public C()
                     {
-                        public C()
+                        void Goo()
                         {
-                            void Goo()
-                            {
-                                this.[|Field|] = 1;
-                            };
-                        }
+                            this.[|Field|] = 1;
+                        };
                     }
-                    """,
+                }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_property_0, "Field"),
@@ -11032,18 +11032,18 @@ class C
         {
             await TestExactActionSetOfferedAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace ConsoleApp5
+                namespace ConsoleApp5
+                {
+                    class MyException: Exception
+
+                    internal MyException(int error, int offset, string message) : base(message)
                     {
-                        class MyException: Exception
-
-                        internal MyException(int error, int offset, string message) : base(message)
-                        {
-                            [|Error|] = error;
-                            Offset = offset;
-                        }
-                    """,
+                        [|Error|] = error;
+                        Offset = offset;
+                    }
+                """,
                 new[]
                 {
                     string.Format(FeaturesResources.Generate_local_0, "Error", "MyException"),
@@ -11063,29 +11063,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Diagnostics;
+                using System;
+                using System.Diagnostics;
 
-                    class Class
+                class Class
+                {
+                    private static void AssertSomething()
                     {
-                        private static void AssertSomething()
-                        {
-                            Action<int> call = _ => Debug.Assert([|expected|]);
-                        }
+                        Action<int> call = _ => Debug.Assert([|expected|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Diagnostics;
+                using System;
+                using System.Diagnostics;
 
-                    class Class
+                class Class
+                {
+                    private static void AssertSomething(bool expected)
                     {
-                        private static void AssertSomething(bool expected)
-                        {
-                            Action<int> call = _ => Debug.Assert(expected);
-                        }
+                        Action<int> call = _ => Debug.Assert(expected);
                     }
-                    """,
+                }
+                """,
                 index: Parameter
             );
         }
@@ -11095,35 +11095,35 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Diagnostics;
+                using System;
+                using System.Diagnostics;
 
-                    class Class
+                class Class
+                {
+                    private static void AssertSomething()
                     {
-                        private static void AssertSomething()
+                        void M()
                         {
-                            void M()
-                            {
-                                Action<int> call = _ => Debug.Assert([|expected|]);
-                            }
+                            Action<int> call = _ => Debug.Assert([|expected|]);
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Diagnostics;
+                using System;
+                using System.Diagnostics;
 
-                    class Class
+                class Class
+                {
+                    private static void AssertSomething()
                     {
-                        private static void AssertSomething()
+                        void M(bool expected)
                         {
-                            void M(bool expected)
-                            {
-                                Action<int> call = _ => Debug.Assert(expected);
-                            }
+                            Action<int> call = _ => Debug.Assert(expected);
                         }
                     }
-                    """,
+                }
+                """,
                 index: Parameter
             );
         }
@@ -11259,29 +11259,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(CancellationToken cancellationToken)
                     {
-                        public async Task M(CancellationToken cancellationToken)
-                        {
-                            await Task.Delay([|time|]);
-                        }
+                        await Task.Delay([|time|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(System.TimeSpan time, CancellationToken cancellationToken)
                     {
-                        public async Task M(System.TimeSpan time, CancellationToken cancellationToken)
-                        {
-                            await Task.Delay(time);
-                        }
+                        await Task.Delay(time);
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11291,29 +11291,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(string someParameter, CancellationToken cancellationToken)
                     {
-                        public async Task M(string someParameter, CancellationToken cancellationToken)
-                        {
-                            await Task.Delay([|time|]);
-                        }
+                        await Task.Delay([|time|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(string someParameter, System.TimeSpan time, CancellationToken cancellationToken)
                     {
-                        public async Task M(string someParameter, System.TimeSpan time, CancellationToken cancellationToken)
-                        {
-                            await Task.Delay(time);
-                        }
+                        await Task.Delay(time);
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11323,29 +11323,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(bool someParameter = true, CancellationToken cancellationToken)
                     {
-                        public async Task M(bool someParameter = true, CancellationToken cancellationToken)
-                        {
-                            await Task.Delay([|time|]);
-                        }
+                        await Task.Delay([|time|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
                     {
-                        public async Task M(System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
-                        {
-                            await Task.Delay(time);
-                        }
+                        await Task.Delay(time);
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11355,29 +11355,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(int value, bool someParameter = true, CancellationToken cancellationToken)
                     {
-                        public async Task M(int value, bool someParameter = true, CancellationToken cancellationToken)
-                        {
-                            await Task.Delay([|time|]);
-                        }
+                        await Task.Delay([|time|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(int value, System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
                     {
-                        public async Task M(int value, System.TimeSpan time, bool someParameter = true, CancellationToken cancellationToken)
-                        {
-                            await Task.Delay(time);
-                        }
+                        await Task.Delay(time);
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11387,29 +11387,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(bool someParameter = true)
                     {
-                        public async Task M(bool someParameter = true)
-                        {
-                            await Task.Delay([|time|]);
-                        }
+                        await Task.Delay([|time|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(System.TimeSpan time, bool someParameter = true)
                     {
-                        public async Task M(System.TimeSpan time, bool someParameter = true)
-                        {
-                            await Task.Delay(time);
-                        }
+                        await Task.Delay(time);
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11419,29 +11419,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(params double[] x)
                     {
-                        public async Task M(params double[] x)
-                        {
-                            await Task.Delay([|time|]);
-                        }
+                        await Task.Delay([|time|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(System.TimeSpan time, params double[] x)
                     {
-                        public async Task M(System.TimeSpan time, params double[] x)
-                        {
-                            await Task.Delay(time);
-                        }
+                        await Task.Delay(time);
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11451,29 +11451,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    public static class TestClass
+                public static class TestClass
+                {
+                    public static int Method(this CancellationToken cancellationToken)
                     {
-                        public static int Method(this CancellationToken cancellationToken)
-                        {
-                            return [|test|];
-                        }
+                        return [|test|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    public static class TestClass
+                public static class TestClass
+                {
+                    public static int Method(this CancellationToken cancellationToken, int test)
                     {
-                        public static int Method(this CancellationToken cancellationToken, int test)
-                        {
-                            return test;
-                        }
+                        return test;
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11483,29 +11483,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    public static class TestClass
+                public static class TestClass
+                {
+                    public static int Method(this CancellationToken cancellationToken, out int x, params bool[] z)
                     {
-                        public static int Method(this CancellationToken cancellationToken, out int x, params bool[] z)
-                        {
-                            return [|test|];
-                        }
+                        return [|test|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    public static class TestClass
+                public static class TestClass
+                {
+                    public static int Method(this CancellationToken cancellationToken, int test, out int x, params bool[] z)
                     {
-                        public static int Method(this CancellationToken cancellationToken, int test, out int x, params bool[] z)
-                        {
-                            return test;
-                        }
+                        return test;
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11515,29 +11515,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(out int x, int y, out int z, params double[] x)
                     {
-                        public async Task M(out int x, int y, out int z, params double[] x)
-                        {
-                            await Task.Delay([|time|]);
-                        }
+                        await Task.Delay([|time|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading;
-                    using System.Threading.Tasks;
+                using System.Threading;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task M(out int x, int y, System.TimeSpan time, out int z, params double[] x)
                     {
-                        public async Task M(out int x, int y, System.TimeSpan time, out int z, params double[] x)
-                        {
-                            await Task.Delay(time);
-                        }
+                        await Task.Delay(time);
                     }
-                    """,
+                }
+                """,
                 index: 4
             );
         }
@@ -11547,16 +11547,16 @@ class C
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    public unsafe class Bar
+                public unsafe class Bar
+                {
+                    public static ZZZ()
                     {
-                        public static ZZZ()
-                        {
-                             delegate*<void> i = &[|Goo|];
-                        }
+                         delegate*<void> i = &[|Goo|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11565,29 +11565,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Example
-                    {
-                        public Example(int argument) { }
+                class Example
+                {
+                    public Example(int argument) { }
 
-                        void M()
-                        {
-                            Example e = new([|_field|]);
-                        }
+                    void M()
+                    {
+                        Example e = new([|_field|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Example
+                class Example
+                {
+                    private int _field;
+
+                    public Example(int argument) { }
+
+                    void M()
                     {
-                        private int _field;
-
-                        public Example(int argument) { }
-
-                        void M()
-                        {
-                            Example e = new(_field);
-                        }
+                        Example e = new(_field);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11596,29 +11596,29 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Example
+                class Example
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            List<int> list = new() { [|_field|] };
-                        }
+                        List<int> list = new() { [|_field|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Example
+                class Example
+                {
+                    private int _field;
+
+                    void M()
                     {
-                        private int _field;
-
-                        void M()
-                        {
-                            List<int> list = new() { [|_field|] };
-                        }
+                        List<int> list = new() { [|_field|] };
                     }
-                    """
+                }
+                """
             );
         }
     }

@@ -45,13 +45,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C<T>
+                class C<T>
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var e = new object();
-                            if (e is T $$
-                    """
+                        var e = new object();
+                        if (e is T $$
+                """
             );
         }
 
@@ -60,13 +60,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var e = new object();
-                            if (e is int[] $$
-                    """
+                        var e = new object();
+                        if (e is int[] $$
+                """
             );
         }
 
@@ -75,15 +75,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var e = new object();
-                            if (e is List<int> $$
-                    """
+                        var e = new object();
+                        if (e is List<int> $$
+                """
             );
         }
 
@@ -92,13 +92,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var e = new object();
-                            if (e is System.Collections.Generic.List<int> $$
-                    """
+                        var e = new object();
+                        if (e is System.Collections.Generic.List<int> $$
+                """
             );
         }
 
@@ -107,14 +107,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        int P { get; }
+                class C
+                {
+                    int P { get; }
 
-                        void M(C test)
-                        {
-                            if (test is { P: 1 } $$
-                    """
+                    void M(C test)
+                    {
+                        if (test is { P: 1 } $$
+                """
             );
         }
 
@@ -123,14 +123,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        public int P { get; }
+                class C
+                {
+                    public int P { get; }
 
-                        void M(C test)
-                        {
-                            if (test is { P: 1 $$
-                    """
+                    void M(C test)
+                    {
+                        if (test is { P: 1 $$
+                """
             );
         }
 
@@ -139,18 +139,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
+                        const int P = 1;
+
+                        int Prop { get; }
+
+                        void M(C test)
                         {
-                            const int P = 1;
-
-                            int Prop { get; }
-
-                            void M(C test)
-                            {
-                                if (test is { Prop: N.C.P $$
-                    """
+                            if (test is { Prop: N.C.P $$
+                """
             );
         }
 
@@ -159,15 +159,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        int P { get; }
+                class C
+                {
+                    int P { get; }
 
-                        void M()
-                        {
-                            var C2 = new C();
-                            if (C2 is { P: (1 $$
-                    """
+                    void M()
+                    {
+                        var C2 = new C();
+                        if (C2 is { P: (1 $$
+                """
             );
         }
 
@@ -176,18 +176,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
+                        const int P = 1;
+
+                        int Prop { get; }
+
+                        void M(C test)
                         {
-                            const int P = 1;
-
-                            int Prop { get; }
-
-                            void M(C test)
-                            {
-                                if (test is { Prop: (N.C.P $$
-                    """
+                            if (test is { Prop: (N.C.P $$
+                """
             );
         }
 
@@ -196,15 +196,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        int P { get; }
+                class C
+                {
+                    int P { get; }
 
-                        void M()
-                        {
-                            var C2 = new C();
-                            if (C2 is { P: (((1 $$
-                    """
+                    void M()
+                    {
+                        var C2 = new C();
+                        if (C2 is { P: (((1 $$
+                """
             );
         }
 
@@ -213,18 +213,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
+                        const int P = 1;
+
+                        int Prop { get; }
+
+                        void M(C test)
                         {
-                            const int P = 1;
-
-                            int Prop { get; }
-
-                            void M(C test)
-                            {
-                                if (test is { Prop: (((N.C.P $$
-                    """
+                            if (test is { Prop: (((N.C.P $$
+                """
             );
         }
 
@@ -233,15 +233,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        int P { get; }
+                class C
+                {
+                    int P { get; }
 
-                        void M()
-                        {
-                            var C2 = new C();
-                            if (C2 is { P: (1) $$
-                    """
+                    void M()
+                    {
+                        var C2 = new C();
+                        if (C2 is { P: (1) $$
+                """
             );
         }
 
@@ -250,18 +250,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
+                        const int P = 1;
+
+                        int Prop { get; }
+
+                        void M(C test)
                         {
-                            const int P = 1;
-
-                            int Prop { get; }
-
-                            void M(C test)
-                            {
-                                if (test is { Prop: (N.C.P + 1) $$
-                    """
+                            if (test is { Prop: (N.C.P + 1) $$
+                """
             );
         }
 
@@ -270,15 +270,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        int P { get; }
+                class C
+                {
+                    int P { get; }
 
-                        void M()
-                        {
-                            var C2 = new C();
-                            if (C2 is { P: (((1))) $$
-                    """
+                    void M()
+                    {
+                        var C2 = new C();
+                        if (C2 is { P: (((1))) $$
+                """
             );
         }
 
@@ -287,18 +287,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
+                        const int P = 1;
+
+                        int Prop { get; }
+
+                        void M(C test)
                         {
-                            const int P = 1;
-
-                            int Prop { get; }
-
-                            void M(C test)
-                            {
-                                if (test is { Prop: (((N.C.P))) $$
-                    """
+                            if (test is { Prop: (((N.C.P))) $$
+                """
             );
         }
 
@@ -307,16 +307,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        int P { get; }
+                class C
+                {
+                    int P { get; }
 
-                        void M()
-                        {
-                            var C2 = new C();
-                            var e = new object();
-                            if (e is C2.P $$
-                    """
+                    void M()
+                    {
+                        var C2 = new C();
+                        var e = new object();
+                        if (e is C2.P $$
+                """
             );
         }
 
@@ -325,17 +325,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
-                        {
-                            const int P = 1;
+                        const int P = 1;
 
-                            void M()
-                            {
-                                var e = new object();
-                                if (e is N.C.P $$
-                    """
+                        void M()
+                        {
+                            var e = new object();
+                            if (e is N.C.P $$
+                """
             );
         }
 
@@ -359,19 +359,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
-                        {
-                            const int P = 1;
+                        const int P = 1;
 
-                            void M()
+                        void M()
+                        {
+                            var e = new object();
+                            var result = e switch
                             {
-                                var e = new object();
-                                var result = e switch
-                                {
-                                    N.C.P $$
-                    """
+                                N.C.P $$
+                """
             );
         }
 
@@ -410,19 +410,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
-                        {
-                            const int P = 1;
+                        const int P = 1;
 
-                            void M()
+                        void M()
+                        {
+                            var e = new object();
+                            var result = e switch
                             {
-                                var e = new object();
-                                var result = e switch
-                                {
-                                    (N.C.P $$
-                    """
+                                (N.C.P $$
+                """
             );
         }
 
@@ -446,19 +446,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
-                        {
-                            const int P = 1;
+                        const int P = 1;
 
-                            void M()
+                        void M()
+                        {
+                            var e = new object();
+                            var result = e switch
                             {
-                                var e = new object();
-                                var result = e switch
-                                {
-                                    (((N.C.P $$
-                    """
+                                (((N.C.P $$
+                """
             );
         }
 
@@ -497,19 +497,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
-                        {
-                            const int P = 1;
+                        const int P = 1;
 
-                            void M()
+                        void M()
+                        {
+                            var e = new object();
+                            switch (e)
                             {
-                                var e = new object();
-                                switch (e)
-                                {
-                                    case (((N.C.P $$
-                    """
+                                case (((N.C.P $$
+                """
             );
         }
 
@@ -518,17 +518,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class C
                     {
-                        class C
+                        void M()
                         {
-                            void M()
+                            var e = new object();
+                            switch (e)
                             {
-                                var e = new object();
-                                switch (e)
-                                {
-                                    case (((N.C $$
-                    """
+                                case (((N.C $$
+                """
             );
         }
 
@@ -645,18 +645,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    var goo = Goo.First;
-                    switch (goo)
-                    {
-                        case Goo.$$
-                    }
+                var goo = Goo.First;
+                switch (goo)
+                {
+                    case Goo.$$
+                }
 
-                    public enum Goo
-                    {
-                        First,
-                        Second
-                    }
-                    """
+                public enum Goo
+                {
+                    First,
+                    Second
+                }
+                """
             );
         }
 
@@ -665,8 +665,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    expr is (not []) $$
-                    """
+                expr is (not []) $$
+                """
             );
         }
 
@@ -676,8 +676,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             // expr is (not []) and var x
             await VerifyKeywordAsync(
                 """
-                    expr is (not []) $$ var x
-                    """
+                expr is (not []) $$ var x
+                """
             );
         }
 
@@ -686,9 +686,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    int v = 0;
-                    if (v is var a and a.$$)
-                    """
+                int v = 0;
+                if (v is var a and a.$$)
+                """
             );
         }
 
@@ -697,9 +697,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    int* v = null;
-                    if (v is var a and a->$$)
-                    """
+                int* v = null;
+                if (v is var a and a->$$)
+                """
             );
         }
     }

@@ -24,21 +24,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    sealed class C
-                    {
-                    }
-                    class D : {|CS0509:C|}
-                    {
-                    }
-                    """,
+                sealed class C
+                {
+                }
+                class D : {|CS0509:C|}
+                {
+                }
+                """,
                 """
-                    class C
-                    {
-                    }
-                    class D : C
-                    {
-                    }
-                    """
+                class C
+                {
+                }
+                class D : C
+                {
+                }
+                """
             );
         }
 
@@ -47,21 +47,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public sealed unsafe class C
-                    {
-                    }
-                    class D : {|CS0509:C|}
-                    {
-                    }
-                    """,
+                public sealed unsafe class C
+                {
+                }
+                class D : {|CS0509:C|}
+                {
+                }
+                """,
                 """
-                    public unsafe class C
-                    {
-                    }
-                    class D : C
-                    {
-                    }
-                    """
+                public unsafe class C
+                {
+                }
+                class D : C
+                {
+                }
+                """
             );
         }
 
@@ -70,21 +70,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    sealed class C<T>
-                    {
-                    }
-                    class D : {|CS0509:C<int>|}
-                    {
-                    }
-                    """,
+                sealed class C<T>
+                {
+                }
+                class D : {|CS0509:C<int>|}
+                {
+                }
+                """,
                 """
-                    class C<T>
-                    {
-                    }
-                    class D : C<int>
-                    {
-                    }
-                    """
+                class C<T>
+                {
+                }
+                class D : C<int>
+                {
+                }
+                """
             );
         }
 
@@ -176,33 +176,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public sealed partial class C
-                    {
-                    }
-                    partial class C
-                    {
-                    }
-                    sealed partial class C
-                    {
-                    }
-                    class D : {|CS0509:C|}
-                    {
-                    }
-                    """,
+                public sealed partial class C
+                {
+                }
+                partial class C
+                {
+                }
+                sealed partial class C
+                {
+                }
+                class D : {|CS0509:C|}
+                {
+                }
+                """,
                 """
-                    public partial class C
-                    {
-                    }
-                    partial class C
-                    {
-                    }
-                    partial class C
-                    {
-                    }
-                    class D : C
-                    {
-                    }
-                    """
+                public partial class C
+                {
+                }
+                partial class C
+                {
+                }
+                partial class C
+                {
+                }
+                class D : C
+                {
+                }
+                """
             );
         }
 

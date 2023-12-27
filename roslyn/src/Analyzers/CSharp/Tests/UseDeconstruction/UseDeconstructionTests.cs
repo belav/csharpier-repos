@@ -26,27 +26,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var [|t1|] = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var [|t1|] = GetPerson();
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var (name, age) = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var (name, age) = GetPerson();
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -96,29 +96,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var [|t1|] = GetPerson();
-                            System.Console.WriteLine(t1.name + " " + t1.age);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var [|t1|] = GetPerson();
+                        System.Console.WriteLine(t1.name + " " + t1.age);
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var (name, age) = GetPerson();
-                            System.Console.WriteLine(name + " " + age);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var (name, age) = GetPerson();
+                        System.Console.WriteLine(name + " " + age);
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -127,29 +127,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name, int age) [|t1|] = GetPerson();
-                            System.Console.WriteLine(t1.name + " " + t1.age);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (string name, int age) [|t1|] = GetPerson();
+                        System.Console.WriteLine(t1.name + " " + t1.age);
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name, int age) = GetPerson();
-                            System.Console.WriteLine(name + " " + age);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (string name, int age) = GetPerson();
+                        System.Console.WriteLine(name + " " + age);
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -158,33 +158,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach (var [|t1|] in GetPeople())
-                                System.Console.WriteLine(t1.name + " " + t1.age);
-                        }
-
-                        IEnumerable<(string name, int age)> GetPeople() => default;
+                        foreach (var [|t1|] in GetPeople())
+                            System.Console.WriteLine(t1.name + " " + t1.age);
                     }
-                    """,
+
+                    IEnumerable<(string name, int age)> GetPeople() => default;
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach (var (name, age) in GetPeople())
-                                System.Console.WriteLine(name + " " + age);
-                        }
-
-                        IEnumerable<(string name, int age)> GetPeople() => default;
+                        foreach (var (name, age) in GetPeople())
+                            System.Console.WriteLine(name + " " + age);
                     }
-                    """
+
+                    IEnumerable<(string name, int age)> GetPeople() => default;
+                }
+                """
             );
         }
 
@@ -193,33 +193,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach ((string name, int age) [|t1|] in GetPeople())
-                                System.Console.WriteLine(t1.name + " " + t1.age);
-                        }
-
-                        IEnumerable<(string name, int age)> GetPeople() => default;
+                        foreach ((string name, int age) [|t1|] in GetPeople())
+                            System.Console.WriteLine(t1.name + " " + t1.age);
                     }
-                    """,
+
+                    IEnumerable<(string name, int age)> GetPeople() => default;
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach ((string name, int age) in GetPeople())
-                                System.Console.WriteLine(name + " " + age);
-                        }
-
-                        IEnumerable<(string name, int age)> GetPeople() => default;
+                        foreach ((string name, int age) in GetPeople())
+                            System.Console.WriteLine(name + " " + age);
                     }
-                    """
+
+                    IEnumerable<(string name, int age)> GetPeople() => default;
+                }
+                """
             );
         }
 
@@ -228,29 +228,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var [|t1|] = GetPerson();
-                            var [|t2|] = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var [|t1|] = GetPerson();
+                        var [|t2|] = GetPerson();
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var (name, age) = GetPerson();
-                            var t2 = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var (name, age) = GetPerson();
+                        var t2 = GetPerson();
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -259,37 +259,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var [|t1|] = GetPerson();
-                        }
-
-                        void M2()
-                        {
-                            var [|t2|] = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var [|t1|] = GetPerson();
                     }
-                    """,
+
+                    void M2()
+                    {
+                        var [|t2|] = GetPerson();
+                    }
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var (name, age) = GetPerson();
-                        }
-
-                        void M2()
-                        {
-                            var (name, age) = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        var (name, age) = GetPerson();
                     }
-                    """
+
+                    void M2()
+                    {
+                        var (name, age) = GetPerson();
+                    }
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -298,29 +298,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name1, int age1) [|t1|] = GetPerson();
-                            (string name2, int age2) [|t2|] = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (string name1, int age1) [|t1|] = GetPerson();
+                        (string name2, int age2) [|t2|] = GetPerson();
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name1, int age1) = GetPerson();
-                            (string name2, int age2) = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (string name1, int age1) = GetPerson();
+                        (string name2, int age2) = GetPerson();
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -329,29 +329,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name, int age) [|t1|] = GetPerson();
-                            (string name, int age) [|t2|] = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (string name, int age) [|t1|] = GetPerson();
+                        (string name, int age) [|t2|] = GetPerson();
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name, int age) = GetPerson();
-                            (string name, int age) t2 = GetPerson();
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (string name, int age) = GetPerson();
+                        (string name, int age) t2 = GetPerson();
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -378,27 +378,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var [|t1|] = GetPerson();
-                        }
-
-                        (string Item1, int Item2) GetPerson() => default;
+                        var [|t1|] = GetPerson();
                     }
-                    """,
+
+                    (string Item1, int Item2) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var (Item1, Item2) = GetPerson();
-                        }
-
-                        (string Item1, int Item2) GetPerson() => default;
+                        var (Item1, Item2) = GetPerson();
                     }
-                    """
+
+                    (string Item1, int Item2) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -407,29 +407,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var [|t1|] = GetPerson();
-                            System.Console.WriteLine(t1.Item1);
-                        }
-
-                        (string Item1, int Item2) GetPerson() => default;
+                        var [|t1|] = GetPerson();
+                        System.Console.WriteLine(t1.Item1);
                     }
-                    """,
+
+                    (string Item1, int Item2) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var (Item1, Item2) = GetPerson();
-                            System.Console.WriteLine(Item1);
-                        }
-
-                        (string Item1, int Item2) GetPerson() => default;
+                        var (Item1, Item2) = GetPerson();
+                        System.Console.WriteLine(Item1);
                     }
-                    """
+
+                    (string Item1, int Item2) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -532,29 +532,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ [|t1|] = GetPerson();
-                            System.Console.WriteLine(/*7*/t1.name/*8*/ + " " + /*9*/t1.age/*10*/);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ [|t1|] = GetPerson();
+                        System.Console.WriteLine(/*7*/t1.name/*8*/ + " " + /*9*/t1.age/*10*/);
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ = GetPerson();
-                            System.Console.WriteLine(/*7*/name/*8*/ + " " + /*9*/age/*10*/);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        /*1*/(/*2*/string/*3*/ name, /*4*/int/*5*/ age)/*6*/ = GetPerson();
+                        System.Console.WriteLine(/*7*/name/*8*/ + " " + /*9*/age/*10*/);
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -582,25 +582,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name, int age) [|person|] = default((string, int));
-                            System.Console.WriteLine(person.name + " " + person.age);
-                        }
+                        (string name, int age) [|person|] = default((string, int));
+                        System.Console.WriteLine(person.name + " " + person.age);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (string name, int age) = default((string, int));
-                            System.Console.WriteLine(name + " " + age);
-                        }
+                        (string name, int age) = default((string, int));
+                        System.Console.WriteLine(name + " " + age);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -631,35 +631,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    class Person
                     {
-                        class Person
-                        {
-                            public static implicit operator (string, int)(Person person) => default;
-                        }
-
-                        void M()
-                        {
-                            (string name, int age) [|person|] = ((string, int))new Person();
-                            System.Console.WriteLine(person.name + " " + person.age);
-                        }
+                        public static implicit operator (string, int)(Person person) => default;
                     }
-                    """,
+
+                    void M()
+                    {
+                        (string name, int age) [|person|] = ((string, int))new Person();
+                        System.Console.WriteLine(person.name + " " + person.age);
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    class Person
                     {
-                        class Person
-                        {
-                            public static implicit operator (string, int)(Person person) => default;
-                        }
-
-                        void M()
-                        {
-                            (string name, int age) = ((string, int))new Person();
-                            System.Console.WriteLine(name + " " + age);
-                        }
+                        public static implicit operator (string, int)(Person person) => default;
                     }
-                    """
+
+                    void M()
+                    {
+                        (string name, int age) = ((string, int))new Person();
+                        System.Console.WriteLine(name + " " + age);
+                    }
+                }
+                """
             );
         }
 
@@ -690,37 +690,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Linq;
-                    class C
+                using System.Linq;
+                class C
+                {
+                    class Person
                     {
-                        class Person
-                        {
-                            public static implicit operator (string, int)(Person person) => default;
-                        }
-
-                        void M()
-                        {
-                            foreach ((string name, int age) [|person|] in new Person[] { }.Cast<(string, int)>())
-                                System.Console.WriteLine(person.name + " " + person.age);
-                        }
+                        public static implicit operator (string, int)(Person person) => default;
                     }
-                    """,
+
+                    void M()
+                    {
+                        foreach ((string name, int age) [|person|] in new Person[] { }.Cast<(string, int)>())
+                            System.Console.WriteLine(person.name + " " + person.age);
+                    }
+                }
+                """,
                 """
-                    using System.Linq;
-                    class C
+                using System.Linq;
+                class C
+                {
+                    class Person
                     {
-                        class Person
-                        {
-                            public static implicit operator (string, int)(Person person) => default;
-                        }
-
-                        void M()
-                        {
-                            foreach ((string name, int age) in new Person[] { }.Cast<(string, int)>())
-                                System.Console.WriteLine(name + " " + age);
-                        }
+                        public static implicit operator (string, int)(Person person) => default;
                     }
-                    """
+
+                    void M()
+                    {
+                        foreach ((string name, int age) in new Person[] { }.Cast<(string, int)>())
+                            System.Console.WriteLine(name + " " + age);
+                    }
+                }
+                """
             );
         }
 
@@ -729,25 +729,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (object name, double age) [|person|] = (null, 0);
-                            System.Console.WriteLine(person.name + " " + person.age);
-                        }
+                        (object name, double age) [|person|] = (null, 0);
+                        System.Console.WriteLine(person.name + " " + person.age);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (object name, double age) = (null, 0);
-                            System.Console.WriteLine(name + " " + age);
-                        }
+                        (object name, double age) = (null, 0);
+                        System.Console.WriteLine(name + " " + age);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -756,29 +756,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (object name, double age) [|person|] = GetPerson();
-                            System.Console.WriteLine(person.name + " " + person.age);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (object name, double age) [|person|] = GetPerson();
+                        System.Console.WriteLine(person.name + " " + person.age);
                     }
-                    """,
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (object name, double age) = GetPerson();
-                            System.Console.WriteLine(name + " " + age);
-                        }
-
-                        (string name, int age) GetPerson() => default;
+                        (object name, double age) = GetPerson();
+                        System.Console.WriteLine(name + " " + age);
                     }
-                    """
+
+                    (string name, int age) GetPerson() => default;
+                }
+                """
             );
         }
 
@@ -787,31 +787,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach ((object name, double age) [|person|] in GetPeople())
-                                System.Console.WriteLine(person.name + " " + person.age);
-                        }
-
-                        IEnumerable<(string name, int age)> GetPeople() => default;
+                        foreach ((object name, double age) [|person|] in GetPeople())
+                            System.Console.WriteLine(person.name + " " + person.age);
                     }
-                    """,
+
+                    IEnumerable<(string name, int age)> GetPeople() => default;
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach ((object name, double age) in GetPeople())
-                                System.Console.WriteLine(name + " " + age);
-                        }
-
-                        IEnumerable<(string name, int age)> GetPeople() => default;
+                        foreach ((object name, double age) in GetPeople())
+                            System.Console.WriteLine(name + " " + age);
                     }
-                    """
+
+                    IEnumerable<(string name, int age)> GetPeople() => default;
+                }
+                """
             );
         }
 

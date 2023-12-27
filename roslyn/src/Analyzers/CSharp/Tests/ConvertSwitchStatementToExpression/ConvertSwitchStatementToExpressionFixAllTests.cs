@@ -24,149 +24,149 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    int M(int i, int j)
                     {
-                        int M(int i, int j)
+                        int r;
+                        [|switch|] (i)
                         {
-                            int r;
-                            [|switch|] (i)
-                            {
-                                case 1:
-                                    r = 1;
-                                    break;
-                                case 2:
-                                    r = 2;
-                                    break;
-                                case 3:
-                                    r = 3;
-                                    break;
-                                default:
-                                    r = 4;
-                                    break;
-                            }
-                            int x, y;
-                            switch (i)
-                            {
-                                case 1:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                                case 2:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                                case 3:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                                default:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                            }
-                            [|switch|] (i)
-                            {
-                                default:
-                                    throw null;
-                                case 1:
-                                    [|switch|] (j)
-                                    {
-                                        case 10:
-                                            return 10;
-                                        case 20:
-                                            return 20;
-                                        case 30:
-                                            return 30;
-                                    }
-                                    return 0;
-                                case 2:
-                                    [|switch|] (j)
-                                    {
-                                        case 10:
-                                            return 10;
-                                        case 20:
-                                            return 20;
-                                        case 30:
-                                            return 30;
-                                        case var _:
-                                            return 0;
-                                    }
-                                case 3:
-                                    [|switch|] (j)
-                                    {
-                                        case 10:
-                                            return 10;
-                                        case 20:
-                                            return 20;
-                                        case 30:
-                                            return 30;
-                                        case var v:
-                                            return 0;
-                                    }
-                            }
+                            case 1:
+                                r = 1;
+                                break;
+                            case 2:
+                                r = 2;
+                                break;
+                            case 3:
+                                r = 3;
+                                break;
+                            default:
+                                r = 4;
+                                break;
+                        }
+                        int x, y;
+                        switch (i)
+                        {
+                            case 1:
+                                x = 1;
+                                y = 1;
+                                break;
+                            case 2:
+                                x = 1;
+                                y = 1;
+                                break;
+                            case 3:
+                                x = 1;
+                                y = 1;
+                                break;
+                            default:
+                                x = 1;
+                                y = 1;
+                                break;
+                        }
+                        [|switch|] (i)
+                        {
+                            default:
+                                throw null;
+                            case 1:
+                                [|switch|] (j)
+                                {
+                                    case 10:
+                                        return 10;
+                                    case 20:
+                                        return 20;
+                                    case 30:
+                                        return 30;
+                                }
+                                return 0;
+                            case 2:
+                                [|switch|] (j)
+                                {
+                                    case 10:
+                                        return 10;
+                                    case 20:
+                                        return 20;
+                                    case 30:
+                                        return 30;
+                                    case var _:
+                                        return 0;
+                                }
+                            case 3:
+                                [|switch|] (j)
+                                {
+                                    case 10:
+                                        return 10;
+                                    case 20:
+                                        return 20;
+                                    case 30:
+                                        return 30;
+                                    case var v:
+                                        return 0;
+                                }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    int M(int i, int j)
                     {
-                        int M(int i, int j)
+                        var r = i switch
                         {
-                            var r = i switch
-                            {
-                                1 => 1,
-                                2 => 2,
-                                3 => 3,
-                                _ => 4,
-                            };
-                            int x, y;
-                            switch (i)
-                            {
-                                case 1:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                                case 2:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                                case 3:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                                default:
-                                    x = 1;
-                                    y = 1;
-                                    break;
-                            }
-                            return i switch
-                            {
-                                1 => j switch
-                                {
-                                    10 => 10,
-                                    20 => 20,
-                                    30 => 30,
-                                    _ => 0,
-                                },
-                                2 => j switch
-                                {
-                                    10 => 10,
-                                    20 => 20,
-                                    30 => 30,
-                                    var _ => 0,
-                                },
-                                3 => j switch
-                                {
-                                    10 => 10,
-                                    20 => 20,
-                                    30 => 30,
-                                    var v => 0,
-                                },
-                                _ => throw null,
-                            };
+                            1 => 1,
+                            2 => 2,
+                            3 => 3,
+                            _ => 4,
+                        };
+                        int x, y;
+                        switch (i)
+                        {
+                            case 1:
+                                x = 1;
+                                y = 1;
+                                break;
+                            case 2:
+                                x = 1;
+                                y = 1;
+                                break;
+                            case 3:
+                                x = 1;
+                                y = 1;
+                                break;
+                            default:
+                                x = 1;
+                                y = 1;
+                                break;
                         }
+                        return i switch
+                        {
+                            1 => j switch
+                            {
+                                10 => 10,
+                                20 => 20,
+                                30 => 30,
+                                _ => 0,
+                            },
+                            2 => j switch
+                            {
+                                10 => 10,
+                                20 => 20,
+                                30 => 30,
+                                var _ => 0,
+                            },
+                            3 => j switch
+                            {
+                                10 => 10,
+                                20 => 20,
+                                30 => 30,
+                                var v => 0,
+                            },
+                            _ => throw null,
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -230,62 +230,62 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    public static void Main() { }
+                    public DayOfWeek StatusValue() => DayOfWeek.Monday;
+                    public short Value => 0;
+                    public bool ValueBoolean()
                     {
-                        public static void Main() { }
-                        public DayOfWeek StatusValue() => DayOfWeek.Monday;
-                        public short Value => 0;
-                        public bool ValueBoolean()
+                        bool value;
+                        [|switch|] (StatusValue())
                         {
-                            bool value;
-                            [|switch|] (StatusValue())
-                            {
-                                case DayOfWeek.Monday:
-                                    [|switch|] (Value)
-                                    {
-                                        case 0:
-                                            value = false;
-                                            break;
-                                        case 1:
-                                            value = true;
-                                            break;
-                                        default:
-                                            throw new Exception();
-                                    }
-                                    break;
-                                default:
-                                    throw new Exception();
-                            }
-                            return value;
-                        }
-                    }
-                    """,
-                """
-                    using System;
-
-                    class Program
-                    {
-                        public static void Main() { }
-                        public DayOfWeek StatusValue() => DayOfWeek.Monday;
-                        public short Value => 0;
-                        public bool ValueBoolean()
-                        {
-                            var value = StatusValue() switch
-                            {
-                                DayOfWeek.Monday => Value switch
+                            case DayOfWeek.Monday:
+                                [|switch|] (Value)
                                 {
-                                    0 => false,
-                                    1 => true,
-                                    _ => throw new Exception(),
-                                },
-                                _ => throw new Exception(),
-                            };
-                            return value;
+                                    case 0:
+                                        value = false;
+                                        break;
+                                    case 1:
+                                        value = true;
+                                        break;
+                                    default:
+                                        throw new Exception();
+                                }
+                                break;
+                            default:
+                                throw new Exception();
                         }
+                        return value;
                     }
-                    """
+                }
+                """,
+                """
+                using System;
+
+                class Program
+                {
+                    public static void Main() { }
+                    public DayOfWeek StatusValue() => DayOfWeek.Monday;
+                    public short Value => 0;
+                    public bool ValueBoolean()
+                    {
+                        var value = StatusValue() switch
+                        {
+                            DayOfWeek.Monday => Value switch
+                            {
+                                0 => false,
+                                1 => true,
+                                _ => throw new Exception(),
+                            },
+                            _ => throw new Exception(),
+                        };
+                        return value;
+                    }
+                }
+                """
             );
         }
 
@@ -294,45 +294,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public C(String s) => _s = s;
+                    private readonly String _s;
+                    public static implicit operator String(C value) => value._s;
+                    public static implicit operator C(String value) => new C(value);
+                    
+                    public bool method(C c)
                     {
-                        public C(String s) => _s = s;
-                        private readonly String _s;
-                        public static implicit operator String(C value) => value._s;
-                        public static implicit operator C(String value) => new C(value);
-                        
-                        public bool method(C c)
+                        [|switch|] (c)
                         {
-                            [|switch|] (c)
-                            {
-                                case "A": return true;
-                                default: return false;
-                            }
+                            case "A": return true;
+                            default: return false;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public C(String s) => _s = s;
+                    private readonly String _s;
+                    public static implicit operator String(C value) => value._s;
+                    public static implicit operator C(String value) => new C(value);
+                    
+                    public bool method(C c)
                     {
-                        public C(String s) => _s = s;
-                        private readonly String _s;
-                        public static implicit operator String(C value) => value._s;
-                        public static implicit operator C(String value) => new C(value);
-                        
-                        public bool method(C c)
+                        return (string)c switch
                         {
-                            return (string)c switch
-                            {
-                                "A" => true,
-                                _ => false,
-                            };
-                        }
+                            "A" => true,
+                            _ => false,
+                        };
                     }
-                    """
+                }
+                """
             );
         }
     }

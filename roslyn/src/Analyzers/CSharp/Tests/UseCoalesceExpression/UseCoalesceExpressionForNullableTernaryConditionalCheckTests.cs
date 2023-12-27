@@ -37,27 +37,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = [||]!x.HasValue ? y : x.Value;
-                        }
+                        var z = [||]!x.HasValue ? y : x.Value;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = x ?? y ;
-                        }
+                        var z = x ?? y ;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -66,27 +66,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = [||]x.HasValue ? x.Value : y;
-                        }
+                        var z = [||]x.HasValue ? x.Value : y;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = x ?? y;
-                        }
+                        var z = x ?? y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -95,27 +95,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = [||]!(x + y).HasValue ? y : (x + y).Value;
-                        }
+                        var z = [||]!(x + y).HasValue ? y : (x + y).Value;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = (x + y) ?? y ;
-                        }
+                        var z = (x + y) ?? y ;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -124,27 +124,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = [||](x.HasValue) ? x.Value : y;
-                        }
+                        var z = [||](x.HasValue) ? x.Value : y;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z = x ?? y;
-                        }
+                        var z = x ?? y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -153,29 +153,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z1 = {|FixAllInDocument:x|}.HasValue ? x.Value : y;
-                            var z2 = !x.HasValue ? y : x.Value;
-                        }
+                        var z1 = {|FixAllInDocument:x|}.HasValue ? x.Value : y;
+                        var z2 = !x.HasValue ? y : x.Value;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            var z1 = x ?? y;
-                            var z2 = x ?? y ;
-                        }
+                        var z1 = x ?? y;
+                        var z2 = x ?? y ;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -184,27 +184,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y, int? z)
                     {
-                        void M(int? x, int? y, int? z)
-                        {
-                            var w = {|FixAllInDocument:x|}.HasValue ? x.Value : y.ToString(z.HasValue ? z.Value : y);
-                        }
+                        var w = {|FixAllInDocument:x|}.HasValue ? x.Value : y.ToString(z.HasValue ? z.Value : y);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y, int? z)
                     {
-                        void M(int? x, int? y, int? z)
-                        {
-                            var w = x ?? y.ToString(z ?? y);
-                        }
+                        var w = x ?? y.ToString(z ?? y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -213,27 +213,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y, int? z)
                     {
-                        void M(int? x, int? y, int? z)
-                        {
-                            var w = {|FixAllInDocument:x|}.HasValue ? x.Value : y.HasValue ? y.Value : z;
-                        }
+                        var w = {|FixAllInDocument:x|}.HasValue ? x.Value : y.HasValue ? y.Value : z;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y, int? z)
                     {
-                        void M(int? x, int? y, int? z)
-                        {
-                            var w = x ?? y ?? z;
-                        }
+                        var w = x ?? y ?? z;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -242,29 +242,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            Expression<Func<int>> e = () => [||]!x.HasValue ? y : x.Value;
-                        }
+                        Expression<Func<int>> e = () => [||]!x.HasValue ? y : x.Value;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class C
+                class C
+                {
+                    void M(int? x, int? y)
                     {
-                        void M(int? x, int? y)
-                        {
-                            Expression<Func<int>> e = () => {|Warning:x ?? y|} ;
-                        }
+                        Expression<Func<int>> e = () => {|Warning:x ?? y|} ;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -273,16 +273,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x)
                     {
-                        void M(int? x)
-                        {
-                            object z = [||]x.HasValue ? x.Value : "";
-                        }
+                        object z = [||]x.HasValue ? x.Value : "";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -291,27 +291,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x)
                     {
-                        void M(int? x)
-                        {
-                            object z = [||]x.HasValue ? x.Value : 0;
-                        }
+                        object z = [||]x.HasValue ? x.Value : 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int? x)
                     {
-                        void M(int? x)
-                        {
-                            object z = x ?? 0;
-                        }
+                        object z = x ?? 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -320,15 +320,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        public int? Index { get; set; }
+                class C
+                {
+                    public int? Index { get; set; }
 
-                        public string InterpolatedText => $"{([||]Index.HasValue ? Index.Value : "???")}: rest of the text";
-                    }
-                    """
+                    public string InterpolatedText => $"{([||]Index.HasValue ? Index.Value : "???")}: rest of the text";
+                }
+                """
             );
         }
 
@@ -337,25 +337,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        public int? Index { get; set; }
+                class C
+                {
+                    public int? Index { get; set; }
 
-                        public string InterpolatedText => $"{([||]Index.HasValue ? Index.Value : 0)}: rest of the text";
-                    }
-                    """,
+                    public string InterpolatedText => $"{([||]Index.HasValue ? Index.Value : 0)}: rest of the text";
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        public int? Index { get; set; }
+                class C
+                {
+                    public int? Index { get; set; }
 
-                        public string InterpolatedText => $"{(Index ?? 0)}: rest of the text";
-                    }
-                    """
+                    public string InterpolatedText => $"{(Index ?? 0)}: rest of the text";
+                }
+                """
             );
         }
     }

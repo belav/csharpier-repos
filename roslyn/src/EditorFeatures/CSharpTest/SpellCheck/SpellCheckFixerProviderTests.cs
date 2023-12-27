@@ -21,17 +21,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         {
             await TestSuccessAsync(
                 """
-                    class {|CorrectlySpelled:CrrectlySpelled|}
-                    {
-                        public CrrectlySpelled() { }
-                    }
-                    """,
+                class {|CorrectlySpelled:CrrectlySpelled|}
+                {
+                    public CrrectlySpelled() { }
+                }
+                """,
                 """
-                    class CorrectlySpelled
-                    {
-                        public CorrectlySpelled() { }
-                    }
-                    """
+                class CorrectlySpelled
+                {
+                    public CorrectlySpelled() { }
+                }
+                """
             );
         }
 
@@ -41,25 +41,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             // Should not be called inside a string.  But we should still apply the change.
             await TestFailureAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v1 = "{|word:wrd|}";
-                            var v2 = "wrd";
-                        }
+                        var v1 = "{|word:wrd|}";
+                        var v2 = "wrd";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v1 = "word";
-                            var v2 = "wrd";
-                        }
+                        var v1 = "word";
+                        var v2 = "wrd";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -69,17 +69,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             // Should not be called inside a string.  But we should still apply the change.
             await TestFailureAsync(
                 """
-                    class {|Bo()gus:Orginal|}
-                    {
-                        public Orginal() { }
-                    }
-                    """,
+                class {|Bo()gus:Orginal|}
+                {
+                    public Orginal() { }
+                }
+                """,
                 """
-                    class Bo()gus
-                    {
-                        public Orginal() { }
-                    }
-                    """
+                class Bo()gus
+                {
+                    public Orginal() { }
+                }
+                """
             );
         }
 
@@ -89,17 +89,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             // Replacement span is larger than the lang token to rename.
             await TestFailureAsync(
                 """
-                    class {|Replacement:Class |}
-                    {
-                        public Class() { }
-                    }
-                    """,
+                class {|Replacement:Class |}
+                {
+                    public Class() { }
+                }
+                """,
                 """
-                    class Replacement
-                    {
-                        public Class() { }
-                    }
-                    """
+                class Replacement
+                {
+                    public Class() { }
+                }
+                """
             );
         }
     }

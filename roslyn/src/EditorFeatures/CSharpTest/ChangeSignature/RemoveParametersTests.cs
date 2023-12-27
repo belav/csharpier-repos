@@ -413,17 +413,17 @@ class C{i}
             using var workspace = TestWorkspace.Create(
                 XElement.Parse(
                     """
-                        <Workspace>
-                            <Submission Language="C#" CommonReferences="true">  
-                                class C
+                    <Workspace>
+                        <Submission Language="C#" CommonReferences="true">  
+                            class C
+                            {
+                                void M$$(int x)
                                 {
-                                    void M$$(int x)
-                                    {
-                                    }
                                 }
-                            </Submission>
-                        </Workspace>
-                        """
+                            }
+                        </Submission>
+                    </Workspace>
+                    """
                 ),
                 workspaceKind: WorkspaceKind.Interactive,
                 composition: EditorTestCompositions.EditorFeaturesWpf

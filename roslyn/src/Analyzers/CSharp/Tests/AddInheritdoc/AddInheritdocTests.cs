@@ -35,32 +35,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddInheritd
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        public override void {|CS1591:M|}() { }
-                    }
-                    """,
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    public override void {|CS1591:M|}() { }
+                }
+                """,
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        /// <inheritdoc/>
-                        public override void M() { }
-                    }
-                    """
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    /// <inheritdoc/>
+                    public override void M() { }
+                }
+                """
             );
         }
 
@@ -91,32 +91,32 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public interface IInterface
+                {
                     /// Some doc.
-                    public interface IInterface
-                    {
-                        /// Some doc.
-                        void M();
-                    }
-                    /// Some doc.
-                    public class MyClass: IInterface
-                    {
-                        public void {|CS1591:M|}() { }
-                    }
-                    """,
+                    void M();
+                }
+                /// Some doc.
+                public class MyClass: IInterface
+                {
+                    public void {|CS1591:M|}() { }
+                }
+                """,
                 """
+                /// Some doc.
+                public interface IInterface
+                {
                     /// Some doc.
-                    public interface IInterface
-                    {
-                        /// Some doc.
-                        void M();
-                    }
-                    /// Some doc.
-                    public class MyClass: IInterface
-                    {
-                        /// <inheritdoc/>
-                        public void M() { }
-                    }
-                    """
+                    void M();
+                }
+                /// Some doc.
+                public class MyClass: IInterface
+                {
+                    /// <inheritdoc/>
+                    public void M() { }
+                }
+                """
             );
         }
 
@@ -125,18 +125,18 @@ public class Derived: BaseClass
         {
             await TestMissingAsync(
                 """
+                /// Some doc.
+                public interface IInterface
+                {
                     /// Some doc.
-                    public interface IInterface
-                    {
-                        /// Some doc.
-                        void M();
-                    }
-                    /// Some doc.
-                    public class MyClass: IInterface
-                    {
-                        void IInterface.M() { }
-                    }
-                    """
+                    void M();
+                }
+                /// Some doc.
+                public class MyClass: IInterface
+                {
+                    void IInterface.M() { }
+                }
+                """
             );
         }
 
@@ -145,32 +145,32 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual string P { get; set; }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        public override string {|CS1591:P|} { get; set; }
-                    }
-                    """,
+                    public virtual string P { get; set; }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    public override string {|CS1591:P|} { get; set; }
+                }
+                """,
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual string P { get; set; }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        /// <inheritdoc/>
-                        public override string P { get; set; }
-                    }
-                    """
+                    public virtual string P { get; set; }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    /// <inheritdoc/>
+                    public override string P { get; set; }
+                }
+                """
             );
         }
 
@@ -179,32 +179,32 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public interface IInterface
+                {
                     /// Some doc.
-                    public interface IInterface
-                    {
-                        /// Some doc.
-                        string P { get; }
-                    }
-                    /// Some doc.
-                    public class MyClass: IInterface
-                    {
-                        public string {|CS1591:P|} { get; }
-                    }
-                    """,
+                    string P { get; }
+                }
+                /// Some doc.
+                public class MyClass: IInterface
+                {
+                    public string {|CS1591:P|} { get; }
+                }
+                """,
                 """
+                /// Some doc.
+                public interface IInterface
+                {
                     /// Some doc.
-                    public interface IInterface
-                    {
-                        /// Some doc.
-                        string P { get; }
-                    }
-                    /// Some doc.
-                    public class MyClass: IInterface
-                    {
-                        /// <inheritdoc/>
-                        public string P { get; }
-                    }
-                    """
+                    string P { get; }
+                }
+                /// Some doc.
+                public class MyClass: IInterface
+                {
+                    /// <inheritdoc/>
+                    public string P { get; }
+                }
+                """
             );
         }
 
@@ -213,36 +213,36 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public interface IInterface
+                {
                     /// Some doc.
-                    public interface IInterface
-                    {
-                        /// Some doc.
-                        event System.Action SomeEvent;
-                    }
-                    /// Some doc.
-                    public class MyClass: IInterface
-                    {
-                        public event System.Action {|CS1591:SomeEvent|};
+                    event System.Action SomeEvent;
+                }
+                /// Some doc.
+                public class MyClass: IInterface
+                {
+                    public event System.Action {|CS1591:SomeEvent|};
 
-                        void OnSomething() => SomeEvent?.Invoke();
-                    }
-                    """,
+                    void OnSomething() => SomeEvent?.Invoke();
+                }
+                """,
                 """
+                /// Some doc.
+                public interface IInterface
+                {
                     /// Some doc.
-                    public interface IInterface
-                    {
-                        /// Some doc.
-                        event System.Action SomeEvent;
-                    }
-                    /// Some doc.
-                    public class MyClass: IInterface
-                    {
-                        /// <inheritdoc/>
-                        public event System.Action SomeEvent;
+                    event System.Action SomeEvent;
+                }
+                /// Some doc.
+                public class MyClass: IInterface
+                {
+                    /// <inheritdoc/>
+                    public event System.Action SomeEvent;
 
-                        void OnSomething() => SomeEvent?.Invoke();
-                    }
-                    """
+                    void OnSomething() => SomeEvent?.Invoke();
+                }
+                """
             );
         }
 
@@ -251,34 +251,34 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        // Comment
-                        public override void {|CS1591:M|}() { }
-                    }
-                    """,
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    // Comment
+                    public override void {|CS1591:M|}() { }
+                }
+                """,
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        /// <inheritdoc/>
-                        // Comment
-                        public override void M() { }
-                    }
-                    """
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    /// <inheritdoc/>
+                    // Comment
+                    public override void M() { }
+                }
+                """
             );
         }
 
@@ -287,34 +287,34 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                                       // Comment 1
-                      /* Comment 2 */  public /* Comment 3 */ override void {|CS1591:M|} /* Comment 4 */ ()  /* Comment 5 */ { } /* Comment 6 */
-                    }
-                    """,
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                                   // Comment 1
+                  /* Comment 2 */  public /* Comment 3 */ override void {|CS1591:M|} /* Comment 4 */ ()  /* Comment 5 */ { } /* Comment 6 */
+                }
+                """,
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                                       /// <inheritdoc/>
-                                       // Comment 1
-                      /* Comment 2 */  public /* Comment 3 */ override void M /* Comment 4 */ ()  /* Comment 5 */ { } /* Comment 6 */
-                    }
-                    """
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                                   /// <inheritdoc/>
+                                   // Comment 1
+                  /* Comment 2 */  public /* Comment 3 */ override void M /* Comment 4 */ ()  /* Comment 5 */ { } /* Comment 6 */
+                }
+                """
             );
         }
 
@@ -323,46 +323,46 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
-                    /// Some doc.
-                    [System.AttributeUsage(System.AttributeTargets.Method)]
-                    public sealed class DummyAttribute: System.Attribute
-                    {
-                    }
+                /// Some doc.
+                [System.AttributeUsage(System.AttributeTargets.Method)]
+                public sealed class DummyAttribute: System.Attribute
+                {
+                }
 
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        [Dummy]
-                        public override void {|CS1591:M|}() { }
-                    }
-                    """,
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    [Dummy]
+                    public override void {|CS1591:M|}() { }
+                }
+                """,
                 """
-                    /// Some doc.
-                    [System.AttributeUsage(System.AttributeTargets.Method)]
-                    public sealed class DummyAttribute: System.Attribute
-                    {
-                    }
+                /// Some doc.
+                [System.AttributeUsage(System.AttributeTargets.Method)]
+                public sealed class DummyAttribute: System.Attribute
+                {
+                }
 
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                    }
-                    /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        /// <inheritdoc/>
-                        [Dummy]
-                        public override void M() { }
-                    }
-                    """
+                    public virtual void M() { }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    /// <inheritdoc/>
+                    [Dummy]
+                    public override void M() { }
+                }
+                """
             );
         }
 
@@ -371,39 +371,39 @@ public class Derived: BaseClass
         {
             await TestAsync(
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                        /// Some doc.
-                        public virtual string P { get; }
-                    }
+                    public virtual void M() { }
                     /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        public override void {|CS1591:M|}() { }
-                        public override string {|CS1591:P|} { get; }
-                    }
-                    """,
+                    public virtual string P { get; }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    public override void {|CS1591:M|}() { }
+                    public override string {|CS1591:P|} { get; }
+                }
+                """,
                 """
+                /// Some doc.
+                public class BaseClass
+                {
                     /// Some doc.
-                    public class BaseClass
-                    {
-                        /// Some doc.
-                        public virtual void M() { }
-                        /// Some doc.
-                        public virtual string P { get; }
-                    }
+                    public virtual void M() { }
                     /// Some doc.
-                    public class Derived: BaseClass
-                    {
-                        /// <inheritdoc/>
-                        public override void M() { }
-                        /// <inheritdoc/>
-                        public override string P { get; }
-                    }
-                    """
+                    public virtual string P { get; }
+                }
+                /// Some doc.
+                public class Derived: BaseClass
+                {
+                    /// <inheritdoc/>
+                    public override void M() { }
+                    /// <inheritdoc/>
+                    public override string P { get; }
+                }
+                """
             );
         }
     }

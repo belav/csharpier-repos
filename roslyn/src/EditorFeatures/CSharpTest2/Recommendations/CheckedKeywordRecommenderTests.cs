@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -107,13 +107,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C
+                class C
+                {
+                    public int x, y;
+                    void M()
                     {
-                        public int x, y;
-                        void M()
-                        {
-                            var c = new C { x = 2, y = 3, $$
-                    """
+                        var c = new C { x = 2, y = 3, $$
+                """
             );
         }
 
@@ -128,9 +128,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        public static implicit operator $$
-                    """
+                class Goo {
+                    public static implicit operator $$
+                """
             );
         }
 
@@ -139,9 +139,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        public static implicit operator $$ int (Goo x){}
-                    """
+                class Goo {
+                    public static implicit operator $$ int (Goo x){}
+                """
             );
         }
 
@@ -150,9 +150,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit operator $$
-                    """
+                class Goo {
+                    public static explicit operator $$
+                """
             );
         }
 
@@ -161,9 +161,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit /* some comment */ operator $$
-                    """
+                class Goo {
+                    public static explicit /* some comment */ operator $$
+                """
             );
         }
 
@@ -172,9 +172,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit operator $$ int (Goo x){}
-                    """
+                class Goo {
+                    public static explicit operator $$ int (Goo x){}
+                """
             );
         }
 
@@ -183,9 +183,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int operator $$
-                    """
+                class Goo {
+                    public static int operator $$
+                """
             );
         }
 
@@ -194,9 +194,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int /* some comment */ operator $$
-                    """
+                class Goo {
+                    public static int /* some comment */ operator $$
+                """
             );
         }
 
@@ -205,9 +205,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int operator $$ -(Goo x){}
-                    """
+                class Goo {
+                    public static int operator $$ -(Goo x){}
+                """
             );
         }
 
@@ -216,9 +216,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int operator $$ -(Goo x, Goo y){}
-                    """
+                class Goo {
+                    public static int operator $$ -(Goo x, Goo y){}
+                """
             );
         }
 
@@ -233,9 +233,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        public static implicit I1.operator $$
-                    """
+                class Goo {
+                    public static implicit I1.operator $$
+                """
             );
         }
 
@@ -244,9 +244,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        public static implicit I1.operator $$ int (Goo x){}
-                    """
+                class Goo {
+                    public static implicit I1.operator $$ int (Goo x){}
+                """
             );
         }
 
@@ -255,9 +255,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit I1.operator $$
-                    """
+                class Goo {
+                    public static explicit I1.operator $$
+                """
             );
         }
 
@@ -266,9 +266,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit /* some comment */ I1.operator $$
-                    """
+                class Goo {
+                    public static explicit /* some comment */ I1.operator $$
+                """
             );
         }
 
@@ -277,9 +277,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit I1. /* some comment */ operator $$
-                    """
+                class Goo {
+                    public static explicit I1. /* some comment */ operator $$
+                """
             );
         }
 
@@ -288,9 +288,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit I1.operator $$ int (Goo x){}
-                    """
+                class Goo {
+                    public static explicit I1.operator $$ int (Goo x){}
+                """
             );
         }
 
@@ -299,9 +299,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int I1.operator $$
-                    """
+                class Goo {
+                    public static int I1.operator $$
+                """
             );
         }
 
@@ -310,9 +310,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int /* some comment */ I1.operator $$
-                    """
+                class Goo {
+                    public static int /* some comment */ I1.operator $$
+                """
             );
         }
 
@@ -321,9 +321,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int I1. /* some comment */ operator $$
-                    """
+                class Goo {
+                    public static int I1. /* some comment */ operator $$
+                """
             );
         }
 
@@ -332,9 +332,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int I1.operator $$ -(Goo x){}
-                    """
+                class Goo {
+                    public static int I1.operator $$ -(Goo x){}
+                """
             );
         }
 
@@ -343,9 +343,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static int I1.operator $$ -(Goo x, Goo y){}
-                    """
+                class Goo {
+                    public static int I1.operator $$ -(Goo x, Goo y){}
+                """
             );
         }
     }

@@ -38,9 +38,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -62,9 +62,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -85,9 +85,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                         int* goo = stackalloc $$
-                    """
+                class C {
+                     int* goo = stackalloc $$
+                """
             );
         }
 
@@ -129,9 +129,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        $$
-                        return true;
-                        """
+                    $$
+                    return true;
+                    """
                 )
             );
         }
@@ -142,9 +142,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        return true;
-                        $$
-                        """
+                    return true;
+                    $$
+                    """
                 )
             );
         }
@@ -155,10 +155,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        if (true) {
-                        }
-                        $$
-                        """
+                    if (true) {
+                    }
+                    $$
+                    """
                 )
             );
         }
@@ -186,11 +186,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C
-                    {
-                      $$
-                    }
-                    """
+                class C
+                {
+                  $$
+                }
+                """
             );
         }
 
@@ -331,9 +331,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        const $$
-                    """
+                class C {
+                    const $$
+                """
             );
         }
 
@@ -348,9 +348,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                         void M1(out $$
-                    """
+                class C {
+                     void M1(out $$
+                """
             );
         }
 
@@ -360,11 +360,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch(o)
-                            {
-                                case $$
-                            }
-                        """
+                    switch(o)
+                        {
+                            case $$
+                        }
+                    """
                 )
             );
         }
@@ -378,9 +378,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        ref $$
-                    """
+                class C {
+                    ref $$
+                """
             );
         }
 
@@ -389,9 +389,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        ref readonly $$
-                    """
+                class C {
+                    ref readonly $$
+                """
             );
         }
 
@@ -435,21 +435,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    using System;
+                using System;
 
-                    class Person { public string Name; }
+                class Person { public string Name; }
 
-                    class Program
+                class Program
+                {
+                    void Goo(object o)
                     {
-                        void Goo(object o)
+                        if (o is Person { Name: $$ })
                         {
-                            if (o is Person { Name: $$ })
-                            {
-                                Console.WriteLine(n);
-                            }
+                            Console.WriteLine(n);
                         }
                     }
-                    """
+                }
+                """
             );
         }
 

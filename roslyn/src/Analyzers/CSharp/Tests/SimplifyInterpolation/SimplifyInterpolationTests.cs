@@ -40,14 +40,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
             using var workspace = CreateWorkspaceFromOptions(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix";
                     }
-                    """,
+                }
+                """,
                 parameters
             );
 
@@ -64,23 +64,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue} suffix";
-                        }
+                        _ = $"prefix {someValue} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -89,23 +89,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int someValue)
                     {
-                        void M(int someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString("|}g{|Unnecessary:")|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString("|}g{|Unnecessary:")|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int someValue)
                     {
-                        void M(int someValue)
-                        {
-                            _ = $"prefix {someValue:g} suffix";
-                        }
+                        _ = $"prefix {someValue:g} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -114,23 +114,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString("|}\\d \"d\"{|Unnecessary:")|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString("|}\\d \"d\"{|Unnecessary:")|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $"prefix {someValue:\\d \"d\"} suffix";
-                        }
+                        _ = $"prefix {someValue:\\d \"d\"} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -139,23 +139,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $@"prefix {someValue{|Unnecessary:[||].ToString(@"|}\d ""d""{|Unnecessary:")|}} suffix";
-                        }
+                        _ = $@"prefix {someValue{|Unnecessary:[||].ToString(@"|}\d ""d""{|Unnecessary:")|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $@"prefix {someValue:\d ""d""} suffix";
-                        }
+                        _ = $@"prefix {someValue:\d ""d""} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -164,23 +164,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString(@"|}\d ""d""{|Unnecessary:")|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString(@"|}\d ""d""{|Unnecessary:")|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $"prefix {someValue:\\d \"d\"} suffix";
-                        }
+                        _ = $"prefix {someValue:\\d \"d\"} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -189,23 +189,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $@"prefix {someValue{|Unnecessary:[||].ToString("|}\\d \"d\"{|Unnecessary:")|}} suffix";
-                        }
+                        _ = $@"prefix {someValue{|Unnecessary:[||].ToString("|}\\d \"d\"{|Unnecessary:")|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $@"prefix {someValue:\d ""d""} suffix";
-                        }
+                        _ = $@"prefix {someValue:\d ""d""} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -214,15 +214,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            const string someConst = "some format code";
-                            _ = $"prefix {someValue[||].ToString(someConst)} suffix";
-                        }
+                        const string someConst = "some format code";
+                        _ = $"prefix {someValue[||].ToString(someConst)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -231,16 +231,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(C someValue)
                     {
-                        void M(C someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString('f')} suffix";
-                        }
-
-                        public string ToString(object obj) => null;
+                        _ = $"prefix {someValue[||].ToString('f')} suffix";
                     }
-                    """
+
+                    public string ToString(object obj) => null;
+                }
+                """
             );
         }
 
@@ -251,14 +251,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString("some format code", System.Globalization.CultureInfo.CurrentCulture)} suffix";
-                        }
+                        _ = $"prefix {someValue[||].ToString("some format code", System.Globalization.CultureInfo.CurrentCulture)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -269,23 +269,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.CultureInfo.InvariantCulture)|}} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.CultureInfo.InvariantCulture)|}} suffix");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -294,23 +294,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.DateTimeFormatInfo.InvariantInfo)|}} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.DateTimeFormatInfo.InvariantInfo)|}} suffix");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -319,23 +319,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int someValue)
                     {
-                        void M(int someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.NumberFormatInfo.InvariantInfo)|}} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.NumberFormatInfo.InvariantInfo)|}} suffix");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int someValue)
                     {
-                        void M(int someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -344,14 +344,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString(System.Globalization.CultureInfo.InvariantCulture)} suffix";
-                        }
+                        _ = $"prefix {someValue[||].ToString(System.Globalization.CultureInfo.InvariantCulture)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -360,23 +360,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString("|}some format code{|Unnecessary:", System.Globalization.CultureInfo.InvariantCulture)|}} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue[||]{|Unnecessary:.ToString("|}some format code{|Unnecessary:", System.Globalization.CultureInfo.InvariantCulture)|}} suffix");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = System.FormattableString.Invariant($"prefix {someValue:some format code} suffix");
-                        }
+                        _ = System.FormattableString.Invariant($"prefix {someValue:some format code} suffix");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -385,14 +385,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(System.DateTime someValue)
                     {
-                        void M(System.DateTime someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString("some format code", System.Globalization.CultureInfo.InvariantCulture)} suffix";
-                        }
+                        _ = $"prefix {someValue[||].ToString("some format code", System.Globalization.CultureInfo.InvariantCulture)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -401,23 +401,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].PadLeft(|}3{|Unnecessary:)|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].PadLeft(|}3{|Unnecessary:)|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,3} suffix";
-                        }
+                        _ = $"prefix {someValue,3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -426,23 +426,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].PadRight(|}3{|Unnecessary:)|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].PadRight(|}3{|Unnecessary:)|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,-3} suffix";
-                        }
+                        _ = $"prefix {someValue,-3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -451,25 +451,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            const int someConstant = 1;
-                            _ = $"prefix {someValue{|Unnecessary:[||].PadLeft(|}(byte)3.3 + someConstant{|Unnecessary:)|}} suffix";
-                        }
+                        const int someConstant = 1;
+                        _ = $"prefix {someValue{|Unnecessary:[||].PadLeft(|}(byte)3.3 + someConstant{|Unnecessary:)|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            const int someConstant = 1;
-                            _ = $"prefix {someValue,(byte)3.3 + someConstant} suffix";
-                        }
+                        const int someConstant = 1;
+                        _ = $"prefix {someValue,(byte)3.3 + someConstant} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -478,23 +478,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].PadLeft(|}3{|Unnecessary:, ' ')|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].PadLeft(|}3{|Unnecessary:, ' ')|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,3} suffix";
-                        }
+                        _ = $"prefix {someValue,3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -503,23 +503,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].PadRight(|}3{|Unnecessary:, ' ')|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].PadRight(|}3{|Unnecessary:, ' ')|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,-3} suffix";
-                        }
+                        _ = $"prefix {someValue,-3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -528,14 +528,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadLeft(3, '\t')} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadLeft(3, '\t')} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -544,14 +544,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadRight(3, '\t')} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadRight(3, '\t')} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -560,25 +560,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            const int someConstant = 1;
-                            _ = $"prefix {someValue{|Unnecessary:[||].PadRight(|}(byte)3.3 + someConstant{|Unnecessary:)|}} suffix";
-                        }
+                        const int someConstant = 1;
+                        _ = $"prefix {someValue{|Unnecessary:[||].PadRight(|}(byte)3.3 + someConstant{|Unnecessary:)|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            const int someConstant = 1;
-                            _ = $"prefix {someValue,-((byte)3.3 + someConstant)} suffix";
-                        }
+                        const int someConstant = 1;
+                        _ = $"prefix {someValue,-((byte)3.3 + someConstant)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -587,14 +587,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString():goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].ToString():goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -603,14 +603,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString("bar"):goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].ToString("bar"):goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -619,23 +619,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString()|},3} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString()|},3} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,3} suffix";
-                        }
+                        _ = $"prefix {someValue,3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -644,14 +644,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString(),3:goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].ToString(),3:goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -660,14 +660,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].ToString("some format code"),3:goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].ToString("some format code"),3:goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -676,23 +676,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadLeft(3):goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadLeft(3):goo} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,3:goo} suffix";
-                        }
+                        _ = $"prefix {someValue,3:goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -701,23 +701,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadRight(3):goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadRight(3):goo} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,-3:goo} suffix";
-                        }
+                        _ = $"prefix {someValue,-3:goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -726,14 +726,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadLeft(3),3} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadLeft(3),3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -742,14 +742,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadRight(3),3} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadRight(3),3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -758,14 +758,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadLeft(3),3:goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadLeft(3),3:goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -774,14 +774,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue[||].PadRight(3),3:goo} suffix";
-                        }
+                        _ = $"prefix {someValue[||].PadRight(3),3:goo} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -790,23 +790,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix";
-                        }
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue,3} suffix";
-                        }
+                        _ = $"prefix {someValue,3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -815,23 +815,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|}} suffix";
-                        }
+                        _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue.PadLeft(3)} suffix";
-                        }
+                        _ = $"prefix {someValue.PadLeft(3)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -840,23 +840,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|},3} suffix";
-                        }
+                        _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|},3} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue.PadLeft(3),3} suffix";
-                        }
+                        _ = $"prefix {someValue.PadLeft(3),3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -865,23 +865,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].PadRight(|}3{|Unnecessary:)|}} suffix";
-                        }
+                        _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].PadRight(|}3{|Unnecessary:)|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue.PadLeft(3),-3} suffix";
-                        }
+                        _ = $"prefix {someValue.PadLeft(3),-3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -890,14 +890,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string someValue)
                     {
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {someValue.PadLeft(3)[||].PadRight(3),3} suffix";
-                        }
+                        _ = $"prefix {someValue.PadLeft(3)[||].PadRight(3),3} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -906,13 +906,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        override string ToString() => "Goobar";
+                class C
+                {
+                    override string ToString() => "Goobar";
 
-                        string GetViaInterpolation() => $"Hello {ToString[||]()}";
-                    }
-                    """
+                    string GetViaInterpolation() => $"Hello {ToString[||]()}";
+                }
+                """
             );
         }
 
@@ -921,13 +921,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        string ToString(string arg) => "Goobar";
+                class C
+                {
+                    string ToString(string arg) => "Goobar";
 
-                        string GetViaInterpolation() => $"Hello {ToString[||]("g")}";
-                    }
-                    """
+                    string GetViaInterpolation() => $"Hello {ToString[||]("g")}";
+                }
+                """
             );
         }
 
@@ -936,13 +936,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        public static string ToString() => "Goobar";
+                class C
+                {
+                    public static string ToString() => "Goobar";
 
-                        string GetViaInterpolation() => $"Hello {ToString[||]()}";
-                    }
-                    """
+                    string GetViaInterpolation() => $"Hello {ToString[||]()}";
+                }
+                """
             );
         }
 
@@ -951,13 +951,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        public static string ToString(string arg) => "Goobar";
+                class C
+                {
+                    public static string ToString(string arg) => "Goobar";
 
-                        string GetViaInterpolation() => $"Hello {ToString[||]("g")}";
-                    }
-                    """
+                    string GetViaInterpolation() => $"Hello {ToString[||]("g")}";
+                }
+                """
             );
         }
 
@@ -966,16 +966,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        public string PadLeft(int val) => "";
+                class C
+                {
+                    public string PadLeft(int val) => "";
 
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {[||]PadLeft(3)} suffix";
-                        }
+                    void M(string someValue)
+                    {
+                        _ = $"prefix {[||]PadLeft(3)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -984,16 +984,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        public static string PadLeft(int val) => "";
+                class C
+                {
+                    public static string PadLeft(int val) => "";
 
-                        void M(string someValue)
-                        {
-                            _ = $"prefix {[||]PadLeft(3)} suffix";
-                        }
+                    void M(string someValue)
+                    {
+                        _ = $"prefix {[||]PadLeft(3)} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1002,41 +1002,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
-                    using System.Linq;
+                using System;
+                using System.Linq;
 
-                    public static class Sample
+                public static class Sample
+                {
+                    public static void PrintRightAligned ( String[] strings )
                     {
-                        public static void PrintRightAligned ( String[] strings )
-                        {
-                            const int maxLength = 1;
+                        const int maxLength = 1;
 
-                            for ( var i = 0; i < strings.Length; i++ )
-                            {
-                                var str = strings[i];
-                                Console.WriteLine ($"{i}.{str[||].PadRight(maxLength, ' ')}");
-                            }
+                        for ( var i = 0; i < strings.Length; i++ )
+                        {
+                            var str = strings[i];
+                            Console.WriteLine ($"{i}.{str[||].PadRight(maxLength, ' ')}");
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Linq;
+                using System;
+                using System.Linq;
 
-                    public static class Sample
+                public static class Sample
+                {
+                    public static void PrintRightAligned ( String[] strings )
                     {
-                        public static void PrintRightAligned ( String[] strings )
-                        {
-                            const int maxLength = 1;
+                        const int maxLength = 1;
 
-                            for ( var i = 0; i < strings.Length; i++ )
-                            {
-                                var str = strings[i];
-                                Console.WriteLine ($"{i}.{str,-maxLength}");
-                            }
+                        for ( var i = 0; i < strings.Length; i++ )
+                        {
+                            var str = strings[i];
+                            Console.WriteLine ($"{i}.{str,-maxLength}");
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1045,23 +1045,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    using System;
-                    using System.Linq;
+                using System;
+                using System.Linq;
 
-                    public static class Sample
+                public static class Sample
+                {
+                    public static void PrintRightAligned ( String[] strings )
                     {
-                        public static void PrintRightAligned ( String[] strings )
-                        {
-                            var maxLength = strings.Max(str => str.Length);
+                        var maxLength = strings.Max(str => str.Length);
 
-                            for ( var i = 0; i < strings.Length; i++ )
-                            {
-                                var str = strings[i];
-                                Console.WriteLine ($"{i}.{str[||].PadRight(maxLength, ' ')}");
-                            }
+                        for ( var i = 0; i < strings.Length; i++ )
+                        {
+                            var str = strings[i];
+                            Console.WriteLine ($"{i}.{str[||].PadRight(maxLength, ' ')}");
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1070,11 +1070,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        public override string ToString() => $"Test: {base[||].ToString()}";
-                    }
-                    """
+                class C
+                {
+                    public override string ToString() => $"Test: {base[||].ToString()}";
+                }
+                """
             );
         }
 
@@ -1083,11 +1083,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class C
-                    {
-                        string M() => $"Test: {base[||].ToString()}";
-                    }
-                    """
+                class C
+                {
+                    string M() => $"Test: {base[||].ToString()}";
+                }
+                """
             );
         }
 
@@ -1096,16 +1096,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingAsync(
                 """
-                    class Base
-                    {
-                        public string ToString(string format) => format;
-                    }
+                class Base
+                {
+                    public string ToString(string format) => format;
+                }
 
-                    class Derived : Base
-                    {
-                        public override string ToString() => $"Test: {base[||].ToString("a")}";
-                    }
-                    """
+                class Derived : Base
+                {
+                    public override string ToString() => $"Test: {base[||].ToString("a")}";
+                }
+                """
             );
         }
 
@@ -1114,17 +1114,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        public override string ToString() => $"Test: {base.ToString()[||].PadLeft(10)}";
-                    }
-                    """,
+                class C
+                {
+                    public override string ToString() => $"Test: {base.ToString()[||].PadLeft(10)}";
+                }
+                """,
                 """
-                    class C
-                    {
-                        public override string ToString() => $"Test: {base.ToString(),10}";
-                    }
-                    """
+                class C
+                {
+                    public override string ToString() => $"Test: {base.ToString(),10}";
+                }
+                """
             );
         }
 
@@ -1133,16 +1133,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        string M(TypeNotImplementingIFormattable value) => $"Test: {value[||].ToString("a")}";
-                    }
+                class C
+                {
+                    string M(TypeNotImplementingIFormattable value) => $"Test: {value[||].ToString("a")}";
+                }
 
-                    struct TypeNotImplementingIFormattable
-                    {
-                        public string ToString(string format) => "A";
-                    }
-                    """
+                struct TypeNotImplementingIFormattable
+                {
+                    public string ToString(string format) => "A";
+                }
+                """
             );
         }
 
@@ -1151,35 +1151,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        string M(TypeImplementingIFormattable value) => $"Test: {value[||].ToString("a")}";
-                    }
+                class C
+                {
+                    string M(TypeImplementingIFormattable value) => $"Test: {value[||].ToString("a")}";
+                }
 
-                    struct TypeImplementingIFormattable : IFormattable
-                    {
-                        public string ToString(string format) => "A";
+                struct TypeImplementingIFormattable : IFormattable
+                {
+                    public string ToString(string format) => "A";
 
-                        string IFormattable.ToString(string format, IFormatProvider formatProvider) => "B";
-                    }
-                    """,
+                    string IFormattable.ToString(string format, IFormatProvider formatProvider) => "B";
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        string M(TypeImplementingIFormattable value) => $"Test: {value:a}";
-                    }
+                class C
+                {
+                    string M(TypeImplementingIFormattable value) => $"Test: {value:a}";
+                }
 
-                    struct TypeImplementingIFormattable : IFormattable
-                    {
-                        public string ToString(string format) => "A";
+                struct TypeImplementingIFormattable : IFormattable
+                {
+                    public string ToString(string format) => "A";
 
-                        string IFormattable.ToString(string format, IFormatProvider formatProvider) => "B";
-                    }
-                    """
+                    string IFormattable.ToString(string format, IFormatProvider formatProvider) => "B";
+                }
+                """
             );
         }
 
@@ -1188,27 +1188,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        string M(TypeNotImplementingIFormattable value) => $"Test: {value[||].ToString()}";
-                    }
+                class C
+                {
+                    string M(TypeNotImplementingIFormattable value) => $"Test: {value[||].ToString()}";
+                }
 
-                    struct TypeNotImplementingIFormattable
-                    {
-                        public string ToString(string format) => "A";
-                    }
-                    """,
+                struct TypeNotImplementingIFormattable
+                {
+                    public string ToString(string format) => "A";
+                }
+                """,
                 """
-                    class C
-                    {
-                        string M(TypeNotImplementingIFormattable value) => $"Test: {value}";
-                    }
+                class C
+                {
+                    string M(TypeNotImplementingIFormattable value) => $"Test: {value}";
+                }
 
-                    struct TypeNotImplementingIFormattable
-                    {
-                        public string ToString(string format) => "A";
-                    }
-                    """
+                struct TypeNotImplementingIFormattable
+                {
+                    public string ToString(string format) => "A";
+                }
+                """
             );
         }
 
@@ -1217,27 +1217,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        string M(TypeNotImplementingIFormattable value) => $"Test: {value.ToString("a")[||].PadLeft(10)}";
-                    }
+                class C
+                {
+                    string M(TypeNotImplementingIFormattable value) => $"Test: {value.ToString("a")[||].PadLeft(10)}";
+                }
 
-                    struct TypeNotImplementingIFormattable
-                    {
-                        public string ToString(string format) => "A";
-                    }
-                    """,
+                struct TypeNotImplementingIFormattable
+                {
+                    public string ToString(string format) => "A";
+                }
+                """,
                 """
-                    class C
-                    {
-                        string M(TypeNotImplementingIFormattable value) => $"Test: {value.ToString("a"),10}";
-                    }
+                class C
+                {
+                    string M(TypeNotImplementingIFormattable value) => $"Test: {value.ToString("a"),10}";
+                }
 
-                    struct TypeNotImplementingIFormattable
-                    {
-                        public string ToString(string format) => "A";
-                    }
-                    """
+                struct TypeNotImplementingIFormattable
+                {
+                    public string ToString(string format) => "A";
+                }
+                """
             );
         }
 
@@ -1246,16 +1246,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        string M(RefStruct someValue) => $"Test: {someValue[||].ToString()}";
-                    }
+                class C
+                {
+                    string M(RefStruct someValue) => $"Test: {someValue[||].ToString()}";
+                }
 
-                    ref struct RefStruct
-                    {
-                        public override string ToString() => "A";
-                    }
-                    """
+                ref struct RefStruct
+                {
+                    public override string ToString() => "A";
+                }
+                """
             );
         }
 
@@ -1264,27 +1264,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        string M(RefStruct someValue) => $"Test: {someValue.ToString()[||].PadLeft(10)}";
-                    }
+                class C
+                {
+                    string M(RefStruct someValue) => $"Test: {someValue.ToString()[||].PadLeft(10)}";
+                }
 
-                    ref struct RefStruct
-                    {
-                        public override string ToString() => "A";
-                    }
-                    """,
+                ref struct RefStruct
+                {
+                    public override string ToString() => "A";
+                }
+                """,
                 """
-                    class C
-                    {
-                        string M(RefStruct someValue) => $"Test: {someValue.ToString(),10}";
-                    }
+                class C
+                {
+                    string M(RefStruct someValue) => $"Test: {someValue.ToString(),10}";
+                }
 
-                    ref struct RefStruct
-                    {
-                        public override string ToString() => "A";
-                    }
-                    """
+                ref struct RefStruct
+                {
+                    public override string ToString() => "A";
+                }
+                """
             );
         }
 
@@ -1293,12 +1293,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public new string ToString() => "Shadow";
-                        static string M(C c) => $"{c[||].ToString()}";
-                    }
-                    """
+                class C
+                {
+                    public new string ToString() => "Shadow";
+                    static string M(C c) => $"{c[||].ToString()}";
+                }
+                """
             );
         }
 
@@ -1307,17 +1307,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public new string ToString() => "Shadow";
-                    }
+                class C
+                {
+                    public new string ToString() => "Shadow";
+                }
 
-                    class B : C
-                    {
-                        public override string ToString() => "OverrideShadow";
-                        static string M(C c) => $"{c[||].ToString()}";
-                    }
-                    """
+                class B : C
+                {
+                    public override string ToString() => "OverrideShadow";
+                    static string M(C c) => $"{c[||].ToString()}";
+                }
+                """
             );
         }
 
@@ -1326,37 +1326,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        public override string ToString() => "Override";
-                    }
+                class C
+                {
+                    public override string ToString() => "Override";
+                }
 
-                    class B : C
-                    {
-                        public override string ToString() => "OverrideOverride";
+                class B : C
+                {
+                    public override string ToString() => "OverrideOverride";
 
-                        void M(B someValue)
-                        {
-                            _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}} suffix";
-                        }
+                    void M(B someValue)
+                    {
+                        _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}} suffix";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        public override string ToString() => "Override";
-                    }
+                class C
+                {
+                    public override string ToString() => "Override";
+                }
 
-                    class B : C
-                    {
-                        public override string ToString() => "OverrideOverride";
+                class B : C
+                {
+                    public override string ToString() => "OverrideOverride";
 
-                        void M(B someValue)
-                        {
-                            _ = $"prefix {someValue} suffix";
-                        }
+                    void M(B someValue)
+                    {
+                        _ = $"prefix {someValue} suffix";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1365,23 +1365,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool cond)
                     {
-                        void M(bool cond)
-                        {
-                            _ = $"{(cond ? 1 : 2){|Unnecessary:[||].ToString()|}}";
-                        }
+                        _ = $"{(cond ? 1 : 2){|Unnecessary:[||].ToString()|}}";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool cond)
                     {
-                        void M(bool cond)
-                        {
-                            _ = $"{(cond ? 1 : 2)}";
-                        }
+                        _ = $"{(cond ? 1 : 2)}";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1390,23 +1390,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool cond)
                     {
-                        void M(bool cond)
-                        {
-                            _ = $"{(cond ? 1 : 2){|Unnecessary:[||].ToString("|}g{|Unnecessary:")|}}";
-                        }
+                        _ = $"{(cond ? 1 : 2){|Unnecessary:[||].ToString("|}g{|Unnecessary:")|}}";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool cond)
                     {
-                        void M(bool cond)
-                        {
-                            _ = $"{(cond ? 1 : 2):g}";
-                        }
+                        _ = $"{(cond ? 1 : 2):g}";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1415,23 +1415,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool cond)
                     {
-                        void M(bool cond)
-                        {
-                            _ = $"{(cond ? "1" : "2"){|Unnecessary:[||].PadLeft(|}3{|Unnecessary:)|}}";
-                        }
+                        _ = $"{(cond ? "1" : "2"){|Unnecessary:[||].PadLeft(|}3{|Unnecessary:)|}}";
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool cond)
                     {
-                        void M(bool cond)
-                        {
-                            _ = $"{(cond ? "1" : "2"),3}";
-                        }
+                        _ = $"{(cond ? "1" : "2"),3}";
                     }
-                    """
+                }
+                """
             );
         }
     }

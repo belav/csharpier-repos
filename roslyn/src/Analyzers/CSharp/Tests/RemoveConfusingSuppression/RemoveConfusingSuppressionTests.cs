@@ -23,27 +23,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o [|!|]is string)
                         {
-                            if (o [|!|]is string)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o is string)
                         {
-                            if (o is string)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -52,27 +52,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o [|!|]is string s)
                         {
-                            if (o [|!|]is string s)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o is string s)
                         {
-                            if (o is string s)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 

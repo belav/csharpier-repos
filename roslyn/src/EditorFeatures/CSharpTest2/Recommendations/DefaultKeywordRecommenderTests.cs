@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -71,9 +71,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                    #$$
-                    """
+                class C {
+                #$$
+                """
             );
         }
 
@@ -82,9 +82,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                    #if $$
-                    """
+                class C {
+                #if $$
+                """
             );
         }
 
@@ -118,9 +118,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            $$
-                        """
+                    switch (expr) {
+                        $$
+                    """
                 )
             );
         }
@@ -131,10 +131,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            case 0:
-                            $$
-                        """
+                    switch (expr) {
+                        case 0:
+                        $$
+                    """
                 )
             );
         }
@@ -145,10 +145,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                            $$
-                        """
+                    switch (expr) {
+                        default:
+                        $$
+                    """
                 )
             );
         }
@@ -159,11 +159,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                              Console.WriteLine();
-                            $$
-                        """
+                    switch (expr) {
+                        default:
+                          Console.WriteLine();
+                        $$
+                    """
                 )
             );
         }
@@ -174,12 +174,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                              Console.WriteLine();
-                              Console.WriteLine();
-                            $$
-                        """
+                    switch (expr) {
+                        default:
+                          Console.WriteLine();
+                          Console.WriteLine();
+                        $$
+                    """
                 )
             );
         }
@@ -190,11 +190,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default: {
-                            }
-                            $$
-                        """
+                    switch (expr) {
+                        default: {
+                        }
+                        $$
+                    """
                 )
             );
         }
@@ -205,13 +205,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                              if (goo) {
-                              } else {
-                              }
-                            $$
-                        """
+                    switch (expr) {
+                        default:
+                          if (goo) {
+                          } else {
+                          }
+                        $$
+                    """
                 )
             );
         }
@@ -222,11 +222,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                               Console.WriteLine(
-                            $$
-                        """
+                    switch (expr) {
+                        default:
+                           Console.WriteLine(
+                        $$
+                    """
                 )
             );
         }
@@ -237,10 +237,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default: {
-                              $$
-                        """
+                    switch (expr) {
+                        default: {
+                          $$
+                    """
                 )
             );
         }
@@ -251,12 +251,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                              if (goo)
-                                Console.WriteLine();
-                            $$
-                        """
+                    switch (expr) {
+                        default:
+                          if (goo)
+                            Console.WriteLine();
+                        $$
+                    """
                 )
             );
         }
@@ -267,11 +267,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                              if (goo)
-                                $$
-                        """
+                    switch (expr) {
+                        default:
+                          if (goo)
+                            $$
+                    """
                 )
             );
         }
@@ -282,12 +282,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                              while (true) {
-                              }
-                            $$
-                        """
+                    switch (expr) {
+                        default:
+                          while (true) {
+                          }
+                        $$
+                    """
                 )
             );
         }
@@ -298,10 +298,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                        switch (expr) {
-                            default:
-                              goto $$
-                        """
+                    switch (expr) {
+                        default:
+                          goto $$
+                    """
                 )
             );
         }
@@ -335,13 +335,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C
+                class C
+                {
+                    public int x, y;
+                    void M()
                     {
-                        public int x, y;
-                        void M()
-                        {
-                            var c = new C { x = 2, y = 3, $$
-                    """
+                        var c = new C { x = 2, y = 3, $$
+                """
             );
         }
 
@@ -356,13 +356,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
+                class C
+                {
+                    void M<T>() where T : $$
                     {
-                        void M<T>() where T : $$
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -371,13 +371,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C : Base
+                class C : Base
+                {
+                    public override void M<T>() where T : $$
                     {
-                        public override void M<T>() where T : $$
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -386,13 +386,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C : I
+                class C : I
+                {
+                    public void I.M<T>() where T : $$
                     {
-                        public void I.M<T>() where T : $$
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -419,16 +419,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
+                class C
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int i, string s) tuple;
-                            tuple = ($$)
-                            Main(args);
-                        }
+                        (int i, string s) tuple;
+                        tuple = ($$)
+                        Main(args);
                     }
-                    """
+                }
+                """
             );
         }
     }

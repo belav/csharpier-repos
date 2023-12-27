@@ -63,10 +63,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                    unsafe class [|C|] // The compiler reports this on the name, not the 'unsafe' keyword.
-                    {
-                    }
-                    """
+                unsafe class [|C|] // The compiler reports this on the name, not the 'unsafe' keyword.
+                {
+                }
+                """
             );
         }
 
@@ -75,13 +75,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                    class C
+                class C
+                {
+                    unsafe void [|M|]()
                     {
-                        unsafe void [|M|]()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -90,16 +90,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        unsafe void [|F|]()
                         {
-                            unsafe void [|F|]()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -108,16 +108,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|unsafe|]
                         {
-                            [|unsafe|]
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -126,17 +126,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        unsafe
                         {
-                            unsafe
-                            {
-                                [|int * p;|]
-                            }
+                            [|int * p;|]
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

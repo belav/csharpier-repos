@@ -1262,21 +1262,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    namespace N
-                    {
-                        var [|x|] = 1;
-                    }
-                    """,
+                namespace N
+                {
+                    var [|x|] = 1;
+                }
+                """,
                 new TestParameters(testHost: host)
             );
 
             await TestMissingInRegularAndScriptAsync(
                 """
-                    enum E
-                    {
-                        [|x|] = 1;
-                    }
-                    """,
+                enum E
+                {
+                    [|x|] = 1;
+                }
+                """,
                 new TestParameters(testHost: host)
             );
         }
@@ -1291,30 +1291,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                 await TestAllOptionsOffAsync(
                     host,
                     """
-                        class C
-                        {
-                            int [|iyi|];
-                        }
-                        """,
+                    class C
+                    {
+                        int [|iyi|];
+                    }
+                    """,
                     """
-                        class C
+                    class C
+                    {
+                        int iyi;
+
+                        public int Iyi
                         {
-                            int iyi;
-
-                            public int Iyi
+                            get
                             {
-                                get
-                                {
-                                    return iyi;
-                                }
+                                return iyi;
+                            }
 
-                                set
-                                {
-                                    iyi = value;
-                                }
+                            set
+                            {
+                                iyi = value;
                             }
                         }
-                        """
+                    }
+                    """
                 );
             }
         }
@@ -1329,30 +1329,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                 await TestAllOptionsOffAsync(
                     host,
                     """
-                        class C
-                        {
-                            int [|ırak|];
-                        }
-                        """,
+                    class C
+                    {
+                        int [|ırak|];
+                    }
+                    """,
                     """
-                        class C
+                    class C
+                    {
+                        int ırak;
+
+                        public int Irak
                         {
-                            int ırak;
-
-                            public int Irak
+                            get
                             {
-                                get
-                                {
-                                    return ırak;
-                                }
+                                return ırak;
+                            }
 
-                                set
-                                {
-                                    ırak = value;
-                                }
+                            set
+                            {
+                                ırak = value;
                             }
                         }
-                        """
+                    }
+                    """
                 );
             }
         }
@@ -1365,30 +1365,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                 await TestAllOptionsOffAsync(
                     host,
                     """
-                        class C
-                        {
-                            int [|بيت|];
-                        }
-                        """,
+                    class C
+                    {
+                        int [|بيت|];
+                    }
+                    """,
                     """
-                        class C
+                    class C
+                    {
+                        int بيت;
+
+                        public int بيت1
                         {
-                            int بيت;
-
-                            public int بيت1
+                            get
                             {
-                                get
-                                {
-                                    return بيت;
-                                }
+                                return بيت;
+                            }
 
-                                set
-                                {
-                                    بيت = value;
-                                }
+                            set
+                            {
+                                بيت = value;
                             }
                         }
-                        """
+                    }
+                    """
                 );
             }
         }
@@ -1401,30 +1401,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                 await TestAllOptionsOffAsync(
                     host,
                     """
-                        class C
-                        {
-                            int [|árbol|];
-                        }
-                        """,
+                    class C
+                    {
+                        int [|árbol|];
+                    }
+                    """,
                     """
-                        class C
+                    class C
+                    {
+                        int árbol;
+
+                        public int Árbol
                         {
-                            int árbol;
-
-                            public int Árbol
+                            get
                             {
-                                get
-                                {
-                                    return árbol;
-                                }
+                                return árbol;
+                            }
 
-                                set
-                                {
-                                    árbol = value;
-                                }
+                            set
+                            {
+                                árbol = value;
                             }
                         }
-                        """
+                    }
+                    """
                 );
             }
         }
@@ -1437,30 +1437,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
                 await TestAllOptionsOffAsync(
                     host,
                     """
-                        class C
-                        {
-                            int [|σκύλος|];
-                        }
-                        """,
+                    class C
+                    {
+                        int [|σκύλος|];
+                    }
+                    """,
                     """
-                        class C
+                    class C
+                    {
+                        int σκύλος;
+
+                        public int Σκύλος
                         {
-                            int σκύλος;
-
-                            public int Σκύλος
+                            get
                             {
-                                get
-                                {
-                                    return σκύλος;
-                                }
+                                return σκύλος;
+                            }
 
-                                set
-                                {
-                                    σκύλος = value;
-                                }
+                            set
+                            {
+                                σκύλος = value;
                             }
                         }
-                        """
+                    }
+                    """
                 );
             }
         }
@@ -1471,30 +1471,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(
                 host,
                 """
-                    class C
-                    {
-                        int [|@class|];
-                    }
-                    """,
+                class C
+                {
+                    int [|@class|];
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int @class;
+
+                    public int Class
                     {
-                        int @class;
-
-                        public int Class
+                        get
                         {
-                            get
-                            {
-                                return @class;
-                            }
+                            return @class;
+                        }
 
-                            set
-                            {
-                                @class = value;
-                            }
+                        set
+                        {
+                            @class = value;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1504,30 +1504,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(
                 host,
                 """
-                    class C
-                    {
-                        int [|@class|];
-                    }
-                    """,
+                class C
+                {
+                    int [|@class|];
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int @class;
+
+                    public int Class
                     {
-                        int @class;
-
-                        public int Class
+                        get
                         {
-                            get
-                            {
-                                return this.@class;
-                            }
+                            return this.@class;
+                        }
 
-                            set
-                            {
-                                this.@class = value;
-                            }
+                        set
+                        {
+                            this.@class = value;
                         }
                     }
-                    """,
+                }
+                """,
                 options: Option(
                     CodeStyleOptions2.QualifyFieldAccess,
                     true,
@@ -1542,30 +1542,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Encaps
             await TestAllOptionsOffAsync(
                 host,
                 """
-                    class C
-                    {
-                        int [|i|];
-                    }
-                    """,
+                class C
+                {
+                    int [|i|];
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int i;
+
+                    public int I
                     {
-                        int i;
-
-                        public int I
+                        get
                         {
-                            get
-                            {
-                                return this.i;
-                            }
+                            return this.i;
+                        }
 
-                            set
-                            {
-                                this.i = value;
-                            }
+                        set
+                        {
+                            this.i = value;
                         }
                     }
-                    """,
+                }
+                """,
                 options: Option(
                     CodeStyleOptions2.QualifyFieldAccess,
                     true,

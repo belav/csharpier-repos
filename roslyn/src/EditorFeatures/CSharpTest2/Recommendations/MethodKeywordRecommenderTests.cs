@@ -24,9 +24,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
         await VerifyAbsenceAsync(
             SourceCodeKind.Script,
             """
-                class C { }
-                $$
-                """
+            class C { }
+            $$
+            """
         );
     }
 
@@ -36,9 +36,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
         await VerifyAbsenceAsync(
             SourceCodeKind.Script,
             """
-                System.Console.WriteLine();
-                $$
-                """
+            System.Console.WriteLine();
+            $$
+            """
         );
     }
 
@@ -48,9 +48,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
         await VerifyAbsenceAsync(
             SourceCodeKind.Script,
             """
-                int i = 0;
-                $$
-                """
+            int i = 0;
+            $$
+            """
         );
     }
 
@@ -77,9 +77,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    [$$
-                """
+            class C {
+                [$$
+            """
         );
     }
 
@@ -88,10 +88,10 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    [Goo]
-                    [$$
-                """
+            class C {
+                [Goo]
+                [$$
+            """
         );
     }
 
@@ -100,11 +100,11 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    void Goo() {
-                    }
-                    [$$
-                """
+            class C {
+                void Goo() {
+                }
+                [$$
+            """
         );
     }
 
@@ -113,12 +113,12 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    int Goo {
-                        get;
-                    }
-                    [$$
-                """
+            class C {
+                int Goo {
+                    get;
+                }
+                [$$
+            """
         );
     }
 
@@ -127,10 +127,10 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    int Goo;
-                    [$$
-                """
+            class C {
+                int Goo;
+                [$$
+            """
         );
     }
 
@@ -139,10 +139,10 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    event Action<int> Goo;
-                    [$$
-                """
+            class C {
+                event Action<int> Goo;
+                [$$
+            """
         );
     }
 
@@ -157,9 +157,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyAbsenceAsync(
             """
-                class C {
-                    void Goo([$$
-                """
+            class C {
+                void Goo([$$
+            """
         );
     }
 
@@ -168,9 +168,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    int Goo { [$$
-                """
+            class C {
+                int Goo { [$$
+            """
         );
     }
 
@@ -179,9 +179,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    int Goo { get { } [$$
-                """
+            class C {
+                int Goo { get { } [$$
+            """
         );
     }
 
@@ -190,9 +190,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    event Action<int> Goo { [$$
-                """
+            class C {
+                event Action<int> Goo { [$$
+            """
         );
     }
 
@@ -201,9 +201,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C {
-                    event Action<int> Goo { add { } [$$
-                """
+            class C {
+                event Action<int> Goo { add { } [$$
+            """
         );
     }
 
@@ -218,9 +218,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                interface I {
-                    [$$
-                """
+            interface I {
+                [$$
+            """
         );
     }
 
@@ -229,9 +229,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                struct S {
-                    [$$
-                """
+            struct S {
+                [$$
+            """
         );
     }
 
@@ -240,9 +240,9 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyAbsenceAsync(
             """
-                enum E {
-                    [$$
-                """
+            enum E {
+                [$$
+            """
         );
     }
 
@@ -251,11 +251,11 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                [$$
-                class C()
-                {
-                }
-                """
+            [$$
+            class C()
+            {
+            }
+            """
         );
     }
 
@@ -264,11 +264,11 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                [$$
-                struct C()
-                {
-                }
-                """
+            [$$
+            struct C()
+            {
+            }
+            """
         );
     }
 
@@ -277,17 +277,17 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
+                    [$$
+                    void F()
                     {
-                        [$$
-                        void F()
-                        {
-                        }
                     }
                 }
-                """
+            }
+            """
         );
     }
 }

@@ -65,15 +65,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    var s = $@"{ true
-                                [|? 1|]
-                                : 2}";
-                    """,
+                var s = $@"{ true
+                            [|? 1|]
+                            : 2}";
+                """,
                 """
-                    var s = $@"{ (true
-                                ? 1
-                                : 2)}";
-                    """
+                var s = $@"{ (true
+                            ? 1
+                            : 2)}";
+                """
             );
         }
 
@@ -82,23 +82,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    var s = $@"{
-                                true
-                                ?
-                                [|1|]
-                                : 
-                                2
-                                }";
-                    """,
+                var s = $@"{
+                            true
+                            ?
+                            [|1|]
+                            : 
+                            2
+                            }";
+                """,
                 """
-                    var s = $@"{
-                                (true
-                                ?
-                                1
-                                : 
-                                2
-                    )            }";
-                    """
+                var s = $@"{
+                            (true
+                            ?
+                            1
+                            : 
+                            2
+                )            }";
+                """
             );
         }
 
@@ -188,11 +188,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    var s2 = $"{ (true ? "1" : false ? $"{ true ? "2" [|:|] "3"}" : "4") }"
-                    """,
+                var s2 = $"{ (true ? "1" : false ? $"{ true ? "2" [|:|] "3"}" : "4") }"
+                """,
                 """
-                    var s2 = $"{ (true ? "1" : false ? $"{ (true ? "2" : "3")}" : "4") }"
-                    """
+                var s2 = $"{ (true ? "1" : false ? $"{ (true ? "2" : "3")}" : "4") }"
+                """
             );
         }
 
@@ -228,15 +228,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { true ? "Text2" [|:|]
-                    NextLineOfCode();
-                    """,
+                PreviousLineOfCode();
+                var s3 = $"Text1 { true ? "Text2" [|:|]
+                NextLineOfCode();
+                """,
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { (true ? "Text2" :)
-                    NextLineOfCode();
-                    """
+                PreviousLineOfCode();
+                var s3 = $"Text1 { (true ? "Text2" :)
+                NextLineOfCode();
+                """
             );
         }
 
@@ -245,15 +245,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { true ? "Text2" [|:|] "
-                    NextLineOfCode();
-                    """,
+                PreviousLineOfCode();
+                var s3 = $"Text1 { true ? "Text2" [|:|] "
+                NextLineOfCode();
+                """,
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { (true ? "Text2" : ")
-                    NextLineOfCode();
-                    """
+                PreviousLineOfCode();
+                var s3 = $"Text1 { (true ? "Text2" : ")
+                NextLineOfCode();
+                """
             );
         }
 
@@ -262,15 +262,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { true ? "Text2" [|:|] "Text3
-                    NextLineOfCode();
-                    """,
+                PreviousLineOfCode();
+                var s3 = $"Text1 { true ? "Text2" [|:|] "Text3
+                NextLineOfCode();
+                """,
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { (true ? "Text2" : "Text3)
-                    NextLineOfCode();
-                    """
+                PreviousLineOfCode();
+                var s3 = $"Text1 { (true ? "Text2" : "Text3)
+                NextLineOfCode();
+                """
             );
         }
 
@@ -279,15 +279,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { true ? "Text2" [|:|] "Text3"
-                    NextLineOfCode();
-                    """,
+                PreviousLineOfCode();
+                var s3 = $"Text1 { true ? "Text2" [|:|] "Text3"
+                NextLineOfCode();
+                """,
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { (true ? "Text2" : "Text3")
-                    NextLineOfCode();
-                    """
+                PreviousLineOfCode();
+                var s3 = $"Text1 { (true ? "Text2" : "Text3")
+                NextLineOfCode();
+                """
             );
         }
 
@@ -296,15 +296,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { true ? "Text2" [|:|] "Text3" }
-                    NextLineOfCode();
-                    """,
+                PreviousLineOfCode();
+                var s3 = $"Text1 { true ? "Text2" [|:|] "Text3" }
+                NextLineOfCode();
+                """,
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { (true ? "Text2" : "Text3") }
-                    NextLineOfCode();
-                    """
+                PreviousLineOfCode();
+                var s3 = $"Text1 { (true ? "Text2" : "Text3") }
+                NextLineOfCode();
+                """
             );
         }
 
@@ -313,15 +313,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    (
-                    var s3 = $"Text1 { true ? "Text2" [|:|] "Text3" }
-                    NextLineOfCode();
-                    """,
+                (
+                var s3 = $"Text1 { true ? "Text2" [|:|] "Text3" }
+                NextLineOfCode();
+                """,
                 """
-                    (
-                    var s3 = $"Text1 { (true ? "Text2" : "Text3") }
-                    NextLineOfCode();
-                    """
+                (
+                var s3 = $"Text1 { (true ? "Text2" : "Text3") }
+                NextLineOfCode();
+                """
             );
         }
 
@@ -330,15 +330,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { true ? "Text2" [|:|] "Text3" }
-                    NextLineOfCode(
-                    """,
+                PreviousLineOfCode();
+                var s3 = $"Text1 { true ? "Text2" [|:|] "Text3" }
+                NextLineOfCode(
+                """,
                 """
-                    PreviousLineOfCode();
-                    var s3 = $"Text1 { (true ? "Text2" : "Text3") }
-                    NextLineOfCode(
-                    """
+                PreviousLineOfCode();
+                var s3 = $"Text1 { (true ? "Text2" : "Text3") }
+                NextLineOfCode(
+                """
             );
         }
 
@@ -347,15 +347,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    PreviousLineOfCode();
-                    var s3 = ($"Text1 { true ? "Text2" [|:|] "Text3" }
-                    NextLineOfCode();
-                    """,
+                PreviousLineOfCode();
+                var s3 = ($"Text1 { true ? "Text2" [|:|] "Text3" }
+                NextLineOfCode();
+                """,
                 """
-                    PreviousLineOfCode();
-                    var s3 = ($"Text1 { (true ? "Text2" : "Text3") }
-                    NextLineOfCode();
-                    """
+                PreviousLineOfCode();
+                var s3 = ($"Text1 { (true ? "Text2" : "Text3") }
+                NextLineOfCode();
+                """
             );
         }
 
@@ -364,11 +364,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConditionalExpressionIn
         {
             await TestInMethodAsync(
                 """
-                    var s3 = $"{ true ? 1 [|:|] 2 )}"
-                    """,
+                var s3 = $"{ true ? 1 [|:|] 2 )}"
+                """,
                 """
-                    var s3 = $"{ (true ? 1 : 2 )}"
-                    """
+                var s3 = $"{ (true ? 1 : 2 )}"
+                """
             );
         }
     }

@@ -76,30 +76,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true ? 0 : 1;
-                        }
+                        i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -108,30 +108,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true ? throw new System.Exception() : 1;
-                        }
+                        i = true ? throw new System.Exception() : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -140,30 +140,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true ? 0 : throw new System.Exception();
-                        }
+                        i = true ? 0 : throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -172,21 +172,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -195,21 +195,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp6
             );
         }
@@ -219,21 +219,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                                {|CS0156:throw|};
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            {|CS0156:throw|};
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -242,26 +242,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            [|if|] (true)
-                                i = 0;
-                            else
-                                i = 1;
-                        }
+                        [|if|] (true)
+                            i = 0;
+                        else
+                            i = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true ? 0 : 1;
-                        }
+                        i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -270,28 +270,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            if (true)
-                                [|if|] (true)
-                                    i = 0;
-                                else
-                                    i = 1;
-                        }
+                        if (true)
+                            [|if|] (true)
+                                i = 0;
+                            else
+                                i = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            if (true)
-                                i = true ? 0 : 1;
-                        }
+                        if (true)
+                            i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -300,21 +300,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int i, int j)
                     {
-                        void M(int i, int j)
+                        if (true)
                         {
-                            if (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                j = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            j = 1;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -323,30 +323,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                this.{|CS1061:i|} = 0;
-                            }
-                            else
-                            {
-                                this.{|CS1061:i|} = 1;
-                            }
+                            this.{|CS1061:i|} = 0;
+                        }
+                        else
+                        {
+                            this.{|CS1061:i|} = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.{|CS1061:i|} = true ? 0 : 1;
-                        }
+                        this.{|CS1061:i|} = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -355,30 +355,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                this.{|CS1061:i|} = 0;
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            this.{|CS1061:i|} = 0;
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            this.{|CS1061:i|} = true ? 0 : throw new System.Exception();
-                        }
+                        this.{|CS1061:i|} = true ? 0 : throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -387,34 +387,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        private int i;
+                class C
+                {
+                    private int i;
 
-                        void M()
+                    void M()
+                    {
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                this.i = 0;
-                            }
-                            else
-                            {
-                                this . i = 1;
-                            }
+                            this.i = 0;
+                        }
+                        else
+                        {
+                            this . i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int i;
+                class C
+                {
+                    private int i;
 
-                        void M()
-                        {
-                            this.i = true ? 0 : 1;
-                        }
+                    void M()
+                    {
+                        this.i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -423,34 +423,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        int i;
+                class C
+                {
+                    int i;
 
-                        void M()
+                    void M()
+                    {
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                this.i = 0;
-                            }
-                            else
-                            {
-                                this.i = 1;
-                            }
+                            this.i = 0;
+                        }
+                        else
+                        {
+                            this.i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        int i;
+                class C
+                {
+                    int i;
 
-                        void M()
-                        {
-                            this.i = true ? 0 : 1;
-                        }
+                    void M()
+                    {
+                        this.i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -459,31 +459,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i;
+                        [|if|] (true)
                         {
-                            int i;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? 0 : 1;
-                        }
+                        int i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -492,31 +492,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i;
+                        [|if|] (true)
                         {
-                            int i;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? 0 : throw new System.Exception();
-                        }
+                        int i = true ? 0 : throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -525,31 +525,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i;
+                        [|if|] (true)
                         {
-                            int i;
-                            [|if|] (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? throw new System.Exception() : 1;
-                        }
+                        int i = true ? throw new System.Exception() : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -558,31 +558,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = 0;
+                        [|if|] (true)
                         {
-                            int i = 0;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? 0 : 1;
-                        }
+                        int i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -591,31 +591,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = default;
+                        [|if|] (true)
                         {
-                            int i = default;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? 0 : 1;
-                        }
+                        int i = true ? 0 : 1;
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.Latest
             );
         }
@@ -625,31 +625,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = default(int);
+                        [|if|] (true)
                         {
-                            int i = default(int);
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? 0 : 1;
-                        }
+                        int i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -658,36 +658,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = Foo();
+                        [|if|] (true)
                         {
-                            int i = Foo();
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
                         }
-
-                        int Foo() => 0;
+                        else
+                        {
+                            i = 1;
+                        }
                     }
-                    """,
+
+                    int Foo() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = Foo();
-                            i = true ? 0 : 1;
-                        }
-
-                        int Foo() => 0;
+                        int i = Foo();
+                        i = true ? 0 : 1;
                     }
-                    """
+
+                    int Foo() => 0;
+                }
+                """
             );
         }
 
@@ -696,38 +696,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = 0;
+                        Console.WriteLine();
+                        [|if|] (true)
                         {
-                            int i = 0;
-                            Console.WriteLine();
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = 0;
-                            Console.WriteLine();
-                            i = true ? 0 : 1;
-                        }
+                        int i = 0;
+                        Console.WriteLine();
+                        i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -736,36 +736,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = 0;
+                        [|if|] (Bar(i))
                         {
-                            int i = 0;
-                            [|if|] (Bar(i))
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
                         }
-
-                        bool Bar(int i) => true;
+                        else
+                        {
+                            i = 1;
+                        }
                     }
-                    """,
+
+                    bool Bar(int i) => true;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = 0;
-                            i = Bar(i) ? 0 : 1;
-                        }
-
-                        bool Bar(int i) => true;
+                        int i = 0;
+                        i = Bar(i) ? 0 : 1;
                     }
-                    """
+
+                    bool Bar(int i) => true;
+                }
+                """
             );
         }
 
@@ -774,32 +774,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = 0, j = 0;
+                        [|if|] (true)
                         {
-                            int i = 0, j = 0;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = 0, j = 0;
-                            i = true ? 0 : 1;
-                        }
+                        int i = 0, j = 0;
+                        i = true ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -808,31 +808,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = 0;
+                        [|if|] (true)
                         {
-                            int i = 0;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var i = true ? 0 : 1;
-                        }
+                        var i = true ? 0 : 1;
                     }
-                    """,
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -848,31 +848,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = 0;
+                        [|if|] (true)
                         {
-                            int i = 0;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? 0 : 1;
-                        }
+                        int i = true ? 0 : 1;
                     }
-                    """,
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -888,31 +888,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int i = 0;
+                        [|if|] (true)
                         {
-                            int i = 0;
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = true ? 0 : 1;
-                        }
+                        int i = true ? 0 : 1;
                     }
-                    """,
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -928,17 +928,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                                i = 0;
-                            }
+                            i = 0;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -947,19 +947,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                                i = 0;
-                            }
-
-                            i = 1;
+                            i = 0;
                         }
+
+                        i = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -968,19 +968,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                                i = 0;
-                            }
-
-                            throw new System.Exception();
+                            i = 0;
                         }
+
+                        throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -989,33 +989,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        // cast will be necessary, otherwise 'var' would get the type 'string'.
+                        object o;
+                        [|if|] (true)
                         {
-                            // cast will be necessary, otherwise 'var' would get the type 'string'.
-                            object o;
-                            [|if|] (true)
-                            {
-                                o = "a";
-                            }
-                            else
-                            {
-                                o = "b";
-                            }
+                            o = "a";
+                        }
+                        else
+                        {
+                            o = "b";
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            // cast will be necessary, otherwise 'var' would get the type 'string'.
-                            var o = true ? "a" : (object)"b";
-                        }
+                        // cast will be necessary, otherwise 'var' would get the type 'string'.
+                        var o = true ? "a" : (object)"b";
                     }
-                    """,
+                }
+                """,
                 options: PreferImplicitTypeAlways
             );
         }
@@ -1025,31 +1025,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        object o;
+                        [|if|] (true)
                         {
-                            object o;
-                            [|if|] (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                o = "b";
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            o = "b";
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var o = true ? throw new System.Exception() : (object)"b";
-                        }
+                        var o = true ? throw new System.Exception() : (object)"b";
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp8,
                 PreferImplicitTypeAlways
             );
@@ -1060,31 +1060,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        object o;
+                        [|if|] (true)
                         {
-                            object o;
-                            [|if|] (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                o = "b";
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            o = "b";
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var o = true ? throw new System.Exception() : (object)"b";
-                        }
+                        var o = true ? throw new System.Exception() : (object)"b";
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp9,
                 options: PreferImplicitTypeAlways
             );
@@ -1095,31 +1095,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        object o;
+                        [|if|] (true)
                         {
-                            object o;
-                            [|if|] (true)
-                            {
-                                o = "a";
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            o = "a";
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var o = true ? (object)"a" : throw new System.Exception();
-                        }
+                        var o = true ? (object)"a" : throw new System.Exception();
                     }
-                    """,
+                }
+                """,
                 options: PreferImplicitTypeAlways
             );
         }
@@ -1129,31 +1129,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        string s;
+                        [|if|] (true)
                         {
-                            string s;
-                            [|if|] (true)
-                            {
-                                s = "a";
-                            }
-                            else
-                            {
-                                s = null;
-                            }
+                            s = "a";
+                        }
+                        else
+                        {
+                            s = null;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = true ? "a" : null;
-                        }
+                        var s = true ? "a" : null;
                     }
-                    """,
+                }
+                """,
                 options: PreferImplicitTypeAlways
             );
         }
@@ -1163,31 +1163,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        string s;
+                        [|if|] (true)
                         {
-                            string s;
-                            [|if|] (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                s = null;
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            s = null;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = true ? throw new System.Exception() : (string)null;
-                        }
+                        var s = true ? throw new System.Exception() : (string)null;
                     }
-                    """,
+                }
+                """,
                 options: PreferImplicitTypeAlways
             );
         }
@@ -1197,31 +1197,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        string s;
+                        [|if|] (true)
                         {
-                            string s;
-                            [|if|] (true)
-                            {
-                                s = "a";
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            s = "a";
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = true ? "a" : throw new System.Exception();
-                        }
+                        var s = true ? "a" : throw new System.Exception();
                     }
-                    """,
+                }
+                """,
                 options: PreferImplicitTypeAlways
             );
         }
@@ -1231,31 +1231,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        string s;
+                        [|if|] (true)
                         {
-                            string s;
-                            [|if|] (true)
-                            {
-                                s = null;
-                            }
-                            else
-                            {
-                                s = null;
-                            }
+                            s = null;
+                        }
+                        else
+                        {
+                            s = null;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = true ? null : (string)null;
-                        }
+                        var s = true ? null : (string)null;
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp8,
                 PreferImplicitTypeAlways
             );
@@ -1266,31 +1266,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        string s;
+                        [|if|] (true)
                         {
-                            string s;
-                            [|if|] (true)
-                            {
-                                s = null;
-                            }
-                            else
-                            {
-                                s = null;
-                            }
+                            s = null;
+                        }
+                        else
+                        {
+                            s = null;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var s = true ? null : (string)null;
-                        }
+                        var s = true ? null : (string)null;
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp9,
                 options: PreferImplicitTypeAlways
             );
@@ -1301,32 +1301,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        // leading
+                        [|if|] (true)
                         {
-                            // leading
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            } // trailing
+                            i = 0;
                         }
+                        else
+                        {
+                            i = 1;
+                        } // trailing
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            // leading
-                            i = true ? 0 : 1; // trailing
-                        }
+                        // leading
+                        i = true ? 0 : 1; // trailing
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1335,42 +1335,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 1;
+                        }
 
-                            string s;
-                            [|if|] (true)
-                            {
-                                s = "a";
-                            }
-                            else
-                            {
-                                s = "b";
-                            }
+                        string s;
+                        [|if|] (true)
+                        {
+                            s = "a";
+                        }
+                        else
+                        {
+                            s = "b";
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true ? 0 : 1;
+                        i = true ? 0 : 1;
 
-                            string s = true ? "a" : "b";
-                        }
+                        string s = true ? "a" : "b";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1379,38 +1379,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                i = Foo(
-                                    1, 2, 3);
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
+                            i = Foo(
+                                1, 2, 3);
                         }
-
-                        int Foo(int x, int y, int z) => 0;
+                        else
+                        {
+                            i = 1;
+                        }
                     }
-                    """,
+
+                    int Foo(int x, int y, int z) => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true
-                                ? Foo(
-                                    1, 2, 3)
-                                : 1;
-                        }
-
-                        int Foo(int x, int y, int z) => 0;
+                        i = true
+                            ? Foo(
+                                1, 2, 3)
+                            : 1;
                     }
-                    """
+
+                    int Foo(int x, int y, int z) => 0;
+                }
+                """
             );
         }
 
@@ -1419,38 +1419,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                                i = Foo(
-                                    1, 2, 3);
-                            }
+                            i = 0;
                         }
-
-                        int Foo(int x, int y, int z) => 0;
+                        else
+                        {
+                            i = Foo(
+                                1, 2, 3);
+                        }
                     }
-                    """,
+
+                    int Foo(int x, int y, int z) => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true
-                                ? 0
-                                : Foo(
-                                    1, 2, 3);
-                        }
-
-                        int Foo(int x, int y, int z) => 0;
+                        i = true
+                            ? 0
+                            : Foo(
+                                1, 2, 3);
                     }
-                    """
+
+                    int Foo(int x, int y, int z) => 0;
+                }
+                """
             );
         }
 
@@ -1459,40 +1459,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        [|if|] (true)
                         {
-                            [|if|] (true)
-                            {
-                                i = Foo(
-                                    1, 2, 3);
-                            }
-                            else
-                            {
-                                i = Foo(
-                                    4, 5, 6);
-                            }
+                            i = Foo(
+                                1, 2, 3);
                         }
-
-                        int Foo(int x, int y, int z) => 0;
+                        else
+                        {
+                            i = Foo(
+                                4, 5, 6);
+                        }
                     }
-                    """,
+
+                    int Foo(int x, int y, int z) => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            i = true
-                                ? Foo(
-                                    1, 2, 3)
-                                : Foo(
-                                    4, 5, 6);
-                        }
-
-                        int Foo(int x, int y, int z) => 0;
+                        i = true
+                            ? Foo(
+                                1, 2, 3)
+                            : Foo(
+                                4, 5, 6);
                     }
-                    """
+
+                    int Foo(int x, int y, int z) => 0;
+                }
+                """
             );
         }
 
@@ -1501,39 +1501,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else [|if|] (false)
-                            {
-                                i = 1;
-                            }
-                            else
-                            {
-                                i = 0;
-                            }
+                        }
+                        else [|if|] (false)
+                        {
+                            i = 1;
+                        }
+                        else
+                        {
+                            i = 0;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else
-                            {
-                                i = false ? 1 : 0;
-                            }
+                        }
+                        else
+                        {
+                            i = false ? 1 : 0;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1542,39 +1542,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else [|if|] (false)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                i = 0;
-                            }
+                        }
+                        else [|if|] (false)
+                        {
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            i = 0;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else
-                            {
-                                i = false ? throw new System.Exception() : 0;
-                            }
+                        }
+                        else
+                        {
+                            i = false ? throw new System.Exception() : 0;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1583,39 +1583,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else [|if|] (false)
-                            {
-                                i = 1;
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                        }
+                        else [|if|] (false)
+                        {
+                            i = 1;
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else
-                            {
-                                i = false ? 1 : throw new System.Exception();
-                            }
+                        }
+                        else
+                        {
+                            i = false ? 1 : throw new System.Exception();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1662,32 +1662,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int i, ref int j)
                     {
-                        void M(ref int i, ref int j)
+                        ref int x = ref i;
+                        [|if|] (true)
                         {
-                            ref int x = ref i;
-                            [|if|] (true)
-                            {
-                                x = ref i;
-                            }
-                            else
-                            {
-                                x = ref j;
-                            }
+                            x = ref i;
+                        }
+                        else
+                        {
+                            x = ref j;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(ref int i, ref int j)
                     {
-                        void M(ref int i, ref int j)
-                        {
-                            ref int x = ref i;
-                            x = ref true ? ref i : ref j;
-                        }
+                        ref int x = ref i;
+                        x = ref true ? ref i : ref j;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1696,22 +1696,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int i, ref int j)
                     {
-                        void M(ref int i, ref int j)
+                        ref int x = ref i;
+                        if (true)
                         {
-                            ref int x = ref i;
-                            if (true)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                x = ref j;
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            x = ref j;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1720,22 +1720,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int i, ref int j)
                     {
-                        void M(ref int i, ref int j)
+                        ref int x = ref i;
+                        if (true)
                         {
-                            ref int x = ref i;
-                            if (true)
-                            {
-                                x = ref i;
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            x = ref i;
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1744,30 +1744,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
+                        [|if|] (j == 0)
                         {
-                            [|if|] (j == 0)
-                            {
-                                i = true;
-                            }
-                            else
-                            {
-                                i = false;
-                            }
+                            i = true;
+                        }
+                        else
+                        {
+                            i = false;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
-                        {
-                            i = j == 0;
-                        }
+                        i = j == 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1776,30 +1776,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
+                        [|if|] (j == 0)
                         {
-                            [|if|] (j == 0)
-                            {
-                                i = true;
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            i = true;
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
-                        {
-                            i = j == 0 ? true : throw new System.Exception();
-                        }
+                        i = j == 0 ? true : throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1808,30 +1808,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
+                        [|if|] (j == 0)
                         {
-                            [|if|] (j == 0)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                i = false;
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            i = false;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
-                        {
-                            i = j == 0 ? throw new System.Exception() : false;
-                        }
+                        i = j == 0 ? throw new System.Exception() : false;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1840,30 +1840,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
+                        [|if|] (j == 0)
                         {
-                            [|if|] (j == 0)
-                            {
-                                i = false;
-                            }
-                            else
-                            {
-                                i = true;
-                            }
+                            i = false;
+                        }
+                        else
+                        {
+                            i = true;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
-                        {
-                            i = j != 0;
-                        }
+                        i = j != 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1872,30 +1872,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
+                        [|if|] (j == 0)
                         {
-                            [|if|] (j == 0)
-                            {
-                                throw new System.Exception();
-                            }
-                            else
-                            {
-                                i = true;
-                            }
+                            throw new System.Exception();
+                        }
+                        else
+                        {
+                            i = true;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
-                        {
-                            i = j == 0 ? throw new System.Exception() : true;
-                        }
+                        i = j == 0 ? throw new System.Exception() : true;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1904,30 +1904,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
+                        [|if|] (j == 0)
                         {
-                            [|if|] (j == 0)
-                            {
-                                i = false;
-                            }
-                            else
-                            {
-                                throw new System.Exception();
-                            }
+                            i = false;
+                        }
+                        else
+                        {
+                            throw new System.Exception();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool i, int j)
                     {
-                        void M(bool i, int j)
-                        {
-                            i = j == 0 ? false : throw new System.Exception();
-                        }
+                        i = j == 0 ? false : throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1936,36 +1936,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            Guid? id;
+                        Guid? id;
 
-                            [|if|] (true)
-                            {
-                                id = Guid.NewGuid();
-                            }
-                            else
-                            {
-                                id = Guid.Empty;
-                            }
+                        [|if|] (true)
+                        {
+                            id = Guid.NewGuid();
+                        }
+                        else
+                        {
+                            id = Guid.Empty;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var id = true ? Guid.NewGuid() : (Guid?)Guid.Empty;
-                        }
+                        var id = true ? Guid.NewGuid() : (Guid?)Guid.Empty;
                     }
-                    """,
+                }
+                """,
                 options: PreferImplicitTypeAlways
             );
         }
@@ -1975,36 +1975,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(bool containsHighBits)
                     {
-                        void M(bool containsHighBits)
-                        {
-                            Action<char> write;
+                        Action<char> write;
 
-                            [|if|] (containsHighBits)
-                            {
-                                write = (char character) => Console.WriteLine(1);
-                            }
-                            else
-                            {
-                                write = (char character) => Console.WriteLine(2);
-                            }
+                        [|if|] (containsHighBits)
+                        {
+                            write = (char character) => Console.WriteLine(1);
+                        }
+                        else
+                        {
+                            write = (char character) => Console.WriteLine(2);
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(bool containsHighBits)
                     {
-                        void M(bool containsHighBits)
-                        {
-                            Action<char> write = containsHighBits ? ((char character) => Console.WriteLine(1)) : ((char character) => Console.WriteLine(2));
-                        }
+                        Action<char> write = containsHighBits ? ((char character) => Console.WriteLine(1)) : ((char character) => Console.WriteLine(2));
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp9
             );
         }
@@ -2014,45 +2014,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(string node1, string node2)
                     {
-                        void M(string node1, string node2)
+                        bool b;
+                        [|if|] (AreSimilarCore(node1, node2))
                         {
-                            bool b;
-                            [|if|] (AreSimilarCore(node1, node2))
-                            {
-                                b = true;
-                            }
-                            else
-                            {
-                                b = false;
-                            }
+                            b = true;
                         }
-
-                        private bool AreSimilarCore(string node1, string node2)
+                        else
                         {
-                            throw new NotImplementedException();
+                            b = false;
                         }
                     }
-                    """,
+
+                    private bool AreSimilarCore(string node1, string node2)
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(string node1, string node2)
                     {
-                        void M(string node1, string node2)
-                        {
-                            bool b = AreSimilarCore(node1, node2);
-                        }
-
-                        private bool AreSimilarCore(string node1, string node2)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        bool b = AreSimilarCore(node1, node2);
                     }
-                    """,
+
+                    private bool AreSimilarCore(string node1, string node2)
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+                """,
                 LanguageVersion.CSharp9,
                 equivalenceKey: nameof(AnalyzersResources.Simplify_check)
             );
@@ -2110,24 +2110,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class MyClass
+                class MyClass
+                {
+                    void M(bool flag)
                     {
-                        void M(bool flag)
+                        if (flag)
                         {
-                            if (flag)
-                            {
-                                _ = A();
-                            }
-                            else
-                            {
-                                _ = B();
-                            }
+                            _ = A();
                         }
-
-                        int A() => default;
-                        string B() => default;
+                        else
+                        {
+                            _ = B();
+                        }
                     }
-                    """
+
+                    int A() => default;
+                    string B() => default;
+                }
+                """
             );
         }
 
@@ -2136,30 +2136,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    class MyClass
+                class MyClass
+                {
+                    void M(bool flag)
                     {
-                        void M(bool flag)
+                        if (flag)
                         {
-                            if (flag)
-                            {
-                                _ = GetC();
-                            }
-                            else
-                            {
-                                _ = GetString();
-                            }
+                            _ = GetC();
                         }
-
-                        C GetC() => new C();
-                        string GetString() => "";
+                        else
+                        {
+                            _ = GetString();
+                        }
                     }
 
-                    class C
-                    {
-                        public static implicit operator C(string c) => new C();
-                        public static implicit operator string(C c) => "";
-                    }
-                    """
+                    C GetC() => new C();
+                    string GetString() => "";
+                }
+
+                class C
+                {
+                    public static implicit operator C(string c) => new C();
+                    public static implicit operator string(C c) => "";
+                }
+                """
             );
         }
 
@@ -2168,28 +2168,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    public class Class1
-                    {
-                        public int i;
-                    }
+                public class Class1
+                {
+                    public int i;
+                }
 
-                    public class Program
+                public class Program
+                {
+                    public static void Test(object obj)
                     {
-                        public static void Test(object obj)
+                        if (obj is Class1 c)
                         {
-                            if (obj is Class1 c)
-                            {
-                                c.i = 1;
-                            }
-                            else
-                            {
-                                throw new Exception();
-                            }
+                            c.i = 1;
+                        }
+                        else
+                        {
+                            throw new Exception();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2198,30 +2198,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    public class Class1
-                    {
-                        public int i;
-                    }
+                public class Class1
+                {
+                    public int i;
+                }
 
-                    public class Program
+                public class Program
+                {
+                    public static void Test(object obj)
                     {
-                        public static void Test(object obj)
+                        if (TryGetValue(out var c))
                         {
-                            if (TryGetValue(out var c))
-                            {
-                                c.i = 1;
-                            }
-                            else    
-                            {
-                                throw new Exception();
-                            }
+                            c.i = 1;
                         }
-
-                        private static bool TryGetValue(out Class1 c) => throw new NotImplementedException();
+                        else    
+                        {
+                            throw new Exception();
+                        }
                     }
-                    """
+
+                    private static bool TryGetValue(out Class1 c) => throw new NotImplementedException();
+                }
+                """
             );
         }
     }

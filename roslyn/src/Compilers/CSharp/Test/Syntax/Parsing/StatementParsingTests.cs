@@ -4422,17 +4422,17 @@ System.Console.WriteLine(true)";
         {
             UsingTree(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            case int when SomeTest():
-                                Console.WriteLine("answer");
-                                break;
-                            }
+                        case int when SomeTest():
+                            Console.WriteLine("answer");
+                            break;
                         }
                     }
-                    """,
+                }
+                """,
                 // (4,6): error CS1003: Syntax error, 'switch' expected
                 //     {
                 Diagnostic(ErrorCode.ERR_SyntaxError, "")
@@ -4559,21 +4559,21 @@ System.Console.WriteLine(true)";
         {
             UsingTree(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (expr)
                         {
-                            switch (expr)
-                            {
-                                int i;
+                            int i;
 
-                                case int when SomeTest():
-                                    Console.WriteLine("answer");
-                                    break;
-                            }
+                            case int when SomeTest():
+                                Console.WriteLine("answer");
+                                break;
                         }
                     }
-                    """,
+                }
+                """,
                 // (6,10): error CS1513: } expected
                 //         {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(6, 10),
@@ -4730,21 +4730,21 @@ System.Console.WriteLine(true)";
         {
             UsingTree(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        switch (new object())
                         {
-                            switch (new object())
-                            {
-                                bool SomeTest() => o is 42;
+                            bool SomeTest() => o is 42;
 
-                                case int when SomeTest():
-                                    Console.WriteLine("answer");
-                                    break;
-                            }
+                            case int when SomeTest():
+                                Console.WriteLine("answer");
+                                break;
                         }
                     }
-                    """,
+                }
+                """,
                 // (6,10): error CS1513: } expected
                 //         {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(6, 10),
@@ -4928,13 +4928,13 @@ System.Console.WriteLine(true)";
         {
             UsingStatement(
                 """
-                    switch (obj)
-                    {
-                        case Type { Prop: Type { }:
-                        case Type { Prop: Type { }:
-                           break;
-                    }
-                    """,
+                switch (obj)
+                {
+                    case Type { Prop: Type { }:
+                    case Type { Prop: Type { }:
+                       break;
+                }
+                """,
                 // (3,31): error CS1513: } expected
                 //     case Type { Prop: Type { }:
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(3, 31),
@@ -5050,13 +5050,13 @@ System.Console.WriteLine(true)";
         {
             UsingStatement(
                 """
-                    switch (obj)
-                    {
-                        case Type { Prop: Type {:
-                        case Type { Prop: Type {:
-                           break;
-                    }
-                    """,
+                switch (obj)
+                {
+                    case Type { Prop: Type {:
+                    case Type { Prop: Type {:
+                       break;
+                }
+                """,
                 // (3,29): error CS1513: } expected
                 //     case Type { Prop: Type {:
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(3, 29),
@@ -5178,13 +5178,13 @@ System.Console.WriteLine(true)";
         {
             UsingStatement(
                 """
-                    switch (obj)
-                    {
-                        case { Prop: { Prop: {:
-                        case { Prop: { Prop: {:
-                           break;
-                    }
-                    """,
+                switch (obj)
+                {
+                    case { Prop: { Prop: {:
+                    case { Prop: { Prop: {:
+                       break;
+                }
+                """,
                 // (3,27): error CS1513: } expected
                 //     case { Prop: { Prop: {:
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(3, 27),
@@ -5334,13 +5334,13 @@ System.Console.WriteLine(true)";
         {
             UsingStatement(
                 """
-                    switch (obj)
-                    {
-                        case [:
-                        case [:
-                           break;
-                    }
-                    """,
+                switch (obj)
+                {
+                    case [:
+                    case [:
+                       break;
+                }
+                """,
                 // (3,11): error CS1003: Syntax error, ']' expected
                 //     case [:
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(3, 11),
@@ -5396,13 +5396,13 @@ System.Console.WriteLine(true)";
         {
             UsingStatement(
                 """
-                    switch (obj)
-                    {
-                        case [[:
-                        case [[:
-                           break;
-                    }
-                    """,
+                switch (obj)
+                {
+                    case [[:
+                    case [[:
+                       break;
+                }
+                """,
                 // (3,12): error CS1003: Syntax error, ']' expected
                 //     case [[:
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(3, 12),
@@ -5474,13 +5474,13 @@ System.Console.WriteLine(true)";
         {
             UsingStatement(
                 """
-                    switch (obj)
-                    {
-                        case [[[:
-                        case [[[:
-                           break;
-                    }
-                    """,
+                switch (obj)
+                {
+                    case [[[:
+                    case [[[:
+                       break;
+                }
+                """,
                 // (3,13): error CS1003: Syntax error, ']' expected
                 //     case [[[:
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(3, 13),
@@ -5569,14 +5569,14 @@ System.Console.WriteLine(true)";
             // No good error recovery strategy yet
             UsingStatement(
                 """
-                    switch (obj)
-                    {
-                        case { =>
-                            break;
-                        case { =>
-                            break;
-                    }
-                    """,
+                switch (obj)
+                {
+                    case { =>
+                        break;
+                    case { =>
+                        break;
+                }
+                """,
                 // (3,12): error CS1001: Identifier expected
                 //     case { =>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(3, 12),

@@ -26,23 +26,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a + 10;
-                        }
+                        a [|=|] a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a += 10;
-                        }
+                        a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -51,23 +51,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a - 10;
-                        }
+                        a [|=|] a - 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a -= 10;
-                        }
+                        a -= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -76,23 +76,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a * 10;
-                        }
+                        a [|=|] a * 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a *= 10;
-                        }
+                        a *= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -101,23 +101,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a / 10;
-                        }
+                        a [|=|] a / 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a /= 10;
-                        }
+                        a /= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -126,23 +126,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a % 10;
-                        }
+                        a [|=|] a % 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a %= 10;
-                        }
+                        a %= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -151,23 +151,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a & 10;
-                        }
+                        a [|=|] a & 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a &= 10;
-                        }
+                        a &= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -176,23 +176,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a ^ 10;
-                        }
+                        a [|=|] a ^ 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a ^= 10;
-                        }
+                        a ^= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -201,23 +201,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a | 10;
-                        }
+                        a [|=|] a | 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a |= 10;
-                        }
+                        a |= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -226,23 +226,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a << 10;
-                        }
+                        a [|=|] a << 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a <<= 10;
-                        }
+                        a <<= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -251,23 +251,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a >> 10;
-                        }
+                        a [|=|] a >> 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a >>= 10;
-                        }
+                        a >>= 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -346,27 +346,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            a [|=|] a + 10;
-                        }
+                    void M()
+                    {
+                        a [|=|] a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            a += 10;
-                        }
+                    void M()
+                    {
+                        a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -375,27 +375,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            this.a [|=|] this.a + 10;
-                        }
+                    void M()
+                    {
+                        this.a [|=|] this.a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            this.a += 10;
-                        }
+                    void M()
+                    {
+                        this.a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -404,27 +404,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            this  .  /*trivia*/ a [|=|] this /*comment*/ .a + 10;
-                        }
+                    void M()
+                    {
+                        this  .  /*trivia*/ a [|=|] this /*comment*/ .a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            this  .  /*trivia*/ a += 10;
-                        }
+                    void M()
+                    {
+                        this  .  /*trivia*/ a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -433,27 +433,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        static int a;
+                public class C
+                {
+                    static int a;
 
-                        void M()
-                        {
-                            C.a [|=|] C.a + 10;
-                        }
+                    void M()
+                    {
+                        C.a [|=|] C.a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        static int a;
+                public class C
+                {
+                    static int a;
 
-                        void M()
-                        {
-                            C.a += 10;
-                        }
+                    void M()
+                    {
+                        C.a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -462,33 +462,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    namespace NS
+                namespace NS
+                {
+                    public class C
                     {
-                        public class C
-                        {
-                            static int a;
+                        static int a;
 
-                            void M()
-                            {
-                                NS.C.a [|=|] NS.C.a + 10;
-                            }
+                        void M()
+                        {
+                            NS.C.a [|=|] NS.C.a + 10;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace NS
+                namespace NS
+                {
+                    public class C
                     {
-                        public class C
-                        {
-                            static int a;
+                        static int a;
 
-                            void M()
-                            {
-                                NS.C.a += 10;
-                            }
+                        void M()
+                        {
+                            NS.C.a += 10;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -497,27 +497,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            (a) [|=|] (a) + 10;
-                        }
+                    void M()
+                    {
+                        (a) [|=|] (a) + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        int a;
+                public class C
+                {
+                    int a;
 
-                        void M()
-                        {
-                            (a) += 10;
-                        }
+                    void M()
+                    {
+                        (a) += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -526,33 +526,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        public int a;
-                    }
+                public class C
+                {
+                    public int a;
+                }
 
-                    public class D : C
+                public class D : C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            base.a [|=|] base.a + 10;
-                        }
+                        base.a [|=|] base.a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        public int a;
-                    }
+                public class C
+                {
+                    public int a;
+                }
 
-                    public class D : C
+                public class D : C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            base.a += 10;
-                        }
+                        base.a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -561,37 +561,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        public int a;
-                    }
+                public class C
+                {
+                    public int a;
+                }
 
-                    public class D
-                    {
-                        C c;
+                public class D
+                {
+                    C c;
 
-                        void M()
-                        {
-                            this.c.a [|=|] this.c.a + 10;
-                        }
+                    void M()
+                    {
+                        this.c.a [|=|] this.c.a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        public int a;
-                    }
+                public class C
+                {
+                    public int a;
+                }
 
-                    public class D
-                    {
-                        C c;
+                public class D
+                {
+                    C c;
 
-                        void M()
-                        {
-                            this.c.a += 10;
-                        }
+                    void M()
+                    {
+                        this.c.a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -600,27 +600,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        int a { get; set; }
+                public class C
+                {
+                    int a { get; set; }
 
-                        void M()
-                        {
-                            a [|=|] a + 10;
-                        }
+                    void M()
+                    {
+                        a [|=|] a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        int a { get; set; }
+                public class C
+                {
+                    int a { get; set; }
 
-                        void M()
-                        {
-                            a += 10;
-                        }
+                    void M()
+                    {
+                        a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -629,27 +629,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        int a { get; set; }
+                public class C
+                {
+                    int a { get; set; }
 
-                        void M()
-                        {
-                            this.a [|=|] this.a + 10;
-                        }
+                    void M()
+                    {
+                        this.a [|=|] this.a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        int a { get; set; }
+                public class C
+                {
+                    int a { get; set; }
 
-                        void M()
-                        {
-                            this.a += 10;
-                        }
+                    void M()
+                    {
+                        this.a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -658,27 +658,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
-                    {
-                        int a { get; set; }
+                public class C
+                {
+                    int a { get; set; }
 
-                        void M()
-                        {
-                            (this.a) [|=|] (this.a) + 10;
-                        }
+                    void M()
+                    {
+                        (this.a) [|=|] (this.a) + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
-                    {
-                        int a { get; set; }
+                public class C
+                {
+                    int a { get; set; }
 
-                        void M()
-                        {
-                            (this.a) += 10;
-                        }
+                    void M()
+                    {
+                        (this.a) += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -827,24 +827,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a +
-                                10;
-                        }
+                        a [|=|] a +
+                            10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a += 10;
-                        }
+                        a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -853,25 +853,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a +
+                        a [|=|] a +
 
-                                10;
-                        }
+                            10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a += 10;
-                        }
+                        a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -880,25 +880,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            // before
-                            a [|=|] a + 10; // after
-                        }
+                        // before
+                        a [|=|] a + 10; // after
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            // before
-                            a += 10; // after
-                        }
+                        // before
+                        a += 10; // after
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -907,23 +907,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a /*mid1*/ [|=|] /*mid2*/ a + 10;
-                        }
+                        a /*mid1*/ [|=|] /*mid2*/ a + 10;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a /*mid1*/ += /*mid2*/ 10;
-                        }
+                        a /*mid1*/ += /*mid2*/ 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -932,25 +932,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a, int b)
                     {
-                        void M(int a, int b)
-                        {
-                            a [|=|] a + 10;
-                            b [|=|] b - a;
-                        }
+                        a [|=|] a + 10;
+                        b [|=|] b - a;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a, int b)
                     {
-                        void M(int a, int b)
-                        {
-                            a += 10;
-                            b -= a;
-                        }
+                        a += 10;
+                        b -= a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -959,23 +959,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a, int b)
                     {
-                        void M(int a, int b)
-                        {
-                            b = (a [|=|] a + 10);
-                        }
+                        b = (a [|=|] a + 10);
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a, int b)
                     {
-                        void M(int a, int b)
-                        {
-                            b = (a += 10);
-                        }
+                        b = (a += 10);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1051,23 +1051,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] (a + 10);
-                        }
+                        a [|=|] (a + 10);
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a += 10;
-                        }
+                        a += 10;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1076,23 +1076,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a + 1;
-                        }
+                        a [|=|] a + 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a++;
-                        }
+                        a++;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1101,23 +1101,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a - 1;
-                        }
+                        a [|=|] a - 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a--;
-                        }
+                        a--;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1126,23 +1126,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a [|=|] a + (-1);
-                        }
+                        a [|=|] a + (-1);
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            a--;
-                        }
+                        a--;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1151,23 +1151,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(double a)
                     {
-                        void M(double a)
-                        {
-                            a [|=|] a + 1.0;
-                        }
+                        a [|=|] a + 1.0;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(double a)
                     {
-                        void M(double a)
-                        {
-                            a++;
-                        }
+                        a++;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1176,23 +1176,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(string a)
                     {
-                        void M(string a)
-                        {
-                            a [|=|] a + "1";
-                        }
+                        a [|=|] a + "1";
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(string a)
                     {
-                        void M(string a)
-                        {
-                            a += "1";
-                        }
+                        a += "1";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1201,23 +1201,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(char a)
                     {
-                        void M(char a)
-                        {
-                            a [|=|] {|CS0266:a + 1|};
-                        }
+                        a [|=|] {|CS0266:a + 1|};
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(char a)
                     {
-                        void M(char a)
-                        {
-                            a++;
-                        }
+                        a++;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1226,25 +1226,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public enum E {}
-                    public class C
+                public enum E {}
+                public class C
+                {
+                    void M(E a)
                     {
-                        void M(E a)
-                        {
-                            a [|=|] a + 1;
-                        }
+                        a [|=|] a + 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    public enum E {}
-                    public class C
+                public enum E {}
+                public class C
+                {
+                    void M(E a)
                     {
-                        void M(E a)
-                        {
-                            a++;
-                        }
+                        a++;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1253,23 +1253,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(decimal a)
                     {
-                        void M(decimal a)
-                        {
-                            a [|=|] a + 1.0m;
-                        }
+                        a [|=|] a + 1.0m;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(decimal a)
                     {
-                        void M(decimal a)
-                        {
-                            a++;
-                        }
+                        a++;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1342,27 +1342,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
+                        for (int i = 0; i < 10; i [|=|] i + 1)
                         {
-                            for (int i = 0; i < 10; i [|=|] i + 1)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1371,23 +1371,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            M(i [|=|] i + 1);
-                        }
+                        M(i [|=|] i + 1);
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            M(++i);
-                        }
+                        M(++i);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1491,49 +1491,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator +(C left, int right)
-                        {
-                            return new C(left.data + right);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c [|=|] c + 1;
-                        }
+                        this.data = data;
                     }
-                    """,
+
+                    public static C operator +(C left, int right)
+                    {
+                        return new C(left.data + right);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c [|=|] c + 1;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator +(C left, int right)
-                        {
-                            return new C(left.data + right);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c += 1;
-                        }
+                        this.data = data;
                     }
-                    """
+
+                    public static C operator +(C left, int right)
+                    {
+                        return new C(left.data + right);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c += 1;
+                    }
+                }
+                """
             );
         }
 
@@ -1542,59 +1542,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator +(C left, int right)
-                        {
-                            return new C(left.data + right);
-                        }
-
-                        public static C operator ++(C operand)
-                        {
-                            return new C(operand.data + 1);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c [|=|] c + 1;
-                        }
+                        this.data = data;
                     }
-                    """,
+
+                    public static C operator +(C left, int right)
+                    {
+                        return new C(left.data + right);
+                    }
+
+                    public static C operator ++(C operand)
+                    {
+                        return new C(operand.data + 1);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c [|=|] c + 1;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator +(C left, int right)
-                        {
-                            return new C(left.data + right);
-                        }
-
-                        public static C operator ++(C operand)
-                        {
-                            return new C(operand.data + 1);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c++;
-                        }
+                        this.data = data;
                     }
-                    """
+
+                    public static C operator +(C left, int right)
+                    {
+                        return new C(left.data + right);
+                    }
+
+                    public static C operator ++(C operand)
+                    {
+                        return new C(operand.data + 1);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c++;
+                    }
+                }
+                """
             );
         }
 
@@ -1603,49 +1603,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator -(C left, int right)
-                        {
-                            return new C(left.data - right);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c [|=|] c - 1;
-                        }
+                        this.data = data;
                     }
-                    """,
+
+                    public static C operator -(C left, int right)
+                    {
+                        return new C(left.data - right);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c [|=|] c - 1;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator -(C left, int right)
-                        {
-                            return new C(left.data - right);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c -= 1;
-                        }
+                        this.data = data;
                     }
-                    """
+
+                    public static C operator -(C left, int right)
+                    {
+                        return new C(left.data - right);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c -= 1;
+                    }
+                }
+                """
             );
         }
 
@@ -1654,59 +1654,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator -(C left, int right)
-                        {
-                            return new C(left.data - right);
-                        }
-
-                        public static C operator --(C operand)
-                        {
-                            return new C(operand.data - 1);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c [|=|] c - 1;
-                        }
+                        this.data = data;
                     }
-                    """,
+
+                    public static C operator -(C left, int right)
+                    {
+                        return new C(left.data - right);
+                    }
+
+                    public static C operator --(C operand)
+                    {
+                        return new C(operand.data - 1);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c [|=|] c - 1;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int data;
+
+                    public C(int data)
                     {
-                        int data;
-
-                        public C(int data)
-                        {
-                            this.data = data;
-                        }
-
-                        public static C operator -(C left, int right)
-                        {
-                            return new C(left.data - right);
-                        }
-
-                        public static C operator --(C operand)
-                        {
-                            return new C(operand.data - 1);
-                        }
-
-                        void M()
-                        {
-                            var c = new C(0);
-                            c--;
-                        }
+                        this.data = data;
                     }
-                    """
+
+                    public static C operator -(C left, int right)
+                    {
+                        return new C(left.data - right);
+                    }
+
+                    public static C operator --(C operand)
+                    {
+                        return new C(operand.data - 1);
+                    }
+
+                    void M()
+                    {
+                        var c = new C(0);
+                        c--;
+                    }
+                }
+                """
             );
         }
     }

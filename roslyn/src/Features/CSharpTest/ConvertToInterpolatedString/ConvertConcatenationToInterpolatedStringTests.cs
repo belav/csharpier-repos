@@ -87,23 +87,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = [||]"string" + 1;
-                    }
+                    var v = [||]"string" + 1;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"string{1}";
-                    }
+                    var v = $"string{1}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -112,23 +112,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = "string"[||] + 1;
-                    }
+                    var v = "string"[||] + 1;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"string{1}";
-                    }
+                    var v = $"string{1}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -137,23 +137,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 1 + [||]"string";
-                    }
+                    var v = 1 + [||]"string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{1}string";
-                    }
+                    var v = $"{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -162,23 +162,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 1 + 2 + [||]"string";
-                    }
+                    var v = 1 + 2 + [||]"string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{1 + 2}string";
-                    }
+                    var v = $"{1 + 2}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -187,27 +187,27 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v =
-                            // Leading trivia
-                            1 + 2 + [||]"string" /* trailing trivia */;
-                    }
+                    var v =
+                        // Leading trivia
+                        1 + 2 + [||]"string" /* trailing trivia */;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v =
-                            // Leading trivia
-                            $"{1 + 2}string" /* trailing trivia */;
-                    }
+                    var v =
+                        // Leading trivia
+                        $"{1 + 2}string" /* trailing trivia */;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -216,23 +216,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 1 + 2 + [||]"string" + 3 + 4;
-                    }
+                    var v = 1 + 2 + [||]"string" + 3 + 4;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{1 + 2}string{3}{4}";
-                    }
+                    var v = $"{1 + 2}string{3}{4}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -241,23 +241,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = "\r" + 2 + [||]"string" + 3 + "\n";
-                    }
+                    var v = "\r" + 2 + [||]"string" + 3 + "\n";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"\r{2}string{3}\n";
-                    }
+                    var v = $"\r{2}string{3}\n";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -266,23 +266,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = "\\r" + 2 + [||]"string" + 3 + "\\n";
-                    }
+                    var v = "\\r" + 2 + [||]"string" + 3 + "\\n";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"\\r{2}string{3}\\n";
-                    }
+                    var v = $"\\r{2}string{3}\\n";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -291,23 +291,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 1 + [||]@"string";
-                    }
+                    var v = 1 + [||]@"string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $@"{1}string";
-                    }
+                    var v = $@"{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -364,37 +364,37 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class D
-                {
-                    public static bool operator +(D d, string s) => false;
-                    public static bool operator +(string s, D d) => false;
-                }
+            public class D
+            {
+                public static bool operator +(D d, string s) => false;
+                public static bool operator +(string s, D d) => false;
+            }
 
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        D d = null;
-                        var v = 1 + [||]"string" + d;
-                    }
+                    D d = null;
+                    var v = 1 + [||]"string" + d;
                 }
-                """,
+            }
+            """,
             """
-                public class D
-                {
-                    public static bool operator +(D d, string s) => false;
-                    public static bool operator +(string s, D d) => false;
-                }
+            public class D
+            {
+                public static bool operator +(D d, string s) => false;
+                public static bool operator +(string s, D d) => false;
+            }
 
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        D d = null;
-                        var v = $"{1}string" + d;
-                    }
+                    D d = null;
+                    var v = $"{1}string" + d;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -426,23 +426,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = "A" + 1 + [||]"B" + "C";
-                    }
+                    var v = "A" + 1 + [||]"B" + "C";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"A{1}BC";
-                    }
+                    var v = $"A{1}BC";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -451,23 +451,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = "A" + [||]"B" + "C" + 1;
-                    }
+                    var v = "A" + [||]"B" + "C" + 1;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"ABC{1}";
-                    }
+                    var v = $"ABC{1}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -476,23 +476,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = "A" + 1 + [||]"B" + "C" + 2 +"D"+ "E"+ "F" + 3;
-                    }
+                    var v = "A" + 1 + [||]"B" + "C" + 2 +"D"+ "E"+ "F" + 3;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"A{1}BC{2}DEF{3}";
-                    }
+                    var v = $"A{1}BC{2}DEF{3}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -552,23 +552,23 @@ public class ConvertConcatenationToInterpolatedStringTests
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = 1 + [||]"{string}";
-                        }
+                        var v = 1 + [||]"{string}";
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = $"{1}{{string}}";
-                        }
+                        var v = $"{1}{{string}}";
                     }
-                    """
+                }
+                """
             );
         }
     }
@@ -579,23 +579,23 @@ public class ConvertConcatenationToInterpolatedStringTests
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = 1 + [||]"{string}" + "{string}";
-                        }
+                        var v = 1 + [||]"{string}" + "{string}";
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = $"{1}{{string}}{{string}}";
-                        }
+                        var v = $"{1}{{string}}{{string}}";
                     }
-                    """
+                }
+                """
             );
         }
     }
@@ -606,23 +606,23 @@ public class ConvertConcatenationToInterpolatedStringTests
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = 1 + [||]"{{string}}";
-                        }
+                        var v = 1 + [||]"{{string}}";
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = $"{1}{{{{string}}}}";
-                        }
+                        var v = $"{1}{{{{string}}}}";
                     }
-                    """
+                }
+                """
             );
         }
     }
@@ -633,23 +633,23 @@ public class ConvertConcatenationToInterpolatedStringTests
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = "{" + 1 + [||]"}";
-                        }
+                        var v = "{" + 1 + [||]"}";
                     }
-                    """,
+                }
+                """,
                 """
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = $"{{{1}}}";
-                        }
+                        var v = $"{{{1}}}";
                     }
-                    """
+                }
+                """
             );
         }
     }
@@ -659,23 +659,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 1 + [||]@"{string}";
-                    }
+                    var v = 1 + [||]@"{string}";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $@"{1}{{string}}";
-                    }
+                    var v = $@"{1}{{string}}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -684,23 +684,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = @"{" + 1 + [||]@"}";
-                    }
+                    var v = @"{" + 1 + [||]@"}";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $@"{{{1}}}";
-                    }
+                    var v = $@"{{{1}}}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -710,23 +710,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = [|"string" + 1|];
-                    }
+                    var v = [|"string" + 1|];
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"string{1}";
-                    }
+                    var v = $"string{1}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -788,23 +788,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        [|var v = "string" + 1|];
-                    }
+                    [|var v = "string" + 1|];
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"string{1}";
-                    }
+                    var v = $"string{1}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -813,23 +813,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = [||]3 + "string" + 1 + "string";
-                    }
+                    var v = [||]3 + "string" + 1 + "string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{3}string{1}string";
-                    }
+                    var v = $"{3}string{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -838,23 +838,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 3[||] + "string" + 1 + "string";
-                    }
+                    var v = 3[||] + "string" + 1 + "string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{3}string{1}string";
-                    }
+                    var v = $"{3}string{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -863,23 +863,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 3 [||]+ "string" + 1 + "string";
-                    }
+                    var v = 3 [||]+ "string" + 1 + "string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{3}string{1}string";
-                    }
+                    var v = $"{3}string{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -888,23 +888,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 3 +[||] "string" + 1 + "string";
-                    }
+                    var v = 3 +[||] "string" + 1 + "string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{3}string{1}string";
-                    }
+                    var v = $"{3}string{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -913,23 +913,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 3 + "string" + 1 [||]+ "string";
-                    }
+                    var v = 3 + "string" + 1 [||]+ "string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{3}string{1}string";
-                    }
+                    var v = $"{3}string{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -938,23 +938,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 3 + "string" + 1 +[||] "string";
-                    }
+                    var v = 3 + "string" + 1 +[||] "string";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{3}string{1}string";
-                    }
+                    var v = $"{3}string{1}string";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -963,23 +963,23 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = 1 [||]+ ("string");
-                    }
+                    var v = 1 [||]+ ("string");
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $"{1}{"string"}";
-                    }
+                    var v = $"{1}{"string"}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -988,27 +988,27 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var hello = "hello";
-                        var world = "world";
-                        var str = hello [||]+ ' ' + world;
-                    }
+                    var hello = "hello";
+                    var world = "world";
+                    var str = hello [||]+ ' ' + world;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var hello = "hello";
-                        var world = "world";
-                        var str = $"{hello} {world}";
-                    }
+                    var hello = "hello";
+                    var world = "world";
+                    var str = $"{hello} {world}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1017,25 +1017,25 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var world = "world";
-                        var str = "hello" [||]+ ' ' + world;
-                    }
+                    var world = "world";
+                    var str = "hello" [||]+ ' ' + world;
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var world = "world";
-                        var str = $"hello {world}";
-                    }
+                    var world = "world";
+                    var str = $"hello {world}";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1044,25 +1044,25 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var hello = "hello";
-                        var str = hello [||]+ ' ' + "world";
-                    }
+                    var hello = "hello";
+                    var str = hello [||]+ ' ' + "world";
                 }
-                """,
+            }
+            """,
             """
-                public class C
+            public class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var hello = "hello";
-                        var str = $"{hello} world";
-                    }
+                    var hello = "hello";
+                    var str = $"{hello} world";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1145,27 +1145,27 @@ public class ConvertConcatenationToInterpolatedStringTests
     {
         await VerifyCS.VerifyRefactoringAsync(
             """
-                using System;
-                class C
-                {
-                    void M() {
-                        const string Hello = "Hello";
-                        const string World = "World";
-                        Console.WriteLine(Hello + " " + [||]World);
-                    }
+            using System;
+            class C
+            {
+                void M() {
+                    const string Hello = "Hello";
+                    const string World = "World";
+                    Console.WriteLine(Hello + " " + [||]World);
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class C
-                {
-                    void M() {
-                        const string Hello = "Hello";
-                        const string World = "World";
-                        Console.WriteLine($"{Hello} {World}");
-                    }
+            using System;
+            class C
+            {
+                void M() {
+                    const string Hello = "Hello";
+                    const string World = "World";
+                    Console.WriteLine($"{Hello} {World}");
                 }
-                """
+            }
+            """
         );
     }
 

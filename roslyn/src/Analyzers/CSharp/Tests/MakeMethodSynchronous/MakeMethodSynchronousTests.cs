@@ -24,25 +24,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    async Task {|CS1998:Goo|}()
                     {
-                        async Task {|CS1998:Goo|}()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -51,27 +51,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    async Task<int> {|CS1998:Goo|}()
                     {
-                        async Task<int> {|CS1998:Goo|}()
-                        {
-                            return 1;
-                        }
+                        return 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    int {|#0:Goo|}()
                     {
-                        int {|#0:Goo|}()
-                        {
-                            return 1;
-                        }
+                        return 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -80,25 +80,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async Task {|CS1998:Goo|}()
                     {
-                        public async Task {|CS1998:Goo|}()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public void Goo()
                     {
-                        public void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -107,25 +107,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    async public Task {|CS1998:Goo|}()
                     {
-                        async public Task {|CS1998:Goo|}()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public void Goo()
                     {
-                        public void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -134,26 +134,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    async // comment
+                    Task {|CS1998:Goo|}()
                     {
-                        async // comment
-                        Task {|CS1998:Goo|}()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -162,25 +162,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    async Task {|CS1998:GooAsync|}()
                     {
-                        async Task {|CS1998:GooAsync|}()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -189,35 +189,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    async Task {|CS1998:GooAsync|}()
                     {
-                        async Task {|CS1998:GooAsync|}()
-                        {
-                        }
-
-                        void Bar()
-                        {
-                            GooAsync();
-                        }
                     }
-                    """,
+
+                    void Bar()
+                    {
+                        GooAsync();
+                    }
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                        }
-
-                        void Bar()
-                        {
-                            Goo();
-                        }
                     }
-                    """
+
+                    void Bar()
+                    {
+                        Goo();
+                    }
+                }
+                """
             );
         }
 
@@ -411,39 +411,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    public class Class1
+                public class Class1
+                {
+                    async Task {|CS1998:GooAsync|}()
                     {
-                        async Task {|CS1998:GooAsync|}()
-                        {
-                            BarAsync();
-                        }
-
-                        async Task<int> {|#0:{|CS1998:BarAsync|}|}()
-                        {
-                            GooAsync();
-                            return 1;
-                        }
+                        BarAsync();
                     }
-                    """,
+
+                    async Task<int> {|#0:{|CS1998:BarAsync|}|}()
+                    {
+                        GooAsync();
+                        return 1;
+                    }
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    public class Class1
+                public class Class1
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Bar();
-                        }
-
-                        int {|#0:Bar|}()
-                        {
-                            Goo();
-                            return 1;
-                        }
+                        Bar();
                     }
-                    """
+
+                    int {|#0:Bar|}()
+                    {
+                        Goo();
+                        return 1;
+                    }
+                }
+                """
             );
         }
 
@@ -715,31 +715,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public void M1()
                     {
-                        public void M1()
+                        async Task {|CS1998:M2Async|}()
                         {
-                            async Task {|CS1998:M2Async|}()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public void M1()
                     {
-                        public void M1()
+                        void M2()
                         {
-                            void M2()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -867,29 +867,29 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    async System.Threading.Tasks.Task {|CS1998:MAsync|}()
                     {
-                        async System.Threading.Tasks.Task {|CS1998:MAsync|}()
+                        using ({|#0:var x = new object()|})
                         {
-                            using ({|#0:var x = new object()|})
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 // /0/Test0.cs(5,16): error CS1674: 'object': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 DiagnosticResult.CompilerError("CS1674").WithLocation(0).WithArguments("object"),
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        using ({|#0:var x = new object()|})
                         {
-                            using ({|#0:var x = new object()|})
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -924,27 +924,27 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    async System.Threading.Tasks.Task {|CS1998:MAsync|}()
                     {
-                        async System.Threading.Tasks.Task {|CS1998:MAsync|}()
+                        foreach (var n in new int[] { })
                         {
-                            foreach (var n in new int[] { })
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var n in new int[] { })
                         {
-                            foreach (var n in new int[] { })
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -979,27 +979,27 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    async System.Threading.Tasks.Task {|CS1998:MAsync|}()
                     {
-                        async System.Threading.Tasks.Task {|CS1998:MAsync|}()
+                        foreach (var (a, b) in new(int, int)[] { })
                         {
-                            foreach (var (a, b) in new(int, int)[] { })
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var (a, b) in new (int, int)[] { })
                         {
-                            foreach (var (a, b) in new (int, int)[] { })
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 

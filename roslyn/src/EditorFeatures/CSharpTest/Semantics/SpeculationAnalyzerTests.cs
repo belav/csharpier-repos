@@ -26,16 +26,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class Program
+                class Program
+                {
+                    void Vain(int arg = 3) { }
+                    void Vain(string arg) { }
+                    void Main()
                     {
-                        void Vain(int arg = 3) { }
-                        void Vain(string arg) { }
-                        void Main()
-                        {
-                            [|Vain(5)|];
-                        }
+                        [|Vain(5)|];
                     }
-                    """,
+                }
+                """,
                 "Vain(string.Empty)",
                 true
             );
@@ -50,15 +50,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
             // changes that won't break semantics.
             Test(
                 """
-                    static class Program
+                static class Program
+                {
+                    public static void Vain(this int arg) { }
+                    static void Main()
                     {
-                        public static void Vain(this int arg) { }
-                        static void Main()
-                        {
-                            [|5.Vain()|];
-                        }
+                        [|5.Vain()|];
                     }
-                    """,
+                }
+                """,
                 "Vain(5)",
                 semanticChanges: true
             );
@@ -69,15 +69,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            Exception ex = [|(Exception)new InvalidOperationException()|];
-                        }
+                        Exception ex = [|(Exception)new InvalidOperationException()|];
                     }
-                    """,
+                }
+                """,
                 "new InvalidOperationException()",
                 false
             );
@@ -88,14 +88,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            long i = [|(long)5|];
-                        }
+                        long i = [|(long)5|];
                     }
-                    """,
+                }
+                """,
                 "5",
                 false
             );
@@ -106,19 +106,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class From
+                class From
+                {
+                    public static implicit operator To(From from) { return new To(); }
+                }
+                class To { }
+                class Program
+                {
+                    void Main()
                     {
-                        public static implicit operator To(From from) { return new To(); }
+                        To to = [|(To)new From()|];
                     }
-                    class To { }
-                    class Program
-                    {
-                        void Main()
-                        {
-                            To to = [|(To)new From()|];
-                        }
-                    }
-                    """,
+                }
+                """,
                 "new From()",
                 true
             );
@@ -129,16 +129,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            Exception ex1 = new InvalidOperationException();
-                            var ex2 = [|(InvalidOperationException)ex1|];
-                        }
+                        Exception ex1 = new InvalidOperationException();
+                        var ex2 = [|(InvalidOperationException)ex1|];
                     }
-                    """,
+                }
+                """,
                 "ex1",
                 true
             );
@@ -149,16 +149,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System.Collections;
-                    class Program
+                using System.Collections;
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var a = new[] { 1, 2, 3 };
-                            [|((IEnumerable)a).GetEnumerator()|];
-                        }
+                        var a = new[] { 1, 2, 3 };
+                        [|((IEnumerable)a).GetEnumerator()|];
                     }
-                    """,
+                }
+                """,
                 "a.GetEnumerator()",
                 false
             );
@@ -169,17 +169,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System;
-                    using System.IO;
-                    class Program
+                using System;
+                using System.IO;
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var s = new MemoryStream();
-                            [|((Stream)s).Flush()|];
-                        }
+                        var s = new MemoryStream();
+                        [|((Stream)s).Flush()|];
                     }
-                    """,
+                }
+                """,
                 "s.Flush()",
                 false
             );
@@ -190,21 +190,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System;
-                    class Class : IComparable
+                using System;
+                class Class : IComparable
+                {
+                    public int CompareTo(object other) { return 1; }
+                }
+                class Program
+                {
+                    static void Main()
                     {
-                        public int CompareTo(object other) { return 1; }
+                        var c = new Class();
+                        var d = new Class();
+                        [|((IComparable)c).CompareTo(d)|];
                     }
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            var c = new Class();
-                            var d = new Class();
-                            [|((IComparable)c).CompareTo(d)|];
-                        }
-                    }
-                    """,
+                }
+                """,
                 "c.CompareTo(d)",
                 true
             );
@@ -215,21 +215,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System;
-                    sealed class Class : IComparable
+                using System;
+                sealed class Class : IComparable
+                {
+                    public int CompareTo(object other) { return 1; }
+                }
+                class Program
+                {
+                    static void Main()
                     {
-                        public int CompareTo(object other) { return 1; }
+                        var c = new Class();
+                        var d = new Class();
+                        [|((IComparable)c).CompareTo(d)|];
                     }
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            var c = new Class();
-                            var d = new Class();
-                            [|((IComparable)c).CompareTo(d)|];
-                        }
-                    }
-                    """,
+                }
+                """,
                 "((IComparable)c).CompareTo(d)",
                 semanticChanges: false
             );
@@ -240,16 +240,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            decimal d = 5;
-                            [|((IComparable<decimal>)d).CompareTo(6)|];
-                        }
+                        decimal d = 5;
+                        [|((IComparable<decimal>)d).CompareTo(6)|];
                     }
-                    """,
+                }
+                """,
                 "d.CompareTo(6)",
                 false
             );
@@ -260,14 +260,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var r = [|1+1L|];
-                        }
+                        var r = [|1+1L|];
                     }
-                    """,
+                }
+                """,
                 "1+1",
                 true
             );
@@ -278,15 +278,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System.Linq;
-                    class Program
+                using System.Linq;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var items = [|from i in Enumerable.Range(0, 3) select (long)i|];
-                        }
+                        var items = [|from i in Enumerable.Range(0, 3) select (long)i|];
                     }
-                    """,
+                }
+                """,
                 "from i in Enumerable.Range(0, 3) select i",
                 true
             );
@@ -297,15 +297,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System.Linq;
-                    class Program
+                using System.Linq;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var items = [|from i in new long[0] select i|];
-                        }
+                        var items = [|from i in new long[0] select i|];
                     }
-                    """,
+                }
+                """,
                 "from i in new int[0] select i",
                 true
             );
@@ -316,15 +316,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System.Linq;
-                    class Program
+                using System.Linq;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var items = [|from i in Enumerable.Range(0, 3) group (long)i by i|];
-                        }
+                        var items = [|from i in Enumerable.Range(0, 3) group (long)i by i|];
                     }
-                    """,
+                }
+                """,
                 "from i in Enumerable.Range(0, 3) group i by i",
                 true
             );
@@ -335,15 +335,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System.Linq;
-                    class Program
+                using System.Linq;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var items = from i in Enumerable.Range(0, 3) orderby [|(long)i|] select i;
-                        }
+                        var items = from i in Enumerable.Range(0, 3) orderby [|(long)i|] select i;
                     }
-                    """,
+                }
+                """,
                 "i",
                 true
             );
@@ -354,18 +354,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System;
-                    class AnAttribute : Attribute
-                    {
-                        public AnAttribute(string a, long b) { }
-                        public AnAttribute(int a, int b) { }
-                    }
-                    class Program
-                    {
-                        [An([|"5"|], 6)]
-                        static void Main() { }
-                    }
-                    """,
+                using System;
+                class AnAttribute : Attribute
+                {
+                    public AnAttribute(string a, long b) { }
+                    public AnAttribute(int a, int b) { }
+                }
+                class Program
+                {
+                    [An([|"5"|], 6)]
+                    static void Main() { }
+                }
+                """,
                 "5",
                 false,
                 "6"
@@ -381,18 +381,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    using System.Collections;
-                    class Collection : IEnumerable
+                using System.Collections;
+                class Collection : IEnumerable
+                {
+                    public IEnumerator GetEnumerator() { throw new System.NotImplementedException(); }
+                    public void Add(string s) { }
+                    public void Add(int i) { }
+                    void Main()
                     {
-                        public IEnumerator GetEnumerator() { throw new System.NotImplementedException(); }
-                        public void Add(string s) { }
-                        public void Add(int i) { }
-                        void Main()
-                        {
-                            var c = new Collection { [|"5"|] };
-                        }
+                        var c = new Collection { [|"5"|] };
                     }
-                    """,
+                }
+                """,
                 "5",
                 true
             );
@@ -403,16 +403,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    public interface IRogueAction
-                    {
-                        public string Name { get; private set; }
+                public interface IRogueAction
+                {
+                    public string Name { get; private set; }
 
-                        protected IRogueAction(string name)
-                        {
-                            [|this.Name|] = name;
-                        }
+                    protected IRogueAction(string name)
+                    {
+                        [|this.Name|] = name;
                     }
-                    """,
+                }
+                """,
                 "Name",
                 semanticChanges: false,
                 isBrokenCode: true
@@ -424,15 +424,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            object thing = new { shouldBeAnInt = [|(int)Directions.South|] };
-                        }
-                        public enum Directions { North, East, South, West }
+                        object thing = new { shouldBeAnInt = [|(int)Directions.South|] };
                     }
-                    """,
+                    public enum Directions { North, East, South, West }
+                }
+                """,
                 "Directions.South",
                 semanticChanges: true
             );
@@ -443,15 +443,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            object thing = new { shouldBeAnInt = [|(Directions)Directions.South|] };
-                        }
-                        public enum Directions { North, East, South, West }
+                        object thing = new { shouldBeAnInt = [|(Directions)Directions.South|] };
                     }
-                    """,
+                    public enum Directions { North, East, South, West }
+                }
+                """,
                 "Directions.South",
                 semanticChanges: false
             );
@@ -462,24 +462,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] arts)
                     {
-                        static void Main(string[] arts)
+                        var x = 1f;
+                        switch (x)
                         {
-                            var x = 1f;
-                            switch (x)
-                            {
-                                case [|(float) 1|]:
-                                    System.Console.WriteLine("one");
-                                    break;
+                            case [|(float) 1|]:
+                                System.Console.WriteLine("one");
+                                break;
 
-                                default:
-                                    System.Console.WriteLine("not one");
-                                    break;
-                            }
+                            default:
+                                System.Console.WriteLine("not one");
+                                break;
                         }
                     }
-                    """,
+                }
+                """,
                 "1",
                 semanticChanges: false
             );
@@ -490,24 +490,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] arts)
                     {
-                        static void Main(string[] arts)
+                        object x = 1f;
+                        switch (x)
                         {
-                            object x = 1f;
-                            switch (x)
-                            {
-                                case [|(float) 1|]: // without the case, object x does not match int 1
-                                    System.Console.WriteLine("one");
-                                    break;
+                            case [|(float) 1|]: // without the case, object x does not match int 1
+                                System.Console.WriteLine("one");
+                                break;
 
-                                default:
-                                    System.Console.WriteLine("not one");
-                                    break;
-                            }
+                            default:
+                                System.Console.WriteLine("not one");
+                                break;
                         }
                     }
-                    """,
+                }
+                """,
                 "1",
                 semanticChanges: true
             );
@@ -518,26 +518,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 code: """
-                    class Indexer
+                class Indexer
+                {
+                    public int this[int x] { get { return x; } }
+                }
+                class A
+                {
+                    public Indexer Foo { get; } = new Indexer();
+                }
+                class B : A
+                {
+                }
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        public int this[int x] { get { return x; } }
+                        var b = new B();
+                        var y = ([|(A)b|]).Foo[1];
                     }
-                    class A
-                    {
-                        public Indexer Foo { get; } = new Indexer();
-                    }
-                    class B : A
-                    {
-                    }
-                    class Program
-                    {
-                        static void Main(string[] args)
-                        {
-                            var b = new B();
-                            var y = ([|(A)b|]).Foo[1];
-                        }
-                    }
-                    """,
+                }
+                """,
                 replacementExpression: "b",
                 semanticChanges: false
             );
@@ -548,27 +548,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 code: """
-                    class Indexer
+                class Indexer
+                {
+                    public int this[int x] { get { return x; } }
+                }
+                class A
+                {
+                    public Indexer Foo { get; } = new Indexer();
+                }
+                class B : A
+                {
+                    public new Indexer Foo { get; } = new Indexer();
+                }
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        public int this[int x] { get { return x; } }
+                        var b = new B();
+                        var y = ([|(A)b|]).Foo[1];
                     }
-                    class A
-                    {
-                        public Indexer Foo { get; } = new Indexer();
-                    }
-                    class B : A
-                    {
-                        public new Indexer Foo { get; } = new Indexer();
-                    }
-                    class Program
-                    {
-                        static void Main(string[] args)
-                        {
-                            var b = new B();
-                            var y = ([|(A)b|]).Foo[1];
-                        }
-                    }
-                    """,
+                }
+                """,
                 replacementExpression: "b",
                 semanticChanges: true
             );
@@ -579,23 +579,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 code: """
-                    public delegate void MyDelegate();
-                    class A
+                public delegate void MyDelegate();
+                class A
+                {
+                    public MyDelegate Foo { get; }
+                }
+                class B : A
+                {
+                }
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        public MyDelegate Foo { get; }
+                        var b = new B();
+                        ([|(A)b|]).Foo();
                     }
-                    class B : A
-                    {
-                    }
-                    class Program
-                    {
-                        static void Main(string[] args)
-                        {
-                            var b = new B();
-                            ([|(A)b|]).Foo();
-                        }
-                    }
-                    """,
+                }
+                """,
                 replacementExpression: "b",
                 semanticChanges: false
             );
@@ -606,24 +606,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         {
             Test(
                 code: """
-                    public delegate void MyDelegate();
-                    class A
+                public delegate void MyDelegate();
+                class A
+                {
+                    public MyDelegate Foo { get; }
+                }
+                class B : A
+                {
+                    public new MyDelegate Foo { get; }
+                }
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        public MyDelegate Foo { get; }
+                        var b = new B();
+                        ([|(A)b|]).Foo();
                     }
-                    class B : A
-                    {
-                        public new MyDelegate Foo { get; }
-                    }
-                    class Program
-                    {
-                        static void Main(string[] args)
-                        {
-                            var b = new B();
-                            ([|(A)b|]).Foo();
-                        }
-                    }
-                    """,
+                }
+                """,
                 replacementExpression: "b",
                 semanticChanges: true
             );

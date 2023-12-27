@@ -31,22 +31,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            void [|Goo|]() { }
-                        }
+                        void [|Goo|]() { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -55,23 +55,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            void {|FixAllInDocument:F|}() { }
-                            void G() { }
-                        }
+                        void {|FixAllInDocument:F|}() { }
+                        void G() { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -80,23 +80,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            void G() { }
-                            void {|FixAllInDocument:F|}() { }
-                        }
+                        void G() { }
+                        void {|FixAllInDocument:F|}() { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -105,22 +105,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            void {|FixAllInDocument:F|}() { void G() { } }
-                        }
+                        void {|FixAllInDocument:F|}() { void G() { } }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -129,22 +129,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            void G() { void {|FixAllInDocument:F|}() { } }
-                        }
+                        void G() { void {|FixAllInDocument:F|}() { } }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -153,11 +153,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFuncti
         {
             await TestAsync(
                 """
-                    void [|local()|] { }
-                    """,
+                void [|local()|] { }
+                """,
                 """
 
-                    """,
+                """,
                 TestOptions.Regular
             );
         }

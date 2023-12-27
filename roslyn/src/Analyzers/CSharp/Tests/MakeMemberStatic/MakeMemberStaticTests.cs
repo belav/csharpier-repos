@@ -25,17 +25,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public static class Foo
-                    {
-                        int {|CS0708:i|};
-                    }
-                    """,
+                public static class Foo
+                {
+                    int {|CS0708:i|};
+                }
+                """,
                 """
-                    public static class Foo
-                    {
-                        static int i;
-                    }
-                    """
+                public static class Foo
+                {
+                    static int i;
+                }
+                """
             );
         }
 
@@ -44,19 +44,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public static class Foo
-                    {
-                        // comment
-                        readonly int {|CS0708:i|};
-                    }
-                    """,
+                public static class Foo
+                {
+                    // comment
+                    readonly int {|CS0708:i|};
+                }
+                """,
                 """
-                    public static class Foo
-                    {
-                        // comment
-                        static readonly int i;
-                    }
-                    """
+                public static class Foo
+                {
+                    // comment
+                    static readonly int i;
+                }
+                """
             );
         }
 
@@ -65,17 +65,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public static class Foo
-                    {
-                        void {|CS0708:M|}() { }
-                    }
-                    """,
+                public static class Foo
+                {
+                    void {|CS0708:M|}() { }
+                }
+                """,
                 """
-                    public static class Foo
-                    {
-                        static void M() { }
-                    }
-                    """
+                public static class Foo
+                {
+                    static void M() { }
+                }
+                """
             );
         }
 
@@ -84,17 +84,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public static class Foo
-                    {
-                        object {|CS0708:P|} { get; set; }
-                    }
-                    """,
+                public static class Foo
+                {
+                    object {|CS0708:P|} { get; set; }
+                }
+                """,
                 """
-                    public static class Foo
-                    {
-                        static object P { get; set; }
-                    }
-                    """
+                public static class Foo
+                {
+                    static object P { get; set; }
+                }
+                """
             );
         }
 
@@ -103,17 +103,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public static class Foo
-                    {
-                        event System.Action {|CS0708:E|};
-                    }
-                    """,
+                public static class Foo
+                {
+                    event System.Action {|CS0708:E|};
+                }
+                """,
                 """
-                    public static class Foo
-                    {
-                        static event System.Action E;
-                    }
-                    """
+                public static class Foo
+                {
+                    static event System.Action E;
+                }
+                """
             );
         }
 
@@ -122,32 +122,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    namespace NS
+                namespace NS
+                {
+                    public static class Foo
                     {
-                        public static class Foo
-                        {
-                            int {|CS0708:i|};
-                            void {|CS0708:M|}() { }
-                            object {|CS0708:P|} { get; set; }
-                            event System.Action {|CS0708:E|};
-                        }
+                        int {|CS0708:i|};
+                        void {|CS0708:M|}() { }
+                        object {|CS0708:P|} { get; set; }
+                        event System.Action {|CS0708:E|};
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace NS
+                namespace NS
+                {
+                    public static class Foo
                     {
-                        public static class Foo
-                        {
-                            static int i;
+                        static int i;
 
-                            static void M() { }
+                        static void M() { }
 
-                            static object P { get; set; }
+                        static object P { get; set; }
 
-                            static event System.Action E;
-                        }
+                        static event System.Action E;
                     }
-                    """
+                }
+                """
             );
         }
     }

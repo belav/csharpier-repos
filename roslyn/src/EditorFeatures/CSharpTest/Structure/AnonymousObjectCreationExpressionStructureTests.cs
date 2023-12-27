@@ -23,17 +23,17 @@ public class AnonymousObjectCreationExpressionStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = {|hint:new{|textspan: $${
-                            Name = "John",
-                            Age = 19
-                        }|}|};
-                    }
+                    var v = {|hint:new{|textspan: $${
+                        Name = "John",
+                        Age = 19
+                    }|}|};
                 }
-                """,
+            }
+            """,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
         );
     }

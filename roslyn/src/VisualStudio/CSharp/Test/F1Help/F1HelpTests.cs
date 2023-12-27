@@ -932,13 +932,13 @@ class Program
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(r[||]ef readonly int x)
                     {
-                        void M(r[||]ef readonly int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 "ref_CSharpKeyword"
             );
         }
@@ -948,13 +948,13 @@ class Program
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref read[||]only int x)
                     {
-                        void M(ref read[||]only int x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 "readonly_CSharpKeyword"
             );
         }
@@ -2037,11 +2037,11 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class C
-                    {
-                        re[||]quired int Field;
-                    }
-                    """,
+                public class C
+                {
+                    re[||]quired int Field;
+                }
+                """,
                 "required"
             );
         }
@@ -2051,15 +2051,15 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class Base
-                    {
-                        virtual void M<T>(T? t) { }
-                    }
-                    public class C
-                    {
-                        override void M<T>() where T : def[||]ault { }
-                    }
-                    """,
+                public class Base
+                {
+                    virtual void M<T>(T? t) { }
+                }
+                public class C
+                {
+                    override void M<T>() where T : def[||]ault { }
+                }
+                """,
                 expectedText: "defaultconstraint"
             );
         }
@@ -2069,20 +2069,20 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        switch (o)
                         {
-                            switch (o)
-                            {
-                                case 1:
-                                    goto def[||]ault;
-                                default:
-                                    return;
-                            }
+                            case 1:
+                                goto def[||]ault;
+                            default:
+                                return;
                         }
                     }
-                    """,
+                }
+                """,
                 expectedText: "defaultcase"
             );
         }
@@ -2092,20 +2092,20 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        switch (o)
                         {
-                            switch (o)
-                            {
-                                case 1:
-                                    goto default;
-                                def[||]ault:
-                                    return;
-                            }
+                            case 1:
+                                goto default;
+                            def[||]ault:
+                                return;
                         }
                     }
-                    """,
+                }
+                """,
                 expectedText: "defaultcase"
             );
         }
@@ -2115,8 +2115,8 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    #line def[||]ault
-                    """,
+                #line def[||]ault
+                """,
                 expectedText: "defaultline"
             );
         }
@@ -2126,10 +2126,10 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class C<T> where T : not[||]null
-                    {
-                    }
-                    """,
+                public class C<T> where T : not[||]null
+                {
+                }
+                """,
                 expectedText: "notnull"
             );
         }
@@ -2139,13 +2139,13 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M<T>() where T : not[||]null
                     {
-                        void M<T>() where T : not[||]null
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 expectedText: "notnull"
             );
         }
@@ -2155,11 +2155,11 @@ class C
         {
             await TestAsync(
                 """
-                    public class C
-                    {
-                        int not[||]null = 0;
-                    }
-                    """,
+                public class C
+                {
+                    int not[||]null = 0;
+                }
+                """,
                 expectedText: "C.notnull"
             );
         }
@@ -2169,10 +2169,10 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class C<T> where T : un[||]managed
-                    {
-                    }
-                    """,
+                public class C<T> where T : un[||]managed
+                {
+                }
+                """,
                 expectedText: "unmanaged"
             );
         }
@@ -2182,13 +2182,13 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    public class C
+                public class C
+                {
+                    void M<T>() where T : un[||]managed
                     {
-                        void M<T>() where T : un[||]managed
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 expectedText: "unmanaged"
             );
         }
@@ -2198,8 +2198,8 @@ class C
         {
             await TestAsync(
                 """
-                    int un[||]managed = 0;
-                    """,
+                int un[||]managed = 0;
+                """,
                 expectedText: "System.Int32"
             );
         }
@@ -2209,8 +2209,8 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    swit[||]ch (1) { default: break; }
-                    """,
+                swit[||]ch (1) { default: break; }
+                """,
                 expectedText: "switch"
             );
         }
@@ -2220,8 +2220,8 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    _ = 1 swit[||]ch { _ => 0 };
-                    """,
+                _ = 1 swit[||]ch { _ => 0 };
+                """,
                 expectedText: "switch-expression"
             );
         }
@@ -2231,8 +2231,8 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    fi[||]le class C { }
-                    """,
+                fi[||]le class C { }
+                """,
                 expectedText: "file"
             );
         }
@@ -2242,8 +2242,8 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    _ = 1 >[||]> 2;
-                    """,
+                _ = 1 >[||]> 2;
+                """,
                 expectedText: ">>"
             );
         }
@@ -2253,8 +2253,8 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    _ = 1 >>[||]> 2;
-                    """,
+                _ = 1 >>[||]> 2;
+                """,
                 expectedText: ">>>"
             );
         }
@@ -2264,8 +2264,8 @@ class C
         {
             await Test_KeywordAsync(
                 """
-                    1 >>[||]>= 2;
-                    """,
+                1 >>[||]>= 2;
+                """,
                 expectedText: ">>>="
             );
         }

@@ -58,27 +58,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o == null ? null : o.ToString()|];
-                        }
+                        var v = [|o == null ? null : o.ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -87,28 +87,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            [|if|] (o != null)
-                                o.ToString();
-                        }
+                        [|if|] (o != null)
+                            o.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            o?.ToString();
-                        }
+                        o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -117,30 +117,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        [|if|] (o != null)
                         {
-                            [|if|] (o != null)
-                            {
-                                o.ToString();
-                            }
+                            o.ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            o?.ToString();
-                        }
+                        o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -149,20 +149,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o != null)
+                            o.ToString();
+                        else
                         {
-                            if (o != null)
-                                o.ToString();
-                            else
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -171,20 +171,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o != null)
                         {
-                            if (o != null)
-                            {
-                                o.ToString();
-                                o.ToString();
-                            }
+                            o.ToString();
+                            o.ToString();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -193,18 +193,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    object o = null;
-                    [|if|] (o != null)
-                        o.ToString();
-                    """,
+                object o = null;
+                [|if|] (o != null)
+                    o.ToString();
+                """,
                 """
-                    using System;
+                using System;
 
-                    object o = null;
-                    o?.ToString();
-                    """,
+                object o = null;
+                o?.ToString();
+                """,
                 OutputKind.ConsoleApplication
             );
         }
@@ -214,27 +214,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o is null ? null : o.ToString()|];
-                        }
+                        var v = [|o is null ? null : o.ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -243,27 +243,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o is not null ? o.ToString() : null|];
-                        }
+                        var v = [|o is not null ? o.ToString() : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -272,28 +272,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            [|if|] (o is not null)
-                                o.ToString();
-                        }
+                        [|if|] (o is not null)
+                            o.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            o?.ToString();
-                        }
+                        o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -302,16 +302,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o == null ? null : o.ToString();
-                        }
+                        var v = o == null ? null : o.ToString();
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp5
             );
         }
@@ -321,17 +321,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            if (o != null)
-                                o.ToString();
-                        }
+                        if (o != null)
+                            o.ToString();
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp5
             );
         }
@@ -341,27 +341,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|null == o ? null : o.ToString()|];
-                        }
+                        var v = [|null == o ? null : o.ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -370,28 +370,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            [|if|] (null != o)
-                                        o.ToString();
-                        }
+                        [|if|] (null != o)
+                                    o.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            o?.ToString();
-                        }
+                        o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -400,27 +400,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o != null ? o.ToString() : null|];
-                        }
+                        var v = [|o != null ? o.ToString() : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -429,25 +429,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|c != null ? c.f : null|];
-                        }
+                        int? x = [|c != null ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -456,26 +456,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] (c != null)
-                                c.f?.ToString();
-                        }
+                        [|if|] (c != null)
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -484,25 +484,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|(object)c != null ? c.f : null|];
-                        }
+                        int? x = [|(object)c != null ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -511,26 +511,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] ((object)c != null)
-                                c.f?.ToString();
-                        }
+                        [|if|] ((object)c != null)
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -539,27 +539,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|null != o ? o.ToString() : null|];
-                        }
+                        var v = [|null != o ? o.ToString() : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -568,27 +568,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o == null ? null : {|CS0021:o[0]|}|];
-                        }
+                        var v = [|o == null ? null : {|CS0021:o[0]|}|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?{|CS0021:[0]|};
-                        }
+                        var v = o?{|CS0021:[0]|};
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -597,28 +597,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            [|if|] (o != null)
-                                {|CS0021:o[0]|}.ToString();
-                        }
+                        [|if|] (o != null)
+                            {|CS0021:o[0]|}.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            o?{|CS0021:[0]|}.ToString();
-                        }
+                        o?{|CS0021:[0]|}.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -627,27 +627,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o == null ? null : o.{|CS1061:B|}?.C|];
-                        }
+                        var v = [|o == null ? null : o.{|CS1061:B|}?.C|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?{|CS1061:.B|}?.C;
-                        }
+                        var v = o?{|CS1061:.B|}?.C;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -656,28 +656,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            [|if|](o != null)
-                                o.{|CS1061:B|}?.C();
-                        }
+                        [|if|](o != null)
+                            o.{|CS1061:B|}?.C();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            o?{|CS1061:.B|}?.C();
-                        }
+                        o?{|CS1061:.B|}?.C();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -686,27 +686,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o == null ? null : o.{|CS1061:B|}|];
-                        }
+                        var v = [|o == null ? null : o.{|CS1061:B|}|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?{|CS1061:.B|};
-                        }
+                        var v = o?{|CS1061:.B|};
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -715,28 +715,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            [|if|] (o != null)
-                                o.{|CS1061:B|}();
-                        }
+                        [|if|] (o != null)
+                            o.{|CS1061:B|}();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            o?{|CS1061:.B|}();
-                        }
+                        o?{|CS1061:.B|}();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -745,16 +745,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o == null ? null : o;
-                        }
+                        var v = o == null ? null : o;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -763,17 +763,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            if (o != null)
-                                {|CS0201:o|};
-                        }
+                        if (o != null)
+                            {|CS0201:o|};
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -782,27 +782,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|(o == null) ? null : o.ToString()|];
-                        }
+                        var v = [|(o == null) ? null : o.ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -811,29 +811,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v1 = [|o == null ? null : o.ToString()|];
-                            var v2 = [|o != null ? o.ToString() : null|];
-                        }
+                        var v1 = [|o == null ? null : o.ToString()|];
+                        var v2 = [|o != null ? o.ToString() : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v1 = o?.ToString();
-                            var v2 = o?.ToString();
-                        }
+                        var v1 = o?.ToString();
+                        var v2 = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -842,27 +842,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o1, object o2)
                     {
-                        void M(object o1, object o2)
-                        {
-                            var v1 = [|o1 == null ? null : o1.{|CS1501:ToString|}([|o2 == null ? null : o2.ToString()|])|];
-                        }
+                        var v1 = [|o1 == null ? null : o1.{|CS1501:ToString|}([|o2 == null ? null : o2.ToString()|])|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o1, object o2)
                     {
-                        void M(object o1, object o2)
-                        {
-                            var v1 = o1?{|CS1501:.ToString|}(o2?.ToString());
-                        }
+                        var v1 = o1?{|CS1501:.ToString|}(o2?.ToString());
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -871,16 +871,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = {|CS0173:o == null ? 0 : o.ToString()|};
-                        }
+                        var v = {|CS0173:o == null ? 0 : o.ToString()|};
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -889,16 +889,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = {|CS0173:o != null ? o.ToString() : 0|};
-                        }
+                        var v = {|CS0173:o != null ? o.ToString() : 0|};
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -907,18 +907,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class D
+                class D
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var c = new C();
-                            Action<string> a = c != null ? c.M : (Action<string>)null;
-                        }
+                        var c = new C();
+                        Action<string> a = c != null ? c.M : (Action<string>)null;
                     }
-                    class C { public void M(string s) { } }
-                    """
+                }
+                class C { public void M(string s) { } }
+                """
             );
         }
 
@@ -927,21 +927,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class Program
+                class Program
+                {
+                    void Main(string s)
                     {
-                        void Main(string s)
-                        {
-                            Method<string>(t => s != null ? s.ToString() : null); // works
-                        }
-
-                        public void Method<T>(Expression<Func<T, string>> functor)
-                        {
-                        }
+                        Method<string>(t => s != null ? s.ToString() : null); // works
                     }
-                    """
+
+                    public void Method<T>(Expression<Func<T, string>> functor)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -951,17 +951,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Linq;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            _ = from item in Enumerable.Empty<(int? x, int? y)?>().AsQueryable()
-                                select item == null ? null : item.Value.x;
-                        }
+                        _ = from item in Enumerable.Empty<(int? x, int? y)?>().AsQueryable()
+                            select item == null ? null : item.Value.x;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -971,18 +971,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Linq;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            _ = from item in Enumerable.Empty<(int? x, int? y)?>().AsQueryable()
-                                where (item == null ? null : item.Value.x) > 0
-                                select item;
-                        }
+                        _ = from item in Enumerable.Empty<(int? x, int? y)?>().AsQueryable()
+                            where (item == null ? null : item.Value.x) > 0
+                            select item;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -992,18 +992,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Linq;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            _ = from item in Enumerable.Empty<(int? x, int? y)?>().AsQueryable()
-                                let x = item == null ? null : item.Value.x
-                                select x;
-                        }
+                        _ = from item in Enumerable.Empty<(int? x, int? y)?>().AsQueryable()
+                            let x = item == null ? null : item.Value.x
+                            select x;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1012,27 +1012,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Main(DateTime? toDate)
                     {
-                        void Main(DateTime? toDate)
-                        {
-                            var v = [|toDate == null ? null : toDate.Value.ToString("yyyy/MM/ dd")|];
-                        }
+                        var v = [|toDate == null ? null : toDate.Value.ToString("yyyy/MM/ dd")|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Main(DateTime? toDate)
                     {
-                        void Main(DateTime? toDate)
-                        {
-                            var v = toDate?.ToString("yyyy/MM/ dd");
-                        }
+                        var v = toDate?.ToString("yyyy/MM/ dd");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1041,28 +1041,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Main(DateTime? toDate)
                     {
-                        void Main(DateTime? toDate)
-                        {
-                            [|if|] (toDate != null)
-                                toDate.Value.ToString("yyyy/MM/ dd");
-                        }
+                        [|if|] (toDate != null)
+                            toDate.Value.ToString("yyyy/MM/ dd");
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Main(DateTime? toDate)
                     {
-                        void Main(DateTime? toDate)
-                        {
-                            toDate?.ToString("yyyy/MM/ dd");
-                        }
+                        toDate?.ToString("yyyy/MM/ dd");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1071,37 +1071,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    struct S
-                    {
-                        public string this[int i] => "";
-                    }
+                struct S
+                {
+                    public string this[int i] => "";
+                }
 
-                    class C
+                class C
+                {
+                    void Main(S? s)
                     {
-                        void Main(S? s)
-                        {
-                            var x = [|s == null ? null : s.Value[0]|];
-                        }
+                        var x = [|s == null ? null : s.Value[0]|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    struct S
-                    {
-                        public string this[int i] => "";
-                    }
+                struct S
+                {
+                    public string this[int i] => "";
+                }
 
-                    class C
+                class C
+                {
+                    void Main(S? s)
                     {
-                        void Main(S? s)
-                        {
-                            var x = s?[0];
-                        }
+                        var x = s?[0];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1110,25 +1110,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|c is null ? null : c.f|];
-                        }
+                        int? x = [|c is null ? null : c.f|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1137,25 +1137,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|c is not null ? c.f : null|];
-                        }
+                        int? x = [|c is not null ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1164,26 +1164,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] (c is not null)
-                                c.f?.ToString();
-                        }
+                        [|if|] (c is not null)
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1192,15 +1192,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c is C ? null : c.f;
-                        }
+                        int? x = c is C ? null : c.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1209,16 +1209,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            if (c is C)
-                                c.f?.ToString();
-                        }
+                        if (c is C)
+                            c.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1227,16 +1227,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            if (c is C d)
-                                c.f?.ToString();
-                        }
+                        if (c is C d)
+                            c.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1245,16 +1245,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            if (c is not C)
-                                c.f?.ToString();
-                        }
+                        if (c is not C)
+                            c.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1263,14 +1263,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            int? x = s is "" ? null : (int?)s.Length;
-                        }
+                        int? x = s is "" ? null : (int?)s.Length;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1279,25 +1279,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|ReferenceEquals(c, null) ? null : c.f|];
-                        }
+                        int? x = [|ReferenceEquals(c, null) ? null : c.f|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1306,26 +1306,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] (!ReferenceEquals(c, null))
-                                c.f?.ToString();
-                        }
+                        [|if|] (!ReferenceEquals(c, null))
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1334,25 +1334,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|ReferenceEquals(null, c) ? null : c.f|];
-                        }
+                        int? x = [|ReferenceEquals(null, c) ? null : c.f|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1361,26 +1361,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] (!ReferenceEquals(null, c))
-                                c.f?.ToString();
-                        }
+                        [|if|] (!ReferenceEquals(null, c))
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1389,15 +1389,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = ReferenceEquals(c, other) ? null : c.f;
-                        }
+                        int? x = ReferenceEquals(c, other) ? null : c.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1406,16 +1406,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            if (ReferenceEquals(c, other))
-                                c.f?.ToString();
-                        }
+                        if (ReferenceEquals(c, other))
+                            c.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1424,16 +1424,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            if (!ReferenceEquals(c, other))
-                                c.f?.ToString();
-                        }
+                        if (!ReferenceEquals(c, other))
+                            c.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1442,15 +1442,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = ReferenceEquals(other, c) ? null : c.f;
-                        }
+                        int? x = ReferenceEquals(other, c) ? null : c.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1459,25 +1459,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|object.ReferenceEquals(c, null) ? null : c.f|];
-                        }
+                        int? x = [|object.ReferenceEquals(c, null) ? null : c.f|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1486,26 +1486,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] (!object.ReferenceEquals(c, null))
-                                c.f?.ToString();
-                        }
+                        [|if|] (!object.ReferenceEquals(c, null))
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1514,25 +1514,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|object.ReferenceEquals(null, c) ? null : c.f|];
-                        }
+                        int? x = [|object.ReferenceEquals(null, c) ? null : c.f|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1541,26 +1541,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] (!object.ReferenceEquals(null, c))
-                                c.f?.ToString();
-                        }
+                        [|if|] (!object.ReferenceEquals(null, c))
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1569,15 +1569,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = object.ReferenceEquals(c, other) ? null : c.f;
-                        }
+                        int? x = object.ReferenceEquals(c, other) ? null : c.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1586,15 +1586,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = object.ReferenceEquals(other, c) ? null : c.f;
-                        }
+                        int? x = object.ReferenceEquals(other, c) ? null : c.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1603,25 +1603,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!(c is null) ? c.f : null|];
-                        }
+                        int? x = [|!(c is null) ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1630,25 +1630,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!(c is not null) ? null : c.f|];
-                        }
+                        int? x = [|!(c is not null) ? null : c.f|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1657,15 +1657,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = !(c is C) ? c.f : null;
-                        }
+                        int? x = !(c is C) ? c.f : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1674,14 +1674,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
-                        {
-                            int? x = !(s is "") ? (int?)s.Length : null;
-                        }
+                        int? x = !(s is "") ? (int?)s.Length : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1690,25 +1690,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!ReferenceEquals(c, null) ? c.f : null|];
-                        }
+                        int? x = [|!ReferenceEquals(c, null) ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1717,25 +1717,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!ReferenceEquals(null, c) ? c.f : null|];
-                        }
+                        int? x = [|!ReferenceEquals(null, c) ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1744,15 +1744,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = !ReferenceEquals(c, other) ? c.f : null;
-                        }
+                        int? x = !ReferenceEquals(c, other) ? c.f : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1761,15 +1761,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = !ReferenceEquals(other, c) ? c.f : null;
-                        }
+                        int? x = !ReferenceEquals(other, c) ? c.f : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1778,25 +1778,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!object.ReferenceEquals(c, null) ? c.f : null|];
-                        }
+                        int? x = [|!object.ReferenceEquals(c, null) ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1805,25 +1805,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!object.ReferenceEquals(null, c) ? c.f : null|];
-                        }
+                        int? x = [|!object.ReferenceEquals(null, c) ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1832,15 +1832,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = !object.ReferenceEquals(c, other) ? c.f : null;
-                        }
+                        int? x = !object.ReferenceEquals(c, other) ? c.f : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1849,15 +1849,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = !object.ReferenceEquals(other, c) ? c.f : null;
-                        }
+                        int? x = !object.ReferenceEquals(other, c) ? c.f : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1866,25 +1866,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!(c == null) ? c.f : null|];
-                        }
+                        int? x = [|!(c == null) ? c.f : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1893,26 +1893,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            [|if|] (!(c == null))
-                                c.f?.ToString();
-                        }
+                        [|if|] (!(c == null))
+                            c.f?.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            c?.f?.ToString();
-                        }
+                        c?.f?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1921,25 +1921,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = [|!(c != null) ? null : c.f|];
-                        }
+                        int? x = [|!(c != null) ? null : c.f|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c)
                     {
-                        public int? f;
-                        void M(C c)
-                        {
-                            int? x = c?.f;
-                        }
+                        int? x = c?.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1948,15 +1948,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = !(c == other) ? c.f : null;
-                        }
+                        int? x = !(c == other) ? c.f : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1965,15 +1965,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int? f;
+                    void M(C c, C other)
                     {
-                        public int? f;
-                        void M(C c, C other)
-                        {
-                            int? x = !(c != other) ? null : c.f;
-                        }
+                        int? x = !(c != other) ? null : c.f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1982,27 +1982,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|(o == null) ? null : (o.ToString())|];
-                        }
+                        var v = [|(o == null) ? null : (o.ToString())|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = (o?.ToString());
-                        }
+                        var v = (o?.ToString());
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2011,27 +2011,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|(o != null) ? (o.ToString()) : null|];
-                        }
+                        var v = [|(o != null) ? (o.ToString()) : null|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = (o?.ToString());
-                        }
+                        var v = (o?.ToString());
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2040,27 +2040,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o == null ? (null) : o.ToString()|];
-                        }
+                        var v = [|o == null ? (null) : o.ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2069,27 +2069,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = [|o != null ? o.ToString() : (null)|];
-                        }
+                        var v = [|o != null ? o.ToString() : (null)|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            var v = o?.ToString();
-                        }
+                        var v = o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2098,30 +2098,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            // Before
-                            [|if|] (o != null)
-                                o.ToString();
-                        }
+                        // Before
+                        [|if|] (o != null)
+                            o.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            // Before
-                            o?.ToString();
-                        }
+                        // Before
+                        o?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2130,32 +2130,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
-                        {
-                            // Before1
-                            [|if|] (o != null)
-                                // Before2
-                                o.ToString();
-                        }
-                    }
-                    """,
-                """
-                    using System;
-
-                    class C
-                    {
-                        void M(object o)
-                        {
-                            // Before1
+                        // Before1
+                        [|if|] (o != null)
                             // Before2
-                            o?.ToString();
-                        }
+                            o.ToString();
                     }
-                    """
+                }
+                """,
+                """
+                using System;
+
+                class C
+                {
+                    void M(object o)
+                    {
+                        // Before1
+                        // Before2
+                        o?.ToString();
+                    }
+                }
+                """
             );
         }
 
@@ -2164,34 +2164,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        // Before1
+                        [|if|] (o != null)
                         {
-                            // Before1
-                            [|if|] (o != null)
-                            {
-                                // Before2
-                                o.ToString();
-                            }
-                        }
-                    }
-                    """,
-                """
-                    using System;
-
-                    class C
-                    {
-                        void M(object o)
-                        {
-                            // Before1
                             // Before2
-                            o?.ToString();
+                            o.ToString();
                         }
                     }
-                    """
+                }
+                """,
+                """
+                using System;
+
+                class C
+                {
+                    void M(object o)
+                    {
+                        // Before1
+                        // Before2
+                        o?.ToString();
+                    }
+                }
+                """
             );
         }
 
@@ -2200,34 +2200,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        // Before1
+                        [|if|] (o != null)
                         {
-                            // Before1
-                            [|if|] (o != null)
-                            {
-                                // Before2
-                                o.ToString(); // After
-                            }
-                        }
-                    }
-                    """,
-                """
-                    using System;
-
-                    class C
-                    {
-                        void M(object o)
-                        {
-                            // Before1
                             // Before2
-                            o?.ToString(); // After
+                            o.ToString(); // After
                         }
                     }
-                    """
+                }
+                """,
+                """
+                using System;
+
+                class C
+                {
+                    void M(object o)
+                    {
+                        // Before1
+                        // Before2
+                        o?.ToString(); // After
+                    }
+                }
+                """
             );
         }
 
@@ -2236,34 +2236,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        // Before1
+                        [|if|] (o != null)
                         {
-                            // Before1
-                            [|if|] (o != null)
-                            {
-                                // Before2
-                                o.ToString();
-                            } // After
-                        }
-                    }
-                    """,
-                """
-                    using System;
-
-                    class C
-                    {
-                        void M(object o)
-                        {
-                            // Before1
                             // Before2
-                            o?.ToString(); // After
-                        }
+                            o.ToString();
+                        } // After
                     }
-                    """
+                }
+                """,
+                """
+                using System;
+
+                class C
+                {
+                    void M(object o)
+                    {
+                        // Before1
+                        // Before2
+                        o?.ToString(); // After
+                    }
+                }
+                """
             );
         }
 
@@ -2272,17 +2272,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    unsafe void M(int* i)
                     {
-                        unsafe void M(int* i)
-                        {
-                            if (i != null)
-                                i->ToString();
-                        }
+                        if (i != null)
+                            i->ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2291,27 +2291,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class D
+                class D
+                {
+                    public static void StaticMethod(D d) { }
+                    public void InstanceMethod(D d) { }
+                }
+
+                public class C
+                {
+                    D D { get; }
+
+                    public void Test()
                     {
-                        public static void StaticMethod(D d) { }
-                        public void InstanceMethod(D d) { }
-                    }
-
-                    public class C
-                    {
-                        D D { get; }
-
-                        public void Test()
+                        if (D != null)
                         {
-                            if (D != null)
-                            {
-                                D.StaticMethod(D);
-                            }
+                            D.StaticMethod(D);
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2320,46 +2320,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class D
+                class D
+                {
+                    public static void Method(D d) { }
+                    public void InstanceMethod(D d) { }
+                }
+
+                public class C
+                {
+                    D D { get; }
+
+                    public void Test()
                     {
-                        public static void Method(D d) { }
-                        public void InstanceMethod(D d) { }
-                    }
-
-                    public class C
-                    {
-                        D D { get; }
-
-                        public void Test()
+                        [|if|] (D != null)
                         {
-                            [|if|] (D != null)
-                            {
-                                D.InstanceMethod(D);
-                            }
+                            D.InstanceMethod(D);
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class D
+                class D
+                {
+                    public static void Method(D d) { }
+                    public void InstanceMethod(D d) { }
+                }
+
+                public class C
+                {
+                    D D { get; }
+
+                    public void Test()
                     {
-                        public static void Method(D d) { }
-                        public void InstanceMethod(D d) { }
+                        D?.InstanceMethod(D);
                     }
-
-                    public class C
-                    {
-                        D D { get; }
-
-                        public void Test()
-                        {
-                            D?.InstanceMethod(D);
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -2368,14 +2368,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
-                    {
-                        Action<int> M(List<int> p) => p is null ? null : p.Add;
-                    }
-                    """
+                class C
+                {
+                    Action<int> M(List<int> p) => p is null ? null : p.Add;
+                }
+                """
             );
         }
 
@@ -2384,35 +2384,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else [|if|] (s != null)
-                            {
-                                s.ToString();
-                            }
+                        }
+                        else [|if|] (s != null)
+                        {
+                            s.ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else
-                            {
-                                s?.ToString();
-                            }
+                        }
+                        else
+                        {
+                            s?.ToString();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2421,31 +2421,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else [|if|] (s != null)
-                                s.ToString();
                         }
+                        else [|if|] (s != null)
+                            s.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else
-                                s?.ToString();
                         }
+                        else
+                            s?.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2454,37 +2454,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else [|if|] (s != null)
-                            {
-                                // comment
-                                s.ToString();
-                            }
+                        }
+                        else [|if|] (s != null)
+                        {
+                            // comment
+                            s.ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else
-                            {
-                                // comment
-                                s?.ToString();
-                            }
+                        }
+                        else
+                        {
+                            // comment
+                            s?.ToString();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2493,33 +2493,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else [|if|] (s != null) {
-                                s.ToString();
-                            }
+                        }
+                        else [|if|] (s != null) {
+                            s.ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (true)
                         {
-                            if (true)
-                            {
-                            }
-                            else {
-                                s?.ToString();
-                            }
+                        }
+                        else {
+                            s?.ToString();
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

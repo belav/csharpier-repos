@@ -33,22 +33,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|int a = 3;|]
-                        }
+                        [|int a = 3;|]
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -57,26 +57,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|string a;|]
-                            string b = ";
-                            var c = b;
-                        }
+                        [|string a;|]
+                        string b = ";
+                        var c = b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            string b = ";
-                            var c = b;
-                        }
+                        string b = ";
+                        var c = b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -85,22 +85,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|string a;|]
-                        }
+                        [|string a;|]
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -109,23 +109,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|string a|], b;
-                        }
+                        [|string a|], b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            string b;
-                        }
+                        string b;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -134,23 +134,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            string a, [|b|];
-                        }
+                        string a, [|b|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            string a;
-                        }
+                        string a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -159,23 +159,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            {|FixAllInDocument:string a;|}
-                            string b;
-                        }
+                        {|FixAllInDocument:string a;|}
+                        string b;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -184,23 +184,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            {|FixAllInDocument:string a;|}
-                            string b, c;
-                        }
+                        {|FixAllInDocument:string a;|}
+                        string b, c;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -209,22 +209,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            string a, {|FixAllInDocument:b|};
-                        }
+                        string a, {|FixAllInDocument:b|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -234,33 +234,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        try
                         {
-                            try
-                            {
-                            }
-                            catch (System.Exception [|e|])
-                            {
-                            }
+                        }
+                        catch (System.Exception [|e|])
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        try
                         {
-                            try
-                            {
-                            }
-                            catch (System.Exception)
-                            {
-                            }
+                        }
+                        catch (System.Exception)
+                        {
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -270,50 +270,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #define DIRECTIVE1
+                #define DIRECTIVE1
 
-                    using System;
+                using System;
 
-                    namespace ClassLibrary
+                namespace ClassLibrary
+                {
+                    public class Class1
                     {
-                        public class Class1
+                        public static string GetText()
                         {
-                            public static string GetText()
-                            {
-                    #if DIRECTIVE1
-                            return "Hello from " + Environment.OSVersion;
-                    #elif DIRECTIVE2
-                            return "Hello from .NET Standard";
-                    #else
-                    #error Unknown platform
-                    #endif
-                                int [|blah|] = 5;
-                            }
+                #if DIRECTIVE1
+                        return "Hello from " + Environment.OSVersion;
+                #elif DIRECTIVE2
+                        return "Hello from .NET Standard";
+                #else
+                #error Unknown platform
+                #endif
+                            int [|blah|] = 5;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    #define DIRECTIVE1
+                #define DIRECTIVE1
 
-                    using System;
+                using System;
 
-                    namespace ClassLibrary
+                namespace ClassLibrary
+                {
+                    public class Class1
                     {
-                        public class Class1
+                        public static string GetText()
                         {
-                            public static string GetText()
-                            {
-                    #if DIRECTIVE1
-                            return "Hello from " + Environment.OSVersion;
-                    #elif DIRECTIVE2
-                            return "Hello from .NET Standard";
-                    #else
-                    #error Unknown platform
-                    #endif
-                            }
+                #if DIRECTIVE1
+                        return "Hello from " + Environment.OSVersion;
+                #elif DIRECTIVE2
+                        return "Hello from .NET Standard";
+                #else
+                #error Unknown platform
+                #endif
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -323,28 +323,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
-                        {
-                            bool used = true;
-                            int [|unused|];
+                        bool used = true;
+                        int [|unused|];
 
-                            return used;
-                        }
+                        return used;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
-                        {
-                            bool used = true;
+                        bool used = true;
 
-                            return used;
-                        }
+                        return used;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -354,25 +354,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
-                        {
-                            int [|unused|];
+                        int [|unused|];
 
-                            return used;
-                        }
+                        return used;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
-                        {
-                            return used;
-                        }
+                        return used;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -381,36 +381,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case true:
-                                    bool used = true;
-                                    int [|unused|];
+                            case true:
+                                bool used = true;
+                                int [|unused|];
 
-                                    return used;
-                            }
+                                return used;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case true:
-                                    bool used = true;
+                            case true:
+                                bool used = true;
 
-                                    return used;
-                            }
+                                return used;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -419,33 +419,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case true:
-                                    int [|unused|];
+                            case true:
+                                int [|unused|];
 
-                                    return used;
-                            }
+                                return used;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    bool TrySomething()
                     {
-                        bool TrySomething()
+                        switch (true)
                         {
-                            switch (true)
-                            {
-                                case true:
-                                    return used;
-                            }
+                            case true:
+                                return used;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -454,22 +454,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int [|unused|] = 0; // remove also comment
-                        }
+                        int [|unused|] = 0; // remove also comment
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -478,23 +478,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int [|b|] = 0;
-                            b = 0;
-                        }
+                        int [|b|] = 0;
+                        b = 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -503,25 +503,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int [|unused|] = 0, used = 0;
-                            return used;
-                        }
+                        int [|unused|] = 0, used = 0;
+                        return used;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int used = 0;
-                            return used;
-                        }
+                        int used = 0;
+                        return used;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -530,25 +530,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int used = 0, [|unused|] = 0;
-                            return used;
-                        }
+                        int used = 0, [|unused|] = 0;
+                        return used;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int used = 0;
-                            return used;
-                        }
+                        int used = 0;
+                        return used;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -560,28 +560,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int [|unused|] = 0;
-                            int used = 0;
-                            unused = used = 0;
-                            return used;
-                        }
+                        int [|unused|] = 0;
+                        int used = 0;
+                        unused = used = 0;
+                        return used;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int used = 0;
-                            used = 0;
-                            return used;
-                        }
+                        int used = 0;
+                        used = 0;
+                        return used;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -590,28 +590,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int used = 0;
-                            int [|unused|] = 0;
-                            used = unused = 0;
-                            return used;
-                        }
+                        int used = 0;
+                        int [|unused|] = 0;
+                        used = unused = 0;
+                        return used;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            int used = 0;
-                            used = 0;
-                            return used;
-                        }
+                        int used = 0;
+                        used = 0;
+                        return used;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -623,27 +623,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        Func<int> [|unused|] = () =>
                         {
-                            Func<int> [|unused|] = () =>
-                            {
-                                return 0;
-                            };
-                            return 1;
-                        }
+                            return 0;
+                        };
+                        return 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
-                        {
-                            return 1;
-                        }
+                        return 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -739,29 +739,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        for([|int i = 0|]; ; )
                         {
-                            for([|int i = 0|]; ; )
-                            {
 
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        for(; ; )
                         {
-                            for(; ; )
-                            {
 
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -771,29 +771,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        for(int i = 0[|, j = 0|]; i < 1; i++)
                         {
-                            for(int i = 0[|, j = 0|]; i < 1; i++)
-                            {
 
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
+                        for(int i = 0; i < 1; i++)
                         {
-                            for(int i = 0; i < 1; i++)
-                            {
 
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -803,11 +803,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestAsync(
                 """
-                    [|int i = 0|];
-                    """,
+                [|int i = 0|];
+                """,
                 """
 
-                    """,
+                """,
                 TestOptions.Regular
             );
         }
@@ -818,31 +818,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            if (true)
-                                for(int i = 0[|, j = 0|]; i < 1; i++)
-                                {
+                        if (true)
+                            for(int i = 0[|, j = 0|]; i < 1; i++)
+                            {
 
-                                }
-                        }
+                            }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            if (true)
-                                for(int i = 0; i < 1; i++)
-                                {
+                        if (true)
+                            for(int i = 0; i < 1; i++)
+                            {
 
-                                }
-                        }
+                            }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -852,17 +852,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(bool test)
                     {
-                        void Method(bool test)
+                        if (test [|and test|])
                         {
-                            if (test [|and test|])
-                            {
 
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -872,29 +872,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Class
+                class Class
+                {
+                    void Method(bool test)
                     {
-                        void Method(bool test)
-                        {
-                            if (test) var x = () => {
-                                try { }
-                                catch (Exception [|ex|]) { }
-                            };
-                        }
+                        if (test) var x = () => {
+                            try { }
+                            catch (Exception [|ex|]) { }
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    class Class
+                class Class
+                {
+                    void Method(bool test)
                     {
-                        void Method(bool test)
-                        {
-                            if (test) var x = () => {
-                                try { }
-                                catch (Exception) { }
-                            };
-                        }
+                        if (test) var x = () => {
+                            try { }
+                            catch (Exception) { }
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -904,12 +904,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
             await TestAsync(
                 """
-                    [|int i = 1|];
-                    i = 2;
-                    """,
+                [|int i = 1|];
+                i = 2;
+                """,
                 """
 
-                    """,
+                """,
                 CSharpParseOptions.Default
             );
         }

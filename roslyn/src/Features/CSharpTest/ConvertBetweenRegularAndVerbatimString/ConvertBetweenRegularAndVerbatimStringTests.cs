@@ -26,14 +26,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestMissingAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||]";
-                        }
+                        var v = "[||]";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -42,14 +42,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestMissingAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||];
-                        }
+                        var v = "[||];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -58,14 +58,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestMissingAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"[||];
-                        }
+                        var v = @"[||];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -74,23 +74,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"[||]";
-                        }
+                        var v = @"[||]";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "";
-                        }
+                        var v = "";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -99,27 +99,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v =
-                                // leading
-                                @"[||]" /* trailing */;
-                        }
+                        var v =
+                            // leading
+                            @"[||]" /* trailing */;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v =
-                                // leading
-                                "" /* trailing */;
-                        }
+                        var v =
+                            // leading
+                            "" /* trailing */;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -128,14 +128,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestMissingAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||]a";
-                        }
+                        var v = "[||]a";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -144,23 +144,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"[||]a";
-                        }
+                        var v = @"[||]a";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "a";
-                        }
+                        var v = "a";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -169,14 +169,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestMissingAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||]\u0001";
-                        }
+                        var v = "[||]\u0001";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -185,24 +185,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||]a\r\nb";
-                        }
+                        var v = "[||]a\r\nb";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"a
-                    b";
-                        }
+                        var v = @"a
+                b";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -211,24 +211,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"[||]a
-                    b";
-                        }
+                        var v = @"[||]a
+                b";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "a\r\nb";
-                        }
+                        var v = "a\r\nb";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -237,14 +237,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestMissingAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||]a\0b";
-                        }
+                        var v = "[||]a\0b";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -253,23 +253,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||]a\"b";
-                        }
+                        var v = "[||]a\"b";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"a""b";
-                        }
+                        var v = @"a""b";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -278,23 +278,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"[||]a""b";
-                        }
+                        var v = @"[||]a""b";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "a\"b";
-                        }
+                        var v = "a\"b";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -303,24 +303,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "[||]a\r\n{1}";
-                        }
+                        var v = "[||]a\r\n{1}";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"a
-                    {1}";
-                        }
+                        var v = @"a
+                {1}";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -329,24 +329,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = @"[||]a
-                    {1}";
-                        }
+                        var v = @"[||]a
+                {1}";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var v = "a\r\n{1}";
-                        }
+                        var v = "a\r\n{1}";
                     }
-                    """
+                }
+                """
             );
         }
     }

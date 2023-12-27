@@ -25,89 +25,89 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = {|FixAllInDocument:|}"a";
-                            var singleLine2 = @"goo""bar";
+                        var singleLine1 = {|FixAllInDocument:|}"a";
+                        var singleLine2 = @"goo""bar";
 
-                            var multiLine1 = "goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
 
-                            var multiLineWithoutLeadingWhitespace1 = @"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-
-                            var multiLine1 = "goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
-
-                            var multiLineWithoutLeadingWhitespace1 = @"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
                     }
-                    """,
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
+
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
 
-                            var multiLine1 = "goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
 
-                            var multiLineWithoutLeadingWhitespace1 = @"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-
-                            var multiLine1 = "goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
-
-                            var multiLineWithoutLeadingWhitespace1 = @"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
                     }
-                    """"
+
+                    void M2()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
+
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
+                }
+                """"
             );
         }
 
@@ -116,107 +116,107 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                            var multiLine1 = {|FixAllInDocument:|}"goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
+                        var multiLine1 = {|FixAllInDocument:|}"goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
 
-                            var multiLineWithoutLeadingWhitespace1 = @"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-
-                            var multiLine1 = "goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
-
-                            var multiLineWithoutLeadingWhitespace1 = @"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
                     }
-                    """,
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
+
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                            var multiLine1 = """
-                                goo
-                                bar
-                                """;
-                            var multiLine2 = """
-                                goo
-                                bar
-                                """;
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
 
-                            var multiLineWithoutLeadingWhitespace1 = """
+                        var multiLineWithoutLeadingWhitespace1 = """
 
-                                from x in y
-                                where x > 0
-                                select x
-                                """;
-                            var multiLineWithoutLeadingWhitespace2 = """
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
 
-                                from x2 in y2
-                                where x2 > 0
-                                select x2
-                                """;
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-
-                            var multiLine1 = """
-                                goo
-                                bar
-                                """;
-                            var multiLine2 = """
-                                goo
-                                bar
-                                """;
-
-                            var multiLineWithoutLeadingWhitespace1 = """
-
-                                from x in y
-                                where x > 0
-                                select x
-                                """;
-                            var multiLineWithoutLeadingWhitespace2 = """
-
-                                from x2 in y2
-                                where x2 > 0
-                                select x2
-                                """;
-                        }
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
                     }
-                    """"
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
+
+                        var multiLineWithoutLeadingWhitespace1 = """
+
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
+
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
+                    }
+                }
+                """"
             );
         }
 
@@ -225,103 +225,103 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                            var multiLine1 = "goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
 
-                            var multiLineWithoutLeadingWhitespace1 = {|FixAllInDocument:|}@"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-
-                            var multiLine1 = "goo\r\nbar";
-                            var multiLine2 = @"goo
-                    bar";
-
-                            var multiLineWithoutLeadingWhitespace1 = @"
-                    from x in y
-                    where x > 0
-                    select x";
-                            var multiLineWithoutLeadingWhitespace2 = @"
-                    from x2 in y2
-                    where x2 > 0
-                    select x2";
-                        }
+                        var multiLineWithoutLeadingWhitespace1 = {|FixAllInDocument:|}@"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
                     }
-                    """,
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = "goo\r\nbar";
+                        var multiLine2 = @"goo
+                bar";
+
+                        var multiLineWithoutLeadingWhitespace1 = @"
+                from x in y
+                where x > 0
+                select x";
+                        var multiLineWithoutLeadingWhitespace2 = @"
+                from x2 in y2
+                where x2 > 0
+                select x2";
+                    }
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
 
-                            var multiLine1 = """
-                                goo
-                                bar
-                                """;
-                            var multiLine2 = """
-                                goo
-                                bar
-                                """;
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
 
-                            var multiLineWithoutLeadingWhitespace1 = """
-                                from x in y
-                                where x > 0
-                                select x
-                                """;
-                            var multiLineWithoutLeadingWhitespace2 = """
-                                from x2 in y2
-                                where x2 > 0
-                                select x2
-                                """;
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-
-                            var multiLine1 = """
-                                goo
-                                bar
-                                """;
-                            var multiLine2 = """
-                                goo
-                                bar
-                                """;
-
-                            var multiLineWithoutLeadingWhitespace1 = """
-                                from x in y
-                                where x > 0
-                                select x
-                                """;
-                            var multiLineWithoutLeadingWhitespace2 = """
-                                from x2 in y2
-                                where x2 > 0
-                                select x2
-                                """;
-                        }
+                        var multiLineWithoutLeadingWhitespace1 = """
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
                     }
-                    """",
+
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+
+                        var multiLine1 = """
+                            goo
+                            bar
+                            """;
+                        var multiLine2 = """
+                            goo
+                            bar
+                            """;
+
+                        var multiLineWithoutLeadingWhitespace1 = """
+                            from x in y
+                            where x > 0
+                            select x
+                            """;
+                        var multiLineWithoutLeadingWhitespace2 = """
+                            from x2 in y2
+                            where x2 > 0
+                            select x2
+                            """;
+                    }
+                }
+                """",
                 index: 1
             );
         }
@@ -331,81 +331,81 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    class Program1
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
+                {
+                    void M1()
                     {
-                        void M1()
-                        {
-                            var singleLine1 = {|FixAllInProject:|}"a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = {|FixAllInProject:|}"a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                            <Document>
-                    class Program2
+                }
+                        </Document>
+                        <Document>
+                class Program2
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                        </Project>
-                        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                            <Document>
-                    class Program3
+                }
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
+                {
+                    void M3()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 """"
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    class Program1
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
+                {
+                    void M1()
                     {
-                        void M1()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
-                            </Document>
-                            <Document>
-                    class Program2
+                }
+                        </Document>
+                        <Document>
+                class Program2
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
-                            </Document>
-                        </Project>
-                        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                            <Document>
-                    class Program3
+                }
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
+                {
+                    void M3()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """"
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """"
             );
         }
 
@@ -414,81 +414,81 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    class Program1
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
+                {
+                    void M1()
                     {
-                        void M1()
-                        {
-                            var singleLine1 = {|FixAllInSolution:|}"a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = {|FixAllInSolution:|}"a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                            <Document>
-                    class Program2
+                }
+                        </Document>
+                        <Document>
+                class Program2
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                        </Project>
-                        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                            <Document>
-                    class Program3
+                }
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
+                {
+                    void M3()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 """"
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    class Program1
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                class Program1
+                {
+                    void M1()
                     {
-                        void M1()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
-                            </Document>
-                            <Document>
-                    class Program2
+                }
+                        </Document>
+                        <Document>
+                class Program2
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
-                            </Document>
-                        </Project>
-                        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                            <Document>
-                    class Program3
+                }
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
+                {
+                    void M3()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """"
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """"
             );
         }
 
@@ -497,55 +497,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = {|FixAllInContainingMember:|}"a";
-                            var singleLine2 = @"goo""bar";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = {|FixAllInContainingMember:|}"a";
+                        var singleLine2 = @"goo""bar";
                     }
 
-                    class C2
+                    void M2()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                    """,
+                }
+
+                class C2
+                {
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
 
-                    class C2
+                    void M2()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                    """"
+                }
+
+                class C2
+                {
+                    void M()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                """"
             );
         }
 
@@ -554,73 +554,73 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    partial class C
+                partial class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = {|FixAllInContainingType:|}"a";
-                            var singleLine2 = @"goo""bar";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = {|FixAllInContainingType:|}"a";
+                        var singleLine2 = @"goo""bar";
                     }
 
-                    class C2
+                    void M2()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
+                }
 
-                    partial class C
+                class C2
+                {
+                    void M()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                    """,
+                }
+
+                partial class C
+                {
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                """,
                 """"
-                    partial class C
+                partial class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
 
-                    class C2
+                    void M2()
                     {
-                        void M()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
+                }
 
-                    partial class C
+                class C2
+                {
+                    void M()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                    """"
+                }
+
+                partial class C
+                {
+                    void M3()
+                    {
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
+                    }
+                }
+                """"
             );
         }
 
@@ -629,111 +629,111 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    partial class Program1
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                partial class Program1
+                {
+                    void M1()
                     {
-                        void M1()
-                        {
-                            var singleLine1 = {|FixAllInContainingType:|}"a";
-                            var singleLine2 = @"goo""bar";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
-                    }
-                            </Document>
-                            <Document>
-                    partial class Program1
-                    {
-                        void M3()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = {|FixAllInContainingType:|}"a";
+                        var singleLine2 = @"goo""bar";
                     }
 
-                    class Program2
+                    void M2()
                     {
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                        </Project>
-                        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                            <Document>
-                    class Program3
+                }
+                        </Document>
+                        <Document>
+                partial class Program1
+                {
+                    void M3()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
                     }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                }
+
+                class Program2
+                {
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
+                {
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """,
                 """"
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    partial class Program1
+                <Workspace>
+                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document>
+                partial class Program1
+                {
+                    void M1()
                     {
-                        void M1()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
-
-                        void M2()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
-                    }
-                            </Document>
-                            <Document>
-                    partial class Program1
-                    {
-                        void M3()
-                        {
-                            var singleLine1 = """a""";
-                            var singleLine2 = """goo"bar""";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
 
-                    class Program2
+                    void M2()
                     {
-                        void M2()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
-                            </Document>
-                        </Project>
-                        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                            <Document>
-                    class Program3
+                }
+                        </Document>
+                        <Document>
+                partial class Program1
+                {
+                    void M3()
                     {
-                        void M3()
-                        {
-                            var singleLine1 = "a";
-                            var singleLine2 = @"goo""bar";
-                        }
+                        var singleLine1 = """a""";
+                        var singleLine2 = """goo"bar""";
                     }
-                            </Document>
-                        </Project>
-                    </Workspace>
-                    """"
+                }
+
+                class Program2
+                {
+                    void M2()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                        </Document>
+                    </Project>
+                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                        <Document>
+                class Program3
+                {
+                    void M3()
+                    {
+                        var singleLine1 = "a";
+                        var singleLine2 = @"goo""bar";
+                    }
+                }
+                        </Document>
+                    </Project>
+                </Workspace>
+                """"
             );
         }
 
@@ -742,39 +742,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                    {|FixAllInDocument:|}@"class X
-                    {
-                    }",
-                    @"class Y
-                    {
-                    }");
-                        }
+                        await TestAsync(
+                {|FixAllInDocument:|}@"class X
+                {
+                }",
+                @"class Y
+                {
+                }");
                     }
-                    """,
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                                """
-                                class X
-                                {
-                                }
-                                """,
-                                """
-                                class Y
-                                {
-                                }
-                                """);
-                        }
+                        await TestAsync(
+                            """
+                            class X
+                            {
+                            }
+                            """,
+                            """
+                            class Y
+                            {
+                            }
+                            """);
                     }
-                    """"
+                }
+                """"
             );
         }
 
@@ -783,37 +783,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                    {|FixAllInDocument:|}@"class X
-                    {
-                    }", @"class Y
-                    {
-                    }");
-                        }
+                        await TestAsync(
+                {|FixAllInDocument:|}@"class X
+                {
+                }", @"class Y
+                {
+                }");
                     }
-                    """,
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                                """
-                                class X
-                                {
-                                }
-                                """, """
-                                class Y
-                                {
-                                }
-                                """);
-                        }
+                        await TestAsync(
+                            """
+                            class X
+                            {
+                            }
+                            """, """
+                            class Y
+                            {
+                            }
+                            """);
                     }
-                    """"
+                }
+                """"
             );
         }
 
@@ -822,41 +822,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                    {|FixAllInDocument:|}@"
-                    class X
-                    {
-                    }",
-                    @"
-                    class Y
-                    {
-                    }");
-                        }
+                        await TestAsync(
+                {|FixAllInDocument:|}@"
+                class X
+                {
+                }",
+                @"
+                class Y
+                {
+                }");
                     }
-                    """,
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                                """
-                                class X
-                                {
-                                }
-                                """,
-                                """
-                                class Y
-                                {
-                                }
-                                """);
-                        }
+                        await TestAsync(
+                            """
+                            class X
+                            {
+                            }
+                            """,
+                            """
+                            class Y
+                            {
+                            }
+                            """);
                     }
-                    """",
+                }
+                """",
                 index: 1
             );
         }
@@ -866,39 +866,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                    {|FixAllInDocument:|}@"
-                    class X
-                    {
-                    }", @"
-                    class Y
-                    {
-                    }");
-                        }
+                        await TestAsync(
+                {|FixAllInDocument:|}@"
+                class X
+                {
+                }", @"
+                class Y
+                {
+                }");
                     }
-                    """,
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                                """
-                                class X
-                                {
-                                }
-                                """, """
-                                class Y
-                                {
-                                }
-                                """);
-                        }
+                        await TestAsync(
+                            """
+                            class X
+                            {
+                            }
+                            """, """
+                            class Y
+                            {
+                            }
+                            """);
                     }
-                    """",
+                }
+                """",
                 index: 1
             );
         }
@@ -908,43 +908,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                    {|FixAllInDocument:|}@"
-                    class X
-                    {
+                        await TestAsync(
+                {|FixAllInDocument:|}@"
+                class X
+                {
+                }
+                ",
+                @"
+                class Y
+                {
+                }
+                ");
                     }
-                    ",
-                    @"
-                    class Y
-                    {
-                    }
-                    ");
-                        }
-                    }
-                    """,
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                                """
-                                class X
-                                {
-                                }
-                                """,
-                                """
-                                class Y
-                                {
-                                }
-                                """);
-                        }
+                        await TestAsync(
+                            """
+                            class X
+                            {
+                            }
+                            """,
+                            """
+                            class Y
+                            {
+                            }
+                            """);
                     }
-                    """",
+                }
+                """",
                 index: 1
             );
         }
@@ -954,41 +954,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                    {|FixAllInDocument:|}@"
-                    class X
-                    {
+                        await TestAsync(
+                {|FixAllInDocument:|}@"
+                class X
+                {
+                }
+                ", @"
+                class Y
+                {
+                }
+                ");
                     }
-                    ", @"
-                    class Y
-                    {
-                    }
-                    ");
-                        }
-                    }
-                    """,
+                }
+                """,
                 """"
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            await TestAsync(
-                                """
-                                class X
-                                {
-                                }
-                                """, """
-                                class Y
-                                {
-                                }
-                                """);
-                        }
+                        await TestAsync(
+                            """
+                            class X
+                            {
+                            }
+                            """, """
+                            class Y
+                            {
+                            }
+                            """);
                     }
-                    """",
+                }
+                """",
                 index: 1
             );
         }

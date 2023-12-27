@@ -520,9 +520,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await TestAsync(
                 text,
                 """
-                    /*comment*/
-                               Goo(/* params */); /* comment
-                    """,
+                /*comment*/
+                           Goo(/* params */); /* comment
+                """,
                 "C.Goo()"
             );
         }

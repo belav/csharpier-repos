@@ -54,16 +54,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                        }
-
-                        int M2() => 0;
+                        [|M2()|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferNone
             );
         }
@@ -74,27 +74,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             // Discard not supported in C# 6.0, so we fallback to unused local variable.
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                        }
-
-                        int M2() => 0;
+                        [|M2()|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var unused = M2();
-                        }
-
-                        int M2() => 0;
+                        var unused = M2();
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferDiscard,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp6
@@ -109,16 +109,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x = [|M2()|];
-                        }
-
-                        int M2() => 0;
+                        int x = [|M2()|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 optionName
             );
         }
@@ -133,16 +133,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                        }
-
-                        int M2() => 0;
+                        [|M2()|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 $@"class C
 {{
     void M()
@@ -163,16 +163,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                        }
-
-                        C M2() => new C();
+                        [|M2()|];
                     }
-                    """,
+
+                    C M2() => new C();
+                }
+                """,
                 $@"class C
 {{
     void M()
@@ -193,14 +193,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|1|];
-                        }
+                        [|1|];
                     }
-                    """,
+                }
+                """,
                 optionName
             );
         }
@@ -212,16 +212,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2(,)|];
-                        }
-
-                        int M2() => 0;
+                        [|M2(,)|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 optionName
             );
         }
@@ -233,14 +233,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                        }
+                        [|M2()|];
                     }
-                    """,
+                }
+                """,
                 optionName
             );
         }
@@ -252,16 +252,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                        }
-
-                        UndefinedType M2() => null;
+                        [|M2()|];
                     }
-                    """,
+
+                    UndefinedType M2() => null;
+                }
+                """,
                 optionName
             );
         }
@@ -273,17 +273,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Threading.Tasks;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    private async Task M()
                     {
-                        private async Task M()
-                        {
-                            // error CS0103: The name 'CancellationToken' does not exist in the current context
-                            [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
-                        }
+                        // error CS0103: The name 'CancellationToken' does not exist in the current context
+                        [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
                     }
-                    """,
+                }
+                """,
                 optionName
             );
         }
@@ -295,17 +295,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    private async Task M()
                     {
-                        private async Task M()
-                        {
-                            // error CS0103: The name 'Task' does not exist in the current context
-                            // error CS0103: The name 'CancellationToken' does not exist in the current context
-                            // error CS1983: The return type of an async method must be void, Task or Task<T>
-                            [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
-                        }
+                        // error CS0103: The name 'Task' does not exist in the current context
+                        // error CS0103: The name 'CancellationToken' does not exist in the current context
+                        // error CS1983: The return type of an async method must be void, Task or Task<T>
+                        [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
                     }
-                    """,
+                }
+                """,
                 optionName
             );
         }
@@ -317,16 +317,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                        }
-
-                        void M2() { }
+                        [|M2()|];
                     }
-                    """,
+
+                    void M2() { }
+                }
+                """,
                 optionName
             );
         }
@@ -373,29 +373,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var unused = M2();
-                            [|M2()|];
-                        }
-
-                        int M2() => 0;
+                        var unused = M2();
+                        [|M2()|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var unused = M2();
-                            var unused1 = M2();
-                        }
-
-                        int M2() => 0;
+                        var unused = M2();
+                        var unused1 = M2();
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferUnusedLocal
             );
         }
@@ -405,29 +405,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|M2()|];
-                            var unused = M2();
-                        }
-
-                        int M2() => 0;
+                        [|M2()|];
+                        var unused = M2();
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var unused1 = M2();
-                            var unused = M2();
-                        }
-
-                        int M2() => 0;
+                        var unused1 = M2();
+                        var unused = M2();
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferUnusedLocal
             );
         }
@@ -437,35 +437,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int p)
                     {
-                        void M(int p)
+                        [|M2()|];
+                        if (p > 0)
                         {
-                            [|M2()|];
-                            if (p > 0)
-                            {
-                                var unused = M2();
-                            }
+                            var unused = M2();
                         }
-
-                        int M2() => 0;
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int p)
                     {
-                        void M(int p)
+                        var unused1 = M2();
+                        if (p > 0)
                         {
-                            var unused1 = M2();
-                            if (p > 0)
-                            {
-                                var unused = M2();
-                            }
+                            var unused = M2();
                         }
-
-                        int M2() => 0;
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferUnusedLocal
             );
         }
@@ -475,41 +475,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int p)
                     {
-                        void M(int p)
+                        if (p > 0)
                         {
-                            if (p > 0)
-                            {
-                                [|M2()|];
-                            }
-                            else
-                            {
-                                var unused = M2();
-                            }
+                            [|M2()|];
                         }
-
-                        int M2() => 0;
+                        else
+                        {
+                            var unused = M2();
+                        }
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int p)
                     {
-                        void M(int p)
+                        if (p > 0)
                         {
-                            if (p > 0)
-                            {
-                                var unused1 = M2();
-                            }
-                            else
-                            {
-                                var unused = M2();
-                            }
+                            var unused1 = M2();
                         }
-
-                        int M2() => 0;
+                        else
+                        {
+                            var unused = M2();
+                        }
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferUnusedLocal
             );
         }
@@ -526,24 +526,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public C()
                     {
-                        public C()
-                        {
-                            M2();           // Separate code block
-                        }
-
-                        void M(int unused1, int unused2)
-                        {
-                            {|FixAllInDocument:M2()|};
-                            M2();           // Another instance in same code block
-                            _ = M2();       // Already fixed
-                            var x = M2();   // Different unused value diagnostic
-                        }
-
-                        int M2() => 0;
+                        M2();           // Separate code block
                     }
-                    """,
+
+                    void M(int unused1, int unused2)
+                    {
+                        {|FixAllInDocument:M2()|};
+                        M2();           // Another instance in same code block
+                        _ = M2();       // Already fixed
+                        var x = M2();   // Different unused value diagnostic
+                    }
+
+                    int M2() => 0;
+                }
+                """,
                 $@"class C
 {{
     public C()
@@ -570,31 +570,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            // C1
-                            [|M2()|];   // C2
-                            // C3
-                        }
-
-                        int M2() => 0;
+                        // C1
+                        [|M2()|];   // C2
+                        // C3
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            // C1
-                            _ = M2();   // C2
-                            // C3
-                        }
-
-                        int M2() => 0;
+                        // C1
+                        _ = M2();   // C2
+                        // C3
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferDiscard
             );
         }
@@ -604,30 +604,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        void M()
-                        {/*C0*/
-                            /*C1*/[|M2()|]/*C2*/;/*C3*/
-                         /*C4*/
-                        }
-
-                        int M2() => 0;
+                class C
+                {
+                    void M()
+                    {/*C0*/
+                        /*C1*/[|M2()|]/*C2*/;/*C3*/
+                     /*C4*/
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M()
-                        {/*C0*/
-                            /*C1*/
-                            _ = M2()/*C2*/;/*C3*/
-                         /*C4*/
-                        }
-
-                        int M2() => 0;
+                class C
+                {
+                    void M()
+                    {/*C0*/
+                        /*C1*/
+                        _ = M2()/*C2*/;/*C3*/
+                     /*C4*/
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferDiscard
             );
         }
@@ -637,31 +637,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            // C1
-                            [|M2()|];   // C2
-                            // C3
-                        }
-
-                        int M2() => 0;
+                        // C1
+                        [|M2()|];   // C2
+                        // C3
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            // C1
-                            var unused = M2();   // C2
-                            // C3
-                        }
-
-                        int M2() => 0;
+                        // C1
+                        var unused = M2();   // C2
+                        // C3
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferUnusedLocal
             );
         }
@@ -671,30 +671,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        void M()
-                        {/*C0*/
-                            /*C1*/[|M2()|]/*C2*/;/*C3*/
-                         /*C4*/
-                        }
-
-                        int M2() => 0;
+                class C
+                {
+                    void M()
+                    {/*C0*/
+                        /*C1*/[|M2()|]/*C2*/;/*C3*/
+                     /*C4*/
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M()
-                        {/*C0*/
-                            /*C1*/
-                            var unused = M2()/*C2*/;/*C3*/
-                            /*C4*/
-                        }
-
-                        int M2() => 0;
+                class C
+                {
+                    void M()
+                    {/*C0*/
+                        /*C1*/
+                        var unused = M2()/*C2*/;/*C3*/
+                        /*C4*/
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 options: PreferUnusedLocal
             );
         }
@@ -706,12 +706,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        void M() => [|M2()|];
-                        int M2() => 0;
-                    }
-                    """,
+                class C
+                {
+                    void M() => [|M2()|];
+                    int M2() => 0;
+                }
+                """,
                 optionName
             );
         }
@@ -723,16 +723,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            System.Action a = () => [|M2()|];
-                        }
-
-                        int M2() => 0;
+                        System.Action a = () => [|M2()|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 optionName
             );
         }
@@ -744,19 +744,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            LocalFunction();
-                            return;
+                        LocalFunction();
+                        return;
 
-                            void LocalFunction() => [|M2()|];
-                        }
-
-                        int M2() => 0;
+                        void LocalFunction() => [|M2()|];
                     }
-                    """,
+
+                    int M2() => 0;
+                }
+                """,
                 optionName
             );
         }
@@ -768,20 +768,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                                List<dynamic> returnValue = new List<dynamic>();
+                            List<dynamic> returnValue = new List<dynamic>();
 
-                                dynamic dynamicValue = new object();
+                            dynamic dynamicValue = new object();
 
-                                [|returnValue.Add(dynamicValue)|];
-                        }
+                            [|returnValue.Add(dynamicValue)|];
                     }
-                    """,
+                }
+                """,
                 optionName
             );
         }

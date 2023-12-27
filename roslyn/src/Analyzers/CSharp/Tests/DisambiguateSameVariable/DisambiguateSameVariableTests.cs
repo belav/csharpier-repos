@@ -73,25 +73,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    void M(int a)
                     {
-                        int a;
-                        void M(int a)
-                        {
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    void M(int a)
                     {
-                        int a;
-                        void M(int a)
-                        {
-                            this.a = a;
-                        }
+                        this.a = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -117,25 +117,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int _a;
+                    void M(int a)
                     {
-                        int _a;
-                        void M(int a)
-                        {
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int _a;
+                    void M(int a)
                     {
-                        int _a;
-                        void M(int a)
-                        {
-                            _a = a;
-                        }
+                        _a = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -144,25 +144,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int A;
+                    void M(int a)
                     {
-                        int A;
-                        void M(int a)
-                        {
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int A;
+                    void M(int a)
                     {
-                        int A;
-                        void M(int a)
-                        {
-                            A = a;
-                        }
+                        A = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -171,25 +171,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int A { get; set; }
+                    void M(int a)
                     {
-                        int A { get; set; }
-                        void M(int a)
-                        {
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int A { get; set; }
+                    void M(int a)
                     {
-                        int A { get; set; }
-                        void M(int a)
-                        {
-                            A = a;
-                        }
+                        A = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -198,25 +198,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    readonly int a;
+                    public C(int a)
                     {
-                        readonly int a;
-                        public C(int a)
-                        {
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    readonly int a;
+                    public C(int a)
                     {
-                        readonly int a;
-                        public C(int a)
-                        {
-                            this.a = a;
-                        }
+                        this.a = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -226,25 +226,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
             // Not legal, but is at least something they might want.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    readonly int a;
+                    void M(int a)
                     {
-                        readonly int a;
-                        void M(int a)
-                        {
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    readonly int a;
+                    void M(int a)
                     {
-                        readonly int a;
-                        void M(int a)
-                        {
-                            {|CS0191:this.a|} = a;
-                        }
+                        {|CS0191:this.a|} = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -253,33 +253,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Base
-                    {
-                        protected int a;
-                    }
+                class Base
+                {
+                    protected int a;
+                }
 
-                    class C : Base
+                class C : Base
+                {
+                    public C(int a)
                     {
-                        public C(int a)
-                        {
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class Base
-                    {
-                        protected int a;
-                    }
+                class Base
+                {
+                    protected int a;
+                }
 
-                    class C : Base
+                class C : Base
+                {
+                    public C(int a)
                     {
-                        public C(int a)
-                        {
-                            this.a = a;
-                        }
+                        this.a = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -326,29 +326,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    void M(int a)
                     {
-                        int a;
-                        void M(int a)
+                        if ({|CS1718:a == a|})
                         {
-                            if ({|CS1718:a == a|})
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    void M(int a)
                     {
-                        int a;
-                        void M(int a)
+                        if (this.a == a)
                         {
-                            if (this.a == a)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -357,27 +357,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    void M(int a)
                     {
-                        int a;
-                        void M(int a)
-                        {
-                            {|CS1717:a = a|};
-                            {|CS1717:a = a|};
-                        }
+                        {|CS1717:a = a|};
+                        {|CS1717:a = a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    void M(int a)
                     {
-                        int a;
-                        void M(int a)
-                        {
-                            this.a = a;
-                            this.a = a;
-                        }
+                        this.a = a;
+                        this.a = a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -386,27 +386,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    int A { get; set; }
+                    void M()
                     {
-                        int a;
-                        int A { get; set; }
-                        void M()
-                        {
-                            {|CS1717:this.a = this.a|};
-                        }
+                        {|CS1717:this.a = this.a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    int A { get; set; }
+                    void M()
                     {
-                        int a;
-                        int A { get; set; }
-                        void M()
-                        {
-                            this.A = this.a;
-                        }
+                        this.A = this.a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -415,27 +415,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    int A { get; set; }
+                    void M(C c)
                     {
-                        int a;
-                        int A { get; set; }
-                        void M(C c)
-                        {
-                            {|CS1717:c.a = c.a|};
-                        }
+                        {|CS1717:c.a = c.a|};
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int a;
+                    int A { get; set; }
+                    void M(C c)
                     {
-                        int a;
-                        int A { get; set; }
-                        void M(C c)
-                        {
-                            c.A = c.a;
-                        }
+                        c.A = c.a;
                     }
-                    """
+                }
+                """
             );
         }
     }

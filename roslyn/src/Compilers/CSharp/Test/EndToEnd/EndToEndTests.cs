@@ -243,17 +243,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 var builder = new StringBuilder();
                 builder.AppendLine(
                     """
-                        static class E
+                    static class E
+                    {
+                        public static C M(this C c, string x) { return c; }
+                    }
+                    class C
+                    {
+                        static C GetC() => new C();
+                        void M2()
                         {
-                            public static C M(this C c, string x) { return c; }
-                        }
-                        class C
-                        {
-                            static C GetC() => new C();
-                            void M2()
-                            {
-                                GetC()
-                        """
+                            GetC()
+                    """
                 );
                 for (int i = 0; i < depth; i++)
                 {
@@ -568,9 +568,9 @@ public class Test
             var sb = new StringBuilder();
             sb.AppendLine(
                 """
-                    _ = new System.Collections.Generic.Dictionary<string, string>
-                    {
-                    """
+                _ = new System.Collections.Generic.Dictionary<string, string>
+                {
+                """
             );
 
             for (int i = 0; i < 100; i++)
@@ -628,19 +628,19 @@ public class Test
             files.Add(
                 (
                     """
-                        class C
-                        {
-                            public static void M() => throw null!;
-                        }
+                    class C
+                    {
+                        public static void M() => throw null!;
+                    }
 
-                        namespace System.Runtime.CompilerServices
+                    namespace System.Runtime.CompilerServices
+                    {
+                        public class InterceptsLocationAttribute : Attribute
                         {
-                            public class InterceptsLocationAttribute : Attribute
-                            {
-                                public InterceptsLocationAttribute(string path, int line, int column) { }
-                            }
+                            public InterceptsLocationAttribute(string path, int line, int column) { }
                         }
-                        """,
+                    }
+                    """,
                     "C.cs"
                 )
             );

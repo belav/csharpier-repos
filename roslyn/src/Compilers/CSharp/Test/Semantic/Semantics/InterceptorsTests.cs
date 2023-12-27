@@ -20,16 +20,16 @@ public class InterceptorsTests : CSharpTestBase
 {
     private static readonly (string, string) s_attributesSource = (
         """
-            namespace System.Runtime.CompilerServices;
+        namespace System.Runtime.CompilerServices;
 
-            [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
-            public sealed class InterceptsLocationAttribute : Attribute
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+            public InterceptsLocationAttribute(string filePath, int line, int character)
             {
-                public InterceptsLocationAttribute(string filePath, int line, int character)
-                {
-                }
             }
-            """,
+        }
+        """,
         "attributes.cs"
     );
 
@@ -797,50 +797,50 @@ public class InterceptorsTests : CSharpTestBase
     {
         var source0 = (
             """
-                public class D0
+            public class D0
+            {
+                public static void M()
                 {
-                    public static void M()
-                    {
-                        C.InterceptableMethod("a");
-                    }
+                    C.InterceptableMethod("a");
                 }
-                """,
+            }
+            """,
             "Program.cs"
         );
 
         var source1 = (
             """
-                public class D1
+            public class D1
+            {
+                public static void M()
                 {
-                    public static void M()
-                    {
-                        C.InterceptableMethod("a");
-                    }
+                    C.InterceptableMethod("a");
                 }
-                """,
+            }
+            """,
             "Program.cs"
         );
 
         var source2 = (
             """
-                using System.Runtime.CompilerServices;
-                using System;
+            using System.Runtime.CompilerServices;
+            using System;
 
-                D0.M();
-                D1.M();
+            D0.M();
+            D1.M();
 
-                public class C
-                {
+            public class C
+            {
 
-                    public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
-                }
+                public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+            }
 
-                public static class Interceptor
-                {
-                    [InterceptsLocation("Program.cs", 5, 11)]
-                    public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
-                }
-                """,
+            public static class Interceptor
+            {
+                [InterceptsLocation("Program.cs", 5, 11)]
+                public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
+            }
+            """,
             "Interceptor.cs"
         );
 
@@ -4581,18 +4581,18 @@ public class InterceptorsTests : CSharpTestBase
         verifier.VerifyIL(
             "D.M2",
             """
-                {
-                  // Code size       12 (0xc)
-                  .maxstack  2
-                  IL_0000:  ldarg.0
-                  IL_0001:  ldarg.1
-                  IL_0002:  call       "bool object.NotReferenceEquals(object, object)"
-                  IL_0007:  brfalse.s  IL_000b
-                  IL_0009:  ldnull
-                  IL_000a:  throw
-                  IL_000b:  ret
-                }
-                """
+            {
+              // Code size       12 (0xc)
+              .maxstack  2
+              IL_0000:  ldarg.0
+              IL_0001:  ldarg.1
+              IL_0002:  call       "bool object.NotReferenceEquals(object, object)"
+              IL_0007:  brfalse.s  IL_000b
+              IL_0009:  ldnull
+              IL_000a:  throw
+              IL_000b:  ret
+            }
+            """
         );
     }
 
@@ -4669,18 +4669,18 @@ public class InterceptorsTests : CSharpTestBase
         verifier.VerifyIL(
             "D.M0",
             """
-                {
-                  // Code size       12 (0xc)
-                  .maxstack  2
-                  IL_0000:  ldarg.0
-                  IL_0001:  ldarg.1
-                  IL_0002:  call       "bool D.Interceptor(object, object)"
-                  IL_0007:  brfalse.s  IL_000b
-                  IL_0009:  ldnull
-                  IL_000a:  throw
-                  IL_000b:  ret
-                }
-                """
+            {
+              // Code size       12 (0xc)
+              .maxstack  2
+              IL_0000:  ldarg.0
+              IL_0001:  ldarg.1
+              IL_0002:  call       "bool D.Interceptor(object, object)"
+              IL_0007:  brfalse.s  IL_000b
+              IL_0009:  ldnull
+              IL_000a:  throw
+              IL_000b:  ret
+            }
+            """
         );
     }
 
@@ -5255,13 +5255,13 @@ partial struct CustomHandler
         verifier.VerifyIL(
             "<top-level-statements-entry-point>",
             """
-                {
-                  // Code size        6 (0x6)
-                  .maxstack  0
-                  IL_0000:  call       "void D.Interceptor()"
-                  IL_0005:  ret
-                }
-                """
+            {
+              // Code size        6 (0x6)
+              .maxstack  0
+              IL_0000:  call       "void D.Interceptor()"
+              IL_0005:  ret
+            }
+            """
         );
     }
 

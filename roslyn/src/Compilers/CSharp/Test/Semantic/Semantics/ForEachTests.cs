@@ -4182,16 +4182,16 @@ public static class Extensions
         {
             var comp = CreateCompilation(
                     """
-                        class C
+                    class C
+                    {
+                        unsafe void M()
                         {
-                            unsafe void M()
+                            foreach (var x in new int*[0])
                             {
-                                foreach (var x in new int*[0])
-                                {
-                                }
                             }
                         }
-                        """,
+                    }
+                    """,
                     options: TestOptions.UnsafeDebugDll
                 )
                 .VerifyDiagnostics();
@@ -4208,28 +4208,28 @@ public static class Extensions
         {
             var comp = CreateCompilation(
                     """
-                        internal class MyEnumerable
-                        {
-                            public Enumerator GetEnumerator() => new Enumerator();
-                        }
+                    internal class MyEnumerable
+                    {
+                        public Enumerator GetEnumerator() => new Enumerator();
+                    }
 
-                        internal unsafe class Enumerator
-                        {
-                            public int* Current { get; }
+                    internal unsafe class Enumerator
+                    {
+                        public int* Current { get; }
 
-                            public bool MoveNext() => true;
-                        }
+                        public bool MoveNext() => true;
+                    }
 
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
+                            foreach (var x in new MyEnumerable())
                             {
-                                foreach (var x in new MyEnumerable())
-                                {
-                                }
                             }
                         }
-                        """,
+                    }
+                    """,
                     options: TestOptions.UnsafeDebugDll
                 )
                 .VerifyDiagnostics();

@@ -47,30 +47,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x [|=>|]
                         {
-                            Func<int, string> f = x [|=>|]
-                            {
-                                return x.ToString();
-                            };
-                        }
+                            return x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x => x.ToString();
-                        }
+                        Func<int, string> f = x => x.ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -80,16 +80,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x [|=>|] x.ToString();
-                        }
+                        Func<int, string> f = x [|=>|] x.ToString();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: UseExpressionBody)
             );
         }
@@ -99,30 +99,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x [|=>|] x.ToString();
-                        }
+                        Func<int, string> f = x [|=>|] x.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x =>
                         {
-                            Func<int, string> f = x =>
-                            {
-                                return x.ToString();
-                            };
-                        }
+                            return x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -132,16 +132,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x [|=>|] { return x.ToString(); };
-                        }
+                        Func<int, string> f = x [|=>|] { return x.ToString(); };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: UseBlockBody)
             );
         }
@@ -151,34 +151,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        TargetMethod(x [|=>|]
                         {
-                            TargetMethod(x [|=>|]
-                            {
-                                return x.ToString();
-                            });
-                        }
-
-                        void TargetMethod(Func<int, string> targetParam) { }
+                            return x.ToString();
+                        });
                     }
-                    """,
+
+                    void TargetMethod(Func<int, string> targetParam) { }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            TargetMethod(x => x.ToString());
-                        }
-
-                        void TargetMethod(Func<int, string> targetParam) { }
+                        TargetMethod(x => x.ToString());
                     }
-                    """,
+
+                    void TargetMethod(Func<int, string> targetParam) { }
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -188,34 +188,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            TargetMethod(x [|=>|] x.ToString());
-                        }
-
-                        void TargetMethod(Func<int, string> targetParam) { }
+                        TargetMethod(x [|=>|] x.ToString());
                     }
-                    """,
+
+                    void TargetMethod(Func<int, string> targetParam) { }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        TargetMethod(x =>
                         {
-                            TargetMethod(x =>
-                            {
-                                return x.ToString();
-                            });
-                        }
-
-                        void TargetMethod(Func<int, string> targetParam) { }
+                            return x.ToString();
+                        });
                     }
-                    """,
+
+                    void TargetMethod(Func<int, string> targetParam) { }
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -225,19 +225,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x =>
                         {
-                            Func<int, string> f = x =>
-                            {
-                                [|return|] x.ToString();
-                            };
-                        }
+                            [|return|] x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: UseExpressionBody)
             );
         }
@@ -247,19 +247,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x =>
-                            [|{|]
-                                return x.ToString();
-                            };
-                        }
+                        Func<int, string> f = x =>
+                        [|{|]
+                            return x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: UseExpressionBody)
             );
         }
@@ -269,19 +269,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x =>
                         {
-                            Func<int, string> f = x =>
-                            {
-                                return x.ToString();
-                            [|}|];
-                        }
+                            return x.ToString();
+                        [|}|];
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: UseExpressionBody)
             );
         }
@@ -291,30 +291,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x [|=>|]
                         {
-                            Func<int, string> f = x [|=>|]
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x => throw null;
-                        }
+                        Func<int, string> f = x => throw null;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -324,30 +324,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x [|=>|] throw null;
-                        }
+                        Func<int, string> f = x [|=>|] throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x =>
                         {
-                            Func<int, string> f = x =>
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -357,30 +357,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = x [|=>|]
                         {
-                            Action<int> f = x [|=>|]
-                            {
-                                x.ToString();
-                            };
-                        }
+                            x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = x => x.ToString();
-                        }
+                        Action<int> f = x => x.ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -390,30 +390,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = x [|=>|]
                         {
-                            Action<int> f = x [|=>|]
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = x => throw null;
-                        }
+                        Action<int> f = x => throw null;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -423,30 +423,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = x [|=>|] x.ToString();
-                        }
+                        Action<int> f = x [|=>|] x.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = x =>
                         {
-                            Action<int> f = x =>
-                            {
-                                x.ToString();
-                            };
-                        }
+                            x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -456,30 +456,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = x [|=>|] throw null;
-                        }
+                        Action<int> f = x [|=>|] throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = x =>
                         {
-                            Action<int> f = x =>
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -489,30 +489,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = async x [|=>|]
                         {
-                            Action<int> f = async x [|=>|]
-                            {
-                                x.ToString();
-                            };
-                        }
+                            x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = async x => x.ToString();
-                        }
+                        Action<int> f = async x => x.ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -522,30 +522,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = async x [|=>|]
                         {
-                            Action<int> f = async x [|=>|]
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = async x => throw null;
-                        }
+                        Action<int> f = async x => throw null;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -555,30 +555,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = async x [|=>|] x.ToString();
-                        }
+                        Action<int> f = async x [|=>|] x.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = async x =>
                         {
-                            Action<int> f = async x =>
-                            {
-                                x.ToString();
-                            };
-                        }
+                            x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -588,30 +588,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Action<int> f = async x [|=>|] throw null;
-                        }
+                        Action<int> f = async x [|=>|] throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Action<int> f = async x =>
                         {
-                            Action<int> f = async x =>
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -621,32 +621,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = () [|=>|]
                         {
-                            Func<Task> f = () [|=>|]
-                            {
-                                return Task.CompletedTask;
-                            };
-                        }
+                            return Task.CompletedTask;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = () => Task.CompletedTask;
-                        }
+                        Func<Task> f = () => Task.CompletedTask;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -656,32 +656,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = () [|=>|]
                         {
-                            Func<Task> f = () [|=>|]
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = () => throw null;
-                        }
+                        Func<Task> f = () => throw null;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -691,32 +691,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = () [|=>|] Task.CompletedTask;
-                        }
+                        Func<Task> f = () [|=>|] Task.CompletedTask;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = () =>
                         {
-                            Func<Task> f = () =>
-                            {
-                                return Task.CompletedTask;
-                            };
-                        }
+                            return Task.CompletedTask;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -726,32 +726,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = () [|=>|] throw null;
-                        }
+                        Func<Task> f = () [|=>|] throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = () =>
                         {
-                            Func<Task> f = () =>
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -761,32 +761,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = async () [|=>|]
                         {
-                            Func<Task> f = async () [|=>|]
-                            {
-                                await Task.CompletedTask;
-                            };
-                        }
+                            await Task.CompletedTask;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = async () => await Task.CompletedTask;
-                        }
+                        Func<Task> f = async () => await Task.CompletedTask;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -796,32 +796,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = async () [|=>|]
                         {
-                            Func<Task> f = async () [|=>|]
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = async () => throw null;
-                        }
+                        Func<Task> f = async () => throw null;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -831,32 +831,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = async () [|=>|] await Task.CompletedTask;
-                        }
+                        Func<Task> f = async () [|=>|] await Task.CompletedTask;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = async () =>
                         {
-                            Func<Task> f = async () =>
-                            {
-                                await Task.CompletedTask;
-                            };
-                        }
+                            await Task.CompletedTask;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -866,32 +866,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<Task> f = async () [|=>|] throw null;
-                        }
+                        Func<Task> f = async () [|=>|] throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<Task> f = async () =>
                         {
-                            Func<Task> f = async () =>
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -901,32 +901,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = x [|=>|]
                         {
-                            Func<int, Task<string>> f = x [|=>|]
-                            {
-                                return Task.FromResult(x.ToString());
-                            };
-                        }
+                            return Task.FromResult(x.ToString());
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = x => Task.FromResult(x.ToString());
-                        }
+                        Func<int, Task<string>> f = x => Task.FromResult(x.ToString());
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -936,32 +936,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = x [|=>|]
                         {
-                            Func<int, Task<string>> f = x [|=>|]
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = x => throw null;
-                        }
+                        Func<int, Task<string>> f = x => throw null;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -971,32 +971,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = x [|=>|] Task.FromResult(x.ToString());
-                        }
+                        Func<int, Task<string>> f = x [|=>|] Task.FromResult(x.ToString());
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = x =>
                         {
-                            Func<int, Task<string>> f = x =>
-                            {
-                                return Task.FromResult(x.ToString());
-                            };
-                        }
+                            return Task.FromResult(x.ToString());
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1006,32 +1006,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = x [|=>|] throw null;
-                        }
+                        Func<int, Task<string>> f = x [|=>|] throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = x =>
                         {
-                            Func<int, Task<string>> f = x =>
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1041,32 +1041,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = async x [|=>|]
                         {
-                            Func<int, Task<string>> f = async x [|=>|]
-                            {
-                                return await Task.FromResult(x.ToString());
-                            };
-                        }
+                            return await Task.FromResult(x.ToString());
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = async x => await Task.FromResult(x.ToString());
-                        }
+                        Func<int, Task<string>> f = async x => await Task.FromResult(x.ToString());
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1076,32 +1076,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = async x [|=>|]
                         {
-                            Func<int, Task<string>> f = async x [|=>|]
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = async x => throw null;
-                        }
+                        Func<int, Task<string>> f = async x => throw null;
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1111,32 +1111,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = async x [|=>|] await Task.FromResult(x.ToString());
-                        }
+                        Func<int, Task<string>> f = async x [|=>|] await Task.FromResult(x.ToString());
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = async x =>
                         {
-                            Func<int, Task<string>> f = async x =>
-                            {
-                                return await Task.FromResult(x.ToString());
-                            };
-                        }
+                            return await Task.FromResult(x.ToString());
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1146,32 +1146,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Task<string>> f = async x [|=>|] throw null;
-                        }
+                        Func<int, Task<string>> f = async x [|=>|] throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Task<string>> f = async x =>
                         {
-                            Func<int, Task<string>> f = async x =>
-                            {
-                                throw null;
-                            };
-                        }
+                            throw null;
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1181,35 +1181,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x [|=>|]
                         {
-                            Func<int, string> f = x [|=>|]
-                            {
-                                // Comment
-                                return x.ToString();
-                            };
-                        }
+                            // Comment
+                            return x.ToString();
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x =>
-                                // Comment
-                                x.ToString();
-                        }
+                        Func<int, string> f = x =>
+                            // Comment
+                            x.ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1219,32 +1219,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x [|=>|]
                         {
-                            Func<int, string> f = x [|=>|]
-                            {
-                                return x.ToString(); // Comment
-                            };
-                        }
+                            return x.ToString(); // Comment
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x => x.ToString();
-                        }
+                        Func<int, string> f = x => x.ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1254,32 +1254,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, string> f = x [|=>|] x.ToString(); // Comment
-                        }
+                        Func<int, string> f = x [|=>|] x.ToString(); // Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, string> f = x =>
                         {
-                            Func<int, string> f = x =>
-                            {
-                                return x.ToString();
-                            }; // Comment
-                        }
+                            return x.ToString();
+                        }; // Comment
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1289,33 +1289,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = x {|FixAllInDocument:=>|}
                         {
-                            Func<int, Func<int, string>> f = x {|FixAllInDocument:=>|}
+                            return y =>
                             {
-                                return y =>
-                                {
-                                    return (x + y).ToString();
-                                };
+                                return (x + y).ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = x => y => (x + y).ToString();
-                        }
+                        Func<int, Func<int, string>> f = x => y => (x + y).ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1325,33 +1325,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = x =>
                         {
-                            Func<int, Func<int, string>> f = x =>
+                            return y {|FixAllInDocument:=>|}
                             {
-                                return y {|FixAllInDocument:=>|}
-                                {
-                                    return (x + y).ToString();
-                                };
+                                return (x + y).ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = x => y => (x + y).ToString();
-                        }
+                        Func<int, Func<int, string>> f = x => y => (x + y).ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1361,33 +1361,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = x {|FixAllInDocument:=>|} y => (x + y).ToString();
-                        }
+                        Func<int, Func<int, string>> f = x {|FixAllInDocument:=>|} y => (x + y).ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = x =>
                         {
-                            Func<int, Func<int, string>> f = x =>
+                            return y =>
                             {
-                                return y =>
-                                {
-                                    return (x + y).ToString();
-                                };
+                                return (x + y).ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1397,33 +1397,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = x => y {|FixAllInDocument:=>|} (x + y).ToString();
-                        }
+                        Func<int, Func<int, string>> f = x => y {|FixAllInDocument:=>|} (x + y).ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = x =>
                         {
-                            Func<int, Func<int, string>> f = x =>
+                            return y =>
                             {
-                                return y =>
-                                {
-                                    return (x + y).ToString();
-                                };
+                                return (x + y).ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1433,33 +1433,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = a {|FixAllInDocument:=>|}
                         {
-                            Func<int, Func<int, string>> f = a {|FixAllInDocument:=>|}
+                            return b =>
                             {
-                                return b =>
-                                {
-                                    return b.ToString();
-                                };
+                                return b.ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = a => b => b.ToString();
-                        }
+                        Func<int, Func<int, string>> f = a => b => b.ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1469,33 +1469,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = a =>
                         {
-                            Func<int, Func<int, string>> f = a =>
+                            return b {|FixAllInDocument:=>|}
                             {
-                                return b {|FixAllInDocument:=>|}
-                                {
-                                    return b.ToString();
-                                };
+                                return b.ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = a => b => b.ToString();
-                        }
+                        Func<int, Func<int, string>> f = a => b => b.ToString();
                     }
-                    """,
+                }
+                """,
                 options: UseExpressionBody
             );
         }
@@ -1505,33 +1505,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = a {|FixAllInDocument:=>|} b => b.ToString();
-                        }
+                        Func<int, Func<int, string>> f = a {|FixAllInDocument:=>|} b => b.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = a =>
                         {
-                            Func<int, Func<int, string>> f = a =>
+                            return b =>
                             {
-                                return b =>
-                                {
-                                    return b.ToString();
-                                };
+                                return b.ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }
@@ -1541,33 +1541,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            Func<int, Func<int, string>> f = a => b {|FixAllInDocument:=>|} b.ToString();
-                        }
+                        Func<int, Func<int, string>> f = a => b {|FixAllInDocument:=>|} b.ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        Func<int, Func<int, string>> f = a =>
                         {
-                            Func<int, Func<int, string>> f = a =>
+                            return b =>
                             {
-                                return b =>
-                                {
-                                    return b.ToString();
-                                };
+                                return b.ToString();
                             };
-                        }
+                        };
                     }
-                    """,
+                }
+                """,
                 options: UseBlockBody
             );
         }

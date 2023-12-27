@@ -33,15 +33,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    [|static|] internal class C
-                    {
-                    }
-                    """,
+                [|static|] internal class C
+                {
+                }
+                """,
                 """
-                    internal static class C
-                    {
-                    }
-                    """
+                internal static class C
+                {
+                }
+                """
             );
         }
 
@@ -50,15 +50,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    [|unsafe|] public struct C
-                    {
-                    }
-                    """,
+                [|unsafe|] public struct C
+                {
+                }
+                """,
                 """
-                    public unsafe struct C
-                    {
-                    }
-                    """
+                public unsafe struct C
+                {
+                }
+                """
             );
         }
 
@@ -67,15 +67,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    [|unsafe|] public interface C
-                    {
-                    }
-                    """,
+                [|unsafe|] public interface C
+                {
+                }
+                """,
                 """
-                    public unsafe interface C
-                    {
-                    }
-                    """
+                public unsafe interface C
+                {
+                }
+                """
             );
         }
 
@@ -84,15 +84,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    [|internal|] protected enum C
-                    {
-                    }
-                    """,
+                [|internal|] protected enum C
+                {
+                }
+                """,
                 """
-                    protected internal enum C
-                    {
-                    }
-                    """
+                protected internal enum C
+                {
+                }
+                """
             );
         }
 
@@ -110,17 +110,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|unsafe|] public void M() { }
-                    }
-                    """,
+                class C
+                {
+                    [|unsafe|] public void M() { }
+                }
+                """,
                 """
-                    class C
-                    {
-                        public unsafe void M() { }
-                    }
-                    """
+                class C
+                {
+                    public unsafe void M() { }
+                }
+                """
             );
         }
 
@@ -129,17 +129,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|unsafe|] public int a;
-                    }
-                    """,
+                class C
+                {
+                    [|unsafe|] public int a;
+                }
+                """,
                 """
-                    class C
-                    {
-                        public unsafe int a;
-                    }
-                    """
+                class C
+                {
+                    public unsafe int a;
+                }
+                """
             );
         }
 
@@ -148,17 +148,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|unsafe|] public C() { }
-                    }
-                    """,
+                class C
+                {
+                    [|unsafe|] public C() { }
+                }
+                """,
                 """
-                    class C
-                    {
-                        public unsafe C() { }
-                    }
-                    """
+                class C
+                {
+                    public unsafe C() { }
+                }
+                """
             );
         }
 
@@ -167,17 +167,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|unsafe|] public int P { get; }
-                    }
-                    """,
+                class C
+                {
+                    [|unsafe|] public int P { get; }
+                }
+                """,
                 """
-                    class C
-                    {
-                        public unsafe int P { get; }
-                    }
-                    """
+                class C
+                {
+                    public unsafe int P { get; }
+                }
+                """
             );
         }
 
@@ -186,17 +186,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        int P { [|internal|] protected get; }
-                    }
-                    """,
+                class C
+                {
+                    int P { [|internal|] protected get; }
+                }
+                """,
                 """
-                    class C
-                    {
-                        int P { protected internal get; }
-                    }
-                    """
+                class C
+                {
+                    int P { protected internal get; }
+                }
+                """
             );
         }
 
@@ -205,17 +205,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|internal|] protected event Action P { add { } remove { } }
-                    }
-                    """,
+                class C
+                {
+                    [|internal|] protected event Action P { add { } remove { } }
+                }
+                """,
                 """
-                    class C
-                    {
-                        protected internal event Action P { add { } remove { } }
-                    }
-                    """
+                class C
+                {
+                    protected internal event Action P { add { } remove { } }
+                }
+                """
             );
         }
 
@@ -224,17 +224,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|internal|] protected event Action P;
-                    }
-                    """,
+                class C
+                {
+                    [|internal|] protected event Action P;
+                }
+                """,
                 """
-                    class C
-                    {
-                        protected internal event Action P;
-                    }
-                    """
+                class C
+                {
+                    protected internal event Action P;
+                }
+                """
             );
         }
 
@@ -243,17 +243,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|static|] public C operator +(C c1, C c2) { }
-                    }
-                    """,
+                class C
+                {
+                    [|static|] public C operator +(C c1, C c2) { }
+                }
+                """,
                 """
-                    class C
-                    {
-                        public static C operator +(C c1, C c2) { }
-                    }
-                    """
+                class C
+                {
+                    public static C operator +(C c1, C c2) { }
+                }
+                """
             );
         }
 
@@ -262,17 +262,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
-                    {
-                        [|static|] public implicit operator bool(C c1) { }
-                    }
-                    """,
+                class C
+                {
+                    [|static|] public implicit operator bool(C c1) { }
+                }
+                """,
                 """
-                    class C
-                    {
-                        public static implicit operator bool(C c1) { }
-                    }
-                    """
+                class C
+                {
+                    public static implicit operator bool(C c1) { }
+                }
+                """
             );
         }
 
@@ -281,17 +281,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    {|FixAllInDocument:static|} internal class C
-                    {
-                        static internal class Nested { }
-                    }
-                    """,
+                {|FixAllInDocument:static|} internal class C
+                {
+                    static internal class Nested { }
+                }
+                """,
                 """
-                    internal static class C
-                    {
-                        internal static class Nested { }
-                    }
-                    """
+                internal static class C
+                {
+                    internal static class Nested { }
+                }
+                """
             );
         }
 
@@ -300,17 +300,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    static internal class C
-                    {
-                        {|FixAllInDocument:static|} internal class Nested { }
-                    }
-                    """,
+                static internal class C
+                {
+                    {|FixAllInDocument:static|} internal class Nested { }
+                }
+                """,
                 """
-                    internal static class C
-                    {
-                        internal static class Nested { }
-                    }
-                    """
+                internal static class C
+                {
+                    internal static class Nested { }
+                }
+                """
             );
         }
 
@@ -319,17 +319,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    /// Doc comment
-                    [|static|] internal class C
-                    {
-                    }
-                    """,
+                /// Doc comment
+                [|static|] internal class C
+                {
+                }
+                """,
                 """
-                    /// Doc comment
-                    internal static class C
-                    {
-                    }
-                    """
+                /// Doc comment
+                internal static class C
+                {
+                }
+                """
             );
         }
 
@@ -338,15 +338,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    /* start */ [|static|] /* middle */ internal /* end */ class C
-                    {
-                    }
-                    """,
+                /* start */ [|static|] /* middle */ internal /* end */ class C
+                {
+                }
+                """,
                 """
-                    /* start */ internal /* middle */ static /* end */ class C
-                    {
-                    }
-                    """
+                /* start */ internal /* middle */ static /* end */ class C
+                {
+                }
+                """
             );
         }
 
@@ -355,19 +355,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    #if true
-                    [|static|] internal class C
-                    {
-                    }
-                    #endif
-                    """,
+                #if true
+                [|static|] internal class C
+                {
+                }
+                #endif
+                """,
                 """
-                    #if true
-                    internal static class C
-                    {
-                    }
-                    #endif
-                    """
+                #if true
+                internal static class C
+                {
+                }
+                #endif
+                """
             );
         }
 
@@ -448,17 +448,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    partial class C
-                    {
-                        [|partial|] static void M();
-                    }
-                    """,
+                partial class C
+                {
+                    [|partial|] static void M();
+                }
+                """,
                 """
-                    partial class C
-                    {
-                        static partial void M();
-                    }
-                    """
+                partial class C
+                {
+                    static partial void M();
+                }
+                """
             );
         }
 
@@ -467,17 +467,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    partial class C
-                    {
-                        [|partial|] unsafe void M();
-                    }
-                    """,
+                partial class C
+                {
+                    [|partial|] unsafe void M();
+                }
+                """,
                 """
-                    partial class C
-                    {
-                        unsafe partial void M();
-                    }
-                    """
+                partial class C
+                {
+                    unsafe partial void M();
+                }
+                """
             );
         }
 
@@ -487,14 +487,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
             // Not handled for performance reason.
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public static async void M()
                     {
-                        public static async void M()
-                        {
-                            [|async|] static void Local() { }
-                        }
+                        [|async|] static void Local() { }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -503,16 +503,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    {|FixAllInContainingMember:static|} internal class C
-                    {
-                        static internal class Nested { }
-                    }
+                {|FixAllInContainingMember:static|} internal class C
+                {
+                    static internal class Nested { }
+                }
 
-                    static internal class C2
-                    {
-                        static internal class Nested { }
-                    }
-                    """
+                static internal class C2
+                {
+                    static internal class Nested { }
+                }
+                """
             );
         }
 
@@ -521,27 +521,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScript1Async(
                 """
-                    {|FixAllInContainingType:static|} internal class C
-                    {
-                        static internal class Nested { }
-                    }
+                {|FixAllInContainingType:static|} internal class C
+                {
+                    static internal class Nested { }
+                }
 
-                    static internal class C2
-                    {
-                        static internal class Nested { }
-                    }
-                    """,
+                static internal class C2
+                {
+                    static internal class Nested { }
+                }
+                """,
                 """
-                    internal static class C
-                    {
-                        internal static class Nested { }
-                    }
+                internal static class C
+                {
+                    internal static class Nested { }
+                }
 
-                    static internal class C2
-                    {
-                        static internal class Nested { }
-                    }
-                    """
+                static internal class C2
+                {
+                    static internal class Nested { }
+                }
+                """
             );
         }
 
@@ -550,17 +550,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        [|required|] public virtual unsafe int Prop { get; init; }
-                    }
-                    """,
+                class C
+                {
+                    [|required|] public virtual unsafe int Prop { get; init; }
+                }
+                """,
                 """
-                    class C
-                    {
-                        public virtual unsafe required int Prop { get; init; }
-                    }
-                    """
+                class C
+                {
+                    public virtual unsafe required int Prop { get; init; }
+                }
+                """
             );
         }
 
@@ -569,17 +569,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        [|required|] public unsafe volatile int Field;
-                    }
-                    """,
+                class C
+                {
+                    [|required|] public unsafe volatile int Field;
+                }
+                """,
                 """
-                    class C
-                    {
-                        public unsafe required volatile int Field;
-                    }
-                    """
+                class C
+                {
+                    public unsafe required volatile int Field;
+                }
+                """
             );
         }
 
@@ -588,15 +588,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.OrderModifiers
         {
             await TestInRegularAndScriptAsync(
                 """
-                    [|abstract file|] class C
-                    {
-                    }
-                    """,
+                [|abstract file|] class C
+                {
+                }
+                """,
                 """
-                    file abstract class C
-                    {
-                    }
-                    """
+                file abstract class C
+                {
+                }
+                """
             );
         }
     }

@@ -63,26 +63,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M(Action action)
                 {
-                    void M(Action action)
-                    {
-                        M(() [||]=> { });
-                    }
+                    M(() [||]=> { });
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M(Action action)
                 {
-                    void M(Action action)
-                    {
-                        Action {|Rename:action1|} = () => { };
-                        M(action1);
-                    }
+                    Action {|Rename:action1|} = () => { };
+                    M(action1);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -91,26 +91,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M(int a, int b)
                 {
-                    void M(int a, int b)
-                    {
-                        var x = a [||]+ b + 3;
-                    }
+                    var x = a [||]+ b + 3;
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M(int a, int b)
                 {
-                    void M(int a, int b)
-                    {
-                        int {|Rename:v|} = a + b;
-                        var x = v + 3;
-                    }
+                    int {|Rename:v|} = a + b;
+                    var x = v + 3;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -119,15 +119,15 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingAsync(
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M(int a)
                 {
-                    void M(int a)
-                    {
-                        var x = [||]a;
-                    }
+                    var x = [||]a;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -136,26 +136,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M(Action action)
                 {
-                    void M(Action action)
-                    {
-                        M(() => { var x [||]= y; });
-                    }
+                    M(() => { var x [||]= y; });
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M(Action action)
                 {
-                    void M(Action action)
-                    {
-                        Action {|Rename:value|} = () => { var x[||] = y; };
-                        M(value);
-                    }
+                    Action {|Rename:value|} = () => { var x[||] = y; };
+                    M(value);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -164,26 +164,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Bar([|1 + 1|]);
-                        Bar(1 + 1);
-                    }
+                    Bar([|1 + 1|]);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        const int {|Rename:V|} = 1 + 1;
-                        Bar(V);
-                        Bar(1 + 1);
-                    }
+                    const int {|Rename:V|} = 1 + 1;
+                    Bar(V);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -193,26 +193,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Bar([|1 + 1|]);
-                        Bar(1 + 1);
-                    }
+                    Bar([|1 + 1|]);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        const int {|Rename:V|} = 1 + 1;
-                        Bar(V);
-                        Bar(V);
-                    }
+                    const int {|Rename:V|} = 1 + 1;
+                    Bar(V);
+                    Bar(V);
                 }
-                """,
+            }
+            """,
             index: 3
         );
     }
@@ -295,24 +295,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M(bool b)
                 {
-                    void M(bool b)
-                    {
-                        var x = [|b ? 1 : throw null|];
-                    }
+                    var x = [|b ? 1 : throw null|];
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M(bool b)
                 {
-                    void M(bool b)
-                    {
-                        int {|Rename:v|} = b ? 1 : throw null;
-                        var x = v;
-                    }
+                    int {|Rename:v|} = b ? 1 : throw null;
+                    var x = v;
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -463,23 +463,23 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                public C() : this([|1 + 1|], 1 + 1)
                 {
-                    public C() : this([|1 + 1|], 1 + 1)
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1 + 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1 + 1;
 
-                    public C() : this(V, 1 + 1)
-                    {
-                    }
+                public C() : this(V, 1 + 1)
+                {
                 }
-                """,
+            }
+            """,
             index: 0
         );
     }
@@ -489,23 +489,23 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                public C() : this([|1 + 1|], 1 + 1)
                 {
-                    public C() : this([|1 + 1|], 1 + 1)
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1 + 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1 + 1;
 
-                    public C() : this(V, V)
-                    {
-                    }
+                public C() : this(V, V)
+                {
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -515,23 +515,23 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Bar(int i = [|1 + 1|], int j = 1 + 1)
                 {
-                    void Bar(int i = [|1 + 1|], int j = 1 + 1)
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1 + 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1 + 1;
 
-                    void Bar(int i = V, int j = 1 + 1)
-                    {
-                    }
+                void Bar(int i = V, int j = 1 + 1)
+                {
                 }
-                """,
+            }
+            """,
             index: 0
         );
     }
@@ -541,23 +541,23 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Bar(int i = [|1 + 1|], int j = 1 + 1)
                 {
-                    void Bar(int i = [|1 + 1|], int j = 1 + 1)
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1 + 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1 + 1;
 
-                    void Bar(int i = V, int j = V)
-                    {
-                    }
+                void Bar(int i = V, int j = V)
+                {
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -567,25 +567,25 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                [Goo([|1 + 1|], 1 + 1)]
+                void Bar()
                 {
-                    [Goo([|1 + 1|], 1 + 1)]
-                    void Bar()
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1 + 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1 + 1;
 
-                    [Goo(V, 1 + 1)]
-                    void Bar()
-                    {
-                    }
+                [Goo(V, 1 + 1)]
+                void Bar()
+                {
                 }
-                """,
+            }
+            """,
             index: 0
         );
     }
@@ -595,25 +595,25 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                [Goo([|1 + 1|], 1 + 1)]
+                void Bar()
                 {
-                    [Goo([|1 + 1|], 1 + 1)]
-                    void Bar()
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1 + 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1 + 1;
 
-                    [Goo(V, V)]
-                    void Bar()
-                    {
-                    }
+                [Goo(V, V)]
+                void Bar()
+                {
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -623,28 +623,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        int V = 0;
-                        Bar([|1 + 1|]);
-                        Bar(1 + 1);
-                    }
+                    int V = 0;
+                    Bar([|1 + 1|]);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        int V = 0;
-                        const int {|Rename:V1|} = 1 + 1;
-                        Bar(V1);
-                        Bar(1 + 1);
-                    }
+                    int V = 0;
+                    const int {|Rename:V1|} = 1 + 1;
+                    Bar(V1);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -679,30 +679,30 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
-                {
-                    static int Baz;
+            class C
+            {
+                static int Baz;
 
-                    void Goo()
-                    {
-                        Bar([|C.Baz|]);
-                        Bar(1 + 1);
-                    }
+                void Goo()
+                {
+                    Bar([|C.Baz|]);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    static int Baz;
+            class C
+            {
+                static int Baz;
 
-                    void Goo()
-                    {
-                        var {|Rename:baz|} = C.Baz;
-                        Bar(baz);
-                        Bar(1 + 1);
-                    }
+                void Goo()
+                {
+                    var {|Rename:baz|} = C.Baz;
+                    Bar(baz);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             index: 0,
             options: ImplicitTypingEverywhere()
         );
@@ -713,30 +713,30 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
-                {
-                    static int Baz;
+            class C
+            {
+                static int Baz;
 
-                    void Goo()
-                    {
-                        Bar([|C.Baz|]);
-                        Bar(1 + 1);
-                    }
+                void Goo()
+                {
+                    Bar([|C.Baz|]);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    static int Baz;
+            class C
+            {
+                static int Baz;
 
-                    void Goo()
-                    {
-                        int {|Rename:baz|} = C.Baz;
-                        Bar(baz);
-                        Bar(1 + 1);
-                    }
+                void Goo()
+                {
+                    int {|Rename:baz|} = C.Baz;
+                    Bar(baz);
+                    Bar(1 + 1);
                 }
-                """,
+            }
+            """,
             index: 0
         );
     }
@@ -746,23 +746,23 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                public C(int V) : this([|1 + 1|])
                 {
-                    public C(int V) : this([|1 + 1|])
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1 + 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1 + 1;
 
-                    public C(int V) : this(C.V)
-                    {
-                    }
+                public C(int V) : this(C.V)
+                {
                 }
-                """,
+            }
+            """,
             index: 0
         );
     }
@@ -772,38 +772,38 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                private static int v = 5;
+
+                static void Main(string[] args)
                 {
-                    private static int v = 5;
-
-                    static void Main(string[] args)
-                    {
-                        Func<int, int> d = (x) => {
-                            return [|x * v|];
-                        };
-                        d.Invoke(v);
-                    }
+                    Func<int, int> d = (x) => {
+                        return [|x * v|];
+                    };
+                    d.Invoke(v);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                private static int v = 5;
+
+                static void Main(string[] args)
                 {
-                    private static int v = 5;
-
-                    static void Main(string[] args)
-                    {
-                        Func<int, int> d = (x) => {
-                            var {|Rename:v1|} = x * v;
-                            return v1;
-                        };
-                        d.Invoke(v);
-                    }
+                    Func<int, int> d = (x) => {
+                        var {|Rename:v1|} = x * v;
+                        return v1;
+                    };
+                    d.Invoke(v);
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -813,38 +813,38 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                private static int v = 5;
+
+                static void Main(string[] args)
                 {
-                    private static int v = 5;
-
-                    static void Main(string[] args)
-                    {
-                        Func<int, int> d = (x) => {
-                            return [|x * v|];
-                        };
-                        d.Invoke(v);
-                    }
+                    Func<int, int> d = (x) => {
+                        return [|x * v|];
+                    };
+                    d.Invoke(v);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                private static int v = 5;
+
+                static void Main(string[] args)
                 {
-                    private static int v = 5;
-
-                    static void Main(string[] args)
-                    {
-                        Func<int, int> d = (x) => {
-                            int {|Rename:v1|} = x * v;
-                            return v1;
-                        };
-                        d.Invoke(v);
-                    }
+                    Func<int, int> d = (x) => {
+                        int {|Rename:v1|} = x * v;
+                        return v1;
+                    };
+                    d.Invoke(v);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -853,46 +853,46 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
                 }
 
-                class Program
+                public static void Add(object @class)
                 {
-                    static void Main()
-                    {
-                        G<int>.Add([|new G<int>.@class()|]);
-                    }
                 }
-                """,
+            }
+
+            class Program
+            {
+                static void Main()
+                {
+                    G<int>.Add([|new G<int>.@class()|]);
+                }
+            }
+            """,
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
                 }
 
-                class Program
+                public static void Add(object @class)
                 {
-                    static void Main()
-                    {
-                        var {|Rename:@class|} = new G<int>.@class();
-                        G<int>.Add(@class);
-                    }
                 }
-                """,
+            }
+
+            class Program
+            {
+                static void Main()
+                {
+                    var {|Rename:@class|} = new G<int>.@class();
+                    G<int>.Add(@class);
+                }
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -902,46 +902,46 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
                 }
 
-                class Program
+                public static void Add(object @class)
                 {
-                    static void Main()
-                    {
-                        G<int>.Add([|new G<int>.@class()|]);
-                    }
                 }
-                """,
+            }
+
+            class Program
+            {
+                static void Main()
+                {
+                    G<int>.Add([|new G<int>.@class()|]);
+                }
+            }
+            """,
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
                 }
 
-                class Program
+                public static void Add(object @class)
                 {
-                    static void Main()
-                    {
-                        G<int>.@class {|Rename:@class|} = new G<int>.@class();
-                        G<int>.Add(@class);
-                    }
                 }
-                """
+            }
+
+            class Program
+            {
+                static void Main()
+                {
+                    G<int>.@class {|Rename:@class|} = new G<int>.@class();
+                    G<int>.Add(@class);
+                }
+            }
+            """
         );
     }
 
@@ -950,40 +950,40 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
-
-                    static void Main()
-                    {
-                        G<int>.Add([|new G<int>.@class()|]);
-                    }
                 }
-                """,
+
+                public static void Add(object @class)
+                {
+                }
+
+                static void Main()
+                {
+                    G<int>.Add([|new G<int>.@class()|]);
+                }
+            }
+            """,
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
-
-                    static void Main()
-                    {
-                        var {|Rename:@class|} = new G<int>.@class();
-                        G<int>.Add(@class);
-                    }
                 }
-                """,
+
+                public static void Add(object @class)
+                {
+                }
+
+                static void Main()
+                {
+                    var {|Rename:@class|} = new G<int>.@class();
+                    G<int>.Add(@class);
+                }
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -993,40 +993,40 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
-
-                    static void Main()
-                    {
-                        G<int>.Add([|new G<int>.@class()|]);
-                    }
                 }
-                """,
+
+                public static void Add(object @class)
+                {
+                }
+
+                static void Main()
+                {
+                    G<int>.Add([|new G<int>.@class()|]);
+                }
+            }
+            """,
             """
-                static class G<T>
+            static class G<T>
+            {
+                public class @class
                 {
-                    public class @class
-                    {
-                    }
-
-                    public static void Add(object @class)
-                    {
-                    }
-
-                    static void Main()
-                    {
-                        G<int>.@class {|Rename:@class|} = new G<int>.@class();
-                        G<int>.Add(@class);
-                    }
                 }
-                """
+
+                public static void Add(object @class)
+                {
+                }
+
+                static void Main()
+                {
+                    G<int>.@class {|Rename:@class|} = new G<int>.@class();
+                    G<int>.Add(@class);
+                }
+            }
+            """
         );
     }
 
@@ -1035,18 +1035,18 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
-                {
-                    int[] array = new int[[|10|]];
-                }
-                """,
+            class C
+            {
+                int[] array = new int[[|10|]];
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 10;
-                    int[] array = new int[V];
-                }
-                """
+            class C
+            {
+                private const int {|Rename:V|} = 10;
+                int[] array = new int[V];
+            }
+            """
         );
     }
 
@@ -1055,24 +1055,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int i = [|1 + 2|] + 3;
-                    }
+                    int i = [|1 + 2|] + 3;
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        const int {|Rename:V|} = 1 + 2;
-                        int i = V + 3;
-                    }
+                    const int {|Rename:V|} = 1 + 2;
+                    int i = V + 3;
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -1082,32 +1082,32 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                static void Main<T>(string[] args)
                 {
-                    static void Main<T>(string[] args)
-                    {
-                        Goo([|(T)2.ToString()|]);
-                    }
+                    Goo([|(T)2.ToString()|]);
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                static void Main<T>(string[] args)
                 {
-                    static void Main<T>(string[] args)
-                    {
-                        var {|Rename:t|} = (T)2.ToString();
-                        Goo(t);
-                    }
+                    var {|Rename:t|} = (T)2.ToString();
+                    Goo(t);
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -1117,18 +1117,18 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestActionCountAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                static void Main<T>(string[] args)
                 {
-                    static void Main<T>(string[] args)
-                    {
-                        Goo([|(T)2.ToString()|]);
-                    }
+                    Goo([|(T)2.ToString()|]);
                 }
-                """,
+            }
+            """,
             count: 2
         );
     }
@@ -1140,18 +1140,18 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                unsafe struct S
-                {
-                    fixed int buffer[[|10|]];
-                }
-                """,
+            unsafe struct S
+            {
+                fixed int buffer[[|10|]];
+            }
+            """,
             """
-                unsafe struct S
-                {
-                    private const int p = 10;
-                    fixed int buffer[p];
-                }
-                """
+            unsafe struct S
+            {
+                private const int p = 10;
+                fixed int buffer[p];
+            }
+            """
         );
     }
 
@@ -1160,24 +1160,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int i = [|1 + 2|] + 3;
-                    }
+                    int i = [|1 + 2|] + 3;
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        const int {|Rename:V|} = 1 + 2;
-                        int i = V + 3;
-                    }
+                    const int {|Rename:V|} = 1 + 2;
+                    int i = V + 3;
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -1187,24 +1187,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        const int i = [|1|] + 1;
-                    }
+                    const int i = [|1|] + 1;
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        const int {|Rename:V|} = 1;
-                        const int i = V + 1;
-                    }
+                    const int {|Rename:V|} = 1;
+                    const int i = V + 1;
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -1214,34 +1214,34 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                [Goo(2 + 3 + 4)]
-                class Program
-                {
-                    int x = [|2 + 3|] + 4;
-                }
+            [Goo(2 + 3 + 4)]
+            class Program
+            {
+                int x = [|2 + 3|] + 4;
+            }
 
-                internal class GooAttribute : System.Attribute
+            internal class GooAttribute : System.Attribute
+            {
+                public GooAttribute(int x)
                 {
-                    public GooAttribute(int x)
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                [Goo(V + 4)]
-                class Program
-                {
-                    private const int {|Rename:V|} = 2 + 3;
-                    int x = V + 4;
-                }
+            [Goo(V + 4)]
+            class Program
+            {
+                private const int {|Rename:V|} = 2 + 3;
+                int x = V + 4;
+            }
 
-                internal class GooAttribute : System.Attribute
+            internal class GooAttribute : System.Attribute
+            {
+                public GooAttribute(int x)
                 {
-                    public GooAttribute(int x)
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -1251,16 +1251,16 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        int i;
-                        [|i = 2|];
-                        i = 3;
-                    }
+                    int i;
+                    [|i = 2|];
+                    i = 3;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1269,36 +1269,36 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    select [|i + j|];
-                    }
+                                select [|i + j|];
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    let {|Rename:v|} = i + j
-                                    select v;
-                    }
+                                let {|Rename:v|} = i + j
+                                select v;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1307,38 +1307,38 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where [|i + j|] > 5
-                                    select i + j;
-                    }
+                                where [|i + j|] > 5
+                                select i + j;
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    let {|Rename:v|} = i + j
-                                    where v > 5
-                                    select i + j;
-                    }
+                                let {|Rename:v|} = i + j
+                                where v > 5
+                                select i + j;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1347,40 +1347,40 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where [|i + j|] > 5
-                                    let x = j + i
-                                    select i + j;
-                    }
+                                where [|i + j|] > 5
+                                let x = j + i
+                                select i + j;
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    let {|Rename:v|} = i + j
-                                    where v > 5
-                                    let x = j + i
-                                    select v;
-                    }
+                                let {|Rename:v|} = i + j
+                                where v > 5
+                                let x = j + i
+                                select v;
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -1390,40 +1390,40 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where i + j > 5
-                                    let x = j + i
-                                    select [|i + j|];
-                    }
+                                where i + j > 5
+                                let x = j + i
+                                select [|i + j|];
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    let {|Rename:v|} = i + j
-                                    where v > 5
-                                    let x = j + i
-                                    select v;
-                    }
+                                let {|Rename:v|} = i + j
+                                where v > 5
+                                let x = j + i
+                                select v;
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -1433,50 +1433,50 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where i > (from k in new int[] { 3 }
+                                where i > (from k in new int[] { 3 }
 
-                                               select [|i + j|]).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           select [|i + j|]).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               select i + j).Max()
-                                    let x = j + i
-                                    select i + j;
-                    }
+                                           select i + j).Max()
+                                let x = j + i
+                                select i + j;
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where i > (from k in new int[] { 3 }
+                                where i > (from k in new int[] { 3 }
 
-                                               let {|Rename:v|} = i + j
-                                               select v).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           let {|Rename:v|} = i + j
+                                           select v).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               select i + j).Max()
-                                    let x = j + i
-                                    select i + j;
-                    }
+                                           select i + j).Max()
+                                let x = j + i
+                                select i + j;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1485,50 +1485,50 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where i > (from k in new int[] { 3 }
+                                where i > (from k in new int[] { 3 }
 
-                                               select [|i + j|]).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           select [|i + j|]).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               select i + j).Max()
-                                    let x = j + i
-                                    select i + j;
-                    }
+                                           select i + j).Max()
+                                let x = j + i
+                                select i + j;
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    let {|Rename:v|} = i + j
-                                    where i > (from k in new int[] { 3 }
+                                let {|Rename:v|} = i + j
+                                where i > (from k in new int[] { 3 }
 
-                                               select v).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           select v).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               select v).Max()
-                                    let x = j + i
-                                    select v;
-                    }
+                                           select v).Max()
+                                let x = j + i
+                                select v;
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -1538,50 +1538,50 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where i > (from k in new int[] { 3 }
+                                where i > (from k in new int[] { 3 }
 
-                                               select i + j).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           select i + j).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               select [|i + j|]).Max()
-                                    let x = j + i
-                                    select i + j;
-                    }
+                                           select [|i + j|]).Max()
+                                let x = j + i
+                                select i + j;
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where i > (from k in new int[] { 3 }
+                                where i > (from k in new int[] { 3 }
 
-                                               select i + j).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           select i + j).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               let {|Rename:v|} = i + j
-                                               select v).Max()
-                                    let x = j + i
-                                    select i + j;
-                    }
+                                           let {|Rename:v|} = i + j
+                                           select v).Max()
+                                let x = j + i
+                                select i + j;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1590,50 +1590,50 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    where i > (from k in new int[] { 3 }
+                                where i > (from k in new int[] { 3 }
 
-                                               select i + j).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           select i + j).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               select [|i + j|]).Max()
-                                    let x = j + i
-                                    select i + j;
-                    }
+                                           select [|i + j|]).Max()
+                                let x = j + i
+                                select i + j;
                 }
-                """,
+            }
+            """,
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var query = from i in new int[] { 1 }
+                    var query = from i in new int[] { 1 }
 
-                                    from j in new int[] { 2 }
+                                from j in new int[] { 2 }
 
-                                    let {|Rename:v|} = i + j
-                                    where i > (from k in new int[] { 3 }
+                                let {|Rename:v|} = i + j
+                                where i > (from k in new int[] { 3 }
 
-                                               select v).Max()
-                                    where j > (from m in new int[] { 4 }
+                                           select v).Max()
+                                where j > (from m in new int[] { 4 }
 
-                                               select v).Max()
-                                    let x = j + i
-                                    select v;
-                    }
+                                           select v).Max()
+                                let x = j + i
+                                select v;
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -1643,14 +1643,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var a = new { [|A = 0|] };
-                    }
+                    var a = new { [|A = 0|] };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1659,24 +1659,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var a = new [|{ A = 0 }|];
-                    }
+                    var a = new [|{ A = 0 }|];
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var {|Rename:value|} = new { A = 0 };
-                        var a = value;
-                    }
+                    var {|Rename:value|} = new { A = 0 };
+                    var a = value;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1685,26 +1685,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        int[] a = null;
-                        int[] temp = checked([|a = new[] { 1, 2, 3 }|]);
-                    }
+                    int[] a = null;
+                    int[] temp = checked([|a = new[] { 1, 2, 3 }|]);
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        int[] a = null;
-                        var {|Rename:ints|} = a = new[] { 1, 2, 3 };
-                        int[] temp = checked(ints);
-                    }
+                    int[] a = null;
+                    var {|Rename:ints|} = a = new[] { 1, 2, 3 };
+                    int[] temp = checked(ints);
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -1714,19 +1714,19 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        F<[|int?|], int?>(3);
-                    }
-
-                    R F<T, R>(T arg1)
-                    {
-                        return default(R);
-                    }
+                    F<[|int?|], int?>(3);
                 }
-                """
+
+                R F<T, R>(T arg1)
+                {
+                    return default(R);
+                }
+            }
+            """
         );
     }
 
@@ -1735,24 +1735,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        WriteLine([|new { X = 1 }|]);
-                    }
+                    WriteLine([|new { X = 1 }|]);
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var {|Rename:value|} = new { X = 1 };
-                        WriteLine(value);
-                    }
+                    var {|Rename:value|} = new { X = 1 };
+                    WriteLine(value);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1761,15 +1761,15 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
-                using System.Runtime.InteropServices;
+            using System;
+            using System.Runtime.InteropServices;
 
-                class M
-                {
-                    [DllImport("user32.dll", [|CharSet|] = CharSet.Auto)]
-                    public static extern IntPtr FindWindow(string className, string windowTitle);
-                }
-                """
+            class M
+            {
+                [DllImport("user32.dll", [|CharSet|] = CharSet.Auto)]
+                public static extern IntPtr FindWindow(string className, string windowTitle);
+            }
+            """
         );
     }
 
@@ -1778,15 +1778,15 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
-                using System.Runtime.InteropServices;
+            using System;
+            using System.Runtime.InteropServices;
 
-                class M
-                {
-                    [DllImport("user32.dll", CharSet = CharSet.[|Auto|])]
-                    public static extern IntPtr FindWindow(string className, string windowTitle);
-                }
-                """
+            class M
+            {
+                [DllImport("user32.dll", CharSet = CharSet.[|Auto|])]
+                public static extern IntPtr FindWindow(string className, string windowTitle);
+            }
+            """
         );
     }
 
@@ -1795,20 +1795,20 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute
-                {
-                    public TestAttribute(int a = 42)
-                    {
-                    }
-                }
-
-                [Test([|a|]: 1)]
-                class Goo
+            class TestAttribute : Attribute
+            {
+                public TestAttribute(int a = 42)
                 {
                 }
-                """
+            }
+
+            [Test([|a|]: 1)]
+            class Goo
+            {
+            }
+            """
         );
     }
 
@@ -1817,15 +1817,15 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        var x = new int[3];
-                        [|x[1]|] = 2;
-                    }
+                    var x = new int[3];
+                    [|x[1]|] = 2;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1835,14 +1835,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
-                using System.Linq.Expressions;
+            using System;
+            using System.Linq.Expressions;
 
-                class Program
-                {
-                    static Expression<Func<int?, char?>> e1 = c => [|null|];
-                }
-                """
+            class Program
+            {
+                static Expression<Func<int?, char?>> e1 = c => [|null|];
+            }
+            """
         );
     }
 
@@ -1851,16 +1851,16 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        int[,] array2Da = new [|int[1, 2]|] { { 1, 2 } };
-                    }
+                    int[,] array2Da = new [|int[1, 2]|] { { 1, 2 } };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -1898,29 +1898,29 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScript1Async(
             """
-                class Program
+            class Program
+            {
+            #line hidden
+                void Main()
                 {
-                #line hidden
-                    void Main()
-                    {
-                #line default
-                        Goo([|1 + 1|]);
-                    }
+            #line default
+                    Goo([|1 + 1|]);
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+            #line hidden
+                void Main()
                 {
-                #line hidden
-                    void Main()
-                    {
-                #line default
-                        Goo(V);
-                    }
-
-                    private const int {|Rename:V|} = 1 + 1;
+            #line default
+                    Goo(V);
                 }
-                """,
+
+                private const int {|Rename:V|} = 1 + 1;
+            }
+            """,
             parameters: new TestParameters(Options.Regular)
         );
     }
@@ -1930,32 +1930,32 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                #line hidden
-                class Program
+            #line hidden
+            class Program
+            {
+            #line default
+                void Main()
                 {
-                #line default
-                    void Main()
-                    {
-                        Goo([|1 + 1|]);
-                    }
-                #line hidden
+                    Goo([|1 + 1|]);
                 }
-                #line default
-                """,
+            #line hidden
+            }
+            #line default
+            """,
             """
-                #line hidden
-                class Program
+            #line hidden
+            class Program
+            {
+            #line default
+                void Main()
                 {
-                #line default
-                    void Main()
-                    {
-                        const int {|Rename:V|} = 1 + 1;
-                        Goo(V);
-                    }
-                #line hidden
+                    const int {|Rename:V|} = 1 + 1;
+                    Goo(V);
                 }
-                #line default
-                """
+            #line hidden
+            }
+            #line default
+            """
         );
     }
 
@@ -1964,14 +1964,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingAsync(
             """
-                class Program
-                {
-                    int i = [|1 + 1|];
+            class Program
+            {
+                int i = [|1 + 1|];
 
-                #line hidden
-                }
-                #line default
-                """,
+            #line hidden
+            }
+            #line default
+            """,
             new TestParameters(Options.Regular)
         );
     }
@@ -1981,13 +1981,13 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingAsync(
             """
-                [Goo([|1 + 1|])]
-                class Program
-                {
-                #line hidden
-                }
-                #line default
-                """,
+            [Goo([|1 + 1|])]
+            class Program
+            {
+            #line hidden
+            }
+            #line default
+            """,
             new TestParameters(Options.Regular)
         );
     }
@@ -1997,16 +1997,16 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingAsync(
             """
-                class Program
+            class Program
+            {
+                public Program() : this([|1 + 1|])
                 {
-                    public Program() : this([|1 + 1|])
-                    {
-                    }
-
-                #line hidden
                 }
-                #line default
-                """,
+
+            #line hidden
+            }
+            #line default
+            """,
             new TestParameters(Options.Regular)
         );
     }
@@ -2016,16 +2016,16 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingAsync(
             """
-                class Program
+            class Program
+            {
+                public Program(int i = [|1 + 1|])
                 {
-                    public Program(int i = [|1 + 1|])
-                    {
-                    }
-
-                #line hidden
                 }
-                #line default
-                """,
+
+            #line hidden
+            }
+            #line default
+            """,
             new TestParameters(Options.Regular)
         );
     }
@@ -2035,20 +2035,20 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingAsync(
             """
-                using System.Linq;
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                public Program(string[] args)
                 {
-                    public Program(string[] args)
-                    {
-                        var q = from x in args
-                #line hidden
-                                let z = 1
-                #line default
-                                select [|x + x|];
-                    }
+                    var q = from x in args
+            #line hidden
+                            let z = 1
+            #line default
+                            select [|x + x|];
                 }
-                """,
+            }
+            """,
             new TestParameters(Options.Regular)
         );
     }
@@ -2058,42 +2058,42 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestAsync(
             """
-                #line hidden
-                using System.Linq;
+            #line hidden
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                public Program(string[] args)
                 {
-                    public Program(string[] args)
-                    {
-                        var q =
-                #line default
-                            from x in args
-                            let z = 1
-                            select [|x + x|];
-                #line hidden
-                    }
+                    var q =
+            #line default
+                        from x in args
+                        let z = 1
+                        select [|x + x|];
+            #line hidden
                 }
-                #line default
-                """,
+            }
+            #line default
+            """,
             """
-                #line hidden
-                using System.Linq;
+            #line hidden
+            using System.Linq;
 
-                class Program
+            class Program
+            {
+                public Program(string[] args)
                 {
-                    public Program(string[] args)
-                    {
-                        var q =
-                #line default
-                            from x in args
-                            let z = 1
-                            let {|Rename:v|} = x + x
-                            select v;
-                #line hidden
-                    }
+                    var q =
+            #line default
+                        from x in args
+                        let z = 1
+                        let {|Rename:v|} = x + x
+                        select v;
+            #line hidden
                 }
-                #line default
-                """,
+            }
+            #line default
+            """,
             parseOptions: Options.Regular
         );
     }
@@ -2103,14 +2103,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        [|System|].Console.WriteLine(4);
-                    }
+                    [|System|].Console.WriteLine(4);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2119,14 +2119,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        [|System.Console|].WriteLine(4);
-                    }
+                    [|System.Console|].WriteLine(4);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2135,14 +2135,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        [|base|].ToString();
-                    }
+                    [|base|].ToString();
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2151,17 +2151,17 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                #line 1 "goo"
-                        Console.WriteLine([|5|]);
-                #line default
-                #line hidden
-                    }
+            #line 1 "goo"
+                    Console.WriteLine([|5|]);
+            #line default
+            #line hidden
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2192,21 +2192,21 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
         await TestInRegularAndScriptAsync(
             code,
             """
-                class Program
+            class Program
+            {
+                void Main ( )
                 {
-                    void Main ( )
+            #line 1 "goo"
+                    if (true)
                     {
-                #line 1 "goo"
-                        if (true)
-                        {
-                            const int {|Rename:V|} = 5;
-                            Console.WriteLine(V);
-                        }
-                #line default
-                #line hidden
+                        const int {|Rename:V|} = 5;
+                        Console.WriteLine(V);
                     }
+            #line default
+            #line hidden
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2247,14 +2247,14 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class A
+            class A
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        long x = -[|9223372036854775808|];
-                    }
+                    long x = -[|9223372036854775808|];
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2263,11 +2263,11 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                [GuidAttribute([|"1A585C4D-3371-48dc-AF8A-AFFECC1B0967"|])]
-                public interface I
-                {
-                }
-                """
+            [GuidAttribute([|"1A585C4D-3371-48dc-AF8A-AFFECC1B0967"|])]
+            public interface I
+            {
+            }
+            """
         );
     }
 
@@ -2276,13 +2276,13 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices;
 
-                [ComSourceInterfaces([|typeof(GuidAttribute)|])]
-                public class Button
-                {
-                }
-                """
+            [ComSourceInterfaces([|typeof(GuidAttribute)|])]
+            public class Button
+            {
+            }
+            """
         );
     }
 
@@ -2291,25 +2291,25 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello"|] + "World";
-                    }
+                    var s2 = [|"Hello"|] + "World";
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const string {|Rename:V|} = "Hello";
+            class C
+            {
+                private const string {|Rename:V|} = "Hello";
 
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = V + "World";
-                    }
+                void goo(string s = "Hello")
+                {
+                    var s2 = V + "World";
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2318,25 +2318,25 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello"|] + "World";
-                    }
+                    var s2 = [|"Hello"|] + "World";
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const string {|Rename:V|} = "Hello";
+            class C
+            {
+                private const string {|Rename:V|} = "Hello";
 
-                    void goo(string s = V)
-                    {
-                        var s2 = V + "World";
-                    }
+                void goo(string s = V)
+                {
+                    var s2 = V + "World";
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -2346,24 +2346,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello"|] + "World";
-                    }
+                    var s2 = [|"Hello"|] + "World";
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        const string {|Rename:V|} = "Hello";
-                        var s2 = V + "World";
-                    }
+                    const string {|Rename:V|} = "Hello";
+                    var s2 = V + "World";
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -2373,24 +2373,24 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello"|] + "World";
-                    }
+                    var s2 = [|"Hello"|] + "World";
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        const string {|Rename:V|} = "Hello";
-                        var s2 = V + "World";
-                    }
+                    const string {|Rename:V|} = "Hello";
+                    var s2 = V + "World";
                 }
-                """,
+            }
+            """,
             index: 3
         );
     }
@@ -2400,26 +2400,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        const string s1 = "World";
-                        var s2 = [|"Hello" + s1|];
-                    }
+                    const string s1 = "World";
+                    var s2 = [|"Hello" + s1|];
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        const string s1 = "World";
-                        const string {|Rename:V|} = "Hello" + s1;
-                        var s2 = V;
-                    }
+                    const string s1 = "World";
+                    const string {|Rename:V|} = "Hello" + s1;
+                    var s2 = V;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2428,26 +2428,26 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        const string s1 = "World";
-                        var s2 = [|"Hello" + s1|];
-                    }
+                    const string s1 = "World";
+                    var s2 = [|"Hello" + s1|];
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void goo(string s = "Hello")
                 {
-                    void goo(string s = "Hello")
-                    {
-                        const string s1 = "World";
-                        const string {|Rename:V|} = "Hello" + s1;
-                        var s2 = V;
-                    }
+                    const string s1 = "World";
+                    const string {|Rename:V|} = "Hello" + s1;
+                    var s2 = V;
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -2457,28 +2457,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
-                {
-                    const string s1 = "World";
+            class C
+            {
+                const string s1 = "World";
 
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello" + s1|];
-                    }
+                void goo(string s = "Hello")
+                {
+                    var s2 = [|"Hello" + s1|];
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    const string s1 = "World";
-                    private const string {|Rename:V|} = "Hello" + s1;
+            class C
+            {
+                const string s1 = "World";
+                private const string {|Rename:V|} = "Hello" + s1;
 
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = V;
-                    }
+                void goo(string s = "Hello")
+                {
+                    var s2 = V;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2487,28 +2487,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
-                {
-                    const string s1 = "World";
+            class C
+            {
+                const string s1 = "World";
 
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello" + s1|];
-                    }
+                void goo(string s = "Hello")
+                {
+                    var s2 = [|"Hello" + s1|];
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    const string s1 = "World";
-                    private const string {|Rename:V|} = "Hello" + s1;
+            class C
+            {
+                const string s1 = "World";
+                private const string {|Rename:V|} = "Hello" + s1;
 
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = V;
-                    }
+                void goo(string s = "Hello")
+                {
+                    var s2 = V;
                 }
-                """,
+            }
+            """,
             index: 1
         );
     }
@@ -2518,28 +2518,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
-                {
-                    const string s1 = "World";
+            class C
+            {
+                const string s1 = "World";
 
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello" + s1|];
-                    }
+                void goo(string s = "Hello")
+                {
+                    var s2 = [|"Hello" + s1|];
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    const string s1 = "World";
+            class C
+            {
+                const string s1 = "World";
 
-                    void goo(string s = "Hello")
-                    {
-                        const string {|Rename:V|} = "Hello" + s1;
-                        var s2 = V;
-                    }
+                void goo(string s = "Hello")
+                {
+                    const string {|Rename:V|} = "Hello" + s1;
+                    var s2 = V;
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -2549,28 +2549,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
-                {
-                    const string s1 = "World";
+            class C
+            {
+                const string s1 = "World";
 
-                    void goo(string s = "Hello")
-                    {
-                        var s2 = [|"Hello" + s1|];
-                    }
+                void goo(string s = "Hello")
+                {
+                    var s2 = [|"Hello" + s1|];
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    const string s1 = "World";
+            class C
+            {
+                const string s1 = "World";
 
-                    void goo(string s = "Hello")
-                    {
-                        const string {|Rename:V|} = "Hello" + s1;
-                        var s2 = V;
-                    }
+                void goo(string s = "Hello")
+                {
+                    const string {|Rename:V|} = "Hello" + s1;
+                    var s2 = V;
                 }
-                """,
+            }
+            """,
             index: 3
         );
     }
@@ -2580,45 +2580,45 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                static class C
+            static class C
+            {
+                static void Inner(Action<string> x, string y) { }
+                static void Inner(Action<string> x, int y) { }
+                static void Inner(Action<int> x, int y) { }
+
+                static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
+                static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
+
+                static T Goo<T>(T x) { return x; }
+
+                static void Main()
                 {
-                    static void Inner(Action<string> x, string y) { }
-                    static void Inner(Action<string> x, int y) { }
-                    static void Inner(Action<int> x, int y) { }
-
-                    static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
-                    static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
-
-                    static T Goo<T>(T x) { return x; }
-
-                    static void Main()
-                    {
-                        Outer(y => Inner(x => { [|Goo(x)|].ToString(); }, y), null);
-                    }
+                    Outer(y => Inner(x => { [|Goo(x)|].ToString(); }, y), null);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                static class C
+            static class C
+            {
+                static void Inner(Action<string> x, string y) { }
+                static void Inner(Action<string> x, int y) { }
+                static void Inner(Action<int> x, int y) { }
+
+                static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
+                static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
+
+                static T Goo<T>(T x) { return x; }
+
+                static void Main()
                 {
-                    static void Inner(Action<string> x, string y) { }
-                    static void Inner(Action<string> x, int y) { }
-                    static void Inner(Action<int> x, int y) { }
-
-                    static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
-                    static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
-
-                    static T Goo<T>(T x) { return x; }
-
-                    static void Main()
-                    {
-                        Outer(y => Inner(x => { var {|Rename:v|} = Goo(x); v.ToString(); }, y), null);
-                    }
+                    Outer(y => Inner(x => { var {|Rename:v|} = Goo(x); v.ToString(); }, y), null);
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -2628,45 +2628,45 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                static class C
+            static class C
+            {
+                static void Inner(Action<string> x, string y) { }
+                static void Inner(Action<string> x, int y) { }
+                static void Inner(Action<int> x, int y) { }
+
+                static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
+                static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
+
+                static T Goo<T>(T x) { return x; }
+
+                static void Main()
                 {
-                    static void Inner(Action<string> x, string y) { }
-                    static void Inner(Action<string> x, int y) { }
-                    static void Inner(Action<int> x, int y) { }
-
-                    static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
-                    static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
-
-                    static T Goo<T>(T x) { return x; }
-
-                    static void Main()
-                    {
-                        Outer(y => Inner(x => { [|Goo(x)|].ToString(); }, y), null);
-                    }
+                    Outer(y => Inner(x => { [|Goo(x)|].ToString(); }, y), null);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                static class C
+            static class C
+            {
+                static void Inner(Action<string> x, string y) { }
+                static void Inner(Action<string> x, int y) { }
+                static void Inner(Action<int> x, int y) { }
+
+                static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
+                static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
+
+                static T Goo<T>(T x) { return x; }
+
+                static void Main()
                 {
-                    static void Inner(Action<string> x, string y) { }
-                    static void Inner(Action<string> x, int y) { }
-                    static void Inner(Action<int> x, int y) { }
-
-                    static void Outer(Action<string> x, object y) { Console.WriteLine(1); }
-                    static void Outer(Action<int> x, string y) { Console.WriteLine(2); }
-
-                    static T Goo<T>(T x) { return x; }
-
-                    static void Main()
-                    {
-                        Outer(y => Inner(x => { string {|Rename:v|} = Goo(x); v.ToString(); }, y), (object)null);
-                    }
+                    Outer(y => Inner(x => { string {|Rename:v|} = Goo(x); v.ToString(); }, y), (object)null);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2679,36 +2679,36 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        byte z = 0;
-                        Goo([|x => 0|], y => 0, z, z);
-                    }
-
-                    static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
-                    static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                    byte z = 0;
+                    Goo([|x => 0|], y => 0, z, z);
                 }
-                """,
+
+                static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
+                static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        byte z = 0;
-                        Func<byte, byte> {|Rename:p|} = x => 0;
-                        Goo(p, y => (byte)0, z, z);
-                    }
-
-                    static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
-                    static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                    byte z = 0;
+                    Func<byte, byte> {|Rename:p|} = x => 0;
+                    Goo(p, y => (byte)0, z, z);
                 }
-                """
+
+                static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
+                static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+            }
+            """
         );
     }
 
@@ -2717,36 +2717,36 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Program
+            using System;
+            class Program
+            {
+                int Main(int i)
                 {
-                    int Main(int i)
+                    switch (1)
                     {
-                        switch (1)
-                        {
-                            case 0:
-                                var f = Main([|1 + 1|]);
-                                Console.WriteLine(f);
-                        }
+                        case 0:
+                            var f = Main([|1 + 1|]);
+                            Console.WriteLine(f);
                     }
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class Program
+            using System;
+            class Program
+            {
+                int Main(int i)
                 {
-                    int Main(int i)
+                    switch (1)
                     {
-                        switch (1)
-                        {
-                            case 0:
-                                const int {|Rename:I|} = 1 + 1;
-                                var f = Main(I);
-                                Console.WriteLine(f);
-                        }
+                        case 0:
+                            const int {|Rename:I|} = 1 + 1;
+                            var f = Main(I);
+                            Console.WriteLine(f);
                     }
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -2756,40 +2756,40 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Program
+            using System;
+            class Program
+            {
+                int Main(int i)
                 {
-                    int Main(int i)
+                    switch (1)
                     {
-                        switch (1)
-                        {
-                            case 0:
-                                var f = Main([|1 + 1|]);
-                                var g = Main(1 + 1);
-                            case 1:
-                                Console.WriteLine(1 + 0);
-                        }
+                        case 0:
+                            var f = Main([|1 + 1|]);
+                            var g = Main(1 + 1);
+                        case 1:
+                            Console.WriteLine(1 + 0);
                     }
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class Program
+            using System;
+            class Program
+            {
+                int Main(int i)
                 {
-                    int Main(int i)
+                    switch (1)
                     {
-                        switch (1)
-                        {
-                            case 0:
-                                const int {|Rename:I|} = 1 + 1;
-                                var f = Main(I);
-                                var g = Main(I);
-                            case 1:
-                                Console.WriteLine(1 + 0);
-                        }
+                        case 0:
+                            const int {|Rename:I|} = 1 + 1;
+                            var f = Main(I);
+                            var g = Main(I);
+                        case 1:
+                            Console.WriteLine(1 + 0);
                     }
                 }
-                """,
+            }
+            """,
             index: 3
         );
     }
@@ -2799,40 +2799,40 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Program
+            using System;
+            class Program
+            {
+                int Main(int i)
                 {
-                    int Main(int i)
+                    switch (1)
                     {
-                        switch (1)
-                        {
-                            case 0:
-                                var f = Main([|1 + 1|]);
-                                var g = Main(1 + 1);
-                            case 1:
-                                Console.WriteLine(1 + 1);
-                        }
+                        case 0:
+                            var f = Main([|1 + 1|]);
+                            var g = Main(1 + 1);
+                        case 1:
+                            Console.WriteLine(1 + 1);
                     }
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class Program
+            using System;
+            class Program
+            {
+                int Main(int i)
                 {
-                    int Main(int i)
+                    const int {|Rename:I|} = 1 + 1;
+                    switch (1)
                     {
-                        const int {|Rename:I|} = 1 + 1;
-                        switch (1)
-                        {
-                            case 0:
-                                var f = Main(I);
-                                var g = Main(I);
-                            case 1:
-                                Console.WriteLine(I);
-                        }
+                        case 0:
+                            var f = Main(I);
+                            var g = Main(I);
+                        case 1:
+                            Console.WriteLine(I);
                     }
                 }
-                """,
+            }
+            """,
             index: 3
         );
     }
@@ -2842,31 +2842,31 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        Func<int, int> f = x => [|x + 1|];
-                    }
+                    Func<int, int> f = x => [|x + 1|];
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    Func<int, int> f = x =>
                     {
-                        Func<int, int> f = x =>
-                        {
-                            var {|Rename:v|} = x + 1;
-                            return v;
-                        };
-                    }
+                        var {|Rename:v|} = x + 1;
+                        return v;
+                    };
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -2876,31 +2876,31 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        Func<int, Func<int, int>> f = x => y => [|x + 1|];
-                    }
+                    Func<int, Func<int, int>> f = x => y => [|x + 1|];
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    Func<int, Func<int, int>> f = x => y =>
                     {
-                        Func<int, Func<int, int>> f = x => y =>
-                        {
-                            var {|Rename:v|} = x + 1;
-                            return v;
-                        };
-                    }
+                        var {|Rename:v|} = x + 1;
+                        return v;
+                    };
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -2910,31 +2910,31 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        Func<int, Func<int, int>> f = x => y => [|y + 1|];
-                    }
+                    Func<int, Func<int, int>> f = x => y => [|y + 1|];
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    Func<int, Func<int, int>> f = x => y =>
                     {
-                        Func<int, Func<int, int>> f = x => y =>
-                        {
-                            var {|Rename:v|} = y + 1;
-                            return v;
-                        };
-                    }
+                        var {|Rename:v|} = y + 1;
+                        return v;
+                    };
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -2944,31 +2944,31 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        Func<int, Func<int, int>> f = x => [|y => y + 1|];
-                    }
+                    Func<int, Func<int, int>> f = x => [|y => y + 1|];
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    Func<int, Func<int, int>> f = x =>
                     {
-                        Func<int, Func<int, int>> f = x =>
-                        {
-                            Func<int, int> {|Rename:value|} = y => y + 1;
-                            return value;
-                        };
-                    }
+                        Func<int, int> {|Rename:value|} = y => y + 1;
+                        return value;
+                    };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -2977,31 +2977,31 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        Func<int, Func<int, int>> f = x => [|y => x + 1|];
-                    }
+                    Func<int, Func<int, int>> f = x => [|y => x + 1|];
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    Func<int, Func<int, int>> f = x =>
                     {
-                        Func<int, Func<int, int>> f = x =>
-                        {
-                            Func<int, int> {|Rename:value|} = y => x + 1;
-                            return value;
-                        };
-                    }
+                        Func<int, int> {|Rename:value|} = y => x + 1;
+                        return value;
+                    };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -3010,30 +3010,30 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        Action<int> goo = x => [|x.ToString()|];
-                    }
+                    Action<int> goo = x => [|x.ToString()|];
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
+                    Action<int> goo = x =>
                     {
-                        Action<int> goo = x =>
-                        {
-                            string {|Rename:v|} = x.ToString();
-                        };
-                    }
+                        string {|Rename:v|} = x.ToString();
+                    };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -3042,28 +3042,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        [|new Nullable<int*>()|].GetValueOrDefault();
-                    }
+                    [|new Nullable<int*>()|].GetValueOrDefault();
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        var {|Rename:v|} = new Nullable<int*>();
-                        v.GetValueOrDefault();
-                    }
+                    var {|Rename:v|} = new Nullable<int*>();
+                    v.GetValueOrDefault();
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -3073,28 +3073,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        [|new Nullable<int*>()|].GetValueOrDefault();
-                    }
+                    [|new Nullable<int*>()|].GetValueOrDefault();
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        Nullable<int*> {|Rename:v|} = new Nullable<int*>();
-                        v.GetValueOrDefault();
-                    }
+                    Nullable<int*> {|Rename:v|} = new Nullable<int*>();
+                    v.GetValueOrDefault();
                 }
-                """
+            }
+            """
         );
     }
 
@@ -3103,30 +3103,30 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                class C
+            class C
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        var set = new HashSet<string>();
-                        set.Add([|set.ToString()|]);
-                    }
+                    var set = new HashSet<string>();
+                    set.Add([|set.ToString()|]);
                 }
-                """,
+            }
+            """,
             """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                class C
+            class C
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        var set = new HashSet<string>();
-                        var {|Rename:item|} = set.ToString();
-                        set.Add(item);
-                    }
+                    var set = new HashSet<string>();
+                    var {|Rename:item|} = set.ToString();
+                    set.Add(item);
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -3136,32 +3136,32 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        ([|(C.Bar)|].Invoke)();
-                    }
-
-                    static Action Bar;
+                    ([|(C.Bar)|].Invoke)();
                 }
-                """,
+
+                static Action Bar;
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Action {|Rename:bar|} = (C.Bar);
-                        bar.Invoke();
-                    }
-
-                    static Action Bar;
+                    Action {|Rename:bar|} = (C.Bar);
+                    bar.Invoke();
                 }
-                """
+
+                static Action Bar;
+            }
+            """
         );
     }
 
@@ -3170,28 +3170,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        Console.WriteLine(5 - ([|1|] + 2));
-                    }
+                    Console.WriteLine(5 - ([|1|] + 2));
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                static void Main()
                 {
-                    static void Main()
-                    {
-                        const int {|Rename:V|} = 1;
-                        Console.WriteLine(5 - (V + 2));
-                    }
+                    const int {|Rename:V|} = 1;
+                    Console.WriteLine(5 - (V + 2));
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -3201,36 +3201,36 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        var d = new Dictionary<string, Exception>();
-                        d.Add("a", [|new Exception()|]);
-                    }
+                    var d = new Dictionary<string, Exception>();
+                    d.Add("a", [|new Exception()|]);
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
-                using System.Threading.Tasks;
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
-                    {
-                        var d = new Dictionary<string, Exception>();
-                        var {|Rename:value|} = new Exception();
-                        d.Add("a", value);
-                    }
+                    var d = new Dictionary<string, Exception>();
+                    var {|Rename:value|} = new Exception();
+                    d.Add("a", value);
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -3240,28 +3240,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var l = new List<int>() { [|Environment.TickCount|] };
-                    }
+                    var l = new List<int>() { [|Environment.TickCount|] };
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var {|Rename:tickCount|} = Environment.TickCount;
-                        var l = new List<int>() { tickCount };
-                    }
+                    var {|Rename:tickCount|} = Environment.TickCount;
+                    var l = new List<int>() { tickCount };
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -3271,28 +3271,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var l = new List<int>() { [|Environment.TickCount|] };
-                    }
+                    var l = new List<int>() { [|Environment.TickCount|] };
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int {|Rename:tickCount|} = Environment.TickCount;
-                        var l = new List<int>() { tickCount };
-                    }
+                    int {|Rename:tickCount|} = Environment.TickCount;
+                    var l = new List<int>() { tickCount };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -3301,32 +3301,32 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                public Dictionary<int, int> A { get; private set; }
+                static int Main(string[] args)
                 {
-                    public Dictionary<int, int> A { get; private set; }
-                    static int Main(string[] args)
-                    {
-                        int a = 0;
-                        return new Program { A = { { [|a + 2|], 0 } } }.A.Count;
-                    }
+                    int a = 0;
+                    return new Program { A = { { [|a + 2|], 0 } } }.A.Count;
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                public Dictionary<int, int> A { get; private set; }
+                static int Main(string[] args)
                 {
-                    public Dictionary<int, int> A { get; private set; }
-                    static int Main(string[] args)
-                    {
-                        int a = 0;
-                        var {|Rename:v|} = a + 2;
-                        return new Program { A = { { v, 0 } } }.A.Count;
-                    }
+                    int a = 0;
+                    var {|Rename:v|} = a + 2;
+                    return new Program { A = { { v, 0 } } }.A.Count;
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -3336,28 +3336,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var a = new int[] { [|Environment.TickCount|] };
-                    }
+                    var a = new int[] { [|Environment.TickCount|] };
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var {|Rename:tickCount|} = Environment.TickCount;
-                        var a = new int[] { tickCount };
-                    }
+                    var {|Rename:tickCount|} = Environment.TickCount;
+                    var a = new int[] { tickCount };
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -3367,28 +3367,28 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var a = new int[] { [|Environment.TickCount|] };
-                    }
+                    var a = new int[] { [|Environment.TickCount|] };
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                using System.Collections.Generic;
-                class C
+            using System;
+            using System.Collections.Generic;
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int {|Rename:tickCount|} = Environment.TickCount;
-                        var a = new int[] { tickCount };
-                    }
+                    int {|Rename:tickCount|} = Environment.TickCount;
+                    var a = new int[] { tickCount };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -3397,36 +3397,36 @@ public class IntroduceVariableTests : AbstractCSharpCodeActionTest
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M()
                 {
-                    void M()
+                    var s = "Text";
+                    var x = 42;
+                    if ([|s.Length|].CompareTo(x) > 0 &&
+                        s.Length.CompareTo(x) > 0)
                     {
-                        var s = "Text";
-                        var x = 42;
-                        if ([|s.Length|].CompareTo(x) > 0 &&
-                            s.Length.CompareTo(x) > 0)
-                        {
-                        }
                     }
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                void M()
                 {
-                    void M()
+                    var s = "Text";
+                    var x = 42;
+                    var {|Rename:length|} = s.Length;
+                    if (length.CompareTo(x) > 0 &&
+                        length.CompareTo(x) > 0)
                     {
-                        var s = "Text";
-                        var x = 42;
-                        var {|Rename:length|} = s.Length;
-                        if (length.CompareTo(x) > 0 &&
-                            length.CompareTo(x) > 0)
-                        {
-                        }
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -3526,30 +3526,30 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x = 5;
+                    int x = 5;
 
-                        // comment
-                        int y = [|(x + 5)|] * (x + 5);
-                    }
+                    // comment
+                    int y = [|(x + 5)|] * (x + 5);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x = 5;
+                    int x = 5;
 
-                        // comment
-                        var {|Rename:v|} = (x + 5);
-                        int y = v * (x + 5);
-                    }
+                    // comment
+                    var {|Rename:v|} = (x + 5);
+                    int y = v * (x + 5);
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere()
         );
     }
@@ -3559,32 +3559,32 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x = 5;
+                    int x = 5;
 
-                        // comment
-                        int y = [|(x + 5)|] * (x + 5);
-                        int z = (x + 5);
-                    }
+                    // comment
+                    int y = [|(x + 5)|] * (x + 5);
+                    int z = (x + 5);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x = 5;
+                    int x = 5;
 
-                        // comment
-                        var {|Rename:v|} = (x + 5);
-                        int y = v * v;
-                        int z = v;
-                    }
+                    // comment
+                    var {|Rename:v|} = (x + 5);
+                    int y = v * v;
+                    int z = v;
                 }
-                """,
+            }
+            """,
             options: ImplicitTypingEverywhere(),
             index: 1
         );
@@ -3594,76 +3594,76 @@ class C
     public Task TestIntroduceLocal_NullableType_FlowStateNonNull() =>
         TestInRegularAndScriptAsync(
             """
-                #nullable enable
+            #nullable enable
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        string? s = string.Empty;
-                        M2([|s|]);
-                    }
-
-                    void M2(string? s)
-                    {
-                    }
+                    string? s = string.Empty;
+                    M2([|s|]);
                 }
-                """,
+
+                void M2(string? s)
+                {
+                }
+            }
+            """,
             """
-                #nullable enable
+            #nullable enable
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        string? s = string.Empty;
-                        string {|Rename:s1|} = s;
-                        M2(s1);
-                    }
-
-                    void M2(string? s)
-                    {
-                    }
+                    string? s = string.Empty;
+                    string {|Rename:s1|} = s;
+                    M2(s1);
                 }
-                """
+
+                void M2(string? s)
+                {
+                }
+            }
+            """
         );
 
     [Fact]
     public Task TestIntroduceLocal_NullableType_FlowStateNull() =>
         TestInRegularAndScriptAsync(
             """
-                #nullable enable
+            #nullable enable
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        string? s = null;
-                        M2([|s|]);
-                    }
-
-                    void M2(string? s)
-                    {
-                    }
+                    string? s = null;
+                    M2([|s|]);
                 }
-                """,
+
+                void M2(string? s)
+                {
+                }
+            }
+            """,
             """
-                #nullable enable
+            #nullable enable
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        string? s = null;
-                        string? {|Rename:s1|} = s;
-                        M2(s1);
-                    }
-
-                    void M2(string? s)
-                    {
-                    }
+                    string? s = null;
+                    string? {|Rename:s1|} = s;
+                    M2(s1);
                 }
-                """
+
+                void M2(string? s)
+                {
+                }
+            }
+            """
         );
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1065661")]
@@ -3671,17 +3671,17 @@ class C
     {
         await TestSmartTagTextAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var s = [|@"a
+                    var s = [|@"a
 
-                b
-                c"|];
-                    }
+            b
+            c"|];
                 }
-                """,
+            }
+            """,
             string.Format(
                 FeaturesResources.Introduce_local_constant_for_0,
                 """
@@ -3697,17 +3697,17 @@ class C
     {
         await TestSmartTagTextAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var s = [|$@"a
+                    var s = [|$@"a
 
-                b
-                c"|];
-                    }
+            b
+            c"|];
                 }
-                """,
+            }
+            """,
             string.Format(
                 FeaturesResources.Introduce_constant_for_0,
                 """
@@ -5258,23 +5258,23 @@ class TestClass
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                class C1
-                {
-                }
+            class C1
+            {
+            }
 
-                class C2
-                {
-                }
+            class C2
+            {
+            }
 
-                class Test
+            class Test
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        C1 c1 = [|null|];
-                        C2 c2 = null;
-                    }
+                    C1 c1 = [|null|];
+                    C2 c2 = null;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -5346,17 +5346,17 @@ class C
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                public T F<T>(T x)
                 {
-                    public T F<T>(T x)
-                    {
-                        var y = [|F(new C())?.F(new C())|]?.F(new C());
-                        return x;
-                    }
+                    var y = [|F(new C())?.F(new C())|]?.F(new C());
+                    return x;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -5365,17 +5365,17 @@ class C
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                public T F<T>(T x)
                 {
-                    public T F<T>(T x)
-                    {
-                        var y = F(new C())?.[|F(new C())|]?.F(new C());
-                        return x;
-                    }
+                    var y = F(new C())?.[|F(new C())|]?.F(new C());
+                    return x;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -5384,16 +5384,16 @@ class C
     {
         await TestMissingInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                static void Test(string s)
                 {
-                    static void Test(string s)
-                    {
-                        var l = s?.[|Length|] ?? 0;
-                    }
+                    var l = s?.[|Length|] ?? 0;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -5726,15 +5726,15 @@ class C
         // Cannot refactor tuple as local constant
         await TestActionCountAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Bar([|(1, "hello")|]);
-                        Bar((1, "hello");
-                    }
+                    Bar([|(1, "hello")|]);
+                    Bar((1, "hello");
                 }
-                """,
+            }
+            """,
             count: 2
         );
     }
@@ -5744,36 +5744,36 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                class MySpan { public int Start { get; } public int End { get; } }
+                void Method(MySpan span)
                 {
-                    class MySpan { public int Start { get; } public int End { get; } }
-                    void Method(MySpan span)
+                    int pos = span.Start;
+                    while (pos < [|span.End|])
                     {
-                        int pos = span.Start;
-                        while (pos < [|span.End|])
-                        {
-                            int spanEnd = span.End;
-                            int end = pos;
-                        }
+                        int spanEnd = span.End;
+                        int end = pos;
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                class MySpan { public int Start { get; } public int End { get; } }
+                void Method(MySpan span)
                 {
-                    class MySpan { public int Start { get; } public int End { get; } }
-                    void Method(MySpan span)
+                    int pos = span.Start;
+                    int {|Rename:end1|} = span.End;
+                    while (pos < end1)
                     {
-                        int pos = span.Start;
-                        int {|Rename:end1|} = span.End;
-                        while (pos < end1)
-                        {
-                            int spanEnd = span.End;
-                            int end = pos;
-                        }
+                        int spanEnd = span.End;
+                        int end = pos;
                     }
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6053,40 +6053,40 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                public C(string a, string b)
                 {
-                    public C(string a, string b)
-                    {
-                        new TextSpan([|int.Parse(a)|], int.Parse(b));
-                    }
+                    new TextSpan([|int.Parse(a)|], int.Parse(b));
                 }
+            }
 
-                struct TextSpan
+            struct TextSpan
+            {
+                public TextSpan(int start, int length)
                 {
-                    public TextSpan(int start, int length)
-                    {
 
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                public C(string a, string b)
                 {
-                    public C(string a, string b)
-                    {
-                        int {|Rename:start|} = int.Parse(a);
-                        new TextSpan(start, int.Parse(b));
-                    }
+                    int {|Rename:start|} = int.Parse(a);
+                    new TextSpan(start, int.Parse(b));
                 }
+            }
 
-                struct TextSpan
+            struct TextSpan
+            {
+                public TextSpan(int start, int length)
                 {
-                    public TextSpan(int start, int length)
-                    {
 
-                    }
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6095,40 +6095,40 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                public C(string a, string b)
                 {
-                    public C(string a, string b)
-                    {
-                        new TextSpan(int.Parse(a), [|int.Parse(b)|]);
-                    }
+                    new TextSpan(int.Parse(a), [|int.Parse(b)|]);
                 }
+            }
 
-                struct TextSpan
+            struct TextSpan
+            {
+                public TextSpan(int start, int length)
                 {
-                    public TextSpan(int start, int length)
-                    {
 
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                public C(string a, string b)
                 {
-                    public C(string a, string b)
-                    {
-                        int {|Rename:length|} = int.Parse(b);
-                        new TextSpan(int.Parse(a), length);
-                    }
+                    int {|Rename:length|} = int.Parse(b);
+                    new TextSpan(int.Parse(a), length);
                 }
+            }
 
-                struct TextSpan
+            struct TextSpan
+            {
+                public TextSpan(int start, int length)
                 {
-                    public TextSpan(int start, int length)
-                    {
 
-                    }
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6137,28 +6137,28 @@ class C
     {
         await TestAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                public C(string a, string b)
                 {
-                    public C(string a, string b)
-                    {
-                        var tuple = (id: 1, date: [|DateTime.Now.ToString()|]);
-                    }
+                    var tuple = (id: 1, date: [|DateTime.Now.ToString()|]);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                public C(string a, string b)
                 {
-                    public C(string a, string b)
-                    {
-                        string {|Rename:date|} = DateTime.Now.ToString();
-                        var tuple = (id: 1, date: date);
-                    }
+                    string {|Rename:date|} = DateTime.Now.ToString();
+                    var tuple = (id: 1, date: date);
                 }
-                """,
+            }
+            """,
             parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest)
         );
     }
@@ -6168,29 +6168,29 @@ class C
     {
         await TestAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                public C()
                 {
-                    public C()
-                    {
-                        var tuple = (key: 1, value: [|1 + 1|]);
-                    }
+                    var tuple = (key: 1, value: [|1 + 1|]);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                private const int {|Rename:Value|} = 1 + 1;
+
+                public C()
                 {
-                    private const int {|Rename:Value|} = 1 + 1;
-
-                    public C()
-                    {
-                        var tuple = (key: 1, value: Value);
-                    }
+                    var tuple = (key: 1, value: Value);
                 }
-                """,
+            }
+            """,
             parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
             index: 0
         );
@@ -6201,28 +6201,28 @@ class C
     {
         await TestAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                public C()
                 {
-                    public C()
-                    {
-                        var tuple = (key: 1, value: [|1 + 1|]);
-                    }
+                    var tuple = (key: 1, value: [|1 + 1|]);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                public C()
                 {
-                    public C()
-                    {
-                        const int {|Rename:Value|} = 1 + 1;
-                        var tuple = (key: 1, value: Value);
-                    }
+                    const int {|Rename:Value|} = 1 + 1;
+                    var tuple = (key: 1, value: Value);
                 }
-                """,
+            }
+            """,
             parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
             index: 2
         );
@@ -6233,25 +6233,25 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                public class C
-                {
-                    public string Goo { get; set; }
+            public class C
+            {
+                public string Goo { get; set; }
 
-                    [Example([|2+2|])]
-                    public string Bar { get; set; }
-                }
-                """,
+                [Example([|2+2|])]
+                public string Bar { get; set; }
+            }
+            """,
             """
-                public class C
-                {
-                    private const int {|Rename:V|} = 2 + 2;
+            public class C
+            {
+                private const int {|Rename:V|} = 2 + 2;
 
-                    public string Goo { get; set; }
+                public string Goo { get; set; }
 
-                    [Example(V)]
-                    public string Bar { get; set; }
-                }
-                """
+                [Example(V)]
+                public string Bar { get; set; }
+            }
+            """
         );
     }
 
@@ -6260,31 +6260,31 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                namespace C
+            namespace C
+            {
+                class C
                 {
-                    class C
+                    void M()
                     {
-                        void M()
-                        {
-                            var t = new { foo = [|1 + 1|] };
-                        }
+                        var t = new { foo = [|1 + 1|] };
                     }
                 }
-                """,
+            }
+            """,
             """
-                namespace C
+            namespace C
+            {
+                class C
                 {
-                    class C
-                    {
-                        private const int {|Rename:V|} = 1 + 1;
+                    private const int {|Rename:V|} = 1 + 1;
 
-                        void M()
-                        {
-                            var t = new { foo = V };
-                        }
+                    void M()
+                    {
+                        var t = new { foo = V };
                     }
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6293,24 +6293,24 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M(int a)
                 {
-                    void M(int a)
-                    {
-                        System.Console.Write([|a|]);
-                    }
+                    System.Console.Write([|a|]);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M(int a)
                 {
-                    void M(int a)
-                    {
-                        int {|Rename:a1|} = a;
-                        System.Console.Write(a1);
-                    }
+                    int {|Rename:a1|} = a;
+                    System.Console.Write(a1);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6319,14 +6319,14 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
+            class C
+            {
+                void M(int a)
                 {
-                    void M(int a)
-                    {
-                        System.Console.Write([||]a);
-                    }
+                    System.Console.Write([||]a);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6336,24 +6336,24 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M(int parameter)
                 {
-                    void M(int parameter)
-                    {
-                        System.Console.Write([|par|]ameter);
-                    }
+                    System.Console.Write([|par|]ameter);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M(int parameter)
                 {
-                    void M(int parameter)
-                    {
-                        int {|Rename:parameter1|} = parameter;
-                        System.Console.Write(parameter1);
-                    }
+                    int {|Rename:parameter1|} = parameter;
+                    System.Console.Write(parameter1);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6362,26 +6362,26 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                int a;
+                void M()
                 {
-                    int a;
-                    void M()
-                    {
-                        System.Console.Write([|this.a|]);
-                    }
+                    System.Console.Write([|this.a|]);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                int a;
+                void M()
                 {
-                    int a;
-                    void M()
-                    {
-                        int {|Rename:a1|} = this.a;
-                        System.Console.Write(a1);
-                    }
+                    int {|Rename:a1|} = this.a;
+                    System.Console.Write(a1);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6390,26 +6390,26 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                static int a;
+                void M()
                 {
-                    static int a;
-                    void M()
-                    {
-                        System.Console.Write([|C.a|]);
-                    }
+                    System.Console.Write([|C.a|]);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                static int a;
+                void M()
                 {
-                    static int a;
-                    void M()
-                    {
-                        int {|Rename:a1|} = C.a;
-                        System.Console.Write(a1);
-                    }
+                    int {|Rename:a1|} = C.a;
+                    System.Console.Write(a1);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6420,26 +6420,26 @@ class C
         // unambiguous and there will be no other refactorings offered. Thus the cost of offering it very virtually non-existent.
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                static int a;
+                void M()
                 {
-                    static int a;
-                    void M()
-                    {
-                        System.Console.Write(C[|.|]a);
-                    }
+                    System.Console.Write(C[|.|]a);
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                static int a;
+                void M()
                 {
-                    static int a;
-                    void M()
-                    {
-                        int {|Rename:a1|} = C.a;
-                        System.Console.Write(a1);
-                    }
+                    int {|Rename:a1|} = C.a;
+                    System.Console.Write(a1);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6448,15 +6448,15 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
+            class C
+            {
+                static int a;
+                void M()
                 {
-                    static int a;
-                    void M()
-                    {
-                        System.Console.Write([|C.|]a);
-                    }
+                    System.Console.Write([|C.|]a);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6465,15 +6465,15 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
+            class C
+            {
+                static int a;
+                void M()
                 {
-                    static int a;
-                    void M()
-                    {
-                        System.Console.Write(C.[|a|]);
-                    }
+                    System.Console.Write(C.[|a|]);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6482,15 +6482,15 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
+            class C
+            {
+                static int a;
+                void M()
                 {
-                    static int a;
-                    void M()
-                    {
-                        System.Console.Write(C.[||]a);
-                    }
+                    System.Console.Write(C.[||]a);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6499,29 +6499,29 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x = [|
-                            5 * 2 |]
-                            ;
-                    }
+                    int x = [|
+                        5 * 2 |]
+                        ;
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 5 * 2;
+            class C
+            {
+                private const int {|Rename:V|} = 5 * 2;
 
-                    void M()
-                    {
-                        int x =
-                            V
-                            ;
-                    }
+                void M()
+                {
+                    int x =
+                        V
+                        ;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6530,29 +6530,29 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x =
-                [|            5 * 2
-                |]            ;
-                    }
+                    int x =
+            [|            5 * 2
+            |]            ;
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 5 * 2;
+            class C
+            {
+                private const int {|Rename:V|} = 5 * 2;
 
-                    void M()
-                    {
-                        int x =
-                            V
-                            ;
-                    }
+                void M()
+                {
+                    int x =
+                        V
+                        ;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6561,16 +6561,16 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x = // start [| comment
-                            5 * 2 |]
-                            ;
-                    }
+                    int x = // start [| comment
+                        5 * 2 |]
+                        ;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6580,29 +6580,29 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        int x = /*comment1*/ [|
-                            5 * 2 |]
-                            ;
-                    }
+                    int x = /*comment1*/ [|
+                        5 * 2 |]
+                        ;
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 5 * 2;
+            class C
+            {
+                private const int {|Rename:V|} = 5 * 2;
 
-                    void M()
-                    {
-                        int x = /*comment1*/
-                            V
-                            ;
-                    }
+                void M()
+                {
+                    int x = /*comment1*/
+                        V
+                        ;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6613,28 +6613,28 @@ class C
         // introduce local still introduces a local, not a ref-local.
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M(int x)
                 {
-                    void M(int x)
-                    {
-                        ref int y = ref x;
-                        M2([|(y = ref x)|]);
-                    }
-                    void M2(int p) { }
+                    ref int y = ref x;
+                    M2([|(y = ref x)|]);
                 }
-                """,
+                void M2(int p) { }
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M(int x)
                 {
-                    void M(int x)
-                    {
-                        ref int y = ref x;
-                        int {|Rename:p|} = (y = ref x);
-                        M2(p);
-                    }
-                    void M2(int p) { }
+                    ref int y = ref x;
+                    int {|Rename:p|} = (y = ref x);
+                    M2(p);
                 }
-                """
+                void M2(int p) { }
+            }
+            """
         );
     }
 
@@ -6644,16 +6644,16 @@ class C
         // Cannot extract expressions passed by ref
         await TestMissingInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M(int x)
                 {
-                    void M(int x)
-                    {
-                        ref int y = ref x;
-                        M2(ref [|(y = ref x)|]);
-                    }
-                    void M2(ref int p) { }
+                    ref int y = ref x;
+                    M2(ref [|(y = ref x)|]);
                 }
-                """
+                void M2(ref int p) { }
+            }
+            """
         );
     }
 
@@ -6662,25 +6662,25 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Bar(1[||], 2);
-                    }
+                    Bar(1[||], 2);
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 1;
+            class C
+            {
+                private const int {|Rename:V|} = 1;
 
-                    void Goo()
-                    {
-                        Bar(V, 2);
-                    }
+                void Goo()
+                {
+                    Bar(V, 2);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6689,25 +6689,25 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Bar(1, 2[||]);
-                    }
+                    Bar(1, 2[||]);
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 2;
+            class C
+            {
+                private const int {|Rename:V|} = 2;
 
-                    void Goo()
-                    {
-                        Bar(1, V);
-                    }
+                void Goo()
+                {
+                    Bar(1, V);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6716,25 +6716,25 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Bar(1, (2[||]));
-                    }
+                    Bar(1, (2[||]));
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = (2);
+            class C
+            {
+                private const int {|Rename:V|} = (2);
 
-                    void Goo()
-                    {
-                        Bar(1, V);
-                    }
+                void Goo()
+                {
+                    Bar(1, V);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6743,25 +6743,25 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void Goo()
                 {
-                    void Goo()
-                    {
-                        Bar(1, Bar(2[||]));
-                    }
+                    Bar(1, Bar(2[||]));
                 }
-                """,
+            }
+            """,
             """
-                class C
-                {
-                    private const int {|Rename:V|} = 2;
+            class C
+            {
+                private const int {|Rename:V|} = 2;
 
-                    void Goo()
-                    {
-                        Bar(1, Bar(V));
-                    }
+                void Goo()
+                {
+                    Bar(1, Bar(V));
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6770,11 +6770,11 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
-                {
-                    int x = [| |] 0;
-                }
-                """
+            class C
+            {
+                int x = [| |] 0;
+            }
+            """
         );
     }
 
@@ -6783,14 +6783,14 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
+            class C
+            {
+                [Example( [| |] )]
+                public void Goo()
                 {
-                    [Example( [| |] )]
-                    public void Goo()
-                    {
-                    }
                 }
-                """
+            }
+            """
         );
     }
 
@@ -6799,28 +6799,28 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                byte[] getArray() => null;
+                void test()
                 {
-                    byte[] getArray() => null;
-                    void test()
-                    {
-                        var goo = [|getArray()|][0];
-                    }
+                    var goo = [|getArray()|][0];
                 }
-                """,
+            }
+            """,
             """
-                using System;
-                class C
+            using System;
+            class C
+            {
+                byte[] getArray() => null;
+                void test()
                 {
-                    byte[] getArray() => null;
-                    void test()
-                    {
-                        byte[] {|Rename:bytes|} = getArray();
-                        var goo = bytes[0];
-                    }
+                    byte[] {|Rename:bytes|} = getArray();
+                    var goo = bytes[0];
                 }
-                """
+            }
+            """
         );
     }
 
@@ -7126,36 +7126,36 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var x = i.ToString();
-                        Local();
+                    var x = i.ToString();
+                    Local();
 
-                        void Local()
-                        {
-                            var y = [|i.ToString();|]
-                        }
+                    void Local()
+                    {
+                        var y = [|i.ToString();|]
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var {|Rename:v|} = i.ToString();
-                        var x = v;
-                        Local();
+                    var {|Rename:v|} = i.ToString();
+                    var x = v;
+                    Local();
 
-                        void Local()
-                        {
-                            var y = v;
-                        }
+                    void Local()
+                    {
+                        var y = v;
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7166,46 +7166,46 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                public int TestProperty
                 {
-                    public int TestProperty
+                    get => 10;
+                    set
                     {
-                        get => 10;
-                        set
-                        {
-                            int i = 10;
-                            var x = i.ToString();
-                            Local();
+                        int i = 10;
+                        var x = i.ToString();
+                        Local();
 
-                            void Local()
-                            {
-                                var y = [|i.ToString()|];
-                            }
+                        void Local()
+                        {
+                            var y = [|i.ToString()|];
                         }
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                public int TestProperty
                 {
-                    public int TestProperty
+                    get => 10;
+                    set
                     {
-                        get => 10;
-                        set
-                        {
-                            int i = 10;
-                            var {|Rename:v|} = i.ToString();
-                            var x = v;
-                            Local();
+                        int i = 10;
+                        var {|Rename:v|} = i.ToString();
+                        var x = v;
+                        Local();
 
-                            void Local()
-                            {
-                                var y = v;
-                            }
+                        void Local()
+                        {
+                            var y = v;
                         }
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7216,52 +7216,52 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                public int TestProperty
                 {
-                    public int TestProperty
+                    get => 10;
+                    set
                     {
-                        get => 10;
-                        set
-                        {
-                            int i = 10;
-                            var x = i.ToString();
-                            Local();
+                        int i = 10;
+                        var x = i.ToString();
+                        Local();
 
-                            void Local()
+                        void Local()
+                        {
+                            for (int j = 0; j < 5; j++)
                             {
-                                for (int j = 0; j < 5; j++)
-                                {
-                                    var y = [|i.ToString();|]
-                                }
+                                var y = [|i.ToString();|]
                             }
                         }
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                public int TestProperty
                 {
-                    public int TestProperty
+                    get => 10;
+                    set
                     {
-                        get => 10;
-                        set
-                        {
-                            int i = 10;
-                            var {|Rename:v|} = i.ToString();
-                            var x = v;
-                            Local();
+                        int i = 10;
+                        var {|Rename:v|} = i.ToString();
+                        var x = v;
+                        Local();
 
-                            void Local()
+                        void Local()
+                        {
+                            for (int j = 0; j < 5; j++)
                             {
-                                for (int j = 0; j < 5; j++)
-                                {
-                                    var y = v;
-                                }
+                                var y = v;
                             }
                         }
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7272,44 +7272,44 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var x = i.ToString();
-                        Local();
+                    var x = i.ToString();
+                    Local();
 
+                    void Local()
+                    {
                         void Local()
                         {
-                            void Local()
-                            {
-                                var y = [|i.ToString();|]
-                            }
-                            var z = i.ToString();
+                            var y = [|i.ToString();|]
                         }
+                        var z = i.ToString();
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var {|Rename:v|} = i.ToString();
-                        var x = v;
-                        Local();
+                    var {|Rename:v|} = i.ToString();
+                    var x = v;
+                    Local();
 
+                    void Local()
+                    {
                         void Local()
                         {
-                            void Local()
-                            {
-                                var y = v;
-                            }
-                            var z = v;
+                            var y = v;
                         }
+                        var z = v;
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7320,44 +7320,44 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var x = i.ToString();
-                        Local();
+                    var x = i.ToString();
+                    Local();
 
-                        void Local()
+                    void Local()
+                    {
+                        static void Local()
                         {
-                            static void Local()
-                            {
-                                var y = [|i.ToString();|]
-                            }
-                            var z = i.ToString();
+                            var y = [|i.ToString();|]
                         }
+                        var z = i.ToString();
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var x = i.ToString();
-                        Local();
+                    var x = i.ToString();
+                    Local();
 
-                        void Local()
+                    void Local()
+                    {
+                        static void Local()
                         {
-                            static void Local()
-                            {
-                                var {|Rename:v|} = i.ToString();
-                                var y = v;
-                            }
-                            var z = i.ToString();
+                            var {|Rename:v|} = i.ToString();
+                            var y = v;
                         }
+                        var z = i.ToString();
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7368,50 +7368,50 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var x = Foo();
-                        Local();
+                    var x = Foo();
+                    Local();
 
-                        static void Local()
-                        {
-                            var y = [|Foo()|];
-                        }
-                    }
-
-                    private static object Foo()
+                    static void Local()
                     {
-                        throw new NotImplementedException();
+                        var y = [|Foo()|];
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var x = Foo();
-                        Local();
+                    var x = Foo();
+                    Local();
 
-                        static void Local()
-                        {
-                            var {|Rename:v|} = Foo();
-                            var y = v;
-                        }
-                    }
-
-                    private static object Foo()
+                    static void Local()
                     {
-                        throw new NotImplementedException();
+                        var {|Rename:v|} = Foo();
+                        var y = v;
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7422,34 +7422,34 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
+                    Local();
 
-                        void Local()
-                        {
-                            var y = [|i.ToString();|]
-                        }
+                    void Local()
+                    {
+                        var y = [|i.ToString();|]
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
+                    Local();
 
-                        void Local()
-                        {
-                            var {|Rename:v|} = i.ToString();
-                            var y = v;
-                        }
+                    void Local()
+                    {
+                        var {|Rename:v|} = i.ToString();
+                        var y = v;
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7460,36 +7460,36 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
+                    Local();
 
-                        void Local()
-                        {
-                            var x = [|i.ToString();|]
-                            var y = i.ToString();
-                        }
+                    void Local()
+                    {
+                        var x = [|i.ToString();|]
+                        var y = i.ToString();
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
+                    Local();
 
-                        void Local()
-                        {
-                            var {|Rename:v|} = i.ToString();
-                            var x = v;
-                            var y = v;
-                        }
+                    void Local()
+                    {
+                        var {|Rename:v|} = i.ToString();
+                        var x = v;
+                        var y = v;
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7500,36 +7500,36 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
+                    Local();
 
-                        void Local()
-                        {
-                            var x = i.ToString();
-                            var y = [|i.ToString();|]
-                        }
+                    void Local()
+                    {
+                        var x = i.ToString();
+                        var y = [|i.ToString();|]
                     }
                 }
-                """,
+            }
+            """,
             """
-                class Program
+            class Program
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
+                    Local();
 
-                        void Local()
-                        {
-                            var {|Rename:v|} = i.ToString();
-                            var x = v;
-                            var y = v;
-                        }
+                    void Local()
+                    {
+                        var {|Rename:v|} = i.ToString();
+                        var x = v;
+                        var y = v;
                     }
                 }
-                """,
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7540,48 +7540,48 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
-                        var x = Foo();
+                    Local();
+                    var x = Foo();
 
-                        void Local()
-                        {
-                            var y = [|Foo();|]
-                        }
-                    }
-
-                    private static object Foo()
+                    void Local()
                     {
-                        throw new NotImplementedException();
+                        var y = [|Foo();|]
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var {|Rename:v|} = Foo();
-                        Local();
-                        var x = v;
+                    var {|Rename:v|} = Foo();
+                    Local();
+                    var x = v;
 
-                        void Local()
-                        {
-                            var y = v;
-                        }
-                    }
-
-                    private static object Foo()
+                    void Local()
                     {
-                        throw new NotImplementedException();
+                        var y = v;
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7592,48 +7592,48 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    void Local()
                     {
-                        void Local()
-                        {
-                            var y = [|Foo();|]
-                        }
-
-                        Local();
-                        var x = Foo();
+                        var y = [|Foo();|]
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = Foo();
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var {|Rename:v|} = Foo();
+                    void Local()
                     {
-                        var {|Rename:v|} = Foo();
-                        void Local()
-                        {
-                            var y = v;
-                        }
-
-                        Local();
-                        var x = v;
+                        var y = v;
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7644,52 +7644,52 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var s = 5;
+                    void Local()
                     {
-                        var s = 5;
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = [|Foo();|]
-                        }
-
-                        Local();
-                        var x = Foo();
+                        var z = 10;
+                        var y = [|Foo();|]
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = Foo();
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var s = 5;
+                    var {|Rename:v|} = Foo();
+                    void Local()
                     {
-                        var s = 5;
-                        var {|Rename:v|} = Foo();
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = v;
-                        }
-
-                        Local();
-                        var x = v;
+                        var z = 10;
+                        var y = v;
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7700,54 +7700,54 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    Local();
+                    var s = 5;
+                    void Local()
                     {
-                        Local();
-                        var s = 5;
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = [|Foo();|]
-                        }
-
-                        Local();
-                        var x = Foo();
+                        var z = 10;
+                        var y = [|Foo();|]
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = Foo();
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var {|Rename:v|} = Foo();
+                    Local();
+                    var s = 5;
+                    void Local()
                     {
-                        var {|Rename:v|} = Foo();
-                        Local();
-                        var s = 5;
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = v;
-                        }
-
-                        Local();
-                        var x = v;
+                        var z = 10;
+                        var y = v;
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7758,60 +7758,60 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M0()
                 {
-                    void M0()
+                    void M(int i)
                     {
-                        void M(int i)
+                        Local();
+                        var s = 5;
+                        void Local()
                         {
-                            Local();
-                            var s = 5;
-                            void Local()
-                            {
-                                var z = 10;
-                                var y = [|Foo();|]
-                            }
-
-                            Local();
-                            var x = Foo();
+                            var z = 10;
+                            var y = [|Foo();|]
                         }
-                    }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
+                        Local();
+                        var x = Foo();
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M0()
                 {
-                    void M0()
+                    void M(int i)
                     {
-                        void M(int i)
+                        var {|Rename:v|} = Foo();
+                        Local();
+                        var s = 5;
+                        void Local()
                         {
-                            var {|Rename:v|} = Foo();
-                            Local();
-                            var s = 5;
-                            void Local()
-                            {
-                                var z = 10;
-                                var y = v;
-                            }
-
-                            Local();
-                            var x = v;
+                            var z = 10;
+                            var y = v;
                         }
-                    }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
+                        Local();
+                        var x = v;
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7822,68 +7822,68 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    Local();
+                    Local2();
+                    var s = 5;
+
+                    void Local2()
                     {
-                        Local();
-                        Local2();
-                        var s = 5;
-
-                        void Local2()
-                        {
-                            var w = Foo();
-                        }
-
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = [|Foo();|]
-                        }
-
-                        Local();
-                        var x = Foo();
+                        var w = Foo();
                     }
 
-                    private static object Foo()
+                    void Local()
                     {
-                        throw new NotImplementedException();
+                        var z = 10;
+                        var y = [|Foo();|]
                     }
+
+                    Local();
+                    var x = Foo();
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var {|Rename:v|} = Foo();
+                    Local();
+                    Local2();
+                    var s = 5;
+
+                    void Local2()
                     {
-                        var {|Rename:v|} = Foo();
-                        Local();
-                        Local2();
-                        var s = 5;
-
-                        void Local2()
-                        {
-                            var w = v;
-                        }
-
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = v;
-                        }
-
-                        Local();
-                        var x = v;
+                        var w = v;
                     }
 
-                    private static object Foo()
+                    void Local()
                     {
-                        throw new NotImplementedException();
+                        var z = 10;
+                        var y = v;
                     }
+
+                    Local();
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7894,64 +7894,64 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var s = 5;
+
+                    void Local2()
                     {
-                        var s = 5;
-
-                        void Local2()
-                        {
-                            var w = Foo();
-                        }
-
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = [|Foo();|]
-                        }
-
-                        Local();
-                        var x = Foo();
+                        var w = Foo();
                     }
 
-                    private static object Foo()
+                    void Local()
                     {
-                        throw new NotImplementedException();
+                        var z = 10;
+                        var y = [|Foo();|]
                     }
+
+                    Local();
+                    var x = Foo();
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var s = 5;
+
+                    var {|Rename:v|} = Foo();
+                    void Local2()
                     {
-                        var s = 5;
-
-                        var {|Rename:v|} = Foo();
-                        void Local2()
-                        {
-                            var w = v;
-                        }
-
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = v;
-                        }
-
-                        Local();
-                        var x = v;
+                        var w = v;
                     }
 
-                    private static object Foo()
+                    void Local()
                     {
-                        throw new NotImplementedException();
+                        var z = 10;
+                        var y = v;
                     }
+
+                    Local();
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -7962,50 +7962,50 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var s = 5;
+                    void Local()
                     {
-                        var s = 5;
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = [|Foo();|]
-                        }
-
-                        var x = Foo();
+                        var z = 10;
+                        var y = [|Foo();|]
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var x = Foo();
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var s = 5;
+                    var {|Rename:v|} = Foo();
+                    void Local()
                     {
-                        var s = 5;
-                        var {|Rename:v|} = Foo();
-                        void Local()
-                        {
-                            var z = 10;
-                            var y = v;
-                        }
-
-                        var x = v;
+                        var z = 10;
+                        var y = v;
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -8016,46 +8016,46 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        Local();
-                        var s = 5;
-                        object y;
-                        void Local() => y = Foo();
+                    Local();
+                    var s = 5;
+                    object y;
+                    void Local() => y = Foo();
 
-                        var x = [|Foo();|]
-                    }
-
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var x = [|Foo();|]
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var {|Rename:v|} = Foo();
-                        Local();
-                        var s = 5;
-                        object y;
-                        void Local() => y = v;
+                    var {|Rename:v|} = Foo();
+                    Local();
+                    var s = 5;
+                    object y;
+                    void Local() => y = v;
 
-                        var x = v;
-                    }
-
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -8066,46 +8066,46 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var s = 5;
-                        object y;
-                        void Local() => y = Foo();
+                    var s = 5;
+                    object y;
+                    void Local() => y = Foo();
 
-                        Local();
-                        var x = [|Foo();|]
-                    }
-
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = [|Foo();|]
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
-                    {
-                        var s = 5;
-                        object y;
-                        var {|Rename:v|} = Foo();
-                        void Local() => y = v;
+                    var s = 5;
+                    object y;
+                    var {|Rename:v|} = Foo();
+                    void Local() => y = v;
 
-                        Local();
-                        var x = v;
-                    }
-
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    Local();
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -8116,78 +8116,78 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var c = new C();
+                    c.Local();
+
+                    this.Local();
+
+                    Local();
+                    void Local()
                     {
-                        var c = new C();
-                        c.Local();
-
-                        this.Local();
-
-                        Local();
-                        void Local()
-                        {
-                            var y = [|Foo();|]
-                        }
-
-                        var x = Foo();
+                        var y = [|Foo();|]
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    private void Local()
-                    {
-
-                    }
+                    var x = Foo();
                 }
 
-                class C
+                private static object Foo()
                 {
-                    public void Local() { }
+                    throw new NotImplementedException();
                 }
-                """,
+
+                private void Local()
+                {
+
+                }
+            }
+
+            class C
+            {
+                public void Local() { }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var c = new C();
+                    c.Local();
+
+                    this.Local();
+
+                    var {|Rename:v|} = Foo();
+                    Local();
+                    void Local()
                     {
-                        var c = new C();
-                        c.Local();
-
-                        this.Local();
-
-                        var {|Rename:v|} = Foo();
-                        Local();
-                        void Local()
-                        {
-                            var y = v;
-                        }
-
-                        var x = v;
+                        var y = v;
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
-
-                    private void Local()
-                    {
-
-                    }
+                    var x = v;
                 }
 
-                class C
+                private static object Foo()
                 {
-                    public void Local() { }
+                    throw new NotImplementedException();
                 }
-                """,
+
+                private void Local()
+                {
+
+                }
+            }
+
+            class C
+            {
+                public void Local() { }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -8198,48 +8198,48 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    Local();
+                    static void Local()
                     {
-                        Local();
-                        static void Local()
-                        {
-                            var y = Foo();
-                        }
-
-                        var x = [|Foo()|];
+                        var y = Foo();
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var x = [|Foo()|];
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    Local();
+                    static void Local()
                     {
-                        Local();
-                        static void Local()
-                        {
-                            var y = Foo();
-                        }
-
-                        var {|Rename:v|} = Foo();
-                        var x = v;
+                        var y = Foo();
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var {|Rename:v|} = Foo();
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -8250,46 +8250,46 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var x = [|Foo()|];
+                    Local();
+                    static void Local()
                     {
-                        var x = [|Foo()|];
-                        Local();
-                        static void Local()
-                        {
-                            var y = Foo();
-                        }
-                    }
-
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
+                        var y = Foo();
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var {|Rename:v|} = Foo();
+                    var x = v;
+                    Local();
+                    static void Local()
                     {
-                        var {|Rename:v|} = Foo();
-                        var x = v;
-                        Local();
-                        static void Local()
-                        {
-                            var y = Foo();
-                        }
-                    }
-
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
+                        var y = Foo();
                     }
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -8300,48 +8300,48 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    Local();
+                    void Local()
                     {
-                        Local();
-                        void Local()
-                        {
-                            var y = Foo();
-                        }
-
-                        var x = [|Foo()|];
+                        var y = Foo();
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var x = [|Foo()|];
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             """
-                using System;
-                class Bug
+            using System;
+            class Bug
+            {
+                void M(int i)
                 {
-                    void M(int i)
+                    var {|Rename:v|} = Foo();
+                    Local();
+                    void Local()
                     {
-                        var {|Rename:v|} = Foo();
-                        Local();
-                        void Local()
-                        {
-                            var y = v;
-                        }
-
-                        var x = v;
+                        var y = v;
                     }
 
-                    private static object Foo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                    var x = v;
                 }
-                """,
+
+                private static object Foo()
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            """,
             index: 1,
             options: ImplicitTypingEverywhere()
         );
@@ -8352,34 +8352,34 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    if (true)
                     {
-                        if (true)
-                        {
-                        }
-                        else if ([|args.Length|] == 0)
-                        {
-                        }
+                    }
+                    else if ([|args.Length|] == 0)
+                    {
                     }
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    int {|Rename:length|} = args.Length;
+                    if (true)
                     {
-                        int {|Rename:length|} = args.Length;
-                        if (true)
-                        {
-                        }
-                        else if (length == 0)
-                        {
-                        }
+                    }
+                    else if (length == 0)
+                    {
                     }
                 }
-                """
+            }
+            """
         );
     }
 
@@ -8388,40 +8388,40 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                public class Class1
+            public class Class1
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        Foo(1,[| Bar()|]);
-                    }
-
-                    private void Foo(int v1, object v2)
-                    {
-                    }
-
-                    private object Bar()
-                    {
-                    }
+                    Foo(1,[| Bar()|]);
                 }
-                """,
+
+                private void Foo(int v1, object v2)
+                {
+                }
+
+                private object Bar()
+                {
+                }
+            }
+            """,
             """
-                public class Class1
+            public class Class1
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        object {|Rename:v2|} = Bar();
-                        Foo(1, v2);
-                    }
-
-                    private void Foo(int v1, object v2)
-                    {
-                    }
-
-                    private object Bar()
-                    {
-                    }
+                    object {|Rename:v2|} = Bar();
+                    Foo(1, v2);
                 }
-                """
+
+                private void Foo(int v1, object v2)
+                {
+                }
+
+                private object Bar()
+                {
+                }
+            }
+            """
         );
     }
 
@@ -8430,44 +8430,44 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    foreach (var num in [|GetNumbers()|])
                     {
-                        foreach (var num in [|GetNumbers()|])
-                        {
 
-                        }
-                    }
-
-                    static IEnumerable<int> GetNumbers()
-                    {
-                        return new[] { 1, 2, 3 };
                     }
                 }
-                """,
+
+                static IEnumerable<int> GetNumbers()
+                {
+                    return new[] { 1, 2, 3 };
+                }
+            }
+            """,
             """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                class Program
+            class Program
+            {
+                static void Main(string[] args)
                 {
-                    static void Main(string[] args)
+                    IEnumerable<int> {|Rename:nums|} = GetNumbers();
+                    foreach (var num in nums)
                     {
-                        IEnumerable<int> {|Rename:nums|} = GetNumbers();
-                        foreach (var num in nums)
-                        {
 
-                        }
-                    }
-
-                    static IEnumerable<int> GetNumbers()
-                    {
-                        return new[] { 1, 2, 3 };
                     }
                 }
-                """
+
+                static IEnumerable<int> GetNumbers()
+                {
+                    return new[] { 1, 2, 3 };
+                }
+            }
+            """
         );
     }
 
@@ -8476,26 +8476,26 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class D
+            class D
+            {
+                void C(int a)
                 {
-                    void C(int a)
-                    {
-                        C(
-                            [|1 + 2|]);
-                    }
+                    C(
+                        [|1 + 2|]);
                 }
-                """,
+            }
+            """,
             """
-                class D
+            class D
+            {
+                void C(int a)
                 {
-                    void C(int a)
-                    {
-                        const int {|Rename:A|} = 1 + 2;
-                        C(
-                            A);
-                    }
+                    const int {|Rename:A|} = 1 + 2;
+                    C(
+                        A);
                 }
-                """,
+            }
+            """,
             index: 3
         );
     }
@@ -8505,33 +8505,33 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.IO;
-                using System.Threading.Tasks;
+            using System.IO;
+            using System.Threading.Tasks;
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        Task.Run(() => File.Copy("src", [|Path.Combine("dir", "file")|]));
-                    }
+                    Task.Run(() => File.Copy("src", [|Path.Combine("dir", "file")|]));
                 }
-                """,
+            }
+            """,
             """
-                using System.IO;
-                using System.Threading.Tasks;
+            using System.IO;
+            using System.Threading.Tasks;
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
+                    Task.Run(() =>
                     {
-                        Task.Run(() =>
-                        {
-                            string {|Rename:destFileName|} = Path.Combine("dir", "file");
-                            File.Copy("src", destFileName);
-                        });
-                    }
+                        string {|Rename:destFileName|} = Path.Combine("dir", "file");
+                        File.Copy("src", destFileName);
+                    });
                 }
-                """
+            }
+            """
         );
     }
 
@@ -8540,30 +8540,30 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        Action<int> goo = x => ([|x.ToString()|]);
-                    }
+                    Action<int> goo = x => ([|x.ToString()|]);
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
+                    Action<int> goo = x =>
                     {
-                        Action<int> goo = x =>
-                        {
-                            string {|Rename:v|} = x.ToString();
-                        };
-                    }
+                        string {|Rename:v|} = x.ToString();
+                    };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -8572,30 +8572,30 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        Action<int> goo = x => [|(x.ToString())|];
-                    }
+                    Action<int> goo = x => [|(x.ToString())|];
                 }
-                """,
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
+                    Action<int> goo = x =>
                     {
-                        Action<int> goo = x =>
-                        {
-                            string {|Rename:v|} = (x.ToString());
-                        };
-                    }
+                        string {|Rename:v|} = (x.ToString());
+                    };
                 }
-                """
+            }
+            """
         );
     }
 
@@ -8604,41 +8604,41 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        Func<int, Task> f = async x => await [|M2()|];
-                    }
-
-                    async Task M2()
-                    {
-                    }
+                    Func<int, Task> f = async x => await [|M2()|];
                 }
-                """,
+
+                async Task M2()
+                {
+                }
+            }
+            """,
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
+                    Func<int, Task> f = async x =>
                     {
-                        Func<int, Task> f = async x =>
-                        {
-                            Task {|Rename:task|} = M2();
-                            await task;
-                        };
-                    }
-
-                    async Task M2()
-                    {
-                    }
+                        Task {|Rename:task|} = M2();
+                        await task;
+                    };
                 }
-                """
+
+                async Task M2()
+                {
+                }
+            }
+            """
         );
     }
 
@@ -8647,53 +8647,53 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                namespace System.Threading.Tasks {
-                    struct ValueTask
-                    {
-                    }
-                }
-
-                class Program
+            namespace System.Threading.Tasks {
+                struct ValueTask
                 {
-                    void M()
-                    {
-                        Func<int, ValueTask> f = async x => await [|M2()|];
-                    }
-
-                    async ValueTask M2()
-                    {
-                    }
                 }
-                """,
+            }
+
+            class Program
+            {
+                void M()
+                {
+                    Func<int, ValueTask> f = async x => await [|M2()|];
+                }
+
+                async ValueTask M2()
+                {
+                }
+            }
+            """,
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                namespace System.Threading.Tasks {
-                    struct ValueTask
-                    {
-                    }
-                }
-
-                class Program
+            namespace System.Threading.Tasks {
+                struct ValueTask
                 {
-                    void M()
-                    {
-                        Func<int, ValueTask> f = async x =>
-                        {
-                            ValueTask {|Rename:valueTask|} = M2();
-                            await valueTask;
-                        };
-                    }
-
-                    async ValueTask M2()
-                    {
-                    }
                 }
-                """
+            }
+
+            class Program
+            {
+                void M()
+                {
+                    Func<int, ValueTask> f = async x =>
+                    {
+                        ValueTask {|Rename:valueTask|} = M2();
+                        await valueTask;
+                    };
+                }
+
+                async ValueTask M2()
+                {
+                }
+            }
+            """
         );
     }
 
@@ -8702,43 +8702,43 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        Func<int, Task<int>> f = async x => await [|M2()|];
-                    }
-
-                    async Task<int> M2()
-                    {
-                        return 0;
-                    }
+                    Func<int, Task<int>> f = async x => await [|M2()|];
                 }
-                """,
+
+                async Task<int> M2()
+                {
+                    return 0;
+                }
+            }
+            """,
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                class Program
+            class Program
+            {
+                void M()
                 {
-                    void M()
+                    Func<int, Task<int>> f = async x =>
                     {
-                        Func<int, Task<int>> f = async x =>
-                        {
-                            Task<int> {|Rename:task|} = M2();
-                            return await task;
-                        };
-                    }
-
-                    async Task<int> M2()
-                    {
-                        return 0;
-                    }
+                        Task<int> {|Rename:task|} = M2();
+                        return await task;
+                    };
                 }
-                """
+
+                async Task<int> M2()
+                {
+                    return 0;
+                }
+            }
+            """
         );
     }
 
@@ -8747,55 +8747,55 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                namespace System.Threading.Tasks {
-                    struct ValueTask<T>
-                    {
-                    }
-                }
-
-                class Program
+            namespace System.Threading.Tasks {
+                struct ValueTask<T>
                 {
-                    void M()
-                    {
-                        Func<int, ValueTask<int>> f = async x => await [|M2()|];
-                    }
-
-                    async ValueTask<int> M2()
-                    {
-                        return 0;
-                    }
                 }
-                """,
+            }
+
+            class Program
+            {
+                void M()
+                {
+                    Func<int, ValueTask<int>> f = async x => await [|M2()|];
+                }
+
+                async ValueTask<int> M2()
+                {
+                    return 0;
+                }
+            }
+            """,
             """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                namespace System.Threading.Tasks {
-                    struct ValueTask<T>
-                    {
-                    }
-                }
-
-                class Program
+            namespace System.Threading.Tasks {
+                struct ValueTask<T>
                 {
-                    void M()
-                    {
-                        Func<int, ValueTask<int>> f = async x =>
-                        {
-                            ValueTask<int> {|Rename:valueTask|} = M2();
-                            return await valueTask;
-                        };
-                    }
-
-                    async ValueTask<int> M2()
-                    {
-                        return 0;
-                    }
                 }
-                """
+            }
+
+            class Program
+            {
+                void M()
+                {
+                    Func<int, ValueTask<int>> f = async x =>
+                    {
+                        ValueTask<int> {|Rename:valueTask|} = M2();
+                        return await valueTask;
+                    };
+                }
+
+                async ValueTask<int> M2()
+                {
+                    return 0;
+                }
+            }
+            """
         );
     }
 
@@ -8804,47 +8804,47 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" Name="P1" CommonReferences="true">
-                        <Document>
-                public static class Extensions
+            <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" Name="P1" CommonReferences="true">
+                    <Document>
+            public static class Extensions
+            {
+                public static void Goo(this string s) { }
+            }
+                    </Document>
+                </Project>
+                <Project Language="C#" AssemblyName="Assembly2" Name="P2" CommonReferences="true">
+                    <Document>
+            public static class Extensions
+            {
+                public static void Bar(this string s) { }
+            }
+                    </Document>
+                </Project>
+                <Project Language="C#" AssemblyName="Assembly3" Name="P3" CommonReferences="true">
+                    <ProjectReference>P1</ProjectReference>
+                    <ProjectReference>P2</ProjectReference>
+                    <Document>public class P
+            {
+                public void M(string s)
                 {
-                    public static void Goo(this string s) { }
+                    s.Bar([|$""|]);
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" Name="P2" CommonReferences="true">
-                        <Document>
-                public static class Extensions
-                {
-                    public static void Bar(this string s) { }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly3" Name="P3" CommonReferences="true">
-                        <ProjectReference>P1</ProjectReference>
-                        <ProjectReference>P2</ProjectReference>
-                        <Document>public class P
-                {
-                    public void M(string s)
-                    {
-                        s.Bar([|$""|]);
-                    }
-                }</Document>
-                    </Project>
-                </Workspace>
-                """,
+            }</Document>
+                </Project>
+            </Workspace>
+            """,
             """
-                public class P
-                {
-                    private const string {|Rename:V|} = $"";
+            public class P
+            {
+                private const string {|Rename:V|} = $"";
 
-                    public void M(string s)
-                    {
-                        s.Bar(V);
-                    }
+                public void M(string s)
+                {
+                    s.Bar(V);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -8853,38 +8853,38 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class A
+            class A
+            {
+                public void Create(A a, B b)
                 {
-                    public void Create(A a, B b)
-                    {
-                    }
                 }
+            }
 
-                class B
+            class B
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        new A().Create(new A(), [|new(1)|]);
-                    }
+                    new A().Create(new A(), [|new(1)|]);
                 }
-                """,
+            }
+            """,
             """
-                class A
+            class A
+            {
+                public void Create(A a, B b)
                 {
-                    public void Create(A a, B b)
-                    {
-                    }
                 }
+            }
 
-                class B
+            class B
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        B {|Rename:b|} = new(1);
-                        new A().Create(new A(), b);
-                    }
+                    B {|Rename:b|} = new(1);
+                    new A().Create(new A(), b);
                 }
-                """
+            }
+            """
         );
     }
 
@@ -8893,38 +8893,38 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                using System.IO;
+            using System.IO;
 
-                public class SomeClass
+            public class SomeClass
+            {
+                public void Foo()
                 {
-                    public void Foo()
-                    {
-                        var somePath = Path.Combine("one", "two");
-                        Other([|"someParam"|]);
-                    }
-
-                    public void Other(string path)
-                    {
-                    }
+                    var somePath = Path.Combine("one", "two");
+                    Other([|"someParam"|]);
                 }
-                """,
+
+                public void Other(string path)
+                {
+                }
+            }
+            """,
             """
-                using System.IO;
+            using System.IO;
 
-                public class SomeClass
+            public class SomeClass
+            {
+                public void Foo()
                 {
-                    public void Foo()
-                    {
-                        var somePath = Path.Combine("one", "two");
-                        const string {|Rename:Path1|} = "someParam";
-                        Other(Path1);
-                    }
-
-                    public void Other(string path)
-                    {
-                    }
+                    var somePath = Path.Combine("one", "two");
+                    const string {|Rename:Path1|} = "someParam";
+                    Other(Path1);
                 }
-                """,
+
+                public void Other(string path)
+                {
+                }
+            }
+            """,
             2
         );
     }
@@ -8934,14 +8934,14 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        const int foo = [|10|];
-                    }
+                    const int foo = [|10|];
                 }
-                """
+            }
+            """
         );
     }
 
@@ -8950,11 +8950,11 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
-                {
-                    const int foo = [|10|];
-                }
-                """
+            class C
+            {
+                const int foo = [|10|];
+            }
+            """
         );
     }
 
@@ -8963,11 +8963,11 @@ class C
     {
         await TestMissingAsync(
             """
-                class C
-                {
-                    const int foo = ([|10|]);
-                }
-                """
+            class C
+            {
+                const int foo = ([|10|]);
+            }
+            """
         );
     }
 
@@ -8976,24 +8976,24 @@ class C
     {
         await TestInRegularAndScriptAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        const int foo = [|10|] + 10;
-                    }
+                    const int foo = [|10|] + 10;
                 }
-                """,
+            }
+            """,
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        const int {|Rename:V|} = 10;
-                        const int foo = V + 10;
-                    }
+                    const int {|Rename:V|} = 10;
+                    const int foo = V + 10;
                 }
-                """,
+            }
+            """,
             index: 2
         );
     }
@@ -9051,13 +9051,13 @@ namespace ConsoleApp1
     {
         await TestMissingAsync(
             """
-                sealed class C {
-                    readonly string s;
-                    public C(string s) {
-                        [||]this.s = s;
-                    }
+            sealed class C {
+                readonly string s;
+                public C(string s) {
+                    [||]this.s = s;
                 }
-                """
+            }
+            """
         );
     }
 
@@ -9066,32 +9066,32 @@ namespace ConsoleApp1
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        H((int x = 1, int y = 2) [||]=> x + y);
-                    }
-
-                    static void H(Delegate d) { }
+                    H((int x = 1, int y = 2) [||]=> x + y);
                 }
-                """,
+
+                static void H(Delegate d) { }
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var {|Rename:d|} = (int x = 1, int y = 2) => x + y;
-                        H(d);
-                    }
-
-                    static void H(Delegate d) { }
+                    var {|Rename:d|} = (int x = 1, int y = 2) => x + y;
+                    H(d);
                 }
-                """
+
+                static void H(Delegate d) { }
+            }
+            """
         );
     }
 
@@ -9100,32 +9100,32 @@ namespace ConsoleApp1
     {
         await TestInRegularAndScriptAsync(
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        H((int x, params int[] xs) [||]=> xs.Length + x);
-                    }
-
-                    static void H(Delegate d) { }
+                    H((int x, params int[] xs) [||]=> xs.Length + x);
                 }
-                """,
+
+                static void H(Delegate d) { }
+            }
+            """,
             """
-                using System;
+            using System;
 
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var {|Rename:d|} = (int x, params int[] xs) => xs.Length + x;
-                        H(d);
-                    }
-
-                    static void H(Delegate d) { }
+                    var {|Rename:d|} = (int x, params int[] xs) => xs.Length + x;
+                    H(d);
                 }
-                """
+
+                static void H(Delegate d) { }
+            }
+            """
         );
     }
 
@@ -9134,14 +9134,14 @@ namespace ConsoleApp1
     {
         await TestMissingAsync(
             """
-                public class C
-                {
-                    public string Goo { get; set; }
+            public class C
+            {
+                public string Goo { get; set; }
 
-                    [Example([|new int[] { 2+2 }|])]
-                    public string Bar { get; set; }
-                }
-                """
+                [Example([|new int[] { 2+2 }|])]
+                public string Bar { get; set; }
+            }
+            """
         );
     }
 
@@ -9150,14 +9150,14 @@ namespace ConsoleApp1
     {
         await TestMissingAsync(
             """
-                public class C
-                {
-                    public string Goo { get; set; }
+            public class C
+            {
+                public string Goo { get; set; }
 
-                    [Example([|typeof(C)|])]
-                    public string Bar { get; set; }
-                }
-                """
+                [Example([|typeof(C)|])]
+                public string Bar { get; set; }
+            }
+            """
         );
     }
 }

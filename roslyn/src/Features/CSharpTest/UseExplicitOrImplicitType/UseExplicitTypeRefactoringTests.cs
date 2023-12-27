@@ -310,14 +310,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
             // This error case is handled by a separate code fix (UseExplicitTypeForConst).
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            const [||]var v = 0;
-                        }
+                        const [||]var v = 0;
                     }
-                    """
+                }
+                """
             );
         }
 

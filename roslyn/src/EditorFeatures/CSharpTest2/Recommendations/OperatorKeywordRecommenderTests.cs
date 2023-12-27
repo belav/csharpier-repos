@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static implicit $$
-                    """
+                class Goo {
+                    public static implicit $$
+                """
             );
         }
 
@@ -88,9 +88,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Goo {
-                        public static explicit $$
-                    """
+                class Goo {
+                    public static explicit $$
+                """
             );
         }
 
@@ -99,9 +99,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        int $$
-                    """
+                class Goo {
+                    int $$
+                """
             );
         }
 
@@ -110,9 +110,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        public static int $$
-                    """
+                class Goo {
+                    public static int $$
+                """
             );
         }
 
@@ -121,9 +121,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        public static extern int $$
-                    """
+                class Goo {
+                    public static extern int $$
+                """
             );
         }
 
@@ -132,9 +132,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Goo {
-                        public static IList<int> $$
-                    """
+                class Goo {
+                    public static IList<int> $$
+                """
             );
         }
 
@@ -143,9 +143,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    interface Goo {
-                        public static int $$
-                    """
+                interface Goo {
+                    public static int $$
+                """
             );
         }
     }

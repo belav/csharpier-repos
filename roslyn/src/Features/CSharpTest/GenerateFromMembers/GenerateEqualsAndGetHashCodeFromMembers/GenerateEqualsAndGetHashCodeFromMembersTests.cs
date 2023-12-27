@@ -611,47 +611,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName
-                    {
-                        [|int i;
+                struct ReallyLongName
+                {
+                    [|int i;
 
-                        string S { get; }|]
-                    }
-                    """,
+                    string S { get; }|]
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName : IEquatable<ReallyLongName>
+                struct ReallyLongName : IEquatable<ReallyLongName>
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override bool Equals(object obj)
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override bool Equals(object obj)
-                        {
-                            return obj is ReallyLongName name && Equals(name);
-                        }
-
-                        public bool Equals(ReallyLongName other)
-                        {
-                            return i == other.i &&
-                                   S == other.S;
-                        }
-
-                        public static bool operator ==(ReallyLongName left, ReallyLongName right)
-                        {
-                            return left.Equals(right);
-                        }
-
-                        public static bool operator !=(ReallyLongName left, ReallyLongName right)
-                        {
-                            return !(left == right);
-                        }
+                        return obj is ReallyLongName name && Equals(name);
                     }
-                    """
+
+                    public bool Equals(ReallyLongName other)
+                    {
+                        return i == other.i &&
+                               S == other.S;
+                    }
+
+                    public static bool operator ==(ReallyLongName left, ReallyLongName right)
+                    {
+                        return left.Equals(right);
+                    }
+
+                    public static bool operator !=(ReallyLongName left, ReallyLongName right)
+                    {
+                        return !(left == right);
+                    }
+                }
+                """
             );
         }
 
@@ -660,47 +660,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName
-                    {
-                        [|int i;
+                struct ReallyLongName
+                {
+                    [|int i;
 
-                        string S { get; }|]
-                    }
-                    """,
+                    string S { get; }|]
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName : IEquatable<ReallyLongName>
+                struct ReallyLongName : IEquatable<ReallyLongName>
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override bool Equals(object obj)
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override bool Equals(object obj)
-                        {
-                            return obj is ReallyLongName name && Equals(name);
-                        }
-
-                        public bool Equals(ReallyLongName other)
-                        {
-                            return i == other.i &&
-                                   S == other.S;
-                        }
-
-                        public static bool operator ==(ReallyLongName left, ReallyLongName right)
-                        {
-                            return left.Equals(right);
-                        }
-
-                        public static bool operator !=(ReallyLongName left, ReallyLongName right)
-                        {
-                            return !(left == right);
-                        }
+                        return obj is ReallyLongName name && Equals(name);
                     }
-                    """
+
+                    public bool Equals(ReallyLongName other)
+                    {
+                        return i == other.i &&
+                               S == other.S;
+                    }
+
+                    public static bool operator ==(ReallyLongName left, ReallyLongName right)
+                    {
+                        return left.Equals(right);
+                    }
+
+                    public static bool operator !=(ReallyLongName left, ReallyLongName right)
+                    {
+                        return !(left == right);
+                    }
+                }
+                """
             );
         }
 
@@ -709,44 +709,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
-                    {
-                        [|int i;
+                struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
+                {
+                    [|int i;
 
-                        string S { get; }|]
-                    }
-                    """,
+                    string S { get; }|]
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
+                struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override bool Equals(object obj)
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override bool Equals(object obj)
-                        {
-                            return obj is ReallyLongName name &&
-                                   i == name.i &&
-                                   S == name.S;
-                        }
-
-                        public static bool operator ==(ReallyLongName left, ReallyLongName right)
-                        {
-                            return left.Equals(right);
-                        }
-
-                        public static bool operator !=(ReallyLongName left, ReallyLongName right)
-                        {
-                            return !(left == right);
-                        }
+                        return obj is ReallyLongName name &&
+                               i == name.i &&
+                               S == name.S;
                     }
-                    """
+
+                    public static bool operator ==(ReallyLongName left, ReallyLongName right)
+                    {
+                        return left.Equals(right);
+                    }
+
+                    public static bool operator !=(ReallyLongName left, ReallyLongName right)
+                    {
+                        return !(left == right);
+                    }
+                }
+                """
             );
         }
 
@@ -755,44 +755,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName
-                    {
-                        [|int i;
+                struct ReallyLongName
+                {
+                    [|int i;
 
-                        string S { get; }|]
+                    string S { get; }|]
 
-                        public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
-                        public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
-                    }
-                    """,
+                    public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
+                    public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName : IEquatable<ReallyLongName>
+                struct ReallyLongName : IEquatable<ReallyLongName>
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override bool Equals(object obj)
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override bool Equals(object obj)
-                        {
-                            return obj is ReallyLongName name && Equals(name);
-                        }
-
-                        public bool Equals(ReallyLongName other)
-                        {
-                            return i == other.i &&
-                                   S == other.S;
-                        }
-
-                        public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
-                        public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
+                        return obj is ReallyLongName name && Equals(name);
                     }
-                    """
+
+                    public bool Equals(ReallyLongName other)
+                    {
+                        return i == other.i &&
+                               S == other.S;
+                    }
+
+                    public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
+                    public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
+                }
+                """
             );
         }
 
@@ -801,40 +801,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
-                    {
-                        [|int i;
+                struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
+                {
+                    [|int i;
 
-                        string S { get; }|]
+                    string S { get; }|]
 
-                        public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
-                        public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
-                    }
-                    """,
+                    public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
+                    public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
+                struct ReallyLongName : {|CS0535:IEquatable<ReallyLongName>|}
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override bool Equals(object obj)
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override bool Equals(object obj)
-                        {
-                            return obj is ReallyLongName name &&
-                                   i == name.i &&
-                                   S == name.S;
-                        }
-
-                        public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
-                        public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
+                        return obj is ReallyLongName name &&
+                               i == name.i &&
+                               S == name.S;
                     }
-                    """
+
+                    public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
+                    public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
+                }
+                """
             );
         }
 
@@ -878,27 +878,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Program
-                    {
-                        [|int a;|]
-                    }
-                    """,
+                class Program
+                {
+                    [|int a;|]
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class Program
+                class Program
+                {
+                    int a;
+
+                    public override bool Equals(object? obj)
                     {
-                        int a;
-
-                        public override bool Equals(object? obj)
-                        {
-                            return obj is Program program &&
-                                   a == program.a;
-                        }
+                        return obj is Program program &&
+                               a == program.a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3871,27 +3871,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
-                    {
-                        [|int a;|]
-                    }
-                    """,
+                class Program
+                {
+                    [|int a;|]
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    int a;
+
+                    public override bool Equals(object obj)
                     {
-                        int a;
-
-                        public override bool Equals(object obj)
-                        {
-                            return obj is Program program &&
-                                   a == program.a;
-                        }
+                        return obj is Program program &&
+                               a == program.a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3900,42 +3900,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    struct Program
-                    {
-                        [|int a;|]
-                    }
-                    """,
+                struct Program
+                {
+                    [|int a;|]
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    struct Program : IEquatable<Program>
+                struct Program : IEquatable<Program>
+                {
+                    int a;
+
+                    public override bool Equals(object obj)
                     {
-                        int a;
-
-                        public override bool Equals(object obj)
-                        {
-                            return obj is Program program && Equals(program);
-                        }
-
-                        public bool Equals(Program other)
-                        {
-                            return a == other.a;
-                        }
-
-                        public static bool operator ==(Program left, Program right)
-                        {
-                            return left.Equals(right);
-                        }
-
-                        public static bool operator !=(Program left, Program right)
-                        {
-                            return !(left == right);
-                        }
+                        return obj is Program program && Equals(program);
                     }
-                    """
+
+                    public bool Equals(Program other)
+                    {
+                        return a == other.a;
+                    }
+
+                    public static bool operator ==(Program left, Program right)
+                    {
+                        return left.Equals(right);
+                    }
+
+                    public static bool operator !=(Program left, Program right)
+                    {
+                        return !(left == right);
+                    }
+                }
+                """
             );
         }
 

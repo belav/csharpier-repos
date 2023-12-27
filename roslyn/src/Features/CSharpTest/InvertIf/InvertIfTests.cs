@@ -384,43 +384,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        [||]if (a ||
+                        b &&
+                        c < // comment
+                        d)
                         {
-                            [||]if (a ||
-                            b &&
-                            c < // comment
-                            d)
-                            {
-                                a();
-                            }
-                            else
-                            {
-                                b();
-                            }
+                            a();
+                        }
+                        else
+                        {
+                            b();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        if (!a &&
+                        (!b ||
+                        c >= // comment
+                        d))
                         {
-                            if (!a &&
-                            (!b ||
-                            c >= // comment
-                            d))
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                a();
-                            }
+                            b();
+                        }
+                        else
+                        {
+                            a();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -429,53 +429,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            bool a = true;
-                            bool b = true;
-                            bool c = true;
-                            bool d = true;
+                        bool a = true;
+                        bool b = true;
+                        bool c = true;
+                        bool d = true;
 
-                            [||]if (a ||
-                            b &&
-                            c < // comment
-                            d)
-                            {
-                                a();
-                            }
-                            else
-                            {
-                                b();
-                            }
+                        [||]if (a ||
+                        b &&
+                        c < // comment
+                        d)
+                        {
+                            a();
+                        }
+                        else
+                        {
+                            b();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            bool a = true;
-                            bool b = true;
-                            bool c = true;
-                            bool d = true;
+                        bool a = true;
+                        bool b = true;
+                        bool c = true;
+                        bool d = true;
 
-                            if (!a &&
-                            (!b ||
-                            c >= // comment
-                            d))
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                a();
-                            }
+                        if (!a &&
+                        (!b ||
+                        c >= // comment
+                        d))
+                        {
+                            b();
+                        }
+                        else
+                        {
+                            a();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -484,15 +484,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        [||]if (a)
                         {
-                            [||]if (a)
-                            {
-                                a();
-                            }
-                            else if (b)
+                            a();
+                        }
+                        else if (b)
+                        {
+                            b();
+                        }
+                        else
+                        {
+                            c();
+                        }
+                    }
+                }
+                """,
+                """
+                class A
+                {
+                    void Goo()
+                    {
+                        if (!a)
+                        {
+                            if (b)
                             {
                                 b();
                             }
@@ -501,31 +519,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                                 c();
                             }
                         }
-                    }
-                    """,
-                """
-                    class A
-                    {
-                        void Goo()
+                        else
                         {
-                            if (!a)
-                            {
-                                if (b)
-                                {
-                                    b();
-                                }
-                                else
-                                {
-                                    c();
-                                }
-                            }
-                            else
-                            {
-                                a();
-                            }
+                            a();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -534,48 +534,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        [|if (a)
                         {
-                            [|if (a)
-                            {
-                                a();
-                            }
-                            else if (b)
+                            a();
+                        }
+                        else if (b)
+                        {
+                            b();
+                        }
+                        else
+                        {
+                            c();
+                        }|]
+                    }
+                }
+                """,
+                """
+                class A
+                {
+                    void Goo()
+                    {
+                        if (!a)
+                        {
+                            if (b)
                             {
                                 b();
                             }
                             else
                             {
                                 c();
-                            }|]
+                            }
                         }
-                    }
-                    """,
-                """
-                    class A
-                    {
-                        void Goo()
+                        else
                         {
-                            if (!a)
-                            {
-                                if (b)
-                                {
-                                    b();
-                                }
-                                else
-                                {
-                                    c();
-                                }
-                            }
-                            else
-                            {
-                                a();
-                            }
+                            a();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -584,15 +584,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        [|if (a)
                         {
-                            [|if (a)
-                            {
-                                a();
-                            }|]
-                            else if (b)
+                            a();
+                        }|]
+                        else if (b)
+                        {
+                            b();
+                        }
+                        else
+                        {
+                            c();
+                        }
+                    }
+                }
+                """,
+                """
+                class A
+                {
+                    void Goo()
+                    {
+                        if (!a)
+                        {
+                            if (b)
                             {
                                 b();
                             }
@@ -601,31 +619,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                                 c();
                             }
                         }
-                    }
-                    """,
-                """
-                    class A
-                    {
-                        void Goo()
+                        else
                         {
-                            if (!a)
-                            {
-                                if (b)
-                                {
-                                    b();
-                                }
-                                else
-                                {
-                                    c();
-                                }
-                            }
-                            else
-                            {
-                                a();
-                            }
+                            a();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -634,25 +634,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        if (a)
                         {
-                            if (a)
-                            {
-                                a();
-                            }
-                            [|else if (b)
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                c();
-                            }|]
+                            a();
                         }
+                        [|else if (b)
+                        {
+                            b();
+                        }
+                        else
+                        {
+                            c();
+                        }|]
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -661,33 +661,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            [||]if (foo) 
-                                bar();
-                            else
-                                if (baz)
-                                    Quux();
-                        }
+                        [||]if (foo) 
+                            bar();
+                        else
+                            if (baz)
+                                Quux();
                     }
-                    """,
+                }
+                """,
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        if (!foo)
                         {
-                            if (!foo)
-                            {
-                                if (baz)
-                                    Quux();
-                            }
-                            else
-                                bar();
+                            if (baz)
+                                Quux();
                         }
+                        else
+                            bar();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -696,38 +696,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            [||]if (foo) {
-                               x();
-                               x();
-                            } else {
-                               y();
-                               y();
-                            }
+                        [||]if (foo) {
+                           x();
+                           x();
+                        } else {
+                           y();
+                           y();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        if (!foo)
                         {
-                            if (!foo)
-                            {
-                                y();
-                                y();
-                            }
-                            else
-                            {
-                                x();
-                                x();
-                            }
+                            y();
+                            y();
+                        }
+                        else
+                        {
+                            x();
+                            x();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -736,17 +736,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class A
-                    {
-                        void Goo()
-                        { /*1*/
-                            [||]if (a) /*2*/
-                            { /*3*/
-                                /*4*/
-                                goo(); /*5*/
-                                /*6*/
-                            } /*7*/
-                            else if (b) /*8*/
+                class A
+                {
+                    void Goo()
+                    { /*1*/
+                        [||]if (a) /*2*/
+                        { /*3*/
+                            /*4*/
+                            goo(); /*5*/
+                            /*6*/
+                        } /*7*/
+                        else if (b) /*8*/
+                        { /*9*/
+                            /*10*/
+                            goo(); /*11*/
+                            /*12*/
+                        } /*13*/
+                        else /*14*/
+                        { /*15*/
+                            /*16*/
+                            goo(); /*17*/
+                            /*18*/
+                        } /*19*/
+                        /*20*/
+                    }
+                }
+                """,
+                """
+                class A
+                {
+                    void Goo()
+                    { /*1*/
+                        if (!a) /*2*/
+                        {
+                            if (b) /*8*/
                             { /*9*/
                                 /*10*/
                                 goo(); /*11*/
@@ -758,40 +781,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                                 goo(); /*17*/
                                 /*18*/
                             } /*19*/
-                            /*20*/
                         }
+                        else
+                        { /*3*/
+                            /*4*/
+                            goo(); /*5*/
+                            /*6*/
+                        } /*7*/
+                        /*20*/
                     }
-                    """,
+                }
                 """
-                    class A
-                    {
-                        void Goo()
-                        { /*1*/
-                            if (!a) /*2*/
-                            {
-                                if (b) /*8*/
-                                { /*9*/
-                                    /*10*/
-                                    goo(); /*11*/
-                                    /*12*/
-                                } /*13*/
-                                else /*14*/
-                                { /*15*/
-                                    /*16*/
-                                    goo(); /*17*/
-                                    /*18*/
-                                } /*19*/
-                            }
-                            else
-                            { /*3*/
-                                /*4*/
-                                goo(); /*5*/
-                                /*6*/
-                            } /*7*/
-                            /*20*/
-                        }
-                    }
-                    """
             );
         }
 
@@ -800,23 +800,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                #line hidden
+                        [||]if (a)
                         {
-                    #line hidden
-                            [||]if (a)
-                            {
-                                a();
-                            }
-                            else
-                            {
-                                b();
-                            }
-                    #line default
+                            a();
                         }
+                        else
+                        {
+                            b();
+                        }
+                #line default
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -825,23 +825,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                        [||]if (a)
                         {
-                            [||]if (a)
-                            {
-                    #line hidden
-                                a();
-                    #line default
-                            }
-                            else
-                            {
-                                b();
-                            }
+                #line hidden
+                            a();
+                #line default
+                        }
+                        else
+                        {
+                            b();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -850,23 +850,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                        [||]if (a)
                         {
-                            [||]if (a)
-                            {
-                                a();
-                            }
-                            else
-                            {
-                    #line hidden
-                                b();
-                    #line default
-                            }
+                            a();
+                        }
+                        else
+                        {
+                #line hidden
+                            b();
+                #line default
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -875,23 +875,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                        [||]if (a)
                         {
-                            [||]if (a)
-                            {
-                    #line hidden
-                                a();
-                            }
-                            else
-                            {
-                                b();
-                    #line default
-                            }
+                #line hidden
+                            a();
+                        }
+                        else
+                        {
+                            b();
+                #line default
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -900,23 +900,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                        [||]if (a)
                         {
-                            [||]if (a)
-                            {
-                                a();
-                    #line hidden
-                            }
-                            else
-                            {
-                    #line default
-                                b();
-                            }
+                            a();
+                #line hidden
+                        }
+                        else
+                        {
+                #line default
+                            b();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -925,41 +925,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #line hidden
-                    class C
+                #line hidden
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                #line default
+                        [||]if (a)
                         {
-                    #line default
-                            [||]if (a)
-                            {
-                                a();
-                            }
-                            else
-                            {
-                                b();
-                            }
+                            a();
+                        }
+                        else
+                        {
+                            b();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    #line hidden
-                    class C
+                #line hidden
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                #line default
+                        if (!a)
                         {
-                    #line default
-                            if (!a)
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                a();
-                            }
+                            b();
+                        }
+                        else
+                        {
+                            a();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -968,45 +968,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #line hidden
-                    class C
+                #line hidden
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                #line default
+                        [||]if (a)
                         {
-                    #line default
-                            [||]if (a)
-                            {
-                                a();
-                            }
-                            else
-                            {
-                                b();
-                            }
-                    #line hidden
+                            a();
                         }
+                        else
+                        {
+                            b();
+                        }
+                #line hidden
                     }
-                    #line default
-                    """,
+                }
+                #line default
+                """,
                 """
-                    #line hidden
-                    class C
+                #line hidden
+                class C
+                {
+                    void F()
                     {
-                        void F()
+                #line default
+                        if (!a)
                         {
-                    #line default
-                            if (!a)
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                a();
-                            }
-                    #line hidden
+                            b();
                         }
+                        else
+                        {
+                            a();
+                        }
+                #line hidden
                     }
-                    #line default
-                    """
+                }
+                #line default
+                """
             );
         }
 
@@ -1150,37 +1150,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        [||]if (s == "a")
                         {
-                            [||]if (s == "a")
-                            {
-                                // A single line comment
-                            }
-                            else
-                            {
-                                s = "b"
-                            }
+                            // A single line comment
+                        }
+                        else
+                        {
+                            s = "b"
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (s != "a")
                         {
-                            if (s != "a")
-                            {
-                                s = "b"
-                            }
-                            else
-                            {
-                                // A single line comment
-                            }
+                            s = "b"
+                        }
+                        else
+                        {
+                            // A single line comment
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1189,49 +1189,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        [||]if (s == "a")
                         {
-                            [||]if (s == "a")
-                            {
-                                /*
-                                * This is
-                                * a multiline
-                                * comment with
-                                * two words
-                                * per line.
-                                */
-                            }
-                            else
-                            {
-                                s = "b"
-                            }
+                            /*
+                            * This is
+                            * a multiline
+                            * comment with
+                            * two words
+                            * per line.
+                            */
+                        }
+                        else
+                        {
+                            s = "b"
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(string s)
                     {
-                        void M(string s)
+                        if (s != "a")
                         {
-                            if (s != "a")
-                            {
-                                s = "b"
-                            }
-                            else
-                            {
-                                /*
-                                * This is
-                                * a multiline
-                                * comment with
-                                * two words
-                                * per line.
-                                */
-                            }
+                            s = "b"
+                        }
+                        else
+                        {
+                            /*
+                            * This is
+                            * a multiline
+                            * comment with
+                            * two words
+                            * per line.
+                            */
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1240,37 +1240,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        [||]if (c is object)
                         {
-                            [||]if (c is object)
-                            {
-                                return 1;
-                            }
-                            else
-                            {
-                                return 2;
-                            }
+                            return 1;
+                        }
+                        else
+                        {
+                            return 2;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        if (!(c is object))
                         {
-                            if (!(c is object))
-                            {
-                                return 2;
-                            }
-                            else
-                            {
-                                return 1;
-                            }
+                            return 2;
+                        }
+                        else
+                        {
+                            return 1;
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp6
                 )
@@ -1282,37 +1282,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        [||]if (c is object)
                         {
-                            [||]if (c is object)
-                            {
-                                return 1;
-                            }
-                            else
-                            {
-                                return 2;
-                            }
+                            return 1;
+                        }
+                        else
+                        {
+                            return 2;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        if (c is null)
                         {
-                            if (c is null)
-                            {
-                                return 2;
-                            }
-                            else
-                            {
-                                return 1;
-                            }
+                            return 2;
+                        }
+                        else
+                        {
+                            return 1;
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp8
                 )
@@ -1324,37 +1324,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        [||]if (c is object)
                         {
-                            [||]if (c is object)
-                            {
-                                return 1;
-                            }
-                            else
-                            {
-                                return 2;
-                            }
+                            return 1;
+                        }
+                        else
+                        {
+                            return 2;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        if (c is null)
                         {
-                            if (c is null)
-                            {
-                                return 2;
-                            }
-                            else
-                            {
-                                return 1;
-                            }
+                            return 2;
+                        }
+                        else
+                        {
+                            return 1;
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp9
                 )
@@ -1369,37 +1369,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
             // expression.
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        [||]if (c is not object)
                         {
-                            [||]if (c is not object)
-                            {
-                                return 1;
-                            }
-                            else
-                            {
-                                return 2;
-                            }
+                            return 1;
+                        }
+                        else
+                        {
+                            return 2;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        if (c is object)
                         {
-                            if (c is object)
-                            {
-                                return 2;
-                            }
-                            else
-                            {
-                                return 1;
-                            }
+                            return 2;
+                        }
+                        else
+                        {
+                            return 1;
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp8
                 )
@@ -1411,37 +1411,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        [||]if (c is not object)
                         {
-                            [||]if (c is not object)
-                            {
-                                return 1;
-                            }
-                            else
-                            {
-                                return 2;
-                            }
+                            return 1;
+                        }
+                        else
+                        {
+                            return 2;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int M()
                     {
-                        int M()
+                        if (c is not null)
                         {
-                            if (c is not null)
-                            {
-                                return 2;
-                            }
-                            else
-                            {
-                                return 1;
-                            }
+                            return 2;
+                        }
+                        else
+                        {
+                            return 1;
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp9
                 )
@@ -1453,30 +1453,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int? p)
                     {
-                        void M(int? p)
+                        [||]if (p > 10)
                         {
-                            [||]if (p > 10)
-                            {
-                                System.Console.WriteLine("p is not null and p.Value > 10");
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        void M(int? p)
-                        {
-                            if (!(p > 10))
-                            {
-                                return;
-                            }
                             System.Console.WriteLine("p is not null and p.Value > 10");
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    void M(int? p)
+                    {
+                        if (!(p > 10))
+                        {
+                            return;
+                        }
+                        System.Console.WriteLine("p is not null and p.Value > 10");
+                    }
+                }
+                """
             );
         }
 
@@ -1485,30 +1485,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int? p)
                     {
-                        void M(int? p)
+                        [||]if (p >= 10)
                         {
-                            [||]if (p >= 10)
-                            {
-                                System.Console.WriteLine("p is not null and p.Value >= 10");
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        void M(int? p)
-                        {
-                            if (!(p >= 10))
-                            {
-                                return;
-                            }
                             System.Console.WriteLine("p is not null and p.Value >= 10");
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    void M(int? p)
+                    {
+                        if (!(p >= 10))
+                        {
+                            return;
+                        }
+                        System.Console.WriteLine("p is not null and p.Value >= 10");
+                    }
+                }
+                """
             );
         }
 
@@ -1517,30 +1517,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int? p)
                     {
-                        void M(int? p)
+                        [||]if (p < 10)
                         {
-                            [||]if (p < 10)
-                            {
-                                System.Console.WriteLine("p is not null and p.Value < 10");
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        void M(int? p)
-                        {
-                            if (!(p < 10))
-                            {
-                                return;
-                            }
                             System.Console.WriteLine("p is not null and p.Value < 10");
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    void M(int? p)
+                    {
+                        if (!(p < 10))
+                        {
+                            return;
+                        }
+                        System.Console.WriteLine("p is not null and p.Value < 10");
+                    }
+                }
+                """
             );
         }
 
@@ -1549,30 +1549,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int? p)
                     {
-                        void M(int? p)
+                        [||]if (p <= 10)
                         {
-                            [||]if (p <= 10)
-                            {
-                                System.Console.WriteLine("p is not null and p.Value <= 10");
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        void M(int? p)
-                        {
-                            if (!(p <= 10))
-                            {
-                                return;
-                            }
                             System.Console.WriteLine("p is not null and p.Value <= 10");
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    void M(int? p)
+                    {
+                        if (!(p <= 10))
+                        {
+                            return;
+                        }
+                        System.Console.WriteLine("p is not null and p.Value <= 10");
+                    }
+                }
+                """
             );
         }
 
@@ -1581,44 +1581,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    using System;
-                    class C
+                #nullable enable
+                using System;
+                class C
+                {
+                    void M(C? p)
                     {
-                        void M(C? p)
+                        [||]if (p > new C())
                         {
-                            [||]if (p > new C())
-                            {
-                                Console.WriteLine("Null-handling semantics may actually change depending on the operator implementation");
-                            }
-                        }
-
-                        public static bool operator <(C? left, C? right) => throw new NotImplementedException();
-                        public static bool operator >(C? left, C? right) => throw new NotImplementedException();
-                        public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
-                        public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
-                    }
-                    """,
-                """
-                    #nullable enable
-                    using System;
-                    class C
-                    {
-                        void M(C? p)
-                        {
-                            if (p <= new C())
-                            {
-                                return;
-                            }
                             Console.WriteLine("Null-handling semantics may actually change depending on the operator implementation");
                         }
-
-                        public static bool operator <(C? left, C? right) => throw new NotImplementedException();
-                        public static bool operator >(C? left, C? right) => throw new NotImplementedException();
-                        public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
-                        public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
                     }
-                    """
+
+                    public static bool operator <(C? left, C? right) => throw new NotImplementedException();
+                    public static bool operator >(C? left, C? right) => throw new NotImplementedException();
+                    public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
+                    public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
+                }
+                """,
+                """
+                #nullable enable
+                using System;
+                class C
+                {
+                    void M(C? p)
+                    {
+                        if (p <= new C())
+                        {
+                            return;
+                        }
+                        Console.WriteLine("Null-handling semantics may actually change depending on the operator implementation");
+                    }
+
+                    public static bool operator <(C? left, C? right) => throw new NotImplementedException();
+                    public static bool operator >(C? left, C? right) => throw new NotImplementedException();
+                    public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
+                    public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
+                }
+                """
             );
         }
 
@@ -1627,34 +1627,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    class Program
+                class Program
+                {
+                    public static IEnumerable Method(bool condition)
                     {
-                        public static IEnumerable Method(bool condition)
+                        [||]if (condition)
                         {
-                            [||]if (condition)
-                            {
-                                yield return 1;
-                            }
-                        }
-                    }
-                    """,
-                """
-                    using System.Collections;
-
-                    class Program
-                    {
-                        public static IEnumerable Method(bool condition)
-                        {
-                            if (!condition)
-                            {
-                                yield break;
-                            }
                             yield return 1;
                         }
                     }
-                    """
+                }
+                """,
+                """
+                using System.Collections;
+
+                class Program
+                {
+                    public static IEnumerable Method(bool condition)
+                    {
+                        if (!condition)
+                        {
+                            yield break;
+                        }
+                        yield return 1;
+                    }
+                }
+                """
             );
         }
 
@@ -1663,39 +1663,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    string? M(string s)
                     {
-                        string? M(string s)
+                        var l = s.ToLowerCase();
+
+                        [||]if (l == "hello")
                         {
-                            var l = s.ToLowerCase();
-
-                            [||]if (l == "hello")
-                            {
-                                return null;
-                            }
-
-                            return l;
-
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        string? M(string s)
-                        {
-                            var l = s.ToLowerCase();
-
-                            if (l != "hello")
-                            {
-                                return l;
-                            }
-
                             return null;
-
                         }
+
+                        return l;
+
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    string? M(string s)
+                    {
+                        var l = s.ToLowerCase();
+
+                        if (l != "hello")
+                        {
+                            return l;
+                        }
+
+                        return null;
+
+                    }
+                }
+                """
             );
         }
 
@@ -1704,47 +1704,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    string? M(string s)
                     {
-                        string? M(string s)
+                        var l = s.ToLowerCase();
+
+                        [||]if (l == "hello")
                         {
-                            var l = s.ToLowerCase();
-
-                            [||]if (l == "hello")
-                            {
-                                // null 1
-                                return null; // null 2
-                                // null 3
-                            }
-
-                            // l 1
-                            return l; // l 2
-                            // l 3
-
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        string? M(string s)
-                        {
-                            var l = s.ToLowerCase();
-
-                            if (l != "hello")
-                            {
-                                // l 1
-                                return l; // l 2
-                                // null 3
-                            }
-
                             // null 1
                             return null; // null 2
-                            // l 3
-
+                            // null 3
                         }
+
+                        // l 1
+                        return l; // l 2
+                        // l 3
+
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    string? M(string s)
+                    {
+                        var l = s.ToLowerCase();
+
+                        if (l != "hello")
+                        {
+                            // l 1
+                            return l; // l 2
+                            // null 3
+                        }
+
+                        // null 1
+                        return null; // null 2
+                        // l 3
+
+                    }
+                }
+                """
             );
         }
 
@@ -1753,19 +1753,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        string? M(bool b)
-                        {[||]if(b){return(true);}return(false);}
-                    }
-                    """,
+                class C
+                {
+                    string? M(bool b)
+                    {[||]if(b){return(true);}return(false);}
+                }
+                """,
                 """
-                    class C
-                    {
-                        string? M(bool b)
-                        { if (!b) { return (false); } return (true); }
-                    }
-                    """
+                class C
+                {
+                    string? M(bool b)
+                    { if (!b) { return (false); } return (true); }
+                }
+                """
             );
         }
     }

@@ -56,12 +56,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
             XElement.Parse(
                 string.Format(
                     """
-                        <Workspace>
-                            <Project Language="C#" CommonReferences="true">
-                                <Document>{0}</Document>
-                            </Project>
-                        </Workspace>
-                        """,
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document>{0}</Document>
+                        </Project>
+                    </Workspace>
+                    """,
                     markup
                 )
             );

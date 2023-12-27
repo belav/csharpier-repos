@@ -23,24 +23,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //[|Test|] Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //[|Test|] Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //
-                            //Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //
+                        //Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -50,24 +50,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // [|  |] Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // [|  |] Test Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //
-                            // Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //
+                        // Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -77,14 +77,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            /[||]/Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        /[||]/Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -94,12 +94,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //Test Comment[||]
-                    """
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //Test Comment[||]
+                """
             );
         }
 
@@ -109,14 +109,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            [||]//Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        [||]//Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -126,14 +126,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //[||]Test[||] Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //[||]Test[||] Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -143,24 +143,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //[||]Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //[||]Test Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //
-                            //Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //
+                        //Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -170,24 +170,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            ////[||]Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        ////[||]Test Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            ////
-                            ////Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        ////
+                        ////Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -198,14 +198,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //[||]//Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //[||]//Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -215,14 +215,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // goo[||]  //Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // goo[||]  //Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -232,14 +232,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // goo [||] //Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // goo [||] //Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -249,14 +249,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // goo  [||]//Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // goo  [||]//Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -266,14 +266,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // [|goo|] //Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // [|goo|] //Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -283,24 +283,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // [||]Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // [||]Test Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //
-                            // Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //
+                        // Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -310,24 +310,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         {
             TestHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //[||] Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //[||] Test Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            //
-                            //Test Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        //
+                        //Test Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -396,24 +396,24 @@ public class Program
         {
             TestHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // Test [||]Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // Test [||]Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // Test
-                            // Comment
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // Test
+                        // Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -423,14 +423,14 @@ public class Program
         {
             TestNotHandled(
                 """
-                    public class Program
-                    {
-                        public static void Main(string[] args) 
-                        { 
-                            // Test Comment[||]
-                        }
+                public class Program
+                {
+                    public static void Main(string[] args) 
+                    { 
+                        // Test Comment[||]
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -440,22 +440,22 @@ public class Program
         {
             TestHandled(
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main(string[] args) // Test [||]Comment
                     {
-                        public static void Main(string[] args) // Test [||]Comment
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main(string[] args) // Test
+                                                           // Comment
                     {
-                        public static void Main(string[] args) // Test
-                                                               // Comment
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -465,22 +465,22 @@ public class Program
         {
             TestHandled(
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main(string[] args) // Test[||] Comment
                     {
-                        public static void Main(string[] args) // Test[||] Comment
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main(string[] args) // Test
+                                                           // Comment
                     {
-                        public static void Main(string[] args) // Test
-                                                               // Comment
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -490,24 +490,24 @@ public class Program
         {
             TestHandled(
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main(string[] args) 
                     {
-                        public static void Main(string[] args) 
-                        {
-                            // X[||]Test Comment
-                        }
+                        // X[||]Test Comment
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Program
+                public class Program
+                {
+                    public static void Main(string[] args) 
                     {
-                        public static void Main(string[] args) 
-                        {
-                            // X
-                            // Test Comment
-                        }
+                        // X
+                        // Test Comment
                     }
-                    """,
+                }
+                """,
                 useTabs: true
             );
         }
@@ -517,17 +517,17 @@ public class Program
         {
             TestNotHandled(
                 """
-                    namespace TestNamespace
+                namespace TestNamespace
+                {
+                    public class Program
                     {
-                        public class Program
+                        /// <summary>Test [||]Comment</summary>
+                        public static void Main(string[] args)
                         {
-                            /// <summary>Test [||]Comment</summary>
-                            public static void Main(string[] args)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

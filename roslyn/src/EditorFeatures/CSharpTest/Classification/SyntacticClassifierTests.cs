@@ -6810,24 +6810,24 @@ static T I1.operator checked >>>(T a, T b)
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(Action action)
                     {
-                        void M(Action action)
-                        {
-                            [|localFunction();
-                            staticLocalFunction();
+                        [|localFunction();
+                        staticLocalFunction();
 
-                            M(localFunction);
-                            M(staticLocalFunction);
+                        M(localFunction);
+                        M(staticLocalFunction);
 
-                            void localFunction() { }
-                            static void staticLocalFunction() { }|]
-                        }
+                        void localFunction() { }
+                        static void staticLocalFunction() { }|]
                     }
+                }
 
-                    """,
+                """,
                 testHost,
                 Identifier("localFunction"),
                 Punctuation.OpenParen,
@@ -6922,18 +6922,18 @@ static T I1.operator checked >>>(T a, T b)
         {
             await TestAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            const int n = 100;
-                            const int m = 200;
-                            var lam = (int x = n + m) => x;
-                        }
+                        const int n = 100;
+                        const int m = 200;
+                        var lam = (int x = n + m) => x;
                     }
+                }
 
-                    """,
+                """,
                 testHost,
                 Keyword("using"),
                 Identifier("System"),
@@ -6984,15 +6984,15 @@ static T I1.operator checked >>>(T a, T b)
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var lam = (string s = "a string") => s;
-                        }
+                        var lam = (string s = "a string") => s;
                     }
+                }
 
-                    """,
+                """,
                 testHost,
                 Keyword("class"),
                 Class("Program"),

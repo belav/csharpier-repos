@@ -59,31 +59,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1
-                            };
-                        }
+                            1
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -92,13 +92,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
-                    {
-                        List<int> v = new List<int>();
-                    }
-                    """
+                class C
+                {
+                    List<int> v = new List<int>();
+                }
+                """
             );
         }
 
@@ -107,13 +107,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
-                    {
-                        List<int> v = new List<int>() { 1, 2, 3 };
-                    }
-                    """
+                class C
+                {
+                    List<int> v = new List<int>() { 1, 2, 3 };
+                }
+                """
             );
         }
 
@@ -122,33 +122,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(int[] x)
                     {
-                        void M(int[] x)
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                            c.AddRange(x);
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        c.AddRange(x);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(int[] x)
                     {
-                        void M(int[] x)
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1
-                            };
-                            c.AddRange(x);
-                        }
+                            1
+                        };
+                        c.AddRange(x);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -157,35 +157,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(int[] x)
                     {
-                        void M(int[] x)
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                            foreach (var v in x)
-                                c.Add(v);
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        foreach (var v in x)
+                            c.Add(v);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(int[] x)
                     {
-                        void M(int[] x)
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1
-                            };
-                            foreach (var v in x)
-                                c.Add(v);
-                        }
+                            1
+                        };
+                        foreach (var v in x)
+                            c.Add(v);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -194,35 +194,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(bool b)
                     {
-                        void M(bool b)
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                            if (b)
-                                c.Add(2);
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                            c.Add(2);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(bool b)
                     {
-                        void M(bool b)
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1
-                            };
-                            if (b)
-                                c.Add(2);
-                        }
+                            1
+                        };
+                        if (b)
+                            c.Add(2);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -231,39 +231,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(bool b)
                     {
-                        void M(bool b)
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                            if (b)
-                                c.Add(2);
-                            else
-                                c.Add(3);
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
+                            c.Add(2);
+                        else
+                            c.Add(3);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(bool b)
                     {
-                        void M(bool b)
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1
-                            };
-                            if (b)
-                                c.Add(2);
-                            else
-                                c.Add(3);
-                        }
+                            1
+                        };
+                        if (b)
+                            c.Add(2);
+                        else
+                            c.Add(3);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -272,39 +272,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(bool b)
                     {
-                        void M(bool b)
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        if (b)
                         {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                            if (b)
-                            {
-                                c.Add(2);
-                            }
+                            c.Add(2);
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(bool b)
                     {
-                        void M(bool b)
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1
-                            };
-                            if (b)
-                            {
-                                c.Add(2);
-                            }
+                            1
+                        };
+                        if (b)
+                        {
+                            c.Add(2);
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -313,29 +313,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>();
-                            c[1] = 2;
-                        }
+                        var c = [|new|] List<int>();
+                        c[1] = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                [1] = 2
-                            };
-                        }
+                            [1] = 2
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -344,16 +344,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = new List<int>();
-                            c[1] = 2;
-                        }
+                        var c = new List<int>();
+                        c[1] = 2;
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp5
             );
         }
@@ -363,51 +363,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class A
-                    {
-                        public B b;
-                    }
+                class A
+                {
+                    public B b;
+                }
 
-                    class B
-                    {
-                        public List<int> c;
-                    }
+                class B
+                {
+                    public List<int> c;
+                }
 
-                    class C
+                class C
+                {
+                    void M(A a)
                     {
-                        void M(A a)
-                        {
-                            a.b.c = [|new|] List<int>();
-                            a.b.c[1] = 2;
-                        }
+                        a.b.c = [|new|] List<int>();
+                        a.b.c[1] = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class A
-                    {
-                        public B b;
-                    }
+                class A
+                {
+                    public B b;
+                }
 
-                    class B
-                    {
-                        public List<int> c;
-                    }
+                class B
+                {
+                    public List<int> c;
+                }
 
-                    class C
+                class C
+                {
+                    void M(A a)
                     {
-                        void M(A a)
+                        a.b.c = new List<int>
                         {
-                            a.b.c = new List<int>
-                            {
-                                [1] = 2
-                            };
-                        }
+                            [1] = 2
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -416,31 +416,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<object>();
-                            c[1] = 2;
-                            c[2] = "";
-                        }
+                        var c = [|new|] List<object>();
+                        c[1] = 2;
+                        c[2] = "";
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<object>
                         {
-                            var c = new List<object>
-                            {
-                                [1] = 2,
-                                [2] = ""
-                            };
-                        }
+                            [1] = 2,
+                            [2] = ""
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -449,53 +449,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] X();
-                            c[1] = 2;
-                            c[2] = "";
-                            c[3, 4] = 5;
-                        }
+                        var c = [|new|] X();
+                        c[1] = 2;
+                        c[2] = "";
+                        c[3, 4] = 5;
                     }
+                }
 
-                    class X : IEnumerable
-                    {
-                        public object this[int i] { get => null; set { } }
-                        public object this[int i, int j] { get => null; set { } }
+                class X : IEnumerable
+                {
+                    public object this[int i] { get => null; set { } }
+                    public object this[int i, int j] { get => null; set { } }
 
-                        public IEnumerator GetEnumerator() => null;
-                        public void Add(int i) { }
-                    }
-                    """,
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
+                }
+                """,
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new X
                         {
-                            var c = new X
-                            {
-                                [1] = 2,
-                                [2] = "",
-                                [3, 4] = 5
-                            };
-                        }
+                            [1] = 2,
+                            [2] = "",
+                            [3, 4] = 5
+                        };
                     }
+                }
 
-                    class X : IEnumerable
-                    {
-                        public object this[int i] { get => null; set { } }
-                        public object this[int i, int j] { get => null; set { } }
+                class X : IEnumerable
+                {
+                    public object this[int i] { get => null; set { } }
+                    public object this[int i, int j] { get => null; set { } }
 
-                        public IEnumerator GetEnumerator() => null;
-                        public void Add(int i) { }
-                    }
-                    """
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
+                }
+                """
             );
         }
 
@@ -504,31 +504,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>();
-                            c[1] = 2;
-                            c.Add(0);
-                        }
+                        var c = [|new|] List<int>();
+                        c[1] = 2;
+                        c.Add(0);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                [1] = 2
-                            };
-                            c.Add(0);
-                        }
+                            [1] = 2
+                        };
+                        c.Add(0);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -537,31 +537,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]0);
-                            c[1] = 2;
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]0);
+                        c[1] = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                0
-                            };
-                            c[1] = 2;
-                        }
+                            0
+                        };
+                        c[1] = 2;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -570,39 +570,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                            [|c.Add(|]2);
-                            throw new System.Exception();
-                            c.Add(3);
-                            c.Add(4);
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1);
+                        [|c.Add(|]2);
+                        throw new System.Exception();
+                        c.Add(3);
+                        c.Add(4);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1,
-                                2
-                            };
-                            throw new System.Exception();
-                            c.Add(3);
-                            c.Add(4);
-                        }
+                            1,
+                            2
+                        };
+                        throw new System.Exception();
+                        c.Add(3);
+                        c.Add(4);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -611,17 +611,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            List<int> c = new List<int>();
-                            c.Add(1);
-                        }
+                        List<int> c = new List<int>();
+                        c.Add(1);
                     }
-                    """,
+                }
+                """,
                 LanguageVersion.CSharp2
             );
         }
@@ -631,19 +631,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = new C();
-                            c.Add(1);
-                        }
-
-                        void Add(int i) { }
+                        var c = new C();
+                        c.Add(1);
                     }
-                    """
+
+                    void Add(int i) { }
+                }
+                """
             );
         }
 
@@ -652,21 +652,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = new C();
-                            c.Add(1);
-                        }
-
-                        public void Add(int i)
-                        {
-                        }
+                        var c = new C();
+                        c.Add(1);
                     }
-                    """
+
+                    public void Add(int i)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -675,31 +675,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>(1);
-                            [|c.Add(|]1);
-                        }
+                        var c = [|new|] List<int>(1);
+                        [|c.Add(|]1);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<int>(1)
                         {
-                            var c = new List<int>(1)
-                            {
-                                1
-                            };
-                        }
+                            1
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -708,33 +708,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            List<int> c = null;
-                            c = [|new|] List<int>();
-                            [|c.Add(|]1);
-                        }
+                        List<int> c = null;
+                        c = [|new|] List<int>();
+                        [|c.Add(|]1);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        List<int> c = null;
+                        c = new List<int>
                         {
-                            List<int> c = null;
-                            c = new List<int>
-                            {
-                                1
-                            };
-                        }
+                            1
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -743,25 +743,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
-                        {
-                            var c = new List();
-                            c.Add(ref i);
-                        }
+                        var c = new List();
+                        c.Add(ref i);
                     }
+                }
 
 
-                    class List
+                class List
+                {
+                    public void Add(ref int i)
                     {
-                        public void Add(ref int i)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -770,33 +770,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(List<int>[] array)
                     {
-                        void M(List<int>[] array)
-                        {
-                            array[0] = [|new|] List<int>();
-                            [|array[0].Add(|]1);
-                            [|array[0].Add(|]2);
-                        }
+                        array[0] = [|new|] List<int>();
+                        [|array[0].Add(|]1);
+                        [|array[0].Add(|]2);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(List<int>[] array)
                     {
-                        void M(List<int>[] array)
+                        array[0] = new List<int>
                         {
-                            array[0] = new List<int>
-                            {
-                                1,
-                                2
-                            };
-                        }
+                            1,
+                            2
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -805,17 +805,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = new List<int>();
-                            c.Add(item: 1);
-                        }
+                        var c = new List<int>();
+                        c.Add(item: 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -824,35 +824,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = [|new|] List<int>()
                         {
-                            var c = [|new|] List<int>()
-                            {
-                                1
-                            };
-                            [|c.Add(|]1);
-                        }
+                            1
+                        };
+                        [|c.Add(|]1);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = [|new|] List<int>
                         {
-                            var c = [|new|] List<int>
-                            {
-                                1,
-                                1
-                            };
-                        }
+                            1,
+                            1
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -861,35 +861,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = [|new|] List<int>()
                         {
-                            var c = [|new|] List<int>()
-                            {
-                                1,
-                            };
-                            [|c.Add(|]1);
-                        }
+                            1,
+                        };
+                        [|c.Add(|]1);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = [|new|] List<int>
                         {
-                            var c = [|new|] List<int>
-                            {
-                                1,
-                                1
-                            };
-                        }
+                            1,
+                            1
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -898,41 +898,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(List<int>[] array)
                     {
-                        void M(List<int>[] array)
-                        {
-                            array[0] = [|new|] List<int>();
-                            [|array[0].Add(|]1);
-                            [|array[0].Add(|]2);
-                            array[1] = [|new|] List<int>();
-                            [|array[1].Add(|]3);
-                            [|array[1].Add(|]4);
-                        }
+                        array[0] = [|new|] List<int>();
+                        [|array[0].Add(|]1);
+                        [|array[0].Add(|]2);
+                        array[1] = [|new|] List<int>();
+                        [|array[1].Add(|]3);
+                        [|array[1].Add(|]4);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(List<int>[] array)
                     {
-                        void M(List<int>[] array)
+                        array[0] = new List<int>
                         {
-                            array[0] = new List<int>
-                            {
-                                1,
-                                2
-                            };
-                            array[1] = new List<int>
-                            {
-                                3,
-                                4
-                            };
-                        }
+                            1,
+                            2
+                        };
+                        array[1] = new List<int>
+                        {
+                            3,
+                            4
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -941,60 +941,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var list1 = [|new|] Bar(() => {
-                                var list2 = [|new|] List<int>();
-                                [|list2.Add(|]2);
-                            });
-                            [|list1.Add(|]1);
-                        }
+                        var list1 = [|new|] Bar(() => {
+                            var list2 = [|new|] List<int>();
+                            [|list2.Add(|]2);
+                        });
+                        [|list1.Add(|]1);
                     }
+                }
 
-                    class Bar : IEnumerable
-                    {
-                        public Bar(Action action) { }
+                class Bar : IEnumerable
+                {
+                    public Bar(Action action) { }
 
-                        public IEnumerator GetEnumerator() => null;
-                        public void Add(int i) { }
-                    }
-                    """,
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var list1 = new Bar(() =>
                         {
-                            var list1 = new Bar(() =>
+                            var list2 = new List<int>
                             {
-                                var list2 = new List<int>
-                                {
-                                    2
-                                };
-                            })
-                            {
-                                1
+                                2
                             };
-                        }
+                        })
+                        {
+                            1
+                        };
                     }
+                }
 
-                    class Bar : IEnumerable
-                    {
-                        public Bar(Action action) { }
+                class Bar : IEnumerable
+                {
+                    public Bar(Action action) { }
 
-                        public IEnumerator GetEnumerator() => null;
-                        public void Add(int i) { }
-                    }
-                    """
+                    public IEnumerator GetEnumerator() => null;
+                    public void Add(int i) { }
+                }
+                """
             );
         }
 
@@ -1066,31 +1066,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>();
-                            [|c.Add(|]1); // Goo
-                            [|c.Add(|]2); // Bar
-                        }
+                        var c = [|new|] List<int>();
+                        [|c.Add(|]1); // Goo
+                        [|c.Add(|]2); // Bar
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new List<int>
                         {
-                            var c = new List<int>
-                            {
-                                1, // Goo
-                                2 // Bar
-                            };
-                        }
+                            1, // Goo
+                            2 // Bar
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1100,38 +1100,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    class C
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] List<int>();
+                        var c = [|new|] List<int>();
 
+                        // Goo
+                        [|c.Add(|]1);
+
+                        // Bar
+                        [|c.Add(|]2);
+                    }
+                }
+                """,
+                """
+                using System.Collections.Generic;
+                class C
+                {
+                    void M()
+                    {
+                        var c = new List<int>
+                        {
                             // Goo
-                            [|c.Add(|]1);
+                            1,
 
                             // Bar
-                            [|c.Add(|]2);
-                        }
+                            2
+                        };
                     }
-                    """,
+                }
                 """
-                    using System.Collections.Generic;
-                    class C
-                    {
-                        void M()
-                        {
-                            var c = new List<int>
-                            {
-                                // Goo
-                                1,
-
-                                // Bar
-                                2
-                            };
-                        }
-                    }
-                    """
             );
         }
 
@@ -1140,33 +1140,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = [|new|] Dictionary<int, string>();
-                            [|c.Add(|]1, "x");
-                            [|c.Add(|]2, "y");
-                        }
+                        var c = [|new|] Dictionary<int, string>();
+                        [|c.Add(|]1, "x");
+                        [|c.Add(|]2, "y");
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        var c = new Dictionary<int, string>
                         {
-                            var c = new Dictionary<int, string>
-                            {
-                                { 1, "x" },
-                                { 2, "y" }
-                            };
-                        }
+                            { 1, "x" },
+                            { 2, "y" }
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1175,39 +1175,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public static void Bar()
                     {
-                        public static void Bar()
-                        {
-                            string item = null;
-                            var items = new List<string>();
+                        string item = null;
+                        var items = new List<string>();
 
-                            var values = [|new|] List<string>(); // Collection initialization can be simplified
-                            [|values.Add(|]item);
-                            values.AddRange(items);
-                        }
+                        var values = [|new|] List<string>(); // Collection initialization can be simplified
+                        [|values.Add(|]item);
+                        values.AddRange(items);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public static void Bar()
                     {
-                        public static void Bar()
-                        {
-                            string item = null;
-                            var items = new List<string>();
+                        string item = null;
+                        var items = new List<string>();
 
-                            var values = new List<string>
-                            {
-                                item
-                            }; // Collection initialization can be simplified
-                            values.AddRange(items);
-                        }
+                        var values = new List<string>
+                        {
+                            item
+                        }; // Collection initialization can be simplified
+                        values.AddRange(items);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1216,19 +1216,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                            using System.Collections.Generic;
-                    using System.Linq;
+                        using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var myStringArray = new string[] { "Test", "123", "ABC" };
-                            var myStringList = myStringArray?.ToList() ?? new List<string>();
-                            myStringList.Add("Done");
-                        }
+                        var myStringArray = new string[] { "Test", "123", "ABC" };
+                        var myStringList = myStringArray?.ToList() ?? new List<string>();
+                        myStringList.Add("Done");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1237,17 +1237,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            var items = new List<object>();
-                            items[0] = items[0];
-                        }
+                        var items = new List<object>();
+                        items[0] = items[0];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1256,33 +1256,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            var items = [|new|] List<object>();
-                            items[0] = 1;
-                            items[1] = items[0];
-                        }
+                        var items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[1] = items[0];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        var items = [|new|] List<object>
                         {
-                            var items = [|new|] List<object>
-                            {
-                                [0] = 1
-                            };
-                            items[1] = items[0];
-                        }
+                            [0] = 1
+                        };
+                        items[1] = items[0];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1291,18 +1291,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var t = new List<int>(new int[] { 1, 2, 3 });
-                            t.Add(t.Min() - 1);
-                        }
+                        var t = new List<int>(new int[] { 1, 2, 3 });
+                        t.Add(t.Min() - 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1311,35 +1311,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            List<object> items = null;
-                            items = [|new|] List<object>();
-                            items[0] = 1;
-                            items[1] = items[0];
-                        }
+                        List<object> items = null;
+                        items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[1] = items[0];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        List<object> items = null;
+                        items = [|new|] List<object>
                         {
-                            List<object> items = null;
-                            items = [|new|] List<object>
-                            {
-                                [0] = 1
-                            };
-                            items[1] = items[0];
-                        }
+                            [0] = 1
+                        };
+                        items[1] = items[0];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1348,19 +1348,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            List<int> t = null;
-                            t = new List<int>(new int[] { 1, 2, 3 });
-                            t.Add(t.Min() - 1);
-                        }
+                        List<int> t = null;
+                        t = new List<int>(new int[] { 1, 2, 3 });
+                        t.Add(t.Min() - 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1369,18 +1369,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    private List<int> myField;
+                    void M()
                     {
-                        private List<int> myField;
-                        void M()
-                        {
-                            myField = new List<int>();
-                            myField.Add(this.myField.Count);
-                        }
+                        myField = new List<int>();
+                        myField.Add(this.myField.Count);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1389,17 +1389,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Dynamic;
+                using System.Dynamic;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            dynamic body = new ExpandoObject();
-                            body[0] = new ExpandoObject();
-                        }
+                        dynamic body = new ExpandoObject();
+                        body[0] = new ExpandoObject();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1408,19 +1408,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                            var items = new List<object>();
-                    #if true
-                            items.Add(1);
-                    #endif
-                        }
+                        var items = new List<object>();
+                #if true
+                        items.Add(1);
+                #endif
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1429,35 +1429,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                    #if true
-                            var items = [|new|] List<object>();
-                            [|items.Add(|]1);
-                    #endif
-                        }
+                #if true
+                        var items = [|new|] List<object>();
+                        [|items.Add(|]1);
+                #endif
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
+                #if true
+                        var items = new List<object>
                         {
-                    #if true
-                            var items = new List<object>
-                            {
-                                1
-                            };
-                    #endif
-                        }
+                            1
+                        };
+                #endif
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1466,33 +1466,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                            int lastItem;
-                            var list = [|new|] List<int>();
-                            [|list.Add(|]lastItem = 5);
-                        }
+                        int lastItem;
+                        var list = [|new|] List<int>();
+                        [|list.Add(|]lastItem = 5);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
+                        int lastItem;
+                        var list = new List<int>
                         {
-                            int lastItem;
-                            var list = new List<int>
-                            {
-                                (lastItem = 5)
-                            };
-                        }
+                            (lastItem = 5)
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1501,33 +1501,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                            int lastItem = 0;
-                            var list = [|new|] List<int>();
-                            [|list.Add(|]lastItem += 5);
-                        }
+                        int lastItem = 0;
+                        var list = [|new|] List<int>();
+                        [|list.Add(|]lastItem += 5);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
+                        int lastItem = 0;
+                        var list = new List<int>
                         {
-                            int lastItem = 0;
-                            var list = new List<int>
-                            {
-                                (lastItem += 5)
-                            };
-                        }
+                            (lastItem += 5)
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1536,35 +1536,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class MyClass
+                class MyClass
+                {
+                    public void Main()
                     {
-                        public void Main()
-                        {
-                            var list = [|new|] List<int>();
-                            [|list.Add(|]1);
+                        var list = [|new|] List<int>();
+                        [|list.Add(|]1);
 
-                            int horse = 1;
-                        }
+                        int horse = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class MyClass
+                class MyClass
+                {
+                    public void Main()
                     {
-                        public void Main()
+                        var list = new List<int>
                         {
-                            var list = new List<int>
-                            {
-                                1
-                            };
+                            1
+                        };
 
-                            int horse = 1;
-                        }
+                        int horse = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1573,20 +1573,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    using System.Dynamic;
+                using System.Collections.Generic;
+                using System.Dynamic;
 
-                    public class Goo
+                public class Goo
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                            IDictionary<string, object> obj = new ExpandoObject();
-                            obj.Add("string", "v");
-                            obj.Add("int", 1);
-                            obj.Add(" object", new { X = 1, Y = 2 });
-                            }
-                    }
-                    """
+                        IDictionary<string, object> obj = new ExpandoObject();
+                        obj.Add("string", "v");
+                        obj.Add("int", 1);
+                        obj.Add(" object", new { X = 1, Y = 2 });
+                        }
+                }
+                """
             );
         }
 
@@ -1595,33 +1595,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            List<object> items = [|new|] List<object>();
-                            items[0] = 1;
-                            items[items.Count - 1] = 2;
-                        }
+                        List<object> items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[items.Count - 1] = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        List<object> items = [|new|] List<object>
                         {
-                            List<object> items = [|new|] List<object>
-                            {
-                                [0] = 1
-                            };
-                            items[items.Count - 1] = 2;
-                        }
+                            [0] = 1
+                        };
+                        items[items.Count - 1] = 2;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1630,33 +1630,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            List<object> items = [|new|] List<object>();
-                            items[0] = 1;
-                            items[^1] = 2;
-                        }
+                        List<object> items = [|new|] List<object>();
+                        items[0] = 1;
+                        items[^1] = 2;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        List<object> items = new List<object>
                         {
-                            List<object> items = new List<object>
-                            {
-                                [0] = 1
-                            };
-                            items[^1] = 2;
-                        }
+                            [0] = 1
+                        };
+                        items[^1] = 2;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1665,31 +1665,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            List<object> items = [|new|]();
-                            items[0] = 1;
-                        }
+                        List<object> items = [|new|]();
+                        items[0] = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        List<object> items = new()
                         {
-                            List<object> items = new()
-                            {
-                                [0] = 1
-                            };
-                        }
+                            [0] = 1
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1699,20 +1699,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    var list = [|new|] List<int>();
-                    [|list.Add(|]1);
-                    """,
+                var list = [|new|] List<int>();
+                [|list.Add(|]1);
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    var list = new List<int>
-                    {
-                        1
-                    };
+                var list = new List<int>
+                {
+                    1
+                };
 
-                    """,
+                """,
                 OutputKind.ConsoleApplication
             );
         }

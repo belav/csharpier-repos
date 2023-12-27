@@ -284,16 +284,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    [[|Obsolete($$|])]
+                    void Goo()
                     {
-                        [[|Obsolete($$|])]
-                        void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -302,16 +302,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    [[|Obsolete($$|])]
+                    void Goo()
                     {
-                        [[|Obsolete($$|])]
-                        void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -320,18 +320,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    [[|Obsolete(
+
+                $$|]]
+                    void Goo()
                     {
-                        [[|Obsolete(
-
-                    $$|]]
-                        void Goo()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 

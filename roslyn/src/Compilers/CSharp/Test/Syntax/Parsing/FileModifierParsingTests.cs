@@ -202,8 +202,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                partial file record C { }
-                """,
+            partial file record C { }
+            """,
             expectedBindingDiagnostics: new DiagnosticDescription[]
             {
                 // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
@@ -619,8 +619,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                file class C { }
-                """,
+            file class C { }
+            """,
             options: TestOptions.Regular10,
             expectedBindingDiagnostics: new[]
             {
@@ -651,8 +651,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                file delegate void D();
-                """
+            file delegate void D();
+            """
         );
 
         N(SyntaxKind.CompilationUnit);
@@ -683,11 +683,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                namespace NS
-                {
-                    file class C { }
-                }
-                """
+            namespace NS
+            {
+                file class C { }
+            }
+            """
         );
 
         N(SyntaxKind.CompilationUnit);
@@ -720,9 +720,9 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                namespace NS;
-                file class C { }
-                """
+            namespace NS;
+            file class C { }
+            """
         );
 
         N(SyntaxKind.CompilationUnit);
@@ -754,11 +754,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class Outer
-                {
-                    file class C { }
-                }
-                """,
+            class Outer
+            {
+                file class C { }
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
@@ -796,11 +796,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file delegate*<int, void> M();
-                }
-                """,
+            class C
+            {
+                file delegate*<int, void> M();
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,10): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
@@ -874,11 +874,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file void M() { }
-                }
-                """,
+            class C
+            {
+                file void M() { }
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,15): error CS0106: The modifier 'file' is not valid for this item
@@ -926,11 +926,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file int x;
-                }
-                """,
+            class C
+            {
+                file int x;
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,14): error CS0106: The modifier 'file' is not valid for this item
@@ -2733,11 +2733,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record();
-                }
-                """,
+            class C
+            {
+                file record();
+            }
+            """,
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
@@ -2787,11 +2787,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record();
-                }
-                """,
+            class C
+            {
+                file record();
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,10): error CS0106: The modifier 'file' is not valid for this item
@@ -2835,11 +2835,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record() { }
-                }
-                """,
+            class C
+            {
+                file record() { }
+            }
+            """,
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
@@ -2893,11 +2893,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record() { }
-                }
-                """,
+            class C
+            {
+                file record() { }
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,10): error CS0106: The modifier 'file' is not valid for this item
@@ -2945,11 +2945,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record X();
-                }
-                """,
+            class C
+            {
+                file record X();
+            }
+            """,
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
@@ -3005,11 +3005,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record X();
-                }
-                """,
+            class C
+            {
+                file record X();
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
@@ -3051,11 +3051,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record X() { }
-                }
-                """,
+            class C
+            {
+                file record X() { }
+            }
+            """,
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
@@ -3115,11 +3115,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record X() { }
-                }
-                """,
+            class C
+            {
+                file record X() { }
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
@@ -3162,11 +3162,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record X;
-                }
-                """,
+            class C
+            {
+                file record X;
+            }
+            """,
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
@@ -3223,11 +3223,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    file record X;
-                }
-                """,
+            class C
+            {
+                file record X;
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
@@ -3264,8 +3264,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                file record X();
-                """
+            file record X();
+            """
         );
 
         N(SyntaxKind.CompilationUnit);
@@ -3292,11 +3292,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                void M()
-                {
-                    file file;
-                }
-                """,
+            void M()
+            {
+                file file;
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (1,6): warning CS8321: The local function 'M' is declared but never used
@@ -3364,11 +3364,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                void M()
-                {
-                    int file;
-                }
-                """,
+            void M()
+            {
+                int file;
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (1,6): warning CS8321: The local function 'M' is declared but never used
@@ -3433,8 +3433,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                file file;
-                """,
+            file file;
+            """,
             options: TestOptions.Regular.WithLanguageVersion(languageVersion),
             expectedBindingDiagnostics: new[]
             {
@@ -3483,8 +3483,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                int file;
-                """,
+            int file;
+            """,
             options: TestOptions.Regular.WithLanguageVersion(languageVersion),
             expectedBindingDiagnostics: new[]
             {
@@ -3527,9 +3527,9 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                bool file;
-                file = true;
-                """,
+            bool file;
+            file = true;
+            """,
             options: TestOptions.Regular.WithLanguageVersion(languageVersion),
             expectedBindingDiagnostics: new[]
             {
@@ -3590,12 +3590,12 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                void M()
-                {
-                    bool file;
-                    file = true;
-                }
-                """,
+            void M()
+            {
+                bool file;
+                file = true;
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (1,6): warning CS8321: The local function 'M' is declared but never used
@@ -3675,8 +3675,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                _ = file () => { };
-                """,
+            _ = file () => { };
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (1,1): error CS8183: Cannot infer the type of implicitly-typed discard.
@@ -3734,8 +3734,8 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                file local() { };
-                """,
+            file local() { };
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
@@ -3795,11 +3795,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    void M(file int x) { }
-                }
-                """,
+            class C
+            {
+                void M(file int x) { }
+            }
+            """,
             expectedParsingDiagnostics: new[]
             {
                 // (3,17): error CS1001: Identifier expected
@@ -3882,11 +3882,11 @@ public class FileModifierParsingTests : ParsingTests
     {
         UsingNode(
             """
-                class C
-                {
-                    void M(file x) { }
-                }
-                """,
+            class C
+            {
+                void M(file x) { }
+            }
+            """,
             expectedBindingDiagnostics: new[]
             {
                 // (3,12): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)

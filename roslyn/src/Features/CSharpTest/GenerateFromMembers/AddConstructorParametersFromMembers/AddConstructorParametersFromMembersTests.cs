@@ -553,30 +553,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class Program
-                    {
-                        [|(int, string) i;
-                        (string, int) s;|]
+                class Program
+                {
+                    [|(int, string) i;
+                    (string, int) s;|]
 
-                        public Program((int, string) i)
-                        {
-                            this.i = i;
-                        }
+                    public Program((int, string) i)
+                    {
+                        this.i = i;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        (int, string) i;
-                        (string, int) s;
+                class Program
+                {
+                    (int, string) i;
+                    (string, int) s;
 
-                        public Program((int, string) i, (string, int) s)
-                        {
-                            this.i = i;
-                            this.s = s;
-                        }
+                    public Program((int, string) i, (string, int) s)
+                    {
+                        this.i = i;
+                        this.s = s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -585,30 +585,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class Program
-                    {
-                        [|(int a, string b) i;
-                        (string c, int d) s;|]
+                class Program
+                {
+                    [|(int a, string b) i;
+                    (string c, int d) s;|]
 
-                        public Program((int a, string b) i)
-                        {
-                            this.i = i;
-                        }
+                    public Program((int a, string b) i)
+                    {
+                        this.i = i;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        (int a, string b) i;
-                        (string c, int d) s;
+                class Program
+                {
+                    (int a, string b) i;
+                    (string c, int d) s;
 
-                        public Program((int a, string b) i, (string c, int d) s)
-                        {
-                            this.i = i;
-                            this.s = s;
-                        }
+                    public Program((int a, string b) i, (string c, int d) s)
+                    {
+                        this.i = i;
+                        this.s = s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -617,30 +617,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class Program
-                    {
-                        [|(int a, string b) i;
-                        (string c, int d) s;|]
+                class Program
+                {
+                    [|(int a, string b) i;
+                    (string c, int d) s;|]
 
-                        public Program((int e, string f) i)
-                        {
-                            this.i = i;
-                        }
+                    public Program((int e, string f) i)
+                    {
+                        this.i = i;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        [|(int a, string b) i;
-                        (string c, int d) s;|]
+                class Program
+                {
+                    [|(int a, string b) i;
+                    (string c, int d) s;|]
 
-                        public Program((int e, string f) i, (string c, int d) s)
-                        {
-                            this.i = i;
-                            this.s = s;
-                        }
+                    public Program((int e, string f) i, (string c, int d) s)
+                    {
+                        this.i = i;
+                        this.s = s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -856,30 +856,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class Program
-                    {
-                        [|(int?, bool?) i;
-                        (byte?, long?) s;|]
+                class Program
+                {
+                    [|(int?, bool?) i;
+                    (byte?, long?) s;|]
 
-                        public Program((int?, bool?) i)
-                        {
-                            this.i = i;
-                        }
+                    public Program((int?, bool?) i)
+                    {
+                        this.i = i;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
-                    {
-                        (int?, bool?) i;
-                        (byte?, long?) s;
+                class Program
+                {
+                    (int?, bool?) i;
+                    (byte?, long?) s;
 
-                        public Program((int?, bool?) i, (byte?, long?) s)
-                        {
-                            this.i = i;
-                            this.s = s;
-                        }
+                    public Program((int?, bool?) i, (byte?, long?) s)
+                    {
+                        this.i = i;
+                        this.s = s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -888,34 +888,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    [|(List<int>, List<bool>) i;
+                    (List<byte>, List<long>) s;|]
+
+                    public Program((List<int>, List<bool>) i)
                     {
-                        [|(List<int>, List<bool>) i;
-                        (List<byte>, List<long>) s;|]
-
-                        public Program((List<int>, List<bool>) i)
-                        {
-                            this.i = i;
-                        }
+                        this.i = i;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    (List<int>, List<bool>) i;
+                    (List<byte>, List<long>) s;
+
+                    public Program((List<int>, List<bool>) i, (List<byte>, List<long>) s)
                     {
-                        (List<int>, List<bool>) i;
-                        (List<byte>, List<long>) s;
-
-                        public Program((List<int>, List<bool>) i, (List<byte>, List<long>) s)
-                        {
-                            this.i = i;
-                            this.s = s;
-                        }
+                        this.i = i;
+                        this.s = s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -924,38 +924,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    int i;
+                    [|(List<byte>, List<long>) s;|]
+                    int j;
+
+                    public C(int i, int j)
                     {
-                        int i;
-                        [|(List<byte>, List<long>) s;|]
-                        int j;
-
-                        public C(int i, int j)
-                        {
-                            this.i = i;
-                            this.j = j;
-                        }
+                        this.i = i;
+                        this.j = j;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    int i;
+                    (List<byte>, List<long>) s;
+                    int j;
+
+                    public C(int i, int j, (List<byte>, List<long>) s)
                     {
-                        int i;
-                        (List<byte>, List<long>) s;
-                        int j;
-
-                        public C(int i, int j, (List<byte>, List<long>) s)
-                        {
-                            this.i = i;
-                            this.j = j;
-                            this.s = s;
-                        }
+                        this.i = i;
+                        this.j = j;
+                        this.s = s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -964,34 +964,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
-                    {
-                        [|int i;
-                        int k;
-                        int j;|]
+                class C
+                {
+                    [|int i;
+                    int k;
+                    int j;|]
 
-                        public C(int i, int j)
-                        {
-                            this.i = i;
-                            this.j = j;
-                        }
+                    public C(int i, int j)
+                    {
+                        this.i = i;
+                        this.j = j;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        int i;
-                        int k;
-                        int j;
+                class C
+                {
+                    int i;
+                    int k;
+                    int j;
 
-                        public C(int i, int j, int k)
-                        {
-                            this.i = i;
-                            this.j = j;
-                            this.k = k;
-                        }
+                    public C(int i, int j, int k)
+                    {
+                        this.i = i;
+                        this.j = j;
+                        this.k = k;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1032,26 +1032,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    [|int i;
+                    int Hello { get; set; }|]
+                    public C(int i)
                     {
-                        [|int i;
-                        int Hello { get; set; }|]
-                        public C(int i)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int Hello { get; set; }
+                    public C(int i, int hello)
                     {
-                        int i;
-                        int Hello { get; set; }
-                        public C(int i, int hello)
-                        {
-                            Hello = hello;
-                        }
+                        Hello = hello;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1060,27 +1060,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    [|int i;
+                    int Hello { get; set; }|]
+                    public C()
                     {
-                        [|int i;
-                        int Hello { get; set; }|]
-                        public C()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int Hello { get; set; }
+                    public C(int i, int hello)
                     {
-                        int i;
-                        int Hello { get; set; }
-                        public C(int i, int hello)
-                        {
-                            this.i = i;
-                            Hello = hello;
-                        }
+                        this.i = i;
+                        Hello = hello;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1102,26 +1102,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int [|j|];
+                    public C(int i)
                     {
-                        int i;
-                        int [|j|];
-                        public C(int i)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int j;
+                    public C(int i, int j)
                     {
-                        int i;
-                        int j;
-                        public C(int i, int j)
-                        {
-                            this.j = j;
-                        }
+                        this.j = j;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1130,29 +1130,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int [|j;
+                    int k|];
+                    public C(int i)
                     {
-                        int i;
-                        int [|j;
-                        int k|];
-                        public C(int i)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int j;
+                    int k;
+                    public C(int i, int j, int k)
                     {
-                        int i;
-                        int j;
-                        int k;
-                        public C(int i, int j, int k)
-                        {
-                            this.j = j;
-                            this.k = k;
-                        }
+                        this.j = j;
+                        this.k = k;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1161,28 +1161,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int [|j;
+                    int |]k;
+                    public C(int i)
                     {
-                        int i;
-                        int [|j;
-                        int |]k;
-                        public C(int i)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int i;
+                    int j;
+                    int k;
+                    public C(int i, int j)
                     {
-                        int i;
-                        int j;
-                        int k;
-                        public C(int i, int j)
-                        {
-                            this.j = j;
-                        }
+                        this.j = j;
                     }
-                    """
+                }
+                """
             );
         }
 

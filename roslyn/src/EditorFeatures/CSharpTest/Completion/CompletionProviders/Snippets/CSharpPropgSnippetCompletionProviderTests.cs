@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // Ensure we don't generate redundant `set` accessor when executed in readonly struct
             await VerifyPropertyAsync(
                 """
-                    readonly struct MyStruct
-                    {
-                        $$
-                    }
-                    """,
+                readonly struct MyStruct
+                {
+                    $$
+                }
+                """,
                 "public int MyProperty { get; }"
             );
         }
@@ -32,11 +32,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             // Ensure we don't generate redundant `set` accessor when executed in interface
             await VerifyPropertyAsync(
                 """
-                    interface MyInterface
-                    {
-                        $$
-                    }
-                    """,
+                interface MyInterface
+                {
+                    $$
+                }
+                """,
                 "public int MyProperty { get; }"
             );
         }

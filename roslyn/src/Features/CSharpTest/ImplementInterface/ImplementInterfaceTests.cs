@@ -181,29 +181,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        void Method1();
-                    }
+                interface IInterface
+                {
+                    void Method1();
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        void Method1();
-                    }
+                interface IInterface
+                {
+                    void Method1();
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public void Method1()
                     {
-                        public void Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -302,29 +302,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        (int, int) Method((string, string) x);
-                    }
+                interface IInterface
+                {
+                    (int, int) Method((string, string) x);
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        (int, int) Method((string, string) x);
-                    }
+                interface IInterface
+                {
+                    (int, int) Method((string, string) x);
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public (int, int) Method((string, string) x)
                     {
-                        public (int, int) Method((string, string) x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -333,29 +333,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    interface I
-                    {
-                        ValueTuple<object> F();
-                    }
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                using System;
+                interface I
+                {
+                    ValueTuple<object> F();
+                }
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System;
-                    interface I
+                using System;
+                interface I
+                {
+                    ValueTuple<object> F();
+                }
+                class C : I
+                {
+                    public ValueTuple<object> F()
                     {
-                        ValueTuple<object> F();
+                        throw new NotImplementedException();
                     }
-                    class C : I
-                    {
-                        public ValueTuple<object> F()
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -364,26 +364,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    interface IInterface
-                    {
-                        void Method1();
-                    }
+                interface IInterface
+                {
+                    void Method1();
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        void Method1();
-                    }
+                interface IInterface
+                {
+                    void Method1();
+                }
 
-                    class Class : IInterface
-                    {
-                        public void Method1() => throw new System.NotImplementedException();
-                    }
-                    """
+                class Class : IInterface
+                {
+                    public void Method1() => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -393,31 +393,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
             // Note: we're putting the attribute by hand to simulate metadata
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                        (int a, int b)[] Method1((int c, string) x);
-                    }
+                interface IInterface
+                {
+                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                    (int a, int b)[] Method1((int c, string) x);
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                        (int a, int b)[] Method1((int c, string) x);
-                    }
+                interface IInterface
+                {
+                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                    (int a, int b)[] Method1((int c, string) x);
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public (int a, int b)[] Method1((int c, string) x)
                     {
-                        public (int a, int b)[] Method1((int c, string) x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -426,31 +426,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                        (int a, int b)[] Method1((int c, string) x);
-                    }
+                interface IInterface
+                {
+                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                    (int a, int b)[] Method1((int c, string) x);
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                        (int a, int b)[] Method1((int c, string) x);
-                    }
+                interface IInterface
+                {
+                    [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                    (int a, int b)[] Method1((int c, string) x);
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    (int a, int b)[] IInterface.Method1((int c, string) x)
                     {
-                        (int a, int b)[] IInterface.Method1((int c, string) x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::IInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -463,39 +463,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                        (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
-                    }
+                interface IInterface
+                {
+                    [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                    (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
-                        (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
-                    }
+                interface IInterface
+                {
+                    [{|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}]
+                    (int a, int b)[] Property1 { [return: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] get; [param: {|CS8138:System.Runtime.CompilerServices.TupleElementNames(new[] { "a", "b" })|}] set; }
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public (int a, int b)[] Property1
                     {
-                        public (int a, int b)[] Property1
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -538,31 +538,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
-                        object Method1();
-                    }
+                interface IInterface
+                {
+                    [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
+                    object Method1();
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
-                        object Method1();
-                    }
+                interface IInterface
+                {
+                    [return: {|CS1970:System.Runtime.CompilerServices.DynamicAttribute()|}]
+                    object Method1();
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public object Method1()
                     {
-                        public object Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -651,28 +651,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        void Method1();
-                    }
+                interface IInterface
+                {
+                    void Method1();
+                }
 
-                    class Class : {|CS0535:IInterface|}{|CS1513:|}{|CS1514:|}
-                    """,
+                class Class : {|CS0535:IInterface|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    interface IInterface
-                    {
-                        void Method1();
-                    }
+                interface IInterface
+                {
+                    void Method1();
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public void Method1()
                     {
-                        public void Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -681,37 +681,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface1
+                {
+                    void Method1();
+                }
 
-                    interface IInterface2 : IInterface1
-                    {
-                    }
+                interface IInterface2 : IInterface1
+                {
+                }
 
-                    class Class : {|CS0535:IInterface2|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface2|}
+                {
+                }
+                """,
                 """
-                    interface IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface1
+                {
+                    void Method1();
+                }
 
-                    interface IInterface2 : IInterface1
-                    {
-                    }
+                interface IInterface2 : IInterface1
+                {
+                }
 
-                    class Class : IInterface2
+                class Class : IInterface2
+                {
+                    public void Method1()
                     {
-                        public void Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -720,37 +720,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1
-                    {
-                    }
+                interface IInterface1
+                {
+                }
 
-                    interface IInterface2 : IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface2 : IInterface1
+                {
+                    void Method1();
+                }
 
-                    class Class : {|CS0535:IInterface2|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface2|}
+                {
+                }
+                """,
                 """
-                    interface IInterface1
-                    {
-                    }
+                interface IInterface1
+                {
+                }
 
-                    interface IInterface2 : IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface2 : IInterface1
+                {
+                    void Method1();
+                }
 
-                    class Class : IInterface2
+                class Class : IInterface2
+                {
+                    public void Method1()
                     {
-                        public void Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -759,44 +759,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface1
+                {
+                    void Method1();
+                }
 
-                    interface IInterface2 : IInterface1
-                    {
-                        void Method2();
-                    }
+                interface IInterface2 : IInterface1
+                {
+                    void Method2();
+                }
 
-                    class Class : {|CS0535:{|CS0535:IInterface2|}|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:{|CS0535:IInterface2|}|}
+                {
+                }
+                """,
                 """
-                    interface IInterface1
+                interface IInterface1
+                {
+                    void Method1();
+                }
+
+                interface IInterface2 : IInterface1
+                {
+                    void Method2();
+                }
+
+                class Class : IInterface2
+                {
+                    public void Method1()
                     {
-                        void Method1();
+                        throw new System.NotImplementedException();
                     }
 
-                    interface IInterface2 : IInterface1
+                    public void Method2()
                     {
-                        void Method2();
+                        throw new System.NotImplementedException();
                     }
-
-                    class Class : IInterface2
-                    {
-                        public void Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void Method2()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -805,39 +805,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface1
+                {
+                    void Method1();
+                }
 
-                    interface IInterface2 : IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface2 : IInterface1
+                {
+                    void Method1();
+                }
 
-                    class Class : {|CS0535:{|CS0535:IInterface2|}|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:{|CS0535:IInterface2|}|}
+                {
+                }
+                """,
                 """
-                    interface IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface1
+                {
+                    void Method1();
+                }
 
-                    interface IInterface2 : IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface2 : IInterface1
+                {
+                    void Method1();
+                }
 
-                    class Class : IInterface2
+                class Class : IInterface2
+                {
+                    public void Method1()
                     {
-                        public void Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -846,38 +846,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1
-                    {
-                        void Method1();
-                    }
+                interface IInterface1
+                {
+                    void Method1();
+                }
 
-                    class Class : {|CS0738:IInterface1|}
+                class Class : {|CS0738:IInterface1|}
+                {
+                    public int Method1()
                     {
-                        public int Method1()
-                        {
-                            return 0;
-                        }
+                        return 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    interface IInterface1
+                interface IInterface1
+                {
+                    void Method1();
+                }
+
+                class Class : IInterface1
+                {
+                    public int Method1()
                     {
-                        void Method1();
+                        return 0;
                     }
 
-                    class Class : IInterface1
+                    void IInterface1.Method1()
                     {
-                        public int Method1()
-                        {
-                            return 0;
-                        }
-
-                        void IInterface1.Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -886,36 +886,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1
-                    {
-                        void Method1(int i);
-                    }
+                interface IInterface1
+                {
+                    void Method1(int i);
+                }
 
-                    class Class : {|CS0535:IInterface1|}
+                class Class : {|CS0535:IInterface1|}
+                {
+                    public void Method1(string i)
                     {
-                        public void Method1(string i)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    interface IInterface1
+                interface IInterface1
+                {
+                    void Method1(int i);
+                }
+
+                class Class : IInterface1
+                {
+                    public void Method1(string i)
                     {
-                        void Method1(int i);
                     }
 
-                    class Class : IInterface1
+                    public void Method1(int i)
                     {
-                        public void Method1(string i)
-                        {
-                        }
-
-                        public void Method1(int i)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -924,29 +924,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1<T>
-                    {
-                        void Method1(T t);
-                    }
+                interface IInterface1<T>
+                {
+                    void Method1(T t);
+                }
 
-                    class Class : {|CS0535:IInterface1<int>|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface1<int>|}
+                {
+                }
+                """,
                 """
-                    interface IInterface1<T>
-                    {
-                        void Method1(T t);
-                    }
+                interface IInterface1<T>
+                {
+                    void Method1(T t);
+                }
 
-                    class Class : IInterface1<int>
+                class Class : IInterface1<int>
+                {
+                    public void Method1(int t)
                     {
-                        public void Method1(int t)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -955,29 +955,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1<T>
-                    {
-                        void Method1<U>(T t, U u);
-                    }
+                interface IInterface1<T>
+                {
+                    void Method1<U>(T t, U u);
+                }
 
-                    class Class : {|CS0535:IInterface1<int>|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface1<int>|}
+                {
+                }
+                """,
                 """
-                    interface IInterface1<T>
-                    {
-                        void Method1<U>(T t, U u);
-                    }
+                interface IInterface1<T>
+                {
+                    void Method1<U>(T t, U u);
+                }
 
-                    class Class : IInterface1<int>
+                class Class : IInterface1<int>
+                {
+                    public void Method1<U>(int t, U u)
                     {
-                        public void Method1<U>(int t, U u)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -986,31 +986,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections.Generic;
-                    interface IInterface1<T>
-                    {
-                        void Method1<U>(T t, U u) where U : IList<T>;
-                    }
+                using System.Collections.Generic;
+                interface IInterface1<T>
+                {
+                    void Method1<U>(T t, U u) where U : IList<T>;
+                }
 
-                    class Class : {|CS0535:IInterface1<int>|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface1<int>|}
+                {
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    interface IInterface1<T>
-                    {
-                        void Method1<U>(T t, U u) where U : IList<T>;
-                    }
+                using System.Collections.Generic;
+                interface IInterface1<T>
+                {
+                    void Method1<U>(T t, U u) where U : IList<T>;
+                }
 
-                    class Class : IInterface1<int>
+                class Class : IInterface1<int>
+                {
+                    public void Method1<U>(int t, U u) where U : IList<int>
                     {
-                        public void Method1<U>(int t, U u) where U : IList<int>
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1019,29 +1019,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface1<T>
-                    {
-                        void Method1<U>(T t, U u) where U : T;
-                    }
+                interface IInterface1<T>
+                {
+                    void Method1<U>(T t, U u) where U : T;
+                }
 
-                    class Class : {|CS0535:IInterface1<int>|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface1<int>|}
+                {
+                }
+                """,
                 """
-                    interface IInterface1<T>
-                    {
-                        void Method1<U>(T t, U u) where U : T;
-                    }
+                interface IInterface1<T>
+                {
+                    void Method1<U>(T t, U u) where U : T;
+                }
 
-                    class Class : IInterface1<int>
+                class Class : IInterface1<int>
+                {
+                    void IInterface1<int>.Method1<U>(int t, U u)
                     {
-                        void IInterface1<int>.Method1<U>(int t, U u)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1050,29 +1050,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        string[] M();
-                    }
+                interface I
+                {
+                    string[] M();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        string[] M();
-                    }
+                interface I
+                {
+                    string[] M();
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public string[] M()
                     {
-                        public string[] M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1081,32 +1081,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        I i;
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                    I i;
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    class C : I
-                    {
-                        I i;
+                class C : I
+                {
+                    I i;
 
-                        public void Method1()
-                        {
-                            i.Method1();
-                        }
+                    public void Method1()
+                    {
+                        i.Method1();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
                     1
@@ -1119,29 +1119,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    class C(I i) : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C(I i) : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    class C(I i) : I
+                class C(I i) : I
+                {
+                    public void Method1()
                     {
-                        public void Method1()
-                        {
-                            i.Method1();
-                        }
+                        i.Method1();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
                     1
@@ -1154,47 +1154,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        I i;
-                    }
+                class C : {|CS0535:I|}
+                {
+                    I i;
+                }
 
-                    class D : {|CS0535:I|}
-                    {
-                        I i;
-                    }
-                    """,
+                class D : {|CS0535:I|}
+                {
+                    I i;
+                }
+                """,
                 """
-                    interface I
+                interface I
+                {
+                    void Method1();
+                }
+
+                class C : I
+                {
+                    I i;
+
+                    public void Method1()
                     {
-                        void Method1();
+                        i.Method1();
                     }
+                }
 
-                    class C : I
+                class D : I
+                {
+                    I i;
+
+                    public void Method1()
                     {
-                        I i;
-
-                        public void Method1()
-                        {
-                            i.Method1();
-                        }
+                        i.Method1();
                     }
-
-                    class D : I
-                    {
-                        I i;
-
-                        public void Method1()
-                        {
-                            i.Method1();
-                        }
-                    }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
                     1
@@ -1207,47 +1207,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        I i;
-                    }
+                class C : {|CS0535:I|}
+                {
+                    I i;
+                }
 
-                    class D : {|CS0535:I|}
-                    {
-                        I i { get; }
-                    }
-                    """,
+                class D : {|CS0535:I|}
+                {
+                    I i { get; }
+                }
+                """,
                 """
-                    interface I
+                interface I
+                {
+                    void Method1();
+                }
+
+                class C : I
+                {
+                    I i;
+
+                    public void Method1()
                     {
-                        void Method1();
+                        i.Method1();
                     }
+                }
 
-                    class C : I
+                class D : I
+                {
+                    I i { get; }
+
+                    public void Method1()
                     {
-                        I i;
-
-                        public void Method1()
-                        {
-                            i.Method1();
-                        }
+                        i.Method1();
                     }
-
-                    class D : I
-                    {
-                        I i { get; }
-
-                        public void Method1()
-                        {
-                            i.Method1();
-                        }
-                    }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;i",
                     1
@@ -1319,40 +1319,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IGoo
-                    {
-                        int this[int x] { get; set; }
-                    }
+                interface IGoo
+                {
+                    int this[int x] { get; set; }
+                }
 
-                    class Goo : {|CS0535:IGoo|}
-                    {
-                        IGoo f;
-                    }
-                    """,
+                class Goo : {|CS0535:IGoo|}
+                {
+                    IGoo f;
+                }
+                """,
                 """
-                    interface IGoo
-                    {
-                        int this[int x] { get; set; }
-                    }
+                interface IGoo
+                {
+                    int this[int x] { get; set; }
+                }
 
-                    class Goo : IGoo
-                    {
-                        IGoo f;
+                class Goo : IGoo
+                {
+                    IGoo f;
 
-                        public int this[int x]
+                    public int this[int x]
+                    {
+                        get
                         {
-                            get
-                            {
-                                return f[x];
-                            }
+                            return f[x];
+                        }
 
-                            set
-                            {
-                                f[x] = value;
-                            }
+                        set
+                        {
+                            f[x] = value;
                         }
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;f",
                     1
@@ -1365,26 +1365,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    sealed class X : {|CS0535:IComparer|}
-                    {
-                        X x;
-                    }
-                    """,
+                sealed class X : {|CS0535:IComparer|}
+                {
+                    X x;
+                }
+                """,
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    sealed class X : IComparer
+                sealed class X : IComparer
+                {
+                    X x;
+
+                    public int Compare(object x, object y)
                     {
-                        X x;
-
-                        public int Compare(object x, object y)
-                        {
-                            return this.x.Compare(x, y);
-                        }
+                        return this.x.Compare(x, y);
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::System.Collections.IComparer;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;x",
                     1
@@ -1397,26 +1397,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    sealed class X : {|CS0535:IComparer|}
-                    {
-                        X a;
-                    }
-                    """,
+                sealed class X : {|CS0535:IComparer|}
+                {
+                    X a;
+                }
+                """,
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    sealed class X : IComparer
+                sealed class X : IComparer
+                {
+                    X a;
+
+                    public int Compare(object x, object y)
                     {
-                        X a;
-
-                        public int Compare(object x, object y)
-                        {
-                            return a.Compare(x, y);
-                        }
+                        return a.Compare(x, y);
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::System.Collections.IComparer;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
                     1
@@ -1429,26 +1429,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    abstract class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                abstract class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Method1();
-                    }
+                interface I
+                {
+                    void Method1();
+                }
 
-                    abstract class C : I
-                    {
-                        public abstract void Method1();
-                    }
-                    """,
+                abstract class C : I
+                {
+                    public abstract void Method1();
+                }
+                """,
                 codeAction: (
                     "False;True;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -1461,39 +1461,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    class C : {|CS0535:{|CS0535:I|}|}
-                    {
-                        I goo;
-                    }
+                class C : {|CS0535:{|CS0535:I|}|}
+                {
+                    I goo;
+                }
 
-                    interface I
-                    {
-                        void Method1(ref int x, out int y, ref readonly int w, int z);
-                        int Method2();
-                    }
-                    """,
+                interface I
+                {
+                    void Method1(ref int x, out int y, ref readonly int w, int z);
+                    int Method2();
+                }
+                """,
                 """
-                    class C : I
+                class C : I
+                {
+                    I goo;
+
+                    public void Method1(ref int x, out int y, ref readonly int w, int z)
                     {
-                        I goo;
-
-                        public void Method1(ref int x, out int y, ref readonly int w, int z)
-                        {
-                            goo.Method1(ref x, out y, in w, z);
-                        }
-
-                        public int Method2()
-                        {
-                            return goo.Method2();
-                        }
+                        goo.Method1(ref x, out y, in w, z);
                     }
 
-                    interface I
+                    public int Method2()
                     {
-                        void Method1(ref int x, out int y, ref readonly int w, int z);
-                        int Method2();
+                        return goo.Method2();
                     }
-                    """,
+                }
+
+                interface I
+                {
+                    void Method1(ref int x, out int y, ref readonly int w, int z);
+                    int Method2();
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;goo",
                     1
@@ -1506,45 +1506,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    class B
+                class B
+                {
+                    public int Method1()
                     {
-                        public int Method1()
-                        {
-                            return 0;
-                        }
+                        return 0;
                     }
+                }
 
-                    class C : B, {|CS0738:I|}
-                    {
-                    }
+                class C : B, {|CS0738:I|}
+                {
+                }
 
-                    interface I
-                    {
-                        void Method1();
-                    }
-                    """,
+                interface I
+                {
+                    void Method1();
+                }
+                """,
                 """
-                    class B
+                class B
+                {
+                    public int Method1()
                     {
-                        public int Method1()
-                        {
-                            return 0;
-                        }
+                        return 0;
                     }
+                }
 
-                    class C : B, I
+                class C : B, I
+                {
+                    void I.Method1()
                     {
-                        void I.Method1()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
+                }
 
-                    interface I
-                    {
-                        void Method1();
-                    }
-                    """
+                interface I
+                {
+                    void Method1();
+                }
+                """
             );
         }
 
@@ -1553,40 +1553,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    class Test : {|CS0737:I1|}
-                    {
-                        int Prop { get; set; }
-                    }
+                class Test : {|CS0737:I1|}
+                {
+                    int Prop { get; set; }
+                }
 
-                    interface I1
-                    {
-                        int Prop { get; set; }
-                    }
-                    """,
+                interface I1
+                {
+                    int Prop { get; set; }
+                }
+                """,
                 """
-                    class Test : I1
+                class Test : I1
+                {
+                    int Prop { get; set; }
+
+                    int I1.Prop
                     {
-                        int Prop { get; set; }
-
-                        int I1.Prop
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
+                }
 
-                    interface I1
-                    {
-                        int Prop { get; set; }
-                    }
-                    """
+                interface I1
+                {
+                    int Prop { get; set; }
+                }
+                """
             );
         }
 
@@ -1621,29 +1621,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        void @M();
-                    }
+                interface IInterface
+                {
+                    void @M();
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        void @M();
-                    }
+                interface IInterface
+                {
+                    void @M();
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1652,29 +1652,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        void @int();
-                    }
+                interface IInterface
+                {
+                    void @int();
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        void @int();
-                    }
+                interface IInterface
+                {
+                    void @int();
+                }
 
-                    class Class : IInterface
+                class Class : IInterface
+                {
+                    public void @int()
                     {
-                        public void @int()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1683,32 +1683,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface @IInterface
-                    {
-                        void M();
-                    }
+                interface @IInterface
+                {
+                    void M();
+                }
 
-                    class Class : {|CS0737:@IInterface|}
-                    {
-                        string M() => "";
-                    }
-                    """,
+                class Class : {|CS0737:@IInterface|}
+                {
+                    string M() => "";
+                }
+                """,
                 """
-                    interface @IInterface
-                    {
-                        void M();
-                    }
+                interface @IInterface
+                {
+                    void M();
+                }
 
-                    class Class : @IInterface
-                    {
-                        string M() => "";
+                class Class : @IInterface
+                {
+                    string M() => "";
 
-                        void IInterface.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    void IInterface.M()
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1717,32 +1717,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface @IInterface
-                    {
-                        void @M();
-                    }
+                interface @IInterface
+                {
+                    void @M();
+                }
 
-                    class Class : {|CS0737:@IInterface|}
-                    {
-                        string M() => "";
-                    }
-                    """,
+                class Class : {|CS0737:@IInterface|}
+                {
+                    string M() => "";
+                }
+                """,
                 """
-                    interface @IInterface
-                    {
-                        void @M();
-                    }
+                interface @IInterface
+                {
+                    void @M();
+                }
 
-                    class Class : @IInterface
-                    {
-                        string M() => "";
+                class Class : @IInterface
+                {
+                    string M() => "";
 
-                        void IInterface.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    void IInterface.M()
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1751,32 +1751,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface @int
-                    {
-                        void M();
-                    }
+                interface @int
+                {
+                    void M();
+                }
 
-                    class Class : {|CS0737:@int|}
-                    {
-                        string M() => "";
-                    }
-                    """,
+                class Class : {|CS0737:@int|}
+                {
+                    string M() => "";
+                }
+                """,
                 """
-                    interface @int
-                    {
-                        void M();
-                    }
+                interface @int
+                {
+                    void M();
+                }
 
-                    class Class : @int
-                    {
-                        string M() => "";
+                class Class : @int
+                {
+                    string M() => "";
 
-                        void @int.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    void @int.M()
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1785,32 +1785,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface @int
-                    {
-                        void @bool();
-                    }
+                interface @int
+                {
+                    void @bool();
+                }
 
-                    class Class : {|CS0737:@int|}
-                    {
-                        string @bool() => "";
-                    }
-                    """,
+                class Class : {|CS0737:@int|}
+                {
+                    string @bool() => "";
+                }
+                """,
                 """
-                    interface @int
-                    {
-                        void @bool();
-                    }
+                interface @int
+                {
+                    void @bool();
+                }
 
-                    class Class : @int
-                    {
-                        string @bool() => "";
+                class Class : @int
+                {
+                    string @bool() => "";
 
-                        void @int.@bool()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    void @int.@bool()
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1819,35 +1819,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface DD
-                    {
-                        int Prop { get; set; }
-                    }
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public interface DD
+                {
+                    int Prop { get; set; }
+                }
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
+                public interface DD
+                {
+                    int Prop { get; set; }
+                }
+                public class A : DD
+                {
+                    public int Prop
                     {
-                        int Prop { get; set; }
-                    }
-                    public class A : DD
-                    {
-                        public int Prop
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1856,26 +1856,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : DD
-                    {
-                        public int Prop => throw new System.NotImplementedException();
-                    }
-                    """
+                public class A : DD
+                {
+                    public int Prop => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -1884,26 +1884,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : DD
-                    {
-                        public int Prop { get => throw new System.NotImplementedException(); }
-                    }
-                    """
+                public class A : DD
+                {
+                    public int Prop { get => throw new System.NotImplementedException(); }
+                }
+                """
             );
         }
 
@@ -1912,26 +1912,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : DD
-                    {
-                        public int this[int i] => throw new System.NotImplementedException();
-                    }
-                    """
+                public class A : DD
+                {
+                    public int this[int i] => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -1940,26 +1940,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : DD
-                    {
-                        public int this[int i] { get => throw new System.NotImplementedException(); }
-                    }
-                    """
+                public class A : DD
+                {
+                    public int this[int i] { get => throw new System.NotImplementedException(); }
+                }
+                """
             );
         }
 
@@ -1968,26 +1968,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int M();
-                    }
+                public interface DD
+                {
+                    int M();
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int M();
-                    }
+                public interface DD
+                {
+                    int M();
+                }
 
-                    public class A : DD
-                    {
-                        public int M() => throw new System.NotImplementedException();
-                    }
-                    """
+                public class A : DD
+                {
+                    public int M() => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -1996,24 +1996,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public interface DD
+                {
+                    int Prop { get; }
+                }
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
-                    public class A : DD
-                    {
-                        public int Prop => throw new System.NotImplementedException();
-                    }
-                    """
+                public interface DD
+                {
+                    int Prop { get; }
+                }
+                public class A : DD
+                {
+                    public int Prop => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -2022,26 +2022,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : DD
-                    {
-                        public int Prop { get => throw new System.NotImplementedException(); }
-                    }
-                    """
+                public class A : DD
+                {
+                    public int Prop { get => throw new System.NotImplementedException(); }
+                }
+                """
             );
         }
 
@@ -2050,26 +2050,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int Prop { get; set; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; set; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int Prop { get; set; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; set; }
+                }
 
-                    public class A : DD
-                    {
-                        public int Prop { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-                    }
-                    """
+                public class A : DD
+                {
+                    public int Prop { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+                }
+                """
             );
         }
 
@@ -2078,32 +2078,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int Prop { get; }
-                    }
+                public interface DD
+                {
+                    int Prop { get; }
+                }
 
-                    public class A : DD
+                public class A : DD
+                {
+                    public int Prop
                     {
-                        public int Prop
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2112,26 +2112,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : DD
-                    {
-                        public int this[int i] => throw new System.NotImplementedException();
-                    }
-                    """
+                public class A : DD
+                {
+                    public int this[int i] => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -2140,26 +2140,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; set; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; set; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; set; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; set; }
+                }
 
-                    public class A : DD
-                    {
-                        public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-                    }
-                    """
+                public class A : DD
+                {
+                    public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+                }
+                """
             );
         }
 
@@ -2168,26 +2168,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; }
+                }
 
-                    public class A : DD
-                    {
-                        public int this[int i] { get => throw new System.NotImplementedException(); }
-                    }
-                    """
+                public class A : DD
+                {
+                    public int this[int i] { get => throw new System.NotImplementedException(); }
+                }
+                """
             );
         }
 
@@ -2196,26 +2196,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOnAsync(
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; set; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; set; }
+                }
 
-                    public class A : {|CS0535:DD|}
-                    {
-                    }
-                    """,
+                public class A : {|CS0535:DD|}
+                {
+                }
+                """,
                 """
-                    public interface DD
-                    {
-                        int this[int i] { get; set; }
-                    }
+                public interface DD
+                {
+                    int this[int i] { get; set; }
+                }
 
-                    public class A : DD
-                    {
-                        public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-                    }
-                    """
+                public class A : DD
+                {
+                    public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+                }
+                """
             );
         }
 
@@ -2224,29 +2224,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface DD
-                    {
-                        void Goo();
-                    }
-                    public class A : {|CS0535:DD|}
-                    {
-                        //comments
-                    }
-                    """,
+                public interface DD
+                {
+                    void Goo();
+                }
+                public class A : {|CS0535:DD|}
+                {
+                    //comments
+                }
+                """,
                 """
-                    public interface DD
+                public interface DD
+                {
+                    void Goo();
+                }
+                public class A : DD
+                {
+                    //comments
+                    public void Goo()
                     {
-                        void Goo();
+                        throw new System.NotImplementedException();
                     }
-                    public class A : DD
-                    {
-                        //comments
-                        public void Goo()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -2255,20 +2255,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
-                    """,
+                using System;
+                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
-                    class C : IServiceProvider
+                using System;
+                class C : IServiceProvider
+                {
+                    public object GetService(Type serviceType)
                     {
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -2298,37 +2298,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface i1
-                    {
-                        int p { get; set; }
-                    }
+                interface i1
+                {
+                    int p { get; set; }
+                }
 
-                    class c1 : {|CS0535:i1|}
-                    {
-                    }
-                    """,
+                class c1 : {|CS0535:i1|}
+                {
+                }
+                """,
                 """
-                    interface i1
-                    {
-                        int p { get; set; }
-                    }
+                interface i1
+                {
+                    int p { get; set; }
+                }
 
-                    class c1 : i1
+                class c1 : i1
+                {
+                    int i1.p
                     {
-                        int i1.p
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::i1;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -2435,48 +2435,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
-                    {
-                        int[] field;
-                    }
-                    """,
+                class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
+                {
+                    int[] field;
+                }
+                """,
                 """
-                    using System.Collections;
-                    using System.Collections.Generic;
+                using System.Collections;
+                using System.Collections.Generic;
 
-                    class A : IReadOnlyList<int>
+                class A : IReadOnlyList<int>
+                {
+                    int[] field;
+
+                    public int this[int index]
                     {
-                        int[] field;
-
-                        public int this[int index]
+                        get
                         {
-                            get
-                            {
-                                return ((IReadOnlyList<int>)field)[index];
-                            }
-                        }
-
-                        public int Count
-                        {
-                            get
-                            {
-                                return ((IReadOnlyCollection<int>)field).Count;
-                            }
-                        }
-
-                        public IEnumerator<int> GetEnumerator()
-                        {
-                            return ((IEnumerable<int>)field).GetEnumerator();
-                        }
-
-                        IEnumerator IEnumerable.GetEnumerator()
-                        {
-                            return field.GetEnumerator();
+                            return ((IReadOnlyList<int>)field)[index];
                         }
                     }
-                    """,
+
+                    public int Count
+                    {
+                        get
+                        {
+                            return ((IReadOnlyCollection<int>)field).Count;
+                        }
+                    }
+
+                    public IEnumerator<int> GetEnumerator()
+                    {
+                        return ((IEnumerable<int>)field).GetEnumerator();
+                    }
+
+                    IEnumerator IEnumerable.GetEnumerator()
+                    {
+                        return field.GetEnumerator();
+                    }
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::System.Collections.Generic.IReadOnlyList<int>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;field",
                     1
@@ -2489,48 +2489,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
-                    {
-                        int[] field { get; set; }
-                    }
-                    """,
+                class A : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IReadOnlyList<int>|}|}|}|}
+                {
+                    int[] field { get; set; }
+                }
+                """,
                 """
-                    using System.Collections;
-                    using System.Collections.Generic;
+                using System.Collections;
+                using System.Collections.Generic;
 
-                    class A : IReadOnlyList<int>
+                class A : IReadOnlyList<int>
+                {
+                    public int this[int index]
                     {
-                        public int this[int index]
+                        get
                         {
-                            get
-                            {
-                                return ((IReadOnlyList<int>)field)[index];
-                            }
-                        }
-
-                        public int Count
-                        {
-                            get
-                            {
-                                return ((IReadOnlyCollection<int>)field).Count;
-                            }
-                        }
-
-                        int[] field { get; set; }
-
-                        public IEnumerator<int> GetEnumerator()
-                        {
-                            return ((IEnumerable<int>)field).GetEnumerator();
-                        }
-
-                        IEnumerator IEnumerable.GetEnumerator()
-                        {
-                            return field.GetEnumerator();
+                            return ((IReadOnlyList<int>)field)[index];
                         }
                     }
-                    """,
+
+                    public int Count
+                    {
+                        get
+                        {
+                            return ((IReadOnlyCollection<int>)field).Count;
+                        }
+                    }
+
+                    int[] field { get; set; }
+
+                    public IEnumerator<int> GetEnumerator()
+                    {
+                        return ((IEnumerable<int>)field).GetEnumerator();
+                    }
+
+                    IEnumerator IEnumerable.GetEnumerator()
+                    {
+                        return field.GetEnumerator();
+                    }
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::System.Collections.Generic.IReadOnlyList<int>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;field",
                     1
@@ -2543,48 +2543,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        int M();
-                    }
+                interface I
+                {
+                    int M();
+                }
 
-                    class A : I
+                class A : I
+                {
+                    int I.M()
                     {
-                        int I.M()
-                        {
-                            return 0;
-                        }
+                        return 0;
                     }
+                }
 
-                    class B : {|CS0535:I|}
-                    {
-                        A a;
-                    }
-                    """,
+                class B : {|CS0535:I|}
+                {
+                    A a;
+                }
+                """,
                 """
-                    interface I
-                    {
-                        int M();
-                    }
+                interface I
+                {
+                    int M();
+                }
 
-                    class A : I
+                class A : I
+                {
+                    int I.M()
                     {
-                        int I.M()
-                        {
-                            return 0;
-                        }
+                        return 0;
                     }
+                }
 
-                    class B : I
+                class B : I
+                {
+                    A a;
+
+                    public int M()
                     {
-                        A a;
-
-                        public int M()
-                        {
-                            return ((I)a).M();
-                        }
+                        return ((I)a).M();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;a",
                     1
@@ -3243,52 +3243,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface IGoo
-                    {
-                        event System.EventHandler E;
-                    }
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
 
-                    class CanGoo : IGoo
-                    {
-                        public event System.EventHandler E;
-                    }
+                class CanGoo : IGoo
+                {
+                    public event System.EventHandler E;
+                }
 
-                    class HasCanGoo : {|CS0535:IGoo|}
-                    {
-                        CanGoo canGoo;
-                    }
-                    """,
+                class HasCanGoo : {|CS0535:IGoo|}
+                {
+                    CanGoo canGoo;
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface IGoo
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
+
+                class CanGoo : IGoo
+                {
+                    public event System.EventHandler E;
+                }
+
+                class HasCanGoo : IGoo
+                {
+                    CanGoo canGoo;
+
+                    public event EventHandler E
                     {
-                        event System.EventHandler E;
-                    }
-
-                    class CanGoo : IGoo
-                    {
-                        public event System.EventHandler E;
-                    }
-
-                    class HasCanGoo : IGoo
-                    {
-                        CanGoo canGoo;
-
-                        public event EventHandler E
+                        add
                         {
-                            add
-                            {
-                                ((IGoo)canGoo).E += value;
-                            }
+                            ((IGoo)canGoo).E += value;
+                        }
 
-                            remove
-                            {
-                                ((IGoo)canGoo).E -= value;
-                            }
+                        remove
+                        {
+                            ((IGoo)canGoo).E -= value;
                         }
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;canGoo",
                     1
@@ -3332,28 +3332,28 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IGoo
-                    {
-                        event System.EventHandler E;
-                    }
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
 
-                    abstract class Goo : {|CS0535:IGoo|}
-                    {
-                    }
-                    """,
+                abstract class Goo : {|CS0535:IGoo|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface IGoo
-                    {
-                        event System.EventHandler E;
-                    }
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
 
-                    abstract class Goo : IGoo
-                    {
-                        public event EventHandler E;
-                    }
-                    """,
+                abstract class Goo : IGoo
+                {
+                    public event EventHandler E;
+                }
+                """,
                 codeAction: (
                     "False;False;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     0
@@ -3366,28 +3366,28 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IGoo
-                    {
-                        event System.EventHandler E;
-                    }
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
 
-                    abstract class Goo : {|CS0535:IGoo|}
-                    {
-                    }
-                    """,
+                abstract class Goo : {|CS0535:IGoo|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface IGoo
-                    {
-                        event System.EventHandler E;
-                    }
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
 
-                    abstract class Goo : IGoo
-                    {
-                        public abstract event EventHandler E;
-                    }
-                    """,
+                abstract class Goo : IGoo
+                {
+                    public abstract event EventHandler E;
+                }
+                """,
                 codeAction: (
                     "False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -3400,39 +3400,39 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IGoo
-                    {
-                        event System.EventHandler E;
-                    }
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
 
-                    abstract class Goo : {|CS0535:IGoo|}
-                    {
-                    }
-                    """,
+                abstract class Goo : {|CS0535:IGoo|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface IGoo
-                    {
-                        event System.EventHandler E;
-                    }
+                interface IGoo
+                {
+                    event System.EventHandler E;
+                }
 
-                    abstract class Goo : IGoo
+                abstract class Goo : IGoo
+                {
+                    event EventHandler IGoo.E
                     {
-                        event EventHandler IGoo.E
+                        add
                         {
-                            add
-                            {
-                                throw new NotImplementedException();
-                            }
+                            throw new NotImplementedException();
+                        }
 
-                            remove
-                            {
-                                throw new NotImplementedException();
-                            }
+                        remove
+                        {
+                            throw new NotImplementedException();
                         }
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     2
@@ -3554,37 +3554,37 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface ISomeInterface
-                    {
-                        int this[int index] { get; set; }
-                    }
+                public interface ISomeInterface
+                {
+                    int this[int index] { get; set; }
+                }
 
-                    class IndexerClass : {|CS0535:ISomeInterface|}
-                    {
-                    }
-                    """,
+                class IndexerClass : {|CS0535:ISomeInterface|}
+                {
+                }
+                """,
                 """
-                    public interface ISomeInterface
-                    {
-                        int this[int index] { get; set; }
-                    }
+                public interface ISomeInterface
+                {
+                    int this[int index] { get; set; }
+                }
 
-                    class IndexerClass : ISomeInterface
+                class IndexerClass : ISomeInterface
+                {
+                    public int this[int index]
                     {
-                        public int this[int index]
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3593,37 +3593,37 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface ISomeInterface
-                    {
-                        int this[int index] { get; set; }
-                    }
+                public interface ISomeInterface
+                {
+                    int this[int index] { get; set; }
+                }
 
-                    class IndexerClass : {|CS0535:ISomeInterface|}
-                    {
-                    }
-                    """,
+                class IndexerClass : {|CS0535:ISomeInterface|}
+                {
+                }
+                """,
                 """
-                    public interface ISomeInterface
-                    {
-                        int this[int index] { get; set; }
-                    }
+                public interface ISomeInterface
+                {
+                    int this[int index] { get; set; }
+                }
 
-                    class IndexerClass : ISomeInterface
+                class IndexerClass : ISomeInterface
+                {
+                    int ISomeInterface.this[int index]
                     {
-                        int ISomeInterface.this[int index]
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::ISomeInterface;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -3636,32 +3636,32 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface ISomeInterface
-                    {
-                        int this[int index] { get; }
-                    }
+                public interface ISomeInterface
+                {
+                    int this[int index] { get; }
+                }
 
-                    class IndexerClass : {|CS0535:ISomeInterface|}
-                    {
-                    }
-                    """,
+                class IndexerClass : {|CS0535:ISomeInterface|}
+                {
+                }
+                """,
                 """
-                    public interface ISomeInterface
-                    {
-                        int this[int index] { get; }
-                    }
+                public interface ISomeInterface
+                {
+                    int this[int index] { get; }
+                }
 
-                    class IndexerClass : ISomeInterface
+                class IndexerClass : ISomeInterface
+                {
+                    public int this[int index]
                     {
-                        public int this[int index]
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3670,29 +3670,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo<T>() where T : class;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : class;
+                }
 
-                    class A : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Goo<T>() where T : class;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : class;
+                }
 
-                    class A : I
+                class A : I
+                {
+                    public void Goo<T>() where T : class
                     {
-                        public void Goo<T>() where T : class
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3701,29 +3701,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo<T>() where T : class;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : class;
+                }
 
-                    class A : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Goo<T>() where T : class;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : class;
+                }
 
-                    class A : I
+                class A : I
+                {
+                    void I.Goo<T>()
                     {
-                        void I.Goo<T>()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -3736,31 +3736,31 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo<T>() where T : System.Attribute;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : System.Attribute;
+                }
 
-                    class A : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo<T>() where T : System.Attribute;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : System.Attribute;
+                }
 
-                    class A : I
+                class A : I
+                {
+                    public void Goo<T>() where T : Attribute
                     {
-                        public void Goo<T>() where T : Attribute
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3769,37 +3769,37 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        int this[int x] { get; set; }
-                    }
+                interface I
+                {
+                    int this[int x] { get; set; }
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        int this[int x] { get; set; }
-                    }
+                interface I
+                {
+                    int this[int x] { get; set; }
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public int this[int x]
                     {
-                        public int this[int x]
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3808,33 +3808,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo<T>() where T : IComparable<T>;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : IComparable<T>;
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo<T>() where T : IComparable<T>;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : IComparable<T>;
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo<T>() where T : IComparable<T>
                     {
-                        public void Goo<T>() where T : IComparable<T>
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3843,33 +3843,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo<T>() where T : IComparable<T>;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : IComparable<T>;
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo<T>() where T : IComparable<T>;
-                    }
+                interface I
+                {
+                    void Goo<T>() where T : IComparable<T>;
+                }
 
-                    class C : I
+                class C : I
+                {
+                    void I.Goo<T>()
                     {
-                        void I.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -3882,29 +3882,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : {|CS0535:I<string>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<string>|}
+                {
+                }
+                """,
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : I<string>
+                class A : I<string>
+                {
+                    void I<string>.Goo<T>()
                     {
-                        void I<string>.Goo<T>()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3913,29 +3913,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : {|CS0535:I<object>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<object>|}
+                {
+                }
+                """,
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : I<object>
+                class A : I<object>
+                {
+                    public void Goo<T>() where T : class
                     {
-                        public void Goo<T>() where T : class
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3944,29 +3944,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : {|CS0535:I<object>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<object>|}
+                {
+                }
+                """,
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : I<object>
+                class A : I<object>
+                {
+                    void I<object>.Goo<T>()
                     {
-                        void I<object>.Goo<T>()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I<object>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -3979,33 +3979,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : {|CS0535:I<Delegate>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<Delegate>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : I<Delegate>
+                class A : I<Delegate>
+                {
+                    void I<Delegate>.Goo<T>()
                     {
-                        void I<Delegate>.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4014,33 +4014,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : {|CS0535:I<MulticastDelegate>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<MulticastDelegate>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : I<MulticastDelegate>
+                class A : I<MulticastDelegate>
+                {
+                    void I<MulticastDelegate>.Goo<T>()
                     {
-                        void I<MulticastDelegate>.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4049,37 +4049,37 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    delegate void Bar();
+                delegate void Bar();
 
-                    class A : {|CS0535:I<Bar>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<Bar>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
+
+                delegate void Bar();
+
+                class A : I<Bar>
+                {
+                    void I<Bar>.Goo<T>()
                     {
-                        void Goo<T>() where T : class, S;
+                        throw new NotImplementedException();
                     }
-
-                    delegate void Bar();
-
-                    class A : I<Bar>
-                    {
-                        void I<Bar>.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -4088,33 +4088,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : {|CS0535:I<Enum>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<Enum>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : I<Enum>
+                class A : I<Enum>
+                {
+                    void I<Enum>.Goo<T>()
                     {
-                        void I<Enum>.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4123,33 +4123,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : {|CS0535:I<int[]>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<int[]>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class A : I<int[]>
+                class A : I<int[]>
+                {
+                    void I<int[]>.Goo<T>()
                     {
-                        void I<int[]>.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4158,41 +4158,41 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    enum E
-                    {
-                    }
+                enum E
+                {
+                }
 
-                    class A : {|CS0535:I<E>|}
-                    {
-                    }
-                    """,
+                class A : {|CS0535:I<E>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    enum E
-                    {
-                    }
+                enum E
+                {
+                }
 
-                    class A : I<E>
+                class A : I<E>
+                {
+                    void I<E>.Goo<{|CS0455:T|}>()
                     {
-                        void I<E>.Goo<{|CS0455:T|}>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4275,33 +4275,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : S;
+                }
 
-                    class C : {|CS0535:I<Array>|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I<Array>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : S;
+                }
 
-                    class C : I<Array>
+                class C : I<Array>
+                {
+                    void I<Array>.Goo<T>()
                     {
-                        void I<Array>.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4310,33 +4310,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : Exception, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : Exception, S;
+                }
 
-                    class C : {|CS0535:I<Attribute>|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I<Attribute>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : Exception, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : Exception, S;
+                }
 
-                    class C : I<Attribute>
+                class C : I<Attribute>
+                {
+                    void I<Attribute>.Goo<{|CS0455:T|}>()
                     {
-                        void I<Attribute>.Goo<{|CS0455:T|}>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4345,33 +4345,33 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class C : {|CS0535:I<Exception>|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I<Exception>|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I<S>
-                    {
-                        void Goo<T>() where T : class, S;
-                    }
+                interface I<S>
+                {
+                    void Goo<T>() where T : class, S;
+                }
 
-                    class C : I<Exception>
+                class C : I<Exception>
+                {
+                    void I<Exception>.Goo<T>()
                     {
-                        void I<Exception>.Goo<T>()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4380,35 +4380,35 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<T>
-                    {
-                        void Goo<S>(T x, IList<S> list) where S : T;
-                    }
+                interface I<T>
+                {
+                    void Goo<S>(T x, IList<S> list) where S : T;
+                }
 
-                    class A<S> : {|CS0535:I<S>|}
-                    {
-                    }
-                    """,
+                class A<S> : {|CS0535:I<S>|}
+                {
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<T>
-                    {
-                        void Goo<S>(T x, IList<S> list) where S : T;
-                    }
+                interface I<T>
+                {
+                    void Goo<S>(T x, IList<S> list) where S : T;
+                }
 
-                    class A<S> : I<S>
+                class A<S> : I<S>
+                {
+                    public void Goo<S1>(S x, IList<S1> list) where S1 : S
                     {
-                        public void Goo<S1>(S x, IList<S1> list) where S1 : S
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4417,35 +4417,35 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<T>
-                    {
-                        void Goo<S>(T x, IList<S> list) where S : T;
-                    }
+                interface I<T>
+                {
+                    void Goo<S>(T x, IList<S> list) where S : T;
+                }
 
-                    class A<S> : {|CS0535:I<S>|}
-                    {
-                    }
-                    """,
+                class A<S> : {|CS0535:I<S>|}
+                {
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<T>
-                    {
-                        void Goo<S>(T x, IList<S> list) where S : T;
-                    }
+                interface I<T>
+                {
+                    void Goo<S>(T x, IList<S> list) where S : T;
+                }
 
-                    class A<S> : I<S>
+                class A<S> : I<S>
+                {
+                    void I<S>.Goo<S1>(S x, IList<S1> list)
                     {
-                        void I<S>.Goo<S1>(S x, IList<S1> list)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I<S>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -4458,41 +4458,41 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<X, Y>
-                    {
-                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                            where A : IList<B>
-                            where B : IList<A>;
-                    }
+                interface I<X, Y>
+                {
+                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                        where A : IList<B>
+                        where B : IList<A>;
+                }
 
-                    class C<A, B> : {|CS0535:I<A, B>|}
-                    {
-                    }
-                    """,
+                class C<A, B> : {|CS0535:I<A, B>|}
+                {
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<X, Y>
-                    {
-                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                            where A : IList<B>
-                            where B : IList<A>;
-                    }
+                interface I<X, Y>
+                {
+                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                        where A : IList<B>
+                        where B : IList<A>;
+                }
 
-                    class C<A, B> : I<A, B>
+                class C<A, B> : I<A, B>
+                {
+                    public void Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
+                        where A1 : IList<B1>
+                        where B1 : IList<A1>
                     {
-                        public void Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
-                            where A1 : IList<B1>
-                            where B1 : IList<A1>
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4501,39 +4501,39 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<X, Y>
-                    {
-                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                            where A : IList<B>
-                            where B : IList<A>;
-                    }
+                interface I<X, Y>
+                {
+                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                        where A : IList<B>
+                        where B : IList<A>;
+                }
 
-                    class C<A, B> : {|CS0535:I<A, B>|}
-                    {
-                    }
-                    """,
+                class C<A, B> : {|CS0535:I<A, B>|}
+                {
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    interface I<X, Y>
-                    {
-                        void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
-                            where A : IList<B>
-                            where B : IList<A>;
-                    }
+                interface I<X, Y>
+                {
+                    void Goo<A, B>(X x, Y y, IList<A> list1, IList<B> list2)
+                        where A : IList<B>
+                        where B : IList<A>;
+                }
 
-                    class C<A, B> : I<A, B>
+                class C<A, B> : I<A, B>
+                {
+                    void I<A, B>.Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
                     {
-                        void I<A, B>.Goo<A1, B1>(A x, B y, IList<A1> list1, IList<B1> list2)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I<A, B>;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -4546,47 +4546,47 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class A<T>
+                class A<T>
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
-
-                        interface I
-                        {
-                            void Goo(B x);
-                        }
-
-                        class C<U> : {|CS0535:I|}
-                        {
-                        }
                     }
-                    """,
+
+                    interface I
+                    {
+                        void Goo(B x);
+                    }
+
+                    class C<U> : {|CS0535:I|}
+                    {
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class A<T>
+                class A<T>
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
+                    }
 
-                        interface I
-                        {
-                            void Goo(B x);
-                        }
+                    interface I
+                    {
+                        void Goo(B x);
+                    }
 
-                        class C<U> : I
+                    class C<U> : I
+                    {
+                        public void Goo(B x)
                         {
-                            public void Goo(B x)
-                            {
-                                throw new NotImplementedException();
-                            }
+                            throw new NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4595,43 +4595,43 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    class A<T>
+                class A<T>
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
-
-                        interface I
-                        {
-                            void Goo(B[] x);
-                        }
-
-                        class C<U> : {|CS0535:I|}
-                        {
-                        }
                     }
-                    """,
+
+                    interface I
+                    {
+                        void Goo(B[] x);
+                    }
+
+                    class C<U> : {|CS0535:I|}
+                    {
+                    }
+                }
+                """,
                 """
-                    class A<T>
+                class A<T>
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
+                    }
 
-                        interface I
-                        {
-                            void Goo(B[] x);
-                        }
+                    interface I
+                    {
+                        void Goo(B[] x);
+                    }
 
-                        class C<U> : I
+                    class C<U> : I
+                    {
+                        public void Goo(B[] x)
                         {
-                            public void Goo(B[] x)
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4640,43 +4640,43 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    class A<T>
+                class A<T>
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
-
-                        interface I
-                        {
-                            void Goo(B[][,][,,][,,,] x);
-                        }
-
-                        class C<U> : {|CS0535:I|}
-                        {
-                        }
                     }
-                    """,
+
+                    interface I
+                    {
+                        void Goo(B[][,][,,][,,,] x);
+                    }
+
+                    class C<U> : {|CS0535:I|}
+                    {
+                    }
+                }
+                """,
                 """
-                    class A<T>
+                class A<T>
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
+                    }
 
-                        interface I
-                        {
-                            void Goo(B[][,][,,][,,,] x);
-                        }
+                    interface I
+                    {
+                        void Goo(B[][,][,,][,,,] x);
+                    }
 
-                        class C<U> : I
+                    class C<U> : I
+                    {
+                        public void Goo(B[][,][,,][,,,] x)
                         {
-                            public void Goo(B[][,][,,][,,,] x)
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4685,26 +4685,26 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IGoo
-                    {
-                        int Gibberish { get; set; }
-                    }
+                interface IGoo
+                {
+                    int Gibberish { get; set; }
+                }
 
-                    abstract class Goo : {|CS0535:IGoo|}
-                    {
-                    }
-                    """,
+                abstract class Goo : {|CS0535:IGoo|}
+                {
+                }
+                """,
                 """
-                    interface IGoo
-                    {
-                        int Gibberish { get; set; }
-                    }
+                interface IGoo
+                {
+                    int Gibberish { get; set; }
+                }
 
-                    abstract class Goo : IGoo
-                    {
-                        public abstract int Gibberish { get; set; }
-                    }
-                    """,
+                abstract class Goo : IGoo
+                {
+                    public abstract int Gibberish { get; set; }
+                }
+                """,
                 codeAction: (
                     "False;True;True:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -4734,29 +4734,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IOptional
-                    {
-                        int Goo(int g = 0);
-                    }
+                interface IOptional
+                {
+                    int Goo(int g = 0);
+                }
 
-                    class Opt : {|CS0535:IOptional|}
-                    {
-                    }
-                    """,
+                class Opt : {|CS0535:IOptional|}
+                {
+                }
+                """,
                 """
-                    interface IOptional
-                    {
-                        int Goo(int g = 0);
-                    }
+                interface IOptional
+                {
+                    int Goo(int g = 0);
+                }
 
-                    class Opt : IOptional
+                class Opt : IOptional
+                {
+                    public int Goo(int g = 0)
                     {
-                        public int Goo(int g = 0)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4765,29 +4765,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IOptional
-                    {
-                        int Goo(int g = 0);
-                    }
+                interface IOptional
+                {
+                    int Goo(int g = 0);
+                }
 
-                    class Opt : {|CS0535:IOptional|}
-                    {
-                    }
-                    """,
+                class Opt : {|CS0535:IOptional|}
+                {
+                }
+                """,
                 """
-                    interface IOptional
-                    {
-                        int Goo(int g = 0);
-                    }
+                interface IOptional
+                {
+                    int Goo(int g = 0);
+                }
 
-                    class Opt : IOptional
+                class Opt : IOptional
+                {
+                    int IOptional.Goo(int g)
                     {
-                        int IOptional.Goo(int g)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::IOptional;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -4816,36 +4816,36 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    #line default
-                    using System;
+                #line default
+                using System;
 
-                    partial class Program : {|CS0535:IComparable|}
+                partial class Program : {|CS0535:IComparable|}
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                    #line hidden
-                        }
+                #line hidden
                     }
-                    #line default
-                    """,
+                }
+                #line default
+                """,
                 """
-                    #line default
-                    using System;
+                #line default
+                using System;
 
-                    partial class Program : IComparable
+                partial class Program : IComparable
+                {
+                    public int CompareTo(object obj)
                     {
-                        public int CompareTo(object obj)
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        void Goo()
-                        {
-                    #line hidden
-                        }
+                        throw new NotImplementedException();
                     }
-                    #line default
-                    """
+
+                    void Goo()
+                    {
+                #line hidden
+                    }
+                }
+                #line default
+                """
             );
         }
 
@@ -4854,35 +4854,35 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    partial class Program : {|CS0535:IComparable|}
-                    {
-                    #line hidden
-                    }
-                    #line default
+                partial class Program : {|CS0535:IComparable|}
+                {
+                #line hidden
+                }
+                #line default
 
-                    partial class Program
-                    {
-                    }
-                    """,
+                partial class Program
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    partial class Program : IComparable
-                    {
-                    #line hidden
-                    }
-                    #line default
+                partial class Program : IComparable
+                {
+                #line hidden
+                }
+                #line default
 
-                    partial class Program
+                partial class Program
+                {
+                    public int CompareTo(object obj)
                     {
-                        public int CompareTo(object obj)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4951,37 +4951,37 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    using System.Runtime.CompilerServices;
-                    using System.Runtime.InteropServices;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
 
-                    interface IGoo
-                    {
-                        void Goo([Optional][DateTimeConstant(100)] DateTime x);
-                    }
+                interface IGoo
+                {
+                    void Goo([Optional][DateTimeConstant(100)] DateTime x);
+                }
 
-                    public class C : {|CS0535:IGoo|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:IGoo|}
+                {
+                }
+                """,
                 """
-                    using System;
-                    using System.Runtime.CompilerServices;
-                    using System.Runtime.InteropServices;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
 
-                    interface IGoo
-                    {
-                        void Goo([Optional][DateTimeConstant(100)] DateTime x);
-                    }
+                interface IGoo
+                {
+                    void Goo([Optional][DateTimeConstant(100)] DateTime x);
+                }
 
-                    public class C : IGoo
+                public class C : IGoo
+                {
+                    void IGoo.Goo(DateTime x)
                     {
-                        void IGoo.Goo(DateTime x)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -4994,42 +4994,42 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.CompilerServices;
-                    using System.Runtime.InteropServices;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
 
-                    interface IGoo
-                    {
-                        void Goo1([Optional][IUnknownConstant] object x);
-                        void Goo2([Optional][IDispatchConstant] object x);
-                    }
+                interface IGoo
+                {
+                    void Goo1([Optional][IUnknownConstant] object x);
+                    void Goo2([Optional][IDispatchConstant] object x);
+                }
 
-                    public class C : {|CS0535:{|CS0535:IGoo|}|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:{|CS0535:IGoo|}|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.CompilerServices;
-                    using System.Runtime.InteropServices;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
 
-                    interface IGoo
+                interface IGoo
+                {
+                    void Goo1([Optional][IUnknownConstant] object x);
+                    void Goo2([Optional][IDispatchConstant] object x);
+                }
+
+                public class C : IGoo
+                {
+                    public void Goo1([IUnknownConstant, Optional] object x)
                     {
-                        void Goo1([Optional][IUnknownConstant] object x);
-                        void Goo2([Optional][IDispatchConstant] object x);
+                        throw new System.NotImplementedException();
                     }
 
-                    public class C : IGoo
+                    public void Goo2([IDispatchConstant, Optional] object x)
                     {
-                        public void Goo1([IUnknownConstant, Optional] object x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void Goo2([IDispatchConstant, Optional] object x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5038,42 +5038,42 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.CompilerServices;
-                    using System.Runtime.InteropServices;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
 
-                    interface IGoo
-                    {
-                        void Goo1([Optional][IUnknownConstant] object x);
-                        void Goo2([Optional][IDispatchConstant] object x);
-                    }
+                interface IGoo
+                {
+                    void Goo1([Optional][IUnknownConstant] object x);
+                    void Goo2([Optional][IDispatchConstant] object x);
+                }
 
-                    public class C : {|CS0535:{|CS0535:IGoo|}|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:{|CS0535:IGoo|}|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.CompilerServices;
-                    using System.Runtime.InteropServices;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
 
-                    interface IGoo
+                interface IGoo
+                {
+                    void Goo1([Optional][IUnknownConstant] object x);
+                    void Goo2([Optional][IDispatchConstant] object x);
+                }
+
+                public class C : IGoo
+                {
+                    void IGoo.Goo1(object x)
                     {
-                        void Goo1([Optional][IUnknownConstant] object x);
-                        void Goo2([Optional][IDispatchConstant] object x);
+                        throw new System.NotImplementedException();
                     }
 
-                    public class C : IGoo
+                    void IGoo.Goo2(object x)
                     {
-                        void IGoo.Goo1(object x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        void IGoo.Goo2(object x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::IGoo;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -5086,29 +5086,29 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event S
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IGoo
-                    {
-                        void Goo();
-                    }
+                interface IGoo
+                {
+                    void Goo();
+                }
 
-                    public class Goo : {|CS0535:IGoo|}
-                    {
-                    }
-                    """,
+                public class Goo : {|CS0535:IGoo|}
+                {
+                }
+                """,
                 """
-                    interface IGoo
-                    {
-                        void Goo();
-                    }
+                interface IGoo
+                {
+                    void Goo();
+                }
 
-                    public class Goo : IGoo
+                public class Goo : IGoo
+                {
+                    void IGoo.Goo()
                     {
-                        void IGoo.Goo()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5135,37 +5135,37 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    struct b
-                    {
-                    }
+                struct b
+                {
+                }
 
-                    interface d
-                    {
-                        void m(b? x = null, b? y = default(b?));
-                    }
+                interface d
+                {
+                    void m(b? x = null, b? y = default(b?));
+                }
 
-                    class c : {|CS0535:d|}
-                    {
-                    }
-                    """,
+                class c : {|CS0535:d|}
+                {
+                }
+                """,
                 """
-                    struct b
-                    {
-                    }
+                struct b
+                {
+                }
 
-                    interface d
-                    {
-                        void m(b? x = null, b? y = default(b?));
-                    }
+                interface d
+                {
+                    void m(b? x = null, b? y = default(b?));
+                }
 
-                    class c : d
+                class c : d
+                {
+                    public void m(b? x = null, b? y = null)
                     {
-                        public void m(b? x = null, b? y = null)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5174,37 +5174,37 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    struct b
-                    {
-                    }
+                struct b
+                {
+                }
 
-                    interface d
-                    {
-                        void m(b? x = null, b? y = default(b?));
-                    }
+                interface d
+                {
+                    void m(b? x = null, b? y = default(b?));
+                }
 
-                    class c : {|CS0535:d|}
-                    {
-                    }
-                    """,
+                class c : {|CS0535:d|}
+                {
+                }
+                """,
                 """
-                    struct b
-                    {
-                    }
+                struct b
+                {
+                }
 
-                    interface d
-                    {
-                        void m(b? x = null, b? y = default(b?));
-                    }
+                interface d
+                {
+                    void m(b? x = null, b? y = default(b?));
+                }
 
-                    class c : d
+                class c : d
+                {
+                    void d.m(b? x, b? y)
                     {
-                        void d.m(b? x, b? y)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::d;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -5217,29 +5217,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface d
-                    {
-                        void m(int? x = 5, int? y = null);
-                    }
+                interface d
+                {
+                    void m(int? x = 5, int? y = null);
+                }
 
-                    class c : {|CS0535:d|}
-                    {
-                    }
-                    """,
+                class c : {|CS0535:d|}
+                {
+                }
+                """,
                 """
-                    interface d
-                    {
-                        void m(int? x = 5, int? y = null);
-                    }
+                interface d
+                {
+                    void m(int? x = 5, int? y = null);
+                }
 
-                    class c : d
+                class c : d
+                {
+                    public void m(int? x = 5, int? y = null)
                     {
-                        public void m(int? x = 5, int? y = null)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5248,33 +5248,33 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        void Goo([Optional] I o);
-                    }
+                interface I
+                {
+                    void Goo([Optional] I o);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        void Goo([Optional] I o);
-                    }
+                interface I
+                {
+                    void Goo([Optional] I o);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo([Optional] I o)
                     {
-                        public void Goo([Optional] I o)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5479,66 +5479,66 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    enum E
-                    {
-                       A = 1,
-                       B = 2  
-                    }
+                enum E
+                {
+                   A = 1,
+                   B = 2  
+                }
 
-                    [FlagsAttribute]
-                    enum FlagE
-                    {
-                       A = 1,
-                       B = 2
-                    }
+                [FlagsAttribute]
+                enum FlagE
+                {
+                   A = 1,
+                   B = 2
+                }
 
-                    interface I
-                    {
-                        void M1(E e = E.A | E.B);
-                        void M2(FlagE e = FlagE.A | FlagE.B);
-                    }
+                interface I
+                {
+                    void M1(E e = E.A | E.B);
+                    void M2(FlagE e = FlagE.A | FlagE.B);
+                }
 
-                    class C : {|CS0535:{|CS0535:I|}|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:{|CS0535:I|}|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    enum E
+                enum E
+                {
+                   A = 1,
+                   B = 2  
+                }
+
+                [FlagsAttribute]
+                enum FlagE
+                {
+                   A = 1,
+                   B = 2
+                }
+
+                interface I
+                {
+                    void M1(E e = E.A | E.B);
+                    void M2(FlagE e = FlagE.A | FlagE.B);
+                }
+
+                class C : I
+                {
+                    public void M1(E e = (E)3)
                     {
-                       A = 1,
-                       B = 2  
+                        throw new NotImplementedException();
                     }
 
-                    [FlagsAttribute]
-                    enum FlagE
+                    public void M2(FlagE e = FlagE.A | FlagE.B)
                     {
-                       A = 1,
-                       B = 2
+                        throw new NotImplementedException();
                     }
-
-                    interface I
-                    {
-                        void M1(E e = E.A | E.B);
-                        void M2(FlagE e = FlagE.A | FlagE.B);
-                    }
-
-                    class C : I
-                    {
-                        public void M1(E e = (E)3)
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M2(FlagE e = FlagE.A | FlagE.B)
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -5547,103 +5547,103 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void M01(char c = '\0');
-                        void M02(char c = '\r');
-                        void M03(char c = '\n');
-                        void M04(char c = '\t');
-                        void M05(char c = '\b');
-                        void M06(char c = '\v');
-                        void M07(char c = '\'');
-                        void M08(char c = '“');
-                        void M09(char c = 'a');
-                        void M10(char c = '"');
-                        void M11(char c = '\u2029');
-                    }
+                interface I
+                {
+                    void M01(char c = '\0');
+                    void M02(char c = '\r');
+                    void M03(char c = '\n');
+                    void M04(char c = '\t');
+                    void M05(char c = '\b');
+                    void M06(char c = '\v');
+                    void M07(char c = '\'');
+                    void M08(char c = '“');
+                    void M09(char c = 'a');
+                    void M10(char c = '"');
+                    void M11(char c = '\u2029');
+                }
 
-                    class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}|}|}|}|}|}|}|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}|}|}|}|}|}|}|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void M01(char c = '\0');
+                    void M02(char c = '\r');
+                    void M03(char c = '\n');
+                    void M04(char c = '\t');
+                    void M05(char c = '\b');
+                    void M06(char c = '\v');
+                    void M07(char c = '\'');
+                    void M08(char c = '“');
+                    void M09(char c = 'a');
+                    void M10(char c = '"');
+                    void M11(char c = '\u2029');
+                }
+
+                class C : I
+                {
+                    public void M01(char c = '\0')
                     {
-                        void M01(char c = '\0');
-                        void M02(char c = '\r');
-                        void M03(char c = '\n');
-                        void M04(char c = '\t');
-                        void M05(char c = '\b');
-                        void M06(char c = '\v');
-                        void M07(char c = '\'');
-                        void M08(char c = '“');
-                        void M09(char c = 'a');
-                        void M10(char c = '"');
-                        void M11(char c = '\u2029');
+                        throw new NotImplementedException();
                     }
 
-                    class C : I
+                    public void M02(char c = '\r')
                     {
-                        public void M01(char c = '\0')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M02(char c = '\r')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M03(char c = '\n')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M04(char c = '\t')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M05(char c = '\b')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M06(char c = '\v')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M07(char c = '\'')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M08(char c = '“')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M09(char c = 'a')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M10(char c = '"')
-                        {
-                            throw new NotImplementedException();
-                        }
-
-                        public void M11(char c = '\u2029')
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+
+                    public void M03(char c = '\n')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M04(char c = '\t')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M05(char c = '\b')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M06(char c = '\v')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M07(char c = '\'')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M08(char c = '“')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M09(char c = 'a')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M10(char c = '"')
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    public void M11(char c = '\u2029')
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+                """
             );
         }
 
@@ -5652,36 +5652,36 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo(DayOfWeek x = DayOfWeek.Friday);
-                    }
+                interface I
+                {
+                    void Goo(DayOfWeek x = DayOfWeek.Friday);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        DayOfWeek DayOfWeek { get; set; }
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                    DayOfWeek DayOfWeek { get; set; }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(DayOfWeek x = DayOfWeek.Friday);
+                }
+
+                class C : I
+                {
+                    DayOfWeek DayOfWeek { get; set; }
+
+                    public void Goo(DayOfWeek x = DayOfWeek.Friday)
                     {
-                        void Goo(DayOfWeek x = DayOfWeek.Friday);
+                        throw new NotImplementedException();
                     }
-
-                    class C : I
-                    {
-                        DayOfWeek DayOfWeek { get; set; }
-
-                        public void Goo(DayOfWeek x = DayOfWeek.Friday)
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -5690,29 +5690,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo(decimal x = decimal.MaxValue);
-                    }
+                interface I
+                {
+                    void Goo(decimal x = decimal.MaxValue);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Goo(decimal x = decimal.MaxValue);
-                    }
+                interface I
+                {
+                    void Goo(decimal x = decimal.MaxValue);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(decimal x = decimal.MaxValue)
                     {
-                        public void Goo(decimal x = decimal.MaxValue)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5721,29 +5721,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo(decimal? x = decimal.MaxValue);
-                    }
+                interface I
+                {
+                    void Goo(decimal? x = decimal.MaxValue);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Goo(decimal? x = decimal.MaxValue);
-                    }
+                interface I
+                {
+                    void Goo(decimal? x = decimal.MaxValue);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(decimal? x = decimal.MaxValue)
                     {
-                        public void Goo(decimal? x = decimal.MaxValue)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5752,33 +5752,33 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo(DayOfWeek? x = DayOfWeek.Friday);
-                    }
+                interface I
+                {
+                    void Goo(DayOfWeek? x = DayOfWeek.Friday);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo(DayOfWeek? x = DayOfWeek.Friday);
-                    }
+                interface I
+                {
+                    void Goo(DayOfWeek? x = DayOfWeek.Friday);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(DayOfWeek? x = DayOfWeek.Friday)
                     {
-                        public void Goo(DayOfWeek? x = DayOfWeek.Friday)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5787,29 +5787,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo(byte x = 1);
-                    }
+                interface I
+                {
+                    void Goo(byte x = 1);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Goo(byte x = 1);
-                    }
+                interface I
+                {
+                    void Goo(byte x = 1);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(byte x = 1)
                     {
-                        public void Goo(byte x = 1)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5852,33 +5852,33 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
-                    }
+                interface I
+                {
+                    void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
-                    {
-                        void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
-                    }
+                interface I
+                {
+                    void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue)
                     {
-                        public void Goo(ConsoleColor x = (ConsoleColor)int.MaxValue)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5887,39 +5887,39 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    enum E
-                    {
-                        A = 1,
-                    }
+                enum E
+                {
+                    A = 1,
+                }
 
-                    interface I
-                    {
-                        void Goo(E x = 0);
-                    }
+                interface I
+                {
+                    void Goo(E x = 0);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    enum E
-                    {
-                        A = 1,
-                    }
+                enum E
+                {
+                    A = 1,
+                }
 
-                    interface I
-                    {
-                        void Goo(E x = 0);
-                    }
+                interface I
+                {
+                    void Goo(E x = 0);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(E x = 0)
                     {
-                        public void Goo(E x = 0)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5928,33 +5928,33 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
-                    }
+                interface I
+                {
+                    void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
-                    }
+                interface I
+                {
+                    void Goo([Optional][DefaultParameterValue(1)] int x, int[,] y);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[,] y = null)
                     {
-                        public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[,] y = null)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5963,33 +5963,33 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
-                    }
+                interface I
+                {
+                    void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
-                    }
+                interface I
+                {
+                    void Goo([Optional, DefaultParameterValue(1)] int x, int[] y, int[] z);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[] y = null, int[] z = null)
                     {
-                        public void Goo([{|CS1745:DefaultParameterValue|}(1), {|CS1745:Optional|}] int x = {|CS8017:1|}, int[] y = null, int[] z = null)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6041,29 +6041,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I<S>
-                    {
-                        void T1<T>(S x, T y);
-                    }
+                interface I<S>
+                {
+                    void T1<T>(S x, T y);
+                }
 
-                    class C<T> : {|CS0535:I<T>|}
-                    {
-                    }
-                    """,
+                class C<T> : {|CS0535:I<T>|}
+                {
+                }
+                """,
                 """
-                    interface I<S>
-                    {
-                        void T1<T>(S x, T y);
-                    }
+                interface I<S>
+                {
+                    void T1<T>(S x, T y);
+                }
 
-                    class C<T> : I<T>
+                class C<T> : I<T>
+                {
+                    public void T1<T2>(T x, T2 y)
                     {
-                        public void T1<T2>(T x, T2 y)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6072,33 +6072,33 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    interface I<S>
-                    {
-                        void Goo<T>(S y, List<T>.Enumerator x);
-                    }
+                interface I<S>
+                {
+                    void Goo<T>(S y, List<T>.Enumerator x);
+                }
 
-                    class D<T> : {|CS0535:I<T>|}
-                    {
-                    }
-                    """,
+                class D<T> : {|CS0535:I<T>|}
+                {
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    interface I<S>
-                    {
-                        void Goo<T>(S y, List<T>.Enumerator x);
-                    }
+                interface I<S>
+                {
+                    void Goo<T>(S y, List<T>.Enumerator x);
+                }
 
-                    class D<T> : I<T>
+                class D<T> : I<T>
+                {
+                    public void Goo<T1>(T y, List<T1>.Enumerator x)
                     {
-                        public void Goo<T1>(T y, List<T1>.Enumerator x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6107,29 +6107,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo(float x = 1E10F);
-                    }
+                interface I
+                {
+                    void Goo(float x = 1E10F);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Goo(float x = 1E10F);
-                    }
+                interface I
+                {
+                    void Goo(float x = 1E10F);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(float x = 1E+10F)
                     {
-                        public void Goo(float x = 1E+10F)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6138,28 +6138,28 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo<@class>();
-                    }
+                interface I
+                {
+                    void Goo<@class>();
+                }
 
-                    class C : {|CS0535:I|}{|CS1513:|}{|CS1514:|}
-                    """,
+                class C : {|CS0535:I|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    interface I
-                    {
-                        void Goo<@class>();
-                    }
+                interface I
+                {
+                    void Goo<@class>();
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo<@class>()
                     {
-                        public void Goo<@class>()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6168,36 +6168,36 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo1(decimal x = 1E28M);
-                        void Goo2(decimal x = -1E28M);
-                    }
+                interface I
+                {
+                    void Goo1(decimal x = 1E28M);
+                    void Goo2(decimal x = -1E28M);
+                }
 
-                    class C : {|CS0535:{|CS0535:I|}|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:{|CS0535:I|}|}
+                {
+                }
+                """,
                 """
-                    interface I
+                interface I
+                {
+                    void Goo1(decimal x = 1E28M);
+                    void Goo2(decimal x = -1E28M);
+                }
+
+                class C : I
+                {
+                    public void Goo1(decimal x = 10000000000000000000000000000M)
                     {
-                        void Goo1(decimal x = 1E28M);
-                        void Goo2(decimal x = -1E28M);
+                        throw new System.NotImplementedException();
                     }
 
-                    class C : I
+                    public void Goo2(decimal x = -10000000000000000000000000000M)
                     {
-                        public void Goo1(decimal x = 10000000000000000000000000000M)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void Goo2(decimal x = -10000000000000000000000000000M)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6206,29 +6206,29 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo(decimal x = 0.1M);
-                    }
+                interface I
+                {
+                    void Goo(decimal x = 0.1M);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void Goo(decimal x = 0.1M);
-                    }
+                interface I
+                {
+                    void Goo(decimal x = 0.1M);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void Goo(decimal x = 0.1M)
                     {
-                        public void Goo(decimal x = 0.1M)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6237,26 +6237,26 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    // Implement interface
-                    class C : {|CS0535:IServiceProvider|} {|CS1035:|}/*
-                    {|CS1513:|}{|CS1514:|}
-                    """,
+                // Implement interface
+                class C : {|CS0535:IServiceProvider|} {|CS1035:|}/*
+                {|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
+                using System;
 
-                    // Implement interface
-                    class C : IServiceProvider /*
-                    */
+                // Implement interface
+                class C : IServiceProvider /*
+                */
+                {
+                    public object GetService(Type serviceType)
                     {
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6265,25 +6265,25 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    // Implement interface
-                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
-                    #pragma warning disable
-                    """,
+                // Implement interface
+                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
+                #pragma warning disable
+                """,
                 """
-                    using System;
+                using System;
 
-                    // Implement interface
-                    class C : IServiceProvider
+                // Implement interface
+                class C : IServiceProvider
+                {
+                    public object GetService(Type serviceType)
                     {
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    #pragma warning disable
-                    """
+                }
+                #pragma warning disable
+                """
             );
         }
 
@@ -6292,23 +6292,23 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|} // Implement interface
+                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|} // Implement interface
 
-                    """,
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C : IServiceProvider // Implement interface
+                class C : IServiceProvider // Implement interface
+                {
+                    public object GetService(Type serviceType)
                     {
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6317,23 +6317,23 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
-                    // Implement interface
-                    """,
+                class C : {|CS0535:IServiceProvider|}{|CS1513:|}{|CS1514:|}
+                // Implement interface
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C : IServiceProvider
+                class C : IServiceProvider
+                {
+                    public object GetService(Type serviceType)
                     {
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    // Implement interface
-                    """
+                }
+                // Implement interface
+                """
             );
         }
 
@@ -6343,20 +6343,20 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                    """,
+                using System;
+                class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
-                    class C : IDisposable
+                using System;
+                class C : IDisposable
+                {
+                    public void Dispose()
                     {
-                        public void Dispose()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """,
+                """,
                 codeAction: (
                     "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     0
@@ -6370,9 +6370,9 @@ class B : IGoo
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                    """,
+                using System;
+                class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                """,
                 $@"using System;
 class C : IDisposable
 {{
@@ -6394,20 +6394,20 @@ class C : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                    """,
+                using System;
+                class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
-                    class C : IDisposable
+                using System;
+                class C : IDisposable
+                {
+                    void IDisposable.Dispose()
                     {
-                        void IDisposable.Dispose()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """,
+                """,
                 codeAction: (
                     "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     2
@@ -6421,14 +6421,14 @@ class C : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    class C : {|CS0535:System.IDisposable|}
+                using System;
+                class C : {|CS0535:System.IDisposable|}
+                {
+                    class IDisposable
                     {
-                        class IDisposable
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 $@"using System;
 class C : System.IDisposable
 {{
@@ -6453,17 +6453,17 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    abstract class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                    """,
+                using System;
+                abstract class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
-                    abstract class C : IDisposable
-                    {
-                        public abstract void Dispose();
-                    }
+                using System;
+                abstract class C : IDisposable
+                {
+                    public abstract void Dispose();
+                }
 
-                    """,
+                """,
                 codeAction: (
                     "False;True;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     2
@@ -6477,24 +6477,24 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    class C : {|CS0535:IDisposable|}
-                    {
-                        private IDisposable goo;
-                    }
-                    """,
+                using System;
+                class C : {|CS0535:IDisposable|}
+                {
+                    private IDisposable goo;
+                }
+                """,
                 """
-                    using System;
-                    class C : IDisposable
-                    {
-                        private IDisposable goo;
+                using System;
+                class C : IDisposable
+                {
+                    private IDisposable goo;
 
-                        public void Dispose()
-                        {
-                            goo.Dispose();
-                        }
+                    public void Dispose()
+                    {
+                        goo.Dispose();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;goo",
                     2
@@ -6529,34 +6529,34 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    interface I : IDisposable
-                    {
-                        void F();
-                    }
-                    class C : {|CS0535:{|CS0535:I|}|}
-                    {
-                    }
-                    """,
+                using System;
+                interface I : IDisposable
+                {
+                    void F();
+                }
+                class C : {|CS0535:{|CS0535:I|}|}
+                {
+                }
+                """,
                 """
-                    using System;
-                    interface I : IDisposable
+                using System;
+                interface I : IDisposable
+                {
+                    void F();
+                }
+                class C : I
+                {
+                    public void Dispose()
                     {
-                        void F();
+                        throw new NotImplementedException();
                     }
-                    class C : I
-                    {
-                        public void Dispose()
-                        {
-                            throw new NotImplementedException();
-                        }
 
-                        public void F()
-                        {
-                            throw new NotImplementedException();
-                        }
+                    public void F()
+                    {
+                        throw new NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     0
@@ -6569,15 +6569,15 @@ class C : System.IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    interface I : IDisposable
-                    {
-                        void F();
-                    }
-                    class C : {|CS0535:{|CS0535:I|}|}
-                    {
-                    }
-                    """,
+                using System;
+                interface I : IDisposable
+                {
+                    void F();
+                }
+                class C : {|CS0535:{|CS0535:I|}|}
+                {
+                }
+                """,
                 $@"using System;
 interface I : IDisposable
 {{
@@ -6606,15 +6606,15 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    interface I : IDisposable
-                    {
-                        void F();
-                    }
-                    class C : {|CS0535:{|CS0535:I|}|}
-                    {
-                    }
-                    """,
+                using System;
+                interface I : IDisposable
+                {
+                    void F();
+                }
+                class C : {|CS0535:{|CS0535:I|}|}
+                {
+                }
+                """,
                 $@"using System;
 interface I : IDisposable
 {{
@@ -6643,33 +6643,33 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    namespace System
+                namespace System
+                {
+                    interface IDisposable
                     {
-                        interface IDisposable
-                        {
-                            void Dispose();
-                        }
-
-                        class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                        void Dispose();
                     }
-                    """,
+
+                    class C : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                }
+                """,
                 """
-                    namespace System
+                namespace System
+                {
+                    interface IDisposable
                     {
-                        interface IDisposable
-                        {
-                            void Dispose();
-                        }
+                        void Dispose();
+                    }
 
-                        class C : IDisposable
+                    class C : IDisposable
+                    {
+                        void IDisposable.Dispose()
                         {
-                            void IDisposable.Dispose()
-                            {
-                                throw new NotImplementedException();
-                            }
+                            throw new NotImplementedException();
                         }
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::System.IDisposable;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -6682,20 +6682,20 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                    """,
+                using System;
+                struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
-                    struct S : IDisposable
+                using System;
+                struct S : IDisposable
+                {
+                    public void Dispose()
                     {
-                        public void Dispose()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6704,20 +6704,20 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
-                    """,
+                using System;
+                struct S : {|CS0535:IDisposable|}{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
-                    struct S : IDisposable
+                using System;
+                struct S : IDisposable
+                {
+                    void IDisposable.Dispose()
                     {
-                        void IDisposable.Dispose()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """,
+                """,
                 codeAction: (
                     "True;False;False:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -6783,21 +6783,21 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
-                    """,
+                class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C : IServiceProvider {|CS1003:@""|}{
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                class C : IServiceProvider {|CS1003:@""|}{
+                    public object GetService(Type serviceType)
+                    {
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6806,21 +6806,21 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
-                    """,
+                class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C : IServiceProvider {|CS1003:""|}{
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                class C : IServiceProvider {|CS1003:""|}{
+                    public object GetService(Type serviceType)
+                    {
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6829,21 +6829,21 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
-                    """,
+                class C : {|CS0535:IServiceProvider|} {|CS1039:|}@"{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C : IServiceProvider {|CS1003:@""|}{
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                class C : IServiceProvider {|CS1003:@""|}{
+                    public object GetService(Type serviceType)
+                    {
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6852,21 +6852,21 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
-                    """,
+                class C : {|CS0535:IServiceProvider|} {|CS1010:|}"{|CS1513:|}{|CS1514:|}
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C : IServiceProvider {|CS1003:""|}{
-                        public object GetService(Type serviceType)
-                        {
-                            throw new NotImplementedException();
-                        }
+                class C : IServiceProvider {|CS1003:""|}{
+                    public object GetService(Type serviceType)
+                    {
+                        throw new NotImplementedException();
                     }
+                }
 
-                    """
+                """
             );
         }
 
@@ -6875,50 +6875,50 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void Goo1(decimal x = 1E-25M);
-                        void Goo2(decimal x = -1E-25M);
-                        void Goo3(decimal x = 1E-24M);
-                        void Goo4(decimal x = -1E-24M);
-                    }
+                interface I
+                {
+                    void Goo1(decimal x = 1E-25M);
+                    void Goo2(decimal x = -1E-25M);
+                    void Goo3(decimal x = 1E-24M);
+                    void Goo4(decimal x = -1E-24M);
+                }
 
-                    class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:{|CS0535:{|CS0535:{|CS0535:I|}|}|}|}
+                {
+                }
+                """,
                 """
-                    interface I
+                interface I
+                {
+                    void Goo1(decimal x = 1E-25M);
+                    void Goo2(decimal x = -1E-25M);
+                    void Goo3(decimal x = 1E-24M);
+                    void Goo4(decimal x = -1E-24M);
+                }
+
+                class C : I
+                {
+                    public void Goo1(decimal x = 0.0000000000000000000000001M)
                     {
-                        void Goo1(decimal x = 1E-25M);
-                        void Goo2(decimal x = -1E-25M);
-                        void Goo3(decimal x = 1E-24M);
-                        void Goo4(decimal x = -1E-24M);
+                        throw new System.NotImplementedException();
                     }
 
-                    class C : I
+                    public void Goo2(decimal x = -0.0000000000000000000000001M)
                     {
-                        public void Goo1(decimal x = 0.0000000000000000000000001M)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void Goo2(decimal x = -0.0000000000000000000000001M)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void Goo3(decimal x = 0.000000000000000000000001M)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void Goo4(decimal x = -0.000000000000000000000001M)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+
+                    public void Goo3(decimal x = 0.000000000000000000000001M)
+                    {
+                        throw new System.NotImplementedException();
+                    }
+
+                    public void Goo4(decimal x = -0.000000000000000000000001M)
+                    {
+                        throw new System.NotImplementedException();
+                    }
+                }
+                """
             );
         }
 
@@ -6980,29 +6980,29 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>(S T1);
-                    }
+                interface I<S>
+                {
+                    void Goo<T>(S T1);
+                }
 
-                    class C<T> : {|CS0535:I<T>|}
-                    {
-                    }
-                    """,
+                class C<T> : {|CS0535:I<T>|}
+                {
+                }
+                """,
                 """
-                    interface I<S>
-                    {
-                        void Goo<T>(S T1);
-                    }
+                interface I<S>
+                {
+                    void Goo<T>(S T1);
+                }
 
-                    class C<T> : I<T>
+                class C<T> : I<T>
+                {
+                    public void Goo<T2>(T T1)
                     {
-                        public void Goo<T2>(T T1)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7011,36 +7011,36 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: MarshalAs(UnmanagedType.U1)]
-                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                    }
+                interface I
+                {
+                    [return: MarshalAs(UnmanagedType.U1)]
+                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: MarshalAs(UnmanagedType.U1)]
-                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                    }
+                interface I
+                {
+                    [return: MarshalAs(UnmanagedType.U1)]
+                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    [return: MarshalAs(UnmanagedType.U1)]
+                    public bool Goo([MarshalAs(UnmanagedType.U1)] bool x)
                     {
-                        [return: MarshalAs(UnmanagedType.U1)]
-                        public bool Goo([MarshalAs(UnmanagedType.U1)] bool x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7049,35 +7049,35 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: MarshalAs(UnmanagedType.U1)]
-                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                    }
+                interface I
+                {
+                    [return: MarshalAs(UnmanagedType.U1)]
+                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: MarshalAs(UnmanagedType.U1)]
-                        bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
-                    }
+                interface I
+                {
+                    [return: MarshalAs(UnmanagedType.U1)]
+                    bool Goo([MarshalAs(UnmanagedType.U1)] bool x);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    bool I.Goo(bool x)
                     {
-                        bool I.Goo(bool x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -7090,33 +7090,33 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    interface IGoo
-                    {
-                        void Bar(DateTime DateTime);
-                    }
+                interface IGoo
+                {
+                    void Bar(DateTime DateTime);
+                }
 
-                    class C : {|CS0535:IGoo|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:IGoo|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface IGoo
-                    {
-                        void Bar(DateTime DateTime);
-                    }
+                interface IGoo
+                {
+                    void Bar(DateTime DateTime);
+                }
 
-                    class C : IGoo
+                class C : IGoo
+                {
+                    public void Bar(DateTime DateTime)
                     {
-                        public void Bar(DateTime DateTime)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7125,38 +7125,38 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections.Generic;
-                    using System.Runtime.InteropServices;
+                using System.Collections.Generic;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
-                        void Goo();
-                    }
+                interface I
+                {
+                    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
+                    void Goo();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    using System.Runtime.InteropServices;
+                using System.Collections.Generic;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
-                        void Goo();
-                    }
+                interface I
+                {
+                    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
+                    void Goo();
+                }
 
-                    class C : I
+                class C : I
+                {
+                    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
+                    public void Goo()
                     {
-                        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(List<>))]
-                        public void Goo()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7165,35 +7165,35 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    public interface I
                     {
-                        public interface I
-                        {
-                            void M();
-                        }
+                        void M();
                     }
+                }
 
-                    class C : {|CS0535:N.I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:N.I|}
+                {
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    public interface I
                     {
-                        public interface I
-                        {
-                            void M();
-                        }
+                        void M();
                     }
+                }
 
-                    class C : N.I
+                class C : N.I
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7202,37 +7202,37 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    public interface I
                     {
-                        public interface I
-                        {
-                            void M();
-                        }
+                        void M();
                     }
+                }
 
-                    class C : {|CS0535:N.I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:N.I|}
+                {
+                }
+                """,
                 """
-                    using N;
+                using N;
 
-                    namespace N
+                namespace N
+                {
+                    public interface I
                     {
-                        public interface I
-                        {
-                            void M();
-                        }
+                        void M();
                     }
+                }
 
-                    class C : N.I
+                class C : N.I
+                {
+                    void I.M()
                     {
-                        void I.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::N.I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -7245,37 +7245,37 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface I
-                    {
-                        void Goo();
-                    }
+                public interface I
+                {
+                    void Goo();
+                }
 
-                    partial class C
-                    {
-                    }
+                partial class C
+                {
+                }
 
-                    partial class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                partial class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    public interface I
-                    {
-                        void Goo();
-                    }
+                public interface I
+                {
+                    void Goo();
+                }
 
-                    partial class C
-                    {
-                    }
+                partial class C
+                {
+                }
 
-                    partial class C : I
+                partial class C : I
+                {
+                    void I.Goo()
                     {
-                        void I.Goo()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -7288,37 +7288,37 @@ class C : I
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    public interface I
-                    {
-                        void Goo();
-                    }
+                public interface I
+                {
+                    void Goo();
+                }
 
-                    partial class C : {|CS0535:I|}
-                    {
-                    }
+                partial class C : {|CS0535:I|}
+                {
+                }
 
-                    partial class C
-                    {
-                    }
-                    """,
+                partial class C
+                {
+                }
+                """,
                 """
-                    public interface I
-                    {
-                        void Goo();
-                    }
+                public interface I
+                {
+                    void Goo();
+                }
 
-                    partial class C : I
+                partial class C : I
+                {
+                    void I.Goo()
                     {
-                        void I.Goo()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
+                }
 
-                    partial class C
-                    {
-                    }
-                    """,
+                partial class C
+                {
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -7598,12 +7598,12 @@ class Goo : [|IComparable|]
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program : {|CS0535:IDisposable|}
-                    {
-                    }
-                    """,
+                class Program : {|CS0535:IDisposable|}
+                {
+                }
+                """,
                 $@"using System;
 
 class Program : IDisposable
@@ -7624,13 +7624,13 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program : {|CS0535:IDisposable|}
-                    {
-                        private bool DisposedValue;
-                    }
-                    """,
+                class Program : {|CS0535:IDisposable|}
+                {
+                    private bool DisposedValue;
+                }
+                """,
                 $@"using System;
 
 class Program : IDisposable
@@ -7652,26 +7652,26 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program : {|CS0535:IDisposable|}
-                    {
-                        private bool disposedValue;
-                    }
-                    """,
+                class Program : {|CS0535:IDisposable|}
+                {
+                    private bool disposedValue;
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program : IDisposable
+                class Program : IDisposable
+                {
+                    private bool disposedValue;
+
+                    public void Dispose()
                     {
-                        private bool disposedValue;
-
-                        public void Dispose()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     0
@@ -7684,30 +7684,30 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program : {|CS0535:IDisposable|}
+                class Program : {|CS0535:IDisposable|}
+                {
+                    public void Dispose(bool flag)
                     {
-                        public void Dispose(bool flag)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program : IDisposable
+                class Program : IDisposable
+                {
+                    public void Dispose(bool flag)
                     {
-                        public void Dispose(bool flag)
-                        {
-                        }
-
-                        public void Dispose()
-                        {
-                            throw new NotImplementedException();
-                        }
                     }
-                    """,
+
+                    public void Dispose()
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+                """,
                 codeAction: (
                     "False;False;True:global::System.IDisposable;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     0
@@ -7720,12 +7720,12 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    sealed class Program : {|CS0535:IDisposable|}
-                    {
-                    }
-                    """,
+                sealed class Program : {|CS0535:IDisposable|}
+                {
+                }
+                """,
                 $@"using System;
 
 sealed class Program : IDisposable
@@ -7746,13 +7746,13 @@ sealed class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program : {|CS0535:IDisposable|}
-                    {
-                        private bool disposedValue;
-                    }
-                    """,
+                class Program : {|CS0535:IDisposable|}
+                {
+                    private bool disposedValue;
+                }
+                """,
                 $@"using System;
 
 class Program : IDisposable
@@ -7802,29 +7802,29 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
-                    }
+                interface I
+                {
+                    void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
-                    }
+                interface I
+                {
+                    void M([System.Runtime.InteropServices.ComAliasName("pAlias")] int p);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public void M(int p)
                     {
-                        public void M(int p)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7833,35 +7833,35 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: ComAliasName("pAlias1")]
-                        long M([ComAliasName("pAlias2")] int p);
-                    }
+                interface I
+                {
+                    [return: ComAliasName("pAlias1")]
+                    long M([ComAliasName("pAlias2")] int p);
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    interface I
-                    {
-                        [return: ComAliasName("pAlias1")]
-                        long M([ComAliasName("pAlias2")] int p);
-                    }
+                interface I
+                {
+                    [return: ComAliasName("pAlias1")]
+                    long M([ComAliasName("pAlias2")] int p);
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public long M(int p)
                     {
-                        public long M(int p)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7870,32 +7870,32 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I
-                    {
-                        long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
-                    }
+                interface I
+                {
+                    long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    interface I
-                    {
-                        long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
-                    }
+                interface I
+                {
+                    long this[[System.Runtime.InteropServices.ComAliasName("pAlias")] int p] { get; }
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public long this[int p]
                     {
-                        public long this[int p]
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7904,39 +7904,39 @@ class Program : IDisposable
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    namespace Scenarios
+                namespace Scenarios
+                {
+                    public interface TestInterface
                     {
-                        public interface TestInterface
-                        {
-                            void M1();
-                        }
-
-                        struct TestStruct1 : {|CS0535:TestInterface|}{|CS1513:|}{|CS1514:|}
-
-
-                        // Comment
+                        void M1();
                     }
-                    """,
+
+                    struct TestStruct1 : {|CS0535:TestInterface|}{|CS1513:|}{|CS1514:|}
+
+
+                    // Comment
+                }
+                """,
                 """
-                    namespace Scenarios
+                namespace Scenarios
+                {
+                    public interface TestInterface
                     {
-                        public interface TestInterface
-                        {
-                            void M1();
-                        }
-
-                        struct TestStruct1 : TestInterface
-                        {
-                            public void M1()
-                            {
-                                throw new System.NotImplementedException();
-                            }
-                        }
-
-
-                        // Comment
+                        void M1();
                     }
-                    """
+
+                    struct TestStruct1 : TestInterface
+                    {
+                        public void M1()
+                        {
+                            throw new System.NotImplementedException();
+                        }
+                    }
+
+
+                    // Comment
+                }
+                """
             );
         }
 
@@ -7946,20 +7946,20 @@ class Program : IDisposable
             //CSharpFeaturesResources.DisposePattern
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
-                    {
-                        System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
-                        System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
-                    }
+                interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
+                {
+                    System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
+                    System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
+                }
 
-                    partial class C
-                    {
-                    }
+                partial class C
+                {
+                }
 
-                    partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
-                    {
-                    }
-                    """,
+                partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
+                {
+                }
+                """,
                 $@"using System;
 using System.Collections.Generic;
 
@@ -8006,20 +8006,20 @@ partial class C : I<System.Exception, System.AggregateException>, System.IDispos
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
-                    {
-                        System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
-                        System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
-                    }
+                interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
+                {
+                    System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
+                    System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
+                }
 
-                    partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
-                    {
-                    }
+                partial class C : {|CS0535:{|CS0535:{|CS0535:I<System.Exception, System.AggregateException>|}|}|}, {|CS0535:System.IDisposable|}
+                {
+                }
 
-                    partial class C
-                    {
-                    }
-                    """,
+                partial class C
+                {
+                }
+                """,
                 $@"using System;
 using System.Collections.Generic;
 
@@ -8104,47 +8104,47 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
+                using System;
 
-                    public class Goo : {|CS0535:Holder.SomeInterface|}
+                public class Goo : {|CS0535:Holder.SomeInterface|}
+                {
+                }
+
+                public class Holder
+                {
+                    public interface SomeInterface
                     {
+                        void Something([SomeAttribute] string helloWorld);
                     }
 
-                    public class Holder
+                    private class SomeAttribute : Attribute
                     {
-                        public interface SomeInterface
-                        {
-                            void Something([SomeAttribute] string helloWorld);
-                        }
-
-                        private class SomeAttribute : Attribute
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class Goo : Holder.SomeInterface
+                public class Goo : Holder.SomeInterface
+                {
+                    public void Something(string helloWorld)
                     {
-                        public void Something(string helloWorld)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
+                    }
+                }
+
+                public class Holder
+                {
+                    public interface SomeInterface
+                    {
+                        void Something([SomeAttribute] string helloWorld);
                     }
 
-                    public class Holder
+                    private class SomeAttribute : Attribute
                     {
-                        public interface SomeInterface
-                        {
-                            void Something([SomeAttribute] string helloWorld);
-                        }
-
-                        private class SomeAttribute : Attribute
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8153,107 +8153,107 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Issue2785<T> : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:IList<object>|}|}|}|}|}|}|}|}|}|}|}|}|}
-                    {
-                        private static List<object> innerList = new List<object>();
-                    }
-                    """,
+                class Issue2785<T> : {|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:{|CS0535:IList<object>|}|}|}|}|}|}|}|}|}|}|}|}|}
+                {
+                    private static List<object> innerList = new List<object>();
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections;
-                    using System.Collections.Generic;
-                    using System.Linq;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Threading.Tasks;
 
-                    class Issue2785<T> : IList<object>
+                class Issue2785<T> : IList<object>
+                {
+                    private static List<object> innerList = new List<object>();
+
+                    public object this[int index]
                     {
-                        private static List<object> innerList = new List<object>();
-
-                        public object this[int index]
+                        get
                         {
-                            get
-                            {
-                                return ((IList<object>)innerList)[index];
-                            }
-
-                            set
-                            {
-                                ((IList<object>)innerList)[index] = value;
-                            }
+                            return ((IList<object>)innerList)[index];
                         }
 
-                        public int Count
+                        set
                         {
-                            get
-                            {
-                                return ((ICollection<object>)innerList).Count;
-                            }
-                        }
-
-                        public bool IsReadOnly
-                        {
-                            get
-                            {
-                                return ((ICollection<object>)innerList).IsReadOnly;
-                            }
-                        }
-
-                        public void Add(object item)
-                        {
-                            ((ICollection<object>)innerList).Add(item);
-                        }
-
-                        public void Clear()
-                        {
-                            ((ICollection<object>)innerList).Clear();
-                        }
-
-                        public bool Contains(object item)
-                        {
-                            return ((ICollection<object>)innerList).Contains(item);
-                        }
-
-                        public void CopyTo(object[] array, int arrayIndex)
-                        {
-                            ((ICollection<object>)innerList).CopyTo(array, arrayIndex);
-                        }
-
-                        public IEnumerator<object> GetEnumerator()
-                        {
-                            return ((IEnumerable<object>)innerList).GetEnumerator();
-                        }
-
-                        public int IndexOf(object item)
-                        {
-                            return ((IList<object>)innerList).IndexOf(item);
-                        }
-
-                        public void Insert(int index, object item)
-                        {
-                            ((IList<object>)innerList).Insert(index, item);
-                        }
-
-                        public bool Remove(object item)
-                        {
-                            return ((ICollection<object>)innerList).Remove(item);
-                        }
-
-                        public void RemoveAt(int index)
-                        {
-                            ((IList<object>)innerList).RemoveAt(index);
-                        }
-
-                        IEnumerator IEnumerable.GetEnumerator()
-                        {
-                            return ((IEnumerable)innerList).GetEnumerator();
+                            ((IList<object>)innerList)[index] = value;
                         }
                     }
-                    """,
+
+                    public int Count
+                    {
+                        get
+                        {
+                            return ((ICollection<object>)innerList).Count;
+                        }
+                    }
+
+                    public bool IsReadOnly
+                    {
+                        get
+                        {
+                            return ((ICollection<object>)innerList).IsReadOnly;
+                        }
+                    }
+
+                    public void Add(object item)
+                    {
+                        ((ICollection<object>)innerList).Add(item);
+                    }
+
+                    public void Clear()
+                    {
+                        ((ICollection<object>)innerList).Clear();
+                    }
+
+                    public bool Contains(object item)
+                    {
+                        return ((ICollection<object>)innerList).Contains(item);
+                    }
+
+                    public void CopyTo(object[] array, int arrayIndex)
+                    {
+                        ((ICollection<object>)innerList).CopyTo(array, arrayIndex);
+                    }
+
+                    public IEnumerator<object> GetEnumerator()
+                    {
+                        return ((IEnumerable<object>)innerList).GetEnumerator();
+                    }
+
+                    public int IndexOf(object item)
+                    {
+                        return ((IList<object>)innerList).IndexOf(item);
+                    }
+
+                    public void Insert(int index, object item)
+                    {
+                        ((IList<object>)innerList).Insert(index, item);
+                    }
+
+                    public bool Remove(object item)
+                    {
+                        return ((ICollection<object>)innerList).Remove(item);
+                    }
+
+                    public void RemoveAt(int index)
+                    {
+                        ((IList<object>)innerList).RemoveAt(index);
+                    }
+
+                    IEnumerator IEnumerable.GetEnumerator()
+                    {
+                        return ((IEnumerable)innerList).GetEnumerator();
+                    }
+                }
+                """,
                 codeAction: (
                     "False;False;False:global::System.Collections.Generic.IList<object>;mscorlib;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;innerList",
                     1
@@ -8266,32 +8266,32 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
-                    }
+                interface IInterface
+                {
+                    (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                        (int, string) x;
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                    (int, string) x;
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
-                    }
+                interface IInterface
+                {
+                    (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
+                }
 
-                    class Class : IInterface
-                    {
-                        (int, string) x;
+                class Class : IInterface
+                {
+                    (int, string) x;
 
-                        public (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    public (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y)
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8300,32 +8300,32 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface
-                    {
-                        (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
-                    }
+                interface IInterface
+                {
+                    (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
+                }
 
-                    class Class : {|CS0535:IInterface|}
-                    {
-                        (int, string) x;
-                    }
-                    """,
+                class Class : {|CS0535:IInterface|}
+                {
+                    (int, string) x;
+                }
+                """,
                 """
-                    interface IInterface
-                    {
-                        (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
-                    }
+                interface IInterface
+                {
+                    (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
+                }
 
-                    class Class : IInterface
-                    {
-                        (int, string) x;
+                class Class : IInterface
+                {
+                    (int, string) x;
 
-                        public (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    public (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y)
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8334,32 +8334,32 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface<TA, TB>
-                    {
-                        (TA, TB) Method1((TA, TB) y);
-                    }
+                interface IInterface<TA, TB>
+                {
+                    (TA, TB) Method1((TA, TB) y);
+                }
 
-                    class Class : {|CS0535:IInterface<(int, string), int>|}
-                    {
-                        (int, string) x;
-                    }
-                    """,
+                class Class : {|CS0535:IInterface<(int, string), int>|}
+                {
+                    (int, string) x;
+                }
+                """,
                 """
-                    interface IInterface<TA, TB>
-                    {
-                        (TA, TB) Method1((TA, TB) y);
-                    }
+                interface IInterface<TA, TB>
+                {
+                    (TA, TB) Method1((TA, TB) y);
+                }
 
-                    class Class : IInterface<(int, string), int>
-                    {
-                        (int, string) x;
+                class Class : IInterface<(int, string), int>
+                {
+                    (int, string) x;
 
-                        public ((int, string), int) Method1(((int, string), int) y)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    public ((int, string), int) Method1(((int, string), int) y)
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8368,32 +8368,32 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    interface IInterface<TA, TB>
-                    {
-                        (TA a, TB b) Method1((TA a, TB b) y);
-                    }
+                interface IInterface<TA, TB>
+                {
+                    (TA a, TB b) Method1((TA a, TB b) y);
+                }
 
-                    class Class : {|CS0535:IInterface<(int, string), int>|}
-                    {
-                        (int, string) x;
-                    }
-                    """,
+                class Class : {|CS0535:IInterface<(int, string), int>|}
+                {
+                    (int, string) x;
+                }
+                """,
                 """
-                    interface IInterface<TA, TB>
-                    {
-                        (TA a, TB b) Method1((TA a, TB b) y);
-                    }
+                interface IInterface<TA, TB>
+                {
+                    (TA a, TB b) Method1((TA a, TB b) y);
+                }
 
-                    class Class : IInterface<(int, string), int>
-                    {
-                        (int, string) x;
+                class Class : IInterface<(int, string), int>
+                {
+                    (int, string) x;
 
-                        public ((int, string) a, int b) Method1(((int, string) a, int b) y)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    public ((int, string) a, int b) Method1(((int, string) a, int b) y)
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8443,55 +8443,55 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    [ComImport]
-                    [Guid("00000000-0000-0000-0000-000000000000")]
-                    interface IComInterface
-                    {
-                        void MOverload();
-                        void X();
-                        void MOverload(int i);
-                        int Prop { get; }
-                    }
+                [ComImport]
+                [Guid("00000000-0000-0000-0000-000000000000")]
+                interface IComInterface
+                {
+                    void MOverload();
+                    void X();
+                    void MOverload(int i);
+                    int Prop { get; }
+                }
 
-                    class Class : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IComInterface|}|}|}|}
-                    {
-                    }
-                    """,
+                class Class : {|CS0535:{|CS0535:{|CS0535:{|CS0535:IComInterface|}|}|}|}
+                {
+                }
+                """,
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    [ComImport]
-                    [Guid("00000000-0000-0000-0000-000000000000")]
-                    interface IComInterface
+                [ComImport]
+                [Guid("00000000-0000-0000-0000-000000000000")]
+                interface IComInterface
+                {
+                    void MOverload();
+                    void X();
+                    void MOverload(int i);
+                    int Prop { get; }
+                }
+
+                class Class : IComInterface
+                {
+                    public void MOverload()
                     {
-                        void MOverload();
-                        void X();
-                        void MOverload(int i);
-                        int Prop { get; }
+                        throw new System.NotImplementedException();
                     }
 
-                    class Class : IComInterface
+                    public void X()
                     {
-                        public void MOverload()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void X()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public void MOverload(int i)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        public int Prop => throw new System.NotImplementedException();
+                        throw new System.NotImplementedException();
                     }
-                    """
+
+                    public void MOverload(int i)
+                    {
+                        throw new System.NotImplementedException();
+                    }
+
+                    public int Prop => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -8544,39 +8544,39 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I {
-                        ref int IGoo();
-                        ref int Goo { get; }
-                        ref int this[int i] { get; }
-                    }
+                interface I {
+                    ref int IGoo();
+                    ref int Goo { get; }
+                    ref int this[int i] { get; }
+                }
 
-                    class C : {|CS0535:{|CS0535:{|CS0535:I|}|}|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:{|CS0535:{|CS0535:I|}|}|}
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I {
-                        ref int IGoo();
-                        ref int Goo { get; }
-                        ref int this[int i] { get; }
-                    }
+                interface I {
+                    ref int IGoo();
+                    ref int Goo { get; }
+                    ref int this[int i] { get; }
+                }
 
-                    class C : I
+                class C : I
+                {
+                    public ref int this[int i] => throw new NotImplementedException();
+
+                    public ref int Goo => throw new NotImplementedException();
+
+                    public ref int IGoo()
                     {
-                        public ref int this[int i] => throw new NotImplementedException();
-
-                        public ref int Goo => throw new NotImplementedException();
-
-                        public ref int IGoo()
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -8700,27 +8700,27 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface ITest
-                    {
-                        ref readonly int Method();
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                interface ITest
+                {
+                    ref readonly int Method();
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    interface ITest
+                interface ITest
+                {
+                    ref readonly int Method();
+                }
+                public class Test : ITest
+                {
+                    public ref readonly int Method()
                     {
-                        ref readonly int Method();
+                        throw new System.NotImplementedException();
                     }
-                    public class Test : ITest
-                    {
-                        public ref readonly int Method()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -8729,24 +8729,24 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface ITest
-                    {
-                        ref readonly int Property { get; }
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                interface ITest
+                {
+                    ref readonly int Property { get; }
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    interface ITest
-                    {
-                        ref readonly int Property { get; }
-                    }
-                    public class Test : ITest
-                    {
-                        public ref readonly int Property => throw new System.NotImplementedException();
-                    }
-                    """
+                interface ITest
+                {
+                    ref readonly int Property { get; }
+                }
+                public class Test : ITest
+                {
+                    public ref readonly int Property => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -8783,24 +8783,24 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface ITest
-                    {
-                        ref readonly int this[int p] { get; }
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                interface ITest
+                {
+                    ref readonly int this[int p] { get; }
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    interface ITest
-                    {
-                        ref readonly int this[int p] { get; }
-                    }
-                    public class Test : ITest
-                    {
-                        public ref readonly int this[int p] => throw new System.NotImplementedException();
-                    }
-                    """
+                interface ITest
+                {
+                    ref readonly int this[int p] { get; }
+                }
+                public class Test : ITest
+                {
+                    public ref readonly int this[int p] => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -8809,27 +8809,27 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    public interface ITest
-                    {
-                        void M<T>() where T : unmanaged;
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                public interface ITest
+                {
+                    void M<T>() where T : unmanaged;
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    public interface ITest
+                public interface ITest
+                {
+                    void M<T>() where T : unmanaged;
+                }
+                public class Test : ITest
+                {
+                    public void M<T>() where T : unmanaged
                     {
-                        void M<T>() where T : unmanaged;
+                        throw new System.NotImplementedException();
                     }
-                    public class Test : ITest
-                    {
-                        public void M<T>() where T : unmanaged
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -9568,36 +9568,36 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        Goo MyProperty { get; }
-                    }
+                internal interface I
+                {
+                    Goo MyProperty { get; }
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        Goo MyProperty { get; }
-                    }
+                internal interface I
+                {
+                    Goo MyProperty { get; }
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    Goo I.MyProperty
                     {
-                        Goo I.MyProperty
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9606,33 +9606,33 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        Goo M();
-                    }
+                internal interface I
+                {
+                    Goo M();
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        Goo M();
-                    }
+                internal interface I
+                {
+                    Goo M();
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    Goo I.M()
                     {
-                        Goo I.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9641,33 +9641,33 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        void M(Goo goo);
-                    }
+                internal interface I
+                {
+                    void M(Goo goo);
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        void M(Goo goo);
-                    }
+                internal interface I
+                {
+                    void M(Goo goo);
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    void I.M(Goo goo)
                     {
-                        void I.M(Goo goo)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9676,41 +9676,41 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal delegate void MyDelegate();
+                internal delegate void MyDelegate();
 
-                    internal interface I
-                    {
-                        event MyDelegate Event;
-                    }
+                internal interface I
+                {
+                    event MyDelegate Event;
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal delegate void MyDelegate();
+                internal delegate void MyDelegate();
 
-                    internal interface I
-                    {
-                        event MyDelegate Event;
-                    }
+                internal interface I
+                {
+                    event MyDelegate Event;
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    event MyDelegate I.Event
                     {
-                        event MyDelegate I.Event
+                        add
                         {
-                            add
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            remove
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        remove
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9719,36 +9719,36 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        Goo this[int i] { get; }
-                    }
+                internal interface I
+                {
+                    Goo this[int i] { get; }
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        Goo this[int i] { get; }
-                    }
+                internal interface I
+                {
+                    Goo this[int i] { get; }
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    Goo I.this[int i]
                     {
-                        Goo I.this[int i]
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9757,36 +9757,36 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        int this[Goo goo] { get; }
-                    }
+                internal interface I
+                {
+                    int this[Goo goo] { get; }
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        int this[Goo goo] { get; }
-                    }
+                internal interface I
+                {
+                    int this[Goo goo] { get; }
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    int I.this[Goo goo]
                     {
-                        int I.this[Goo goo]
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9795,37 +9795,37 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        List<Goo> M();
-                    }
+                internal interface I
+                {
+                    List<Goo> M();
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
+                internal interface I
+                {
+                    List<Goo> M();
+                }
+
+                public class C : {|CS0535:I|}
+                {
+                    List<Goo> I.M()
                     {
-                        List<Goo> M();
+                        throw new System.NotImplementedException();
                     }
-
-                    public class C : {|CS0535:I|}
-                    {
-                        List<Goo> I.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -9834,39 +9834,39 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Container
-                    {
-                        public class Goo {}
-                    }
+                internal class Container
+                {
+                    public class Goo {}
+                }
 
-                    internal interface I
-                    {
-                        Container.Goo M();
-                    }
+                internal interface I
+                {
+                    Container.Goo M();
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Container
-                    {
-                        public class Goo {}
-                    }
+                internal class Container
+                {
+                    public class Goo {}
+                }
 
-                    internal interface I
-                    {
-                        Container.Goo M();
-                    }
+                internal interface I
+                {
+                    Container.Goo M();
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    Container.Goo I.M()
                     {
-                        Container.Goo I.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9875,33 +9875,33 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        T M<T>() where T: Goo;
-                    }
+                internal interface I
+                {
+                    T M<T>() where T: Goo;
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        T M<T>() where T: Goo;
-                    }
+                internal interface I
+                {
+                    T M<T>() where T: Goo;
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    T I.M<T>()
                     {
-                        T I.M<T>()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9910,33 +9910,33 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        void M<T>(T arg) where T: Goo;
-                    }
+                internal interface I
+                {
+                    void M<T>(T arg) where T: Goo;
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        void M<T>(T arg) where T: Goo;
-                    }
+                internal interface I
+                {
+                    void M<T>(T arg) where T: Goo;
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    void I.M<T>(T arg)
                     {
-                        void I.M<T>(T arg)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9945,33 +9945,33 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        void M<T>() where T: Goo;
-                    }
+                internal interface I
+                {
+                    void M<T>() where T: Goo;
+                }
 
-                    public class C : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        void M<T>() where T: Goo;
-                    }
+                internal interface I
+                {
+                    void M<T>() where T: Goo;
+                }
 
-                    public class C : {|CS0535:I|}
+                public class C : {|CS0535:I|}
+                {
+                    void I.M<T>()
                     {
-                        void I.M<T>()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9980,40 +9980,40 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
-                    {
-                        int N();
-                        Goo M();
-                    }
+                internal interface I
+                {
+                    int N();
+                    Goo M();
+                }
 
-                    public class C : {|CS0535:{|CS0535:I|}|}
-                    {
-                    }
-                    """,
+                public class C : {|CS0535:{|CS0535:I|}|}
+                {
+                }
+                """,
                 """
-                    internal class Goo {}
+                internal class Goo {}
 
-                    internal interface I
+                internal interface I
+                {
+                    int N();
+                    Goo M();
+                }
+
+                public class C : {|CS0535:{|CS0535:I|}|}
+                {
+                    public int N()
                     {
-                        int N();
-                        Goo M();
+                        throw new System.NotImplementedException();
                     }
 
-                    public class C : {|CS0535:{|CS0535:I|}|}
+                    Goo I.M()
                     {
-                        public int N()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-
-                        Goo I.M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10451,27 +10451,27 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    public interface ITest
-                    {
-                        void M<T>() where T : notnull;
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                public interface ITest
+                {
+                    void M<T>() where T : notnull;
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    public interface ITest
+                public interface ITest
+                {
+                    void M<T>() where T : notnull;
+                }
+                public class Test : ITest
+                {
+                    public void M<T>() where T : notnull
                     {
-                        void M<T>() where T : notnull;
+                        throw new System.NotImplementedException();
                     }
-                    public class Test : ITest
-                    {
-                        public void M<T>() where T : notnull
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -10480,28 +10480,28 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    public interface ITest
-                    {
-                        string? P { get; }
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                public interface ITest
+                {
+                    string? P { get; }
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    public interface ITest
-                    {
-                        string? P { get; }
-                    }
-                    public class Test : ITest
-                    {
-                        public string? P => throw new System.NotImplementedException();
-                    }
-                    """
+                public interface ITest
+                {
+                    string? P { get; }
+                }
+                public class Test : ITest
+                {
+                    public string? P => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -10528,31 +10528,31 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    public interface ITest
-                    {
-                        string? P();
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                public interface ITest
+                {
+                    string? P();
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    public interface ITest
+                public interface ITest
+                {
+                    string? P();
+                }
+                public class Test : ITest
+                {
+                    public string? P()
                     {
-                        string? P();
+                        throw new System.NotImplementedException();
                     }
-                    public class Test : ITest
-                    {
-                        public string? P()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -10563,32 +10563,32 @@ partial class C
             // see https://github.com/dotnet/roslyn/issues/36673
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    public interface ITest
-                    {
-                        event EventHandler? SomeEvent;
-                    }
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                public interface ITest
+                {
+                    event EventHandler? SomeEvent;
+                }
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    public interface ITest
-                    {
-                        event EventHandler? SomeEvent;
-                    }
-                    public class Test : ITest
-                    {
-                        public event EventHandler? SomeEvent;
-                    }
-                    """
+                public interface ITest
+                {
+                    event EventHandler? SomeEvent;
+                }
+                public class Test : ITest
+                {
+                    public event EventHandler? SomeEvent;
+                }
+                """
             );
         }
 
@@ -10597,34 +10597,34 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    public interface ITest
-                    {
-                        string? P { get; }
-                    }
+                public interface ITest
+                {
+                    string? P { get; }
+                }
 
-                    #nullable disable
+                #nullable disable
 
-                    public class Test : {|CS0535:ITest|}
-                    {
-                    }
-                    """,
+                public class Test : {|CS0535:ITest|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    public interface ITest
-                    {
-                        string? P { get; }
-                    }
+                public interface ITest
+                {
+                    string? P { get; }
+                }
 
-                    #nullable disable
+                #nullable disable
 
-                    public class Test : ITest
-                    {
-                        public string P => throw new System.NotImplementedException();
-                    }
-                    """
+                public class Test : ITest
+                {
+                    public string P => throw new System.NotImplementedException();
+                }
+                """
             );
         }
 
@@ -10689,39 +10689,39 @@ partial class C
         {
             await TestWithAllCodeStyleOptionsOffAsync(
                 """
-                    class B
-                    {
-                        public void M<T>() { }
-                    }
+                class B
+                {
+                    public void M<T>() { }
+                }
 
-                    interface I
-                    {
-                        void M();
-                    }
+                interface I
+                {
+                    void M();
+                }
 
-                    class D : B, {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class D : B, {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    class B
-                    {
-                        public void M<T>() { }
-                    }
+                class B
+                {
+                    public void M<T>() { }
+                }
 
-                    interface I
-                    {
-                        void M();
-                    }
+                interface I
+                {
+                    void M();
+                }
 
-                    class D : B, I
+                class D : B, I
+                {
+                    public void M()
                     {
-                        public void M()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10730,34 +10730,34 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface I
-                    {
-                        void M1();
-                        void M2();
-                    }
+                interface I
+                {
+                    void M1();
+                    void M2();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        public void M1(){}
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                    public void M1(){}
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void M1();
-                        void M2();
-                    }
+                interface I
+                {
+                    void M1();
+                    void M2();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        public void M1(){}
+                class C : {|CS0535:I|}
+                {
+                    public void M1(){}
 
-                        void I.M2()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    void I.M2()
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     2
@@ -10862,34 +10862,34 @@ partial class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface I
-                    {
-                        void M1();
-                        internal void M2();
-                    }
+                interface I
+                {
+                    void M1();
+                    internal void M2();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        public void M1(){}
-                    }
-                    """,
+                class C : {|CS0535:I|}
+                {
+                    public void M1(){}
+                }
+                """,
                 """
-                    interface I
-                    {
-                        void M1();
-                        internal void M2();
-                    }
+                interface I
+                {
+                    void M1();
+                    internal void M2();
+                }
 
-                    class C : {|CS0535:I|}
-                    {
-                        public void M1(){}
+                class C : {|CS0535:I|}
+                {
+                    public void M1(){}
 
-                        void I.M2()
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                    void I.M2()
+                    {
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;True:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -11107,29 +11107,29 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface IGoo<T> where T : struct
-                    {
-                        void Bar(T? x);
-                    }
+                interface IGoo<T> where T : struct
+                {
+                    void Bar(T? x);
+                }
 
-                    class C : {|CS0535:IGoo<int>|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:IGoo<int>|}
+                {
+                }
+                """,
                 """
-                    interface IGoo<T> where T : struct
-                    {
-                        void Bar(T? x);
-                    }
+                interface IGoo<T> where T : struct
+                {
+                    void Bar(T? x);
+                }
 
-                    class C : IGoo<int>
+                class C : IGoo<int>
+                {
+                    public void Bar(int? x)
                     {
-                        public void Bar(int? x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11247,33 +11247,33 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface IGoo<T> where T : class
-                    {
-                        void Bar(T? x);
-                    }
+                interface IGoo<T> where T : class
+                {
+                    void Bar(T? x);
+                }
 
-                    class C : {|CS0535:IGoo<string>|}
-                    {
-                    }
-                    """,
+                class C : {|CS0535:IGoo<string>|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface IGoo<T> where T : class
-                    {
-                        void Bar(T? x);
-                    }
+                interface IGoo<T> where T : class
+                {
+                    void Bar(T? x);
+                }
 
-                    class C : IGoo<string>
+                class C : IGoo<string>
+                {
+                    public void Bar(string? x)
                     {
-                        public void Bar(string? x)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11282,33 +11282,33 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface I
-                    {
-                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                    }
+                interface I
+                {
+                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                }
 
-                    class D : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class D : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface I
-                    {
-                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                    }
+                interface I
+                {
+                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                }
 
-                    class D : I
+                class D : I
+                {
+                    public void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
                     {
-                        public void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11317,35 +11317,35 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface I
-                    {
-                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                    }
+                interface I
+                {
+                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                }
 
-                    class D : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class D : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface I
-                    {
-                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
-                    }
+                interface I
+                {
+                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                }
 
-                    class D : I
+                class D : I
+                {
+                    void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                        where T1 : default
+                        where T3 : default
                     {
-                        void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
-                            where T1 : default
-                            where T3 : default
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1
@@ -11358,35 +11358,35 @@ interface I
         {
             await TestInRegularAndScriptAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface I
-                    {
-                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
-                    }
+                interface I
+                {
+                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
+                }
 
-                    class D : {|CS0535:I|}
-                    {
-                    }
-                    """,
+                class D : {|CS0535:I|}
+                {
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    interface I
-                    {
-                        void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
-                    }
+                interface I
+                {
+                    void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) where T1 : class;
+                }
 
-                    class D : I
+                class D : I
+                {
+                    void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                        where T1 : class
+                        where T3 : default
                     {
-                        void I.M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
-                            where T1 : class
-                            where T3 : default
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 codeAction: (
                     "True;False;False:global::I;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                     1

@@ -1057,13 +1057,13 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             var builder = new System.Text.StringBuilder();
             builder.AppendLine(
                 """
-                    using Microsoft.Extensions.Logging;
-                    class Program
+                using Microsoft.Extensions.Logging;
+                class Program
+                {
+                    [LoggerMessage(EventId = 1, Level = LogLevel.Debug, Message = "M1")]
+                    static partial void M1(ILogger logger)
                     {
-                        [LoggerMessage(EventId = 1, Level = LogLevel.Debug, Message = "M1")]
-                        static partial void M1(ILogger logger)
-                        {
-                    """
+                """
             );
             builder.AppendLine("    int[] values = new[] { ");
             for (int i = 0; i < nItems; i++)

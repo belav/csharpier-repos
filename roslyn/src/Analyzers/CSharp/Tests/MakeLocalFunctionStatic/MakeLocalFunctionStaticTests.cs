@@ -41,33 +41,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int [||]fibonacci(int n)
                         {
-                            int [||]fibonacci(int n)
-                            {
-                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-                            }
+                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        static int fibonacci(int n)
                         {
-                            static int fibonacci(int n)
-                            {
-                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-                            }
+                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8ParseOptions
             );
         }
@@ -77,19 +77,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int [||]fibonacci(int n)
                         {
-                            int [||]fibonacci(int n)
-                            {
-                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-                            }
+                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     parseOptions: CSharp8ParseOptions,
                     options: Option(
@@ -105,19 +105,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        static int [||]fibonacci(int n)
                         {
-                            static int [||]fibonacci(int n)
-                            {
-                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-                            }
+                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
             );
         }
@@ -127,19 +127,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int [||]fibonacci(int n)
                         {
-                            int [||]fibonacci(int n)
-                            {
-                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-                            }
+                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
             );
         }
@@ -149,19 +149,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int i)
                     {
-                        void M(int i)
+                        int [||]fibonacci(int n)
                         {
-                            int [||]fibonacci(int n)
-                            {
-                                return i <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-                            }
+                            return i <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
             );
         }
@@ -171,20 +171,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        int [||]fibonacci(int n)
                         {
-                            int [||]fibonacci(int n)
-                            {
-                                M();
-                                return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-                            }
+                            M();
+                            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
             );
         }
@@ -194,35 +194,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        async Task<int> [||]fibonacci(int n)
                         {
-                            async Task<int> [||]fibonacci(int n)
-                            {
-                                return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
-                            }
+                            return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        static async Task<int> fibonacci(int n)
                         {
-                            static async Task<int> fibonacci(int n)
-                            {
-                                return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
-                            }
+                            return n <= 1 ? n : await fibonacci(n - 1) + await fibonacci(n - 2);
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8ParseOptions
             );
         }
@@ -463,23 +463,23 @@ class C
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        void [||]A()
                         {
-                            void [||]A()
-                            {
-                                B();
-                            }
+                            B();
+                        }
 
-                            void B()
-                            {
-                            }
+                        void B()
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
             );
         }
@@ -489,43 +489,43 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        void [||]A()
                         {
-                            void [||]A()
-                            {
-                                B();
-                            }
+                            B();
+                        }
 
-                            static void B()
-                            {
-                            }
+                        static void B()
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        static void A()
                         {
-                            static void A()
-                            {
-                                B();
-                            }
+                            B();
+                        }
 
-                            static void B()
-                            {
-                            }
+                        static void B()
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8ParseOptions
             );
         }
@@ -535,43 +535,43 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        void [||]A()
                         {
-                            void [||]A()
-                            {
-                                B();
+                            B();
 
-                                void B()
-                                {
-                                }
+                            void B()
+                            {
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        static void A()
                         {
-                            static void A()
-                            {
-                                B();
+                            B();
 
-                                void B()
-                                {
-                                }
+                            void B()
+                            {
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8ParseOptions
             );
         }
@@ -582,15 +582,15 @@ class C
         {
             await TestAsync(
                 """
-                    void [||]A()
-                    {
-                    }
-                    """,
+                void [||]A()
+                {
+                }
+                """,
                 """
-                    static void A()
-                    {
-                    }
-                    """,
+                static void A()
+                {
+                }
+                """,
                 parseOptions: CSharp8ParseOptions
             );
         }
@@ -601,15 +601,15 @@ class C
         {
             await TestAsync(
                 """
-                    unsafe void [||]A()
-                    {
-                    }
-                    """,
+                unsafe void [||]A()
+                {
+                }
+                """,
                 """
-                    static unsafe void A()
-                    {
-                    }
-                    """,
+                static unsafe void A()
+                {
+                }
+                """,
                 parseOptions: CSharp8ParseOptions
             );
         }

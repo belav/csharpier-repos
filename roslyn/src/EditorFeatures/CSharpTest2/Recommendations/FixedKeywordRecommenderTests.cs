@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -78,9 +78,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        unsafe {
-                            $$
-                        """
+                    unsafe {
+                        $$
+                    """
                 )
             );
         }
@@ -91,11 +91,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        unsafe {
-                            fixed (int* = bar) {
-                            }
-                            $$
-                        """
+                    unsafe {
+                        fixed (int* = bar) {
+                        }
+                        $$
+                    """
                 )
             );
         }
@@ -106,10 +106,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                        fixed (int* = bar) {
-                          }
-                          $$
-                        """
+                    fixed (int* = bar) {
+                      }
+                      $$
+                    """
                 )
             );
         }
@@ -119,9 +119,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        $$
-                    """
+                class C {
+                    $$
+                """
             );
         }
 
@@ -130,9 +130,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    struct S {
-                        $$
-                    """
+                struct S {
+                    $$
+                """
             );
         }
 
@@ -141,9 +141,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    record struct S {
-                        $$
-                    """
+                record struct S {
+                    $$
+                """
             );
         }
 
@@ -152,9 +152,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    unsafe struct S {
-                        $$
-                    """
+                unsafe struct S {
+                    $$
+                """
             );
         }
 
@@ -163,10 +163,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    unsafe struct S {
-                        struct T {
-                          $$
-                    """
+                unsafe struct S {
+                    struct T {
+                      $$
+                """
             );
         }
 
@@ -175,10 +175,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    struct S {
-                        unsafe struct T {
-                          $$
-                    """
+                struct S {
+                    unsafe struct T {
+                      $$
+                """
             );
         }
 
@@ -187,9 +187,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    unsafe struct S {
-                        static $$
-                    """
+                unsafe struct S {
+                    static $$
+                """
             );
         }
 
@@ -198,17 +198,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    public class C
+                public class C
+                {
+                    public void M()
                     {
-                        public void M()
+                        unsafe void Local()
                         {
-                            unsafe void Local()
-                            {
-                                $$
-                            }
+                            $$
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -217,17 +217,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    public class C
+                public class C
+                {
+                    public void M()
                     {
-                        public void M()
+                        void Local()
                         {
-                            void Local()
-                            {
-                                $$
-                            }
+                            $$
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

@@ -134,9 +134,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    using System;
-                    Console.$$
-                    """,
+                using System;
+                Console.$$
+                """,
                 @"Beep"
             );
         }
@@ -150,11 +150,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    class C {
-                    #if false
-                    System.Console.$$
-                    #endif
-                    """,
+                class C {
+                #if false
+                System.Console.$$
+                #endif
+                """,
                 @"Beep"
             );
         }
@@ -164,11 +164,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    class C {
-                    #if true
-                    System.Console.$$
-                    #endif
-                    """,
+                class C {
+                #if true
+                System.Console.$$
+                #endif
+                """,
                 @"Beep"
             );
         }
@@ -178,11 +178,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                    // Console.$$
-                    """,
+                class C {
+                // Console.$$
+                """,
                 @"Beep"
             );
         }
@@ -192,11 +192,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                    /*  Console.$$   */
-                    """,
+                class C {
+                /*  Console.$$   */
+                """,
                 @"Beep"
             );
         }
@@ -206,11 +206,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                    /// Console.$$
-                    """,
+                class C {
+                /// Console.$$
+                """,
                 @"Beep"
             );
         }
@@ -220,15 +220,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                        void Method()
-                        {
-                            /// Console.$$
-                        }
+                class C {
+                    void Method()
+                    {
+                        /// Console.$$
                     }
-                    """,
+                }
+                """,
                 @"Beep"
             );
         }
@@ -238,13 +238,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                        void Method()
-                        {
-                            /**  Console.$$   */
-                    """,
+                class C {
+                    void Method()
+                    {
+                        /**  Console.$$   */
+                """,
                 @"Beep"
             );
         }
@@ -302,15 +302,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program {
-                        static void Main(string[] args)
-                        {
-                            string a = "a$$
-                        }
+                class Program {
+                    static void Main(string[] args)
+                    {
+                        string a = "a$$
                     }
-                    """,
+                }
+                """,
                 @"Main"
             );
         }
@@ -320,16 +320,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program {
-                        static void Main(string[] args)
-                        {
-                            #region
-                            #endregion // a$$
-                        }
+                class Program {
+                    static void Main(string[] args)
+                    {
+                        #region
+                        #endregion // a$$
                     }
-                    """,
+                }
+                """,
                 @"Main"
             );
         }
@@ -339,15 +339,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemIsAbsentAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program {
-                        static void Main(string[] args)
-                        {
-                            //s$$
-                        }
+                class Program {
+                    static void Main(string[] args)
+                    {
+                        //s$$
                     }
-                    """,
+                }
+                """,
                 @"SByte"
             );
         }
@@ -357,13 +357,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                        void Method()
-                        {
-                            Console.$$
-                    """,
+                class C {
+                    void Method()
+                    {
+                        Console.$$
+                """,
                 @"Beep"
             );
         }
@@ -377,15 +377,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                        string Property
+                class C {
+                    string Property
+                    {
+                        get 
                         {
-                            get 
-                            {
-                                Console.$$
-                    """,
+                            Console.$$
+                """,
                 @"Beep"
             );
         }
@@ -395,11 +395,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                        int i = Console.$$
-                    """,
+                class C {
+                    int i = Console.$$
+                """,
                 @"Beep"
             );
         }
@@ -409,9 +409,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    class C {
-                        object i = $$
-                    """,
+                class C {
+                    object i = $$
+                """,
                 @"System"
             );
         }
@@ -421,13 +421,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C {
-                        void Method()
-                        {
-                           new List<string>().$$
-                    """,
+                class C {
+                    void Method()
+                    {
+                       new List<string>().$$
+                """,
                 @"Capacity"
             );
         }
@@ -437,10 +437,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    using System.Collections.Generic;
-                    class C {
-                        int i =  new List<string>().$$
-                    """,
+                using System.Collections.Generic;
+                class C {
+                    int i =  new List<string>().$$
+                """,
                 @"Count"
             );
         }
@@ -450,13 +450,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         {
             await VerifyItemExistsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C {
-                        private static int Method() {}
+                class C {
+                    private static int Method() {}
 
-                        int i = $$
-                    """,
+                    int i = $$
+                """,
                 @"Method"
             );
         }

@@ -75,23 +75,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case [||]default: }
-                        }
+                        switch (1) { case [||]default: }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case 0: }
-                        }
+                        switch (1) { case 0: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -101,23 +101,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case ([||]default): }
-                        }
+                        switch (1) { case ([||]default): }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case (0): }
-                        }
+                        switch (1) { case (0): }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -127,14 +127,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case (int)[||]default: }
-                        }
+                        switch (1) { case (int)[||]default: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -144,14 +144,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case [||]default(int): }
-                        }
+                        switch (1) { case [||]default(int): }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -161,14 +161,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case [||]0: }
-                        }
+                        switch (1) { case [||]0: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -179,23 +179,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             // Note that the default value of a struct type is not a constant, so this code is incorrect.
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (System.DateTime.Now) { case [||]default: }
-                        }
+                        switch (System.DateTime.Now) { case [||]default: }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (System.DateTime.Now) { case default(System.DateTime): }
-                        }
+                        switch (System.DateTime.Now) { case default(System.DateTime): }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -206,23 +206,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             // Note that the default value of a tuple type is not a constant, so this code is incorrect.
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch ((0, true)) { case [||]default: }
-                        }
+                        switch ((0, true)) { case [||]default: }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch ((0, true)) { case default((int, bool)): }
-                        }
+                        switch ((0, true)) { case default((int, bool)): }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -252,23 +252,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case [||]default when true: }
-                        }
+                        switch (1) { case [||]default when true: }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case 0 when true: }
-                        }
+                        switch (1) { case 0 when true: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -278,23 +278,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case ([||]default) when true: }
-                        }
+                        switch (1) { case ([||]default) when true: }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case (0) when true: }
-                        }
+                        switch (1) { case (0) when true: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -304,14 +304,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case (int)[||]default when true: }
-                        }
+                        switch (1) { case (int)[||]default when true: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -321,14 +321,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case [||]default(int) when true: }
-                        }
+                        switch (1) { case [||]default(int) when true: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -338,14 +338,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (1) { case [||]0 when true: }
-                        }
+                        switch (1) { case [||]0 when true: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -356,23 +356,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             // Note that the default value of a struct type is not a constant, so this code is incorrect.
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (System.DateTime.Now) { case [||]default when true: }
-                        }
+                        switch (System.DateTime.Now) { case [||]default when true: }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch (System.DateTime.Now) { case default(System.DateTime) when true: }
-                        }
+                        switch (System.DateTime.Now) { case default(System.DateTime) when true: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -383,23 +383,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             // Note that the default value of a tuple type is not a constant, so this code is incorrect.
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch ((0, true)) { case [||]default when true: }
-                        }
+                        switch ((0, true)) { case [||]default when true: }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            switch ((0, true)) { case default((int, bool)) when true: }
-                        }
+                        switch ((0, true)) { case default((int, bool)) when true: }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -431,23 +431,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is [||]default) { }
-                        }
+                        if (true is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is false) { }
-                        }
+                        if (true is false) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -457,23 +457,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is ([||]default)) { }
-                        }
+                        if (true is ([||]default)) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is (false)) { }
-                        }
+                        if (true is (false)) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -483,14 +483,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is (bool)[||]default) { }
-                        }
+                        if (true is (bool)[||]default) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -500,14 +500,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is [||]default(bool)) { }
-                        }
+                        if (true is [||]default(bool)) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -517,14 +517,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is [||]false) { }
-                        }
+                        if (true is [||]false) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -571,23 +571,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             // Note that the default value of a struct type is not a constant, so this code is incorrect.
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (System.DateTime.Now is [||]default) { }
-                        }
+                        if (System.DateTime.Now is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (System.DateTime.Now is default(System.DateTime)) { }
-                        }
+                        if (System.DateTime.Now is default(System.DateTime)) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -598,23 +598,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             // Note that the default value of a tuple type is not a constant, so this code is incorrect.
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if ((0, true) is [||]default) { }
-                        }
+                        if ((0, true) is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if ((0, true) is default((int, bool))) { }
-                        }
+                        if ((0, true) is default((int, bool))) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -721,25 +721,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             // Note that the default value of a struct type is not a constant, so this code is incorrect.
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    struct Struct { }
+                    void M()
                     {
-                        struct Struct { }
-                        void M()
-                        {
-                            if (new Struct() is [||]default) { }
-                        }
+                        if (new Struct() is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    struct Struct { }
+                    void M()
                     {
-                        struct Struct { }
-                        void M()
-                        {
-                            if (new Struct() is default(Struct)) { }
-                        }
+                        if (new Struct() is default(Struct)) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -749,23 +749,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (new { a = 0 } is [||]default) { }
-                        }
+                        if (new { a = 0 } is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (new { a = 0 } is null) { }
-                        }
+                        if (new { a = 0 } is null) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -806,16 +806,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    struct Container<T> { }
+                    Container<T> ToContainer<T>(T value) => new Container<T>();
+                    void M()
                     {
-                        struct Container<T> { }
-                        Container<T> ToContainer<T>(T value) => new Container<T>();
-                        void M()
-                        {
-                            if (ToContainer(new { x = 0 }) is [||]default) { }
-                        }
+                        if (ToContainer(new { x = 0 }) is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -905,15 +905,15 @@ class C
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
-                    {
-                        void M()
-                        { 
-                            var value;
-                            if (value is [||]default) { }
-                        }
+                class C
+                {
+                    void M()
+                    { 
+                        var value;
+                        if (value is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -963,15 +963,15 @@ class C
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
-                    {
-                        void M()
-                        { 
-                            var value = () => { };
-                            if (value is [||]default) { }
-                        }
+                class C
+                {
+                    void M()
+                    { 
+                        var value = () => { };
+                        if (value is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 ImmutableArray.Create(LanguageVersion.CSharp7_1)
             );
         }
@@ -981,25 +981,25 @@ class C
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
-                    {
-                        void M()
-                        { 
-                            var value = () => { };
-                            if (value is [||]default) { }
-                        }
+                class C
+                {
+                    void M()
+                    { 
+                        var value = () => { };
+                        if (value is [||]default) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M()
-                        { 
-                            var value = () => { };
-                            if (value is null) { }
-                        }
+                class C
+                {
+                    void M()
+                    { 
+                        var value = () => { };
+                        if (value is null) { }
                     }
-                    """,
+                }
+                """,
                 ImmutableArray.Create(LanguageVersion.Latest)
             );
         }
@@ -1009,25 +1009,25 @@ class C
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is
-                                /*a*/ [||]default /*b*/) { }
-                        }
+                        if (true is
+                            /*a*/ [||]default /*b*/) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (true is
-                                /*a*/ false /*b*/) { }
-                        }
+                        if (true is
+                            /*a*/ false /*b*/) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -1037,25 +1037,25 @@ class C
         {
             await TestWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (System.DateTime.Now is
-                                /*a*/ [||]default /*b*/) { }
-                        }
+                        if (System.DateTime.Now is
+                            /*a*/ [||]default /*b*/) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            if (System.DateTime.Now is
-                                /*a*/ default(System.DateTime) /*b*/) { }
-                        }
+                        if (System.DateTime.Now is
+                            /*a*/ default(System.DateTime) /*b*/) { }
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -1065,14 +1065,14 @@ class C
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = [||]default;
-                        }
+                        int i = [||]default;
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -1082,14 +1082,14 @@ class C
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = [||]default;
-                        }
+                        var v = [||]default;
                     }
-                    """,
+                }
+                """,
                 s_csharp7_1above
             );
         }
@@ -1099,14 +1099,14 @@ class C
         {
             await TestMissingWithLanguageVersionsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int i = [||]default;
-                        }
+                        int i = [||]default;
                     }
-                    """,
+                }
+                """,
                 s_csharp7below
             );
         }

@@ -31,44 +31,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class B
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
+
+                class C : B
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        public override int GetHashCode() => 0;
+                        var hashCode = 339610899;
+                        hashCode = hashCode * -1521134295 + base.GetHashCode();
+                        hashCode = hashCode * -1521134295 + j.GetHashCode();
+                        return hashCode;
                     }
-
-                    class C : B
-                    {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = 339610899;
-                            hashCode = hashCode * -1521134295 + base.GetHashCode();
-                            hashCode = hashCode * -1521134295 + j.GetHashCode();
-                            return hashCode;
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class B
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
+
+                class C : B
+                {
+                    int j;
+
+                    public override int GetHashCode()
                     {
-                        public override int GetHashCode() => 0;
+                        return System.HashCode.Combine(base.GetHashCode(), j);
                     }
-
-                    class C : B
-                    {
-                        int j;
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(base.GetHashCode(), j);
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -77,43 +77,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class B
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
+
+                class C : B
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        public override int GetHashCode() => 0;
+                        var hashCode = 339610899;
+                        hashCode = hashCode * -1521134295 + j.GetHashCode();
+                        return hashCode;
                     }
-
-                    class C : B
-                    {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = 339610899;
-                            hashCode = hashCode * -1521134295 + j.GetHashCode();
-                            return hashCode;
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class B
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
+
+                class C : B
+                {
+                    int j;
+
+                    public override int GetHashCode()
                     {
-                        public override int GetHashCode() => 0;
+                        return System.HashCode.Combine(j);
                     }
-
-                    class C : B
-                    {
-                        int j;
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(j);
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -122,43 +122,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class B
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
+
+                class C : B
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        public override int GetHashCode() => 0;
+                        var hashCode = 339610899;
+                        hashCode = hashCode * -1521134295 + base.GetHashCode();
+                        return hashCode;
                     }
-
-                    class C : B
-                    {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = 339610899;
-                            hashCode = hashCode * -1521134295 + base.GetHashCode();
-                            return hashCode;
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class B
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
+
+                class C : B
+                {
+                    int j;
+
+                    public override int GetHashCode()
                     {
-                        public override int GetHashCode() => 0;
+                        return System.HashCode.Combine(base.GetHashCode());
                     }
-
-                    class C : B
-                    {
-                        int j;
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(base.GetHashCode());
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -167,40 +167,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -209,43 +209,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
+                        unchecked
                         {
-                            unchecked
-                            {
-                                var hashCode = -538000506;
-                                hashCode = hashCode * -1521134295 + i.GetHashCode();
-                                hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                                return hashCode;
-                            }
+                            var hashCode = -538000506;
+                            hashCode = hashCode * -1521134295 + i.GetHashCode();
+                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                            return hashCode;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -254,24 +254,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode1()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode1()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -280,23 +280,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -305,23 +305,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -330,24 +330,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506, x;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506, x;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -356,24 +356,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -382,24 +382,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return 0;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -408,39 +408,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = i;
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = i;
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -449,39 +449,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -490,26 +490,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class B
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
+
+                class C : B
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        public override int GetHashCode() => 0;
+                        var hashCode = 339610899;
+                        hashCode = hashCode * -1521134295 + this.GetHashCode();
+                        hashCode = hashCode * -1521134295 + j.GetHashCode();
+                        return hashCode;
                     }
-
-                    class C : B
-                    {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = 339610899;
-                            hashCode = hashCode * -1521134295 + this.GetHashCode();
-                            hashCode = hashCode * -1521134295 + j.GetHashCode();
-                            return hashCode;
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -518,24 +518,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    class B
-                    {
-                        public override int GetHashCode() => 0;
-                    }
+                class B
+                {
+                    public override int GetHashCode() => 0;
+                }
 
-                    class C : B
-                    {
-                        int j;
+                class C : B
+                {
+                    int j;
 
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = 339610899;
-                            hashCode = hashCode * -1521134295 + base.GetHashCode();
-                            hashCode = hashCode * -1521134295 + j.GetHashCode();
-                            return hashCode;
-                        }
+                    public override int $$GetHashCode()
+                    {
+                        var hashCode = 339610899;
+                        hashCode = hashCode * -1521134295 + base.GetHashCode();
+                        hashCode = hashCode * -1521134295 + j.GetHashCode();
+                        return hashCode;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -544,40 +544,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + (S != null ? S.GetHashCode() : 0);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + (S != null ? S.GetHashCode() : 0);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -586,40 +586,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + (S == null ? 0 : S.GetHashCode());
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + (S == null ? 0 : S.GetHashCode());
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -628,33 +628,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            long hashCode = -468965076;
-                            hashCode = (hashCode * -1521134295 + j.GetHashCode()).GetHashCode();
-                            return hashCode;
-                        }
+                        long hashCode = -468965076;
+                        hashCode = (hashCode * -1521134295 + j.GetHashCode()).GetHashCode();
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int j;
+
+                    public override int GetHashCode()
                     {
-                        int j;
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(j);
-                        }
+                        return System.HashCode.Combine(j);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -663,33 +663,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            long hashCode = -468965076;
-                            hashCode = (hashCode * -1521134295 + j.GetHashCode()).GetHashCode();
-                            return (int)hashCode;
-                        }
+                        long hashCode = -468965076;
+                        hashCode = (hashCode * -1521134295 + j.GetHashCode()).GetHashCode();
+                        return (int)hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int j;
+
+                    public override int GetHashCode()
                     {
-                        int j;
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(j);
-                        }
+                        return System.HashCode.Combine(j);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -698,37 +698,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            return (i, S).GetHashCode();
-                        }
+                        return (i, S).GetHashCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -737,40 +737,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -779,40 +779,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -821,40 +821,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S)!;
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S)!;
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -863,40 +863,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S)!;
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S)!;
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -905,44 +905,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -951,44 +951,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -997,44 +997,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S)!;
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S)!;
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1043,44 +1043,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S)!;
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S)!;
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1089,44 +1089,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1135,44 +1135,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S);
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S);
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1181,44 +1181,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S)!;
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S)!;
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1227,44 +1227,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int $$GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S)!;
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(S)!;
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    #nullable disable
+                #nullable disable
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string? S { get; }
+
+                    public override int GetHashCode()
                     {
-                        int i;
-
-                        string? S { get; }
-
-                        public override int GetHashCode()
-                        {
-                            return System.HashCode.Combine(i, S);
-                        }
+                        return System.HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1273,21 +1273,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode1()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode1()
-                        {
-                            return HashCode.Combine(i, S);
-                        }
+                        return HashCode.Combine(i, S);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1296,24 +1296,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int i;
+
+                    string S { get; }
+
+                    public override int $$GetHashCode1()
                     {
-                        int i;
-
-                        string S { get; }
-
-                        public override int $$GetHashCode1()
-                        {
-                            var hash = new HashCode();
-                            hash.Add(i);
-                            hash.Add(S);
-                            return hash.ToHashCode();
-                        }
+                        var hash = new HashCode();
+                        hash.Add(i);
+                        hash.Add(S);
+                        return hash.ToHashCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1322,53 +1322,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int a, b, c, d, e, f, g, h, i;
+
+                    public override int $$GetHashCode()
                     {
-                        int a, b, c, d, e, f, g, h, i;
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + a.GetHashCode();
-                            hashCode = hashCode * -1521134295 + b.GetHashCode();
-                            hashCode = hashCode * -1521134295 + c.GetHashCode();
-                            hashCode = hashCode * -1521134295 + d.GetHashCode();
-                            hashCode = hashCode * -1521134295 + e.GetHashCode();
-                            hashCode = hashCode * -1521134295 + f.GetHashCode();
-                            hashCode = hashCode * -1521134295 + g.GetHashCode();
-                            hashCode = hashCode * -1521134295 + h.GetHashCode();
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + a.GetHashCode();
+                        hashCode = hashCode * -1521134295 + b.GetHashCode();
+                        hashCode = hashCode * -1521134295 + c.GetHashCode();
+                        hashCode = hashCode * -1521134295 + d.GetHashCode();
+                        hashCode = hashCode * -1521134295 + e.GetHashCode();
+                        hashCode = hashCode * -1521134295 + f.GetHashCode();
+                        hashCode = hashCode * -1521134295 + g.GetHashCode();
+                        hashCode = hashCode * -1521134295 + h.GetHashCode();
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int a, b, c, d, e, f, g, h, i;
+
+                    public override int GetHashCode()
                     {
-                        int a, b, c, d, e, f, g, h, i;
-
-                        public override int GetHashCode()
-                        {
-                            var hash = new System.HashCode();
-                            hash.Add(a);
-                            hash.Add(b);
-                            hash.Add(c);
-                            hash.Add(d);
-                            hash.Add(e);
-                            hash.Add(f);
-                            hash.Add(g);
-                            hash.Add(h);
-                            hash.Add(i);
-                            return hash.ToHashCode();
-                        }
+                        var hash = new System.HashCode();
+                        hash.Add(a);
+                        hash.Add(b);
+                        hash.Add(c);
+                        hash.Add(d);
+                        hash.Add(e);
+                        hash.Add(f);
+                        hash.Add(g);
+                        hash.Add(h);
+                        hash.Add(i);
+                        return hash.ToHashCode();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: UseVarTestExtensions.PreferImplicitTypeWithInfo(this))
             );
         }
@@ -1378,53 +1378,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int a, b, c, d, e, f, g, h, i;
+
+                    public override int $$GetHashCode()
                     {
-                        int a, b, c, d, e, f, g, h, i;
-
-                        public override int $$GetHashCode()
-                        {
-                            var hashCode = -538000506;
-                            hashCode = hashCode * -1521134295 + a.GetHashCode();
-                            hashCode = hashCode * -1521134295 + b.GetHashCode();
-                            hashCode = hashCode * -1521134295 + c.GetHashCode();
-                            hashCode = hashCode * -1521134295 + d.GetHashCode();
-                            hashCode = hashCode * -1521134295 + e.GetHashCode();
-                            hashCode = hashCode * -1521134295 + f.GetHashCode();
-                            hashCode = hashCode * -1521134295 + g.GetHashCode();
-                            hashCode = hashCode * -1521134295 + h.GetHashCode();
-                            hashCode = hashCode * -1521134295 + i.GetHashCode();
-                            return hashCode;
-                        }
+                        var hashCode = -538000506;
+                        hashCode = hashCode * -1521134295 + a.GetHashCode();
+                        hashCode = hashCode * -1521134295 + b.GetHashCode();
+                        hashCode = hashCode * -1521134295 + c.GetHashCode();
+                        hashCode = hashCode * -1521134295 + d.GetHashCode();
+                        hashCode = hashCode * -1521134295 + e.GetHashCode();
+                        hashCode = hashCode * -1521134295 + f.GetHashCode();
+                        hashCode = hashCode * -1521134295 + g.GetHashCode();
+                        hashCode = hashCode * -1521134295 + h.GetHashCode();
+                        hashCode = hashCode * -1521134295 + i.GetHashCode();
+                        return hashCode;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    namespace System { public struct HashCode { } }
+                using System.Collections.Generic;
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int a, b, c, d, e, f, g, h, i;
+
+                    public override int GetHashCode()
                     {
-                        int a, b, c, d, e, f, g, h, i;
-
-                        public override int GetHashCode()
-                        {
-                            System.HashCode hash = new System.HashCode();
-                            hash.Add(a);
-                            hash.Add(b);
-                            hash.Add(c);
-                            hash.Add(d);
-                            hash.Add(e);
-                            hash.Add(f);
-                            hash.Add(g);
-                            hash.Add(h);
-                            hash.Add(i);
-                            return hash.ToHashCode();
-                        }
+                        System.HashCode hash = new System.HashCode();
+                        hash.Add(a);
+                        hash.Add(b);
+                        hash.Add(c);
+                        hash.Add(d);
+                        hash.Add(e);
+                        hash.Add(f);
+                        hash.Add(g);
+                        hash.Add(h);
+                        hash.Add(i);
+                        return hash.ToHashCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1433,18 +1433,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            return j;
-                        }
+                        return j;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1453,18 +1453,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            return j.GetHashCode();
-                        }
+                        return j.GetHashCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1473,18 +1473,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
         {
             await TestMissingAsync(
                 """
-                    namespace System { public struct HashCode { } }
+                namespace System { public struct HashCode { } }
 
-                    class C
+                class C
+                {
+                    int j;
+
+                    public override int $$GetHashCode()
                     {
-                        int j;
-
-                        public override int $$GetHashCode()
-                        {
-                            return base.GetHashCode();
-                        }
+                        return base.GetHashCode();
                     }
-                    """
+                }
+                """
             );
         }
     }

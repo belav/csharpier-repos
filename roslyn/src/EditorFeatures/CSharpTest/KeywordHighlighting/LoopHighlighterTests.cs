@@ -22,24 +22,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        {|Cursor:[|while|]|} (true)
                         {
-                            {|Cursor:[|while|]|} (true)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                [|break|];
+                            }
+                            else
+                            {
+                                [|continue|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -48,24 +48,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|while|] (true)
                         {
-                            [|while|] (true)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    {|Cursor:[|break|]|};
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                {|Cursor:[|break|]|};
+                            }
+                            else
+                            {
+                                [|continue|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -74,24 +74,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|while|] (true)
                         {
-                            [|while|] (true)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    {|Cursor:[|continue|]|};
-                                }
+                                [|break|];
+                            }
+                            else
+                            {
+                                {|Cursor:[|continue|]|};
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -100,25 +100,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        {|Cursor:[|do|]|}
                         {
-                            {|Cursor:[|do|]|}
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                [|break|];
                             }
-                            [|while|] (true);
+                            else
+                            {
+                                [|continue|];
+                            }
                         }
+                        [|while|] (true);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -127,25 +127,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|do|]
                         {
-                            [|do|]
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    {|Cursor:[|break|]|};
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                {|Cursor:[|break|]|};
                             }
-                            [|while|] (true);
+                            else
+                            {
+                                [|continue|];
+                            }
                         }
+                        [|while|] (true);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -154,25 +154,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|do|]
                         {
-                            [|do|]
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    {|Cursor:[|continue|]|};
-                                }
+                                [|break|];
                             }
-                            [|while|] (true);
+                            else
+                            {
+                                {|Cursor:[|continue|]|};
+                            }
                         }
+                        [|while|] (true);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -181,25 +181,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|do|]
                         {
-                            [|do|]
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                [|break|];
                             }
-                            {|Cursor:[|while|]|} (true);
+                            else
+                            {
+                                [|continue|];
+                            }
                         }
+                        {|Cursor:[|while|]|} (true);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -208,25 +208,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        do
                         {
-                            do
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    continue;
-                                }
+                                break;
                             }
-                            while {|Cursor:(true)|};
+                            else
+                            {
+                                continue;
+                            }
                         }
+                        while {|Cursor:(true)|};
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -235,25 +235,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|do|]
                         {
-                            [|do|]
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                [|break|];
                             }
-                            [|while|] (true);{|Cursor:|}
+                            else
+                            {
+                                [|continue|];
+                            }
                         }
+                        [|while|] (true);{|Cursor:|}
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -262,24 +262,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        {|Cursor:[|for|]|} (int i = 0; i < 10; i++)
                         {
-                            {|Cursor:[|for|]|} (int i = 0; i < 10; i++)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                [|break|];
+                            }
+                            else
+                            {
+                                [|continue|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -288,24 +288,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|for|] (int i = 0; i < 10; i++)
                         {
-                            [|for|] (int i = 0; i < 10; i++)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    {|Cursor:[|break|];|}
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                {|Cursor:[|break|];|}
+                            }
+                            else
+                            {
+                                [|continue|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -314,24 +314,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|for|] (int i = 0; i < 10; i++)
                         {
-                            [|for|] (int i = 0; i < 10; i++)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    {|Cursor:[|continue|];|}
-                                }
+                                [|break|];
+                            }
+                            else
+                            {
+                                {|Cursor:[|continue|];|}
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -340,24 +340,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        {|Cursor:[|foreach|]|} (var a in x)
                         {
-                            {|Cursor:[|foreach|]|} (var a in x)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                [|break|];
+                            }
+                            else
+                            {
+                                [|continue|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -366,24 +366,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|foreach|] (var a in x)
                         {
-                            [|foreach|] (var a in x)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    {|Cursor:[|break|];|}
-                                }
-                                else
-                                {
-                                    [|continue|];
-                                }
+                                {|Cursor:[|break|];|}
+                            }
+                            else
+                            {
+                                [|continue|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -392,24 +392,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|foreach|] (var a in x)
                         {
-                            [|foreach|] (var a in x)
+                            if (x)
                             {
-                                if (x)
-                                {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    {|Cursor:[|continue|];|}
-                                }
+                                [|break|];
+                            }
+                            else
+                            {
+                                {|Cursor:[|continue|];|}
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -418,43 +418,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        {|Cursor:[|foreach|]|} (var a in x)
                         {
-                            {|Cursor:[|foreach|]|} (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                [|break|];
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    [|break|];
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            do
                                             {
-                                                do
-                                                {
-                                                    break;
-                                                }
-                                                while (false);
                                                 break;
                                             }
-
+                                            while (false);
                                             break;
-                                    }
-                                }
+                                        }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
+                                        break;
                                 }
+                            }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -463,43 +463,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|foreach|] (var a in x)
                         {
-                            [|foreach|] (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                {|Cursor:[|break|];|}
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    {|Cursor:[|break|];|}
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            do
                                             {
-                                                do
-                                                {
-                                                    break;
-                                                }
-                                                while (false);
                                                 break;
                                             }
-
+                                            while (false);
                                             break;
-                                    }
-                                }
+                                        }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
+                                        break;
                                 }
+                            }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -508,43 +508,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            {|Cursor:[|do|]|}
                                             {
-                                                {|Cursor:[|do|]|}
-                                                {
-                                                    [|break|];
-                                                }
-                                                [|while|] (false);
-                                                break;
+                                                [|break|];
                                             }
-
+                                            [|while|] (false);
                                             break;
-                                    }
-                                }
+                                        }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
+                                        break;
                                 }
+                            }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -553,43 +553,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            [|do|]
                                             {
-                                                [|do|]
-                                                {
-                                                    {|Cursor:[|break|];|}
-                                                }
-                                                [|while|] (false);
-                                                break;
+                                                {|Cursor:[|break|];|}
                                             }
-
+                                            [|while|] (false);
                                             break;
-                                    }
-                                }
+                                        }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
+                                        break;
                                 }
+                            }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -598,43 +598,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            [|do|]
                                             {
-                                                [|do|]
-                                                {
-                                                    [|break|];
-                                                }
-                                                {|Cursor:[|while|]|} (false);
-                                                break;
+                                                [|break|];
                                             }
-
+                                            {|Cursor:[|while|]|} (false);
                                             break;
-                                    }
-                                }
+                                        }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
+                                        break;
                                 }
+                            }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -643,43 +643,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            [|do|]
                                             {
-                                                [|do|]
-                                                {
-                                                    [|break|];
-                                                }
-                                                [|while|] (false);{|Cursor:|}
-                                                break;
+                                                [|break|];
                                             }
-
+                                            [|while|] (false);{|Cursor:|}
                                             break;
-                                    }
-                                }
+                                        }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
+                                        break;
                                 }
+                            }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -688,43 +688,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            {|Cursor:[|while|]|} (true)
+                                    case 0:
+                                        {|Cursor:[|while|]|} (true)
+                                        {
+                                            do
                                             {
-                                                do
-                                                {
-                                                    break;
-                                                }
-                                                while (false);
-                                                [|break|];
+                                                break;
                                             }
+                                            while (false);
+                                            [|break|];
+                                        }
 
-                                            break;
-                                    }
+                                        break;
                                 }
+                            }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
-                                }
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -733,43 +733,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            [|while|] (true)
+                                    case 0:
+                                        [|while|] (true)
+                                        {
+                                            do
                                             {
-                                                do
-                                                {
-                                                    break;
-                                                }
-                                                while (false);
-                                                {|Cursor:[|break|];|}
+                                                break;
                                             }
+                                            while (false);
+                                            {|Cursor:[|break|];|}
+                                        }
 
-                                            break;
-                                    }
+                                        break;
                                 }
+                            }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    break;
-                                }
+                            for (int i = 0; i < 10; i++)
+                            {
+                                break;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -780,43 +780,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            do
                                             {
-                                                do
-                                                {
-                                                    break;
-                                                }
-                                                while (false);
                                                 break;
                                             }
-
+                                            while (false);
                                             break;
-                                    }
-                                }
+                                        }
 
-                                {|Cursor:[|for|]|} (int i = 0; i < 10; i++)
-                                {
-                                    [|break|];
+                                        break;
                                 }
+                            }
+
+                            {|Cursor:[|for|]|} (int i = 0; i < 10; i++)
+                            {
+                                [|break|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -825,43 +825,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                break;
+                            }
+                            else
+                            {
+                                switch (b)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    switch (b)
-                                    {
-                                        case 0:
-                                            while (true)
+                                    case 0:
+                                        while (true)
+                                        {
+                                            do
                                             {
-                                                do
-                                                {
-                                                    break;
-                                                }
-                                                while (false);
                                                 break;
                                             }
-
+                                            while (false);
                                             break;
-                                    }
-                                }
+                                        }
 
-                                [|for|] (int i = 0; i < 10; i++)
-                                {
-                                    {|Cursor:[|break|];|}
+                                        break;
                                 }
+                            }
+
+                            [|for|] (int i = 0; i < 10; i++)
+                            {
+                                {|Cursor:[|break|];|}
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -870,37 +870,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        {|Cursor:[|foreach|]|} (var a in x)
                         {
-                            {|Cursor:[|foreach|]|} (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                [|continue|];
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    [|continue|];
-                                }
-                                else
-                                {
-                                    while (true)
+                                    do
                                     {
-                                        do
-                                        {
-                                            continue;
-                                        }
-                                        while (false);
                                         continue;
                                     }
-                                }
-
-                                for (int i = 0; i < 10; i++)
-                                {
+                                    while (false);
                                     continue;
                                 }
                             }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -909,37 +909,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        [|foreach|] (var a in x)
                         {
-                            [|foreach|] (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                {|Cursor:[|continue|];|}
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    {|Cursor:[|continue|];|}
-                                }
-                                else
-                                {
-                                    while (true)
+                                    do
                                     {
-                                        do
-                                        {
-                                            continue;
-                                        }
-                                        while (false);
                                         continue;
                                     }
-                                }
-
-                                for (int i = 0; i < 10; i++)
-                                {
+                                    while (false);
                                     continue;
                                 }
                             }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -948,37 +948,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    while (true)
+                                    {|Cursor:[|do|]|}
                                     {
-                                        {|Cursor:[|do|]|}
-                                        {
-                                            [|continue|];
-                                        }
-                                        [|while|] (false);
-                                        continue;
+                                        [|continue|];
                                     }
-                                }
-
-                                for (int i = 0; i < 10; i++)
-                                {
+                                    [|while|] (false);
                                     continue;
                                 }
                             }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -987,37 +987,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    while (true)
+                                    [|do|]
                                     {
-                                        [|do|]
-                                        {
-                                            {|Cursor:[|continue|];|}
-                                        }
-                                        [|while|] (false);
-                                        continue;
+                                        {|Cursor:[|continue|];|}
                                     }
-                                }
-
-                                for (int i = 0; i < 10; i++)
-                                {
+                                    [|while|] (false);
                                     continue;
                                 }
                             }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1026,37 +1026,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    while (true)
+                                    [|do|]
                                     {
-                                        [|do|]
-                                        {
-                                            [|continue|];
-                                        }
-                                        {|Cursor:[|while|]|} (false);
-                                        continue;
+                                        [|continue|];
                                     }
-                                }
-
-                                for (int i = 0; i < 10; i++)
-                                {
+                                    {|Cursor:[|while|]|} (false);
                                     continue;
                                 }
                             }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1065,37 +1065,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    while (true)
+                                    do
                                     {
-                                        do
-                                        {
-                                            continue;
-                                        }
-                                        while {|Cursor:(false)|};
                                         continue;
                                     }
-                                }
-
-                                for (int i = 0; i < 10; i++)
-                                {
+                                    while {|Cursor:(false)|};
                                     continue;
                                 }
                             }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1104,37 +1104,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    while (true)
+                                    [|do|]
                                     {
-                                        [|do|]
-                                        {
-                                            [|continue|];
-                                        }
-                                        [|while|] (false);{|Cursor:|}
-                                        continue;
+                                        [|continue|];
                                     }
-                                }
-
-                                for (int i = 0; i < 10; i++)
-                                {
+                                    [|while|] (false);{|Cursor:|}
                                     continue;
                                 }
                             }
+
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1143,37 +1143,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                {|Cursor:[|while|]|} (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    {|Cursor:[|while|]|} (true)
+                                    do
                                     {
-                                        do
-                                        {
-                                            continue;
-                                        }
-                                        while (false);
-                                        [|continue|];
+                                        continue;
                                     }
+                                    while (false);
+                                    [|continue|];
                                 }
+                            }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    continue;
-                                }
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1182,37 +1182,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                [|while|] (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    [|while|] (true)
+                                    do
                                     {
-                                        do
-                                        {
-                                            continue;
-                                        }
-                                        while (false);
-                                        {|Cursor:[|continue|];|}
+                                        continue;
                                     }
+                                    while (false);
+                                    {|Cursor:[|continue|];|}
                                 }
+                            }
 
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    continue;
-                                }
+                            for (int i = 0; i < 10; i++)
+                            {
+                                continue;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1221,37 +1221,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    while (true)
+                                    do
                                     {
-                                        do
-                                        {
-                                            continue;
-                                        }
-                                        while (false);
                                         continue;
                                     }
+                                    while (false);
+                                    continue;
                                 }
+                            }
 
-                                {|Cursor:[|for|]|} (int i = 0; i < 10; i++)
-                                {
-                                    [|continue|];
-                                }
+                            {|Cursor:[|for|]|} (int i = 0; i < 10; i++)
+                            {
+                                [|continue|];
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1260,37 +1260,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        foreach (var a in x)
                         {
-                            foreach (var a in x)
+                            if (a)
                             {
-                                if (a)
+                                continue;
+                            }
+                            else
+                            {
+                                while (true)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    while (true)
+                                    do
                                     {
-                                        do
-                                        {
-                                            continue;
-                                        }
-                                        while (false);
                                         continue;
                                     }
+                                    while (false);
+                                    continue;
                                 }
+                            }
 
-                                [|for|] (int i = 0; i < 10; i++)
-                                {
-                                    {|Cursor:[|continue|];|}
-                                }
+                            [|for|] (int i = 0; i < 10; i++)
+                            {
+                                {|Cursor:[|continue|];|}
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

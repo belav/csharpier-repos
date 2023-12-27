@@ -21,17 +21,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        {|Cursor:[|using|]|} (Font f = new Font(“Arial”, 10.0f))
                         {
-                            {|Cursor:[|using|]|} (Font f = new Font(“Arial”, 10.0f))
-                            {
-                                // use f...
-                            }
+                            // use f...
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

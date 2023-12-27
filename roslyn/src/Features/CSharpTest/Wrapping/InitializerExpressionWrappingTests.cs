@@ -24,12 +24,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ 1 };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ 1 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -38,12 +38,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ 1, };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ 1, };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -52,33 +52,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ 1, 2 };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ 1, 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                1,
-                                2
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            1,
+                            2
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                1, 2
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            1, 2
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -87,33 +87,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = [||]{ 1, 2 };
-                        }
+                class C {
+                    void Bar() {
+                        var test = [||]{ 1, 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test =
-                            {
-                                1,
-                                2
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test =
+                        {
+                            1,
+                            2
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test =
-                            {
-                                1, 2
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test =
+                        {
+                            1, 2
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -122,33 +122,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ 1, 2, };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ 1, 2, };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                1,
-                                2,
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            1,
+                            2,
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                1, 2,
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            1, 2,
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -157,40 +157,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                "the",
-                                "quick",
-                                "brown",
-                                "fox",
-                                "jumps",
-                                "over",
-                                "the",
-                                "lazy",
-                                "dog"
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            "the",
+                            "quick",
+                            "brown",
+                            "fox",
+                            "jumps",
+                            "over",
+                            "the",
+                            "lazy",
+                            "dog"
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -199,60 +199,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                "the",
-                                "quick",
-                                "brown",
-                                "fox",
-                                "jumps",
-                                "over",
-                                "the",
-                                "lazy",
-                                "dog",
-                                "the",
-                                "quick",
-                                "brown",
-                                "fox",
-                                "jumps",
-                                "over",
-                                "the",
-                                "lazy",
-                                "dog"
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            "the",
+                            "quick",
+                            "brown",
+                            "fox",
+                            "jumps",
+                            "over",
+                            "the",
+                            "lazy",
+                            "dog",
+                            "the",
+                            "quick",
+                            "brown",
+                            "fox",
+                            "jumps",
+                            "over",
+                            "the",
+                            "lazy",
+                            "dog"
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox",
-                                "jumps", "over", "the", "lazy", "dog"
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox",
+                            "jumps", "over", "the", "lazy", "dog"
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -261,33 +261,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            [||]{
-                                1,
-                                2
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        [||]{
+                            1,
+                            2
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] { 1, 2 };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] { 1, 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                1, 2
-                            };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            1, 2
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -296,40 +296,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            [||]{
-                                "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        [||]{
+                            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[]
-                            {
-                                "the",
-                                "quick",
-                                "brown",
-                                "fox",
-                                "jumps",
-                                "over",
-                                "the",
-                                "lazy",
-                                "dog"
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new[]
+                        {
+                            "the",
+                            "quick",
+                            "brown",
+                            "fox",
+                            "jumps",
+                            "over",
+                            "the",
+                            "lazy",
+                            "dog"
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] { "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        var test = new[] { "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
+                     }
+                }
+                """
             );
         }
 
@@ -338,41 +338,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<int>
-                            {
-                                0,
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                6,
-                                7,
-                                8,
-                                9
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<int>
+                        {
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<int>
-                            {
-                                0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        var test = new List<int>
+                        {
+                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -381,41 +381,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<int>
-                            [||]{
-                                0,
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                6,
-                                7,
-                                8,
-                                9
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<int>
+                        [||]{
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<int>
-                            {
-                                0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        var test = new List<int>
+                        {
+                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -424,34 +424,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<A> [||]{ new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 } };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<A> [||]{ new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 } };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<A>
-                            {
-                                new A { B = 1, C = 1 },
-                                new A { B = 2, C = 2 },
-                                new A { B = 3, C = 3 }
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<A>
+                        {
+                            new A { B = 1, C = 1 },
+                            new A { B = 2, C = 2 },
+                            new A { B = 3, C = 3 }
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<A>
-                            {
-                                new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        var test = new List<A>
+                        {
+                            new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -460,34 +460,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<A>
-                            [||]{
-                                new A { B = 1, C = 1 },
-                                new A { B = 2, C = 2 },
-                                new A { B = 3, C = 3 }
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<A>
+                        [||]{
+                            new A { B = 1, C = 1 },
+                            new A { B = 2, C = 2 },
+                            new A { B = 3, C = 3 }
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<A> { new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 } };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        var test = new List<A> { new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 } };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            var test = new List<A>
-                            {
-                                new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        var test = new List<A>
+                        {
+                            new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -496,41 +496,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            return new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        return new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            return new List<int>
-                            {
-                                0,
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                6,
-                                7,
-                                8,
-                                9
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        return new List<int>
+                        {
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            return new List<int>
-                            {
-                                0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        return new List<int>
+                        {
+                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -539,41 +539,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    class C {
-                        void Bar() {
-                            return new List<int>
-                            [||]{
-                                0,
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                6,
-                                7,
-                                8,
-                                9
-                            };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        return new List<int>
+                        [||]{
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9
+                        };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            return new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                         }
-                    }
-                    """,
+                class C {
+                    void Bar() {
+                        return new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                     }
+                }
+                """,
                 """
-                    class C {
-                        void Bar() {
-                            return new List<int>
-                            {
-                                0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                            };
-                         }
-                    }
-                    """
+                class C {
+                    void Bar() {
+                        return new List<int>
+                        {
+                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                        };
+                     }
+                }
+                """
             );
         }
 
@@ -582,35 +582,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    public class C {
-                        public List<int> B => new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                    }
-                    """,
+                public class C {
+                    public List<int> B => new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                }
+                """,
                 """
-                    public class C {
-                        public List<int> B => new List<int>
-                        {
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9
-                        };
-                    }
-                    """,
+                public class C {
+                    public List<int> B => new List<int>
+                    {
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    };
+                }
+                """,
                 """
-                    public class C {
-                        public List<int> B => new List<int>
-                        {
-                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                        };
-                    }
-                    """
+                public class C {
+                    public List<int> B => new List<int>
+                    {
+                        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    };
+                }
+                """
             );
         }
 
@@ -619,35 +619,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    public class C {
-                        public List<int> B => new List<int>
-                        [||]{
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9
-                        };
-                    }
-                    """,
+                public class C {
+                    public List<int> B => new List<int>
+                    [||]{
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    };
+                }
+                """,
                 """
-                    public class C {
-                        public List<int> B => new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                    }
-                    """,
+                public class C {
+                    public List<int> B => new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                }
+                """,
                 """
-                    public class C {
-                        public List<int> B => new List<int>
-                        {
-                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                        };
-                    }
-                    """
+                public class C {
+                    public List<int> B => new List<int>
+                    {
+                        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    };
+                }
+                """
             );
         }
 
@@ -656,35 +656,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    public void F() {
-                        var result = fakefunction(new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-                    }
-                    """,
+                public void F() {
+                    var result = fakefunction(new List<int> [||]{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+                }
+                """,
                 """
-                    public void F() {
-                        var result = fakefunction(new List<int>
-                        {
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9
-                        });
-                    }
-                    """,
+                public void F() {
+                    var result = fakefunction(new List<int>
+                    {
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    });
+                }
+                """,
                 """
-                    public void F() {
-                        var result = fakefunction(new List<int>
-                        {
-                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                        });
-                    }
-                    """
+                public void F() {
+                    var result = fakefunction(new List<int>
+                    {
+                        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    });
+                }
+                """
             );
         }
 
@@ -693,35 +693,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestAllWrappingCasesAsync(
                 """
-                    public void F() {
-                        var result = fakefunction(new List<int>
-                        [||]{
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9
-                        });
-                    }
-                    """,
+                public void F() {
+                    var result = fakefunction(new List<int>
+                    [||]{
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    });
+                }
+                """,
                 """
-                    public void F() {
-                        var result = fakefunction(new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-                    }
-                    """,
+                public void F() {
+                    var result = fakefunction(new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+                }
+                """,
                 """
-                    public void F() {
-                        var result = fakefunction(new List<int>
-                        {
-                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                        });
-                    }
-                    """
+                public void F() {
+                    var result = fakefunction(new List<int>
+                    {
+                        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    });
+                }
+                """
             );
         }
 
@@ -730,12 +730,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||] 1, 2 };
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] [||] 1, 2 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -744,13 +744,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ 1, 2
-                            return;
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ 1, 2
+                        return;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -759,12 +759,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         {
             await TestMissingAsync(
                 """
-                    class C {
-                        void Bar() {
-                            var test = new[] [||]{ 1, 2 ;
-                        }
+                class C {
+                    void Bar() {
+                        var test = new[] [||]{ 1, 2 ;
                     }
-                    """
+                }
+                """
             );
         }
     }

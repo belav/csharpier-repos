@@ -38,25 +38,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            var t = ([||]a: a, 2);
-                        }
+                        int a = 1;
+                        var t = ([||]a: a, 2);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            var t = (a, 2);
-                        }
+                        int a = 1;
+                        var t = (a, 2);
                     }
-                    """,
+                }
+                """,
                 parseOptions: s_parseOptions
             );
         }
@@ -66,15 +66,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int alice = 1;
-                            (int, int, string) t = ([||]alice: alice, alice, null);
-                        }
+                        int alice = 1;
+                        (int, int, string) t = ([||]alice: alice, alice, null);
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(parseOptions: s_parseOptions)
             );
         }
@@ -84,15 +84,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestActionCountAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 2;
-                            var t = (1, [||]a: a);
-                        }
+                        int a = 2;
+                        var t = (1, [||]a: a);
                     }
-                    """,
+                }
+                """,
                 count: 0,
                 parameters: new TestParameters(
                     CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)
@@ -105,15 +105,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestActionCountAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 2;
-                            var t = (1, [||]a: a);
-                        }
+                        int a = 2;
+                        var t = (1, [||]a: a);
                     }
-                    """,
+                }
+                """,
                 count: 0,
                 parameters: new TestParameters(
                     CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7)
@@ -126,27 +126,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            int b = 2;
-                            var t = ( /*before*/ {|FixAllInDocument:a:|} /*middle*/ a /*after*/, /*before*/ b: /*middle*/ b /*after*/);
-                        }
+                        int a = 1;
+                        int b = 2;
+                        var t = ( /*before*/ {|FixAllInDocument:a:|} /*middle*/ a /*after*/, /*before*/ b: /*middle*/ b /*after*/);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            int b = 2;
-                            var t = ( /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/);
-                        }
+                        int a = 1;
+                        int b = 2;
+                        var t = ( /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/);
                     }
-                    """,
+                }
+                """,
                 parseOptions: s_parseOptions
             );
         }
@@ -156,25 +156,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            var t = new { [||]a= a, 2 };
-                        }
+                        int a = 1;
+                        var t = new { [||]a= a, 2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            var t = new { a, 2 };
-                        }
+                        int a = 1;
+                        var t = new { a, 2 };
                     }
-                    """,
+                }
+                """,
                 parseOptions: s_parseOptions
             );
         }
@@ -184,15 +184,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int alice = 1;
-                            var t = new { [||]alice=alice, alice };
-                        }
+                        int alice = 1;
+                        var t = new { [||]alice=alice, alice };
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(parseOptions: s_parseOptions)
             );
         }
@@ -202,27 +202,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            int b = 2;
-                            var t = new { /*before*/ {|FixAllInDocument:a =|} /*middle*/ a /*after*/, /*before*/ b = /*middle*/ b /*after*/ };
-                        }
+                        int a = 1;
+                        int b = 2;
+                        var t = new { /*before*/ {|FixAllInDocument:a =|} /*middle*/ a /*after*/, /*before*/ b = /*middle*/ b /*after*/ };
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            int b = 2;
-                            var t = new { /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/ };
-                        }
+                        int a = 1;
+                        int b = 2;
+                        var t = new { /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/ };
                     }
-                    """,
+                }
+                """,
                 parseOptions: s_parseOptions
             );
         }

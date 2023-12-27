@@ -1063,15 +1063,15 @@ public partial class C
         var path = "path/to/file.cs";
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-                using System;
+            using System;
 
-                C.M();
+            C.M();
 
-                file class C
-                {
-                    public static void M() { Console.Write(1); }
-                }
-                """,
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
@@ -1114,30 +1114,30 @@ public partial class C
         var path = "path/to/file.cs";
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-                using System;
+            using System;
 
-                C.M();
+            C.M();
 
-                file class C
-                {
-                    public static void M() { Console.Write(1); }
-                }
-                """,
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
         );
         var source2 = SyntaxFactory.ParseSyntaxTree(
             """
-                using System;
+            using System;
 
-                namespace NS;
+            namespace NS;
 
-                file class C
-                {
-                    public static void M() { Console.Write(2); }
-                }
-                """,
+            file class C
+            {
+                public static void M() { Console.Write(2); }
+            }
+            """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
@@ -1179,15 +1179,15 @@ public partial class C
         var path = "path/to/file.cs";
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-                using System;
+            using System;
 
-                namespace NS1.NS2;
+            namespace NS1.NS2;
 
-                file class C<T>
-                {
-                    public static void M() { Console.Write(1); }
-                }
-                """,
+            file class C<T>
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """,
             options: TestOptions.RegularPreview,
             path: path,
             encoding: Encoding.Default
@@ -1229,15 +1229,15 @@ public partial class C
     {
         var source1 = SyntaxFactory.ParseSyntaxTree(
             """
-                using System;
+            using System;
 
-                C.M();
+            C.M();
 
-                file class C
-                {
-                    public static void M() { Console.Write(1); }
-                }
-                """,
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """,
             options: TestOptions.RegularPreview,
             path: "path/to/file.cs",
             encoding: Encoding.Default
@@ -5517,8 +5517,8 @@ public partial class C
     {
         var tree = SyntaxFactory.ParseSyntaxTree(
             """
-                partial file class C { }
-                """,
+            partial file class C { }
+            """,
             path: "file1.cs",
             encoding: Encoding.Default
         );

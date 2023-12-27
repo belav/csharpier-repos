@@ -116,17 +116,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = """$$"""
-                    """"
+                var v = """$$"""
+                """"
             );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = """
-                    $${|VirtualSpaces-4:|}
-                        """
-                    """"
+                var v = """
+                $${|VirtualSpaces-4:|}
+                    """
+                """"
             );
         }
 
@@ -140,10 +140,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = """
-                    $${|VirtualSpaces-4:|}
-                        """;
-                    """"
+                var v = """
+                $${|VirtualSpaces-4:|}
+                    """;
+                """"
             );
         }
 
@@ -152,15 +152,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """""
-                    var v = """"$$""
-                    """""
+                var v = """"$$""
+                """""
             );
 
             testState.SendReturn(handled: false);
             testState.AssertCodeIs(
                 """""
-                    var v = """"$$""
-                    """""
+                var v = """"$$""
+                """""
             );
         }
 
@@ -169,17 +169,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = $"""$$"""
-                    """"
+                var v = $"""$$"""
+                """"
             );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = $"""
-                    $${|VirtualSpaces-4:|}
-                        """
-                    """"
+                var v = $"""
+                $${|VirtualSpaces-4:|}
+                    """
+                """"
             );
         }
 
@@ -188,19 +188,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = """$$""";
-                    Console.WriteLine("Goo");
-                    """"
+                var v = """$$""";
+                Console.WriteLine("Goo");
+                """"
             );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = """
-                    $${|VirtualSpaces-4:|}
-                        """;
-                    Console.WriteLine("Goo");
-                    """"
+                var v = """
+                $${|VirtualSpaces-4:|}
+                    """;
+                Console.WriteLine("Goo");
+                """"
             );
         }
 
@@ -209,17 +209,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = WriteLine("""$$"""
-                    """"
+                var v = WriteLine("""$$"""
+                """"
             );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = WriteLine("""
-                    $${|VirtualSpaces-4:|}
-                        """
-                    """"
+                var v = WriteLine("""
+                $${|VirtualSpaces-4:|}
+                    """
+                """"
             );
         }
 
@@ -233,10 +233,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = WriteLine("""
-                    $${|VirtualSpaces-4:|}
-                        """)
-                    """"
+                var v = WriteLine("""
+                $${|VirtualSpaces-4:|}
+                    """)
+                """"
             );
         }
 
@@ -250,10 +250,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = WriteLine("""
-                    $${|VirtualSpaces-4:|}
-                        """);
-                    """"
+                var v = WriteLine("""
+                $${|VirtualSpaces-4:|}
+                    """);
+                """"
             );
         }
 
@@ -262,19 +262,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = WriteLine(
-                        """$$"""
-                    """"
+                var v = WriteLine(
+                    """$$"""
+                """"
             );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = WriteLine(
-                        """
-                    $${|VirtualSpaces-4:|}
-                        """
-                    """"
+                var v = WriteLine(
+                    """
+                $${|VirtualSpaces-4:|}
+                    """
+                """"
             );
         }
 
@@ -283,19 +283,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = WriteLine(
-                        """$$""")
-                    """"
+                var v = WriteLine(
+                    """$$""")
+                """"
             );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = WriteLine(
-                        """
-                    $${|VirtualSpaces-4:|}
-                        """)
-                    """"
+                var v = WriteLine(
+                    """
+                $${|VirtualSpaces-4:|}
+                    """)
+                """"
             );
         }
 
@@ -304,19 +304,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = WriteLine(
-                        """$$""");
-                    """"
+                var v = WriteLine(
+                    """$$""");
+                """"
             );
 
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = WriteLine(
-                        """
-                    $${|VirtualSpaces-4:|}
-                        """);
-                    """"
+                var v = WriteLine(
+                    """
+                $${|VirtualSpaces-4:|}
+                    """);
+                """"
             );
         }
 
@@ -330,10 +330,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             testState.SendReturn(handled: true);
             testState.AssertCodeIs(
                 """"
-                    var v = $"""
-                    $${|VirtualSpaces-4:|}
-                        """;
-                    """"
+                var v = $"""
+                $${|VirtualSpaces-4:|}
+                    """;
+                """"
             );
         }
 
@@ -342,15 +342,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """""
-                    var v = $""""$$""
-                    """""
+                var v = $""""$$""
+                """""
             );
 
             testState.SendReturn(handled: false);
             testState.AssertCodeIs(
                 """""
-                    var v = $""""$$""
-                    """""
+                var v = $""""$$""
+                """""
             );
         }
 
@@ -382,8 +382,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """"
-                    var v = """$$"""
-                    """"
+                var v = """$$"""
+                """"
             );
         }
 
@@ -404,8 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """"
-                    var v = $"""$$"""
-                    """"
+                var v = $"""$$"""
+                """"
             );
         }
 
@@ -491,15 +491,15 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """
-                    var v = "$$"
-                    """
+                var v = "$$"
+                """
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """
-                    var v = ""$$"
-                    """
+                var v = ""$$"
+                """
             );
         }
 
@@ -508,15 +508,15 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """
-                    var v = ""$$""
-                    """
+                var v = ""$$""
+                """
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """"
-                    var v = """$$""
-                    """"
+                var v = """$$""
+                """"
             );
         }
 
@@ -525,15 +525,15 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = """$$"""
-                    """"
+                var v = """$$"""
+                """"
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
-                    var v = """"$$""""
-                    """""
+                var v = """"$$""""
+                """""
             );
         }
 
@@ -542,15 +542,15 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = $"""$$"""
-                    """"
+                var v = $"""$$"""
+                """"
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
-                    var v = $""""$$""""
-                    """""
+                var v = $""""$$""""
+                """""
             );
         }
 
@@ -559,15 +559,15 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """""
-                    var v = $""$$""""
-                    """""
+                var v = $""$$""""
+                """""
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
-                    var v = $"""$$""""
-                    """""
+                var v = $"""$$""""
+                """""
             );
         }
 
@@ -580,15 +580,15 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = """$$ """
-                    """"
+                var v = """$$ """
+                """"
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
-                    var v = """"$$ """"
-                    """""
+                var v = """"$$ """"
+                """""
             );
         }
 
@@ -597,19 +597,19 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = """$$
+                var v = """$$
 
-                        """
-                    """"
+                    """
+                """"
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
-                    var v = """"$$
+                var v = """"$$
 
-                        """"
-                    """""
+                    """"
+                """""
             );
         }
 
@@ -618,19 +618,19 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = $"""$$
+                var v = $"""$$
 
-                        """
-                    """"
+                    """
+                """"
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
-                    var v = $""""$$
+                var v = $""""$$
 
-                        """"
-                    """""
+                    """"
+                """""
             );
         }
 
@@ -648,19 +648,19 @@ var v = $$$"""[||]"""
         {
             using var testState = RawStringLiteralTestState.CreateTestState(
                 """"
-                    var v = """$$
+                var v = """$$
 
-                        ""
-                    """"
+                    ""
+                """"
             );
 
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """""
-                    var v = """"$$
+                var v = """"$$
 
-                        ""
-                    """""
+                    ""
+                """""
             );
         }
 
@@ -674,8 +674,8 @@ var v = $$$"""[||]"""
             testState.SendTypeChar('"');
             testState.AssertCodeIs(
                 """
-                    "$$
-                    """
+                "$$
+                """
             );
         }
     }

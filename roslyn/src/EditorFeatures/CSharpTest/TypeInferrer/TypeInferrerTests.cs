@@ -155,9 +155,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInMethodAsync(
                 """
-                    #nullable enable
-                    string? q = [|Goo()|];
-                    """,
+                #nullable enable
+                string? q = [|Goo()|];
+                """,
                 "global::System.String?",
                 mode
             );
@@ -178,9 +178,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInMethodAsync(
                 """
-                    bool? b;
-                    var q = b ?? [|Goo()|];
-                    """,
+                bool? b;
+                var q = b ?? [|Goo()|];
+                """,
                 "global::System.Boolean",
                 mode
             );
@@ -191,9 +191,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInMethodAsync(
                 """
-                    string s;
-                    var q = s ?? [|Goo()|];
-                    """,
+                string s;
+                var q = s ?? [|Goo()|];
+                """,
                 "global::System.String",
                 mode
             );
@@ -217,9 +217,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
             // https://github.com/dotnet/roslyn/issues/37852 tracks fixing this is a much fancier way.
             await TestInMethodAsync(
                 """
-                    ErrorType s;
-                    var q = [|Goo()|] ?? s;
-                    """,
+                ErrorType s;
+                var q = [|Goo()|] ?? s;
+                """,
                 "ErrorType",
                 TestMode.Node
             );
@@ -230,9 +230,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInMethodAsync(
                 """
-                    string s;
-                    var q = s + [|Goo()|];
-                    """,
+                string s;
+                var q = s + [|Goo()|];
+                """,
                 "global::System.String",
                 mode
             );
@@ -243,9 +243,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInMethodAsync(
                 """
-                    var s;
-                    var q = s || [|Goo()|];
-                    """,
+                var s;
+                var q = s || [|Goo()|];
+                """,
                 "global::System.Boolean",
                 mode
             );
@@ -287,31 +287,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public static C operator &(C c, C d)
                     {
-                        public static C operator &(C c, C d)
-                        {
-                            return null;
-                        }
-
-                        public static bool operator true(C c)
-                        {
-                            return true;
-                        }
-
-                        public static bool operator false(C c)
-                        {
-                            return false;
-                        }
-
-                        static void Main(string[] args)
-                        {
-                            var c = new C() && [|Goo()|];
-                        }
+                        return null;
                     }
-                    """,
+
+                    public static bool operator true(C c)
+                    {
+                        return true;
+                    }
+
+                    public static bool operator false(C c)
+                    {
+                        return false;
+                    }
+
+                    static void Main(string[] args)
+                    {
+                        var c = new C() && [|Goo()|];
+                    }
+                }
+                """,
                 "global::System.Boolean",
                 mode
             );
@@ -827,11 +827,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    C()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                C()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "void",
                 mode
             );
@@ -842,11 +842,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    ~C()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                ~C()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "void",
                 mode
             );
@@ -857,11 +857,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    int M()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                int M()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -872,12 +872,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    #nullable enable
-                    string? M()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                #nullable enable
+                string? M()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -888,11 +888,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                void M()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "void",
                 mode
             );
@@ -903,11 +903,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    async System.Threading.Tasks.Task<int> M()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                async System.Threading.Tasks.Task<int> M()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -918,11 +918,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    async System.Threading.Tasks.Task<string?> M()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                async System.Threading.Tasks.Task<string?> M()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -933,11 +933,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    async System.Threading.Tasks.Task M()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                async System.Threading.Tasks.Task M()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "void",
                 mode
             );
@@ -948,11 +948,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    async void M()
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                async void M()
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "void",
                 mode
             );
@@ -963,11 +963,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    public static C operator ++(C c)
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                public static C operator ++(C c)
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "global::C",
                 mode
             );
@@ -978,11 +978,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    public static implicit operator int(C c)
-                    {
-                        return [|Goo()|];
-                    }
-                    """,
+                public static implicit operator int(C c)
+                {
+                    return [|Goo()|];
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -993,14 +993,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    int P
+                int P
+                {
+                    get
                     {
-                        get
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1011,15 +1011,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    #nullable enable
-                    string? P
+                #nullable enable
+                string? P
+                {
+                    get
                     {
-                        get
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1030,14 +1030,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    int P
+                int P
+                {
+                    set
                     {
-                        set
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "void",
                 mode
             );
@@ -1048,14 +1048,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    int this[int i]
+                int this[int i]
+                {
+                    get
                     {
-                        get
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1066,15 +1066,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    #nullable enable
-                    string? this[int i]
+                #nullable enable
+                string? this[int i]
+                {
+                    get
                     {
-                        get
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1085,14 +1085,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    int this[int i]
+                int this[int i]
+                {
+                    set
                     {
-                        set
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "void",
                 mode
             );
@@ -1103,15 +1103,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    event System.EventHandler E
+                event System.EventHandler E
+                {
+                    add
                     {
-                        add
-                        {
-                            return [|Goo()|];
-                        }
-                        remove { }
+                        return [|Goo()|];
                     }
-                    """,
+                    remove { }
+                }
+                """,
                 "void",
                 mode
             );
@@ -1122,15 +1122,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    event System.EventHandler E
+                event System.EventHandler E
+                {
+                    add { }
+                    remove
                     {
-                        add { }
-                        remove
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "void",
                 mode
             );
@@ -1141,14 +1141,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
+                void M()
+                {
+                    int F()
                     {
-                        int F()
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1159,15 +1159,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    #nullable enable
-                    void M()
+                #nullable enable
+                void M()
+                {
+                    string? F()
                     {
-                        string? F()
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1178,14 +1178,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
+                void M()
+                {
+                    async System.Threading.Tasks.Task<int> F()
                     {
-                        async System.Threading.Tasks.Task<int> F()
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1196,14 +1196,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
+                void M()
+                {
+                    async System.Threading.Tasks.Task F()
                     {
-                        async System.Threading.Tasks.Task F()
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "void",
                 mode
             );
@@ -1214,14 +1214,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
+                void M()
+                {
+                    async void F()
                     {
-                        async void F()
-                        {
-                            return [|Goo()|];
-                        }
+                        return [|Goo()|];
                     }
-                    """,
+                }
+                """,
                 "void",
                 mode
             );
@@ -1266,9 +1266,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    #nullable enable
-                    async System.Threading.Tasks.Task<string?> M() => [|Goo()|];
-                    """,
+                #nullable enable
+                async System.Threading.Tasks.Task<string?> M() => [|Goo()|];
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1375,11 +1375,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        int F() => [|Goo()|];
-                    }
-                    """,
+                void M()
+                {
+                    int F() => [|Goo()|];
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1390,11 +1390,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        async System.Threading.Tasks.Task<int> F() => [|Goo()|];
-                    }
-                    """,
+                void M()
+                {
+                    async System.Threading.Tasks.Task<int> F() => [|Goo()|];
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1405,11 +1405,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        async System.Threading.Tasks.Task F() => [|Goo()|];
-                    }
-                    """,
+                void M()
+                {
+                    async System.Threading.Tasks.Task F() => [|Goo()|];
+                }
+                """,
                 "void",
                 mode
             );
@@ -1420,11 +1420,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        async void F() => [|Goo()|];
-                    }
-                    """,
+                void M()
+                {
+                    async void F() => [|Goo()|];
+                }
+                """,
                 "void",
                 mode
             );
@@ -1589,11 +1589,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<string, int> f = s =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<string, int> f = s =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1604,11 +1604,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<int> f = () =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<int> f = () =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1619,12 +1619,12 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    #nullable enable
-                    System.Func<string, string?> f = s =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                #nullable enable
+                System.Func<string, string?> f = s =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1635,11 +1635,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<int> f = delegate ()
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<int> f = delegate ()
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1650,12 +1650,12 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    #nullable enable
-                    System.Func<string?> f = delegate ()
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                #nullable enable
+                System.Func<string?> f = delegate ()
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1666,11 +1666,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<string, System.Threading.Tasks.Task<int>> f = async s =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<string, System.Threading.Tasks.Task<int>> f = async s =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1681,11 +1681,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<System.Threading.Tasks.Task<int>> f = async () =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<System.Threading.Tasks.Task<int>> f = async () =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1696,11 +1696,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<System.Threading.Tasks.Task<int>> f = async delegate ()
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<System.Threading.Tasks.Task<int>> f = async delegate ()
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -1713,12 +1713,12 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    #nullable enable
-                    System.Func<System.Threading.Tasks.Task<string?>> f = async delegate ()
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                #nullable enable
+                System.Func<System.Threading.Tasks.Task<string?>> f = async delegate ()
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1729,11 +1729,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<string, System.Threading.Tasks.Task> f = async s =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<string, System.Threading.Tasks.Task> f = async s =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "void",
                 mode
             );
@@ -1744,11 +1744,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<System.Threading.Tasks.Task> f = async () =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<System.Threading.Tasks.Task> f = async () =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "void",
                 mode
             );
@@ -1759,11 +1759,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Func<System.Threading.Tasks.Task> f = async delegate ()
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Func<System.Threading.Tasks.Task> f = async delegate ()
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "void",
                 mode
             );
@@ -1774,11 +1774,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Action<string> f = async s =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Action<string> f = async s =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "void",
                 mode
             );
@@ -1789,11 +1789,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Action f = async () =>
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Action f = async () =>
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "void",
                 mode
             );
@@ -1804,11 +1804,11 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    System.Action f = async delegate ()
-                    {
-                        return [|Goo()|];
-                    };
-                    """,
+                System.Action f = async delegate ()
+                {
+                    return [|Goo()|];
+                };
+                """,
                 "void",
                 mode
             );
@@ -1861,9 +1861,9 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    #nullable enable
-                    System.Func<string, System.Threading.Tasks.Task<string?>> f = async s => [|Goo()|];
-                    """,
+                #nullable enable
+                System.Func<string, System.Threading.Tasks.Task<string?>> f = async s => [|Goo()|];
+                """,
                 "global::System.String?",
                 mode
             );
@@ -1968,10 +1968,10 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    for (int i = 0; [|Goo()|];
+                for (int i = 0; [|Goo()|];
 
-                    i++) { }
-                    """,
+                i++) { }
+                """,
                 "global::System.Boolean",
                 mode
             );
@@ -1998,9 +1998,9 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    #nullable enable
-                    for (string? s = [|Goo()|]; ; ) { }
-                    """,
+                #nullable enable
+                for (string? s = [|Goo()|]; ; ) { }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -2035,9 +2035,9 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    #nullable enable
-                    foreach (string? v in [|Goo()|]) { }
-                    """,
+                #nullable enable
+                foreach (string? v in [|Goo()|]) { }
+                """,
                 "global::System.Collections.Generic.IEnumerable<global::System.String?>",
                 mode
             );
@@ -2118,13 +2118,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        Bar([|Goo()|]);
-                    }
+                void M()
+                {
+                    Bar([|Goo()|]);
+                }
 
-                    void Bar(int i);
-                    """,
+                void Bar(int i);
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -2135,13 +2135,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        Bar([|Goo()|]);
-                    }
+                void M()
+                {
+                    Bar([|Goo()|]);
+                }
 
-                    void Bar();
-                    """,
+                void Bar();
+                """,
                 "global::System.Object",
                 mode
             );
@@ -2152,13 +2152,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        Bar([|Goo()|]);
-                    }
+                void M()
+                {
+                    Bar([|Goo()|]);
+                }
 
-                    void Bar(int i, string s);
-                    """,
+                void Bar(int i, string s);
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -2169,13 +2169,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        Bar(s: [|Goo()|]);
-                    }
+                void M()
+                {
+                    Bar(s: [|Goo()|]);
+                }
 
-                    void Bar(int i, string s);
-                    """,
+                void Bar(int i, string s);
+                """,
                 "global::System.String",
                 mode
             );
@@ -2186,13 +2186,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        Bar([|Goo()|]);
-                    }
+                void M()
+                {
+                    Bar([|Goo()|]);
+                }
 
-                    void Bar(string? s);
-                    """,
+                void Bar(string? s);
+                """,
                 "global::System.String?",
                 mode
             );
@@ -2209,15 +2209,15 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        new C([|Goo()|]);
-                    }
+                void M()
+                {
+                    new C([|Goo()|]);
+                }
 
-                    C(int i)
-                    {
-                    }
-                    """,
+                C(int i)
+                {
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -2228,15 +2228,15 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        new C([|Goo()|]);
-                    }
+                void M()
+                {
+                    new C([|Goo()|]);
+                }
 
-                    C()
-                    {
-                    }
-                    """,
+                C()
+                {
+                }
+                """,
                 "global::System.Object",
                 mode
             );
@@ -2247,15 +2247,15 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        new C([|Goo()|]);
-                    }
+                void M()
+                {
+                    new C([|Goo()|]);
+                }
 
-                    C(int i, string s)
-                    {
-                    }
-                    """,
+                C(int i, string s)
+                {
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -2266,15 +2266,15 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        new C(s: [|Goo()|]);
-                    }
+                void M()
+                {
+                    new C(s: [|Goo()|]);
+                }
 
-                    C(int i, string s)
-                    {
-                    }
-                    """,
+                C(int i, string s)
+                {
+                }
+                """,
                 "global::System.String",
                 mode
             );
@@ -2285,17 +2285,17 @@ class C
         {
             await TestInClassAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    void M()
-                    {
-                        new C([|Goo()|]);
-                    }
+                void M()
+                {
+                    new C([|Goo()|]);
+                }
 
-                    C(string? s)
-                    {
-                    }
-                    """,
+                C(string? s)
+                {
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -2310,13 +2310,13 @@ class C
         {
             await TestAsync(
                 """
-                    class MyClass
+                class MyClass
+                {
+                    public MyClass(int x) : this([|test|])
                     {
-                        public MyClass(int x) : this([|test|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -2331,13 +2331,13 @@ class C
         {
             await TestAsync(
                 """
-                    class MyClass
+                class MyClass
+                {
+                    public MyClass(int x, string y) : this(5, [|test|])
                     {
-                        public MyClass(int x, string y) : this(5, [|test|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 "global::System.String",
                 mode
             );
@@ -2348,15 +2348,15 @@ class C
         {
             await TestAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class MyClass
+                class MyClass
+                {
+                    public MyClass(string? y) : this([|test|])
                     {
-                        public MyClass(string? y) : this([|test|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -2371,20 +2371,20 @@ class C
         {
             await TestAsync(
                 """
-                    class B
+                class B
+                {
+                    public B(int x)
                     {
-                        public B(int x)
-                        {
-                        }
                     }
+                }
 
-                    class D : B
+                class D : B
+                {
+                    public D() : base([|test|])
                     {
-                        public D() : base([|test|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -2395,22 +2395,22 @@ class C
         {
             await TestAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class B
+                class B
+                {
+                    public B(string? x)
                     {
-                        public B(string? x)
-                        {
-                        }
                     }
+                }
 
-                    class D : B
+                class D : B
+                {
+                    public D() : base([|test|])
                     {
-                        public D() : base([|test|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 "global::System.String?",
                 mode
             );
@@ -2421,10 +2421,10 @@ class C
         {
             await TestInMethodAsync(
                 """
-                    string[] i;
+                string[] i;
 
-                    i[[|Goo()|]];
-                    """,
+                i[[|Goo()|]];
+                """,
                 "global::System.Int32",
                 mode
             );
@@ -2439,13 +2439,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        this[[|Goo()|]];
-                    }
+                void M()
+                {
+                    this[[|Goo()|]];
+                }
 
-                    int this[long i] { get; }
-                    """,
+                int this[long i] { get; }
+                """,
                 "global::System.Int64",
                 mode
             );
@@ -2456,13 +2456,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        this[42, [|Goo()|]];
-                    }
+                void M()
+                {
+                    this[42, [|Goo()|]];
+                }
 
-                    int this[int i, string s] { get; }
-                    """,
+                int this[int i, string s] { get; }
+                """,
                 "global::System.String",
                 mode
             );
@@ -2473,13 +2473,13 @@ class C
         {
             await TestInClassAsync(
                 """
-                    void M()
-                    {
-                        this[s: [|Goo()|]];
-                    }
+                void M()
+                {
+                    this[s: [|Goo()|]];
+                }
 
-                    int this[int i, string s] { get; }
-                    """,
+                int this[int i, string s] { get; }
+                """,
                 "global::System.String",
                 mode
             );

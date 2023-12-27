@@ -1120,10 +1120,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 new SignatureHelpTestItem(
                     "G<S, T>",
                     """
-                        List:
+                    List:
 
-                        Item 1.
-                        """,
+                    Item 1.
+                    """,
                     classificationTypeNames: ImmutableArray.Create(
                         ClassificationTypeNames.Text,
                         ClassificationTypeNames.WhiteSpace,

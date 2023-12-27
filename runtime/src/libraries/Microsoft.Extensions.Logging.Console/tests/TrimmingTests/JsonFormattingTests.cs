@@ -65,8 +65,8 @@ class Program
         if (
             !consoleOutput.Contains(
                 """
-                    "Message": "Hello",
-                    """
+                "Message": "Hello",
+                """
             )
         )
         {

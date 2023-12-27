@@ -69,30 +69,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b)
-                            {
-                                return b != true;
-                            }
+                        static bool NewMethod(bool b)
+                        {
+                            return b != true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -108,30 +108,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            bool NewMethod(bool b)
-                            {
-                                return b != true;
-                            }
+                        bool NewMethod(bool b)
+                        {
+                            return b != true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -147,30 +147,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b)
-                            {
-                                return b != true;
-                            }
+                        static bool NewMethod(bool b)
+                        {
+                            return b != true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -186,27 +186,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b) => b != true;
-                        }
+                        static bool NewMethod(bool b) => b != true;
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -222,27 +222,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b) => b != true;
-                        }
+                        static bool NewMethod(bool b) => b != true;
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -258,33 +258,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine(
+                        bool b = true;
+                        System.Console.WriteLine(
 
-                                [|b != true|]
-                                    ? b = true : b = false);
-                        }
+                            [|b != true|]
+                                ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine(
+                        bool b = true;
+                        System.Console.WriteLine(
 
-                                {|Rename:NewMethod|}(b)
-                                    ? b = true : b = false);
+                            {|Rename:NewMethod|}(b)
+                                ? b = true : b = false);
 
-                            static bool NewMethod(bool b) => b != true;
-                        }
+                        static bool NewMethod(bool b) => b != true;
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -300,32 +300,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != 
-                                true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != 
+                            true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b)
-                            {
-                                return b !=
-                                            true;
-                            }
+                        static bool NewMethod(bool b)
+                        {
+                            return b !=
+                                        true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -341,32 +341,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b !=/*
-                    */true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b !=/*
+                */true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b)
-                            {
-                                return b !=/*
-                    */true;
-                            }
+                        static bool NewMethod(bool b)
+                        {
+                            return b !=/*
+                */true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -382,32 +382,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|"" != @"
-                    "|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|"" != @"
+                "|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}() ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}() ? b = true : b = false);
 
-                            static bool NewMethod()
-                            {
-                                return "" != @"
-                    ";
-                            }
+                        static bool NewMethod()
+                        {
+                            return "" != @"
+                ";
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -423,42 +423,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            int x = 1;
-                            object y = 0;
-                            [|int s = true ? fun(x) : fun(y);|]
-                        }
-
-                        private static T fun<T>(T t)
-                        {
-                            return t;
-                        }
+                        int x = 1;
+                        object y = 0;
+                        [|int s = true ? fun(x) : fun(y);|]
                     }
-                    """,
+
+                    private static T fun<T>(T t)
+                    {
+                        return t;
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            int x = 1;
-                            object y = 0;
-                            {|Rename:NewMethod|}(x, y);
+                        int x = 1;
+                        object y = 0;
+                        {|Rename:NewMethod|}(x, y);
 
-                            static void NewMethod(int x, object y)
-                            {
-                                int s = true ? fun(x) : fun(y);
-                            }
-                        }
-
-                        private static T fun<T>(T t)
+                        static void NewMethod(int x, object y)
                         {
-                            return t;
+                            int s = true ? fun(x) : fun(y);
                         }
                     }
-                    """,
+
+                    private static T fun<T>(T t)
+                    {
+                        return t;
+                    }
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -468,43 +468,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    delegate int del(int i);
+                delegate int del(int i);
 
-                    class C
+                class C
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            del q = x => {
-                                goto label2;
-                                [|return x * x;|]
-                            };
-                        label2:
-                            return;
-                        }
+                        del q = x => {
+                            goto label2;
+                            [|return x * x;|]
+                        };
+                    label2:
+                        return;
                     }
-                    """,
+                }
+                """,
                 """
-                    delegate int del(int i);
+                delegate int del(int i);
 
-                    class C
+                class C
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        del q = x =>
                         {
-                            del q = x =>
-                            {
-                                goto label2;
-                                return {|Rename:NewMethod|}(x);
+                            goto label2;
+                            return {|Rename:NewMethod|}(x);
 
-                                static int NewMethod(int x)
-                                {
-                                    return x * x;
-                                }
-                            };
-                        label2:
-                            return;
-                        }
+                            static int NewMethod(int x)
+                            {
+                                return x * x;
+                            }
+                        };
+                    label2:
+                        return;
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -514,28 +514,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|System|].Console.WriteLine(4);
-                        }
+                        [|System|].Console.WriteLine(4);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            {|Rename:NewMethod|}();
+                        {|Rename:NewMethod|}();
 
-                            static void NewMethod()
-                            {
-                                System.Console.WriteLine(4);
-                            }
+                        static void NewMethod()
+                        {
+                            System.Console.WriteLine(4);
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -545,28 +545,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|System.Console|].WriteLine(4);
-                        }
+                        [|System.Console|].WriteLine(4);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            {|Rename:NewMethod|}();
+                        {|Rename:NewMethod|}();
 
-                            static void NewMethod()
-                            {
-                                System.Console.WriteLine(4);
-                            }
+                        static void NewMethod()
+                        {
+                            System.Console.WriteLine(4);
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -576,28 +576,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|base|].ToString();
-                        }
+                        [|base|].ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            {|Rename:NewMethod|}();
+                        {|Rename:NewMethod|}();
 
-                            void NewMethod()
-                            {
-                                base.ToString();
-                            }
+                        void NewMethod()
+                        {
+                            base.ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -607,42 +607,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        public static Action X { get; set; }
-                    }
+                class C
+                {
+                    public static Action X { get; set; }
+                }
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|C.X|]();
-                        }
+                        [|C.X|]();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        public static Action X { get; set; }
-                    }
+                class C
+                {
+                    public static Action X { get; set; }
+                }
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
+                        {|Rename:GetX|}()();
+
+                        static Action GetX()
                         {
-                            {|Rename:GetX|}()();
-
-                            static Action GetX()
-                            {
-                                return C.X;
-                            }
+                            return C.X;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -652,40 +652,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            byte z = 0;
-                            Goo([|x => 0|], y => 0, z, z);
-                        }
-
-                        static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
-                        static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                        byte z = 0;
+                        Goo([|x => 0|], y => 0, z, z);
                     }
-                    """,
+
+                    static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
+                    static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
+                        byte z = 0;
+                        Goo({|Rename:NewMethod|}(), y => (byte)0, z, z);
+
+                        static Func<byte, byte> NewMethod()
                         {
-                            byte z = 0;
-                            Goo({|Rename:NewMethod|}(), y => (byte)0, z, z);
-
-                            static Func<byte, byte> NewMethod()
-                            {
-                                return x => 0;
-                            }
+                            return x => 0;
                         }
-
-                        static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
-                        static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
                     }
-                    """,
+
+                    static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
+                    static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -695,40 +695,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            byte z = 0;
-                            Goo([|x => 0|], y => { return 0; }, z, z);
-                        }
-
-                        static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
-                        static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                        byte z = 0;
+                        Goo([|x => 0|], y => { return 0; }, z, z);
                     }
-                    """,
+
+                    static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
+                    static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
+                        byte z = 0;
+                        Goo({|Rename:NewMethod|}(), y => { return (byte)0; }, z, z);
+
+                        static Func<byte, byte> NewMethod()
                         {
-                            byte z = 0;
-                            Goo({|Rename:NewMethod|}(), y => { return (byte)0; }, z, z);
-
-                            static Func<byte, byte> NewMethod()
-                            {
-                                return x => 0;
-                            }
+                            return x => 0;
                         }
-
-                        static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
-                        static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
                     }
-                    """,
+
+                    static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
+                    static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -738,98 +738,98 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    static class C
+                static class C
+                {
+                    static void Ex(this string x)
                     {
-                        static void Ex(this string x)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, string y)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, int y)
-                        {
-                        }
-
-                        static void Inner(Action<int> x, int y)
-                        {
-                        }
-
-                        static void Outer(Action<string> x, object y)
-                        {
-                            Console.WriteLine(1);
-                        }
-
-                        static void Outer(Action<int> x, int y)
-                        {
-                            Console.WriteLine(2);
-                        }
-
-                        static void Main()
-                        {
-                            Outer(y => Inner(x => [|x|].Ex(), y), - -1);
-                        }
                     }
 
-                    static class E
+                    static void Inner(Action<string> x, string y)
                     {
-                        public static void Ex(this int x)
-                        {
-                        }
                     }
-                    """,
+
+                    static void Inner(Action<string> x, int y)
+                    {
+                    }
+
+                    static void Inner(Action<int> x, int y)
+                    {
+                    }
+
+                    static void Outer(Action<string> x, object y)
+                    {
+                        Console.WriteLine(1);
+                    }
+
+                    static void Outer(Action<int> x, int y)
+                    {
+                        Console.WriteLine(2);
+                    }
+
+                    static void Main()
+                    {
+                        Outer(y => Inner(x => [|x|].Ex(), y), - -1);
+                    }
+                }
+
+                static class E
+                {
+                    public static void Ex(this int x)
+                    {
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    static class C
+                static class C
+                {
+                    static void Ex(this string x)
                     {
-                        static void Ex(this string x)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, string y)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, int y)
-                        {
-                        }
-
-                        static void Inner(Action<int> x, int y)
-                        {
-                        }
-
-                        static void Outer(Action<string> x, object y)
-                        {
-                            Console.WriteLine(1);
-                        }
-
-                        static void Outer(Action<int> x, int y)
-                        {
-                            Console.WriteLine(2);
-                        }
-
-                        static void Main()
-                        {
-                            Outer(y => Inner(x => {|Rename:GetX|}(x).Ex(), y), (object)- -1);
-
-                            static string GetX(string x)
-                            {
-                                return x;
-                            }
-                        }
                     }
 
-                    static class E
+                    static void Inner(Action<string> x, string y)
                     {
-                        public static void Ex(this int x)
+                    }
+
+                    static void Inner(Action<string> x, int y)
+                    {
+                    }
+
+                    static void Inner(Action<int> x, int y)
+                    {
+                    }
+
+                    static void Outer(Action<string> x, object y)
+                    {
+                        Console.WriteLine(1);
+                    }
+
+                    static void Outer(Action<int> x, int y)
+                    {
+                        Console.WriteLine(2);
+                    }
+
+                    static void Main()
+                    {
+                        Outer(y => Inner(x => {|Rename:GetX|}(x).Ex(), y), (object)- -1);
+
+                        static string GetX(string x)
                         {
+                            return x;
                         }
                     }
-                    """,
+                }
+
+                static class E
+                {
+                    public static void Ex(this int x)
+                    {
+                    }
+                }
+                """,
                 parseOptions: Options.Regular,
                 index: CodeActionIndex
             );
@@ -840,98 +840,98 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestAsync(
                 """
-                    using System;
+                using System;
 
-                    static class C
+                static class C
+                {
+                    static void Ex<T>(this string x)
                     {
-                        static void Ex<T>(this string x)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, string y)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, int y)
-                        {
-                        }
-
-                        static void Inner(Action<int> x, int y)
-                        {
-                        }
-
-                        static void Outer(Action<string> x, object y)
-                        {
-                            Console.WriteLine(1);
-                        }
-
-                        static void Outer(Action<int> x, int y)
-                        {
-                            Console.WriteLine(2);
-                        }
-
-                        static void Main()
-                        {
-                            Outer(y => Inner(x => [|x|].Ex<int>(), y), - -1);
-                        }
                     }
 
-                    static class E
+                    static void Inner(Action<string> x, string y)
                     {
-                        public static void Ex<T>(this int x)
-                        {
-                        }
                     }
-                    """,
+
+                    static void Inner(Action<string> x, int y)
+                    {
+                    }
+
+                    static void Inner(Action<int> x, int y)
+                    {
+                    }
+
+                    static void Outer(Action<string> x, object y)
+                    {
+                        Console.WriteLine(1);
+                    }
+
+                    static void Outer(Action<int> x, int y)
+                    {
+                        Console.WriteLine(2);
+                    }
+
+                    static void Main()
+                    {
+                        Outer(y => Inner(x => [|x|].Ex<int>(), y), - -1);
+                    }
+                }
+
+                static class E
+                {
+                    public static void Ex<T>(this int x)
+                    {
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    static class C
+                static class C
+                {
+                    static void Ex<T>(this string x)
                     {
-                        static void Ex<T>(this string x)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, string y)
-                        {
-                        }
-
-                        static void Inner(Action<string> x, int y)
-                        {
-                        }
-
-                        static void Inner(Action<int> x, int y)
-                        {
-                        }
-
-                        static void Outer(Action<string> x, object y)
-                        {
-                            Console.WriteLine(1);
-                        }
-
-                        static void Outer(Action<int> x, int y)
-                        {
-                            Console.WriteLine(2);
-                        }
-
-                        static void Main()
-                        {
-                            Outer(y => Inner(x => {|Rename:GetX|}(x).Ex<int>(), y), (object)- -1);
-
-                            static string GetX(string x)
-                            {
-                                return x;
-                            }
-                        }
                     }
 
-                    static class E
+                    static void Inner(Action<string> x, string y)
                     {
-                        public static void Ex<T>(this int x)
+                    }
+
+                    static void Inner(Action<string> x, int y)
+                    {
+                    }
+
+                    static void Inner(Action<int> x, int y)
+                    {
+                    }
+
+                    static void Outer(Action<string> x, object y)
+                    {
+                        Console.WriteLine(1);
+                    }
+
+                    static void Outer(Action<int> x, int y)
+                    {
+                        Console.WriteLine(2);
+                    }
+
+                    static void Main()
+                    {
+                        Outer(y => Inner(x => {|Rename:GetX|}(x).Ex<int>(), y), (object)- -1);
+
+                        static string GetX(string x)
                         {
+                            return x;
                         }
                     }
-                    """,
+                }
+
+                static class E
+                {
+                    public static void Ex<T>(this int x)
+                    {
+                    }
+                }
+                """,
                 parseOptions: Options.Regular,
                 index: CodeActionIndex
             );
@@ -942,43 +942,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Construct
+                class Construct
+                {
+                    public void Do() { }
+                    static void Main(string[] args)
                     {
-                        public void Do() { }
-                        static void Main(string[] args)
+                        [|Construct obj1 = new Construct();
+                        obj1.Do();
+                        /* Interesting comment. */
+                        Construct obj2 = new Construct();
+                        obj2.Do();|]
+                        obj1.Do();
+                        obj2.Do();
+                    }
+                }
+                """,
+                """
+                class Construct
+                {
+                    public void Do() { }
+                    static void Main(string[] args)
+                    {
+                        Construct obj1, obj2;
+                        {|Rename:NewMethod|}(out obj1, out obj2);
+                        obj1.Do();
+                        obj2.Do();
+
+                        static void NewMethod(out Construct obj1, out Construct obj2)
                         {
-                            [|Construct obj1 = new Construct();
+                            obj1 = new Construct();
                             obj1.Do();
                             /* Interesting comment. */
-                            Construct obj2 = new Construct();
-                            obj2.Do();|]
-                            obj1.Do();
+                            obj2 = new Construct();
                             obj2.Do();
                         }
                     }
-                    """,
-                """
-                    class Construct
-                    {
-                        public void Do() { }
-                        static void Main(string[] args)
-                        {
-                            Construct obj1, obj2;
-                            {|Rename:NewMethod|}(out obj1, out obj2);
-                            obj1.Do();
-                            obj2.Do();
-
-                            static void NewMethod(out Construct obj1, out Construct obj2)
-                            {
-                                obj1 = new Construct();
-                                obj1.Do();
-                                /* Interesting comment. */
-                                obj2 = new Construct();
-                                obj2.Do();
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -988,51 +988,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Construct
+                class Construct
+                {
+                    public void Do() { }
+                    static void Main(string[] args)
                     {
-                        public void Do() { }
-                        static void Main(string[] args)
+                        [|Construct obj1 = new Construct();
+                        obj1.Do();
+                        /* Interesting comment. */
+                        Construct obj2 = new Construct();
+                        obj2.Do();
+                        /* Second Interesting comment. */
+                        Construct obj3 = new Construct();
+                        obj3.Do();|]
+                        obj1.Do();
+                        obj2.Do();
+                        obj3.Do();
+                    }
+                }
+                """,
+                """
+                class Construct
+                {
+                    public void Do() { }
+                    static void Main(string[] args)
+                    {
+                        Construct obj1, obj2, obj3;
+                        {|Rename:NewMethod|}(out obj1, out obj2, out obj3);
+                        obj1.Do();
+                        obj2.Do();
+                        obj3.Do();
+
+                        static void NewMethod(out Construct obj1, out Construct obj2, out Construct obj3)
                         {
-                            [|Construct obj1 = new Construct();
+                            obj1 = new Construct();
                             obj1.Do();
                             /* Interesting comment. */
-                            Construct obj2 = new Construct();
+                            obj2 = new Construct();
                             obj2.Do();
                             /* Second Interesting comment. */
-                            Construct obj3 = new Construct();
-                            obj3.Do();|]
-                            obj1.Do();
-                            obj2.Do();
+                            obj3 = new Construct();
                             obj3.Do();
                         }
                     }
-                    """,
-                """
-                    class Construct
-                    {
-                        public void Do() { }
-                        static void Main(string[] args)
-                        {
-                            Construct obj1, obj2, obj3;
-                            {|Rename:NewMethod|}(out obj1, out obj2, out obj3);
-                            obj1.Do();
-                            obj2.Do();
-                            obj3.Do();
-
-                            static void NewMethod(out Construct obj1, out Construct obj2, out Construct obj3)
-                            {
-                                obj1 = new Construct();
-                                obj1.Do();
-                                /* Interesting comment. */
-                                obj2 = new Construct();
-                                obj2.Do();
-                                /* Second Interesting comment. */
-                                obj3 = new Construct();
-                                obj3.Do();
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1042,48 +1042,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Construct
+                class Construct
+                {
+                    public void Do() { }
+                    static void Main(string[] args)
                     {
-                        public void Do() { }
-                        static void Main(string[] args)
+                        [|Construct obj1 = new Construct();
+                        obj1.Do();
+                        /* Interesting comment. */
+                        Construct obj2 = new Construct(), obj3 = new Construct();
+                        obj2.Do();
+                        obj3.Do();|]
+                        obj1.Do();
+                        obj2.Do();
+                        obj3.Do();
+                    }
+                }
+                """,
+                """
+                class Construct
+                {
+                    public void Do() { }
+                    static void Main(string[] args)
+                    {
+                        Construct obj1, obj2, obj3;
+                        {|Rename:NewMethod|}(out obj1, out obj2, out obj3);
+                        obj1.Do();
+                        obj2.Do();
+                        obj3.Do();
+
+                        static void NewMethod(out Construct obj1, out Construct obj2, out Construct obj3)
                         {
-                            [|Construct obj1 = new Construct();
+                            obj1 = new Construct();
                             obj1.Do();
                             /* Interesting comment. */
-                            Construct obj2 = new Construct(), obj3 = new Construct();
-                            obj2.Do();
-                            obj3.Do();|]
-                            obj1.Do();
+                            obj2 = new Construct();
+                            obj3 = new Construct();
                             obj2.Do();
                             obj3.Do();
                         }
                     }
-                    """,
-                """
-                    class Construct
-                    {
-                        public void Do() { }
-                        static void Main(string[] args)
-                        {
-                            Construct obj1, obj2, obj3;
-                            {|Rename:NewMethod|}(out obj1, out obj2, out obj3);
-                            obj1.Do();
-                            obj2.Do();
-                            obj3.Do();
-
-                            static void NewMethod(out Construct obj1, out Construct obj2, out Construct obj3)
-                            {
-                                obj1 = new Construct();
-                                obj1.Do();
-                                /* Interesting comment. */
-                                obj2 = new Construct();
-                                obj3 = new Construct();
-                                obj2.Do();
-                                obj3.Do();
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1358,30 +1358,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|var x = (c: 1, d: 2);|]
-                            System.Console.WriteLine(x.c);
-                        }
+                        [|var x = (c: 1, d: 2);|]
+                        System.Console.WriteLine(x.c);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int c, int d) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.c);
+                        (int c, int d) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.c);
 
-                            static (int c, int d) NewMethod()
-                            {
-                                return (c: 1, d: 2);
-                            }
+                        static (int c, int d) NewMethod()
+                        {
+                            return (c: 1, d: 2);
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1506,33 +1506,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    static void M(int i)
                     {
-                        static void M(int i)
-                        {
-                            int r;
-                            [|r = M1(out int y, i);|]
-                            System.Console.WriteLine(r + y);
-                        }
+                        int r;
+                        [|r = M1(out int y, i);|]
+                        System.Console.WriteLine(r + y);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M(int i)
                     {
-                        static void M(int i)
-                        {
-                            int r;
-                            int y;
-                            {|Rename:NewMethod|}(i, out r, out y);
-                            System.Console.WriteLine(r + y);
+                        int r;
+                        int y;
+                        {|Rename:NewMethod|}(i, out r, out y);
+                        System.Console.WriteLine(r + y);
 
-                            static void NewMethod(int i, out int r, out int y)
-                            {
-                                r = M1(out y, i);
-                            }
+                        static void NewMethod(int i, out int r, out int y)
+                        {
+                            r = M1(out y, i);
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1543,33 +1543,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    static void M(int i)
                     {
-                        static void M(int i)
-                        {
-                            int r;
-                            [|r = M1(3 is int y, i);|]
-                            System.Console.WriteLine(r + y);
-                        }
+                        int r;
+                        [|r = M1(3 is int y, i);|]
+                        System.Console.WriteLine(r + y);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M(int i)
                     {
-                        static void M(int i)
-                        {
-                            int r;
-                            int y;
-                            {|Rename:NewMethod|}(i, out r, out y);
-                            System.Console.WriteLine(r + y);
+                        int r;
+                        int y;
+                        {|Rename:NewMethod|}(i, out r, out y);
+                        System.Console.WriteLine(r + y);
 
-                            static void NewMethod(int i, out int r, out int y)
-                            {
-                                r = M1(3 is int {|Conflict:y|}, i);
-                            }
+                        static void NewMethod(int i, out int r, out int y)
+                        {
+                            r = M1(3 is int {|Conflict:y|}, i);
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1580,33 +1580,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int r;
-                            [|r = M1(out /*out*/ int /*int*/ y /*y*/) + M2(3 is int z);|]
-                            System.Console.WriteLine(r + y + z);
-                        }
+                        int r;
+                        [|r = M1(out /*out*/ int /*int*/ y /*y*/) + M2(3 is int z);|]
+                        System.Console.WriteLine(r + y + z);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int r;
-                            int y, z;
-                            {|Rename:NewMethod|}(out r, out y, out z);
-                            System.Console.WriteLine(r + y + z);
+                        int r;
+                        int y, z;
+                        {|Rename:NewMethod|}(out r, out y, out z);
+                        System.Console.WriteLine(r + y + z);
 
-                            static void NewMethod(out int r, out int y, out int z)
-                            {
-                                r = M1(out /*out*/  /*int*/ y /*y*/) + M2(3 is int {|Conflict:z|});
-                            }
+                        static void NewMethod(out int r, out int y, out int z)
+                        {
+                            r = M1(out /*out*/  /*int*/ y /*y*/) + M2(3 is int {|Conflict:z|});
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1617,43 +1617,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        int r;
+                        [|r = M1(out int y);
                         {
-                            int r;
-                            [|r = M1(out int y);
+                            M2(out int y);
+                            System.Console.Write(y);
+                        }|]
+
+                        System.Console.WriteLine(r + y);
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    static void M()
+                    {
+                        int r;
+                        int y;
+                        {|Rename:NewMethod|}(out r, out y);
+
+                        System.Console.WriteLine(r + y);
+
+                        static void NewMethod(out int r, out int y)
+                        {
+                            r = M1(out y);
                             {
                                 M2(out int y);
                                 System.Console.Write(y);
-                            }|]
-
-                            System.Console.WriteLine(r + y);
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        static void M()
-                        {
-                            int r;
-                            int y;
-                            {|Rename:NewMethod|}(out r, out y);
-
-                            System.Console.WriteLine(r + y);
-
-                            static void NewMethod(out int r, out int y)
-                            {
-                                r = M1(out y);
-                                {
-                                    M2(out int y);
-                                    System.Console.Write(y);
-                                }
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1664,43 +1664,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        int r;
+                        [|r = M1(1 is int y);
                         {
-                            int r;
-                            [|r = M1(1 is int y);
+                            M2(2 is int y);
+                            System.Console.Write(y);
+                        }|]
+
+                        System.Console.WriteLine(r + y);
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    static void M()
+                    {
+                        int r;
+                        int y;
+                        {|Rename:NewMethod|}(out r, out y);
+
+                        System.Console.WriteLine(r + y);
+
+                        static void NewMethod(out int r, out int y)
+                        {
+                            r = M1(1 is int {|Conflict:y|});
                             {
                                 M2(2 is int y);
                                 System.Console.Write(y);
-                            }|]
-
-                            System.Console.WriteLine(r + y);
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        static void M()
-                        {
-                            int r;
-                            int y;
-                            {|Rename:NewMethod|}(out r, out y);
-
-                            System.Console.WriteLine(r + y);
-
-                            static void NewMethod(out int r, out int y)
-                            {
-                                r = M1(1 is int {|Conflict:y|});
-                                {
-                                    M2(2 is int y);
-                                    System.Console.Write(y);
-                                }
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1710,45 +1710,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
-                    using System.Threading;
+                using System;
+                using System.Threading;
 
-                    class C
+                class C
+                {
+                    void M(CancellationToken ct)
                     {
-                        void M(CancellationToken ct)
-                        {
-                            var v = 0;
+                        var v = 0;
 
-                            [|if (true)
+                        [|if (true)
+                        {
+                            ct.ThrowIfCancellationRequested();
+                            Console.WriteLine(v);
+                        }|]
+                    }
+                }
+                """,
+                """
+                using System;
+                using System.Threading;
+
+                class C
+                {
+                    void M(CancellationToken ct)
+                    {
+                        var v = 0;
+                        {|Rename:NewMethod|}(v, ct);
+
+                        static void NewMethod(int v, CancellationToken ct)
+                        {
+                            if (true)
                             {
                                 ct.ThrowIfCancellationRequested();
                                 Console.WriteLine(v);
-                            }|]
-                        }
-                    }
-                    """,
-                """
-                    using System;
-                    using System.Threading;
-
-                    class C
-                    {
-                        void M(CancellationToken ct)
-                        {
-                            var v = 0;
-                            {|Rename:NewMethod|}(v, ct);
-
-                            static void NewMethod(int v, CancellationToken ct)
-                            {
-                                if (true)
-                                {
-                                    ct.ThrowIfCancellationRequested();
-                                    Console.WriteLine(v);
-                                }
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1758,50 +1758,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo(int i)
                     {
-                        void Goo(int i)
+                        [|var v = (string)null;
+
+                        switch (i)
                         {
-                            [|var v = (string)null;
+                            case 0: v = "0"; break;
+                            case 1: v = "1"; break;
+                        }|]
+
+                        Console.WriteLine(v);
+                    }
+                }
+                """,
+                """
+                using System;
+
+                class C
+                {
+                    void Goo(int i)
+                    {
+                        var v = {|Rename:NewMethod|}(i);
+
+                        Console.WriteLine(v);
+
+                        static string NewMethod(int i)
+                        {
+                            var v = (string)null;
 
                             switch (i)
                             {
                                 case 0: v = "0"; break;
                                 case 1: v = "1"; break;
-                            }|]
-
-                            Console.WriteLine(v);
-                        }
-                    }
-                    """,
-                """
-                    using System;
-
-                    class C
-                    {
-                        void Goo(int i)
-                        {
-                            var v = {|Rename:NewMethod|}(i);
-
-                            Console.WriteLine(v);
-
-                            static string NewMethod(int i)
-                            {
-                                var v = (string)null;
-
-                                switch (i)
-                                {
-                                    case 0: v = "0"; break;
-                                    case 1: v = "1"; break;
-                                }
-
-                                return v;
                             }
+
+                            return v;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -1817,50 +1817,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo(int i)
                     {
-                        void Goo(int i)
+                        [|var v = (string)null;
+
+                        switch (i)
                         {
-                            [|var v = (string)null;
+                            case 0: v = "0"; break;
+                            case 1: v = "1"; break;
+                        }|]
+
+                        Console.WriteLine(v);
+                    }
+                }
+                """,
+                """
+                using System;
+
+                class C
+                {
+                    void Goo(int i)
+                    {
+                        string v = {|Rename:NewMethod|}(i);
+
+                        Console.WriteLine(v);
+
+                        static string NewMethod(int i)
+                        {
+                            var v = (string)null;
 
                             switch (i)
                             {
                                 case 0: v = "0"; break;
                                 case 1: v = "1"; break;
-                            }|]
-
-                            Console.WriteLine(v);
-                        }
-                    }
-                    """,
-                """
-                    using System;
-
-                    class C
-                    {
-                        void Goo(int i)
-                        {
-                            string v = {|Rename:NewMethod|}(i);
-
-                            Console.WriteLine(v);
-
-                            static string NewMethod(int i)
-                            {
-                                var v = (string)null;
-
-                                switch (i)
-                                {
-                                    case 0: v = "0"; break;
-                                    case 1: v = "1"; break;
-                                }
-
-                                return v;
                             }
+
+                            return v;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -1915,30 +1915,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            [|void Local() { }
-                            Local();|]
-                        }
+                        [|void Local() { }
+                        Local();|]
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            {|Rename:NewMethod|}();
+                        {|Rename:NewMethod|}();
 
-                            static void NewMethod()
-                            {
-                                void Local() { }
-                                Local();
-                            }
+                        static void NewMethod()
+                        {
+                            void Local() { }
+                            Local();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1952,36 +1952,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public static void Main()
                     {
-                        public static void Main()
+                        static void LocalParent()
                         {
-                            static void LocalParent()
-                            {
-                                [|void Local() { }
-                                Local();|]
-                            }
+                            [|void Local() { }
+                            Local();|]
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public static void Main()
                     {
-                        public static void Main()
+                        static void LocalParent()
                         {
-                            static void LocalParent()
-                            {
-                                {|Rename:NewMethod|}();
+                            {|Rename:NewMethod|}();
 
-                                static void NewMethod()
-                                {
-                                    void Local() { }
-                                    Local();
-                                }
+                            static void NewMethod()
+                            {
+                                void Local() { }
+                                Local();
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -1995,56 +1995,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    int Testing;
+
+                    void ClassTest()
                     {
-                        int Testing;
+                        ExistingLocalFunction();
+                        [|NewMethod();|]
+                        Testing = 5;
 
-                        void ClassTest()
-                        {
-                            ExistingLocalFunction();
-                            [|NewMethod();|]
-                            Testing = 5;
-
-                            void ExistingLocalFunction()
-                            {
-
-                            }
-                        }
-
-                        void NewMethod()
+                        void ExistingLocalFunction()
                         {
 
                         }
                     }
-                    """,
+
+                    void NewMethod()
+                    {
+
+                    }
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    int Testing;
+
+                    void ClassTest()
                     {
-                        int Testing;
+                        ExistingLocalFunction();
+                        {|Rename:NewMethod1|}();
+                        Testing = 5;
 
-                        void ClassTest()
+                        void ExistingLocalFunction()
                         {
-                            ExistingLocalFunction();
-                            {|Rename:NewMethod1|}();
-                            Testing = 5;
 
-                            void ExistingLocalFunction()
-                            {
-
-                            }
-
-                            void NewMethod1()
-                            {
-                                NewMethod();
-                            }
                         }
 
-                        void NewMethod()
+                        void NewMethod1()
                         {
-
+                            NewMethod();
                         }
                     }
-                    """,
+
+                    void NewMethod()
+                    {
+
+                    }
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -2093,38 +2093,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    public static void Main()
                     {
-                        public static void Main()
+                        void Local()
                         {
-                            void Local()
-                            {
-                                [|int x = 0;
-                                x++;|]
-                            }
-                            Local();
+                            [|int x = 0;
+                            x++;|]
                         }
+                        Local();
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public static void Main()
                     {
-                        public static void Main()
+                        void Local()
                         {
-                            void Local()
-                            {
-                                {|Rename:NewMethod|}();
+                            {|Rename:NewMethod|}();
 
-                                static void NewMethod()
-                                {
-                                    int x = 0;
-                                    x++;
-                                }
+                            static void NewMethod()
+                            {
+                                int x = 0;
+                                x++;
                             }
-                            Local();
                         }
+                        Local();
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -2134,43 +2134,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void method()
                     {
-                        void method()
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
+                            int v = 0;
+                            for(int i=0 ; i<5; i++)
                             {
-                                int v = 0;
-                                for(int i=0 ; i<5; i++)
-                                {
-                                    [|v = v + i;|]
-                                }
+                                [|v = v + i;|]
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void method()
                     {
-                        void method()
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
+                            int v = 0;
+                            for(int i=0 ; i<5; i++)
                             {
-                                int v = 0;
-                                for(int i=0 ; i<5; i++)
-                                {
-                                    v = {|Rename:NewMethod|}(v, i);
-                                }
+                                v = {|Rename:NewMethod|}(v, i);
+                            }
 
-                                static int NewMethod(int v, int i)
-                                {
-                                    v = v + i;
-                                    return v;
-                                }
+                            static int NewMethod(int v, int i)
+                            {
+                                v = v + i;
+                                return v;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -2180,42 +2180,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void method()
                     {
-                        void method()
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
+                            int v = 0;
+                            for(int i=0 ; i<5; i++)
                             {
-                                int v = 0;
-                                for(int i=0 ; i<5; i++)
-                                {
-                                    [|v = v + i|];
-                                }
+                                [|v = v + i|];
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void method()
                     {
-                        void method()
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
+                            int v = 0;
+                            for(int i=0 ; i<5; i++)
                             {
-                                int v = 0;
-                                for(int i=0 ; i<5; i++)
-                                {
-                                    v = {|Rename:NewMethod|}(v, i);
-                                }
+                                v = {|Rename:NewMethod|}(v, i);
+                            }
 
-                                static int NewMethod(int v, int i)
-                                {
-                                    return v + i;
-                                }
+                            static int NewMethod(int v, int i)
+                            {
+                                return v + i;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -2225,42 +2225,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    void method()
                     {
-                        void method()
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
+                            int v = 0;
+                            for(int i=0 ; i<5; i++)
                             {
-                                int v = 0;
-                                for(int i=0 ; i<5; i++)
-                                {
-                                    [|i = v = v + i|];
-                                }
+                                [|i = v = v + i|];
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    void method()
                     {
-                        void method()
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
+                            int v = 0;
+                            for(int i=0 ; i<5; i++)
                             {
-                                int v = 0;
-                                for(int i=0 ; i<5; i++)
-                                {
-                                    i = {|Rename:NewMethod|}(ref v, i);
-                                }
+                                i = {|Rename:NewMethod|}(ref v, i);
+                            }
 
-                                static int NewMethod(ref int v, int i)
-                                {
-                                    return v = v + i;
-                                }
+                            static int NewMethod(ref int v, int i)
+                            {
+                                return v = v + i;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -2270,32 +2270,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            var t = [|(a, b: 2)|];
-                            System.Console.Write(t.a);
-                        }
+                        int a = 1;
+                        var t = [|(a, b: 2)|];
+                        System.Console.Write(t.a);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int a = 1;
-                            var t = {|Rename:GetT|}();
-                            System.Console.Write(t.a);
+                        int a = 1;
+                        var t = {|Rename:GetT|}();
+                        System.Console.Write(t.a);
 
-                            (int a, int b) GetT()
-                            {
-                                return (a, b: 2);
-                            }
+                        (int a, int b) GetT()
+                        {
+                            return (a, b: 2);
                         }
                     }
-                    """,
+                }
+                """,
                 TestOptions.Regular7_1,
                 index: CodeActionIndex
             );
@@ -2306,31 +2306,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|var (x, y) = (1, 2);|]
-                            System.Console.Write(x + y);
-                        }
+                        [|var (x, y) = (1, 2);|]
+                        System.Console.Write(x + y);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x, y;
-                            {|Rename:NewMethod|}();
-                            System.Console.Write(x + y);
+                        int x, y;
+                        {|Rename:NewMethod|}();
+                        System.Console.Write(x + y);
 
-                            void NewMethod()
-                            {
-                                var (x, y) = (1, 2);
-                            }
+                        void NewMethod()
+                        {
+                            var (x, y) = (1, 2);
                         }
                     }
-                    """,
+                }
+                """,
                 TestOptions.Regular7_1,
                 index: CodeActionIndex
             );
@@ -2341,31 +2341,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|(var x, var y) = (1, 2);|]
-                            System.Console.Write(x + y);
-                        }
+                        [|(var x, var y) = (1, 2);|]
+                        System.Console.Write(x + y);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            int x, y;
-                            {|Rename:NewMethod|}();
-                            System.Console.Write(x + y);
+                        int x, y;
+                        {|Rename:NewMethod|}();
+                        System.Console.Write(x + y);
 
-                            void NewMethod()
-                            {
-                                (x, y) = (1, 2);
-                            }
+                        void NewMethod()
+                        {
+                            (x, y) = (1, 2);
                         }
                     }
-                    """,
+                }
+                """,
                 TestOptions.Regular7_1,
                 index: CodeActionIndex
             );
@@ -2548,39 +2548,39 @@ class Program
         public Task TestAnnotatedNullableReturn() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            [|string? x = null;
-                            x?.ToString();|]
+                        [|string? x = null;
+                        x?.ToString();|]
 
-                            return x;
-                        }
+                        return x;
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
+                        string? x = {|Rename:NewMethod|}();
+
+                        return x;
+
+                        static string? NewMethod()
                         {
-                            string? x = {|Rename:NewMethod|}();
-
+                            string? x = null;
+                            x?.ToString();
                             return x;
-
-                            static string? NewMethod()
-                            {
-                                string? x = null;
-                                x?.ToString();
-                                return x;
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2588,40 +2588,40 @@ class Program
         public Task TestAnnotatedNullableParameters1() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            [|string? x = a?.Contains(b).ToString();|]
+                        string? a = null;
+                        string? b = null;
+                        [|string? x = a?.Contains(b).ToString();|]
 
-                            return x;
-                        }
+                        return x;
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
+                        string? a = null;
+                        string? b = null;
+                        string? x = {|Rename:NewMethod|}(a, b);
+
+                        return x;
+
+                        static string? NewMethod(string? a, string? b)
                         {
-                            string? a = null;
-                            string? b = null;
-                            string? x = {|Rename:NewMethod|}(a, b);
-
-                            return x;
-
-                            static string? NewMethod(string? a, string? b)
-                            {
-                                return a?.Contains(b).ToString();
-                            }
+                            return a?.Contains(b).ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2629,42 +2629,42 @@ class Program
         public Task TestAnnotatedNullableParameters2() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            int c = 0;
-                            [|string x = (a + b + c).ToString();|]
+                        string? a = null;
+                        string? b = null;
+                        int c = 0;
+                        [|string x = (a + b + c).ToString();|]
 
-                            return x;
-                        }
+                        return x;
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
+                        string? a = null;
+                        string? b = null;
+                        int c = 0;
+                        string x = {|Rename:NewMethod|}(a, b, c);
+
+                        return x;
+
+                        static string NewMethod(string? a, string? b, int c)
                         {
-                            string? a = null;
-                            string? b = null;
-                            int c = 0;
-                            string x = {|Rename:NewMethod|}(a, b, c);
-
-                            return x;
-
-                            static string NewMethod(string? a, string? b, int c)
-                            {
-                                return (a + b + c).ToString();
-                            }
+                            return (a + b + c).ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2672,38 +2672,38 @@ class Program
         public Task TestAnnotatedNullableParameters3() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            int c = 0;
-                            return [|(a + b + c).ToString()|];
-                        }
+                        string? a = null;
+                        string? b = null;
+                        int c = 0;
+                        return [|(a + b + c).ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            int c = 0;
-                            return {|Rename:NewMethod|}(a, b, c);
+                        string? a = null;
+                        string? b = null;
+                        int c = 0;
+                        return {|Rename:NewMethod|}(a, b, c);
 
-                            static string NewMethod(string? a, string? b, int c)
-                            {
-                                return (a + b + c).ToString();
-                            }
+                        static string NewMethod(string? a, string? b, int c)
+                        {
+                            return (a + b + c).ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2711,36 +2711,36 @@ class Program
         public Task TestAnnotatedNullableParameters4() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            return [|a?.Contains(b).ToString()|];
-                        }
+                        string? a = null;
+                        string? b = null;
+                        return [|a?.Contains(b).ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            return {|Rename:NewMethod|}(a, b);
+                        string? a = null;
+                        string? b = null;
+                        return {|Rename:NewMethod|}(a, b);
 
-                            static string? NewMethod(string? a, string? b)
-                            {
-                                return a?.Contains(b).ToString();
-                            }
+                        static string? NewMethod(string? a, string? b)
+                        {
+                            return a?.Contains(b).ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2748,36 +2748,36 @@ class Program
         public Task TestFlowStateNullableParameters1() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            return [|(a + b + a).ToString()|];
-                        }
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        return [|(a + b + a).ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            return {|Rename:NewMethod|}(a, b);
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        return {|Rename:NewMethod|}(a, b);
 
-                            static string NewMethod(string a, string b)
-                            {
-                                return (a + b + a).ToString();
-                            }
+                        static string NewMethod(string a, string b)
+                        {
+                            return (a + b + a).ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2785,36 +2785,36 @@ class Program
         public Task TestFlowStateNullableParameters2() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            return [|(a + b + a).ToString()|];
-                        }
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        return [|(a + b + a).ToString()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            return {|Rename:NewMethod|}(a, b);
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        return {|Rename:NewMethod|}(a, b);
 
-                            static string NewMethod(string a, string b)
-                            {
-                                return (a + b + a).ToString();
-                            }
+                        static string NewMethod(string a, string b)
+                        {
+                            return (a + b + a).ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2822,36 +2822,36 @@ class Program
         public Task TestFlowStateNullableParameters3() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            return [|(a + b + a)?.ToString()|] ?? string.Empty;
-                        }
+                        string? a = null;
+                        string? b = null;
+                        return [|(a + b + a)?.ToString()|] ?? string.Empty;
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
-                        {
-                            string? a = null;
-                            string? b = null;
-                            return {|Rename:NewMethod|}(a, b) ?? string.Empty;
+                        string? a = null;
+                        string? b = null;
+                        return {|Rename:NewMethod|}(a, b) ?? string.Empty;
 
-                            static string? NewMethod(string? a, string? b)
-                            {
-                                return (a + b + a)?.ToString();
-                            }
+                        static string? NewMethod(string? a, string? b)
+                        {
+                            return (a + b + a)?.ToString();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2859,51 +2859,51 @@ class Program
         public Task TestFlowStateNullableParameters_MultipleStates() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        [|string? c = a + b;
+                        a = string.Empty;
+                        c += a;
+                        a = null;
+                        b = null;
+                        b = "test";
+                        c = a?.ToString();|]
+                        return c ?? string.Empty;
+                    }
+                }
+                """,
+                """
+                #nullable enable
+
+                class C
+                {
+                    public string M()
+                    {
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        string? c = {|Rename:NewMethod|}(ref a, ref b);
+                        return c ?? string.Empty;
+
+                        static string? NewMethod(ref string? a, ref string? b)
                         {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            [|string? c = a + b;
+                            string? c = a + b;
                             a = string.Empty;
                             c += a;
                             a = null;
                             b = null;
                             b = "test";
-                            c = a?.ToString();|]
-                            return c ?? string.Empty;
+                            c = a?.ToString();
+                            return c;
                         }
                     }
-                    """,
-                """
-                    #nullable enable
-
-                    class C
-                    {
-                        public string M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            string? c = {|Rename:NewMethod|}(ref a, ref b);
-                            return c ?? string.Empty;
-
-                            static string? NewMethod(ref string? a, ref string? b)
-                            {
-                                string? c = a + b;
-                                a = string.Empty;
-                                c += a;
-                                a = null;
-                                b = null;
-                                b = "test";
-                                c = a?.ToString();
-                                return c;
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2911,51 +2911,51 @@ class Program
         public Task TestFlowStateNullableParameters_MultipleStatesNonNullReturn() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        [|string? c = a + b;
+                        a = string.Empty;
+                        b = string.Empty;
+                        a = null;
+                        b = null;
+                        c = null;
+                        c = a + b;|]
+                        return c ?? string.Empty;
+                    }
+                }
+                """,
+                """
+                #nullable enable
+
+                class C
+                {
+                    public string M()
+                    {
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        string? c = {|Rename:NewMethod|}(ref a, ref b);
+                        return c ?? string.Empty;
+
+                        static string NewMethod(ref string? a, ref string? b)
                         {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            [|string? c = a + b;
+                            string? c = a + b;
                             a = string.Empty;
                             b = string.Empty;
                             a = null;
                             b = null;
                             c = null;
-                            c = a + b;|]
-                            return c ?? string.Empty;
+                            c = a + b;
+                            return c;
                         }
                     }
-                    """,
-                """
-                    #nullable enable
-
-                    class C
-                    {
-                        public string M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            string? c = {|Rename:NewMethod|}(ref a, ref b);
-                            return c ?? string.Empty;
-
-                            static string NewMethod(ref string? a, ref string? b)
-                            {
-                                string? c = a + b;
-                                a = string.Empty;
-                                b = string.Empty;
-                                a = null;
-                                b = null;
-                                c = null;
-                                c = a + b;
-                                return c;
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -2963,49 +2963,49 @@ class Program
         public Task TestFlowStateNullableParameters_MultipleStatesNullReturn() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        [|string? c = a + b;
+                        a = string.Empty;
+                        b = string.Empty;
+                        a = null;
+                        b = null;
+                        c = a?.ToString();|]
+                        return c ?? string.Empty;
+                    }
+                }
+                """,
+                """
+                #nullable enable
+
+                class C
+                {
+                    public string M()
+                    {
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        string? c = {|Rename:NewMethod|}(ref a, ref b);
+                        return c ?? string.Empty;
+
+                        static string? NewMethod(ref string? a, ref string? b)
                         {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            [|string? c = a + b;
+                            string? c = a + b;
                             a = string.Empty;
                             b = string.Empty;
                             a = null;
                             b = null;
-                            c = a?.ToString();|]
-                            return c ?? string.Empty;
+                            c = a?.ToString();
+                            return c;
                         }
                     }
-                    """,
-                """
-                    #nullable enable
-
-                    class C
-                    {
-                        public string M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            string? c = {|Rename:NewMethod|}(ref a, ref b);
-                            return c ?? string.Empty;
-
-                            static string? NewMethod(ref string? a, ref string? b)
-                            {
-                                string? c = a + b;
-                                a = string.Empty;
-                                b = string.Empty;
-                                a = null;
-                                b = null;
-                                c = a?.ToString();
-                                return c;
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3013,47 +3013,47 @@ class Program
         public Task TestFlowStateNullableParameters_RefNotNull() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string M()
                     {
-                        public string M()
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        [|var c = a + b;
+                        a = string.Empty;
+                        c += a;
+                        b = "test";
+                        c = a + b +c;|]
+                        return c;
+                    }
+                }
+                """,
+                """
+                #nullable enable
+
+                class C
+                {
+                    public string M()
+                    {
+                        string? a = string.Empty;
+                        string? b = string.Empty;
+                        string c = {|Rename:NewMethod|}(ref a, ref b);
+                        return c;
+
+                        static string NewMethod(ref string a, ref string b)
                         {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            [|var c = a + b;
+                            var c = a + b;
                             a = string.Empty;
                             c += a;
                             b = "test";
-                            c = a + b +c;|]
+                            c = a + b + c;
                             return c;
                         }
                     }
-                    """,
-                """
-                    #nullable enable
-
-                    class C
-                    {
-                        public string M()
-                        {
-                            string? a = string.Empty;
-                            string? b = string.Empty;
-                            string c = {|Rename:NewMethod|}(ref a, ref b);
-                            return c;
-
-                            static string NewMethod(ref string a, ref string b)
-                            {
-                                var c = a + b;
-                                a = string.Empty;
-                                c += a;
-                                b = "test";
-                                c = a + b + c;
-                                return c;
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3067,39 +3067,39 @@ class Program
         public Task TestFlowNullableReturn_NotNull1() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            [|string? x = null;
-                            x.ToString();|]
+                        [|string? x = null;
+                        x.ToString();|]
 
-                            return x;
-                        }
+                        return x;
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
+                        string? x = {|Rename:NewMethod|}();
+
+                        return x;
+
+                        static string NewMethod()
                         {
-                            string? x = {|Rename:NewMethod|}();
-
+                            string? x = null;
+                            x.ToString();
                             return x;
-
-                            static string NewMethod()
-                            {
-                                string? x = null;
-                                x.ToString();
-                                return x;
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3107,41 +3107,41 @@ class Program
         public Task TestFlowNullableReturn_NotNull2() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
-                        {
-                            [|string? x = null;
-                            x?.ToString();
-                            x = string.Empty;|]
+                        [|string? x = null;
+                        x?.ToString();
+                        x = string.Empty;|]
 
-                            return x;
-                        }
+                        return x;
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
+                        string? x = {|Rename:NewMethod|}();
+
+                        return x;
+
+                        static string NewMethod()
                         {
-                            string? x = {|Rename:NewMethod|}();
-
+                            string? x = null;
+                            x?.ToString();
+                            x = string.Empty;
                             return x;
-
-                            static string NewMethod()
-                            {
-                                string? x = null;
-                                x?.ToString();
-                                x = string.Empty;
-                                return x;
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3149,53 +3149,53 @@ class Program
         public Task TestFlowNullable_Lambda() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
+                        [|string? x = null;
+                        Action modifyXToNonNull = () =>
                         {
-                            [|string? x = null;
+                            x += x;
+                        };
+
+                        modifyXToNonNull();|]
+
+                        return x;
+                    }
+                }
+                """,
+                """
+                #nullable enable
+
+                using System;
+
+                class C
+                {
+                    public string? M()
+                    {
+                        string? x = {|Rename:NewMethod|}();
+
+                        return x;
+
+                        static string? NewMethod()
+                        {
+                            string? x = null;
                             Action modifyXToNonNull = () =>
                             {
                                 x += x;
                             };
 
-                            modifyXToNonNull();|]
-
+                            modifyXToNonNull();
                             return x;
                         }
                     }
-                    """,
-                """
-                    #nullable enable
-
-                    using System;
-
-                    class C
-                    {
-                        public string? M()
-                        {
-                            string? x = {|Rename:NewMethod|}();
-
-                            return x;
-
-                            static string? NewMethod()
-                            {
-                                string? x = null;
-                                Action modifyXToNonNull = () =>
-                                {
-                                    x += x;
-                                };
-
-                                modifyXToNonNull();
-                                return x;
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3203,53 +3203,53 @@ class Program
         public Task TestFlowNullable_LambdaWithReturn() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public string? M()
                     {
-                        public string? M()
+                        [|string? x = null;
+                        Func<string?> returnNull = () =>
                         {
-                            [|string? x = null;
+                            return null;
+                        };
+
+                        x = returnNull() ?? string.Empty;|]
+
+                        return x;
+                    }
+                }
+                """,
+                """
+                #nullable enable
+
+                using System;
+
+                class C
+                {
+                    public string? M()
+                    {
+                        string? x = {|Rename:NewMethod|}();
+
+                        return x;
+
+                        static string NewMethod()
+                        {
+                            string? x = null;
                             Func<string?> returnNull = () =>
                             {
                                 return null;
                             };
 
-                            x = returnNull() ?? string.Empty;|]
-
+                            x = returnNull() ?? string.Empty;
                             return x;
                         }
                     }
-                    """,
-                """
-                    #nullable enable
-
-                    using System;
-
-                    class C
-                    {
-                        public string? M()
-                        {
-                            string? x = {|Rename:NewMethod|}();
-
-                            return x;
-
-                            static string NewMethod()
-                            {
-                                string? x = null;
-                                Func<string?> returnNull = () =>
-                                {
-                                    return null;
-                                };
-
-                                x = returnNull() ?? string.Empty;
-                                return x;
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3258,30 +3258,30 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    struct S1
+                struct S1
+                {
+                    readonly int M1() => 42;
+                    void Main()
                     {
-                        readonly int M1() => 42;
-                        void Main()
-                        {
-                            [|int i = M1() + M1()|];
-                        }
+                        [|int i = M1() + M1()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    struct S1
+                struct S1
+                {
+                    readonly int M1() => 42;
+                    void Main()
                     {
-                        readonly int M1() => 42;
-                        void Main()
-                        {
-                            {|Rename:NewMethod|}();
+                        {|Rename:NewMethod|}();
 
-                            readonly void NewMethod()
-                            {
-                                int i = M1() + M1();
-                            }
+                        readonly void NewMethod()
+                        {
+                            int i = M1() + M1();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -3291,30 +3291,30 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    readonly struct S1
+                readonly struct S1
+                {
+                    int M1() => 42;
+                    void Main()
                     {
-                        int M1() => 42;
-                        void Main()
-                        {
-                            [|int i = M1() + M1()|];
-                        }
+                        [|int i = M1() + M1()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    readonly struct S1
+                readonly struct S1
+                {
+                    int M1() => 42;
+                    void Main()
                     {
-                        int M1() => 42;
-                        void Main()
-                        {
-                            {|Rename:NewMethod|}();
+                        {|Rename:NewMethod|}();
 
-                            void NewMethod()
-                            {
-                                int i = M1() + M1();
-                            }
+                        void NewMethod()
+                        {
+                            int i = M1() + M1();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -3324,30 +3324,30 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    struct S1
+                struct S1
+                {
+                    int M1() => 42;
+                    readonly void Main()
                     {
-                        int M1() => 42;
-                        readonly void Main()
-                        {
-                            [|int i = M1() + M1()|];
-                        }
+                        [|int i = M1() + M1()|];
                     }
-                    """,
+                }
+                """,
                 """
-                    struct S1
+                struct S1
+                {
+                    int M1() => 42;
+                    readonly void Main()
                     {
-                        int M1() => 42;
-                        readonly void Main()
-                        {
-                            {|Rename:NewMethod|}();
+                        {|Rename:NewMethod|}();
 
-                            void NewMethod()
-                            {
-                                int i = M1() + M1();
-                            }
+                        void NewMethod()
+                        {
+                            int i = M1() + M1();
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -3356,40 +3356,40 @@ class Program
         public Task TestExtractNullableObjectWithExplicitCast() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = null;
-                            var s = (string?)[|o|];
-                            Console.WriteLine(s);
-                        }
+                        object? o = null;
+                        var s = (string?)[|o|];
+                        Console.WriteLine(s);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = null;
-                            var s = (string?){|Rename:GetO|}(o);
-                            Console.WriteLine(s);
+                        object? o = null;
+                        var s = (string?){|Rename:GetO|}(o);
+                        Console.WriteLine(s);
 
-                            static object? GetO(object? o)
-                            {
-                                return o;
-                            }
+                        static object? GetO(object? o)
+                        {
+                            return o;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3397,40 +3397,40 @@ class Program
         public Task TestExtractNotNullableObjectWithExplicitCast() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = new object();
-                            var s = (string)[|o|];
-                            Console.WriteLine(s);
-                        }
+                        object? o = new object();
+                        var s = (string)[|o|];
+                        Console.WriteLine(s);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = new object();
-                            var s = (string){|Rename:GetO|}(o);
-                            Console.WriteLine(s);
+                        object? o = new object();
+                        var s = (string){|Rename:GetO|}(o);
+                        Console.WriteLine(s);
 
-                            static object GetO(object o)
-                            {
-                                return o;
-                            }
+                        static object GetO(object o)
+                        {
+                            return o;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3438,54 +3438,54 @@ class Program
         public Task TestExtractNotNullableWithExplicitCast() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class A
+                class A
+                {
+                }
+
+                class B : A
+                {
+                }
+
+                class C
+                {
+                    void M()
                     {
+                        B? b = new B();
+                        var s = (A)[|b|];
                     }
-
-                    class B : A
-                    {
-                    }
-
-                    class C
-                    {
-                        void M()
-                        {
-                            B? b = new B();
-                            var s = (A)[|b|];
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class A
+                class A
+                {
+                }
+
+                class B : A
+                {
+                }
+
+                class C
+                {
+                    void M()
                     {
-                    }
+                        B? b = new B();
+                        var s = (A){|Rename:GetB|}(b);
 
-                    class B : A
-                    {
-                    }
-
-                    class C
-                    {
-                        void M()
+                        static B GetB(B b)
                         {
-                            B? b = new B();
-                            var s = (A){|Rename:GetB|}(b);
-
-                            static B GetB(B b)
-                            {
-                                return b;
-                            }
+                            return b;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3493,54 +3493,54 @@ class Program
         public Task TestExtractNullableWithExplicitCast() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class A
+                class A
+                {
+                }
+
+                class B : A
+                {
+                }
+
+                class C
+                {
+                    void M()
                     {
+                        B? b = null;
+                        var s = (A)[|b|];
                     }
-
-                    class B : A
-                    {
-                    }
-
-                    class C
-                    {
-                        void M()
-                        {
-                            B? b = null;
-                            var s = (A)[|b|];
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class A
+                class A
+                {
+                }
+
+                class B : A
+                {
+                }
+
+                class C
+                {
+                    void M()
                     {
-                    }
+                        B? b = null;
+                        var s = (A){|Rename:GetB|}(b);
 
-                    class B : A
-                    {
-                    }
-
-                    class C
-                    {
-                        void M()
+                        static B? GetB(B? b)
                         {
-                            B? b = null;
-                            var s = (A){|Rename:GetB|}(b);
-
-                            static B? GetB(B? b)
-                            {
-                                return b;
-                            }
+                            return b;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3548,40 +3548,40 @@ class Program
         public Task TestExtractNotNullableWithExplicitCastSelected() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = new object();
-                            var s = [|(string)o|];
-                            Console.WriteLine(s);
-                        }
+                        object? o = new object();
+                        var s = [|(string)o|];
+                        Console.WriteLine(s);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = new object();
-                            var s = {|Rename:GetS|}(o);
-                            Console.WriteLine(s);
+                        object? o = new object();
+                        var s = {|Rename:GetS|}(o);
+                        Console.WriteLine(s);
 
-                            static string GetS(object o)
-                            {
-                                return (string)o;
-                            }
+                        static string GetS(object o)
+                        {
+                            return (string)o;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3589,40 +3589,40 @@ class Program
         public Task TestExtractNullableWithExplicitCastSelected() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = null;
-                            var s = [|(string?)o|];
-                            Console.WriteLine(s);
-                        }
+                        object? o = null;
+                        var s = [|(string?)o|];
+                        Console.WriteLine(s);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = null;
-                            var s = {|Rename:GetS|}(o);
-                            Console.WriteLine(s);
+                        object? o = null;
+                        var s = {|Rename:GetS|}(o);
+                        Console.WriteLine(s);
 
-                            static string? GetS(object? o)
-                            {
-                                return (string?)o;
-                            }
+                        static string? GetS(object? o)
+                        {
+                            return (string?)o;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3630,40 +3630,40 @@ class Program
         public Task TestExtractNullableNonNullFlowWithExplicitCastSelected() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = new object();
-                            var s = [|(string?)o|];
-                            Console.WriteLine(s);
-                        }
+                        object? o = new object();
+                        var s = [|(string?)o|];
+                        Console.WriteLine(s);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = new object();
-                            var s = {|Rename:GetS|}(o);
-                            Console.WriteLine(s);
+                        object? o = new object();
+                        var s = {|Rename:GetS|}(o);
+                        Console.WriteLine(s);
 
-                            static string? GetS(object o)
-                            {
-                                return (string?)o;
-                            }
+                        static string? GetS(object o)
+                        {
+                            return (string?)o;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3671,40 +3671,40 @@ class Program
         public Task TestExtractNullableToNonNullableWithExplicitCastSelected() =>
             TestInRegularAndScript1Async(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = null;
-                            var s = [|(string)o|];
-                            Console.WriteLine(s);
-                        }
+                        object? o = null;
+                        var s = [|(string)o|];
+                        Console.WriteLine(s);
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object? o = null;
-                            var s = {|Rename:GetS|}(o);
-                            Console.WriteLine(s);
+                        object? o = null;
+                        var s = {|Rename:GetS|}(o);
+                        Console.WriteLine(s);
 
-                            static string? GetS(object? o)
-                            {
-                                return (string)o;
-                            }
+                        static string? GetS(object? o)
+                        {
+                            return (string)o;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
 
@@ -3713,38 +3713,38 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|var test = 1;|]
+                        [|var test = 1;|]
 
-                            static void NewMethod()
-                            {
-                                var test = 1;
-                            }
+                        static void NewMethod()
+                        {
+                            var test = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        {|Rename:NewMethod1|}();
+
+                        static void NewMethod()
                         {
-                            {|Rename:NewMethod1|}();
+                            var test = 1;
+                        }
 
-                            static void NewMethod()
-                            {
-                                var test = 1;
-                            }
-
-                            static void NewMethod1()
-                            {
-                                var test = 1;
-                            }
+                        static void NewMethod1()
+                        {
+                            var test = 1;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -3754,46 +3754,46 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        static void NewMethod()
                         {
-                            static void NewMethod()
-                            {
-                                var NewMethod2 = 0;
-                                [|var test = 1;|]
+                            var NewMethod2 = 0;
+                            [|var test = 1;|]
 
-                                static void NewMethod1()
-                                {
-                                    var test = 1;
-                                }
+                            static void NewMethod1()
+                            {
+                                var test = 1;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        static void NewMethod()
                         {
-                            static void NewMethod()
+                            var NewMethod2 = 0;
+                            {|Rename:NewMethod3|}();
+
+                            static void NewMethod1()
                             {
-                                var NewMethod2 = 0;
-                                {|Rename:NewMethod3|}();
+                                var test = 1;
+                            }
 
-                                static void NewMethod1()
-                                {
-                                    var test = 1;
-                                }
-
-                                static void NewMethod3()
-                                {
-                                    var test = 1;
-                                }
+                            static void NewMethod3()
+                            {
+                                var test = 1;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -3803,36 +3803,36 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Test
+                class Test
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        [|ExistingLocalFunction();
+
+                        void ExistingLocalFunction()
                         {
-                            [|ExistingLocalFunction();
+                        }|]
+                    }
+                }
+                """,
+                """
+                class Test
+                {
+                    static void Main(string[] args)
+                    {
+                        {|Rename:NewMethod|}();
+
+                        static void NewMethod()
+                        {
+                            ExistingLocalFunction();
 
                             void ExistingLocalFunction()
                             {
-                            }|]
-                        }
-                    }
-                    """,
-                """
-                    class Test
-                    {
-                        static void Main(string[] args)
-                        {
-                            {|Rename:NewMethod|}();
-
-                            static void NewMethod()
-                            {
-                                ExistingLocalFunction();
-
-                                void ExistingLocalFunction()
-                                {
-                                }
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -3842,41 +3842,41 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Test()
                     {
-                        void Test()
-                        {
-                            if (true)
-                                [|if (true)
-                                    return;|]
-                            Console.WriteLine();
-                        }
+                        if (true)
+                            [|if (true)
+                                return;|]
+                        Console.WriteLine();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Test()
                     {
-                        void Test()
+                        if (true)
+                        {
+                            {|Rename:NewMethod|}();
+                            return;
+                        }
+                        Console.WriteLine();
+
+                        static void NewMethod()
                         {
                             if (true)
-                            {
-                                {|Rename:NewMethod|}();
                                 return;
-                            }
-                            Console.WriteLine();
-
-                            static void NewMethod()
-                            {
-                                if (true)
-                                    return;
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -3886,30 +3886,30 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}() ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}() ? b = true : b = false);
 
-                            bool NewMethod()
-                            {
-                                return b != true;
-                            }
+                        bool NewMethod()
+                        {
+                            return b != true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -3926,30 +3926,30 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}() ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}() ? b = true : b = false);
 
-                            bool NewMethod()
-                            {
-                                return b != true;
-                            }
+                        bool NewMethod()
+                        {
+                            return b != true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -3966,30 +3966,30 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b)
-                            {
-                                return b != true;
-                            }
+                        static bool NewMethod(bool b)
+                        {
+                            return b != true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4006,30 +4006,30 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine([|b != true|] ? b = true : b = false);
-                        }
+                        bool b = true;
+                        System.Console.WriteLine([|b != true|] ? b = true : b = false);
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            bool b = true;
-                            System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
+                        bool b = true;
+                        System.Console.WriteLine({|Rename:NewMethod|}(b) ? b = true : b = false);
 
-                            static bool NewMethod(bool b)
-                            {
-                                return b != true;
-                            }
+                        static bool NewMethod(bool b)
+                        {
+                            return b != true;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4046,51 +4046,51 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
-                        {
-                            get { [|return _seconds / 3600;|] }
-                            set 
-                            { 
-                                if (value < 0 || value > 24)
-                                    throw new ArgumentOutOfRangeException("test");
-                                _seconds = value * 3600;
-                            }
+                        get { [|return _seconds / 3600;|] }
+                        set 
+                        { 
+                            if (value < 0 || value > 24)
+                                throw new ArgumentOutOfRangeException("test");
+                            _seconds = value * 3600;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
+                        get
                         {
-                            get
-                            {
-                                return {|Rename:NewMethod|}();
+                            return {|Rename:NewMethod|}();
 
-                                double NewMethod()
-                                {
-                                    return _seconds / 3600;
-                                }
-                            }
-                            set 
-                            { 
-                                if (value < 0 || value > 24)
-                                    throw new ArgumentOutOfRangeException("test");
-                                _seconds = value * 3600;
+                            double NewMethod()
+                            {
+                                return _seconds / 3600;
                             }
                         }
+                        set 
+                        { 
+                            if (value < 0 || value > 24)
+                                throw new ArgumentOutOfRangeException("test");
+                            _seconds = value * 3600;
+                        }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4106,51 +4106,51 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
-                        {
-                            get { return [|_seconds / 3600;|] }
-                            set 
-                            { 
-                                if (value < 0 || value > 24)
-                                    throw new ArgumentOutOfRangeException("test");
-                                _seconds = value * 3600;
-                            }
+                        get { return [|_seconds / 3600;|] }
+                        set 
+                        { 
+                            if (value < 0 || value > 24)
+                                throw new ArgumentOutOfRangeException("test");
+                            _seconds = value * 3600;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
+                        get
                         {
-                            get
-                            {
-                                return {|Rename:NewMethod|}();
+                            return {|Rename:NewMethod|}();
 
-                                double NewMethod()
-                                {
-                                    return _seconds / 3600;
-                                }
-                            }
-                            set 
-                            { 
-                                if (value < 0 || value > 24)
-                                    throw new ArgumentOutOfRangeException("test");
-                                _seconds = value * 3600;
+                            double NewMethod()
+                            {
+                                return _seconds / 3600;
                             }
                         }
+                        set 
+                        { 
+                            if (value < 0 || value > 24)
+                                throw new ArgumentOutOfRangeException("test");
+                            _seconds = value * 3600;
+                        }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4166,48 +4166,48 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
+                        get { return _seconds / 3600; }
+                        set 
                         {
-                            get { return _seconds / 3600; }
-                            set 
-                            {
-                                [|if (value < 0 || value > 24)
-                                    throw new ArgumentOutOfRangeException("test");|]
-                                _seconds = value * 3600;
-                            }
+                            [|if (value < 0 || value > 24)
+                                throw new ArgumentOutOfRangeException("test");|]
+                            _seconds = value * 3600;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
+                        get { return _seconds / 3600; }
+                        set
                         {
-                            get { return _seconds / 3600; }
-                            set
-                            {
-                                {|Rename:NewMethod|}(value);
-                                _seconds = value * 3600;
+                            {|Rename:NewMethod|}(value);
+                            _seconds = value * 3600;
 
-                                static void NewMethod(double value)
-                                {
-                                    if (value < 0 || value > 24)
-                                        throw new ArgumentOutOfRangeException("test");
-                                }
+                            static void NewMethod(double value)
+                            {
+                                if (value < 0 || value > 24)
+                                    throw new ArgumentOutOfRangeException("test");
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4223,48 +4223,48 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
+                        get { return _seconds / 3600; }
+                        set 
                         {
-                            get { return _seconds / 3600; }
-                            set 
-                            {
-                                if (value < 0 || value > 24)
-                                    throw new ArgumentOutOfRangeException("test");
-                                [|_seconds = value * 3600;|]
-                            }
+                            if (value < 0 || value > 24)
+                                throw new ArgumentOutOfRangeException("test");
+                            [|_seconds = value * 3600;|]
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class TimePeriod
+                class TimePeriod
+                {
+                    private double _seconds;
+
+                    public double Hours
                     {
-                        private double _seconds;
-
-                        public double Hours
+                        get { return _seconds / 3600; }
+                        set
                         {
-                            get { return _seconds / 3600; }
-                            set
-                            {
-                                if (value < 0 || value > 24)
-                                    throw new ArgumentOutOfRangeException("test");
-                                {|Rename:NewMethod|}(value);
+                            if (value < 0 || value > 24)
+                                throw new ArgumentOutOfRangeException("test");
+                            {|Rename:NewMethod|}(value);
 
-                                void NewMethod(double value)
-                                {
-                                    _seconds = value * 3600;
-                                }
+                            void NewMethod(double value)
+                            {
+                                _seconds = value * 3600;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4280,58 +4280,58 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                [|if (index < 0 && index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");|]
-                                return testArr[index];
-                            }
-                            set
-                            {
-                                if (index < 0 || index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                testArr[index] = value;
-                            }
+                            [|if (index < 0 && index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");|]
+                            return testArr[index];
+                        }
+                        set
+                        {
+                            if (index < 0 || index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            testArr[index] = value;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                {|Rename:NewMethod|}(index);
-                                return testArr[index];
+                            {|Rename:NewMethod|}(index);
+                            return testArr[index];
 
-                                void NewMethod(int index)
-                                {
-                                    if (index < 0 && index >= testArr.Length)
-                                        throw new IndexOutOfRangeException("test");
-                                }
-                            }
-                            set
+                            void NewMethod(int index)
                             {
-                                if (index < 0 || index >= testArr.Length)
+                                if (index < 0 && index >= testArr.Length)
                                     throw new IndexOutOfRangeException("test");
-                                testArr[index] = value;
                             }
                         }
+                        set
+                        {
+                            if (index < 0 || index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            testArr[index] = value;
+                        }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4347,58 +4347,58 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                if (index < 0 && index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                [|return testArr[index];|]
-                            }
-                            set
-                            {
-                                if (index < 0 || index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                testArr[index] = value;
-                            }
+                            if (index < 0 && index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            [|return testArr[index];|]
+                        }
+                        set
+                        {
+                            if (index < 0 || index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            testArr[index] = value;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                if (index < 0 && index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                return {|Rename:NewMethod|}(index);
+                            if (index < 0 && index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            return {|Rename:NewMethod|}(index);
 
-                                string NewMethod(int index)
-                                {
-                                    return testArr[index];
-                                }
-                            }
-                            set
+                            string NewMethod(int index)
                             {
-                                if (index < 0 || index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                testArr[index] = value;
+                                return testArr[index];
                             }
                         }
+                        set
+                        {
+                            if (index < 0 || index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            testArr[index] = value;
+                        }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4414,58 +4414,58 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                if (index < 0 && index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                return testArr[index];
-                            }
-                            set
-                            {
-                                [|if (index < 0 || index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");|]
-                                testArr[index] = value;
-                            }
+                            if (index < 0 && index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            return testArr[index];
+                        }
+                        set
+                        {
+                            [|if (index < 0 || index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");|]
+                            testArr[index] = value;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                if (index < 0 && index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                return testArr[index];
-                            }
-                            set
-                            {
-                                {|Rename:NewMethod|}(index);
-                                testArr[index] = value;
+                            if (index < 0 && index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            return testArr[index];
+                        }
+                        set
+                        {
+                            {|Rename:NewMethod|}(index);
+                            testArr[index] = value;
 
-                                void NewMethod(int index)
-                                {
-                                    if (index < 0 || index >= testArr.Length)
-                                        throw new IndexOutOfRangeException("test");
-                                }
+                            void NewMethod(int index)
+                            {
+                                if (index < 0 || index >= testArr.Length)
+                                    throw new IndexOutOfRangeException("test");
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4481,58 +4481,58 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                if (index < 0 && index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                return testArr[index];
-                            }
-                            set
-                            {
-                                if (index < 0 || index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                [|testArr[index] = value;|]
-                            }
+                            if (index < 0 && index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            return testArr[index];
+                        }
+                        set
+                        {
+                            if (index < 0 || index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            [|testArr[index] = value;|]
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Indexer
+                class Indexer
+                {
+                    private readonly string[] testArr = new string[1];
+
+                    public string this[int index]
                     {
-                        private readonly string[] testArr = new string[1];
-
-                        public string this[int index]
+                        get
                         {
-                            get
-                            {
-                                if (index < 0 && index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                return testArr[index];
-                            }
-                            set
-                            {
-                                if (index < 0 || index >= testArr.Length)
-                                    throw new IndexOutOfRangeException("test");
-                                {|Rename:NewMethod|}(index, value);
+                            if (index < 0 && index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            return testArr[index];
+                        }
+                        set
+                        {
+                            if (index < 0 || index >= testArr.Length)
+                                throw new IndexOutOfRangeException("test");
+                            {|Rename:NewMethod|}(index, value);
 
-                                void NewMethod(int index, string value)
-                                {
-                                    testArr[index] = value;
-                                }
+                            void NewMethod(int index, string value)
+                            {
+                                testArr[index] = value;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex,
                 new TestParameters(
                     options: Option(
@@ -4592,28 +4592,28 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class MethodExtraction
+                class MethodExtraction
+                {
+                    void TestMethod()
                     {
-                        void TestMethod()
-                        {
-                            int a = [|1 + 1|];
-                        }
+                        int a = [|1 + 1|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class MethodExtraction
+                class MethodExtraction
+                {
+                    void TestMethod()
                     {
-                        void TestMethod()
-                        {
-                            int a = {|Rename:GetA|}();
+                        int a = {|Rename:GetA|}();
 
-                            static int GetA()
-                            {
-                                return 1 + 1;
-                            }
+                        static int GetA()
+                        {
+                            return 1 + 1;
                         }
                     }
-                    """,
+                }
+                """,
                 CodeActionIndex
             );
         }
@@ -5346,17 +5346,17 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        void L()
                         {
-                            void L()
-                            {
-                                [|using System;|]
-                            }
+                            [|using System;|]
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5365,15 +5365,15 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public static void Main(string[] args)
                     {
-                        public static void Main(string[] args)
-                        {
-                            [|bool Local() => args == null;|]
-                            Local();
-                        }
+                        [|bool Local() => args == null;|]
+                        Local();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(index: CodeActionIndex)
             );
         }
@@ -5383,18 +5383,18 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public static void Main(string[] args)
                     {
-                        public static void Main(string[] args)
+                        [|bool Local()
                         {
-                            [|bool Local()
-                            {
-                                return args == null;
-                            }|]
-                            Local();
-                        }
+                            return args == null;
+                        }|]
+                        Local();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(index: CodeActionIndex)
             );
         }
@@ -5404,43 +5404,43 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                    delegate int del(int i);
+                delegate int del(int i);
 
-                    class C
+                class C
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            del q = x => {
-                                [|goto label2;
-                                return x * x;|]
-                            };
-                        label2:
-                            return;
-                        }
+                        del q = x => {
+                            [|goto label2;
+                            return x * x;|]
+                        };
+                    label2:
+                        return;
                     }
-                    """,
+                }
+                """,
                 """
-                    delegate int del(int i);
+                delegate int del(int i);
 
-                    class C
+                class C
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        del q = x =>
                         {
-                            del q = x =>
-                            {
-                                return {|Rename:NewMethod|}(x);
+                            return {|Rename:NewMethod|}(x);
 
-                                static int NewMethod(int x)
-                                {
-                                    goto label2;
-                                    return x * x;
-                                }
-                            };
-                        label2:
-                            return;
-                        }
+                            static int NewMethod(int x)
+                            {
+                                goto label2;
+                                return x * x;
+                            }
+                        };
+                    label2:
+                        return;
                     }
-                    """,
+                }
+                """,
                 index: CodeActionIndex
             );
         }
@@ -5450,16 +5450,16 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        [|int a = 10;|]
-                        int b = 5;
+                class C
+                {
+                    [|int a = 10;|]
+                    int b = 5;
 
-                        static void Main(string[] args)
-                        {
-                        }
+                    static void Main(string[] args)
+                    {
                     }
-                    """,
+                }
+                """,
                 new TestParameters(index: CodeActionIndex)
             );
         }
@@ -5469,16 +5469,16 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [|a = 10;|]
-                        int b = 5;
+                class C
+                {
+                    int [|a = 10;|]
+                    int b = 5;
 
-                        static void Main(string[] args)
-                        {
-                        }
+                    static void Main(string[] args)
+                    {
                     }
-                    """,
+                }
+                """,
                 new TestParameters(index: CodeActionIndex)
             );
         }
@@ -5588,17 +5588,17 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    [|[Serializable]|]
+                    public class SampleClass
                     {
-                        [|[Serializable]|]
-                        public class SampleClass
-                        {
-                            // Objects of this type can be serialized.
-                        }
+                        // Objects of this type can be serialized.
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5607,16 +5607,16 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-                    class C
+                class C
+                {
+                    [ComVisible([|true|])]
+                    public class SampleClass
                     {
-                        [ComVisible([|true|])]
-                        public class SampleClass
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5625,27 +5625,27 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class B
+                class B
+                {
+                    protected B(string message)
                     {
-                        protected B(string message)
-                        {
 
-                        }
+                    }
+                }
+
+                class C : B
+                {
+                    public C(string message) : [|this("test", "test2")|]
+                    {
+
                     }
 
-                    class C : B
+                    public C(string message, string message2) : base(message)
                     {
-                        public C(string message) : [|this("test", "test2")|]
-                        {
 
-                        }
-
-                        public C(string message, string message2) : base(message)
-                        {
-
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5654,27 +5654,27 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class B
+                class B
+                {
+                    protected B(string message)
                     {
-                        protected B(string message)
-                        {
 
-                        }
+                    }
+                }
+
+                class C : B
+                {
+                    public C(string message) : this("test", "test2")
+                    {
+
                     }
 
-                    class C : B
+                    public C(string message, string message2) : [|base(message)|]
                     {
-                        public C(string message) : this("test", "test2")
-                        {
 
-                        }
-
-                        public C(string message, string message2) : [|base(message)|]
-                        {
-
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5959,11 +5959,11 @@ class Program
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    namespace C
-                    {
-                        private bool TestMethod() => [|false|];
-                    }
-                    """,
+                namespace C
+                {
+                    private bool TestMethod() => [|false|];
+                }
+                """,
                 codeActionIndex: 1
             );
         }
@@ -5974,46 +5974,46 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        if (true)
                         {
-                            if (true)
+                            static void L()
                             {
-                                static void L()
+                               [|
+                                static void L2()
                                 {
-                                   [|
-                                    static void L2()
-                                    {
-                                        var x = 1;
-                                    }|]
-                                }
+                                    var x = 1;
+                                }|]
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        if (true)
+                            {|Rename:NewMethod|}();
+
+                        static void NewMethod()
                         {
-                            if (true)
-                                {|Rename:NewMethod|}();
-
-                            static void NewMethod()
+                            static void L()
                             {
-                                static void L()
-                                {
 
-                                    static void L2()
-                                    {
-                                        var x = 1;
-                                    }
+                                static void L2()
+                                {
+                                    var x = 1;
                                 }
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 index: 1
             );
         }
@@ -6024,44 +6024,44 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        if (true)
                         {
-                            if (true)
+                            static void L()
                             {
-                                static void L()
+                                [|static void L2()
                                 {
-                                    [|static void L2()
-                                    {
-                                        var x = 1;
-                                    }
-                                }|]
-                            }
+                                    var x = 1;
+                                }
+                            }|]
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            if (true)
-                                {|Rename:NewMethod|}();
+                        if (true)
+                            {|Rename:NewMethod|}();
 
-                            static void NewMethod()
+                        static void NewMethod()
+                        {
+                            static void L()
                             {
-                                static void L()
+                                static void L2()
                                 {
-                                    static void L2()
-                                    {
-                                        var x = 1;
-                                    }
+                                    var x = 1;
                                 }
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 index: 1
             );
         }

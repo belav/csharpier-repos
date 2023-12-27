@@ -1080,59 +1080,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 var expected = new[] { new SignatureHelpTestItem("char string[int index]") };
                 await TestAsync(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                ""?[$$ }
-                        }
-                        """,
+                            ""?[$$ }
+                    }
+                    """,
                     expected
                 ); // inline with a string literal
                 await TestAsync(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                ""?[/**/$$ }
-                        }
-                        """,
+                            ""?[/**/$$ }
+                    }
+                    """,
                     expected
                 ); // inline with a string literal and multiline comment
                 await TestAsync(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                ("")?[$$ }
-                        }
-                        """,
+                            ("")?[$$ }
+                    }
+                    """,
                     expected
                 ); // parenthesized expression
                 await TestAsync(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                new System.String(' ', 1)?[$$ }
-                        }
-                        """,
+                            new System.String(' ', 1)?[$$ }
+                    }
+                    """,
                     expected
                 ); // new object expression
 
                 // more complicated parenthesized expression
                 await TestAsync(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                (null as System.Collections.Generic.List<int>)?[$$ }
-                        }
-                        """,
+                            (null as System.Collections.Generic.List<int>)?[$$ }
+                    }
+                    """,
                     new[]
                     {
                         new SignatureHelpTestItem(

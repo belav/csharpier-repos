@@ -2941,11 +2941,11 @@ void Method(int i = 0)
         {
             await TestInClassAsync(
                 """
-                    void Goo(ref readonly DateTime dt, ref readonly System.IO.FileInfo fi, params int[] numbers)
-                    {
-                        Go$$o(in DateTime.Now, in fi, 32);
-                    }
-                    """,
+                void Goo(ref readonly DateTime dt, ref readonly System.IO.FileInfo fi, params int[] numbers)
+                {
+                    Go$$o(in DateTime.Now, in fi, 32);
+                }
+                """,
                 MainDescription(
                     "void C.Goo(ref readonly DateTime dt, ref readonly System.IO.FileInfo fi, params int[] numbers)"
                 )
@@ -9302,15 +9302,15 @@ class C
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var lam = (params int[] xs) => xs.Length;
-                            $$lam();
-                        }
+                        var lam = (params int[] xs) => xs.Length;
+                        $$lam();
                     }
-                    """,
+                }
+                """,
                 MainDescription($"({FeaturesResources.local_variable}) 'a lam"),
                 AnonymousTypes(
                     $"""
@@ -9327,14 +9327,14 @@ class C
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            $$var lam = (params int[] xs) => xs.Length;
-                        }
+                        $$var lam = (params int[] xs) => xs.Length;
                     }
-                    """,
+                }
+                """,
                 MainDescription("delegate int <anonymous delegate>(params int[] arg)")
             );
         }
@@ -9344,14 +9344,14 @@ class C
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var lam = (params i$$nt[] xs) => xs.Length;
-                        }
+                        var lam = (params i$$nt[] xs) => xs.Length;
                     }
-                    """,
+                }
+                """,
                 MainDescription("struct System.Int32")
             );
         }
@@ -9361,14 +9361,14 @@ class C
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var lam = (params int[] x$$s) => xs.Length;
-                        }
+                        var lam = (params int[] x$$s) => xs.Length;
                     }
-                    """,
+                }
+                """,
                 MainDescription($"({FeaturesResources.parameter}) params int[] xs")
             );
         }

@@ -22,27 +22,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        short x = 0;
+                        short y = 100;
+                        while (true)
                         {
-                            short x = 0;
-                            short y = 100;
-                            while (true)
+                            {|Cursor:[|checked|]|}
                             {
-                                {|Cursor:[|checked|]|}
-                                {
-                                    x++;
-                                }
+                                x++;
+                            }
 
-                                unchecked
-                                {
-                                    y++;
-                                }
+                            unchecked
+                            {
+                                y++;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -51,27 +51,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        short x = 0;
+                        short y = 100;
+                        while (true)
                         {
-                            short x = 0;
-                            short y = 100;
-                            while (true)
+                            checked
                             {
-                                checked
-                                {
-                                    x++;
-                                }
+                                x++;
+                            }
 
-                                {|Cursor:[|unchecked|]|}
-                                {
-                                    y++;
-                                }
+                            {|Cursor:[|unchecked|]|}
+                            {
+                                y++;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
     }

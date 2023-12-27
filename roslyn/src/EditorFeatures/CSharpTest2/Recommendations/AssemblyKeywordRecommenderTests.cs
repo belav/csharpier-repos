@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        [$$
-                    """
+                class C {
+                    [$$
+                """
             );
         }
 
@@ -88,10 +88,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        [Goo]
-                        [$$
-                    """
+                class C {
+                    [Goo]
+                    [$$
+                """
             );
         }
 
@@ -100,11 +100,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        void Goo() {
-                        }
-                        [$$
-                    """
+                class C {
+                    void Goo() {
+                    }
+                    [$$
+                """
             );
         }
 
@@ -113,12 +113,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        int Goo {
-                            get;
-                        }
-                        [$$
-                    """
+                class C {
+                    int Goo {
+                        get;
+                    }
+                    [$$
+                """
             );
         }
 
@@ -127,10 +127,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        int Goo;
-                        [$$
-                    """
+                class C {
+                    int Goo;
+                    [$$
+                """
             );
         }
 
@@ -139,10 +139,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        event Action<int> Goo;
-                        [$$
-                    """
+                class C {
+                    event Action<int> Goo;
+                    [$$
+                """
             );
         }
 
@@ -157,14 +157,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class A
+                class A
+                {
+                    [$$
+                    class B
                     {
-                        [$$
-                        class B
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -173,9 +173,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    [$$
-                    namespace Goo {
-                    """
+                [$$
+                namespace Goo {
+                """
             );
         }
 
@@ -184,9 +184,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    [$$
-                    namespace Goo;
-                    """
+                [$$
+                namespace Goo;
+                """
             );
         }
 
@@ -195,9 +195,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    $$
-                    namespace Goo {}
-                    """
+                $$
+                namespace Goo {}
+                """
             );
         }
 
@@ -206,11 +206,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    using System;
+                using System;
 
-                    $$
-                    namespace Goo {}
-                    """
+                $$
+                namespace Goo {}
+                """
             );
         }
 
@@ -219,11 +219,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    global using System;
+                global using System;
 
-                    $$
-                    namespace Goo {}
-                    """
+                $$
+                namespace Goo {}
+                """
             );
         }
 
@@ -232,11 +232,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    using System;
+                using System;
 
-                    [$$
-                    namespace Goo {}
-                    """
+                [$$
+                namespace Goo {}
+                """
             );
         }
 
@@ -245,11 +245,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    global using System;
+                global using System;
 
-                    [$$
-                    namespace Goo {}
-                    """
+                [$$
+                namespace Goo {}
+                """
             );
         }
 
@@ -258,10 +258,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    [$$
-                    [assembly: Whatever]
-                    namespace Goo {}
-                    """
+                [$$
+                [assembly: Whatever]
+                namespace Goo {}
+                """
             );
         }
 
@@ -270,9 +270,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    [$$
-                    class Goo {}
-                    """
+                [$$
+                class Goo {}
+                """
             );
         }
 
@@ -281,9 +281,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    [$$
-                    interface IGoo {}
-                    """
+                [$$
+                interface IGoo {}
+                """
             );
         }
 
@@ -292,9 +292,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    [$$
-                    struct Goo {}
-                    """
+                [$$
+                struct Goo {}
+                """
             );
         }
 
@@ -303,9 +303,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    [$$
-                    enum Goo {}
-                    """
+                [$$
+                enum Goo {}
+                """
             );
         }
 
@@ -314,10 +314,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    $$
-                    [assembly: Whatever]
-                    namespace Goo {}
-                    """
+                $$
+                [assembly: Whatever]
+                namespace Goo {}
+                """
             );
         }
 
@@ -326,12 +326,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    using System;
+                using System;
 
-                    $$
-                    [assembly: Whatever]
-                    namespace Goo {}
-                    """
+                $$
+                [assembly: Whatever]
+                namespace Goo {}
+                """
             );
         }
 
@@ -340,12 +340,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    global using System;
+                global using System;
 
-                    $$
-                    [assembly: Whatever]
-                    namespace Goo {}
-                    """
+                $$
+                [assembly: Whatever]
+                namespace Goo {}
+                """
             );
         }
 
@@ -354,12 +354,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    using System;
+                using System;
 
-                    [$$
-                    [assembly: Whatever]
-                    namespace Goo {}
-                    """
+                [$$
+                [assembly: Whatever]
+                namespace Goo {}
+                """
             );
         }
 
@@ -368,12 +368,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    global using System;
+                global using System;
 
-                    [$$
-                    [assembly: Whatever]
-                    namespace Goo {}
-                    """
+                [$$
+                [assembly: Whatever]
+                namespace Goo {}
+                """
             );
         }
 
@@ -382,9 +382,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    namespace Goo {
-                         [$$
-                    """
+                namespace Goo {
+                     [$$
+                """
             );
         }
 
@@ -393,9 +393,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        void Goo([$$
-                    """
+                class C {
+                    void Goo([$$
+                """
             );
         }
 
@@ -404,10 +404,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        void Goo(string[] array) {
-                            array[$$
-                    """
+                class C {
+                    void Goo(string[] array) {
+                        array[$$
+                """
             );
         }
 
@@ -416,9 +416,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        public int this[$$
-                    """
+                class C {
+                    public int this[$$
+                """
             );
         }
 
@@ -427,9 +427,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        int Goo { [$$
-                    """
+                class C {
+                    int Goo { [$$
+                """
             );
         }
 
@@ -438,9 +438,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        event Action<int> Goo { [$$
-                    """
+                class C {
+                    event Action<int> Goo { [$$
+                """
             );
         }
 
@@ -461,9 +461,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                        void M<[$$
-                    """
+                class C {
+                    void M<[$$
+                """
             );
         }
 
@@ -472,9 +472,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    interface I {
-                        [$$
-                    """
+                interface I {
+                    [$$
+                """
             );
         }
 
@@ -483,9 +483,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    struct S {
-                        [$$
-                    """
+                struct S {
+                    [$$
+                """
             );
         }
 
@@ -494,9 +494,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    enum E {
-                        [$$
-                    """
+                enum E {
+                    [$$
+                """
             );
         }
     }

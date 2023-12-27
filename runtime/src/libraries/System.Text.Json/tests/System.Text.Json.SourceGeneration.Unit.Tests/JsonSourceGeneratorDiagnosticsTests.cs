@@ -836,17 +836,17 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             Compilation referencedCompilation = CompilationHelper.CreateCompilation(
                 """
-                    using System.Text.Json.Serialization;
+                using System.Text.Json.Serialization;
 
-                    namespace Library
+                namespace Library
+                {
+                    public class MyPoco
                     {
-                        public class MyPoco
-                        {
-                            [JsonConverter(typeof(int))]
-                            public int Value { get; set; }
-                        }
+                        [JsonConverter(typeof(int))]
+                        public int Value { get; set; }
                     }
-                    """
+                }
+                """
             );
 
             // Emit the image of the referenced assembly.
@@ -858,16 +858,16 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             Compilation compilation = CompilationHelper.CreateCompilation(
                 """
-                    using Library;
-                    using System.Text.Json.Serialization;
+                using Library;
+                using System.Text.Json.Serialization;
 
-                    namespace Application
-                    {
-                        [JsonSerializable(typeof(MyPoco))]
-                        public partial class MyContext : JsonSerializerContext
-                        { }
-                    }
-                    """,
+                namespace Application
+                {
+                    [JsonSerializable(typeof(MyPoco))]
+                    public partial class MyContext : JsonSerializerContext
+                    { }
+                }
+                """,
                 additionalReferences
             );
 
@@ -901,19 +901,19 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             Compilation compilation = CompilationHelper.CreateCompilation(
                 """
-                    using System.Text.Json.Serialization;
+                using System.Text.Json.Serialization;
 
-                    namespace Application
+                namespace Application
+                {
+                    [JsonSerializable(typeof(MyPoco))]
+                    public partial class MyContext : IDisposable
                     {
-                        [JsonSerializable(typeof(MyPoco))]
-                        public partial class MyContext : IDisposable
-                        {
-                            public void Dispose() { }
-                        }
-
-                        public class MyPoco { }
+                        public void Dispose() { }
                     }
-                    """
+
+                    public class MyPoco { }
+                }
+                """
             );
 
             JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(

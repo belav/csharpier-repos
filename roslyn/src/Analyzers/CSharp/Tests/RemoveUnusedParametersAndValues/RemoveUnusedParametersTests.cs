@@ -102,14 +102,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|])
                     {
-                        void M(int [|p|])
-                        {
-                            var x = p;
-                        }
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -118,13 +118,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|])
                     {
-                        void M(int [|p|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -185,14 +185,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|])
                     {
-                        void M(int [|p|])
-                        {
-                            var x = p;
-                        }
+                        var x = p;
                     }
-                    """,
+                }
+                """,
                 options: unusedValueAssignmentOptionSuppressed
             );
         }
@@ -202,14 +202,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|])
                     {
-                        void M(int [|p|])
-                        {
-                            p = 1;
-                        }
+                        p = 1;
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -219,15 +219,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|])
                     {
-                        void M(int [|p|])
-                        {
-                            p = 1;
-                            var x = p;
-                        }
+                        p = 1;
+                        var x = p;
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -237,23 +237,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|], bool flag)
                     {
-                        void M(int [|p|], bool flag)
+                        if (flag)
                         {
-                            if (flag)
-                            {
-                                p = 0;
-                            }
-                            else
-                            {
-                                p = 1;
-                            }
-
-                            var x = p;
+                            p = 0;
                         }
+                        else
+                        {
+                            p = 1;
+                        }
+
+                        var x = p;
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -263,26 +263,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|], bool flag, bool flag2)
                     {
-                        void M(int [|p|], bool flag, bool flag2)
+                        if (flag)
                         {
-                            if (flag)
+                            if (flag2)
                             {
-                                if (flag2)
-                                {
-                                    p = 0;
-                                }
+                                p = 0;
                             }
-                            else
-                            {
-                                p = 1;
-                            }
-
-                            var x = p;
                         }
+                        else
+                        {
+                            p = 1;
+                        }
+
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -291,13 +291,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|] = 0)
                     {
-                        void M(int [|p|] = 0)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -307,19 +307,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class B
-                    {
-                        protected B(int p) { }
-                    }
+                class B
+                {
+                    protected B(int p) { }
+                }
 
-                    class C: B
+                class C: B
+                {
+                    C(int [|p|])
+                    : base(p)
                     {
-                        C(int [|p|])
-                        : base(p)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -328,20 +328,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class B
-                    {
-                        protected B(int p) { }
-                    }
+                class B
+                {
+                    protected B(int p) { }
+                }
 
-                    class C: B
+                class C: B
+                {
+                    C(int [|p|])
+                    : base(0)
                     {
-                        C(int [|p|])
-                        : base(0)
-                        {
-                            var x = p;
-                        }
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -350,20 +350,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class B
-                    {
-                        protected B(int p) { }
-                    }
+                class B
+                {
+                    protected B(int p) { }
+                }
 
-                    class C: B
+                class C: B
+                {
+                    C(int [|p|])
+                    : base(p)
                     {
-                        C(int [|p|])
-                        : base(p)
-                        {
-                            var x = p;
-                        }
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -372,17 +372,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int y)
                     {
-                        void M(int y)
+                        LocalFunction(y);
+                        void LocalFunction(int [|p|])
                         {
-                            LocalFunction(y);
-                            void LocalFunction(int [|p|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -392,17 +392,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        LocalFunction(0);
+                        void LocalFunction(int [|p|])
                         {
-                            LocalFunction(0);
-                            void LocalFunction(int [|p|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -412,17 +412,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        LocalFunction(0);
+                        void LocalFunction(int [|_|])
                         {
-                            LocalFunction(0);
-                            void LocalFunction(int [|_|])
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -431,21 +431,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        M2(LocalFunction);
+                        void LocalFunction(int [|p|])
                         {
-                            M2(LocalFunction);
-                            void LocalFunction(int [|p|])
-                            {
-                            }
                         }
-
-                        void M2(Action<int> a) => a(0);
                     }
-                    """
+
+                    void M2(Action<int> a) => a(0);
+                }
+                """
             );
         }
 
@@ -455,16 +455,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             // Currently we bail out from analysis for method returning delegate types.
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private static Action<int> M(object [|p|] = null, Action<object> myDelegate)
                     {
-                        private static Action<int> M(object [|p|] = null, Action<object> myDelegate)
-                        {
-                            return d => { myDelegate(p); };
-                        }
+                        return d => { myDelegate(p); };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -475,16 +475,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             // We should still report unused parameters.
             await TestDiagnosticsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private static Action M(object [|p|])
                     {
-                        private static Action M(object [|p|])
-                        {
-                            return () => { };
-                        }
+                        return () => { };
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -496,18 +496,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             // We should still report unused parameters.
             await TestDiagnosticsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private static void M(object [|p|])
                     {
-                        private static void M(object [|p|])
-                        {
-                            M2(() => { });
-                        }
-
-                        private static void M2(Action a) { }
+                        M2(() => { });
                     }
-                    """,
+
+                    private static void M2(Action a) { }
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -517,20 +517,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private static void M(object [|p|])
                     {
-                        private static void M(object [|p|])
-                        {
-                            M2(() => { M3(p); });
-                        }
-
-                        private static void M2(Action a) { }
-
-                        private static void M3(object o) { }
+                        M2(() => { M3(p); });
                     }
-                    """
+
+                    private static void M2(Action a) { }
+
+                    private static void M3(object o) { }
+                }
+                """
             );
         }
 
@@ -539,20 +539,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private static void M(object [|p|])
                     {
-                        private static void M(object [|p|])
-                        {
-                            M2(() => { M3(out p); });
-                        }
-
-                        private static void M2(Action a) { }
-
-                        private static void M3(out object o) { o = null; }
+                        M2(() => { M3(out p); });
                     }
-                    """
+
+                    private static void M2(Action a) { }
+
+                    private static void M3(out object o) { o = null; }
+                }
+                """
             );
         }
 
@@ -561,20 +561,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class C
+                class C
+                {
+                    public static void M1(object [|p|])
                     {
-                        public static void M1(object [|p|])
-                        {
-                            M2(x => x.M3());
-                        }
-
-                        private static C M2(Expression<Func<C, int>> a) { return null; }
-                        private int M3() { return 0; }
+                        M2(x => x.M3());
                     }
-                    """,
+
+                    private static C M2(Expression<Func<C, int>> a) { return null; }
+                    private int M3() { return 0; }
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -584,20 +584,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class C
+                class C
+                {
+                    public static void M1(object [|p|])
                     {
-                        public static void M1(object [|p|])
-                        {
-                            M2(x => x.M3(p));
-                        }
-
-                        private static C M2(Expression<Func<C, int>> a) { return null; }
-                        private int M3(object o) { return 0; }
+                        M2(x => x.M3(p));
                     }
-                    """
+
+                    private static C M2(Expression<Func<C, int>> a) { return null; }
+                    private int M3(object o) { return 0; }
+                }
+                """
             );
         }
 
@@ -606,20 +606,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
-                    using System.Linq.Expressions;
+                using System;
+                using System.Linq.Expressions;
 
-                    class C
+                class C
+                {
+                    public static void M1(object [|p|])
                     {
-                        public static void M1(object [|p|])
-                        {
-                            M2(x => x.M3(out p));
-                        }
-
-                        private static C M2(Expression<Func<C, int>> a) { return null; }
-                        private int M3(out object o) { o = null; return 0; }
+                        M2(x => x.M3(out p));
                     }
-                    """
+
+                    private static C M2(Expression<Func<C, int>> a) { return null; }
+                    private int M3(out object o) { o = null; return 0; }
+                }
+                """
             );
         }
 
@@ -630,17 +630,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             // too a local/parameter.
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private Action _field;
+                    private static void M(object [|p|])
                     {
-                        private Action _field;
-                        private static void M(object [|p|])
-                        {
-                            _field = () => { Console.WriteLine(p); };
-                        }
+                        _field = () => { Console.WriteLine(p); };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -649,27 +649,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private static readonly object s_gate = new object();
+
+                    public static C M(object [|p|], bool flag, C c1, C c2)
                     {
-                        private static readonly object s_gate = new object();
-
-                        public static C M(object [|p|], bool flag, C c1, C c2)
+                        C c;
+                        lock (s_gate)
                         {
-                            C c;
-                            lock (s_gate)
-                            {
-                                c = flag > 0 ? c1 : c2;
-                            }
-
-                            c.M2(p);
-                            return c;
+                            c = flag > 0 ? c1 : c2;
                         }
 
-                        private void M2(object p) { }
+                        c.M2(p);
+                        return c;
                     }
-                    """
+
+                    private void M2(object p) { }
+                }
+                """
             );
         }
 
@@ -678,20 +678,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int y)
                     {
-                        void M(int y)
+                        Action<int> myLambda = [|p|] =>
                         {
-                            Action<int> myLambda = [|p|] =>
-                            {
-                            };
+                        };
 
-                            myLambda(y);
-                        }
+                        myLambda(y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -700,20 +700,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int y)
                     {
-                        void M(int y)
+                        Action<int> myLambda = [|_|] =>
                         {
-                            Action<int> myLambda = [|_|] =>
-                            {
-                            };
+                        };
 
-                            myLambda(y);
-                        }
+                        myLambda(y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -722,20 +722,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int y)
                     {
-                        void M(int y)
+                        Action<int, int> myLambda = ([|_|], _) =>
                         {
-                            Action<int, int> myLambda = ([|_|], _) =>
-                            {
-                            };
+                        };
 
-                            myLambda(y, y);
-                        }
+                        myLambda(y, y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -744,20 +744,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int y)
                     {
-                        void M(int y)
+                        void local([|_|], _)
                         {
-                            void local([|_|], _)
-                            {
-                            }
-
-                            local(y, y);
                         }
+
+                        local(y, y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -766,20 +766,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M([|_|], _)
                     {
-                        void M([|_|], _)
-                        {
-                        }
-
-                        void M2(int y)
-                        {
-                            M(y, y);
-                        }
                     }
-                    """
+
+                    void M2(int y)
+                    {
+                        M(y, y);
+                    }
+                }
+                """
             );
         }
 
@@ -788,18 +788,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int y)
                     {
-                        void M(int y)
+                        LocalFunction(y);
+                        void LocalFunction(int [|p|])
                         {
-                            LocalFunction(y);
-                            void LocalFunction(int [|p|])
-                            {
-                                var x = p;
-                            }
+                            var x = p;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -808,21 +808,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(int y)
                     {
-                        void M(int y)
+                        Action<int> myLambda = [|p|] =>
                         {
-                            Action<int> myLambda = [|p|] =>
-                            {
-                                var x = p;
-                            }
-
-                            myLambda(y);
+                            var x = p;
                         }
+
+                        myLambda(y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -831,14 +831,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p = 0|])
                     {
-                        void M(int [|p = 0|])
-                        {
-                            var x = p;
-                        }
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -847,13 +847,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(in int [|p|])
                     {
-                        void M(in int [|p|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -863,13 +863,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int [|p|])
                     {
-                        void M(ref int [|p|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -879,14 +879,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int [|p|])
                     {
-                        void M(ref int [|p|])
-                        {
-                            p = 0;
-                        }
+                        p = 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -895,14 +895,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int [|p|])
                     {
-                        void M(ref int [|p|])
-                        {
-                            var x = p;
-                        }
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -911,15 +911,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int [|p|])
                     {
-                        void M(ref int [|p|])
-                        {
-                            var x = p;
-                            p = 1;
-                        }
+                        var x = p;
+                        p = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -928,15 +928,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int [|p|])
                     {
-                        void M(ref int [|p|])
-                        {
-                            p = 1;
-                            var x = p;
-                        }
+                        p = 1;
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -945,15 +945,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(ref int [|p|])
                     {
-                        void M(ref int [|p|])
-                        {
-                            p = 0;
-                            p = 1;
-                        }
+                        p = 0;
+                        p = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -962,13 +962,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(out int [|p|])
                     {
-                        void M(out int [|p|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -978,14 +978,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(out int [|p|])
                     {
-                        void M(out int [|p|])
-                        {
-                            p = 0;
-                        }
+                        p = 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -994,15 +994,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(out int [|p|])
                     {
-                        void M(out int [|p|])
-                        {
-                            p = 0;
-                            var x = p;
-                        }
+                        p = 0;
+                        var x = p;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1011,15 +1011,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(out int [|p|])
                     {
-                        void M(out int [|p|])
-                        {
-                            p = 0;
-                            p = 1;
-                        }
+                        p = 0;
+                        p = 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1028,12 +1028,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
-                    {
-                        [System.Runtime.InteropServices.DllImport(nameof(M))]
-                        static extern void M(int [|p|]);
-                    }
-                    """
+                class C
+                {
+                    [System.Runtime.InteropServices.DllImport(nameof(M))]
+                    static extern void M(int [|p|]);
+                }
+                """
             );
         }
 
@@ -1042,11 +1042,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    abstract class C
-                    {
-                        protected abstract void M(int [|p|]);
-                    }
-                    """
+                abstract class C
+                {
+                    protected abstract void M(int [|p|]);
+                }
+                """
             );
         }
 
@@ -1055,13 +1055,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    protected virtual void M(int [|p|])
                     {
-                        protected virtual void M(int [|p|])
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1070,21 +1070,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    protected virtual void M(int p)
                     {
-                        protected virtual void M(int p)
-                        {
-                            var x = p;
-                        }
+                        var x = p;
                     }
+                }
 
-                    class D : C
+                class D : C
+                {
+                    protected override void M(int [|p|])
                     {
-                        protected override void M(int [|p|])
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1093,17 +1093,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    interface I
+                interface I
+                {
+                    void M(int p);
+                }
+                class C: I
+                {
+                    public void M(int [|p|])
                     {
-                        void M(int p);
                     }
-                    class C: I
-                    {
-                        public void M(int [|p|])
-                        {
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -1112,17 +1112,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    interface I
+                interface I
+                {
+                    void M(int p);
+                }
+                class C: I
+                {
+                    void I.M(int [|p|])
                     {
-                        void M(int p);
                     }
-                    class C: I
-                    {
-                        void I.M(int [|p|])
-                        {
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -1131,14 +1131,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    int this[int [|p|]]
                     {
-                        int this[int [|p|]]
-                        {
-                            get { return 0; }
-                        }
+                        get { return 0; }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1147,16 +1147,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|p|])
                     {
-                        void M(int [|p|])
-                        {
-                    #if DEBUG
-                            System.Console.WriteLine(p);
-                    #endif
-                        }
+                #if DEBUG
+                        System.Console.WriteLine(p);
+                #endif
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1165,13 +1165,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    public void MyHandler(object [|obj|], System.EventArgs args)
                     {
-                        public void MyHandler(object [|obj|], System.EventArgs args)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1180,13 +1180,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    public void MyHandler(object obj, System.EventArgs [|args|])
                     {
-                        public void MyHandler(object obj, System.EventArgs [|args|])
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1195,24 +1195,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    public delegate void MyDelegate(int x);
+                public delegate void MyDelegate(int x);
 
-                    class C
+                class C
+                {
+                    private event MyDelegate myDel;
+
+                    void M(C c)
                     {
-                        private event MyDelegate myDel;
-
-                        void M(C c)
-                        {
-                            c.myDel += Handler;
-                        }
-
-                        void Handler(int [|x|])
-                        {
-                        }
+                        c.myDel += Handler;
                     }
-                    """
+
+                    void Handler(int [|x|])
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -1221,17 +1221,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    public class CustomEventArgs : System.EventArgs
                     {
-                        public class CustomEventArgs : System.EventArgs
-                        {
-                        }
-
-                        public void MyHandler(object [|obj|], CustomEventArgs args)
-                        {
-                        }
                     }
-                    """
+
+                    public void MyHandler(object [|obj|], CustomEventArgs args)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -1285,32 +1285,32 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
-                    using System.Runtime.Serialization;
+                using System;
+                using System.Runtime.Serialization;
 
-                    internal sealed class NonSerializable
+                internal sealed class NonSerializable
+                {
+                    public NonSerializable(string value) => Value = value;
+
+                    public string Value { get; set; }
+                }
+
+                [Serializable]
+                internal sealed class CustomSerializingType : ISerializable
+                {
+                    private readonly NonSerializable _nonSerializable;
+
+                    public CustomSerializingType(SerializationInfo info, StreamingContext [|context|])
                     {
-                        public NonSerializable(string value) => Value = value;
-
-                        public string Value { get; set; }
+                        _nonSerializable = new NonSerializable(info.GetString("KEY"));
                     }
 
-                    [Serializable]
-                    internal sealed class CustomSerializingType : ISerializable
+                    public void GetObjectData(SerializationInfo info, StreamingContext context)
                     {
-                        private readonly NonSerializable _nonSerializable;
-
-                        public CustomSerializingType(SerializationInfo info, StreamingContext [|context|])
-                        {
-                            _nonSerializable = new NonSerializable(info.GetString("KEY"));
-                        }
-
-                        public void GetObjectData(SerializationInfo info, StreamingContext context)
-                        {
-                            info.AddValue("KEY", _nonSerializable.Value);
-                        }
+                        info.AddValue("KEY", _nonSerializable.Value);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1379,16 +1379,16 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(object [|o|])
                     {
-                        void M(object [|o|])
+                        if (o is int _)
                         {
-                            if (o is int _)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1397,13 +1397,13 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    [|void M(int _, char _1, C _3)|]
                     {
-                        [|void M(int _, char _1, C _3)|]
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1412,17 +1412,17 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|x|])
                     {
-                        void M(int [|x|])
-                        {
-                            // CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type.
-                            Invoke<string>(() => x);
+                        // CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type.
+                        Invoke<string>(() => x);
 
-                            T Invoke<T>(Func<T> a) { return a(); }
-                        }
+                        T Invoke<T>(Func<T> a) { return a(); }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1431,17 +1431,17 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|x|])
                     {
-                        void M(int [|x|])
-                        {
-                            // CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type.
-                            Invoke<string>(() => 0);
+                        // CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type.
+                        Invoke<string>(() => 0);
 
-                            T Invoke<T>(Func<T> a) { return a(); }
-                        }
+                        T Invoke<T>(Func<T> a) { return a(); }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -1451,20 +1451,20 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    public static bool M(out int x)
                     {
-                        public static bool M(out int x)
-                        {
-                            return LocalFunction(out x);
+                        return LocalFunction(out x);
 
-                            bool LocalFunction(out int [|y|])
-                            {
-                                y = 0;
-                                return true;
-                            }
+                        bool LocalFunction(out int [|y|])
+                        {
+                            y = 0;
+                            return true;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1473,19 +1473,19 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    public static bool M(ref int x)
                     {
-                        public static bool M(ref int x)
-                        {
-                            return LocalFunction(ref x);
+                        return LocalFunction(ref x);
 
-                            bool LocalFunction(ref int [|y|])
-                            {
-                                return true;
-                            }
+                        bool LocalFunction(ref int [|y|])
+                        {
+                            return true;
                         }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -1495,20 +1495,20 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    public static bool M(ref int x)
                     {
-                        public static bool M(ref int x)
-                        {
-                            return LocalFunction(ref x);
+                        return LocalFunction(ref x);
 
-                            bool LocalFunction(ref int [|y|])
-                            {
-                                y = 0;
-                                return true;
-                            }
+                        bool LocalFunction(ref int [|y|])
+                        {
+                            y = 0;
+                            return true;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1517,14 +1517,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    public static void M(C [|x|])
                     {
-                        public static void M(C [|x|])
-                        {
-                            x ??= new C();
-                        }
+                        x ??= new C();
                     }
-                    """,
+                }
+                """,
                 parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8)
             );
         }
@@ -1534,18 +1534,18 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            LocalFunc(0);
+                        LocalFunc(0);
 
-                            void LocalFunc<T>(T [|value|])
-                            {
-                            }
+                        void LocalFunc<T>(T [|value|])
+                        {
                         }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -1555,30 +1555,30 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(object [|value|])
                     {
-                        void M(object [|value|])
+                        try
                         {
-                            try
-                            {
-                                value = LocalFunc(0);
-                            }
-                            finally
-                            {
-                                value = LocalFunc(0);
-                            }
+                            value = LocalFunc(0);
+                        }
+                        finally
+                        {
+                            value = LocalFunc(0);
+                        }
 
-                            return;
+                        return;
 
-                            IEnumerable<T> LocalFunc<T>(T value)
-                            {
-                                yield return value;
-                            }
+                        IEnumerable<T> LocalFunc<T>(T value)
+                        {
+                            yield return value;
                         }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -1588,32 +1588,32 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(object [|value|])
                     {
-                        void M(object [|value|])
+                        Func<object, IEnumerable<object>> myDel = LocalFunc;
+                        try
                         {
-                            Func<object, IEnumerable<object>> myDel = LocalFunc;
-                            try
-                            {
-                                value = myDel(value);
-                            }
-                            finally
-                            {
-                                value = myDel(value);
-                            }
+                            value = myDel(value);
+                        }
+                        finally
+                        {
+                            value = myDel(value);
+                        }
 
-                            return;
+                        return;
 
-                            IEnumerable<T> LocalFunc<T>(T value)
-                            {
-                                yield return value;
-                            }
+                        IEnumerable<T> LocalFunc<T>(T value)
+                        {
+                            yield return value;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1630,26 +1630,26 @@ class C
 
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    public interface I { event Action MyAction; }
+                public interface I { event Action MyAction; }
 
-                    public sealed class C : IDisposable
+                public sealed class C : IDisposable
+                {
+                    private readonly Task<I> task;
+
+                    public C(Task<I> [|task|])
                     {
-                        private readonly Task<I> task;
-
-                        public C(Task<I> [|task|])
-                        {
-                            this.task = task;
-                            Task.Run(async () => (await task).MyAction += myAction);
-                        }
-
-                        private void myAction() { }
-
-                        public void Dispose() => task.Result.MyAction -= myAction;
+                        this.task = task;
+                        Task.Run(async () => (await task).MyAction += myAction);
                     }
-                    """,
+
+                    private void myAction() { }
+
+                    public void Dispose() => task.Result.MyAction -= myAction;
+                }
+                """,
                 options
             );
         }
@@ -1673,26 +1673,26 @@ class C
 
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    public interface I { event Action MyAction; }
+                public interface I { event Action MyAction; }
 
-                    public sealed class C : IDisposable
+                public sealed class C : IDisposable
+                {
+                    private readonly Task<I> task;
+
+                    public C(Task<I> [|task|])
                     {
-                        private readonly Task<I> task;
-
-                        public C(Task<I> [|task|])
-                        {
-                            this.task = task;
-                            Task.Run(async () => (await task).MyAction += myAction);
-                        }
-
-                        private void myAction() { }
-
-                        public void Dispose() => task.Result.MyAction -= myAction;
+                        this.task = task;
+                        Task.Run(async () => (await task).MyAction += myAction);
                     }
-                    """,
+
+                    private void myAction() { }
+
+                    public void Dispose() => task.Result.MyAction -= myAction;
+                }
+                """,
                 parameters
             );
         }
@@ -1703,24 +1703,24 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    public partial class C
+                public partial class C
+                {
+                    private void M(int [|x|])
                     {
-                        private void M(int [|x|])
-                        {
-                        }
                     }
+                }
 
-                    public partial class C
+                public partial class C
+                {
+                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                    public void M2(out Action<int> a)
                     {
-                        [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                        public void M2(out Action<int> a)
-                        {
-                            a = M;
-                        }
+                        a = M;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1729,14 +1729,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public partial class C
+                public partial class C
+                {
+                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                    private void M(int [|x|])
                     {
-                        [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                        private void M(int [|x|])
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1746,18 +1746,18 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public partial class C
-                    {
-                        public partial void M(int x);
-                    }
+                public partial class C
+                {
+                    public partial void M(int x);
+                }
 
-                    public partial class C
+                public partial class C
+                {
+                    public partial void M(int [|x|])
                     {
-                        public partial void M(int [|x|])
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1766,11 +1766,11 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public partial class C
-                    {
-                        public partial void M(int [|x|]);
-                    }
-                    """
+                public partial class C
+                {
+                    public partial void M(int [|x|]);
+                }
+                """
             );
         }
 
@@ -1779,13 +1779,13 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public class C
+                public class C
+                {
+                    public void M[|(int )|]
                     {
-                        public void M[|(int )|]
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1794,16 +1794,16 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void Goo(int [|i|])
                     {
-                        private void Goo(int [|i|])
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1812,14 +1812,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        private void Goo(int [|i|])
-                            => throw new NotImplementedException();
-                    }
-                    """
+                class C
+                {
+                    private void Goo(int [|i|])
+                        => throw new NotImplementedException();
+                }
+                """
             );
         }
 
@@ -1828,14 +1828,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        public C(int [|i|])
-                            => throw new NotImplementedException();
-                    }
-                    """
+                class C
+                {
+                    public C(int [|i|])
+                        => throw new NotImplementedException();
+                }
+                """
             );
         }
 
@@ -1844,14 +1844,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        private int Goo(int [|i|])
-                            => throw new NotImplementedException();
-                    }
-                    """
+                class C
+                {
+                    private int Goo(int [|i|])
+                        => throw new NotImplementedException();
+                }
+                """
             );
         }
 
@@ -1860,16 +1860,16 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private int Goo(int [|i|])
                     {
-                        private int Goo(int [|i|])
-                        {
-                            throw new NotImplementedException();
-                        }
+                        throw new NotImplementedException();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1878,17 +1878,17 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void Goo(int [|i|])
                     {
-                        private void Goo(int [|i|])
-                        {
-                            throw new NotImplementedException();
-                            return;
-                        }
+                        throw new NotImplementedException();
+                        return;
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -1898,17 +1898,17 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void Goo(int [|i|])
                     {
-                        private void Goo(int [|i|])
-                        {
-                            if (true)
-                                throw new NotImplementedException();
-                        }
+                        if (true)
+                            throw new NotImplementedException();
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -1924,13 +1924,13 @@ class C
         {
             await TestDiagnosticsAsync(
                 """
-                    record A
+                record A
+                {
+                    public A(int [|X|])
                     {
-                        public A(int [|X|])
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }
@@ -1940,9 +1940,9 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    record A(int X);
-                    record B(int X, int [|Y|]) : A(X);
-                    """
+                record A(int X);
+                record B(int X, int [|Y|]) : A(X);
+                """
             );
         }
 
@@ -1951,9 +1951,9 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public record Base(int I) { }
-                    public record Derived(string [|S|]) : Base(42) { }
-                    """
+                public record Base(int I) { }
+                public record Derived(string [|S|]) : Base(42) { }
+                """
             );
         }
 
@@ -1962,31 +1962,31 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    using System;
-                    using System.Runtime.InteropServices;
+                using System;
+                using System.Runtime.InteropServices;
 
 
-                    public class C : ICustomMarshaler
-                    {
-                        public void CleanUpManagedData(object ManagedObj)
-                            => throw new NotImplementedException();
+                public class C : ICustomMarshaler
+                {
+                    public void CleanUpManagedData(object ManagedObj)
+                        => throw new NotImplementedException();
 
-                        public void CleanUpNativeData(IntPtr pNativeData)
-                            => throw new NotImplementedException();
+                    public void CleanUpNativeData(IntPtr pNativeData)
+                        => throw new NotImplementedException();
 
-                        public int GetNativeDataSize()
-                            => throw new NotImplementedException();
+                    public int GetNativeDataSize()
+                        => throw new NotImplementedException();
 
-                        public IntPtr MarshalManagedToNative(object ManagedObj)
-                            => throw new NotImplementedException();
+                    public IntPtr MarshalManagedToNative(object ManagedObj)
+                        => throw new NotImplementedException();
 
-                        public object MarshalNativeToManaged(IntPtr pNativeData)
-                            => throw new NotImplementedException();
+                    public object MarshalNativeToManaged(IntPtr pNativeData)
+                        => throw new NotImplementedException();
 
-                        public static ICustomMarshaler GetInstance(string [|s|])
-                            => null;
-                    }
-                    """
+                    public static ICustomMarshaler GetInstance(string [|s|])
+                        => null;
+                }
+                """
             );
         }
 
@@ -1995,11 +1995,11 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public class Class
-                    {
-                        public void Method(int [|x|]) => throw new System.Exception();
-                    }
-                    """
+                public class Class
+                {
+                    public void Method(int [|x|]) => throw new System.Exception();
+                }
+                """
             );
         }
 
@@ -2008,14 +2008,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public class Class
+                public class Class
+                {
+                    public void Method(int [|x|])
                     {
-                        public void Method(int [|x|])
-                        {
-                            throw new System.Exception();
-                        }
+                        throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2024,14 +2024,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public class Class
+                public class Class
+                {
+                    public Class(int [|x|])
                     {
-                        public Class(int [|x|])
-                        {
-                            throw new System.Exception();
-                        }
+                        throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2040,11 +2040,11 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public class Class
-                    {
-                        public Class(int [|x|]) => throw new System.Exception();
-                    }
-                    """
+                public class Class
+                {
+                    public Class(int [|x|]) => throw new System.Exception();
+                }
+                """
             );
         }
 
@@ -2053,14 +2053,14 @@ class C
         {
             await TestDiagnosticMissingAsync(
                 """
-                    public class Class
+                public class Class
+                {
+                    public void Method()
                     {
-                        public void Method()
-                        {
-                            void LocalMethod(int [|x|]) => throw new System.Exception();
-                        }
+                        void LocalMethod(int [|x|]) => throw new System.Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2094,14 +2094,14 @@ class C(int [|a100|]) : Object()
         {
             await TestDiagnosticsAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int [|x|])
                     {
-                        void M(int [|x|])
-                        {
-                            const string y = nameof(C);
-                        }
+                        const string y = nameof(C);
                     }
-                    """,
+                }
+                """,
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
             );
         }

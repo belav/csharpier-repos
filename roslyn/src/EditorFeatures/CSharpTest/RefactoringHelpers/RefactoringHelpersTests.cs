@@ -1666,25 +1666,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         {
             await TestAsync<IfStatementSyntax>(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        {|result:[|if (a)
                         {
-                            {|result:[|if (a)
-                            {
-                                a();
-                            }|]
-                            else if (b)
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                c();
-                            }|}
+                            a();
+                        }|]
+                        else if (b)
+                        {
+                            b();
                         }
+                        else
+                        {
+                            c();
+                        }|}
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1693,25 +1693,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         {
             await TestAsync<IfStatementSyntax>(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        {|result:[|if (a)
                         {
-                            {|result:[|if (a)
-                            {
-                                a();
-                            }
-                            else if (b)
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                c();
-                            }|]|}
+                            a();
                         }
+                        else if (b)
+                        {
+                            b();
+                        }
+                        else
+                        {
+                            c();
+                        }|]|}
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1720,25 +1720,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         {
             await TestMissingAsync<IfStatementSyntax>(
                 """
-                    class A
+                class A
+                {
+                    void Goo()
                     {
-                        void Goo()
+                        if (a)
                         {
-                            if (a)
-                            {
-                                a();
-                            }
-                            [|else if (b)
-                            {
-                                b();
-                            }
-                            else
-                            {
-                                c();
-                            }|]
+                            a();
                         }
+                        [|else if (b)
+                        {
+                            b();
+                        }
+                        else
+                        {
+                            c();
+                        }|]
                     }
-                    """
+                }
+                """
             );
         }
 

@@ -200,9 +200,9 @@ public class EndpointsServerReconnectionTest
     {
         javascript.ExecuteScript(
             """
-                window.reconnectModal = arguments[0];
-                window.reconnectModal.remove();
-                """,
+            window.reconnectModal = arguments[0];
+            window.reconnectModal.remove();
+            """,
             reconnectModal
         );
     }

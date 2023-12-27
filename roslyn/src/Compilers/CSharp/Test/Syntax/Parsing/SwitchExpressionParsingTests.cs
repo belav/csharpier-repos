@@ -18,12 +18,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    case 0 => 1,
-                    case 1 => 2,
-                }
-                """,
+            x switch
+            {
+                case 0 => 1,
+                case 1 => 2,
+            }
+            """,
             // (3,5): error CS9134: A switch expression arm does not begin with a 'case' keyword.
             //     case 0 => 1,
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(3, 5),
@@ -81,12 +81,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    case 0 => 1;
-                    case 1 => 2;
-                }
-                """,
+            x switch
+            {
+                case 0 => 1;
+                case 1 => 2;
+            }
+            """,
             // (3,5): error CS9134: A switch expression arm does not begin with a 'case' keyword.
             //     case 0 => 1;
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(3, 5),
@@ -150,12 +150,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    case 0: 1,
-                    case 1: 2,
-                }
-                """,
+            x switch
+            {
+                case 0: 1,
+                case 1: 2,
+            }
+            """,
             // (3,5): error CS9134: A switch expression arm does not begin with a 'case' keyword.
             //     case 0: 1,
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(3, 5),
@@ -219,12 +219,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    case 0: 1;
-                    case 1: 2;
-                }
-                """,
+            x switch
+            {
+                case 0: 1;
+                case 1: 2;
+            }
+            """,
             // (3,5): error CS9134: A switch expression arm does not begin with a 'case' keyword.
             //     case 0: 1;
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(3, 5),
@@ -294,20 +294,20 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingStatement(
             """
+            {
+                var y = x switch
                 {
-                    var y = x switch
+                    case 0:
+                        Goo();
+                        return Bar;
+                    case 1:
                     {
-                        case 0:
-                            Goo();
-                            return Bar;
-                        case 1:
-                        {
-                            Baz();
-                            throw new Quux();
-                        }
-                    };
-                }
-                """,
+                        Baz();
+                        throw new Quux();
+                    }
+                };
+            }
+            """,
             // (4,9): error CS9134: A switch expression arm does not begin with a 'case' keyword.
             //         case 0:
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(4, 9),
@@ -469,12 +469,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0: 1,
-                    1: 2,
-                }
-                """,
+            x switch
+            {
+                0: 1,
+                1: 2,
+            }
+            """,
             // (3,6): error CS1003: Syntax error, '=>' expected
             //     0: 1,
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(3, 6),
@@ -532,12 +532,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0: 1;
-                    1: 2;
-                }
-                """,
+            x switch
+            {
+                0: 1;
+                1: 2;
+            }
+            """,
             // (3,6): error CS1003: Syntax error, '=>' expected
             //     0: 1;
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(3, 6),
@@ -601,12 +601,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0 => 1,
-                    default: 2,
-                }
-                """,
+            x switch
+            {
+                0 => 1,
+                default: 2,
+            }
+            """,
             // (4,12): error CS1003: Syntax error, '=>' expected
             //     default: 2,
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 12)
@@ -661,12 +661,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0 => 1;
-                    default: 2;
-                }
-                """,
+            x switch
+            {
+                0 => 1;
+                default: 2;
+            }
+            """,
             // (3,11): error CS1003: Syntax error, ',' expected
             //     0 => 1;
             Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
@@ -727,12 +727,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0 => 1,
-                    default(int): 2,
-                }
-                """,
+            x switch
+            {
+                0 => 1,
+                default(int): 2,
+            }
+            """,
             // (4,17): error CS1003: Syntax error, '=>' expected
             //     default(int): 2,
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 17)
@@ -793,12 +793,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0 => 1;
-                    default(int): 2;
-                }
-                """,
+            x switch
+            {
+                0 => 1;
+                default(int): 2;
+            }
+            """,
             // (3,11): error CS1003: Syntax error, ',' expected
             //     0 => 1;
             Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
@@ -1045,12 +1045,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0 => 1,
-                    default(int) => 2,
-                }
-                """
+            x switch
+            {
+                0 => 1,
+                default(int) => 2,
+            }
+            """
         );
         N(SyntaxKind.SwitchExpression);
         {
@@ -1108,12 +1108,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                x switch
-                {
-                    0 => 1;
-                    default(int) => 2;
-                }
-                """,
+            x switch
+            {
+                0 => 1;
+                default(int) => 2;
+            }
+            """,
             // (3,11): error CS1003: Syntax error, ',' expected
             //     0 => 1;
             Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
@@ -1178,12 +1178,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    Type { Prop: Type { } => 1,
-                    Type { Prop: Type { } => 2
-                }
-                """,
+            obj switch
+            {
+                Type { Prop: Type { } => 1,
+                Type { Prop: Type { } => 2
+            }
+            """,
             // (3,27): error CS1513: } expected
             //     Type { Prop: Type { } => 1,
             Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(3, 27),
@@ -1297,12 +1297,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    Type { Prop: Type { } : 1,
-                    Type { Prop: Type { } : 2
-                }
-                """,
+            obj switch
+            {
+                Type { Prop: Type { } : 1,
+                Type { Prop: Type { } : 2
+            }
+            """,
             // (3,27): error CS1513: } expected
             //     Type { Prop: Type { } : 1,
             Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(3, 27),
@@ -1422,12 +1422,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    Type { Prop: Type { => 1,
-                    Type { Prop: Type { => 2
-                }
-                """,
+            obj switch
+            {
+                Type { Prop: Type { => 1,
+                Type { Prop: Type { => 2
+            }
+            """,
             // (3,25): error CS1513: } expected
             //     Type { Prop: Type { => 1,
             Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(3, 25),
@@ -1547,12 +1547,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    Type { Prop: Type { : 1,
-                    Type { Prop: Type { : 2
-                }
-                """,
+            obj switch
+            {
+                Type { Prop: Type { : 1,
+                Type { Prop: Type { : 2
+            }
+            """,
             // (3,25): error CS1513: } expected
             //     Type { Prop: Type { : 1,
             Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(3, 25),
@@ -1678,12 +1678,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    Type { Prop: { Prop: { => 1,
-                    Type { Prop: { Prop: { => 2
-                }
-                """,
+            obj switch
+            {
+                Type { Prop: { Prop: { => 1,
+                Type { Prop: { Prop: { => 2
+            }
+            """,
             // (3,28): error CS1513: } expected
             //     Type { Prop: { Prop: { => 1,
             Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(3, 28),
@@ -1839,12 +1839,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    Type { Prop: { Prop: { : 1,
-                    Type { Prop: { Prop: { : 2
-                }
-                """,
+            obj switch
+            {
+                Type { Prop: { Prop: { : 1,
+                Type { Prop: { Prop: { : 2
+            }
+            """,
             // (3,28): error CS1513: } expected
             //     Type { Prop: { Prop: { : 1,
             Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(3, 28),
@@ -2006,12 +2006,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    [ => 1,
-                    [ => 2
-                }
-                """,
+            obj switch
+            {
+                [ => 1,
+                [ => 2
+            }
+            """,
             // (3,7): error CS1003: Syntax error, ']' expected
             //     [ => 1,
             Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(3, 7),
@@ -2065,12 +2065,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    [ : 1,
-                    [ : 2
-                }
-                """,
+            obj switch
+            {
+                [ : 1,
+                [ : 2
+            }
+            """,
             // (3,7): error CS1003: Syntax error, ']' expected
             //     [ : 1,
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(3, 7),
@@ -2130,12 +2130,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    [[ => 1,
-                    [[ => 2
-                }
-                """,
+            obj switch
+            {
+                [[ => 1,
+                [[ => 2
+            }
+            """,
             // (3,8): error CS1003: Syntax error, ']' expected
             //     [[ => 1,
             Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(3, 8),
@@ -2205,12 +2205,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    [[ : 1,
-                    [[ : 2
-                }
-                """,
+            obj switch
+            {
+                [[ : 1,
+                [[ : 2
+            }
+            """,
             // (3,8): error CS1003: Syntax error, ']' expected
             //     [[ : 1,
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(3, 8),
@@ -2286,12 +2286,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    [[[ => 1,
-                    [[[ => 2
-                }
-                """,
+            obj switch
+            {
+                [[[ => 1,
+                [[[ => 2
+            }
+            """,
             // (3,9): error CS1003: Syntax error, ']' expected
             //     [[[ => 1,
             Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(3, 9),
@@ -2377,12 +2377,12 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    [[[ : 1,
-                    [[[ : 2
-                }
-                """,
+            obj switch
+            {
+                [[[ : 1,
+                [[[ : 2
+            }
+            """,
             // (3,9): error CS1003: Syntax error, ']' expected
             //     [[[ : 1,
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(3, 9),
@@ -2474,10 +2474,10 @@ public class SwitchExpressionParsingTests : ParsingTests
     {
         UsingExpression(
             """
-                obj switch
-                {
-                    { Prop: 1, { Prop: 2 }
-                """,
+            obj switch
+            {
+                { Prop: 1, { Prop: 2 }
+            """,
             // (3,27): error CS1513: } expected
             //     { Prop: 1, { Prop: 2 }
             Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 27),

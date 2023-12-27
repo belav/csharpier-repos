@@ -109,10 +109,10 @@ End Class",
 
             await SetUpEditorAsync(
                 """
-                    Class C
-                        Dim i As Integer$$
-                    End Class
-                    """,
+                Class C
+                    Dim i As Integer$$
+                End Class
+                """,
                 HangMitigatingCancellationToken
             );
 

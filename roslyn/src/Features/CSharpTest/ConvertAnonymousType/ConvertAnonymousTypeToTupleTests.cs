@@ -54,14 +54,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var t1 = [||]new { };
-                        }
+                        var t1 = [||]new { };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -70,14 +70,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Test
+                class Test
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var t1 = [||]new { a = 1 };
-                        }
+                        var t1 = [||]new { a = 1 };
                     }
-                    """
+                }
+                """
             );
         }
 

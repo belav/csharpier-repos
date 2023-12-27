@@ -87,13 +87,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        [|var|] _myfield = 5;
-                    }
-                    """,
+                class Program
+                {
+                    [|var|] _myfield = 5;
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -103,13 +103,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        public event [|var|] _myevent;
-                    }
-                    """,
+                class Program
+                {
+                    public event [|var|] _myevent;
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -197,16 +197,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|var|] x = 5, y = x;
-                        }
+                        [|var|] x = 5, y = x;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -216,16 +216,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|var|] x;
-                        }
+                        [|var|] x;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -235,20 +235,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|var|] p = new var();
-                        }
-
-                        class var
-                        {
-                        }
+                        [|var|] p = new var();
                     }
-                    """,
+
+                    class var
+                    {
+                    }
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -258,16 +258,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|Program|] p = new Program();
-                        }
+                        [|Program|] p = new Program();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -277,17 +277,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    struct Program
+                struct Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            ref [|Program|] p = Ref();
-                        }
-                        ref Program Ref() => throw null;
+                        ref [|Program|] p = Ref();
                     }
-                    """,
+                    ref Program Ref() => throw null;
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -297,20 +297,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var c = new [|var|]();
-                        }
+                        var c = new [|var|]();
                     }
+                }
 
-                    class var
-                    {
-                    }
-                    """
+                class var
+                {
+                }
+                """
             );
         }
 
@@ -319,16 +319,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|var|] x = new Goo();
-                        }
+                        [|var|] x = new Goo();
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -339,21 +339,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
+                        // Error CS1061: 'KeyValuePair<int, int>' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'KeyValuePair<int, int>' could be found (are you missing a using directive or an assembly reference?)
+                        // Error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'KeyValuePair<int, int>', with 2 out parameters and a void return type.
+                        foreach ([|var|] (key, value) in new Dictionary<int, int>())
                         {
-                            // Error CS1061: 'KeyValuePair<int, int>' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'KeyValuePair<int, int>' could be found (are you missing a using directive or an assembly reference?)
-                            // Error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'KeyValuePair<int, int>', with 2 out parameters and a void return type.
-                            foreach ([|var|] (key, value) in new Dictionary<int, int>())
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -364,19 +364,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    void M(C c)
                     {
-                        void M(C c)
-                        {
-                            // Error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
-                            // Error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 2 out parameters and a void return type.
-                            [|var|] (key, value) = c;
-                        }
+                        // Error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
+                        // Error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 2 out parameters and a void return type.
+                        [|var|] (key, value) = c;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -1436,16 +1436,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|dynamic|] x = 1;
-                        }
+                        [|dynamic|] x = 1;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -1455,22 +1455,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Linq;
+                using System;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var values = Enumerable.Range(1, 5).Select(i => new { Value = i });
+                        var values = Enumerable.Range(1, 5).Select(i => new { Value = i });
 
-                            foreach ([|var|] value in values)
-                            {
-                                Console.WriteLine(value.Value);
-                            }
+                        foreach ([|var|] value in values)
+                        {
+                            Console.WriteLine(value.Value);
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -1480,27 +1480,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|var|] (x, y) = new Program();
-                        }
-                        void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                        [|var|] (x, y) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int x, string y) = new Program();
-                        }
-                        void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                        (int x, string y) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1510,27 +1510,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            ([|var|] x, var y) = new Program();
-                        }
-                        void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                        ([|var|] x, var y) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int x, var y) = new Program();
-                        }
-                        void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                        (int x, var y) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1540,27 +1540,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|var|] (x, (y, z)) = new Program();
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        [|var|] (x, (y, z)) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int x, (int y, Program z)) = new Program();
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        (int x, (int y, Program z)) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1570,27 +1570,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|var|](x,(y,z)) = new Program();
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        [|var|](x,(y,z)) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int x, (int y, Program z)) = new Program();
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        (int x, (int y, Program z)) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1600,27 +1600,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach ([|var|] (x, (y, z)) in new[] { new Program() } { }
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        foreach ([|var|] (x, (y, z)) in new[] { new Program() } { }
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            foreach ((int x, (int y, Program z)) in new[] { new Program() } { }
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        foreach ((int x, (int y, Program z)) in new[] { new Program() } { }
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1630,27 +1630,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            /*before*/[|var|]/*after*/ (/*x1*/x/*x2*/, /*yz1*/(/*y1*/y/*y2*/, /*z1*/z/*z2*/)/*yz2*/) /*end*/ = new Program();
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        /*before*/[|var|]/*after*/ (/*x1*/x/*x2*/, /*yz1*/(/*y1*/y/*y2*/, /*z1*/z/*z2*/)/*yz2*/) /*end*/ = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            /*before*//*after*/(/*x1*/int x/*x2*/, /*yz1*/(/*y1*/int y/*y2*/, /*z1*/Program z/*z2*/)/*yz2*/) /*end*/ = new Program();
-                        }
-                        void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                        /*before*//*after*/(/*x1*/int x/*x2*/, /*yz1*/(/*y1*/int y/*y2*/, /*z1*/Program z/*z2*/)/*yz2*/) /*end*/ = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Program s) { i = 1; s = null; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1660,27 +1660,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|var|] (x, _) = new Program();
-                        }
-                        void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                        [|var|] (x, _) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int x, string _) = new Program();
-                        }
-                        void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                        (int x, string _) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1690,27 +1690,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|var|] (x, y) = new Program();
-                        }
-                        void Deconstruct(out int i, out Error s) { i = 1; s = null; }
+                        [|var|] (x, y) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Error s) { i = 1; s = null; }
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int x, Error y) = new Program();
-                        }
-                        void Deconstruct(out int i, out Error s) { i = 1; s = null; }
+                        (int x, Error y) = new Program();
                     }
-                    """,
+                    void Deconstruct(out int i, out Error s) { i = 1; s = null; }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1720,39 +1720,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Linq;
+                using System;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var values = Enumerable.Range(1, 5);
+                        var values = Enumerable.Range(1, 5);
 
-                            foreach ([|var|] value in values)
-                            {
-                                Console.WriteLine(value.Value);
-                            }
+                        foreach ([|var|] value in values)
+                        {
+                            Console.WriteLine(value.Value);
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Linq;
+                using System;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var values = Enumerable.Range(1, 5);
+                        var values = Enumerable.Range(1, 5);
 
-                            foreach (int value in values)
-                            {
-                                Console.WriteLine(value.Value);
-                            }
+                        foreach (int value in values)
+                        {
+                            Console.WriteLine(value.Value);
                         }
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1762,16 +1762,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|var|] x = new { Amount = 108, Message = "Hello" };
-                        }
+                        [|var|] x = new { Amount = 108, Message = "Hello" };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -1781,16 +1781,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|var|] x = new[] { new { name = "apple", diam = 4 }, new { name = "grape", diam = 1 } };
-                        }
+                        [|var|] x = new[] { new { name = "apple", diam = 4 }, new { name = "grape", diam = 1 } };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -1800,26 +1800,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            var products = new List<Product>();
-                            [|var|] productQuery = from prod in products
-                                               select new { prod.Color, prod.Price };
-                        }
+                        var products = new List<Product>();
+                        [|var|] productQuery = from prod in products
+                                           select new { prod.Color, prod.Price };
                     }
+                }
 
-                    class Product
-                    {
-                        public ConsoleColor Color { get; set; }
-                        public int Price { get; set; }
-                    }
-                    """
+                class Product
+                {
+                    public ConsoleColor Color { get; set; }
+                    public int Price { get; set; }
+                }
+                """
             );
         }
 
@@ -1828,27 +1828,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] s = "hello";
-                        }
+                        [|var|] s = "hello";
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            string s = "hello";
-                        }
+                        string s = "hello";
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1858,27 +1858,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] s = 5;
-                        }
+                        [|var|] s = 5;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int s = 5;
-                        }
+                        int s = 5;
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1888,27 +1888,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] c = new List<int>();
-                        }
+                        [|var|] c = new List<int>();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            List<int> c = new List<int>();
-                        }
+                        List<int> c = new List<int>();
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1918,27 +1918,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            [|var|] c = new C();
-                        }
+                        [|var|] c = new C();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            C c = new C();
-                        }
+                        C c = new C();
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1948,27 +1948,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C<T>
+                class C<T>
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] c = new C<int>();
-                        }
+                        [|var|] c = new C<int>();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C<T>
+                class C<T>
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            C<int> c = new C<int>();
-                        }
+                        C<int> c = new C<int>();
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -1978,27 +1978,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] n1 = new int[4] { 2, 4, 6, 8 };
-                        }
+                        [|var|] n1 = new int[4] { 2, 4, 6, 8 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int[] n1 = new int[4] { 2, 4, 6, 8 };
-                        }
+                        int[] n1 = new int[4] { 2, 4, 6, 8 };
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2008,27 +2008,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] n1 = new[] { 2, 4, 6, 8 };
-                        }
+                        [|var|] n1 = new[] { 2, 4, 6, 8 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int[] n1 = new[] { 2, 4, 6, 8 };
-                        }
+                        int[] n1 = new[] { 2, 4, 6, 8 };
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2038,33 +2038,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] cs = new[] {
-                                new[] { 1, 2, 3, 4 },
-                                new[] { 5, 6, 7, 8 }
-                            };
-                        }
+                        [|var|] cs = new[] {
+                            new[] { 1, 2, 3, 4 },
+                            new[] { 5, 6, 7, 8 }
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            int[][] cs = new[] {
-                                new[] { 1, 2, 3, 4 },
-                                new[] { 5, 6, 7, 8 }
-                            };
-                        }
+                        int[][] cs = new[] {
+                            new[] { 1, 2, 3, 4 },
+                            new[] { 5, 6, 7, 8 }
+                        };
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2074,37 +2074,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] cc = new Customer { City = "Chennai" };
-                        }
-
-                        private class Customer
-                        {
-                            public string City { get; set; }
-                        }
+                        [|var|] cc = new Customer { City = "Chennai" };
                     }
-                    """,
+
+                    private class Customer
+                    {
+                        public string City { get; set; }
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            Customer cc = new Customer { City = "Chennai" };
-                        }
-
-                        private class Customer
-                        {
-                            public string City { get; set; }
-                        }
+                        Customer cc = new Customer { City = "Chennai" };
                     }
-                    """,
+
+                    private class Customer
+                    {
+                        public string City { get; set; }
+                    }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2114,29 +2114,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] digits = new List<int> { 1, 2, 3 };
-                        }
+                        [|var|] digits = new List<int> { 1, 2, 3 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            List<int> digits = new List<int> { 1, 2, 3 };
-                        }
+                        List<int> digits = new List<int> { 1, 2, 3 };
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2146,45 +2146,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        [|var|] cs = new List<Customer>
                         {
-                            [|var|] cs = new List<Customer>
-                            {
-                                new Customer { City = "Chennai" }
-                            };
-                        }
-
-                        private class Customer
-                        {
-                            public string City { get; set; }
-                        }
+                            new Customer { City = "Chennai" }
+                        };
                     }
-                    """,
+
+                    private class Customer
+                    {
+                        public string City { get; set; }
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        List<Customer> cs = new List<Customer>
                         {
-                            List<Customer> cs = new List<Customer>
-                            {
-                                new Customer { City = "Chennai" }
-                            };
-                        }
-
-                        private class Customer
-                        {
-                            public string City { get; set; }
-                        }
+                            new Customer { City = "Chennai" }
+                        };
                     }
-                    """,
+
+                    private class Customer
+                    {
+                        public string City { get; set; }
+                    }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2194,31 +2194,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        for ([|var|] i = 0; i < 5; i++)
                         {
-                            for ([|var|] i = 0; i < 5; i++)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        for (int i = 0; i < 5; i++)
                         {
-                            for (int i = 0; i < 5; i++)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2228,35 +2228,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        var l = new List<int> { 1, 3, 5 };
+                        foreach ([|var|] item in l)
                         {
-                            var l = new List<int> { 1, 3, 5 };
-                            foreach ([|var|] item in l)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        var l = new List<int> { 1, 3, 5 };
+                        foreach (int item in l)
                         {
-                            var l = new List<int> { 1, 3, 5 };
-                            foreach (int item in l)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2266,49 +2266,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            var customers = new List<Customer>();
-                            [|var|] expr = from c in customers
-                                       where c.City == "London"
-                                       select c;
-                        }
+                        var customers = new List<Customer>();
+                        [|var|] expr = from c in customers
+                                   where c.City == "London"
+                                   select c;
+                    }
 
-                        private class Customer
-                        {
-                            public string City { get; set; }
-                        }
+                    private class Customer
+                    {
+                        public string City { get; set; }
                     }
-                    }
-                    """,
+                }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            var customers = new List<Customer>();
-                            IEnumerable<Customer> expr = from c in customers
-                                       where c.City == "London"
-                                       select c;
-                        }
+                        var customers = new List<Customer>();
+                        IEnumerable<Customer> expr = from c in customers
+                                   where c.City == "London"
+                                   select c;
+                    }
 
-                        private class Customer
-                        {
-                            public string City { get; set; }
-                        }
+                    private class Customer
+                    {
+                        public string City { get; set; }
                     }
-                    }
-                    """,
+                }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2318,47 +2318,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        using ([|var|] r = new Res())
                         {
-                            using ([|var|] r = new Res())
-                            {
-                            }
-                        }
-
-                        private class Res : IDisposable
-                        {
-                            public void Dispose()
-                            {
-                                throw new NotImplementedException();
-                            }
                         }
                     }
-                    """,
+
+                    private class Res : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
+                        using (Res r = new Res())
                         {
-                            using (Res r = new Res())
-                            {
-                            }
-                        }
-
-                        private class Res : IDisposable
-                        {
-                            public void Dispose()
-                            {
-                                throw new NotImplementedException();
-                            }
                         }
                     }
-                    """,
+
+                    private class Res : IDisposable
+                    {
+                        public void Dispose()
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2368,27 +2368,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|var|] s = $"Hello, {name}"
-                        }
+                        [|var|] s = $"Hello, {name}"
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            string s = $"Hello, {name}"
-                        }
+                        string s = $"Hello, {name}"
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2398,29 +2398,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            double x = 1234.7;
-                            [|var|] a = (int)x;
-                        }
+                        double x = 1234.7;
+                        [|var|] a = (int)x;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            double x = 1234.7;
-                            int a = (int)x;
-                        }
+                        double x = 1234.7;
+                        int a = (int)x;
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2430,39 +2430,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            C obj = new C();
-                            [|var|] anotherObj = obj?.Test();
-                        }
-
-                        C Test()
-                        {
-                            return this;
-                        }
+                        C obj = new C();
+                        [|var|] anotherObj = obj?.Test();
                     }
-                    """,
+
+                    C Test()
+                    {
+                        return this;
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            C obj = new C();
-                            C anotherObj = obj?.Test();
-                        }
-
-                        C Test()
-                        {
-                            return this;
-                        }
+                        C obj = new C();
+                        C anotherObj = obj?.Test();
                     }
-                    """,
+
+                    C Test()
+                    {
+                        return this;
+                    }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2472,29 +2472,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            long number1 = int.MaxValue + 20L;
-                            [|var|] intNumber = checked((int)number1);
-                        }
+                        long number1 = int.MaxValue + 20L;
+                        [|var|] intNumber = checked((int)number1);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            long number1 = int.MaxValue + 20L;
-                            int intNumber = checked((int)number1);
-                        }
+                        long number1 = int.MaxValue + 20L;
+                        int intNumber = checked((int)number1);
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2504,39 +2504,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async void ProcessRead()
                     {
-                        public async void ProcessRead()
-                        {
-                            [|var|] text = await ReadTextAsync(null);
-                        }
-
-                        private async Task<string> ReadTextAsync(string filePath)
-                        {
-                            return string.Empty;
-                        }
+                        [|var|] text = await ReadTextAsync(null);
                     }
-                    """,
+
+                    private async Task<string> ReadTextAsync(string filePath)
+                    {
+                        return string.Empty;
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async void ProcessRead()
                     {
-                        public async void ProcessRead()
-                        {
-                            string text = await ReadTextAsync(null);
-                        }
-
-                        private async Task<string> ReadTextAsync(string filePath)
-                        {
-                            return string.Empty;
-                        }
+                        string text = await ReadTextAsync(null);
                     }
-                    """,
+
+                    private async Task<string> ReadTextAsync(string filePath)
+                    {
+                        return string.Empty;
+                    }
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2546,27 +2546,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            [|var|] text = 1;
-                        }
+                        [|var|] text = 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            int text = 1;
-                        }
+                        int text = 1;
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeForBuiltInTypesOnly()
             );
         }
@@ -2576,31 +2576,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            [|var|] text = GetChar();
-                        }
-
-                        public char GetChar() => 'c';
+                        [|var|] text = GetChar();
                     }
-                    """,
+
+                    public char GetChar() => 'c';
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            char text = GetChar();
-                        }
-
-                        public char GetChar() => 'c';
+                        char text = GetChar();
                     }
-                    """,
+
+                    public char GetChar() => 'c';
+                }
+                """,
                 options: ExplicitTypeForBuiltInTypesOnly()
             );
         }
@@ -2612,27 +2612,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
             // we in the IDE treat it as an intrinsic type for this feature.
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            [|var|] text = string.Empty;
-                        }
+                        [|var|] text = string.Empty;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            string text = string.Empty;
-                        }
+                        string text = string.Empty;
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeForBuiltInTypesOnly()
             );
         }
@@ -2644,29 +2644,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
             // we in the IDE treat it as an intrinsic type for this feature.
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            object j = new C();
-                            [|var|] text = j;
-                        }
+                        object j = new C();
+                        [|var|] text = j;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void ProcessRead()
                     {
-                        public void ProcessRead()
-                        {
-                            object j = new C();
-                            object text = j;
-                        }
+                        object j = new C();
+                        object text = j;
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeForBuiltInTypesOnly()
             );
         }
@@ -2760,23 +2760,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] s = (1, "hello");
-                        }
+                        [|var|] s = (1, "hello");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            (int, string) s = (1, "hello");
-                        }
+                        (int, string) s = (1, "hello");
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2786,23 +2786,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] s = (a: 1, b: "hello");
-                        }
+                        [|var|] s = (a: 1, b: "hello");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            (int a, string b) s = (a: 1, b: "hello");
-                        }
+                        (int a, string b) s = (a: 1, b: "hello");
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2812,23 +2812,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|var|] s = (a: 1, "hello");
-                        }
+                        [|var|] s = (a: 1, "hello");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            (int a, string) s = (a: 1, "hello");
-                        }
+                        (int a, string) s = (a: 1, "hello");
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2838,27 +2838,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            DateTime.TryParse(string.Empty, [|out var|] date);
-                        }
+                        DateTime.TryParse(string.Empty, [|out var|] date);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            DateTime.TryParse(string.Empty, out DateTime date);
-                        }
+                        DateTime.TryParse(string.Empty, out DateTime date);
                     }
-                    """,
+                }
+                """,
                 options: ExplicitTypeEverywhere()
             );
         }
@@ -2868,16 +2868,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            [|String|] test = new String(' ', 4);
-                        }
+                        [|String|] test = new String(' ', 4);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -2887,18 +2887,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
+                        foreach ([|String|] test in new String[] { "test1", "test2" })
                         {
-                            foreach ([|String|] test in new String[] { "test1", "test2" })
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -2908,16 +2908,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|Int32[]|] array = new[] { 1, 2, 3 };
-                        }
+                        [|Int32[]|] array = new[] { 1, 2, 3 };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -2927,20 +2927,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
+                        [|Int32[][]|] a = new Int32[][]
                         {
-                            [|Int32[][]|] a = new Int32[][]
-                            {
-                                new[] { 1, 2 },
-                                new[] { 3, 4 }
-                            };
-                        }
+                            new[] { 1, 2 },
+                            new[] { 3, 4 }
+                        };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -2950,17 +2950,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|IEnumerable<Int32>|] a = new List<Int32> { 1, 2 }.Where(x => x > 1);
-                        }
+                        [|IEnumerable<Int32>|] a = new List<Int32> { 1, 2 }.Where(x => x > 1);
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -2970,17 +2970,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            String name = "name";
-                            [|String|] s = $"Hello, {name}"
-                        }
+                        String name = "name";
+                        [|String|] s = $"Hello, {name}"
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -2990,17 +2990,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            Object name = "name";
-                            [|String|] s = (String) name;
-                        }
+                        Object name = "name";
+                        [|String|] s = (String) name;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -3010,22 +3010,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Threading.Tasks;
+                using System;
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    public async void ProcessRead()
                     {
-                        public async void ProcessRead()
-                        {
-                            [|String|] text = await ReadTextAsync(null);
-                        }
-
-                        private async Task<string> ReadTextAsync(string filePath)
-                        {
-                            return String.Empty;
-                        }
+                        [|String|] text = await ReadTextAsync(null);
                     }
-                    """,
+
+                    private async Task<string> ReadTextAsync(string filePath)
+                    {
+                        return String.Empty;
+                    }
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -3035,17 +3035,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            String number = "12";
-                            Int32.TryParse(name, out [|Int32|] number)
-                        }
+                        String number = "12";
+                        Int32.TryParse(name, out [|Int32|] number)
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -3055,18 +3055,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
+                        for ([|Int32|] i = 0; i < 5; i++)
                         {
-                            for ([|Int32|] i = 0; i < 5; i++)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -3076,17 +3076,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|List<Int32>|] a = new List<Int32> { 1, 2 };
-                        }
+                        [|List<Int32>|] a = new List<Int32> { 1, 2 };
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
             );
         }
@@ -3096,20 +3096,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    void Method(List<int> var)
                     {
-                        void Method(List<int> var)
+                        foreach (int value in [|var|])
                         {
-                            foreach (int value in [|var|])
-                            {
-                                Console.WriteLine(value.Value);
-                            }
+                            Console.WriteLine(value.Value);
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
@@ -3120,14 +3120,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
             // This error case is handled by a separate code fix (UseExplicitTypeForConst).
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            const [|var|] v = 0;
-                        }
+                        const [|var|] v = 0;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }

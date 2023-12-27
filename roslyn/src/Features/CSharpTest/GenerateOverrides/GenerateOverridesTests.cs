@@ -30,30 +30,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    class C
-                    {
-                        [||]
-                    }
-                    """,
+                class C
+                {
+                    [||]
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public override bool Equals(object obj)
                     {
-                        public override bool Equals(object obj)
-                        {
-                            return base.Equals(obj);
-                        }
-
-                        public override int GetHashCode()
-                        {
-                            return base.GetHashCode();
-                        }
-
-                        public override string ToString()
-                        {
-                            return base.ToString();
-                        }
+                        return base.Equals(obj);
                     }
-                    """,
+
+                    public override int GetHashCode()
+                    {
+                        return base.GetHashCode();
+                    }
+
+                    public override string ToString()
+                    {
+                        return base.ToString();
+                    }
+                }
+                """,
                 ["Equals", "GetHashCode", "ToString"]
             );
         }
@@ -64,28 +64,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    class C[||]
-                    """,
+                class C[||]
+                """,
                 """
-                    class C
+                class C
+                {
+                    public override bool Equals(object obj)
                     {
-                        public override bool Equals(object obj)
-                        {
-                            return base.Equals(obj);
-                        }
-
-                        public override int GetHashCode()
-                        {
-                            return base.GetHashCode();
-                        }
-
-                        public override string ToString()
-                        {
-                            return base.ToString();
-                        }
+                        return base.Equals(obj);
                     }
 
-                    """,
+                    public override int GetHashCode()
+                    {
+                        return base.GetHashCode();
+                    }
+
+                    public override string ToString()
+                    {
+                        return base.ToString();
+                    }
+                }
+
+                """,
                 ["Equals", "GetHashCode", "ToString"]
             );
         }
@@ -96,23 +96,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    record C[||];
-                    """,
+                record C[||];
+                """,
                 """
-                    record C
+                record C
+                {
+                    public override int GetHashCode()
                     {
-                        public override int GetHashCode()
-                        {
-                            return base.GetHashCode();
-                        }
-
-                        public override string ToString()
-                        {
-                            return base.ToString();
-                        }
+                        return base.GetHashCode();
                     }
 
-                    """,
+                    public override string ToString()
+                    {
+                        return base.ToString();
+                    }
+                }
+
+                """,
                 ["GetHashCode", "ToString"]
             );
         }
@@ -123,46 +123,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public virtual ref int X() => throw new NotImplementedException();
+                class Base
+                {
+                    public virtual ref int X() => throw new NotImplementedException();
 
-                        public virtual ref int Y => throw new NotImplementedException();
+                    public virtual ref int Y => throw new NotImplementedException();
 
-                        public virtual ref int this[int i] => throw new NotImplementedException();
-                    }
+                    public virtual ref int this[int i] => throw new NotImplementedException();
+                }
 
-                    class Derived : Base
-                    {
-                         [||]
-                    }
-                    """,
+                class Derived : Base
+                {
+                     [||]
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    public virtual ref int X() => throw new NotImplementedException();
+
+                    public virtual ref int Y => throw new NotImplementedException();
+
+                    public virtual ref int this[int i] => throw new NotImplementedException();
+                }
+
+                class Derived : Base
+                {
+                    public override ref int this[int i] => ref base[i];
+
+                    public override ref int Y => ref base.Y;
+
+                    public override ref int X()
                     {
-                        public virtual ref int X() => throw new NotImplementedException();
-
-                        public virtual ref int Y => throw new NotImplementedException();
-
-                        public virtual ref int this[int i] => throw new NotImplementedException();
+                        return ref base.X();
                     }
-
-                    class Derived : Base
-                    {
-                        public override ref int this[int i] => ref base[i];
-
-                        public override ref int Y => ref base.Y;
-
-                        public override ref int X()
-                        {
-                            return ref base.X();
-                        }
-                    }
-                    """,
+                }
+                """,
                 ["X", "Y", "this[]"]
             );
         }
@@ -172,27 +172,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    class Base
-                    {
-                        public virtual int Property { init => throw new NotImplementedException(); }
-                    }
+                class Base
+                {
+                    public virtual int Property { init => throw new NotImplementedException(); }
+                }
 
-                    class Derived : Base
-                    {
-                         [||]
-                    }
-                    """,
+                class Derived : Base
+                {
+                     [||]
+                }
+                """,
                 """
-                    class Base
-                    {
-                        public virtual int Property { init => throw new NotImplementedException(); }
-                    }
+                class Base
+                {
+                    public virtual int Property { init => throw new NotImplementedException(); }
+                }
 
-                    class Derived : Base
-                    {
-                        public override int Property { init => base.Property = value; }
-                    }
-                    """,
+                class Derived : Base
+                {
+                    public override int Property { init => base.Property = value; }
+                }
+                """,
                 ["Property"]
             );
         }
@@ -202,27 +202,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    class Base
-                    {
-                        public virtual int this[int i] { init => throw new NotImplementedException(); }
-                    }
+                class Base
+                {
+                    public virtual int this[int i] { init => throw new NotImplementedException(); }
+                }
 
-                    class Derived : Base
-                    {
-                         [||]
-                    }
-                    """,
+                class Derived : Base
+                {
+                     [||]
+                }
+                """,
                 """
-                    class Base
-                    {
-                        public virtual int this[int i] { init => throw new NotImplementedException(); }
-                    }
+                class Base
+                {
+                    public virtual int this[int i] { init => throw new NotImplementedException(); }
+                }
 
-                    class Derived : Base
-                    {
-                        public override int this[int i] { init => base[i] = value; }
-                    }
-                    """,
+                class Derived : Base
+                {
+                    public override int this[int i] { init => base[i] = value; }
+                }
+                """,
                 ["this[]"]
             );
         }
@@ -233,11 +233,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestMissingAsync(
                 """
-                    static class C
-                    {
-                        [||]
-                    }
-                    """
+                static class C
+                {
+                    [||]
+                }
+                """
             );
         }
 
@@ -247,11 +247,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestMissingAsync(
                 """
-                    static class [||]C
-                    {
+                static class [||]C
+                {
 
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -261,32 +261,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    class C
-                    {
-                        public virtual void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) {}
-                    }
+                class C
+                {
+                    public virtual void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) {}
+                }
 
-                    class D : C
-                    {
-                        [||]
-                    }
-                    """,
+                class D : C
+                {
+                    [||]
+                }
+                """,
                 """
-                    class C
-                    {
-                        public virtual void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) {}
-                    }
+                class C
+                {
+                    public virtual void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) {}
+                }
 
-                    class D : C
+                class D : C
+                {
+                    public override void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                        where T1 : default
+                        where T3 : default
                     {
-                        public override void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
-                            where T1 : default
-                            where T3 : default
-                        {
-                            base.M(a, b, c, d);
-                        }
+                        base.M(a, b, c, d);
                     }
-                    """,
+                }
+                """,
                 ["M"]
             );
         }
@@ -296,27 +296,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
         {
             await TestWithPickMembersDialogAsync(
                 """
-                    class Base
-                    {
-                        public virtual required int Property { get; set; }
-                    }
+                class Base
+                {
+                    public virtual required int Property { get; set; }
+                }
 
-                    class Derived : Base
-                    {
-                         [||]
-                    }
-                    """,
+                class Derived : Base
+                {
+                     [||]
+                }
+                """,
                 """
-                    class Base
-                    {
-                        public virtual required int Property { get; set; }
-                    }
+                class Base
+                {
+                    public virtual required int Property { get; set; }
+                }
 
-                    class Derived : Base
-                    {
-                        public override required int Property { get => base.Property; set => base.Property = value; }
-                    }
-                    """,
+                class Derived : Base
+                {
+                    public override required int Property { get => base.Property; set => base.Property = value; }
+                }
+                """,
                 ["Property"]
             );
         }

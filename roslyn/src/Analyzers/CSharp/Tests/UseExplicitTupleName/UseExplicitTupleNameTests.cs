@@ -25,25 +25,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            var v2 = v1.[|Item1|];
-                        }
+                        (int i, string s) v1 = default((int, string));
+                        var v2 = v1.[|Item1|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            var v2 = v1.i;
-                        }
+                        (int i, string s) v1 = default((int, string));
+                        var v2 = v1.i;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -52,29 +52,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            Goo(v1.[|Item1|]);
-                        }
-
-                        void Goo(int i) { }
+                        (int i, string s) v1 = default((int, string));
+                        Goo(v1.[|Item1|]);
                     }
-                    """,
+
+                    void Goo(int i) { }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            Goo(v1.i);
-                        }
-
-                        void Goo(int i) { }
+                        (int i, string s) v1 = default((int, string));
+                        Goo(v1.i);
                     }
-                    """
+
+                    void Goo(int i) { }
+                }
+                """
             );
         }
 
@@ -83,25 +83,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            var v2 = v1.[|Item2|];
-                        }
+                        (int i, string s) v1 = default((int, string));
+                        var v2 = v1.[|Item2|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            var v2 = v1.s;
-                        }
+                        (int i, string s) v1 = default((int, string));
+                        var v2 = v1.s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -144,25 +144,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int item1, string s) v1 = default((int, string));
-                            var v2 = v1.[|Item1|];
-                        }
+                        (int item1, string s) v1 = default((int, string));
+                        var v2 = v1.[|Item1|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int item1, string s) v1 = default((int, string));
-                            var v2 = v1.item1;
-                        }
+                        (int item1, string s) v1 = default((int, string));
+                        var v2 = v1.item1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -171,27 +171,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            var v2 = v1.[|Item1|];
-                            var v3 = v1.[|Item2|];
-                        }
+                        (int i, string s) v1 = default((int, string));
+                        var v2 = v1.[|Item1|];
+                        var v3 = v1.[|Item2|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, string s) v1 = default((int, string));
-                            var v2 = v1.i;
-                            var v3 = v1.s;
-                        }
+                        (int i, string s) v1 = default((int, string));
+                        var v2 = v1.i;
+                        var v3 = v1.s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -200,25 +200,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, int s) v1 = default((int, int));
-                            v1.[|Item1|] = v1.[|Item2|];
-                        }
+                        (int i, int s) v1 = default((int, int));
+                        v1.[|Item1|] = v1.[|Item2|];
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            (int i, int s) v1 = default((int, int));
-                            v1.i = v1.s;
-                        }
+                        (int i, int s) v1 = default((int, int));
+                        v1.i = v1.s;
                     }
-                    """
+                }
+                """
             );
         }
 

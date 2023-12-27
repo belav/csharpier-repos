@@ -241,10 +241,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = """
-                        goo\r\nbar
-                        """;
-                    """",
+                var goo = """
+                    goo\r\nbar
+                    """;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -255,10 +255,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = """
-                        goo\r\nbar
-                        """u8;
-                    """",
+                var goo = """
+                    goo\r\nbar
+                    """u8;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -269,10 +269,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = $"""
-                        goo\r\nbar
-                        """;
-                    """",
+                var goo = $"""
+                    goo\r\nbar
+                    """;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -283,10 +283,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = $"""
-                        goo\r\nbar
-                        """u8;
-                    """",
+                var goo = $"""
+                    goo\r\nbar
+                    """u8;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -309,10 +309,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = """
-                        \
-                        """;
-                    """",
+                var goo = """
+                    \
+                    """;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -323,10 +323,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = """
-                        \
-                        """u8;
-                    """",
+                var goo = """
+                    \
+                    """u8;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -337,10 +337,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = $"""
-                        \
-                        """;
-                    """",
+                var goo = $"""
+                    \
+                    """;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -351,10 +351,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestInMethodAsync(
                 """"
-                    var goo = $"""
-                        \
-                        """u8;
-                    """",
+                var goo = $"""
+                    \
+                    """u8;
+                """",
                 testHost,
                 Keyword("var")
             );
@@ -405,14 +405,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    class C
-                    {
-                            void M()
-                            {
-                                var x = "𠀀𠀁𠣶𤆐𥽠𪛕";
-                            }
-                    }
-                    """,
+                class C
+                {
+                        void M()
+                        {
+                            var x = "𠀀𠀁𠣶𤆐𥽠𪛕";
+                        }
+                }
+                """,
                 testHost,
                 Keyword("var")
             );
@@ -423,25 +423,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """""
-                    class C
-                    {
-                        string x1 = "\xabcd";
-                        string x2 = "\uabcd";
-                        string x3 = "\U00009F99";
-                        string x4 = "\'";
-                        string x5 = "\"";
-                        string x6 = "\\";
-                        string x7 = "\0";
-                        string x8 = "\a";
-                        string x9 = "\b";
-                        string x10 = "\f";
-                        string x11 = "\n";
-                        string x12 = "\r";
-                        string x13 = "\t";
-                        string x14 = "\v";
-                        string x15 = @"""";
-                    }
-                    """"",
+                class C
+                {
+                    string x1 = "\xabcd";
+                    string x2 = "\uabcd";
+                    string x3 = "\U00009F99";
+                    string x4 = "\'";
+                    string x5 = "\"";
+                    string x6 = "\\";
+                    string x7 = "\0";
+                    string x8 = "\a";
+                    string x9 = "\b";
+                    string x10 = "\f";
+                    string x11 = "\n";
+                    string x12 = "\r";
+                    string x13 = "\t";
+                    string x14 = "\v";
+                    string x15 = @"""";
+                }
+                """"",
                 testHost,
                 Escape("\\xabcd"),
                 Escape("\\uabcd"),
@@ -449,8 +449,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Escape("\\\'"),
                 Escape(
                     """
-                        \"
-                        """
+                    \"
+                    """
                 ),
                 Escape("\\\\"),
                 Escape("\\0"),
@@ -463,8 +463,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Escape("\\v"),
                 Escape(
                     """
-                        ""
-                        """
+                    ""
+                    """
                 )
             );
         }

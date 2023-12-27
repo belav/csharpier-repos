@@ -36,26 +36,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                }
+                """
             );
         }
 
@@ -64,26 +64,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public int GetProp()
+                        get
                         {
                             return 0;
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    public int GetProp()
+                    {
+                        return 0;
+                    }
+                }
+                """
             );
         }
 
@@ -92,34 +92,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-
-                        public void M()
-                        {
-                            var v = new { P = this.Prop } }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public int GetProp()
+                        get
                         {
                             return 0;
                         }
-
-                        public void M()
-                        {
-                            var v = new { P = this.GetProp() } }
                     }
-                    """
+
+                    public void M()
+                    {
+                        var v = new { P = this.Prop } }
+                }
+                """,
+                """
+                class C
+                {
+                    public int GetProp()
+                    {
+                        return 0;
+                    }
+
+                    public void M()
+                    {
+                        var v = new { P = this.GetProp() } }
+                }
+                """
             );
         }
 
@@ -128,34 +128,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-
-                        public void M()
-                        {
-                            var v = new { this.Prop } }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public int GetProp()
+                        get
                         {
                             return 0;
                         }
-
-                        public void M()
-                        {
-                            var v = new { Prop = this.GetProp() } }
                     }
-                    """
+
+                    public void M()
+                    {
+                        var v = new { this.Prop } }
+                }
+                """,
+                """
+                class C
+                {
+                    public int GetProp()
+                    {
+                        return 0;
+                    }
+
+                    public void M()
+                    {
+                        var v = new { Prop = this.GetProp() } }
+                }
+                """
             );
         }
 
@@ -164,44 +164,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-
-                        public void RefM(ref int i)
-                        {
-                        }
-
-                        public void M()
-                        {
-                            RefM(ref this.Prop);
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public int GetProp()
+                        get
                         {
                             return 0;
                         }
-
-                        public void RefM(ref int i)
-                        {
-                        }
-
-                        public void M()
-                        {
-                            RefM(ref this.{|Conflict:GetProp|}());
-                        }
                     }
-                    """
+
+                    public void RefM(ref int i)
+                    {
+                    }
+
+                    public void M()
+                    {
+                        RefM(ref this.Prop);
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    public int GetProp()
+                    {
+                        return 0;
+                    }
+
+                    public void RefM(ref int i)
+                    {
+                    }
+
+                    public void M()
+                    {
+                        RefM(ref this.{|Conflict:GetProp|}());
+                    }
+                }
+                """
             );
         }
 
@@ -210,44 +210,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-
-                        public void OutM(out int i)
-                        {
-                        }
-
-                        public void M()
-                        {
-                            OutM(out this.Prop);
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public int GetProp()
+                        get
                         {
                             return 0;
                         }
-
-                        public void OutM(out int i)
-                        {
-                        }
-
-                        public void M()
-                        {
-                            OutM(out this.{|Conflict:GetProp|}());
-                        }
                     }
-                    """
+
+                    public void OutM(out int i)
+                    {
+                    }
+
+                    public void M()
+                    {
+                        OutM(out this.Prop);
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    public int GetProp()
+                    {
+                        return 0;
+                    }
+
+                    public void OutM(out int i)
+                    {
+                    }
+
+                    public void M()
+                    {
+                        OutM(out this.{|Conflict:GetProp|}());
+                    }
+                }
+                """
             );
         }
 
@@ -256,40 +256,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class CAttribute : Attribute
+                class CAttribute : Attribute
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-                    }
-
-                    [C(Prop = 1)]
-                    class D
-                    {
-                    }
-                    """,
-                """
-                    using System;
-
-                    class CAttribute : Attribute
-                    {
-                        public int GetProp()
+                        get
                         {
                             return 0;
                         }
                     }
+                }
 
-                    [C({|Conflict:Prop|} = 1)]
-                    class D
+                [C(Prop = 1)]
+                class D
+                {
+                }
+                """,
+                """
+                using System;
+
+                class CAttribute : Attribute
+                {
+                    public int GetProp()
                     {
+                        return 0;
                     }
-                    """
+                }
+
+                [C({|Conflict:Prop|} = 1)]
+                class D
+                {
+                }
+                """
             );
         }
 
@@ -298,26 +298,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private void SetProp(int value)
+                        set
                         {
                             var v = value;
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+                }
+                """
             );
         }
 
@@ -326,36 +326,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop = 1;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private void SetProp(int value)
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(1);
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop = 1;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(1);
+                    }
+                }
+                """
             );
         }
 
@@ -364,35 +364,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        set
                         {
                             var v = value;
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+                }
+                """
             );
         }
 
@@ -401,35 +401,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            private set
-                            {
-                                var v = value;
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        private set
                         {
                             var v = value;
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    public int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+                }
+                """
             );
         }
 
@@ -438,45 +438,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop++;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(this.GetProp() + 1);
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop++;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(this.GetProp() + 1);
+                    }
+                }
+                """
             );
         }
 
@@ -485,45 +485,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop--;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(this.GetProp() - 1);
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop--;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(this.GetProp() - 1);
+                    }
+                }
+                """
             );
         }
 
@@ -532,26 +532,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
+                        get
                         {
-                            get
-                            {
-                                return this.Prop + 1;
-                            }
+                            return this.Prop + 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int GetProp()
                     {
-                        private int GetProp()
-                        {
-                            return this.GetProp() + 1;
-                        }
+                        return this.GetProp() + 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -560,26 +560,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
+                        set
                         {
-                            set
-                            {
-                                this.Prop = value + 1;
-                            }
+                            this.Prop = value + 1;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private void SetProp(int value)
                     {
-                        private void SetProp(int value)
-                        {
-                            this.SetProp(value + 1);
-                        }
+                        this.SetProp(value + 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -588,45 +588,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop *= x;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(this.GetProp() * x);
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop *= x;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(this.GetProp() * x);
+                    }
+                }
+                """
             );
         }
 
@@ -635,45 +635,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop *= x + y;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(this.GetProp() * (x + y));
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop *= x + y;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(this.GetProp() * (x + y));
+                    }
+                }
+                """
             );
         }
 
@@ -682,45 +682,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    object [||]Prop
                     {
-                        object [||]Prop
-                        {
-                            get
-                            {
-                                return null;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop ??= x;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private object GetProp()
+                        get
                         {
                             return null;
                         }
-                        private void SetProp(object value)
+
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(this.GetProp() ?? x);
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop ??= x;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private object GetProp()
+                    {
+                        return null;
+                    }
+                    private void SetProp(object value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(this.GetProp() ?? x);
+                    }
+                }
+                """
             );
         }
 
@@ -729,45 +729,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop >>= x;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(this.GetProp() >> x);
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop >>= x;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(this.GetProp() >> x);
+                    }
+                }
+                """
             );
         }
 
@@ -776,45 +776,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop >>>= x;
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             return 0;
                         }
-                        private void SetProp(int value)
+
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(this.GetProp() >>> x);
-                        }
                     }
-                    """
+
+                    void M()
+                    {
+                        this.Prop >>>= x;
+                    }
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        return 0;
+                    }
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(this.GetProp() >>> x);
+                    }
+                }
+                """
             );
         }
 
@@ -823,25 +823,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop { }
+                class C
+                {
+                    int [||]Prop { }
 
-                        void M()
-                        {
-                            var v = this.Prop;
-                        }
-                    }
-                    """,
-                """
-                    class C
+                    void M()
                     {
-                        void M()
-                        {
-                            var v = this.GetProp();
-                        }
+                        var v = this.Prop;
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    void M()
+                    {
+                        var v = this.GetProp();
+                    }
+                }
+                """
             );
         }
 
@@ -850,20 +850,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop => 1;
-                    }
-                    """,
+                class C
+                {
+                    int [||]Prop => 1;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int GetProp()
                     {
-                        private int GetProp()
-                        {
-                            return 1;
-                        }
+                        return 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -872,20 +872,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop => 1; // Comment
-                    }
-                    """,
+                class C
+                {
+                    int [||]Prop => 1; // Comment
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int GetProp()
                     {
-                        private int GetProp()
-                        {
-                            return 1; // Comment
-                        }
+                        return 1; // Comment
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -894,26 +894,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Goo
                     {
-                        int [||]Goo
-                        {
-                            get
-                            {
-                                int count;
-                                foreach (var x in y)
-                                {
-                                    count += bar;
-                                }
-                                return count;
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetGoo()
+                        get
                         {
                             int count;
                             foreach (var x in y)
@@ -923,7 +908,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                             return count;
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetGoo()
+                    {
+                        int count;
+                        foreach (var x in y)
+                        {
+                            count += bar;
+                        }
+                        return count;
+                    }
+                }
+                """
             );
         }
 
@@ -932,21 +932,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]Prop => /* return 42 */ 42;
-                    }
-                    """,
+                class C
+                {
+                    public int [||]Prop => /* return 42 */ 42;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public int GetProp()
                     {
-                        public int GetProp()
-                        {
-                            /* return 42 */
-                            return 42;
-                        }
+                        /* return 42 */
+                        return 42;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -955,25 +955,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public abstract int [||]Prop { get; }
+                class C
+                {
+                    public abstract int [||]Prop { get; }
 
-                        public void M()
-                        {
-                            var v = new { P = this.Prop } }
-                    }
-                    """,
+                    public void M()
+                    {
+                        var v = new { P = this.Prop } }
+                }
+                """,
                 """
-                    class C
-                    {
-                        public abstract int GetProp();
+                class C
+                {
+                    public abstract int GetProp();
 
-                        public void M()
-                        {
-                            var v = new { P = this.GetProp() } }
-                    }
-                    """
+                    public void M()
+                    {
+                        var v = new { P = this.GetProp() } }
+                }
+                """
             );
         }
 
@@ -982,34 +982,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public virtual int [||]Prop
                     {
-                        public virtual int [||]Prop
-                        {
-                            get
-                            {
-                                return 1;
-                            }
-                        }
-
-                        public void M()
-                        {
-                            var v = new { P = this.Prop } }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public virtual int GetProp()
+                        get
                         {
                             return 1;
                         }
-
-                        public void M()
-                        {
-                            var v = new { P = this.GetProp() } }
                     }
-                    """
+
+                    public void M()
+                    {
+                        var v = new { P = this.Prop } }
+                }
+                """,
+                """
+                class C
+                {
+                    public virtual int GetProp()
+                    {
+                        return 1;
+                    }
+
+                    public void M()
+                    {
+                        var v = new { P = this.GetProp() } }
+                }
+                """
             );
         }
 
@@ -1018,17 +1018,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface I
-                    {
-                        int [||]Prop { get; }
-                    }
-                    """,
+                interface I
+                {
+                    int [||]Prop { get; }
+                }
+                """,
                 """
-                    interface I
-                    {
-                        int GetProp();
-                    }
-                    """
+                interface I
+                {
+                    int GetProp();
+                }
+                """
             );
         }
 
@@ -1037,22 +1037,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]Prop { get; }
-                    }
-                    """,
+                class C
+                {
+                    public int [||]Prop { get; }
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly int prop;
+                class C
+                {
+                    private readonly int prop;
 
-                        public int GetProp()
-                        {
-                            return prop;
-                        }
+                    public int GetProp()
+                    {
+                        return prop;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1061,32 +1061,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]Prop { get; }
+                class C
+                {
+                    public int [||]Prop { get; }
 
-                        public C()
-                        {
-                            this.Prop++;
-                        }
+                    public C()
+                    {
+                        this.Prop++;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private readonly int prop;
+
+                    public int GetProp()
                     {
-                        private readonly int prop;
-
-                        public int GetProp()
-                        {
-                            return prop;
-                        }
-
-                        public C()
-                        {
-                            this.prop = this.GetProp() + 1;
-                        }
+                        return prop;
                     }
-                    """
+
+                    public C()
+                    {
+                        this.prop = this.GetProp() + 1;
+                    }
+                }
+                """
             );
         }
 
@@ -1095,32 +1095,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]Prop { get; }
+                class C
+                {
+                    public int [||]Prop { get; }
 
-                        public C()
-                        {
-                            this.Prop *= x + y;
-                        }
+                    public C()
+                    {
+                        this.Prop *= x + y;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private readonly int prop;
+
+                    public int GetProp()
                     {
-                        private readonly int prop;
-
-                        public int GetProp()
-                        {
-                            return prop;
-                        }
-
-                        public C()
-                        {
-                            this.prop = this.GetProp() * (x + y);
-                        }
+                        return prop;
                     }
-                    """
+
+                    public C()
+                    {
+                        this.prop = this.GetProp() * (x + y);
+                    }
+                }
+                """
             );
         }
 
@@ -1129,22 +1129,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]Prop { get; } = 1;
-                    }
-                    """,
+                class C
+                {
+                    public int [||]Prop { get; } = 1;
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly int prop = 1;
+                class C
+                {
+                    private readonly int prop = 1;
 
-                        public int GetProp()
-                        {
-                            return prop;
-                        }
+                    public int GetProp()
+                    {
+                        return prop;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1153,25 +1153,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        private int prop;
+                class C
+                {
+                    private int prop;
 
-                        public int [||]Prop { get; } = 1;
-                    }
-                    """,
+                    public int [||]Prop { get; } = 1;
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int prop;
-                        private readonly int prop1 = 1;
+                class C
+                {
+                    private int prop;
+                    private readonly int prop1 = 1;
 
-                        public int GetProp()
-                        {
-                            return prop1;
-                        }
+                    public int GetProp()
+                    {
+                        return prop1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1180,22 +1180,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]PascalCase { get; }
-                    }
-                    """,
+                class C
+                {
+                    public int [||]PascalCase { get; }
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly int pascalCase;
+                class C
+                {
+                    private readonly int pascalCase;
 
-                        public int GetPascalCase()
-                        {
-                            return pascalCase;
-                        }
+                    public int GetPascalCase()
+                    {
+                        return pascalCase;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1204,30 +1204,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
-                        {
-                            get
-                            {
-                                return 0;
-                            }
-                        }
-
-                        public abstract int GetProp();
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        public int GetProp1()
+                        get
                         {
                             return 0;
                         }
-
-                        public abstract int GetProp();
                     }
-                    """
+
+                    public abstract int GetProp();
+                }
+                """,
+                """
+                class C
+                {
+                    public int GetProp1()
+                    {
+                        return 0;
+                    }
+
+                    public abstract int GetProp();
+                }
+                """
             );
         }
 
@@ -1236,28 +1236,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public int [||]Prop
                     {
-                        public int [||]Prop
+                        set
                         {
-                            set
-                            {
-                            }
                         }
-
-                        public abstract void SetProp(int i);
                     }
-                    """,
+
+                    public abstract void SetProp(int i);
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public void SetProp1(int value)
                     {
-                        public void SetProp1(int value)
-                        {
-                        }
-
-                        public abstract void SetProp(int i);
                     }
-                    """
+
+                    public abstract void SetProp(int i);
+                }
+                """
             );
         }
 
@@ -1266,28 +1266,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public object [||]Prop
                     {
-                        public object [||]Prop
+                        set
                         {
-                            set
-                            {
-                            }
                         }
-
-                        public abstract void SetProp(dynamic i);
                     }
-                    """,
+
+                    public abstract void SetProp(dynamic i);
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public void SetProp1(object value)
                     {
-                        public void SetProp1(object value)
-                        {
-                        }
-
-                        public abstract void SetProp(dynamic i);
                     }
-                    """
+
+                    public abstract void SetProp(dynamic i);
+                }
+                """
             );
         }
 
@@ -1296,39 +1296,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop { get; set; }
+
+                    void M()
                     {
-                        int [||]Prop { get; set; }
 
-                        void M()
-                        {
-
-                            Prop++;
-                        }
+                        Prop++;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int prop;
+
+                    private int GetProp()
                     {
-                        private int prop;
-
-                        private int GetProp()
-                        {
-                            return prop;
-                        }
-
-                        private void SetProp(int value)
-                        {
-                            prop = value;
-                        }
-
-                        void M()
-                        {
-
-                            SetProp(GetProp() + 1);
-                        }
+                        return prop;
                     }
-                    """
+
+                    private void SetProp(int value)
+                    {
+                        prop = value;
+                    }
+
+                    void M()
+                    {
+
+                        SetProp(GetProp() + 1);
+                    }
+                }
+                """
             );
         }
 
@@ -1337,39 +1337,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop { get; set; }
+                class C
+                {
+                    int [||]Prop { get; set; }
 
-                        void M()
-                        {
-                            /* Leading */
-                            Prop++; /* Trailing */
-                        }
+                    void M()
+                    {
+                        /* Leading */
+                        Prop++; /* Trailing */
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int prop;
+
+                    private int GetProp()
                     {
-                        private int prop;
-
-                        private int GetProp()
-                        {
-                            return prop;
-                        }
-
-                        private void SetProp(int value)
-                        {
-                            prop = value;
-                        }
-
-                        void M()
-                        {
-                            /* Leading */
-                            SetProp(GetProp() + 1); /* Trailing */
-                        }
+                        return prop;
                     }
-                    """
+
+                    private void SetProp(int value)
+                    {
+                        prop = value;
+                    }
+
+                    void M()
+                    {
+                        /* Leading */
+                        SetProp(GetProp() + 1); /* Trailing */
+                    }
+                }
+                """
             );
         }
 
@@ -1378,39 +1378,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop { get; set; }
+                class C
+                {
+                    int [||]Prop { get; set; }
 
-                        void M()
-                        {
-                            /* Leading */
-                            Prop += 1 /* Trailing */ ;
-                        }
+                    void M()
+                    {
+                        /* Leading */
+                        Prop += 1 /* Trailing */ ;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int prop;
+
+                    private int GetProp()
                     {
-                        private int prop;
-
-                        private int GetProp()
-                        {
-                            return prop;
-                        }
-
-                        private void SetProp(int value)
-                        {
-                            prop = value;
-                        }
-
-                        void M()
-                        {
-                            /* Leading */
-                            SetProp(GetProp() + 1 /* Trailing */ );
-                        }
+                        return prop;
                     }
-                    """
+
+                    private void SetProp(int value)
+                    {
+                        prop = value;
+                    }
+
+                    void M()
+                    {
+                        /* Leading */
+                        SetProp(GetProp() + 1 /* Trailing */ );
+                    }
+                }
+                """
             );
         }
 
@@ -1419,37 +1419,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop { get; set; }
+                class C
+                {
+                    int [||]Prop { get; set; }
 
-                        void M()
-                        {
-                            Prop = Prop + 1;
-                        }
+                    void M()
+                    {
+                        Prop = Prop + 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int prop;
+
+                    private int GetProp()
                     {
-                        private int prop;
-
-                        private int GetProp()
-                        {
-                            return prop;
-                        }
-
-                        private void SetProp(int value)
-                        {
-                            prop = value;
-                        }
-
-                        void M()
-                        {
-                            SetProp(GetProp() + 1);
-                        }
+                        return prop;
                     }
-                    """
+
+                    private void SetProp(int value)
+                    {
+                        prop = value;
+                    }
+
+                    void M()
+                    {
+                        SetProp(GetProp() + 1);
+                    }
+                }
+                """
             );
         }
 
@@ -1458,37 +1458,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop { get; set; }
+                class C
+                {
+                    int [||]Prop { get; set; }
 
-                        void M()
-                        {
-                            Prop *= Prop + 1;
-                        }
+                    void M()
+                    {
+                        Prop *= Prop + 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private int prop;
+
+                    private int GetProp()
                     {
-                        private int prop;
-
-                        private int GetProp()
-                        {
-                            return prop;
-                        }
-
-                        private void SetProp(int value)
-                        {
-                            prop = value;
-                        }
-
-                        void M()
-                        {
-                            SetProp(GetProp() * (GetProp() + 1));
-                        }
+                        return prop;
                     }
-                    """
+
+                    private void SetProp(int value)
+                    {
+                        prop = value;
+                    }
+
+                    void M()
+                    {
+                        SetProp(GetProp() * (GetProp() + 1));
+                    }
+                }
+                """
             );
         }
 
@@ -1498,34 +1498,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    public class Goo
-                    {
-                        public bool [||]Any { get; } // Replace 'Any' with method
+                public class Goo
+                {
+                    public bool [||]Any { get; } // Replace 'Any' with method
 
-                        public static void Bar()
-                        {
-                            var goo = new Goo();
-                            bool f = goo?.Any == true;
-                        }
+                    public static void Bar()
+                    {
+                        var goo = new Goo();
+                        bool f = goo?.Any == true;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Goo
+                public class Goo
+                {
+                    private readonly bool any;
+
+                    public bool GetAny()
                     {
-                        private readonly bool any;
-
-                        public bool GetAny()
-                        {
-                            return any;
-                        }
-
-                        public static void Bar()
-                        {
-                            var goo = new Goo();
-                            bool f = goo?.GetAny() == true;
-                        }
+                        return any;
                     }
-                    """
+
+                    public static void Bar()
+                    {
+                        var goo = new Goo();
+                        bool f = goo?.GetAny() == true;
+                    }
+                }
+                """
             );
         }
 
@@ -1535,23 +1535,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
+                        get
                         {
-                            get
-                            {
-                                return 0;
-                            }
+                            return 0;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int GetProp() => 0;
-                    }
-                    """,
+                class C
+                {
+                    private int GetProp() => 0;
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -1562,29 +1562,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
+                        get
                         {
-                            get
-                            {
-                                return 0;
-                            }
+                            return 0;
+                        }
 
-                            set
-                            {
-                                throw e;
-                            }
+                        set
+                        {
+                            throw e;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int GetProp() => 0;
-                        private void SetProp(int value) => throw e;
-                    }
-                    """,
+                class C
+                {
+                    private int GetProp() => 0;
+                    private void SetProp(int value) => throw e;
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -1595,23 +1595,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get => 0;
+                        get => 0;
 
-                            set => throw e;
-                        }
+                        set => throw e;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int GetProp() => 0;
-                        private void SetProp(int value) => throw e;
-                    }
-                    """,
+                class C
+                {
+                    private int GetProp() => 0;
+                    private void SetProp(int value) => throw e;
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -1622,17 +1622,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop => 0;
-                    }
-                    """,
+                class C
+                {
+                    int [||]Prop => 0;
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int GetProp() => 0;
-                    }
-                    """,
+                class C
+                {
+                    private int GetProp() => 0;
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -1643,19 +1643,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop { get; }
-                    }
-                    """,
+                class C
+                {
+                    int [||]Prop { get; }
+                }
+                """,
                 """
-                    class C
-                    {
-                        private readonly int prop;
+                class C
+                {
+                    private readonly int prop;
 
-                        private int GetProp() => prop;
-                    }
-                    """,
+                    private int GetProp() => prop;
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -1666,20 +1666,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop { get; set; }
-                    }
-                    """,
+                class C
+                {
+                    int [||]Prop { get; set; }
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int prop;
+                class C
+                {
+                    private int prop;
 
-                        private int GetProp() => prop;
-                        private void SetProp(int value) => prop = value;
-                    }
-                    """,
+                    private int GetProp() => prop;
+                    private void SetProp(int value) => prop = value;
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -1690,28 +1690,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            get
-                            {
-                                A();
-                                return B();
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
+                        get
                         {
                             A();
                             return B();
                         }
                     }
-                    """,
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                        A();
+                        return B();
+                    }
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -1722,32 +1722,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    internal interface ILanguageServiceHost
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Gets the active workspace project context that provides access to the language service for the active configured project.
+                    /// </summary>
+                    /// <value>
+                    ///     An value that provides access to the language service for the active configured project.
+                    /// </value>
+                    object [||]ActiveProjectContext
                     {
-                        /// <summary>
-                        ///     Gets the active workspace project context that provides access to the language service for the active configured project.
-                        /// </summary>
-                        /// <value>
-                        ///     An value that provides access to the language service for the active configured project.
-                        /// </value>
-                        object [||]ActiveProjectContext
-                        {
-                            get;
-                        }
+                        get;
                     }
-                    """,
+                }
+                """,
                 """
-                    internal interface ILanguageServiceHost
-                    {
-                        /// <summary>
-                        ///     Gets the active workspace project context that provides access to the language service for the active configured project.
-                        /// </summary>
-                        /// <returns>
-                        ///     An value that provides access to the language service for the active configured project.
-                        /// </returns>
-                        object GetActiveProjectContext();
-                    }
-                    """
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Gets the active workspace project context that provides access to the language service for the active configured project.
+                    /// </summary>
+                    /// <returns>
+                    ///     An value that provides access to the language service for the active configured project.
+                    /// </returns>
+                    object GetActiveProjectContext();
+                }
+                """
             );
         }
 
@@ -1757,32 +1757,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    internal interface ILanguageServiceHost
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Sets the active workspace project context that provides access to the language service for the active configured project.
+                    /// </summary>
+                    /// <value>
+                    ///     An value that provides access to the language service for the active configured project.
+                    /// </value>
+                    object [||]ActiveProjectContext
                     {
-                        /// <summary>
-                        ///     Sets the active workspace project context that provides access to the language service for the active configured project.
-                        /// </summary>
-                        /// <value>
-                        ///     An value that provides access to the language service for the active configured project.
-                        /// </value>
-                        object [||]ActiveProjectContext
-                        {
-                            set;
-                        }
+                        set;
                     }
-                    """,
+                }
+                """,
                 """
-                    internal interface ILanguageServiceHost
-                    {
-                        /// <summary>
-                        ///     Sets the active workspace project context that provides access to the language service for the active configured project.
-                        /// </summary>
-                        /// <param name="value">
-                        ///     An value that provides access to the language service for the active configured project.
-                        /// </param>
-                        void SetActiveProjectContext(object value);
-                    }
-                    """
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Sets the active workspace project context that provides access to the language service for the active configured project.
+                    /// </summary>
+                    /// <param name="value">
+                    ///     An value that provides access to the language service for the active configured project.
+                    /// </param>
+                    void SetActiveProjectContext(object value);
+                }
+                """
             );
         }
 
@@ -1792,40 +1792,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    internal interface ILanguageServiceHost
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Gets or sets the active workspace project context that provides access to the language service for the active configured project.
+                    /// </summary>
+                    /// <value>
+                    ///     An value that provides access to the language service for the active configured project.
+                    /// </value>
+                    object [||]ActiveProjectContext
                     {
-                        /// <summary>
-                        ///     Gets or sets the active workspace project context that provides access to the language service for the active configured project.
-                        /// </summary>
-                        /// <value>
-                        ///     An value that provides access to the language service for the active configured project.
-                        /// </value>
-                        object [||]ActiveProjectContext
-                        {
-                            get; set;
-                        }
+                        get; set;
                     }
-                    """,
+                }
+                """,
                 """
-                    internal interface ILanguageServiceHost
-                    {
-                        /// <summary>
-                        ///     Gets or sets the active workspace project context that provides access to the language service for the active configured project.
-                        /// </summary>
-                        /// <returns>
-                        ///     An value that provides access to the language service for the active configured project.
-                        /// </returns>
-                        object GetActiveProjectContext();
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Gets or sets the active workspace project context that provides access to the language service for the active configured project.
+                    /// </summary>
+                    /// <returns>
+                    ///     An value that provides access to the language service for the active configured project.
+                    /// </returns>
+                    object GetActiveProjectContext();
 
-                        /// <summary>
-                        ///     Gets or sets the active workspace project context that provides access to the language service for the active configured project.
-                        /// </summary>
-                        /// <param name="value">
-                        ///     An value that provides access to the language service for the active configured project.
-                        /// </param>
-                        void SetActiveProjectContext(object value);
-                    }
-                    """
+                    /// <summary>
+                    ///     Gets or sets the active workspace project context that provides access to the language service for the active configured project.
+                    /// </summary>
+                    /// <param name="value">
+                    ///     An value that provides access to the language service for the active configured project.
+                    /// </param>
+                    void SetActiveProjectContext(object value);
+                }
+                """
             );
         }
 
@@ -1835,38 +1835,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    internal interface ILanguageServiceHost
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Sets <see cref="ActiveProjectContext"/>.
+                    /// </summary>
+                    /// <seealso cref="ActiveProjectContext"/>
+                    object [||]ActiveProjectContext
                     {
-                        /// <summary>
-                        ///     Sets <see cref="ActiveProjectContext"/>.
-                        /// </summary>
-                        /// <seealso cref="ActiveProjectContext"/>
-                        object [||]ActiveProjectContext
-                        {
-                            set;
-                        }
+                        set;
                     }
-                    internal struct AStruct
-                    {
-                        /// <seealso cref="ILanguageServiceHost.ActiveProjectContext"/>
-                        private int x;
-                    }
-                    """,
+                }
+                internal struct AStruct
+                {
+                    /// <seealso cref="ILanguageServiceHost.ActiveProjectContext"/>
+                    private int x;
+                }
+                """,
                 """
-                    internal interface ILanguageServiceHost
-                    {
-                        /// <summary>
-                        ///     Sets <see cref="SetActiveProjectContext(object)"/>.
-                        /// </summary>
-                        /// <seealso cref="SetActiveProjectContext(object)"/>
-                        void SetActiveProjectContext(object value);
-                    }
-                    internal struct AStruct
-                    {
-                        /// <seealso cref="ILanguageServiceHost.SetActiveProjectContext(object)"/>
-                        private int x;
-                    }
-                    """
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Sets <see cref="SetActiveProjectContext(object)"/>.
+                    /// </summary>
+                    /// <seealso cref="SetActiveProjectContext(object)"/>
+                    void SetActiveProjectContext(object value);
+                }
+                internal struct AStruct
+                {
+                    /// <seealso cref="ILanguageServiceHost.SetActiveProjectContext(object)"/>
+                    private int x;
+                }
+                """
             );
         }
 
@@ -1876,44 +1876,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    internal interface ILanguageServiceHost
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Gets or sets <see cref="ActiveProjectContext"/>.
+                    /// </summary>
+                    /// <seealso cref="ActiveProjectContext"/>
+                    object [||]ActiveProjectContext
                     {
-                        /// <summary>
-                        ///     Gets or sets <see cref="ActiveProjectContext"/>.
-                        /// </summary>
-                        /// <seealso cref="ActiveProjectContext"/>
-                        object [||]ActiveProjectContext
-                        {
-                            get; set;
-                        }
+                        get; set;
                     }
-                    internal struct AStruct
-                    {
-                        /// <seealso cref="ILanguageServiceHost.ActiveProjectContext"/>
-                        private int x;
-                    }
-                    """,
+                }
+                internal struct AStruct
+                {
+                    /// <seealso cref="ILanguageServiceHost.ActiveProjectContext"/>
+                    private int x;
+                }
+                """,
                 """
-                    internal interface ILanguageServiceHost
-                    {
-                        /// <summary>
-                        ///     Gets or sets <see cref="GetActiveProjectContext()"/>.
-                        /// </summary>
-                        /// <seealso cref="GetActiveProjectContext()"/>
-                        object GetActiveProjectContext();
+                internal interface ILanguageServiceHost
+                {
+                    /// <summary>
+                    ///     Gets or sets <see cref="GetActiveProjectContext()"/>.
+                    /// </summary>
+                    /// <seealso cref="GetActiveProjectContext()"/>
+                    object GetActiveProjectContext();
 
-                        /// <summary>
-                        ///     Gets or sets <see cref="GetActiveProjectContext()"/>.
-                        /// </summary>
-                        /// <seealso cref="GetActiveProjectContext()"/>
-                        void SetActiveProjectContext(object value);
-                    }
-                    internal struct AStruct
-                    {
-                        /// <seealso cref="ILanguageServiceHost.GetActiveProjectContext()"/>
-                        private int x;
-                    }
-                    """
+                    /// <summary>
+                    ///     Gets or sets <see cref="GetActiveProjectContext()"/>.
+                    /// </summary>
+                    /// <seealso cref="GetActiveProjectContext()"/>
+                    void SetActiveProjectContext(object value);
+                }
+                internal struct AStruct
+                {
+                    /// <seealso cref="ILanguageServiceHost.GetActiveProjectContext()"/>
+                    private int x;
+                }
+                """
             );
         }
 
@@ -1923,32 +1923,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    internal interface ISomeInterface<T>
+                internal interface ISomeInterface<T>
+                {
+                    /// <seealso cref="Context"/>
+                    ISomeInterface<T> [||]Context
                     {
-                        /// <seealso cref="Context"/>
-                        ISomeInterface<T> [||]Context
-                        {
-                            set;
-                        }
+                        set;
                     }
-                    internal struct AStruct
-                    {
-                        /// <seealso cref="ISomeInterface{T}.Context"/>
-                        private int x;
-                    }
-                    """,
+                }
+                internal struct AStruct
+                {
+                    /// <seealso cref="ISomeInterface{T}.Context"/>
+                    private int x;
+                }
+                """,
                 """
-                    internal interface ISomeInterface<T>
-                    {
-                        /// <seealso cref="SetContext(ISomeInterface{T})"/>
-                        void SetContext(ISomeInterface<T> value);
-                    }
-                    internal struct AStruct
-                    {
-                        /// <seealso cref="ISomeInterface{T}.SetContext(ISomeInterface{T})"/>
-                        private int x;
-                    }
-                    """
+                internal interface ISomeInterface<T>
+                {
+                    /// <seealso cref="SetContext(ISomeInterface{T})"/>
+                    void SetContext(ISomeInterface<T> value);
+                }
+                internal struct AStruct
+                {
+                    /// <seealso cref="ISomeInterface{T}.SetContext(ISomeInterface{T})"/>
+                    private int x;
+                }
+                """
             );
         }
 
@@ -1958,34 +1958,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
+                        get
                         {
-                            get
-                            {
-                    #if true
-                                return 0;
-                    #else
-                                return 1;
-                    #endif
-                            }
-                        }
-                    }
-                    """,
-                """
-                    class C
-                    {
-                        private int GetProp()
-                        {
-                    #if true
+                #if true
                             return 0;
-                    #else
-                                return 1;
-                    #endif
+                #else
+                            return 1;
+                #endif
                         }
                     }
-                    """
+                }
+                """,
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                #if true
+                        return 0;
+                #else
+                            return 1;
+                #endif
+                    }
+                }
+                """
             );
         }
 
@@ -1995,32 +1995,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
+                        get
                         {
-                            get
-                            {
-                    #if true
-                                return 0;
-                    #else
-                                return 1;
-                    #endif
-                            }
+                #if true
+                            return 0;
+                #else
+                            return 1;
+                #endif
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int GetProp() =>
-                    #if true
-                                0;
-                    #else
-                                return 1;
-                    #endif
-                    }
-                    """,
+                class C
+                {
+                    private int GetProp() =>
+                #if true
+                            0;
+                #else
+                            return 1;
+                #endif
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -2031,27 +2031,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop =>
-                    #if true
-                            0;
-                    #else
-                            1;
-                    #endif
-                    }
-                    """,
+                class C
+                {
+                    int [||]Prop =>
+                #if true
+                        0;
+                #else
+                        1;
+                #endif
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int GetProp() =>
-                    #if true
-                            0;
-                    #else
-                            1;
-                    #endif
-                    }
-                    """
+                class C
+                {
+                    private int GetProp() =>
+                #if true
+                        0;
+                #else
+                        1;
+                #endif
+                }
+                """
             );
         }
 
@@ -2061,27 +2061,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int [||]Prop =>
-                    #if true
-                            0;
-                    #else
-                            1;
-                    #endif
-                    }
-                    """,
+                class C
+                {
+                    int [||]Prop =>
+                #if true
+                        0;
+                #else
+                        1;
+                #endif
+                }
+                """,
                 """
-                    class C
-                    {
-                        private int GetProp() =>
-                    #if true
-                            0;
-                    #else
-                            1;
-                    #endif
-                    }
-                    """,
+                class C
+                {
+                    private int GetProp() =>
+                #if true
+                        0;
+                #else
+                        1;
+                #endif
+                }
+                """,
                 options: PreferExpressionBodiedMethods
             );
         }
@@ -2092,46 +2092,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    interface IGoo
-                    {
-                        int [||]Goo { get; set; }
-                    }
+                interface IGoo
+                {
+                    int [||]Goo { get; set; }
+                }
 
-                    class C : IGoo
+                class C : IGoo
+                {
+                    int IGoo.Goo
                     {
-                        int IGoo.Goo
+                        get
                         {
-                            get
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                            throw new System.NotImplementedException();
+                        }
 
-                            set
-                            {
-                                throw new System.NotImplementedException();
-                            }
+                        set
+                        {
+                            throw new System.NotImplementedException();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    interface IGoo
-                    {
-                        int GetGoo();
-                        void SetGoo(int value);
-                    }
+                interface IGoo
+                {
+                    int GetGoo();
+                    void SetGoo(int value);
+                }
 
-                    class C : IGoo
+                class C : IGoo
+                {
+                    int IGoo.GetGoo()
                     {
-                        int IGoo.GetGoo()
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                        void IGoo.SetGoo(int value)
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                        throw new System.NotImplementedException();
                     }
-                    """
+                    void IGoo.SetGoo(int value)
+                    {
+                        throw new System.NotImplementedException();
+                    }
+                }
+                """
             );
         }
 
@@ -2141,20 +2141,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public unsafe void* [||]Pointer => default;
-                    }
-                    """,
+                class C
+                {
+                    public unsafe void* [||]Pointer => default;
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public unsafe void* GetPointer()
                     {
-                        public unsafe void* GetPointer()
-                        {
-                            return default;
-                        }
+                        return default;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2164,27 +2164,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public unsafe void* [||]Pointer { get; set; }
-                    }
-                    """,
+                class C
+                {
+                    public unsafe void* [||]Pointer { get; set; }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private unsafe void* pointer;
+
+                    public unsafe void* GetPointer()
                     {
-                        private unsafe void* pointer;
-
-                        public unsafe void* GetPointer()
-                        {
-                            return pointer;
-                        }
-
-                        public unsafe void SetPointer(void* value)
-                        {
-                            pointer = value;
-                        }
+                        return pointer;
                     }
-                    """
+
+                    public unsafe void SetPointer(void* value)
+                    {
+                        pointer = value;
+                    }
+                }
+                """
             );
         }
 
@@ -2194,27 +2194,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public unsafe int [||]P
                     {
-                        public unsafe int [||]P
-                        {
-                            get => 0;
-                            set {}
-                        }
+                        get => 0;
+                        set {}
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public unsafe int GetP()
                     {
-                        public unsafe int GetP()
-                        {
-                            return 0;
-                        }
-
-                        public unsafe void SetP(int value)
-                        { }
+                        return 0;
                     }
-                    """
+
+                    public unsafe void SetP(int value)
+                    { }
+                }
+                """
             );
         }
 
@@ -2224,32 +2224,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]Value { get; }
+                class C
+                {
+                    public int [||]Value { get; }
 
-                        public C(int value)
-                        {
-                            Value = value;
-                        }
+                    public C(int value)
+                    {
+                        Value = value;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private readonly int value;
+
+                    public int GetValue()
                     {
-                        private readonly int value;
-
-                        public int GetValue()
-                        {
-                            return value;
-                        }
-
-                        public C(int value)
-                        {
-                            this.value = value;
-                        }
+                        return value;
                     }
-                    """
+
+                    public C(int value)
+                    {
+                        this.value = value;
+                    }
+                }
+                """
             );
         }
 
@@ -2259,32 +2259,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public int [||]Value { get; }
+                class C
+                {
+                    public int [||]Value { get; }
 
-                        public C(int value)
-                        {
-                            this.Value = value;
-                        }
+                    public C(int value)
+                    {
+                        this.Value = value;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private readonly int value;
+
+                    public int GetValue()
                     {
-                        private readonly int value;
-
-                        public int GetValue()
-                        {
-                            return value;
-                        }
-
-                        public C(int value)
-                        {
-                            this.value = value;
-                        }
+                        return value;
                     }
-                    """
+
+                    public C(int value)
+                    {
+                        this.value = value;
+                    }
+                }
+                """
             );
         }
 
@@ -2294,32 +2294,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        public static int [||]Value { get; }
+                class C
+                {
+                    public static int [||]Value { get; }
 
-                        public static void Set(int value)
-                        {
-                            Value = value;
-                        }
+                    public static void Set(int value)
+                    {
+                        Value = value;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    private static readonly int value;
+
+                    public static int GetValue()
                     {
-                        private static readonly int value;
-
-                        public static int GetValue()
-                        {
-                            return value;
-                        }
-
-                        public static void Set(int value)
-                        {
-                            C.value = value;
-                        }
+                        return value;
                     }
-                    """
+
+                    public static void Set(int value)
+                    {
+                        C.value = value;
+                    }
+                }
+                """
             );
         }
 
@@ -2329,46 +2329,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    public class Tweet
-                    {
-                        public string [||]Tweet { get; }
-                    }
+                public class Tweet
+                {
+                    public string [||]Tweet { get; }
+                }
 
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
+                        var t = new Tweet();
+                        var t1 = new Tweet
                         {
-                            var t = new Tweet();
-                            var t1 = new Tweet
-                            {
-                                Tweet = t.Tweet
-                            };
-                        }
+                            Tweet = t.Tweet
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Tweet
-                    {
-                        private readonly string tweet;
+                public class Tweet
+                {
+                    private readonly string tweet;
 
-                        public string GetTweet()
-                        {
-                            return tweet;
-                        }
-                    }
-
-                    class C
+                    public string GetTweet()
                     {
-                        void Main()
-                        {
-                            var t = new Tweet();
-                            var t1 = new Tweet
-                            {
-                                {|Conflict:Tweet|} = t.GetTweet()
-                            };
-                        }
+                        return tweet;
                     }
-                    """
+                }
+
+                class C
+                {
+                    void Main()
+                    {
+                        var t = new Tweet();
+                        var t1 = new Tweet
+                        {
+                            {|Conflict:Tweet|} = t.GetTweet()
+                        };
+                    }
+                }
+                """
             );
         }
 
@@ -2378,46 +2378,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    public class Tweet
-                    {
-                        public string [||]Tweet { get; }
-                    }
+                public class Tweet
+                {
+                    public string [||]Tweet { get; }
+                }
 
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
+                        var t = new Tweet();
+                        Tweet t1 = new()
                         {
-                            var t = new Tweet();
-                            Tweet t1 = new()
-                            {
-                                Tweet = t.Tweet
-                            };
-                        }
+                            Tweet = t.Tweet
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Tweet
-                    {
-                        private readonly string tweet;
+                public class Tweet
+                {
+                    private readonly string tweet;
 
-                        public string GetTweet()
-                        {
-                            return tweet;
-                        }
-                    }
-
-                    class C
+                    public string GetTweet()
                     {
-                        void Main()
-                        {
-                            var t = new Tweet();
-                            Tweet t1 = new()
-                            {
-                                {|Conflict:Tweet|} = t.GetTweet()
-                            };
-                        }
+                        return tweet;
                     }
-                    """
+                }
+
+                class C
+                {
+                    void Main()
+                    {
+                        var t = new Tweet();
+                        Tweet t1 = new()
+                        {
+                            {|Conflict:Tweet|} = t.GetTweet()
+                        };
+                    }
+                }
+                """
             );
         }
 
@@ -2427,46 +2427,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    public class Tweet
-                    {
-                        public string [||]Tweet { get; }
-                    }
+                public class Tweet
+                {
+                    public string [||]Tweet { get; }
+                }
 
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
+                        var t = new Tweet();
+                        var t1 = t with
                         {
-                            var t = new Tweet();
-                            var t1 = t with
-                            {
-                                Tweet = t.Tweet
-                            };
-                        }
+                            Tweet = t.Tweet
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    public class Tweet
-                    {
-                        private readonly string tweet;
+                public class Tweet
+                {
+                    private readonly string tweet;
 
-                        public string GetTweet()
-                        {
-                            return tweet;
-                        }
-                    }
-
-                    class C
+                    public string GetTweet()
                     {
-                        void Main()
-                        {
-                            var t = new Tweet();
-                            var t1 = t with
-                            {
-                                {|Conflict:Tweet|} = t.GetTweet()
-                            };
-                        }
+                        return tweet;
                     }
-                    """
+                }
+
+                class C
+                {
+                    void Main()
+                    {
+                        var t = new Tweet();
+                        var t1 = t with
+                        {
+                            {|Conflict:Tweet|} = t.GetTweet()
+                        };
+                    }
+                }
+                """
             );
         }
 
@@ -2476,54 +2476,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                            <Document FilePath='C.cs'>
-                    class C
+                <Workspace>
+                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                        <Document FilePath='C.cs'>
+                class C
+                {
+                    int [||]Prop
                     {
-                        int [||]Prop
-                        {
-                            set
-                            {
-                                var v = value;
-                            }
-                        }
-
-                        void M()
-                        {
-                            this.Prop = 1;
-                        }
-                    }
-                            </Document>
-                        </Project>
-                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                        </Project>
-                    </Workspace>
-                    """,
-                """
-                    <Workspace>
-                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
-                            <Document FilePath='C.cs'>
-                    class C
-                    {
-                        private void SetProp(int value)
+                        set
                         {
                             var v = value;
                         }
-
-                        void M()
-                        {
-                            this.SetProp(1);
-                        }
                     }
-                            </Document>
-                        </Project>
-                        <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
-                            <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
-                        </Project>
-                    </Workspace>
-                    """
+
+                    void M()
+                    {
+                        this.Prop = 1;
+                    }
+                }
+                        </Document>
+                    </Project>
+                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                    </Project>
+                </Workspace>
+                """,
+                """
+                <Workspace>
+                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.1'>
+                        <Document FilePath='C.cs'>
+                class C
+                {
+                    private void SetProp(int value)
+                    {
+                        var v = value;
+                    }
+
+                    void M()
+                    {
+                        this.SetProp(1);
+                    }
+                }
+                        </Document>
+                    </Project>
+                    <Project Language='C#' CommonReferences='true' AssemblyName='LinkedProj' Name='CSProj.2'>
+                        <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
+                    </Project>
+                </Workspace>
+                """
             );
         }
 
@@ -2532,35 +2532,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Runtime.CompilerServices;
+                using System;
+                using System.Runtime.CompilerServices;
 
-                    class Program
+                class Program
+                {
+                    static void Main() { }
+
+                    private static int [||]SomeValue
                     {
-                        static void Main() { }
-
-                        private static int [||]SomeValue
-                        {
-                            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                            get => 42;
-                        }
-                    }
-                    """,
-                """
-                    using System;
-                    using System.Runtime.CompilerServices;
-
-                    class Program
-                    {
-                        static void Main() { }
-
                         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                        private static int GetSomeValue()
-                        {
-                            return 42;
-                        }
+                        get => 42;
                     }
-                    """
+                }
+                """,
+                """
+                using System;
+                using System.Runtime.CompilerServices;
+
+                class Program
+                {
+                    static void Main() { }
+
+                    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                    private static int GetSomeValue()
+                    {
+                        return 42;
+                    }
+                }
+                """
             );
         }
 
@@ -2569,42 +2569,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Runtime.CompilerServices;
+                using System;
+                using System.Runtime.CompilerServices;
 
-                    class Program
+                class Program
+                {
+                    static void Main() { }
+
+                    private static int [||]SomeValue
                     {
-                        static void Main() { }
-
-                        private static int [||]SomeValue
-                        {
-                            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                            get => 42;
-
-                            [OtherAttribute]
-                            set { }
-                        }
-                    }
-                    """,
-                """
-                    using System;
-                    using System.Runtime.CompilerServices;
-
-                    class Program
-                    {
-                        static void Main() { }
-
                         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                        private static int GetSomeValue()
-                        {
-                            return 42;
-                        }
+                        get => 42;
 
                         [OtherAttribute]
-                        private static void SetSomeValue(int value)
-                        { }
+                        set { }
                     }
-                    """
+                }
+                """,
+                """
+                using System;
+                using System.Runtime.CompilerServices;
+
+                class Program
+                {
+                    static void Main() { }
+
+                    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                    private static int GetSomeValue()
+                    {
+                        return 42;
+                    }
+
+                    [OtherAttribute]
+                    private static void SetSomeValue(int value)
+                    { }
+                }
+                """
             );
         }
     }

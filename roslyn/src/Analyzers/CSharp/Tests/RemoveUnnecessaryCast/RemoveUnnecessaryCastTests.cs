@@ -63,31 +63,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = 2;
-                            int i = 1;
-                            Goo(x < [|(int)|]i, x > (2 + 3));
-                        }
-
-                        static void Goo(bool a, bool b) { }
+                        int x = 2;
+                        int i = 1;
+                        Goo(x < [|(int)|]i, x > (2 + 3));
                     }
-                    """,
+
+                    static void Goo(bool a, bool b) { }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = 2;
-                            int i = 1;
-                            Goo(x < (i), x > (2 + 3));
-                        }
-
-                        static void Goo(bool a, bool b) { }
+                        int x = 2;
+                        int i = 1;
+                        Goo(x < (i), x > (2 + 3));
                     }
-                    """
+
+                    static void Goo(bool a, bool b) { }
+                }
+                """
             );
         }
 
@@ -96,29 +96,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = Console.WriteLine;
-                            ([|(Action)|]a)();
-                        }
+                        Action a = Console.WriteLine;
+                        ([|(Action)|]a)();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = Console.WriteLine;
-                            a();
-                        }
+                        Action a = Console.WriteLine;
+                        a();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -127,27 +127,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var x = (Decimal)[|(int)|]-1;
-                        }
+                        var x = (Decimal)[|(int)|]-1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var x = (Decimal)(-1);
-                        }
+                        var x = (Decimal)(-1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -215,39 +215,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class A
+                class A
+                {
+                    public static implicit operator A(string x)
                     {
-                        public static implicit operator A(string x)
-                        {
-                            return new A();
-                        }
+                        return new A();
                     }
+                }
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            A x = [|(string)|]"";
-                        }
+                        A x = [|(string)|]"";
                     }
-                    """,
+                }
+                """,
                 """
-                    class A
+                class A
+                {
+                    public static implicit operator A(string x)
                     {
-                        public static implicit operator A(string x)
-                        {
-                            return new A();
-                        }
+                        return new A();
                     }
+                }
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            A x = "";
-                        }
+                        A x = "";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -295,31 +295,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var x = (Action)delegate {
-                            }
-
-                            [|as Action|];
+                        var x = (Action)delegate {
                         }
+
+                        [|as Action|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var x = (Action)delegate {
-                            };
-                        }
+                        var x = (Action)delegate {
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -474,21 +474,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void M1(int? i1 = [|(int?)|]null)
                     {
-                        static void M1(int? i1 = [|(int?)|]null)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void M1(int? i1 = null)
                     {
-                        static void M1(int? i1 = null)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -497,23 +497,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static long M2()
                     {
-                        static long M2()
-                        {
-                            return [|(long)|]5;
-                        }
+                        return [|(long)|]5;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static long M2()
                     {
-                        static long M2()
-                        {
-                            return 5;
-                        }
+                        return 5;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -522,25 +522,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    static void M1()
                     {
-                        static void M1()
-                        {
-                            Func<long> f1 = () => [|(long)|]5;
-                        }
+                        Func<long> f1 = () => [|(long)|]5;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    static void M1()
                     {
-                        static void M1()
-                        {
-                            Func<long> f1 = () => 5;
-                        }
+                        Func<long> f1 = () => 5;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -549,25 +549,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    static void M1()
                     {
-                        static void M1()
-                        {
-                            Func<long> f1 = () => { return [|(long)|]5; };
-                        }
+                        Func<long> f1 = () => { return [|(long)|]5; };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    static void M1()
                     {
-                        static void M1()
-                        {
-                            Func<long> f1 = () => { return 5; };
-                        }
+                        Func<long> f1 = () => { return 5; };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -671,27 +671,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Test
+                class Test
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int b = 5;
+                        int b = 5;
 
-                            long f1 = (b == 5) ? 4 : [|(long)|]5;
-                        }
+                        long f1 = (b == 5) ? 4 : [|(long)|]5;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int b = 5;
+                        int b = 5;
 
-                            long f1 = (b == 5) ? 4 : 5;
-                        }
+                        long f1 = (b == 5) ? 4 : 5;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -765,33 +765,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    class Test
+                using System;
+                class Test
+                {
+                    delegate void D(int x);
+
+                    static void Main(string[] args)
                     {
-                        delegate void D(int x);
-
-                        static void Main(string[] args)
-                        {
-                            var cd1 = new D([|(Action<int>)|]M1);
-                        }
-
-                        public static void M1(int i) { }
+                        var cd1 = new D([|(Action<int>)|]M1);
                     }
-                    """,
+
+                    public static void M1(int i) { }
+                }
+                """,
                 """
-                    using System;
-                    class Test
+                using System;
+                class Test
+                {
+                    delegate void D(int x);
+
+                    static void Main(string[] args)
                     {
-                        delegate void D(int x);
-
-                        static void Main(string[] args)
-                        {
-                            var cd1 = new D(M1);
-                        }
-
-                        public static void M1(int i) { }
+                        var cd1 = new D(M1);
                     }
-                    """
+
+                    public static void M1(int i) { }
+                }
+                """
             );
         }
 
@@ -800,31 +800,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    class Test
+                using System;
+                class Test
+                {
+                    public static void Main()
                     {
-                        public static void Main()
+                        Func<Func<int>> f2 = () =>
                         {
-                            Func<Func<int>> f2 = () =>
-                            {
-                                return [|(Func<int>)|](/*Lambda returning int const*/() => 5 /*Const returned is 5*/);
-                            };
-                        }
+                            return [|(Func<int>)|](/*Lambda returning int const*/() => 5 /*Const returned is 5*/);
+                        };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class Test
+                using System;
+                class Test
+                {
+                    public static void Main()
                     {
-                        public static void Main()
+                        Func<Func<int>> f2 = () =>
                         {
-                            Func<Func<int>> f2 = () =>
-                            {
-                                return /*Lambda returning int const*/() => 5 /*Const returned is 5*/;
-                            };
-                        }
+                            return /*Lambda returning int const*/() => 5 /*Const returned is 5*/;
+                        };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -833,31 +833,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Test
+                class Test
+                {
+                    static void Main()
                     {
-                        static void Main()
+                        switch (5L)
                         {
-                            switch (5L)
-                            {
-                                case [|(long)|]5:
-                                    break;
-                            }
+                            case [|(long)|]5:
+                                break;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    static void Main()
                     {
-                        static void Main()
+                        switch (5L)
                         {
-                            switch (5L)
-                            {
-                                case 5:
-                                    break;
-                            }
+                            case 5:
+                                break;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -867,33 +867,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Test
+                class Test
+                {
+                    static void Main()
                     {
-                        static void Main()
+                        switch (5L)
                         {
-                            switch (5L)
-                            {
-                                case 5:
-                                    goto case [|(long)|]5;
-                                    break;
-                            }
+                            case 5:
+                                goto case [|(long)|]5;
+                                break;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Test
+                class Test
+                {
+                    static void Main()
                     {
-                        static void Main()
+                        switch (5L)
                         {
-                            switch (5L)
-                            {
-                                case 5:
-                                    goto case 5;
-                                    break;
-                            }
+                            case 5:
+                                goto case 5;
+                                break;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -903,27 +903,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var z = new List<long> { [|(long)0|] };
-                        }
+                        var z = new List<long> { [|(long)0|] };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var z = new List<long> { 0 };
-                        }
+                        var z = new List<long> { 0 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -992,25 +992,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class X
+                class X
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            string x = "";
-                            var s = new object[] { [|(object)|]x };
-                        }
+                        string x = "";
+                        var s = new object[] { [|(object)|]x };
                     }
-                    """,
+                }
+                """,
                 """
-                    class X
+                class X
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            string x = "";
-                            var s = new object[] { x };
-                        }
+                        string x = "";
+                        var s = new object[] { x };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1019,37 +1019,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    class MyAction
+                using System;
+                class MyAction
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            MyAction x = null;
-                            var y = x + [|(Action)|]delegate { };
-                        }
-
-                        public static MyAction operator +(MyAction x, Action y)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        MyAction x = null;
+                        var y = x + [|(Action)|]delegate { };
                     }
-                    """,
+
+                    public static MyAction operator +(MyAction x, Action y)
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+                """,
                 """
-                    using System;
-                    class MyAction
+                using System;
+                class MyAction
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            MyAction x = null;
-                            var y = x + delegate { };
-                        }
-
-                        public static MyAction operator +(MyAction x, Action y)
-                        {
-                            throw new NotImplementedException();
-                        }
+                        MyAction x = null;
+                        var y = x + delegate { };
                     }
-                    """
+
+                    public static MyAction operator +(MyAction x, Action y)
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+                """
             );
         }
 
@@ -1075,25 +1075,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    class MyAction
+                using System;
+                class MyAction
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            Action y = [|(Action)|](() => { });
-                        }
+                        Action y = [|(Action)|](() => { });
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class MyAction
+                using System;
+                class MyAction
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            Action y = () => { };
-                        }
+                        Action y = () => { };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1102,29 +1102,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Goo<T>()
                     {
-                        static void Goo<T>()
-                        {
-                            Action a = null;
-                            var x = [|(Action)|](Goo<Guid>)==a;
-                        }
+                        Action a = null;
+                        var x = [|(Action)|](Goo<Guid>)==a;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Goo<T>()
                     {
-                        static void Goo<T>()
-                        {
-                            Action a = null;
-                            var x = (Goo<Guid>) == a;
-                        }
+                        Action a = null;
+                        var x = (Goo<Guid>) == a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1246,27 +1246,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class E
+                class E
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            throw [|(Exception)|]new Exception();
-                        }
+                        throw [|(Exception)|]new Exception();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class E
+                class E
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            throw new Exception();
-                        }
+                        throw new Exception();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1374,33 +1374,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class X
+                class X
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var s = ([|(object)|]new X()).ToString();
-                        }
-
-                        public override string ToString()
-                        {
-                            return "";
-                        }
+                        var s = ([|(object)|]new X()).ToString();
                     }
-                    """,
+
+                    public override string ToString()
+                    {
+                        return "";
+                    }
+                }
+                """,
                 """
-                    class X
+                class X
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var s = new X().ToString();
-                        }
-
-                        public override string ToString()
-                        {
-                            return "";
-                        }
+                        var s = new X().ToString();
                     }
-                    """
+
+                    public override string ToString()
+                    {
+                        return "";
+                    }
+                }
+                """
             );
         }
 
@@ -1409,53 +1409,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Reflection;
+                using System;
+                using System.Collections.Generic;
+                using System.Reflection;
 
-                    static class Program
+                static class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            FieldInfo[] fields = typeof(Exception).GetFields();
-                            Console.WriteLine(fields.Any([|(Func<FieldInfo, bool>)|](field => field.IsStatic)));
-                        }
-
-                        static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
-                        {
-                            return false;
-                        }
-
-                        static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
-                        {
-                            return true;
-                        }
+                        FieldInfo[] fields = typeof(Exception).GetFields();
+                        Console.WriteLine(fields.Any([|(Func<FieldInfo, bool>)|](field => field.IsStatic)));
                     }
-                    """,
+
+                    static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
+                    {
+                        return false;
+                    }
+
+                    static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
+                    {
+                        return true;
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Reflection;
+                using System;
+                using System.Collections.Generic;
+                using System.Reflection;
 
-                    static class Program
+                static class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            FieldInfo[] fields = typeof(Exception).GetFields();
-                            Console.WriteLine(fields.Any(field => field.IsStatic));
-                        }
-
-                        static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
-                        {
-                            return false;
-                        }
-
-                        static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
-                        {
-                            return true;
-                        }
+                        FieldInfo[] fields = typeof(Exception).GetFields();
+                        Console.WriteLine(fields.Any(field => field.IsStatic));
                     }
-                    """
+
+                    static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
+                    {
+                        return false;
+                    }
+
+                    static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
+                    {
+                        return true;
+                    }
+                }
+                """
             );
         }
 
@@ -1464,31 +1464,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class A
+                class A
+                {
+                    int Select(Func<int, long> x) { return 1; }
+
+                    static void Main()
                     {
-                        int Select(Func<int, long> x) { return 1; }
-
-                        static void Main()
-                        {
-                            Console.WriteLine(from y in new A() select [|(long)|]0);
-                        }
+                        Console.WriteLine(from y in new A() select [|(long)|]0);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class A
+                class A
+                {
+                    int Select(Func<int, long> x) { return 1; }
+
+                    static void Main()
                     {
-                        int Select(Func<int, long> x) { return 1; }
-
-                        static void Main()
-                        {
-                            Console.WriteLine(from y in new A() select 0);
-                        }
+                        Console.WriteLine(from y in new A() select 0);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1566,103 +1566,103 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface IIncrementable
+                interface IIncrementable
+                {
+                    int Value { get; }
+
+                    void Increment();
+                }
+
+                struct S : IIncrementable
+                {
+                    public int Value { get; private set; }
+
+                    public void Increment()
                     {
-                        int Value { get; }
+                        Value++;
+                    }
+                }
 
-                        void Increment();
+                class C : IIncrementable
+                {
+                    public int Value { get; private set; }
+
+                    public void Increment()
+                    {
+                        Value++;
+                    }
+                }
+
+                static class Program
+                {
+                    static void Main()
+                    {
+                        Goo(new S(), new C());
                     }
 
-                    struct S : IIncrementable
+                    static void Goo<TAny, TClass>(TAny x, TClass y)
+                        where TAny : IIncrementable
+                        where TClass : class, IIncrementable
                     {
-                        public int Value { get; private set; }
+                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                        ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
 
-                        public void Increment()
-                        {
-                            Value++;
-                        }
+                        Console.WriteLine(x.Value);
+                        Console.WriteLine(y.Value);
                     }
-
-                    class C : IIncrementable
-                    {
-                        public int Value { get; private set; }
-
-                        public void Increment()
-                        {
-                            Value++;
-                        }
-                    }
-
-                    static class Program
-                    {
-                        static void Main()
-                        {
-                            Goo(new S(), new C());
-                        }
-
-                        static void Goo<TAny, TClass>(TAny x, TClass y)
-                            where TAny : IIncrementable
-                            where TClass : class, IIncrementable
-                        {
-                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                            ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
-
-                            Console.WriteLine(x.Value);
-                            Console.WriteLine(y.Value);
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface IIncrementable
+                interface IIncrementable
+                {
+                    int Value { get; }
+
+                    void Increment();
+                }
+
+                struct S : IIncrementable
+                {
+                    public int Value { get; private set; }
+
+                    public void Increment()
                     {
-                        int Value { get; }
+                        Value++;
+                    }
+                }
 
-                        void Increment();
+                class C : IIncrementable
+                {
+                    public int Value { get; private set; }
+
+                    public void Increment()
+                    {
+                        Value++;
+                    }
+                }
+
+                static class Program
+                {
+                    static void Main()
+                    {
+                        Goo(new S(), new C());
                     }
 
-                    struct S : IIncrementable
+                    static void Goo<TAny, TClass>(TAny x, TClass y)
+                        where TAny : IIncrementable
+                        where TClass : class, IIncrementable
                     {
-                        public int Value { get; private set; }
+                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                        y.Increment(); // Unnecessary Cast - OK
 
-                        public void Increment()
-                        {
-                            Value++;
-                        }
+                        Console.WriteLine(x.Value);
+                        Console.WriteLine(y.Value);
                     }
-
-                    class C : IIncrementable
-                    {
-                        public int Value { get; private set; }
-
-                        public void Increment()
-                        {
-                            Value++;
-                        }
-                    }
-
-                    static class Program
-                    {
-                        static void Main()
-                        {
-                            Goo(new S(), new C());
-                        }
-
-                        static void Goo<TAny, TClass>(TAny x, TClass y)
-                            where TAny : IIncrementable
-                            where TClass : class, IIncrementable
-                        {
-                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                            y.Increment(); // Unnecessary Cast - OK
-
-                            Console.WriteLine(x.Value);
-                            Console.WriteLine(y.Value);
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -1671,85 +1671,85 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface IIncrementable
+                interface IIncrementable
+                {
+                    int Value { get; }
+                    void Increment();
+                }
+
+                struct S : IIncrementable
+                {
+                    public int Value { get; private set; }
+                    public void Increment() { Value++; }
+                }
+
+                class C: IIncrementable
+                {
+                    public int Value { get; private set; }
+                    public void Increment() { Value++; }
+                }
+
+                static class Program
+                {
+                    static void Main()
                     {
-                        int Value { get; }
-                        void Increment();
+                        Goo(new S(), new C());
                     }
 
-                    struct S : IIncrementable
+                    static void Goo<TAny, TClass>(TAny x, TClass y) 
+                        where TAny : IIncrementable
+                        where TClass : class, IIncrementable
                     {
-                        public int Value { get; private set; }
-                        public void Increment() { Value++; }
+                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                        ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
+
+                        Console.WriteLine(x.Value);
+                        Console.WriteLine(y.Value);
                     }
-
-                    class C: IIncrementable
-                    {
-                        public int Value { get; private set; }
-                        public void Increment() { Value++; }
-                    }
-
-                    static class Program
-                    {
-                        static void Main()
-                        {
-                            Goo(new S(), new C());
-                        }
-
-                        static void Goo<TAny, TClass>(TAny x, TClass y) 
-                            where TAny : IIncrementable
-                            where TClass : class, IIncrementable
-                        {
-                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                            ([|(IIncrementable)|]y).Increment(); // Unnecessary Cast - OK
-
-                            Console.WriteLine(x.Value);
-                            Console.WriteLine(y.Value);
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface IIncrementable
+                interface IIncrementable
+                {
+                    int Value { get; }
+                    void Increment();
+                }
+
+                struct S : IIncrementable
+                {
+                    public int Value { get; private set; }
+                    public void Increment() { Value++; }
+                }
+
+                class C: IIncrementable
+                {
+                    public int Value { get; private set; }
+                    public void Increment() { Value++; }
+                }
+
+                static class Program
+                {
+                    static void Main()
                     {
-                        int Value { get; }
-                        void Increment();
+                        Goo(new S(), new C());
                     }
 
-                    struct S : IIncrementable
+                    static void Goo<TAny, TClass>(TAny x, TClass y) 
+                        where TAny : IIncrementable
+                        where TClass : class, IIncrementable
                     {
-                        public int Value { get; private set; }
-                        public void Increment() { Value++; }
+                        ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                        y.Increment(); // Unnecessary Cast - OK
+
+                        Console.WriteLine(x.Value);
+                        Console.WriteLine(y.Value);
                     }
-
-                    class C: IIncrementable
-                    {
-                        public int Value { get; private set; }
-                        public void Increment() { Value++; }
-                    }
-
-                    static class Program
-                    {
-                        static void Main()
-                        {
-                            Goo(new S(), new C());
-                        }
-
-                        static void Goo<TAny, TClass>(TAny x, TClass y) 
-                            where TAny : IIncrementable
-                            where TClass : class, IIncrementable
-                        {
-                            ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                            y.Increment(); // Unnecessary Cast - OK
-
-                            Console.WriteLine(x.Value);
-                            Console.WriteLine(y.Value);
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -1782,47 +1782,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Other
-                    {
-                        public short GetScopeIdForTelemetry(FixAllScope scope)
-                            => [|(short)|](scope switch
-                            {
-                                FixAllScope.Document => 1,
-                                FixAllScope.Project => 2,
-                                FixAllScope.Solution => 3,
-                                _ => 4,
-                            });
-
-                        public enum FixAllScope
+                class Other
+                {
+                    public short GetScopeIdForTelemetry(FixAllScope scope)
+                        => [|(short)|](scope switch
                         {
-                            Document,
-                            Project,
-                            Solution,
-                            Other
-                        }
+                            FixAllScope.Document => 1,
+                            FixAllScope.Project => 2,
+                            FixAllScope.Solution => 3,
+                            _ => 4,
+                        });
+
+                    public enum FixAllScope
+                    {
+                        Document,
+                        Project,
+                        Solution,
+                        Other
                     }
-                    """,
+                }
+                """,
                 """
-                    class Other
-                    {
-                        public short GetScopeIdForTelemetry(FixAllScope scope)
-                            => scope switch
-                            {
-                                FixAllScope.Document => 1,
-                                FixAllScope.Project => 2,
-                                FixAllScope.Solution => 3,
-                                _ => 4,
-                            };
-
-                        public enum FixAllScope
+                class Other
+                {
+                    public short GetScopeIdForTelemetry(FixAllScope scope)
+                        => scope switch
                         {
-                            Document,
-                            Project,
-                            Solution,
-                            Other
-                        }
+                            FixAllScope.Document => 1,
+                            FixAllScope.Project => 2,
+                            FixAllScope.Solution => 3,
+                            _ => 4,
+                        };
+
+                    public enum FixAllScope
+                    {
+                        Document,
+                        Project,
+                        Solution,
+                        Other
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1831,31 +1831,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            long x =
-                    #if true
-                                [|(long)|] // Remove Unnecessary Cast
-                    #endif
-                                1;
-                        }
+                        long x =
+                #if true
+                            [|(long)|] // Remove Unnecessary Cast
+                #endif
+                            1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            long x =
-                    #if true
-                                // Remove Unnecessary Cast
-                    #endif
-                                1;
-                        }
+                        long x =
+                #if true
+                            // Remove Unnecessary Cast
+                #endif
+                            1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1864,25 +1864,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class X
+                class X
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            object x = [|(string)|]null;
-                            object y = [|(int?)|]null;
-                        }
+                        object x = [|(string)|]null;
+                        object y = [|(int?)|]null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class X
+                class X
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            object x = null;
-                            object y = null;
-                        }
+                        object x = null;
+                        object y = null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1891,27 +1891,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    static class C
+                static class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int? x = 1;
-                            long y = 2;
-                            long? z = x + [|(long?)|] y;
-                        }
+                        int? x = 1;
+                        long y = 2;
+                        long? z = x + [|(long?)|] y;
                     }
-                    """,
+                }
+                """,
                 """
-                    static class C
+                static class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int? x = 1;
-                            long y = 2;
-                            long? z = x + y;
-                        }
+                        int? x = 1;
+                        long y = 2;
+                        long? z = x + y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1920,25 +1920,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = 1;
-                            ([|(int)|]x).ToString();
-                        }
+                        int x = 1;
+                        ([|(int)|]x).ToString();
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = 1;
-                            x.ToString();
-                        }
+                        int x = 1;
+                        x.ToString();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2063,19 +2063,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
-                    {
-                        C(int x) { }
-                        C() : this([|(int)|]1) { }
-                    }
-                    """,
+                class C
+                {
+                    C(int x) { }
+                    C() : this([|(int)|]1) { }
+                }
+                """,
                 """
-                    class C
-                    {
-                        C(int x) { }
-                        C() : this(1) { }
-                    }
-                    """
+                class C
+                {
+                    C(int x) { }
+                    C() : this(1) { }
+                }
+                """
             );
         }
 
@@ -2088,25 +2088,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    class C
-                    {
-                        C(int x) { }
-                        C(object x) { }
-                        C() : this([|(IEnumerable)|]"") { }
-                    }
-                    """,
+                class C
+                {
+                    C(int x) { }
+                    C(object x) { }
+                    C() : this([|(IEnumerable)|]"") { }
+                }
+                """,
                 """
-                    using System.Collections;
+                using System.Collections;
 
-                    class C
-                    {
-                        C(int x) { }
-                        C(object x) { }
-                        C() : this("") { }
-                    }
-                    """
+                class C
+                {
+                    C(int x) { }
+                    C(object x) { }
+                    C() : this("") { }
+                }
+                """
             );
         }
 
@@ -2142,27 +2142,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    static class C
+                static class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int? x = 1;
-                            long y = 2;
-                            long? z = x + [|(long?)|]y;
-                        }
+                        int? x = 1;
+                        long y = 2;
+                        long? z = x + [|(long?)|]y;
                     }
-                    """,
+                }
+                """,
                 """
-                    static class C
+                static class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int? x = 1;
-                            long y = 2;
-                            long? z = x + y;
-                        }
+                        int? x = 1;
+                        long y = 2;
+                        long? z = x + y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2390,23 +2390,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    object M1(bool b)
                     {
-                        object M1(bool b)
-                        {
-                            return b ? [|(double)|]1 : [|(double)|]0;
-                        }
+                        return b ? [|(double)|]1 : [|(double)|]0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    object M1(bool b)
                     {
-                        object M1(bool b)
-                        {
-                            return b ? 1 : (double)0;
-                        }
+                        return b ? 1 : (double)0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2447,23 +2447,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    object M1(bool b)
                     {
-                        object M1(bool b)
-                        {
-                            return b ? [|(int)|]1 : 0;
-                        }
+                        return b ? [|(int)|]1 : 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    object M1(bool b)
                     {
-                        object M1(bool b)
-                        {
-                            return b ? 1 : 0;
-                        }
+                        return b ? 1 : 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2490,27 +2490,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    [A([|(int)|]0)]
-                    class A : Attribute
+                [A([|(int)|]0)]
+                class A : Attribute
+                {
+                    public A(object x)
                     {
-                        public A(object x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    [A(0)]
-                    class A : Attribute
+                [A(0)]
+                class A : Attribute
+                {
+                    public A(object x)
                     {
-                        public A(object x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2537,27 +2537,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class A : Attribute
+                class A : Attribute
+                {
+                    public A()
                     {
-                        public A()
-                        {
-                            object x = [|(int)|]0;
-                        }
+                        object x = [|(int)|]0;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class A : Attribute
+                class A : Attribute
+                {
+                    public A()
                     {
-                        public A()
-                        {
-                            object x = 0;
-                        }
+                        object x = 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2584,27 +2584,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class A : Attribute
+                class A : Attribute
+                {
+                    public A(int i)
                     {
-                        public A(int i)
-                        {
-                            long x = [|(long)|]i;
-                        }
+                        long x = [|(long)|]i;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class A : Attribute
+                class A : Attribute
+                {
+                    public A(int i)
                     {
-                        public A(int i)
-                        {
-                            long x = i;
-                        }
+                        long x = i;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2613,27 +2613,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    [A({|CS0182:[|(IComparable)|]0|})]
-                    class A : Attribute
+                [A({|CS0182:[|(IComparable)|]0|})]
+                class A : Attribute
+                {
+                    public A(object x)
                     {
-                        public A(object x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    [A(0)]
-                    class A : Attribute
+                [A(0)]
+                class A : Attribute
+                {
+                    public A(object x)
                     {
-                        public A(object x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2697,47 +2697,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 0)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 0)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            ([|(I)|]new C()).Goo();
-                        }
+                        ([|(I)|]new C()).Goo();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 0)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 0)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            new C().Goo();
-                        }
+                        new C().Goo();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2747,53 +2747,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    string Goo { get; }
+                }
+
+                sealed class C : I
+                {
+                    public string Goo
                     {
-                        string Goo { get; }
-                    }
-
-                    sealed class C : I
-                    {
-                        public string Goo
+                        get
                         {
-                            get
-                            {
-                                return "Nikov Rules";
-                            }
-                        }
-
-                        static void Main()
-                        {
-                            Console.WriteLine(([|(I)|]new C()).Goo);
+                            return "Nikov Rules";
                         }
                     }
-                    """,
+
+                    static void Main()
+                    {
+                        Console.WriteLine(([|(I)|]new C()).Goo);
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    string Goo { get; }
+                }
+
+                sealed class C : I
+                {
+                    public string Goo
                     {
-                        string Goo { get; }
-                    }
-
-                    sealed class C : I
-                    {
-                        public string Goo
+                        get
                         {
-                            get
-                            {
-                                return "Nikov Rules";
-                            }
-                        }
-
-                        static void Main()
-                        {
-                            Console.WriteLine(new C().Goo);
+                            return "Nikov Rules";
                         }
                     }
-                    """
+
+                    static void Main()
+                    {
+                        Console.WriteLine(new C().Goo);
+                    }
+                }
+                """
             );
         }
 
@@ -2803,57 +2803,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    string Goo { get; }
+                }
+
+                sealed class C : I
+                {
+                    public C Instance { get { return new C(); } }
+
+                    public string Goo
                     {
-                        string Goo { get; }
-                    }
-
-                    sealed class C : I
-                    {
-                        public C Instance { get { return new C(); } }
-
-                        public string Goo
+                        get
                         {
-                            get
-                            {
-                                return "Nikov Rules";
-                            }
-                        }
-
-                        void Main()
-                        {
-                            Console.WriteLine(([|(I)|]Instance).Goo);
+                            return "Nikov Rules";
                         }
                     }
-                    """,
+
+                    void Main()
+                    {
+                        Console.WriteLine(([|(I)|]Instance).Goo);
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    string Goo { get; }
+                }
+
+                sealed class C : I
+                {
+                    public C Instance { get { return new C(); } }
+
+                    public string Goo
                     {
-                        string Goo { get; }
-                    }
-
-                    sealed class C : I
-                    {
-                        public C Instance { get { return new C(); } }
-
-                        public string Goo
+                        get
                         {
-                            get
-                            {
-                                return "Nikov Rules";
-                            }
-                        }
-
-                        void Main()
-                        {
-                            Console.WriteLine(Instance.Goo);
+                            return "Nikov Rules";
                         }
                     }
-                    """
+
+                    void Main()
+                    {
+                        Console.WriteLine(Instance.Goo);
+                    }
+                }
+                """
             );
         }
 
@@ -2891,47 +2891,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 1)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 1)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            ([|(I)|]new C()).Goo(2);
-                        }
+                        ([|(I)|]new C()).Goo(2);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 1)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 1)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            new C().Goo(2);
-                        }
+                        new C().Goo(2);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2972,47 +2972,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 0)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 0)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            ([|(I)|]new C()).Goo();
-                        }
+                        ([|(I)|]new C()).Goo();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 0)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 0)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            new C().Goo();
-                        }
+                        new C().Goo();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3021,47 +3021,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 1)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 1)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            ([|(I)|]new C()).Goo(2);
-                        }
+                        ([|(I)|]new C()).Goo(2);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x = 0);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x = 1)
                     {
-                        void Goo(int x = 0);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x = 1)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            new C().Goo(2);
-                        }
+                        new C().Goo(2);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3098,47 +3098,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x)
                     {
-                        void Goo(int x);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            ([|(I)|]new C()).Goo(0);
-                        }
+                        ([|(I)|]new C()).Goo(0);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int x)
                     {
-                        void Goo(int x);
+                        Console.WriteLine(x);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int x)
-                        {
-                            Console.WriteLine(x);
-                        }
-
-                        static void Main()
-                        {
-                            new C().Goo(0);
-                        }
+                        new C().Goo(0);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3147,47 +3147,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int y)
                     {
-                        void Goo(int x);
+                        Console.WriteLine(y);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int y)
-                        {
-                            Console.WriteLine(y);
-                        }
-
-                        static void Main()
-                        {
-                            ([|(I)|]new C()).Goo(0);
-                        }
+                        ([|(I)|]new C()).Goo(0);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    interface I
+                interface I
+                {
+                    void Goo(int x);
+                }
+
+                sealed class C : I
+                {
+                    public void Goo(int y)
                     {
-                        void Goo(int x);
+                        Console.WriteLine(y);
                     }
 
-                    sealed class C : I
+                    static void Main()
                     {
-                        public void Goo(int y)
-                        {
-                            Console.WriteLine(y);
-                        }
-
-                        static void Main()
-                        {
-                            new C().Goo(0);
-                        }
+                        new C().Goo(0);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3404,41 +3404,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            ([|(IDisposable)|]GetEnumerator()).Dispose();
-                        }
-
-                        static List<int>.Enumerator GetEnumerator()
-                        {
-                            var x = new List<int> { 1, 2, 3 };
-                            return x.GetEnumerator();
-                        }
+                        ([|(IDisposable)|]GetEnumerator()).Dispose();
                     }
-                    """,
+
+                    static List<int>.Enumerator GetEnumerator()
+                    {
+                        var x = new List<int> { 1, 2, 3 };
+                        return x.GetEnumerator();
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            GetEnumerator().Dispose();
-                        }
-
-                        static List<int>.Enumerator GetEnumerator()
-                        {
-                            var x = new List<int> { 1, 2, 3 };
-                            return x.GetEnumerator();
-                        }
+                        GetEnumerator().Dispose();
                     }
-                    """
+
+                    static List<int>.Enumerator GetEnumerator()
+                    {
+                        var x = new List<int> { 1, 2, 3 };
+                        return x.GetEnumerator();
+                    }
+                }
+                """
             );
         }
 
@@ -3450,29 +3450,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = () => { };
-                            var c = ([|(ICloneable)|]a).Clone();
-                        }
+                        Action a = () => { };
+                        var c = ([|(ICloneable)|]a).Clone();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = () => { };
-                            var c = a.Clone();
-                        }
+                        Action a = () => { };
+                        var c = a.Clone();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3484,29 +3484,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var a = new[] { 1, 2, 3 };
-                            var c = ([|(ICloneable)|]a).Clone(); 
-                        }
+                        var a = new[] { 1, 2, 3 };
+                        var c = ([|(ICloneable)|]a).Clone(); 
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var a = new[] { 1, 2, 3 };
-                            var c = a.Clone(); 
-                        }
+                        var a = new[] { 1, 2, 3 };
+                        var c = a.Clone(); 
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3515,29 +3515,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void Main(string s)
                     {
-                        static void Main(string s)
-                        {
-                            IEnumerable<char> i = [|(IEnumerable<char>)|]s;
-                        }
+                        IEnumerable<char> i = [|(IEnumerable<char>)|]s;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void Main(string s)
                     {
-                        static void Main(string s)
-                        {
-                            IEnumerable<char> i = s;
-                        }
+                        IEnumerable<char> i = s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3549,29 +3549,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Enum e = DayOfWeek.Monday;
-                            var y = ([|(IConvertible)|]e).GetTypeCode();
-                        }
+                        Enum e = DayOfWeek.Monday;
+                        var y = ([|(IConvertible)|]e).GetTypeCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Enum e = DayOfWeek.Monday;
-                            var y = e.GetTypeCode();
-                        }
+                        Enum e = DayOfWeek.Monday;
+                        var y = e.GetTypeCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3597,27 +3597,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var y = ([|(IConvertible)|](DateTime.Now + TimeSpan.Zero)).GetTypeCode();
-                        }
+                        var y = ([|(IConvertible)|](DateTime.Now + TimeSpan.Zero)).GetTypeCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var y = (DateTime.Now + TimeSpan.Zero).GetTypeCode();
-                        }
+                        var y = (DateTime.Now + TimeSpan.Zero).GetTypeCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3645,31 +3645,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    DateTime this[int i] => default;
+
+                    void Main()
                     {
-                        DateTime this[int i] => default;
-
-                        void Main()
-                        {
-                            var y = ([|(IConvertible)|]this[0]).GetTypeCode();
-                        }
+                        var y = ([|(IConvertible)|]this[0]).GetTypeCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    DateTime this[int i] => default;
+
+                    void Main()
                     {
-                        DateTime this[int i] => default;
-
-                        void Main()
-                        {
-                            var y = this[0].GetTypeCode();
-                        }
+                        var y = this[0].GetTypeCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3697,31 +3697,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    DateTime X => default;
+
+                    void Main()
                     {
-                        DateTime X => default;
-
-                        void Main()
-                        {
-                            var y = ([|(IConvertible)|]X).GetTypeCode();
-                        }
+                        var y = ([|(IConvertible)|]X).GetTypeCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    DateTime X => default;
+
+                    void Main()
                     {
-                        DateTime X => default;
-
-                        void Main()
-                        {
-                            var y = X.GetTypeCode();
-                        }
+                        var y = X.GetTypeCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3749,31 +3749,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    DateTime X() => default;
+
+                    void Main()
                     {
-                        DateTime X() => default;
-
-                        void Main()
-                        {
-                            var y = ([|(IConvertible)|]X()).GetTypeCode();
-                        }
+                        var y = ([|(IConvertible)|]X()).GetTypeCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    DateTime X() => default;
+
+                    void Main()
                     {
-                        DateTime X() => default;
-
-                        void Main()
-                        {
-                            var y = X().GetTypeCode();
-                        }
+                        var y = X().GetTypeCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3855,27 +3855,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo([|(object[])|]null);
-                        }
+                    static void Main()
+                    {
+                        Goo([|(object[])|]null);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo(null);
-                        }
+                    static void Main()
+                    {
+                        Goo(null);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3884,27 +3884,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo([|(string[])|]null);
-                        }
+                    static void Main()
+                    {
+                        Goo([|(string[])|]null);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo(null);
-                        }
+                    static void Main()
+                    {
+                        Goo(null);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3913,27 +3913,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
-                    {
-                        static void Goo(params int[] x) { }
+                class C
+                {
+                    static void Goo(params int[] x) { }
 
-                        static void Main()
-                        {
-                            Goo([|(int[])|]null);
-                        }
+                    static void Main()
+                    {
+                        Goo([|(int[])|]null);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        static void Goo(params int[] x) { }
+                class C
+                {
+                    static void Goo(params int[] x) { }
 
-                        static void Main()
-                        {
-                            Goo(null);
-                        }
+                    static void Main()
+                    {
+                        Goo(null);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3942,27 +3942,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo([|(object[])|]null, null);
-                        }
+                    static void Main()
+                    {
+                        Goo([|(object[])|]null, null);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo(null, null);
-                        }
+                    static void Main()
+                    {
+                        Goo(null, null);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3971,27 +3971,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo([|(object)|]null, null);
-                        }
+                    static void Main()
+                    {
+                        Goo([|(object)|]null, null);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        static void Goo(params object[] x) { }
+                class C
+                {
+                    static void Goo(params object[] x) { }
 
-                        static void Main()
-                        {
-                            Goo(null, null);
-                        }
+                    static void Main()
+                    {
+                        Goo(null, null);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4000,27 +4000,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Goo(x: [|(object[])|]null);
-                        }
-
-                        static void Goo(params object[] x) { }
+                        Goo(x: [|(object[])|]null);
                     }
-                    """,
+
+                    static void Goo(params object[] x) { }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Goo(x: null);
-                        }
-
-                        static void Goo(params object[] x) { }
+                        Goo(x: null);
                     }
-                    """
+
+                    static void Goo(params object[] x) { }
+                }
+                """
             );
         }
 
@@ -4263,47 +4263,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    abstract class Y
+                abstract class Y
+                {
+                    public abstract void Goo(int x = 1);
+                }
+
+                class X : Y
+                {
+                    static void Main()
                     {
-                        public abstract void Goo(int x = 1);
+                        ([|(Y)|]new X()).Goo();
                     }
 
-                    class X : Y
+                    public override void Goo(int x = 1)
                     {
-                        static void Main()
-                        {
-                            ([|(Y)|]new X()).Goo();
-                        }
-
-                        public override void Goo(int x = 1)
-                        {
-                            Console.WriteLine(x);
-                        }
+                        Console.WriteLine(x);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    abstract class Y
+                abstract class Y
+                {
+                    public abstract void Goo(int x = 1);
+                }
+
+                class X : Y
+                {
+                    static void Main()
                     {
-                        public abstract void Goo(int x = 1);
+                        new X().Goo();
                     }
 
-                    class X : Y
+                    public override void Goo(int x = 1)
                     {
-                        static void Main()
-                        {
-                            new X().Goo();
-                        }
-
-                        public override void Goo(int x = 1)
-                        {
-                            Console.WriteLine(x);
-                        }
+                        Console.WriteLine(x);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4315,31 +4315,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    static class Program
+                static class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = ([|(string)|]"").Goo;
-                        }
-
-                        static void Goo(this string x) { }
+                        Action a = ([|(string)|]"").Goo;
                     }
-                    """,
+
+                    static void Goo(this string x) { }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    static class Program
+                static class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = "".Goo;
-                        }
-
-                        static void Goo(this string x) { }
+                        Action a = "".Goo;
                     }
-                    """
+
+                    static void Goo(this string x) { }
+                }
+                """
             );
         }
 
@@ -4954,39 +4954,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            object thing = new { shouldBeAnInt = [|(Directions)|]Directions.South };
-                        }
-
-                        public enum Directions
-                        {
-                            North,
-                            East,
-                            South,
-                            West
-                        }
+                        object thing = new { shouldBeAnInt = [|(Directions)|]Directions.South };
                     }
-                    """,
+
+                    public enum Directions
+                    {
+                        North,
+                        East,
+                        South,
+                        West
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            object thing = new { shouldBeAnInt = Directions.South };
-                        }
-
-                        public enum Directions
-                        {
-                            North,
-                            East,
-                            South,
-                            West
-                        }
+                        object thing = new { shouldBeAnInt = Directions.South };
                     }
-                    """
+
+                    public enum Directions
+                    {
+                        North,
+                        East,
+                        South,
+                        West
+                    }
+                }
+                """
             );
         }
 
@@ -4995,23 +4995,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            (int, string) tuple = [|((int, string))|](1, "hello");
-                        }
+                        (int, string) tuple = [|((int, string))|](1, "hello");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            (int, string) tuple = (1, "hello");
-                        }
+                        (int, string) tuple = (1, "hello");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5020,23 +5020,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            (int a, string) tuple = [|((int, string d))|](1, f: "hello");
-                        }
+                        (int a, string) tuple = [|((int, string d))|](1, f: "hello");
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            (int a, string) tuple = (1, f: "hello");
-                        }
+                        (int a, string) tuple = (1, f: "hello");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5045,25 +5045,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    bool M()
                     {
-                        bool M()
-                        {
-                            if (![|(bool)|]M()) throw null;
-                            throw null;
-                        }
+                        if (![|(bool)|]M()) throw null;
+                        throw null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    bool M()
                     {
-                        bool M()
-                        {
-                            if (!M()) throw null;
-                            throw null;
-                        }
+                        if (!M()) throw null;
+                        throw null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5195,31 +5195,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main(string[] args)
                     {
-                        public static void Main(string[] args)
-                        {
-                            TakesParams([|(string)|]null);
-                        }
-
-                        private static void TakesParams({|CS0225:params|} string wrongDefined)
-                        {
-                        }
+                        TakesParams([|(string)|]null);
                     }
-                    """,
+
+                    private static void TakesParams({|CS0225:params|} string wrongDefined)
+                    {
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main(string[] args)
                     {
-                        public static void Main(string[] args)
-                        {
-                            TakesParams(null);
-                        }
-
-                        private static void TakesParams({|CS0225:params|} string wrongDefined)
-                        {
-                        }
+                        TakesParams(null);
                     }
-                    """
+
+                    private static void TakesParams({|CS0225:params|} string wrongDefined)
+                    {
+                    }
+                }
+                """
             );
         }
 
@@ -5228,35 +5228,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main(string[] args)
                     {
-                        public static void Main(string[] args)
-                        {
-                            var takesArgs = new[] { "Hello", "World" };
-                            TakesParams([|(System.IComparable[])|]takesArgs);
-                        }
-
-                        private static void TakesParams(params object[] goo)
-                        {
-                            System.Console.WriteLine(goo.Length);
-                        }
+                        var takesArgs = new[] { "Hello", "World" };
+                        TakesParams([|(System.IComparable[])|]takesArgs);
                     }
-                    """,
+
+                    private static void TakesParams(params object[] goo)
+                    {
+                        System.Console.WriteLine(goo.Length);
+                    }
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public static void Main(string[] args)
                     {
-                        public static void Main(string[] args)
-                        {
-                            var takesArgs = new[] { "Hello", "World" };
-                            TakesParams(takesArgs);
-                        }
-
-                        private static void TakesParams(params object[] goo)
-                        {
-                            System.Console.WriteLine(goo.Length);
-                        }
+                        var takesArgs = new[] { "Hello", "World" };
+                        TakesParams(takesArgs);
                     }
-                    """
+
+                    private static void TakesParams(params object[] goo)
+                    {
+                        System.Console.WriteLine(goo.Length);
+                    }
+                }
+                """
             );
         }
 
@@ -5321,47 +5321,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    using System.Reflection;
-                    using System.Collections.Generic;
+                using System;
+                using System.Reflection;
+                using System.Collections.Generic;
 
-                    static class Program
+                static class Program
+                {
+                    enum TestEnum
                     {
-                        enum TestEnum
-                        {
-                            Test,
-                        }
-
-                        static void Main()
-                        {
-                            Dictionary<int, string> Icons = new Dictionary<int, string>
-                            {
-                                [[|(int)|] 0] = null,
-                            };
-                        }
+                        Test,
                     }
-                    """,
+
+                    static void Main()
+                    {
+                        Dictionary<int, string> Icons = new Dictionary<int, string>
+                        {
+                            [[|(int)|] 0] = null,
+                        };
+                    }
+                }
+                """,
                 """
-                    using System;
-                    using System.Reflection;
-                    using System.Collections.Generic;
+                using System;
+                using System.Reflection;
+                using System.Collections.Generic;
 
-                    static class Program
+                static class Program
+                {
+                    enum TestEnum
                     {
-                        enum TestEnum
-                        {
-                            Test,
-                        }
-
-                        static void Main()
-                        {
-                            Dictionary<int, string> Icons = new Dictionary<int, string>
-                            {
-                                [0] = null,
-                            };
-                        }
+                        Test,
                     }
-                    """
+
+                    static void Main()
+                    {
+                        Dictionary<int, string> Icons = new Dictionary<int, string>
+                        {
+                            [0] = null,
+                        };
+                    }
+                }
+                """
             );
         }
 
@@ -5436,35 +5436,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    sealed class MarkAttribute : Attribute
+                using System;
+                sealed class MarkAttribute : Attribute
+                {
+                    public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
                     {
-                        public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
-                        {
-                        }
-                        public int Prop { get; set; }
                     }
+                    public int Prop { get; set; }
+                }
 
-                    [Mark(true, [|(string)|]null, Prop = 1)]
-                    static class Program
-                    {
-                    }
-                    """,
+                [Mark(true, [|(string)|]null, Prop = 1)]
+                static class Program
+                {
+                }
+                """,
                 """
-                    using System;
-                    sealed class MarkAttribute : Attribute
+                using System;
+                sealed class MarkAttribute : Attribute
+                {
+                    public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
                     {
-                        public MarkAttribute(bool otherArg, {|CS0225:params|} string wrongDefined)
-                        {
-                        }
-                        public int Prop { get; set; }
                     }
+                    public int Prop { get; set; }
+                }
 
-                    [Mark(true, null, Prop = 1)]
-                    static class Program
-                    {
-                    }
-                    """
+                [Mark(true, null, Prop = 1)]
+                static class Program
+                {
+                }
+                """
             );
         }
 
@@ -5530,35 +5530,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    sealed class MarkAttribute : Attribute
+                using System;
+                sealed class MarkAttribute : Attribute
+                {
+                    public MarkAttribute()
                     {
-                        public MarkAttribute()
-                        {
-                        }
-                        public int Prop { get; set; }
                     }
+                    public int Prop { get; set; }
+                }
 
-                    [Mark(Prop = [|(int)|]1)]
-                    static class Program
-                    {
-                    }
-                    """,
+                [Mark(Prop = [|(int)|]1)]
+                static class Program
+                {
+                }
+                """,
                 """
-                    using System;
-                    sealed class MarkAttribute : Attribute
+                using System;
+                sealed class MarkAttribute : Attribute
+                {
+                    public MarkAttribute()
                     {
-                        public MarkAttribute()
-                        {
-                        }
-                        public int Prop { get; set; }
                     }
+                    public int Prop { get; set; }
+                }
 
-                    [Mark(Prop = 1)]
-                    static class Program
-                    {
-                    }
-                    """
+                [Mark(Prop = 1)]
+                static class Program
+                {
+                }
+                """
             );
         }
 
@@ -5836,25 +5836,25 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var a = true;
-                            var b = ![|(bool)|]a;
-                        }
+                        var a = true;
+                        var b = ![|(bool)|]a;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            var a = true;
-                            var b = !a;
-                        }
+                        var a = true;
+                        var b = !a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6393,37 +6393,37 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public static void M()
                     {
-                        public static void M()
+                        for (int i = 0; i < 1; i++)
                         {
-                            for (int i = 0; i < 1; i++)
-                            {
-                                long a = 0, b = 0;
+                            long a = 0, b = 0;
 
-                                SameScope([|(decimal)|]a + [|(decimal)|]b);
+                            SameScope([|(decimal)|]a + [|(decimal)|]b);
 
-                                static void SameScope(decimal sum) { }
-                            }
+                            static void SameScope(decimal sum) { }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public static void M()
                     {
-                        public static void M()
+                        for (int i = 0; i < 1; i++)
                         {
-                            for (int i = 0; i < 1; i++)
-                            {
-                                long a = 0, b = 0;
+                            long a = 0, b = 0;
 
-                                SameScope(a + (decimal)b);
+                            SameScope(a + (decimal)b);
 
-                                static void SameScope(decimal sum) { }
-                            }
+                            static void SameScope(decimal sum) { }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6512,27 +6512,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            IFormattable x = [|(IFormattable)|]$"";
-                        }
+                        IFormattable x = [|(IFormattable)|]$"";
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            IFormattable x = $"";
-                        }
+                        IFormattable x = $"";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6559,27 +6559,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            FormattableString x = [|(FormattableString)|]$"";
-                        }
+                        FormattableString x = [|(FormattableString)|]$"";
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            FormattableString x = $"";
-                        }
+                        FormattableString x = $"";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6609,31 +6609,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            bar([|(FormattableString)|]$"");
-                        }
-
-                        private void bar(FormattableString s) { }
+                        bar([|(FormattableString)|]$"");
                     }
-                    """,
+
+                    private void bar(FormattableString s) { }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            bar($"");
-                        }
-
-                        private void bar(FormattableString s) { }
+                        bar($"");
                     }
-                    """
+
+                    private void bar(FormattableString s) { }
+                }
+                """
             );
         }
 
@@ -6642,27 +6642,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            object o = [|(string)|]$"";
-                        }
+                        object o = [|(string)|]$"";
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            object o = $"";
-                        }
+                        object o = $"";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6671,31 +6671,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            bar([|(IFormattable)|]$"");
-                        }
-
-                        private void bar(IFormattable s) { }
+                        bar([|(IFormattable)|]$"");
                     }
-                    """,
+
+                    private void bar(IFormattable s) { }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private void goo()
                     {
-                        private void goo()
-                        {
-                            bar($"");
-                        }
-
-                        private void bar(IFormattable s) { }
+                        bar($"");
                     }
-                    """
+
+                    private void bar(IFormattable s) { }
+                }
+                """
             );
         }
 
@@ -6819,47 +6819,47 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public sealed class DbContext : IDisposable
+                public sealed class DbContext : IDisposable
+                {
+                    public void Dispose()
                     {
-                        public void Dispose()
-                        {
-                            Console.WriteLine("Base called");
-                        }
+                        Console.WriteLine("Base called");
                     }
+                }
 
-                    class C
+                class C
+                {
+                    private readonly DbContext _dbContext = null;
+
+                    void Main()
                     {
-                        private readonly DbContext _dbContext = null;
-
-                        void Main()
-                        {
-                            ([|(IDisposable)|]_dbContext).Dispose();
-                        }
+                        ([|(IDisposable)|]_dbContext).Dispose();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public sealed class DbContext : IDisposable
+                public sealed class DbContext : IDisposable
+                {
+                    public void Dispose()
                     {
-                        public void Dispose()
-                        {
-                            Console.WriteLine("Base called");
-                        }
+                        Console.WriteLine("Base called");
                     }
+                }
 
-                    class C
+                class C
+                {
+                    private readonly DbContext _dbContext = null;
+
+                    void Main()
                     {
-                        private readonly DbContext _dbContext = null;
-
-                        void Main()
-                        {
-                            _dbContext.Dispose();
-                        }
+                        _dbContext.Dispose();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6941,31 +6941,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float f;
+
+                    void M()
                     {
-                        float f;
-
-                        void M()
-                        {
-                            var v = [|(float)|]f;
-                        }
+                        var v = [|(float)|]f;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float f;
+
+                    void M()
                     {
-                        float f;
-
-                        void M()
-                        {
-                            var v = f;
-                        }
+                        var v = f;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6974,31 +6974,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float f;
+
+                    void M(float f1)
                     {
-                        float f;
-
-                        void M(float f1)
-                        {
-                            f = [|(float)|]f1;
-                        }
+                        f = [|(float)|]f1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float f;
+
+                    void M(float f1)
                     {
-                        float f;
-
-                        void M(float f1)
-                        {
-                            f = f1;
-                        }
+                        f = f1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7007,23 +7007,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
-                    {
-                        static float f1;
-                        static float f2 = [|(float)|]f1;
-                    }
-                    """,
+                public class C
+                {
+                    static float f1;
+                    static float f2 = [|(float)|]f1;
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
-                    {
-                        static float f1;
-                        static float f2 = f1;
-                    }
-                    """
+                public class C
+                {
+                    static float f1;
+                    static float f2 = f1;
+                }
+                """
             );
         }
 
@@ -7032,31 +7032,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float[] f;
+
+                    void M()
                     {
-                        float[] f;
-
-                        void M()
-                        {
-                            var v = [|(float)|]f[0];
-                        }
+                        var v = [|(float)|]f[0];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float[] f;
+
+                    void M()
                     {
-                        float[] f;
-
-                        void M()
-                        {
-                            var v = f[0];
-                        }
+                        var v = f[0];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7065,31 +7065,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float[] f;
+
+                    void M(float f2)
                     {
-                        float[] f;
-
-                        void M(float f2)
-                        {
-                            f[0] = [|(float)|]f2;
-                        }
+                        f[0] = [|(float)|]f2;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    float[] f;
+
+                    void M(float f2)
                     {
-                        float[] f;
-
-                        void M(float f2)
-                        {
-                            f[0] = f2;
-                        }
+                        f[0] = f2;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7098,27 +7098,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M(float f2)
                     {
-                        void M(float f2)
-                        {
-                            float[] f = { [|(float)|]f2 };
-                        }
+                        float[] f = { [|(float)|]f2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M(float f2)
                     {
-                        void M(float f2)
-                        {
-                            float[] f = { f2 };
-                        }
+                        float[] f = { f2 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7127,27 +7127,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M(float f2)
                     {
-                        void M(float f2)
-                        {
-                            float[] f = new float[] { [|(float)|]f2 };
-                        }
+                        float[] f = new float[] { [|(float)|]f2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M(float f2)
                     {
-                        void M(float f2)
-                        {
-                            float[] f = new float[] { f2 };
-                        }
+                        float[] f = new float[] { f2 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7156,27 +7156,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M(float f2)
                     {
-                        void M(float f2)
-                        {
-                            float[] f = new[] { [|(float)|]f2 };
-                        }
+                        float[] f = new[] { [|(float)|]f2 };
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M(float f2)
                     {
-                        void M(float f2)
-                        {
-                            float[] f = new[] { f2 };
-                        }
+                        float[] f = new[] { f2 };
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7185,29 +7185,29 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            float value = 0.0f;
-                            object boxed = [|(float)|]value;
-                        }
+                        float value = 0.0f;
+                        object boxed = [|(float)|]value;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            float value = 0.0f;
-                            object boxed = value;
-                        }
+                        float value = 0.0f;
+                        object boxed = value;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7216,29 +7216,29 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            double value = 0.0;
-                            object boxed = [|(double)|]value;
-                        }
+                        double value = 0.0;
+                        object boxed = [|(double)|]value;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C
+                public class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            double value = 0.0;
-                            object boxed = value;
-                        }
+                        double value = 0.0;
+                        object boxed = value;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7247,35 +7247,35 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        public static void Main() { }
+                class Program
+                {
+                    public static void Main() { }
 
-                        public static string GetValue(DayOfWeek value)
-                            => [|(DayOfWeek)|]value switch
-                            {
-                                DayOfWeek.Monday => "Monday",
-                                _ => "Other",
-                            };
-                    }
-                    """,
+                    public static string GetValue(DayOfWeek value)
+                        => [|(DayOfWeek)|]value switch
+                        {
+                            DayOfWeek.Monday => "Monday",
+                            _ => "Other",
+                        };
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
-                    {
-                        public static void Main() { }
+                class Program
+                {
+                    public static void Main() { }
 
-                        public static string GetValue(DayOfWeek value)
-                            => value switch
-                            {
-                                DayOfWeek.Monday => "Monday",
-                                _ => "Other",
-                            };
-                    }
-                    """
+                    public static string GetValue(DayOfWeek value)
+                        => value switch
+                        {
+                            DayOfWeek.Monday => "Monday",
+                            _ => "Other",
+                        };
+                }
+                """
             );
         }
 
@@ -7372,35 +7372,35 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private long Repro()
                     {
-                        private long Repro()
-                        {
-                            var random = new Random();
-                            long result = random.Next();
-                            result <<= 32;
-                            result &= [|(long)|]random.Next();
-                            return result;
-                        }
+                        var random = new Random();
+                        long result = random.Next();
+                        result <<= 32;
+                        result &= [|(long)|]random.Next();
+                        return result;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private long Repro()
                     {
-                        private long Repro()
-                        {
-                            var random = new Random();
-                            long result = random.Next();
-                            result <<= 32;
-                            result &= random.Next();
-                            return result;
-                        }
+                        var random = new Random();
+                        long result = random.Next();
+                        result <<= 32;
+                        result &= random.Next();
+                        return result;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7409,35 +7409,35 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private long Repro()
                     {
-                        private long Repro()
-                        {
-                            var random = new Random();
-                            long result = random.Next();
-                            result <<= 32;
-                            var x = result & [|(long)|]random.Next();
-                            return result;
-                        }
+                        var random = new Random();
+                        long result = random.Next();
+                        result <<= 32;
+                        var x = result & [|(long)|]random.Next();
+                        return result;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private long Repro()
                     {
-                        private long Repro()
-                        {
-                            var random = new Random();
-                            long result = random.Next();
-                            result <<= 32;
-                            var x = result & random.Next();
-                            return result;
-                        }
+                        var random = new Random();
+                        long result = random.Next();
+                        result <<= 32;
+                        var x = result & random.Next();
+                        return result;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7446,35 +7446,35 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private long Repro()
                     {
-                        private long Repro()
-                        {
-                            var random = new Random();
-                            long result = random.Next();
-                            result <<= 32;
-                            var x = [|(long)|]random.Next() & result;
-                            return result;
-                        }
+                        var random = new Random();
+                        long result = random.Next();
+                        result <<= 32;
+                        var x = [|(long)|]random.Next() & result;
+                        return result;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    private long Repro()
                     {
-                        private long Repro()
-                        {
-                            var random = new Random();
-                            long result = random.Next();
-                            result <<= 32;
-                            var x = random.Next() & result;
-                            return result;
-                        }
+                        var random = new Random();
+                        long result = random.Next();
+                        result <<= 32;
+                        var x = random.Next() & result;
+                        return result;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7506,35 +7506,35 @@ enum Sign
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int i32_hi = 1;
-                            int i32_lo = 1;
-                            ulong u64 = 1;
-                            sbyte i08 = 1;
-                            short i16 = -1;
+                        int i32_hi = 1;
+                        int i32_lo = 1;
+                        ulong u64 = 1;
+                        sbyte i08 = 1;
+                        short i16 = -1;
 
-                            object v2 = (ulong)i32_hi | [|(ulong)|]u64;
-                        }
+                        object v2 = (ulong)i32_hi | [|(ulong)|]u64;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int i32_hi = 1;
-                            int i32_lo = 1;
-                            ulong u64 = 1;
-                            sbyte i08 = 1;
-                            short i16 = -1;
+                        int i32_hi = 1;
+                        int i32_lo = 1;
+                        ulong u64 = 1;
+                        sbyte i08 = 1;
+                        short i16 = -1;
 
-                            object v2 = (ulong)i32_hi | u64;
-                        }
+                        object v2 = (ulong)i32_hi | u64;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7566,35 +7566,35 @@ enum Sign
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int i32_hi = 1;
-                            int i32_lo = 1;
-                            ulong u64 = 1;
-                            sbyte i08 = 1;
-                            short i16 = -1;
+                        int i32_hi = 1;
+                        int i32_lo = 1;
+                        ulong u64 = 1;
+                        sbyte i08 = 1;
+                        short i16 = -1;
 
-                            object v4 = [|(ulong)|](uint)(ushort)i08 | (ulong)i32_lo;
-                        }
+                        object v4 = [|(ulong)|](uint)(ushort)i08 | (ulong)i32_lo;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int i32_hi = 1;
-                            int i32_lo = 1;
-                            ulong u64 = 1;
-                            sbyte i08 = 1;
-                            short i16 = -1;
+                        int i32_hi = 1;
+                        int i32_lo = 1;
+                        ulong u64 = 1;
+                        sbyte i08 = 1;
+                        short i16 = -1;
 
-                            object v4 = (ushort)i08 | (ulong)i32_lo;
-                        }
+                        object v4 = (ushort)i08 | (ulong)i32_lo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7603,35 +7603,35 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int i32_hi = 1;
-                            int i32_lo = 1;
-                            ulong u64 = 1;
-                            sbyte i08 = 1;
-                            short i16 = -1;
+                        int i32_hi = 1;
+                        int i32_lo = 1;
+                        ulong u64 = 1;
+                        sbyte i08 = 1;
+                        short i16 = -1;
 
-                            object v5 = (int)i08 | [|(int)|]i32_lo;
-                        }
+                        object v5 = (int)i08 | [|(int)|]i32_lo;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int i32_hi = 1;
-                            int i32_lo = 1;
-                            ulong u64 = 1;
-                            sbyte i08 = 1;
-                            short i16 = -1;
+                        int i32_hi = 1;
+                        int i32_lo = 1;
+                        ulong u64 = 1;
+                        sbyte i08 = 1;
+                        short i16 = -1;
 
-                            object v5 = (int)i08 | i32_lo;
-                        }
+                        object v5 = (int)i08 | i32_lo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7751,35 +7751,35 @@ enum Sign
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int? i32_hi = 1;
-                            int? i32_lo = 1;
-                            ulong? u64 = 1;
-                            sbyte? i08 = 1;
-                            short? i16 = -1;
+                        int? i32_hi = 1;
+                        int? i32_lo = 1;
+                        ulong? u64 = 1;
+                        sbyte? i08 = 1;
+                        short? i16 = -1;
 
-                            object v2 = (ulong?)i32_hi | [|(ulong?)|]u64;
-                        }
+                        object v2 = (ulong?)i32_hi | [|(ulong?)|]u64;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int? i32_hi = 1;
-                            int? i32_lo = 1;
-                            ulong? u64 = 1;
-                            sbyte? i08 = 1;
-                            short? i16 = -1;
+                        int? i32_hi = 1;
+                        int? i32_lo = 1;
+                        ulong? u64 = 1;
+                        sbyte? i08 = 1;
+                        short? i16 = -1;
 
-                            object v2 = (ulong?)i32_hi | u64;
-                        }
+                        object v2 = (ulong?)i32_hi | u64;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7811,35 +7811,35 @@ enum Sign
             // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int? i32_hi = 1;
-                            int? i32_lo = 1;
-                            ulong? u64 = 1;
-                            sbyte? i08 = 1;
-                            short? i16 = -1;
+                        int? i32_hi = 1;
+                        int? i32_lo = 1;
+                        ulong? u64 = 1;
+                        sbyte? i08 = 1;
+                        short? i16 = -1;
 
-                            object v4 = [|(ulong?)|][|(uint?)|](ushort?)i08 | (ulong?)i32_lo;
-                        }
+                        object v4 = [|(ulong?)|][|(uint?)|](ushort?)i08 | (ulong?)i32_lo;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int? i32_hi = 1;
-                            int? i32_lo = 1;
-                            ulong? u64 = 1;
-                            sbyte? i08 = 1;
-                            short? i16 = -1;
+                        int? i32_hi = 1;
+                        int? i32_lo = 1;
+                        ulong? u64 = 1;
+                        sbyte? i08 = 1;
+                        short? i16 = -1;
 
-                            object v4 = (ushort?)i08 | (ulong?)i32_lo;
-                        }
+                        object v4 = (ushort?)i08 | (ulong?)i32_lo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7848,35 +7848,35 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int? i32_hi = 1;
-                            int? i32_lo = 1;
-                            ulong? u64 = 1;
-                            sbyte? i08 = 1;
-                            short? i16 = -1;
+                        int? i32_hi = 1;
+                        int? i32_lo = 1;
+                        ulong? u64 = 1;
+                        sbyte? i08 = 1;
+                        short? i16 = -1;
 
-                            object v5 = (int?)i08 | [|(int?)|]i32_lo;
-                        }
+                        object v5 = (int?)i08 | [|(int?)|]i32_lo;
                     }
-                    """,
+                }
+                """,
                 """
-                    public class sign
+                public class sign
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int? i32_hi = 1;
-                            int? i32_lo = 1;
-                            ulong? u64 = 1;
-                            sbyte? i08 = 1;
-                            short? i16 = -1;
+                        int? i32_hi = 1;
+                        int? i32_lo = 1;
+                        ulong? u64 = 1;
+                        sbyte? i08 = 1;
+                        short? i16 = -1;
 
-                            object v5 = (int?)i08 | i32_lo;
-                        }
+                        object v5 = (int?)i08 | i32_lo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9478,25 +9478,25 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Other
-                    {
-                        void Goo()
-                        {  
-                            char c = '4';
-                            string s = $"{[|(object)|]c:X4}";
-                        }
+                class Other
+                {
+                    void Goo()
+                    {  
+                        char c = '4';
+                        string s = $"{[|(object)|]c:X4}";
                     }
-                    """,
+                }
+                """,
                 """
-                    class Other
-                    {
-                        void Goo()
-                        {  
-                            char c = '4';
-                            string s = $"{c:X4}";
-                        }
+                class Other
+                {
+                    void Goo()
+                    {  
+                        char c = '4';
+                        string s = $"{c:X4}";
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9957,23 +9957,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main(int? n)
                     {
-                        void Main(int? n)
-                        {
-                            var v = n is [|(int)|]0;
-                        }
+                        var v = n is [|(int)|]0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main(int? n)
                     {
-                        void Main(int? n)
-                        {
-                            var v = n is 0;
-                        }
+                        var v = n is 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -9982,23 +9982,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class Program
+                class Program
+                {
+                    void Main(int? n)
                     {
-                        void Main(int? n)
-                        {
-                            var v = n is [|(int?)|]0;
-                        }
+                        var v = n is [|(int?)|]0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    void Main(int? n)
                     {
-                        void Main(int? n)
-                        {
-                            var v = n is 0;
-                        }
+                        var v = n is 0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10024,39 +10024,39 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = int.MaxValue;
-                            double y = x;
-                            double z = [|(float)|]x;
-                            Console.WriteLine(x);
-                            Console.WriteLine(y);
-                            Console.WriteLine(z);
-                            Console.WriteLine(y == z);
-                        }
+                        int x = int.MaxValue;
+                        double y = x;
+                        double z = [|(float)|]x;
+                        Console.WriteLine(x);
+                        Console.WriteLine(y);
+                        Console.WriteLine(z);
+                        Console.WriteLine(y == z);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = int.MaxValue;
-                            double y = x;
-                            double z = x;
-                            Console.WriteLine(x);
-                            Console.WriteLine(y);
-                            Console.WriteLine(z);
-                            Console.WriteLine(y == z);
-                        }
+                        int x = int.MaxValue;
+                        double y = x;
+                        double z = x;
+                        Console.WriteLine(x);
+                        Console.WriteLine(y);
+                        Console.WriteLine(z);
+                        Console.WriteLine(y == z);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10179,31 +10179,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Bar(dynamic x, Action y) { }
+
+                    static void Main()
                     {
-                        static void Bar(dynamic x, Action y) { }
-
-                        static void Main()
-                        {
-                            Bar([|(object)|]1, Console.WriteLine);
-                        }
+                        Bar([|(object)|]1, Console.WriteLine);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Bar(dynamic x, Action y) { }
+
+                    static void Main()
                     {
-                        static void Bar(dynamic x, Action y) { }
-
-                        static void Main()
-                        {
-                            Bar(1, Console.WriteLine);
-                        }
+                        Bar(1, Console.WriteLine);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10212,31 +10212,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Bar(dynamic x, Action y) { }
+
+                    static void Main()
                     {
-                        static void Bar(dynamic x, Action y) { }
-
-                        static void Main()
-                        {
-                            Bar([|(IComparable)|]1, Console.WriteLine);
-                        }
+                        Bar([|(IComparable)|]1, Console.WriteLine);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void Bar(dynamic x, Action y) { }
+
+                    static void Main()
                     {
-                        static void Bar(dynamic x, Action y) { }
-
-                        static void Main()
-                        {
-                            Bar(1, Console.WriteLine);
-                        }
+                        Bar(1, Console.WriteLine);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10282,29 +10282,29 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            long lng = 0;
-                            object o1 = [|(long)|]lng;
-                        }
+                        long lng = 0;
+                        object o1 = [|(long)|]lng;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            long lng = 0;
-                            object o1 = lng;
-                        }
+                        long lng = 0;
+                        object o1 = lng;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10313,27 +10313,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            object o1 = [|(long)|]0L;
-                        }
+                        object o1 = [|(long)|]0L;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            object o1 = 0L;
-                        }
+                        object o1 = 0L;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10362,31 +10362,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            byte? data = 1;
-                            var x = data [|as byte?|];
-                            Console.WriteLine(x);
-                        }
+                        byte? data = 1;
+                        var x = data [|as byte?|];
+                        Console.WriteLine(x);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            byte? data = 1;
-                            var x = data;
-                            Console.WriteLine(x);
-                        }
+                        byte? data = 1;
+                        var x = data;
+                        Console.WriteLine(x);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10419,39 +10419,39 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
-                        {
-                            unsafe public Span(void* pointer, int length) { }
-                        }
+                        unsafe public Span(void* pointer, int length) { }
                     }
-                    class Program
+                }
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
-                        }
+                        Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
-                        {
-                            unsafe public Span(void* pointer, int length) { }
-                        }
+                        unsafe public Span(void* pointer, int length) { }
                     }
-                    class Program
+                }
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Span<int> x = stackalloc int[8]; // cast can be removed
-                        }
+                        Span<int> x = stackalloc int[8]; // cast can be removed
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10511,45 +10511,45 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
+                        unsafe public Span(void* pointer, int length) { }
+                    }
+                }
+                class Program
+                {
+                    static void Main()
+                    {
+                        unsafe
                         {
-                            unsafe public Span(void* pointer, int length) { }
+                            Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
                         }
                     }
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            unsafe
-                            {
-                                Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
-                            }
-                        }
-                    }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
+                        unsafe public Span(void* pointer, int length) { }
+                    }
+                }
+                class Program
+                {
+                    static void Main()
+                    {
+                        unsafe
                         {
-                            unsafe public Span(void* pointer, int length) { }
+                            Span<int> x = stackalloc int[8]; // cast can be removed
                         }
                     }
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            unsafe
-                            {
-                                Span<int> x = stackalloc int[8]; // cast can be removed
-                            }
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -10558,39 +10558,39 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
-                        {
-                            unsafe public Span(void* pointer, int length) { }
-                        }
+                        unsafe public Span(void* pointer, int length) { }
                     }
-                    class Program
+                }
+                class Program
+                {
+                    unsafe static void Main()
                     {
-                        unsafe static void Main()
-                        {
-                            Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
-                        }
+                        Span<int> x = [|(Span<int>)|]stackalloc int[8]; // cast can be removed
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
-                        {
-                            unsafe public Span(void* pointer, int length) { }
-                        }
+                        unsafe public Span(void* pointer, int length) { }
                     }
-                    class Program
+                }
+                class Program
+                {
+                    unsafe static void Main()
                     {
-                        unsafe static void Main()
-                        {
-                            Span<int> x = stackalloc int[8]; // cast can be removed
-                        }
+                        Span<int> x = stackalloc int[8]; // cast can be removed
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10623,39 +10623,39 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
-                        {
-                            unsafe public Span(void* pointer, int length) { }
-                        }
+                        unsafe public Span(void* pointer, int length) { }
                     }
-                    class Program
+                }
+                class Program
+                {
+                    unsafe static void Main()
                     {
-                        unsafe static void Main()
-                        {
-                            var x = [|(Span<int>)|](stackalloc int[8]); // cast can be removed
-                        }
+                        var x = [|(Span<int>)|](stackalloc int[8]); // cast can be removed
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    namespace System
+                using System;
+                namespace System
+                {
+                    public readonly ref struct Span<T> 
                     {
-                        public readonly ref struct Span<T> 
-                        {
-                            unsafe public Span(void* pointer, int length) { }
-                        }
+                        unsafe public Span(void* pointer, int length) { }
                     }
-                    class Program
+                }
+                class Program
+                {
+                    unsafe static void Main()
                     {
-                        unsafe static void Main()
-                        {
-                            var x = (stackalloc int[8]); // cast can be removed
-                        }
+                        var x = (stackalloc int[8]); // cast can be removed
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10689,31 +10689,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o is [|(int)|]0)
                         {
-                            if (o is [|(int)|]0)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o is 0)
                         {
-                            if (o is 0)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10722,31 +10722,31 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o is [|(long)|]0L)
                         {
-                            if (o is [|(long)|]0L)
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void M(object o)
                     {
-                        void M(object o)
+                        if (o is 0L)
                         {
-                            if (o is 0L)
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -10967,45 +10967,45 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class Assembly : IAssembly
-                    {
-                        public static bool operator ==(Assembly a1, Assembly a2) => false;
-                        public static bool operator !=(Assembly a1, Assembly a2) => false;
+                class Assembly : IAssembly
+                {
+                    public static bool operator ==(Assembly a1, Assembly a2) => false;
+                    public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                        public override bool Equals(object obj) => false;
-                        public override int GetHashCode() => 0;
-                    }
+                    public override bool Equals(object obj) => false;
+                    public override int GetHashCode() => 0;
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, Assembly a1)
-                            => [|(object)|]a1 == [|(object)|]a2;
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, Assembly a1)
+                        => [|(object)|]a1 == [|(object)|]a2;
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class Assembly : IAssembly
-                    {
-                        public static bool operator ==(Assembly a1, Assembly a2) => false;
-                        public static bool operator !=(Assembly a1, Assembly a2) => false;
+                class Assembly : IAssembly
+                {
+                    public static bool operator ==(Assembly a1, Assembly a2) => false;
+                    public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                        public override bool Equals(object obj) => false;
-                        public override int GetHashCode() => 0;
-                    }
+                    public override bool Equals(object obj) => false;
+                    public override int GetHashCode() => 0;
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, Assembly a1)
-                            => a1 == [|(object)|]a2;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, Assembly a1)
+                        => a1 == [|(object)|]a2;
+                }
+                """
             );
         }
 
@@ -11122,45 +11122,45 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class Assembly : IAssembly
-                    {
-                        public static bool operator ==(Assembly a1, Assembly a2) => false;
-                        public static bool operator !=(Assembly a1, Assembly a2) => false;
+                class Assembly : IAssembly
+                {
+                    public static bool operator ==(Assembly a1, Assembly a2) => false;
+                    public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                        public override bool Equals(object obj) => false;
-                        public override int GetHashCode() => 0;
-                    }
+                    public override bool Equals(object obj) => false;
+                    public override int GetHashCode() => 0;
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, Assembly a1)
-                            => a1 [|as object|] == a2 [|as object|];
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, Assembly a1)
+                        => a1 [|as object|] == a2 [|as object|];
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class Assembly : IAssembly
-                    {
-                        public static bool operator ==(Assembly a1, Assembly a2) => false;
-                        public static bool operator !=(Assembly a1, Assembly a2) => false;
+                class Assembly : IAssembly
+                {
+                    public static bool operator ==(Assembly a1, Assembly a2) => false;
+                    public static bool operator !=(Assembly a1, Assembly a2) => false;
 
-                        public override bool Equals(object obj) => false;
-                        public override int GetHashCode() => 0;
-                    }
+                    public override bool Equals(object obj) => false;
+                    public override int GetHashCode() => 0;
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, Assembly a1)
-                            => a1 == a2 as object;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, Assembly a1)
+                        => a1 == a2 as object;
+                }
+                """
             );
         }
 
@@ -11277,27 +11277,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => [|(object)|]a1 == a2;
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => [|(object)|]a1 == a2;
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == a2;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == a2;
+                }
+                """
             );
         }
 
@@ -11306,27 +11306,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == [|(object)|]a2;
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == [|(object)|]a2;
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == a2;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == a2;
+                }
+                """
             );
         }
 
@@ -11335,27 +11335,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => [|(object)|]a1 == [|(object)|]a2;
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => [|(object)|]a1 == [|(object)|]a2;
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == a2;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == a2;
+                }
+                """
             );
         }
 
@@ -11364,27 +11364,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 [|as object|] == a2;
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 [|as object|] == a2;
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == a2;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == a2;
+                }
+                """
             );
         }
 
@@ -11393,27 +11393,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == a2 [|as object|];
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == a2 [|as object|];
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == a2;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == a2;
+                }
+                """
             );
         }
 
@@ -11422,27 +11422,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 [|as object|] == a2 [|as object|];
-                    }
-                    """,
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 [|as object|] == a2 [|as object|];
+                }
+                """,
                 """
-                    interface IAssembly
-                    {
-                    }
+                interface IAssembly
+                {
+                }
 
-                    class C
-                    {
-                        bool M(IAssembly a2, IAssembly a1)
-                            => a1 == a2;
-                    }
-                    """
+                class C
+                {
+                    bool M(IAssembly a2, IAssembly a1)
+                        => a1 == a2;
+                }
+                """
             );
         }
 
@@ -11533,33 +11533,33 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    string? M(bool b, string s)
                     {
-                        string? M(bool b, string s)
-                        {
-                            return b ? s : [|(string?)|]null;
-                        }
+                        return b ? s : [|(string?)|]null;
                     }
-                    """,
+                }
+                """,
                 """
-                    #nullable enable
+                #nullable enable
 
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class C
+                class C
+                {
+                    string? M(bool b, string s)
                     {
-                        string? M(bool b, string s)
-                        {
-                            return b ? s : null;
-                        }
+                        return b ? s : null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11568,23 +11568,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            long f1 = (a == 5) ? 4 : [|(long)|]5;
-                        }
+                        long f1 = (a == 5) ? 4 : [|(long)|]5;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a)
                     {
-                        void M(int a)
-                        {
-                            long f1 = (a == 5) ? 4 : 5;
-                        }
+                        long f1 = (a == 5) ? 4 : 5;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11609,23 +11609,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            long f1 = (a == 5) ? b : [|(long)|]c;
-                        }
+                        long f1 = (a == 5) ? b : [|(long)|]c;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            long f1 = (a == 5) ? b : c;
-                        }
+                        long f1 = (a == 5) ? b : c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11649,23 +11649,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            int? f1 = (a == 5) ? [|(int?)|]0 : 1;
-                        }
+                        int? f1 = (a == 5) ? [|(int?)|]0 : 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            int? f1 = (a == 5) ? 0 : 1;
-                        }
+                        int? f1 = (a == 5) ? 0 : 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11690,23 +11690,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            int? f1 = (a == 5) ? [|(int?)|]b : c;
-                        }
+                        int? f1 = (a == 5) ? [|(int?)|]b : c;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            int? f1 = (a == 5) ? b : c;
-                        }
+                        int? f1 = (a == 5) ? b : c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11731,23 +11731,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            long f1 = (a == 5) ? [|(long)|]0 : default;
-                        }
+                        long f1 = (a == 5) ? [|(long)|]0 : default;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            long f1 = (a == 5) ? 0 : default;
-                        }
+                        long f1 = (a == 5) ? 0 : default;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11771,23 +11771,23 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            long f1 = (a == 5) ? [|(long)|]b : default;
-                        }
+                        long f1 = (a == 5) ? [|(long)|]b : default;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            long f1 = (a == 5) ? b : default;
-                        }
+                        long f1 = (a == 5) ? b : default;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11841,27 +11841,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Console.WriteLine((int)(float?)[|(int?)|]2147483647); // Prints -2147483648
-                        }
+                        Console.WriteLine((int)(float?)[|(int?)|]2147483647); // Prints -2147483648
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Console.WriteLine((int)(float?)2147483647); // Prints -2147483648
-                        }
+                        Console.WriteLine((int)(float?)2147483647); // Prints -2147483648
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -11870,27 +11870,27 @@ enum Sign
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Console.WriteLine((int)(double?)[|(long?)|][|(int?)|]1);
-                        }
+                        Console.WriteLine((int)(double?)[|(long?)|][|(int?)|]1);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Console.WriteLine((int)(double?)1);
-                        }
+                        Console.WriteLine((int)(double?)1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13195,29 +13195,29 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
+                using System;
 
-                    public class C {
-                        double s;
+                public class C {
+                    double s;
 
-                        public void M() {
-                            ([|(double)|]s).CompareTo(0); // double is built in.  Methods will not mutate it.
-                            Console.WriteLine(s);
-                        }
+                    public void M() {
+                        ([|(double)|]s).CompareTo(0); // double is built in.  Methods will not mutate it.
+                        Console.WriteLine(s);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    public class C {
-                        double s;
+                public class C {
+                    double s;
 
-                        public void M() {
-                            s.CompareTo(0); // double is built in.  Methods will not mutate it.
-                            Console.WriteLine(s);
-                        }
+                    public void M() {
+                        s.CompareTo(0); // double is built in.  Methods will not mutate it.
+                        Console.WriteLine(s);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13226,37 +13226,37 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    public class S {
-                        public int Field;
-                        public void Increment() => Field++;
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public class S {
+                    public int Field;
+                    public void Increment() => Field++;
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            ([|(S)|]s).Increment(); // safe to remove since this is not a struct
-                            s.Print();
-                        }
+                    public void M() {
+                        ([|(S)|]s).Increment(); // safe to remove since this is not a struct
+                        s.Print();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public class S {
-                        public int Field;
-                        public void Increment() => Field++;
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public class S {
+                    public int Field;
+                    public void Increment() => Field++;
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            s.Increment(); // safe to remove since this is not a struct
-                            s.Print();
-                        }
+                    public void M() {
+                        s.Increment(); // safe to remove since this is not a struct
+                        s.Print();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13265,39 +13265,39 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    public readonly struct S
-                    {
-                        public readonly int Field;
-                        public void Increment() { }
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public readonly struct S
+                {
+                    public readonly int Field;
+                    public void Increment() { }
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            ([|(S)|]s).Increment(); // safe to remove since struct is readonly
-                            s.Print();
-                        }
+                    public void M() {
+                        ([|(S)|]s).Increment(); // safe to remove since struct is readonly
+                        s.Print();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public readonly struct S
-                    {
-                        public readonly int Field;
-                        public void Increment() { }
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public readonly struct S
+                {
+                    public readonly int Field;
+                    public void Increment() { }
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            s.Increment(); // safe to remove since struct is readonly
-                            s.Print();
-                        }
+                    public void M() {
+                        s.Increment(); // safe to remove since struct is readonly
+                        s.Print();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13306,43 +13306,43 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    public struct S
-                    {
-                        public readonly int Field;
-                        public void Increment() { }
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S
+                {
+                    public readonly int Field;
+                    public void Increment() { }
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        S GetS() => s;
+                    S GetS() => s;
 
-                        public void M() {
-                            ([|(S)|]GetS()).Increment(); // safe to remove since not an lvalue.
-                            s.Print();
-                        }
+                    public void M() {
+                        ([|(S)|]GetS()).Increment(); // safe to remove since not an lvalue.
+                        s.Print();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public struct S
-                    {
-                        public readonly int Field;
-                        public void Increment() { }
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S
+                {
+                    public readonly int Field;
+                    public void Increment() { }
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        S GetS() => s;
+                    S GetS() => s;
 
-                        public void M() {
-                            GetS().Increment(); // safe to remove since not an lvalue.
-                            s.Print();
-                        }
+                    public void M() {
+                        GetS().Increment(); // safe to remove since not an lvalue.
+                        s.Print();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13351,39 +13351,39 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    public struct S
-                    {
-                        public readonly int Field;
-                        public readonly void Increment() { }
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S
+                {
+                    public readonly int Field;
+                    public readonly void Increment() { }
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            ([|(S)|]s).Increment(); // safe to remove since method is readonly
-                            s.Print();
-                        }
+                    public void M() {
+                        ([|(S)|]s).Increment(); // safe to remove since method is readonly
+                        s.Print();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public struct S
-                    {
-                        public readonly int Field;
-                        public readonly void Increment() { }
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S
+                {
+                    public readonly int Field;
+                    public readonly void Increment() { }
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            s.Increment(); // safe to remove since method is readonly
-                            s.Print();
-                        }
+                    public void M() {
+                        s.Increment(); // safe to remove since method is readonly
+                        s.Print();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13392,39 +13392,39 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    public struct S
-                    {
-                        public readonly int Field;
-                        public override string ToString() => "";
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S
+                {
+                    public readonly int Field;
+                    public override string ToString() => "";
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            ([|(S)|]s).ToString(); // safe to remove since override of object method
-                            s.Print();
-                        }
+                    public void M() {
+                        ([|(S)|]s).ToString(); // safe to remove since override of object method
+                        s.Print();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public struct S
-                    {
-                        public readonly int Field;
-                        public override string ToString() => "";
-                        public void Print() => Console.WriteLine(Field);
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S
+                {
+                    public readonly int Field;
+                    public override string ToString() => "";
+                    public void Print() => Console.WriteLine(Field);
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            s.ToString(); // safe to remove since override of object method
-                            s.Print();
-                        }
+                    public void M() {
+                        s.ToString(); // safe to remove since override of object method
+                        s.Print();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13433,39 +13433,39 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    public struct S {
-                        public int Field;
-                        public void Increment() => Field++;
-                        public void Print() => Console.WriteLine(Field);
-                        public int Prop => 0;
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S {
+                    public int Field;
+                    public void Increment() => Field++;
+                    public void Print() => Console.WriteLine(Field);
+                    public int Prop => 0;
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            var v = ([|(S)|]s).Prop; // Safe because we assume non-methods don't mutate
-                            s.Print();
-                        }
+                    public void M() {
+                        var v = ([|(S)|]s).Prop; // Safe because we assume non-methods don't mutate
+                        s.Print();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public struct S {
-                        public int Field;
-                        public void Increment() => Field++;
-                        public void Print() => Console.WriteLine(Field);
-                        public int Prop => 0;
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S {
+                    public int Field;
+                    public void Increment() => Field++;
+                    public void Print() => Console.WriteLine(Field);
+                    public int Prop => 0;
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            var v = s.Prop; // Safe because we assume non-methods don't mutate
-                            s.Print();
-                        }
+                    public void M() {
+                        var v = s.Prop; // Safe because we assume non-methods don't mutate
+                        s.Print();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -13474,39 +13474,39 @@ class C
         {
             await VerifyCS.VerifyCodeFixAsync(
                 """
-                    using System;
-                    public struct S {
-                        public int Field;
-                        public void Increment() => Field++;
-                        public void Print() => Console.WriteLine(Field);
-                        public int Prop => 0;
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S {
+                    public int Field;
+                    public void Increment() => Field++;
+                    public void Print() => Console.WriteLine(Field);
+                    public int Prop => 0;
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            var v = [|(S)|]s; // Safe because we're not accessing a member
-                            s.Print();
-                        }
+                    public void M() {
+                        var v = [|(S)|]s; // Safe because we're not accessing a member
+                        s.Print();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    public struct S {
-                        public int Field;
-                        public void Increment() => Field++;
-                        public void Print() => Console.WriteLine(Field);
-                        public int Prop => 0;
-                    }
-                    public class C {
-                        S s;
+                using System;
+                public struct S {
+                    public int Field;
+                    public void Increment() => Field++;
+                    public void Print() => Console.WriteLine(Field);
+                    public int Prop => 0;
+                }
+                public class C {
+                    S s;
 
-                        public void M() {
-                            var v = s; // Safe because we're not accessing a member
-                            s.Print();
-                        }
+                    public void M() {
+                        var v = s; // Safe because we're not accessing a member
+                        s.Print();
                     }
-                    """
+                }
+                """
             );
         }
     }

@@ -31,9 +31,9 @@ public class CommandLineIVTTests : CommandLineTestBase
         var source2 = dir.CreateFile("B.cs")
             .WriteAllText(
                 """
-                    namespace N2;
-                    internal class B : N1.A {}
-                    """
+                namespace N2;
+                internal class B : N1.A {}
+                """
             );
 
         var sw = new StringWriter();
@@ -117,9 +117,9 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
         var source2 = dir.CreateFile("B.cs")
             .WriteAllText(
                 """
-                    namespace N2;
-                    internal class B : N1.A {}
-                    """
+                namespace N2;
+                internal class B : N1.A {}
+                """
             );
 
         var sw = new StringWriter();
@@ -204,10 +204,10 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
         var source2 = dir.CreateFile("B.cs")
             .WriteAllText(
                 """
-                    var a = new N1.A();
-                    _ = a.Prop;
-                    a.Prop = "hello";
-                    """
+                var a = new N1.A();
+                _ = a.Prop;
+                a.Prop = "hello";
+                """
             );
 
         var sw = new StringWriter();
@@ -296,12 +296,12 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
         var source2 = dir.CreateFile("B.cs")
             .WriteAllText(
                 """
-                    namespace N2;
-                    public class B : N1.A
-                    {
-                        public void M() { }
-                    }
-                    """
+                namespace N2;
+                public class B : N1.A
+                {
+                    public void M() { }
+                }
+                """
             );
 
         var sw = new StringWriter();

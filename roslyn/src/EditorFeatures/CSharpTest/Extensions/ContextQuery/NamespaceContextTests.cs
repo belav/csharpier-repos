@@ -35,10 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyFalse(
                 """
-                    #if false
-                    $$
-                    #endif
-                    """
+                #if false
+                $$
+                #endif
+                """
             );
         }
 
@@ -50,10 +50,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class C {
-                    //
-                    $$
-                    """
+                class C {
+                //
+                $$
+                """
             );
         }
 
@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    [$$]
-                    class CL {}
-                    """
+                [$$]
+                class CL {}
+                """
             );
         }
 
@@ -97,11 +97,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        [$$]
-                        void Method() {}
-                    }
-                    """
+                class CL {
+                    [$$]
+                    void Method() {}
+                }
+                """
             );
         }
 
@@ -110,10 +110,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL{
-                        void Method<[A$$]T> () {}
-                    }
-                    """
+                class CL{
+                    void Method<[A$$]T> () {}
+                }
+                """
             );
         }
 
@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL{
-                        void Method ([$$]int i) {}
-                    }
-                    """
+                class CL{
+                    void Method ([$$]int i) {}
+                }
+                """
             );
         }
 
@@ -140,10 +140,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyFalse(
                 """
-                    namespace NS {
-                    class CL {}
-                    $$
-                    """
+                namespace NS {
+                class CL {}
+                $$
+                """
             );
         }
 
@@ -161,9 +161,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$
-                    """
+                class CL {
+                    $$
+                """
             );
         }
 
@@ -172,9 +172,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        public $$
-                    """
+                class CL {
+                    public $$
+                """
             );
         }
 
@@ -226,9 +226,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ i
-                    """
+                class CL {
+                    $$ i
+                """
             );
         }
 
@@ -237,9 +237,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        event $$
-                    """
+                class CL {
+                    event $$
+                """
             );
         }
 
@@ -248,9 +248,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        explicit operator $$
-                    """
+                class CL {
+                    explicit operator $$
+                """
             );
         }
 
@@ -259,9 +259,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyFalse(
                 """
-                    class CL {
-                        explicit $$
-                    """
+                class CL {
+                    explicit $$
+                """
             );
         }
 
@@ -270,9 +270,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ Prop {
-                    """
+                class CL {
+                    $$ Prop {
+                """
             );
         }
 
@@ -281,9 +281,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        event $$ Event {
-                    """
+                class CL {
+                    event $$ Event {
+                """
             );
         }
 
@@ -292,9 +292,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ this
-                    """
+                class CL {
+                    $$ this
+                """
             );
         }
 
@@ -303,9 +303,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        void Method($$
-                    """
+                class CL {
+                    void Method($$
+                """
             );
         }
 
@@ -314,9 +314,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ [
-                    """
+                class CL {
+                    $$ [
+                """
             );
         }
 
@@ -325,9 +325,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ *
-                    """
+                class CL {
+                    $$ *
+                """
             );
         }
 
@@ -336,9 +336,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ ?
-                    """
+                class CL {
+                    $$ ?
+                """
             );
         }
 
@@ -347,9 +347,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        delegate $$
-                    """
+                class CL {
+                    delegate $$
+                """
             );
         }
 
@@ -358,9 +358,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ M(
-                    """
+                class CL {
+                    $$ M(
+                """
             );
         }
 
@@ -369,9 +369,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         {
             VerifyTrue(
                 """
-                    class CL {
-                        $$ operator
-                    """
+                class CL {
+                    $$ operator
+                """
             );
         }
 
@@ -514,10 +514,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             VerifyTrue(
                 AddInsideMethod(
                     """
-                        switch(i)
-                            {
-                                case $$
-                        """
+                    switch(i)
+                        {
+                            case $$
+                    """
                 )
             );
         }

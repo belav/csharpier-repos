@@ -16065,39 +16065,39 @@ class Program
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
                 expectedOutput: """
-                    <>f__AnonymousDelegate0
-                    """
+                <>f__AnonymousDelegate0
+                """
             );
             verifier.VerifyTypeIL(
                 "<>f__AnonymousDelegate0",
                 """
-                    .class private auto ansi sealed '<>f__AnonymousDelegate0'
-                        extends [System.Runtime]System.MulticastDelegate
+                .class private auto ansi sealed '<>f__AnonymousDelegate0'
+                    extends [System.Runtime]System.MulticastDelegate
+                {
+                    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                        01 00 00 00
+                    )
+                    // Methods
+                    .method public hidebysig specialname rtspecialname 
+                        instance void .ctor (
+                            object 'object',
+                            native int 'method'
+                        ) runtime managed 
                     {
-                        .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-                            01 00 00 00
-                        )
-                        // Methods
-                        .method public hidebysig specialname rtspecialname 
-                            instance void .ctor (
-                                object 'object',
-                                native int 'method'
-                            ) runtime managed 
-                        {
-                        } // end of method '<>f__AnonymousDelegate0'::.ctor
-                        .method public hidebysig newslot virtual 
-                            instance int32& Invoke (
-                                int32& arg1,
-                                int32& arg2
-                            ) runtime managed 
-                        {
-                            .param [2]
-                                .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
-                                    01 00 00 00
-                                )
-                        } // end of method '<>f__AnonymousDelegate0'::Invoke
-                    } // end of class <>f__AnonymousDelegate0
-                    """
+                    } // end of method '<>f__AnonymousDelegate0'::.ctor
+                    .method public hidebysig newslot virtual 
+                        instance int32& Invoke (
+                            int32& arg1,
+                            int32& arg2
+                        ) runtime managed 
+                    {
+                        .param [2]
+                            .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
+                                01 00 00 00
+                            )
+                    } // end of method '<>f__AnonymousDelegate0'::Invoke
+                } // end of class <>f__AnonymousDelegate0
+                """
             );
         }
 
@@ -16123,39 +16123,39 @@ class Program
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
                 expectedOutput: """
-                    <>f__AnonymousDelegate0
-                    """
+                <>f__AnonymousDelegate0
+                """
             );
             verifier.VerifyTypeIL(
                 "<>f__AnonymousDelegate0",
                 """
-                    .class private auto ansi sealed '<>f__AnonymousDelegate0'
-                        extends [System.Runtime]System.MulticastDelegate
+                .class private auto ansi sealed '<>f__AnonymousDelegate0'
+                    extends [System.Runtime]System.MulticastDelegate
+                {
+                    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                        01 00 00 00
+                    )
+                    // Methods
+                    .method public hidebysig specialname rtspecialname 
+                        instance void .ctor (
+                            object 'object',
+                            native int 'method'
+                        ) runtime managed 
                     {
-                        .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-                            01 00 00 00
-                        )
-                        // Methods
-                        .method public hidebysig specialname rtspecialname 
-                            instance void .ctor (
-                                object 'object',
-                                native int 'method'
-                            ) runtime managed 
-                        {
-                        } // end of method '<>f__AnonymousDelegate0'::.ctor
-                        .method public hidebysig newslot virtual 
-                            instance int32& Invoke (
-                                int32& arg1,
-                                int32& arg2
-                            ) runtime managed 
-                        {
-                            .param [1]
-                                .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
-                                    01 00 00 00
-                                )
-                        } // end of method '<>f__AnonymousDelegate0'::Invoke
-                    } // end of class <>f__AnonymousDelegate0
-                    """
+                    } // end of method '<>f__AnonymousDelegate0'::.ctor
+                    .method public hidebysig newslot virtual 
+                        instance int32& Invoke (
+                            int32& arg1,
+                            int32& arg2
+                        ) runtime managed 
+                    {
+                        .param [1]
+                            .custom instance void [System.Runtime]System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
+                                01 00 00 00
+                            )
+                    } // end of method '<>f__AnonymousDelegate0'::Invoke
+                } // end of class <>f__AnonymousDelegate0
+                """
             );
         }
 
@@ -16194,13 +16194,13 @@ class Program
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
                 expectedOutput: """
-                    <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
-                    <>f__AnonymousDelegate0
-                    <>f__AnonymousDelegate1
-                    <>f__AnonymousDelegate1
-                    <>f__AnonymousDelegate0
-                    <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
-                    """
+                <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
+                <>f__AnonymousDelegate0
+                <>f__AnonymousDelegate1
+                <>f__AnonymousDelegate1
+                <>f__AnonymousDelegate0
+                <>F{00000049}`3[System.Int32,System.Int32,System.Int32]
+                """
             );
         }
 
@@ -18954,30 +18954,30 @@ class Program
             verifier.VerifyTypeIL(
                 "<>f__AnonymousDelegate0`2",
                 """
-                    .class private auto ansi sealed '<>f__AnonymousDelegate0`2'<T1, T2>
-                        extends [System.Runtime]System.MulticastDelegate
+                .class private auto ansi sealed '<>f__AnonymousDelegate0`2'<T1, T2>
+                    extends [System.Runtime]System.MulticastDelegate
+                {
+                    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                        01 00 00 00
+                    )
+                    // Methods
+                    .method public hidebysig specialname rtspecialname 
+                        instance void .ctor (
+                            object 'object',
+                            native int 'method'
+                        ) runtime managed 
                     {
-                        .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-                            01 00 00 00
-                        )
-                        // Methods
-                        .method public hidebysig specialname rtspecialname 
-                            instance void .ctor (
-                                object 'object',
-                                native int 'method'
-                            ) runtime managed 
-                        {
-                        } // end of method '<>f__AnonymousDelegate0`2'::.ctor
-                        .method public hidebysig newslot virtual 
-                            instance void Invoke (
-                                !T1 arg1,
-                                [opt] !T2 arg2
-                            ) runtime managed 
-                        {
-                            .param [2] = "callerArgExpression"
-                        } // end of method '<>f__AnonymousDelegate0`2'::Invoke
-                    } // end of class <>f__AnonymousDelegate0`2
-                    """
+                    } // end of method '<>f__AnonymousDelegate0`2'::.ctor
+                    .method public hidebysig newslot virtual 
+                        instance void Invoke (
+                            !T1 arg1,
+                            [opt] !T2 arg2
+                        ) runtime managed 
+                    {
+                        .param [2] = "callerArgExpression"
+                    } // end of method '<>f__AnonymousDelegate0`2'::Invoke
+                } // end of class <>f__AnonymousDelegate0`2
+                """
             );
         }
 
@@ -20113,11 +20113,11 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: """
-                        <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                        System.Func`2[System.Int32,System.Int32]
-                        System.Func`2[System.Int32,System.Int32]
-                        <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                        """
+                    <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                    System.Func`2[System.Int32,System.Int32]
+                    System.Func`2[System.Int32,System.Int32]
+                    <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -20496,15 +20496,15 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        System.Action`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        System.Action`1[System.Nullable`1[System.Decimal]]
-                        """
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    System.Action`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    System.Action`1[System.Nullable`1[System.Decimal]]
+                    """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -20618,15 +20618,15 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        System.Action`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        System.Action`1[System.Nullable`1[System.Decimal]]
-                        """
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    System.Action`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    System.Action`1[System.Nullable`1[System.Decimal]]
+                    """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -20757,15 +20757,15 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Decimal]
-                        System.Action`1[System.Decimal]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
-                        System.Action`1[System.Nullable`1[System.Decimal]]
-                        """
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Decimal]
+                    System.Action`1[System.Decimal]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Decimal]]
+                    System.Action`1[System.Nullable`1[System.Decimal]]
+                    """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -20822,10 +20822,10 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                        <>f__AnonymousDelegate0`1[System.DateTime]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
-                        System.Action`1[System.DateTime]
-                        """
+                    <>f__AnonymousDelegate0`1[System.DateTime]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
+                    System.Action`1[System.DateTime]
+                    """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -20932,10 +20932,10 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                        <>f__AnonymousDelegate0`1[System.DateTime]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
-                        System.Action`1[System.DateTime]
-                        """
+                    <>f__AnonymousDelegate0`1[System.DateTime]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
+                    System.Action`1[System.DateTime]
+                    """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -21054,10 +21054,10 @@ class Program
             var verifier = CompileAndVerify(
                     source,
                     expectedOutput: """
-                        <>f__AnonymousDelegate0`1[System.DateTime]
-                        <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
-                        System.Action`1[System.DateTime]
-                        """
+                    <>f__AnonymousDelegate0`1[System.DateTime]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.DateTime]]
+                    System.Action`1[System.DateTime]
+                    """
                 )
                 .VerifyDiagnostics();
             verifier.VerifyTypeIL(
@@ -22176,15 +22176,15 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: """
-                        True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                        True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                        True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                        True, System.Func`2[System.Int32[],System.Int32]
-                        True, <>A{00000001}`3[System.Int32,System.Int32,System.Int32[]]
-                        True, <>f__AnonymousDelegate1`3[System.Int32,System.Int32,System.Int32]
-                        True, <>f__AnonymousDelegate2
-                        True, <>f__AnonymousDelegate2
-                        """
+                    True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                    True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                    True, <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                    True, System.Func`2[System.Int32[],System.Int32]
+                    True, <>A{00000001}`3[System.Int32,System.Int32,System.Int32[]]
+                    True, <>f__AnonymousDelegate1`3[System.Int32,System.Int32,System.Int32]
+                    True, <>f__AnonymousDelegate2
+                    True, <>f__AnonymousDelegate2
+                    """
                 )
                 .VerifyDiagnostics();
         }

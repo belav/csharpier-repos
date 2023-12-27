@@ -72,9 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void M $$
-                    """
+                class Test {
+                    void M $$
+                """
             );
         }
 
@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void M<T> where $$
-                    """
+                class Test {
+                    void M<T> where $$
+                """
             );
         }
 
@@ -94,9 +94,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void M<T> where T $$
-                    """
+                class Test {
+                    void M<T> where T $$
+                """
             );
         }
 
@@ -105,9 +105,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Test {
-                        void M<T> where T : $$
-                    """
+                class Test {
+                    void M<T> where T : $$
+                """
             );
         }
 
@@ -116,9 +116,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void M<T> where T : I $$
-                    """
+                class Test {
+                    void M<T> where T : I $$
+                """
             );
         }
 
@@ -127,9 +127,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Test {
-                        void M<T> where T : I, $$
-                    """
+                class Test {
+                    void M<T> where T : I, $$
+                """
             );
         }
 
@@ -174,10 +174,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void N() {
-                            void M $$
-                    """
+                class Test {
+                    void N() {
+                        void M $$
+                """
             );
         }
 
@@ -186,10 +186,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void N() {
-                            void M<T> where $$
-                    """
+                class Test {
+                    void N() {
+                        void M<T> where $$
+                """
             );
         }
 
@@ -198,10 +198,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void N() {
-                            void M<T> where T $$
-                    """
+                class Test {
+                    void N() {
+                        void M<T> where T $$
+                """
             );
         }
 
@@ -210,10 +210,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Test {
-                        void N() {
-                            void M<T> where T : $$
-                    """
+                class Test {
+                    void N() {
+                        void M<T> where T : $$
+                """
             );
         }
 
@@ -222,10 +222,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class Test {
-                        void N() {
-                            void M<T> where T : I $$
-                    """
+                class Test {
+                    void N() {
+                        void M<T> where T : I $$
+                """
             );
         }
 
@@ -234,10 +234,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Test {
-                        void N() {
-                            void M<T> where T : I, $$
-                    """
+                class Test {
+                    void N() {
+                        void M<T> where T : I, $$
+                """
             );
         }
 
@@ -246,10 +246,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Test {
-                        unsafe void N() {
-                            delegate* $$
-                    """
+                class Test {
+                    unsafe void N() {
+                        delegate* $$
+                """
             );
         }
 
@@ -258,10 +258,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class Test {
-                        unsafe void N() {
-                            delegate*$$
-                    """
+                class Test {
+                    unsafe void N() {
+                        delegate*$$
+                """
             );
         }
     }

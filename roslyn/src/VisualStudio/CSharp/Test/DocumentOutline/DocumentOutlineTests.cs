@@ -232,9 +232,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
         {
             var (_, _, items) = await InitializeMocksAndDataModelAndUIItems(
                 """
-                    enum Test
-                      { a, b }
-                    """
+                enum Test
+                  { a, b }
+                """
             );
 
             Assert.Collection(
@@ -266,8 +266,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
         {
             var (_, _, items) = await InitializeMocksAndDataModelAndUIItems(
                 """
-                    abstract class TypeName { public string PropertyName { get; } = "Value"; }
-                    """
+                abstract class TypeName { public string PropertyName { get; } = "Value"; }
+                """
             );
 
             Assert.Collection(

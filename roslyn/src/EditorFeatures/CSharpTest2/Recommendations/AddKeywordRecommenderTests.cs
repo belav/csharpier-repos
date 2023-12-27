@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -76,9 +76,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C {
-                       event Goo Bar { $$
-                    """
+                class C {
+                   event Goo Bar { $$
+                """
             );
         }
 
@@ -87,9 +87,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C {
-                       event Goo Bar { [Bar] $$
-                    """
+                class C {
+                   event Goo Bar { [Bar] $$
+                """
             );
         }
 
@@ -98,9 +98,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C {
-                       event Goo Bar { remove { } $$
-                    """
+                class C {
+                   event Goo Bar { remove { } $$
+                """
             );
         }
 
@@ -109,9 +109,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C {
-                       event Goo Bar { remove { } [Bar] $$
-                    """
+                class C {
+                   event Goo Bar { remove { } [Bar] $$
+                """
             );
         }
 
@@ -120,9 +120,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C {
-                       event Goo Bar { set { } $$
-                    """
+                class C {
+                   event Goo Bar { set { } $$
+                """
             );
         }
 
@@ -131,9 +131,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                       event Goo Bar { add $$
-                    """
+                class C {
+                   event Goo Bar { add $$
+                """
             );
         }
 
@@ -142,9 +142,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                       event Goo Bar { add { } $$
-                    """
+                class C {
+                   event Goo Bar { add { } $$
+                """
             );
         }
 
@@ -153,9 +153,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C {
-                       int Goo { $$
-                    """
+                class C {
+                   int Goo { $$
+                """
             );
         }
     }

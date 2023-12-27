@@ -368,12 +368,12 @@ public class QueryTests : IDisposable
 
         Assert.Equal(
             """
-                @__isaac_0='?' (DbType = Object)
+            @__isaac_0='?' (DbType = Object)
 
-                SELECT [p].[Name]
-                FROM [Patriarchy] AS [p]
-                WHERE @__isaac_0.IsDescendantOf([p].[Id]) = CAST(1 AS bit)
-                """,
+            SELECT [p].[Name]
+            FROM [Patriarchy] AS [p]
+            WHERE @__isaac_0.IsDescendantOf([p].[Id]) = CAST(1 AS bit)
+            """,
             _db.Sql,
             ignoreLineEndingDifferences: true
         );

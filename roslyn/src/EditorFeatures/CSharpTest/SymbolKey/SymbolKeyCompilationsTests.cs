@@ -394,23 +394,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             // we should be able to distinguish a file-local type and non-file-local type when they have the same source name.
             var src1 = SyntaxFactory.ParseSyntaxTree(
                 """
-                    using System;
+                using System;
 
-                    namespace N1.N2
-                    {
-                        file class C { }
-                    }
-                    """,
+                namespace N1.N2
+                {
+                    file class C { }
+                }
+                """,
                 path: "File1.cs"
             );
 
             var src2 = SyntaxFactory.ParseSyntaxTree(
                 """
-                    namespace N1.N2
-                    {
-                        class C { }
-                    }
-                    """,
+                namespace N1.N2
+                {
+                    class C { }
+                }
+                """,
                 path: "File2.cs"
             );
             var originalComp = CreateCompilation(new[] { src1, src2 }, assemblyName: "Test");

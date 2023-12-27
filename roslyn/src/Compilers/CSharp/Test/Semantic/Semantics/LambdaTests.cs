@@ -8330,14 +8330,14 @@ class Program
         {
             CreateCompilation(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                System.Action x = static partial () => { };
-                            }
+                            System.Action x = static partial () => { };
                         }
-                        """
+                    }
+                    """
                 )
                 .VerifyDiagnostics(
                     // (5,34): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
@@ -8358,14 +8358,14 @@ class Program
         {
             CreateCompilation(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                System.Action x = partial static () => { };
-                            }
+                            System.Action x = partial static () => { };
                         }
-                        """
+                    }
+                    """
                 )
                 .VerifyDiagnostics(
                     // (5,27): error CS0103: The name 'partial' does not exist in the current context
@@ -8403,14 +8403,14 @@ class Program
         {
             CreateCompilation(
                     """
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                System.Action x = partial () => { };
-                            }
+                            System.Action x = partial () => { };
                         }
-                        """
+                    }
+                    """
                 )
                 .VerifyDiagnostics(
                     // (5,27): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
@@ -9916,13 +9916,13 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: """
-                        0
-                        1
-                        3
-                        3
-                        null
-                        1
-                        """
+                    0
+                    1
+                    3
+                    3
+                    null
+                    1
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -10064,10 +10064,10 @@ class Program
             CompileAndVerify(
                 source,
                 expectedOutput: """
-                    <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
-                    System.Func`2[System.Int32[],System.Int32]
-                    <>f__AnonymousDelegate1`3[System.Int32[],System.Int32,System.Int32]
-                    """,
+                <>f__AnonymousDelegate0`2[System.Int32,System.Int32]
+                System.Func`2[System.Int32[],System.Int32]
+                <>f__AnonymousDelegate1`3[System.Int32[],System.Int32,System.Int32]
+                """,
                 symbolValidator: static module =>
                 {
                     var lam1 = (NamedTypeSymbol)

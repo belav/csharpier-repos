@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    class C { }
-                    $$
-                    """
+                class C { }
+                $$
+                """
             );
         }
 
@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    System.Console.WriteLine();
-                    $$
-                    """
+                System.Console.WriteLine();
+                $$
+                """
             );
         }
 
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Script,
                 """
-                    int i = 0;
-                    $$
-                    """
+                int i = 0;
+                $$
+                """
             );
         }
 
@@ -78,9 +78,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        $$
-                        return true;
-                        """
+                    $$
+                    return true;
+                    """
                 )
             );
         }
@@ -91,9 +91,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        return true;
-                        $$
-                        """
+                    return true;
+                    $$
+                    """
                 )
             );
         }
@@ -104,10 +104,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        if (true) {
-                        }
-                        $$
-                        """
+                    if (true) {
+                    }
+                    $$
+                    """
                 )
             );
         }
@@ -118,9 +118,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        if (true)
-                            $$
-                        """
+                    if (true)
+                        $$
+                    """
                 )
             );
         }
@@ -131,9 +131,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        do
-                            $$
-                        """
+                    do
+                        $$
+                    """
                 )
             );
         }
@@ -144,9 +144,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        while (true)
-                            $$
-                        """
+                    while (true)
+                        $$
+                    """
                 )
             );
         }
@@ -157,9 +157,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        for (int i = 0; i < 10; i++)
-                            $$
-                        """
+                    for (int i = 0; i < 10; i++)
+                        $$
+                    """
                 )
             );
         }
@@ -170,9 +170,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        foreach (var v in bar)
-                            $$
-                        """
+                    foreach (var v in bar)
+                        $$
+                    """
                 )
             );
         }
@@ -188,11 +188,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                    class C
-                    {
-                      $$
-                    }
-                    """
+                class C
+                {
+                  $$
+                }
+                """
             );
         }
 
@@ -202,10 +202,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                        if (caseOrDefaultKeywordOpt != null) {
-                            if (caseOrDefaultKeyword.Kind != SyntaxKind.CaseKeyword && caseOrDefaultKeyword.Kind != SyntaxKind.DefaultKeyword) 
-                              $$
-                        """
+                    if (caseOrDefaultKeywordOpt != null) {
+                        if (caseOrDefaultKeyword.Kind != SyntaxKind.CaseKeyword && caseOrDefaultKeyword.Kind != SyntaxKind.DefaultKeyword) 
+                          $$
+                    """
                 )
             );
         }
@@ -215,10 +215,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
-                    {
-                        void Goo() => $$
-                    """
+                class C
+                {
+                    void Goo() => $$
+                """
             );
         }
 
@@ -227,12 +227,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
+                class C
+                {
+                    public C(object o)
                     {
-                        public C(object o)
-                        {
-                            _o = o ?? $$
-                    """
+                        _o = o ?? $$
+                """
             );
         }
 
@@ -241,12 +241,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
+                class C
+                {
+                    public C(object o)
                     {
-                        public C(object o)
-                        {
-                            var v= true ? $$
-                    """
+                        var v= true ? $$
+                """
             );
         }
 
@@ -255,12 +255,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                    class C
+                class C
+                {
+                    public C(object o)
                     {
-                        public C(object o)
-                        {
-                            var v= true ? 0 : $$
-                    """
+                        var v= true ? 0 : $$
+                """
             );
         }
     }

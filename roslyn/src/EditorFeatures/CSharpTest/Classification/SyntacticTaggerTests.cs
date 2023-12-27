@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             var snapshot = subjectBuffer.Insert(
                 document.CursorPosition.Value,
                 """
-                    "
-                    """
+                "
+                """
             );
             expectedLength = snapshot.Length;
 

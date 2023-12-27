@@ -41,37 +41,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static T Goo<T>(T x, T y)
                     {
-                        static T Goo<T>(T x, T y)
-                        {
-                            return default(T);
-                        }
-
-                        static void M()
-                        {
-                            var c = [|Goo<int>|](1, 1);
-                        }
+                        return default(T);
                     }
-                    """,
+
+                    static void M()
+                    {
+                        var c = [|Goo<int>|](1, 1);
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static T Goo<T>(T x, T y)
                     {
-                        static T Goo<T>(T x, T y)
-                        {
-                            return default(T);
-                        }
-
-                        static void M()
-                        {
-                            var c = Goo(1, 1);
-                        }
+                        return default(T);
                     }
-                    """
+
+                    static void M()
+                    {
+                        var c = Goo(1, 1);
+                    }
+                }
+                """
             );
         }
 
@@ -80,35 +80,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    using Goo = System;
+                using Goo = System;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                        }
-
-                        class B
-                        {
-                            public [|Goo::Int32|] a;
-                        }
                     }
-                    """,
+
+                    class B
+                    {
+                        public [|Goo::Int32|] a;
+                    }
+                }
+                """,
                 """
-                    using Goo = System;
+                using Goo = System;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                        }
-
-                        class B
-                        {
-                            public int a;
-                        }
                     }
-                    """
+
+                    class B
+                    {
+                        public int a;
+                    }
+                }
+                """
             );
         }
 
@@ -117,27 +117,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace Root
-                    {
-                        using MyType = System.IO.File;
+                namespace Root
+                {
+                    using MyType = System.IO.File;
 
-                        class A
-                        {
-                            [|System.IO.File|] c;
-                        }
+                    class A
+                    {
+                        [|System.IO.File|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace Root
-                    {
-                        using MyType = System.IO.File;
+                namespace Root
+                {
+                    using MyType = System.IO.File;
 
-                        class A
-                        {
-                            MyType c;
-                        }
+                    class A
+                    {
+                        MyType c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -146,27 +146,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    global using MyType = System.IO.File;
+                global using MyType = System.IO.File;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            [|System.IO.File|] c;
-                        }
+                        [|System.IO.File|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    global using MyType = System.IO.File;
+                global using MyType = System.IO.File;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            MyType c;
-                        }
+                        MyType c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -175,32 +175,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferences="true">
-                            <Document>
-                    global using MyType = System.IO.File;
-                            </Document>
-                            <Document>
-                    namespace Root
+                <Workspace>
+                    <Project Language="C#" CommonReferences="true">
+                        <Document>
+                global using MyType = System.IO.File;
+                        </Document>
+                        <Document>
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            [|System.IO.File|] c;
-                        }
-                    }</Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                        [|System.IO.File|] c;
+                    }
+                }</Document>
+                    </Project>
+                </Workspace>
+                """,
                 """
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            MyType c;
-                        }
+                        MyType c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -209,25 +209,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace Root;
+                namespace Root;
 
-                    using MyType = System.IO.File;
+                using MyType = System.IO.File;
 
-                    class A
-                    {
-                        [|System.IO.File|] c;
-                    }
-                    """,
+                class A
+                {
+                    [|System.IO.File|] c;
+                }
+                """,
                 """
-                    namespace Root;
+                namespace Root;
 
-                    using MyType = System.IO.File;
+                using MyType = System.IO.File;
 
-                    class A
-                    {
-                        MyType c;
-                    }
-                    """
+                class A
+                {
+                    MyType c;
+                }
+                """
             );
         }
 
@@ -246,25 +246,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    class A
-                    {
-                        MyType c;
-                    }
-                    """
+                class A
+                {
+                    MyType c;
+                }
+                """
             );
 
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    class A
-                    {
-                        [|System.Exception|] c;
-                    }
-                    """
+                class A
+                {
+                    [|System.Exception|] c;
+                }
+                """
             );
         }
 
@@ -273,27 +273,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace Root
-                    {
-                        using MyType = System.Exception;
+                namespace Root
+                {
+                    using MyType = System.Exception;
 
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                    class A
+                    {
+                        [|System.Exception|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace Root
-                    {
-                        using MyType = System.Exception;
+                namespace Root
+                {
+                    using MyType = System.Exception;
 
-                        class A
-                        {
-                            MyType c;
-                        }
+                    class A
+                    {
+                        MyType c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -302,27 +302,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                        [|System.Exception|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            MyType c;
-                        }
+                        MyType c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -331,33 +331,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Nested
                     {
-                        namespace Nested
+                        class A
                         {
-                            class A
-                            {
-                                [|System.Exception|] c;
-                            }
+                            [|System.Exception|] c;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Nested
                     {
-                        namespace Nested
+                        class A
                         {
-                            class A
-                            {
-                                MyType c;
-                            }
+                            MyType c;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -366,21 +366,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    class A
-                    {
-                        [|System.Exception|] c;
-                    }
-                    """,
+                class A
+                {
+                    [|System.Exception|] c;
+                }
+                """,
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    class A
-                    {
-                        MyType c;
-                    }
-                    """
+                class A
+                {
+                    MyType c;
+                }
+                """
             );
         }
 
@@ -389,27 +389,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace Root
-                    {
-                        using MyType = System.Exception;
+                namespace Root
+                {
+                    using MyType = System.Exception;
 
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                    class A
+                    {
+                        [|System.Exception|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace Root
-                    {
-                        using MyType = System.Exception;
+                namespace Root
+                {
+                    using MyType = System.Exception;
 
-                        class A
-                        {
-                            MyType c;
-                        }
+                    class A
+                    {
+                        MyType c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -418,27 +418,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                        [|System.Exception|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            MyType c;
-                        }
+                        MyType c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -447,33 +447,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Nested
                     {
-                        namespace Nested
+                        class A
                         {
-                            class A
-                            {
-                                [|System.Exception|] c;
-                            }
+                            [|System.Exception|] c;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Nested
                     {
-                        namespace Nested
+                        class A
                         {
-                            class A
-                            {
-                                MyType c;
-                            }
+                            MyType c;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -482,33 +482,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using Goo = System.Int32;
+                using Goo = System.Int32;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Nested
                     {
-                        namespace Nested
+                        class A
                         {
-                            class A
-                            {
-                                var c = [|System.Int32|].MaxValue;
-                            }
+                            var c = [|System.Int32|].MaxValue;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using Goo = System.Int32;
+                using Goo = System.Int32;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Nested
                     {
-                        namespace Nested
+                        class A
                         {
-                            class A
-                            {
-                                var c = Goo.MaxValue;
-                            }
+                            var c = Goo.MaxValue;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -517,35 +517,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
-                    using Foo = SimplifyInsideNameof.Program;
+                using System;
+                using Foo = SimplifyInsideNameof.Program;
 
-                    namespace SimplifyInsideNameof
+                namespace SimplifyInsideNameof
+                {
+                  class Program
+                  {
+                    static void Main(string[] args)
                     {
-                      class Program
-                      {
-                        static void Main(string[] args)
-                        {
-                          Console.WriteLine(nameof([|SimplifyInsideNameof.Program|]));
-                        }
-                      }
+                      Console.WriteLine(nameof([|SimplifyInsideNameof.Program|]));
                     }
-                    """,
+                  }
+                }
+                """,
                 """
-                    using System;
-                    using Foo = SimplifyInsideNameof.Program;
+                using System;
+                using Foo = SimplifyInsideNameof.Program;
 
-                    namespace SimplifyInsideNameof
+                namespace SimplifyInsideNameof
+                {
+                  class Program
+                  {
+                    static void Main(string[] args)
                     {
-                      class Program
-                      {
-                        static void Main(string[] args)
-                        {
-                          Console.WriteLine(nameof(Program));
-                        }
-                      }
+                      Console.WriteLine(nameof(Program));
                     }
-                    """
+                  }
+                }
+                """
             );
         }
 
@@ -556,35 +556,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using Goo = SimplifyInsideNameof.Program;
+                using System;
+                using Goo = SimplifyInsideNameof.Program;
 
-                    namespace SimplifyInsideNameof
+                namespace SimplifyInsideNameof
+                {
+                  class Program
+                  {
+                    static void Main(string[] args)
                     {
-                      class Program
-                      {
-                        static void Main(string[] args)
-                        {
-                          Console.WriteLine(nameof([|SimplifyInsideNameof.Program|].Main));
-                        }
-                      }
+                      Console.WriteLine(nameof([|SimplifyInsideNameof.Program|].Main));
                     }
-                    """,
+                  }
+                }
+                """,
                 """
-                    using System;
-                    using Goo = SimplifyInsideNameof.Program;
+                using System;
+                using Goo = SimplifyInsideNameof.Program;
 
-                    namespace SimplifyInsideNameof
+                namespace SimplifyInsideNameof
+                {
+                  class Program
+                  {
+                    static void Main(string[] args)
                     {
-                      class Program
-                      {
-                        static void Main(string[] args)
-                        {
-                          Console.WriteLine(nameof(Main));
-                        }
-                      }
+                      Console.WriteLine(nameof(Main));
                     }
-                    """
+                  }
+                }
+                """
             );
         }
 
@@ -593,43 +593,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using Goo = N.Goo;
+                using System;
+                using Goo = N.Goo;
 
-                    namespace N {
-                        class Goo { }
-                    }
+                namespace N {
+                    class Goo { }
+                }
 
-                    namespace SimplifyInsideNameof
+                namespace SimplifyInsideNameof
+                {
+                  class Program
+                  {
+                    static void Main(string[] args)
                     {
-                      class Program
-                      {
-                        static void Main(string[] args)
-                        {
-                          Console.WriteLine(nameof([|N.Goo|]));
-                        }
-                      }
+                      Console.WriteLine(nameof([|N.Goo|]));
                     }
-                    """,
+                  }
+                }
+                """,
                 """
-                    using System;
-                    using Goo = N.Goo;
+                using System;
+                using Goo = N.Goo;
 
-                    namespace N {
-                        class Goo { }
-                    }
+                namespace N {
+                    class Goo { }
+                }
 
-                    namespace SimplifyInsideNameof
+                namespace SimplifyInsideNameof
+                {
+                  class Program
+                  {
+                    static void Main(string[] args)
                     {
-                      class Program
-                      {
-                        static void Main(string[] args)
-                        {
-                          Console.WriteLine(nameof(Goo));
-                        }
-                      }
+                      Console.WriteLine(nameof(Goo));
                     }
-                    """
+                  }
+                }
+                """
             );
         }
 
@@ -638,31 +638,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType1 = System.Exception;
+                using MyType1 = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    using MyType2 = Exception;
+
+                    class A
                     {
-                        using MyType2 = Exception;
-
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                        [|System.Exception|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType1 = System.Exception;
+                using MyType1 = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    using MyType2 = Exception;
+
+                    class A
                     {
-                        using MyType2 = Exception;
-
-                        class A
-                        {
-                            MyType1 c;
-                        }
+                        MyType1 c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -671,31 +671,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType1 = System.Exception;
+                using MyType1 = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    using MyType2 = [|System.Exception|];
+
+                    class A
                     {
-                        using MyType2 = [|System.Exception|];
-
-                        class A
-                        {
-                            System.Exception c;
-                        }
+                        System.Exception c;
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType1 = System.Exception;
+                using MyType1 = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    using MyType2 = MyType1;
+
+                    class A
                     {
-                        using MyType2 = MyType1;
-
-                        class A
-                        {
-                            System.Exception c;
-                        }
+                        System.Exception c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -704,18 +704,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    using MyType = Exception;
+
+                    class A
                     {
-                        using MyType = Exception;
-
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                        [|System.Exception|] c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -724,21 +724,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public int MyType => 3;
+                        public int MyType => 3;
 
-                            void M()
-                            {
-                                var x = [|System.ConsoleColor|].Red;
-                            }
+                        void M()
+                        {
+                            var x = [|System.ConsoleColor|].Red;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -747,21 +747,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public System.ConsoleColor MyType() => 3;
+                        public System.ConsoleColor MyType() => 3;
 
-                            void M()
-                            {
-                                var x = [|System.ConsoleColor|].Red;
-                            }
+                        void M()
+                        {
+                            var x = [|System.ConsoleColor|].Red;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -770,37 +770,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public System.ConsoleColor MyType => 3;
+                        public System.ConsoleColor MyType => 3;
 
-                            void M()
-                            {
-                                var x = [|System.ConsoleColor|].Red;
-                            }
+                        void M()
+                        {
+                            var x = [|System.ConsoleColor|].Red;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public System.ConsoleColor MyType => 3;
+                        public System.ConsoleColor MyType => 3;
 
-                            void M()
-                            {
-                                var x = MyType.Red;
-                            }
+                        void M()
+                        {
+                            var x = MyType.Red;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -809,37 +809,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public System.ConsoleColor MyType = 3;
+                        public System.ConsoleColor MyType = 3;
 
-                            void M()
-                            {
-                                var x = [|System.ConsoleColor|].Red;
-                            }
+                        void M()
+                        {
+                            var x = [|System.ConsoleColor|].Red;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public System.ConsoleColor MyType = 3;
+                        public System.ConsoleColor MyType = 3;
 
-                            void M()
-                            {
-                                var x = MyType.Red;
-                            }
+                        void M()
+                        {
+                            var x = MyType.Red;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -848,33 +848,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
+                        void M(System.ConsoleColor MyType)
                         {
-                            void M(System.ConsoleColor MyType)
-                            {
-                                var x = [|System.ConsoleColor|].Red;
-                            }
+                            var x = [|System.ConsoleColor|].Red;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
+                        void M(System.ConsoleColor MyType)
                         {
-                            void M(System.ConsoleColor MyType)
-                            {
-                                var x = MyType.Red;
-                            }
+                            var x = MyType.Red;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -883,63 +883,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = Root.Inner.Inner2;
+                using MyType = Root.Inner.Inner2;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Inner
                     {
-                        namespace Inner
+                        namespace Inner2
                         {
-                            namespace Inner2
+                            public class Red
                             {
-                                public class Red
+                                public static void Goo()
                                 {
-                                    public static void Goo()
-                                    {
-                                    }
                                 }
                             }
                         }
+                    }
 
-                        class A
+                    class A
+                    {
+                        public int MyType => 3;
+
+                        void M()
                         {
-                            public int MyType => 3;
-
-                            void M()
-                            {
-                                [|Root.Inner.Inner2|].Red.Goo();
-                            }
+                            [|Root.Inner.Inner2|].Red.Goo();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = Root.Inner.Inner2;
+                using MyType = Root.Inner.Inner2;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Inner
                     {
-                        namespace Inner
+                        namespace Inner2
                         {
-                            namespace Inner2
+                            public class Red
                             {
-                                public class Red
+                                public static void Goo()
                                 {
-                                    public static void Goo()
-                                    {
-                                    }
                                 }
                             }
                         }
+                    }
 
-                        class A
+                    class A
+                    {
+                        public int MyType => 3;
+
+                        void M()
                         {
-                            public int MyType => 3;
-
-                            void M()
-                            {
-                                Inner.Inner2.Red.Goo();
-                            }
+                            Inner.Inner2.Red.Goo();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -948,59 +948,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = Root.Inner.Inner2;
+                using MyType = Root.Inner.Inner2;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Inner
                     {
-                        namespace Inner
+                        namespace Inner2
                         {
-                            namespace Inner2
+                            public class Red
                             {
-                                public class Red
+                                public static void Goo()
                                 {
-                                    public static void Goo()
-                                    {
-                                    }
                                 }
                             }
                         }
+                    }
 
-                        class A
+                    class A
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                [|Root.Inner.Inner2|].Red.Goo();
-                            }
+                            [|Root.Inner.Inner2|].Red.Goo();
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = Root.Inner.Inner2;
+                using MyType = Root.Inner.Inner2;
 
-                    namespace Root
+                namespace Root
+                {
+                    namespace Inner
                     {
-                        namespace Inner
+                        namespace Inner2
                         {
-                            namespace Inner2
+                            public class Red
                             {
-                                public class Red
+                                public static void Goo()
                                 {
-                                    public static void Goo()
-                                    {
-                                    }
                                 }
                             }
                         }
+                    }
 
-                        class A
+                    class A
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                MyType.Red.Goo();
-                            }
+                            MyType.Red.Goo();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1009,31 +1009,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public int MyType => 3;
+                        public int MyType => 3;
 
-                            [|System.ConsoleColor|] x;
-                        }
+                        [|System.ConsoleColor|] x;
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.ConsoleColor;
+                using MyType = System.ConsoleColor;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            public int MyType => 3;
+                        public int MyType => 3;
 
-                            MyType x;
-                        }
+                        MyType x;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1042,19 +1042,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Example
+                class Example
+                {
+                    /// <summary>
+                    /// <see cref="[|Example|].ToString"/>
+                    /// </summary>
+                    void Method()
                     {
-                        /// <summary>
-                        /// <see cref="[|Example|].ToString"/>
-                        /// </summary>
-                        void Method()
-                        {
-                        }
-
-                        public override string ToString() => throw null;
-                        public string ToString(string format, IFormatProvider formatProvider) => throw null;
                     }
-                    """
+
+                    public override string ToString() => throw null;
+                    public string ToString(string format, IFormatProvider formatProvider) => throw null;
+                }
+                """
             );
         }
 
@@ -1063,19 +1063,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Example
+                class Example
+                {
+                    /// <summary>
+                    /// <see cref="[|Example.ToString|]"/>
+                    /// </summary>
+                    void Method()
                     {
-                        /// <summary>
-                        /// <see cref="[|Example.ToString|]"/>
-                        /// </summary>
-                        void Method()
-                        {
-                        }
-
-                        public override string ToString() => throw null;
-                        public string ToString(string format, IFormatProvider formatProvider) => throw null;
                     }
-                    """
+
+                    public override string ToString() => throw null;
+                    public string ToString(string format, IFormatProvider formatProvider) => throw null;
+                }
+                """
             );
         }
 
@@ -1084,29 +1084,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Example
+                class Example
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            _ = nameof([|Example|].Goo);
-                        }
-
-                        public static void Goo() { }
-                        public static void Goo(int i) { }
+                        _ = nameof([|Example|].Goo);
                     }
-                    """,
+
+                    public static void Goo() { }
+                    public static void Goo(int i) { }
+                }
+                """,
                 """
-                    class Example
+                class Example
+                {
+                    void Method()
                     {
-                        void Method()
-                        {
-                            _ = nameof(Goo);
-                        }
-
-                        public static void Goo() { }
-                        public static void Goo(int i) { }
+                        _ = nameof(Goo);
                     }
-                    """
+
+                    public static void Goo() { }
+                    public static void Goo(int i) { }
+                }
+                """
             );
         }
 
@@ -1115,31 +1115,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    using MyType = [|System.Exception|];
+
+                    class A
                     {
-                        using MyType = [|System.Exception|];
-
-                        class A
-                        {
-                            System.Exception c;
-                        }
+                        System.Exception c;
                     }
-                    """,
+                }
+                """,
                 """
-                    using MyType = System.Exception;
+                using MyType = System.Exception;
 
-                    namespace Root
+                namespace Root
+                {
+                    using MyType = MyType;
+
+                    class A
                     {
-                        using MyType = MyType;
-
-                        class A
-                        {
-                            System.Exception c;
-                        }
+                        System.Exception c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1176,11 +1176,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    class A
-                    {
-                        int i;
-                    }
-                    """,
+                class A
+                {
+                    int i;
+                }
+                """,
                 options: featureOptions
             );
             await TestActionCountAsync(
@@ -1190,11 +1190,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             );
             await TestSpansAsync(
                 """
-                    class A
-                    {
-                        [|System.Int32|] i;
-                    }
-                    """,
+                class A
+                {
+                    [|System.Int32|] i;
+                }
+                """,
                 parameters: new TestParameters(options: featureOptions)
             );
         }
@@ -1268,30 +1268,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    using System;
+                using System;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            Exception c;
-                        }
+                        Exception c;
                     }
-                    """
+                }
+                """
             );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            [|System|].Exception c;
-                        }
+                        [|System|].Exception c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1312,28 +1312,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    using System;
+                using System;
 
-                    namespace Root;
+                namespace Root;
 
-                    class A
-                    {
-                        Exception c;
-                    }
-                    """
+                class A
+                {
+                    Exception c;
+                }
+                """
             );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace Root;
+                namespace Root;
 
-                    class A
-                    {
-                        [|System|].Exception c;
-                    }
-                    """
+                class A
+                {
+                    [|System|].Exception c;
+                }
+                """
             );
         }
 
@@ -1342,23 +1342,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace System
+                namespace System
+                {
+                    class A
                     {
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                        [|System.Exception|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace System
+                namespace System
+                {
+                    class A
                     {
-                        class A
-                        {
-                            Exception c;
-                        }
+                        Exception c;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1367,37 +1367,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N1
+                namespace N1
+                {
+                    public class A1
                     {
-                        public class A1
-                        {
-                        }
+                    }
 
-                        namespace N2
+                    namespace N2
+                    {
+                        public class A2
                         {
-                            public class A2
-                            {
-                                [|N1.A1|] a;
-                            }
+                            [|N1.A1|] a;
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N1
+                namespace N1
+                {
+                    public class A1
                     {
-                        public class A1
-                        {
-                        }
+                    }
 
-                        namespace N2
+                    namespace N2
+                    {
+                        public class A2
                         {
-                            public class A2
-                            {
-                                A1 a;
-                            }
+                            A1 a;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1407,37 +1407,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             // this is failing since we can't speculatively bind namespace yet
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N1
+                namespace N1
+                {
+                    namespace N2
                     {
-                        namespace N2
+                        public class A1
                         {
-                            public class A1
-                            {
-                            }
-                        }
-
-                        public class A2
-                        {
-                            [|N1.N2.A1|] a;
                         }
                     }
-                    """,
+
+                    public class A2
+                    {
+                        [|N1.N2.A1|] a;
+                    }
+                }
+                """,
                 """
-                    namespace N1
+                namespace N1
+                {
+                    namespace N2
                     {
-                        namespace N2
+                        public class A1
                         {
-                            public class A1
-                            {
-                            }
-                        }
-
-                        public class A2
-                        {
-                            N2.A1 a;
                         }
                     }
-                    """
+
+                    public class A2
+                    {
+                        N2.A1 a;
+                    }
+                }
+                """
             );
         }
 
@@ -1446,37 +1446,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N1
+                namespace N1
+                {
+                    class NC1
                     {
-                        class NC1
+                        public class A1
                         {
-                            public class A1
-                            {
-                            }
-                        }
-
-                        public class A2
-                        {
-                            [|N1.NC1.A1|] a;
                         }
                     }
-                    """,
+
+                    public class A2
+                    {
+                        [|N1.NC1.A1|] a;
+                    }
+                }
+                """,
                 """
-                    namespace N1
+                namespace N1
+                {
+                    class NC1
                     {
-                        class NC1
+                        public class A1
                         {
-                            public class A1
-                            {
-                            }
-                        }
-
-                        public class A2
-                        {
-                            NC1.A1 a;
                         }
                     }
-                    """
+
+                    public class A2
+                    {
+                        NC1.A1 a;
+                    }
+                }
+                """
             );
         }
 
@@ -1523,19 +1523,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    namespace N1
+                namespace N1
+                {
+                    namespace N2
                     {
-                        namespace N2
+                        public class A2
                         {
-                            public class A2
-                            {
-                                public class A1 { }
+                            public class A1 { }
 
-                                A1 a;
-                            }
+                            A1 a;
                         }
                     }
-                    """
+                }
+                """
             );
 
             await TestActionCountAsync(source, 1);
@@ -1574,16 +1574,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    using System;
+                using System;
 
-                    namespace N1
+                namespace N1
+                {
+                    public class A1
                     {
-                        public class A1
-                        {
-                            EventHandler<EventArgs> a;
-                        }
+                        EventHandler<EventArgs> a;
                     }
-                    """
+                }
+                """
             );
 
             await TestActionCountAsync(source, 1);
@@ -1595,27 +1595,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace N1
+                namespace N1
+                {
+                    public class A1
                     {
-                        public class A1
-                        {
-                            {|FixAllInDocument:System.Action|}<System.Action<System.Action<System.EventArgs>, System.Action<System.Action<System.EventArgs, System.Action<System.EventArgs>, System.Action<System.Action<System.Action<System.Action<System.EventArgs>, System.Action<System.EventArgs>>>>>>>> a;
-                        }
+                        {|FixAllInDocument:System.Action|}<System.Action<System.Action<System.EventArgs>, System.Action<System.Action<System.EventArgs, System.Action<System.EventArgs>, System.Action<System.Action<System.Action<System.Action<System.EventArgs>, System.Action<System.EventArgs>>>>>>>> a;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace N1
+                namespace N1
+                {
+                    public class A1
                     {
-                        public class A1
-                        {
-                            Action<Action<Action<EventArgs>, Action<Action<EventArgs, Action<EventArgs>, Action<Action<Action<Action<EventArgs>, Action<EventArgs>>>>>>>> a;
-                        }
+                        Action<Action<Action<EventArgs>, Action<Action<EventArgs, Action<EventArgs>, Action<Action<Action<Action<EventArgs>, Action<EventArgs>>>>>>>> a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1654,30 +1654,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    using MyHandler = System.EventHandler<System.EventArgs>;
+                using MyHandler = System.EventHandler<System.EventArgs>;
 
-                    namespace N1
+                namespace N1
+                {
+                    public class A1
                     {
-                        public class A1
-                        {
-                            System.EventHandler<MyHandler> a;
-                        }
+                        System.EventHandler<MyHandler> a;
                     }
-                    """
+                }
+                """
             );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
-                    using MyHandler = System.EventHandler<System.EventArgs>;
+                using MyHandler = System.EventHandler<System.EventArgs>;
 
-                    namespace N1
+                namespace N1
+                {
+                    public class A1
                     {
-                        public class A1
-                        {
-                            System.EventHandler<[|System.EventHandler<System.EventArgs>|]> a;
-                        }
+                        System.EventHandler<[|System.EventHandler<System.EventArgs>|]> a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1686,45 +1686,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace N1
+                namespace N1
+                {
+                    using MyType = N2.A1<Exception>;
+
+                    namespace N2
                     {
-                        using MyType = N2.A1<Exception>;
-
-                        namespace N2
+                        public class A1<T>
                         {
-                            public class A1<T>
-                            {
-                            }
-                        }
-
-                        class Test
-                        {
-                            [|N1.N2.A1<System.Exception>|] a;
                         }
                     }
-                    """,
+
+                    class Test
+                    {
+                        [|N1.N2.A1<System.Exception>|] a;
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace N1
+                namespace N1
+                {
+                    using MyType = N2.A1<Exception>;
+
+                    namespace N2
                     {
-                        using MyType = N2.A1<Exception>;
-
-                        namespace N2
+                        public class A1<T>
                         {
-                            public class A1<T>
-                            {
-                            }
-                        }
-
-                        class Test
-                        {
-                            MyType a;
                         }
                     }
-                    """
+
+                    class Test
+                    {
+                        MyType a;
+                    }
+                }
+                """
             );
         }
 
@@ -1734,45 +1734,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace N1
+                namespace N1
+                {
+                    using MyType = Exception;
+
+                    namespace N2
                     {
-                        using MyType = Exception;
-
-                        namespace N2
+                        public class A1<T>
                         {
-                            public class A1<T>
-                            {
-                            }
-                        }
-
-                        class Test
-                        {
-                            N1.N2.A1<[|System.Exception|]> a;
                         }
                     }
-                    """,
+
+                    class Test
+                    {
+                        N1.N2.A1<[|System.Exception|]> a;
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace N1
+                namespace N1
+                {
+                    using MyType = Exception;
+
+                    namespace N2
                     {
-                        using MyType = Exception;
-
-                        namespace N2
+                        public class A1<T>
                         {
-                            public class A1<T>
-                            {
-                            }
-                        }
-
-                        class Test
-                        {
-                            N2.A1<MyType> a;
                         }
                     }
-                    """
+
+                    class Test
+                    {
+                        N2.A1<MyType> a;
+                    }
+                }
+                """
             );
         }
 
@@ -1781,27 +1781,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    namespace N1
+                namespace N1
+                {
+                    class Test
                     {
-                        class Test
-                        {
-                            [|System.Collections.Generic.List<System.String[]>|] a;
-                        }
+                        [|System.Collections.Generic.List<System.String[]>|] a;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    namespace N1
+                namespace N1
+                {
+                    class Test
                     {
-                        class Test
-                        {
-                            List<string[]> a;
-                        }
+                        List<string[]> a;
                     }
-                    """
+                }
+                """
             );
 
             // TODO: The below test is currently disabled due to restrictions of the test framework, this needs to be fixed.
@@ -1832,27 +1832,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    namespace N1
+                namespace N1
+                {
+                    class Test
                     {
-                        class Test
-                        {
-                            [|System.Collections.Generic.List<System.String[][,][,,,]>|] a;
-                        }
+                        [|System.Collections.Generic.List<System.String[][,][,,,]>|] a;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Collections.Generic;
+                using System.Collections.Generic;
 
-                    namespace N1
+                namespace N1
+                {
+                    class Test
                     {
-                        class Test
-                        {
-                            List<string[][,][,,,]> a;
-                        }
+                        List<string[][,][,,,]> a;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1865,16 +1865,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = nameof([|Int32|]);
-                        }
+                        var x = nameof([|Int32|]);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1883,14 +1883,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = nameof([|System.Int32|]);
-                        }
+                        var x = nameof([|System.Int32|]);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1903,16 +1903,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = nameof([|Int32|].MaxValue);
-                        }
+                        var x = nameof([|Int32|].MaxValue);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1925,37 +1925,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = nameof(typeof([|Int32|]));
-                        }
-
-                        static string nameof(Type t)
-                        {
-                            return string.Empty;
-                        }
+                        var x = nameof(typeof([|Int32|]));
                     }
-                    """,
+
+                    static string nameof(Type t)
+                    {
+                        return string.Empty;
+                    }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = nameof(typeof(int));
-                        }
-
-                        static string nameof(Type t)
-                        {
-                            return string.Empty;
-                        }
+                        var x = nameof(typeof(int));
                     }
-                    """
+
+                    static string nameof(Type t)
+                    {
+                        return string.Empty;
+                    }
+                }
+                """
             );
         }
 
@@ -1964,27 +1964,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = nameof([|System.Int32|]);
-                        }
+                        var x = nameof([|System.Int32|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = nameof(Int32);
-                        }
+                        var x = nameof(Int32);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -1993,29 +1993,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N1
+                namespace N1
+                {
+                    public class C1
                     {
-                        public class C1
+                        /// <see cref="[|System.Int32|]"/>
+                        public C1()
                         {
-                            /// <see cref="[|System.Int32|]"/>
-                            public C1()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N1
+                namespace N1
+                {
+                    public class C1
                     {
-                        public class C1
+                        /// <see cref="int"/>
+                        public C1()
                         {
-                            /// <see cref="int"/>
-                            public C1()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeEverywhere
             );
         }
@@ -2042,6 +2042,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
+                using I64 = System.Int64;
+                using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
+
+                namespace N1
+                {
+                    class Test
+                    {
+                    }
+                }
+                """,
+                """
+                using I64 = System.Int64;
+                using Goo = System.Collections.Generic.IList<long>;
+
+                namespace N1
+                {
+                    class Test
+                    {
+                    }
+                }
+                """
+            );
+        }
+
+        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
+        public async Task SimplifyAlias3()
+        {
+            await TestWithPredefinedTypeOptionsAsync(
+                """
+                namespace Outer
+                {
                     using I64 = System.Int64;
                     using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
 
@@ -2051,8 +2082,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         {
                         }
                     }
-                    """,
+                }
+                """,
                 """
+                namespace Outer
+                {
                     using I64 = System.Int64;
                     using Goo = System.Collections.Generic.IList<long>;
 
@@ -2062,42 +2096,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         {
                         }
                     }
-                    """
-            );
-        }
-
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
-        public async Task SimplifyAlias3()
-        {
-            await TestWithPredefinedTypeOptionsAsync(
+                }
                 """
-                    namespace Outer
-                    {
-                        using I64 = System.Int64;
-                        using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
-
-                        namespace N1
-                        {
-                            class Test
-                            {
-                            }
-                        }
-                    }
-                    """,
-                """
-                    namespace Outer
-                    {
-                        using I64 = System.Int64;
-                        using Goo = System.Collections.Generic.IList<long>;
-
-                        namespace N1
-                        {
-                            class Test
-                            {
-                            }
-                        }
-                    }
-                    """
             );
         }
 
@@ -2106,35 +2106,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    using I64 = System.Int64;
+                using I64 = System.Int64;
 
-                    namespace Outer
+                namespace Outer
+                {
+                    using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
+
+                    namespace N1
                     {
-                        using Goo = System.Collections.Generic.IList<[|System.Int64|]>;
-
-                        namespace N1
+                        class Test
                         {
-                            class Test
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using I64 = System.Int64;
+                using I64 = System.Int64;
 
-                    namespace Outer
+                namespace Outer
+                {
+                    using Goo = System.Collections.Generic.IList<long>;
+
+                    namespace N1
                     {
-                        using Goo = System.Collections.Generic.IList<long>;
-
-                        namespace N1
+                        class Test
                         {
-                            class Test
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2166,27 +2166,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using alias1 = A;
+                using alias1 = A;
 
-                    class A
+                class A
+                {
+                    public [|A|] M()
                     {
-                        public [|A|] M()
-                        {
-                            return null;
-                        }
+                        return null;
                     }
-                    """,
+                }
+                """,
                 """
-                    using alias1 = A;
+                using alias1 = A;
 
-                    class A
+                class A
+                {
+                    public alias1 M()
                     {
-                        public alias1 M()
-                        {
-                            return null;
-                        }
+                        return null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2195,21 +2195,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class A<T>
-                    {
-                        class B : A<B>
-                        {
-                        }
-
-                        class C : I<B>, I<[|B.B|]>
-                        {
-                        }
-                    }
-
-                    interface I<T>
+                class A<T>
+                {
+                    class B : A<B>
                     {
                     }
-                    """
+
+                    class C : I<B>, I<[|B.B|]>
+                    {
+                    }
+                }
+
+                interface I<T>
+                {
+                }
+                """
             );
         }
 
@@ -2218,21 +2218,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class A<T>
-                    {
-                        class B : A<B>
-                        {
-                        }
-
-                        class C : I<B>, [|B.B|]
-                        {
-                        }
-                    }
-
-                    interface I<T>
+                class A<T>
+                {
+                    class B : A<B>
                     {
                     }
-                    """
+
+                    class C : I<B>, [|B.B|]
+                    {
+                    }
+                }
+
+                interface I<T>
+                {
+                }
+                """
             );
         }
 
@@ -2273,13 +2273,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    using M = System.Collections.Generic.IList<[|System.Collections.Generic.IList<>|]>;
+                using System.Collections.Generic;
+                using M = System.Collections.Generic.IList<[|System.Collections.Generic.IList<>|]>;
 
-                    class C
-                    {
-                    }
-                    """
+                class C
+                {
+                }
+                """
             );
         }
 
@@ -2289,22 +2289,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class A<T>
+                class A<T>
+                {
+                    class D : A<T[]>
                     {
-                        class D : A<T[]>
-                        {
-                        }
-
-                        class B
-                        {
-                        }
-
-                        class C<Y>
-                        {
-                            D.B x = new [|D.B|]();
-                        }
                     }
-                    """
+
+                    class B
+                    {
+                    }
+
+                    class C<Y>
+                    {
+                        D.B x = new [|D.B|]();
+                    }
+                }
+                """
             );
         }
 
@@ -2313,22 +2313,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class A<T>
+                class A<T>
+                {
+                    class D : A<T[]>
                     {
-                        class D : A<T[]>
-                        {
-                        }
-
-                        class B
-                        {
-                        }
-
-                        class C<T>
-                        {
-                            D.B x = new [|D.B|]();
-                        }
                     }
-                    """
+
+                    class B
+                    {
+                    }
+
+                    class C<T>
+                    {
+                        D.B x = new [|D.B|]();
+                    }
+                }
+                """
             );
         }
 
@@ -2337,31 +2337,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|global::System|].String s;
-                        }
+                        [|global::System|].String s;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            string s;
-                        }
+                        string s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2377,159 +2377,159 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace OuterNamespace
+                namespace OuterNamespace
+                {
+                    namespace InnerNamespace
                     {
-                        namespace InnerNamespace
+                        class InnerClass1
                         {
-                            class InnerClass1
-                            {
-                            }
-                        }
-
-                        class OuterClass1
-                        {
-                            OuterNamespace.OuterClass1 M1()
-                            {
-                                [|OuterNamespace.OuterClass1|] c1;
-                                OuterNamespace.OuterClass1.Equals(1, 2);
-                            }
-
-                            OuterNamespace.OuterClass2 M2()
-                            {
-                                OuterNamespace.OuterClass2 c1;
-                                OuterNamespace.OuterClass2.Equals(1, 2);
-                            }
-
-                            OuterNamespace.InnerNamespace.InnerClass1 M3()
-                            {
-                                OuterNamespace.InnerNamespace.InnerClass1 c1;
-                                OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
-                            }
-
-                            InnerNamespace.InnerClass1 M3()
-                            {
-                                InnerNamespace.InnerClass1 c1;
-                                global::OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
-                            }
-
-                            void OuterClass2()
-                            {
-                            }
-
-                            void InnerClass1()
-                            {
-                            }
-
-                            void InnerNamespace()
-                            {
-                            }
-                        }
-
-                        class OuterClass2
-                        {
-                            OuterNamespace.OuterClass1 M1()
-                            {
-                                OuterNamespace.OuterClass1 c1;
-                                OuterNamespace.OuterClass1.Equals(1, 2);
-                            }
-
-                            OuterNamespace.OuterClass2 M2()
-                            {
-                                OuterNamespace.OuterClass2 c1;
-                                OuterNamespace.OuterClass2.Equals(1, 2);
-                            }
-
-                            OuterNamespace.InnerNamespace.InnerClass1 M3()
-                            {
-                                OuterNamespace.InnerNamespace.InnerClass1 c1;
-                                OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
-                            }
-
-                            InnerNamespace.InnerClass1 M3()
-                            {
-                                InnerNamespace.InnerClass1 c1;
-                                InnerNamespace.InnerClass1.Equals(1, 2);
-                            }
                         }
                     }
-                    """,
+
+                    class OuterClass1
+                    {
+                        OuterNamespace.OuterClass1 M1()
+                        {
+                            [|OuterNamespace.OuterClass1|] c1;
+                            OuterNamespace.OuterClass1.Equals(1, 2);
+                        }
+
+                        OuterNamespace.OuterClass2 M2()
+                        {
+                            OuterNamespace.OuterClass2 c1;
+                            OuterNamespace.OuterClass2.Equals(1, 2);
+                        }
+
+                        OuterNamespace.InnerNamespace.InnerClass1 M3()
+                        {
+                            OuterNamespace.InnerNamespace.InnerClass1 c1;
+                            OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
+                        }
+
+                        InnerNamespace.InnerClass1 M3()
+                        {
+                            InnerNamespace.InnerClass1 c1;
+                            global::OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
+                        }
+
+                        void OuterClass2()
+                        {
+                        }
+
+                        void InnerClass1()
+                        {
+                        }
+
+                        void InnerNamespace()
+                        {
+                        }
+                    }
+
+                    class OuterClass2
+                    {
+                        OuterNamespace.OuterClass1 M1()
+                        {
+                            OuterNamespace.OuterClass1 c1;
+                            OuterNamespace.OuterClass1.Equals(1, 2);
+                        }
+
+                        OuterNamespace.OuterClass2 M2()
+                        {
+                            OuterNamespace.OuterClass2 c1;
+                            OuterNamespace.OuterClass2.Equals(1, 2);
+                        }
+
+                        OuterNamespace.InnerNamespace.InnerClass1 M3()
+                        {
+                            OuterNamespace.InnerNamespace.InnerClass1 c1;
+                            OuterNamespace.InnerNamespace.InnerClass1.Equals(1, 2);
+                        }
+
+                        InnerNamespace.InnerClass1 M3()
+                        {
+                            InnerNamespace.InnerClass1 c1;
+                            InnerNamespace.InnerClass1.Equals(1, 2);
+                        }
+                    }
+                }
+                """,
                 """
-                    namespace OuterNamespace
+                namespace OuterNamespace
+                {
+                    namespace InnerNamespace
                     {
-                        namespace InnerNamespace
+                        class InnerClass1
                         {
-                            class InnerClass1
-                            {
-                            }
-                        }
-
-                        class OuterClass1
-                        {
-                            OuterClass1 M1()
-                            {
-                                OuterClass1 c1;
-                                Equals(1, 2);
-                            }
-
-                            OuterClass2 M2()
-                            {
-                                OuterClass2 c1;
-                                Equals(1, 2);
-                            }
-
-                            InnerNamespace.InnerClass1 M3()
-                            {
-                                InnerNamespace.InnerClass1 c1;
-                                Equals(1, 2);
-                            }
-
-                            InnerNamespace.InnerClass1 M3()
-                            {
-                                InnerNamespace.InnerClass1 c1;
-                                Equals(1, 2);
-                            }
-
-                            void OuterClass2()
-                            {
-                            }
-
-                            void InnerClass1()
-                            {
-                            }
-
-                            void InnerNamespace()
-                            {
-                            }
-                        }
-
-                        class OuterClass2
-                        {
-                            OuterClass1 M1()
-                            {
-                                OuterClass1 c1;
-                                Equals(1, 2);
-                            }
-
-                            OuterClass2 M2()
-                            {
-                                OuterClass2 c1;
-                                Equals(1, 2);
-                            }
-
-                            InnerNamespace.InnerClass1 M3()
-                            {
-                                InnerNamespace.InnerClass1 c1;
-                                Equals(1, 2);
-                            }
-
-                            InnerNamespace.InnerClass1 M3()
-                            {
-                                InnerNamespace.InnerClass1 c1;
-                                Equals(1, 2);
-                            }
                         }
                     }
-                    """,
+
+                    class OuterClass1
+                    {
+                        OuterClass1 M1()
+                        {
+                            OuterClass1 c1;
+                            Equals(1, 2);
+                        }
+
+                        OuterClass2 M2()
+                        {
+                            OuterClass2 c1;
+                            Equals(1, 2);
+                        }
+
+                        InnerNamespace.InnerClass1 M3()
+                        {
+                            InnerNamespace.InnerClass1 c1;
+                            Equals(1, 2);
+                        }
+
+                        InnerNamespace.InnerClass1 M3()
+                        {
+                            InnerNamespace.InnerClass1 c1;
+                            Equals(1, 2);
+                        }
+
+                        void OuterClass2()
+                        {
+                        }
+
+                        void InnerClass1()
+                        {
+                        }
+
+                        void InnerNamespace()
+                        {
+                        }
+                    }
+
+                    class OuterClass2
+                    {
+                        OuterClass1 M1()
+                        {
+                            OuterClass1 c1;
+                            Equals(1, 2);
+                        }
+
+                        OuterClass2 M2()
+                        {
+                            OuterClass2 c1;
+                            Equals(1, 2);
+                        }
+
+                        InnerNamespace.InnerClass1 M3()
+                        {
+                            InnerNamespace.InnerClass1 c1;
+                            Equals(1, 2);
+                        }
+
+                        InnerNamespace.InnerClass1 M3()
+                        {
+                            InnerNamespace.InnerClass1 c1;
+                            Equals(1, 2);
+                        }
+                    }
+                }
+                """,
                 index: 1
             );
         }
@@ -2540,45 +2540,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main()
-                            {
-                                [|N.Program.Goo.Bar|]();
-                                int Goo;
                             }
                         }
+
+                        static void Main()
+                        {
+                            [|N.Program.Goo.Bar|]();
+                            int Goo;
+                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main()
-                            {
-                                Program.Goo.Bar();
-                                int Goo;
                             }
                         }
+
+                        static void Main()
+                        {
+                            Program.Goo.Bar();
+                            int Goo;
+                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2588,43 +2588,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main(int Goo)
-                            {
-                                [|N.Program.Goo.Bar|]();
                             }
                         }
+
+                        static void Main(int Goo)
+                        {
+                            [|N.Program.Goo.Bar|]();
+                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main(int Goo)
-                            {
-                                Program.Goo.Bar();
                             }
                         }
+
+                        static void Main(int Goo)
+                        {
+                            Program.Goo.Bar();
+                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2634,49 +2634,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
                             }
+                        }
 
-                            static void Main()
+                        static void Main()
+                        {
+                            [|N.Program.Goo.Bar|]();
                             {
-                                [|N.Program.Goo.Bar|]();
-                                {
-                                    int Goo;
-                                }
+                                int Goo;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
                             }
+                        }
 
-                            static void Main()
+                        static void Main()
+                        {
+                            Goo.Bar();
                             {
-                                Goo.Bar();
-                                {
-                                    int Goo;
-                                }
+                                int Goo;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2686,49 +2686,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System.Linq;
+                using System.Linq;
 
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main(int[] args)
-                            {
-                                [|N.Program.Goo.Bar|]();
-                                var q = from Goo in args select Goo;
                             }
                         }
+
+                        static void Main(int[] args)
+                        {
+                            [|N.Program.Goo.Bar|]();
+                            var q = from Goo in args select Goo;
+                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System.Linq;
+                using System.Linq;
 
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main(int[] args)
-                            {
-                                Goo.Bar();
-                                var q = from Goo in args select Goo;
                             }
                         }
+
+                        static void Main(int[] args)
+                        {
+                            Goo.Bar();
+                            var q = from Goo in args select Goo;
+                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2737,17 +2737,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program<T>
+                class Program<T>
+                {
+                    public class Inner
                     {
-                        public class Inner
+                        [Bar(typeof([|Program<>.Inner|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<>.Inner|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2756,29 +2756,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public class Inner<T>
                     {
-                        public class Inner<T>
+                        [Bar(typeof([|Program.Inner<>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program.Inner<>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public class Inner<T>
                     {
-                        public class Inner<T>
+                        [Bar(typeof(Inner<>))]
+                        void Goo()
                         {
-                            [Bar(typeof(Inner<>))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2787,17 +2787,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof([|Program<>.Inner<>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<>.Inner<>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2806,17 +2806,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof([|Program<X>.Inner<>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<X>.Inner<>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2825,17 +2825,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof([|Program<>.Inner<Y>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<>.Inner<Y>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2844,17 +2844,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof([|Program<Y>.Inner<X>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<Y>.Inner<X>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2863,29 +2863,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public class Inner
                     {
-                        public class Inner
+                        [Bar(typeof([|Program.Inner|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program.Inner|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public class Inner
                     {
-                        public class Inner
+                        [Bar(typeof(Inner))]
+                        void Goo()
                         {
-                            [Bar(typeof(Inner))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2894,29 +2894,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program<T>
+                class Program<T>
+                {
+                    public class Inner
                     {
-                        public class Inner
+                        [Bar(typeof([|Program<T>.Inner|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<T>.Inner|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program<T>
+                class Program<T>
+                {
+                    public class Inner
                     {
-                        public class Inner
+                        [Bar(typeof(Inner))]
+                        void Goo()
                         {
-                            [Bar(typeof(Inner))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2925,29 +2925,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    public class Inner<T>
                     {
-                        public class Inner<T>
+                        [Bar(typeof([|Program.Inner<>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program.Inner<>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program
+                class Program
+                {
+                    public class Inner<T>
                     {
-                        public class Inner<T>
+                        [Bar(typeof(Inner<>))]
+                        void Goo()
                         {
-                            [Bar(typeof(Inner<>))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2956,29 +2956,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof([|Program<X>.Inner<Y>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<X>.Inner<Y>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof(Inner<Y>))]
+                        void Goo()
                         {
-                            [Bar(typeof(Inner<Y>))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -2987,29 +2987,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof([|Program<X>.Inner<X>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<X>.Inner<X>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof(Inner<X>))]
+                        void Goo()
                         {
-                            [Bar(typeof(Inner<X>))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3018,17 +3018,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program<X>
+                class Program<X>
+                {
+                    public class Inner<Y>
                     {
-                        public class Inner<Y>
+                        [Bar(typeof([|Program<Y>.Inner<Y>|]))]
+                        void Goo()
                         {
-                            [Bar(typeof([|Program<Y>.Inner<Y>|]))]
-                            void Goo()
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3037,27 +3037,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #if true
-                    class A
-                    #else
-                    class B
-                    #endif
+                #if true
+                class A
+                #else
+                class B
+                #endif
+                {
+                    class C
                     {
-                        class C
-                        {
-                        }
-
-                        static void Main()
-                        {
-                    #if true
-                            [|A.
-                    #else
-                            B.
-                    #endif
-                                C|] x;
-                        }
                     }
-                    """
+
+                    static void Main()
+                    {
+                #if true
+                        [|A.
+                #else
+                        B.
+                #endif
+                            C|] x;
+                    }
+                }
+                """
             );
         }
 
@@ -3066,21 +3066,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class Program
+                class Program
+                {
+                    class System
                     {
-                        class System
-                        {
-                        }
-
-                        int Console = 7;
-
-                        void Main()
-                        {
-                            string v = null;
-                            [|global::System.Console.WriteLine(v)|];
-                        }
                     }
-                    """
+
+                    int Console = 7;
+
+                    void Main()
+                    {
+                        string v = null;
+                        [|global::System.Console.WriteLine(v)|];
+                    }
+                }
+                """
             );
         }
 
@@ -3089,18 +3089,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    enum E
-                    {
-                    }
+                enum E
+                {
+                }
 
-                    class C
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            var x = ([|global::E|])-1;
-                        }
+                        var x = ([|global::E|])-1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3109,27 +3109,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object x = 1;
-                            var y = [|x as System.Nullable<int>|] + 1;
-                        }
+                        object x = 1;
+                        var y = [|x as System.Nullable<int>|] + 1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void M()
                     {
-                        void M()
-                        {
-                            object x = 1;
-                            var y = (x as int?) + 1;
-                        }
+                        object x = 1;
+                        var y = (x as int?) + 1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3138,23 +3138,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            [|System.Nullable<int>.Equals|](1, 1);
-                        }
+                        [|System.Nullable<int>.Equals|](1, 1);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Equals(1, 1);
-                        }
+                        Equals(1, 1);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3163,21 +3163,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    static void Main([|System.Nullable<int>|] i)
                     {
-                        static void Main([|System.Nullable<int>|] i)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void Main(int? i)
                     {
-                        static void Main(int? i)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3186,21 +3186,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    class C
+                class C
+                {
+                    static void Main([|System.Nullable<System.Int32>|] i)
                     {
-                        static void Main([|System.Nullable<System.Int32>|] i)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void Main(int? i)
                     {
-                        static void Main(int? i)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3209,27 +3209,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var x = [|1 is System.Nullable<int>|]? 2 : 3;
-                        }
+                        var x = [|1 is System.Nullable<int>|]? 2 : 3;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            var x = 1 is int? ? 2 : 3;
-                        }
+                        var x = 1 is int? ? 2 : 3;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3238,14 +3238,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="[|Nullable{T}|]"/>
-                    /// </summary>
-                    class A
-                    {
-                    }
-                    """
+                using System;
+                /// <summary>
+                /// <see cref="[|Nullable{T}|]"/>
+                /// </summary>
+                class A
+                {
+                }
+                """
             );
         }
 
@@ -3254,13 +3254,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    /// <summary>
-                    /// <see cref="[|System.Nullable{T}|]"/>
-                    /// </summary>
-                    class A
-                    {
-                    }
-                    """
+                /// <summary>
+                /// <see cref="[|System.Nullable{T}|]"/>
+                /// </summary>
+                class A
+                {
+                }
+                """
             );
         }
 
@@ -3269,13 +3269,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    /// <summary>
-                    /// <see cref="[|System.Nullable{T}|].Value"/>
-                    /// </summary>
-                    class A
-                    {
-                    }
-                    """
+                /// <summary>
+                /// <see cref="[|System.Nullable{T}|].Value"/>
+                /// </summary>
+                class A
+                {
+                }
+                """
             );
         }
 
@@ -3284,23 +3284,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="C{[|Nullable{T}|]}"/>
-                    /// </summary>
-                    class C<T>
-                    {
-                    }
-                    """,
+                using System;
+                /// <summary>
+                /// <see cref="C{[|Nullable{T}|]}"/>
+                /// </summary>
+                class C<T>
+                {
+                }
+                """,
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="C{T?}"/>
-                    /// </summary>
-                    class C<T>
-                    {
-                    }
-                    """
+                using System;
+                /// <summary>
+                /// <see cref="C{T?}"/>
+                /// </summary>
+                class C<T>
+                {
+                }
+                """
             );
         }
 
@@ -3309,16 +3309,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    /// <summary>
-                    /// <see cref="A.M{[|Nullable{T}|]}()"/>
-                    /// </summary>
-                    class A
+                /// <summary>
+                /// <see cref="A.M{[|Nullable{T}|]}()"/>
+                /// </summary>
+                class A
+                {
+                    public void M<U>() where U : struct
                     {
-                        public void M<U>() where U : struct
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3328,14 +3328,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="[|Nullable{int}|]"/>
-                    /// </summary>
-                    class A
-                    {
-                    }
-                    """
+                using System;
+                /// <summary>
+                /// <see cref="[|Nullable{int}|]"/>
+                /// </summary>
+                class A
+                {
+                }
+                """
             );
         }
 
@@ -3345,23 +3345,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="[|System.Nullable{int}|]"/>
-                    /// </summary>
-                    class A
-                    {
-                    }
-                    """,
+                using System;
+                /// <summary>
+                /// <see cref="[|System.Nullable{int}|]"/>
+                /// </summary>
+                class A
+                {
+                }
+                """,
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="Nullable{int}"/>
-                    /// </summary>
-                    class A
-                    {
-                    }
-                    """
+                using System;
+                /// <summary>
+                /// <see cref="Nullable{int}"/>
+                /// </summary>
+                class A
+                {
+                }
+                """
             );
         }
 
@@ -3372,23 +3372,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             // actual type-references in a type-arg list.
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="C{[|Nullable{int}|]}"/>
-                    /// </summary>
-                    class C<T>
-                    {
-                    }
-                    """,
+                using System;
+                /// <summary>
+                /// <see cref="C{[|Nullable{int}|]}"/>
+                /// </summary>
+                class C<T>
+                {
+                }
+                """,
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="C{int?}"/>
-                    /// </summary>
-                    class C<T>
-                    {
-                    }
-                    """
+                using System;
+                /// <summary>
+                /// <see cref="C{int?}"/>
+                /// </summary>
+                class C<T>
+                {
+                }
+                """
             );
         }
 
@@ -3397,25 +3397,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="Goo([|Nullable{int}|])"/>
-                    /// </summary>
-                    class C
-                    {
-                        void Goo(int? i) { }
-                    }
-                    """,
+                using System;
+                /// <summary>
+                /// <see cref="Goo([|Nullable{int}|])"/>
+                /// </summary>
+                class C
+                {
+                    void Goo(int? i) { }
+                }
+                """,
                 """
-                    using System;
-                    /// <summary>
-                    /// <see cref="Goo(int?)"/>
-                    /// </summary>
-                    class C
-                    {
-                        void Goo(int? i) { }
-                    }
-                    """
+                using System;
+                /// <summary>
+                /// <see cref="Goo(int?)"/>
+                /// </summary>
+                class C
+                {
+                    void Goo(int? i) { }
+                }
+                """
             );
         }
 
@@ -3424,16 +3424,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    /// <summary>
-                    /// <see cref="A.M{[|Nullable{int}|]}()"/>
-                    /// </summary>
-                    class A
+                /// <summary>
+                /// <see cref="A.M{[|Nullable{int}|]}()"/>
+                /// </summary>
+                class A
+                {
+                    public void M<U>() where U : struct
                     {
-                        public void M<U>() where U : struct
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3442,27 +3442,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    /// <summary>
-                    /// <see cref="A.M([|System.Nullable{A}|])"/>
-                    /// </summary>
-                    struct A
+                /// <summary>
+                /// <see cref="A.M([|System.Nullable{A}|])"/>
+                /// </summary>
+                struct A
+                {
+                    public void M(A? x)
                     {
-                        public void M(A? x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    /// <summary>
-                    /// <see cref="A.M(A?)"/>
-                    /// </summary>
-                    struct A
+                /// <summary>
+                /// <see cref="A.M(A?)"/>
+                /// </summary>
+                struct A
+                {
+                    public void M(A? x)
                     {
-                        public void M(A? x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3471,27 +3471,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    /// <summary>
-                    /// <see cref="M([|System.Nullable{A}|])"/>
-                    /// </summary>
-                    struct A
+                /// <summary>
+                /// <see cref="M([|System.Nullable{A}|])"/>
+                /// </summary>
+                struct A
+                {
+                    public void M(A? x)
                     {
-                        public void M(A? x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    /// <summary>
-                    /// <see cref="M(A?)"/>
-                    /// </summary>
-                    struct A
+                /// <summary>
+                /// <see cref="M(A?)"/>
+                /// </summary>
+                struct A
+                {
+                    public void M(A? x)
                     {
-                        public void M(A? x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3500,31 +3500,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    /// <summary>
-                    /// <see cref="A.M(List{[|Nullable{int}|]})"/>
-                    /// </summary>
-                    class A
+                using System;
+                using System.Collections.Generic;
+                /// <summary>
+                /// <see cref="A.M(List{[|Nullable{int}|]})"/>
+                /// </summary>
+                class A
+                {
+                    public void M(List<int?> x)
                     {
-                        public void M(List<int?> x)
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    /// <summary>
-                    /// <see cref="A.M(List{int?})"/>
-                    /// </summary>
-                    class A
+                using System;
+                using System.Collections.Generic;
+                /// <summary>
+                /// <see cref="A.M(List{int?})"/>
+                /// </summary>
+                class A
+                {
+                    public void M(List<int?> x)
                     {
-                        public void M(List<int?> x)
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3533,31 +3533,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    /// <summary>
-                    /// <see cref="A.M{U}(List{[|Nullable{U}|]})"/>
-                    /// </summary>
-                    class A
+                using System;
+                using System.Collections.Generic;
+                /// <summary>
+                /// <see cref="A.M{U}(List{[|Nullable{U}|]})"/>
+                /// </summary>
+                class A
+                {
+                    public void M<U>(List<U?> x) where U : struct
                     {
-                        public void M<U>(List<U?> x) where U : struct
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    /// <summary>
-                    /// <see cref="A.M{U}(List{U?})"/>
-                    /// </summary>
-                    class A
+                using System;
+                using System.Collections.Generic;
+                /// <summary>
+                /// <see cref="A.M{U}(List{U?})"/>
+                /// </summary>
+                class A
+                {
+                    public void M<U>(List<U?> x) where U : struct
                     {
-                        public void M<U>(List<U?> x) where U : struct
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3566,31 +3566,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    /// <summary>
-                    /// <see cref="A.M{T}(List{Nullable{T}}, [|Nullable{T}|])"/>
-                    /// </summary>
-                    class A
+                using System;
+                using System.Collections.Generic;
+                /// <summary>
+                /// <see cref="A.M{T}(List{Nullable{T}}, [|Nullable{T}|])"/>
+                /// </summary>
+                class A
+                {
+                    public void M<U>(List<U?> x, U? y) where U : struct
                     {
-                        public void M<U>(List<U?> x, U? y) where U : struct
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Collections.Generic;
-                    /// <summary>
-                    /// <see cref="A.M{T}(List{Nullable{T}}, T?)"/>
-                    /// </summary>
-                    class A
+                using System;
+                using System.Collections.Generic;
+                /// <summary>
+                /// <see cref="A.M{T}(List{Nullable{T}}, T?)"/>
+                /// </summary>
+                class A
+                {
+                    public void M<U>(List<U?> x, U? y) where U : struct
                     {
-                        public void M<U>(List<U?> x, U? y) where U : struct
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3599,59 +3599,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using N;
+                using N;
 
-                    namespace N
+                namespace N
+                {
+                    class Color
                     {
-                        class Color
+                        public static void Goo()
                         {
-                            public static void Goo()
-                            {
-                            }
+                        }
 
-                            public void Bar()
-                            {
-                            }
+                        public void Bar()
+                        {
                         }
                     }
+                }
 
-                    class Program
+                class Program
+                {
+                    Color Color;
+
+                    void Main()
                     {
-                        Color Color;
-
-                        void Main()
-                        {
-                            [|N.Color|].Goo();
-                        }
+                        [|N.Color|].Goo();
                     }
-                    """,
+                }
+                """,
                 """
-                    using N;
+                using N;
 
-                    namespace N
+                namespace N
+                {
+                    class Color
                     {
-                        class Color
+                        public static void Goo()
                         {
-                            public static void Goo()
-                            {
-                            }
+                        }
 
-                            public void Bar()
-                            {
-                            }
+                        public void Bar()
+                        {
                         }
                     }
+                }
 
-                    class Program
+                class Program
+                {
+                    Color Color;
+
+                    void Main()
                     {
-                        Color Color;
-
-                        void Main()
-                        {
-                            Color.Goo();
-                        }
+                        Color.Goo();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3660,32 +3660,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using N;
+                using N;
 
-                    namespace N
+                namespace N
+                {
+                    class Color
                     {
-                        class Color
+                        public static void Goo()
                         {
-                            public static void Goo()
-                            {
-                            }
+                        }
 
-                            public void Bar()
-                            {
-                            }
+                        public void Bar()
+                        {
                         }
                     }
+                }
 
-                    class Program
+                class Program
+                {
+                    Color Color;
+
+                    void Main()
                     {
-                        Color Color;
-
-                        void Main()
-                        {
-                            [|Color.Goo|]();
-                        }
+                        [|Color.Goo|]();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3694,43 +3694,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Goo
                     {
-                        class Goo
+                        public static void Bar()
                         {
-                            public static void Bar()
-                            {
-                            }
-                        }
-
-                        /// <summary>
-                        /// <see cref="[|N|].Goo.Bar"/>
-                        /// </summary>
-                        class Program
-                        {
-                            public Goo Goo;
                         }
                     }
-                    """,
+
+                    /// <summary>
+                    /// <see cref="[|N|].Goo.Bar"/>
+                    /// </summary>
+                    class Program
+                    {
+                        public Goo Goo;
+                    }
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Goo
                     {
-                        class Goo
+                        public static void Bar()
                         {
-                            public static void Bar()
-                            {
-                            }
-                        }
-
-                        /// <summary>
-                        /// <see cref="Goo.Bar"/>
-                        /// </summary>
-                        class Program
-                        {
-                            public Goo Goo;
                         }
                     }
-                    """
+
+                    /// <summary>
+                    /// <see cref="Goo.Bar"/>
+                    /// </summary>
+                    class Program
+                    {
+                        public Goo Goo;
+                    }
+                }
+                """
             );
         }
 
@@ -3739,45 +3739,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Goo
                     {
-                        class Goo
+                        public class Bar
                         {
-                            public class Bar
-                            {
-                                public class Baz { }
-                            }
-                        }
-
-                        /// <summary>
-                        /// <see cref="[|N|].Goo.Bar.Baz"/>
-                        /// </summary>
-                        class Program
-                        {
-                            public Goo Goo;
+                            public class Baz { }
                         }
                     }
-                    """,
+
+                    /// <summary>
+                    /// <see cref="[|N|].Goo.Bar.Baz"/>
+                    /// </summary>
+                    class Program
+                    {
+                        public Goo Goo;
+                    }
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Goo
                     {
-                        class Goo
+                        public class Bar
                         {
-                            public class Bar
-                            {
-                                public class Baz { }
-                            }
-                        }
-
-                        /// <summary>
-                        /// <see cref="Goo.Bar.Baz"/>
-                        /// </summary>
-                        class Program
-                        {
-                            public Goo Goo;
+                            public class Baz { }
                         }
                     }
-                    """
+
+                    /// <summary>
+                    /// <see cref="Goo.Bar.Baz"/>
+                    /// </summary>
+                    class Program
+                    {
+                        public Goo Goo;
+                    }
+                }
+                """
             );
         }
 
@@ -3786,22 +3786,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingAsync(
                 """
-                    using A;
+                using A;
 
-                    namespace A
-                    {
-                        public struct Goo { }
-                    }
+                namespace A
+                {
+                    public struct Goo { }
+                }
 
-                    namespace N
+                namespace N
+                {
+                    /// <summary><see cref="[|A|].Goo"/></summary
+                    class Color
                     {
-                        /// <summary><see cref="[|A|].Goo"/></summary
-                        class Color
-                        {
-                            public Goo Goo;
-                        }
+                        public Goo Goo;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3810,40 +3810,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingAsync(
                 """
-                    using System.Reflection.Metadata;
-                    using Microsoft.Cci;
+                using System.Reflection.Metadata;
+                using Microsoft.Cci;
 
-                    namespace System.Reflection.Metadata
+                namespace System.Reflection.Metadata
+                {
+                    public enum PrimitiveTypeCode
                     {
-                        public enum PrimitiveTypeCode
-                        {
-                            Void = 1,
-                        }
+                        Void = 1,
+                    }
+                }
+
+                namespace Microsoft.Cci
+                {
+                    internal enum PrimitiveTypeCode
+                    {
+                        NotPrimitive,
+                        Pointer,
+                    }
+                }
+
+                namespace Microsoft.CodeAnalysis.CSharp.Symbols
+                {
+                    internal class TypeSymbol
+                    {
+                        internal Cci.PrimitiveTypeCode PrimitiveTypeCode => Cci.PrimitiveTypeCode.Pointer;
                     }
 
-                    namespace Microsoft.Cci
+                    internal partial class NamedTypeSymbol : TypeSymbol
                     {
-                        internal enum PrimitiveTypeCode
-                        {
-                            NotPrimitive,
-                            Pointer,
-                        }
+                        Cci.PrimitiveTypeCode TypeCode
+                            => [|Cci|].PrimitiveTypeCode.NotPrimitive;
                     }
-
-                    namespace Microsoft.CodeAnalysis.CSharp.Symbols
-                    {
-                        internal class TypeSymbol
-                        {
-                            internal Cci.PrimitiveTypeCode PrimitiveTypeCode => Cci.PrimitiveTypeCode.Pointer;
-                        }
-
-                        internal partial class NamedTypeSymbol : TypeSymbol
-                        {
-                            Cci.PrimitiveTypeCode TypeCode
-                                => [|Cci|].PrimitiveTypeCode.NotPrimitive;
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -3862,14 +3862,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestAsync(
                 source,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Program a = null; 
-                        }
+                        Program a = null; 
                     }
-                    """,
+                }
+                """,
                 parseOptions: null
             );
 
@@ -3881,27 +3881,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = [|System.Console.Read|]() + System.Console.Read();
-                        }
+                        int x = [|System.Console.Read|]() + System.Console.Read();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            int x = Console.Read() + System.Console.Read();
-                        }
+                        int x = Console.Read() + System.Console.Read();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3929,23 +3929,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    class Preserve
-                    {
-                        public static int Y;
-                    }
+                class Preserve
+                {
+                    public static int Y;
+                }
 
-                    class Z<T> : Preserve
-                    {
-                    }
+                class Z<T> : Preserve
+                {
+                }
 
-                    static class M
+                static class M
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int k = Preserve.Y;
-                        }
+                        int k = Preserve.Y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -3976,26 +3976,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    class Preserve
+                class Preserve
+                {
+                    public class X
                     {
-                        public class X
-                        {
-                            public static int Y;
-                        }
+                        public static int Y;
                     }
+                }
 
-                    class Z<T> : Preserve
-                    {
-                    }
+                class Z<T> : Preserve
+                {
+                }
 
-                    class M
+                class M
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int k = Preserve.X.Y;
-                        }
+                        int k = Preserve.X.Y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4025,16 +4025,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = [|Console.WriteLine|];
-                        }
+                        Action a = [|Console.WriteLine|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4043,16 +4043,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = [|Console.Blah|];
-                        }
+                        Action a = [|Console.Blah|];
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4061,27 +4061,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = [|System.Console.WriteLine|];
-                        }
+                        Action a = [|System.Console.WriteLine|];
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main()
                     {
-                        static void Main()
-                        {
-                            Action a = Console.WriteLine;
-                        }
+                        Action a = Console.WriteLine;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4090,59 +4090,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using goo = A.B;
-                    using bar = C.D;
+                using goo = A.B;
+                using bar = C.D;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var s = [|new C.D().prop|];
-                        }
+                        var s = [|new C.D().prop|];
                     }
+                }
 
-                    namespace A
+                namespace A
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
                     }
+                }
 
-                    namespace C
+                namespace C
+                {
+                    class D
                     {
-                        class D
-                        {
-                            public A.B prop { get; set; }
-                        }
+                        public A.B prop { get; set; }
                     }
-                    """,
+                }
+                """,
                 """
-                    using goo = A.B;
-                    using bar = C.D;
+                using goo = A.B;
+                using bar = C.D;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var s = new bar().prop;
-                        }
+                        var s = new bar().prop;
                     }
+                }
 
-                    namespace A
+                namespace A
+                {
+                    class B
                     {
-                        class B
-                        {
-                        }
                     }
+                }
 
-                    namespace C
+                namespace C
+                {
+                    class D
                     {
-                        class D
-                        {
-                            public A.B prop { get; set; }
-                        }
+                        public A.B prop { get; set; }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4151,47 +4151,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Collections.Generic;
-                    using System.Linq;
+                using System.Collections.Generic;
+                using System.Linq;
 
-                    namespace NSA
+                namespace NSA
+                {
+                    class DuplicateClassName
                     {
-                        class DuplicateClassName
+                    }
+                }
+
+                namespace NSB
+                {
+                    class DuplicateClassName
+                    {
+                    }
+                }
+
+                namespace Test
+                {
+                    using AliasA = NSA.DuplicateClassName;
+                    using AliasB = NSB.DuplicateClassName;
+
+                    class TestClass
+                    {
+                        static void Main(string[] args)
                         {
+                            var localA = new NSA.DuplicateClassName();
+                            var localB = new NSB.DuplicateClassName();
+                            new List<NoAlias.Goo>().Where(m => [|m.InnocentProperty|] == null);
                         }
                     }
+                }
 
-                    namespace NSB
+                namespace NoAlias
+                {
+                    class Goo
                     {
-                        class DuplicateClassName
-                        {
-                        }
+                        public NSB.DuplicateClassName InnocentProperty { get; set; }
                     }
-
-                    namespace Test
-                    {
-                        using AliasA = NSA.DuplicateClassName;
-                        using AliasB = NSB.DuplicateClassName;
-
-                        class TestClass
-                        {
-                            static void Main(string[] args)
-                            {
-                                var localA = new NSA.DuplicateClassName();
-                                var localB = new NSB.DuplicateClassName();
-                                new List<NoAlias.Goo>().Where(m => [|m.InnocentProperty|] == null);
-                            }
-                        }
-                    }
-
-                    namespace NoAlias
-                    {
-                        class Goo
-                        {
-                            public NSB.DuplicateClassName InnocentProperty { get; set; }
-                        }
-                    }
-                    """
+                }
+                """
             );
         }
 
@@ -4200,16 +4200,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var w = new [|Nullable<>|].
-                        }
+                        var w = new [|Nullable<>|].
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4218,16 +4218,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = typeof([|Nullable<>|]);
-                        }
+                        var x = typeof([|Nullable<>|]);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4236,26 +4236,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                        }
                     }
+                }
 
-                    struct S
+                struct S
+                {
+                    int x;
+
+                    S(dynamic y)
                     {
-                        int x;
-
-                        S(dynamic y)
-                        {
-                            [|object.Equals|](y, 0);
-                            x = y;
-                        }
+                        [|object.Equals|](y, 0);
+                        x = y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4264,26 +4264,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                        }
                     }
+                }
 
-                    struct S
+                struct S
+                {
+                    int x;
+
+                    S(dynamic y)
                     {
-                        int x;
-
-                        S(dynamic y)
-                        {
-                            x = y;
-                            [|this.Equals|](y, 0);
-                        }
+                        x = y;
+                        [|this.Equals|](y, 0);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4292,29 +4292,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using S = X;
+                using S = X;
 
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                        }
+                    }
+                }
+
+                namespace X
+                {
+                    using S = System;
+
+                    enum E
+                    {
                     }
 
-                    namespace X
+                    class C<E>
                     {
-                        using S = System;
-
-                        enum E
-                        {
-                        }
-
-                        class C<E>
-                        {
-                            [|X|].E e; // Simplify type name as suggested
-                        }
+                        [|X|].E e; // Simplify type name as suggested
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4323,37 +4323,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class B
+                class B
+                {
+                    public static void Goo(int x, object y)
                     {
-                        public static void Goo(int x, object y)
-                        {
-                        }
+                    }
 
-                        static void Main()
+                    static void Main()
+                    {
+                        C<string>.D.Goo(0);
+                    }
+                }
+
+                class C<T> : B
+                {
+                    public class D : C<T> // Start rename session and try to rename D to T
+                    {
+                        public static void Goo(dynamic x)
                         {
-                            C<string>.D.Goo(0);
+                            Console.WriteLine([|D.Goo(x, ")|]);
                         }
                     }
 
-                    class C<T> : B
+                    public static string Goo(int x, T y)
                     {
-                        public class D : C<T> // Start rename session and try to rename D to T
-                        {
-                            public static void Goo(dynamic x)
-                            {
-                                Console.WriteLine([|D.Goo(x, ")|]);
-                            }
-                        }
-
-                        public static string Goo(int x, T y)
-                        {
-                            string s = null;
-                            return s;
-                        }
+                        string s = null;
+                        return s;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4362,15 +4362,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestSpansAsync(
                 """
-                    using goo = System.Console;
-                    class Program
+                using goo = System.Console;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|System.Console|].Read();
-                        }
+                        [|System.Console|].Read();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4379,13 +4379,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C<T, S>
+                class C<T, S>
+                {
+                    class D : C<[|D.D|], D.D.D>
                     {
-                        class D : C<[|D.D|], D.D.D>
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4394,14 +4394,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            ([|this.Goo|])();
-                        }
+                        ([|this.Goo|])();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4410,33 +4410,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class B
+                class B
+                {
+                    static void Goo(int x, object y)
                     {
-                        static void Goo(int x, object y)
-                        {
-                        }
-
-                        static void Goo<T>(dynamic x)
-                        {
-                            Console.WriteLine([|C<T>.Goo|](x, "));
-                        }
-
-                        static void Main()
-                        {
-                            Goo<string>(0);
-                        }
                     }
 
-                    class C<T> : B
+                    static void Goo<T>(dynamic x)
                     {
-                        public static string Goo(int x, T y)
-                        {
-                            return "Hello world";
-                        }
+                        Console.WriteLine([|C<T>.Goo|](x, "));
                     }
-                    """
+
+                    static void Main()
+                    {
+                        Goo<string>(0);
+                    }
+                }
+
+                class C<T> : B
+                {
+                    public static string Goo(int x, T y)
+                    {
+                        return "Hello world";
+                    }
+                }
+                """
             );
         }
 
@@ -4445,38 +4445,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestSpansAsync(
                 """
-                    using Generic = System.Collections.Generic;
-                    class Program
+                using Generic = System.Collections.Generic;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new [|System.Collections|].Generic.List<int>();
-                        }
+                        var x = new [|System.Collections|].Generic.List<int>();
                     }
-                    """
+                }
+                """
             );
 
             await TestInRegularAndScriptAsync(
                 """
-                    using Generic = System.Collections.Generic;
-                    class Program
+                using Generic = System.Collections.Generic;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new [|System.Collections|].Generic.List<int>();
-                        }
+                        var x = new [|System.Collections|].Generic.List<int>();
                     }
-                    """,
+                }
+                """,
                 """
-                    using Generic = System.Collections.Generic;
-                    class Program
+                using Generic = System.Collections.Generic;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var x = new Generic.List<int>();
-                        }
+                        var x = new Generic.List<int>();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4485,38 +4485,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestSpansAsync(
                 """
-                    using Console = System.Console;
-                    class Program
+                using Console = System.Console;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|System|].Console.WriteLine("goo");
-                        }
+                        [|System|].Console.WriteLine("goo");
                     }
-                    """
+                }
+                """
             );
 
             await TestInRegularAndScriptAsync(
                 """
-                    using Console = System.Console;
-                    class Program
+                using Console = System.Console;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|System|].Console.WriteLine("goo");
-                        }
+                        [|System|].Console.WriteLine("goo");
                     }
-                    """,
+                }
+                """,
                 """
-                    using Console = System.Console;
-                    class Program
+                using Console = System.Console;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            Console.WriteLine("goo");
-                        }
+                        Console.WriteLine("goo");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4525,20 +4525,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class Program
+                class Program
+                {
+                    public static void GetA
+
+                    [[|System.Diagnostics|].CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+                    public static ISet<string> GetAllFilesInSolution()
                     {
-                        public static void GetA
-
-                        [[|System.Diagnostics|].CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-                        public static ISet<string> GetAllFilesInSolution()
-                        {
-                            return null;
-                        }
+                        return null;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4547,13 +4547,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using Goo = System.Int32;
+                using Goo = System.Int32;
 
-                    class C
-                    {
-                        [|Goo|] f;
-                    }
-                    """
+                class C
+                {
+                    [|Goo|] f;
+                }
+                """
             );
         }
 
@@ -4562,25 +4562,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestSpansAsync(
                 """
-                    namespace A
+                namespace A
+                {
+                    class Program
                     {
-                        class Program
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                var x = A.B.OtherClass.Test[|<int>|](5);
-                            }
-                        }
-
-                        namespace B
-                        {
-                            class OtherClass
-                            {
-                                public static int Test<T>(T t) { return 5; }
-                            }
+                            var x = A.B.OtherClass.Test[|<int>|](5);
                         }
                     }
-                    """
+
+                    namespace B
+                    {
+                        class OtherClass
+                        {
+                            public static int Test<T>(T t) { return 5; }
+                        }
+                    }
+                }
+                """
             );
         }
 
@@ -4589,11 +4589,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    [[|Attribute|]]
-                    class Attribute : System.Attribute
-                    {
-                    }
-                    """
+                [[|Attribute|]]
+                class Attribute : System.Attribute
+                {
+                }
+                """
             );
         }
 
@@ -4602,16 +4602,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        int x;
+                class C
+                {
+                    int x;
 
-                        public void z()
-                        {
-                            [|this|].x = 4;
-                        }
+                    public void z()
+                    {
+                        [|this|].x = 4;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.QualifyFieldAccess,
@@ -4627,25 +4627,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    class C
-                    {
-                        [|System.Int32|] x;
+                class C
+                {
+                    [|System.Int32|] x;
 
-                        public void z()
-                        {
-                        }
+                    public void z()
+                    {
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
-                    {
-                        int x;
+                class C
+                {
+                    int x;
 
-                        public void z()
-                        {
-                        }
+                    public void z()
+                    {
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -4654,23 +4654,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    [|System.Int32|]? x;
+                    public void z()
                     {
-                        [|System.Int32|]? x;
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    int? x;
+                    public void z()
                     {
-                        int? x;
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeEverywhere
             );
         }
@@ -4680,25 +4680,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    /// <see cref="[|Int32|]"/>
+                    public void z()
                     {
-                        /// <see cref="[|Int32|]"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    /// <see cref="int"/>
+                    public void z()
                     {
-                        /// <see cref="int"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeInMemberAccess
             );
         }
@@ -4708,23 +4708,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="[|System.Int32|]"/>
+                    public void z()
                     {
-                        /// <see cref="[|System.Int32|]"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="int"/>
+                    public void z()
                     {
-                        /// <see cref="int"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeEverywhere
             );
         }
@@ -4734,25 +4734,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    /// <see cref="[|Int32|].MaxValue"/>
+                    public void z()
                     {
-                        /// <see cref="[|Int32|].MaxValue"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    /// <see cref="int.MaxValue"/>
+                    public void z()
                     {
-                        /// <see cref="int.MaxValue"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeEverywhere
             );
         }
@@ -4763,16 +4763,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    /// <see cref="[|Int32|]"/>
+                    public void z()
                     {
-                        /// <see cref="[|Int32|]"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
@@ -4789,27 +4789,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    /// <see cref="[|Int32|]"/>
+                    public void z()
                     {
-                        /// <see cref="[|Int32|]"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    /// <see cref="int"/>
+                    public void z()
                     {
-                        /// <see cref="int"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeInMemberAccess
             );
         }
@@ -4820,16 +4820,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    /// <see cref="[|Int32|].MaxValue"/>
+                    public void z()
                     {
-                        /// <see cref="[|Int32|].MaxValue"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
@@ -4845,27 +4845,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    /// <see cref="[|Int32|].MaxValue"/>
+                    public void z()
                     {
-                        /// <see cref="[|Int32|].MaxValue"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    /// <see cref="int.MaxValue"/>
+                    public void z()
                     {
-                        /// <see cref="int.MaxValue"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeInMemberAccess
             );
         }
@@ -4875,14 +4875,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
+                    public void z()
                     {
-                        /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
@@ -4898,23 +4898,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
+                    public void z()
                     {
-                        /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="System.Collections.Generic.List{T}.CopyTo(int, T[], int, int)"/>
+                    public void z()
                     {
-                        /// <see cref="System.Collections.Generic.List{T}.CopyTo(int, T[], int, int)"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeInMemberAccess
             );
         }
@@ -4924,14 +4924,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
+                    public void z()
                     {
-                        /// <see cref="System.Collections.Generic.List{T}.CopyTo([|System.Int32|], T[], int, int)"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: PreferIntrinsicTypeInDeclaration)
             );
         }
@@ -4941,16 +4941,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        [|System.Int32|] x;
+                class C
+                {
+                    [|System.Int32|] x;
 
-                        public void z(System.Int32 y)
-                        {
-                            System.Int32 z = 9;
-                        }
+                    public void z(System.Int32 y)
+                    {
+                        System.Int32 z = 9;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
@@ -4966,16 +4966,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        System.Int32 x;
+                class C
+                {
+                    System.Int32 x;
 
-                        public void z([|System.Int32|] y)
-                        {
-                            System.Int32 z = 9;
-                        }
+                    public void z([|System.Int32|] y)
+                    {
+                        System.Int32 z = 9;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
@@ -4991,16 +4991,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
-                    {
-                        System.Int32 x;
+                class C
+                {
+                    System.Int32 x;
 
-                        public void z(System.Int32 y)
-                        {
-                            [|System.Int32|] z = 9;
-                        }
+                    public void z(System.Int32 y)
+                    {
+                        [|System.Int32|] z = 9;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
@@ -5016,23 +5016,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            var sss = [|System.Int32|].MaxValue;
-                        }
+                        var sss = [|System.Int32|].MaxValue;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            var sss = int.MaxValue;
-                        }
+                        var sss = int.MaxValue;
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeInMemberAccess
             );
         }
@@ -5042,27 +5042,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            var sss = [|Int32|].MaxValue;
-                        }
+                        var sss = [|Int32|].MaxValue;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            var sss = int.MaxValue;
-                        }
+                        var sss = int.MaxValue;
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeInMemberAccess
             );
         }
@@ -5072,21 +5072,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C1
+                class C1
+                {
+                    public static void z()
                     {
-                        public static void z()
-                        {
-                            var sss = [|C2.Memb|].ToString();
-                        }
+                        var sss = [|C2.Memb|].ToString();
                     }
+                }
 
-                    class C2
-                    {
-                        public static int Memb;
-                    }
-                    """
+                class C2
+                {
+                    public static int Memb;
+                }
+                """
             );
         }
 
@@ -5095,16 +5095,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            var sss = [|Int32|].MaxValue;
-                        }
+                        var sss = [|Int32|].MaxValue;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
@@ -5120,14 +5120,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            var sss = [|System.Int32|].MaxValue;
-                        }
+                        var sss = [|System.Int32|].MaxValue;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(
                     options: Option(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
@@ -5143,52 +5143,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            [|System.Console.WriteLine|](");
-                        }
+                        [|System.Console.WriteLine|](");
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            Console.WriteLine(");
-                        }
+                        Console.WriteLine(");
                     }
-                    """
+                }
+                """
             );
 
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            [|System.Int32|] a;
-                        }
+                        [|System.Int32|] a;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    public void z()
                     {
-                        public void z()
-                        {
-                            int a;
-                        }
+                        int a;
                     }
-                    """,
+                }
+                """,
                 parameters: new TestParameters(options: PreferIntrinsicTypeEverywhere)
             );
         }
@@ -5198,33 +5198,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void F()
                     {
-                        static void F()
+                        object o = null;
+                        if (![|(o is Byte)|])
                         {
-                            object o = null;
-                            if (![|(o is Byte)|])
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Program
+                class Program
+                {
+                    static void F()
                     {
-                        static void F()
+                        object o = null;
+                        if (!(o is byte))
                         {
-                            object o = null;
-                            if (!(o is byte))
-                            {
-                            }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5233,23 +5233,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    namespace ClassLibrary2
+                namespace ClassLibrary2
+                {
+                    public class Class1
                     {
-                        public class Class1
-                        {
-                            public object X => ([|System.Int32|])0;
-                        }
+                        public object X => ([|System.Int32|])0;
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace ClassLibrary2
+                namespace ClassLibrary2
+                {
+                    public class Class1
                     {
-                        public class Class1
-                        {
-                            public object X => (int)0;
-                        }
+                        public object X => (int)0;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5258,17 +5258,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    class C
-                    {
-                        public string Goo() => ([|System.String|])";
-                    }
-                    """,
+                class C
+                {
+                    public string Goo() => ([|System.String|])";
+                }
+                """,
                 """
-                    class C
-                    {
-                        public string Goo() => (string)";
-                    }
-                    """
+                class C
+                {
+                    public string Goo() => (string)";
+                }
+                """
             );
         }
 
@@ -5277,17 +5277,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    class C
-                    {
-                        public int this[int index] => ([|System.Int32|])0;
-                    }
-                    """,
+                class C
+                {
+                    public int this[int index] => ([|System.Int32|])0;
+                }
+                """,
                 """
-                    class C
-                    {
-                        public int this[int index] => (int)0;
-                    }
-                    """
+                class C
+                {
+                    public int this[int index] => (int)0;
+                }
+                """
             );
         }
 
@@ -5296,31 +5296,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    static void F()
                     {
-                        static void F()
-                        {
-                            [|C.G|](out _);
-                        }
-                        static void G(out object o)
-                        {
-                            o = null;
-                        }
+                        [|C.G|](out _);
                     }
-                    """,
+                    static void G(out object o)
+                    {
+                        o = null;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void F()
                     {
-                        static void F()
-                        {
-                            G(out _);
-                        }
-                        static void G(out object o)
-                        {
-                            o = null;
-                        }
+                        G(out _);
                     }
-                    """,
+                    static void G(out object o)
+                    {
+                        o = null;
+                    }
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default
             );
         }
@@ -5330,31 +5330,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    static void F()
                     {
-                        static void F()
-                        {
-                            [|C.G|](out _);
-                        }
-                        static void G(out object o)
-                        {
-                            o = null;
-                        }
+                        [|C.G|](out _);
                     }
-                    """,
+                    static void G(out object o)
+                    {
+                        o = null;
+                    }
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void F()
                     {
-                        static void F()
-                        {
-                            G(out _);
-                        }
-                        static void G(out object o)
-                        {
-                            o = null;
-                        }
+                        G(out _);
                     }
-                    """,
+                    static void G(out object o)
+                    {
+                        o = null;
+                    }
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp6
                 )
@@ -5366,25 +5366,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|UInt32|] value = UInt32.MaxValue;
-                        }
+                        [|UInt32|] value = UInt32.MaxValue;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            uint value = UInt32.MaxValue;
-                        }
+                        uint value = UInt32.MaxValue;
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default,
                 options: PreferIntrinsicTypeInDeclaration
             );
@@ -5395,25 +5395,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            UInt32 value = [|UInt32|].MaxValue;
-                        }
+                        UInt32 value = [|UInt32|].MaxValue;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            UInt32 value = uint.MaxValue;
-                        }
+                        UInt32 value = uint.MaxValue;
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default,
                 options: PreferIntrinsicTypeInMemberAccess
             );
@@ -5424,25 +5424,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestAsync(
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            [|UInt32|].Parse("goo");
-                        }
+                        [|UInt32|].Parse("goo");
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    class C
+                using System;
+                class C
+                {
+                    void Main()
                     {
-                        void Main()
-                        {
-                            uint.Parse("goo");
-                        }
+                        uint.Parse("goo");
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharpParseOptions.Default,
                 options: PreferIntrinsicTypeInMemberAccess
             );
@@ -5453,20 +5453,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        foreach (string arg in [|args|])
                         {
-                            foreach (string arg in [|args|])
-                            {
 
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: PreferImplicitTypeEverywhere)
             );
         }
@@ -5476,20 +5476,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-                    class C
+                class C
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
+                        foreach ([|string|] arg in args)
                         {
-                            foreach ([|string|] arg in args)
-                            {
 
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: PreferImplicitTypeEverywhere)
             );
         }
@@ -5499,17 +5499,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    #nullable enable
-                    using System.Threading.Tasks;
+                #nullable enable
+                using System.Threading.Tasks;
 
-                    class C
+                class C
+                {
+                    Task<string?> FooAsync()
                     {
-                        Task<string?> FooAsync()
-                        {
-                            return Task.FromResult<[|string?|]>("something");
-                        }
+                        return Task.FromResult<[|string?|]>("something");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5525,27 +5525,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            [|System.Exception|] c;
-                        }
+                        [|System.Exception|] c;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace Root
+                namespace Root
+                {
+                    class A
                     {
-                        class A
-                        {
-                            Exception c;
-                        }
+                        Exception c;
                     }
-                    """,
+                }
+                """,
                 compilationOptions: new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary,
                     warningLevel: warningLevel
@@ -5595,19 +5595,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    namespace N
-                    {
-                        using [|global::System.IO|];
-                    }
-                    """,
+                using System;
+                namespace N
+                {
+                    using [|global::System.IO|];
+                }
+                """,
                 """
-                    using System;
-                    namespace N
-                    {
-                        using System.IO;
-                    }
-                    """
+                using System;
+                namespace N
+                {
+                    using System.IO;
+                }
+                """
             );
         }
 
@@ -5616,13 +5616,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestDiagnosticInfoAsync(
                 """
-                    /// <summary>
-                    /// <see cref="[|System.String|]"/>
-                    /// </summary>
-                    class Base
-                    {
-                    }
-                    """,
+                /// <summary>
+                /// <see cref="[|System.String|]"/>
+                /// </summary>
+                class Base
+                {
+                }
+                """,
                 IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
                 DiagnosticSeverity.Hidden
             );
@@ -5633,14 +5633,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         {
             await TestDiagnosticInfoAsync(
                 """
-                    /// <summary>
-                    /// <see cref="Foo([|System.String|])"/>
-                    /// </summary>
-                    class Base
-                    {
-                        public void Foo(string s) { }
-                    }
-                    """,
+                /// <summary>
+                /// <see cref="Foo([|System.String|])"/>
+                /// </summary>
+                class Base
+                {
+                    public void Foo(string s) { }
+                }
+                """,
                 IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
                 DiagnosticSeverity.Hidden
             );
@@ -5702,19 +5702,19 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
-                    namespace N
-                    {
-                        using static [|global::System.Math|];
-                    }
-                    """,
+                using System;
+                namespace N
+                {
+                    using static [|global::System.Math|];
+                }
+                """,
                 """
-                    using System;
-                    namespace N
-                    {
-                        using static System.Math;
-                    }
-                    """
+                using System;
+                namespace N
+                {
+                    using static System.Math;
+                }
+                """
             );
         }
 
@@ -5723,23 +5723,23 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            [|System.Int32|] i = 0;
-                        }
+                        [|System.Int32|] i = 0;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            int i = 0;
-                        }
+                        int i = 0;
                     }
-                    """,
+                }
+                """,
                 options: PreferImplicitTypeEverywhere
             );
         }
@@ -5749,14 +5749,14 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            [|int|] i = 0;
-                        }
+                        [|int|] i = 0;
                     }
-                    """,
+                }
+                """,
                 new TestParameters(options: PreferImplicitTypeEverywhere)
             );
         }
@@ -5766,21 +5766,21 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public void Goo(object o1, object o2) => [|Object|].ReferenceEquals(o1, o2);
-                    }
-                    """,
+                class Base
+                {
+                    public void Goo(object o1, object o2) => [|Object|].ReferenceEquals(o1, o2);
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public void Goo(object o1, object o2) => ReferenceEquals(o1, o2);
-                    }
-                    """
+                class Base
+                {
+                    public void Goo(object o1, object o2) => ReferenceEquals(o1, o2);
+                }
+                """
             );
         }
 
@@ -5789,23 +5789,23 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    using MyList = System.Collections.Generic.List<int>;
+                using System.Collections.Generic;
+                using MyList = System.Collections.Generic.List<int>;
 
-                    class Base
-                    {
-                        public [|System.Collections.Generic.List<int>|] Goo;
-                    }
-                    """,
+                class Base
+                {
+                    public [|System.Collections.Generic.List<int>|] Goo;
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    using MyList = System.Collections.Generic.List<int>;
+                using System.Collections.Generic;
+                using MyList = System.Collections.Generic.List<int>;
 
-                    class Base
-                    {
-                        public MyList Goo;
-                    }
-                    """
+                class Base
+                {
+                    public MyList Goo;
+                }
+                """
             );
         }
 
@@ -5814,23 +5814,23 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    using MyList = System.Collections.Generic.List<int>;
+                using System.Collections.Generic;
+                using MyList = System.Collections.Generic.List<int>;
 
-                    class Base
-                    {
-                        public [|List<int>|] Goo;
-                    }
-                    """,
+                class Base
+                {
+                    public [|List<int>|] Goo;
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    using MyList = System.Collections.Generic.List<int>;
+                using System.Collections.Generic;
+                using MyList = System.Collections.Generic.List<int>;
 
-                    class Base
-                    {
-                        public MyList Goo;
-                    }
-                    """
+                class Base
+                {
+                    public MyList Goo;
+                }
+                """
             );
         }
 
@@ -5839,23 +5839,23 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System.Collections.Generic;
-                    using MyList = System.Collections.Generic.List<int>;
+                using System.Collections.Generic;
+                using MyList = System.Collections.Generic.List<int>;
 
-                    class Base
-                    {
-                        public [|List<System.Int32>|] Goo;
-                    }
-                    """,
+                class Base
+                {
+                    public [|List<System.Int32>|] Goo;
+                }
+                """,
                 """
-                    using System.Collections.Generic;
-                    using MyList = System.Collections.Generic.List<int>;
+                using System.Collections.Generic;
+                using MyList = System.Collections.Generic.List<int>;
 
-                    class Base
-                    {
-                        public MyList Goo;
-                    }
-                    """
+                class Base
+                {
+                    public MyList Goo;
+                }
+                """
             );
         }
 
@@ -5864,14 +5864,14 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                    using System.Collections.Generic;
-                    using MyList = System.Collections.Generic.List<int>;
+                using System.Collections.Generic;
+                using MyList = System.Collections.Generic.List<int>;
 
-                    class Base
-                    {
-                        public [|List<string>|] Goo;
-                    }
-                    """
+                class Base
+                {
+                    public [|List<string>|] Goo;
+                }
+                """
             );
         }
 
@@ -5880,27 +5880,27 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = typeof([|Object|]);
-                        }
+                        var v = typeof([|Object|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = typeof(object);
-                        }
+                        var v = typeof(object);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5909,31 +5909,31 @@ namespace N
         {
             await TestWithPredefinedTypeOptionsAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace N
+                namespace N
+                {
+                    using Alias1 = [|System|].Object;
+
+                    class C
                     {
-                        using Alias1 = [|System|].Object;
-
-                        class C
-                        {
-                            Alias1 a1;
-                        }
+                        Alias1 a1;
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace N
+                namespace N
+                {
+                    using Alias1 = Object;
+
+                    class C
                     {
-                        using Alias1 = Object;
-
-                        class C
-                        {
-                            Alias1 a1;
-                        }
+                        Alias1 a1;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5942,31 +5942,31 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace A.B.C
+                namespace A.B.C
+                {
+                    /// <summary>
+                    /// <see cref="[|A.B.C|].X"/>
+                    /// </summary>
+                    class X
                     {
-                        /// <summary>
-                        /// <see cref="[|A.B.C|].X"/>
-                        /// </summary>
-                        class X
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace A.B.C
+                namespace A.B.C
+                {
+                    /// <summary>
+                    /// <see cref="X"/>
+                    /// </summary>
+                    class X
                     {
-                        /// <summary>
-                        /// <see cref="X"/>
-                        /// </summary>
-                        class X
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5975,18 +5975,18 @@ namespace N
         {
             await TestSpansAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace A.B.C
+                namespace A.B.C
+                {
+                    /// <summary>
+                    /// <see cref="[|A.B.C|].X"/>
+                    /// </summary>
+                    class X
                     {
-                        /// <summary>
-                        /// <see cref="[|A.B.C|].X"/>
-                        /// </summary>
-                        class X
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -5995,33 +5995,33 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace A.B.C
+                namespace A.B.C
+                {
+                    /// <summary>
+                    /// <see cref="[|A.B.C.X|].Y(A.B.C.X)"/>
+                    /// </summary>
+                    class X
                     {
-                        /// <summary>
-                        /// <see cref="[|A.B.C.X|].Y(A.B.C.X)"/>
-                        /// </summary>
-                        class X
-                        {
-                            void Y(X x) { }
-                        }
+                        void Y(X x) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace A.B.C
+                namespace A.B.C
+                {
+                    /// <summary>
+                    /// <see cref="Y(X)"/>
+                    /// </summary>
+                    class X
                     {
-                        /// <summary>
-                        /// <see cref="Y(X)"/>
-                        /// </summary>
-                        class X
-                        {
-                            void Y(X x) { }
-                        }
+                        void Y(X x) { }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6030,33 +6030,33 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    namespace A.B.C
+                namespace A.B.C
+                {
+                    /// <summary>
+                    /// <see cref="A.B.C.X.Y([|A.B.C|].X)"/>
+                    /// </summary>
+                    class X
                     {
-                        /// <summary>
-                        /// <see cref="A.B.C.X.Y([|A.B.C|].X)"/>
-                        /// </summary>
-                        class X
-                        {
-                            void Y(X x) { }
-                        }
+                        void Y(X x) { }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace A.B.C
+                namespace A.B.C
+                {
+                    /// <summary>
+                    /// <see cref="A.B.C.X.Y(X)"/>
+                    /// </summary>
+                    class X
                     {
-                        /// <summary>
-                        /// <see cref="A.B.C.X.Y(X)"/>
-                        /// </summary>
-                        class X
-                        {
-                            void Y(X x) { }
-                        }
+                        void Y(X x) { }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6132,27 +6132,27 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    bool Goo()
                     {
-                        bool Goo()
-                        {
-                            return [|object|].Equals(null, null);
-                        }
+                        return [|object|].Equals(null, null);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    bool Goo()
                     {
-                        bool Goo()
-                        {
-                            return Equals(null, null);
-                        }
+                        return Equals(null, null);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6161,16 +6161,16 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = [|base|].GetHashCode();
-                        }
+                        var v = [|base|].GetHashCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6179,27 +6179,27 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    sealed class C
+                sealed class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = [|base|].GetHashCode();
-                        }
+                        var v = [|base|].GetHashCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    sealed class C
+                sealed class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = GetHashCode();
-                        }
+                        var v = GetHashCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6208,27 +6208,27 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    struct C
+                struct C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = [|base|].GetHashCode();
-                        }
+                        var v = [|base|].GetHashCode();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    struct C
+                struct C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = GetHashCode();
-                        }
+                        var v = GetHashCode();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6237,18 +6237,18 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = [|base|].GetHashCode();
-                        }
-
-                        public override int GetHashCode() => 0;
+                        var v = [|base|].GetHashCode();
                     }
-                    """
+
+                    public override int GetHashCode() => 0;
+                }
+                """
             );
         }
 
@@ -6257,37 +6257,37 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public int Baz() => 0;
-                    }
+                class Base
+                {
+                    public int Baz() => 0;
+                }
 
-                    class C : Base
+                class C : Base
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = [|base|].Baz();
-                        }
+                        var v = [|base|].Baz();
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public int Baz() => 0;
-                    }
+                class Base
+                {
+                    public int Baz() => 0;
+                }
 
-                    class C : Base
+                class C : Base
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = Baz();
-                        }
+                        var v = Baz();
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6296,23 +6296,23 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    public int Baz(object o) => 0;
+                }
+
+                class C : Base
+                {
+                    void Goo()
                     {
-                        public int Baz(object o) => 0;
+                        var v = [|base|].Baz(0);
                     }
 
-                    class C : Base
-                    {
-                        void Goo()
-                        {
-                            var v = [|base|].Baz(0);
-                        }
-
-                        public int Baz(int o) => 0;
-                    }
-                    """
+                    public int Baz(int o) => 0;
+                }
+                """
             );
         }
 
@@ -6321,17 +6321,17 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public int Baz(string type)
-                            => type switch
-                            {
-                                nameof([|Int32|]) => 0,
-                            };
-                    }
-                    """
+                class Base
+                {
+                    public int Baz(string type)
+                        => type switch
+                        {
+                            nameof([|Int32|]) => 0,
+                        };
+                }
+                """
             );
         }
 
@@ -6340,23 +6340,23 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public void Goo() => Bar[|<int>|](0);
-                        public void Bar<T>(T t) => default;
-                    }
-                    """,
+                class Base
+                {
+                    public void Goo() => Bar[|<int>|](0);
+                    public void Bar<T>(T t) => default;
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public void Goo() => Bar(0);
-                        public void Bar<T>(T t) => default;
-                    }
-                    """
+                class Base
+                {
+                    public void Goo() => Bar(0);
+                    public void Bar<T>(T t) => default;
+                }
+                """
             );
         }
 
@@ -6365,14 +6365,14 @@ namespace N
         {
             await TestMissingAsync(
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public void Goo() => Bar[|<int>|](0);
-                        public void Bar<T>() => default;
-                    }
-                    """
+                class Base
+                {
+                    public void Goo() => Bar[|<int>|](0);
+                    public void Bar<T>() => default;
+                }
+                """
             );
         }
 
@@ -6381,19 +6381,19 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    enum E
-                    {
-                        Goo = 1,
-                        Bar = [|E|].Goo,
-                    }
-                    """,
+                enum E
+                {
+                    Goo = 1,
+                    Bar = [|E|].Goo,
+                }
+                """,
                 """
-                    enum E
-                    {
-                        Goo = 1,
-                        Bar = Goo,
-                    }
-                    """
+                enum E
+                {
+                    Goo = 1,
+                    Bar = Goo,
+                }
+                """
             );
         }
 
@@ -6402,23 +6402,23 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    /// <summary>
-                    /// <see cref="[|E|].Goo"/>
-                    /// </summary>
-                    enum E
-                    {
-                        Goo = 1,
-                    }
-                    """,
+                /// <summary>
+                /// <see cref="[|E|].Goo"/>
+                /// </summary>
+                enum E
+                {
+                    Goo = 1,
+                }
+                """,
                 """
-                    /// <summary>
-                    /// <see cref="Goo"/>
-                    /// </summary>
-                    enum E
-                    {
-                        Goo = 1,
-                    }
-                    """
+                /// <summary>
+                /// <see cref="Goo"/>
+                /// </summary>
+                enum E
+                {
+                    Goo = 1,
+                }
+                """
             );
         }
 
@@ -6427,23 +6427,23 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="[|C.z|]"/>
+                    public void z()
                     {
-                        /// <see cref="[|C.z|]"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    /// <see cref="z"/>
+                    public void z()
                     {
-                        /// <see cref="z"/>
-                        public void z()
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6452,29 +6452,29 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class GooAttribute : Attribute
-                    {
-                    }
+                class GooAttribute : Attribute
+                {
+                }
 
-                    [Goo[|Attribute|]]
-                    class Bar
-                    {
-                    }
-                    """,
+                [Goo[|Attribute|]]
+                class Bar
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class GooAttribute : Attribute
-                    {
-                    }
+                class GooAttribute : Attribute
+                {
+                }
 
-                    [Goo]
-                    class Bar
-                    {
-                    }
-                    """
+                [Goo]
+                class Bar
+                {
+                }
+                """
             );
         }
 
@@ -6483,29 +6483,29 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class GooAttribute : Attribute
-                    {
-                    }
+                class GooAttribute : Attribute
+                {
+                }
 
-                    [Goo[|Attribute|]()]
-                    class Bar
-                    {
-                    }
-                    """,
+                [Goo[|Attribute|]()]
+                class Bar
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class GooAttribute : Attribute
-                    {
-                    }
+                class GooAttribute : Attribute
+                {
+                }
 
-                    [Goo()]
-                    class Bar
-                    {
-                    }
-                    """
+                [Goo()]
+                class Bar
+                {
+                }
+                """
             );
         }
 
@@ -6514,35 +6514,35 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    namespace N
-                    {
-                        class GooAttribute : Attribute
-                        {
-                        }
-                    }
-
-                    [N.Goo[|Attribute|]()]
-                    class Bar
+                namespace N
+                {
+                    class GooAttribute : Attribute
                     {
                     }
-                    """,
+                }
+
+                [N.Goo[|Attribute|]()]
+                class Bar
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace N
-                    {
-                        class GooAttribute : Attribute
-                        {
-                        }
-                    }
-
-                    [N.Goo()]
-                    class Bar
+                namespace N
+                {
+                    class GooAttribute : Attribute
                     {
                     }
-                    """
+                }
+
+                [N.Goo()]
+                class Bar
+                {
+                }
+                """
             );
         }
 
@@ -6551,35 +6551,35 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    namespace N
-                    {
-                        class GooAttribute : Attribute
-                        {
-                        }
-                    }
-
-                    [N.GooAttribute([|typeof(System.Int32)|])]
-                    class Bar
+                namespace N
+                {
+                    class GooAttribute : Attribute
                     {
                     }
-                    """,
+                }
+
+                [N.GooAttribute([|typeof(System.Int32)|])]
+                class Bar
+                {
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    namespace N
-                    {
-                        class GooAttribute : Attribute
-                        {
-                        }
-                    }
-
-                    [N.GooAttribute(typeof(int))]
-                    class Bar
+                namespace N
+                {
+                    class GooAttribute : Attribute
                     {
                     }
-                    """
+                }
+
+                [N.GooAttribute(typeof(int))]
+                class Bar
+                {
+                }
+                """
             );
         }
 
@@ -6588,29 +6588,29 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
-                    using System.Runtime.Serialization;
+                using System;
+                using System.Runtime.Serialization;
 
-                    namespace Microsoft
+                namespace Microsoft
+                {
+                    [[|System|].Serializable]
+                    public struct ClassifiedToken
                     {
-                        [[|System|].Serializable]
-                        public struct ClassifiedToken
-                        {
-                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
-                    using System.Runtime.Serialization;
+                using System;
+                using System.Runtime.Serialization;
 
-                    namespace Microsoft
+                namespace Microsoft
+                {
+                    [Serializable]
+                    public struct ClassifiedToken
                     {
-                        [Serializable]
-                        public struct ClassifiedToken
-                        {
-                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6620,49 +6620,49 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
                             }
+                        }
 
-                            static void Main()
+                        static void Main()
+                        {
+                            [|N.Program|].Goo.Bar();
                             {
-                                [|N.Program|].Goo.Bar();
-                                {
-                                    int Goo;
-                                }
+                                int Goo;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
                             }
+                        }
 
-                            static void Main()
+                        static void Main()
+                        {
+                            Goo.Bar();
                             {
-                                Goo.Bar();
-                                {
-                                    int Goo;
-                                }
+                                int Goo;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6671,49 +6671,49 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
                             }
+                        }
 
-                            static void Main()
+                        static void Main()
+                        {
+                            [|Program|].Goo.Bar();
                             {
-                                [|Program|].Goo.Bar();
-                                {
-                                    int Goo;
-                                }
+                                int Goo;
                             }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
                             }
+                        }
 
-                            static void Main()
+                        static void Main()
+                        {
+                            Goo.Bar();
                             {
-                                Goo.Bar();
-                                {
-                                    int Goo;
-                                }
+                                int Goo;
                             }
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6722,45 +6722,45 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main()
-                            {
-                                [|N|].Program.Goo.Bar();
-                                int Goo;
                             }
                         }
+
+                        static void Main()
+                        {
+                            [|N|].Program.Goo.Bar();
+                            int Goo;
+                        }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main()
-                            {
-                                Program.Goo.Bar();
-                                int Goo;
                             }
                         }
+
+                        static void Main()
+                        {
+                            Program.Goo.Bar();
+                            int Goo;
+                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6769,25 +6769,25 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    namespace N
+                namespace N
+                {
+                    class Program
                     {
-                        class Program
+                        class Goo
                         {
-                            class Goo
+                            public static void Bar()
                             {
-                                public static void Bar()
-                                {
-                                }
-                            }
-
-                            static void Main(int[] args)
-                            {
-                                [|Program|].Goo.Bar();
-                                int Goo;
                             }
                         }
+
+                        static void Main(int[] args)
+                        {
+                            [|Program|].Goo.Bar();
+                            int Goo;
+                        }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6796,27 +6796,27 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using static System.Int32;
+                using static System.Int32;
 
-                    class Goo
+                class Goo
+                {
+                    public void Bar(string a)
                     {
-                        public void Bar(string a)
-                        {
-                            var v = [|int|].Parse(a);
-                        }
+                        var v = [|int|].Parse(a);
                     }
-                    """,
+                }
+                """,
                 """
-                    using static System.Int32;
+                using static System.Int32;
 
-                    class Goo
+                class Goo
+                {
+                    public void Bar(string a)
                     {
-                        public void Bar(string a)
-                        {
-                            var v = Parse(a);
-                        }
+                        var v = Parse(a);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6851,27 +6851,27 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using A;
-                    using B;
+                using A;
+                using B;
 
-                    namespace A
-                    {
-                        class Goo { }
-                    }
+                namespace A
+                {
+                    class Goo { }
+                }
 
-                    namespace B
-                    {
-                        class Goo { }
-                    }
+                namespace B
+                {
+                    class Goo { }
+                }
 
-                    class C
+                class C
+                {
+                    void Bar(object o)
                     {
-                        void Bar(object o)
-                        {
-                            var x = ([|A|].Goo)o;
-                        }
+                        var x = ([|A|].Goo)o;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6880,31 +6880,31 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using A;
+                using A;
 
-                    namespace A
+                namespace A
+                {
+                    class Goo { }
+                }
+
+                namespace B
+                {
+                    class Goo { }
+                }
+
+                namespace N
+                {
+                    using B;
+
+                    class C
                     {
-                        class Goo { }
-                    }
-
-                    namespace B
-                    {
-                        class Goo { }
-                    }
-
-                    namespace N
-                    {
-                        using B;
-
-                        class C
+                        void Bar(object o)
                         {
-                            void Bar(object o)
-                            {
-                                var x = ([|A|].Goo)o;
-                            }
+                            var x = ([|A|].Goo)o;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6913,57 +6913,57 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
+                using A;
+
+                namespace A
+                {
+                    class Goo { }
+                }
+
+                namespace B
+                {
+                    class Goo { }
+                }
+
+                namespace N
+                {
                     using A;
 
-                    namespace A
+                    class C
                     {
-                        class Goo { }
-                    }
-
-                    namespace B
-                    {
-                        class Goo { }
-                    }
-
-                    namespace N
-                    {
-                        using A;
-
-                        class C
+                        void Bar(object o)
                         {
-                            void Bar(object o)
-                            {
-                                var x = ([|A|].Goo)o;
-                            }
+                            var x = ([|A|].Goo)o;
                         }
                     }
-                    """,
+                }
+                """,
                 """
+                using A;
+
+                namespace A
+                {
+                    class Goo { }
+                }
+
+                namespace B
+                {
+                    class Goo { }
+                }
+
+                namespace N
+                {
                     using A;
 
-                    namespace A
+                    class C
                     {
-                        class Goo { }
-                    }
-
-                    namespace B
-                    {
-                        class Goo { }
-                    }
-
-                    namespace N
-                    {
-                        using A;
-
-                        class C
+                        void Bar(object o)
                         {
-                            void Bar(object o)
-                            {
-                                var x = (Goo)o;
-                            }
+                            var x = (Goo)o;
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -6972,29 +6972,29 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    namespace N1
+                namespace N1
+                {
+                    /// <see cref="[|System.Int32|]"/>
+                    public class C1
                     {
-                        /// <see cref="[|System.Int32|]"/>
-                        public class C1
+                        public C1()
                         {
-                            public C1()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 """
-                    namespace N1
+                namespace N1
+                {
+                    /// <see cref="int"/>
+                    public class C1
                     {
-                        /// <see cref="int"/>
-                        public class C1
+                        public C1()
                         {
-                            public C1()
-                            {
-                            }
                         }
                     }
-                    """,
+                }
+                """,
                 options: PreferIntrinsicTypeEverywhere
             );
         }
@@ -7050,23 +7050,23 @@ namespace N
             await TestInRegularAndScriptAsync(
                 source,
                 """
-                    class Base
-                    {
-                        public static int Y;
-                    }
+                class Base
+                {
+                    public static int Y;
+                }
 
-                    class Derived : Base
-                    {
-                    }
+                class Derived : Base
+                {
+                }
 
-                    static class M
+                static class M
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            int k = Base.Y;
-                        }
+                        int k = Base.Y;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7075,29 +7075,29 @@ namespace N
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class P
+                class P
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            dynamic y = null;
-                            [|System|].Console.WriteLine(y);
-                        }
+                        dynamic y = null;
+                        [|System|].Console.WriteLine(y);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class P
+                class P
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            dynamic y = null;
-                            Console.WriteLine(y);
-                        }
+                        dynamic y = null;
+                        Console.WriteLine(y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7106,26 +7106,26 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class Base
-                    {
-                        public static void Goo(int i) { }
-                    }
+                class Base
+                {
+                    public static void Goo(int i) { }
+                }
 
-                    class Derived
-                    {
-                    }
+                class Derived
+                {
+                }
 
-                    class P
+                class P
+                {
+                    public static void Main()
                     {
-                        public static void Main()
-                        {
-                            dynamic y = null;
-                            [|Derived|].Goo(y);
-                        }
+                        dynamic y = null;
+                        [|Derived|].Goo(y);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7134,16 +7134,16 @@ namespace N
         {
             await TestDiagnosticInfoAsync(
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = nameof([|System|].Int32);
-                        }
+                        var v = nameof([|System|].Int32);
                     }
-                    """,
+                }
+                """,
                 IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId,
                 DiagnosticSeverity.Hidden
             );
@@ -7154,27 +7154,27 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = nameof([|Base|].Goo);
-                        }
+                        var v = nameof([|Base|].Goo);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = nameof(Goo);
-                        }
+                        var v = nameof(Goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7183,27 +7183,27 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            var v = nameof([|Base|].Goo);
-                        }
+                        var v = nameof([|Base|].Goo);
                     }
-                    """,
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            var v = nameof(Goo);
-                        }
+                        var v = nameof(Goo);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7212,31 +7212,31 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = nameof([|Base|].Goo);
-                        }
-
-                        void Goo(int i) { }
+                        var v = nameof([|Base|].Goo);
                     }
-                    """,
+
+                    void Goo(int i) { }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var v = nameof(Goo);
-                        }
-
-                        void Goo(int i) { }
+                        var v = nameof(Goo);
                     }
-                    """
+
+                    void Goo(int i) { }
+                }
+                """
             );
         }
 
@@ -7245,31 +7245,31 @@ namespace N
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            var v = nameof([|Base|].Goo);
-                        }
-
-                        static void Goo(int i) { }
+                        var v = nameof([|Base|].Goo);
                     }
-                    """,
+
+                    static void Goo(int i) { }
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class Base
+                class Base
+                {
+                    static void Goo()
                     {
-                        static void Goo()
-                        {
-                            var v = nameof(Goo);
-                        }
-
-                        static void Goo(int i) { }
+                        var v = nameof(Goo);
                     }
-                    """
+
+                    static void Goo(int i) { }
+                }
+                """
             );
         }
 
@@ -7278,15 +7278,15 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|Console.Equals|]("");
-                        }
+                        [|Console.Equals|]("");
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7295,25 +7295,25 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System.Runtime.CompilerServices;
+                using System.Runtime.CompilerServices;
 
-                    public ref struct A
+                public ref struct A
+                {
+                    private void Goo()
                     {
-                        private void Goo()
-                        {
-                        }
+                    }
 
-                        public readonly unsafe ref struct B
-                        {
-                            private readonly void* a;
+                    public readonly unsafe ref struct B
+                    {
+                        private readonly void* a;
 
-                            public void Dispose()
-                            {
-                                [|((delegate*<ref byte, ref A>)(delegate*<ref byte, ref byte>)&Unsafe.As<byte, byte>)(ref *(byte*)a)|].Goo();
-                            }
+                        public void Dispose()
+                        {
+                            [|((delegate*<ref byte, ref A>)(delegate*<ref byte, ref byte>)&Unsafe.As<byte, byte>)(ref *(byte*)a)|].Goo();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7322,23 +7322,23 @@ namespace N
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    public struct A
+                public struct A
+                {
+                    private void Goo()
                     {
-                        private void Goo()
-                        {
-                        }
+                    }
 
-                        public readonly unsafe struct B
-                        {
-                            private readonly void* a;
+                    public readonly unsafe struct B
+                    {
+                        private readonly void* a;
 
-                            public void Dispose()
-                            {
-                                [|((delegate*<ref byte, ref A>)&Unsafe.As<byte, A>)(ref *(byte*)a)|].Goo();
-                            }
+                        public void Dispose()
+                        {
+                            [|((delegate*<ref byte, ref A>)&Unsafe.As<byte, A>)(ref *(byte*)a)|].Goo();
                         }
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -7364,21 +7364,21 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet7="true">
-                            <Document>class A
-                    {
-                        [|System.IntPtr|] i;
-                    }</Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet7="true">
+                        <Document>class A
+                {
+                    [|System.IntPtr|] i;
+                }</Document>
+                    </Project>
+                </Workspace>
+                """,
                 """
-                    class A
-                    {
-                        nint i;
-                    }
-                    """,
+                class A
+                {
+                    nint i;
+                }
+                """,
                 options: featureOptions
             );
         }
@@ -7389,15 +7389,15 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestMissingInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
-                            <Document>class A
-                    {
-                        [|System.IntPtr|] i;
-                    }</Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
+                        <Document>class A
+                {
+                    [|System.IntPtr|] i;
+                }</Document>
+                    </Project>
+                </Workspace>
+                """,
                 new TestParameters(options: featureOptions)
             );
         }
@@ -7424,21 +7424,21 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet7="true">
-                            <Document>class A
-                    {
-                        [|System.UIntPtr|] i;
-                    }</Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet7="true">
+                        <Document>class A
+                {
+                    [|System.UIntPtr|] i;
+                }</Document>
+                    </Project>
+                </Workspace>
+                """,
                 """
-                    class A
-                    {
-                        nuint i;
-                    }
-                    """,
+                class A
+                {
+                    nuint i;
+                }
+                """,
                 options: featureOptions
             );
         }
@@ -7449,15 +7449,15 @@ namespace N
             var featureOptions = PreferIntrinsicTypeEverywhere;
             await TestMissingInRegularAndScriptAsync(
                 """
-                    <Workspace>
-                        <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
-                            <Document>class A
-                    {
-                        [|System.UIntPtr|] i;
-                    }</Document>
-                        </Project>
-                    </Workspace>
-                    """,
+                <Workspace>
+                    <Project Language="C#" CommonReferencesNet7="true" LanguageVersion="8">
+                        <Document>class A
+                {
+                    [|System.UIntPtr|] i;
+                }</Document>
+                    </Project>
+                </Workspace>
+                """,
                 new TestParameters(options: featureOptions)
             );
         }

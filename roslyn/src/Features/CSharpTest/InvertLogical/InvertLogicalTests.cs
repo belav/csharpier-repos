@@ -33,23 +33,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = a > 10 [||]|| b < 20;
-                        }
+                        var c = a > 10 [||]|| b < 20;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = !(a <= 10 && b >= 20);
-                        }
+                        var c = !(a <= 10 && b >= 20);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -58,23 +58,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = !(a <= 10 [||]&& b >= 20);
-                        }
+                        var c = !(a <= 10 [||]&& b >= 20);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = a > 10 || b < 20;
-                        }
+                        var c = a > 10 || b < 20;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -83,25 +83,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = !(a <= 10 [||]&&
-                                      b >= 20);
-                        }
+                        var c = !(a <= 10 [||]&&
+                                  b >= 20);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = a > 10 ||
-                                      b < 20;
-                        }
+                        var c = a > 10 ||
+                                  b < 20;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -110,27 +110,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b, int c)
                     {
-                        void M(bool x, int a, int b, int c)
-                        {
-                            var c = !(a <= 10 [||]&&
-                                      b >= 20 &&
-                                      c == 30);
-                        }
+                        var c = !(a <= 10 [||]&&
+                                  b >= 20 &&
+                                  c == 30);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b, int c)
                     {
-                        void M(bool x, int a, int b, int c)
-                        {
-                            var c = a > 10 ||
-                                      b < 20 ||
-                                      c != 30;
-                        }
+                        var c = a > 10 ||
+                                  b < 20 ||
+                                  c != 30;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -139,23 +139,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = a > 10 [||]|| b < 20 || c == 30;
-                        }
+                        var x = a > 10 [||]|| b < 20 || c == 30;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = !(a <= 10 && b >= 20 && c != 30);
-                        }
+                        var x = !(a <= 10 && b >= 20 && c != 30);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -164,23 +164,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = a > 10 || b < 20 [||]|| c == 30;
-                        }
+                        var x = a > 10 || b < 20 [||]|| c == 30;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = !(a <= 10 && b >= 20 && c != 30);
-                        }
+                        var x = !(a <= 10 && b >= 20 && c != 30);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -189,23 +189,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = !(a <= 10 [||]&& b >= 20 && c != 30);
-                        }
+                        var x = !(a <= 10 [||]&& b >= 20 && c != 30);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = a > 10 || b < 20 || c == 30;
-                        }
+                        var x = a > 10 || b < 20 || c == 30;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -214,23 +214,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = !([|a <= 10 && b >= 20 && c != 30|]);
-                        }
+                        var x = !([|a <= 10 && b >= 20 && c != 30|]);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = a > 10 || b < 20 || c == 30;
-                        }
+                        var x = a > 10 || b < 20 || c == 30;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -242,14 +242,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
             // -> "expected" result commented out & TestMissingXXX method used in the meantime
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = !([|a <= 10 && b >= 20|] && c != 30);
-                        }
+                        var x = !([|a <= 10 && b >= 20|] && c != 30);
                     }
-                    """ /*
+                }
+                """ /*
 @"class C
 {
     void M(int a, int b, int c)
@@ -265,23 +265,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = !(a <= 10 && b >= 20 [||]&& c != 30);
-                        }
+                        var x = !(a <= 10 && b >= 20 [||]&& c != 30);
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = a > 10 || b < 20 || c == 30;
-                        }
+                        var x = a > 10 || b < 20 || c == 30;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -290,14 +290,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = a > 10 [||]& b < 20;
-                        }
+                        var c = a > 10 [||]& b < 20;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -306,14 +306,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestMissingAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = a > 10 [||]| b < 20;
-                        }
+                        var c = a > 10 [||]| b < 20;
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -322,23 +322,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = a > 10 [||||] b < 20;
-                        }
+                        var c = a > 10 [||||] b < 20;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, int b)
                     {
-                        void M(bool x, int a, int b)
-                        {
-                            var c = !(a <= 10 && b >= 20);
-                        }
+                        var c = !(a <= 10 && b >= 20);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -347,14 +347,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(int a, int b, int c)
                     {
-                        void M(int a, int b, int c)
-                        {
-                            var x = !(a <= 10 && [|b >= 20 && c != 30|]);
-                        }
+                        var x = !(a <= 10 && [|b >= 20 && c != 30|]);
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -363,23 +363,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string;
-                        }
+                        var c = a > 10 [||]&& b is string;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string));
-                        }
+                        var c = !(a <= 10 || !(b is string));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -389,23 +389,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string;
-                        }
+                        var c = a > 10 [||]&& b is string;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not string);
-                        }
+                        var c = !(a <= 10 || b is not string);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -417,23 +417,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
             // This test just makes sure we don't crash in cases like that.
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is not string;
-                        }
+                        var c = a > 10 [||]&& b is not string;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is string);
-                        }
+                        var c = !(a <= 10 || b is string);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -443,23 +443,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is not string;
-                        }
+                        var c = a > 10 [||]&& b is not string;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is string);
-                        }
+                        var c = !(a <= 10 || b is string);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -469,23 +469,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is null;
-                        }
+                        var c = a > 10 [||]&& b is null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is null));
-                        }
+                        var c = !(a <= 10 || !(b is null));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -495,23 +495,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is null;
-                        }
+                        var c = a > 10 [||]&& b is null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not null);
-                        }
+                        var c = !(a <= 10 || b is not null);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -522,23 +522,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
             // Result is illegal (uses a constant pattern in c# 6), but the original code was illegal as well.
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is not null;
-                        }
+                        var c = a > 10 [||]&& b is not null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is null);
-                        }
+                        var c = !(a <= 10 || b is null);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp6
             );
         }
@@ -548,23 +548,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is not null;
-                        }
+                        var c = a > 10 [||]&& b is not null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is null);
-                        }
+                        var c = !(a <= 10 || b is null);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -574,23 +574,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is not null;
-                        }
+                        var c = a > 10 [||]&& b is not null;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is null);
-                        }
+                        var c = !(a <= 10 || b is null);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -600,23 +600,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is true;
-                        }
+                        var c = a > 10 [||]&& b is true;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is true));
-                        }
+                        var c = !(a <= 10 || !(b is true));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -626,23 +626,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& x is true;
-                        }
+                        var c = a > 10 [||]&& x is true;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || x is false);
-                        }
+                        var c = !(a <= 10 || x is false);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -652,23 +652,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is true;
-                        }
+                        var c = a > 10 [||]&& b is true;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not true);
-                        }
+                        var c = !(a <= 10 || b is not true);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -678,23 +678,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is false;
-                        }
+                        var c = a > 10 [||]&& b is false;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is false));
-                        }
+                        var c = !(a <= 10 || !(b is false));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -704,23 +704,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& x is false;
-                        }
+                        var c = a > 10 [||]&& x is false;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || x is true);
-                        }
+                        var c = !(a <= 10 || x is true);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -730,23 +730,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is false;
-                        }
+                        var c = a > 10 [||]&& b is false;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not false);
-                        }
+                        var c = !(a <= 10 || b is not false);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -756,23 +756,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& a is > 20;
-                        }
+                        var c = a > 10 [||]&& a is > 20;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || a is <= 20);
-                        }
+                        var c = !(a <= 10 || a is <= 20);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -782,23 +782,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int? a, object b)
                     {
-                        void M(bool x, int? a, object b)
-                        {
-                            var c = x [||]&& a is > 20;
-                        }
+                        var c = x [||]&& a is > 20;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int? a, object b)
                     {
-                        void M(bool x, int? a, object b)
-                        {
-                            var c = !(!x || a is not > 20);
-                        }
+                        var c = !(!x || a is not > 20);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -808,23 +808,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is > 20;
-                        }
+                        var c = a > 10 [||]&& b is > 20;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not > 20);
-                        }
+                        var c = !(a <= 10 || b is not > 20);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -834,23 +834,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& a is == 20;
-                        }
+                        var c = a > 10 [||]&& a is == 20;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || a is not == 20);
-                        }
+                        var c = !(a <= 10 || a is not == 20);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -860,23 +860,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string and object;
-                        }
+                        var c = a > 10 [||]&& b is string and object;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string and object));
-                        }
+                        var c = !(a <= 10 || !(b is string and object));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -886,23 +886,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string and object;
-                        }
+                        var c = a > 10 [||]&& b is string and object;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not string or not object);
-                        }
+                        var c = !(a <= 10 || b is not string or not object);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -912,23 +912,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string or object;
-                        }
+                        var c = a > 10 [||]&& b is string or object;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string or object));
-                        }
+                        var c = !(a <= 10 || !(b is string or object));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -938,23 +938,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string or object;
-                        }
+                        var c = a > 10 [||]&& b is string or object;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not string and not object);
-                        }
+                        var c = !(a <= 10 || b is not string and not object);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -964,23 +964,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string s;
-                        }
+                        var c = a > 10 [||]&& b is string s;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string s));
-                        }
+                        var c = !(a <= 10 || !(b is string s));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -990,23 +990,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string s;
-                        }
+                        var c = a > 10 [||]&& b is string s;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || b is not string s);
-                        }
+                        var c = !(a <= 10 || b is not string s);
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -1016,23 +1016,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is var s;
-                        }
+                        var c = a > 10 [||]&& b is var s;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is var s));
-                        }
+                        var c = !(a <= 10 || !(b is var s));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -1042,23 +1042,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is var s;
-                        }
+                        var c = a > 10 [||]&& b is var s;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is var s));
-                        }
+                        var c = !(a <= 10 || !(b is var s));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -1068,23 +1068,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string s and object;
-                        }
+                        var c = a > 10 [||]&& b is string s and object;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string s and object));
-                        }
+                        var c = !(a <= 10 || !(b is string s and object));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -1094,23 +1094,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string s and object;
-                        }
+                        var c = a > 10 [||]&& b is string s and object;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string s and object));
-                        }
+                        var c = !(a <= 10 || !(b is string s and object));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }
@@ -1120,23 +1120,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string and object s;
-                        }
+                        var c = a > 10 [||]&& b is string and object s;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string and object s));
-                        }
+                        var c = !(a <= 10 || !(b is string and object s));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp8
             );
         }
@@ -1146,23 +1146,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = a > 10 [||]&& b is string and object s;
-                        }
+                        var c = a > 10 [||]&& b is string and object s;
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    void M(bool x, int a, object b)
                     {
-                        void M(bool x, int a, object b)
-                        {
-                            var c = !(a <= 10 || !(b is string and object s));
-                        }
+                        var c = !(a <= 10 || !(b is string and object s));
                     }
-                    """,
+                }
+                """,
                 parseOptions: CSharp9
             );
         }

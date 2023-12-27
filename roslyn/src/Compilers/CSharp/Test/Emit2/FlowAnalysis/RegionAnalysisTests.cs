@@ -16880,12 +16880,12 @@ class B
         {
             var comp = CreateCompilation(
                 """
-                    ref struct RS
-                    {
-                        ref int ri;
-                        public RS() => ri = 0;
-                    }
-                    """,
+                ref struct RS
+                {
+                    ref int ri;
+                    public RS() => ri = 0;
+                }
+                """,
                 targetFramework: TargetFramework.NetCoreApp
             );
             comp.VerifyEmitDiagnostics(
@@ -16913,12 +16913,12 @@ class B
         {
             var comp = CreateCompilation(
                 """
-                    ref struct RS
-                    {
-                        ref int ri;
-                        public unsafe RS() => ri = ref *default(int*);
-                    }
-                    """,
+                ref struct RS
+                {
+                    ref int ri;
+                    public unsafe RS() => ri = ref *default(int*);
+                }
+                """,
                 targetFramework: TargetFramework.NetCoreApp,
                 options: TestOptions.UnsafeDebugDll
             );

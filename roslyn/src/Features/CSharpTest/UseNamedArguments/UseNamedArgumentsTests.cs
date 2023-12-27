@@ -257,23 +257,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C { void M(int arg1, ref int arg2) => M(
+                class C { void M(int arg1, ref int arg2) => M(
 
-                        [||]1,
+                    [||]1,
 
-                        ref arg1
+                    ref arg1
 
-                        ); }
-                    """,
+                    ); }
+                """,
                 """
-                    class C { void M(int arg1, ref int arg2) => M(
+                class C { void M(int arg1, ref int arg2) => M(
 
-                        arg1: 1,
+                    arg1: 1,
 
-                        arg2: ref arg1
+                    arg2: ref arg1
 
-                        ); }
-                    """
+                    ); }
+                """
             );
         }
 
@@ -288,13 +288,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    [C([||]1, 2)]
-                    class C : System.Attribute { public C(int arg1, int arg2) {} }
-                    """,
+                [C([||]1, 2)]
+                class C : System.Attribute { public C(int arg1, int arg2) {} }
+                """,
                 """
-                    [C(arg1: 1, arg2: 2)]
-                    class C : System.Attribute { public C(int arg1, int arg2) {} }
-                    """
+                [C(arg1: 1, arg2: 2)]
+                class C : System.Attribute { public C(int arg1, int arg2) {} }
+                """
             );
         }
 
@@ -303,13 +303,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    [C([||]1, P = 2)]
-                    class C : System.Attribute { public C(int arg1) {} public int P { get; set; } }
-                    """,
+                [C([||]1, P = 2)]
+                class C : System.Attribute { public C(int arg1) {} public int P { get; set; } }
+                """,
                 """
-                    [C(arg1: 1, P = 2)]
-                    class C : System.Attribute { public C(int arg1) {} public int P { get; set; } }
-                    """
+                [C(arg1: 1, P = 2)]
+                class C : System.Attribute { public C(int arg1) {} public int P { get; set; } }
+                """
             );
         }
 
@@ -318,19 +318,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M([|1 + 2|], 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M([|1 + 2|], 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(arg1: 1 + 2, arg2: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(arg1: 1 + 2, arg2: 2);
+                }
+                """
             );
         }
 
@@ -339,19 +339,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M([||]1 + 2, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M([||]1 + 2, 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(arg1: 1 + 2, arg2: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(arg1: 1 + 2, arg2: 2);
+                }
+                """
             );
         }
 
@@ -360,19 +360,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(1[||] + 2, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(1[||] + 2, 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(arg1: 1 + 2, arg2: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(arg1: 1 + 2, arg2: 2);
+                }
+                """
             );
         }
 
@@ -381,23 +381,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M(Action arg1, int arg2) 
-                            => M([||]() => { }, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(Action arg1, int arg2) 
+                        => M([||]() => { }, 2);
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M(Action arg1, int arg2) 
-                            => M(arg1: () => { }, arg2: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(Action arg1, int arg2) 
+                        => M(arg1: () => { }, arg2: 2);
+                }
+                """
             );
         }
 
@@ -406,19 +406,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(1 [||]+ 2, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(1 [||]+ 2, 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(arg1: 1 + 2, arg2: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(arg1: 1 + 2, arg2: 2);
+                }
+                """
             );
         }
 
@@ -427,19 +427,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7_3(
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2)
-                            => M(1 [||]+ 2, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1, int arg2)
+                        => M(1 [||]+ 2, 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2)
-                            => M(arg1: 1 + 2, 2);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1, int arg2)
+                        => M(arg1: 1 + 2, 2);
+                }
+                """
             );
         }
 
@@ -448,23 +448,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M(Action arg1, int arg2) 
-                            => M(() => { [||] }, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(Action arg1, int arg2) 
+                        => M(() => { [||] }, 2);
+                }
+                """,
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M(Action arg1, int arg2) 
-                            => M(arg1: () => {  }, arg2: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(Action arg1, int arg2) 
+                        => M(arg1: () => {  }, arg2: 2);
+                }
+                """
             );
         }
 
@@ -473,19 +473,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(1 [||]+ 2, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(1 [||]+ 2, 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) 
-                            => M(arg1: 1 + 2, arg2: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1, int arg2) 
+                        => M(arg1: 1 + 2, arg2: 2);
+                }
+                """
             );
         }
 
@@ -494,16 +494,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M(Action arg1, int arg2) 
-                            => M(() => {
-                                 [||]
-                               }, 2);
-                    }
-                    """
+                class C
+                {
+                    void M(Action arg1, int arg2) 
+                        => M(() => {
+                             [||]
+                           }, 2);
+                }
+                """
             );
         }
 
@@ -512,14 +512,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M(Action arg1, int arg2) 
-                            => M([|{|CS1503:1 + 2|}|], 3);
-                    }
-                    """
+                class C
+                {
+                    void M(Action arg1, int arg2) 
+                        => M([|{|CS1503:1 + 2|}|], 3);
+                }
+                """
             );
         }
 
@@ -528,17 +528,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int arg1) => M(arg1[||]);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1) => M(arg1[||]);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1) => M(arg1: arg1);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1) => M(arg1: arg1);
+                }
+                """
             );
         }
 
@@ -547,17 +547,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) => M(arg1[||], arg2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int arg1, int arg2) => M(arg1[||], arg2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int arg1, int arg2) => M(arg1: arg1, arg2: arg2);
-                    }
-                    """
+                class C
+                {
+                    void M(int arg1, int arg2) => M(arg1: arg1, arg2: arg2);
+                }
+                """
             );
         }
 
@@ -566,19 +566,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System.Linq;
-                    class C
-                    {
-                        void M(int[] arr) => arr.Zip(arr, (p1, p2) => ([||]p1, p2));
-                    }
-                    """,
+                using System.Linq;
+                class C
+                {
+                    void M(int[] arr) => arr.Zip(arr, (p1, p2) => ([||]p1, p2));
+                }
+                """,
                 """
-                    using System.Linq;
-                    class C
-                    {
-                        void M(int[] arr) => arr.Zip(arr, resultSelector: (p1, p2) => (p1, p2));
-                    }
-                    """
+                using System.Linq;
+                class C
+                {
+                    void M(int[] arr) => arr.Zip(arr, resultSelector: (p1, p2) => (p1, p2));
+                }
+                """
             );
         }
 
@@ -587,17 +587,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    class C
-                    {
-                        void M(int @default, int @params) => M([||]1, 2);
-                    }
-                    """,
+                class C
+                {
+                    void M(int @default, int @params) => M([||]1, 2);
+                }
+                """,
                 """
-                    class C
-                    {
-                        void M(int @default, int @params) => M(@default: 1, @params: 2);
-                    }
-                    """
+                class C
+                {
+                    void M(int @default, int @params) => M(@default: 1, @params: 2);
+                }
+                """
             );
         }
 
@@ -606,19 +606,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await TestWithCSharp7(
                 """
-                    [C([||]1, 2)]
-                    class C : System.Attribute
-                    {
-                        public C(int @default, int @params) {}
-                    }
-                    """,
+                [C([||]1, 2)]
+                class C : System.Attribute
+                {
+                    public C(int @default, int @params) {}
+                }
+                """,
                 """
-                    [C(@default: 1, @params: 2)]
-                    class C : System.Attribute
-                    {
-                        public C(int @default, int @params) {}
-                    }
-                    """
+                [C(@default: 1, @params: 2)]
+                class C : System.Attribute
+                {
+                    public C(int @default, int @params) {}
+                }
+                """
             );
         }
 
@@ -709,33 +709,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    class C
+                class C
+                {
+                    static void F(string x, string y)
                     {
-                        static void F(string x, string y)
-                        {
-                            F(
-                                    // TODO: 1
-                                    nu[||]ll
-                                    // TODO: 2
-                                ,   null
-                                );
-                        }
+                        F(
+                                // TODO: 1
+                                nu[||]ll
+                                // TODO: 2
+                            ,   null
+                            );
                     }
-                    """,
+                }
+                """,
                 """
-                    class C
+                class C
+                {
+                    static void F(string x, string y)
                     {
-                        static void F(string x, string y)
-                        {
-                            F(
-                                    // TODO: 1
-                                    x: null
-                                    // TODO: 2
-                                ,   null
-                                );
-                        }
+                        F(
+                                // TODO: 1
+                                x: null
+                                // TODO: 2
+                            ,   null
+                            );
                     }
-                    """
+                }
+                """
             );
         }
 
@@ -744,25 +744,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    [My(
-                        // Comment
-                        [||]null/*comment2*/,
-                        null)]
-                    class MyAttribute : System.Attribute
-                    {
-                        public MyAttribute(string x, string y) { }
-                    }
-                    """,
+                [My(
+                    // Comment
+                    [||]null/*comment2*/,
+                    null)]
+                class MyAttribute : System.Attribute
+                {
+                    public MyAttribute(string x, string y) { }
+                }
+                """,
                 """
-                    [My(
-                        // Comment
-                        x: null/*comment2*/,
-                        null)]
-                    class MyAttribute : System.Attribute
-                    {
-                        public MyAttribute(string x, string y) { }
-                    }
-                    """
+                [My(
+                    // Comment
+                    x: null/*comment2*/,
+                    null)]
+                class MyAttribute : System.Attribute
+                {
+                    public MyAttribute(string x, string y) { }
+                }
+                """
             );
         }
     }

@@ -311,16 +311,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         {
             await VerifyCS.VerifyAnalyzerAsync(
                 """
-                    class C
-                    {
-                        void Bar() { }
+                class C
+                {
+                    void Bar() { }
 
-                        int Goo
-                        {
-                            set => Bar();
-                        }
+                    int Goo
+                    {
+                        set => Bar();
                     }
-                    """
+                }
+                """
             );
         }
 
