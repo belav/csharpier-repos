@@ -176,7 +176,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 {
                     builder.AppendLine(
                         $"""
-                                            ({logic.TransformAs.ToString().ToLowerInvariant()}, {logic.TransformCs.ToString().ToLowerInvariant()}),
+                                            ({logic
+                            .TransformAs.ToString()
+                            .ToLowerInvariant()}, {logic
+                            .TransformCs.ToString()
+                            .ToLowerInvariant()}),
                         """
                     );
                 }
@@ -554,79 +558,80 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 var builder = new StringBuilder();
                 builder.AppendLine(
                     $$"""
-                    [Fact]
-                    public void Fuzz_{{iteration}}()
-                    {
-                        var source = "";
-                        var comp = CreateCompilation(source);
-                        var hintNameProvider = new HintNameProvider({{originalInputsLength + newDocumentsCount}});
-                        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(registerPipeline));
-
-                        // original input
-                        var originalInputs = new[]
+                        [Fact]
+                        public void Fuzz_{{iteration}}()
                         {
-                """
+                            var source = "";
+                            var comp = CreateCompilation(source);
+                            var hintNameProvider = new HintNameProvider({{originalInputsLength
+                        + newDocumentsCount}});
+                            var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(registerPipeline));
+
+                            // original input
+                            var originalInputs = new[]
+                            {
+                    """
                 );
 
                 foreach (var text in originalInputs)
                 {
                     builder.AppendLine(
                         $"""
-                            new InMemoryAdditionalText("{text.Path}", "{text.GetText()}"),
-                """
+                                    new InMemoryAdditionalText("{text.Path}", "{text.GetText()}"),
+                        """
                     );
                 }
 
                 builder.AppendLine(
                     $$"""
-                        };
+                            };
 
-                        // from scratch on original
-                        GeneratorDriver driver1 = CSharpGeneratorDriver.Create(new[] { generator }, originalInputs);
-                        driver1.RunGenerators(comp);
+                            // from scratch on original
+                            GeneratorDriver driver1 = CSharpGeneratorDriver.Create(new[] { generator }, originalInputs);
+                            driver1.RunGenerators(comp);
 
-                        // make edits to original input
-                        var editedInputs = ImmutableArray.Create(new AdditionalText[]
-                        {
-                """
+                            // make edits to original input
+                            var editedInputs = ImmutableArray.Create(new AdditionalText[]
+                            {
+                    """
                 );
 
                 foreach (var text in editedInputs)
                 {
                     builder.AppendLine(
                         $"""
-                            new InMemoryAdditionalText("{text.Path}", "{text.GetText()}"),
-                """
+                                    new InMemoryAdditionalText("{text.Path}", "{text.GetText()}"),
+                        """
                     );
                 }
 
                 builder.AppendLine(
                     $$"""
-                        });
+                            });
 
-                        // incremental update from edited input
-                        driver1 = driver1.ReplaceAdditionalTexts(editedInputs);
-                        hintNameProvider.Reset({{originalInputsLength + newDocumentsCount}});
-                        driver1 = driver1.RunGenerators(comp);
-                        var result1 = driver1.GetRunResult();
+                            // incremental update from edited input
+                            driver1 = driver1.ReplaceAdditionalTexts(editedInputs);
+                            hintNameProvider.Reset({{originalInputsLength + newDocumentsCount}});
+                            driver1 = driver1.RunGenerators(comp);
+                            var result1 = driver1.GetRunResult();
 
-                        // from scratch on edited
-                        GeneratorDriver driver2 = CSharpGeneratorDriver.Create(new[] { generator }, editedInputs);
-                        hintNameProvider.Reset({{originalInputsLength + newDocumentsCount}});
-                        driver2 = driver2.RunGenerators(comp);
-                        var result2 = driver2.GetRunResult();
+                            // from scratch on edited
+                            GeneratorDriver driver2 = CSharpGeneratorDriver.Create(new[] { generator }, editedInputs);
+                            hintNameProvider.Reset({{originalInputsLength + newDocumentsCount}});
+                            driver2 = driver2.RunGenerators(comp);
+                            var result2 = driver2.GetRunResult();
 
-                        Assert.Equal(result2.GeneratedTrees, result1.GeneratedTrees, SyntaxTreeComparer.Instance);
-                        Assert.Equal(result2.Diagnostics, result1.Diagnostics, CommonDiagnosticComparer.Instance);
-                """
+                            Assert.Equal(result2.GeneratedTrees, result1.GeneratedTrees, SyntaxTreeComparer.Instance);
+                            Assert.Equal(result2.Diagnostics, result1.Diagnostics, CommonDiagnosticComparer.Instance);
+                    """
                 );
 
                 builder.AppendLine(
                     $$"""
 
-                        void registerPipeline(IncrementalGeneratorInitializationContext context)
-                        {
-                """
+                            void registerPipeline(IncrementalGeneratorInitializationContext context)
+                            {
+                    """
                 );
 
                 builder.Append(

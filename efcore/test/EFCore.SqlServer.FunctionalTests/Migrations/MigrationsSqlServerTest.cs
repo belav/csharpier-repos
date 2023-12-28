@@ -890,9 +890,11 @@ ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT
 
         var computedColumnTypeSql = stored == true ? " PERSISTED" : "";
 
-        AssertSql($"""
+        AssertSql(
+            $"""
 ALTER TABLE [People] ADD [Sum] AS [X] + [Y]{computedColumnTypeSql};
-""");
+"""
+        );
     }
 
     [ConditionalFact]

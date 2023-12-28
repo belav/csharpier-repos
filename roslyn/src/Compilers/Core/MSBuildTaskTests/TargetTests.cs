@@ -1098,11 +1098,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 "Microsoft.Managed.Core.targets"
             );
             XmlReader xmlReader = XmlReader.Create(
-                new StringReader($"""
+                new StringReader(
+                    $"""
 <Project>
     <Import Project="{path}" />
 </Project>
-""")
+"""
+                )
             );
 
             var instance = CreateProjectInstance(xmlReader);

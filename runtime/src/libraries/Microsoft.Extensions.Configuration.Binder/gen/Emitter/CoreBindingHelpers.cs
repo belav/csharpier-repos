@@ -539,7 +539,11 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             $$"""
                             {{condition}}
                             {
-                                throw new {{Identifier.InvalidOperationException}}("{{string.Format(ExceptionMessages.ParameterHasNoMatchingConfig, type.FullName, member.Name)}}");
+                                throw new {{Identifier.InvalidOperationException}}("{{string.Format(
+                                ExceptionMessages.ParameterHasNoMatchingConfig,
+                                type.FullName,
+                                member.Name
+                            )}}");
                             }
                             """
                         );
@@ -699,7 +703,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                         if ({{Identifier.binderOptions}}.BindNonPublicProperties)
                         {
-                            throw new NotSupportedException($"{{string.Format(ExceptionMessages.CannotSpecifyBindNonPublicProperties)}}");
+                            throw new NotSupportedException($"{{string.Format(
+                        ExceptionMessages.CannotSpecifyBindNonPublicProperties
+                    )}}");
                         }
 
                         return {{Identifier.binderOptions}};
@@ -1502,11 +1508,11 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 _writer.WriteLine(
                     $$"""
-                        if ({{Identifier.instance}} is not {{castTypeDisplayString}} {{instanceIdentifier}})
-                        {
-                            return;
-                        }
-                        """
+                    if ({{Identifier.instance}} is not {{castTypeDisplayString}} {{instanceIdentifier}})
+                    {
+                        return;
+                    }
+                    """
                 );
                 _writer.WriteLine();
             }

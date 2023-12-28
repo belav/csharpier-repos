@@ -486,9 +486,11 @@ ALTER TABLE "Entity" ADD "OwnedRequiredReference" TEXT NOT NULL DEFAULT '{}';
 
         var storedSql = stored == true ? " STORED" : "";
 
-        AssertSql($"""
+        AssertSql(
+            $"""
 ALTER TABLE "People" ADD "Sum" AS ("X" + "Y"){storedSql};
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_max_length()

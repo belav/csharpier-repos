@@ -230,9 +230,11 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_05()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file partial record struct C { }
-            """);
+            """
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.RecordStructDeclaration);
@@ -503,9 +505,11 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_09()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file abstract class C { }
-            """);
+            """
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -525,9 +529,11 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             abstract file class C { }
-            """);
+            """
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);

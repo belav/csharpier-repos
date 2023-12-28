@@ -84,18 +84,18 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task EmptyUnmanagedCallConvAttributeForwarded()
         {
             string source = $$"""
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
+                    using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices.Marshalling;
 
-                [UnmanagedObjectUnwrapper<UnmanagedObjectUnwrapper.TestUnwrapper>]
-                partial interface INativeAPI : IUnmanagedInterfaceType
-                {
-                    static unsafe void* IUnmanagedInterfaceType.VirtualMethodTableManagedImplementation => null;
-                    [UnmanagedCallConv]
-                    [VirtualMethodIndex(0)]
-                    void Method();
-                }
-            """;
+                    [UnmanagedObjectUnwrapper<UnmanagedObjectUnwrapper.TestUnwrapper>]
+                    partial interface INativeAPI : IUnmanagedInterfaceType
+                    {
+                        static unsafe void* IUnmanagedInterfaceType.VirtualMethodTableManagedImplementation => null;
+                        [UnmanagedCallConv]
+                        [VirtualMethodIndex(0)]
+                        void Method();
+                    }
+                """;
 
             await VerifyVirtualMethodIndexGeneratorAsync(
                 source,

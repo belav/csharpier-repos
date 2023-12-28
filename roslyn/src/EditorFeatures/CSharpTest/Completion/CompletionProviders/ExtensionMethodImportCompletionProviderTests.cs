@@ -2252,32 +2252,32 @@ namespace NS1
                 """;
 
             var expected = $$"""
-            using AA;
+                using AA;
 
-            public class C
-            {
-            }
-            namespace AA
-            {
-                public static class Ext
+                public class C
                 {
-                    public static int ToInt(this C c)
-                        => 1;
                 }
-            }
-
-            namespace BB
-            {
-                public class B
+                namespace AA
                 {
-                    public void M()
+                    public static class Ext
                     {
-                        var c = new C();
-                        c.ToInt(){{commitChar}}
+                        public static int ToInt(this C c)
+                            => 1;
                     }
                 }
-            }
-            """;
+
+                namespace BB
+                {
+                    public class B
+                    {
+                        public void M()
+                        {
+                            var c = new C();
+                            c.ToInt(){{commitChar}}
+                        }
+                    }
+                }
+                """;
             await VerifyProviderCommitAsync(
                 markup,
                 "ToInt",

@@ -2410,7 +2410,7 @@ public partial class C
                     public static void M() => Console.Write("OtherFile.cs");
                 }
             }
-
+            
             """;
 
         var verifier = CompileAndVerify(

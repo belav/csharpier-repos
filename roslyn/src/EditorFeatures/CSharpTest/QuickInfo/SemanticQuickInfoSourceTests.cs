@@ -9315,9 +9315,9 @@ class C
                 AnonymousTypes(
                     $"""
 
-                {FeaturesResources.Types_colon}
-                    'a {FeaturesResources.is_} delegate int (params int[] arg)
-                """
+                    {FeaturesResources.Types_colon}
+                        'a {FeaturesResources.is_} delegate int (params int[] arg)
+                    """
                 )
             );
         }

@@ -2806,7 +2806,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 ref struct C
                 {
                     private ReadOnlySpan<int> span = {{expression}};
@@ -2818,11 +2818,11 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 ref struct C
                 {
                     private ReadOnlySpan<int> span = {{expected}};
-                
+
                     public C() { }
                 }
                 """,
@@ -2840,7 +2840,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 ref struct C
                 {
                     private static readonly int i = 0;
@@ -2863,7 +2863,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span => {{expression}};
@@ -2873,7 +2873,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span => {{expected}};
@@ -2893,7 +2893,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span { get => {{expression}}; }
@@ -2903,7 +2903,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span { get => {{expected}}; }
@@ -2923,7 +2923,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span { get { return {{expression}}; } }
@@ -2933,7 +2933,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span { get { return {{expected}}; } }
@@ -2953,7 +2953,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private static readonly int i = 1;
@@ -2974,7 +2974,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span() => {{expression}};
@@ -2984,7 +2984,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private ReadOnlySpan<int> Span() => {{expected}};
@@ -3004,7 +3004,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     private static readonly int i = 1;
@@ -3025,7 +3025,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -3038,7 +3038,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -3061,7 +3061,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -3076,14 +3076,14 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
                     {
                         X({{expected}});
                     }
-                
+
                     void X(ReadOnlySpan<int> span) { }
                 }
                 """,
@@ -3101,7 +3101,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3114,7 +3114,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3137,7 +3137,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3151,7 +3151,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3175,7 +3175,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int[] globalArray;
@@ -3192,7 +3192,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int[] globalArray;
@@ -3219,7 +3219,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3233,7 +3233,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3257,7 +3257,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3273,7 +3273,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3281,7 +3281,7 @@ public class UseCollectionExpressionForArrayTests
                         ReadOnlySpan<int> s = [i];
                         X(s);
                     }
-                
+
                     void X(ReadOnlySpan<int> span) { }
                 }
                 """,
@@ -3299,7 +3299,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3315,7 +3315,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3323,7 +3323,7 @@ public class UseCollectionExpressionForArrayTests
                         ReadOnlySpan<int> s = [i];
                         return X(s);
                     }
-                
+
                     ReadOnlySpan<int> X(scoped ReadOnlySpan<int> span) => default;
                 }
                 """,
@@ -3341,7 +3341,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3355,7 +3355,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -3379,7 +3379,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     string M(int i)
@@ -3393,7 +3393,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     string M(int i)
@@ -3417,7 +3417,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3425,7 +3425,7 @@ public class UseCollectionExpressionForArrayTests
                         ReadOnlySpan<int> s = [|[|new|][]|] { i };
                         return X(s.Slice(0, 1));
                     }
-                
+
                     ReadOnlySpan<int> X(scoped ReadOnlySpan<int> span) => default;
                 }
                 """,
@@ -3433,7 +3433,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3441,7 +3441,7 @@ public class UseCollectionExpressionForArrayTests
                         ReadOnlySpan<int> s = [i];
                         return X(s.Slice(0, 1));
                     }
-                
+
                     ReadOnlySpan<int> X(scoped ReadOnlySpan<int> span) => default;
                 }
                 """,
@@ -3459,7 +3459,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3467,7 +3467,7 @@ public class UseCollectionExpressionForArrayTests
                         ReadOnlySpan<int> s = [|[|new|][]|] { i };
                         return X(s[0..1]);
                     }
-                
+
                     ReadOnlySpan<int> X(scoped ReadOnlySpan<int> span) => default;
                 }
                 """,
@@ -3475,7 +3475,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3483,7 +3483,7 @@ public class UseCollectionExpressionForArrayTests
                         ReadOnlySpan<int> s = [i];
                         return X(s[0..1]);
                     }
-                
+
                     ReadOnlySpan<int> X(scoped ReadOnlySpan<int> span) => default;
                 }
                 """,
@@ -3501,7 +3501,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int M(int i)
@@ -3515,7 +3515,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int M(int i)
@@ -3539,7 +3539,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int M(int i)
@@ -3553,7 +3553,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int M(int i)
@@ -3577,7 +3577,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int M(int i)
@@ -3591,7 +3591,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     int M(int i)
@@ -3615,7 +3615,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3639,7 +3639,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3662,7 +3662,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3683,7 +3683,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3708,7 +3708,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3731,7 +3731,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3756,7 +3756,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3779,7 +3779,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3803,7 +3803,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3827,7 +3827,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3852,7 +3852,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3877,7 +3877,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3904,7 +3904,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3931,7 +3931,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3958,7 +3958,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -3975,7 +3975,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -4002,7 +4002,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -4018,7 +4018,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int i)
@@ -4044,7 +4044,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)
@@ -4061,7 +4061,7 @@ public class UseCollectionExpressionForArrayTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     ReadOnlySpan<int> M(int i)

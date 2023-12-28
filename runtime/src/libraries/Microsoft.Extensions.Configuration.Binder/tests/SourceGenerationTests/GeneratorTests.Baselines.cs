@@ -38,29 +38,29 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Bind_NamedParameters_OutOfOrder(string row)
         {
             string source = $$"""
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass configObj = new();
-                                {{row}}
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                            }
+                            MyClass configObj = new();
+                            {{row}}
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                        }
+                    }
+                """;
 
             await VerifyThatSourceIsGenerated(source);
         }
@@ -81,29 +81,29 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task Get_TypeOf_NamedParametersOutOfOrder(string row)
         {
             string source = $$"""
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
 
-                                MyClass configObj = new();
-                                {{row}}
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                            }
+                            MyClass configObj = new();
+                            {{row}}
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                        }
+                    }
+                """;
 
             await VerifyThatSourceIsGenerated(source);
         }
@@ -130,27 +130,27 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task GetValue_NamedParametersOutOfOrder(string row)
         {
             string source = $$"""
-                        using System.Collections.Generic;
-                        using Microsoft.Extensions.Configuration;
+                    using System.Collections.Generic;
+                    using Microsoft.Extensions.Configuration;
 
-                        public class Program
+                    public class Program
+                    {
+                        public static void Main()
                         {
-                            public static void Main()
-                            {
-                                ConfigurationBuilder configurationBuilder = new();
-                                IConfigurationRoot config = configurationBuilder.Build();
-                                {{row}}
-                            }
-
-                            public class MyClass
-                            {
-                                public string MyString { get; set; }
-                                public int MyInt { get; set; }
-                                public List<int> MyList { get; set; }
-                                public Dictionary<string, string> MyDictionary { get; set; }
-                            }
+                            ConfigurationBuilder configurationBuilder = new();
+                            IConfigurationRoot config = configurationBuilder.Build();
+                            {{row}}
                         }
-                    """;
+
+                        public class MyClass
+                        {
+                            public string MyString { get; set; }
+                            public int MyInt { get; set; }
+                            public List<int> MyList { get; set; }
+                            public Dictionary<string, string> MyDictionary { get; set; }
+                        }
+                    }
+                """;
 
             await VerifyThatSourceIsGenerated(source);
         }

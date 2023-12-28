@@ -2371,7 +2371,7 @@ class Driver
                 using System;
                 using System.Threading.Tasks;
                 using static System.Console;
-                
+
                 class C
                 {
                     static async Task Main()
@@ -2380,13 +2380,13 @@ class Driver
                         WriteLine("--- catch first ---");
                         await new C().M1(catchFirst: true);
                     }
-                
+
                     bool F(string caller, bool result)
                     {
                         WriteLine($"F: {caller}");
                         return result;
                     }
-                
+
                     async Task M1(bool catchFirst)
                     {
                         try
@@ -2410,7 +2410,7 @@ class Driver
                             }
                         }
                     }
-                
+
                     async Task M2(string caller, Exception ex)
                     {
                         WriteLine($"M2: {caller} {ex.Message}");

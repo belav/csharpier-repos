@@ -73,7 +73,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     $$"""
                     OptionsServiceCollectionExtensions.AddOptions({{Identifier.services}});
                     {{Identifier.services}}.{{Identifier.AddSingleton}}<{{Identifier.IOptionsChangeTokenSource}}<{{Identifier.TOptions}}>>(new {{Identifier.ConfigurationChangeTokenSource}}<{{Identifier.TOptions}}>({{Identifier.name}}, {{Identifier.config}}));
-                    return {{Identifier.services}}.{{Identifier.AddSingleton}}<IConfigureOptions<{{Identifier.TOptions}}>>(new ConfigureNamedOptions<{{Identifier.TOptions}}>({{Identifier.name}}, {{Identifier.instance}} => {{nameof(MethodsToGen_CoreBindingHelper.BindCoreMain)}}({{Identifier.config}}, {{Identifier.instance}}, typeof({{Identifier.TOptions}}), {{Identifier.configureOptions}})));
+                    return {{Identifier.services}}.{{Identifier.AddSingleton}}<IConfigureOptions<{{Identifier.TOptions}}>>(new ConfigureNamedOptions<{{Identifier.TOptions}}>({{Identifier.name}}, {{Identifier.instance}} => {{nameof(
+                        MethodsToGen_CoreBindingHelper.BindCoreMain
+                    )}}({{Identifier.config}}, {{Identifier.instance}}, typeof({{Identifier.TOptions}}), {{Identifier.configureOptions}})));
                     """
                 );
                 EmitEndBlock();

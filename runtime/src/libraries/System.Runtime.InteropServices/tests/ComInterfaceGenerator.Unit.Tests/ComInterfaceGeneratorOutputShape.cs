@@ -48,7 +48,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string source = $$"""
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
                 partial interface I
@@ -74,7 +74,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string source = $$"""
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
                 partial interface I
@@ -105,7 +105,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string source = $$"""
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
                 partial interface I
@@ -129,24 +129,24 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task InheritingComInterfacesGenerateShadowingMethodsWithDefaultImplementations()
         {
             string source = $$"""
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
-       
-               [GeneratedComInterface]
-               [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
-               partial interface I
-               {
-                   void Method();
-                   void Method2();
-               }
-               [GeneratedComInterface]
-               [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
-               partial interface J : I
-               {
-                   void MethodA();
-                   void MethodB();
-               }
-               """;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+
+                [GeneratedComInterface]
+                [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
+                partial interface I
+                {
+                    void Method();
+                    void Method2();
+                }
+                [GeneratedComInterface]
+                [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
+                partial interface J : I
+                {
+                    void MethodA();
+                    void MethodB();
+                }
+                """;
 
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
@@ -174,29 +174,29 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task InheritingComInterfacesGenerateShadowingMethodsWithDefaultImplementations_LongInheritanceChain()
         {
             string source = $$"""
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
-       
-               [GeneratedComInterface]
-               [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
-               partial interface I
-               {
-                   void Method();
-               }
-               [GeneratedComInterface]
-               [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
-               partial interface J : I
-               {
-                   void Method2();
-               }
-               [GeneratedComInterface]
-               [Guid("0DB41042-0255-4CDD-B73A-9C5D5F31303D")]
-               partial interface K : J
-               {
-                   void MethodA();
-                   void MethodB();
-               }
-               """;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+
+                [GeneratedComInterface]
+                [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
+                partial interface I
+                {
+                    void Method();
+                }
+                [GeneratedComInterface]
+                [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
+                partial interface J : I
+                {
+                    void Method2();
+                }
+                [GeneratedComInterface]
+                [Guid("0DB41042-0255-4CDD-B73A-9C5D5F31303D")]
+                partial interface K : J
+                {
+                    void MethodA();
+                    void MethodB();
+                }
+                """;
 
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
@@ -237,27 +237,27 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task ValidateAttributesAreCopiedToShadowingMethods()
         {
             var source = $$"""
-                using System;
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
+                    using System;
+                    using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices.Marshalling;
 
-                namespace Test
-                {
-                    [GeneratedComInterface]
-                    [Guid("EA4319EA-AE9A-4261-B42D-BB027AD81F5F")]
-                    partial interface IFoo
+                    namespace Test
                     {
-                        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute("message")]
-                        void Bar();
-                    }
+                        [GeneratedComInterface]
+                        [Guid("EA4319EA-AE9A-4261-B42D-BB027AD81F5F")]
+                        partial interface IFoo
+                        {
+                            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute("message")]
+                            void Bar();
+                        }
 
-                    [GeneratedComInterface]
-                    [Guid("8A501001-02CA-490A-AA23-0ECC646F07A3")]
-                    partial interface IDerivedIface : IFoo
-                    {
+                        [GeneratedComInterface]
+                        [Guid("8A501001-02CA-490A-AA23-0ECC646F07A3")]
+                        partial interface IDerivedIface : IFoo
+                        {
+                        }
                     }
-                }
-            """;
+                """;
 
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {

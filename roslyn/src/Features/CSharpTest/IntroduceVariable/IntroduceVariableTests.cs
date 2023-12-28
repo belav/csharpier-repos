@@ -9020,8 +9020,7 @@ namespace ConsoleApp1
         private Task ConsumeAsync(object value) => throw new NotImplementedException();
     }
 }
-"""
-                + ValueTaskDeclaration,
+""" + ValueTaskDeclaration,
             $$"""
 using System;
 using System.Threading.Tasks;
@@ -9041,8 +9040,7 @@ namespace ConsoleApp1
         private Task ConsumeAsync(object value) => throw new NotImplementedException();
     }
 }
-"""
-                + ValueTaskDeclaration
+""" + ValueTaskDeclaration
         );
     }
 

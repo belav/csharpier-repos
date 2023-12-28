@@ -15685,15 +15685,15 @@ class Program
                 inferred({{manyArgs}});
                 Report(lam);
                 Report(inferred);
-                
+
                 static void Report(Delegate d) => Console.WriteLine(d.GetType());
                 """;
             CompileAndVerify(
                     source,
                     expectedOutput: $"""
-                <>A`17[{manyTypes}]
-                <>A`17[{manyTypes}]
-                """
+                    <>A`17[{manyTypes}]
+                    <>A`17[{manyTypes}]
+                    """
                 )
                 .VerifyDiagnostics();
 
@@ -15751,10 +15751,10 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0`17[{manyTypes}]
-                <>f__AnonymousDelegate0`17[{manyTypes}]
-                <>f__AnonymousDelegate1`17[{manyTypes}]
-                """
+                    <>f__AnonymousDelegate0`17[{manyTypes}]
+                    <>f__AnonymousDelegate0`17[{manyTypes}]
+                    <>f__AnonymousDelegate1`17[{manyTypes}]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -15778,10 +15778,10 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0`17[{manyTypes},System.Int32]
-                <>f__AnonymousDelegate0`17[{manyTypes},System.Int32]
-                <>A`17[{manyTypes},System.Int32[]]
-                """
+                    <>f__AnonymousDelegate0`17[{manyTypes},System.Int32]
+                    <>f__AnonymousDelegate0`17[{manyTypes},System.Int32]
+                    <>A`17[{manyTypes},System.Int32[]]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -15806,10 +15806,10 @@ class Program
                     source,
                     options: TestOptions.UnsafeReleaseExe,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0
-                <>f__AnonymousDelegate0
-                <>f__AnonymousDelegate1
-                """
+                    <>f__AnonymousDelegate0
+                    <>f__AnonymousDelegate0
+                    <>f__AnonymousDelegate1
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -15834,10 +15834,10 @@ class Program
                     source,
                     options: TestOptions.UnsafeReleaseExe,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0
-                <>f__AnonymousDelegate0
-                <>f__AnonymousDelegate1
-                """
+                    <>f__AnonymousDelegate0
+                    <>f__AnonymousDelegate0
+                    <>f__AnonymousDelegate1
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -15873,15 +15873,15 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0`1[System.Object]
-                <>f__AnonymousDelegate0`1[System.String]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Int32]]
-                <>f__AnonymousDelegate0`1[S1]
-                <>f__AnonymousDelegate0`1[S2]
-                <>f__AnonymousDelegate0`1[C]
-                <>f__AnonymousDelegate0`1[I]
-                <>f__AnonymousDelegate1`1[System.Int32]
-                """
+                    <>f__AnonymousDelegate0`1[System.Object]
+                    <>f__AnonymousDelegate0`1[System.String]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Int32]]
+                    <>f__AnonymousDelegate0`1[S1]
+                    <>f__AnonymousDelegate0`1[S2]
+                    <>f__AnonymousDelegate0`1[C]
+                    <>f__AnonymousDelegate0`1[I]
+                    <>f__AnonymousDelegate1`1[System.Int32]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -15900,9 +15900,9 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0`1[System.Int32]
-                <>f__AnonymousDelegate0`1[System.Nullable`1[System.Int32]]
-                """
+                    <>f__AnonymousDelegate0`1[System.Int32]
+                    <>f__AnonymousDelegate0`1[System.Nullable`1[System.Int32]]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -15928,12 +15928,12 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0`1[System.String]
-                <>f__AnonymousDelegate1`1[System.String]
-                <>f__AnonymousDelegate2`1[System.String]
-                <>f__AnonymousDelegate2`1[System.String]
-                <>f__AnonymousDelegate2`1[System.Object]
-                """
+                    <>f__AnonymousDelegate0`1[System.String]
+                    <>f__AnonymousDelegate1`1[System.String]
+                    <>f__AnonymousDelegate2`1[System.String]
+                    <>f__AnonymousDelegate2`1[System.String]
+                    <>f__AnonymousDelegate2`1[System.Object]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -15952,9 +15952,9 @@ class Program
             CompileAndVerify(
                     source,
                     expectedOutput: $"""
-                <>f__AnonymousDelegate0`1[System.Int32]
-                <>f__AnonymousDelegate0`1[System.String]
-                """
+                    <>f__AnonymousDelegate0`1[System.Int32]
+                    <>f__AnonymousDelegate0`1[System.String]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -16265,32 +16265,32 @@ class Program
             verifier.VerifyTypeIL(
                 "<>f__AnonymousDelegate0",
                 $$"""
-                    .class private auto ansi sealed '<>f__AnonymousDelegate0'
-                        extends [System.Runtime]System.MulticastDelegate
+                .class private auto ansi sealed '<>f__AnonymousDelegate0'
+                    extends [System.Runtime]System.MulticastDelegate
+                {
+                    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+                        01 00 00 00
+                    )
+                    // Methods
+                    .method public hidebysig specialname rtspecialname
+                        instance void .ctor (
+                            object 'object',
+                            native int 'method'
+                        ) runtime managed
                     {
-                        .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
-                            01 00 00 00
-                        )
-                        // Methods
-                        .method public hidebysig specialname rtspecialname
-                            instance void .ctor (
-                                object 'object',
-                                native int 'method'
-                            ) runtime managed
-                        {
-                        } // end of method '<>f__AnonymousDelegate0'::.ctor
-                        .method public hidebysig newslot virtual
-                            instance int32& Invoke (
-                                int32& arg
-                            ) runtime managed
-                        {
-                            .param [1]
-                                .custom instance void ['{{attributeAssemblyName}}']System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
-                                    01 00 00 00
-                                )
-                        } // end of method '<>f__AnonymousDelegate0'::Invoke
-                    } // end of class <>f__AnonymousDelegate0
-                    """
+                    } // end of method '<>f__AnonymousDelegate0'::.ctor
+                    .method public hidebysig newslot virtual
+                        instance int32& Invoke (
+                            int32& arg
+                        ) runtime managed
+                    {
+                        .param [1]
+                            .custom instance void ['{{attributeAssemblyName}}']System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = (
+                                01 00 00 00
+                            )
+                    } // end of method '<>f__AnonymousDelegate0'::Invoke
+                } // end of class <>f__AnonymousDelegate0
+                """
             );
         }
 
@@ -21320,9 +21320,9 @@ class Program
             CompileAndVerify(
                     comp,
                     expectedOutput: $"""
-                System.Action`1[{typeFullName}]
-                System.Action`1[{typeFullName}]
-                """
+                    System.Action`1[{typeFullName}]
+                    System.Action`1[{typeFullName}]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -21390,7 +21390,7 @@ class Program
                 using System.Runtime.InteropServices;
 
                 Del lam = ([Optional, DecimalConstant(1, 0, 0u, 0u, 11u)] {{type}} d) => { };
-                
+
                 delegate void Del([Optional, DecimalConstant(1, 0, 0u, 0u, 11u)] {{type}} d);
                 """;
             var comp = CreateCompilation(source);
@@ -21499,7 +21499,7 @@ class Program
                 using System.Runtime.InteropServices;
 
                 var m = C.M;
-                
+
                 class C
                 {
                     public static void M([Optional, DecimalConstant(1, 0, 0u, 0u, 11u)] {{type}} d) { }
@@ -21533,7 +21533,7 @@ class Program
                 using System.Runtime.InteropServices;
 
                 Del m = C.M;
-                
+
                 class C
                 {
                     public static void M([Optional, DecimalConstant(1, 0, 0u, 0u, 11u)] {{type}} d) { }
@@ -21559,7 +21559,7 @@ class Program
                 using System.Runtime.CompilerServices;
 
                 var m = C.M;
-                
+
                 class C
                 {
                     public static void M([DecimalConstant(1, 0, 0u, 0u, 11u)] {{type}} d = 1.1m) { }
@@ -21592,7 +21592,7 @@ class Program
                 using System.Runtime.CompilerServices;
 
                 Del m = C.M;
-                
+
                 class C
                 {
                     public static void M([DecimalConstant(1, 0, 0u, 0u, 11u)] {{type}} d = 1.1m) { }
@@ -21806,9 +21806,9 @@ class Program
             CompileAndVerify(
                     comp,
                     expectedOutput: $"""
-                System.Action`1[{typeFullName}]
-                System.Action`1[{typeFullName}]
-                """
+                    System.Action`1[{typeFullName}]
+                    System.Action`1[{typeFullName}]
+                    """
                 )
                 .VerifyDiagnostics();
         }
@@ -21902,7 +21902,7 @@ class Program
                 using System;
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
-                
+
                 public class C
                 {
                     public static void M([Optional, DateTimeConstant(100L)] {{type}} d) { }
@@ -21940,7 +21940,7 @@ class Program
                 using System.Runtime.InteropServices;
 
                 public delegate void Del([Optional, DateTimeConstant(100L)] {{type}} d);
-                
+
                 public class C
                 {
                     public static void M([Optional, DateTimeConstant(100L)] {{type}} d) { }

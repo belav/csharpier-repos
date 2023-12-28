@@ -164,16 +164,16 @@ namespace JSImportGenerator.Unit.Tests
 
         public static string DefaultReturnMarshaler(string type) =>
             $$"""
-            //DefaultReturnMarshaler<{{type}}>
-            using System.Runtime.InteropServices.JavaScript;
-            partial class Basic
-            {
-                [JSImport("DoesNotExist")]
-                public static partial {{type}} Import1();
-            
-                [JSExport()]
-                public static {{type}} Export1(){ throw null; }
-            }
-            """;
+                //DefaultReturnMarshaler<{{type}}>
+                using System.Runtime.InteropServices.JavaScript;
+                partial class Basic
+                {
+                    [JSImport("DoesNotExist")]
+                    public static partial {{type}} Import1();
+
+                    [JSExport()]
+                    public static {{type}} Export1(){ throw null; }
+                }
+                """;
     }
 }

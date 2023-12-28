@@ -421,9 +421,7 @@ public class Test
                 """;
             for (int i = 1; i < number; i++)
             {
-                declarations[
-                    i
-                ] = $"""
+                declarations[i] = $"""
                     Class C{i}(Of T{i})
                         Inherits C{i - 1}(Of T{i})
                     End Class
@@ -650,18 +648,18 @@ public class Test
                 files.Add(
                     (
                         $$"""
-                    using System;
-                    using System.Runtime.CompilerServices;
+                        using System;
+                        using System.Runtime.CompilerServices;
 
-                    class C{{i}}
-                    {
-                        [InterceptsLocation("Program.cs", {{i + 1}}, 3)]
-                        public static void M()
+                        class C{{i}}
                         {
-                            Console.WriteLine({{i}});
+                            [InterceptsLocation("Program.cs", {{i + 1}}, 3)]
+                            public static void M()
+                            {
+                                Console.WriteLine({{i}});
+                            }
                         }
-                    }
-                    """,
+                        """,
                         $"C{i}.cs"
                     )
                 );

@@ -327,7 +327,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var expectedCodeAfterCommit = $$"""
                 using System.Collections.Generic;
                 using System.Collections;
-                
+
                 class C
                 {
                     void M({{collectionType}} enumerable)
@@ -606,14 +606,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet7="true">
                         <Document>using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M()
                     {
                         IEnumerable&lt;int&gt; enumerable;
                         IAsyncEnumerable&lt;int&gt; asyncEnumerable;
-                
+
                         await $$
                     }
                 }</Document>
@@ -623,14 +623,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
             var expectedCodeAfterCommit = $$"""
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M()
                     {
                         IEnumerable<int> enumerable;
                         IAsyncEnumerable<int> asyncEnumerable;
-                
+
                         await foreach (var item in asyncEnumerable)
                         {
                             $$
@@ -657,7 +657,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet7="true">
                         <Document>using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M(IAsyncEnumerable&lt;int&gt; asyncEnumerable)
@@ -671,7 +671,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
             var expectedCodeAfterCommit = $$"""
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M(IAsyncEnumerable<int> asyncEnumerable)

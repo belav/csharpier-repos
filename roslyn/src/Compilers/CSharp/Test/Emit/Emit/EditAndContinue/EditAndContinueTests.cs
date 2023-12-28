@@ -43,17 +43,17 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
+                    class C
+                    {
+                        public C()
                         {
-                            public C()
-                            {
-                            }
-
-                            public C(int x)
-                            {
-                            }
                         }
-                        """,
+
+                        public C(int x)
+                        {
+                        }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -119,13 +119,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
+                    class C
+                    {
+                        public C(int x)
                         {
-                            public C(int x)
-                            {
-                            }
                         }
-                        """,
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyMethodDefNames(".ctor");
@@ -5122,11 +5122,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public string P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get; set; }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -5278,11 +5278,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public string P { get { return "1"; } set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get { return "1"; } set { } }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -5453,11 +5453,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public string P { get { return "1"; } set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get { return "1"; } set { } }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -5606,11 +5606,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public string P { get { return "1"; } set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        public string P { get { return "1"; } set { } }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -5742,11 +5742,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            string P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        string P { get; set; }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -5755,11 +5755,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            int P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        int P { get; set; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -5887,11 +5887,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            string P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        string P { get; set; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6003,11 +6003,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            string P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        string P { get; set; }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -6016,11 +6016,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            string Q { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        string Q { get; set; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6148,11 +6148,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            string P { get; set; }
-                        }
-                        """,
+                    class C
+                    {
+                        string P { get; set; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6264,11 +6264,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public int this[int x] { get { return 1; } set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        public int this[int x] { get { return 1; } set { } }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -6344,11 +6344,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            int this[int x] { get { return 2; } }
-                        }
-                        """,
+                    class C
+                    {
+                        int this[int x] { get { return 2; } }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -6357,11 +6357,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            int this[string x] { get { return 2; } }
-                        }
-                        """,
+                    class C
+                    {
+                        int this[string x] { get { return 2; } }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6442,11 +6442,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            int this[int x] { get { return 2; } }
-                        }
-                        """,
+                    class C
+                    {
+                        int this[int x] { get { return 2; } }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6516,12 +6516,12 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            int this[int x] { get { return 2; } }
-                            int this[string y] { get { return 3; } }
-                        }
-                        """,
+                    class C
+                    {
+                        int this[int x] { get { return 2; } }
+                        int this[string y] { get { return 3; } }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -6592,11 +6592,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            int this[int x] { get => 1; set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        int this[int x] { get => 1; set { } }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -6605,11 +6605,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            int this[int y] { get => 1; set { } }
-                        }
-                        """,
+                    class C
+                    {
+                        int this[int y] { get => 1; set { } }
+                    }
+                    """,
                     edits: new[]
                     {
                         // Both accessors must be updated, the indexer itself does not:
@@ -6824,11 +6824,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public event System.EventHandler E;
-                        }
-                        """,
+                    class C
+                    {
+                        public event System.EventHandler E;
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -6904,11 +6904,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public event System.EventHandler E;
-                        }
-                        """,
+                    class C
+                    {
+                        public event System.EventHandler E;
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -7720,7 +7720,7 @@ class C
                 .AddBaseline(
                     source: $$"""
                         using System;
-                        
+
                         class C
                         {
                             class D
@@ -7736,8 +7736,7 @@ class C
                                 Console.WriteLine("1");
                             }
                         }
-                        """
-                        + MetadataUpdateOriginalTypeAttributeSource,
+                        """ + MetadataUpdateOriginalTypeAttributeSource,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -14943,11 +14942,11 @@ public interface IB
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            public static bool operator !(C c) => true;
-                        }
-                        """,
+                    class C
+                    {
+                        public static bool operator !(C c) => true;
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -20319,15 +20318,15 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            {{methodDef}}
-                        }
+                    class C
+                    {
+                        {{methodDef}}
+                    }
 
-                        class N
-                        {
-                        }
-                        """,
+                    class N
+                    {
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C", "N");
@@ -20386,11 +20385,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            void M1() { }
-                        }
-                        """,
+                    class C
+                    {
+                        void M1() { }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -20487,11 +20486,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            void M1() { }
-                        }
-                        """,
+                    class C
+                    {
+                        void M1() { }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -20585,16 +20584,16 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class A : System.Attribute { }
-                        class B : System.Attribute { }
+                    class A : System.Attribute { }
+                    class B : System.Attribute { }
 
-                        class C
-                        {
-                            [A]
-                            [return: A]
-                            void M1([A]int x) { }
-                        }
-                        """,
+                    class C
+                    {
+                        [A]
+                        [return: A]
+                        void M1([A]int x) { }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "A", "B", "C");
@@ -20744,11 +20743,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            void Goo() { }
-                        }
-                        """,
+                    class C
+                    {
+                        void Goo() { }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -20915,13 +20914,13 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        using System;
+                    using System;
 
-                        class C
-                        {
-                            void F() { _ = new Action(() => Console.WriteLine(1)); } 
-                        }
-                        """,
+                    class C
+                    {
+                        void F() { _ = new Action(() => Console.WriteLine(1)); } 
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifySynthesizedMembers();
@@ -21126,12 +21125,12 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        using System;
+                    using System;
 
-                        class C
-                        {
-                        }
-                        """,
+                    class C
+                    {
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifySynthesizedMembers();
@@ -21827,11 +21826,11 @@ class C
         {
             using var test = new EditAndContinueTest().AddBaseline(
                 source: $$"""
-                        class C
-                        {
-                            int M1() { return 0; }
-                        }
-                        """,
+                class C
+                {
+                    int M1() { return 0; }
+                }
+                """,
                 validator: g =>
                 {
                     g.VerifyTypeDefNames("<Module>", "C");
@@ -21902,11 +21901,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            void M(int someInt) { someInt.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        void M(int someInt) { someInt.ToString(); }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -21915,11 +21914,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            void M(bool someBool) { someBool.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        void M(bool someBool) { someBool.ToString(); }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -21993,11 +21992,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            void M(int someInt) { someInt.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        void M(int someInt) { someInt.ToString(); }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -22076,11 +22075,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            string M(int someInt) { return someInt.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        string M(int someInt) { return someInt.ToString(); }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -22089,11 +22088,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            int M(int someInt) { return someInt; }
-                        }
-                        """,
+                    class C
+                    {
+                        int M(int someInt) { return someInt; }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -22170,11 +22169,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            string M(int someInt) { return someInt.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        string M(int someInt) { return someInt.ToString(); }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -22257,11 +22256,11 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            void M(int someInt) { someInt.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        void M(int someInt) { someInt.ToString(); }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C");
@@ -22270,11 +22269,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            void M(int someInt, bool someBool) { someInt.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        void M(int someInt, bool someBool) { someInt.ToString(); }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -22345,11 +22344,11 @@ class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        class C
-                        {
-                            void M(int someInt) { someInt.ToString(); }
-                        }
-                        """,
+                    class C
+                    {
+                        void M(int someInt) { someInt.ToString(); }
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(
@@ -22944,11 +22943,11 @@ file class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            byte[] b = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                        }
-                        """,
+                    class C
+                    {
+                        byte[] b = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -23062,11 +23061,11 @@ file class C
             )
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            void F() { System.ReadOnlySpan<byte> b = stackalloc byte[] { 0, 1, 2, 3, 4, 5, 6 }; }
-                        }
-                        """,
+                    class C
+                    {
+                        void F() { System.ReadOnlySpan<byte> b = stackalloc byte[] { 0, 1, 2, 3, 4, 5, 6 }; }
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -23307,24 +23306,24 @@ file class C
             )
                 .AddBaseline(
                     source: $$"""
-                        using System;
-                        class C
-                        {
-                           static int F({{typeName}} s)
-                               => s switch 
-                               {
-                                   "A_______" => 1,
-                                   "_B______" => 2,
-                                   "__C_____" => 3,
-                                   "___D____" => 4,
-                                   "____E___" => 5,
-                                   "_____F__" => 6,
-                                   "______G_" => 7,
-                                   "_______H" => 8,
-                                   _ => 9
-                               };
-                        }
-                        """,
+                    using System;
+                    class C
+                    {
+                       static int F({{typeName}} s)
+                           => s switch 
+                           {
+                               "A_______" => 1,
+                               "_B______" => 2,
+                               "__C_____" => 3,
+                               "___D____" => 4,
+                               "____E___" => 5,
+                               "_____F__" => 6,
+                               "______G_" => 7,
+                               "_______H" => 8,
+                               _ => 9
+                           };
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C", "<PrivateImplementationDetails>");
@@ -23333,24 +23332,24 @@ file class C
                 )
                 .AddGeneration(
                     source: $$"""
-                        using System;
-                        class C
-                        {
-                            static int F({{typeName}} s)
-                               => s switch 
-                               {
-                                   "A_______" => 10,
-                                   "_B______" => 20,
-                                   "__C_____" => 30,
-                                   "___D____" => 40,
-                                   "____E___" => 50,
-                                   "_____F__" => 60,
-                                   "______G_" => 70,
-                                   "_______H" => 80,
-                                   _ => 90
-                               };
-                        }
-                        """,
+                    using System;
+                    class C
+                    {
+                        static int F({{typeName}} s)
+                           => s switch 
+                           {
+                               "A_______" => 10,
+                               "_B______" => 20,
+                               "__C_____" => 30,
+                               "___D____" => 40,
+                               "____E___" => 50,
+                               "_____F__" => 60,
+                               "______G_" => 70,
+                               "_______H" => 80,
+                               _ => 90
+                           };
+                    }
+                    """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),
@@ -23403,11 +23402,11 @@ file class C
             )
                 .AddBaseline(
                     source: $$"""
-                        class C
-                        {
-                            static int F(bool b) => b switch { true => 1 };
-                        }
-                        """,
+                    class C
+                    {
+                        static int F(bool b) => b switch { true => 1 };
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames("<Module>", "C", "<PrivateImplementationDetails>");
@@ -23469,23 +23468,23 @@ file class C
             using var _ = new EditAndContinueTest(targetFramework: TargetFramework.Net80)
                 .AddBaseline(
                     source: $$"""
-                        using System.Runtime.CompilerServices;
+                    using System.Runtime.CompilerServices;
 
-                        [InlineArray(2)]
-                        public struct Buffer
-                        {
-                            private int _element0;
-                        }
+                    [InlineArray(2)]
+                    public struct Buffer
+                    {
+                        private int _element0;
+                    }
 
-                        class C
+                    class C
+                    {
+                        static void F()
                         {
-                            static void F()
-                            {
-                                var b = new Buffer();
-                                b[0] = 1;
-                            }
+                            var b = new Buffer();
+                            b[0] = 1;
                         }
-                        """,
+                    }
+                    """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(

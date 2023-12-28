@@ -2097,7 +2097,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     {
                         _ = flag ? A() : B();
                     }
-                
+
                     {{originalFirstType}} A() => default;
                     {{originalSecondType}} B() => default;
                 }

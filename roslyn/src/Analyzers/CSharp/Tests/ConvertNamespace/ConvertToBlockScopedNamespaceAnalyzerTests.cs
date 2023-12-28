@@ -112,13 +112,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                [|namespace N;|]{{endOfDocumentSequence}}
-                """,
+                    [|namespace N;|]{{endOfDocumentSequence}}
+                    """,
                 FixedCode = $$"""
-                namespace N
-                {
-                }{{endOfDocumentSequence}}
-                """,
+                    namespace N
+                    {
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -139,18 +139,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                [|namespace N;|]
+                    [|namespace N;|]
 
-                #if true
-                #endif{{endOfDocumentSequence}}
-                """,
+                    #if true
+                    #endif{{endOfDocumentSequence}}
+                    """,
                 FixedCode = $$"""
-                namespace N
-                {
-                #if true
-                #endif
-                }{{endOfDocumentSequence}}
-                """,
+                    namespace N
+                    {
+                    #if true
+                    #endif
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -171,18 +171,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                [|namespace N;|]
+                    [|namespace N;|]
 
-                #region Text
-                #endregion{{endOfDocumentSequence}}
-                """,
-                FixedCode = $$"""
-                namespace N
-                {
                     #region Text
-                    #endregion
-                }{{endOfDocumentSequence}}
-                """,
+                    #endregion{{endOfDocumentSequence}}
+                    """,
+                FixedCode = $$"""
+                    namespace N
+                    {
+                        #region Text
+                        #endregion
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -201,20 +201,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                [|namespace N;|]
+                    [|namespace N;|]
 
-                namespace {|CS8955:N2|}
-                {
-                }{{endOfDocumentSequence}}
-                """,
-                FixedCode = $$"""
-                namespace N
-                {
-                    namespace N2
+                    namespace {|CS8955:N2|}
                     {
-                    }
-                }{{endOfDocumentSequence}}
-                """,
+                    }{{endOfDocumentSequence}}
+                    """,
+                FixedCode = $$"""
+                    namespace N
+                    {
+                        namespace N2
+                        {
+                        }
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -233,18 +233,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                [|namespace N;|]
+                    [|namespace N;|]
 
-                [|namespace {|CS8954:N2|};|]{{endOfDocumentSequence}}
-                """,
+                    [|namespace {|CS8954:N2|};|]{{endOfDocumentSequence}}
+                    """,
                 FixedCode = $$"""
-                namespace N
-                {
-                    namespace N2
+                    namespace N
                     {
-                    }
-                }{{endOfDocumentSequence}}
-                """,
+                        namespace N2
+                        {
+                        }
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 NumberOfFixAllIterations = 2,
                 Options =
@@ -264,19 +264,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                namespace N
-                {
-                    [|namespace {|CS8955:N2|};|]
-                }{{endOfDocumentSequence}}
-                """,
-                FixedCode = $$"""
-                namespace N
-                {
-                    namespace $$N2
+                    namespace N
                     {
-                    }
-                }{{endOfDocumentSequence}}
-                """,
+                        [|namespace {|CS8955:N2|};|]
+                    }{{endOfDocumentSequence}}
+                    """,
+                FixedCode = $$"""
+                    namespace N
+                    {
+                        namespace $$N2
+                        {
+                        }
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -295,18 +295,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                namespace N
-                {
-                    [|namespace {|CS8955:N2|};|]
-                }{{endOfDocumentSequence}}
-                """,
+                    namespace N
+                    {
+                        [|namespace {|CS8955:N2|};|]
+                    }{{endOfDocumentSequence}}
+                    """,
                 FixedCode = $$"""
-                namespace N
-                {
-                    namespace $$N2 {
-                    }
-                }{{endOfDocumentSequence}}
-                """,
+                    namespace N
+                    {
+                        namespace $$N2 {
+                        }
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -330,24 +330,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                namespace N
-                {
-                    [|namespace {|CS8955:N2|};|]
-
-                #if true
-                #endif
-                }{{endOfDocumentSequence}}
-                """,
-                FixedCode = $$"""
-                namespace N
-                {
-                    namespace $$N2
+                    namespace N
                     {
-                #if true
-                #endif
-                    }
-                }{{endOfDocumentSequence}}
-                """,
+                        [|namespace {|CS8955:N2|};|]
+
+                    #if true
+                    #endif
+                    }{{endOfDocumentSequence}}
+                    """,
+                FixedCode = $$"""
+                    namespace N
+                    {
+                        namespace $$N2
+                        {
+                    #if true
+                    #endif
+                        }
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -366,24 +366,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             await new VerifyCS.Test
             {
                 TestCode = $$"""
-                namespace N
-                {
-                    [|namespace {|CS8955:N2|};|]
-
-                    #region Text
-                    #endregion
-                }{{endOfDocumentSequence}}
-                """,
-                FixedCode = $$"""
-                namespace N
-                {
-                    namespace $$N2
+                    namespace N
                     {
+                        [|namespace {|CS8955:N2|};|]
+
                         #region Text
                         #endregion
-                    }
-                }{{endOfDocumentSequence}}
-                """,
+                    }{{endOfDocumentSequence}}
+                    """,
+                FixedCode = $$"""
+                    namespace N
+                    {
+                        namespace $$N2
+                        {
+                            #region Text
+                            #endregion
+                        }
+                    }{{endOfDocumentSequence}}
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {

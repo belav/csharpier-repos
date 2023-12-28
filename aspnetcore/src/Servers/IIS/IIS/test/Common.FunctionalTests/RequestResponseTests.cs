@@ -746,7 +746,10 @@ public class RequestResponseTests
             Application Virtual Path: /
             Application Config Path: MACHINE/WEBROOT/APPHOST/{siteName}
             AppPool ID: {_fixture.DeploymentResult.AppPoolName}
-            AppPool Config File: {_fixture.DeploymentResult.DeploymentParameters.ServerConfigLocation}
+            AppPool Config File: {_fixture
+                .DeploymentResult
+                .DeploymentParameters
+                .ServerConfigLocation}
             Site ID: 1
             Site Name: {siteName}
             """;

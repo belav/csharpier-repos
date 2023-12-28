@@ -1723,7 +1723,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string assemblySource = $$"""
                 using System.Runtime.InteropServices.Marshalling;
-                {{CodeSnippets.ValidateDisableRuntimeMarshalling.NonBlittableUserDefinedTypeWithNativeType}}
+                {{CodeSnippets
+                    .ValidateDisableRuntimeMarshalling
+                    .NonBlittableUserDefinedTypeWithNativeType}}
                 """;
 
             string testSource = CodeSnippets.ValidateDisableRuntimeMarshalling.TypeUsage(

@@ -38,7 +38,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string source = $$"""
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 partial interface I
                 {
@@ -47,7 +47,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 partial interface J
                 {
                 }
-                
+
                 [GeneratedComClass]
                 partial class C : I, J
                 {

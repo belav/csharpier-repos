@@ -258,11 +258,11 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 {
                     _writer.WriteLine(
                         $$"""
-                    if ({{paramName}} is null)
-                    {
-                        return;
-                    }
-                    """
+                        if ({{paramName}} is null)
+                        {
+                            return;
+                        }
+                        """
                     );
                 }
                 else
@@ -270,11 +270,11 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     string throwIfNullExpr = useThrowIfNullMethod
                         ? $"ArgumentNullException.ThrowIfNull({paramName});"
                         : $$"""
-                    if ({{paramName}} is null)
-                    {
-                        throw new ArgumentNullException(nameof({{paramName}}));
-                    }
-                    """;
+                            if ({{paramName}} is null)
+                            {
+                                throw new ArgumentNullException(nameof({{paramName}}));
+                            }
+                            """;
 
                     _writer.WriteLine(throwIfNullExpr);
                 }

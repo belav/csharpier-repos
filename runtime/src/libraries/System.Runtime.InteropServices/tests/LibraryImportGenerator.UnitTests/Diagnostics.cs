@@ -345,10 +345,10 @@ namespace LibraryImportGenerator.UnitTests
                 {
                     [{|#0:LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Custom)|}]
                     public static partial void Method1(out int i);
-                
+
                     [{|#1:LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8, StringMarshallingCustomType = typeof(Native))|}]
                     public static partial void Method2(out int i);
-                
+
                     struct Native
                     {
                         public Native(string s) { }

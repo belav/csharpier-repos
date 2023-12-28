@@ -74,64 +74,64 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
         public async Task SimpleDiagnosticFix()
         {
             var test = $$"""
-			using System.Diagnostics.CodeAnalysis;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-				int M2() => M1();
-			}
-			class D
-			{
-				public int M3(C c) => c.M1();
+                	int M2() => M1();
+                }
+                class D
+                {
+                	public int M3(C c) => c.M1();
 
-				public class E
-				{
-					public int M4(C c) => c.M1();
-				}
-			}
-			public class E
-			{
-				public class F
-				{
-					public int M5(C c) => c.M1();
-				}
-			}
-			""";
+                	public class E
+                	{
+                		public int M4(C c) => c.M1();
+                	}
+                }
+                public class E
+                {
+                	public class F
+                	{
+                		public int M5(C c) => c.M1();
+                	}
+                }
+                """;
 
             var fixtest = $$"""
-			using System.Diagnostics.CodeAnalysis;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-			    [RequiresDynamicCode("Calls C.M1()")]
-			    int M2() => M1();
-			}
-			class D
-			{
-			    [RequiresDynamicCode("Calls C.M1()")]
-			    public int M3(C c) => c.M1();
+                    [RequiresDynamicCode("Calls C.M1()")]
+                    int M2() => M1();
+                }
+                class D
+                {
+                    [RequiresDynamicCode("Calls C.M1()")]
+                    public int M3(C c) => c.M1();
 
-				public class E
-				{
-			        [RequiresDynamicCode("Calls C.M1()")]
-			        public int M4(C c) => c.M1();
-				}
-			}
-			public class E
-			{
-				public class F
-				{
-			        [RequiresDynamicCode()]
-			        public int M5(C c) => c.M1();
-				}
-			}
-			""";
+                	public class E
+                	{
+                        [RequiresDynamicCode("Calls C.M1()")]
+                        public int M4(C c) => c.M1();
+                	}
+                }
+                public class E
+                {
+                	public class F
+                	{
+                        [RequiresDynamicCode()]
+                        public int M5(C c) => c.M1();
+                	}
+                }
+                """;
 
             await VerifyRequiresDynamicCodeCodeFix(
                 source: test,
@@ -177,20 +177,20 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
         public Task FixInLambda()
         {
             var src = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-				Action M2()
-				{
-					return () => M1();
-				}
-			}
-			""";
+                	Action M2()
+                	{
+                		return () => M1();
+                	}
+                }
+                """;
             var diag = new[]
             {
                 // /0/Test0.cs(11,16): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
@@ -208,38 +208,38 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
         public Task FixInLocalFunc()
         {
             var src = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-				Action M2()
-				{
-					void Wrapper () => M1();
-					return Wrapper;
-				}
-			}
-			""";
+                	Action M2()
+                	{
+                		void Wrapper () => M1();
+                		return Wrapper;
+                	}
+                }
+                """;
             var fix = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-			    [RequiresDynamicCode("Calls Wrapper()")]
-			    Action M2()
-				{
-			        [RequiresDynamicCode("Calls C.M1()")] void Wrapper () => M1();
-					return Wrapper;
-				}
-			}
-			""";
+                    [RequiresDynamicCode("Calls Wrapper()")]
+                    Action M2()
+                	{
+                        [RequiresDynamicCode("Calls C.M1()")] void Wrapper () => M1();
+                		return Wrapper;
+                	}
+                }
+                """;
             // Roslyn currently doesn't simplify the attribute name properly, see https://github.com/dotnet/roslyn/issues/52039
             return VerifyRequiresDynamicCodeCodeFix(
                 source: src,
@@ -264,30 +264,30 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
         public Task FixInCtor()
         {
             var src = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public static int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public static int M1() => 0;
 
-				public C() => M1();
-			}
-			""";
+                	public C() => M1();
+                }
+                """;
             var fix = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public static int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public static int M1() => 0;
 
-			    [RequiresDynamicCode()]
-			    public C() => M1();
-			}
-			""";
+                    [RequiresDynamicCode()]
+                    public C() => M1();
+                }
+                """;
             // Roslyn currently doesn't simplify the attribute name properly, see https://github.com/dotnet/roslyn/issues/52039
             return VerifyRequiresDynamicCodeCodeFix(
                 source: src,
@@ -318,17 +318,17 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
         public Task FixInPropertyDecl()
         {
             var src = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-				int M2 => M1();
-			}
-			""";
+                	int M2 => M1();
+                }
+                """;
             var diag = new[]
             {
                 // /0/Test0.cs(9,12): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
@@ -345,42 +345,42 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
         public Task FixInPropertyAccessor()
         {
             var src = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-				public int field;
+                	public int field;
 
-				private int M2 {
-					get { return M1(); }
-					set { field = M1(); }
-				}
-			}
-			""";
+                	private int M2 {
+                		get { return M1(); }
+                		set { field = M1(); }
+                	}
+                }
+                """;
             var fix = $$"""
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+                using System;
+                using System.Diagnostics.CodeAnalysis;
 
-			public class C
-			{
-				[RequiresDynamicCodeAttribute("message")]
-				public int M1() => 0;
+                public class C
+                {
+                	[RequiresDynamicCodeAttribute("message")]
+                	public int M1() => 0;
 
-				public int field;
+                	public int field;
 
-				private int M2 {
-			        [RequiresDynamicCode("Calls C.M1()")]
-			        get { return M1(); }
+                	private int M2 {
+                        [RequiresDynamicCode("Calls C.M1()")]
+                        get { return M1(); }
 
-			        [RequiresDynamicCode("Calls C.M1()")]
-			        set { field = M1(); }
-				}
-			}
-			""";
+                        [RequiresDynamicCode("Calls C.M1()")]
+                        set { field = M1(); }
+                	}
+                }
+                """;
             var diag = new[]
             {
                 // /0/Test0.cs(12,16): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
