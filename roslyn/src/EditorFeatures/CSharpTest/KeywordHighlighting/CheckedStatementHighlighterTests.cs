@@ -15,35 +15,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class CheckedStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(CheckedStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(CheckedStatementHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        short x = 0;
-                        short y = 100;
-                        while (true)
+                        void M()
                         {
-                            {|Cursor:[|checked|]|}
+                            short x = 0;
+                            short y = 100;
+                            while (true)
                             {
-                                x++;
-                            }
+                                {|Cursor:[|checked|]|}
+                                {
+                                    x++;
+                                }
 
-                            unchecked
-                            {
-                                y++;
+                                unchecked
+                                {
+                                    y++;
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -51,27 +51,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        short x = 0;
-                        short y = 100;
-                        while (true)
+                        void M()
                         {
-                            checked
+                            short x = 0;
+                            short y = 100;
+                            while (true)
                             {
-                                x++;
-                            }
+                                checked
+                                {
+                                    x++;
+                                }
 
-                            {|Cursor:[|unchecked|]|}
-                            {
-                                y++;
+                                {|Cursor:[|unchecked|]|}
+                                {
+                                    y++;
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

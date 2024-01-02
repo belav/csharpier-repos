@@ -21,9 +21,13 @@ namespace System.Formats.Tar.Tests
         {
             await using (MemoryStream archiveStream = new MemoryStream())
             {
-                await using (TarWriter writer = new TarWriter(archiveStream, format, leaveOpen: false))
+                await using (
+                    TarWriter writer = new TarWriter(archiveStream, format, leaveOpen: false)
+                )
                 {
-                    await Assert.ThrowsAsync<ArgumentNullException>(() => writer.WriteEntryAsync(null));
+                    await Assert.ThrowsAsync<ArgumentNullException>(
+                        () => writer.WriteEntryAsync(null)
+                    );
                 }
             }
         }
@@ -36,7 +40,10 @@ namespace System.Formats.Tar.Tests
             Assert.Equal(name, entry.Name);
         }
 
-        protected void VerifyGlobalExtendedAttributesEntry(TarEntry entry, Dictionary<string, string> attrs)
+        protected void VerifyGlobalExtendedAttributesEntry(
+            TarEntry entry,
+            Dictionary<string, string> attrs
+        )
         {
             PaxGlobalExtendedAttributesTarEntry gea = entry as PaxGlobalExtendedAttributesTarEntry;
             Assert.NotNull(gea);

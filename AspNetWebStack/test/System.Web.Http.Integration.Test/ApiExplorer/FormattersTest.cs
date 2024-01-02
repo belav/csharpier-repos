@@ -19,32 +19,56 @@ namespace System.Web.Http.ApiExplorer
         public void CustomRequestBodyFormatters_ShowUpOnDescription()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "PostItem");
-            Assert.True(description.SupportedRequestBodyFormatters.Any(formatter => formatter == customFormatter), "Did not find the custom formatter on the SupportedRequestBodyFormatters.");
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
+            );
+            Assert.True(
+                description.SupportedRequestBodyFormatters.Any(formatter =>
+                    formatter == customFormatter
+                ),
+                "Did not find the custom formatter on the SupportedRequestBodyFormatters."
+            );
         }
 
         [Fact]
         public void CustomResponseFormatters_ShowUpOnDescription()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "PostItem");
-            Assert.True(description.SupportedResponseFormatters.Any(formatter => formatter == customFormatter), "Did not find the custom formatter on the SupportedResponseFormatters.");
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
+            );
+            Assert.True(
+                description.SupportedResponseFormatters.Any(formatter =>
+                    formatter == customFormatter
+                ),
+                "Did not find the custom formatter on the SupportedResponseFormatters."
+            );
         }
 
         [Fact]
@@ -52,17 +76,24 @@ namespace System.Web.Http.ApiExplorer
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
             config.Initializer.Invoke(config);
             int expectedFormatterCount = config.Formatters.Count - 1;
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            // Act 
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "PostItem");
+            // Act
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
+            );
             Collection<MediaTypeFormatter> formatters = description.SupportedRequestBodyFormatters;
 
             // Assert
@@ -75,17 +106,24 @@ namespace System.Web.Http.ApiExplorer
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
             config.Initializer.Invoke(config);
             int expectedFormatterCount = config.Formatters.Count - 2;
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            // Act 
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "PostItem");
+            // Act
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
+            );
             Collection<MediaTypeFormatter> formatters = description.SupportedResponseFormatters;
 
             // Assert
@@ -98,19 +136,26 @@ namespace System.Web.Http.ApiExplorer
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
             ITraceWriter testTraceWriter = new Mock<ITraceWriter>().Object;
             config.Services.Replace(typeof(ITraceWriter), testTraceWriter);
             config.Initializer.Invoke(config);
             int expectedFormatterCount = config.Formatters.Count - 1;
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            // Act 
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "PostItem");
+            // Act
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
+            );
             Collection<MediaTypeFormatter> formatters = description.SupportedRequestBodyFormatters;
 
             // Assert
@@ -123,19 +168,26 @@ namespace System.Web.Http.ApiExplorer
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
             ITraceWriter testTraceWriter = new Mock<ITraceWriter>().Object;
             config.Services.Replace(typeof(ITraceWriter), testTraceWriter);
             config.Initializer.Invoke(config);
             int expectedFormatterCount = config.Formatters.Count - 2;
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, typeof(ItemController));
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            // Act 
-            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "PostItem");
+            // Act
+            ApiDescription description = explorer.ApiDescriptions.FirstOrDefault(desc =>
+                desc.ActionDescriptor.ActionName == "PostItem"
+            );
             Collection<MediaTypeFormatter> formatters = description.SupportedResponseFormatters;
 
             // Assert

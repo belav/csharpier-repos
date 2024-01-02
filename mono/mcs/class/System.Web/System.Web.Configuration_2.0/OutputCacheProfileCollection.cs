@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,102 +32,115 @@ using System;
 using System.Collections;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    [ConfigurationCollection(
+        typeof(OutputCacheProfile),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class OutputCacheProfileCollection
+        : ConfigurationElementCollection,
+            ICollection,
+            IEnumerable
+    {
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static OutputCacheProfileCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-	[ConfigurationCollection (typeof (OutputCacheProfile), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class OutputCacheProfileCollection : ConfigurationElementCollection, ICollection, IEnumerable
-	{
-		static ConfigurationPropertyCollection properties;
+        public void Add(OutputCacheProfile name)
+        {
+            BaseAdd(name);
+        }
 
-		static OutputCacheProfileCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		public void Add (OutputCacheProfile name)
-		{
-			BaseAdd (name);
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new OutputCacheProfile();
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((OutputCacheProfile)element).Name;
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new OutputCacheProfile ();
-		}
+        public string GetKey(int index)
+        {
+            return (string)BaseGetKey(index);
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((OutputCacheProfile)element).Name;
-		}
+        public OutputCacheProfile Get(string name)
+        {
+            return (OutputCacheProfile)BaseGet(name);
+        }
 
-		public string GetKey (int index)
-		{
-			return (string)BaseGetKey (index);
-		}
+        public OutputCacheProfile Get(int index)
+        {
+            return (OutputCacheProfile)BaseGet(index);
+        }
 
-		public OutputCacheProfile Get (string name)
-		{
-			return (OutputCacheProfile)BaseGet (name);
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public OutputCacheProfile Get (int index)
-		{
-			return (OutputCacheProfile)BaseGet (index);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void Set(OutputCacheProfile user)
+        {
+            OutputCacheProfile existing = Get(user.Name);
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+            if (existing == null)
+            {
+                Add(user);
+            }
+            else
+            {
+                int index = BaseIndexOf(existing);
+                RemoveAt(index);
+                BaseAdd(index, user);
+            }
+        }
 
-		public void Set (OutputCacheProfile user)
-		{
-			OutputCacheProfile existing = Get (user.Name);
+        public string[] AllKeys
+        {
+            get
+            {
+                string[] keys = new string[Count];
+                for (int i = 0; i < Count; i++)
+                    keys[i] = this[i].Name;
+                return keys;
+            }
+        }
 
-			if (existing == null) {
-				Add (user);
-			}
-			else {
-				int index = BaseIndexOf (existing);
-				RemoveAt (index);
-				BaseAdd (index, user);
-			}
-		}
+        public OutputCacheProfile this[int index]
+        {
+            get { return (OutputCacheProfile)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
 
-		public string[] AllKeys {
-			get {
-				string[] keys = new string[Count];
-				for (int i = 0; i < Count; i ++)
-					keys[i] = this[i].Name;
-				return keys;
-			}
-		}
+        public new OutputCacheProfile this[string name]
+        {
+            get { return (OutputCacheProfile)BaseGet(name); }
+        }
 
-		public OutputCacheProfile this [int index] {
-			get { return (OutputCacheProfile) BaseGet (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
-
-		public new OutputCacheProfile this [string name] {
-			get { return (OutputCacheProfile) BaseGet (name); }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-
-

@@ -16,11 +16,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
     public partial class ConvertAnonymousTypeToTupleTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task ConvertSingleAnonymousType()
@@ -49,29 +52,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
         [Fact]
         public async Task NotOnEmptyAnonymousType()
         {
-            await TestMissingInRegularAndScriptAsync("""
-                class Test
-                {
-                    void Method()
+            await TestMissingInRegularAndScriptAsync(
+                """
+                    class Test
                     {
-                        var t1 = [||]new { };
+                        void Method()
+                        {
+                            var t1 = [||]new { };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
         public async Task NotOnSingleFieldAnonymousType()
         {
-            await TestMissingInRegularAndScriptAsync("""
-                class Test
-                {
-                    void Method()
+            await TestMissingInRegularAndScriptAsync(
+                """
+                    class Test
                     {
-                        var t1 = [||]new { a = 1 };
+                        void Method()
+                        {
+                            var t1 = [||]new { a = 1 };
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]

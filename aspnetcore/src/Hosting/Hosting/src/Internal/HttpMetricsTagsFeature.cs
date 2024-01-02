@@ -9,5 +9,6 @@ internal sealed class HttpMetricsTagsFeature : IHttpMetricsTagsFeature
 {
     ICollection<KeyValuePair<string, object?>> IHttpMetricsTagsFeature.Tags => TagsList;
 
-    public List<KeyValuePair<string, object?>> TagsList { get; } = new List<KeyValuePair<string, object?>>();
+    public List<KeyValuePair<string, object?>> TagsList { get; } =
+        new List<KeyValuePair<string, object?>>();
 }

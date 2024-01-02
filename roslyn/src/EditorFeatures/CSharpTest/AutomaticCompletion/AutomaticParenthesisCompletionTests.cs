@@ -125,7 +125,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Argument()
         {
             var code = """
-                class C 
+                class C
                 {
                     void Method()
                     {
@@ -143,7 +143,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Argument_Invalid()
         {
             var code = """
-                class C 
+                class C
                 {
                     void Method()
                     {
@@ -200,7 +200,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                Parenthesis.OpenCharacter, Parenthesis.CloseCharacter);
+                Parenthesis.OpenCharacter,
+                Parenthesis.CloseCharacter
+            );
         }
     }
 }

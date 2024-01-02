@@ -31,16 +31,19 @@ namespace System.Data.SqlClient
         /// <param name="encryptionKey">
         /// Root encryption key from which three other keys will be derived
         /// </param>
-        /// <param name="encryptionType">Encryption Type, accepted values are Deterministic and Randomized. 
+        /// <param name="encryptionType">Encryption Type, accepted values are Deterministic and Randomized.
         /// For Deterministic encryption, a synthetic IV will be genenrated during encryption
         /// For Randomized encryption, a random IV will be generated during encryption.
         /// </param>
         /// <param name="algorithmVersion">
         /// Algorithm version
         /// </param>
-        internal SqlAes256CbcAlgorithm(SqlAeadAes256CbcHmac256EncryptionKey encryptionKey, SqlClientEncryptionType encryptionType, byte algorithmVersion)
-            :base(encryptionKey, encryptionType, algorithmVersion)
-        { }
+        internal SqlAes256CbcAlgorithm(
+            SqlAeadAes256CbcHmac256EncryptionKey encryptionKey,
+            SqlClientEncryptionType encryptionType,
+            byte algorithmVersion
+        )
+            : base(encryptionKey, encryptionType, algorithmVersion) { }
 
         /// <summary>
         /// Encryption Algorithm
@@ -48,7 +51,8 @@ namespace System.Data.SqlClient
         /// </summary>
         /// <param name="plainText">Plaintext data to be encrypted</param>
         /// <returns>Returns the ciphertext corresponding to the plaintext.</returns>
-        internal override byte[] EncryptData(byte[] plainText) {
+        internal override byte[] EncryptData(byte[] plainText)
+        {
             return EncryptData(plainText, hasAuthenticationTag: false);
         }
 
@@ -58,7 +62,8 @@ namespace System.Data.SqlClient
         /// </summary>
         /// <param name="cipherText"></param>
         /// <returns></returns>
-        internal override byte[] DecryptData(byte[] cipherText) {
+        internal override byte[] DecryptData(byte[] cipherText)
+        {
             return base.DecryptData(cipherText, hasAuthenticationTag: false);
         }
     }

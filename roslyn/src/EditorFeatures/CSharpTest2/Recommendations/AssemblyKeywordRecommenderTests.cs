@@ -15,59 +15,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """);
+                    class C { }
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """);
+                    System.Console.WriteLine();
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """);
+                    int i = 0;
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
@@ -75,9 +77,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    [$$
-                """);
+                    class C {
+                        [$$
+                    """
+            );
         }
 
         [Fact]
@@ -85,10 +88,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    [Goo]
-                    [$$
-                """);
+                    class C {
+                        [Goo]
+                        [$$
+                    """
+            );
         }
 
         [Fact]
@@ -96,11 +100,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    void Goo() {
-                    }
-                    [$$
-                """);
+                    class C {
+                        void Goo() {
+                        }
+                        [$$
+                    """
+            );
         }
 
         [Fact]
@@ -108,12 +113,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    int Goo {
-                        get;
-                    }
-                    [$$
-                """);
+                    class C {
+                        int Goo {
+                            get;
+                        }
+                        [$$
+                    """
+            );
         }
 
         [Fact]
@@ -121,10 +127,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    int Goo;
-                    [$$
-                """);
+                    class C {
+                        int Goo;
+                        [$$
+                    """
+            );
         }
 
         [Fact]
@@ -132,17 +139,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    event Action<int> Goo;
-                    [$$
-                """);
+                    class C {
+                        event Action<int> Goo;
+                        [$$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestInOuterAttribute()
         {
-            await VerifyKeywordAsync(
-@"[$$");
+            await VerifyKeywordAsync(@"[$$");
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -150,14 +157,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class A
-                {
-                    [$$
-                    class B
+                    class A
                     {
+                        [$$
+                        class B
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -165,9 +173,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                [$$
-                namespace Goo {
-                """);
+                    [$$
+                    namespace Goo {
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -175,9 +184,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                [$$
-                namespace Goo;
-                """);
+                    [$$
+                    namespace Goo;
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -185,9 +195,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                $$
-                namespace Goo {}
-                """);
+                    $$
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -195,11 +206,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                $$
-                namespace Goo {}
-                """);
+                    $$
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact]
@@ -207,11 +219,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                global using System;
+                    global using System;
 
-                $$
-                namespace Goo {}
-                """);
+                    $$
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -219,11 +232,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                using System;
+                    using System;
 
-                [$$
-                namespace Goo {}
-                """);
+                    [$$
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact]
@@ -231,11 +245,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                global using System;
+                    global using System;
 
-                [$$
-                namespace Goo {}
-                """);
+                    [$$
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -243,10 +258,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                [$$
-                [assembly: Whatever]
-                namespace Goo {}
-                """);
+                    [$$
+                    [assembly: Whatever]
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -254,9 +270,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                [$$
-                class Goo {}
-                """);
+                    [$$
+                    class Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -264,9 +281,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                [$$
-                interface IGoo {}
-                """);
+                    [$$
+                    interface IGoo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -274,9 +292,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                [$$
-                struct Goo {}
-                """);
+                    [$$
+                    struct Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -284,9 +303,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                [$$
-                enum Goo {}
-                """);
+                    [$$
+                    enum Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -294,10 +314,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                $$
-                [assembly: Whatever]
-                namespace Goo {}
-                """);
+                    $$
+                    [assembly: Whatever]
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -305,12 +326,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                $$
-                [assembly: Whatever]
-                namespace Goo {}
-                """);
+                    $$
+                    [assembly: Whatever]
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact]
@@ -318,12 +340,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                global using System;
+                    global using System;
 
-                $$
-                [assembly: Whatever]
-                namespace Goo {}
-                """);
+                    $$
+                    [assembly: Whatever]
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -331,12 +354,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                using System;
+                    using System;
 
-                [$$
-                [assembly: Whatever]
-                namespace Goo {}
-                """);
+                    [$$
+                    [assembly: Whatever]
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact]
@@ -344,12 +368,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                global using System;
+                    global using System;
 
-                [$$
-                [assembly: Whatever]
-                namespace Goo {}
-                """);
+                    [$$
+                    [assembly: Whatever]
+                    namespace Goo {}
+                    """
+            );
         }
 
         [Fact]
@@ -357,9 +382,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                namespace Goo {
-                     [$$
-                """);
+                    namespace Goo {
+                         [$$
+                    """
+            );
         }
 
         [Fact]
@@ -367,9 +393,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    void Goo([$$
-                """);
+                    class C {
+                        void Goo([$$
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -377,10 +404,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    void Goo(string[] array) {
-                        array[$$
-                """);
+                    class C {
+                        void Goo(string[] array) {
+                            array[$$
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -388,9 +416,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    public int this[$$
-                """);
+                    class C {
+                        public int this[$$
+                    """
+            );
         }
 
         [Fact]
@@ -398,9 +427,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    int Goo { [$$
-                """);
+                    class C {
+                        int Goo { [$$
+                    """
+            );
         }
 
         [Fact]
@@ -408,23 +438,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    event Action<int> Goo { [$$
-                """);
+                    class C {
+                        event Action<int> Goo { [$$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotInClassAssemblyParameters()
         {
-            await VerifyAbsenceAsync(
-@"class C<[$$");
+            await VerifyAbsenceAsync(@"class C<[$$");
         }
 
         [Fact]
         public async Task TestNotInDelegateAssemblyParameters()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<[$$");
+            await VerifyAbsenceAsync(@"delegate void D<[$$");
         }
 
         [Fact]
@@ -432,9 +461,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    void M<[$$
-                """);
+                    class C {
+                        void M<[$$
+                    """
+            );
         }
 
         [Fact]
@@ -442,9 +472,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                interface I {
-                    [$$
-                """);
+                    interface I {
+                        [$$
+                    """
+            );
         }
 
         [Fact]
@@ -452,9 +483,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                struct S {
-                    [$$
-                """);
+                    struct S {
+                        [$$
+                    """
+            );
         }
 
         [Fact]
@@ -462,9 +494,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                enum E {
-                    [$$
-                """);
+                    enum E {
+                        [$$
+                    """
+            );
         }
     }
 }

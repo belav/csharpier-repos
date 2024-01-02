@@ -12,10 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class InterpolatedStringExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<InterpolatedStringExpressionSyntax>
+public class InterpolatedStringExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<InterpolatedStringExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new InterpolatedStringExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new InterpolatedStringExpressionStructureProvider();
 
     [Fact]
     public async Task TestMultiLineStringLiteral()
@@ -33,7 +34,8 @@ public class InterpolatedStringExpressionStructureTests : AbstractCSharpSyntaxNo
                     }
                 }
                 """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -48,6 +50,7 @@ public class InterpolatedStringExpressionStructureTests : AbstractCSharpSyntaxNo
                         var v = $$$";
                     }
                 }
-                """);
+                """
+        );
     }
 }

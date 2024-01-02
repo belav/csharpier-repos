@@ -14,7 +14,11 @@ namespace System.Security.Cryptography
             return true;
         }
 
-        private static string? NativeOidToFriendlyName(string oid, OidGroup oidGroup, bool fallBackToAllGroups)
+        private static string? NativeOidToFriendlyName(
+            string oid,
+            OidGroup oidGroup,
+            bool fallBackToAllGroups
+        )
         {
             if (s_extraOidToFriendlyName.TryGetValue(oid, out string? friendlyName))
             {
@@ -24,7 +28,11 @@ namespace System.Security.Cryptography
             return null;
         }
 
-        private static string? NativeFriendlyNameToOid(string friendlyName, OidGroup oidGroup, bool fallBackToAllGroups)
+        private static string? NativeFriendlyNameToOid(
+            string friendlyName,
+            OidGroup oidGroup,
+            bool fallBackToAllGroups
+        )
         {
             if (s_extraFriendlyNameToOid.TryGetValue(friendlyName, out string? oid))
             {
@@ -47,7 +55,10 @@ namespace System.Security.Cryptography
         // and OpenSSL produce different answers.  Since the answers originally came from OpenSSL
         // on macOS and Android, this preserves the OpenSSL names.
         private static readonly Dictionary<string, string> s_extraFriendlyNameToOid =
-            new Dictionary<string, string>(ExtraFriendlyNameToOidCount, StringComparer.OrdinalIgnoreCase)
+            new Dictionary<string, string>(
+                ExtraFriendlyNameToOidCount,
+                StringComparer.OrdinalIgnoreCase
+            )
             {
                 { "pkcs7-data", "1.2.840.113549.1.7.1" },
                 { "contentType", "1.2.840.113549.1.9.3" },
@@ -67,7 +78,9 @@ namespace System.Security.Cryptography
         private static readonly Dictionary<string, string> s_extraOidToFriendlyName =
             InvertWithDefaultComparer(s_extraFriendlyNameToOid);
 
-        private static Dictionary<string, string> InvertWithDefaultComparer(Dictionary<string, string> source)
+        private static Dictionary<string, string> InvertWithDefaultComparer(
+            Dictionary<string, string> source
+        )
         {
             var result = new Dictionary<string, string>(source.Count);
             foreach (KeyValuePair<string, string> item in source)
@@ -81,10 +94,14 @@ namespace System.Security.Cryptography
         static partial void ExtraStaticDebugValidation()
         {
             // Validate we hardcoded the right dictionary size
-            Debug.Assert(s_extraFriendlyNameToOid.Count == ExtraFriendlyNameToOidCount,
-                $"Expected {nameof(s_extraFriendlyNameToOid)}.{nameof(s_extraFriendlyNameToOid.Count)} == {ExtraFriendlyNameToOidCount}, got {s_extraFriendlyNameToOid.Count}");
-            Debug.Assert(s_extraOidToFriendlyName.Count == ExtraFriendlyNameToOidCount,
-                $"Expected {nameof(s_extraOidToFriendlyName)}.{nameof(s_extraOidToFriendlyName.Count)} == {ExtraFriendlyNameToOidCount}, got {s_extraOidToFriendlyName.Count}");
+            Debug.Assert(
+                s_extraFriendlyNameToOid.Count == ExtraFriendlyNameToOidCount,
+                $"Expected {nameof(s_extraFriendlyNameToOid)}.{nameof(s_extraFriendlyNameToOid.Count)} == {ExtraFriendlyNameToOidCount}, got {s_extraFriendlyNameToOid.Count}"
+            );
+            Debug.Assert(
+                s_extraOidToFriendlyName.Count == ExtraFriendlyNameToOidCount,
+                $"Expected {nameof(s_extraOidToFriendlyName)}.{nameof(s_extraOidToFriendlyName.Count)} == {ExtraFriendlyNameToOidCount}, got {s_extraOidToFriendlyName.Count}"
+            );
         }
 #endif
     }

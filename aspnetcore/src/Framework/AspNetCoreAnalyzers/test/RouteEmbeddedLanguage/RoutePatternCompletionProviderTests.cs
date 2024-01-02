@@ -18,7 +18,8 @@ public partial class RoutePatternCompletionProviderTests
     public async Task Insertion_Literal_NoItems()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -32,7 +33,8 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.False(result.ShouldTriggerCompletion);
@@ -43,7 +45,8 @@ class Program
     public async Task Insertion_PolicyColon_ReturnPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -57,16 +60,26 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var description = await result.Service.GetDescriptionAsync(result.Document, result.Completions.ItemsList[0]);
-        Assert.Equal("Matches a string that contains only lowercase or uppercase letters A through Z in the English alphabet.", description.Text);
+        var description = await result.Service.GetDescriptionAsync(
+            result.Document,
+            result.Completions.ItemsList[0]
+        );
+        Assert.Equal(
+            "Matches a string that contains only lowercase or uppercase letters A through Z in the English alphabet.",
+            description.Text
+        );
 
-        var change = await result.Service.GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
+        var change = await result.Service.GetChangeAsync(
+            result.Document,
+            result.Completions.ItemsList[0]
+        );
         Assert.Equal("alpha", change.TextChange.NewText);
     }
 
@@ -74,7 +87,8 @@ class Program
     public async Task Invoke_PolicyColon_ReturnPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -88,7 +102,9 @@ class Program
     {
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
@@ -99,7 +115,8 @@ class Program
     public async Task Invoke_Policy_HasText_ReturnPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -113,13 +130,18 @@ class Program
     {
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var change = await result.Service.GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
+        var change = await result.Service.GetChangeAsync(
+            result.Document,
+            result.Completions.ItemsList[0]
+        );
         Assert.Equal("alpha", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -128,7 +150,8 @@ class Program
     public async Task Invoke_Policy_InText_ReturnPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -142,13 +165,18 @@ class Program
     {
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var change = await result.Service.GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
+        var change = await result.Service.GetChangeAsync(
+            result.Document,
+            result.Completions.ItemsList[0]
+        );
         Assert.Equal("alpha", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -157,7 +185,8 @@ class Program
     public async Task Invoke_MultiplePolicy_HasText_ReturnPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -171,13 +200,18 @@ class Program
     {
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var change = await result.Service.GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
+        var change = await result.Service.GetChangeAsync(
+            result.Document,
+            result.Completions.ItemsList[0]
+        );
         Assert.Equal("alpha", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -186,7 +220,8 @@ class Program
     public async Task Insertion_PolicyColon_MultipleOverloads_ReturnPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -203,7 +238,8 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
@@ -214,7 +250,8 @@ class Program
     public async Task Insertion_ParameterOpenBrace_UnsupportedMethod_NoItems()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -228,7 +265,8 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.Empty(result.Completions.ItemsList);
@@ -238,7 +276,8 @@ class Program
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_HasDelegate_ReturnDelegateParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -250,19 +289,19 @@ class Program
         EndpointRouteBuilderExtensions.MapGet(null, @""{$$"", (string id) => "");
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_HasDelegate_FromRouteAttribute_ReturnDelegateParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -275,19 +314,19 @@ class Program
         EndpointRouteBuilderExtensions.MapGet(null, @""{$$"", ([FromRoute(Name = ""id1"")]string id) => "");
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id1", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id1", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_HasMethod_ReturnDelegateParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -304,19 +343,19 @@ class Program
         return """";
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_HasMethod_HasStarted_ReturnDelegateParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -333,19 +372,20 @@ class Program
         return """";
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_HasMethod_NamedParameters_ReturnDelegateParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -362,19 +402,19 @@ class Program
         return """";
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_HasSpecialTypes_ExcludeSpecialTypes()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -398,19 +438,19 @@ class Program
         return """";
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_AsParameters_ReturnObjectParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -438,20 +478,23 @@ class Program
         public object Service { get; set; }
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.Collection(
             result.Completions.ItemsList,
             i => Assert.Equal("PageIndex", i.DisplayText),
-            i => Assert.Equal("PageNumber", i.DisplayText));
+            i => Assert.Equal("PageNumber", i.DisplayText)
+        );
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_NullDelegate_NoResults()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -463,7 +506,8 @@ class Program
         EndpointRouteBuilderExtensions.MapGet(null, @""{$$"", null);
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.Empty(result.Completions.ItemsList);
@@ -473,7 +517,8 @@ class Program
     public async Task Insertion_ParameterOpenBrace_EndpointMapGet_Incomplete_NoResults()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -485,7 +530,8 @@ class Program
         EndpointRouteBuilderExtensions.MapGet(null, @""{$$"";
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.Empty(result.Completions.ItemsList);
@@ -495,7 +541,8 @@ class Program
     public async Task Insertion_ParameterOpenBrace_CustomMapGet_ReturnDelegateParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -512,19 +559,19 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_ParameterInUse_NoResults()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -541,7 +588,8 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.Empty(result.Completions.ItemsList);
@@ -551,7 +599,8 @@ class Program
     public async Task Insertion_ParameterOpenBrace_ParameterInUse_DifferentCase_NoResults()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -568,7 +617,8 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
         Assert.Empty(result.Completions.ItemsList);
@@ -578,7 +628,8 @@ class Program
     public async Task Insertion_ParameterOpenBrace_OtherParameters_ReturnDelegateParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -595,19 +646,19 @@ class Program
     {
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id2", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id2", i.DisplayText));
     }
 
     [Fact]
     public async Task Insertion_ParameterOpenBrace_ControllerAction_HasParameter_ReturnActionParameterItem()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -628,19 +679,19 @@ public class TestController
         return null;
     }
 }
-");
+"
+        );
 
         // Assert
-        Assert.Collection(
-            result.Completions.ItemsList,
-            i => Assert.Equal("id", i.DisplayText));
+        Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
     }
 
     [Fact]
     public async Task Invoke_Comment_PolicyColon_ReturnHttpPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -651,7 +702,9 @@ class Program
         var s = @""{hi:$$"";
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
@@ -662,7 +715,8 @@ class Program
     public async Task Invoke_Comment_Http_PolicyColon_ReturnHttpPolicies()
     {
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -673,7 +727,9 @@ class Program
         var s = @""{hi:$$"";
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
@@ -687,7 +743,8 @@ class Program
         // See example in https://github.com/dotnet/razor/pull/6997
 
         // Arrange & Act
-        var result = await GetCompletionsAndServiceAsync(@"
+        var result = await GetCompletionsAndServiceAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -699,15 +756,24 @@ class Program
         var s = @""{hi:$$"";
     }
 }
-", CompletionTrigger.Invoke);
+",
+            CompletionTrigger.Invoke
+        );
 
         // Assert
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("bool", result.Completions.ItemsList[0].DisplayText);
     }
 
-    private Task<CompletionResult> GetCompletionsAndServiceAsync(string source, CompletionTrigger? completionTrigger = null)
+    private Task<CompletionResult> GetCompletionsAndServiceAsync(
+        string source,
+        CompletionTrigger? completionTrigger = null
+    )
     {
-        return CompletionTestHelpers.GetCompletionsAndServiceAsync(Runner, source, completionTrigger);
+        return CompletionTestHelpers.GetCompletionsAndServiceAsync(
+            Runner,
+            source,
+            completionTrigger
+        );
     }
 }

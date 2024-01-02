@@ -34,16 +34,16 @@ public class KeyPerFileConfigurationProvider : ConfigurationProvider, IDisposabl
                 {
                     Thread.Sleep(Source.ReloadDelay);
                     Load(reload: true);
-                });
+                }
+            );
         }
-
     }
 
-    private string NormalizeKey(string key)
-        => key.Replace(Source.SectionDelimiter, ConfigurationPath.KeyDelimiter);
+    private string NormalizeKey(string key) =>
+        key.Replace(Source.SectionDelimiter, ConfigurationPath.KeyDelimiter);
 
-    private static string TrimNewLine(string value)
-        => value.EndsWith(Environment.NewLine, StringComparison.Ordinal)
+    private static string TrimNewLine(string value) =>
+        value.EndsWith(Environment.NewLine, StringComparison.Ordinal)
             ? value.Substring(0, value.Length - Environment.NewLine.Length)
             : value;
 
@@ -68,7 +68,9 @@ public class KeyPerFileConfigurationProvider : ConfigurationProvider, IDisposabl
                 return;
             }
 
-            throw new DirectoryNotFoundException("A non-null file provider for the directory is required when this source is not optional.");
+            throw new DirectoryNotFoundException(
+                "A non-null file provider for the directory is required when this source is not optional."
+            );
         }
 
         var directory = Source.FileProvider.GetDirectoryContents("/");
@@ -80,7 +82,9 @@ public class KeyPerFileConfigurationProvider : ConfigurationProvider, IDisposabl
                 OnReload();
                 return;
             }
-            throw new DirectoryNotFoundException("The root directory for the FileProvider doesn't exist and is not optional.");
+            throw new DirectoryNotFoundException(
+                "The root directory for the FileProvider doesn't exist and is not optional."
+            );
         }
         else
         {
@@ -98,7 +102,6 @@ public class KeyPerFileConfigurationProvider : ConfigurationProvider, IDisposabl
                 {
                     data.Add(NormalizeKey(file.Name), TrimNewLine(streamReader.ReadToEnd()));
                 }
-
             }
         }
 
@@ -106,15 +109,15 @@ public class KeyPerFileConfigurationProvider : ConfigurationProvider, IDisposabl
         OnReload();
     }
 
-    private string GetDirectoryName()
-        => Source.FileProvider?.GetFileInfo("/")?.PhysicalPath ?? "<Unknown>";
+    private string GetDirectoryName() =>
+        Source.FileProvider?.GetFileInfo("/")?.PhysicalPath ?? "<Unknown>";
 
     /// <summary>
     /// Generates a string representing this provider name and relevant details.
     /// </summary>
     /// <returns>The configuration name.</returns>
-    public override string ToString()
-        => $"{GetType().Name} for files in '{GetDirectoryName()}' ({(Source.Optional ? "Optional" : "Required")})";
+    public override string ToString() =>
+        $"{GetType().Name} for files in '{GetDirectoryName()}' ({(Source.Optional ? "Optional" : "Required")})";
 
     /// <inheritdoc />
     public void Dispose()

@@ -32,156 +32,188 @@
 
 
 using System;
-using System.Text;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
+using System.IO;
 using System.Reflection;
+using System.Resources;
+using System.Text;
 using System.Xml;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Tasks.GenerateResourceInternal;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public sealed class GenerateResource : TaskExtension {
-	
-		ITaskItem[]	filesWritten;
-		bool		neverLockTypeAssemblies;
-		ITaskItem[]	outputResources;
-		bool		publicClass;
-		ITaskItem[]	references;
-		ITaskItem[]	sources;
-		ITaskItem	stateFile;
-		string		stronglyTypedClassName;
-		string		stronglyTypedFilename;
-		string		stronglyTypedLanguage;
-		string		stronglyTypedNamespace;
-		bool		useSourcePath;
-		
-		public GenerateResource ()
-		{
-			useSourcePath = false;
-		}
+namespace Microsoft.Build.Tasks
+{
+    public sealed class GenerateResource : TaskExtension
+    {
+        ITaskItem[] filesWritten;
+        bool neverLockTypeAssemblies;
+        ITaskItem[] outputResources;
+        bool publicClass;
+        ITaskItem[] references;
+        ITaskItem[] sources;
+        ITaskItem stateFile;
+        string stronglyTypedClassName;
+        string stronglyTypedFilename;
+        string stronglyTypedLanguage;
+        string stronglyTypedNamespace;
+        bool useSourcePath;
 
-		public override bool Execute ()
-		{
-			if (sources.Length == 0)
-				return true;
+        public GenerateResource()
+        {
+            useSourcePath = false;
+        }
 
-			bool result = true;
-			List  <ITaskItem> temporaryFilesWritten = new List <ITaskItem> ();
-			if (outputResources == null) {
-				foreach (ITaskItem source in sources) {
-					string sourceFile = source.ItemSpec;
-					string outputFile = source.GetMetadata ("AutoGen").Equals ("true", StringComparison.OrdinalIgnoreCase) ?
-						source.ItemSpec.Replace ('\\', '.').Replace ('/', '.') :
-						Path.ChangeExtension (sourceFile, "resources");
+        public override bool Execute()
+        {
+            if (sources.Length == 0)
+                return true;
 
-					if (IsResgenRequired (sourceFile, outputFile))
-						result &= CompileResourceFile (sourceFile, outputFile);
+            bool result = true;
+            List<ITaskItem> temporaryFilesWritten = new List<ITaskItem>();
+            if (outputResources == null)
+            {
+                foreach (ITaskItem source in sources)
+                {
+                    string sourceFile = source.ItemSpec;
+                    string outputFile = source
+                        .GetMetadata("AutoGen")
+                        .Equals("true", StringComparison.OrdinalIgnoreCase)
+                        ? source.ItemSpec.Replace('\\', '.').Replace('/', '.')
+                        : Path.ChangeExtension(sourceFile, "resources");
 
-					ITaskItem newItem = new TaskItem (source);
-					newItem.ItemSpec = outputFile;
+                    if (IsResgenRequired(sourceFile, outputFile))
+                        result &= CompileResourceFile(sourceFile, outputFile);
 
-					temporaryFilesWritten.Add (newItem);
-				}
-			} else {
-				if (sources.Length != outputResources.Length) {
-					Log.LogError ("Sources count is different than OutputResources count.");
-					return false;
-				}
+                    ITaskItem newItem = new TaskItem(source);
+                    newItem.ItemSpec = outputFile;
 
-				for (int i = 0; i < sources.Length; i ++) {
-					if (String.IsNullOrEmpty (outputResources [i].ItemSpec)) {
-						Log.LogError ("Filename of output can not be empty.");
-						result = false;
-						continue;
-					}
+                    temporaryFilesWritten.Add(newItem);
+                }
+            }
+            else
+            {
+                if (sources.Length != outputResources.Length)
+                {
+                    Log.LogError("Sources count is different than OutputResources count.");
+                    return false;
+                }
 
-					if (IsResgenRequired (sources [i].ItemSpec, outputResources [i].ItemSpec))
-						result &= CompileResourceFile (sources [i].ItemSpec, outputResources [i].ItemSpec);
-					temporaryFilesWritten.Add (outputResources [i]);
-				}
-			}
-			
-			filesWritten = temporaryFilesWritten.ToArray ();
+                for (int i = 0; i < sources.Length; i++)
+                {
+                    if (String.IsNullOrEmpty(outputResources[i].ItemSpec))
+                    {
+                        Log.LogError("Filename of output can not be empty.");
+                        result = false;
+                        continue;
+                    }
 
-			return result;
-		}
-		
-		// true if the resx file or any file referenced
-		// by the resx is newer than the .resources file
-		//
-		// Code taken from monodevelop
-		// main/src/core/MonoDevelop.Core/MonoDevelop.Projects.Formats.MD1/MD1DotNetProjectHandler.cs
-		bool IsResgenRequired (string resx_filename, string resources_filename)
-		{
-			if (IsFileNewerThan (resx_filename, resources_filename)) {
-				Log.LogMessage (MessageImportance.Low,
-						"Resource file '{0}' is newer than the source file '{1}', skipping.",
-						resources_filename, resx_filename);
-				return true;
-			}
+                    if (IsResgenRequired(sources[i].ItemSpec, outputResources[i].ItemSpec))
+                        result &= CompileResourceFile(
+                            sources[i].ItemSpec,
+                            outputResources[i].ItemSpec
+                        );
+                    temporaryFilesWritten.Add(outputResources[i]);
+                }
+            }
 
-			if (String.Compare (Path.GetExtension (resx_filename), ".resx", true) != 0)
-				return true;
+            filesWritten = temporaryFilesWritten.ToArray();
 
-			// resx file, check for files referenced from there
-			XmlTextReader xr = null;
-			try {
-				// look for
-				// <data type="System.Resources.ResXFileRef, System.Windows.Forms" ..>
-				//   <value>... filename;.. </value>
-				// </data>
-				xr = new XmlTextReader (resx_filename);
-				string basepath = Path.GetDirectoryName (resx_filename);
-				while (xr.Read ()) {
-					if (xr.NodeType != XmlNodeType.Element ||
-						String.Compare (xr.LocalName, "data") != 0)
-						continue;
+            return result;
+        }
 
-					string type = xr.GetAttribute ("type");
-					if (String.IsNullOrEmpty (type))
-						continue;
+        // true if the resx file or any file referenced
+        // by the resx is newer than the .resources file
+        //
+        // Code taken from monodevelop
+        // main/src/core/MonoDevelop.Core/MonoDevelop.Projects.Formats.MD1/MD1DotNetProjectHandler.cs
+        bool IsResgenRequired(string resx_filename, string resources_filename)
+        {
+            if (IsFileNewerThan(resx_filename, resources_filename))
+            {
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    "Resource file '{0}' is newer than the source file '{1}', skipping.",
+                    resources_filename,
+                    resx_filename
+                );
+                return true;
+            }
 
-					if (String.Compare (type, "System.Resources.ResXFileRef, System.Windows.Forms") != 0)
-						continue;
+            if (String.Compare(Path.GetExtension(resx_filename), ".resx", true) != 0)
+                return true;
 
-					xr.ReadToDescendant ("value");
-					if (xr.NodeType != XmlNodeType.Element)
-						continue;
+            // resx file, check for files referenced from there
+            XmlTextReader xr = null;
+            try
+            {
+                // look for
+                // <data type="System.Resources.ResXFileRef, System.Windows.Forms" ..>
+                //   <value>... filename;.. </value>
+                // </data>
+                xr = new XmlTextReader(resx_filename);
+                string basepath = Path.GetDirectoryName(resx_filename);
+                while (xr.Read())
+                {
+                    if (
+                        xr.NodeType != XmlNodeType.Element
+                        || String.Compare(xr.LocalName, "data") != 0
+                    )
+                        continue;
 
-					string value = xr.ReadElementContentAsString ();
+                    string type = xr.GetAttribute("type");
+                    if (String.IsNullOrEmpty(type))
+                        continue;
 
-					string [] parts = value.Split (';');
-					if (parts.Length > 0) {
-						string referenced_filename = MSBuildUtils.FromMSBuildPath (
-								Path.Combine (basepath, parts [0]).Trim ());
-						if (File.Exists (referenced_filename) &&
-							IsFileNewerThan (referenced_filename, resources_filename))
-							return true;
-					}
-				}
-			} catch (XmlException) {
-				// Ignore xml errors, let resgen handle it
-				return true;
-			} finally {
-				if (xr != null)
-					xr.Close ();
-			}
+                    if (
+                        String.Compare(type, "System.Resources.ResXFileRef, System.Windows.Forms")
+                        != 0
+                    )
+                        continue;
 
-			return false;
-		}
+                    xr.ReadToDescendant("value");
+                    if (xr.NodeType != XmlNodeType.Element)
+                        continue;
 
-		// true if first is newer than second
-		static bool IsFileNewerThan (string first, string second)
-		{
-			FileInfo finfo_first = new FileInfo (first);
-			FileInfo finfo_second = new FileInfo (second);
-			return finfo_first.LastWriteTime > finfo_second.LastWriteTime;
-		}
+                    string value = xr.ReadElementContentAsString();
+
+                    string[] parts = value.Split(';');
+                    if (parts.Length > 0)
+                    {
+                        string referenced_filename = MSBuildUtils.FromMSBuildPath(
+                            Path.Combine(basepath, parts[0]).Trim()
+                        );
+                        if (
+                            File.Exists(referenced_filename)
+                            && IsFileNewerThan(referenced_filename, resources_filename)
+                        )
+                            return true;
+                    }
+                }
+            }
+            catch (XmlException)
+            {
+                // Ignore xml errors, let resgen handle it
+                return true;
+            }
+            finally
+            {
+                if (xr != null)
+                    xr.Close();
+            }
+
+            return false;
+        }
+
+        // true if first is newer than second
+        static bool IsFileNewerThan(string first, string second)
+        {
+            FileInfo finfo_first = new FileInfo(first);
+            FileInfo finfo_second = new FileInfo(second);
+            return finfo_first.LastWriteTime > finfo_second.LastWriteTime;
+        }
 
 #if false
 		private IResourceReader GetReader (Stream stream, string name)
@@ -226,174 +258,152 @@ namespace Microsoft.Build.Tasks {
 			}
 		}
 #endif
-		
-		private bool CompileResourceFile (string sname, string dname )
-		{
-			if (!File.Exists (sname)) {
-				Log.LogError ("Resource file '{0}' not found.", sname);
-				return false;
-			}
+        private bool CompileResourceFile(string sname, string dname)
+        {
+            if (!File.Exists(sname))
+            {
+                Log.LogError("Resource file '{0}' not found.", sname);
+                return false;
+            }
 
-			Resgen resgen = new Resgen ();
-			resgen.BuildEngine = this.BuildEngine;
-			resgen.UseSourcePath = true;
+            Resgen resgen = new Resgen();
+            resgen.BuildEngine = this.BuildEngine;
+            resgen.UseSourcePath = true;
 
-			resgen.SourceFile = sname;
-			resgen.OutputFile = dname;
+            resgen.SourceFile = sname;
+            resgen.OutputFile = dname;
 
-			return resgen.Execute ();
-		}
+            return resgen.Execute();
+        }
 
-		[Output]
-		public ITaskItem[] FilesWritten {
-			get {
-				return filesWritten;
-			}
-		}
+        [Output]
+        public ITaskItem[] FilesWritten
+        {
+            get { return filesWritten; }
+        }
 
-		[MonoTODO]
-		public bool NeverLockTypeAssemblies {
-			get {
-				return neverLockTypeAssemblies;
-			}
-			set {
-				neverLockTypeAssemblies = value;
-			}
-		}
+        [MonoTODO]
+        public bool NeverLockTypeAssemblies
+        {
+            get { return neverLockTypeAssemblies; }
+            set { neverLockTypeAssemblies = value; }
+        }
 
-		[Output]
-		public ITaskItem[] OutputResources {
-			get {
-				return outputResources;
-			}
-			set {
-				outputResources = value;
-			}
-		}
-		
-		public bool PublicClass {
-			get { return publicClass; }
-			set { publicClass = value; }
-		}
+        [Output]
+        public ITaskItem[] OutputResources
+        {
+            get { return outputResources; }
+            set { outputResources = value; }
+        }
 
-		public ITaskItem[] References {
-			get {
-				return references;
-			}
-			set {
-				references = value;
-			}
-		}
+        public bool PublicClass
+        {
+            get { return publicClass; }
+            set { publicClass = value; }
+        }
 
-		[Required]
-		public ITaskItem[] Sources {
-			get {
-				return sources;
-			}
-			set {
-				sources = value;
-			}
-		}
+        public ITaskItem[] References
+        {
+            get { return references; }
+            set { references = value; }
+        }
 
-		public ITaskItem StateFile {
-			get {
-				return stateFile;
-			}
-			set {
-				stateFile = value;
-			}
-		}
+        [Required]
+        public ITaskItem[] Sources
+        {
+            get { return sources; }
+            set { sources = value; }
+        }
 
-		[Output]
-		public string StronglyTypedClassName {
-			get {
-				return stronglyTypedClassName;
-			}
-			set {
-				stronglyTypedClassName = value;
-			}
-		}
+        public ITaskItem StateFile
+        {
+            get { return stateFile; }
+            set { stateFile = value; }
+        }
 
-		[Output]
-		public string StronglyTypedFileName {
-			get {
-				return stronglyTypedFilename;
-			}
-			set {
-				stronglyTypedFilename = value;
-			}
-		}
+        [Output]
+        public string StronglyTypedClassName
+        {
+            get { return stronglyTypedClassName; }
+            set { stronglyTypedClassName = value; }
+        }
 
-		public string StronglyTypedLanguage {
-			get {
-				return stronglyTypedLanguage;
-			}
-			set {
-				stronglyTypedLanguage = value;
-			}
-		}
+        [Output]
+        public string StronglyTypedFileName
+        {
+            get { return stronglyTypedFilename; }
+            set { stronglyTypedFilename = value; }
+        }
 
-		public string StronglyTypedNamespace {
-			get {
-				return stronglyTypedNamespace;
-			}
-			set {
-				stronglyTypedNamespace = value;
-			}
-		}
+        public string StronglyTypedLanguage
+        {
+            get { return stronglyTypedLanguage; }
+            set { stronglyTypedLanguage = value; }
+        }
 
-		public bool UseSourcePath {
-			get {
-				return useSourcePath;
-			}
-			set {
-				useSourcePath = value;
-			}
-		}
-	}
+        public string StronglyTypedNamespace
+        {
+            get { return stronglyTypedNamespace; }
+            set { stronglyTypedNamespace = value; }
+        }
 
-	class Resgen : ToolTaskExtension
-	{
-		public Resgen ()
-		{
-		}
+        public bool UseSourcePath
+        {
+            get { return useSourcePath; }
+            set { useSourcePath = value; }
+        }
+    }
 
-		protected internal override void AddCommandLineCommands (
-						 CommandLineBuilderExtension commandLine)
-		{
-			if (UseSourcePath)
-				commandLine.AppendSwitch ("/useSourcePath");
+    class Resgen : ToolTaskExtension
+    {
+        public Resgen() { }
 
-			commandLine.AppendSwitch (String.Format ("/compile \"{0}{1}\"", SourceFile,
-						OutputFile != null ? "," + OutputFile : ""));
-		}
+        protected internal override void AddCommandLineCommands(
+            CommandLineBuilderExtension commandLine
+        )
+        {
+            if (UseSourcePath)
+                commandLine.AppendSwitch("/useSourcePath");
 
-		public override bool Execute ()
-		{
-			if (String.IsNullOrEmpty (Environment.GetEnvironmentVariable ("MONO_IOMAP")))
-				EnvironmentVariables = new string [] { "MONO_IOMAP=drive" };
-			return base.Execute ();
-		}
+            commandLine.AppendSwitch(
+                String.Format(
+                    "/compile \"{0}{1}\"",
+                    SourceFile,
+                    OutputFile != null ? "," + OutputFile : ""
+                )
+            );
+        }
 
-		protected override string GenerateFullPathToTool ()
-		{
-			if (!string.IsNullOrEmpty (ToolPath))
-				return Path.Combine (ToolPath, ToolExe);
-			return ToolLocationHelper.GetPathToDotNetFrameworkFile (ToolExe, TargetDotNetFrameworkVersion.VersionLatest);
-		}
+        public override bool Execute()
+        {
+            if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("MONO_IOMAP")))
+                EnvironmentVariables = new string[] { "MONO_IOMAP=drive" };
+            return base.Execute();
+        }
 
-		protected override MessageImportance StandardOutputLoggingImportance {
-			get { return MessageImportance.Low; }
-		}
+        protected override string GenerateFullPathToTool()
+        {
+            if (!string.IsNullOrEmpty(ToolPath))
+                return Path.Combine(ToolPath, ToolExe);
+            return ToolLocationHelper.GetPathToDotNetFrameworkFile(
+                ToolExe,
+                TargetDotNetFrameworkVersion.VersionLatest
+            );
+        }
 
-		protected override string ToolName {
-			get { return "resgen.exe"; }
-		}
+        protected override MessageImportance StandardOutputLoggingImportance
+        {
+            get { return MessageImportance.Low; }
+        }
 
-		public string SourceFile { get; set; }
-		public string OutputFile { get; set; }
+        protected override string ToolName
+        {
+            get { return "resgen.exe"; }
+        }
 
-		public bool UseSourcePath { get; set; }
-	}
+        public string SourceFile { get; set; }
+        public string OutputFile { get; set; }
+
+        public bool UseSourcePath { get; set; }
+    }
 }
-

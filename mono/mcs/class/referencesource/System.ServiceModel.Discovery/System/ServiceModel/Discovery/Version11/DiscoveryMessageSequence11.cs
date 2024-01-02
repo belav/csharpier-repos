@@ -10,7 +10,7 @@ namespace System.ServiceModel.Discovery.Version11
     using System.Xml.Serialization;
 
     [XmlSchemaProvider("GetSchema")]
-    [Fx.Tag.XamlVisible(false)]    
+    [Fx.Tag.XamlVisible(false)]
     public class DiscoveryMessageSequence11 : IXmlSerializable
     {
         DiscoveryMessageSequence discoveryMessageSequence;
@@ -25,7 +25,9 @@ namespace System.ServiceModel.Discovery.Version11
             this.discoveryMessageSequence = discoveryMessageSequence;
         }
 
-        public static DiscoveryMessageSequence11 FromDiscoveryMessageSequence(DiscoveryMessageSequence discoveryMessageSequence)
+        public static DiscoveryMessageSequence11 FromDiscoveryMessageSequence(
+            DiscoveryMessageSequence discoveryMessageSequence
+        )
         {
             if (discoveryMessageSequence == null)
             {
@@ -54,7 +56,10 @@ namespace System.ServiceModel.Discovery.Version11
             return null;
         }
 
-        [Fx.Tag.InheritThrows(From = "ReadFrom", FromDeclaringType = typeof(DiscoveryMessageSequence))]
+        [Fx.Tag.InheritThrows(
+            From = "ReadFrom",
+            FromDeclaringType = typeof(DiscoveryMessageSequence)
+        )]
         public void ReadXml(XmlReader reader)
         {
             this.discoveryMessageSequence.ReadFrom(reader);

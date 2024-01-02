@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the default validation of roles.
 /// </summary>
 /// <typeparam name="TRole">The type encapsulating a role.</typeparam>
-public class RoleValidator<TRole> : IRoleValidator<TRole> where TRole : class
+public class RoleValidator<TRole> : IRoleValidator<TRole>
+    where TRole : class
 {
     /// <summary>
     /// Creates a new instance of <see cref="RoleValidator{TRole}"/>.
@@ -43,7 +44,10 @@ public class RoleValidator<TRole> : IRoleValidator<TRole> where TRole : class
         return IdentityResult.Success;
     }
 
-    private async Task<List<IdentityError>?> ValidateRoleName(RoleManager<TRole> manager, TRole role)
+    private async Task<List<IdentityError>?> ValidateRoleName(
+        RoleManager<TRole> manager,
+        TRole role
+    )
     {
         List<IdentityError>? errors = null;
         var roleName = await manager.GetRoleNameAsync(role).ConfigureAwait(false);
@@ -55,8 +59,13 @@ public class RoleValidator<TRole> : IRoleValidator<TRole> where TRole : class
         else
         {
             var owner = await manager.FindByNameAsync(roleName).ConfigureAwait(false);
-            if (owner != null &&
-                !string.Equals(await manager.GetRoleIdAsync(owner).ConfigureAwait(false), await manager.GetRoleIdAsync(role).ConfigureAwait(false)))
+            if (
+                owner != null
+                && !string.Equals(
+                    await manager.GetRoleIdAsync(owner).ConfigureAwait(false),
+                    await manager.GetRoleIdAsync(role).ConfigureAwait(false)
+                )
+            )
             {
                 errors ??= new List<IdentityError>();
                 errors.Add(Describer.DuplicateRoleName(roleName));

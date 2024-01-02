@@ -15,9 +15,11 @@ namespace System.ServiceModel.Channels
         static AsyncCallback onCloseComplete = Fx.ThunkCallback(new AsyncCallback(OnCloseComplete));
 
         public ChannelPool(ChannelPoolSettings settings)
-            : base(settings.MaxOutboundChannelsPerEndpoint, settings.IdleTimeout, settings.LeaseTimeout)
-        {
-        }
+            : base(
+                settings.MaxOutboundChannelsPerEndpoint,
+                settings.IdleTimeout,
+                settings.LeaseTimeout
+            ) { }
 
         protected override void AbortItem(TChannel item)
         {

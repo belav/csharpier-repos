@@ -15,8 +15,11 @@ public class SqlServerIsDateFunctionTranslator : IMethodCallTranslator
 {
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
-    private static readonly MethodInfo MethodInfo = typeof(SqlServerDbFunctionsExtensions)
-        .GetRuntimeMethod(nameof(SqlServerDbFunctionsExtensions.IsDate), new[] { typeof(DbFunctions), typeof(string) })!;
+    private static readonly MethodInfo MethodInfo =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.IsDate),
+            new[] { typeof(DbFunctions), typeof(string) }
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,15 +42,18 @@ public class SqlServerIsDateFunctionTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        => MethodInfo.Equals(method)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    ) =>
+        MethodInfo.Equals(method)
             ? _sqlExpressionFactory.Convert(
                 _sqlExpressionFactory.Function(
                     "ISDATE",
                     new[] { arguments[1] },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
-                    MethodInfo.ReturnType),
-                MethodInfo.ReturnType)
+                    MethodInfo.ReturnType
+                ),
+                MethodInfo.ReturnType
+            )
             : null;
 }

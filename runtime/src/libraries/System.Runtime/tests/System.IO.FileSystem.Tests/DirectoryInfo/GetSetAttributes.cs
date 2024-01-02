@@ -8,18 +8,28 @@ namespace System.IO.Tests
 {
     public class DirectoryInfo_GetSetAttributes : InfoGetSetAttributes<DirectoryInfo>
     {
-        protected override FileAttributes GetAttributes(string path) => new DirectoryInfo(path).Attributes;
-        protected override void SetAttributes(string path, FileAttributes attributes) => new DirectoryInfo(path).Attributes = attributes;
-        protected override string CreateItem(string path = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
-            => Directory.CreateDirectory(path ?? GetTestFilePath()).FullName;
+        protected override FileAttributes GetAttributes(string path) =>
+            new DirectoryInfo(path).Attributes;
+
+        protected override void SetAttributes(string path, FileAttributes attributes) =>
+            new DirectoryInfo(path).Attributes = attributes;
+
+        protected override string CreateItem(
+            string path = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => Directory.CreateDirectory(path ?? GetTestFilePath()).FullName;
+
         protected override DirectoryInfo CreateInfo(string path) => new DirectoryInfo(path);
+
         protected override void DeleteItem(string path) => Directory.Delete(path);
+
         protected override bool IsDirectory => true;
         protected override bool CanBeReadOnly => true;
 
         [Theory]
         [InlineData(FileAttributes.ReadOnly)]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Tests Unix file attributes
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests Unix file attributes
         public void UnixAttributeSetting(FileAttributes attr)
         {
             string path = CreateItem();
@@ -36,7 +46,14 @@ namespace System.IO.Tests
         {
             string testDir = "." + GetTestFileName();
             Directory.CreateDirectory(Path.Combine(TestDirectory, testDir));
-            Assert.True(0 != (new DirectoryInfo(Path.Combine(TestDirectory, testDir) + (endsWithSlash ? "/" : "")).Attributes & FileAttributes.Hidden));
+            Assert.True(
+                0
+                    != (
+                        new DirectoryInfo(
+                            Path.Combine(TestDirectory, testDir) + (endsWithSlash ? "/" : "")
+                        ).Attributes & FileAttributes.Hidden
+                    )
+            );
         }
 
         [Theory]
@@ -45,7 +62,7 @@ namespace System.IO.Tests
         [InlineData(FileAttributes.System)]
         [InlineData(FileAttributes.Archive)]
         [InlineData(FileAttributes.ReadOnly | FileAttributes.Hidden)]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Tests Windows file attributes
+        [PlatformSpecific(TestPlatforms.Windows)] // Tests Windows file attributes
         public void WindowsAttributeSetting(FileAttributes attr)
         {
             string path = CreateItem();
@@ -61,7 +78,7 @@ namespace System.IO.Tests
         [InlineData(FileAttributes.SparseFile)]
         [InlineData(FileAttributes.ReparsePoint)]
         [InlineData(FileAttributes.Compressed)]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Unix-invalid file attributes that don't get set
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Unix-invalid file attributes that don't get set
         public void UnixInvalidAttributes(FileAttributes attr)
         {
             string path = CreateItem();
@@ -75,7 +92,7 @@ namespace System.IO.Tests
         [InlineData(FileAttributes.SparseFile)]
         [InlineData(FileAttributes.ReparsePoint)]
         [InlineData(FileAttributes.Compressed)]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Windows-invalid file attributes that don't get set
+        [PlatformSpecific(TestPlatforms.Windows)] // Windows-invalid file attributes that don't get set
         public void WindowsInvalidAttributes(FileAttributes attr)
         {
             string path = CreateItem();
@@ -86,7 +103,7 @@ namespace System.IO.Tests
         [Theory]
         [InlineData(~FileAttributes.ReadOnly)]
         [InlineData((FileAttributes)(-1))]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Unix-invalid file attributes that throw
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Unix-invalid file attributes that throw
         public void UnixInvalidAttributes_ThrowArgumentException(FileAttributes attr)
         {
             string path = CreateItem();
@@ -97,7 +114,7 @@ namespace System.IO.Tests
         [InlineData(FileAttributes.Temporary)]
         [InlineData(~FileAttributes.ReadOnly)]
         [InlineData((FileAttributes)(-1))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Windows-invalid file attributes that throw
+        [PlatformSpecific(TestPlatforms.Windows)] // Windows-invalid file attributes that throw
         public void WindowsInvalidAttributes_ThrowArgumentException(FileAttributes attr)
         {
             string path = CreateItem();

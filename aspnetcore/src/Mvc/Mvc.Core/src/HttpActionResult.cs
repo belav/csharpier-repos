@@ -26,6 +26,6 @@ internal sealed class HttpActionResult : ActionResult
     }
 
     /// <inheritdoc/>
-    public override Task ExecuteResultAsync(ActionContext context)
-        => Result.ExecuteAsync(context.HttpContext);
+    public override Task ExecuteResultAsync(ActionContext context) =>
+        Result.ExecuteAsync(context.HttpContext);
 }

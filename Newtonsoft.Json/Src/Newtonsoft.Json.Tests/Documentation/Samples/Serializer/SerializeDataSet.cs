@@ -46,7 +46,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             DataSet dataSet = new DataSet("dataSet");
             dataSet.Namespace = "NetFrameWork";
             DataTable table = new DataTable();
@@ -82,9 +82,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //     }
             //   ]
             // }
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Table1"": [
     {
       ""id"": 0,
@@ -95,7 +96,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
       ""item"": ""item 1""
     }
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

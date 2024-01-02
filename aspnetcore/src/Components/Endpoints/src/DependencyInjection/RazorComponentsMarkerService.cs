@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Components.Endpoints;
 
-internal class RazorComponentsMarkerService
-{
-}
+internal class RazorComponentsMarkerService { }

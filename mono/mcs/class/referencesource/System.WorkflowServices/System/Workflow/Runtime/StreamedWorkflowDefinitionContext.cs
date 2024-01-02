@@ -24,51 +24,71 @@ namespace System.Workflow.Runtime
         ITypeProvider typeProvider = null;
         byte[] workflowDefinition = null;
 
-        internal StreamedWorkflowDefinitionContext(Stream workflowDefinition, Stream ruleDefinition, ITypeProvider typeProvider)
+        internal StreamedWorkflowDefinitionContext(
+            Stream workflowDefinition,
+            Stream ruleDefinition,
+            ITypeProvider typeProvider
+        )
         {
             if (workflowDefinition == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowDefinition");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowDefinition"
+                );
             }
 
             this.workflowDefinition = new byte[workflowDefinition.Length];
-            workflowDefinition.Read(this.workflowDefinition, 0, (int) workflowDefinition.Length);
+            workflowDefinition.Read(this.workflowDefinition, 0, (int)workflowDefinition.Length);
 
             if (ruleDefinition != null)
             {
                 this.ruleDefinition = new byte[ruleDefinition.Length];
-                ruleDefinition.Read(this.ruleDefinition, 0, (int) ruleDefinition.Length);
+                ruleDefinition.Read(this.ruleDefinition, 0, (int)ruleDefinition.Length);
             }
 
             this.typeProvider = typeProvider;
         }
 
-        internal StreamedWorkflowDefinitionContext(string workflowDefinitionPath, string ruleDefinitionPath, ITypeProvider typeProvider)
+        internal StreamedWorkflowDefinitionContext(
+            string workflowDefinitionPath,
+            string ruleDefinitionPath,
+            ITypeProvider typeProvider
+        )
         {
             FileStream workflowDefStream = null;
             FileStream ruleDefStream = null;
 
             if (workflowDefinitionPath == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowDefinitionPath");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowDefinitionPath"
+                );
             }
 
             try
             {
-                workflowDefStream = new FileStream(workflowDefinitionPath, FileMode.Open, FileAccess.Read);
+                workflowDefStream = new FileStream(
+                    workflowDefinitionPath,
+                    FileMode.Open,
+                    FileAccess.Read
+                );
 
                 if (ruleDefinitionPath != null)
                 {
-                    ruleDefStream = new FileStream(ruleDefinitionPath, FileMode.Open, FileAccess.Read);
+                    ruleDefStream = new FileStream(
+                        ruleDefinitionPath,
+                        FileMode.Open,
+                        FileAccess.Read
+                    );
                 }
 
                 this.workflowDefinition = new byte[workflowDefStream.Length];
-                workflowDefStream.Read(workflowDefinition, 0, (int) workflowDefStream.Length);
+                workflowDefStream.Read(workflowDefinition, 0, (int)workflowDefStream.Length);
 
                 if (ruleDefStream != null)
                 {
                     this.ruleDefinition = new byte[ruleDefStream.Length];
-                    ruleDefStream.Read(this.ruleDefinition, 0, (int) ruleDefStream.Length);
+                    ruleDefStream.Read(this.ruleDefinition, 0, (int)ruleDefStream.Length);
                 }
 
                 this.typeProvider = typeProvider;
@@ -88,9 +108,15 @@ namespace System.Workflow.Runtime
         }
 
         // This is a valid catch of all exceptions
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes"
+        )]
         // We don't have tracing in Silver as of M2
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "Reliability104:CaughtAndHandledExceptionsRule")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Reliability",
+            "Reliability104:CaughtAndHandledExceptionsRule"
+        )]
         public override string ConfigurationName
         {
             get
@@ -106,7 +132,7 @@ namespace System.Workflow.Runtime
                         if (Fx.IsFatal(exception))
                         {
 #if !_PRESHARP_
-                            // this throw in a getter is valid 
+                            // this throw in a getter is valid
                             throw;
 #endif
                         }
@@ -116,11 +142,16 @@ namespace System.Workflow.Runtime
             }
         }
 
-
         // This is a valid catch of all exceptions
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes"
+        )]
         // We don't have tracing in Silver as of M2
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "Reliability104:CaughtAndHandledExceptionsRule")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Reliability",
+            "Reliability104:CaughtAndHandledExceptionsRule"
+        )]
         public override string WorkflowName
         {
             get
@@ -136,16 +167,17 @@ namespace System.Workflow.Runtime
                         if (Fx.IsFatal(exception))
                         {
 #if !_PRESHARP_
-                            // this throw in a getter is valid 
+                            // this throw in a getter is valid
                             throw;
 #endif
                         }
                     }
                 }
-                return rootActivity != null ? NamingHelper.XmlName(rootActivity.QualifiedName) : null;
+                return rootActivity != null
+                    ? NamingHelper.XmlName(rootActivity.QualifiedName)
+                    : null;
             }
         }
-
 
         public override WorkflowInstance CreateWorkflow()
         {
@@ -172,7 +204,12 @@ namespace System.Workflow.Runtime
                     ruleStream.Position = 0;
                     ruleReader = System.Xml.XmlReader.Create(ruleStream);
                 }
-                return this.WorkflowRuntime.CreateWorkflow(definitionReader, ruleReader, null, instanceId);
+                return this.WorkflowRuntime.CreateWorkflow(
+                    definitionReader,
+                    ruleReader,
+                    null,
+                    instanceId
+                );
             }
             finally
             {
@@ -216,9 +253,18 @@ namespace System.Workflow.Runtime
 
         protected override void OnValidate(ValidationErrorCollection errors)
         {
-            if (!string.IsNullOrEmpty(this.rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string))
+            if (
+                !string.IsNullOrEmpty(
+                    this.rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string
+                )
+            )
             {
-                errors.Add(new ValidationError(SR2.XomlWorkflowHasClassName, ErrorNumbers.Error_XomlWorkflowHasClassName));
+                errors.Add(
+                    new ValidationError(
+                        SR2.XomlWorkflowHasClassName,
+                        ErrorNumbers.Error_XomlWorkflowHasClassName
+                    )
+                );
             }
 
             Queue compositeActivities = new Queue();
@@ -226,17 +272,25 @@ namespace System.Workflow.Runtime
 
             while (compositeActivities.Count > 0)
             {
-                System.Workflow.ComponentModel.Activity activity = compositeActivities.Dequeue() as System.Workflow.ComponentModel.Activity;
+                System.Workflow.ComponentModel.Activity activity =
+                    compositeActivities.Dequeue() as System.Workflow.ComponentModel.Activity;
 
                 if (activity.GetValue(WorkflowMarkupSerializer.XCodeProperty) != null)
                 {
-                    errors.Add(new ValidationError(SR2.XomlWorkflowHasCode, ErrorNumbers.Error_XomlWorkflowHasCode));
+                    errors.Add(
+                        new ValidationError(
+                            SR2.XomlWorkflowHasCode,
+                            ErrorNumbers.Error_XomlWorkflowHasCode
+                        )
+                    );
                 }
 
                 CompositeActivity compositeActivity = activity as CompositeActivity;
                 if (compositeActivity != null)
                 {
-                    foreach (System.Workflow.ComponentModel.Activity childActivity in compositeActivity.EnabledActivities)
+                    foreach (
+                        System.Workflow.ComponentModel.Activity childActivity in compositeActivity.EnabledActivities
+                    )
                     {
                         compositeActivities.Enqueue(childActivity);
                     }
@@ -244,8 +298,10 @@ namespace System.Workflow.Runtime
             }
         }
 
-
-        System.Workflow.ComponentModel.Activity DeSerizalizeDefinition(byte[] workflowDefinition, byte[] ruleDefinition)
+        System.Workflow.ComponentModel.Activity DeSerizalizeDefinition(
+            byte[] workflowDefinition,
+            byte[] ruleDefinition
+        )
         {
             System.IO.Stream definitionStream = null;
             System.IO.Stream ruleStream = null;
@@ -275,25 +331,48 @@ namespace System.Workflow.Runtime
                     serviceContainer.AddService(typeof(ITypeProvider), this.typeProvider);
                 }
 
-                DesignerSerializationManager manager = new DesignerSerializationManager(serviceContainer);
+                DesignerSerializationManager manager = new DesignerSerializationManager(
+                    serviceContainer
+                );
                 try
                 {
                     using (manager.CreateSession())
                     {
-                        WorkflowMarkupSerializationManager xomlSerializationManager = new WorkflowMarkupSerializationManager(manager);
-                        root = new WorkflowMarkupSerializer().Deserialize(xomlSerializationManager, definitionReader) as System.Workflow.ComponentModel.Activity;
+                        WorkflowMarkupSerializationManager xomlSerializationManager =
+                            new WorkflowMarkupSerializationManager(manager);
+                        root =
+                            new WorkflowMarkupSerializer().Deserialize(
+                                xomlSerializationManager,
+                                definitionReader
+                            ) as System.Workflow.ComponentModel.Activity;
 
                         if (root != null && ruleReader != null)
                         {
-                            object rules = new WorkflowMarkupSerializer().Deserialize(xomlSerializationManager, ruleReader);
-                            root.SetValue(System.Workflow.Activities.Rules.RuleDefinitions.RuleDefinitionsProperty, rules);
+                            object rules = new WorkflowMarkupSerializer().Deserialize(
+                                xomlSerializationManager,
+                                ruleReader
+                            );
+                            root.SetValue(
+                                System
+                                    .Workflow
+                                    .Activities
+                                    .Rules
+                                    .RuleDefinitions
+                                    .RuleDefinitionsProperty,
+                                rules
+                            );
                         }
 
                         foreach (object error in manager.Errors)
                         {
                             if (error is WorkflowMarkupSerializationException)
                             {
-                                errors.Add(new ValidationError(((WorkflowMarkupSerializationException) error).Message, 1));
+                                errors.Add(
+                                    new ValidationError(
+                                        ((WorkflowMarkupSerializationException)error).Message,
+                                        1
+                                    )
+                                );
                             }
                             else
                             {
@@ -313,7 +392,12 @@ namespace System.Workflow.Runtime
 
                 if (errors.HasErrors)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WorkflowValidationFailedException(SR2.GetString(SR2.WorkflowValidationFailed), errors));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WorkflowValidationFailedException(
+                            SR2.GetString(SR2.WorkflowValidationFailed),
+                            errors
+                        )
+                    );
                 }
 
                 return root;

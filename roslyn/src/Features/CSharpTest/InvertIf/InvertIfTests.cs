@@ -16,337 +16,367 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
     [Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
     public partial class InvertIfTests : AbstractCSharpCodeActionTest
     {
-        private async Task TestFixOneAsync(
-            string initial,
-            string expected)
+        private async Task TestFixOneAsync(string initial, string expected)
         {
             await TestInRegularAndScriptAsync(CreateTreeText(initial), CreateTreeText(expected));
         }
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpInvertIfCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpInvertIfCodeRefactoringProvider();
 
         private static string CreateTreeText(string initial)
         {
-            return
-                """
-                class A
-                {
-                    bool a = true;
-                    bool b = true;
-                    bool c = true;
-                    bool d = true;
-
-                    void Goo()
+            return """
+                    class A
                     {
-                """ + initial + """
+                        bool a = true;
+                        bool b = true;
+                        bool c = true;
+                        bool d = true;
+
+                        void Goo()
+                        {
+                    """
+                + initial
+                + """
+                        }
                     }
-                }
-                """;
+                    """;
         }
 
         [Fact]
         public async Task TestSingleLine_Identifier()
         {
             await TestFixOneAsync(
-@"[||]if (a) { a(); } else { b(); }",
-@"if (!a) { b(); } else { a(); }");
+                @"[||]if (a) { a(); } else { b(); }",
+                @"if (!a) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_IdentifierWithTrivia()
         {
             await TestFixOneAsync(
-@"[||]if /*0*/(/*1*/a/*2*/)/*3*/ { a(); } else { b(); }",
-@"if /*0*/(/*1*/!a/*2*/)/*3*/ { b(); } else { a(); }");
+                @"[||]if /*0*/(/*1*/a/*2*/)/*3*/ { a(); } else { b(); }",
+                @"if /*0*/(/*1*/!a/*2*/)/*3*/ { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_NotIdentifier()
         {
             await TestFixOneAsync(
-@"[||]if (!a) { a(); } else { b(); }",
-@"if (a) { b(); } else { a(); }");
+                @"[||]if (!a) { a(); } else { b(); }",
+                @"if (a) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_NotIdentifierWithTrivia()
         {
             await TestFixOneAsync(
-@"[||]if /*0*/(/*1*/!/*1b*/a/*2*/)/*3*/ { a(); } else { b(); }",
-@"if /*0*/(/*1*/a/*2*/)/*3*/ { b(); } else { a(); }");
+                @"[||]if /*0*/(/*1*/!/*1b*/a/*2*/)/*3*/ { a(); } else { b(); }",
+                @"if /*0*/(/*1*/a/*2*/)/*3*/ { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_EqualsEquals()
         {
             await TestFixOneAsync(
-@"[||]if (a == b) { a(); } else { b(); }",
-@"if (a != b) { b(); } else { a(); }");
+                @"[||]if (a == b) { a(); } else { b(); }",
+                @"if (a != b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_NotEquals()
         {
             await TestFixOneAsync(
-@"[||]if (a != b) { a(); } else { b(); }",
-@"if (a == b) { b(); } else { a(); }");
+                @"[||]if (a != b) { a(); } else { b(); }",
+                @"if (a == b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_GreaterThan()
         {
             await TestFixOneAsync(
-@"[||]if (a > b) { a(); } else { b(); }",
-@"if (a <= b) { b(); } else { a(); }");
+                @"[||]if (a > b) { a(); } else { b(); }",
+                @"if (a <= b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_GreaterThanEquals()
         {
             await TestFixOneAsync(
-@"[||]if (a >= b) { a(); } else { b(); }",
-@"if (a < b) { b(); } else { a(); }");
+                @"[||]if (a >= b) { a(); } else { b(); }",
+                @"if (a < b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_LessThan()
         {
             await TestFixOneAsync(
-@"[||]if (a < b) { a(); } else { b(); }",
-@"if (a >= b) { b(); } else { a(); }");
+                @"[||]if (a < b) { a(); } else { b(); }",
+                @"if (a >= b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_LessThanEquals()
         {
             await TestFixOneAsync(
-@"[||]if (a <= b) { a(); } else { b(); }",
-@"if (a > b) { b(); } else { a(); }");
+                @"[||]if (a <= b) { a(); } else { b(); }",
+                @"if (a > b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_DoubleParentheses()
         {
             await TestFixOneAsync(
-@"[||]if ((a)) { a(); } else { b(); }",
-@"if (!a) { b(); } else { a(); }");
+                @"[||]if ((a)) { a(); } else { b(); }",
+                @"if (!a) { b(); } else { a(); }"
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/26427")]
         public async Task TestSingleLine_DoubleParenthesesWithInnerTrivia()
         {
             await TestFixOneAsync(
-@"[||]if ((/*1*/a/*2*/)) { a(); } else { b(); }",
-@"if (/*1*/!a/*2*/) { b(); } else { a(); }");
+                @"[||]if ((/*1*/a/*2*/)) { a(); } else { b(); }",
+                @"if (/*1*/!a/*2*/) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_DoubleParenthesesWithMiddleTrivia()
         {
             await TestFixOneAsync(
-@"[||]if (/*1*/(a)/*2*/) { a(); } else { b(); }",
-@"if (/*1*/!a/*2*/) { b(); } else { a(); }");
+                @"[||]if (/*1*/(a)/*2*/) { a(); } else { b(); }",
+                @"if (/*1*/!a/*2*/) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_DoubleParenthesesWithOutsideTrivia()
         {
             await TestFixOneAsync(
-@"[||]if /*before*/((a))/*after*/ { a(); } else { b(); }",
-@"if /*before*/(!a)/*after*/ { b(); } else { a(); }");
+                @"[||]if /*before*/((a))/*after*/ { a(); } else { b(); }",
+                @"if /*before*/(!a)/*after*/ { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_Is()
         {
             await TestFixOneAsync(
-@"[||]if (a is Goo) { a(); } else { b(); }",
-@"if (a is not Goo) { b(); } else { a(); }");
+                @"[||]if (a is Goo) { a(); } else { b(); }",
+                @"if (a is not Goo) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_MethodCall()
         {
             await TestFixOneAsync(
-@"[||]if (a.Goo()) { a(); } else { b(); }",
-@"if (!a.Goo()) { b(); } else { a(); }");
+                @"[||]if (a.Goo()) { a(); } else { b(); }",
+                @"if (!a.Goo()) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_Or()
         {
             await TestFixOneAsync(
-@"[||]if (a || b) { a(); } else { b(); }",
-@"if (!a && !b) { b(); } else { a(); }");
+                @"[||]if (a || b) { a(); } else { b(); }",
+                @"if (!a && !b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_Or2()
         {
             await TestFixOneAsync(
-@"[||]if (!a || !b) { a(); } else { b(); }",
-@"if (a && b) { b(); } else { a(); }");
+                @"[||]if (!a || !b) { a(); } else { b(); }",
+                @"if (a && b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_Or3()
         {
             await TestFixOneAsync(
-@"[||]if (!a || b) { a(); } else { b(); }",
-@"if (a && !b) { b(); } else { a(); }");
+                @"[||]if (!a || b) { a(); } else { b(); }",
+                @"if (a && !b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_Or4()
         {
             await TestFixOneAsync(
-@"[||]if (a | b) { a(); } else { b(); }",
-@"if (!a & !b) { b(); } else { a(); }");
+                @"[||]if (a | b) { a(); } else { b(); }",
+                @"if (!a & !b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_And()
         {
             await TestFixOneAsync(
-@"[||]if (a && b) { a(); } else { b(); }",
-@"if (!a || !b) { b(); } else { a(); }");
+                @"[||]if (a && b) { a(); } else { b(); }",
+                @"if (!a || !b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_And2()
         {
             await TestFixOneAsync(
-@"[||]if (!a && !b) { a(); } else { b(); }",
-@"if (a || b) { b(); } else { a(); }");
+                @"[||]if (!a && !b) { a(); } else { b(); }",
+                @"if (a || b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_And3()
         {
             await TestFixOneAsync(
-@"[||]if (!a && b) { a(); } else { b(); }",
-@"if (a || !b) { b(); } else { a(); }");
+                @"[||]if (!a && b) { a(); } else { b(); }",
+                @"if (a || !b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_And4()
         {
             await TestFixOneAsync(
-@"[||]if (a & b) { a(); } else { b(); }",
-@"if (!a | !b) { b(); } else { a(); }");
+                @"[||]if (a & b) { a(); } else { b(); }",
+                @"if (!a | !b) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_ParenthesizeAndForPrecedence()
         {
             await TestFixOneAsync(
-@"[||]if (a && b || c) { a(); } else { b(); }",
-@"if ((!a || !b) && !c) { b(); } else { a(); }");
+                @"[||]if (a && b || c) { a(); } else { b(); }",
+                @"if ((!a || !b) && !c) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_Plus()
         {
             await TestFixOneAsync(
-@"[||]if (a + b) { a(); } else { b(); }",
-@"if (!(a + b)) { b(); } else { a(); }");
+                @"[||]if (a + b) { a(); } else { b(); }",
+                @"if (!(a + b)) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_True()
         {
             await TestFixOneAsync(
-@"[||]if (true) { a(); } else { b(); }",
-@"if (false) { b(); } else { a(); }");
+                @"[||]if (true) { a(); } else { b(); }",
+                @"if (false) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_TrueWithTrivia()
         {
             await TestFixOneAsync(
-@"[||]if (/*1*/true/*2*/) { a(); } else { b(); }",
-@"if (/*1*/false/*2*/) { b(); } else { a(); }");
+                @"[||]if (/*1*/true/*2*/) { a(); } else { b(); }",
+                @"if (/*1*/false/*2*/) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_False()
         {
             await TestFixOneAsync(
-@"[||]if (false) { a(); } else { b(); }",
-@"if (true) { b(); } else { a(); }");
+                @"[||]if (false) { a(); } else { b(); }",
+                @"if (true) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_OtherLiteralExpression()
         {
             await TestFixOneAsync(
-@"[||]if (literalexpression) { a(); } else { b(); }",
-@"if (!literalexpression) { b(); } else { a(); }");
+                @"[||]if (literalexpression) { a(); } else { b(); }",
+                @"if (!literalexpression) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_TrueAndFalse()
         {
             await TestFixOneAsync(
-@"[||]if (true && false) { a(); } else { b(); }",
-@"if (false || true) { b(); } else { a(); }");
+                @"[||]if (true && false) { a(); } else { b(); }",
+                @"if (false || true) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_NoCurlyBraces()
         {
-            await TestFixOneAsync(
-@"[||]if (a) a(); else b();",
-@"if (!a) b(); else a();");
+            await TestFixOneAsync(@"[||]if (a) a(); else b();", @"if (!a) b(); else a();");
         }
 
         [Fact]
         public async Task TestSingleLine_CurlyBracesOnIf()
         {
-            await TestFixOneAsync(
-@"[||]if (a) { a(); } else b();",
-@"if (!a) b(); else { a(); }");
+            await TestFixOneAsync(@"[||]if (a) { a(); } else b();", @"if (!a) b(); else { a(); }");
         }
 
         [Fact]
         public async Task TestSingleLine_CurlyBracesOnElse()
         {
-            await TestFixOneAsync(
-@"[||]if (a) a(); else { b(); }",
-@"if (!a) { b(); } else a();");
+            await TestFixOneAsync(@"[||]if (a) a(); else { b(); }", @"if (!a) { b(); } else a();");
         }
 
         [Fact]
         public async Task TestSingleLine_IfElseIf()
         {
             await TestFixOneAsync(
-@"[||]if (a) { a(); } else if (b) { b(); }",
-@"if (!a) { if (b) { b(); } } else { a(); }");
+                @"[||]if (a) { a(); } else if (b) { b(); }",
+                @"if (!a) { if (b) { b(); } } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_IfElseIfElse()
         {
             await TestFixOneAsync(
-@"[||]if (a) { a(); } else if (b) { b(); } else { c(); }",
-@"if (!a) { if (b) { b(); } else { c(); } } else { a(); }");
+                @"[||]if (a) { a(); } else if (b) { b(); } else { c(); }",
+                @"if (!a) { if (b) { b(); } else { c(); } } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_CompoundConditional()
         {
             await TestFixOneAsync(
-@"[||]if (((a == b) && (c != d)) || ((e < f) && (!g))) { a(); } else { b(); }",
-@"if ((a != b || c == d) && (e >= f || g)) { b(); } else { a(); }");
+                @"[||]if (((a == b) && (c != d)) || ((e < f) && (!g))) { a(); } else { b(); }",
+                @"if ((a != b || c == d) && (e >= f || g)) { b(); } else { a(); }"
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_Trivia()
         {
             await TestFixOneAsync(
-@"[||]if /*1*/ (a) /*2*/ { /*3*/ a() /*4*/; /*5*/ } /*6*/ else if /*7*/ (b) /*8*/ { /*9*/ b(); /*10*/ } /*11*/ else /*12*/ { /*13*/ c(); /*14*/} /*15*/",
-@"if /*1*/ (!a) /*2*/ { if /*7*/ (b) /*8*/ { /*9*/ b(); /*10*/ } /*11*/ else /*12*/ { /*13*/ c(); /*14*/} /*6*/ } else { /*3*/ a() /*4*/; /*5*/ } /*15*/");
+                @"[||]if /*1*/ (a) /*2*/ { /*3*/ a() /*4*/; /*5*/ } /*6*/ else if /*7*/ (b) /*8*/ { /*9*/ b(); /*10*/ } /*11*/ else /*12*/ { /*13*/ c(); /*14*/} /*15*/",
+                @"if /*1*/ (!a) /*2*/ { if /*7*/ (b) /*8*/ { /*9*/ b(); /*10*/ } /*11*/ else /*12*/ { /*13*/ c(); /*14*/} /*6*/ } else { /*3*/ a() /*4*/; /*5*/ } /*15*/"
+            );
         }
 
         [Fact]
@@ -354,43 +384,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        [||]if (a ||
-                        b &&
-                        c < // comment
-                        d)
+                        void Goo()
                         {
-                            a();
-                        }
-                        else
-                        {
-                            b();
+                            [||]if (a ||
+                            b &&
+                            c < // comment
+                            d)
+                            {
+                                a();
+                            }
+                            else
+                            {
+                                b();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        if (!a &&
-                        (!b ||
-                        c >= // comment
-                        d))
+                        void Goo()
                         {
-                            b();
-                        }
-                        else
-                        {
-                            a();
+                            if (!a &&
+                            (!b ||
+                            c >= // comment
+                            d))
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                a();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -398,53 +429,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        bool a = true;
-                        bool b = true;
-                        bool c = true;
-                        bool d = true;
+                        void Goo()
+                        {
+                            bool a = true;
+                            bool b = true;
+                            bool c = true;
+                            bool d = true;
 
-                        [||]if (a ||
-                        b &&
-                        c < // comment
-                        d)
-                        {
-                            a();
-                        }
-                        else
-                        {
-                            b();
+                            [||]if (a ||
+                            b &&
+                            c < // comment
+                            d)
+                            {
+                                a();
+                            }
+                            else
+                            {
+                                b();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        bool a = true;
-                        bool b = true;
-                        bool c = true;
-                        bool d = true;
+                        void Goo()
+                        {
+                            bool a = true;
+                            bool b = true;
+                            bool c = true;
+                            bool d = true;
 
-                        if (!a &&
-                        (!b ||
-                        c >= // comment
-                        d))
-                        {
-                            b();
-                        }
-                        else
-                        {
-                            a();
+                            if (!a &&
+                            (!b ||
+                            c >= // comment
+                            d))
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                a();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -452,33 +484,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        [||]if (a)
+                        void Goo()
                         {
-                            a();
-                        }
-                        else if (b)
-                        {
-                            b();
-                        }
-                        else
-                        {
-                            c();
-                        }
-                    }
-                }
-                """,
-                """
-                class A
-                {
-                    void Goo()
-                    {
-                        if (!a)
-                        {
-                            if (b)
+                            [||]if (a)
+                            {
+                                a();
+                            }
+                            else if (b)
                             {
                                 b();
                             }
@@ -487,13 +501,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                                 c();
                             }
                         }
-                        else
+                    }
+                    """,
+                """
+                    class A
+                    {
+                        void Goo()
                         {
-                            a();
+                            if (!a)
+                            {
+                                if (b)
+                                {
+                                    b();
+                                }
+                                else
+                                {
+                                    c();
+                                }
+                            }
+                            else
+                            {
+                                a();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -501,48 +534,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        [|if (a)
+                        void Goo()
                         {
-                            a();
-                        }
-                        else if (b)
-                        {
-                            b();
-                        }
-                        else
-                        {
-                            c();
-                        }|]
-                    }
-                }
-                """,
-                """
-                class A
-                {
-                    void Goo()
-                    {
-                        if (!a)
-                        {
-                            if (b)
+                            [|if (a)
+                            {
+                                a();
+                            }
+                            else if (b)
                             {
                                 b();
                             }
                             else
                             {
                                 c();
-                            }
-                        }
-                        else
-                        {
-                            a();
+                            }|]
                         }
                     }
-                }
-                """);
+                    """,
+                """
+                    class A
+                    {
+                        void Goo()
+                        {
+                            if (!a)
+                            {
+                                if (b)
+                                {
+                                    b();
+                                }
+                                else
+                                {
+                                    c();
+                                }
+                            }
+                            else
+                            {
+                                a();
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -550,33 +584,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        [|if (a)
+                        void Goo()
                         {
-                            a();
-                        }|]
-                        else if (b)
-                        {
-                            b();
-                        }
-                        else
-                        {
-                            c();
-                        }
-                    }
-                }
-                """,
-                """
-                class A
-                {
-                    void Goo()
-                    {
-                        if (!a)
-                        {
-                            if (b)
+                            [|if (a)
+                            {
+                                a();
+                            }|]
+                            else if (b)
                             {
                                 b();
                             }
@@ -585,13 +601,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                                 c();
                             }
                         }
-                        else
+                    }
+                    """,
+                """
+                    class A
+                    {
+                        void Goo()
                         {
-                            a();
+                            if (!a)
+                            {
+                                if (b)
+                                {
+                                    b();
+                                }
+                                else
+                                {
+                                    c();
+                                }
+                            }
+                            else
+                            {
+                                a();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -599,25 +634,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        if (a)
+                        void Goo()
                         {
-                            a();
+                            if (a)
+                            {
+                                a();
+                            }
+                            [|else if (b)
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                c();
+                            }|]
                         }
-                        [|else if (b)
-                        {
-                            b();
-                        }
-                        else
-                        {
-                            c();
-                        }|]
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -625,33 +661,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        [||]if (foo) 
-                            bar();
-                        else
-                            if (baz)
-                                Quux();
-                    }
-                }
-                """,
-                """
-                class A
-                {
-                    void Goo()
-                    {
-                        if (!foo)
+                        void Goo()
                         {
-                            if (baz)
-                                Quux();
+                            [||]if (foo) 
+                                bar();
+                            else
+                                if (baz)
+                                    Quux();
                         }
-                        else
-                            bar();
                     }
-                }
-                """);
+                    """,
+                """
+                    class A
+                    {
+                        void Goo()
+                        {
+                            if (!foo)
+                            {
+                                if (baz)
+                                    Quux();
+                            }
+                            else
+                                bar();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -659,78 +696,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        [||]if (foo) {
-                           x();
-                           x();
-                        } else {
-                           y();
-                           y();
+                        void Goo()
+                        {
+                            [||]if (foo) {
+                               x();
+                               x();
+                            } else {
+                               y();
+                               y();
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class A
-                {
-                    void Goo()
+                    class A
                     {
-                        if (!foo)
+                        void Goo()
                         {
-                            y();
-                            y();
-                        }
-                        else
-                        {
-                            x();
-                            x();
+                            if (!foo)
+                            {
+                                y();
+                                y();
+                            }
+                            else
+                            {
+                                x();
+                                x();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
+
         [Fact]
         public async Task TestMultiline_Trivia()
         {
             await TestInRegularAndScriptAsync(
                 """
-                class A
-                {
-                    void Goo()
-                    { /*1*/
-                        [||]if (a) /*2*/
-                        { /*3*/
-                            /*4*/
-                            goo(); /*5*/
-                            /*6*/
-                        } /*7*/
-                        else if (b) /*8*/
-                        { /*9*/
-                            /*10*/
-                            goo(); /*11*/
-                            /*12*/
-                        } /*13*/
-                        else /*14*/
-                        { /*15*/
-                            /*16*/
-                            goo(); /*17*/
-                            /*18*/
-                        } /*19*/
-                        /*20*/
-                    }
-                }
-                """,
-                """
-                class A
-                {
-                    void Goo()
-                    { /*1*/
-                        if (!a) /*2*/
-                        {
-                            if (b) /*8*/
+                    class A
+                    {
+                        void Goo()
+                        { /*1*/
+                            [||]if (a) /*2*/
+                            { /*3*/
+                                /*4*/
+                                goo(); /*5*/
+                                /*6*/
+                            } /*7*/
+                            else if (b) /*8*/
                             { /*9*/
                                 /*10*/
                                 goo(); /*11*/
@@ -742,17 +758,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                                 goo(); /*17*/
                                 /*18*/
                             } /*19*/
+                            /*20*/
                         }
-                        else
-                        { /*3*/
-                            /*4*/
-                            goo(); /*5*/
-                            /*6*/
-                        } /*7*/
-                        /*20*/
                     }
-                }
-                """);
+                    """,
+                """
+                    class A
+                    {
+                        void Goo()
+                        { /*1*/
+                            if (!a) /*2*/
+                            {
+                                if (b) /*8*/
+                                { /*9*/
+                                    /*10*/
+                                    goo(); /*11*/
+                                    /*12*/
+                                } /*13*/
+                                else /*14*/
+                                { /*15*/
+                                    /*16*/
+                                    goo(); /*17*/
+                                    /*18*/
+                                } /*19*/
+                            }
+                            else
+                            { /*3*/
+                                /*4*/
+                                goo(); /*5*/
+                                /*6*/
+                            } /*7*/
+                            /*20*/
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -760,23 +800,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                #line hidden
-                        [||]if (a)
+                        void F()
                         {
-                            a();
+                    #line hidden
+                            [||]if (a)
+                            {
+                                a();
+                            }
+                            else
+                            {
+                                b();
+                            }
+                    #line default
                         }
-                        else
-                        {
-                            b();
-                        }
-                #line default
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -784,23 +825,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        [||]if (a)
+                        void F()
                         {
-                #line hidden
-                            a();
-                #line default
-                        }
-                        else
-                        {
-                            b();
+                            [||]if (a)
+                            {
+                    #line hidden
+                                a();
+                    #line default
+                            }
+                            else
+                            {
+                                b();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -808,23 +850,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        [||]if (a)
+                        void F()
                         {
-                            a();
-                        }
-                        else
-                        {
-                #line hidden
-                            b();
-                #line default
+                            [||]if (a)
+                            {
+                                a();
+                            }
+                            else
+                            {
+                    #line hidden
+                                b();
+                    #line default
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -832,23 +875,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        [||]if (a)
+                        void F()
                         {
-                #line hidden
-                            a();
-                        }
-                        else
-                        {
-                            b();
-                #line default
+                            [||]if (a)
+                            {
+                    #line hidden
+                                a();
+                            }
+                            else
+                            {
+                                b();
+                    #line default
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -856,23 +900,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void F()
+                    class C
                     {
-                        [||]if (a)
+                        void F()
                         {
-                            a();
-                #line hidden
-                        }
-                        else
-                        {
-                #line default
-                            b();
+                            [||]if (a)
+                            {
+                                a();
+                    #line hidden
+                            }
+                            else
+                            {
+                    #line default
+                                b();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -880,42 +925,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                #line hidden
-                class C 
-                {
-                    void F()
+                    #line hidden
+                    class C
                     {
-                #line default
-                        [||]if (a)
+                        void F()
                         {
-                            a();
-                        }
-                        else
-                        {
-                            b();
+                    #line default
+                            [||]if (a)
+                            {
+                                a();
+                            }
+                            else
+                            {
+                                b();
+                            }
                         }
                     }
-                }
-                """,
-
+                    """,
                 """
-                #line hidden
-                class C 
-                {
-                    void F()
+                    #line hidden
+                    class C
                     {
-                #line default
-                        if (!a)
+                        void F()
                         {
-                            b();
-                        }
-                        else
-                        {
-                            a();
+                    #line default
+                            if (!a)
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                a();
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -923,158 +968,172 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                #line hidden
-                class C 
-                {
-                    void F()
+                    #line hidden
+                    class C
                     {
-                #line default
-                        [||]if (a)
+                        void F()
                         {
-                            a();
+                    #line default
+                            [||]if (a)
+                            {
+                                a();
+                            }
+                            else
+                            {
+                                b();
+                            }
+                    #line hidden
                         }
-                        else
-                        {
-                            b();
-                        }
-                #line hidden
                     }
-                }
-                #line default
-                """,
-
+                    #line default
+                    """,
                 """
-                #line hidden
-                class C 
-                {
-                    void F()
+                    #line hidden
+                    class C
                     {
-                #line default
-                        if (!a)
+                        void F()
                         {
-                            b();
+                    #line default
+                            if (!a)
+                            {
+                                b();
+                            }
+                            else
+                            {
+                                a();
+                            }
+                    #line hidden
                         }
-                        else
-                        {
-                            a();
-                        }
-                #line hidden
                     }
-                }
-                #line default
-                """);
+                    #line default
+                    """
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_SimplifyToLengthEqualsZero()
         {
             await TestFixOneAsync(
-@"string x; [||]if (x.Length > 0) { GreaterThanZero(); } else { EqualsZero(); } } } ",
-@"string x; if (x.Length == 0) { EqualsZero(); } else { GreaterThanZero(); } } } ");
+                @"string x; [||]if (x.Length > 0) { GreaterThanZero(); } else { EqualsZero(); } } } ",
+                @"string x; if (x.Length == 0) { EqualsZero(); } else { GreaterThanZero(); } } } "
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_SimplifyToLengthEqualsZero2()
         {
             await TestFixOneAsync(
-@"string[] x; [||]if (x.Length > 0) { GreaterThanZero(); } else { EqualsZero(); } } } ",
-@"string[] x; if (x.Length == 0) { EqualsZero(); } else { GreaterThanZero(); } } } ");
+                @"string[] x; [||]if (x.Length > 0) { GreaterThanZero(); } else { EqualsZero(); } } } ",
+                @"string[] x; if (x.Length == 0) { EqualsZero(); } else { GreaterThanZero(); } } } "
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_SimplifyToLengthEqualsZero3()
         {
             await TestFixOneAsync(
-@"string x; [||]if (x.Length > 0x0) { a(); } else { b(); } } } ",
-@"string x; if (x.Length == 0x0) { b(); } else { a(); } } } ");
+                @"string x; [||]if (x.Length > 0x0) { a(); } else { b(); } } } ",
+                @"string x; if (x.Length == 0x0) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_SimplifyToLengthEqualsZero4()
         {
             await TestFixOneAsync(
-@"string x; [||]if (0 < x.Length) { a(); } else { b(); } } } ",
-@"string x; if (0 == x.Length) { b(); } else { a(); } } } ");
+                @"string x; [||]if (0 < x.Length) { a(); } else { b(); } } } ",
+                @"string x; if (0 == x.Length) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545986")]
         public async Task TestSingleLine_SimplifyToEqualsZero1()
         {
             await TestFixOneAsync(
-@"byte x = 1; [||]if (0 < x) { a(); } else { b(); } } } ",
-@"byte x = 1; if (0 == x) { b(); } else { a(); } } } ");
+                @"byte x = 1; [||]if (0 < x) { a(); } else { b(); } } } ",
+                @"byte x = 1; if (0 == x) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545986")]
         public async Task TestSingleLine_SimplifyToEqualsZero2()
         {
             await TestFixOneAsync(
-@"ushort x = 1; [||]if (0 < x) { a(); } else { b(); } } } ",
-@"ushort x = 1; if (0 == x) { b(); } else { a(); } } } ");
+                @"ushort x = 1; [||]if (0 < x) { a(); } else { b(); } } } ",
+                @"ushort x = 1; if (0 == x) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545986")]
         public async Task TestSingleLine_SimplifyToEqualsZero3()
         {
             await TestFixOneAsync(
-@"uint x = 1; [||]if (0 < x) { a(); } else { b(); } } } ",
-@"uint x = 1; if (0 == x) { b(); } else { a(); } } } ");
+                @"uint x = 1; [||]if (0 < x) { a(); } else { b(); } } } ",
+                @"uint x = 1; if (0 == x) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545986")]
         public async Task TestSingleLine_SimplifyToEqualsZero4()
         {
             await TestFixOneAsync(
-@"ulong x = 1; [||]if (x > 0) { a(); } else { b(); } } } ",
-@"ulong x = 1; if (x == 0) { b(); } else { a(); } } } ");
+                @"ulong x = 1; [||]if (x > 0) { a(); } else { b(); } } } ",
+                @"ulong x = 1; if (x == 0) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545986")]
         public async Task TestSingleLine_SimplifyToNotEqualsZero1()
         {
             await TestFixOneAsync(
-@"ulong x = 1; [||]if (0 == x) { a(); } else { b(); } } } ",
-@"ulong x = 1; if (0 != x) { b(); } else { a(); } } } ");
+                @"ulong x = 1; [||]if (0 == x) { a(); } else { b(); } } } ",
+                @"ulong x = 1; if (0 != x) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545986")]
         public async Task TestSingleLine_SimplifyToNotEqualsZero2()
         {
             await TestFixOneAsync(
-@"ulong x = 1; [||]if (x == 0) { a(); } else { b(); } } } ",
-@"ulong x = 1; if (x != 0) { b(); } else { a(); } } } ");
+                @"ulong x = 1; [||]if (x == 0) { a(); } else { b(); } } } ",
+                @"ulong x = 1; if (x != 0) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530505")]
         public async Task TestSingleLine_SimplifyLongLengthEqualsZero()
         {
             await TestFixOneAsync(
-@"string[] x; [||]if (x.LongLength > 0) { GreaterThanZero(); } else { EqualsZero(); } } } ",
-@"string[] x; if (x.LongLength == 0) { EqualsZero(); } else { GreaterThanZero(); } } } ");
+                @"string[] x; [||]if (x.LongLength > 0) { GreaterThanZero(); } else { EqualsZero(); } } } ",
+                @"string[] x; if (x.LongLength == 0) { EqualsZero(); } else { GreaterThanZero(); } } } "
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_DoesNotSimplifyToLengthEqualsZero()
         {
             await TestFixOneAsync(
-@"string x; [||]if (x.Length >= 0) { a(); } else { b(); } } } ",
-@"string x; if (x.Length < 0) { b(); } else { a(); } } } ");
+                @"string x; [||]if (x.Length >= 0) { a(); } else { b(); } } } ",
+                @"string x; if (x.Length < 0) { b(); } else { a(); } } } "
+            );
         }
 
         [Fact]
         public async Task TestSingleLine_DoesNotSimplifyToLengthEqualsZero2()
         {
             await TestFixOneAsync(
-@"string x; [||]if (x.Length > 0.0f) { GreaterThanZero(); } else { EqualsZero(); } } } ",
-@"string x; if (x.Length <= 0.0f) { EqualsZero(); } else { GreaterThanZero(); } } } ");
+                @"string x; [||]if (x.Length > 0.0f) { GreaterThanZero(); } else { EqualsZero(); } } } ",
+                @"string x; if (x.Length <= 0.0f) { EqualsZero(); } else { GreaterThanZero(); } } } "
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29434")]
         public async Task TestIsExpression()
         {
             await TestInRegularAndScriptAsync(
-@"class C { void M(object o) { [||]if (o is C) { a(); } else { } } }",
-@"class C { void M(object o) { if (o is not C) { } else { a(); } } }");
+                @"class C { void M(object o) { [||]if (o is C) { a(); } else { } } }",
+                @"class C { void M(object o) { if (o is not C) { } else { a(); } } }"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43224")]
@@ -1082,7 +1141,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 @"class C { void M(string s){ [||]if (s == ""a""){}else{ s = ""b""}}}",
-                @"class C { void M(string s){ if (s != ""a""){ s = ""b""}}}");
+                @"class C { void M(string s){ if (s != ""a""){ s = ""b""}}}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43224")]
@@ -1090,37 +1150,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C 
-                {
-                    void M(string s)
+                    class C
                     {
-                        [||]if (s == "a")
+                        void M(string s)
                         {
-                            // A single line comment
-                        }
-                        else
-                        {
-                            s = "b"
+                            [||]if (s == "a")
+                            {
+                                // A single line comment
+                            }
+                            else
+                            {
+                                s = "b"
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C 
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s != "a")
+                        void M(string s)
                         {
-                            s = "b"
-                        }
-                        else
-                        {
-                            // A single line comment
+                            if (s != "a")
+                            {
+                                s = "b"
+                            }
+                            else
+                            {
+                                // A single line comment
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43224")]
@@ -1128,49 +1189,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C 
-                { 
-                    void M(string s)
+                    class C
                     {
-                        [||]if (s == "a")
+                        void M(string s)
                         {
-                            /*
-                            * This is
-                            * a multiline
-                            * comment with
-                            * two words
-                            * per line.
-                            */
-                        }
-                        else
-                        {
-                            s = "b"
+                            [||]if (s == "a")
+                            {
+                                /*
+                                * This is
+                                * a multiline
+                                * comment with
+                                * two words
+                                * per line.
+                                */
+                            }
+                            else
+                            {
+                                s = "b"
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C 
-                { 
-                    void M(string s)
+                    class C
                     {
-                        if (s != "a")
+                        void M(string s)
                         {
-                            s = "b"
-                        }
-                        else
-                        {
-                            /*
-                            * This is
-                            * a multiline
-                            * comment with
-                            * two words
-                            * per line.
-                            */
+                            if (s != "a")
+                            {
+                                s = "b"
+                            }
+                            else
+                            {
+                                /*
+                                * This is
+                                * a multiline
+                                * comment with
+                                * two words
+                                * per line.
+                                */
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51359")]
@@ -1178,37 +1240,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        [||]if (c is object)
+                        int M()
                         {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 2;
+                            [||]if (c is object)
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 2;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        if (!(c is object))
+                        int M()
                         {
-                            return 2;
-                        }
-                        else
-                        {
-                            return 1;
+                            if (!(c is object))
+                            {
+                                return 2;
+                            }
+                            else
+                            {
+                                return 1;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51359")]
@@ -1216,37 +1282,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        [||]if (c is object)
+                        int M()
                         {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 2;
+                            [||]if (c is object)
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 2;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        if (c is null)
+                        int M()
                         {
-                            return 2;
-                        }
-                        else
-                        {
-                            return 1;
+                            if (c is null)
+                            {
+                                return 2;
+                            }
+                            else
+                            {
+                                return 1;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51359")]
@@ -1254,37 +1324,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        [||]if (c is object)
+                        int M()
                         {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 2;
+                            [||]if (c is object)
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 2;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        if (c is null)
+                        int M()
                         {
-                            return 2;
-                        }
-                        else
-                        {
-                            return 1;
+                            if (c is null)
+                            {
+                                return 2;
+                            }
+                            else
+                            {
+                                return 1;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51359")]
@@ -1295,37 +1369,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
             // expression.
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        [||]if (c is not object)
+                        int M()
                         {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 2;
+                            [||]if (c is not object)
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 2;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        if (c is object)
+                        int M()
                         {
-                            return 2;
-                        }
-                        else
-                        {
-                            return 1;
+                            if (c is object)
+                            {
+                                return 2;
+                            }
+                            else
+                            {
+                                return 1;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51359")]
@@ -1333,37 +1411,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        [||]if (c is not object)
+                        int M()
                         {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 2;
+                            [||]if (c is not object)
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 2;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M()
+                    class C
                     {
-                        if (c is not null)
+                        int M()
                         {
-                            return 2;
-                        }
-                        else
-                        {
-                            return 1;
+                            if (c is not null)
+                            {
+                                return 2;
+                            }
+                            else
+                            {
+                                return 1;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63311")]
@@ -1371,30 +1453,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(int? p)
+                    class C
                     {
-                        [||]if (p > 10)
+                        void M(int? p)
                         {
+                            [||]if (p > 10)
+                            {
+                                System.Console.WriteLine("p is not null and p.Value > 10");
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class C
+                    {
+                        void M(int? p)
+                        {
+                            if (!(p > 10))
+                            {
+                                return;
+                            }
                             System.Console.WriteLine("p is not null and p.Value > 10");
                         }
                     }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(int? p)
-                    {
-                        if (!(p > 10))
-                        {
-                            return;
-                        }
-                        System.Console.WriteLine("p is not null and p.Value > 10");
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63311")]
@@ -1402,30 +1485,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(int? p)
+                    class C
                     {
-                        [||]if (p >= 10)
+                        void M(int? p)
                         {
+                            [||]if (p >= 10)
+                            {
+                                System.Console.WriteLine("p is not null and p.Value >= 10");
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class C
+                    {
+                        void M(int? p)
+                        {
+                            if (!(p >= 10))
+                            {
+                                return;
+                            }
                             System.Console.WriteLine("p is not null and p.Value >= 10");
                         }
                     }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(int? p)
-                    {
-                        if (!(p >= 10))
-                        {
-                            return;
-                        }
-                        System.Console.WriteLine("p is not null and p.Value >= 10");
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63311")]
@@ -1433,30 +1517,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(int? p)
+                    class C
                     {
-                        [||]if (p < 10)
+                        void M(int? p)
                         {
+                            [||]if (p < 10)
+                            {
+                                System.Console.WriteLine("p is not null and p.Value < 10");
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class C
+                    {
+                        void M(int? p)
+                        {
+                            if (!(p < 10))
+                            {
+                                return;
+                            }
                             System.Console.WriteLine("p is not null and p.Value < 10");
                         }
                     }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(int? p)
-                    {
-                        if (!(p < 10))
-                        {
-                            return;
-                        }
-                        System.Console.WriteLine("p is not null and p.Value < 10");
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63311")]
@@ -1464,30 +1549,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void M(int? p)
+                    class C
                     {
-                        [||]if (p <= 10)
+                        void M(int? p)
                         {
+                            [||]if (p <= 10)
+                            {
+                                System.Console.WriteLine("p is not null and p.Value <= 10");
+                            }
+                        }
+                    }
+                    """,
+                """
+                    class C
+                    {
+                        void M(int? p)
+                        {
+                            if (!(p <= 10))
+                            {
+                                return;
+                            }
                             System.Console.WriteLine("p is not null and p.Value <= 10");
                         }
                     }
-                }
-                """,
-                """
-                class C
-                {
-                    void M(int? p)
-                    {
-                        if (!(p <= 10))
-                        {
-                            return;
-                        }
-                        System.Console.WriteLine("p is not null and p.Value <= 10");
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63311")]
@@ -1495,44 +1581,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                #nullable enable
-                using System;
-                class C
-                {
-                    void M(C? p)
+                    #nullable enable
+                    using System;
+                    class C
                     {
-                        [||]if (p > new C())
+                        void M(C? p)
                         {
+                            [||]if (p > new C())
+                            {
+                                Console.WriteLine("Null-handling semantics may actually change depending on the operator implementation");
+                            }
+                        }
+
+                        public static bool operator <(C? left, C? right) => throw new NotImplementedException();
+                        public static bool operator >(C? left, C? right) => throw new NotImplementedException();
+                        public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
+                        public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
+                    }
+                    """,
+                """
+                    #nullable enable
+                    using System;
+                    class C
+                    {
+                        void M(C? p)
+                        {
+                            if (p <= new C())
+                            {
+                                return;
+                            }
                             Console.WriteLine("Null-handling semantics may actually change depending on the operator implementation");
                         }
-                    }
 
-                    public static bool operator <(C? left, C? right) => throw new NotImplementedException();
-                    public static bool operator >(C? left, C? right) => throw new NotImplementedException();
-                    public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
-                    public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
-                }
-                """,
-                """
-                #nullable enable
-                using System;
-                class C
-                {
-                    void M(C? p)
-                    {
-                        if (p <= new C())
-                        {
-                            return;
-                        }
-                        Console.WriteLine("Null-handling semantics may actually change depending on the operator implementation");
+                        public static bool operator <(C? left, C? right) => throw new NotImplementedException();
+                        public static bool operator >(C? left, C? right) => throw new NotImplementedException();
+                        public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
+                        public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
                     }
-
-                    public static bool operator <(C? left, C? right) => throw new NotImplementedException();
-                    public static bool operator >(C? left, C? right) => throw new NotImplementedException();
-                    public static bool operator <=(C? left, C? right) => throw new NotImplementedException();
-                    public static bool operator >=(C? left, C? right) => throw new NotImplementedException();
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40585")]
@@ -1540,34 +1627,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System.Collections;
+                    using System.Collections;
 
-                class Program
-                {
-                    public static IEnumerable Method(bool condition)
+                    class Program
                     {
-                        [||]if (condition)
+                        public static IEnumerable Method(bool condition)
                         {
+                            [||]if (condition)
+                            {
+                                yield return 1;
+                            }
+                        }
+                    }
+                    """,
+                """
+                    using System.Collections;
+
+                    class Program
+                    {
+                        public static IEnumerable Method(bool condition)
+                        {
+                            if (!condition)
+                            {
+                                yield break;
+                            }
                             yield return 1;
                         }
                     }
-                }
-                """,
-                """
-                using System.Collections;
-
-                class Program
-                {
-                    public static IEnumerable Method(bool condition)
-                    {
-                        if (!condition)
-                        {
-                            yield break;
-                        }
-                        yield return 1;
-                    }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42715")]
@@ -1575,39 +1663,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    string? M(string s)
+                    class C
                     {
-                        var l = s.ToLowerCase();
-
-                        [||]if (l == "hello")
+                        string? M(string s)
                         {
-                            return null;
-                        }
+                            var l = s.ToLowerCase();
 
-                        return l;
+                            [||]if (l == "hello")
+                            {
+                                return null;
+                            }
 
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    string? M(string s)
-                    {
-                        var l = s.ToLowerCase();
-
-                        if (l != "hello")
-                        {
                             return l;
+
                         }
-
-                        return null;
-
                     }
-                }
-                """);
+                    """,
+                """
+                    class C
+                    {
+                        string? M(string s)
+                        {
+                            var l = s.ToLowerCase();
+
+                            if (l != "hello")
+                            {
+                                return l;
+                            }
+
+                            return null;
+
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42715")]
@@ -1615,47 +1704,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    string? M(string s)
+                    class C
                     {
-                        var l = s.ToLowerCase();
-
-                        [||]if (l == "hello")
+                        string? M(string s)
                         {
-                            // null 1
-                            return null; // null 2
-                            // null 3
-                        }
+                            var l = s.ToLowerCase();
 
-                        // l 1
-                        return l; // l 2
-                        // l 3
+                            [||]if (l == "hello")
+                            {
+                                // null 1
+                                return null; // null 2
+                                // null 3
+                            }
 
-                    }
-                }
-                """,
-                """
-                class C
-                {
-                    string? M(string s)
-                    {
-                        var l = s.ToLowerCase();
-
-                        if (l != "hello")
-                        {
                             // l 1
                             return l; // l 2
-                            // null 3
+                            // l 3
+
                         }
-
-                        // null 1
-                        return null; // null 2
-                        // l 3
-
                     }
-                }
-                """);
+                    """,
+                """
+                    class C
+                    {
+                        string? M(string s)
+                        {
+                            var l = s.ToLowerCase();
+
+                            if (l != "hello")
+                            {
+                                // l 1
+                                return l; // l 2
+                                // null 3
+                            }
+
+                            // null 1
+                            return null; // null 2
+                            // l 3
+
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42715")]
@@ -1663,19 +1753,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    string? M(bool b)
-                    {[||]if(b){return(true);}return(false);}
-                }
-                """,
+                    class C
+                    {
+                        string? M(bool b)
+                        {[||]if(b){return(true);}return(false);}
+                    }
+                    """,
                 """
-                class C
-                {
-                    string? M(bool b)
-                    { if (!b) { return (false); } return (true); }
-                }
-                """);
+                    class C
+                    {
+                        string? M(bool b)
+                        { if (!b) { return (false); } return (true); }
+                    }
+                    """
+            );
         }
     }
 }

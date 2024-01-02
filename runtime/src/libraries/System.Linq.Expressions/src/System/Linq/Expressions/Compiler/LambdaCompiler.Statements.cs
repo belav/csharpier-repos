@@ -18,7 +18,10 @@ namespace System.Linq.Expressions.Compiler
         private void EmitBlockExpression(Expression expr, CompilationFlags flags)
         {
             // emit body
-            Emit((BlockExpression)expr, UpdateEmitAsTypeFlag(flags, CompilationFlags.EmitAsDefaultType));
+            Emit(
+                (BlockExpression)expr,
+                UpdateEmitAsTypeFlag(flags, CompilationFlags.EmitAsDefaultType)
+            );
         }
 
         private void Emit(BlockExpression node, CompilationFlags flags)
@@ -44,7 +47,11 @@ namespace System.Linq.Expressions.Compiler
                 if (tailCall != CompilationFlags.EmitAsNoTail)
                 {
                     var g = next as GotoExpression;
-                    if (g != null && (g.Value == null || !Significant(g.Value)) && ReferenceLabel(g.Target).CanReturn)
+                    if (
+                        g != null
+                        && (g.Value == null || !Significant(g.Value))
+                        && ReferenceLabel(g.Target).CanReturn
+                    )
                     {
                         // Since tail call flags are not passed into EmitTryExpression, CanReturn means the goto will be emitted
                         // as Ret. Therefore we can emit the current expression with tail call.
@@ -84,8 +91,10 @@ namespace System.Linq.Expressions.Compiler
 
         private void EnterScope(object node)
         {
-            if (HasVariables(node) &&
-                (_scope.MergedScopes == null || !_scope.MergedScopes.Contains(node)))
+            if (
+                HasVariables(node)
+                && (_scope.MergedScopes == null || !_scope.MergedScopes.Contains(node))
+            )
             {
                 if (!_tree.Scopes.TryGetValue(node, out CompilerScope? scope))
                 {
@@ -199,8 +208,14 @@ namespace System.Linq.Expressions.Compiler
             // transform the tree to avoid stack overflow on a big switch.
             //
 
-            ParameterExpression switchValue = Expression.Parameter(node.SwitchValue.Type, "switchValue");
-            ParameterExpression testValue = Expression.Parameter(GetTestValueType(node), "testValue");
+            ParameterExpression switchValue = Expression.Parameter(
+                node.SwitchValue.Type,
+                "switchValue"
+            );
+            ParameterExpression testValue = Expression.Parameter(
+                GetTestValueType(node),
+                "testValue"
+            );
             _scope.AddLocal(this, switchValue);
             _scope.AddLocal(this, testValue);
 
@@ -220,7 +235,11 @@ namespace System.Linq.Expressions.Compiler
                     EmitExpression(test);
                     _scope.EmitSet(testValue);
                     Debug.Assert(TypeUtils.AreReferenceAssignable(testValue.Type, test.Type));
-                    EmitExpressionAndBranch(true, Expression.Equal(switchValue, testValue, false, node.Comparison), labels[i]);
+                    EmitExpressionAndBranch(
+                        true,
+                        Expression.Equal(switchValue, testValue, false, node.Comparison),
+                        labels[i]
+                    );
                 }
             }
 
@@ -371,8 +390,10 @@ namespace System.Linq.Expressions.Compiler
             // Make sure the switch value type and the right side type
             // are types we can optimize
             Type type = node.SwitchValue.Type;
-            if (!CanOptimizeSwitchType(type) ||
-                !TypeUtils.AreEquivalent(type, node.Cases[0].TestValues[0].Type))
+            if (
+                !CanOptimizeSwitchType(type)
+                || !TypeUtils.AreEquivalent(type, node.Cases[0].TestValues[0].Type)
+            )
             {
                 return false;
             }
@@ -482,7 +503,14 @@ namespace System.Linq.Expressions.Compiler
             isGoto = false;
         }
 
-        private void EmitSwitchCases(SwitchExpression node, Label[] labels, bool[] isGoto, Label @default, Label end, CompilationFlags flags)
+        private void EmitSwitchCases(
+            SwitchExpression node,
+            Label[] labels,
+            bool[] isGoto,
+            Label @default,
+            Label end,
+            CompilationFlags flags
+        )
         {
             // Jump to default (to handle the fallthrough case)
             _ilg.Emit(OpCodes.Br, @default);
@@ -503,7 +531,9 @@ namespace System.Linq.Expressions.Compiler
                 // Last case doesn't need branch
                 if (node.DefaultBody != null || i < n - 1)
                 {
-                    if ((flags & CompilationFlags.EmitAsTailCallMask) == CompilationFlags.EmitAsTail)
+                    if (
+                        (flags & CompilationFlags.EmitAsTailCallMask) == CompilationFlags.EmitAsTail
+                    )
                     {
                         //The switch case is at the tail of the lambda so
                         //it is safe to emit a Ret.
@@ -526,7 +556,12 @@ namespace System.Linq.Expressions.Compiler
             _ilg.MarkLabel(end);
         }
 
-        private void EmitSwitchBuckets(SwitchInfo info, List<List<SwitchLabel>> buckets, int first, int last)
+        private void EmitSwitchBuckets(
+            SwitchInfo info,
+            List<List<SwitchLabel>> buckets,
+            int first,
+            int last
+        )
         {
             while (true)
             {
@@ -635,7 +670,10 @@ namespace System.Linq.Expressions.Compiler
         private bool TryEmitHashtableSwitch(SwitchExpression node, CompilationFlags flags)
         {
             // If we have a comparison other than string equality, bail
-            if (node.Comparison != String_op_Equality_String_String && node.Comparison != String_Equals_String_String)
+            if (
+                node.Comparison != String_op_Equality_String_String
+                && node.Comparison != String_Equals_String_String
+            )
             {
                 return false;
             }
@@ -674,18 +712,30 @@ namespace System.Linq.Expressions.Compiler
                 {
                     if (t.Value != null)
                     {
-                        initializers.Add(Expression.ElementInit(add, new TrueReadOnlyCollection<Expression>(t, Utils.Constant(i))));
+                        initializers.Add(
+                            Expression.ElementInit(
+                                add,
+                                new TrueReadOnlyCollection<Expression>(t, Utils.Constant(i))
+                            )
+                        );
                     }
                     else
                     {
                         nullCase = i;
                     }
                 }
-                cases.UncheckedAdd(Expression.SwitchCase(node.Cases[i].Body, new TrueReadOnlyCollection<Expression>(Utils.Constant(i))));
+                cases.UncheckedAdd(
+                    Expression.SwitchCase(
+                        node.Cases[i].Body,
+                        new TrueReadOnlyCollection<Expression>(Utils.Constant(i))
+                    )
+                );
             }
 
             // Create the field to hold the lazily initialized dictionary
-            MemberExpression dictField = CreateLazyInitializedField<Dictionary<string, int>>("dictionarySwitch");
+            MemberExpression dictField = CreateLazyInitializedField<Dictionary<string, int>>(
+                "dictionarySwitch"
+            );
 
             // If we happen to initialize it twice (multithreaded case), it's
             // not the end of the world. The C# compiler does better here by
@@ -741,7 +791,13 @@ namespace System.Linq.Expressions.Compiler
                             Expression.Assign(switchIndex, Utils.Constant(-1))
                         )
                     ),
-                    Expression.Switch(node.Type, switchIndex, node.DefaultBody, null, cases.ToReadOnly())
+                    Expression.Switch(
+                        node.Type,
+                        switchIndex,
+                        node.DefaultBody,
+                        null,
+                        cases.ToReadOnly()
+                    )
                 )
             );
 
@@ -750,9 +806,16 @@ namespace System.Linq.Expressions.Compiler
         }
 
         [DynamicDependency("TryGetValue", typeof(Dictionary<,>))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The method will be preserved by the DynamicDependency.")]
-        private static MethodCallExpression CallTryGetValue(Expression dictInit, ParameterExpression switchValue, ParameterExpression switchIndex)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The method will be preserved by the DynamicDependency."
+        )]
+        private static MethodCallExpression CallTryGetValue(
+            Expression dictInit,
+            ParameterExpression switchValue,
+            ParameterExpression switchIndex
+        )
         {
             return Expression.Call(dictInit, "TryGetValue", null, switchValue, switchIndex);
         }

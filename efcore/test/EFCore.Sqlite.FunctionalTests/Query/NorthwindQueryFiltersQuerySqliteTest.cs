@@ -3,12 +3,15 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindQueryFiltersQuerySqliteTest : NorthwindQueryFiltersQueryTestBase<
-    NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer>>
+public class NorthwindQueryFiltersQuerySqliteTest
+    : NorthwindQueryFiltersQueryTestBase<
+        NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer>
+    >
 {
     public NorthwindQueryFiltersQuerySqliteTest(
         NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
@@ -26,9 +29,10 @@ public class NorthwindQueryFiltersQuerySqliteTest : NorthwindQueryFiltersQueryTe
 SELECT COUNT(*)
 FROM "Customers" AS "c"
 WHERE "c"."CompanyName" LIKE @__ef_filter__TenantPrefix_0_startswith ESCAPE '\'
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

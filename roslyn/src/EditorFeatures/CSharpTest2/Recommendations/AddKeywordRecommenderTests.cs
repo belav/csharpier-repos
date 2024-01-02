@@ -14,59 +14,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """);
+                    class C { }
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """);
+                    System.Console.WriteLine();
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """);
+                    int i = 0;
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
@@ -74,9 +76,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C {
-                   event Goo Bar { $$
-                """);
+                    class C {
+                       event Goo Bar { $$
+                    """
+            );
         }
 
         [Fact]
@@ -84,9 +87,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C {
-                   event Goo Bar { [Bar] $$
-                """);
+                    class C {
+                       event Goo Bar { [Bar] $$
+                    """
+            );
         }
 
         [Fact]
@@ -94,9 +98,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C {
-                   event Goo Bar { remove { } $$
-                """);
+                    class C {
+                       event Goo Bar { remove { } $$
+                    """
+            );
         }
 
         [Fact]
@@ -104,9 +109,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C {
-                   event Goo Bar { remove { } [Bar] $$
-                """);
+                    class C {
+                       event Goo Bar { remove { } [Bar] $$
+                    """
+            );
         }
 
         [Fact]
@@ -114,9 +120,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                class C {
-                   event Goo Bar { set { } $$
-                """);
+                    class C {
+                       event Goo Bar { set { } $$
+                    """
+            );
         }
 
         [Fact]
@@ -124,9 +131,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                   event Goo Bar { add $$
-                """);
+                    class C {
+                       event Goo Bar { add $$
+                    """
+            );
         }
 
         [Fact]
@@ -134,9 +142,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                   event Goo Bar { add { } $$
-                """);
+                    class C {
+                       event Goo Bar { add { } $$
+                    """
+            );
         }
 
         [Fact]
@@ -144,9 +153,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                   int Goo { $$
-                """);
+                    class C {
+                       int Goo { $$
+                    """
+            );
         }
     }
 }

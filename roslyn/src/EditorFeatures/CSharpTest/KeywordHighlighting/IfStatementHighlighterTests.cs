@@ -15,30 +15,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class IfStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(IfStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(IfStatementHighlighter);
 
         [Fact]
         public async Task TestIfStatementWithIfAndSingleElse1()
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        {|Cursor:[|if|]|} (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            {|Cursor:[|if|]|} (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -46,22 +46,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -69,26 +70,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        {|Cursor:[|if|]|} (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            {|Cursor:[|if|]|} (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -96,26 +98,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        {|Cursor:[|else if|]|} (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else if|]|} (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -123,26 +126,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -150,27 +154,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        {|Cursor:[|if|]|} (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else|]
-                        [|if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            {|Cursor:[|if|]|} (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            [|if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -178,27 +183,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}
-                        [|if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}
+                            [|if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -206,27 +212,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else|]
-                        {|Cursor:[|if|]|} (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {|Cursor:[|if|]|} (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -234,27 +241,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else|]
-                        [|if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            [|if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -262,25 +270,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        {|Cursor:[|if|]|}(a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else if|](a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]{
-                            // blah
+                            int a = 10;
+                            {|Cursor:[|if|]|}(a < 5)
+                            {
+                                // blah
+                            }
+                            [|else if|](a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]{
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -288,25 +297,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|](a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        {|Cursor:[|else if|]|}(a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]{
-                            // blah
+                            int a = 10;
+                            [|if|](a < 5)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else if|]|}(a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]{
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -314,25 +324,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|](a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else if|](a == 10)
-                        {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}{
-                            // blah
+                            int a = 10;
+                            [|if|](a < 5)
+                            {
+                                // blah
+                            }
+                            [|else if|](a == 10)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}{
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -340,26 +351,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        {|Cursor:[|if|]|} (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            {|Cursor:[|if|]|} (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -367,26 +379,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        {|Cursor:[|else if|]|} (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else if|]|} (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -394,26 +407,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -421,26 +435,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        {|Cursor:[|if|]|} (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else|] /* test */ [|if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            {|Cursor:[|if|]|} (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else|] /* test */ [|if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -448,26 +463,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|} /* test */ [|if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|} /* test */ [|if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -475,26 +491,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else|] /* test */ {|Cursor:[|if|]|} (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else|] /* test */ {|Cursor:[|if|]|} (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -502,26 +519,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                        }
-                        [|else|] /* test */ [|if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}
-                        {
-                            // blah
+                            int a = 10;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                            }
+                            [|else|] /* test */ [|if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -529,31 +547,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        int b = 15;
-                        {|Cursor:[|if|]|} (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                            if (b < 15)
-                                b = 15;
-                            else
-                                b = 14;
-                        }
-                        [|else if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            int b = 15;
+                            {|Cursor:[|if|]|} (a < 5)
+                            {
+                                // blah
+                                if (b < 15)
+                                    b = 15;
+                                else
+                                    b = 14;
+                            }
+                            [|else if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -561,31 +580,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        int b = 15;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                            if (b < 15)
-                                b = 15;
-                            else
-                                b = 14;
-                        }
-                        {|Cursor:[|else if|]|} (a == 10)
-                        {
-                            // blah
-                        }
-                        [|else|]
-                        {
-                            // blah
+                            int a = 10;
+                            int b = 15;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                                if (b < 15)
+                                    b = 15;
+                                else
+                                    b = 14;
+                            }
+                            {|Cursor:[|else if|]|} (a == 10)
+                            {
+                                // blah
+                            }
+                            [|else|]
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -593,31 +613,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                public class C
-                {
-                    public void Goo()
+                    public class C
                     {
-                        int a = 10;
-                        int b = 15;
-                        [|if|] (a < 5)
+                        public void Goo()
                         {
-                            // blah
-                            if (b < 15)
-                                b = 15;
-                            else
-                                b = 14;
-                        }
-                        [|else if|] (a == 10)
-                        {
-                            // blah
-                        }
-                        {|Cursor:[|else|]|}
-                        {
-                            // blah
+                            int a = 10;
+                            int b = 15;
+                            [|if|] (a < 5)
+                            {
+                                // blah
+                                if (b < 15)
+                                    b = 15;
+                                else
+                                    b = 14;
+                            }
+                            [|else if|] (a == 10)
+                            {
+                                // blah
+                            }
+                            {|Cursor:[|else|]|}
+                            {
+                                // blah
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -625,28 +646,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        {|Cursor:[|if|]|} (x)
+                        void M()
                         {
-                            if (y)
+                            {|Cursor:[|if|]|} (x)
                             {
-                                F();
-                            }
-                            else if (z)
-                            {
-                                G();
-                            }
-                            else
-                            {
-                                H();
+                                if (y)
+                                {
+                                    F();
+                                }
+                                else if (z)
+                                {
+                                    G();
+                                }
+                                else
+                                {
+                                    H();
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -654,28 +676,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x)
+                        void M()
                         {
-                            {|Cursor:[|if|]|} (y)
+                            if (x)
                             {
-                                F();
-                            }
-                            [|else if|] (z)
-                            {
-                                G();
-                            }
-                            [|else|]
-                            {
-                                H();
+                                {|Cursor:[|if|]|} (y)
+                                {
+                                    F();
+                                }
+                                [|else if|] (z)
+                                {
+                                    G();
+                                }
+                                [|else|]
+                                {
+                                    H();
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -683,28 +706,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x)
+                        void M()
                         {
-                            [|if|] (y)
+                            if (x)
                             {
-                                F();
-                            }
-                            {|Cursor:[|else if|]|} (z)
-                            {
-                                G();
-                            }
-                            [|else|]
-                            {
-                                H();
+                                [|if|] (y)
+                                {
+                                    F();
+                                }
+                                {|Cursor:[|else if|]|} (z)
+                                {
+                                    G();
+                                }
+                                [|else|]
+                                {
+                                    H();
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -712,28 +736,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
             await TestAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (x)
+                        void M()
                         {
-                            [|if|] (y)
+                            if (x)
                             {
-                                F();
-                            }
-                            [|else if|] (z)
-                            {
-                                G();
-                            }
-                            {|Cursor:[|else|]|}
-                            {
-                                H();
+                                [|if|] (y)
+                                {
+                                    F();
+                                }
+                                [|else if|] (z)
+                                {
+                                    G();
+                                }
+                                {|Cursor:[|else|]|}
+                                {
+                                    H();
+                                }
                             }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

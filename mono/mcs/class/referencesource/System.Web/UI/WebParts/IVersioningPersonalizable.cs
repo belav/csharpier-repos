@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
 
@@ -15,8 +15,8 @@ namespace System.Web.UI.WebControls.WebParts {
     /// that have been removed in a newer version of the object's
     /// implementation.
     /// </devdoc>
-    public interface IVersioningPersonalizable {
-
+    public interface IVersioningPersonalizable
+    {
         /// <devdoc>
         /// The specified dictionary contains property values that
         /// could not automatically be loaded into the object.

@@ -15,92 +15,103 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """);
+                    class C { }
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """);
+                    System.Console.WriteLine();
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """);
+                    int i = 0;
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInsideEmptyMethod()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestInsideUnsafeBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                unsafe {
-                    $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                        unsafe {
+                            $$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterFixed()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                unsafe {
-                    fixed (int* = bar) {
-                    }
-                    $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                        unsafe {
+                            fixed (int* = bar) {
+                            }
+                            $$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterFixed()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                fixed (int* = bar) {
-                  }
-                  $$
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                        fixed (int* = bar) {
+                          }
+                          $$
+                        """
+                )
+            );
         }
 
         [Fact]
@@ -108,9 +119,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    $$
-                """);
+                    class C {
+                        $$
+                    """
+            );
         }
 
         [Fact]
@@ -118,9 +130,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                struct S {
-                    $$
-                """);
+                    struct S {
+                        $$
+                    """
+            );
         }
 
         [Fact]
@@ -128,9 +141,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                record struct S {
-                    $$
-                """);
+                    record struct S {
+                        $$
+                    """
+            );
         }
 
         [Fact]
@@ -138,9 +152,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                unsafe struct S {
-                    $$
-                """);
+                    unsafe struct S {
+                        $$
+                    """
+            );
         }
 
         [Fact]
@@ -148,10 +163,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                unsafe struct S {
-                    struct T {
-                      $$
-                """);
+                    unsafe struct S {
+                        struct T {
+                          $$
+                    """
+            );
         }
 
         [Fact]
@@ -159,10 +175,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                struct S {
-                    unsafe struct T {
-                      $$
-                """);
+                    struct S {
+                        unsafe struct T {
+                          $$
+                    """
+            );
         }
 
         [Fact]
@@ -170,9 +187,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                unsafe struct S {
-                    static $$
-                """);
+                    unsafe struct S {
+                        static $$
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52296")]
@@ -180,17 +198,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyKeywordAsync(
                 """
-                public class C
-                {
-                    public void M()
+                    public class C
                     {
-                        unsafe void Local()
+                        public void M()
                         {
-                            $$
+                            unsafe void Local()
+                            {
+                                $$
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52296")]
@@ -198,17 +217,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                public class C
-                {
-                    public void M()
+                    public class C
                     {
-                        void Local()
+                        public void M()
                         {
-                            $$
+                            void Local()
+                            {
+                                $$
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

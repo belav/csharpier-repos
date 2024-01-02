@@ -14,28 +14,31 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class ProxySomeMethodsHook : IProxyGenerationHook
-	{
-		private readonly Func<Type, MethodInfo, bool> shouldInterceptMethod;
+    public class ProxySomeMethodsHook : IProxyGenerationHook
+    {
+        private readonly Func<Type, MethodInfo, bool> shouldInterceptMethod;
 
-		public ProxySomeMethodsHook(Func<Type, MethodInfo, bool> shouldInterceptMethod)
-		{
-			this.shouldInterceptMethod = shouldInterceptMethod;
-		}
+        public ProxySomeMethodsHook(Func<Type, MethodInfo, bool> shouldInterceptMethod)
+        {
+            this.shouldInterceptMethod = shouldInterceptMethod;
+        }
 
-		public bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
-		{
-			return shouldInterceptMethod(type, methodInfo);
-		}
+        public bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
+        {
+            return shouldInterceptMethod(type, methodInfo);
+        }
 
-		void IProxyGenerationHook.MethodsInspected() { }
+        void IProxyGenerationHook.MethodsInspected() { }
 
-		void IProxyGenerationHook.NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
-	}
+        void IProxyGenerationHook.NonProxyableMemberNotification(
+            Type type,
+            MemberInfo memberInfo
+        ) { }
+    }
 }

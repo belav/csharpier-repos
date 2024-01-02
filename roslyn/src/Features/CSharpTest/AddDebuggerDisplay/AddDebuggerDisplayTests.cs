@@ -8,8 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Shared.Extensions;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<
-    Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay.CSharpAddDebuggerDisplayCodeRefactoringProvider>;
+using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay.CSharpAddDebuggerDisplayCodeRefactoringProvider>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
 {
@@ -19,22 +18,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task OfferedOnEmptyClass()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                [||]class C
-                {
-                }
-                """, """
-                using System.Diagnostics;
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class C
-                {
-                    private string GetDebuggerDisplay()
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    [||]class C
                     {
-                        return ToString();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class C
+                    {
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -97,22 +99,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task OfferedOnEmptyStruct()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                [||]struct Foo
-                {
-                }
-                """, """
-                using System.Diagnostics;
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                struct Foo
-                {
-                    private string GetDebuggerDisplay()
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    [||]struct Foo
                     {
-                        return ToString();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    struct Foo
+                    {
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -178,49 +183,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task OfferedOnToString()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                class C
-                {
-                    public override string [||]ToString() => "Foo";
-                }
-                """, """
-                using System.Diagnostics;
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class C
-                {
-                    public override string ToString() => "Foo";
-
-                    private string GetDebuggerDisplay()
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    class C
                     {
-                        return ToString();
+                        public override string [||]ToString() => "Foo";
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class C
+                    {
+                        public override string ToString() => "Foo";
+
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task OfferedOnShadowingToString()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                class A
-                {
-                    public new string [||]ToString() => "Foo";
-                }
-                """, """
-                using System.Diagnostics;
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class A
-                {
-                    public new string ToString() => "Foo";
-
-                    private string GetDebuggerDisplay()
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    class A
                     {
-                        return ToString();
+                        public new string [||]ToString() => "Foo";
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class A
+                    {
+                        public new string ToString() => "Foo";
+
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -244,20 +255,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task OfferedOnExistingDebuggerDisplayMethod()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                class C
-                {
-                    private string [||]GetDebuggerDisplay() => "Foo";
-                }
-                """, """
-                using System.Diagnostics;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    class C
+                    {
+                        private string [||]GetDebuggerDisplay() => "Foo";
+                    }
+                    """,
+                """
+                    using System.Diagnostics;
 
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class C
-                {
-                    private string GetDebuggerDisplay() => "Foo";
-                }
-                """);
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class C
+                    {
+                        private string GetDebuggerDisplay() => "Foo";
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -276,48 +290,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task NamespaceImportIsNotDuplicated()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                using System.Diagnostics;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    using System.Diagnostics;
 
-                [||]class C
-                {
-                }
-                """, """
-                using System.Diagnostics;
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class C
-                {
-                    private string GetDebuggerDisplay()
+                    [||]class C
                     {
-                        return ToString();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class C
+                    {
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task NamespaceImportIsSorted()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                using System.Xml;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    using System.Xml;
 
-                [||]class C
-                {
-                }
-                """, """
-                using System.Diagnostics;
-                using System.Xml;
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class C
-                {
-                    private string GetDebuggerDisplay()
+                    [||]class C
                     {
-                        return ToString();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+                    using System.Xml;
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class C
+                    {
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -349,47 +369,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task OfferedWhenAttributeWithTheSameNameIsSpecified()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                [{|CS0246:BrokenCode|}.DebuggerDisplay("Foo")]
-                [||]class C
-                {
-                }
-                """, """
-                using System.Diagnostics;
-
-                [{|CS0246:BrokenCode|}.DebuggerDisplay("Foo")]
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                [||]class C
-                {
-                    private string GetDebuggerDisplay()
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    [{|CS0246:BrokenCode|}.DebuggerDisplay("Foo")]
+                    [||]class C
                     {
-                        return ToString();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [{|CS0246:BrokenCode|}.DebuggerDisplay("Foo")]
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    [||]class C
+                    {
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task OfferedWhenAttributeWithTheSameNameIsSpecifiedWithSuffix()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                [{|CS0246:BrokenCode|}.DebuggerDisplayAttribute("Foo")]
-                [||]class C
-                {
-                }
-                """, """
-                using System.Diagnostics;
-
-                [{|CS0246:BrokenCode|}.DebuggerDisplayAttribute("Foo")]
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                [||]class C
-                {
-                    private string GetDebuggerDisplay()
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    [{|CS0246:BrokenCode|}.DebuggerDisplayAttribute("Foo")]
+                    [||]class C
                     {
-                        return ToString();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [{|CS0246:BrokenCode|}.DebuggerDisplayAttribute("Foo")]
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    [||]class C
+                    {
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
@@ -410,77 +436,86 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task OfferedWhenBaseClassHasDebuggerDisplay()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                using System.Diagnostics;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    using System.Diagnostics;
 
-                [DebuggerDisplay("Foo")]
-                class A
-                {
-                }
-
-                [||]class B : A
-                {
-                }
-                """, """
-                using System.Diagnostics;
-
-                [DebuggerDisplay("Foo")]
-                class A
-                {
-                }
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class B : A
-                {
-                    private string GetDebuggerDisplay()
+                    [DebuggerDisplay("Foo")]
+                    class A
                     {
-                        return ToString();
                     }
-                }
-                """);
+
+                    [||]class B : A
+                    {
+                    }
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [DebuggerDisplay("Foo")]
+                    class A
+                    {
+                    }
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class B : A
+                    {
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task ExistingDebuggerDisplayMethodIsUsedEvenWhenPublicStaticNonString()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                [||]class C
-                {
-                    public static object GetDebuggerDisplay() => "Foo";
-                }
-                """, """
-                using System.Diagnostics;
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    [||]class C
+                    {
+                        public static object GetDebuggerDisplay() => "Foo";
+                    }
+                    """,
+                """
+                    using System.Diagnostics;
 
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class C
-                {
-                    public static object GetDebuggerDisplay() => "Foo";
-                }
-                """);
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class C
+                    {
+                        public static object GetDebuggerDisplay() => "Foo";
+                    }
+                    """
+            );
         }
 
         [Fact]
         public async Task ExistingDebuggerDisplayMethodWithParameterIsNotUsed()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
-                [||]class C
-                {
-                    private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
-                }
-                """, """
-                using System.Diagnostics;
-
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                class C
-                {
-                    private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
-
-                    private string GetDebuggerDisplay()
+            await VerifyCS.VerifyRefactoringAsync(
+                """
+                    [||]class C
                     {
-                        return ToString();
+                        private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
                     }
-                }
-                """);
+                    """,
+                """
+                    using System.Diagnostics;
+
+                    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+                    class C
+                    {
+                        private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
+
+                        private string GetDebuggerDisplay()
+                        {
+                            return ToString();
+                        }
+                    }
+                    """
+            );
         }
     }
 }

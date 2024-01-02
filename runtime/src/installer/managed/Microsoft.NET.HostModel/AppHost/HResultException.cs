@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace Microsoft.NET.HostModel
@@ -14,7 +14,9 @@ namespace Microsoft.NET.HostModel
     public class HResultException : Exception
     {
         public readonly int Win32HResult;
-        public HResultException(int hResult) : base(hResult.ToString("X4"))
+
+        public HResultException(int hResult)
+            : base(hResult.ToString("X4"))
         {
             Win32HResult = hResult;
         }

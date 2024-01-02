@@ -1,20 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListItemCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Security.Permissions;
 
-namespace System.Web.UI.MobileControls 
+namespace System.Web.UI.MobileControls
 {
-
     /*
      * Object List Item collection class. Does not derive from MobileListItemCollection,
      * because much of the functionality there is disallowed here.
@@ -23,9 +22,17 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ObjectListItemCollection : ArrayListCollectionBase, IStateManager
     {
         private bool _marked = false;
@@ -40,15 +47,8 @@ namespace System.Web.UI.MobileControls
 
         internal int BaseIndex
         {
-            get
-            {
-                return _baseIndex;
-            }
-
-            set
-            {
-                _baseIndex = value;
-            }
+            get { return _baseIndex; }
+            set { _baseIndex = value; }
         }
 
         /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.GetAll"]/*' />
@@ -56,9 +56,9 @@ namespace System.Web.UI.MobileControls
         {
             int n = Count;
             ObjectListItem[] result = new ObjectListItem[n];
-            if (n > 0) 
+            if (n > 0)
             {
-                Items.CopyTo (0, result, 0, n);
+                Items.CopyTo(0, result, 0, n);
             }
             return result;
         }
@@ -66,15 +66,12 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.this"]/*' />
         public ObjectListItem this[int index]
         {
-            get
-            {
-                return (ObjectListItem)Items[index];
-            }
+            get { return (ObjectListItem)Items[index]; }
         }
 
         internal void Add(ObjectListItem item)
         {
-            Items.Add (item);
+            Items.Add(item);
             if (_marked)
             {
                 _dirty = true;
@@ -85,7 +82,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.Clear"]/*' />
         public void Clear()
         {
-            Items.Clear ();
+            Items.Clear();
             if (_marked)
             {
                 _dirty = true;
@@ -95,7 +92,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.Contains"]/*' />
         public bool Contains(ObjectListItem item)
         {
-            return Items.Contains (item);
+            return Items.Contains(item);
         }
 
         /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.IndexOf"]/*' />
@@ -111,14 +108,11 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         protected bool IsTrackingViewState
         {
-            get
-            {
-                return _marked;
-            }
+            get { return _marked; }
         }
 
         /// <internalonly/>
-        protected void TrackViewState() 
+        protected void TrackViewState()
         {
             _marked = true;
             foreach (IStateManager item in Items)
@@ -128,24 +122,24 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <internalonly/>
-        protected void LoadViewState(Object state) 
+        protected void LoadViewState(Object state)
         {
             if (state != null)
             {
                 Object[] changes = (Object[])state;
-                Debug.Assert (changes.Length == 2);
+                Debug.Assert(changes.Length == 2);
                 if (changes[0] == null)
                 {
-                    Clear ();
+                    Clear();
                 }
                 else
                 {
                     Object[] itemChanges = (Object[])changes[0];
-                    EnsureCount (itemChanges.Length);
+                    EnsureCount(itemChanges.Length);
                     int i = 0;
                     foreach (IStateManager item in Items)
                     {
-                        item.LoadViewState (itemChanges[i++]);
+                        item.LoadViewState(itemChanges[i++]);
                     }
                 }
 
@@ -163,7 +157,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <internalonly/>
-        protected Object SaveViewState() 
+        protected Object SaveViewState()
         {
             if (!_dirty)
             {
@@ -177,7 +171,7 @@ namespace System.Web.UI.MobileControls
                 int i = 0;
                 foreach (IStateManager item in Items)
                 {
-                    itemChanges[i++] = item.SaveViewState ();
+                    itemChanges[i++] = item.SaveViewState();
                 }
             }
             else
@@ -200,7 +194,7 @@ namespace System.Web.UI.MobileControls
             int diff = Count - count;
             if (diff > 0)
             {
-                Items.RemoveRange (count, diff);
+                Items.RemoveRange(count, diff);
                 if (_marked)
                 {
                     _dirty = true;
@@ -212,34 +206,35 @@ namespace System.Web.UI.MobileControls
                 {
                     ObjectListItem item = new ObjectListItem(_owner);
                     item.SetIndex(i + BaseIndex);
-                    Add (item);
+                    Add(item);
                 }
             }
         }
 
         #region Implementation of IStateManager
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
         #endregion
-    } 
+    }
 }
-

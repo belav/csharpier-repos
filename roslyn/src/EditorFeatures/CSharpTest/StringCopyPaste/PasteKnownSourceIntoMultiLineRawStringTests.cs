@@ -7,7 +7,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
 {
-    public class PasteKnownSourceIntoMultiLineRawStringTests : StringCopyPasteCommandHandlerKnownSourceTests
+    public class PasteKnownSourceIntoMultiLineRawStringTests
+        : StringCopyPasteCommandHandlerKnownSourceTests
     {
         #region Normal Copy/Paste tests
 
@@ -17,742 +18,771 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         public void TestPasteSimpleNormalLiteralContent()
         {
             TestCopyPaste(
-"""var v = "{|Copy:goo|}";""",
-""""
+                """var v = "{|Copy:goo|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     goo[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSimpleSubstringNormalLiteralContent()
         {
             TestCopyPaste(
-"""var v = "g{|Copy:o|}o";""",
-""""
+                """var v = "g{|Copy:o|}o";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     o[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPastePartiallySelectedEscapeNormalLiteralContent()
         {
             TestCopyPaste(
-"""var v = "\{|Copy:n|}";""",
-""""
+                """var v = "\{|Copy:n|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     n[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteFullySelectedEscapeNormalLiteralContent()
         {
             TestCopyPaste(
-"""var v = "{|Copy:\n|}";""",
-""""
+                """var v = "{|Copy:\n|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-"var dest =\r\n    \"\"\"\r\n    \n    [||]\r\n    \"\"\";",
-""""
+                "var dest =\r\n    \"\"\"\r\n    \n    [||]\r\n    \"\"\";",
+                """"
 var dest =
     """
     \n[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPastePartiallySelectedQuoteNormalLiteralContent()
         {
             TestCopyPaste(
-"""var v = "\{|Copy:"|}";""",
-""""
+                """var v = "\{|Copy:"|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     "[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteFullySelectedQuoteNormalLiteralContent()
         {
             TestCopyPaste(
-"""var v = "{|Copy:\"|}";""",
-""""
+                """var v = "{|Copy:\"|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     "[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     \"[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSimpleVerbatimLiteralContent()
         {
             TestCopyPaste(
-"""var v = @"{|Copy:goo|}";""",
-""""
+                """var v = @"{|Copy:goo|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     goo[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSimpleSubstringVerbatimLiteralContent()
         {
             TestCopyPaste(
-"""var v = @"g{|Copy:o|}o";""",
-""""
+                """var v = @"g{|Copy:o|}o";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     o[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSelectedVerbatimNewLineLiteralContent()
         {
             TestCopyPaste(
-"""
+                """
 var v = @"{|Copy:
 |}";
 """,
-""""
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     
 [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteFullySelectedEscapeVerbatimLiteralContent()
         {
             TestCopyPaste(
-"""var v = @"{|Copy:""|}";""",
-""""
+                """var v = @"{|Copy:""|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     "[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     ""[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSimpleRawSingleLineLiteralContent()
         {
             TestCopyPaste(
-""""var v = """{|Copy:goo|}""";"""",
-""""
+                """"var v = """{|Copy:goo|}""";"""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     goo[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteQuotesRawSingleLineLiteralContent()
         {
             TestCopyPaste(
-""""var v = """{|Copy: "" |}""";"""",
-""""
+                """"var v = """{|Copy: "" |}""";"""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
      "" [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSimpleRawMultiLineLiteralContent1()
         {
             TestCopyPaste(
-""""
+                """"
 var v = """
     {|Copy:goo|}
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     goo[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSimpleRawMultiLineLiteralContent2()
         {
             TestCopyPaste(
-""""
+                """"
 var v = """
     {|Copy:goo
     bar|}
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     goo
     bar[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteSimpleRawMultiLineLiteralContent3()
         {
             TestCopyPaste(
-""""
+                """"
 var v = """
 {|Copy:    goo
     bar|}
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     goo
     bar[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
         goo
     bar[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationFromInterpolatedStringLiteralContent()
         {
             TestCopyPaste(
-"""var v = $"{|Copy:{0}|}";""",
-""""
+                """var v = $"{|Copy:{0}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithFormatClauseFromInterpolatedStringLiteralContent1()
         {
             TestCopyPaste(
-"""var v = $"{|Copy:{0:X}|}";""",
-""""
+                """var v = $"{|Copy:{0:X}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0:X}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithFormatClauseFromInterpolatedStringLiteralContent2()
         {
             TestCopyPaste(
-"""var v = $"{|Copy:{0:\"X\"}|}";""",
-""""
+                """var v = $"{|Copy:{0:\"X\"}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0:"X"}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0:\"X\"}[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromInterpolatedStringLiteralContent1()
         {
             TestCopyPaste(
-"""var v = $"{|Copy:{"goo"}|}";""",
-""""
+                """var v = $"{|Copy:{"goo"}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {"goo"}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromInterpolatedStringLiteralContent2()
         {
             TestCopyPaste(
-"""var v = $"{|Copy:X{"goo"}Y|}";""",
-""""
+                """var v = $"{|Copy:X{"goo"}Y|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     X{"goo"}Y[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromInterpolatedStringLiteralContent3()
         {
             TestCopyPaste(
-"""var v = $"{|Copy:\"X{"goo"}Y\"|}";""",
-""""
+                """var v = $"{|Copy:\"X{"goo"}Y\"|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     "X{"goo"}Y"[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     \"X{"goo"}Y\"[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromInterpolatedStringLiteralContent4()
         {
             TestCopyPaste(
-"""var v = $"{|Copy:\"X{@"goo"}Y\"|}";""",
-""""
+                """var v = $"{|Copy:\"X{@"goo"}Y\"|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     "X{@"goo"}Y"[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     \"X{@"goo"}Y\"[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationFromVerbatimInterpolatedStringLiteralContent()
         {
             TestCopyPaste(
-"""var v = $@"{|Copy:{0}|}";""",
-""""
+                """var v = $@"{|Copy:{0}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithFormatClauseFromVerbatimInterpolatedStringLiteralContent1()
         {
             TestCopyPaste(
-"""var v = $@"{|Copy:{0:X}|}";""",
-""""
+                """var v = $@"{|Copy:{0:X}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0:X}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithFormatClauseFromVerbatimInterpolatedStringLiteralContent2()
         {
             TestCopyPaste(
-"""var v = $@"{|Copy:{0:""X""}|}";""",
-""""
+                """var v = $@"{|Copy:{0:""X""}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0:"X"}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {0:""X""}[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromVerbatimInterpolatedStringLiteralContent1()
         {
             TestCopyPaste(
-"""var v = $@"{|Copy:{"goo"}|}";""",
-""""
+                """var v = $@"{|Copy:{"goo"}|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     {"goo"}[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromVerbatimInterpolatedStringLiteralContent2()
         {
             TestCopyPaste(
-"""var v = $@"{|Copy:X{"goo"}Y|}";""",
-""""
+                """var v = $@"{|Copy:X{"goo"}Y|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     X{"goo"}Y[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     [||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromVerbatimInterpolatedStringLiteralContent3()
         {
             TestCopyPaste(
-"""var v = $@"{|Copy:""X{"goo"}Y""|}";""",
-""""
+                """var v = $@"{|Copy:""X{"goo"}Y""|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     "X{"goo"}Y"[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     ""X{"goo"}Y""[||]
     """;
-"""");
+""""
+            );
         }
 
         [WpfFact]
         public void TestPasteInterpolationWithStringFromVerbatimInterpolatedStringLiteralContent4()
         {
             TestCopyPaste(
-"""var v = $@"{|Copy:""X{@"goo"}Y""|}";""",
-""""
+                """var v = $@"{|Copy:""X{@"goo"}Y""|}";""",
+                """"
 var dest =
     """
     [||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     "X{@"goo"}Y"[||]
     """;
 """",
-""""
+                """"
 var dest =
     """
     ""X{@"goo"}Y""[||]
     """;
-"""");
+""""
+            );
         }
 
         #endregion
@@ -767,14 +797,14 @@ var dest =
         {
             TestPasteKnownSource(
                 pasteText: "\n",
-""""
+                """"
 var x = """
     [||]
     """
 """",
-"var x = \"\"\"\r\n    \n    [||]\r\n    \"\"\"",
-                afterUndo:
-"var x = \"\"\"\r\n    \n[||]\r\n    \"\"\"");
+                "var x = \"\"\"\r\n    \n    [||]\r\n    \"\"\"",
+                afterUndo: "var x = \"\"\"\r\n    \n[||]\r\n    \"\"\""
+            );
         }
 
         [WpfFact]
@@ -784,25 +814,25 @@ var x = """
                 pasteText: """
 
 
-                """,
-""""
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
     
     [||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     
 [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -810,22 +840,22 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """    """,
-""""
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
         [||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -833,27 +863,27 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                    
+                        
 
-                """,
-""""
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
         
     [||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
         
 [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -861,22 +891,22 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """'""",
-""""
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
     '[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -884,24 +914,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                "
-                """,
-""""
+                    "
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
     "[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -909,24 +939,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
-""""
+                    """
+                    """",
+                """"
 var x = """
     [||]
     """
 """",
-"""""
+                """""
 var x = """"
     """[||]
     """"
 """"",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     """[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -934,24 +964,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                ""
-                """,
-""""
+                    ""
+                    """,
+                """"
 var x = """
     "[||]
     """
 """",
-"""""
+                """""
 var x = """"
     """[||]
     """"
 """"",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     """[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -959,24 +989,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
-""""
+                    """
+                    """",
+                """"
 var x = """
     "[||]
     """
 """",
-""""""
+                """"""
 var x = """""
     """"[||]
     """""
 """""",
-                afterUndo:
-"""""
+                afterUndo: """""
 var x = """
     """"[||]
     """
-""""");
+"""""
+            );
         }
 
         [WpfFact]
@@ -984,24 +1014,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
-""""
+                    """
+                    """",
+                """"
 var x = """
     "[||]"
     """
 """",
-"""""""
+                """""""
 var x = """"""
     """"[||]"
     """"""
 """"""",
-                afterUndo:
-"""""
+                afterUndo: """""
 var x = """
     """"[||]"
     """
-""""");
+"""""
+            );
         }
 
         [WpfFact]
@@ -1009,24 +1039,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
-""""
+                    """
+                    """",
+                """"
 var x = """
     [||]"
     """
 """",
-""""""
+                """"""
 var x = """""
     """[||]"
     """""
 """""",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     """[||]"
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1034,24 +1064,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """""
+                    """"
+                    """"",
                 """"
-                """"",
-""""
 var x = """
     [||]
     """
 """",
-""""""
+                """"""
 var x = """""
     """"[||]
     """""
 """""",
-                afterUndo:
-"""""
+                afterUndo: """""
 var x = """
     """"[||]
     """
-""""");
+"""""
+            );
         }
 
         [WpfFact]
@@ -1059,22 +1089,22 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """  ""  """,
-""""
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
       ""  [||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1082,22 +1112,22 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """abc""",
-""""
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
     abc[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1105,27 +1135,27 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
-""""
+                    abc
+                    def
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
     abc
     def[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     abc
 def[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1133,27 +1163,27 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
-""""
+                    abc
+                    def
+                    """,
+                """"
 var x = """
     goo[||]
     """
 """",
-""""
+                """"
 var x = """
     gooabc
     def[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     gooabc
 def[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1161,27 +1191,27 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
-""""
+                    abc
+                    def
+                    """,
+                """"
 var x = """
     goo[||]bar
     """
 """",
-""""
+                """"
 var x = """
     gooabc
     def[||]bar
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     gooabc
 def[||]bar
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1189,30 +1219,30 @@ def[||]bar
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
+                    abc
+                    def
 
-                """,
-""""
+                    """,
+                """"
 var x = """
     goo[||]bar
     """
 """",
-""""
+                """"
 var x = """
     gooabc
     def
     [||]bar
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     gooabc
 def
 [||]bar
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1220,30 +1250,30 @@ def
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                ghi
-                """,
-""""
+                    abc
+                        def
+                    ghi
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
     abc
         def
     ghi[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     abc
     def
 ghi[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1251,30 +1281,30 @@ ghi[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                ghi
-                """,
-""""
+                    abc
+                        def
+                    ghi
+                    """,
+                """"
 var x = """
           [||]
           """
 """",
-""""
+                """"
 var x = """
           abc
               def
           ghi[||]
           """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
           abc
     def
 ghi[||]
           """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1282,30 +1312,30 @@ ghi[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                    def
-                    ghi
-                """,
-""""
+                    abc
+                        def
+                        ghi
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
     abc
         def
         ghi[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     abc
     def
     ghi[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1313,30 +1343,30 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                    abc
-                    def
-                    ghi
-                """,
-""""
+                        abc
+                        def
+                        ghi
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
         abc
         def
         ghi[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
         abc
     def
     ghi[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1344,30 +1374,30 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                        abc
-                    def
-                    ghi
-                """,
-""""
+                            abc
+                        def
+                        ghi
+                    """,
+                """"
 var x = """
     [||]
     """
 """",
-""""
+                """"
 var x = """
             abc
         def
         ghi[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
             abc
     def
     ghi[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1375,27 +1405,27 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
-""""
+                    abc
+                    def
+                    """,
+                """"
 var x = """
     [||]{|Selection:    |}
     """
 """",
-""""
+                """"
 var x = """
     abc
     def[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     abc
 def[||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1403,30 +1433,30 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
+                    abc
+                    def
 
-                """,
-""""
+                    """,
+                """"
 var x = """
     [||]{|Selection:    |}
     """
 """",
-""""
+                """"
 var x = """
     abc
     def
     [||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     abc
 def
 [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1434,27 +1464,27 @@ def
         {
             TestPasteKnownSource(
                 pasteText: """
-                abc
-                def
-                """,
-""""
+                    abc
+                    def
+                    """,
+                """"
 var x = """
     [||]{|Selection:    |}  
     """
 """",
-""""
+                """"
 var x = """
     abc
     def[||]  
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     abc
 def[||]  
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1462,24 +1492,24 @@ def[||]
         {
             TestPasteKnownSource(
                 pasteText: """
-                "bar
-                """,
-""""
+                    "bar
+                    """,
+                """"
 var x = """
     [||]goo
     """
 """",
-""""
+                """"
 var x = """
     "bar[||]goo
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     [||]goo
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1487,24 +1517,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """
-                ""
-                """,
-""""
+                    ""
+                    """,
+                """"
 var x = """
     [||]{|Selection:    |}
     """
 """",
-""""
+                """"
 var x = """
     ""[||]
     """
 """",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
         [||]
     """
-"""");
+""""
+            );
         }
 
         [WpfFact]
@@ -1512,24 +1542,24 @@ var x = """
         {
             TestPasteKnownSource(
                 pasteText: """"
-                """
-                """",
-""""
+                    """
+                    """",
+                """"
 var x = """
     [||]{|Selection:    |}
     """
 """",
-"""""
+                """""
 var x = """"
     """[||]
     """"
 """"",
-                afterUndo:
-""""
+                afterUndo: """"
 var x = """
     """[||]
     """
-"""");
+""""
+            );
         }
 
         #endregion

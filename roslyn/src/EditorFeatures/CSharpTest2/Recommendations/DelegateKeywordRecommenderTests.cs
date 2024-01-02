@@ -15,93 +15,89 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     [Fact]
     public async Task TestAtRoot_Interactive()
     {
-        await VerifyKeywordAsync(SourceCodeKind.Script,
-            @"$$");
+        await VerifyKeywordAsync(SourceCodeKind.Script, @"$$");
     }
 
     [Fact]
     public async Task TestAfterClass_Interactive()
     {
-        await VerifyKeywordAsync(SourceCodeKind.Script,
+        await VerifyKeywordAsync(
+            SourceCodeKind.Script,
             """
-            class C { }
-            $$
-            """);
+                class C { }
+                $$
+                """
+        );
     }
 
     [Fact]
     public async Task TestAfterGlobalStatement_Interactive()
     {
-        await VerifyKeywordAsync(SourceCodeKind.Script,
+        await VerifyKeywordAsync(
+            SourceCodeKind.Script,
             """
-            System.Console.WriteLine();
-            $$
-            """);
+                System.Console.WriteLine();
+                $$
+                """
+        );
     }
 
     [Fact]
     public async Task TestAfterGlobalVariableDeclaration_Interactive()
     {
-        await VerifyKeywordAsync(SourceCodeKind.Script,
+        await VerifyKeywordAsync(
+            SourceCodeKind.Script,
             """
-            int i = 0;
-            $$
-            """);
+                int i = 0;
+                $$
+                """
+        );
     }
 
     [Fact]
     public async Task TestNotInUsing()
     {
-        await VerifyAbsenceAsync(
-            @"using $$");
+        await VerifyAbsenceAsync(@"using $$");
     }
 
     [Fact]
     public async Task TestInUsingAlias()
     {
-        await VerifyKeywordAsync(
-            @"using Goo = $$");
-        await VerifyKeywordAsync(
-            @"using Goo = d$$");
+        await VerifyKeywordAsync(@"using Goo = $$");
+        await VerifyKeywordAsync(@"using Goo = d$$");
     }
 
     [Fact]
     public async Task TestInGlobalUsingAlias()
     {
-        await VerifyKeywordAsync(
-            @"global using Goo = $$");
-        await VerifyKeywordAsync(
-            @"global using Goo = d$$");
+        await VerifyKeywordAsync(@"global using Goo = $$");
+        await VerifyKeywordAsync(@"global using Goo = d$$");
     }
 
     [Fact]
     public async Task TestInUsingAliasTypeParameter()
     {
         // Valid case: using Goo = System.Collections.Generic.IList<delegate*<void>[]>;
-        await VerifyKeywordAsync(
-            @"using Goo = T<$$");
+        await VerifyKeywordAsync(@"using Goo = T<$$");
     }
 
     [Fact]
     public async Task TestInGlobalUsingAliasTypeParameter()
     {
         // Valid case: global using Goo = System.Collections.Generic.IList<delegate*<void>[]>;
-        await VerifyKeywordAsync(
-            @"global using Goo = T<$$");
+        await VerifyKeywordAsync(@"global using Goo = T<$$");
     }
 
     [Fact]
     public async Task TestInEmptyStatement()
     {
-        await VerifyKeywordAsync(AddInsideMethod(
-            @"$$"));
+        await VerifyKeywordAsync(AddInsideMethod(@"$$"));
     }
 
     [Fact]
     public async Task TestInCompilationUnit()
     {
-        await VerifyKeywordAsync(
-            @"$$");
+        await VerifyKeywordAsync(@"$$");
     }
 
     [Fact]
@@ -109,9 +105,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            extern alias Goo;
-            $$
-            """);
+                extern alias Goo;
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -119,9 +116,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            using Goo;
-            $$
-            """);
+                using Goo;
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -129,9 +127,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            global using Goo;
-            $$
-            """);
+                global using Goo;
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -139,9 +138,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            namespace N {}
-            $$
-            """);
+                namespace N {}
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -149,9 +149,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            namespace N;
-            $$
-            """);
+                namespace N;
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -159,9 +160,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C {}
-            $$
-            """);
+                class C {}
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -169,9 +171,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            delegate void Goo();
-            $$
-            """);
+                delegate void Goo();
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -179,10 +182,11 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C {
-              void Goo() {}
-              $$
-            """);
+                class C {
+                  void Goo() {}
+                  $$
+                """
+        );
     }
 
     [Fact]
@@ -190,10 +194,11 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C {
-              int i;
-              $$
-            """);
+                class C {
+                  int i;
+                  $$
+                """
+        );
     }
 
     [Fact]
@@ -201,50 +206,59 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C {
-              int i { get; }
-              $$
-            """);
+                class C {
+                  int i { get; }
+                  $$
+                """
+        );
     }
 
     [Fact]
     public async Task TestNotBeforeUsing()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Regular,
+        await VerifyAbsenceAsync(
+            SourceCodeKind.Regular,
             """
-            $$
-            using Goo;
-            """);
+                $$
+                using Goo;
+                """
+        );
     }
 
     [Fact(Skip = "https://github.com/dotnet/roslyn/issues/9880")]
     public async Task TestNotBeforeUsing_Interactive()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Script,
+        await VerifyAbsenceAsync(
+            SourceCodeKind.Script,
             """
-            $$
-            using Goo;
-            """);
+                $$
+                using Goo;
+                """
+        );
     }
 
     [Fact]
     public async Task TestNotBeforeGlobalUsing()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Regular,
+        await VerifyAbsenceAsync(
+            SourceCodeKind.Regular,
             """
-            $$
-            global using Goo;
-            """);
+                $$
+                global using Goo;
+                """
+        );
     }
 
     [Fact(Skip = "https://github.com/dotnet/roslyn/issues/9880")]
     public async Task TestNotBeforeGlobalUsing_Interactive()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Script,
+        await VerifyAbsenceAsync(
+            SourceCodeKind.Script,
             """
-            $$
-            global using Goo;
-            """);
+                $$
+                global using Goo;
+                """
+        );
     }
 
     [Fact]
@@ -252,9 +266,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            [assembly: goo]
-            $$
-            """);
+                [assembly: goo]
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -262,9 +277,10 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            [goo]
-            $$
-            """);
+                [goo]
+                $$
+                """
+        );
     }
 
     [Fact]
@@ -272,10 +288,11 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C {
-              [goo]
-              $$
-            """);
+                class C {
+                  [goo]
+                  $$
+                """
+        );
     }
 
     [Fact]
@@ -283,18 +300,21 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            struct S {
-               $$
-            """);
+                struct S {
+                   $$
+                """
+        );
     }
 
     [Fact]
     public async Task TestInsideInterface()
     {
-        await VerifyKeywordAsync("""
-            interface I {
-               $$
-            """);
+        await VerifyKeywordAsync(
+            """
+                interface I {
+                   $$
+                """
+        );
     }
 
     [Fact]
@@ -302,50 +322,44 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C {
-               $$
-            """);
+                class C {
+                   $$
+                """
+        );
     }
 
     [Fact]
-    public async Task TestNotAfterPartial()
-        => await VerifyAbsenceAsync(@"partial $$");
+    public async Task TestNotAfterPartial() => await VerifyAbsenceAsync(@"partial $$");
 
     [Fact]
-    public async Task TestNotAfterAbstract()
-        => await VerifyAbsenceAsync(@"abstract $$");
+    public async Task TestNotAfterAbstract() => await VerifyAbsenceAsync(@"abstract $$");
 
     [Fact]
     public async Task TestAfterInternal()
     {
-        await VerifyKeywordAsync(
-            @"internal $$");
+        await VerifyKeywordAsync(@"internal $$");
     }
 
     [Fact]
     public async Task TestAfterPublic()
     {
-        await VerifyKeywordAsync(
-            @"public $$");
+        await VerifyKeywordAsync(@"public $$");
     }
 
     [Fact]
     public async Task TestAfterPrivate()
     {
-        await VerifyKeywordAsync(
-            @"private $$");
+        await VerifyKeywordAsync(@"private $$");
     }
 
     [Fact]
     public async Task TestAfterProtected()
     {
-        await VerifyKeywordAsync(
-            @"protected $$");
+        await VerifyKeywordAsync(@"protected $$");
     }
 
     [Fact]
-    public async Task TestNotAfterSealed()
-        => await VerifyAbsenceAsync(@"sealed $$");
+    public async Task TestNotAfterSealed() => await VerifyAbsenceAsync(@"sealed $$");
 
     [Fact]
     public async Task TestAfterStatic()
@@ -370,14 +384,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     }
 
     [Fact]
-    public async Task TestAfterDelegate()
-        => await VerifyKeywordAsync(@"delegate $$");
+    public async Task TestAfterDelegate() => await VerifyKeywordAsync(@"delegate $$");
 
     [Fact]
     public async Task TestDelegateAsArgument()
     {
-        await VerifyKeywordAsync(AddInsideMethod(
-            @"Assert.Throws<InvalidOperationException>($$"));
+        await VerifyKeywordAsync(AddInsideMethod(@"Assert.Throws<InvalidOperationException>($$"));
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -385,10 +397,11 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyAbsenceAsync(
             """
-            class E {
-                const int a = $$
-            }
-            """);
+                class E {
+                    const int a = $$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -396,10 +409,11 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyAbsenceAsync(
             """
-            enum E {
-                a = $$
-            }
-            """);
+                enum E {
+                    a = $$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -407,12 +421,13 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyAbsenceAsync(
             """
-            class E {
-              void Goo() {
-                const int a = $$
-              }
-            }
-            """);
+                class E {
+                  void Goo() {
+                    const int a = $$
+                  }
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -420,79 +435,85 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class E {
-                int a = $$
-            }
-            """);
+                class E {
+                    int a = $$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
     public async Task TestInTypeOf()
     {
-        await VerifyKeywordAsync(AddInsideMethod(
-            @"typeof($$"));
+        await VerifyKeywordAsync(AddInsideMethod(@"typeof($$"));
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
     public async Task TestInDefault()
     {
-        await VerifyKeywordAsync(AddInsideMethod(
-            @"default($$"));
+        await VerifyKeywordAsync(AddInsideMethod(@"default($$"));
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
     public async Task TestInSizeOf()
     {
-        await VerifyKeywordAsync(AddInsideMethod(
-            @"sizeof($$"));
+        await VerifyKeywordAsync(AddInsideMethod(@"sizeof($$"));
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544219")]
     public async Task TestNotInObjectInitializerMemberContext()
     {
-        await VerifyAbsenceAsync("""
-            class C
-            {
-                public int x, y;
-                void M()
+        await VerifyAbsenceAsync(
+            """
+                class C
                 {
-                    var c = new C { x = 2, y = 3, $$
-            """);
+                    public int x, y;
+                    void M()
+                    {
+                        var c = new C { x = 2, y = 3, $$
+                """
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/607197")]
     public async Task TestAfterAsyncInMethodBody()
     {
-        await VerifyKeywordAsync("""
-            using System;
-            class C
-            {
-                void M()
+        await VerifyKeywordAsync(
+            """
+                using System;
+                class C
                 {
-                    Action a = async $$
-            """);
+                    void M()
+                    {
+                        Action a = async $$
+                """
+        );
     }
 
     [Fact]
     public async Task TestAfterAsyncInMemberDeclaration()
     {
-        await VerifyKeywordAsync("""
-            using System;
-            class C
-            {
-                async $$
-            """);
+        await VerifyKeywordAsync(
+            """
+                using System;
+                class C
+                {
+                    async $$
+                """
+        );
     }
 
     [Fact]
     public async Task TestInFunctionPointerTypeList()
     {
-        await VerifyKeywordAsync("""
-            using System;
-            class C
-            {
-                delegate*<$$
-            """);
+        await VerifyKeywordAsync(
+            """
+                using System;
+                class C
+                {
+                    delegate*<$$
+                """
+        );
     }
 
     [Fact]
@@ -504,15 +525,17 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70076")]
     public async Task TestNotInAttribute()
     {
-        await VerifyAbsenceAsync("""
-            class C
-            {
-                [$$]
-                void M()
+        await VerifyAbsenceAsync(
+            """
+                class C
                 {
+                    [$$]
+                    void M()
+                    {
+                    }
                 }
-            }
-            """);
+                """
+        );
     }
 
     #region Collection expressions
@@ -520,10 +543,13 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
     public async Task TestInCollectionExpressions_BeforeFirstElementToVar()
     {
-        await VerifyKeywordAsync(AddInsideMethod(
-            """
-            var x = [$$
-            """));
+        await VerifyKeywordAsync(
+            AddInsideMethod(
+                """
+                    var x = [$$
+                    """
+            )
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -531,20 +557,24 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [$$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [$$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
     public async Task TestInCollectionExpressions_AfterFirstElementToVar()
     {
-        await VerifyKeywordAsync(AddInsideMethod(
-            """
-            var x = [new object(), $$
-            """));
+        await VerifyKeywordAsync(
+            AddInsideMethod(
+                """
+                    var x = [new object(), $$
+                    """
+            )
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -552,11 +582,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [string.Empty, $$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [string.Empty, $$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -564,11 +595,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [.. $$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [.. $$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -576,11 +608,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [string.Empty, .. $$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [string.Empty, .. $$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -588,11 +621,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [($$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [($$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -600,11 +634,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [string.Empty, ($$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [string.Empty, ($$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -612,11 +647,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [.. ($$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [.. ($$
+                }
+                """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -624,11 +660,12 @@ public class DelegateKeywordRecommenderTests : KeywordRecommenderTests
     {
         await VerifyKeywordAsync(
             """
-            class C
-            {
-                IEnumerable<string> M() => [string.Empty, .. ($$
-            }
-            """);
+                class C
+                {
+                    IEnumerable<string> M() => [string.Empty, .. ($$
+                }
+                """
+        );
     }
 
     #endregion

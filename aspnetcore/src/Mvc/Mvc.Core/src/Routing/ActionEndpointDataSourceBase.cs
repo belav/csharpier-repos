@@ -57,7 +57,8 @@ internal abstract class ActionEndpointDataSourceBase : EndpointDataSource, IDisp
             Conventions,
             context.Conventions,
             FinallyConventions,
-            context.FinallyConventions);
+            context.FinallyConventions
+        );
     }
 
     // Will be called with the lock.
@@ -67,7 +68,8 @@ internal abstract class ActionEndpointDataSourceBase : EndpointDataSource, IDisp
         IReadOnlyList<Action<EndpointBuilder>> conventions,
         IReadOnlyList<Action<EndpointBuilder>> groupConventions,
         IReadOnlyList<Action<EndpointBuilder>> finallyConventions,
-        IReadOnlyList<Action<EndpointBuilder>> groupFinallyConventions);
+        IReadOnlyList<Action<EndpointBuilder>> groupFinallyConventions
+    );
 
     protected void Subscribe()
     {
@@ -80,7 +82,8 @@ internal abstract class ActionEndpointDataSourceBase : EndpointDataSource, IDisp
         {
             _disposable = ChangeToken.OnChange(
                 collectionProviderWithChangeToken.GetChangeToken,
-                UpdateEndpoints);
+                UpdateEndpoints
+            );
         }
     }
 
@@ -123,7 +126,8 @@ internal abstract class ActionEndpointDataSourceBase : EndpointDataSource, IDisp
                 conventions: Conventions,
                 groupConventions: Array.Empty<Action<EndpointBuilder>>(),
                 finallyConventions: FinallyConventions,
-                groupFinallyConventions: Array.Empty<Action<EndpointBuilder>>());
+                groupFinallyConventions: Array.Empty<Action<EndpointBuilder>>()
+            );
             // Step 1 - capture old token
             var oldCancellationTokenSource = _cancellationTokenSource;
 

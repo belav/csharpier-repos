@@ -15,66 +15,67 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                class C { }
-                $$
-                """);
+                    class C { }
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                System.Console.WriteLine();
-                $$
-                """);
+                    System.Console.WriteLine();
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
-                int i = 0;
-                $$
-                """);
+                    int i = 0;
+                    $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestAfterExpr()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = goo $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var q = goo $$"));
         }
 
         [Fact]
@@ -82,121 +83,131 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C {
-                    void $$
-                """);
+                    class C {
+                        void $$
+                    """
+            );
         }
 
         [Fact]
         public async Task TestNotInForeach()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"foreach (var v $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"foreach (var v $$"));
         }
 
         [Fact]
         public async Task TestNotInFrom()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from a $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"var q = from a $$"));
         }
 
         [Fact]
         public async Task TestNotInJoin()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var q = from a in b
-                          join x $$
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                        var q = from a in b
+                                  join x $$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterType1()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"int $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"int $$"));
         }
 
         [Fact]
         public async Task TestNotAfterType2()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"Goo $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"Goo $$"));
         }
 
         [Fact]
         public async Task TestNotAfterType3()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"Goo<Bar> $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"Goo<Bar> $$"));
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543041")]
         public async Task TestNotAfterVarInForLoop()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"for (var $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"for (var $$"));
         }
 
         [Fact]
         public async Task TestNotAfterVarInOutArgument()
         {
             var experimentalFeatures = new System.Collections.Generic.Dictionary<string, string>(); // no experimental features to enable
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"M(out var $$"), options: Options.Regular.WithFeatures(experimentalFeatures), scriptOptions: Options.Script.WithFeatures(experimentalFeatures));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(@"M(out var $$"),
+                options: Options.Regular.WithFeatures(experimentalFeatures),
+                scriptOptions: Options.Script.WithFeatures(experimentalFeatures)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestNotBeforeFirstStringHole()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var x = "\{0}$$\{1}\{2}"
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                        var x = "\{0}$$\{1}\{2}"
+                        """
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestNotBetweenStringHoles()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var x = "\{0}\{1}$$\{2}"
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                        var x = "\{0}\{1}$$\{2}"
+                        """
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestNotAfterStringHoles()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var x = "\{0}\{1}\{2}$$"
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                        var x = "\{0}\{1}\{2}$$"
+                        """
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064811")]
         public async Task TestAfterLastStringHole()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var x = ""\{0}\{1}\{2}"" $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var x = ""\{0}\{1}\{2}"" $$"));
         }
 
         [Fact]
         public async Task TestAfterExpression_InMethodWithArrowBody()
         {
-            await VerifyKeywordAsync("""
-                class C
-                {
-                    bool M() => this $$
-                }
-                """);
+            await VerifyKeywordAsync(
+                """
+                    class C
+                    {
+                        bool M() => this $$
+                    }
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/1736")]
         public async Task TestNotWithinNumericLiteral()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var x = .$$0;"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"var x = .$$0;"));
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28586")]
@@ -204,20 +215,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void Goo()
+                    class C
                     {
-                        Bar(async $$
-                    }
+                        void Goo()
+                        {
+                            Bar(async $$
+                        }
 
-                    void Bar(Func<int, string> f)
-                    {
+                        void Bar(Func<int, string> f)
+                        {
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -225,12 +237,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        var v = Console.WriteLine $$
-                """);
+                    class C {
+                        void M() {
+                            var v = Console.WriteLine $$
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -238,12 +251,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        Action a = delegate { } $$
-                """);
+                    class C {
+                        void M() {
+                            Action a = delegate { } $$
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -251,12 +265,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        Action b = (() => 0) $$
-                """);
+                    class C {
+                        void M() {
+                            Action b = (() => 0) $$
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -264,12 +279,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                using System;
+                    using System;
 
-                class C {
-                    void M() {
-                        Action b = () => {} $$
-                """);
+                    class C {
+                        void M() {
+                            Action b = () => {} $$
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -277,14 +293,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = 1$$
+                        void M()
+                        {
+                            var x = 1$$
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -292,14 +309,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = 1.$$
+                        void M()
+                        {
+                            var x = 1.$$
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -307,14 +325,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var x = 1. $$
+                        void M()
+                        {
+                            var x = 1. $$
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31367")]
@@ -322,22 +341,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                class A
-                {
-
-                }
-
-                class C
-                {
-                    void M(object o)
+                    class A
                     {
-                        switch (o)
+
+                    }
+
+                    class C
+                    {
+                        void M(object o)
                         {
-                            case A $$
+                            switch (o)
+                            {
+                                case A $$
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31367")]
@@ -345,25 +365,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             await VerifyAbsenceAsync(
                 """
-                namespace N
-                {
-                    class A
+                    namespace N
                     {
-
-                    }
-                }
-
-                class C
-                {
-                    void M(object o)
-                    {
-                        switch (o)
+                        class A
                         {
-                            case N.A $$
+
                         }
                     }
-                }
-                """);
+
+                    class C
+                    {
+                        void M(object o)
+                        {
+                            switch (o)
+                            {
+                                case N.A $$
+                            }
+                        }
+                    }
+                    """
+            );
         }
     }
 }

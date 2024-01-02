@@ -3,8 +3,10 @@
 // </copyright>
 using System;
 
-namespace System.Runtime.Caching {
-    internal enum PerfCounterName {
+namespace System.Runtime.Caching
+{
+    internal enum PerfCounterName
+    {
         Entries = 0,
         Hits,
         HitRatio,

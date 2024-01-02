@@ -11,11 +11,13 @@ public class BearerTokenEvents
     /// <summary>
     /// Invoked when a protocol message is first received.
     /// </summary>
-    public Func<MessageReceivedContext, Task> OnMessageReceived { get; set; } = context => Task.CompletedTask;
+    public Func<MessageReceivedContext, Task> OnMessageReceived { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked when a protocol message is first received.
     /// </summary>
     /// <param name="context">The <see cref="MessageReceivedContext"/>.</param>
-    public virtual Task MessageReceivedAsync(MessageReceivedContext context) => OnMessageReceived(context);
+    public virtual Task MessageReceivedAsync(MessageReceivedContext context) =>
+        OnMessageReceived(context);
 }

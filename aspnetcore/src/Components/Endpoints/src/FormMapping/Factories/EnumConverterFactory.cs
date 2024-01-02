@@ -20,6 +20,7 @@ internal class EnumConverterFactory : IFormDataConverterFactory
             throw new InvalidOperationException($"Cannot create converter for type '{type}'.");
         }
 
-        return (FormDataConverter)Activator.CreateInstance(typeof(EnumConverter<>).MakeGenericType(type))!;
+        return (FormDataConverter)
+            Activator.CreateInstance(typeof(EnumConverter<>).MakeGenericType(type))!;
     }
 }

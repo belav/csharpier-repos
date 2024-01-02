@@ -16,37 +16,41 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
-    public class PassInCapturedVariablesAsArgumentsCodeFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class PassInCapturedVariablesAsArgumentsCodeFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public PassInCapturedVariablesAsArgumentsCodeFixProviderTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new PassInCapturedVariablesAsArgumentsCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new PassInCapturedVariablesAsArgumentsCodeFixProvider());
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
-        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp72ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp8ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
 
         [Fact]
         public async Task TestMissingInCSharp7()
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        return AddLocal();
-
-                        static int AddLocal()
+                        int N(int x)
                         {
-                            return [||]x + 1;
-                        }        
+                            return AddLocal();
+
+                            static int AddLocal()
+                            {
+                                return [||]x + 1;
+                            }        
+                        }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharp72ParseOptions));
+                    """,
+                parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact]
@@ -54,19 +58,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestMissingAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        return AddLocal();
-
-                        int AddLocal()
+                        int N(int x)
                         {
-                            return [||]x + 1;
-                        }        
+                            return AddLocal();
+
+                            int AddLocal()
+                            {
+                                return [||]x + 1;
+                            }        
+                        }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                    """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38734")]
@@ -74,37 +80,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int y = 0;
-
-                    int N(int x)
+                    class C
                     {
-                        return AddLocal();
+                        int y = 0;
 
-                        static int AddLocal()
+                        int N(int x)
                         {
-                            return [||]x + y;
+                            return AddLocal();
+
+                            static int AddLocal()
+                            {
+                                return [||]x + y;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int y = 0;
-
-                    int N(int x)
+                    class C
                     {
-                        return AddLocal(this, x);
+                        int y = 0;
 
-                        static int AddLocal(C @this, int x)
+                        int N(int x)
                         {
-                            return x + @this.y;
+                            return AddLocal(this, x);
+
+                            static int AddLocal(C @this, int x)
+                            {
+                                return x + @this.y;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -112,34 +120,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        return AddLocal();
-
-                        static int AddLocal()
+                        int N(int x)
                         {
-                            return [||]x + 1;
-                        }
-                    }  
-                }
-                """,
+                            return AddLocal();
+
+                            static int AddLocal()
+                            {
+                                return [||]x + 1;
+                            }
+                        }  
+                    }
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        return AddLocal(x);
-
-                        static int AddLocal(int x)
+                        int N(int x)
                         {
-                            return x + 1;
-                        }
-                    }  
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+                            return AddLocal(x);
+
+                            static int AddLocal(int x)
+                            {
+                                return x + 1;
+                            }
+                        }  
+                    }
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -147,35 +156,37 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        return AddLocal();
-
-                        static int AddLocal()
+                        int N(int x)
                         {
-                            return x + [||]y;
+                            int y = 10;
+                            return AddLocal();
+
+                            static int AddLocal()
+                            {
+                                return x + [||]y;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        return AddLocal(x, y);
-
-                        static int AddLocal(int x, int y)
+                        int N(int x)
                         {
-                            return x + y;
+                            int y = 10;
+                            return AddLocal(x, y);
+
+                            static int AddLocal(int x, int y)
+                            {
+                                return x + y;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -183,36 +194,37 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        return AddLocal() + AddLocal();
-
-                        static int AddLocal()
+                        int N(int x)
                         {
-                            return [||]x + y;
+                            int y = 10;
+                            return AddLocal() + AddLocal();
+
+                            static int AddLocal()
+                            {
+                                return [||]x + y;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        return AddLocal(x, y) + AddLocal(x, y);
-
-                        static int AddLocal(int x, int y)
+                        int N(int x)
                         {
-                            return x + y;
+                            int y = 10;
+                            return AddLocal(x, y) + AddLocal(x, y);
+
+                            static int AddLocal(int x, int y)
+                            {
+                                return x + y;
+                            }
                         }
                     }
-                }
-                """
-, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -220,38 +232,39 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, 2);
-                        return AddLocal(m, m);
-
-                        static int AddLocal(int a, int b)
+                        int N(int x)
                         {
-                            return a + b + [||]x + y;
+                            int y = 10;
+                            var m = AddLocal(1, 2);
+                            return AddLocal(m, m);
+
+                            static int AddLocal(int a, int b)
+                            {
+                                return a + b + [||]x + y;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, 2, x, y);
-                        return AddLocal(m, m, x, y);
-
-                        static int AddLocal(int a, int b, int x, int y)
+                        int N(int x)
                         {
-                            return a + b + x + y;
+                            int y = 10;
+                            var m = AddLocal(1, 2, x, y);
+                            return AddLocal(m, m, x, y);
+
+                            static int AddLocal(int a, int b, int x, int y)
+                            {
+                                return a + b + x + y;
+                            }
                         }
                     }
-                }
-                """
-, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -259,37 +272,39 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, 2);
-                        return AddLocal(m, m);
-
-                        static int AddLocal(int a, int b)
+                        int N(int x)
                         {
-                            return AddLocal(a, b) + [||]x + y;
+                            int y = 10;
+                            var m = AddLocal(1, 2);
+                            return AddLocal(m, m);
+
+                            static int AddLocal(int a, int b)
+                            {
+                                return AddLocal(a, b) + [||]x + y;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, 2, x, y);
-                        return AddLocal(m, m, x, y);
-
-                        static int AddLocal(int a, int b, int x, int y)
+                        int N(int x)
                         {
-                            return AddLocal(a, b, x, y) + x + y;
+                            int y = 10;
+                            var m = AddLocal(1, 2, x, y);
+                            return AddLocal(m, m, x, y);
+
+                            static int AddLocal(int a, int b, int x, int y)
+                            {
+                                return AddLocal(a, b, x, y) + x + y;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -297,35 +312,37 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        return AddLocal(AddLocal(1, 2), AddLocal(3, 4));
-
-                        static int AddLocal(int a, int b)
+                        int N(int x)
                         {
-                            return AddLocal(a, b) + [||]x + y;
+                            int y = 10;
+                            return AddLocal(AddLocal(1, 2), AddLocal(3, 4));
+
+                            static int AddLocal(int a, int b)
+                            {
+                                return AddLocal(a, b) + [||]x + y;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        return AddLocal(AddLocal(1, 2, x, y), AddLocal(3, 4, x, y), x, y);
-
-                        static int AddLocal(int a, int b, int x, int y)
+                        int N(int x)
                         {
-                            return AddLocal(a, b, x, y) + x + y;
+                            int y = 10;
+                            return AddLocal(AddLocal(1, 2, x, y), AddLocal(3, 4, x, y), x, y);
+
+                            static int AddLocal(int a, int b, int x, int y)
+                            {
+                                return AddLocal(a, b, x, y) + x + y;
+                            }
                         }
                     }
-                }
-                """, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -333,38 +350,39 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, b: 2);
-                        return AddLocal(b: m, a: m);
-
-                        static int AddLocal(int a, int b)
+                        int N(int x)
                         {
-                            return a + b + [||]x + y;
+                            int y = 10;
+                            var m = AddLocal(1, b: 2);
+                            return AddLocal(b: m, a: m);
+
+                            static int AddLocal(int a, int b)
+                            {
+                                return a + b + [||]x + y;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, b: 2, x: x, y: y);
-                        return AddLocal(b: m, a: m, x: x, y: y);
-
-                        static int AddLocal(int a, int b, int x, int y)
+                        int N(int x)
                         {
-                            return a + b + x + y;
+                            int y = 10;
+                            var m = AddLocal(1, b: 2, x: x, y: y);
+                            return AddLocal(b: m, a: m, x: x, y: y);
+
+                            static int AddLocal(int a, int b, int x, int y)
+                            {
+                                return a + b + x + y;
+                            }
                         }
                     }
-                }
-                """
-, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -372,38 +390,39 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        string y = ";
-                        var m = AddLocal(1);
-                        return AddLocal(b: m);
-
-                        static int AddLocal(int a = 0, int b = 0)
+                        int N(int x)
                         {
-                            return a + b + x + [||]y.Length;
+                            string y = ";
+                            var m = AddLocal(1);
+                            return AddLocal(b: m);
+
+                            static int AddLocal(int a = 0, int b = 0)
+                            {
+                                return a + b + x + [||]y.Length;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        string y = ";
-                        var m = AddLocal(1, x: x, y: y);
-                        return AddLocal(b: m, x: x, y: y);
-
-                        static int AddLocal(int a = 0, int b = 0, int x = 0, string y = null)
+                        int N(int x)
                         {
-                            return a + b + x + y.Length;
+                            string y = ";
+                            var m = AddLocal(1, x: x, y: y);
+                            return AddLocal(b: m, x: x, y: y);
+
+                            static int AddLocal(int a = 0, int b = 0, int x = 0, string y = null)
+                            {
+                                return a + b + x + y.Length;
+                            }
                         }
                     }
-                }
-                """
-, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -411,34 +430,35 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    void N(int x)
+                    class C
                     {
-                        Func<int> del = AddLocal;
-
-                        static int AddLocal()
+                        void N(int x)
                         {
-                            return [||]x + 1;
-                        }
-                    }  
-                }
-                """,
+                            Func<int> del = AddLocal;
+
+                            static int AddLocal()
+                            {
+                                return [||]x + 1;
+                            }
+                        }  
+                    }
+                    """,
                 """
-                class C
-                {
-                    void N(int x)
+                    class C
                     {
-                        Func<int> del = AddLocal;
-
-                        {|Warning:static int AddLocal(int x)
+                        void N(int x)
                         {
-                            return x + 1;
-                        }|}
-                    }  
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+                            Func<int> del = AddLocal;
+
+                            {|Warning:static int AddLocal(int x)
+                            {
+                                return x + 1;
+                            }|}
+                        }  
+                    }
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -446,36 +466,37 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int Static = 0;
-                        return AddLocal();
-
-                        static int AddLocal()
+                        int N(int x)
                         {
-                            return [||]Static + 1;
-                        }
-                    }  
-                }
-                """,
+                            int Static = 0;
+                            return AddLocal();
+
+                            static int AddLocal()
+                            {
+                                return [||]Static + 1;
+                            }
+                        }  
+                    }
+                    """,
                 """
-                class C
-                {
-                    int N(int x)
+                    class C
                     {
-                        int Static = 0;
-                        return AddLocal(Static);
-
-                        static int AddLocal(int @static)
+                        int N(int x)
                         {
-                            return @static + 1;
-                        }
-                    }  
-                }
-                """,
-parseOptions: CSharp8ParseOptions);
+                            int Static = 0;
+                            return AddLocal(Static);
+
+                            static int AddLocal(int @static)
+                            {
+                                return @static + 1;
+                            }
+                        }  
+                    }
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -483,60 +504,61 @@ parseOptions: CSharp8ParseOptions);
         {
             await TestInRegularAndScriptAsync(
                 """
-                class C
-                {
-                    int M(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, 2);
-                        return AddLocal(m, m);
-
-                        static int AddLocal(int a, int b)
+                        int M(int x)
                         {
-                            return a + b + x + y;
+                            int y = 10;
+                            var m = AddLocal(1, 2);
+                            return AddLocal(m, m);
+
+                            static int AddLocal(int a, int b)
+                            {
+                                return a + b + x + y;
+                            }
+                        }
+
+                        int N(int x)
+                        {
+                            int y = 10;
+                            return AddLocal(AddLocal(1, 2), AddLocal(3, 4));
+
+                            static int AddLocal(int a, int b)
+                            {
+                                return AddLocal(a, b) + {|FixAllInDocument:|}x + y;
+                            }
                         }
                     }
-
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal(AddLocal(1, 2), AddLocal(3, 4));
-
-                        static int AddLocal(int a, int b)
-                        {
-                            return AddLocal(a, b) + {|FixAllInDocument:|}x + y;
-                        }
-                    }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    int M(int x)
+                    class C
                     {
-                        int y = 10;
-                        var m = AddLocal(1, 2, x, y);
-                        return AddLocal(m, m, x, y);
-
-                        static int AddLocal(int a, int b, int x, int y)
+                        int M(int x)
                         {
-                            return a + b + x + y;
+                            int y = 10;
+                            var m = AddLocal(1, 2, x, y);
+                            return AddLocal(m, m, x, y);
+
+                            static int AddLocal(int a, int b, int x, int y)
+                            {
+                                return a + b + x + y;
+                            }
+                        }
+
+                        int N(int x)
+                        {
+                            int y = 10;
+                            return AddLocal(AddLocal(1, 2, x, y), AddLocal(3, 4, x, y), x, y);
+
+                            static int AddLocal(int a, int b, int x, int y)
+                            {
+                                return AddLocal(a, b, x, y) + x + y;
+                            }
                         }
                     }
-
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal(AddLocal(1, 2, x, y), AddLocal(3, 4, x, y), x, y);
-
-                        static int AddLocal(int a, int b, int x, int y)
-                        {
-                            return AddLocal(a, b, x, y) + x + y;
-                        }
-                    }
-                }
-                """, parseOptions: CSharp8ParseOptions);
+                    """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
     }
 }
-

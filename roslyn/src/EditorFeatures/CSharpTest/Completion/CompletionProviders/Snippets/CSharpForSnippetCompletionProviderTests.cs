@@ -10,257 +10,294 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpForSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpForSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "for";
 
         [WpfFact]
         public async Task InsertForSnippetInMethodTest()
         {
-            await VerifyCustomCommitProviderAsync("""
-                class Program
-                {
-                    public void Method()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    class Program
                     {
-                        $$
-                    }
-                }
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method()
-                    {
-                        for (int i = 0; i < length; i++)
+                        public void Method()
                         {
                             $$
                         }
                     }
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            for (int i = 0; i < length; i++)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task InsertForSnippetInMethodUsedIncrementorTest()
         {
-            await VerifyCustomCommitProviderAsync("""
-                class Program
-                {
-                    public void Method()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    class Program
                     {
-                        int i;
-                        $$
-                    }
-                }
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method()
-                    {
-                        int i;
-                        for (int j = 0; j < length; j++)
+                        public void Method()
                         {
+                            int i;
                             $$
                         }
                     }
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            int i;
+                            for (int j = 0; j < length; j++)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task InsertForSnippetInMethodUsedIncrementorsTest()
         {
-            await VerifyCustomCommitProviderAsync("""
-                class Program
-                {
-                    public void Method()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    class Program
                     {
-                        int i, j, k;
-                        $$
-                    }
-                }
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method()
-                    {
-                        int i, j, k;
-                        for (int i1 = 0; i1 < length; i1++)
+                        public void Method()
                         {
+                            int i, j, k;
                             $$
                         }
                     }
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            int i, j, k;
+                            for (int i1 = 0; i1 < length; i1++)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task InsertForSnippetInGlobalContextTest()
         {
-            await VerifyCustomCommitProviderAsync("""
-                $$
-                """, ItemToCommit, """
-                for (int i = 0; i < length; i++)
-                {
+            await VerifyCustomCommitProviderAsync(
+                """
                     $$
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    for (int i = 0; i < length; i++)
+                    {
+                        $$
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task InsertForSnippetInConstructorTest()
         {
-            await VerifyCustomCommitProviderAsync("""
-                class Program
-                {
-                    public Program()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    class Program
                     {
-                        $$
-                    }
-                }
-                """, ItemToCommit, """
-                class Program
-                {
-                    public Program()
-                    {
-                        for (int i = 0; i < length; i++)
+                        public Program()
                         {
                             $$
                         }
                     }
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public Program()
+                        {
+                            for (int i = 0; i < length; i++)
+                            {
+                                $$
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task InsertForSnippetInLocalFunctionTest()
         {
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
-            await VerifyCustomCommitProviderAsync("""
-                class Program
-                {
-                    public void Method()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    class Program
                     {
-                        void LocalFunction()
+                        public void Method()
                         {
-                            $$
-                        }
-                    }
-                }
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method()
-                    {
-                        void LocalFunction()
-                        {
-                            for (global::System.Int32 i = 0; i < length; i++)
+                            void LocalFunction()
                             {
                                 $$
                             }
                         }
                     }
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            void LocalFunction()
+                            {
+                                for (global::System.Int32 i = 0; i < length; i++)
+                                {
+                                    $$
+                                }
+                            }
+                        }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task InsertForSnippetInAnonymousFunctionTest()
         {
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
-            await VerifyCustomCommitProviderAsync("""
-                class Program
-                {
-                    public void Method()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    class Program
                     {
-                        var action = delegate()
+                        public void Method()
                         {
-                            $$
-                        };
-                    }
-                }
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method()
-                    {
-                        var action = delegate()
-                        {
-                            for (global::System.Int32 i = 0; i < length; i++)
+                            var action = delegate()
                             {
                                 $$
-                            }
-                        };
+                            };
+                        }
                     }
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            var action = delegate()
+                            {
+                                for (global::System.Int32 i = 0; i < length; i++)
+                                {
+                                    $$
+                                }
+                            };
+                        }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task InsertForSnippetInParenthesizedLambdaExpressionTest()
         {
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
-            await VerifyCustomCommitProviderAsync("""
-                class Program
-                {
-                    public void Method()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    class Program
                     {
-                        var action = () =>
+                        public void Method()
                         {
-                            $$
-                        };
-                    }
-                }
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method()
-                    {
-                        var action = () =>
-                        {
-                            for (global::System.Int32 i = 0; i < length; i++)
+                            var action = () =>
                             {
                                 $$
-                            }
-                        };
+                            };
+                        }
                     }
-                }
-                """);
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            var action = () =>
+                            {
+                                for (global::System.Int32 i = 0; i < length; i++)
+                                {
+                                    $$
+                                }
+                            };
+                        }
+                    }
+                    """
+            );
         }
 
         [WpfFact]
         public async Task ProduceVarWithSpecificCodeStyleTest()
         {
-            await VerifyCustomCommitProviderAsync("""
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath="/0/Test0.cs">class Program
-                {
-                    public void Method()
+            await VerifyCustomCommitProviderAsync(
+                """
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath="/0/Test0.cs">class Program
                     {
-                        $$
-                    }
-                }</Document>
-                <AnalyzerConfigDocument FilePath="/.editorconfig">
-                root = true
-
-                [*]
-                # IDE0008: Use explicit type
-                csharp_style_var_for_built_in_types = true
-                    </AnalyzerConfigDocument>
-                    </Project>
-                </Workspace>
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method()
-                    {
-                        for (var i = 0; i < length; i++)
+                        public void Method()
                         {
                             $$
                         }
+                    }</Document>
+                    <AnalyzerConfigDocument FilePath="/.editorconfig">
+                    root = true
+
+                    [*]
+                    # IDE0008: Use explicit type
+                    csharp_style_var_for_built_in_types = true
+                        </AnalyzerConfigDocument>
+                        </Project>
+                    </Workspace>
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method()
+                        {
+                            for (var i = 0; i < length; i++)
+                            {
+                                $$
+                            }
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [WpfTheory]
@@ -276,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("nuint")]
         public async Task InsertInlineForSnippetInMethodTest(string inlineExpressionType)
         {
-            await VerifyCustomCommitProviderAsync($$"""
+            await VerifyCustomCommitProviderAsync(
+                $$"""
                 class Program
                 {
                     public void Method({{inlineExpressionType}} l)
@@ -284,7 +322,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         l.$$
                     }
                 }
-                """, ItemToCommit, $$"""
+                """,
+                ItemToCommit,
+                $$"""
                 class Program
                 {
                     public void Method({{inlineExpressionType}} l)
@@ -295,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory]
@@ -311,23 +352,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("nuint")]
         public async Task InsertInlineForSnippetInGlobalContextTest(string inlineExpressionType)
         {
-            await VerifyCustomCommitProviderAsync($$"""
+            await VerifyCustomCommitProviderAsync(
+                $$"""
                 {{inlineExpressionType}} l;
                 l.$$
-                """, ItemToCommit, $$"""
+                """,
+                ItemToCommit,
+                $$"""
                 {{inlineExpressionType}} l;
                 for ({{inlineExpressionType}} i = 0; i < l; i++)
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory]
         [InlineData("string")]
         [InlineData("System.DateTime")]
         [InlineData("System.Action")]
-        public async Task NoInlineForSnippetForIncorrectTypeInMethodTest(string inlineExpressionType)
+        public async Task NoInlineForSnippetForIncorrectTypeInMethodTest(
+            string inlineExpressionType
+        )
         {
             var markup = $$"""
                 class Program
@@ -346,7 +393,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("string")]
         [InlineData("System.DateTime")]
         [InlineData("System.Action")]
-        public async Task NoInlineForSnippetForIncorrectTypeInGlobalContextTest(string inlineExpressionType)
+        public async Task NoInlineForSnippetForIncorrectTypeInGlobalContextTest(
+            string inlineExpressionType
+        )
         {
             var markup = $$"""
                 {{inlineExpressionType}} l;
@@ -359,37 +408,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task ProduceVarWithSpecificCodeStyleForInlineSnippetTest()
         {
-            await VerifyCustomCommitProviderAsync("""
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath="/0/Test0.cs">class Program
-                {
-                    public void Method(int l)
+            await VerifyCustomCommitProviderAsync(
+                """
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <Document FilePath="/0/Test0.cs">class Program
                     {
-                        l.$$
-                    }
-                }</Document>
-                <AnalyzerConfigDocument FilePath="/.editorconfig">
-                root = true
-
-                [*]
-                # IDE0008: Use explicit type
-                csharp_style_var_for_built_in_types = true
-                    </AnalyzerConfigDocument>
-                    </Project>
-                </Workspace>
-                """, ItemToCommit, """
-                class Program
-                {
-                    public void Method(int l)
-                    {
-                        for (var i = 0; i < l; i++)
+                        public void Method(int l)
                         {
-                            $$
+                            l.$$
+                        }
+                    }</Document>
+                    <AnalyzerConfigDocument FilePath="/.editorconfig">
+                    root = true
+
+                    [*]
+                    # IDE0008: Use explicit type
+                    csharp_style_var_for_built_in_types = true
+                        </AnalyzerConfigDocument>
+                        </Project>
+                    </Workspace>
+                    """,
+                ItemToCommit,
+                """
+                    class Program
+                    {
+                        public void Method(int l)
+                        {
+                            for (var i = 0; i < l; i++)
+                            {
+                                $$
+                            }
                         }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [WpfFact]
@@ -439,7 +492,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -473,13 +530,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
         [InlineData("// comment")]
         [InlineData("/* comment */")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -494,7 +557,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -502,7 +569,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("#if true")]
         [InlineData("#pragma warning disable CS0108")]
         [InlineData("#nullable enable")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -518,7 +587,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

@@ -16,10 +16,22 @@ namespace MS.Internal.Xml.XPath
             _prefix = prefix;
         }
 
-        public override AstType Type { get { return AstType.Variable; } }
-        public override XPathResultType ReturnType { get { return XPathResultType.Any; } }
+        public override AstType Type
+        {
+            get { return AstType.Variable; }
+        }
+        public override XPathResultType ReturnType
+        {
+            get { return XPathResultType.Any; }
+        }
 
-        public string Localname { get { return _localname; } }
-        public string Prefix { get { return _prefix; } }
+        public string Localname
+        {
+            get { return _localname; }
+        }
+        public string Prefix
+        {
+            get { return _prefix; }
+        }
     }
 }

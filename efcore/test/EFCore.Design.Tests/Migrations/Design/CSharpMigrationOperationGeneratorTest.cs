@@ -19,14 +19,23 @@ public class CSharpMigrationOperationGeneratorTest
                 new CSharpHelper(
                     new SqlServerTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()))));
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                    )
+                )
+            )
+        );
 
         var builder = new IndentedStringBuilder();
 
         generator.Generate(
             "mb",
-            new[] { new SqlOperation { Sql = "-- Don't stand so" }, new SqlOperation { Sql = "-- close to me" } },
-            builder);
+            new[]
+            {
+                new SqlOperation { Sql = "-- Don't stand so" },
+                new SqlOperation { Sql = "-- close to me" }
+            },
+            builder
+        );
 
         Assert.Equal(
             """
@@ -34,12 +43,14 @@ mb.Sql("-- Don't stand so");
 
 mb.Sql("-- close to me");
 """,
-            builder.ToString(), ignoreLineEndingDifferences: true);
+            builder.ToString(),
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
-    public void AddColumnOperation_required_args()
-        => Test(
+    public void AddColumnOperation_required_args() =>
+        Test(
             new AddColumnOperation
             {
                 Name = "Id",
@@ -57,11 +68,12 @@ mb.AddColumn<int>(
                 Assert.Equal("Id", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(typeof(int), o.ClrType);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddColumnOperation_all_args()
-        => Test(
+    public void AddColumnOperation_all_args() =>
+        Test(
             new AddColumnOperation
             {
                 Name = "Id",
@@ -110,11 +122,12 @@ mb.AddColumn<int>(
                 Assert.True(o.IsFixedLength);
                 Assert.Equal("My Comment", o.Comment);
                 Assert.Equal("Some Collation", o.Collation);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddColumnOperation_DefaultValueSql()
-        => Test(
+    public void AddColumnOperation_DefaultValueSql() =>
+        Test(
             new AddColumnOperation
             {
                 Name = "Id",
@@ -135,11 +148,12 @@ mb.AddColumn<int>(
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(typeof(int), o.ClrType);
                 Assert.Equal("1", o.DefaultValueSql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddColumnOperation_ComputedExpression()
-        => Test(
+    public void AddColumnOperation_ComputedExpression() =>
+        Test(
             new AddColumnOperation
             {
                 Name = "Id",
@@ -163,11 +177,12 @@ mb.AddColumn<int>(
                 Assert.Equal(typeof(int), o.ClrType);
                 Assert.Equal("1", o.ComputedColumnSql);
                 Assert.True(o.IsStored);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddForeignKeyOperation_required_args()
-        => Test(
+    public void AddForeignKeyOperation_required_args() =>
+        Test(
             new AddForeignKeyOperation
             {
                 Name = "FK_Post_Blog_BlogId",
@@ -189,11 +204,12 @@ mb.AddForeignKey(
                 Assert.Equal(new[] { "BlogId" }, o.Columns);
                 Assert.Equal("Blog", o.PrincipalTable);
                 Assert.Null(o.PrincipalColumns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddForeignKeyOperation_required_args_composite()
-        => Test(
+    public void AddForeignKeyOperation_required_args_composite() =>
+        Test(
             new AddForeignKeyOperation
             {
                 Name = "FK_Post_Blog_BlogId1_BlogId2",
@@ -215,11 +231,12 @@ mb.AddForeignKey(
                 Assert.Equal(new[] { "BlogId1", "BlogId2" }, o.Columns);
                 Assert.Equal("Blog", o.PrincipalTable);
                 Assert.Null(o.PrincipalColumns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddForeignKeyOperation_all_args()
-        => Test(
+    public void AddForeignKeyOperation_all_args() =>
+        Test(
             new AddForeignKeyOperation
             {
                 Name = "FK_Post_Blog_BlogId",
@@ -255,11 +272,12 @@ mb.AddForeignKey(
                 Assert.Equal(new[] { "Id" }, o.PrincipalColumns);
                 Assert.Equal(ReferentialAction.Restrict, o.OnUpdate);
                 Assert.Equal(ReferentialAction.Cascade, o.OnDelete);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddForeignKeyOperation_all_args_composite()
-        => Test(
+    public void AddForeignKeyOperation_all_args_composite() =>
+        Test(
             new AddForeignKeyOperation
             {
                 Name = "FK_Post_Blog_BlogId1_BlogId2",
@@ -295,11 +313,12 @@ mb.AddForeignKey(
                 Assert.Equal(new[] { "Id1", "Id2" }, o.PrincipalColumns);
                 Assert.Equal(ReferentialAction.Restrict, o.OnUpdate);
                 Assert.Equal(ReferentialAction.Cascade, o.OnDelete);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddPrimaryKey_required_args()
-        => Test(
+    public void AddPrimaryKey_required_args() =>
+        Test(
             new AddPrimaryKeyOperation
             {
                 Name = "PK_Post",
@@ -317,11 +336,12 @@ mb.AddPrimaryKey(
                 Assert.Equal("PK_Post", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(new[] { "Id" }, o.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddPrimaryKey_all_args()
-        => Test(
+    public void AddPrimaryKey_all_args() =>
+        Test(
             new AddPrimaryKeyOperation
             {
                 Name = "PK_Post",
@@ -342,11 +362,12 @@ mb.AddPrimaryKey(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(new[] { "Id" }, o.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddPrimaryKey_composite()
-        => Test(
+    public void AddPrimaryKey_composite() =>
+        Test(
             new AddPrimaryKeyOperation
             {
                 Name = "PK_Post",
@@ -364,11 +385,12 @@ mb.AddPrimaryKey(
                 Assert.Equal("PK_Post", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(new[] { "Id1", "Id2" }, o.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddUniqueConstraint_required_args()
-        => Test(
+    public void AddUniqueConstraint_required_args() =>
+        Test(
             new AddUniqueConstraintOperation
             {
                 Name = "AK_Post_AltId",
@@ -386,11 +408,12 @@ mb.AddUniqueConstraint(
                 Assert.Equal("AK_Post_AltId", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(new[] { "AltId" }, o.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddUniqueConstraint_all_args()
-        => Test(
+    public void AddUniqueConstraint_all_args() =>
+        Test(
             new AddUniqueConstraintOperation
             {
                 Name = "AK_Post_AltId",
@@ -411,11 +434,12 @@ mb.AddUniqueConstraint(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(new[] { "AltId" }, o.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddUniqueConstraint_composite()
-        => Test(
+    public void AddUniqueConstraint_composite() =>
+        Test(
             new AddUniqueConstraintOperation
             {
                 Name = "AK_Post_AltId1_AltId2",
@@ -433,11 +457,12 @@ mb.AddUniqueConstraint(
                 Assert.Equal("AK_Post_AltId1_AltId2", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(new[] { "AltId1", "AltId2" }, o.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddCheckConstraint_required_args()
-        => Test(
+    public void AddCheckConstraint_required_args() =>
+        Test(
             new AddCheckConstraintOperation
             {
                 Name = "CK_Post_AltId1_AltId2",
@@ -455,11 +480,12 @@ mb.AddCheckConstraint(
                 Assert.Equal("CK_Post_AltId1_AltId2", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal("AltId1 > AltId2", o.Sql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AddCheckConstraint_all_args()
-        => Test(
+    public void AddCheckConstraint_all_args() =>
+        Test(
             new AddCheckConstraintOperation
             {
                 Name = "CK_Post_AltId1_AltId2",
@@ -480,11 +506,12 @@ mb.AddCheckConstraint(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal("AltId1 > AltId2", o.Sql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterColumnOperation_required_args()
-        => Test(
+    public void AlterColumnOperation_required_args() =>
+        Test(
             new AlterColumnOperation
             {
                 Name = "Id",
@@ -529,11 +556,12 @@ mb.AlterColumn<int>(
                 Assert.Null(o.OldColumn.ComputedColumnSql);
                 Assert.Null(o.OldColumn.Comment);
                 Assert.Null(o.OldColumn.Collation);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterColumnOperation_all_args()
-        => Test(
+    public void AlterColumnOperation_all_args() =>
+        Test(
             new AlterColumnOperation
             {
                 Name = "Id",
@@ -629,11 +657,12 @@ mb.AlterColumn<int>(
                 Assert.Null(o.OldColumn.ComputedColumnSql);
                 Assert.Equal("My Comment", o.OldColumn.Comment);
                 Assert.Equal("Some Collation", o.OldColumn.Collation);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterColumnOperation_DefaultValueSql()
-        => Test(
+    public void AlterColumnOperation_DefaultValueSql() =>
+        Test(
             new AlterColumnOperation
             {
                 Name = "Id",
@@ -672,11 +701,12 @@ mb.AlterColumn<int>(
                 Assert.Null(o.OldColumn.DefaultValue);
                 Assert.Null(o.OldColumn.DefaultValueSql);
                 Assert.Null(o.OldColumn.ComputedColumnSql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterColumnOperation_computedColumnSql()
-        => Test(
+    public void AlterColumnOperation_computedColumnSql() =>
+        Test(
             new AlterColumnOperation
             {
                 Name = "Id",
@@ -721,11 +751,12 @@ mb.AlterColumn<int>(
                 Assert.Null(o.OldColumn.DefaultValueSql);
                 Assert.Null(o.OldColumn.ComputedColumnSql);
                 Assert.Null(o.OldColumn.IsStored);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterDatabaseOperation()
-        => Test(
+    public void AlterDatabaseOperation() =>
+        Test(
             new AlterDatabaseOperation
             {
                 Collation = "Some collation",
@@ -745,11 +776,12 @@ mb.AlterDatabase(
                 Assert.Equal("Some other collation", o.OldDatabase.Collation);
                 Assert.Equal("bar", o["foo"]);
                 Assert.Equal("foo", o.OldDatabase["bar"]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterDatabaseOperation_with_default_old_collation()
-        => Test(
+    public void AlterDatabaseOperation_with_default_old_collation() =>
+        Test(
             new AlterDatabaseOperation { Collation = "Some collation" },
             """
 mb.AlterDatabase(
@@ -759,11 +791,12 @@ mb.AlterDatabase(
             {
                 Assert.Equal("Some collation", o.Collation);
                 Assert.Null(o.OldDatabase.Collation);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterDatabaseOperation_with_default_new_collation()
-        => Test(
+    public void AlterDatabaseOperation_with_default_new_collation() =>
+        Test(
             new AlterDatabaseOperation { OldDatabase = { Collation = "Some collation" } },
             """
 mb.AlterDatabase(
@@ -773,11 +806,12 @@ mb.AlterDatabase(
             {
                 Assert.Null(o.Collation);
                 Assert.Equal("Some collation", o.OldDatabase.Collation);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterSequenceOperation_required_args()
-        => Test(
+    public void AlterSequenceOperation_required_args() =>
+        Test(
             new AlterSequenceOperation { Name = "EntityFrameworkHiLoSequence" },
             """
 mb.AlterSequence(
@@ -795,11 +829,12 @@ mb.AlterSequence(
                 Assert.Null(o.OldSequence.MinValue);
                 Assert.Null(o.OldSequence.MaxValue);
                 Assert.False(o.OldSequence.IsCyclic);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterSequenceOperation_all_args()
-        => Test(
+    public void AlterSequenceOperation_all_args() =>
+        Test(
             new AlterSequenceOperation
             {
                 Name = "EntityFrameworkHiLoSequence",
@@ -841,11 +876,12 @@ mb.AlterSequence(
                 Assert.Equal(3, o.OldSequence.MinValue);
                 Assert.Equal(5, o.OldSequence.MaxValue);
                 Assert.True(o.OldSequence.IsCyclic);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterTableOperation_required_args()
-        => Test(
+    public void AlterTableOperation_required_args() =>
+        Test(
             new AlterTableOperation { Name = "Customer" },
             """
 mb.AlterTable(
@@ -854,11 +890,12 @@ mb.AlterTable(
             o =>
             {
                 Assert.Equal("Customer", o.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void AlterTableOperation_all_args()
-        => Test(
+    public void AlterTableOperation_all_args() =>
+        Test(
             new AlterTableOperation
             {
                 Name = "Customer",
@@ -879,11 +916,12 @@ mb.AlterTable(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("My Comment 2", o.Comment);
                 Assert.Equal("My Comment", o.OldTable.Comment);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateIndexOperation_required_args()
-        => Test(
+    public void CreateIndexOperation_required_args() =>
+        Test(
             new CreateIndexOperation
             {
                 Name = "IX_Post_Title",
@@ -904,11 +942,12 @@ mb.CreateIndex(
                 Assert.False(o.IsUnique);
                 Assert.Null(o.IsDescending);
                 Assert.Null(o.Filter);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateIndexOperation_all_args()
-        => Test(
+    public void CreateIndexOperation_all_args() =>
+        Test(
             new CreateIndexOperation
             {
                 Name = "IX_Post_Title",
@@ -938,11 +977,12 @@ mb.CreateIndex(
                 Assert.True(o.IsUnique);
                 Assert.Equal(new[] { true, false }, o.IsDescending);
                 Assert.Equal("[Title] IS NOT NULL", o.Filter);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateIndexOperation_composite()
-        => Test(
+    public void CreateIndexOperation_composite() =>
+        Test(
             new CreateIndexOperation
             {
                 Name = "IX_Post_Title_Subtitle",
@@ -960,22 +1000,28 @@ mb.CreateIndex(
                 Assert.Equal("IX_Post_Title_Subtitle", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal(new[] { "Title", "Subtitle" }, o.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateSchemaOperation_required_args()
-        => Test(
+    public void CreateSchemaOperation_required_args() =>
+        Test(
             new EnsureSchemaOperation { Name = "my" },
             """
 mb.EnsureSchema(
     name: "my");
 """,
-            o => Assert.Equal("my", o.Name));
+            o => Assert.Equal("my", o.Name)
+        );
 
     [ConditionalFact]
-    public void CreateSequenceOperation_required_args()
-        => Test(
-            new CreateSequenceOperation { Name = "EntityFrameworkHiLoSequence", ClrType = typeof(long) },
+    public void CreateSequenceOperation_required_args() =>
+        Test(
+            new CreateSequenceOperation
+            {
+                Name = "EntityFrameworkHiLoSequence",
+                ClrType = typeof(long)
+            },
             """
 mb.CreateSequence(
     name: "EntityFrameworkHiLoSequence");
@@ -984,12 +1030,17 @@ mb.CreateSequence(
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
                 Assert.Equal(typeof(long), o.ClrType);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateSequenceOperation_required_args_not_long()
-        => Test(
-            new CreateSequenceOperation { Name = "EntityFrameworkHiLoSequence", ClrType = typeof(int) },
+    public void CreateSequenceOperation_required_args_not_long() =>
+        Test(
+            new CreateSequenceOperation
+            {
+                Name = "EntityFrameworkHiLoSequence",
+                ClrType = typeof(int)
+            },
             """
 mb.CreateSequence<int>(
     name: "EntityFrameworkHiLoSequence");
@@ -998,11 +1049,12 @@ mb.CreateSequence<int>(
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
                 Assert.Equal(typeof(int), o.ClrType);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateSequenceOperation_all_args()
-        => Test(
+    public void CreateSequenceOperation_all_args() =>
+        Test(
             new CreateSequenceOperation
             {
                 Name = "EntityFrameworkHiLoSequence",
@@ -1034,11 +1086,12 @@ mb.CreateSequence(
                 Assert.Equal(2, o.MinValue);
                 Assert.Equal(4, o.MaxValue);
                 Assert.True(o.IsCyclic);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateSequenceOperation_all_args_not_long()
-        => Test(
+    public void CreateSequenceOperation_all_args_not_long() =>
+        Test(
             new CreateSequenceOperation
             {
                 Name = "EntityFrameworkHiLoSequence",
@@ -1070,11 +1123,12 @@ mb.CreateSequence<int>(
                 Assert.Equal(2, o.MinValue);
                 Assert.Equal(4, o.MaxValue);
                 Assert.True(o.IsCyclic);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_Columns_required_args()
-        => Test(
+    public void CreateTableOperation_Columns_required_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1107,11 +1161,12 @@ mb.CreateTable(
                 Assert.Equal("Id", o.Columns[0].Name);
                 Assert.Equal("Post", o.Columns[0].Table);
                 Assert.Equal(typeof(int), o.Columns[0].ClrType);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_Columns_all_args()
-        => Test(
+    public void CreateTableOperation_Columns_all_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1167,11 +1222,12 @@ mb.CreateTable(
                 Assert.Equal(1, o.Columns[0].DefaultValue);
                 Assert.Equal("My Comment", o.Columns[0].Comment);
                 Assert.Equal("Some Collation", o.Columns[0].Collation);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_Columns_DefaultValueSql()
-        => Test(
+    public void CreateTableOperation_Columns_DefaultValueSql() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1205,11 +1261,12 @@ mb.CreateTable(
                 Assert.Equal("Post", o.Columns[0].Table);
                 Assert.Equal(typeof(int), o.Columns[0].ClrType);
                 Assert.Equal("1", o.Columns[0].DefaultValueSql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_Columns_computedColumnSql()
-        => Test(
+    public void CreateTableOperation_Columns_computedColumnSql() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1245,15 +1302,19 @@ mb.CreateTable(
                 Assert.Equal(typeof(int), o.Columns[0].ClrType);
                 Assert.Equal("1", o.Columns[0].ComputedColumnSql);
                 Assert.True(o.Columns[0].IsStored);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_ForeignKeys_required_args()
-        => Test(
+    public void CreateTableOperation_ForeignKeys_required_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
-                Columns = { new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) } },
+                Columns =
+                {
+                    new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) }
+                },
                 ForeignKeys =
                 {
                     new AddForeignKeyOperation
@@ -1289,16 +1350,20 @@ mb.CreateTable(
                 Assert.Equal("Post", fk.Table);
                 Assert.Equal(new[] { "BlogId" }, fk.Columns.ToArray());
                 Assert.Equal("Blog", fk.PrincipalTable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_ForeignKeys_all_args()
-        => Test(
+    public void CreateTableOperation_ForeignKeys_all_args() =>
+        Test(
             new CreateTableOperation
             {
                 Schema = "dbo",
                 Name = "Post",
-                Columns = { new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) } },
+                Columns =
+                {
+                    new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) }
+                },
                 ForeignKeys =
                 {
                     new AddForeignKeyOperation
@@ -1349,11 +1414,12 @@ mb.CreateTable(
                 Assert.Equal(new[] { "Id" }, fk.PrincipalColumns);
                 Assert.Equal(ReferentialAction.SetNull, fk.OnUpdate);
                 Assert.Equal(ReferentialAction.SetDefault, fk.OnDelete);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_ForeignKeys_composite()
-        => Test(
+    public void CreateTableOperation_ForeignKeys_composite() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1400,11 +1466,12 @@ mb.CreateTable(
                 Assert.Equal(new[] { "BlogId1", "BlogId2" }, fk.Columns.ToArray());
                 Assert.Equal("Blog", fk.PrincipalTable);
                 Assert.Equal(new[] { "Id1", "Id2" }, fk.PrincipalColumns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_ForeignKeys_composite_no_principal_columns()
-        => Test(
+    public void CreateTableOperation_ForeignKeys_composite_no_principal_columns() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1448,15 +1515,19 @@ mb.CreateTable(
                 Assert.Equal("Post", fk.Table);
                 Assert.Equal(new[] { "BlogId1", "BlogId2" }, fk.Columns.ToArray());
                 Assert.Equal("Blog", fk.PrincipalTable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_PrimaryKey_required_args()
-        => Test(
+    public void CreateTableOperation_PrimaryKey_required_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
-                Columns = { new AddColumnOperation { Name = "Id", ClrType = typeof(int) } },
+                Columns =
+                {
+                    new AddColumnOperation { Name = "Id", ClrType = typeof(int) }
+                },
                 PrimaryKey = new AddPrimaryKeyOperation
                 {
                     Name = "PK_Post",
@@ -1483,16 +1554,20 @@ mb.CreateTable(
                 Assert.Equal("PK_Post", o.PrimaryKey.Name);
                 Assert.Equal("Post", o.PrimaryKey.Table);
                 Assert.Equal(new[] { "Id" }, o.PrimaryKey.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_PrimaryKey_all_args()
-        => Test(
+    public void CreateTableOperation_PrimaryKey_all_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
                 Schema = "dbo",
-                Columns = { new AddColumnOperation { Name = "Id", ClrType = typeof(int) } },
+                Columns =
+                {
+                    new AddColumnOperation { Name = "Id", ClrType = typeof(int) }
+                },
                 PrimaryKey = new AddPrimaryKeyOperation
                 {
                     Name = "PK_Post",
@@ -1522,11 +1597,12 @@ mb.CreateTable(
                 Assert.Equal("dbo", o.PrimaryKey.Schema);
                 Assert.Equal("Post", o.PrimaryKey.Table);
                 Assert.Equal(new[] { "Id" }, o.PrimaryKey.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_PrimaryKey_composite()
-        => Test(
+    public void CreateTableOperation_PrimaryKey_composite() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1562,15 +1638,19 @@ mb.CreateTable(
                 Assert.Equal("PK_Post", o.PrimaryKey.Name);
                 Assert.Equal("Post", o.PrimaryKey.Table);
                 Assert.Equal(new[] { "Id1", "Id2" }, o.PrimaryKey.Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_UniqueConstraints_required_args()
-        => Test(
+    public void CreateTableOperation_UniqueConstraints_required_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
-                Columns = { new AddColumnOperation { Name = "AltId", ClrType = typeof(int) } },
+                Columns =
+                {
+                    new AddColumnOperation { Name = "AltId", ClrType = typeof(int) }
+                },
                 UniqueConstraints =
                 {
                     new AddUniqueConstraintOperation
@@ -1600,16 +1680,20 @@ mb.CreateTable(
                 Assert.Equal("AK_Post_AltId", o.UniqueConstraints[0].Name);
                 Assert.Equal("Post", o.UniqueConstraints[0].Table);
                 Assert.Equal(new[] { "AltId" }, o.UniqueConstraints[0].Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_UniqueConstraints_all_args()
-        => Test(
+    public void CreateTableOperation_UniqueConstraints_all_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
                 Schema = "dbo",
-                Columns = { new AddColumnOperation { Name = "AltId", ClrType = typeof(int) } },
+                Columns =
+                {
+                    new AddColumnOperation { Name = "AltId", ClrType = typeof(int) }
+                },
                 UniqueConstraints =
                 {
                     new AddUniqueConstraintOperation
@@ -1642,11 +1726,12 @@ mb.CreateTable(
                 Assert.Equal("dbo", o.UniqueConstraints[0].Schema);
                 Assert.Equal("Post", o.UniqueConstraints[0].Table);
                 Assert.Equal(new[] { "AltId" }, o.UniqueConstraints[0].Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_UniqueConstraints_composite()
-        => Test(
+    public void CreateTableOperation_UniqueConstraints_composite() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1685,11 +1770,12 @@ mb.CreateTable(
                 Assert.Equal("AK_Post_AltId1_AltId2", o.UniqueConstraints[0].Name);
                 Assert.Equal("Post", o.UniqueConstraints[0].Table);
                 Assert.Equal(new[] { "AltId1", "AltId2" }, o.UniqueConstraints[0].Columns);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_CheckConstraints_required_args()
-        => Test(
+    public void CreateTableOperation_CheckConstraints_required_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1728,11 +1814,12 @@ mb.CreateTable(
                 Assert.Equal("CK_Post_AltId1_AltId2", o.CheckConstraints[0].Name);
                 Assert.Equal("Post", o.CheckConstraints[0].Table);
                 Assert.Equal("AltId1 > AltId2", o.CheckConstraints[0].Sql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_ChecksConstraints_all_args()
-        => Test(
+    public void CreateTableOperation_ChecksConstraints_all_args() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1775,16 +1862,20 @@ mb.CreateTable(
                 Assert.Equal("dbo", o.CheckConstraints[0].Schema);
                 Assert.Equal("Post", o.CheckConstraints[0].Table);
                 Assert.Equal("AltId1 > AltId2", o.CheckConstraints[0].Sql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_Comment()
-        => Test(
+    public void CreateTableOperation_Comment() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
                 Schema = "dbo",
-                Columns = { new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) } },
+                Columns =
+                {
+                    new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) }
+                },
                 Comment = "My Comment"
             },
             """
@@ -1803,11 +1894,12 @@ mb.CreateTable(
             o =>
             {
                 Assert.Equal("My Comment", o.Comment);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void CreateTableOperation_TableComment_ColumnComment()
-        => Test(
+    public void CreateTableOperation_TableComment_ColumnComment() =>
+        Test(
             new CreateTableOperation
             {
                 Name = "Post",
@@ -1840,11 +1932,12 @@ mb.CreateTable(
             {
                 Assert.Equal("My Operation Comment", o.Comment);
                 Assert.Equal("My Column comment", o.Columns[0].Comment);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropColumnOperation_required_args()
-        => Test(
+    public void DropColumnOperation_required_args() =>
+        Test(
             new DropColumnOperation { Name = "Id", Table = "Post" },
             """
 mb.DropColumn(
@@ -1855,11 +1948,12 @@ mb.DropColumn(
             {
                 Assert.Equal("Id", o.Name);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropColumnOperation_all_args()
-        => Test(
+    public void DropColumnOperation_all_args() =>
+        Test(
             new DropColumnOperation
             {
                 Name = "Id",
@@ -1877,11 +1971,12 @@ mb.DropColumn(
                 Assert.Equal("Id", o.Name);
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropForeignKeyOperation_required_args()
-        => Test(
+    public void DropForeignKeyOperation_required_args() =>
+        Test(
             new DropForeignKeyOperation { Name = "FK_Post_BlogId", Table = "Post" },
             """
 mb.DropForeignKey(
@@ -1892,11 +1987,12 @@ mb.DropForeignKey(
             {
                 Assert.Equal("FK_Post_BlogId", o.Name);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropForeignKeyOperation_all_args()
-        => Test(
+    public void DropForeignKeyOperation_all_args() =>
+        Test(
             new DropForeignKeyOperation
             {
                 Name = "FK_Post_BlogId",
@@ -1914,11 +2010,12 @@ mb.DropForeignKey(
                 Assert.Equal("FK_Post_BlogId", o.Name);
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropIndexOperation_required_args()
-        => Test(
+    public void DropIndexOperation_required_args() =>
+        Test(
             new DropIndexOperation { Name = "IX_Post_Title" },
             """
 mb.DropIndex(
@@ -1927,11 +2024,12 @@ mb.DropIndex(
             o =>
             {
                 Assert.Equal("IX_Post_Title", o.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropIndexOperation_all_args()
-        => Test(
+    public void DropIndexOperation_all_args() =>
+        Test(
             new DropIndexOperation
             {
                 Name = "IX_Post_Title",
@@ -1949,11 +2047,12 @@ mb.DropIndex(
                 Assert.Equal("IX_Post_Title", o.Name);
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropPrimaryKeyOperation_required_args()
-        => Test(
+    public void DropPrimaryKeyOperation_required_args() =>
+        Test(
             new DropPrimaryKeyOperation { Name = "PK_Post", Table = "Post" },
             """
 mb.DropPrimaryKey(
@@ -1964,11 +2063,12 @@ mb.DropPrimaryKey(
             {
                 Assert.Equal("PK_Post", o.Name);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropPrimaryKeyOperation_all_args()
-        => Test(
+    public void DropPrimaryKeyOperation_all_args() =>
+        Test(
             new DropPrimaryKeyOperation
             {
                 Name = "PK_Post",
@@ -1986,31 +2086,34 @@ mb.DropPrimaryKey(
                 Assert.Equal("PK_Post", o.Name);
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropSchemaOperation_required_args()
-        => Test(
+    public void DropSchemaOperation_required_args() =>
+        Test(
             new DropSchemaOperation { Name = "my" },
             """
 mb.DropSchema(
     name: "my");
 """,
-            o => Assert.Equal("my", o.Name));
+            o => Assert.Equal("my", o.Name)
+        );
 
     [ConditionalFact]
-    public void DropSequenceOperation_required_args()
-        => Test(
+    public void DropSequenceOperation_required_args() =>
+        Test(
             new DropSequenceOperation { Name = "EntityFrameworkHiLoSequence" },
             """
 mb.DropSequence(
     name: "EntityFrameworkHiLoSequence");
 """,
-            o => Assert.Equal("EntityFrameworkHiLoSequence", o.Name));
+            o => Assert.Equal("EntityFrameworkHiLoSequence", o.Name)
+        );
 
     [ConditionalFact]
-    public void DropSequenceOperation_all_args()
-        => Test(
+    public void DropSequenceOperation_all_args() =>
+        Test(
             new DropSequenceOperation { Name = "EntityFrameworkHiLoSequence", Schema = "dbo" },
             """
 mb.DropSequence(
@@ -2021,21 +2124,23 @@ mb.DropSequence(
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
                 Assert.Equal("dbo", o.Schema);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropTableOperation_required_args()
-        => Test(
+    public void DropTableOperation_required_args() =>
+        Test(
             new DropTableOperation { Name = "Post" },
             """
 mb.DropTable(
     name: "Post");
 """,
-            o => Assert.Equal("Post", o.Name));
+            o => Assert.Equal("Post", o.Name)
+        );
 
     [ConditionalFact]
-    public void DropTableOperation_all_args()
-        => Test(
+    public void DropTableOperation_all_args() =>
+        Test(
             new DropTableOperation { Name = "Post", Schema = "dbo" },
             """
 mb.DropTable(
@@ -2046,11 +2151,12 @@ mb.DropTable(
             {
                 Assert.Equal("Post", o.Name);
                 Assert.Equal("dbo", o.Schema);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropUniqueConstraintOperation_required_args()
-        => Test(
+    public void DropUniqueConstraintOperation_required_args() =>
+        Test(
             new DropUniqueConstraintOperation { Name = "AK_Post_AltId", Table = "Post" },
             """
 mb.DropUniqueConstraint(
@@ -2061,11 +2167,12 @@ mb.DropUniqueConstraint(
             {
                 Assert.Equal("AK_Post_AltId", o.Name);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropUniqueConstraintOperation_all_args()
-        => Test(
+    public void DropUniqueConstraintOperation_all_args() =>
+        Test(
             new DropUniqueConstraintOperation
             {
                 Name = "AK_Post_AltId",
@@ -2083,11 +2190,12 @@ mb.DropUniqueConstraint(
                 Assert.Equal("AK_Post_AltId", o.Name);
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropCheckConstraintOperation_required_args()
-        => Test(
+    public void DropCheckConstraintOperation_required_args() =>
+        Test(
             new DropCheckConstraintOperation { Name = "CK_Post_AltId1_AltId2", Table = "Post" },
             """
 mb.DropCheckConstraint(
@@ -2098,11 +2206,12 @@ mb.DropCheckConstraint(
             {
                 Assert.Equal("CK_Post_AltId1_AltId2", o.Name);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DropCheckConstraintOperation_all_args()
-        => Test(
+    public void DropCheckConstraintOperation_all_args() =>
+        Test(
             new DropCheckConstraintOperation
             {
                 Name = "CK_Post_AltId1_AltId2",
@@ -2120,11 +2229,12 @@ mb.DropCheckConstraint(
                 Assert.Equal("CK_Post_AltId1_AltId2", o.Name);
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RenameColumnOperation_required_args()
-        => Test(
+    public void RenameColumnOperation_required_args() =>
+        Test(
             new RenameColumnOperation
             {
                 Name = "Id",
@@ -2142,11 +2252,12 @@ mb.RenameColumn(
                 Assert.Equal("Id", o.Name);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal("PostId", o.NewName);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RenameColumnOperation_all_args()
-        => Test(
+    public void RenameColumnOperation_all_args() =>
+        Test(
             new RenameColumnOperation
             {
                 Name = "Id",
@@ -2167,11 +2278,12 @@ mb.RenameColumn(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal("PostId", o.NewName);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RenameIndexOperation_required_args()
-        => Test(
+    public void RenameIndexOperation_required_args() =>
+        Test(
             new RenameIndexOperation { Name = "IX_Post_Title", NewName = "IX_Post_PostTitle" },
             """
 mb.RenameIndex(
@@ -2182,11 +2294,12 @@ mb.RenameIndex(
             {
                 Assert.Equal("IX_Post_Title", o.Name);
                 Assert.Equal("IX_Post_PostTitle", o.NewName);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RenameIndexOperation_all_args()
-        => Test(
+    public void RenameIndexOperation_all_args() =>
+        Test(
             new RenameIndexOperation
             {
                 Name = "IX_dbo.Post_Title",
@@ -2207,21 +2320,23 @@ mb.RenameIndex(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Post", o.Table);
                 Assert.Equal("IX_dbo.Post_PostTitle", o.NewName);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RenameSequenceOperation_required_args()
-        => Test(
+    public void RenameSequenceOperation_required_args() =>
+        Test(
             new RenameSequenceOperation { Name = "EntityFrameworkHiLoSequence" },
             """
 mb.RenameSequence(
     name: "EntityFrameworkHiLoSequence");
 """,
-            o => Assert.Equal("EntityFrameworkHiLoSequence", o.Name));
+            o => Assert.Equal("EntityFrameworkHiLoSequence", o.Name)
+        );
 
     [ConditionalFact]
-    public void RenameSequenceOperation_all_args()
-        => Test(
+    public void RenameSequenceOperation_all_args() =>
+        Test(
             new RenameSequenceOperation
             {
                 Name = "EntityFrameworkHiLoSequence",
@@ -2242,21 +2357,23 @@ mb.RenameSequence(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("MySequence", o.NewName);
                 Assert.Equal("my", o.NewSchema);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RenameTableOperation_required_args()
-        => Test(
+    public void RenameTableOperation_required_args() =>
+        Test(
             new RenameTableOperation { Name = "Post" },
             """
 mb.RenameTable(
     name: "Post");
 """,
-            o => Assert.Equal("Post", o.Name));
+            o => Assert.Equal("Post", o.Name)
+        );
 
     [ConditionalFact]
-    public void RenameTableOperation_all_args()
-        => Test(
+    public void RenameTableOperation_all_args() =>
+        Test(
             new RenameTableOperation
             {
                 Name = "Post",
@@ -2277,11 +2394,12 @@ mb.RenameTable(
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal("Posts", o.NewName);
                 Assert.Equal("my", o.NewSchema);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RestartSequenceOperation_required_args()
-        => Test(
+    public void RestartSequenceOperation_required_args() =>
+        Test(
             new RestartSequenceOperation { Name = "EntityFrameworkHiLoSequence", StartValue = 1 },
             """
 mb.RestartSequence(
@@ -2292,11 +2410,12 @@ mb.RestartSequence(
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
                 Assert.Equal(1, o.StartValue);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void RestartSequenceOperation_all_args()
-        => Test(
+    public void RestartSequenceOperation_all_args() =>
+        Test(
             new RestartSequenceOperation
             {
                 Name = "EntityFrameworkHiLoSequence",
@@ -2314,58 +2433,112 @@ mb.RestartSequence(
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
                 Assert.Equal("dbo", o.Schema);
                 Assert.Equal(1, o.StartValue);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void SqlOperation_required_args()
-        => Test(
+    public void SqlOperation_required_args() =>
+        Test(
             new SqlOperation { Sql = "-- I <3 DDL" },
             "mb.Sql(\"-- I <3 DDL\");",
-            o => Assert.Equal("-- I <3 DDL", o.Sql));
+            o => Assert.Equal("-- I <3 DDL", o.Sql)
+        );
 
-    private static readonly LineString _lineString1 = new(
-        new[] { new Coordinate(1.1, 2.2), new Coordinate(2.2, 2.2), new Coordinate(2.2, 1.1), new Coordinate(7.1, 7.2) }) { SRID = 4326 };
+    private static readonly LineString _lineString1 =
+        new(
+            new[]
+            {
+                new Coordinate(1.1, 2.2),
+                new Coordinate(2.2, 2.2),
+                new Coordinate(2.2, 1.1),
+                new Coordinate(7.1, 7.2)
+            }
+        )
+        {
+            SRID = 4326
+        };
 
-    private static readonly LineString _lineString2 = new(
-        new[] { new Coordinate(7.1, 7.2), new Coordinate(20.2, 20.2), new Coordinate(20.20, 1.1), new Coordinate(70.1, 70.2) })
-    {
-        SRID = 4326
-    };
+    private static readonly LineString _lineString2 =
+        new(
+            new[]
+            {
+                new Coordinate(7.1, 7.2),
+                new Coordinate(20.2, 20.2),
+                new Coordinate(20.20, 1.1),
+                new Coordinate(70.1, 70.2)
+            }
+        )
+        {
+            SRID = 4326
+        };
 
-    private static readonly MultiPoint _multiPoint = new(
-        new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) }) { SRID = 4326 };
+    private static readonly MultiPoint _multiPoint =
+        new(new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) })
+        {
+            SRID = 4326
+        };
 
-    private static readonly Polygon _polygon1 = new(
-        new LinearRing(
-            new[] { new Coordinate(1.1, 2.2), new Coordinate(2.2, 2.2), new Coordinate(2.2, 1.1), new Coordinate(1.1, 2.2) }))
-    {
-        SRID = 4326
-    };
+    private static readonly Polygon _polygon1 =
+        new(
+            new LinearRing(
+                new[]
+                {
+                    new Coordinate(1.1, 2.2),
+                    new Coordinate(2.2, 2.2),
+                    new Coordinate(2.2, 1.1),
+                    new Coordinate(1.1, 2.2)
+                }
+            )
+        )
+        {
+            SRID = 4326
+        };
 
-    private static readonly Polygon _polygon2 = new(
-        new LinearRing(
-            new[] { new Coordinate(10.1, 20.2), new Coordinate(20.2, 20.2), new Coordinate(20.2, 10.1), new Coordinate(10.1, 20.2) }))
-    {
-        SRID = 4326
-    };
+    private static readonly Polygon _polygon2 =
+        new(
+            new LinearRing(
+                new[]
+                {
+                    new Coordinate(10.1, 20.2),
+                    new Coordinate(20.2, 20.2),
+                    new Coordinate(20.2, 10.1),
+                    new Coordinate(10.1, 20.2)
+                }
+            )
+        )
+        {
+            SRID = 4326
+        };
 
     private static readonly Point _point1 = new(1.1, 2.2, 3.3) { SRID = 4326 };
 
-    private static readonly MultiLineString _multiLineString = new(
-        new[] { _lineString1, _lineString2 }) { SRID = 4326 };
+    private static readonly MultiLineString _multiLineString =
+        new(new[] { _lineString1, _lineString2 }) { SRID = 4326 };
 
-    private static readonly MultiPolygon _multiPolygon = new(
-        new[] { _polygon2, _polygon1 }) { SRID = 4326 };
+    private static readonly MultiPolygon _multiPolygon =
+        new(new[] { _polygon2, _polygon1 }) { SRID = 4326 };
 
-    private static readonly GeometryCollection _geometryCollection = new(
-        new Geometry[] { _lineString1, _lineString2, _multiPoint, _polygon1, _polygon2, _point1, _multiLineString, _multiPolygon })
-    {
-        SRID = 4326
-    };
+    private static readonly GeometryCollection _geometryCollection =
+        new(
+            new Geometry[]
+            {
+                _lineString1,
+                _lineString2,
+                _multiPoint,
+                _polygon1,
+                _polygon2,
+                _point1,
+                _multiLineString,
+                _multiPolygon
+            }
+        )
+        {
+            SRID = 4326
+        };
 
     [ConditionalFact]
-    public void InsertDataOperation_all_args()
-        => Test(
+    public void InsertDataOperation_all_args() =>
+        Test(
             new InsertDataOperation
             {
                 Schema = "dbo",
@@ -2415,16 +2588,20 @@ mb.InsertData(
                 Assert.Equal(_multiPolygon, o.Values[5, 2]);
                 Assert.Equal(_multiLineString, o.Values[6, 2]);
                 Assert.Equal(_geometryCollection, o.Values[7, 2]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void InsertDataOperation_required_args()
-        => Test(
+    public void InsertDataOperation_required_args() =>
+        Test(
             new InsertDataOperation
             {
                 Table = "People",
                 Columns = new[] { "Geometry" },
-                Values = new object[,] { { _point1 } }
+                Values = new object[,]
+                {
+                    { _point1 }
+                }
             },
             """
 mb.InsertData(
@@ -2439,16 +2616,20 @@ mb.InsertData(
                 Assert.Equal(1, o.Values.GetLength(0));
                 Assert.Equal(1, o.Values.GetLength(1));
                 Assert.Equal(_point1, o.Values[0, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void InsertDataOperation_required_empty_array()
-        => Test(
+    public void InsertDataOperation_required_empty_array() =>
+        Test(
             new InsertDataOperation
             {
                 Table = "People",
                 Columns = new[] { "Tags" },
-                Values = new object[,] { { new string[0] } }
+                Values = new object[,]
+                {
+                    { new string[0] }
+                }
             },
             """
 mb.InsertData(
@@ -2463,16 +2644,20 @@ mb.InsertData(
                 Assert.Equal(1, o.Values.GetLength(0));
                 Assert.Equal(1, o.Values.GetLength(1));
                 Assert.Equal(new string[0], (string[])o.Values[0, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void InsertDataOperation_required_empty_array_composite()
-        => Test(
+    public void InsertDataOperation_required_empty_array_composite() =>
+        Test(
             new InsertDataOperation
             {
                 Table = "People",
                 Columns = new[] { "First Name", "Last Name", "Geometry" },
-                Values = new object[,] { { "John", null, new string[0] } }
+                Values = new object[,]
+                {
+                    { "John", null, new string[0] }
+                }
             },
             """
 mb.InsertData(
@@ -2488,16 +2673,20 @@ mb.InsertData(
                 Assert.Equal(3, o.Values.GetLength(1));
                 Assert.Null(o.Values[0, 1]);
                 Assert.Equal(new string[0], (string[])o.Values[0, 2]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void InsertDataOperation_required_args_composite()
-        => Test(
+    public void InsertDataOperation_required_args_composite() =>
+        Test(
             new InsertDataOperation
             {
                 Table = "People",
                 Columns = new[] { "First Name", "Last Name", "Geometry" },
-                Values = new object[,] { { "John", "Snow", _polygon1 } }
+                Values = new object[,]
+                {
+                    { "John", "Snow", _polygon1 }
+                }
             },
             """
 mb.InsertData(
@@ -2513,16 +2702,21 @@ mb.InsertData(
                 Assert.Equal(3, o.Values.GetLength(1));
                 Assert.Equal("Snow", o.Values[0, 1]);
                 Assert.Equal(_polygon1, o.Values[0, 2]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void InsertDataOperation_required_args_multiple_rows()
-        => Test(
+    public void InsertDataOperation_required_args_multiple_rows() =>
+        Test(
             new InsertDataOperation
             {
                 Table = "People",
                 Columns = new[] { "Geometries" },
-                Values = new object[,] { { _lineString1 }, { _multiPoint } }
+                Values = new object[,]
+                {
+                    { _lineString1 },
+                    { _multiPoint }
+                }
             },
             """
 mb.InsertData(
@@ -2542,11 +2736,12 @@ mb.InsertData(
                 Assert.Equal(1, o.Values.GetLength(1));
                 Assert.Equal(_lineString1, o.Values[0, 0]);
                 Assert.Equal(_multiPoint, o.Values[1, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void InsertDataOperation_args_with_linebreaks()
-        => Test(
+    public void InsertDataOperation_args_with_linebreaks() =>
+        Test(
             new InsertDataOperation
             {
                 Schema = "dbo",
@@ -2580,19 +2775,30 @@ mb.InsertData(
                 Assert.Equal(2, operation.Values.GetLength(1));
                 Assert.Equal("Contains\r\na Windows linebreak", operation.Values[0, 1]);
                 Assert.Equal("Contains a\nLinux linebreak", operation.Values[1, 1]);
-                Assert.Equal("Contains a single Backslash r,\rjust in case", operation.Values[2, 1]);
-            });
+                Assert.Equal(
+                    "Contains a single Backslash r,\rjust in case",
+                    operation.Values[2, 1]
+                );
+            }
+        );
 
     [ConditionalFact]
-    public void DeleteDataOperation_all_args()
-        => Test(
+    public void DeleteDataOperation_all_args() =>
+        Test(
             new DeleteDataOperation
             {
                 Schema = "dbo",
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
                 KeyColumnTypes = new[] { "string" },
-                KeyValues = new object[,] { { "Hodor" }, { "Daenerys" }, { "John" }, { "Arya" }, { "Harry" } }
+                KeyValues = new object[,]
+                {
+                    { "Hodor" },
+                    { "Daenerys" },
+                    { "John" },
+                    { "Arya" },
+                    { "Harry" }
+                }
             },
             """
 mb.DeleteData(
@@ -2617,11 +2823,12 @@ mb.DeleteData(
                 Assert.Equal(5, o.KeyValues.GetLength(0));
                 Assert.Equal(1, o.KeyValues.GetLength(1));
                 Assert.Equal("John", o.KeyValues[2, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DeleteDataOperation_all_args_composite()
-        => Test(
+    public void DeleteDataOperation_all_args_composite() =>
+        Test(
             new DeleteDataOperation
             {
                 Table = "People",
@@ -2629,7 +2836,11 @@ mb.DeleteData(
                 KeyColumnTypes = new[] { "string", "string" },
                 KeyValues = new object[,]
                 {
-                    { "Hodor", null }, { "Daenerys", "Targaryen" }, { "John", "Snow" }, { "Arya", "Stark" }, { "Harry", "Strickland" }
+                    { "Hodor", null },
+                    { "Daenerys", "Targaryen" },
+                    { "John", "Snow" },
+                    { "Arya", "Stark" },
+                    { "Harry", "Strickland" }
                 }
             },
             """
@@ -2653,16 +2864,20 @@ mb.DeleteData(
                 Assert.Equal(5, o.KeyValues.GetLength(0));
                 Assert.Equal(2, o.KeyValues.GetLength(1));
                 Assert.Equal("Snow", o.KeyValues[2, 1]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DeleteDataOperation_required_args()
-        => Test(
+    public void DeleteDataOperation_required_args() =>
+        Test(
             new DeleteDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "Last Name" },
-                KeyValues = new object[,] { { "Snow" } }
+                KeyValues = new object[,]
+                {
+                    { "Snow" }
+                }
             },
             """
 mb.DeleteData(
@@ -2677,16 +2892,20 @@ mb.DeleteData(
                 Assert.Equal(1, o.KeyValues.GetLength(0));
                 Assert.Equal(1, o.KeyValues.GetLength(1));
                 Assert.Equal("Snow", o.KeyValues[0, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DeleteDataOperation_required_args_composite()
-        => Test(
+    public void DeleteDataOperation_required_args_composite() =>
+        Test(
             new DeleteDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "John", "Snow" } }
+                KeyValues = new object[,]
+                {
+                    { "John", "Snow" }
+                }
             },
             """
 mb.DeleteData(
@@ -2701,11 +2920,12 @@ mb.DeleteData(
                 Assert.Equal(1, o.KeyValues.GetLength(0));
                 Assert.Equal(2, o.KeyValues.GetLength(1));
                 Assert.Equal("Snow", o.KeyValues[0, 1]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void DeleteDataOperation_args_with_linebreaks()
-        => Test(
+    public void DeleteDataOperation_args_with_linebreaks() =>
+        Test(
             new DeleteDataOperation
             {
                 Table = "TestLineBreaks",
@@ -2736,20 +2956,32 @@ mb.DeleteData(
                 Assert.Equal(2, operation.KeyValues.GetLength(1));
                 Assert.Equal("Contains\r\na Windows linebreak", operation.KeyValues[0, 1]);
                 Assert.Equal("Contains a\nLinux linebreak", operation.KeyValues[1, 1]);
-                Assert.Equal("Contains a single Backslash r,\rjust in case", operation.KeyValues[2, 1]);
-            });
+                Assert.Equal(
+                    "Contains a single Backslash r,\rjust in case",
+                    operation.KeyValues[2, 1]
+                );
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_all_args()
-        => Test(
+    public void UpdateDataOperation_all_args() =>
+        Test(
             new UpdateDataOperation
             {
                 Schema = "dbo",
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Hodor" }, { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor" },
+                    { "Daenerys" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Winterfell", "Stark", "Northmen" }, { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Winterfell", "Stark", "Northmen" },
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             """
 mb.UpdateData(
@@ -2780,18 +3012,27 @@ mb.UpdateData(
                 Assert.Equal(2, o.Values.GetLength(0));
                 Assert.Equal(3, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[1, 1]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_all_args_composite()
-        => Test(
+    public void UpdateDataOperation_all_args_composite() =>
+        Test(
             new UpdateDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Hodor", null }, { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor", null },
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Stark" }, { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Stark" },
+                    { "Targaryen" }
+                }
             },
             """
 mb.UpdateData(
@@ -2820,18 +3061,27 @@ mb.UpdateData(
                 Assert.Equal(2, o.Values.GetLength(0));
                 Assert.Equal(1, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[1, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_all_args_composite_multi()
-        => Test(
+    public void UpdateDataOperation_all_args_composite_multi() =>
+        Test(
             new UpdateDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Hodor", null }, { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor", null },
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Winterfell", "Stark", "Northmen" }, { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Winterfell", "Stark", "Northmen" },
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             """
 mb.UpdateData(
@@ -2860,19 +3110,26 @@ mb.UpdateData(
                 Assert.Equal(2, o.Values.GetLength(0));
                 Assert.Equal(3, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[1, 1]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_all_args_multi()
-        => Test(
+    public void UpdateDataOperation_all_args_multi() =>
+        Test(
             new UpdateDataOperation
             {
                 Schema = "dbo",
                 Table = "People",
                 KeyColumns = new[] { "Full Name" },
-                KeyValues = new object[,] { { "Daenerys Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             """
 mb.UpdateData(
@@ -2895,18 +3152,25 @@ mb.UpdateData(
                 Assert.Equal(1, o.Values.GetLength(0));
                 Assert.Equal(3, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[0, 1]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_required_args()
-        => Test(
+    public void UpdateDataOperation_required_args() =>
+        Test(
             new UpdateDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Targaryen" }
+                }
             },
             """
 mb.UpdateData(
@@ -2927,18 +3191,27 @@ mb.UpdateData(
                 Assert.Equal(1, o.Values.GetLength(0));
                 Assert.Equal(1, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[0, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_required_args_multiple_rows()
-        => Test(
+    public void UpdateDataOperation_required_args_multiple_rows() =>
+        Test(
             new UpdateDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Hodor" }, { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor" },
+                    { "Daenerys" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Stark" }, { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Stark" },
+                    { "Targaryen" }
+                }
             },
             """
 mb.UpdateData(
@@ -2967,18 +3240,25 @@ mb.UpdateData(
                 Assert.Equal(2, o.Values.GetLength(0));
                 Assert.Equal(1, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[1, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_required_args_composite()
-        => Test(
+    public void UpdateDataOperation_required_args_composite() =>
+        Test(
             new UpdateDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Targaryen" }
+                }
             },
             """
 mb.UpdateData(
@@ -2999,18 +3279,25 @@ mb.UpdateData(
                 Assert.Equal(1, o.Values.GetLength(0));
                 Assert.Equal(1, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[0, 0]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_required_args_composite_multi()
-        => Test(
+    public void UpdateDataOperation_required_args_composite_multi() =>
+        Test(
             new UpdateDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             """
 mb.UpdateData(
@@ -3031,18 +3318,25 @@ mb.UpdateData(
                 Assert.Equal(1, o.Values.GetLength(0));
                 Assert.Equal(3, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[0, 1]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_required_args_multi()
-        => Test(
+    public void UpdateDataOperation_required_args_multi() =>
+        Test(
             new UpdateDataOperation
             {
                 Table = "People",
                 KeyColumns = new[] { "Full Name" },
-                KeyValues = new object[,] { { "Daenerys Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             """
 mb.UpdateData(
@@ -3063,17 +3357,23 @@ mb.UpdateData(
                 Assert.Equal(1, o.Values.GetLength(0));
                 Assert.Equal(3, o.Values.GetLength(1));
                 Assert.Equal("Targaryen", o.Values[0, 1]);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public void UpdateDataOperation_with_linebreaks()
-        => Test(
+    public void UpdateDataOperation_with_linebreaks() =>
+        Test(
             new UpdateDataOperation
             {
                 Schema = "dbo",
                 Table = "TestLineBreaks",
                 KeyColumns = new[] { "Id" },
-                KeyValues = new object[,] { { 0 }, { 1 }, { 2 }, },
+                KeyValues = new object[,]
+                {
+                    { 0 },
+                    { 1 },
+                    { 2 },
+                },
                 Columns = new[] { "Description" },
                 Values = new object[,]
                 {
@@ -3113,8 +3413,12 @@ mb.UpdateData(
                 Assert.Equal(1, operation.Values.GetLength(1));
                 Assert.Equal("Contains\r\na Windows linebreak", operation.Values[0, 0]);
                 Assert.Equal("Contains a\nLinux linebreak", operation.Values[1, 0]);
-                Assert.Equal("Contains a single Backslash r,\rjust in case", operation.Values[2, 0]);
-            });
+                Assert.Equal(
+                    "Contains a single Backslash r,\rjust in case",
+                    operation.Values[2, 0]
+                );
+            }
+        );
 
     [ConditionalFact]
     public void AlterTableOperation_annotation_set_to_null()
@@ -3143,7 +3447,8 @@ mb.AlterTable(
                 Assert.Equal("NewCustomer", operation.Name);
                 Assert.Null(operation.GetAnnotation("MyAnnotation1").Value);
                 Assert.Equal("Foo", operation.GetAnnotation("MyAnnotation2").Value);
-            });
+            }
+        );
     }
 
     private void Test<T>(T operation, string expectedCode, Action<T> assert)
@@ -3157,8 +3462,15 @@ mb.AlterTable(
                         new RelationalTypeMappingSourceDependencies(
                             new IRelationalTypeMappingSourcePlugin[]
                             {
-                                new SqlServerNetTopologySuiteTypeMappingSourcePlugin(NtsGeometryServices.Instance)
-                            })))));
+                                new SqlServerNetTopologySuiteTypeMappingSourcePlugin(
+                                    NtsGeometryServices.Instance
+                                )
+                            }
+                        )
+                    )
+                )
+            )
+        );
 
         var builder = new IndentedStringBuilder();
         generator.Generate("mb", new[] { operation }, builder);
@@ -3168,11 +3480,16 @@ mb.AlterTable(
 
         var build = new BuildSource
         {
-            References = { BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"), BuildReference.ByName("NetTopologySuite") },
+            References =
+            {
+                BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"),
+                BuildReference.ByName("NetTopologySuite")
+            },
             Sources =
             {
                 {
-                    "Migration.cs", $$"""
+                    "Migration.cs",
+                    $$"""
                     using Microsoft.EntityFrameworkCore.Migrations;
                     using NetTopologySuite.Geometries;
 

@@ -11,6 +11,7 @@ namespace System.Text.Json.SourceGeneration
         TypeUnsupportedBySourceGen = 0,
         Object = 1,
         BuiltInSupportType = 2,
+
         /// <summary>
         /// Known types such as System.Type and System.IntPtr that throw NotSupportedException at runtime.
         /// </summary>

@@ -23,20 +23,26 @@ internal sealed class AspNetCoreCSharpRouteSyntaxDetector
         s_detector = new EmbeddedLanguageDetector(
             CSharpEmbeddedLanguagesProvider.Info,
             identifiers,
-            new EmbeddedLanguageCommentDetector(identifiers));
+            new EmbeddedLanguageCommentDetector(identifiers)
+        );
     }
 
-    private AspNetCoreCSharpRouteSyntaxDetector()
-    {
-    }
+    private AspNetCoreCSharpRouteSyntaxDetector() { }
 
     public bool IsEmbeddedLanguageToken(
         SyntaxToken token,
         SemanticModel semanticModel,
         CancellationToken cancellationToken,
         [NotNullWhen(true)] out string? identifier,
-        out IEnumerable<string>? options)
+        out IEnumerable<string>? options
+    )
     {
-        return s_detector.IsEmbeddedLanguageToken(token, semanticModel, cancellationToken, out identifier, out options);
+        return s_detector.IsEmbeddedLanguageToken(
+            token,
+            semanticModel,
+            cancellationToken,
+            out identifier,
+            out options
+        );
     }
 }

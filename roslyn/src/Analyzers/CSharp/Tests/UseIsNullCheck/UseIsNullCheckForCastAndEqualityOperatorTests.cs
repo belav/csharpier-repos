@@ -16,44 +16,49 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
-    public partial class UseIsNullCheckForCastAndEqualityOperatorTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseIsNullCheckForCastAndEqualityOperatorTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseIsNullCheckForCastAndEqualityOperatorTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer(), new CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer(),
+                new CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestEquality()
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](object)s == null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](object)s == null)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58483")]
@@ -61,18 +66,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](object)s == null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](object)s == null)
+                                return;
+                        }
                     }
-                }
-                """,
-new[] { CSharpAnalyzersResources.Use_is_null_check });
+                    """,
+                new[] { CSharpAnalyzersResources.Use_is_null_check }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58483")]
@@ -80,19 +86,24 @@ new[] { CSharpAnalyzersResources.Use_is_null_check });
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](object)s != null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](object)s != null)
+                                return;
+                        }
                     }
-                }
-                """,
-new[] { CSharpAnalyzersResources.Use_is_object_check },
-new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                    """,
+                new[] { CSharpAnalyzersResources.Use_is_object_check },
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp8
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58483")]
@@ -100,19 +111,24 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestExactActionSetOfferedAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](object)s != null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](object)s != null)
+                                return;
+                        }
                     }
-                }
-                """,
-new[] { CSharpAnalyzersResources.Use_is_not_null_check },
-new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)));
+                    """,
+                new[] { CSharpAnalyzersResources.Use_is_not_null_check },
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp9
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -120,29 +136,30 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||]null == (object)s)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||]null == (object)s)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -150,29 +167,33 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](object)s != null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](object)s != null)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is object)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is object)
+                                return;
+                        }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact]
@@ -180,29 +201,33 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](object)s != null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](object)s != null)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is not null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is not null)
+                                return;
+                        }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact]
@@ -210,29 +235,33 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||]null != (object)s)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||]null != (object)s)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is object)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is object)
+                                return;
+                        }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact]
@@ -240,29 +269,33 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||]null != (object)s)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||]null != (object)s)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is not null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is not null)
+                                return;
+                        }
                     }
-                }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+                    """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact]
@@ -270,17 +303,23 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](object)s == null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](object)s == null)
+                                return;
+                        }
                     }
-                }
-                """, parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                    """,
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -288,17 +327,18 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ([||](string)s == null)
-                            return;
+                        void M(string s)
+                        {
+                            if ([||](string)s == null)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -306,35 +346,36 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ({|FixAllInDocument:|}(object)s == null)
-                            return;
+                        void M(string s)
+                        {
+                            if ({|FixAllInDocument:|}(object)s == null)
+                                return;
 
-                        if (null == (object)s)
-                            return;
+                            if (null == (object)s)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M(string s)
+                        {
+                            if (s is null)
+                                return;
 
-                        if (s is null)
-                            return;
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -342,29 +383,30 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s2)
+                    class C
                     {
-                        if ({|FixAllInDocument:|}(object)((object)s2 == null) == null))
-                            return;
+                        void M(string s2)
+                        {
+                            if ({|FixAllInDocument:|}(object)((object)s2 == null) == null))
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s2)
+                    class C
                     {
-                        if ((s2 is null) is null))
-                            return;
+                        void M(string s2)
+                        {
+                            if ((s2 is null) is null))
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -372,29 +414,30 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ( /*1*/ [||]( /*2*/ object /*3*/ ) /*4*/ s /*5*/ == /*6*/ null /*7*/ )
-                            return;
+                        void M(string s)
+                        {
+                            if ( /*1*/ [||]( /*2*/ object /*3*/ ) /*4*/ s /*5*/ == /*6*/ null /*7*/ )
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ( /*1*/ s /*5*/ is /*6*/ null /*7*/ )
-                            return;
+                        void M(string s)
+                        {
+                            if ( /*1*/ s /*5*/ is /*6*/ null /*7*/ )
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -402,29 +445,30 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ( /*1*/ [||]null /*2*/ == /*3*/ ( /*4*/ object /*5*/ ) /*6*/ s /*7*/ )
-                            return;
+                        void M(string s)
+                        {
+                            if ( /*1*/ [||]null /*2*/ == /*3*/ ( /*4*/ object /*5*/ ) /*6*/ s /*7*/ )
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string s)
+                    class C
                     {
-                        if ( /*1*/ s /*2*/ is /*3*/ null /*7*/ )
-                            return;
+                        void M(string s)
+                        {
+                            if ( /*1*/ s /*2*/ is /*3*/ null /*7*/ )
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -432,29 +476,30 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M<T>(T s) where T : class
+                    class C
                     {
-                        if ([||](object)s == null)
-                            return;
+                        void M<T>(T s) where T : class
+                        {
+                            if ([||](object)s == null)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M<T>(T s) where T : class
+                    class C
                     {
-                        if (s is null)
-                            return;
+                        void M<T>(T s) where T : class
+                        {
+                            if (s is null)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -462,17 +507,18 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M<T>(T s)
+                    class C
                     {
-                        if ([||](object)s == null)
-                            return;
+                        void M<T>(T s)
+                        {
+                            if ([||](object)s == null)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -480,29 +526,30 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestInRegularAndScriptAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string[] s)
+                    class C
                     {
-                        if ([||](object)s[0] == null)
-                            return;
+                        void M(string[] s)
+                        {
+                            if ([||](object)s[0] == null)
+                                return;
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string[] s)
+                    class C
                     {
-                        if (s[0] is null)
-                            return;
+                        void M(string[] s)
+                        {
+                            if (s[0] is null)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -510,17 +557,18 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
         {
             await TestMissingAsync(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    void M(string[] s)
+                    class C
                     {
-                        if ([||](object)s[0] == default)
-                            return;
+                        void M(string[] s)
+                        {
+                            if ([||](object)s[0] == default)
+                                return;
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
     }
 }

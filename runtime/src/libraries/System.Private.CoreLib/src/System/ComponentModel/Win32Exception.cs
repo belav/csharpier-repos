@@ -23,21 +23,21 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='Win32Exception'/> class with the last Win32 error
         /// that occurred.
         /// </summary>
-        public Win32Exception() : this(Marshal.GetLastPInvokeError())
-        {
-        }
+        public Win32Exception()
+            : this(Marshal.GetLastPInvokeError()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Win32Exception'/> class with the specified error.
         /// </summary>
-        public Win32Exception(int error) : this(error, Marshal.GetPInvokeErrorMessage(error))
-        {
-        }
+        public Win32Exception(int error)
+            : this(error, Marshal.GetPInvokeErrorMessage(error)) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref='Win32Exception'/> class with the specified error and the
         /// specified detailed description.
         /// </summary>
-        public Win32Exception(int error, string? message) : base(message)
+        public Win32Exception(int error, string? message)
+            : base(message)
         {
             NativeErrorCode = error;
         }
@@ -45,27 +45,36 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message.
         /// </summary>
-        public Win32Exception(string? message) : this(Marshal.GetLastPInvokeError(), message)
-        {
-        }
+        public Win32Exception(string? message)
+            : this(Marshal.GetLastPInvokeError(), message) { }
 
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message and a
         /// reference to the inner exception that is the cause of this exception.
         /// </summary>
-        public Win32Exception(string? message, Exception? innerException) : base(message, innerException)
+        public Win32Exception(string? message, Exception? innerException)
+            : base(message, innerException)
         {
             NativeErrorCode = Marshal.GetLastPInvokeError();
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected Win32Exception(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected Win32Exception(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             NativeErrorCode = info.GetInt32(nameof(NativeErrorCode));
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -92,9 +101,10 @@ namespace System.ComponentModel
             string message = Message;
             string className = GetType().ToString();
             StringBuilder s = new StringBuilder(className);
-            string nativeErrorString = NativeErrorCode < 0
-                ? $"0x{NativeErrorCode:X8}"
-                : NativeErrorCode.ToString(CultureInfo.InvariantCulture);
+            string nativeErrorString =
+                NativeErrorCode < 0
+                    ? $"0x{NativeErrorCode:X8}"
+                    : NativeErrorCode.ToString(CultureInfo.InvariantCulture);
             if (HResult == E_FAIL)
             {
                 s.Append($" ({nativeErrorString})");

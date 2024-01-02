@@ -10,7 +10,10 @@ public class DelegatingEnumerableTest
     {
         // Arrange
         var numbers = new[] { 10, 20 };
-        var delegatingEnumerable = new DelegatingEnumerable<int, int>(numbers, elementWrapperProvider: null);
+        var delegatingEnumerable = new DelegatingEnumerable<int, int>(
+            numbers,
+            elementWrapperProvider: null
+        );
 
         // Act and Assert
         Assert.Equal(numbers, delegatingEnumerable);
@@ -21,7 +24,10 @@ public class DelegatingEnumerableTest
     {
         // Arrange
         var numbers = new int[] { };
-        var delegatingEnumerable = new DelegatingEnumerable<int, int>(numbers, elementWrapperProvider: null);
+        var delegatingEnumerable = new DelegatingEnumerable<int, int>(
+            numbers,
+            elementWrapperProvider: null
+        );
 
         // Act and Assert
         Assert.Empty(delegatingEnumerable);
@@ -36,9 +42,10 @@ public class DelegatingEnumerableTest
         var error2 = new SerializableError();
         error2.Add("key1", "key1-error");
         var errors = new[] { error1, error2 };
-        var delegatingEnumerable = new DelegatingEnumerable<SerializableErrorWrapper, SerializableError>(
-                                                errors,
-                                                new SerializableErrorWrapperProvider());
+        var delegatingEnumerable = new DelegatingEnumerable<
+            SerializableErrorWrapper,
+            SerializableError
+        >(errors, new SerializableErrorWrapperProvider());
 
         // Act and Assert
         Assert.Equal(errors.Length, delegatingEnumerable.Count());
@@ -58,8 +65,10 @@ public class DelegatingEnumerableTest
     {
         // Arrange
         var errors = new SerializableError[] { };
-        var delegatingEnumerable = new DelegatingEnumerable<SerializableErrorWrapper, SerializableError>(
-                                                errors, new SerializableErrorWrapperProvider());
+        var delegatingEnumerable = new DelegatingEnumerable<
+            SerializableErrorWrapper,
+            SerializableError
+        >(errors, new SerializableErrorWrapperProvider());
 
         // Act and Assert
         Assert.Empty(delegatingEnumerable);

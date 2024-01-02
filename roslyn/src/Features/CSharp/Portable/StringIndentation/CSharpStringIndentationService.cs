@@ -23,15 +23,18 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStringIndentationService()
-        {
-        }
+        public CSharpStringIndentationService() { }
 
         public async Task<ImmutableArray<StringIndentationRegion>> GetStringIndentationRegionsAsync(
-            Document document, TextSpan textSpan, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             using var _ = ArrayBuilder<StringIndentationRegion>.GetInstance(out var result);
 
@@ -45,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
             SyntaxNode root,
             TextSpan textSpan,
             ArrayBuilder<StringIndentationRegion> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -54,15 +58,24 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
 
             while (nodeStack.TryPop(out var node))
             {
-                // DoNot' bother recursing into nodes that don't hit the requested span, they can never contribute 
+                // DoNot' bother recursing into nodes that don't hit the requested span, they can never contribute
                 // regions of interest.
                 if (!node.Span.IntersectsWith(textSpan))
                     continue;
 
-                if (node is InterpolatedStringExpressionSyntax interpolatedString &&
-                    interpolatedString.StringStartToken.IsKind(SyntaxKind.InterpolatedMultiLineRawStringStartToken))
+                if (
+                    node is InterpolatedStringExpressionSyntax interpolatedString
+                    && interpolatedString.StringStartToken.IsKind(
+                        SyntaxKind.InterpolatedMultiLineRawStringStartToken
+                    )
+                )
                 {
-                    ProcessInterpolatedStringExpression(text, interpolatedString, result, cancellationToken);
+                    ProcessInterpolatedStringExpression(
+                        text,
+                        interpolatedString,
+                        result,
+                        cancellationToken
+                    );
                 }
 
                 foreach (var child in node.ChildNodesAndTokens().Reverse())
@@ -73,35 +86,65 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
                     }
                     else if (child.IsToken)
                     {
-                        if (child.Kind() is SyntaxKind.MultiLineRawStringLiteralToken or SyntaxKind.Utf8MultiLineRawStringLiteralToken)
-                            ProcessMultiLineRawStringLiteralToken(text, child.AsToken(), result, cancellationToken);
+                        if (
+                            child.Kind()
+                            is SyntaxKind.MultiLineRawStringLiteralToken
+                                or SyntaxKind.Utf8MultiLineRawStringLiteralToken
+                        )
+                            ProcessMultiLineRawStringLiteralToken(
+                                text,
+                                child.AsToken(),
+                                result,
+                                cancellationToken
+                            );
                     }
                 }
             }
         }
 
         private static void ProcessMultiLineRawStringLiteralToken(
-            SourceText text, SyntaxToken token, ArrayBuilder<StringIndentationRegion> result, CancellationToken cancellationToken)
+            SourceText text,
+            SyntaxToken token,
+            ArrayBuilder<StringIndentationRegion> result,
+            CancellationToken cancellationToken
+        )
         {
             // Ignore strings with errors as we don't want to draw a line in a bad place that makes things even harder
             // to understand.
-            if (token.ContainsDiagnostics && token.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
+            if (
+                token.ContainsDiagnostics
+                && token.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
+            )
                 return;
 
             cancellationToken.ThrowIfCancellationRequested();
-            if (!TryGetIndentSpan(text, (ExpressionSyntax)token.GetRequiredParent(), out _, out var indentSpan))
+            if (
+                !TryGetIndentSpan(
+                    text,
+                    (ExpressionSyntax)token.GetRequiredParent(),
+                    out _,
+                    out var indentSpan
+                )
+            )
                 return;
 
             result.Add(new StringIndentationRegion(indentSpan));
         }
 
-        private static void ProcessInterpolatedStringExpression(SourceText text, InterpolatedStringExpressionSyntax interpolatedString, ArrayBuilder<StringIndentationRegion> result, CancellationToken cancellationToken)
+        private static void ProcessInterpolatedStringExpression(
+            SourceText text,
+            InterpolatedStringExpressionSyntax interpolatedString,
+            ArrayBuilder<StringIndentationRegion> result,
+            CancellationToken cancellationToken
+        )
         {
             // Ignore strings with errors as we don't want to draw a line in a bad place that makes things even harder
             // to understand.
             if (interpolatedString.ContainsDiagnostics)
             {
-                var errors = interpolatedString.GetDiagnostics().Where(d => d.Severity == DiagnosticSeverity.Error);
+                var errors = interpolatedString
+                    .GetDiagnostics()
+                    .Where(d => d.Severity == DiagnosticSeverity.Error);
                 foreach (var error in errors)
                 {
                     if (!IsInHole(interpolatedString, error.Location.SourceSpan))
@@ -117,8 +160,10 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
 
             foreach (var content in interpolatedString.Contents)
             {
-                if (content is InterpolationSyntax interpolation &&
-                    !IgnoreInterpolation(text, offset, interpolation))
+                if (
+                    content is InterpolationSyntax interpolation
+                    && !IgnoreInterpolation(text, offset, interpolation)
+                )
                 {
                     builder.Add(interpolation.Span);
                 }
@@ -127,7 +172,10 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
             result.Add(new StringIndentationRegion(indentSpan, builder.ToImmutable()));
         }
 
-        private static bool IsInHole(InterpolatedStringExpressionSyntax interpolatedString, TextSpan sourceSpan)
+        private static bool IsInHole(
+            InterpolatedStringExpressionSyntax interpolatedString,
+            TextSpan sourceSpan
+        )
         {
             foreach (var content in interpolatedString.Contents)
             {
@@ -138,7 +186,11 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
             return false;
         }
 
-        private static bool IgnoreInterpolation(SourceText text, int offset, InterpolationSyntax interpolation)
+        private static bool IgnoreInterpolation(
+            SourceText text,
+            int offset,
+            InterpolationSyntax interpolation
+        )
         {
             // We can ignore the hole if all the content of it is after the region's indentation level.
             // In that case, it's fine to draw the line through the hole as it won't intersect any code
@@ -159,7 +211,12 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
             return true;
         }
 
-        private static bool TryGetIndentSpan(SourceText text, ExpressionSyntax expression, out int offset, out TextSpan indentSpan)
+        private static bool TryGetIndentSpan(
+            SourceText text,
+            ExpressionSyntax expression,
+            out int offset,
+            out TextSpan indentSpan
+        )
         {
             indentSpan = default;
 

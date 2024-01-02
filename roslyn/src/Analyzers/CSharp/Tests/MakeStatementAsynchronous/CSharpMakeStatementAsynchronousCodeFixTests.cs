@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpMakeStatementAsynchronousCodeFixProvider>;
+        CSharpMakeStatementAsynchronousCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeStatementAsynchronous)]
     public class CSharpMakeStatementAsynchronousCodeFixTests

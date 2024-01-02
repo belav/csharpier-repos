@@ -9,16 +9,11 @@ namespace System.ServiceModel
         string name;
         bool isNameSetExplicit;
 
-        public MessagePropertyAttribute()
-        {
-        }
+        public MessagePropertyAttribute() { }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
             set
             {
                 isNameSetExplicit = true;
@@ -27,11 +22,7 @@ namespace System.ServiceModel
         }
         internal bool IsNameSetExplicit
         {
-            get
-            {
-                return isNameSetExplicit;
-            }
+            get { return isNameSetExplicit; }
         }
     }
 }
-

@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Client;
 using Microsoft.AspNetCore.Http.Connections.Client.Internal;
 using Microsoft.AspNetCore.Internal;
-using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
@@ -26,11 +26,14 @@ public partial class HttpConnectionTests
         {
             using (StartVerifiableLog())
             {
-                await WithConnectionAsync(CreateConnection(loggerFactory: LoggerFactory), async (connection) =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
-                    await connection.StartAsync().DefaultTimeout();
-                });
+                await WithConnectionAsync(
+                    CreateConnection(loggerFactory: LoggerFactory),
+                    async (connection) =>
+                    {
+                        await connection.StartAsync().DefaultTimeout();
+                        await connection.StartAsync().DefaultTimeout();
+                    }
+                );
             }
         }
 
@@ -40,7 +43,12 @@ public partial class HttpConnectionTests
             using (StartVerifiableLog())
             {
                 await WithConnectionAsync(
-                    CreateConnection(loggerFactory: LoggerFactory, transport: new TestTransport(onTransportStart: SyncPoint.Create(out var syncPoint))),
+                    CreateConnection(
+                        loggerFactory: LoggerFactory,
+                        transport: new TestTransport(
+                            onTransportStart: SyncPoint.Create(out var syncPoint)
+                        )
+                    ),
                     async (connection) =>
                     {
                         var firstStart = connection.StartAsync();
@@ -50,7 +58,8 @@ public partial class HttpConnectionTests
 
                         await firstStart.DefaultTimeout();
                         await secondStart.DefaultTimeout();
-                    });
+                    }
+                );
             }
         }
 
@@ -65,12 +74,15 @@ public partial class HttpConnectionTests
                     {
                         await connection.StartAsync().DefaultTimeout();
                         await connection.DisposeAsync().DefaultTimeout();
-                        var exception =
-                            await Assert.ThrowsAsync<ObjectDisposedException>(
-                                async () => await connection.StartAsync()).DefaultTimeout();
+                        var exception = await Assert
+                            .ThrowsAsync<ObjectDisposedException>(
+                                async () => await connection.StartAsync()
+                            )
+                            .DefaultTimeout();
 
                         Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
-                    });
+                    }
+                );
             }
         }
 
@@ -81,8 +93,8 @@ public partial class HttpConnectionTests
         {
             bool ExpectedErrors(WriteContext writeContext)
             {
-                return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                       writeContext.EventId.Name == "ErrorStartingTransport";
+                return writeContext.LoggerName == typeof(HttpConnection).FullName
+                    && writeContext.EventId.Name == "ErrorStartingTransport";
             }
 
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
@@ -117,13 +129,15 @@ public partial class HttpConnectionTests
                     CreateConnection(
                         loggerFactory: LoggerFactory,
                         transportType: HttpTransports.All,
-                        transport: new TestTransport(onTransportStart: OnTransportStart)),
+                        transport: new TestTransport(onTransportStart: OnTransportStart)
+                    ),
                     async (connection) =>
-                {
-                    Assert.Equal(0, startCounter);
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.Equal(passThreshold, startCounter);
-                });
+                    {
+                        Assert.Equal(0, startCounter);
+                        await connection.StartAsync().DefaultTimeout();
+                        Assert.Equal(passThreshold, startCounter);
+                    }
+                );
             }
         }
 
@@ -132,8 +146,8 @@ public partial class HttpConnectionTests
         {
             bool ExpectedErrors(WriteContext writeContext)
             {
-                return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                       writeContext.EventId.Name == "ErrorStartingTransport";
+                return writeContext.LoggerName == typeof(HttpConnection).FullName
+                    && writeContext.EventId.Name == "ErrorStartingTransport";
             }
 
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
@@ -151,13 +165,18 @@ public partial class HttpConnectionTests
                     CreateConnection(
                         loggerFactory: LoggerFactory,
                         transportType: HttpTransports.All,
-                        transport: new TestTransport(onTransportStart: OnTransportStart)),
+                        transport: new TestTransport(onTransportStart: OnTransportStart)
+                    ),
                     async (connection) =>
                     {
-                        var ex = await Assert.ThrowsAsync<AggregateException>(() => connection.StartAsync()).DefaultTimeout();
-                        Assert.Equal("Unable to connect to the server with any of the available transports. " +
-                            "(WebSockets failed: Transport failed to start) (ServerSentEvents failed: Transport failed to start) (LongPolling failed: Transport failed to start)",
-                            ex.Message);
+                        var ex = await Assert
+                            .ThrowsAsync<AggregateException>(() => connection.StartAsync())
+                            .DefaultTimeout();
+                        Assert.Equal(
+                            "Unable to connect to the server with any of the available transports. "
+                                + "(WebSockets failed: Transport failed to start) (ServerSentEvents failed: Transport failed to start) (LongPolling failed: Transport failed to start)",
+                            ex.Message
+                        );
 
                         // If websockets aren't supported then we expect one less attmept to start.
                         if (!TestHelpers.IsWebSocketsSupported())
@@ -166,7 +185,8 @@ public partial class HttpConnectionTests
                         }
 
                         Assert.Equal(availableTransports, startCounter);
-                    });
+                    }
+                );
             }
         }
 
@@ -180,7 +200,8 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         await connection.DisposeAsync().DefaultTimeout();
-                    });
+                    }
+                );
             }
         }
 
@@ -194,7 +215,9 @@ public partial class HttpConnectionTests
                         loggerFactory: LoggerFactory,
                         transport: new TestTransport(
                             onTransportStart: SyncPoint.Create(out var transportStart),
-                            onTransportStop: SyncPoint.Create(out var transportStop))),
+                            onTransportStop: SyncPoint.Create(out var transportStop)
+                        )
+                    ),
                     async (connection) =>
                     {
                         // Start the connection and wait for the transport to start up.
@@ -214,7 +237,8 @@ public partial class HttpConnectionTests
 
                         // Dispose should finish
                         await disposeTask.DefaultTimeout();
-                    });
+                    }
+                );
             }
         }
 
@@ -226,30 +250,34 @@ public partial class HttpConnectionTests
                 await WithConnectionAsync(
                     CreateConnection(
                         loggerFactory: LoggerFactory,
-                        transport: new TestTransport(onTransportStop: SyncPoint.Create(out var transportStop))),
+                        transport: new TestTransport(
+                            onTransportStop: SyncPoint.Create(out var transportStop)
+                        )
+                    ),
                     async (connection) =>
-                {
-                    // Start the connection
-                    await connection.StartAsync().DefaultTimeout();
+                    {
+                        // Start the connection
+                        await connection.StartAsync().DefaultTimeout();
 
-                    // Dispose the connection
-                    var stopTask = connection.DisposeAsync();
+                        // Dispose the connection
+                        var stopTask = connection.DisposeAsync();
 
-                    // Once the transport starts shutting down
-                    await transportStop.WaitForSyncPoint().DefaultTimeout();
-                    Assert.False(stopTask.IsCompleted);
+                        // Once the transport starts shutting down
+                        await transportStop.WaitForSyncPoint().DefaultTimeout();
+                        Assert.False(stopTask.IsCompleted);
 
-                    // Start disposing again, and then let the first dispose continue
-                    var disposeTask = connection.DisposeAsync();
-                    transportStop.Continue();
+                        // Start disposing again, and then let the first dispose continue
+                        var disposeTask = connection.DisposeAsync();
+                        transportStop.Continue();
 
-                    // Wait for the tasks to complete
-                    await stopTask.DefaultTimeout();
-                    await disposeTask.DefaultTimeout();
+                        // Wait for the tasks to complete
+                        await stopTask.DefaultTimeout();
+                        await disposeTask.DefaultTimeout();
 
-                    // We should be disposed and thus unable to restart.
-                    await AssertDisposedAsync(connection).DefaultTimeout();
-                });
+                        // We should be disposed and thus unable to restart.
+                        await AssertDisposedAsync(connection).DefaultTimeout();
+                    }
+                );
             }
         }
 
@@ -273,7 +301,8 @@ public partial class HttpConnectionTests
                         // Stop the connection, and we should stop the transport
                         await connection.DisposeAsync().DefaultTimeout();
                         await testTransport.Receiving.DefaultTimeout();
-                    });
+                    }
+                );
             }
         }
 
@@ -282,8 +311,8 @@ public partial class HttpConnectionTests
         {
             bool ExpectedErrors(WriteContext writeContext)
             {
-                return writeContext.LoggerName == typeof(LongPollingTransport).FullName &&
-                       writeContext.EventId.Name == "ErrorSending";
+                return writeContext.LoggerName == typeof(LongPollingTransport).FullName
+                    && writeContext.EventId.Name == "ErrorSending";
             }
 
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
@@ -295,27 +324,40 @@ public partial class HttpConnectionTests
                 {
                     cancellationToken.Register(() =>
                     {
-                        longPollResult.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent));
+                        longPollResult.TrySetResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                        );
                     });
                     return longPollResult.Task;
                 });
-                httpHandler.OnLongPollDelete(cancellationToken => ResponseUtils.CreateResponse(HttpStatusCode.NoContent));
+                httpHandler.OnLongPollDelete(cancellationToken =>
+                    ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                );
 
-                httpHandler.OnSocketSend((data, _) =>
-                {
-                    Assert.Collection(data, i => Assert.Equal(0x42, i));
-                    return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError));
-                });
+                httpHandler.OnSocketSend(
+                    (data, _) =>
+                    {
+                        Assert.Collection(data, i => Assert.Equal(0x42, i));
+                        return Task.FromResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError)
+                        );
+                    }
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(httpHandler, LoggerFactory),
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection.Transport.Output.WriteAsync(new byte[] { 0x42 }).DefaultTimeout();
+                        await connection
+                            .Transport.Output.WriteAsync(new byte[] { 0x42 })
+                            .DefaultTimeout();
 
-                        await Assert.ThrowsAsync<HttpRequestException>(async () => await connection.Transport.Input.ReadAsync());
-                    });
+                        await Assert.ThrowsAsync<HttpRequestException>(
+                            async () => await connection.Transport.Input.ReadAsync()
+                        );
+                    }
+                );
             }
         }
 
@@ -324,28 +366,38 @@ public partial class HttpConnectionTests
         {
             bool ExpectedErrors(WriteContext writeContext)
             {
-                return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                       writeContext.EventId.Name == "ErrorStartingTransport";
+                return writeContext.LoggerName == typeof(HttpConnection).FullName
+                    && writeContext.EventId.Name == "ErrorStartingTransport";
             }
 
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
             {
                 var httpHandler = new TestHttpMessageHandler();
 
-                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", (_, __) =>
-                {
-                    return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError));
-                });
+                httpHandler.OnGet(
+                    "/?id=00000000-0000-0000-0000-000000000000",
+                    (_, __) =>
+                    {
+                        return Task.FromResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError)
+                        );
+                    }
+                );
 
-                var sse = new ServerSentEventsTransport(new HttpClient(httpHandler), loggerFactory: LoggerFactory);
+                var sse = new ServerSentEventsTransport(
+                    new HttpClient(httpHandler),
+                    loggerFactory: LoggerFactory
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(httpHandler, loggerFactory: LoggerFactory, transport: sse),
                     async (connection) =>
                     {
                         await Assert.ThrowsAsync<AggregateException>(
-                            () => connection.StartAsync().DefaultTimeout());
-                    });
+                            () => connection.StartAsync().DefaultTimeout()
+                        );
+                    }
+                );
             }
         }
 
@@ -357,13 +409,19 @@ public partial class HttpConnectionTests
                 var httpHandler = new TestHttpMessageHandler();
 
                 var connectResponseTcs = new TaskCompletionSource();
-                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", async (_, __) =>
-                {
-                    await connectResponseTcs.Task;
-                    return ResponseUtils.CreateResponse(HttpStatusCode.Accepted);
-                });
+                httpHandler.OnGet(
+                    "/?id=00000000-0000-0000-0000-000000000000",
+                    async (_, __) =>
+                    {
+                        await connectResponseTcs.Task;
+                        return ResponseUtils.CreateResponse(HttpStatusCode.Accepted);
+                    }
+                );
 
-                var sse = new ServerSentEventsTransport(new HttpClient(httpHandler), loggerFactory: LoggerFactory);
+                var sse = new ServerSentEventsTransport(
+                    new HttpClient(httpHandler),
+                    loggerFactory: LoggerFactory
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(httpHandler, loggerFactory: LoggerFactory, transport: sse),
@@ -374,7 +432,8 @@ public partial class HttpConnectionTests
                         Assert.False(startTask.IsCompleted);
                         connectResponseTcs.TrySetResult();
                         await startTask.DefaultTimeout();
-                    });
+                    }
+                );
             }
         }
 
@@ -387,16 +446,18 @@ public partial class HttpConnectionTests
                 // that the call has gotten that far
                 var negotiateSyncPoint = new SyncPoint();
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
-                testHttpHandler.OnNegotiate(async (request, cancellationToken) =>
-                {
-                    // Wait here for the test code to cancel the "outer" token
-                    await negotiateSyncPoint.WaitToContinue().DefaultTimeout();
+                testHttpHandler.OnNegotiate(
+                    async (request, cancellationToken) =>
+                    {
+                        // Wait here for the test code to cancel the "outer" token
+                        await negotiateSyncPoint.WaitToContinue().DefaultTimeout();
 
-                    // Cancel
-                    cancellationToken.ThrowIfCancellationRequested();
+                        // Cancel
+                        cancellationToken.ThrowIfCancellationRequested();
 
-                    return ResponseUtils.CreateResponse(HttpStatusCode.OK);
-                });
+                        return ResponseUtils.CreateResponse(HttpStatusCode.OK);
+                    }
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(testHttpHandler),
@@ -419,8 +480,11 @@ public partial class HttpConnectionTests
                         negotiateSyncPoint.Continue();
 
                         // Assert that StartAsync was canceled
-                        await Assert.ThrowsAsync<TaskCanceledException>(() => startTask).DefaultTimeout();
-                    });
+                        await Assert
+                            .ThrowsAsync<TaskCanceledException>(() => startTask)
+                            .DefaultTimeout();
+                    }
+                );
             }
         }
 
@@ -433,23 +497,30 @@ public partial class HttpConnectionTests
                 var httpHandler = new TestHttpMessageHandler();
 
                 await WithConnectionAsync(
-                    CreateConnection(httpHandler,
-                    transport: new TestTransport(onTransportStart: () =>
-                    {
-                        // Cancel the token when the transport is starting  which will fail the startTask.
-                        cts.Cancel();
-                        return Task.CompletedTask;
-                    })),
+                    CreateConnection(
+                        httpHandler,
+                        transport: new TestTransport(onTransportStart: () =>
+                        {
+                            // Cancel the token when the transport is starting  which will fail the startTask.
+                            cts.Cancel();
+                            return Task.CompletedTask;
+                        })
+                    ),
                     async (connection) =>
                     {
                         // We aggregate failures that happen when we start the transport. The operation canceled exception will
                         // be an inner exception.
-                        var ex = await Assert.ThrowsAsync<AggregateException>(async () => await connection.StartAsync(cts.Token)).DefaultTimeout();
+                        var ex = await Assert
+                            .ThrowsAsync<AggregateException>(
+                                async () => await connection.StartAsync(cts.Token)
+                            )
+                            .DefaultTimeout();
                         Assert.Equal(3, ex.InnerExceptions.Count);
                         var innerEx = ex.InnerExceptions[2];
                         var innerInnerEx = innerEx.InnerException;
                         Assert.IsType<OperationCanceledException>(innerInnerEx);
-                    });
+                    }
+                );
             }
         }
 
@@ -462,16 +533,26 @@ public partial class HttpConnectionTests
                 var httpHandler = new TestHttpMessageHandler();
 
                 await WithConnectionAsync(
-                    CreateConnection(httpHandler,
-                    transport: new TestTransport(onTransportStart: () =>
-                    {
-                        transportStartCalled = true;
-                        return Task.CompletedTask;
-                    })),
+                    CreateConnection(
+                        httpHandler,
+                        transport: new TestTransport(onTransportStart: () =>
+                        {
+                            transportStartCalled = true;
+                            return Task.CompletedTask;
+                        })
+                    ),
                     async (connection) =>
                     {
-                        await Assert.ThrowsAsync<TaskCanceledException>(async () => await connection.StartAsync(new CancellationToken(canceled: true))).DefaultTimeout();
-                    });
+                        await Assert
+                            .ThrowsAsync<TaskCanceledException>(
+                                async () =>
+                                    await connection.StartAsync(
+                                        new CancellationToken(canceled: true)
+                                    )
+                            )
+                            .DefaultTimeout();
+                    }
+                );
 
                 Assert.False(transportStartCalled);
             }
@@ -482,27 +563,43 @@ public partial class HttpConnectionTests
         {
             bool ExpectedErrors(WriteContext writeContext)
             {
-                return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                       writeContext.EventId.Name == "ErrorStartingTransport";
+                return writeContext.LoggerName == typeof(HttpConnection).FullName
+                    && writeContext.EventId.Name == "ErrorStartingTransport";
             }
 
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
             {
                 var httpHandler = new TestHttpMessageHandler();
-                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", (_, __) =>
-                {
-                    // Simulating a cancellationToken canceling this request.
-                    throw new OperationCanceledException("Cancel SSE Start.");
-                });
+                httpHandler.OnGet(
+                    "/?id=00000000-0000-0000-0000-000000000000",
+                    (_, __) =>
+                    {
+                        // Simulating a cancellationToken canceling this request.
+                        throw new OperationCanceledException("Cancel SSE Start.");
+                    }
+                );
 
-                var sse = new ServerSentEventsTransport(new HttpClient(httpHandler), loggerFactory: LoggerFactory);
+                var sse = new ServerSentEventsTransport(
+                    new HttpClient(httpHandler),
+                    loggerFactory: LoggerFactory
+                );
 
                 await WithConnectionAsync(
-                    CreateConnection(httpHandler, loggerFactory: LoggerFactory, transport: sse, transportType: HttpTransportType.ServerSentEvents),
+                    CreateConnection(
+                        httpHandler,
+                        loggerFactory: LoggerFactory,
+                        transport: sse,
+                        transportType: HttpTransportType.ServerSentEvents
+                    ),
                     async (connection) =>
                     {
-                        var ex = await Assert.ThrowsAsync<AggregateException>(async () => await connection.StartAsync()).DefaultTimeout();
-                    });
+                        var ex = await Assert
+                            .ThrowsAsync<AggregateException>(
+                                async () => await connection.StartAsync()
+                            )
+                            .DefaultTimeout();
+                    }
+                );
             }
         }
 
@@ -514,28 +611,41 @@ public partial class HttpConnectionTests
                 var cts = new CancellationTokenSource();
 
                 var httpHandler = new TestHttpMessageHandler(autoNegotiate: false);
-                httpHandler.OnNegotiate((request, cancellationToken) =>
-                {
-                    // Cancel token so that the first request poll will throw
-                    cts.Cancel();
-                    return ResponseUtils.CreateResponse(HttpStatusCode.OK, ResponseUtils.CreateNegotiationContent());
-                });
+                httpHandler.OnNegotiate(
+                    (request, cancellationToken) =>
+                    {
+                        // Cancel token so that the first request poll will throw
+                        cts.Cancel();
+                        return ResponseUtils.CreateResponse(
+                            HttpStatusCode.OK,
+                            ResponseUtils.CreateNegotiationContent()
+                        );
+                    }
+                );
 
                 var lp = new LongPollingTransport(new HttpClient(httpHandler));
 
                 await WithConnectionAsync(
-                    CreateConnection(httpHandler, transport: lp, transportType: HttpTransportType.LongPolling),
+                    CreateConnection(
+                        httpHandler,
+                        transport: lp,
+                        transportType: HttpTransportType.LongPolling
+                    ),
                     async (connection) =>
                     {
-                        var ex = await Assert.ThrowsAsync<AggregateException>(async () => await connection.StartAsync(cts.Token).DefaultTimeout());
-                    });
+                        var ex = await Assert.ThrowsAsync<AggregateException>(
+                            async () => await connection.StartAsync(cts.Token).DefaultTimeout()
+                        );
+                    }
+                );
             }
         }
 
         private static async Task AssertDisposedAsync(HttpConnection connection)
         {
-            var exception =
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => connection.StartAsync());
+            var exception = await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => connection.StartAsync()
+            );
             Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
         }
     }
