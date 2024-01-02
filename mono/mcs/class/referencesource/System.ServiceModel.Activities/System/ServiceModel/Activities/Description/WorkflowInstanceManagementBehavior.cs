@@ -327,10 +327,8 @@
 
                 OperationBehaviorAttribute operationAttribute =
                     operation.Behaviors.Find<OperationBehaviorAttribute>();
-                ((IOperationBehavior)operationAttribute).ApplyDispatchBehavior(
-                    operation,
-                    operationDispatcher
-                );
+                ((IOperationBehavior)operationAttribute)
+                    .ApplyDispatchBehavior(operation, operationDispatcher);
             }
 
             DispatchRuntime dispatchRuntime = endpointDispatcher.DispatchRuntime;

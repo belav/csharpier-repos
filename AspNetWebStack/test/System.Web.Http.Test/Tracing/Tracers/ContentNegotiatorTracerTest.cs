@@ -27,11 +27,8 @@ namespace System.Web.Http.Tracing.Tracers
         public void Negotiate_Calls_Inner_Negotiate()
         {
             // Act
-            ((IContentNegotiator)_tracer).Negotiate(
-                typeof(int),
-                _request,
-                new MediaTypeFormatter[0]
-            );
+            ((IContentNegotiator)_tracer)
+                .Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
 
             // Assert
             _mockNegotiator.Verify(
@@ -63,11 +60,8 @@ namespace System.Web.Http.Tracing.Tracers
                 );
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(
-                typeof(int),
-                _request,
-                new MediaTypeFormatter[0]
-            );
+            var result = ((IContentNegotiator)_tracer)
+                .Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
 
             // Assert
             Assert.Same(expectedMediaType, result.MediaType);
@@ -89,11 +83,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(new ContentNegotiationResult(expectedFormatter, null));
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(
-                typeof(int),
-                _request,
-                new MediaTypeFormatter[0]
-            );
+            var result = ((IContentNegotiator)_tracer)
+                .Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
 
             // Assert
             Assert.IsType<XmlMediaTypeFormatterTracer>(result.Formatter);
@@ -115,11 +106,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(new ContentNegotiationResult(expectedFormatter, null));
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(
-                typeof(int),
-                _request,
-                new MediaTypeFormatter[0]
-            );
+            var result = ((IContentNegotiator)_tracer)
+                .Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
 
             // Assert
             Assert.IsType<JsonMediaTypeFormatterTracer>(result.Formatter);
@@ -141,11 +129,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(new ContentNegotiationResult(expectedFormatter, null));
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(
-                typeof(int),
-                _request,
-                new MediaTypeFormatter[0]
-            );
+            var result = ((IContentNegotiator)_tracer)
+                .Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
 
             // Assert
             Assert.IsType<FormUrlEncodedMediaTypeFormatterTracer>(result.Formatter);
@@ -166,11 +151,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(value: null);
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(
-                typeof(int),
-                _request,
-                new MediaTypeFormatter[0]
-            );
+            var result = ((IContentNegotiator)_tracer)
+                .Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
 
             // Assert
             Assert.Null(result);
@@ -203,11 +185,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            ((IContentNegotiator)_tracer).Negotiate(
-                typeof(int),
-                _request,
-                new MediaTypeFormatter[0]
-            );
+            ((IContentNegotiator)_tracer)
+                .Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
 
             // Assert
             Assert.Equal<TraceRecord>(
@@ -236,11 +215,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Act & Assert
             InvalidOperationException actualException = Assert.Throws<InvalidOperationException>(
                 () =>
-                    ((IContentNegotiator)_tracer).Negotiate(
-                        typeof(int),
-                        _request,
-                        new MediaTypeFormatter[0]
-                    )
+                    ((IContentNegotiator)_tracer)
+                        .Negotiate(typeof(int), _request, new MediaTypeFormatter[0])
             );
 
             // Assert
@@ -277,11 +253,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    ((IContentNegotiator)_tracer).Negotiate(
-                        typeof(int),
-                        _request,
-                        new MediaTypeFormatter[0]
-                    )
+                    ((IContentNegotiator)_tracer)
+                        .Negotiate(typeof(int), _request, new MediaTypeFormatter[0])
             );
 
             // Assert

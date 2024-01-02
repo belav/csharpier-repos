@@ -165,9 +165,8 @@ namespace System.Data.Services.Parsing
 #endif
             else if (typeof(System.Xml.Linq.XElement) == valueType)
             {
-                result = ((System.Xml.Linq.XElement)value).ToString(
-                    System.Xml.Linq.SaveOptions.None
-                );
+                result = ((System.Xml.Linq.XElement)value)
+                    .ToString(System.Xml.Linq.SaveOptions.None);
             }
             else
             {

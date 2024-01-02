@@ -86,16 +86,12 @@ public class EnumerableWrapperProviderFactoryTest
                     (new[] { 10, 20 }).AsQueryable(),
                     typeof(DelegatingEnumerable<int, int>)
                 },
-                {
-                    typeof(IEnumerable<Person>),
-                    (
+                { typeof(IEnumerable<Person>), (
                         new[]
                         {
                             new Person() { Id = 10, Name = "John" }
                         }
-                    ).AsQueryable(),
-                    typeof(DelegatingEnumerable<Person, Person>)
-                },
+                    ).AsQueryable(), typeof(DelegatingEnumerable<Person, Person>) },
                 {
                     typeof(IEnumerable<SerializableError>),
                     (new[] { serializableError }).AsQueryable(),
@@ -145,15 +141,12 @@ public class EnumerableWrapperProviderFactoryTest
                     "value"
                 },
                 { typeof(List<int>), (new[] { 10, 20 }).ToList() },
-                {
-                    typeof(List<Person>),
-                    (
+                { typeof(List<Person>), (
                         new[]
                         {
                             new Person() { Id = 10, Name = "John" }
                         }
-                    ).ToList()
-                },
+                    ).ToList() },
                 { typeof(List<SerializableError>), (new[] { serializableError }).ToList() },
                 { typeof(PersonList), new PersonList() },
             };

@@ -678,9 +678,8 @@ namespace System.Data
 
                     if (ct.ContentModel is XmlSchemaSimpleContent)
                     {
-                        XmlSchemaAnnotated? cContent = (
-                            (XmlSchemaSimpleContent)(ct.ContentModel)
-                        ).Content;
+                        XmlSchemaAnnotated? cContent = ((XmlSchemaSimpleContent)(ct.ContentModel))
+                            .Content;
                         if (cContent is XmlSchemaSimpleContentExtension ccExtension)
                         {
                             if (HasAttributes(ccExtension.Attributes))
@@ -1167,9 +1166,8 @@ namespace System.Data
 
                 if (ct.ContentModel is XmlSchemaComplexContent)
                 {
-                    XmlSchemaAnnotated? cContent = (
-                        (XmlSchemaComplexContent)(ct.ContentModel)
-                    ).Content;
+                    XmlSchemaAnnotated? cContent = ((XmlSchemaComplexContent)(ct.ContentModel))
+                        .Content;
                     if (cContent is XmlSchemaComplexContentExtension ccExtension)
                     {
                         if (!(ct.BaseXmlSchemaType is XmlSchemaComplexType && FromInference))
@@ -1240,9 +1238,8 @@ namespace System.Data
                         ct.ContentModel is XmlSchemaSimpleContent,
                         "expected simpleContent or complexContent"
                     );
-                    XmlSchemaAnnotated cContent = (
-                        (XmlSchemaSimpleContent)(ct.ContentModel)
-                    ).Content!;
+                    XmlSchemaAnnotated cContent = ((XmlSchemaSimpleContent)(ct.ContentModel))
+                        .Content!;
                     if (cContent is XmlSchemaSimpleContentExtension ccExtension)
                     {
                         HandleAttributes(ccExtension.Attributes, table, isBase);
@@ -1308,9 +1305,8 @@ namespace System.Data
             {
                 if (ct.ContentModel is XmlSchemaComplexContent)
                 {
-                    XmlSchemaAnnotated cContent = (
-                        (XmlSchemaComplexContent)(ct.ContentModel)
-                    ).Content!;
+                    XmlSchemaAnnotated cContent = ((XmlSchemaComplexContent)(ct.ContentModel))
+                        .Content!;
                     if (cContent is XmlSchemaComplexContentExtension)
                     {
                         return ((XmlSchemaComplexContentExtension)cContent).Particle;
@@ -3040,9 +3036,8 @@ namespace System.Data
                                         is XmlSchemaComplexType
                                     )
                                 ) // amir
-                                    ((XmlSchemaElement)choiceEl).MaxOccurs = (
-                                        (XmlSchemaParticle)el
-                                    ).MaxOccurs;
+                                    ((XmlSchemaElement)choiceEl).MaxOccurs = ((XmlSchemaParticle)el)
+                                        .MaxOccurs;
                                 if (
                                     (((XmlSchemaElement)choiceEl).RefName.Name.Length != 0)
                                     && (

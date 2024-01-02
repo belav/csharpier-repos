@@ -354,10 +354,8 @@ namespace System.Activities.Statements
 
             SetInputParameters(definition, this.rootActivity, inputs, hasNameCollision);
 
-            ((IDependencyObjectAccessor)this.rootActivity).InitializeActivatingInstanceForRuntime(
-                null,
-                this
-            );
+            ((IDependencyObjectAccessor)this.rootActivity)
+                .InitializeActivatingInstanceForRuntime(null, this);
 
             this.rootActivity.FixUpMetaProperties(definition);
 
@@ -813,7 +811,8 @@ namespace System.Activities.Statements
                 (ActivityExecutionContextInfo)
                     ContextActivity(activity)
                         .GetValue(Activity.ActivityExecutionContextInfoProperty)
-            ).ContextId;
+            )
+                .ContextId;
         }
 
         static Activity ContextActivity(Activity activity)

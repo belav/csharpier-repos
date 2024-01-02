@@ -78,7 +78,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 join _f in context.Motors on _.Id equals _f.Id
                 join __ in context.VehicleInspections on _f.Id equals __.Id
                 select _
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Empty(results);
         }
@@ -101,7 +102,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 from v in context.VehicleInspections
                 where v.Id == _ || v.Id == __ || v.Id == _f
                 select _
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Empty(results);
         }
@@ -1743,7 +1745,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             var query = (
                 from foo in context.FooTable
                 select new { Bar = foo.Bar != null ? (Bar19425)foo.Bar : (Bar19425?)null }
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Single(query);
         }
@@ -1853,15 +1856,11 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         {
             using var context = new MyContext20359();
 
-            var result1 = (
-                from r in context.Root
-                select new { r.B.BValue, r.A.Sub.AValue }
-            ).FirstOrDefault();
+            var result1 = (from r in context.Root select new { r.B.BValue, r.A.Sub.AValue })
+                .FirstOrDefault();
 
-            var result2 = (
-                from r in context.Root
-                select new { r.A.Sub.AValue, r.B.BValue, }
-            ).FirstOrDefault();
+            var result2 = (from r in context.Root select new { r.A.Sub.AValue, r.B.BValue, })
+                .FirstOrDefault();
 
             Assert.Equal(result1.BValue, result2.BValue);
         }

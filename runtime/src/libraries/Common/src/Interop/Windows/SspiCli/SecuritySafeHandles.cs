@@ -437,7 +437,8 @@ namespace System.Net.Security
                                 inSecBuffers._item2.UnmanagedToken.DangerousGetHandle();
                             inUnmanagedBuffer[2].cbBuffer = (
                                 (ChannelBinding)inSecBuffers._item2.UnmanagedToken
-                            ).Size;
+                            )
+                                .Size;
                         }
                         else
                         {
@@ -459,7 +460,8 @@ namespace System.Net.Security
                                 inSecBuffers._item1.UnmanagedToken.DangerousGetHandle();
                             inUnmanagedBuffer[1].cbBuffer = (
                                 (ChannelBinding)inSecBuffers._item1.UnmanagedToken
-                            ).Size;
+                            )
+                                .Size;
                         }
                         else
                         {
@@ -481,7 +483,8 @@ namespace System.Net.Security
                                 inSecBuffers._item0.UnmanagedToken.DangerousGetHandle();
                             inUnmanagedBuffer[0].cbBuffer = (
                                 (ChannelBinding)inSecBuffers._item0.UnmanagedToken
-                            ).Size;
+                            )
+                                .Size;
                         }
                         else
                         {
@@ -820,7 +823,8 @@ namespace System.Net.Security
                                 inSecBuffers._item2.UnmanagedToken.DangerousGetHandle();
                             inUnmanagedBuffer[2].cbBuffer = (
                                 (ChannelBinding)inSecBuffers._item2.UnmanagedToken
-                            ).Size;
+                            )
+                                .Size;
                         }
                         else
                         {
@@ -842,7 +846,8 @@ namespace System.Net.Security
                                 inSecBuffers._item1.UnmanagedToken.DangerousGetHandle();
                             inUnmanagedBuffer[1].cbBuffer = (
                                 (ChannelBinding)inSecBuffers._item1.UnmanagedToken
-                            ).Size;
+                            )
+                                .Size;
                         }
                         else
                         {
@@ -864,7 +869,8 @@ namespace System.Net.Security
                                 inSecBuffers._item0.UnmanagedToken.DangerousGetHandle();
                             inUnmanagedBuffer[0].cbBuffer = (
                                 (ChannelBinding)inSecBuffers._item0.UnmanagedToken
-                            ).Size;
+                            )
+                                .Size;
                         }
                         else
                         {

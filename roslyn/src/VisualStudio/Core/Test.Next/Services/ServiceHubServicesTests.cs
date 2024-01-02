@@ -638,12 +638,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 // The docs on both sides must be in the exact same order, and with identical contents (including
                 // source-text encoding/hash-algorithm).
 
-                var localGeneratedDocs = (
-                    await localProject.GetSourceGeneratedDocumentsAsync()
-                ).ToImmutableArray();
-                var remoteGeneratedDocs = (
-                    await remoteProject.GetSourceGeneratedDocumentsAsync()
-                ).ToImmutableArray();
+                var localGeneratedDocs = (await localProject.GetSourceGeneratedDocumentsAsync())
+                    .ToImmutableArray();
+                var remoteGeneratedDocs = (await remoteProject.GetSourceGeneratedDocumentsAsync())
+                    .ToImmutableArray();
 
                 Assert.Equal(localGeneratedDocs.Length, remoteGeneratedDocs.Length);
                 Assert.Equal(expectedCount, localGeneratedDocs.Length);

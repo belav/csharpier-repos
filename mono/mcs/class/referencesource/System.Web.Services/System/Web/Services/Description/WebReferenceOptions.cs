@@ -247,9 +247,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Services.Description.ServiceDescriptionImportStyle"
                     );
             }
@@ -698,9 +697,8 @@ namespace System.Web.Services.Description
             XmlSerializationWriter writer
         )
         {
-            ((WebReferenceOptionsSerializationWriter)writer).Write5_webReferenceOptions(
-                objectToSerialize
-            );
+            ((WebReferenceOptionsSerializationWriter)writer)
+                .Write5_webReferenceOptions(objectToSerialize);
         }
 
         protected override System.Object Deserialize(XmlSerializationReader reader)

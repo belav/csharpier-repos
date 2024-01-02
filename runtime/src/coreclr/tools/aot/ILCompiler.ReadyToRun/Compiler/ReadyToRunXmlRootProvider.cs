@@ -128,9 +128,8 @@ namespace ILCompiler
                 )
             {
                 _rootingServiceProvider = provider;
-                _instructionSetSupport = (
-                    (ReadyToRunCompilerContext)owningModule.Context
-                ).InstructionSetSupport;
+                _instructionSetSupport = ((ReadyToRunCompilerContext)owningModule.Context)
+                    .InstructionSetSupport;
             }
 
             public void ProcessXml() => ProcessXml(false);

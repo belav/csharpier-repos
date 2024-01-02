@@ -17,7 +17,8 @@ public abstract class NorthwindIncludeQueryRelationalTestBase<TFixture>
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_with_last_no_orderby(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     protected virtual bool CanExecuteQueryString => false;

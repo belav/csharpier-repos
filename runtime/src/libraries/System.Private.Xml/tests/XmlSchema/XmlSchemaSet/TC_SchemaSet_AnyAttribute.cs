@@ -211,7 +211,8 @@ namespace System.Xml.XmlSchemaTests
             {
                 XmlSchemaAnyAttribute attributeWildcard = (
                     (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
-                ).AttributeWildcard;
+                )
+                    .AttributeWildcard;
                 CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
             }
         }
@@ -254,7 +255,8 @@ namespace System.Xml.XmlSchemaTests
             {
                 XmlSchemaAnyAttribute attributeWildcard = (
                     (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t1", attrNs)]
-                ).AttributeWildcard;
+                )
+                    .AttributeWildcard;
                 CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
             }
         }
@@ -278,7 +280,8 @@ namespace System.Xml.XmlSchemaTests
 
             XmlSchemaAnyAttribute attributeWildcard = (
                 (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
-            ).AttributeWildcard;
+            )
+                .AttributeWildcard;
             CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
         }
 

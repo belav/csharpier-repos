@@ -200,7 +200,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 "5ebb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee5"
                 + "0c25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160"
                 + "c496726216e986869eed578bda652855c85604a056201538ee56b6c4"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             KeyTransRecipientInfo recipient = FixedValueKeyTrans1();
             byte[] encryptedKey = recipient.EncryptedKey;
@@ -266,7 +267,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
             + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
             + "030704083adadf63cd297a86800835edc437e31d0b70"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static byte[] s_KeyTransEncodedMessage_Ski = (
             "3081f206092a864886f70d010703a081e43081e10201023181ae3081ab0201028014f2008aa9fa3742e8370cb1674ce1d158"
@@ -274,6 +276,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             + "4fb2113d6f7c07667e7296b029756222d6ced396a8fffed32be838eec7f2e54b9467fa80f85d097f7d1f0fbde57e07ab3d46"
             + "a60b31f37ef9844dcab2a8eef4fec5579fac5ec1e7ee82409898e17d30c3ac1a407fca15d23c9df2904a707294d78d4300ba"
             + "302b06092a864886f70d010701301406082a864886f70d03070408355c596e3e8540608008f1f811e862e51bbd"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
     }
 }

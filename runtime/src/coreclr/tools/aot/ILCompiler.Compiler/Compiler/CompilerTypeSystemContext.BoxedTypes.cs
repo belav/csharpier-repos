@@ -153,7 +153,8 @@ namespace ILCompiler
             MethodDesc typicalMethod = method.GetTypicalMethodDefinition();
             MethodDesc methodDefinitionRepresented = (
                 (ValueTypeInstanceMethodWithHiddenParameter)typicalMethod
-            ).MethodRepresented;
+            )
+                .MethodRepresented;
             return GetMethodForInstantiatedType(
                 methodDefinitionRepresented,
                 (InstantiatedType)method.OwningType
@@ -436,7 +437,8 @@ namespace ILCompiler
         {
             MethodDesc typicalMethodTarget = (
                 (GenericUnboxingThunk)method.GetTypicalMethodDefinition()
-            ).TargetMethod;
+            )
+                .TargetMethod;
 
             MethodDesc methodOnInstantiatedType = typicalMethodTarget;
             if (method.OwningType.HasInstantiation)

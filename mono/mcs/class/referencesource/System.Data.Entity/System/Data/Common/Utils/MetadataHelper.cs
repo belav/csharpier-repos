@@ -679,9 +679,8 @@ namespace System.Data.Common.Utils
                         constraint.FromProperties
                     );
                     otherEndType = (EntityType)
-                        (
-                            (RefType)((AssociationEndMember)constraint.FromRole).TypeUsage.EdmType
-                        ).ElementType;
+                        ((RefType)((AssociationEndMember)constraint.FromRole).TypeUsage.EdmType)
+                            .ElementType;
                 }
                 else if (thisEnd.Equals((AssociationEndMember)constraint.FromRole))
                 {
@@ -689,9 +688,8 @@ namespace System.Data.Common.Utils
                         constraint.ToProperties
                     );
                     otherEndType = (EntityType)
-                        (
-                            (RefType)((AssociationEndMember)constraint.ToRole).TypeUsage.EdmType
-                        ).ElementType;
+                        ((RefType)((AssociationEndMember)constraint.ToRole).TypeUsage.EdmType)
+                            .ElementType;
                 }
                 else
                 {

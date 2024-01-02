@@ -32,7 +32,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             byte[] encoded = (
                 "30223120300C060355040313054A616D65733010060355040A13094D6963726F" + "736F6674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             const string expected = "CN=James + O=Microsoft";
             X500DistinguishedName dn;
@@ -59,9 +60,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Browser doesn't support an X.509 PAL")]
         public static void PrintUnknownOidRdn()
         {
-            byte[] encoded = (
-                "30183116301406052901020203130B496E76616C6964204F6964"
-            ).HexToByteArray();
+            byte[] encoded = ("30183116301406052901020203130B496E76616C6964204F6964")
+                .HexToByteArray();
 
             X500DistinguishedName dn = new X500DistinguishedName(encoded);
             Assert.Equal("OID.1.1.1.2.2.3=Invalid Oid", dn.Decode(X500DistinguishedNameFlags.None));
@@ -494,7 +494,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     "304C31133011060B2B0601040182373C02010313025553310C300A0603550462"
                     + "1303555341310C300A06035504631203555341310C300A060355046312033834"
                     + "30310B3009060355040613025553"
-                ).HexToByteArray()
+                )
+                    .HexToByteArray()
             );
 
             int index = 0;
@@ -699,7 +700,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     + "656D61696C310B3009060355040613025553310C300A06035504631203383430"
                     + "3121301F06092A864886F70D0109011612746F746573206E6F7420616E20656D"
                     + "61696C310B3009060355040613024341310C300A06035504631203383430"
-                ).HexToByteArray()
+                )
+                    .HexToByteArray()
             );
 
             List<X500RelativeDistinguishedName> rdns = dn.EnumerateRelativeDistinguishedNames()

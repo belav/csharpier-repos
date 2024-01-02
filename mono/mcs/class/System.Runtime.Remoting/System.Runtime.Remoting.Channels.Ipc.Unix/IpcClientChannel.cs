@@ -100,11 +100,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Unix
         )
         {
             url = IpcToUnix(url);
-            IMessageSink sink = ((IChannelSender)_innerChannel).CreateMessageSink(
-                url,
-                remoteChannelData,
-                out objectUri
-            );
+            IMessageSink sink = ((IChannelSender)_innerChannel)
+                .CreateMessageSink(url, remoteChannelData, out objectUri);
 
             if (sink != null)
                 return new UrlMapperSink(sink);

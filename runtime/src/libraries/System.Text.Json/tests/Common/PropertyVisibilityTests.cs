@@ -3524,9 +3524,8 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal(
                 "Jane Doe",
-                (
-                    await Serializer.DeserializeWrapper<TypeWith_IgnoredRefStringProp>(janePayload)
-                ).Name
+                (await Serializer.DeserializeWrapper<TypeWith_IgnoredRefStringProp>(janePayload))
+                    .Name
             );
 
             Assert.Equal(
@@ -3534,9 +3533,8 @@ namespace System.Text.Json.Serialization.Tests
                 await Serializer.SerializeWrapper(new TypeWith_IgnoredPropWith_BadConverter())
             );
             Assert.Null(
-                (
-                    await Serializer.DeserializeWrapper<TypeWith_IgnoredPropWith_BadConverter>("{}")
-                ).Property
+                (await Serializer.DeserializeWrapper<TypeWith_IgnoredPropWith_BadConverter>("{}"))
+                    .Property
             );
         }
 

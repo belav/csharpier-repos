@@ -253,9 +253,8 @@ namespace System.Web.UI.WebControls
                     }
                     else
                     {
-                        borderWidthString = ((int)borderWidth.Value).ToString(
-                            NumberFormatInfo.InvariantInfo
-                        );
+                        borderWidthString = ((int)borderWidth.Value)
+                            .ToString(NumberFormatInfo.InvariantInfo);
                     }
                 }
             }

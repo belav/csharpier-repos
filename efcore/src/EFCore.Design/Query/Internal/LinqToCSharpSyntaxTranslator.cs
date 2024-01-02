@@ -1884,7 +1884,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                                 nameof(Activator.CreateInstance),
                                 Array.Empty<Type>()
                             )!
-                        ).MakeGenericMethod(node.Type)
+                        )
+                            .MakeGenericMethod(node.Type)
                     )
                 );
             }

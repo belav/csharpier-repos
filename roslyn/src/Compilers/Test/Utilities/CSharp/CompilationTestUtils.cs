@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string[] symbolDescriptions = (
                 from s in symbols
                 select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
-            ).ToArray();
+            )
+                .ToArray();
             Array.Sort(descriptions);
             Array.Sort(symbolDescriptions);
 
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string[] symbolDescriptions = (
                 from s in symbols
                 select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
-            ).ToArray();
+            )
+                .ToArray();
             Array.Sort(descriptions);
             Array.Sort(symbolDescriptions);
 
@@ -593,14 +595,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     // https://github.com/dotnet/roslyn/issues/35035: After refactoring symboldisplay, we should be able to just call something like typeInfo.Type.ToDisplayString(typeInfo.Nullability.FlowState, TypeWithState.TestDisplayFormat)
                     var type = TypeWithState
                         .Create(
-                            (
-                                annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type
-                            ).GetSymbol(),
+                            (annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type)
+                                .GetSymbol(),
                             (
                                 annotation.IsConverted
                                     ? typeInfo.ConvertedNullability
                                     : typeInfo.Nullability
-                            ).FlowState.ToInternalFlowState()
+                            )
+                                .FlowState.ToInternalFlowState()
                         )
                         .ToTypeWithAnnotations(compilation);
                     return type.ToDisplayString(TypeWithAnnotations.TestDisplayFormat);

@@ -116,9 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.FieldDeclaration:
 
                         {
-                            var modifiers = (
-                                (BaseFieldDeclarationSyntax)declarationSyntax.Parent
-                            ).Modifiers;
+                            var modifiers = ((BaseFieldDeclarationSyntax)declarationSyntax.Parent)
+                                .Modifiers;
                             GetFirstLocalOrFieldBreakpointSpan(
                                 modifiers.Any() ? modifiers[0] : (SyntaxToken?)null,
                                 declaratorSyntax,

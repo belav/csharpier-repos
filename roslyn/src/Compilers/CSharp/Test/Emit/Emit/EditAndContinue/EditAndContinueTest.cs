@@ -23,7 +23,8 @@ internal sealed class EditAndContinueTest(
 {
     private readonly CSharpCompilationOptions _compilationOptions = (
         options ?? TestOptions.DebugDll
-    ).WithConcurrentBuild(false);
+    )
+        .WithConcurrentBuild(false);
     private readonly CSharpParseOptions _parseOptions =
         parseOptions ?? TestOptions.Regular.WithNoRefSafetyRulesAttribute();
 

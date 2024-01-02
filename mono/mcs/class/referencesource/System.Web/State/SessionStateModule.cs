@@ -1411,9 +1411,8 @@ namespace System.Web.SessionState
             {
                 //
                 // Remove the element when no more references
-                ((ICollection<KeyValuePair<string, int>>)s_queuedRequestsNumPerSession).Remove(
-                    new KeyValuePair<string, int>(_rqId, 0)
-                );
+                ((ICollection<KeyValuePair<string, int>>)s_queuedRequestsNumPerSession)
+                    .Remove(new KeyValuePair<string, int>(_rqId, 0));
             }
         }
 

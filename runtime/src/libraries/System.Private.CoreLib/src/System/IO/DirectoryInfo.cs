@@ -60,7 +60,8 @@ namespace System.IO
                         PathInternal.IsRoot(fullPath)
                             ? fullPath
                             : Path.GetFileName(Path.TrimEndingDirectorySeparator(fullPath))
-                    ).ToString();
+                    )
+                        .ToString();
                 }
 
                 return name;

@@ -614,16 +614,17 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                ((IXmlMtomWriterInitializer)xmlWriter).SetOutput(
-                    stream,
-                    this.writeEncoding,
-                    int.MaxValue,
-                    startInfo,
-                    boundary,
-                    startUri,
-                    writeMessageHeaders,
-                    false
-                );
+                ((IXmlMtomWriterInitializer)xmlWriter)
+                    .SetOutput(
+                        stream,
+                        this.writeEncoding,
+                        int.MaxValue,
+                        startInfo,
+                        boundary,
+                        startUri,
+                        writeMessageHeaders,
+                        false
+                    );
             }
             return xmlWriter;
         }
@@ -718,14 +719,15 @@ namespace System.ServiceModel.Channels
                 {
                     if (xmlReader != null && xmlReader is IXmlMtomReaderInitializer)
                     {
-                        ((IXmlMtomReaderInitializer)xmlReader).SetInput(
-                            stream,
-                            MtomMessageEncoderFactory.GetSupportedEncodings(),
-                            contentType,
-                            this.readerQuotas,
-                            this.maxBufferSize,
-                            onStreamedReaderClose
-                        );
+                        ((IXmlMtomReaderInitializer)xmlReader)
+                            .SetInput(
+                                stream,
+                                MtomMessageEncoderFactory.GetSupportedEncodings(),
+                                contentType,
+                                this.readerQuotas,
+                                this.maxBufferSize,
+                                onStreamedReaderClose
+                            );
                     }
                     else
                     {
@@ -747,15 +749,16 @@ namespace System.ServiceModel.Channels
                 {
                     if (xmlReader != null && xmlReader is IXmlTextReaderInitializer)
                     {
-                        ((IXmlTextReaderInitializer)xmlReader).SetInput(
-                            stream,
-                            TextMessageEncoderFactory.GetEncodingFromContentType(
-                                contentType,
-                                this.contentEncodingMap
-                            ),
-                            this.readerQuotas,
-                            onStreamedReaderClose
-                        );
+                        ((IXmlTextReaderInitializer)xmlReader)
+                            .SetInput(
+                                stream,
+                                TextMessageEncoderFactory.GetEncodingFromContentType(
+                                    contentType,
+                                    this.contentEncodingMap
+                                ),
+                                this.readerQuotas,
+                                onStreamedReaderClose
+                            );
                     }
                     else
                     {
@@ -862,16 +865,17 @@ namespace System.ServiceModel.Channels
                     {
                         if (xmlReader != null && xmlReader is IXmlMtomReaderInitializer)
                         {
-                            ((IXmlMtomReaderInitializer)xmlReader).SetInput(
-                                buffer.Array,
-                                buffer.Offset,
-                                buffer.Count,
-                                MtomMessageEncoderFactory.GetSupportedEncodings(),
-                                ContentType,
-                                this.Quotas,
-                                this.messageEncoder.MaxBufferSize,
-                                onClose
-                            );
+                            ((IXmlMtomReaderInitializer)xmlReader)
+                                .SetInput(
+                                    buffer.Array,
+                                    buffer.Offset,
+                                    buffer.Count,
+                                    MtomMessageEncoderFactory.GetSupportedEncodings(),
+                                    ContentType,
+                                    this.Quotas,
+                                    this.messageEncoder.MaxBufferSize,
+                                    onClose
+                                );
                         }
                         else
                         {
@@ -895,17 +899,18 @@ namespace System.ServiceModel.Channels
                     {
                         if (xmlReader != null && xmlReader is IXmlTextReaderInitializer)
                         {
-                            ((IXmlTextReaderInitializer)xmlReader).SetInput(
-                                buffer.Array,
-                                buffer.Offset,
-                                buffer.Count,
-                                TextMessageEncoderFactory.GetEncodingFromContentType(
-                                    ContentType,
-                                    this.messageEncoder.contentEncodingMap
-                                ),
-                                this.Quotas,
-                                onClose
-                            );
+                            ((IXmlTextReaderInitializer)xmlReader)
+                                .SetInput(
+                                    buffer.Array,
+                                    buffer.Offset,
+                                    buffer.Count,
+                                    TextMessageEncoderFactory.GetEncodingFromContentType(
+                                        ContentType,
+                                        this.messageEncoder.contentEncodingMap
+                                    ),
+                                    this.Quotas,
+                                    onClose
+                                );
                         }
                         else
                         {
@@ -983,16 +988,17 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     writer = null;
-                    ((IXmlMtomWriterInitializer)returnedWriter).SetOutput(
-                        stream,
-                        messageEncoder.writeEncoding,
-                        MaxSizeInBytes,
-                        StartInfo,
-                        Boundary,
-                        StartUri,
-                        WriteMessageHeaders,
-                        false
-                    );
+                    ((IXmlMtomWriterInitializer)returnedWriter)
+                        .SetOutput(
+                            stream,
+                            messageEncoder.writeEncoding,
+                            MaxSizeInBytes,
+                            StartInfo,
+                            Boundary,
+                            StartUri,
+                            WriteMessageHeaders,
+                            false
+                        );
                 }
                 if (messageEncoder.writeEncoding.WebName != "utf-8")
                     returnedWriter.WriteStartDocument();

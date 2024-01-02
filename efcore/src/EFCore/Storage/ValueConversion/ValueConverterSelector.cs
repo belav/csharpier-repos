@@ -351,19 +351,13 @@ public class ValueConverterSelector : IValueConverterSelector
                     )
                     : _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
-                        static k => new ValueConverterInfo(
-                            k.ModelClrType,
-                            typeof(byte[]),
-                            i =>
-                                (
+                        static k => new ValueConverterInfo(k.ModelClrType, typeof(byte[]), i => (
                                     i.ModelClrType == typeof(DateTime)
                                         ? DateTimeToBinaryConverter.DefaultInfo.Create()
                                         : i.ModelClrType == typeof(TimeSpan)
                                             ? TimeSpanToTicksConverter.DefaultInfo.Create()
                                             : TimeOnlyToTicksConverter.DefaultInfo.Create()
-                                ).ComposeWith(NumberToBytesConverter<long>.DefaultInfo.Create()),
-                            NumberToBytesConverter<long>.DefaultInfo.MappingHints
-                        )
+                                ).ComposeWith(NumberToBytesConverter<long>.DefaultInfo.Create()), NumberToBytesConverter<long>.DefaultInfo.MappingHints)
                     );
             }
         }

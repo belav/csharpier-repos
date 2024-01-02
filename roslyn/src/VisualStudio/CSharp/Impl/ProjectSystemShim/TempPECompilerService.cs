@@ -115,10 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 {
                     // We get a pipe-delimited list of references, so split them back apart
                     foreach (
-                        var reference in ((string)optionValue).Split(
-                            new[] { '|' },
-                            StringSplitOptions.RemoveEmptyEntries
-                        )
+                        var reference in ((string)optionValue)
+                            .Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
                     )
                     {
                         arguments.Add(string.Format("/r:\"{0}\"", reference));

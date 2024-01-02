@@ -808,11 +808,8 @@ namespace System.Diagnostics.Tracing
             uint dataSize
         )
         {
-            return ((EtwEventProvider)_eventProvider).SetInformation(
-                eventInfoClass,
-                data,
-                dataSize
-            );
+            return ((EtwEventProvider)_eventProvider)
+                .SetInformation(eventInfoClass, data, dataSize);
         }
 #endif
     }

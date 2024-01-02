@@ -165,10 +165,11 @@ namespace Internal.Runtime
                     return false;
 
                 if (
-                    ((MetadataType)type).HasCustomAttribute(
-                        "System.Runtime.InteropServices.ObjectiveC",
-                        "ObjectiveCTrackedTypeAttribute"
-                    )
+                    ((MetadataType)type)
+                        .HasCustomAttribute(
+                            "System.Runtime.InteropServices.ObjectiveC",
+                            "ObjectiveCTrackedTypeAttribute"
+                        )
                 )
                     return true;
 

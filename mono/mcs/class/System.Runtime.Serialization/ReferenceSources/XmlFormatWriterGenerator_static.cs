@@ -200,9 +200,8 @@ namespace System.Runtime.Serialization
 
                 if (classContract.HasExtensionData)
                 {
-                    ExtensionDataObject extensionData = (
-                        (IExtensibleDataObject)objLocal
-                    ).ExtensionData;
+                    ExtensionDataObject extensionData = ((IExtensibleDataObject)objLocal)
+                        .ExtensionData;
                     ctx.WriteExtensionData(writer, extensionData, -1);
 
                     WriteMembers(classContract, extensionData, classContract);

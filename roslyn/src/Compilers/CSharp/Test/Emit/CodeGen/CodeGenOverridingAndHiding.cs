@@ -5341,9 +5341,8 @@ class B : A
             Assert.Equal(expected, parameter.IsParams);
 
             var peParameter = (PEParameterSymbol)parameter;
-            var allAttributes = (
-                (PEModuleSymbol)parameter.ContainingModule
-            ).GetCustomAttributesForToken(peParameter.Handle);
+            var allAttributes = ((PEModuleSymbol)parameter.ContainingModule)
+                .GetCustomAttributesForToken(peParameter.Handle);
             var paramArrayAttributes = allAttributes.Where(a =>
                 a.AttributeClass.ToTestDisplayString() == "System.ParamArrayAttribute"
             );

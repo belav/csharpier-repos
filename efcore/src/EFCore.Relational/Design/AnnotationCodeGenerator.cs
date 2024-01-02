@@ -195,10 +195,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         IAnnotatable annotatable,
         IDictionary<string, IAnnotation> annotations
     ) =>
-        ((IAnnotationCodeGenerator)this).RemoveAnnotationsHandledByConventionsInternal(
-            annotatable,
-            annotations
-        );
+        ((IAnnotationCodeGenerator)this)
+            .RemoveAnnotationsHandledByConventionsInternal(annotatable, annotations);
 
     /// <inheritdoc />
     public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
@@ -694,10 +692,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         IAnnotatable annotatable,
         IDictionary<string, IAnnotation> annotations
     ) =>
-        ((IAnnotationCodeGenerator)this).GenerateDataAnnotationAttributesInternal(
-            annotatable,
-            annotations
-        );
+        ((IAnnotationCodeGenerator)this)
+            .GenerateDataAnnotationAttributesInternal(annotatable, annotations);
 
     /// <summary>
     ///     Checks if the given <paramref name="annotation" /> is handled by convention when

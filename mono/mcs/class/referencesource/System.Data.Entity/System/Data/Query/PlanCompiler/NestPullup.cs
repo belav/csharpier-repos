@@ -534,9 +534,8 @@ namespace System.Data.Query.PlanCompiler
 
                         // Update the definitions corresponding ot the collection vars to be filtered based on the sentinel.
                         foreach (
-                            CollectionInfo collectionInfo in (
-                                (MultiStreamNestOp)chi.Op
-                            ).CollectionInfo
+                            CollectionInfo collectionInfo in ((MultiStreamNestOp)chi.Op)
+                                .CollectionInfo
                         )
                         {
                             m_definingNodeMap[collectionInfo.CollectionVar].Child0 =

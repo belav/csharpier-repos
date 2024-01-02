@@ -97,7 +97,8 @@ public class MigrationsAssembly : IMigrationsAssembly
                 t.IsSubclassOf(typeof(ModelSnapshot))
                 && t.GetCustomAttribute<DbContextAttribute>()?.ContextType == _contextType
             select (ModelSnapshot)Activator.CreateInstance(t.AsType())!
-        ).FirstOrDefault();
+        )
+            .FirstOrDefault();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

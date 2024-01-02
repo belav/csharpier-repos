@@ -1429,7 +1429,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l1 in ss.Set<Level1>()
                     where ss.Set<Level2>().Any(l2 => l2.Level1_Required_Id == l1.Id)
                     select l1.Name
-                ).Distinct()
+                )
+                    .Distinct()
         );
 
     [ConditionalTheory]
@@ -1459,7 +1460,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l1 in ss.Set<Level1>()
                     where ss.Set<Level2>().Any(l2 => ss.Set<Level3>().Select(l3 => l2.Id).Any())
                     select l1.Name
-                ).Distinct()
+                )
+                    .Distinct()
         );
 
     [ConditionalTheory]
@@ -1474,7 +1476,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l1 in ss.Set<Level1>()
                     where ss.Set<Level2>().Any(l2 => ss.Set<Level3>().Select(l3 => l1.Id).Any())
                     select l1.Name
-                ).Distinct()
+                )
+                    .Distinct()
         );
 
     [ConditionalTheory]
@@ -2557,7 +2560,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l2 in grouping.DefaultIfEmpty()
                     orderby l1.Id
                     select l1
-                ).Take(2)
+                )
+                    .Take(2)
                 join l2_outer in ss.Set<Level2>()
                     on x.Id equals l2_outer.Level1_Optional_Id
                     into grouping_outer
@@ -2585,7 +2589,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             from l2 in grouping.DefaultIfEmpty()
                             orderby l1.Id
                             select ClientLevel1(l1)
-                        ).Take(2)
+                        )
+                            .Take(2)
                         join l2_outer in ss.Set<Level2>()
                             on x.Id equals l2_outer.Level1_Optional_Id
                             into grouping_outer
@@ -2600,7 +2605,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             from l2 in grouping.DefaultIfEmpty()
                             orderby l1.Id
                             select ClientLevel1(l1)
-                        ).Take(2)
+                        )
+                            .Take(2)
                         join l2_outer in ss.Set<Level2>()
                             on x.Id equals l2_outer.Level1_Optional_Id
                             into grouping_outer
@@ -2625,7 +2631,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l2 in grouping.DefaultIfEmpty()
                     orderby l1.Id
                     select l2
-                ).Take(2)
+                )
+                    .Take(2)
                 join l1_outer in ss.Set<Level1>()
                     on x.Level1_Optional_Id equals l1_outer.Id
                     into grouping_outer
@@ -2649,7 +2656,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l2 in grouping.DefaultIfEmpty()
                     orderby l1.Id
                     select l2
-                ).Take(2)
+                )
+                    .Take(2)
                 join l1_outer in ss.Set<Level1>()
                     on x.Level1_Optional_Id equals l1_outer.Id
                     into grouping_outer
@@ -2725,7 +2733,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             into grouping
                         from l2_inner in grouping.DefaultIfEmpty()
                         select ClientStringMethod(l1_inner.Name)
-                    ).Count() > 7
+                    )
+                        .Count() > 7
                 where l1.Id < 3
                 select l1.Name
         );
@@ -2752,7 +2761,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                                     into grouping_inner
                                 from l2_inner in grouping_inner.DefaultIfEmpty()
                                 select ClientStringMethod(l1_inner.Name)
-                            ).Count() > 7
+                            )
+                                .Count() > 7
                         select l1_middle
                     )
                         .OrderBy(l1 => l1.Id)
@@ -2784,9 +2794,11 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                                     into grouping_inner
                                 from l2_inner in grouping_inner.DefaultIfEmpty()
                                 select l1_inner.Name
-                            ).Count() > 7
+                            )
+                                .Count() > 7
                         select ClientStringMethod(l1_middle.Name)
-                    ).Count() > 4
+                    )
+                        .Count() > 4
                 where l1_outer.Id < 2
                 select l1_outer.Name
         );
@@ -2909,7 +2921,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l2 in grouping.DefaultIfEmpty()
                     where (l2 != null ? l2.Name : null) != "Foo"
                     select l1
-                ).Distinct()
+                )
+                    .Distinct()
                 select l1.Id
         );
 
@@ -2925,7 +2938,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from l2 in grouping.DefaultIfEmpty()
                     where (l2 != null ? l2.Name : null) != "Foo"
                     select l1.Id
-                ).Distinct()
+                )
+                    .Distinct()
                 select l1
         );
 
@@ -2963,7 +2977,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             into grouping
                         from l2 in grouping.DefaultIfEmpty()
                         select l1_inner
-                    ).Count() > 4
+                    )
+                        .Count() > 4
                 select l1
         );
 
@@ -3064,7 +3079,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         into grouping_inner
                     from l2_inner in grouping_inner.DefaultIfEmpty()
                     select l2_inner
-                ).Take(2)
+                )
+                    .Take(2)
                 join l2_outer in ss.Set<Level2>()
                     on l1_outer.Id equals l2_outer.Level1_Optional_Id
                     into grouping_outer
@@ -4115,8 +4131,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             where l4.Level3_Required_Id == l3.Id
                             orderby l4.Id
                             select l4
-                        ).FirstOrDefault()
-                    ).FirstOrDefault()
+                        )
+                            .FirstOrDefault()
+                    )
+                        .FirstOrDefault()
                 )
                     .FirstOrDefault()
                     .Name != "Foo"
@@ -4147,9 +4165,12 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         where l4.Level3_Required_Id == l3.Id
                         orderby l4.Id
                         select l4
-                    ).FirstOrDefault()
-                ).FirstOrDefault()
-            ).FirstOrDefault();
+                    )
+                        .FirstOrDefault()
+                )
+                    .FirstOrDefault()
+            )
+                .FirstOrDefault();
 
         _ = async ? await query.ToListAsync() : query.ToList();
     }
@@ -4173,7 +4194,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         where l4.Level3_Required_Id == l3.Id
                         orderby l4.Id
                         select l4
-                    ).FirstOrDefault()
+                    )
+                        .FirstOrDefault()
                 )
                     .FirstOrDefault()
             )
@@ -4731,7 +4753,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     from level3 in ss.Set<Level3>()
                     where level2Ids.Contains(level3.Level2_Required_Id)
                     select level3
-                ).AsEnumerable()
+                )
+                    .AsEnumerable()
                 from level3 in level3s.DefaultIfEmpty()
                 select new { l1, level3 },
             elementSorter: e => (e.l1.Id, e.level3?.Id),
@@ -5281,7 +5304,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 from ids in (
                     from l2 in ss.Set<Level2>().Where(i => i.Id < 5)
                     select l2.Level1_Required_Id
-                ).DefaultIfEmpty()
+                )
+                    .DefaultIfEmpty()
                 from l1 in ss.Set<Level1>().Where(x => x.Id != ids)
                 select l1
         );

@@ -557,7 +557,8 @@ namespace Microsoft.CodeAnalysis
                                     MetadataReference,
                                     ImmutableArray<MetadataReference>
                                 >()
-                        ).Add(reference, referenceMap[i].MergedReferences);
+                        )
+                            .Add(reference, referenceMap[i].MergedReferences);
                     }
 
                     hasRecursiveAliases |= !referenceMap[i].RecursiveAliasesOpt.IsDefault;

@@ -3208,10 +3208,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             {
                 // Save image into the memory stream
                 MemoryStream imageStream = new MemoryStream();
-                ((System.Drawing.Image)obj).Save(
-                    imageStream,
-                    ((System.Drawing.Image)obj).RawFormat
-                );
+                ((System.Drawing.Image)obj)
+                    .Save(imageStream, ((System.Drawing.Image)obj).RawFormat);
 
                 // Write the size of the data
                 int imageSize = (int)imageStream.Seek(0, SeekOrigin.End);

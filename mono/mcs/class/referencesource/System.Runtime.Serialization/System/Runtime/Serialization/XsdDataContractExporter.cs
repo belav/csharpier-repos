@@ -481,10 +481,12 @@ namespace System.Runtime.Serialization
                         {
                             XmlFormatClassWriterDelegate writerMethod = (
                                 (ClassDataContract)dataContract
-                            ).XmlFormatWriterDelegate;
+                            )
+                                .XmlFormatWriterDelegate;
                             XmlFormatClassReaderDelegate readerMethod = (
                                 (ClassDataContract)dataContract
-                            ).XmlFormatReaderDelegate;
+                            )
+                                .XmlFormatReaderDelegate;
                         }
                         catch (Exception ex)
                         {
@@ -502,10 +504,12 @@ namespace System.Runtime.Serialization
                         {
                             XmlFormatCollectionWriterDelegate writerMethod = (
                                 (CollectionDataContract)dataContract
-                            ).XmlFormatWriterDelegate;
+                            )
+                                .XmlFormatWriterDelegate;
                             XmlFormatCollectionReaderDelegate readerMethod = (
                                 (CollectionDataContract)dataContract
-                            ).XmlFormatReaderDelegate;
+                            )
+                                .XmlFormatReaderDelegate;
                         }
                         catch (Exception ex)
                         {

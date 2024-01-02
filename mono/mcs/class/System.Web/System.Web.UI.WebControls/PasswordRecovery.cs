@@ -692,18 +692,16 @@ namespace System.Web.UI.WebControls
             if (userNameTemplate == null)
             {
                 userNameTemplate = new UserNameDefaultTemplate(this);
-                ((UserNameContainer)UserNameTemplateContainer).InstantiateTemplate(
-                    userNameTemplate
-                );
+                ((UserNameContainer)UserNameTemplateContainer)
+                    .InstantiateTemplate(userNameTemplate);
             }
 
             ITemplate questionTemplate = QuestionTemplate;
             if (questionTemplate == null)
             {
                 questionTemplate = new QuestionDefaultTemplate(this);
-                ((QuestionContainer)QuestionTemplateContainer).InstantiateTemplate(
-                    questionTemplate
-                );
+                ((QuestionContainer)QuestionTemplateContainer)
+                    .InstantiateTemplate(questionTemplate);
             }
 
             ITemplate successTemplate = SuccessTemplate;

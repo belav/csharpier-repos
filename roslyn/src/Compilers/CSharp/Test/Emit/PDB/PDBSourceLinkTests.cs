@@ -121,7 +121,8 @@ class C
                         let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
                         where pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
                         select pdbReader.GetBlobBytes(cdi.Value)
-                    ).Single();
+                    )
+                        .Single();
 
                     AssertEx.Equal(sourceLinkBlob, actualBlob);
                 }

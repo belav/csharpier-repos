@@ -197,10 +197,8 @@ namespace System.Data.Linq
             {
                 if (toType == typeof(string))
                 {
-                    return ((TimeSpan)value).ToString(
-                        "",
-                        Globalization.CultureInfo.InvariantCulture
-                    );
+                    return ((TimeSpan)value)
+                        .ToString("", Globalization.CultureInfo.InvariantCulture);
                 }
                 else if (toType == typeof(DateTime))
                 {

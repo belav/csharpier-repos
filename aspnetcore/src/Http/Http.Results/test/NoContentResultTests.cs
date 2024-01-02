@@ -101,7 +101,8 @@ public class NoContentResultTests
                 PopulateMetadata<NoContent>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

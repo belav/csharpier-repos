@@ -75,12 +75,13 @@ namespace System.Data.Objects
             }
             else
             {
-                return (_cacheEntry as EntityEntry).GetCurrentEntityValue(
-                    _metadata,
-                    ordinal,
-                    _userObject,
-                    ObjectStateValueRecord.CurrentUpdatable
-                );
+                return (_cacheEntry as EntityEntry)
+                    .GetCurrentEntityValue(
+                        _metadata,
+                        ordinal,
+                        _userObject,
+                        ObjectStateValueRecord.CurrentUpdatable
+                    );
             }
         }
 
@@ -93,12 +94,8 @@ namespace System.Data.Objects
             }
             else
             {
-                (_cacheEntry as EntityEntry).SetCurrentEntityValue(
-                    _metadata,
-                    ordinal,
-                    _userObject,
-                    value
-                );
+                (_cacheEntry as EntityEntry)
+                    .SetCurrentEntityValue(_metadata, ordinal, _userObject, value);
             }
         }
     }

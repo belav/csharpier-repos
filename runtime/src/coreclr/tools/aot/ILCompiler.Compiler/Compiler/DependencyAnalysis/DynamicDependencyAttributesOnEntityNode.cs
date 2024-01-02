@@ -91,10 +91,11 @@ namespace ILCompiler.DependencyAnalysis
                         _
                             => (
                                 ((EcmaField)_entity).OwningType,
-                                ((EcmaField)_entity).GetDecodedCustomAttributes(
-                                    "System.Diagnostics.CodeAnalysis",
-                                    "DynamicDependencyAttribute"
-                                )
+                                ((EcmaField)_entity)
+                                    .GetDecodedCustomAttributes(
+                                        "System.Diagnostics.CodeAnalysis",
+                                        "DynamicDependencyAttribute"
+                                    )
                             ),
                     };
 

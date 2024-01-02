@@ -1419,9 +1419,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
         var property = column.PropertyMappings.First().Property;
         var valueConverter = GetValueConverter(property, typeMapping);
-        columnOperation.ClrType = (
-            valueConverter?.ProviderClrType ?? typeMapping.ClrType
-        ).UnwrapNullableType();
+        columnOperation.ClrType = (valueConverter?.ProviderClrType ?? typeMapping.ClrType)
+            .UnwrapNullableType();
 
         if (!column.TryGetDefaultValue(out var defaultValue))
         {
@@ -2217,9 +2216,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         if (
                             property.GetValueGeneratorFactory() != null
                             && property
-                                == (
-                                    property.DeclaringType as IEntityType
-                                )?.FindDiscriminatorProperty()
+                                == (property.DeclaringType as IEntityType)
+                                    ?.FindDiscriminatorProperty()
                         )
                         {
                             value = entityType.GetDiscriminatorValue()!;

@@ -626,7 +626,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                             remoteSolution1,
                             solution1.WorkspaceVersion
                         )
-                ).solution,
+                )
+                    .solution,
                 expectRemoteSolutionToCurrent: false
             );
 
@@ -639,7 +640,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 await remoteWorkspace
                     .GetTestAccessor()
                     .TryUpdateWorkspaceCurrentSolutionAsync(currentSolution, ++version)
-            ).solution;
+            )
+                .solution;
 
             await Verify(
                 remoteWorkspace,
@@ -662,7 +664,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                             solution2,
                             solution1.WorkspaceVersion
                         )
-                ).updated
+                )
+                    .updated
             );
 
             // move to new solution forward

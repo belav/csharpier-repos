@@ -266,9 +266,8 @@ internal sealed class KestrelServerImpl : IServer
                             options.Protocols,
                             addAltSvcHeader
                         );
-                        var multiplexedConnectionDelegate = (
-                            (IMultiplexedConnectionBuilder)options
-                        ).Build();
+                        var multiplexedConnectionDelegate = ((IMultiplexedConnectionBuilder)options)
+                            .Build();
 
                         // Add the connection limit middleware
                         multiplexedConnectionDelegate = EnforceConnectionLimit(

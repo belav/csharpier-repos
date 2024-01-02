@@ -146,9 +146,8 @@ namespace System.ComponentModel
             if (oldReflectEventDescriptor is DebugReflectEventDescriptor)
             {
                 this.addMethod = ((DebugReflectEventDescriptor)oldReflectEventDescriptor).addMethod;
-                this.removeMethod = (
-                    (DebugReflectEventDescriptor)oldReflectEventDescriptor
-                ).removeMethod;
+                this.removeMethod = ((DebugReflectEventDescriptor)oldReflectEventDescriptor)
+                    .removeMethod;
                 this.filledMethods = true;
             }
         }

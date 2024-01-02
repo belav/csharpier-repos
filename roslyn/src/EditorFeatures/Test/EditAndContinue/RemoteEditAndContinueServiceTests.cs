@@ -263,7 +263,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 await remoteDebuggeeModuleMetadataProvider!.GetActiveStatementsAsync(
                     CancellationToken.None
                 )
-            ).Single();
+            )
+                .Single();
             Assert.Equal(as1.ActiveInstruction, activeStatement.ActiveInstruction);
             Assert.Equal(as1.SourceSpan, activeStatement.SourceSpan);
             Assert.Equal(as1.Flags, activeStatement.Flags);

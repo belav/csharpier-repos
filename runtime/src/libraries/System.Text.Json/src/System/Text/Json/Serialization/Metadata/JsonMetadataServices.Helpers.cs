@@ -48,9 +48,8 @@ namespace System.Text.Json.Serialization.Metadata
             else
             {
                 typeInfo.SetCreateObjectIfCompatible(objectInfo.ObjectCreator);
-                typeInfo.CreateObjectForExtensionDataProperty = (
-                    (JsonTypeInfo)typeInfo
-                ).CreateObject;
+                typeInfo.CreateObjectForExtensionDataProperty = ((JsonTypeInfo)typeInfo)
+                    .CreateObject;
             }
 
             if (objectInfo.PropertyMetadataInitializer != null)

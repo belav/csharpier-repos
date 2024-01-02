@@ -188,14 +188,13 @@ namespace System.ServiceModel.Activities
                         context.ServiceEndpoint is WorkflowHostingEndpoint,
                         "serviceEnpoint must be of WorkflowHostingEndpoint type!"
                     );
-                    Bookmark bookmark = (
-                        (WorkflowHostingEndpoint)context.ServiceEndpoint
-                    ).OnResolveBookmark(
-                        context.Inputs,
-                        context.OperationContext,
-                        responseContext,
-                        out value
-                    );
+                    Bookmark bookmark = ((WorkflowHostingEndpoint)context.ServiceEndpoint)
+                        .OnResolveBookmark(
+                            context.Inputs,
+                            context.OperationContext,
+                            responseContext,
+                            out value
+                        );
                     if (bookmark == null)
                     {
                         throw FxTrace.Exception.AsError(CreateDispatchFaultException());

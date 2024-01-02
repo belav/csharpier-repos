@@ -313,7 +313,8 @@ namespace System.Xml.Serialization
                         particle = (
                             (XmlSchemaGroup)
                                 _schemas.Find(refGroup.RefName, typeof(XmlSchemaGroup), false)!
-                        ).Particle;
+                        )
+                            .Particle;
                     }
                     else if (particle is XmlSchemaGroupBase)
                     {
@@ -339,9 +340,8 @@ namespace System.Xml.Serialization
                     }
                     else if (t == typeof(XmlSchemaSimpleTypeUnion))
                     {
-                        XmlQualifiedName[]? memberTypes = (
-                            (XmlSchemaSimpleTypeUnion)item
-                        ).MemberTypes;
+                        XmlQualifiedName[]? memberTypes = ((XmlSchemaSimpleTypeUnion)item)
+                            .MemberTypes;
 
                         if (memberTypes != null)
                         {

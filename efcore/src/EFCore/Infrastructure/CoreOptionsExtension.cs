@@ -666,7 +666,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
         {
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.UseMemoryCache)] = (
                 Extension.GetMemoryCache()?.GetHashCode() ?? 0L
-            ).ToString(CultureInfo.InvariantCulture);
+            )
+                .ToString(CultureInfo.InvariantCulture);
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableSensitiveDataLogging)] =
                 Extension
                     ._sensitiveDataLoggingEnabled.GetHashCode()

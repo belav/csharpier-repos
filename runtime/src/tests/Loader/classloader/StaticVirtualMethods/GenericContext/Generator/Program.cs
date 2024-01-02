@@ -820,7 +820,8 @@ namespace VirtualStaticInterfaceMethodTestGen
                             + "."
                             + interfaceMethodRoot
                             + interfaceMethodInstantiation
-                        ).Replace(ImplPrefix, "");
+                        )
+                            .Replace(ImplPrefix, "");
 
                     if (scenario.CallerScenario == CallerMethodScenario.NonGeneric)
                     {

@@ -276,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 offset = expression.SpanStart - conditionalAccessExpression.SpanStart;
                 argumentList = (
                     (ElementBindingExpressionSyntax)conditionalAccessExpression.WhenNotNull
-                ).ArgumentList;
+                )
+                    .ArgumentList;
             }
             else
             {

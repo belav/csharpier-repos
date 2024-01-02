@@ -260,9 +260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     displayText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,
                     displayTextSuffix: "",
                     sortText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,
-                    description: (
-                        snippet.Title + Environment.NewLine + snippet.Description
-                    ).ToSymbolDisplayParts(),
+                    description: (snippet.Title + Environment.NewLine + snippet.Description)
+                        .ToSymbolDisplayParts(),
                     glyph: Glyph.Snippet,
                     rules: rules
                 );

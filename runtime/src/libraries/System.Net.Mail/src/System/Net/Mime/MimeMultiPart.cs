@@ -135,10 +135,8 @@ namespace System.Net.Mime
             }
             else
             {
-                IAsyncResult closeResult = ((MimeWriter)context._writer).BeginClose(
-                    new AsyncCallback(MimeWriterCloseCallback),
-                    context
-                );
+                IAsyncResult closeResult = ((MimeWriter)context._writer)
+                    .BeginClose(new AsyncCallback(MimeWriterCloseCallback), context);
                 if (closeResult.CompletedSynchronously)
                 {
                     MimeWriterCloseCallbackHandler(closeResult);
@@ -189,10 +187,8 @@ namespace System.Net.Mime
             }
             else
             {
-                IAsyncResult closeResult = ((MimeWriter)context._writer).BeginClose(
-                    new AsyncCallback(MimeWriterCloseCallback),
-                    context
-                );
+                IAsyncResult closeResult = ((MimeWriter)context._writer)
+                    .BeginClose(new AsyncCallback(MimeWriterCloseCallback), context);
                 if (closeResult.CompletedSynchronously)
                 {
                     MimeWriterCloseCallbackHandler(closeResult);

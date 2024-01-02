@@ -421,7 +421,8 @@ public abstract class NorthwindSetOperationsQueryTestBase<TFixture> : QueryTestB
                                 .Union(ss.Set<Customer>().Where(c => c.City == "London"))
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(CoreStrings.SetOperationWithDifferentIncludesInOperands, message1);
 
@@ -440,7 +441,8 @@ public abstract class NorthwindSetOperationsQueryTestBase<TFixture> : QueryTestB
                                 )
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(CoreStrings.SetOperationWithDifferentIncludesInOperands, message2);
     }
@@ -466,7 +468,8 @@ public abstract class NorthwindSetOperationsQueryTestBase<TFixture> : QueryTestB
                                 )
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(CoreStrings.SetOperationWithDifferentIncludesInOperands, message);
     }

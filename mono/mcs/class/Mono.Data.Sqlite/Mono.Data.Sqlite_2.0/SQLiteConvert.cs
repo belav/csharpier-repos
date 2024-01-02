@@ -236,9 +236,8 @@ namespace Mono.Data.Sqlite
                 case SQLiteDateFormats.JulianDay:
                     return ToJulianDay(dateValue).ToString(CultureInfo.InvariantCulture);
                 case SQLiteDateFormats.UnixEpoch:
-                    return (
-                        (long)(dateValue.Subtract(UnixEpoch).Ticks / TimeSpan.TicksPerSecond)
-                    ).ToString();
+                    return ((long)(dateValue.Subtract(UnixEpoch).Ticks / TimeSpan.TicksPerSecond))
+                        .ToString();
                 default:
                     return dateValue.ToString(_datetimeFormats[19], CultureInfo.InvariantCulture);
             }

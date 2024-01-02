@@ -265,9 +265,8 @@ namespace System.Linq
                             return false;
                         }
 
-                        _enumerator = (
-                            (IEnumerable<TSource>)_appended.ToArray(_appendCount)
-                        ).GetEnumerator();
+                        _enumerator = ((IEnumerable<TSource>)_appended.ToArray(_appendCount))
+                            .GetEnumerator();
                         _state = 4;
                         goto case 4;
                     case 4:

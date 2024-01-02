@@ -56,9 +56,8 @@ public class SqliteCodeGeneratorTest
             )
         );
 
-        var result = ((IProviderConfigurationCodeGenerator)codeGenerator).GenerateUseProvider(
-            "Data Source=Test"
-        );
+        var result = ((IProviderConfigurationCodeGenerator)codeGenerator)
+            .GenerateUseProvider("Data Source=Test");
 
         Assert.Equal("UseSqlite", result.Method);
         Assert.Collection(

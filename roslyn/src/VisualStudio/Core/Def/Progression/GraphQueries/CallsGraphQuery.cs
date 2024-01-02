@@ -76,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 foreach (
                     var syntaxNode in (
                         await reference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false)
-                    ).DescendantNodes()
+                    )
+                        .DescendantNodes()
                 )
                 {
                     cancellationToken.ThrowIfCancellationRequested();

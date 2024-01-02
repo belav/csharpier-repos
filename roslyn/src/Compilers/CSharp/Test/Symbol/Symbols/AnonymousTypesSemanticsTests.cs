@@ -1682,7 +1682,8 @@ public class ClassA
                 from m in info0.Type.GetMembers()
                 where m.Kind == SymbolKind.Property
                 select m
-            ).ToArray();
+            )
+                .ToArray();
             Assert.Equal(3, properties.Length);
 
             Assert.Equal(

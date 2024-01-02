@@ -1003,7 +1003,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 var result = (
                     await client.InvokeAsync(nameof(MethodHub.TaskValueMethod)).DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 // json serializer makes this a long
                 Assert.Equal(42L, result);
@@ -1036,7 +1037,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await client
                         .InvokeAsync(nameof(MethodHub.ValueTaskValueMethod))
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 // json serializer makes this a long
                 Assert.Equal(43L, result);
@@ -1067,7 +1069,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 var result = (
                     await client.InvokeAsync(nameof(MethodHub.ValueTaskMethod)).DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 Assert.Null(result);
 
@@ -1296,7 +1299,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 var result = (
                     await client.InvokeAsync(nameof(MethodHub.VoidMethod)).DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 Assert.Null(result);
 
@@ -1355,9 +1359,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             {
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
-                var result = (
-                    await client.InvokeAsync("RenamedVirtualMethod").DefaultTimeout()
-                ).Result;
+                var result = (await client.InvokeAsync("RenamedVirtualMethod").DefaultTimeout())
+                    .Result;
 
                 // json serializer makes this a long
                 Assert.Equal(34L, result);
@@ -1432,7 +1435,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await client
                         .InvokeAsync(nameof(MethodHub.ConcatString), (byte)32, 42, 'm', "string")
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 Assert.Equal("32, 42, m, string", result);
 
@@ -1466,7 +1470,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await client
                         .InvokeAsync(nameof(InheritedHub.BaseMethod), "string")
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 Assert.Equal("string", result);
 
@@ -1500,7 +1505,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await client
                         .InvokeAsync(nameof(InheritedHub.VirtualMethod), 10)
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 Assert.Equal(0L, result);
 
@@ -2158,7 +2164,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await firstClient
                         .InvokeAsync("GroupSendMethod", "testGroup", "test")
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 // check that 'firstConnection' hasn't received the group send
                 Assert.Null(firstClient.TryRead());
@@ -2170,7 +2177,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await secondClient
                         .InvokeAsync(nameof(MethodHub.GroupAddMethod), "testGroup")
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 await firstClient
                     .SendInvocationAsync(nameof(MethodHub.GroupSendMethod), "testGroup", "test")
@@ -2218,7 +2226,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await firstClient
                         .InvokeAsync("GroupSendMethod", "testGroup", "test")
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 // check that 'firstConnection' hasn't received the group send
                 Assert.Null(firstClient.TryRead());
@@ -2295,7 +2304,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     await firstClient
                         .InvokeAsync("GroupSendMethod", "testGroup", "test")
                         .DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
 
                 // check that 'firstConnection' hasn't received the group send
                 Assert.Null(firstClient.TryRead());
@@ -3357,7 +3367,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 var result = (
                     await client.InvokeAsync(nameof(MethodHub.HasHttpContext)).DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
                 Assert.True((bool)result);
 
                 client.Dispose();
@@ -3387,7 +3398,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 var result = (
                     await client.InvokeAsync(nameof(MethodHub.HasHttpContext)).DefaultTimeout()
-                ).Result;
+                )
+                    .Result;
                 Assert.False((bool)result);
 
                 client.Dispose();

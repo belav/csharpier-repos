@@ -245,7 +245,8 @@ namespace MonoTests.System.Data.OracleClient
             }
 
             //
-            ((IDbDataAdapter)dbDA).SelectCommand.Transaction.Commit();
+            ((IDbDataAdapter)dbDA)
+                .SelectCommand.Transaction.Commit();
 
             //close connection
             if (((IDbDataAdapter)dbDA).SelectCommand.Connection.State != ConnectionState.Closed)

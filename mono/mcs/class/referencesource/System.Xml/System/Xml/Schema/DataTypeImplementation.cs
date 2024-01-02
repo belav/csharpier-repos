@@ -3280,11 +3280,8 @@ namespace System.Xml.Schema
                 goto Error;
 
             string stringValue = uri.OriginalString;
-            exception = ((StringFacetsChecker)stringFacetsChecker).CheckValueFacets(
-                stringValue,
-                this,
-                false
-            );
+            exception = ((StringFacetsChecker)stringFacetsChecker)
+                .CheckValueFacets(stringValue, this, false);
             if (exception != null)
                 goto Error;
 

@@ -24,7 +24,8 @@ public class NorthwindIncludeNoTrackingQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_with_cross_apply_with_filter(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Include_collection_with_outer_apply_with_filter(bool async) =>
@@ -34,7 +35,8 @@ public class NorthwindIncludeNoTrackingQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_with_outer_apply_with_filter(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_with_multiple_ordering(bool async) =>
@@ -44,7 +46,8 @@ public class NorthwindIncludeNoTrackingQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Filtered_include_with_multiple_ordering(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Include_collection_with_outer_apply_with_filter_non_equality(
@@ -56,7 +59,8 @@ public class NorthwindIncludeNoTrackingQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_with_outer_apply_with_filter_non_equality(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Include_collection_with_last_no_orderby(bool async) =>
@@ -66,6 +70,7 @@ public class NorthwindIncludeNoTrackingQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_with_last_no_orderby(async)
                 )
-            ).Message
+            )
+                .Message
         );
 }

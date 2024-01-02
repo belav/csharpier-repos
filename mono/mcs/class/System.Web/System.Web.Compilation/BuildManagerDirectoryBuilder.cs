@@ -487,9 +487,8 @@ namespace System.Web.Compilation
                 .GetCustomAttributes(typeof(BuildProviderAppliesToAttribute), true);
             if (attrs != null && attrs.Length != 0)
             {
-                BuildProviderAppliesTo appliesTo = (
-                    (BuildProviderAppliesToAttribute)attrs[0]
-                ).AppliesTo;
+                BuildProviderAppliesTo appliesTo = ((BuildProviderAppliesToAttribute)attrs[0])
+                    .AppliesTo;
                 if ((appliesTo & BuildProviderAppliesTo.Web) == 0)
                     return null;
             }

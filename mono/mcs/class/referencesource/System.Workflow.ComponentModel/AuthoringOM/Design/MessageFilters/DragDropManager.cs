@@ -139,10 +139,8 @@
                         else
                         {
                             this.draggedDesigner = potentialDraggedDesigner;
-                            ((IWorkflowDesignerMessageSink)this.draggedDesigner).OnMouseDragBegin(
-                                this.dragInitiationPoint,
-                                eventArgs
-                            );
+                            ((IWorkflowDesignerMessageSink)this.draggedDesigner)
+                                .OnMouseDragBegin(this.dragInitiationPoint, eventArgs);
                             parentView.Capture = true;
                         }
                     }
@@ -418,17 +416,15 @@
                     this.dropTargetDesigner = potentialDropTargetDesigner;
 
                     if (this.dropTargetDesigner != null)
-                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragEnter(
-                            dragdropEventArgs
-                        );
+                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner)
+                            .OnDragEnter(dragdropEventArgs);
                 }
                 else
                 {
                     //Looks like we got the same designer
                     if (this.dropTargetDesigner != null)
-                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragOver(
-                            dragdropEventArgs
-                        );
+                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner)
+                            .OnDragOver(dragdropEventArgs);
 
                     //Check if there is a potential for the drag image to be snapped
                     if (
@@ -525,9 +521,8 @@
                 {
                     this.dropTargetDesigner = hitTestInfo.AssociatedDesigner;
                     if (this.dropTargetDesigner != null)
-                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragEnter(
-                            dragdropEventArgs
-                        );
+                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner)
+                            .OnDragEnter(dragdropEventArgs);
                 }
             }
 
@@ -603,9 +598,8 @@
 
                         try
                         {
-                            ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragDrop(
-                                dragdropEventArgs
-                            );
+                            ((IWorkflowDesignerMessageSink)this.dropTargetDesigner)
+                                .OnDragDrop(dragdropEventArgs);
 
                             if (dragdropEventArgs.Effect == DragDropEffects.Move)
                                 this.existingDraggedActivities.Clear();
@@ -652,7 +646,8 @@
             {
                 //We purposely consume application thrown exception which are result of user cancelling the action
                 //during dragdrop where we popup UI Wizards during drag drop. Ref: InvokeWebService
-                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragLeave();
+                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner)
+                    .OnDragLeave();
                 dragdropEventArgs.Effect = DragDropEffects.None;
 
                 string dragDropException = ex.Message;
@@ -712,9 +707,8 @@
         protected override bool OnQueryContinueDrag(QueryContinueDragEventArgs qcdevent)
         {
             if (this.dropTargetDesigner != null)
-                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnQueryContinueDrag(
-                    qcdevent
-                );
+                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner)
+                    .OnQueryContinueDrag(qcdevent);
             return true;
         }
         #endregion

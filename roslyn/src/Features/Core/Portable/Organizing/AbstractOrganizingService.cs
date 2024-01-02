@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Organizing
                             t1 == t2 || t1.GetTypeInfo().IsSubclassOf(t2)
                         )
                     select o
-                ).Distinct();
+                )
+                    .Distinct();
             }
 
             return n => map.GetOrAdd(n.GetType(), getter);

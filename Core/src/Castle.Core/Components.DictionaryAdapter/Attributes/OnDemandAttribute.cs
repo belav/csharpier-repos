@@ -105,7 +105,8 @@ namespace Castle.Components.DictionaryAdapter
                                                 dictionaryAdapter.Meta.Type
                                             )
                                         select ctor
-                                    ).FirstOrDefault();
+                                    )
+                                        .FirstOrDefault();
 
                                     if (constructor != null)
                                         args = new[] { dictionaryAdapter };

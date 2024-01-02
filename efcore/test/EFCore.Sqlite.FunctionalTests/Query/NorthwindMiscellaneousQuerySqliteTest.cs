@@ -415,7 +415,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_code_using_instance_method_throws(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Client_code_using_instance_in_static_method(bool async) =>
@@ -428,7 +429,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_code_using_instance_in_static_method(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Client_code_using_instance_in_anonymous_type(bool async) =>
@@ -440,7 +442,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_code_using_instance_in_anonymous_type(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Client_code_unknown_method(bool async) =>
@@ -462,7 +465,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Entity_equality_through_subquery_composite_key(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task DefaultIfEmpty_in_subquery_nested_filter_order_comparison(
@@ -474,7 +478,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.DefaultIfEmpty_in_subquery_nested_filter_order_comparison(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Select_subquery_recursive_trivial(bool async) =>
@@ -484,7 +489,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Select_subquery_recursive_trivial(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Select_correlated_subquery_ordered(bool async) =>
@@ -494,7 +500,8 @@ FROM "Orders" AS "o"
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Select_correlated_subquery_ordered(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
@@ -509,7 +516,8 @@ FROM "Orders" AS "o"
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
@@ -524,7 +532,8 @@ FROM "Orders" AS "o"
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override Task Max_on_empty_sequence_throws(bool async) =>

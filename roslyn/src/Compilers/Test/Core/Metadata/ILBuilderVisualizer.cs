@@ -61,7 +61,8 @@ namespace Roslyn.Test.Utilities
             object reference = _tokenDeferral.GetReferenceFromToken(token);
             ISymbol symbol = (
                 (reference as ISymbolInternal) ?? (reference as Cci.IReference)?.GetInternalSymbol()
-            )?.GetISymbol();
+            )
+                ?.GetISymbol();
             return string.Format(
                 "\"{0}\"",
                 symbol == null

@@ -696,9 +696,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             case MethodKind.PropertyGet:
                             case MethodKind.PropertySet:
                                 if (
-                                    !(
-                                        (PropertySymbol)method.AssociatedSymbol
-                                    ).CanCallMethodsDirectly()
+                                    !((PropertySymbol)method.AssociatedSymbol)
+                                        .CanCallMethodsDirectly()
                                 )
                                 {
                                     return false;
@@ -754,9 +753,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return true;
                         case MethodKind.PropertyGet:
                         case MethodKind.PropertySet:
-                            return (
-                                (PropertySymbol)method.AssociatedSymbol
-                            ).CanCallMethodsDirectly();
+                            return ((PropertySymbol)method.AssociatedSymbol)
+                                .CanCallMethodsDirectly();
                         default:
                             return false;
                     }
@@ -1524,13 +1522,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var modifier in modifiers)
             {
                 if (
-                    (
-                        (CSharpCustomModifier)modifier
-                    ).ModifierSymbol.GetUnificationUseSiteDiagnosticRecursive(
-                        ref result,
-                        owner,
-                        ref checkedTypes
-                    )
+                    ((CSharpCustomModifier)modifier)
+                        .ModifierSymbol.GetUnificationUseSiteDiagnosticRecursive(
+                            ref result,
+                            owner,
+                            ref checkedTypes
+                        )
                 )
                 {
                     return true;

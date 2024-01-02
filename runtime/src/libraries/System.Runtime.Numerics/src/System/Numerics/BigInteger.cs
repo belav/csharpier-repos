@@ -850,7 +850,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 try
                 {
@@ -887,7 +888,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : remainderFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 uint[]? quotientFromPool = null;
                 size = dividend._bits.Length - divisor._bits.Length + 1;
@@ -895,7 +897,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : quotientFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Divide(dividend._bits, divisor._bits, quotient, rest);
 
@@ -1020,7 +1023,8 @@ namespace System.Numerics
                     leftBits.Length <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(leftBits.Length)
-                ).Slice(0, leftBits.Length);
+                )
+                    .Slice(0, leftBits.Length);
 
                 BigIntegerCalculator.Remainder(leftBits, rightBits, bits);
 
@@ -1035,7 +1039,8 @@ namespace System.Numerics
                     leftBits.Length <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(leftBits.Length)
-                ).Slice(0, leftBits.Length);
+                )
+                    .Slice(0, leftBits.Length);
 
                 BigIntegerCalculator.Gcd(leftBits, rightBits, bits);
                 result = new BigInteger(bits, negative: false);
@@ -1112,7 +1117,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
                 bits.Clear();
                 if (trivialValue)
                 {
@@ -1189,7 +1195,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
                 bits.Clear();
 
                 BigIntegerCalculator.Pow(NumericsHelpers.Abs(value._sign), power, bits);
@@ -1202,7 +1209,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
                 bits.Clear();
 
                 BigIntegerCalculator.Pow(value._bits, power, bits);
@@ -1883,7 +1891,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Add(rightBits, NumericsHelpers.Abs(leftSign), bits);
                 result = new BigInteger(bits, leftSign < 0);
@@ -1897,7 +1906,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Add(leftBits, NumericsHelpers.Abs(rightSign), bits);
                 result = new BigInteger(bits, leftSign < 0);
@@ -1911,7 +1921,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Add(rightBits, leftBits, bits);
                 result = new BigInteger(bits, leftSign < 0);
@@ -1925,7 +1936,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Add(leftBits, rightBits, bits);
                 result = new BigInteger(bits, leftSign < 0);
@@ -1977,7 +1989,8 @@ namespace System.Numerics
                     size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Subtract(rightBits, NumericsHelpers.Abs(leftSign), bits);
                 result = new BigInteger(bits, leftSign >= 0);
@@ -1991,7 +2004,8 @@ namespace System.Numerics
                     size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Subtract(leftBits, NumericsHelpers.Abs(rightSign), bits);
                 result = new BigInteger(bits, leftSign < 0);
@@ -2003,7 +2017,8 @@ namespace System.Numerics
                     size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Subtract(rightBits, leftBits, bits);
                 result = new BigInteger(bits, leftSign >= 0);
@@ -2017,7 +2032,8 @@ namespace System.Numerics
                     size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Subtract(leftBits, rightBits, bits);
                 result = new BigInteger(bits, leftSign < 0);
@@ -2601,7 +2617,8 @@ namespace System.Numerics
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : leftBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
             x = x.Slice(0, left.WriteTo(x));
 
             uint[]? rightBufferFromPool = null;
@@ -2610,7 +2627,8 @@ namespace System.Numerics
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : rightBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
             y = y.Slice(0, right.WriteTo(y));
 
             uint[]? resultBufferFromPool = null;
@@ -2619,7 +2637,8 @@ namespace System.Numerics
                 size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : resultBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
 
             for (int i = 0; i < z.Length; i++)
             {
@@ -2663,7 +2682,8 @@ namespace System.Numerics
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : leftBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
             x = x.Slice(0, left.WriteTo(x));
 
             uint[]? rightBufferFromPool = null;
@@ -2672,7 +2692,8 @@ namespace System.Numerics
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : rightBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
             y = y.Slice(0, right.WriteTo(y));
 
             uint[]? resultBufferFromPool = null;
@@ -2681,7 +2702,8 @@ namespace System.Numerics
                 size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : resultBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
 
             for (int i = 0; i < z.Length; i++)
             {
@@ -2720,7 +2742,8 @@ namespace System.Numerics
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : leftBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
             x = x.Slice(0, left.WriteTo(x));
 
             uint[]? rightBufferFromPool = null;
@@ -2729,7 +2752,8 @@ namespace System.Numerics
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : rightBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
             y = y.Slice(0, right.WriteTo(y));
 
             uint[]? resultBufferFromPool = null;
@@ -2738,7 +2762,8 @@ namespace System.Numerics
                 size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : resultBufferFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
 
             for (int i = 0; i < z.Length; i++)
             {
@@ -2780,7 +2805,8 @@ namespace System.Numerics
                 xl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : xdFromPool = ArrayPool<uint>.Shared.Rent(xl)
-            ).Slice(0, xl);
+            )
+                .Slice(0, xl);
             bool negx = value.GetPartsForBitManipulation(xd);
 
             int zl = xl + digitShift + 1;
@@ -2789,7 +2815,8 @@ namespace System.Numerics
                 (uint)zl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : zdFromPool = ArrayPool<uint>.Shared.Rent(zl)
-            ).Slice(0, zl);
+            )
+                .Slice(0, zl);
             zd.Clear();
 
             uint carry = 0;
@@ -2845,7 +2872,8 @@ namespace System.Numerics
                 xl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : xdFromPool = ArrayPool<uint>.Shared.Rent(xl)
-            ).Slice(0, xl);
+            )
+                .Slice(0, xl);
 
             bool negx = value.GetPartsForBitManipulation(xd);
             bool trackSignBit = false;
@@ -2875,7 +2903,8 @@ namespace System.Numerics
                 (uint)zl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : zdFromPool = ArrayPool<uint>.Shared.Rent(zl)
-            ).Slice(0, zl);
+            )
+                .Slice(0, zl);
             zd.Clear();
 
             if (smallShift == 0)
@@ -2999,7 +3028,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Multiply(right, NumericsHelpers.Abs(leftSign), bits);
                 result = new BigInteger(bits, (leftSign < 0) ^ (rightSign < 0));
@@ -3013,7 +3043,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Multiply(left, NumericsHelpers.Abs(rightSign), bits);
                 result = new BigInteger(bits, (leftSign < 0) ^ (rightSign < 0));
@@ -3025,7 +3056,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Square(left, bits);
                 result = new BigInteger(bits, (leftSign < 0) ^ (rightSign < 0));
@@ -3039,7 +3071,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
                 bits.Clear();
 
                 BigIntegerCalculator.Multiply(right, left, bits);
@@ -3054,7 +3087,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
                 bits.Clear();
 
                 BigIntegerCalculator.Multiply(left, right, bits);
@@ -3098,7 +3132,8 @@ namespace System.Numerics
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : quotientFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 try
                 {
@@ -3130,7 +3165,8 @@ namespace System.Numerics
                     (uint)size < BigIntegerCalculator.StackAllocThreshold
                         ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                         : quotientFromPool = ArrayPool<uint>.Shared.Rent(size)
-                ).Slice(0, size);
+                )
+                    .Slice(0, size);
 
                 BigIntegerCalculator.Divide(dividend._bits, divisor._bits, quotient);
                 var result = new BigInteger(quotient, (dividend._sign < 0) ^ (divisor._sign < 0));
@@ -3185,7 +3221,8 @@ namespace System.Numerics
                 size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : bitsFromPool = ArrayPool<uint>.Shared.Rent(size)
-            ).Slice(0, size);
+            )
+                .Slice(0, size);
 
             BigIntegerCalculator.Remainder(dividend._bits, divisor._bits, bits);
             var result = new BigInteger(bits, dividend._sign < 0);
@@ -5693,7 +5730,8 @@ namespace System.Numerics
                 xl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : xdFromPool = ArrayPool<uint>.Shared.Rent(xl)
-            ).Slice(0, xl);
+            )
+                .Slice(0, xl);
 
             bool negx = value.GetPartsForBitManipulation(xd);
 
@@ -5714,7 +5752,8 @@ namespace System.Numerics
                 (uint)zl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
                     : zdFromPool = ArrayPool<uint>.Shared.Rent(zl)
-            ).Slice(0, zl);
+            )
+                .Slice(0, zl);
             zd.Clear();
 
             if (smallShift == 0)

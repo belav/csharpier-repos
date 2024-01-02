@@ -234,10 +234,8 @@ namespace System.Data.Common
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public override string ConvertObjectToXml(object value)
         {
-            return ((BigInteger)value).ToString(
-                "D",
-                System.Globalization.CultureInfo.InvariantCulture
-            );
+            return ((BigInteger)value)
+                .ToString("D", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         protected override object GetEmptyStorage(int recordCount)

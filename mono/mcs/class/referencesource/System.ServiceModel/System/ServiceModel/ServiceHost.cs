@@ -1874,10 +1874,8 @@ namespace System.ServiceModel
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ((CloseAsyncResult)result.AsyncState).FinishCloseChannelDispatchers(
-                        result,
-                        false
-                    );
+                    ((CloseAsyncResult)result.AsyncState)
+                        .FinishCloseChannelDispatchers(result, false);
                 }
             }
 

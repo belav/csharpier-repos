@@ -252,7 +252,8 @@ class C
                             .GetMember<NamedTypeSymbol>("C")
                             .GetMember<RetargetingMethodSymbol>("M")
                             .Parameters[0]
-                ).MarshallingInformation.TryGetSafeArrayElementUserDefinedSubtype()
+                )
+                    .MarshallingInformation.TryGetSafeArrayElementUserDefinedSubtype()
             );
         }
 

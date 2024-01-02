@@ -44,9 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             protected override NullableWalker.SnapshotManager GetSnapshotManager()
             {
                 // In this override, current nullability state cannot influence anything of speculatively bound expressions.
-                return (
-                    (SpeculativeSemanticModelWithMemberModel)_containingPublicSemanticModel
-                ).ParentSnapshotManagerOpt;
+                return ((SpeculativeSemanticModelWithMemberModel)_containingPublicSemanticModel)
+                    .ParentSnapshotManagerOpt;
             }
 
             protected override BoundNode RewriteNullableBoundNodesWithSnapshots(
@@ -91,12 +90,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override bool IsNullableAnalysisEnabled()
             {
-                return (
-                    (SyntaxTreeSemanticModel)_containingPublicSemanticModel.ParentModel
-                ).IsNullableAnalysisEnabledAtSpeculativePosition(
-                    _containingPublicSemanticModel.OriginalPositionForSpeculation,
-                    Root
-                );
+                return ((SyntaxTreeSemanticModel)_containingPublicSemanticModel.ParentModel)
+                    .IsNullableAnalysisEnabledAtSpeculativePosition(
+                        _containingPublicSemanticModel.OriginalPositionForSpeculation,
+                        Root
+                    );
             }
 
             internal override bool TryGetSpeculativeSemanticModelCore(

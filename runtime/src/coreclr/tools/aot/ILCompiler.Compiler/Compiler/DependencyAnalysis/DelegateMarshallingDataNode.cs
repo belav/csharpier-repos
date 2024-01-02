@@ -27,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis
         {
             InteropStateManager stateManager = (
                 (CompilerGeneratedInteropStubManager)factory.InteropStubManager
-            )._interopStateManager;
+            )
+                ._interopStateManager;
 
             return new DependencyListEntry[]
             {

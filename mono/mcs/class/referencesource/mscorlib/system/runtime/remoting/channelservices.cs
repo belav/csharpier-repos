@@ -448,9 +448,8 @@ namespace System.Runtime.Remoting.Channels
                         {
                             try
                             {
-                                String[] urls = (
-                                    (IChannelReceiver)regChnlList.GetChannel(i)
-                                ).GetUrlsForUri(uri);
+                                String[] urls = ((IChannelReceiver)regChnlList.GetChannel(i))
+                                    .GetUrlsForUri(uri);
                                 // Add the strings to the table
                                 for (int j = 0; j < urls.Length; j++)
                                 {
@@ -829,9 +828,10 @@ namespace System.Runtime.Remoting.Channels
                         replyMsg = (IMessage)new ReturnMessage(e, mcm);
                         if (msg != null)
                         {
-                            ((ReturnMessage)replyMsg).SetLogicalCallContext(
-                                (LogicalCallContext)msg.Properties[Message.CallContextKey]
-                            );
+                            ((ReturnMessage)replyMsg)
+                                .SetLogicalCallContext(
+                                    (LogicalCallContext)msg.Properties[Message.CallContextKey]
+                                );
                         }
                     }
                     catch (Exception)

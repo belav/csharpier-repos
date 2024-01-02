@@ -770,12 +770,8 @@ namespace System.Data.Services.Client
                 null,
                 null
             );
-            return (new DataServiceRequest<TElement>(qc, null)).BeginExecute(
-                this,
-                this,
-                callback,
-                state
-            );
+            return (new DataServiceRequest<TElement>(qc, null))
+                .BeginExecute(this, this, callback, state);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -791,12 +787,8 @@ namespace System.Data.Services.Client
         {
             Util.CheckArgumentNull(continuation, "continuation");
             QueryComponents qc = continuation.CreateQueryComponents();
-            return (new DataServiceRequest<T>(qc, continuation.Plan)).BeginExecute(
-                this,
-                this,
-                callback,
-                state
-            );
+            return (new DataServiceRequest<T>(qc, continuation.Plan))
+                .BeginExecute(this, this, callback, state);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(

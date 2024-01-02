@@ -1362,7 +1362,8 @@ namespace System.Web.UI.WebControls
                                     //
 
 
-                                    ((TableRow)rowEnum.Current).MergeStyle(compositeStyle);
+                                    ((TableRow)rowEnum.Current)
+                                        .MergeStyle(compositeStyle);
                                 }
                                 break;
                             }

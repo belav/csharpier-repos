@@ -462,9 +462,8 @@ namespace System.ServiceModel.Activities
             {
                 return endpointAddressUri == null
                     ? endpoint.Address
-                    : (
-                        new EndpointAddressBuilder(endpoint.Address) { Uri = endpointAddressUri }
-                    ).ToEndpointAddress();
+                    : (new EndpointAddressBuilder(endpoint.Address) { Uri = endpointAddressUri })
+                        .ToEndpointAddress();
             }
             else if (this.Endpoint != null)
             {
@@ -2245,16 +2244,16 @@ namespace System.ServiceModel.Activities
 
                                 this.instance.RequestContext.EnsureAsyncWaitHandle();
 
-                                result = ((IRequestChannel)this.channel).BeginRequest(
-                                    this.instance.RequestOrReply,
-                                    onChannelReceiveReplyCompleted,
-                                    this
-                                );
+                                result = ((IRequestChannel)this.channel)
+                                    .BeginRequest(
+                                        this.instance.RequestOrReply,
+                                        onChannelReceiveReplyCompleted,
+                                        this
+                                    );
                                 if (result.CompletedSynchronously)
                                 {
-                                    Message reply = ((IRequestChannel)this.channel).EndRequest(
-                                        result
-                                    );
+                                    Message reply = ((IRequestChannel)this.channel)
+                                        .EndRequest(result);
                                     this.instance.RequestContext.ReceiveReply(
                                         this.instance.OperationContext,
                                         reply
@@ -2263,11 +2262,12 @@ namespace System.ServiceModel.Activities
                             }
                             else
                             {
-                                result = ((IOutputChannel)this.channel).BeginSend(
-                                    this.instance.RequestOrReply,
-                                    PrepareAsyncCompletion(onChannelSendComplete),
-                                    this
-                                );
+                                result = ((IOutputChannel)this.channel)
+                                    .BeginSend(
+                                        this.instance.RequestOrReply,
+                                        PrepareAsyncCompletion(onChannelSendComplete),
+                                        this
+                                    );
                                 if (result.CompletedSynchronously)
                                 {
                                     ((IOutputChannel)this.channel).EndSend(result);
@@ -3412,15 +3412,13 @@ namespace System.ServiceModel.Activities
 
                     if (this.factoryKey.IsOperationContractOneWay)
                     {
-                        result = (
-                            (ChannelFactory<IOutputChannel>)this.channelFactory
-                        ).CreateChannel(endpointAddress, via);
+                        result = ((ChannelFactory<IOutputChannel>)this.channelFactory)
+                            .CreateChannel(endpointAddress, via);
                     }
                     else
                     {
-                        result = (
-                            (ChannelFactory<IRequestChannel>)this.channelFactory
-                        ).CreateChannel(endpointAddress, via);
+                        result = ((ChannelFactory<IRequestChannel>)this.channelFactory)
+                            .CreateChannel(endpointAddress, via);
                     }
                 }
 

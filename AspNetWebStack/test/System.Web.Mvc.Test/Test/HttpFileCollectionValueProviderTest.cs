@@ -95,7 +95,8 @@ namespace System.Web.Mvc.Test
                     file != null && file.ContentLength > 0 && !String.IsNullOrEmpty(file.FileName)
                 )
                 select (hasContent) ? file : null
-            ).ToArray();
+            )
+                .ToArray();
             Assert.Equal(expectedRawValues, (HttpPostedFileBase[])vpResult.RawValue);
             Assert.Equal("System.Web.HttpPostedFileBase[]", vpResult.AttemptedValue);
             Assert.Equal(CultureInfo.InvariantCulture, vpResult.Culture);

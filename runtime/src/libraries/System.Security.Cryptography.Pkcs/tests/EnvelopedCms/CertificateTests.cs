@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
                 + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
                 + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyCertificates0(encodedMessage);
         }
@@ -128,7 +129,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "8095255d522b08e863c041969ccdf9826a1aea42816ee6ec4bb399c663a4a4e891ec20ec778786d7efe91f6cade5859a9299"
                 + "69fa5d990524578b6917302b06092a864886f70d010701301406082a864886f70d030704082a476e3ed67037f480088fb65b"
                 + "4df40a6635"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyCertificates3(encodedMessage);
         }

@@ -330,10 +330,8 @@ namespace System.Workflow.Runtime
             if (workflowDefinition == null)
                 throw new InvalidOperationException("workflowDefinition");
 
-            ((IDependencyObjectAccessor)this.rootActivity).InitializeActivatingInstanceForRuntime(
-                null,
-                this
-            );
+            ((IDependencyObjectAccessor)this.rootActivity)
+                .InitializeActivatingInstanceForRuntime(null, this);
             this.rootActivity.FixUpMetaProperties(workflowDefinition);
             _runtime = workflowInstance.WorkflowRuntime;
 
@@ -363,7 +361,8 @@ namespace System.Workflow.Runtime
                         ContextActivityUtils
                             .ContextActivity(invokerExec.CurrentActivity)
                             .GetValue(Activity.ActivityExecutionContextInfoProperty)
-                ).ContextGuid;
+                )
+                    .ContextGuid;
                 if (null == invokerExec.CurrentActivity.Parent)
                     trackingCallingState.CallerParentContextGuid =
                         trackingCallingState.CallerContextGuid;
@@ -373,7 +372,8 @@ namespace System.Workflow.Runtime
                             ContextActivityUtils
                                 .ContextActivity(invokerExec.CurrentActivity.Parent)
                                 .GetValue(Activity.ActivityExecutionContextInfoProperty)
-                    ).ContextGuid;
+                    )
+                        .ContextGuid;
                 this.rootActivity.SetValue(
                     WorkflowExecutor.TrackingCallingStateProperty,
                     trackingCallingState
@@ -2724,9 +2724,8 @@ namespace System.Workflow.Runtime
                 "Workflow Runtime: WorkflowExecutor: instanceId: "
                     + this.InstanceIdString
                     + " .Disposed enlistable transaction "
-                    + (
-                        (System.Transactions.Transaction)transactionalProperties.Transaction
-                    ).GetHashCode()
+                    + ((System.Transactions.Transaction)transactionalProperties.Transaction)
+                        .GetHashCode()
             );
 
             // cleanup properties
@@ -2845,7 +2844,8 @@ namespace System.Workflow.Runtime
                                     + (
                                         (System.Transactions.Transaction)
                                             transactionalProperties.Transaction
-                                    ).GetHashCode()
+                                    )
+                                        .GetHashCode()
                             );
                         }
 
@@ -2871,7 +2871,8 @@ namespace System.Workflow.Runtime
                                     + (
                                         (System.Transactions.Transaction)
                                             transactionalProperties.Transaction
-                                    ).GetHashCode()
+                                    )
+                                        .GetHashCode()
                             );
                         }
                     }
@@ -3249,7 +3250,8 @@ namespace System.Workflow.Runtime
                     ContextActivityUtils
                         .ContextActivity(currentActivity)
                         .GetValue(Activity.ActivityExecutionContextInfoProperty)
-            ).ContextGuid;
+            )
+                .ContextGuid;
             Guid parentContextGuid = Guid.Empty;
             if (null != currentActivity.Parent)
                 parentContextGuid = (
@@ -3257,7 +3259,8 @@ namespace System.Workflow.Runtime
                         ContextActivityUtils
                             .ContextActivity(currentActivity.Parent)
                             .GetValue(Activity.ActivityExecutionContextInfoProperty)
-                ).ContextGuid;
+                )
+                    .ContextGuid;
             this.FireExceptionOccured(
                 exp,
                 currentActivity.QualifiedName,
@@ -3508,9 +3511,8 @@ namespace System.Workflow.Runtime
         {
             get
             {
-                return ((Activity)this.WorkflowDefinition).GetValue(
-                        WorkflowChanges.WorkflowChangeActionsProperty
-                    ) != null;
+                return ((Activity)this.WorkflowDefinition)
+                        .GetValue(WorkflowChanges.WorkflowChangeActionsProperty) != null;
             }
         }
         #endregion
@@ -4035,9 +4037,8 @@ namespace System.Workflow.Runtime
                 if (currentActivity is CompositeActivity)
                 {
                     foreach (
-                        Activity flowActivity in (
-                            (ISupportAlternateFlow)currentActivity
-                        ).AlternateFlowActivities
+                        Activity flowActivity in ((ISupportAlternateFlow)currentActivity)
+                            .AlternateFlowActivities
                     )
                     {
                         if (flowActivity is FaultHandlerActivity)

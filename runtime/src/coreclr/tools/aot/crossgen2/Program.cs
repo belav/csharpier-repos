@@ -741,9 +741,8 @@ namespace ILCompiler
                     )
                     {
                         System.Diagnostics.Debug.Assert(inputModules.Count == 1);
-                        optimizationMode = (
-                            (EcmaAssembly)inputModules[0].Assembly
-                        ).HasOptimizationsDisabled()
+                        optimizationMode = ((EcmaAssembly)inputModules[0].Assembly)
+                            .HasOptimizationsDisabled()
                             ? OptimizationMode.None
                             : OptimizationMode.Blended;
                     }

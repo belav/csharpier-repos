@@ -99,10 +99,8 @@ namespace ILCompiler.Dataflow
                 else
                 {
                     Debug.Assert(namedArgument.Kind == CustomAttributeNamedArgumentKind.Property);
-                    PropertyPseudoDesc property = ((MetadataType)attributeType).GetProperty(
-                        namedArgument.Name,
-                        null
-                    );
+                    PropertyPseudoDesc property = ((MetadataType)attributeType)
+                        .GetProperty(namedArgument.Name, null);
                     MethodDesc setter = property.SetMethod;
                     if (setter != null && setter.Signature.Length > 0 && !setter.Signature.IsStatic)
                     {

@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     _context.LastInRegion,
                                     out _succeeded
                                 )
-                        ).ToImmutableArray();
+                        )
+                            .ToImmutableArray();
                     ImmutableInterlocked.InterlockedInitialize(ref _entryPoints, result);
                 }
 

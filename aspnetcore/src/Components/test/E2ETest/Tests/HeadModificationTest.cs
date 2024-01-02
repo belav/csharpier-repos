@@ -123,10 +123,11 @@ public class HeadModificationTest : ServerTestBase<ToggleExecutionModeServerFixt
         {
             var metaDescriptionElement = Browser.FindElement(By.Id("meta-description"));
             return (bool)
-                ((IJavaScriptExecutor)Browser).ExecuteScript(
-                    "return document.head.lastChild === arguments[0];",
-                    metaDescriptionElement
-                );
+                ((IJavaScriptExecutor)Browser)
+                    .ExecuteScript(
+                        "return document.head.lastChild === arguments[0];",
+                        metaDescriptionElement
+                    );
         });
     }
 }

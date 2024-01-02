@@ -65,9 +65,8 @@ public class ServiceProviderCache
         var extension = options.FindExtension<CoreOptionsExtension>();
         if (extension?.ApplicationServiceProvider != null)
         {
-            cacheKey = ((DbContextOptions)options).WithExtension(
-                extension.WithApplicationServiceProvider(null)
-            );
+            cacheKey = ((DbContextOptions)options)
+                .WithExtension(extension.WithApplicationServiceProvider(null));
         }
 
         return _configurations
@@ -122,13 +121,14 @@ public class ServiceProviderCache
                         )
                     )
                     {
-                        ((IList<ServiceDescriptor>)updatedServices).Add(
-                            new ServiceDescriptor(
-                                descriptor.ServiceType,
-                                replacementType,
-                                descriptor.Lifetime
-                            )
-                        );
+                        ((IList<ServiceDescriptor>)updatedServices)
+                            .Add(
+                                new ServiceDescriptor(
+                                    descriptor.ServiceType,
+                                    replacementType,
+                                    descriptor.Lifetime
+                                )
+                            );
                     }
                     else if (
                         replacedServices.TryGetValue(
@@ -137,13 +137,14 @@ public class ServiceProviderCache
                         )
                     )
                     {
-                        ((IList<ServiceDescriptor>)updatedServices).Add(
-                            new ServiceDescriptor(
-                                descriptor.ServiceType,
-                                replacementType,
-                                descriptor.Lifetime
-                            )
-                        );
+                        ((IList<ServiceDescriptor>)updatedServices)
+                            .Add(
+                                new ServiceDescriptor(
+                                    descriptor.ServiceType,
+                                    replacementType,
+                                    descriptor.Lifetime
+                                )
+                            );
                     }
                     else
                     {

@@ -109,7 +109,8 @@ namespace Mono.XBuild.CommandLine
                     && t.GetInterface("Microsoft.Build.Framework.ILogger") != null
                     && t.IsPublic
                 select t
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
 
             if (loggerClass != null)
                 return loggerClass.FullName;

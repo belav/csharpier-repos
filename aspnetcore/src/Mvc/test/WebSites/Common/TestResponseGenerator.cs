@@ -50,9 +50,8 @@ public class TestResponseGenerator
                 routeName = attributeRoutingInfo == null ? null : attributeRoutingInfo.Name,
                 routeValues = new Dictionary<string, object>(_actionContext.RouteData.Values),
                 action = ((ControllerActionDescriptor)_actionContext.ActionDescriptor).ActionName,
-                controller = (
-                    (ControllerActionDescriptor)_actionContext.ActionDescriptor
-                ).ControllerName,
+                controller = ((ControllerActionDescriptor)_actionContext.ActionDescriptor)
+                    .ControllerName,
                 link,
             }
         );

@@ -80,10 +80,8 @@ namespace Microsoft.CodeAnalysis.Rename
             string language,
             CancellationToken cancellationToken
         ) =>
-            ((RemoteOptionsProvider<CodeCleanupOptions>)GetCallback(callbackId)).GetOptionsAsync(
-                language,
-                cancellationToken
-            );
+            ((RemoteOptionsProvider<CodeCleanupOptions>)GetCallback(callbackId))
+                .GetOptionsAsync(language, cancellationToken);
     }
 
     [DataContract]

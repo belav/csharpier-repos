@@ -406,7 +406,8 @@ namespace System.Net.Http.Functional.Tests
                         remoteServer.EchoUri,
                         HttpCompletionOption.ResponseHeadersRead
                     )
-                ).ToArray();
+                )
+                    .ToArray();
                 for (int i = responseTasks.Length - 1; i >= 0; i--) // read backwards to increase likelihood that we wait on a different task than has data available
                 {
                     using (HttpResponseMessage response = await responseTasks[i])

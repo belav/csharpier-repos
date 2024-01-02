@@ -1608,7 +1608,8 @@ namespace System.Threading.Tasks.Tests
                     if (_hasTaskOption && _hasActionState)
                         newTask = (
                             new TaskCompletionSource<double>(new object(), TaskCreationOptions.None)
-                        ).Task;
+                        )
+                            .Task;
                     else if (_hasTaskOption)
                         newTask = (new TaskCompletionSource<double>(TaskCreationOptions.None)).Task;
                     else if (_hasActionState)

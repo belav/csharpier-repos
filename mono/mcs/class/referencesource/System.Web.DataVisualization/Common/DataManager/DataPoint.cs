@@ -1658,9 +1658,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (!Char.IsNumber(field, 0))
                     {
                         columnIndex = ((DbDataRecord)enumerator.Current).GetOrdinal(field);
-                        columnDataType = ((DbDataRecord)enumerator.Current).GetFieldType(
-                            columnIndex
-                        );
+                        columnDataType = ((DbDataRecord)enumerator.Current)
+                            .GetFieldType(columnIndex);
                         failed = false;
                     }
 
@@ -1676,9 +1675,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
                         if (!failed)
                         {
-                            columnDataType = ((DbDataRecord)enumerator.Current).GetFieldType(
-                                columnIndex
-                            );
+                            columnDataType = ((DbDataRecord)enumerator.Current)
+                                .GetFieldType(columnIndex);
                         }
                     }
 

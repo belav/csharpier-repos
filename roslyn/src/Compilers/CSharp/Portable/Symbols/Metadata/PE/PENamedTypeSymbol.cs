@@ -1911,7 +1911,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 contains = (
                                     moduleHasExtension
                                     && containingAssembly.MightContainExtensionMethods
-                                ).ToThreeState();
+                                )
+                                    .ToThreeState();
                             }
                             else
                             {
@@ -2441,9 +2442,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             foreach (var typeParameter in TypeParameters)
             {
-                diag = (
-                    (PETypeParameterSymbol)typeParameter
-                ).DeriveCompilerFeatureRequiredDiagnostic(decoder);
+                diag = ((PETypeParameterSymbol)typeParameter)
+                    .DeriveCompilerFeatureRequiredDiagnostic(decoder);
 
                 if (diag != null)
                 {

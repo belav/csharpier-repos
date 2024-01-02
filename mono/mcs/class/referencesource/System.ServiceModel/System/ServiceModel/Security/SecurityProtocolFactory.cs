@@ -736,7 +736,8 @@ namespace System.ServiceModel.Security
                                 (
                                     (ISecurityContextSecurityTokenCacheProvider)
                                         spec.TokenAuthenticator
-                                ).TokenCache
+                                )
+                                    .TokenCache
                             );
                         }
                     }

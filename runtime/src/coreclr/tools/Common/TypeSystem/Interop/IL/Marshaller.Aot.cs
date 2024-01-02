@@ -1011,9 +1011,8 @@ namespace Internal.TypeSystem.Interop
                 parameterType = ((ByRefType)this.ManagedParameterType).ParameterType;
             }
 
-            CustomAttributeValue<TypeDesc>? guidAttributeValue = (
-                parameterType as EcmaType
-            )?.GetDecodedCustomAttribute("System.Runtime.InteropServices", "GuidAttribute");
+            CustomAttributeValue<TypeDesc>? guidAttributeValue = (parameterType as EcmaType)
+                ?.GetDecodedCustomAttribute("System.Runtime.InteropServices", "GuidAttribute");
             if (guidAttributeValue != null)
             {
                 var guidValue = (string)guidAttributeValue.Value.FixedArguments[0].Value;

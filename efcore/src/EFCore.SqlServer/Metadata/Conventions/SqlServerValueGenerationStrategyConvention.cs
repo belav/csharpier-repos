@@ -145,7 +145,8 @@ public class SqlServerValueGenerationStrategyConvention
                     ?? (
                         property.FindRelationalTypeMapping(storeObject)
                         ?? Dependencies.TypeMappingSource.FindMapping((IProperty)property)
-                    )?.Converter
+                    )
+                        ?.Converter
                 )
                     ?.ProviderClrType
                     .UnwrapNullableType();

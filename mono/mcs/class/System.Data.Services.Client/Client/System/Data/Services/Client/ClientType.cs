@@ -96,9 +96,8 @@ namespace System.Data.Services.Client
                             );
                         }
 
-                        openObjectPropertyName = (
-                            (OpenObjectAttribute)attributes[0]
-                        ).OpenObjectPropertyName;
+                        openObjectPropertyName = ((OpenObjectAttribute)attributes[0])
+                            .OpenObjectPropertyName;
                         openObjectDeclared = tmp;
                     }
                 }
@@ -274,13 +273,11 @@ namespace System.Data.Services.Client
                         from string a in dska.KeyNames
                         where
                             null
-                            == (
-                                from b in this.properties
-                                where b.PropertyName == a
-                                select b
-                            ).FirstOrDefault()
+                            == (from b in this.properties where b.PropertyName == a select b)
+                                .FirstOrDefault()
                         select a
-                    ).First<string>();
+                    )
+                        .First<string>();
                     throw Error.InvalidOperation(
                         Strings.ClientType_MissingProperty(this.ElementTypeName, m)
                     );

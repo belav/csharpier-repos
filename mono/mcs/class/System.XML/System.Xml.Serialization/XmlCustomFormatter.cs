@@ -260,10 +260,8 @@ namespace System.Xml.Serialization
                 case "date":
                     return ((DateTime)value).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
                 case "time":
-                    return ((DateTime)value).ToString(
-                        "HH:mm:ss.FFFFFFF",
-                        CultureInfo.InvariantCulture
-                    );
+                    return ((DateTime)value)
+                        .ToString("HH:mm:ss.FFFFFFF", CultureInfo.InvariantCulture);
                 case "decimal":
                     return XmlConvert.ToString((decimal)value);
                 case "double":

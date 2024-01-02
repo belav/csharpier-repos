@@ -894,15 +894,13 @@ namespace MonoTests.System
             Type szarrayType = new int[10].GetType();
             Assert.IsTrue(
                 szarrayType
-                    == (
-                        Array.CreateInstance(typeof(int), new int[] { 1 }, new int[] { 0 })
-                    ).GetType()
+                    == (Array.CreateInstance(typeof(int), new int[] { 1 }, new int[] { 0 }))
+                        .GetType()
             );
             Assert.IsTrue(
                 szarrayType
-                    != (
-                        Array.CreateInstance(typeof(int), new int[] { 1 }, new int[] { 1 })
-                    ).GetType()
+                    != (Array.CreateInstance(typeof(int), new int[] { 1 }, new int[] { 1 }))
+                        .GetType()
             );
         }
 

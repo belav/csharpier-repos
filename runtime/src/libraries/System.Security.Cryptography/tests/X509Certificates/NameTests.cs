@@ -45,7 +45,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "656320436F72706F726174696F6E311F301D060355040B131653796D616E7465"
                 + "63205472757374204E6574776F726B312830260603550403131F53796D616E74"
                 + "656320436C61737320332045562053534C204341202D204733"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             X500DistinguishedName name = new X500DistinguishedName(encoding);
             string delimiter;
@@ -139,7 +140,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "656320436F72706F726174696F6E311F301D060355040B131653796D616E7465"
                 + "63205472757374204E6574776F726B312830260603550403131F53796D616E74"
                 + "656320436C61737320332045562053534C204341202D204733"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             X500DistinguishedName name = new X500DistinguishedName(encoding);
             string formatted = name.Format(multiLine);

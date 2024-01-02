@@ -539,9 +539,8 @@ class C
             Assert.Equal(SpecialType.System_Object, fifthParam.Parameters[1].Type.SpecialType);
 
             var sixthParam = getParam(5);
-            var sixthParamParam = (
-                (FunctionPointerTypeSymbol)sixthParam.Parameters.Single().Type
-            ).Signature;
+            var sixthParamParam = ((FunctionPointerTypeSymbol)sixthParam.Parameters.Single().Type)
+                .Signature;
             Assert.Equal(t, sixthParamParam.ReturnType);
             Assert.Empty(sixthParamParam.Parameters);
 
@@ -1269,10 +1268,11 @@ class C
                 if (parameterEqualities[i] == Equality.Equal)
                 {
                     Assert.True(
-                        ((FunctionPointerParameterSymbol)param1).MethodEqualityChecks(
-                            (FunctionPointerParameterSymbol)param2,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ((FunctionPointerParameterSymbol)param1)
+                            .MethodEqualityChecks(
+                                (FunctionPointerParameterSymbol)param2,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
 

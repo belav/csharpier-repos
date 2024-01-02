@@ -1086,9 +1086,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (frameType.Arity > 0)
                     {
-                        var typeParameters = (
-                            (SynthesizedClosureEnvironment)frameType
-                        ).ConstructedFromTypeParameters;
+                        var typeParameters = ((SynthesizedClosureEnvironment)frameType)
+                            .ConstructedFromTypeParameters;
                         Debug.Assert(typeParameters.Length == frameType.Arity);
                         var subst = this.TypeMap.SubstituteTypeParameters(typeParameters);
                         frameType = frameType.Construct(subst);

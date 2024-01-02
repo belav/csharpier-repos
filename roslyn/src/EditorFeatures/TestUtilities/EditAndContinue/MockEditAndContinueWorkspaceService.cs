@@ -89,10 +89,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (EmitSolutionUpdateImpl ?? throw new NotImplementedException()).Invoke(
-                    solution,
-                    activeStatementSpanProvider
-                )
+                (EmitSolutionUpdateImpl ?? throw new NotImplementedException())
+                    .Invoke(solution, activeStatementSpanProvider)
             );
 
         public void EndDebuggingSession(
@@ -113,10 +111,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (GetBaseActiveStatementSpansImpl ?? throw new NotImplementedException()).Invoke(
-                    solution,
-                    documentIds
-                )
+                (GetBaseActiveStatementSpansImpl ?? throw new NotImplementedException())
+                    .Invoke(solution, documentIds)
             );
 
         public ValueTask<ImmutableArray<ActiveStatementSpan>> GetAdjustedActiveStatementSpansAsync(
@@ -126,10 +122,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (GetAdjustedActiveStatementSpansImpl ?? throw new NotImplementedException()).Invoke(
-                    document,
-                    activeStatementSpanProvider
-                )
+                (GetAdjustedActiveStatementSpansImpl ?? throw new NotImplementedException())
+                    .Invoke(document, activeStatementSpanProvider)
             );
 
         public ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(
@@ -138,10 +132,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (GetDocumentDiagnosticsImpl ?? throw new NotImplementedException()).Invoke(
-                    document,
-                    activeStatementSpanProvider
-                )
+                (GetDocumentDiagnosticsImpl ?? throw new NotImplementedException())
+                    .Invoke(document, activeStatementSpanProvider)
             );
 
         public void OnSourceFileUpdated(Document document) =>
@@ -157,14 +149,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (StartDebuggingSessionImpl ?? throw new NotImplementedException()).Invoke(
-                    solution,
-                    debuggerService,
-                    sourceTextProvider,
-                    captureMatchingDocuments,
-                    captureAllMatchingDocuments,
-                    reportDiagnostics
-                )
+                (StartDebuggingSessionImpl ?? throw new NotImplementedException())
+                    .Invoke(
+                        solution,
+                        debuggerService,
+                        sourceTextProvider,
+                        captureMatchingDocuments,
+                        captureAllMatchingDocuments,
+                        reportDiagnostics
+                    )
             );
 
         public void SetFileLoggingDirectory(string? logDirectory) =>

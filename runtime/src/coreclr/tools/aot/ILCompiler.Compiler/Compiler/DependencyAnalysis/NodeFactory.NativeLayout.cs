@@ -371,9 +371,8 @@ namespace ILCompiler.DependencyAnalysis
             {
                 if (type.IsRuntimeDeterminedType)
                 {
-                    GenericParameterDesc genericParameter = (
-                        (RuntimeDeterminedType)type
-                    ).RuntimeDeterminedDetailsType;
+                    GenericParameterDesc genericParameter = ((RuntimeDeterminedType)type)
+                        .RuntimeDeterminedDetailsType;
                     type = _factory.TypeSystemContext.GetSignatureVariable(
                         genericParameter.Index,
                         method: (genericParameter.Kind == GenericParameterKind.Method)

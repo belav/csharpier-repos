@@ -103,9 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
 
             var newReturnType = ienumerableGenericSymbol.GenerateTypeSyntax();
             Document? newDocument = null;
-            var newMethodDeclarationSyntax = (node as MethodDeclarationSyntax)?.WithReturnType(
-                newReturnType
-            );
+            var newMethodDeclarationSyntax = (node as MethodDeclarationSyntax)
+                ?.WithReturnType(newReturnType);
             if (newMethodDeclarationSyntax != null)
             {
                 newDocument = document.WithSyntaxRoot(

@@ -39,7 +39,8 @@ public abstract class NorthwindAsTrackingQueryTestBase<TFixture> : IClassFixture
             join o in context.Set<Order>().AsTracking() on c.CustomerID equals o.CustomerID
             where c.CustomerID == "ALFKI"
             select o
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(6, customers.Count);
         Assert.Equal(6, context.ChangeTracker.Entries().Count());
@@ -54,7 +55,8 @@ public abstract class NorthwindAsTrackingQueryTestBase<TFixture> : IClassFixture
             from o in context.Set<Order>().AsTracking()
             where c.CustomerID == o.CustomerID
             select new { c, o }
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(830, customers.Count);
         Assert.Equal(919, context.ChangeTracker.Entries().Count());

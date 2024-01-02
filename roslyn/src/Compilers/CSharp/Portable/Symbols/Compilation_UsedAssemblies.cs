@@ -255,10 +255,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                         !(
                                                             (RetargetingModuleSymbol)
                                                                 retargetingAssembly.Modules[0]
-                                                        ).RetargetingDefinitions(
-                                                            underlyingDependency,
-                                                            out dependency
                                                         )
+                                                            .RetargetingDefinitions(
+                                                                underlyingDependency,
+                                                                out dependency
+                                                            )
                                                     )
                                                     {
                                                         Debug.Assert(

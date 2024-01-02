@@ -56,20 +56,22 @@ namespace System.Web.UI.WebControls.Adapters
                 return;
             }
             writer.EnterStyle(Control.ControlStyle);
-            ((WmlPageAdapter)PageAdapter).RenderBeginPostBack(
-                writer,
-                Control.SoftkeyLabel /* maps to title attribute, Whidbey 10732 */
-                ,
-                Control.AccessKey
-            );
+            ((WmlPageAdapter)PageAdapter)
+                .RenderBeginPostBack(
+                    writer,
+                    Control.SoftkeyLabel /* maps to title attribute, Whidbey 10732 */
+                    ,
+                    Control.AccessKey
+                );
             base.Render(writer);
-            ((WmlPageAdapter)PageAdapter).RenderEndPostBack(
-                writer,
-                Control.UniqueID,
-                "EA" /* argument, placeholder only */
-                ,
-                postUrl
-            );
+            ((WmlPageAdapter)PageAdapter)
+                .RenderEndPostBack(
+                    writer,
+                    Control.UniqueID,
+                    "EA" /* argument, placeholder only */
+                    ,
+                    postUrl
+                );
             writer.ExitStyle(Control.ControlStyle);
         }
     }

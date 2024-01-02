@@ -197,10 +197,8 @@ namespace System.SpanTests
                 ((ReadOnlySpan<int>)new int[2]).SequenceEqual(new int[2], alwaysTrueComparer)
             );
             Assert.True(
-                ((ReadOnlySpan<int>)new int[2] { 1, 3 }).SequenceEqual(
-                    new int[2] { 2, 4 },
-                    alwaysTrueComparer
-                )
+                ((ReadOnlySpan<int>)new int[2] { 1, 3 })
+                    .SequenceEqual(new int[2] { 2, 4 }, alwaysTrueComparer)
             );
         }
 
@@ -217,10 +215,8 @@ namespace System.SpanTests
                 ((ReadOnlySpan<int>)new int[1]).SequenceEqual(new int[2], alwaysFalseComparer)
             );
             Assert.False(
-                ((ReadOnlySpan<int>)new int[2] { 1, 3 }).SequenceEqual(
-                    new int[2] { 2, 4 },
-                    alwaysFalseComparer
-                )
+                ((ReadOnlySpan<int>)new int[2] { 1, 3 })
+                    .SequenceEqual(new int[2] { 2, 4 }, alwaysFalseComparer)
             );
         }
 
@@ -247,10 +243,8 @@ namespace System.SpanTests
 
             Assert.False(((ReadOnlySpan<string>)lower).SequenceEqual(different));
             Assert.False(
-                ((ReadOnlySpan<string>)lower).SequenceEqual(
-                    different,
-                    StringComparer.OrdinalIgnoreCase
-                )
+                ((ReadOnlySpan<string>)lower)
+                    .SequenceEqual(different, StringComparer.OrdinalIgnoreCase)
             );
         }
     }

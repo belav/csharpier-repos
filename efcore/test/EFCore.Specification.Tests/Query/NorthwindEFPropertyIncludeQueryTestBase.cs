@@ -29,7 +29,8 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
                                 ss.Set<Order>().Include(o => EF.Property<Order>(o, "ArcticMonkeys"))
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Include_property(bool async) =>
@@ -39,7 +40,8 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Include_closes_reader(bool async)
@@ -148,7 +150,8 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
                                     .Include(t => t.Item1.Orders)
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     protected override Expression RewriteServerQueryExpression(Expression serverQueryExpression)

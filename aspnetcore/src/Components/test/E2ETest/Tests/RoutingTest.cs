@@ -403,10 +403,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         // It's difficult to access elements within a shadow root using Selenium's regular APIs
         // Bypass this limitation by clicking the element via JavaScript
         var shadowHost = app.FindElement(By.TagName("custom-link-with-shadow-root"));
-        ((IJavaScriptExecutor)Browser).ExecuteScript(
-            "arguments[0].shadowRoot.querySelector('a').click()",
-            shadowHost
-        );
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("arguments[0].shadowRoot.querySelector('a').click()", shadowHost);
 
         Browser.Equal("This is another page.", () => app.FindElement(By.Id("test-info")).Text);
         AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");

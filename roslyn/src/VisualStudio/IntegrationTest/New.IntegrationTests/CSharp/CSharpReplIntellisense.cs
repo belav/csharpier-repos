@@ -24,7 +24,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                     HangMitigatingCancellationToken
                 )
-            ).SelectAsArray(item => item.DisplayText);
+            )
+                .SelectAsArray(item => item.DisplayText);
             Assert.All(
                 ["var", "public", "readonly", "goto",],
                 item => Assert.Contains(item, completionItems)
@@ -47,7 +48,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                         HangMitigatingCancellationToken
                     )
-                ).Select(item => item.DisplayText)
+                )
+                    .Select(item => item.DisplayText)
             );
         }
 
@@ -67,7 +69,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                         HangMitigatingCancellationToken
                     )
-                ).Select(item => item.DisplayText)
+                )
+                    .Select(item => item.DisplayText)
             );
             await TestServices.Input.SendWithoutActivateAsync(
                 VirtualKeyCode.TAB,
@@ -104,7 +107,8 @@ Del<C, System",
                     await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                         HangMitigatingCancellationToken
                     )
-                ).Select(item => item.DisplayText)
+                )
+                    .Select(item => item.DisplayText)
             );
         }
 
@@ -124,7 +128,8 @@ Del<C, System",
                     await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                         HangMitigatingCancellationToken
                     )
-                ).Select(item => item.DisplayText)
+                )
+                    .Select(item => item.DisplayText)
             );
         }
 
@@ -182,7 +187,8 @@ Del<C, System",
                 await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                     HangMitigatingCancellationToken
                 )
-            ).SelectAsArray(item => item.DisplayText);
+            )
+                .SelectAsArray(item => item.DisplayText);
             Assert.All(["x", "Complex",], item => Assert.Contains(item, completionItems));
             await TestServices.Input.SendWithoutActivateAsync(
                 VirtualKeyCode.ESCAPE,

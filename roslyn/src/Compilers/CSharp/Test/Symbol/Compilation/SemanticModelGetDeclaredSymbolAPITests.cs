@@ -2576,9 +2576,8 @@ class Bar { }
                 HashSet<DiagnosticInfo> useSiteDiagnostics = null;
                 binder.LookupSymbolsSimpleName(
                     lookupResult,
-                    (
-                        (CSharp.Symbols.PublicModel.NamespaceOrTypeSymbol)qualifierOpt
-                    )?.UnderlyingNamespaceOrTypeSymbol,
+                    ((CSharp.Symbols.PublicModel.NamespaceOrTypeSymbol)qualifierOpt)
+                        ?.UnderlyingNamespaceOrTypeSymbol,
                     plainName: name,
                     arity: 0,
                     basesBeingResolved: null,

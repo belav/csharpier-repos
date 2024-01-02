@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 ? (
                     (ICompilationUnitSyntax)
                         token.Parent!.SyntaxTree!.GetRoot(CancellationToken.None)
-                ).EndOfFileToken
+                )
+                    .EndOfFileToken
                 : nextToken;
         }
 

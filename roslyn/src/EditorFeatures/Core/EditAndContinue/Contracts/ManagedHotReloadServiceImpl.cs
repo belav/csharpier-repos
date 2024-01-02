@@ -19,17 +19,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public async ValueTask<
             ImmutableArray<InternalContracts.ManagedActiveStatementDebugInfo>
         > GetActiveStatementsAsync(CancellationToken cancellation) =>
-            (
-                await _service.GetActiveStatementsAsync(cancellation).ConfigureAwait(false)
-            ).SelectAsArray(a => a.ToContract());
+            (await _service.GetActiveStatementsAsync(cancellation).ConfigureAwait(false))
+                .SelectAsArray(a => a.ToContract());
 
         public async ValueTask<InternalContracts.ManagedHotReloadAvailability> GetAvailabilityAsync(
             Guid module,
             CancellationToken cancellation
         ) =>
-            (
-                await _service.GetAvailabilityAsync(module, cancellation).ConfigureAwait(false)
-            ).ToContract();
+            (await _service.GetAvailabilityAsync(module, cancellation).ConfigureAwait(false))
+                .ToContract();
 
         public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(
             CancellationToken cancellation

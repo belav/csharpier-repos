@@ -40,9 +40,8 @@ namespace System.Net.Mime
                 _contentDisposition = value;
                 if (value == null)
                 {
-                    ((HeaderCollection)Headers).InternalRemove(
-                        MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!
-                    );
+                    ((HeaderCollection)Headers)
+                        .InternalRemove(MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!);
                 }
                 else
                 {

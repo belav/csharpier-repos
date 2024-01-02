@@ -23610,9 +23610,8 @@ dotnet_diagnostic.CS9204.severity = warning
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             if (
-                (context.Node as PragmaWarningDirectiveTriviaSyntax).DisableOrRestoreKeyword.IsKind(
-                    SyntaxKind.RestoreKeyword
-                )
+                (context.Node as PragmaWarningDirectiveTriviaSyntax)
+                    .DisableOrRestoreKeyword.IsKind(SyntaxKind.RestoreKeyword)
             )
             {
                 context.ReportDiagnostic(Diagnostic.Create(Info01, context.Node.GetLocation()));
@@ -23724,9 +23723,8 @@ dotnet_diagnostic.CS9204.severity = warning
                 (nodeContext) =>
                 {
                     if (
-                        (
-                            nodeContext.Node as PragmaWarningDirectiveTriviaSyntax
-                        ).DisableOrRestoreKeyword.IsKind(SyntaxKind.DisableKeyword)
+                        (nodeContext.Node as PragmaWarningDirectiveTriviaSyntax)
+                            .DisableOrRestoreKeyword.IsKind(SyntaxKind.DisableKeyword)
                     )
                     {
                         nodeContext.ReportDiagnostic(

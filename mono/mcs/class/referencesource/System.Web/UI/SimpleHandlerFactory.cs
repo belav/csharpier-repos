@@ -33,12 +33,8 @@ namespace System.Web.UI
             // This should never get called
             //Debug.Assert(false);
 
-            return ((IHttpHandlerFactory2)this).GetHandler(
-                context,
-                requestType,
-                VirtualPath.CreateNonRelative(virtualPath),
-                path
-            );
+            return ((IHttpHandlerFactory2)this)
+                .GetHandler(context, requestType, VirtualPath.CreateNonRelative(virtualPath), path);
         }
 
         IHttpHandler IHttpHandlerFactory2.GetHandler(

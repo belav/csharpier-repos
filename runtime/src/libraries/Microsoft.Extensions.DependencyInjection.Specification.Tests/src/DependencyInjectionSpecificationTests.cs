@@ -988,7 +988,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var multipleServices = outer.MultipleServices.ToArray();
 
             // Act
-            (serviceProvider as IDisposable).Dispose();
+            (serviceProvider as IDisposable)
+                .Dispose();
 
             // Assert
             Assert.Equal(outer, callback.Disposed[0]);

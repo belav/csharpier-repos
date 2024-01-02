@@ -80,7 +80,8 @@ public static class IdentityBuilderUIExtensions
             .ToArray();
         var applicationName = (
             (IWebHostEnvironment?)environment.LastOrDefault()?.ImplementationInstance
-        )?.ApplicationName;
+        )
+            ?.ApplicationName;
 
         if (applicationName == null)
         {

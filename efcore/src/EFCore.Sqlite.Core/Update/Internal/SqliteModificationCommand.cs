@@ -45,7 +45,8 @@ public class SqliteModificationCommand : ModificationCommand
 
         var propertyProviderClrType = (
             property.GetTypeMapping().Converter?.ProviderClrType ?? property.ClrType
-        ).UnwrapNullableType();
+        )
+            .UnwrapNullableType();
 
         // SQLite has no bool type, so if we simply sent the bool as-is, we'd get 1/0 in the JSON document.
         // To get an actual unquoted true/false value, we pass "true"/"false" string through the json() minifier, which does this.

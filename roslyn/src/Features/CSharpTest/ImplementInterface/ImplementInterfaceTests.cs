@@ -8434,7 +8434,8 @@ partial class C
                             InsertionBehavior = ImplementTypeInsertionBehavior.AtTheEnd
                         }
                     }
-                ).CreateProvider()
+                )
+                    .CreateProvider()
             }.RunAsync();
         }
 
@@ -8622,7 +8623,8 @@ partial class C
                                 ImplementTypePropertyGenerationBehavior.PreferAutoProperties
                         }
                     }
-                ).CreateProvider()
+                )
+                    .CreateProvider()
             }.RunAsync();
         }
 

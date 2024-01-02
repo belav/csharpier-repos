@@ -32,7 +32,8 @@
                 let result = GetValueFromProvider(provider, key, skipValidation)
                 where result != null
                 select result
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
         }
 
         internal static ValueProviderResult GetValueFromProvider(

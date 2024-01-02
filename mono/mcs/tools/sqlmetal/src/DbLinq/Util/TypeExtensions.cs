@@ -101,7 +101,8 @@ namespace DbLinq.Util
                             .Name == name
                     )
                 select member
-            ).SingleOrDefault();
+            )
+                .SingleOrDefault();
         }
 
         /// <summary>

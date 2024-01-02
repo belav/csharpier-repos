@@ -2126,7 +2126,8 @@ namespace System.Workflow.ComponentModel.Design
                     int activityDataPosition = (int)writer.BaseStream.Length;
 
                     // write activity data
-                    ((IPersistUIState)designer).SaveViewState(writer);
+                    ((IPersistUIState)designer)
+                        .SaveViewState(writer);
 
                     // place length
                     writer.Seek(activityDataLengthPosition, SeekOrigin.Begin);

@@ -285,9 +285,8 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Compilation.WCFModel.MetadataFile.MetadataType"
                     );
             }
@@ -745,9 +744,8 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Compilation.WCFModel.ClientOptions.ProxySerializerType"
                     );
             }
@@ -834,9 +832,8 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Compilation.WCFModel.ReferencedCollectionType.CollectionCategory"
                     );
             }
@@ -2893,9 +2890,8 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriterSvcMapFileImpl)writer).Write16_ReferenceGroup(
-                objectToSerialize
-            );
+            ((XmlSerializationWriterSvcMapFileImpl)writer)
+                .Write16_ReferenceGroup(objectToSerialize);
         }
 
         protected override object Deserialize(

@@ -698,7 +698,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Projection_in_a_subquery_should_be_liftable(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -1605,7 +1606,8 @@ OFFSET 0 LIMIT @__p_0
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => base.Projection_skip_projection_doesnt_project_intermittent_column(async)
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(CosmosStrings.OffsetRequiresLimit, message);
     }
@@ -1660,7 +1662,8 @@ OFFSET 0 LIMIT @__p_0
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Do_not_erase_projection_mapping_when_adding_single_projection(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -1716,7 +1719,8 @@ ORDER BY c["OrderID"]
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Collection_include_over_result_of_single_non_scalar(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -1827,7 +1831,8 @@ ORDER BY c["OrderID"]
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Reverse_in_join_inner_with_skip(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -1903,7 +1908,8 @@ ORDER BY c["EmployeeID"] DESC, c["City"]
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => base.Reverse_after_orderBy_and_take(async)
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(CosmosStrings.ReverseAfterSkipTakeNotSupported, message);
     }

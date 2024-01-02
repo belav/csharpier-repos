@@ -913,9 +913,8 @@ namespace ILCompiler.IBC
                     }
                 }
 
-                EcmaModule ecmaModuleOfMethod = (
-                    (EcmaType)methodMetadataType.GetTypeDefinition()
-                ).EcmaModule;
+                EcmaModule ecmaModuleOfMethod = ((EcmaType)methodMetadataType.GetTypeDefinition())
+                    .EcmaModule;
                 MethodDesc ecmaMethod = ecmaModuleOfMethod.GetMethod(
                     MetadataTokens.EntityHandle((int)methodToken)
                 );

@@ -192,10 +192,8 @@ namespace System.Web.Services.Discovery
 
         internal static string UriToString(string baseUrl, string relUrl)
         {
-            return (new Uri(new Uri(baseUrl), relUrl)).GetComponents(
-                UriComponents.AbsoluteUri,
-                UriFormat.SafeUnescaped
-            );
+            return (new Uri(new Uri(baseUrl), relUrl))
+                .GetComponents(UriComponents.AbsoluteUri, UriFormat.SafeUnescaped);
         }
     }
 }

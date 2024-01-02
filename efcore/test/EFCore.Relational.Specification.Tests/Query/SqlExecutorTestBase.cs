@@ -99,7 +99,8 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
                             () =>
                                 context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers""")
                         )
-                    ).Message
+                    )
+                        .Message
                 );
             });
 

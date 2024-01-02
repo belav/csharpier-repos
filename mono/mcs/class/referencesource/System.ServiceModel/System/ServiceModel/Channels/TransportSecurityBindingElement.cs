@@ -157,7 +157,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             sessionFactory.SecurityTokenParameters
-                    ).IssuerBindingContext = issuerBindingContext;
+                    )
+                        .IssuerBindingContext = issuerBindingContext;
                     this.EndpointSupportingTokenParameters.Endorsing.RemoveAt(0);
                     try
                     {
@@ -188,7 +189,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             sessionClientSettings.IssuedSecurityTokenParameters
-                    ).IssuerBindingContext = issuerBindingContext;
+                    )
+                        .IssuerBindingContext = issuerBindingContext;
                     sessionClientSettings.SecurityStandardsManager =
                         sessionFactory.StandardsManager;
                     sessionClientSettings.SessionProtocolFactory = sessionFactory;
@@ -304,7 +306,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             sessionFactory.SecurityTokenParameters
-                    ).IssuerBindingContext = issuerBindingContext;
+                    )
+                        .IssuerBindingContext = issuerBindingContext;
                     this.EndpointSupportingTokenParameters.Endorsing.RemoveAt(0);
                     try
                     {
@@ -339,7 +342,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             channelListener.SessionServerSettings.IssuedSecurityTokenParameters
-                    ).IssuerBindingContext = issuerBindingContext;
+                    )
+                        .IssuerBindingContext = issuerBindingContext;
                     channelListener.SessionServerSettings.SecurityStandardsManager =
                         sessionFactory.StandardsManager;
                     channelListener.SessionServerSettings.SessionProtocolFactory = sessionFactory;

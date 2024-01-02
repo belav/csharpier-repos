@@ -5122,7 +5122,8 @@ namespace System.Xml.Schema
             Debug.Assert(schemaType.DerivedBy == XmlSchemaDerivationMethod.Union);
             XmlSchemaSimpleType[] memberTypes = (
                 (XmlSchemaSimpleTypeUnion)((XmlSchemaSimpleType)schemaType).Content
-            ).BaseMemberTypes;
+            )
+                .BaseMemberTypes;
 
             this.converters = new XmlValueConverter[memberTypes.Length];
             for (int i = 0; i < memberTypes.Length; i++)

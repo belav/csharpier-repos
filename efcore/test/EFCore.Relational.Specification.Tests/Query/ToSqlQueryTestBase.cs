@@ -34,7 +34,8 @@ public abstract class ToSqlQueryTestBase : NonSharedModelTestBase
         var authors = await (
             from o in context.Authors
             select new { Author = o, PostCount = o.PostStat!.Count }
-        ).ToListAsync();
+        )
+            .ToListAsync();
 
         Assert.Single(authors);
         Assert.Equal("Toast", authors[0].Author.Name);

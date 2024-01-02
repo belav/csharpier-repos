@@ -2671,7 +2671,8 @@ namespace System.Xml.Schema
                         // else
                         ConstraintStruct[] constraintStructures = (
                             (ValidationState)_validationStack[level]
-                        ).Constr!;
+                        )
+                            .Constr!;
                         for (int j = 0; j < constraintStructures.Length; ++j)
                         {
                             if (
@@ -2729,9 +2730,8 @@ namespace System.Xml.Schema
                 }
 
                 // else
-                ConstraintStruct[] constraintStructures = (
-                    (ValidationState)_validationStack[i]
-                ).Constr!;
+                ConstraintStruct[] constraintStructures = ((ValidationState)_validationStack[i])
+                    .Constr!;
                 for (int j = 0; j < constraintStructures.Length; ++j)
                 {
                     // check selector from here
@@ -2805,9 +2805,8 @@ namespace System.Xml.Schema
                 }
 
                 // else
-                ConstraintStruct[] constraintStructures = (
-                    (ValidationState)_validationStack[ci]
-                ).Constr!;
+                ConstraintStruct[] constraintStructures = ((ValidationState)_validationStack[ci])
+                    .Constr!;
                 for (int i = 0; i < constraintStructures.Length; ++i)
                 {
                     // axisFields is not null, but may be empty
@@ -3014,7 +3013,8 @@ namespace System.Xml.Schema
             // current level's constraint struct
             ConstraintStruct[]? vcs = (
                 (ValidationState)(_validationStack[_validationStack.Length - 1])
-            ).Constr;
+            )
+                .Constr;
             if (vcs != null)
             {
                 // validating all referencing tables...

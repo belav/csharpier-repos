@@ -333,7 +333,8 @@ namespace DbMetal
                     StringSplitOptions.RemoveEmptyEntries
                 )
                 select entityInterface.Trim()
-            ).ToArray();
+            )
+                .ToArray();
         }
 
         /// <summary>

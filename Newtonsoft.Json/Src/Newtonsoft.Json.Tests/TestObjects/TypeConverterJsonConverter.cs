@@ -58,7 +58,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     converter.CanConvertFrom(typeof(string))
                     && converter.CanConvertTo(typeof(string))
                 select converter
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

@@ -1329,7 +1329,8 @@ namespace System.Workflow.ComponentModel.Compiler
                         foreach (
                             CodeParameterDeclarationExpression parameterDecl in (
                                 (CodeTypeDelegate)codeDomType
-                            ).Parameters
+                            )
+                                .Parameters
                         )
                             invokeMethod.Parameters.Add(parameterDecl);
                         invokeMethod.ReturnType = ((CodeTypeDelegate)codeDomType).ReturnType;

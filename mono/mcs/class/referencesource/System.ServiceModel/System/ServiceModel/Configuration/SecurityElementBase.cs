@@ -1020,7 +1020,8 @@ namespace System.ServiceModel.Configuration
                 this.templateKeyType = (
                     (IssuedSecurityTokenParameters)
                         sbe.EndpointSupportingTokenParameters.Endorsing[0]
-                ).KeyType;
+                )
+                    .KeyType;
             }
             else if (
                 sbe.EndpointSupportingTokenParameters.Signed.Count > 0
@@ -1029,7 +1030,8 @@ namespace System.ServiceModel.Configuration
             {
                 this.templateKeyType = (
                     (IssuedSecurityTokenParameters)sbe.EndpointSupportingTokenParameters.Signed[0]
-                ).KeyType;
+                )
+                    .KeyType;
             }
             else if (
                 sbe.EndpointSupportingTokenParameters.SignedEncrypted.Count > 0
@@ -1040,7 +1042,8 @@ namespace System.ServiceModel.Configuration
                 this.templateKeyType = (
                     (IssuedSecurityTokenParameters)
                         sbe.EndpointSupportingTokenParameters.SignedEncrypted[0]
-                ).KeyType;
+                )
+                    .KeyType;
             }
             else
             {
@@ -1401,12 +1404,12 @@ namespace System.ServiceModel.Configuration
         {
             if (sourceElement is SecurityElementBase)
             {
-                this.failedSecurityBindingElement = (
-                    (SecurityElementBase)sourceElement
-                ).failedSecurityBindingElement;
+                this.failedSecurityBindingElement = ((SecurityElementBase)sourceElement)
+                    .failedSecurityBindingElement;
                 this.willX509IssuerReferenceAssertionBeWritten = (
                     (SecurityElementBase)sourceElement
-                ).willX509IssuerReferenceAssertionBeWritten;
+                )
+                    .willX509IssuerReferenceAssertionBeWritten;
             }
 
             base.Unmerge(sourceElement, parentElement, saveMode);

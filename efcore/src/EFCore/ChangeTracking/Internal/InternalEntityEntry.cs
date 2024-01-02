@@ -1314,10 +1314,8 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             ) && !_stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.Unknown)
         )
         {
-            ((StateManager as StateManager)?.ChangeDetector as ChangeDetector)?.DetectValueChange(
-                this,
-                property
-            );
+            ((StateManager as StateManager)?.ChangeDetector as ChangeDetector)
+                ?.DetectValueChange(this, property);
         }
     }
 

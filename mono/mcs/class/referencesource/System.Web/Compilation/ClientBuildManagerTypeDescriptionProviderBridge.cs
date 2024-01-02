@@ -148,7 +148,8 @@ internal class ClientBuildManagerTypeDescriptionProviderBridge : MarshalByRefObj
             from p in runtimeProperties
             where reflectionPropertyNames.Contains(p.Name)
             select p.Name
-        ).ToArray();
+        )
+            .ToArray();
     }
 
     internal string[] GetFilteredEvents(Type type, BindingFlags bindingFlags)
@@ -164,10 +165,7 @@ internal class ClientBuildManagerTypeDescriptionProviderBridge : MarshalByRefObj
         EventInfo[] reflectionEvents = reflectionType.GetEvents(bindingFlags);
 
         var reflectionEventNames = from e in reflectionEvents select e.Name;
-        return (
-            from e in runtimeEvents
-            where reflectionEventNames.Contains(e.Name)
-            select e.Name
-        ).ToArray();
+        return (from e in runtimeEvents where reflectionEventNames.Contains(e.Name) select e.Name)
+            .ToArray();
     }
 }

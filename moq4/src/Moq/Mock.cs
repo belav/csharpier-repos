@@ -1154,10 +1154,8 @@ namespace Moq
                 return configuredDefaultValue;
             }
 
-            var result = (useAlternateProvider ?? this.DefaultValueProvider).GetDefaultReturnValue(
-                method,
-                this
-            );
+            var result = (useAlternateProvider ?? this.DefaultValueProvider)
+                .GetDefaultReturnValue(method, this);
             var unwrappedResult = Awaitable.TryGetResultRecursive(result);
 
             candidateInnerMock = (unwrappedResult as IMocked)?.Mock;

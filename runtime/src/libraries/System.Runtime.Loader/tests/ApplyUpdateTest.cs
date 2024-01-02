@@ -219,9 +219,8 @@ namespace System.Reflection.Metadata
                 Assert.Equal(1, cattrs.Length);
                 Assert.NotNull(cattrs[0]);
                 Assert.Equal(attrType, cattrs[0].GetType());
-                string p = (
-                    cattrs[0] as System.Reflection.Metadata.ApplyUpdate.Test.MyAttribute
-                ).StringValue;
+                string p = (cattrs[0] as System.Reflection.Metadata.ApplyUpdate.Test.MyAttribute)
+                    .StringValue;
                 Assert.Equal("rstuv", p);
             });
         }
@@ -315,7 +314,8 @@ namespace System.Reflection.Metadata
                 Assert.Equal(1, cattrs.Length);
                 string p = (
                     cattrs[0] as System.Reflection.Metadata.ApplyUpdate.Test.MyDeleteAttribute
-                ).StringValue;
+                )
+                    .StringValue;
                 Assert.Equal("Not Deleted", p);
             });
         }

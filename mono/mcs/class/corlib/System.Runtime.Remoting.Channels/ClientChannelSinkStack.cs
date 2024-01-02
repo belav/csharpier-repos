@@ -59,12 +59,8 @@ namespace System.Runtime.Remoting.Channels
             ChanelSinkStackEntry stackEntry = _sinkStack;
             _sinkStack = _sinkStack.Next;
 
-            ((IClientChannelSink)stackEntry.Sink).AsyncProcessResponse(
-                this,
-                stackEntry.State,
-                headers,
-                stream
-            );
+            ((IClientChannelSink)stackEntry.Sink)
+                .AsyncProcessResponse(this, stackEntry.State, headers, stream);
 
             // Do not call AsyncProcessResponse for each sink in the stack.
             // The sink must recursively call IClientChannelSinkStack.AsyncProcessResponse

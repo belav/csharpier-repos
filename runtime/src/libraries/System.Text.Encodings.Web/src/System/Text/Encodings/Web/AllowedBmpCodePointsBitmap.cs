@@ -83,7 +83,8 @@ namespace System.Text.Encodings.Web
                         (
                             new Vector<uint>(definedCharsBitmapAsLittleEndian)
                             & new Vector<uint>(thisAllowedCharactersBitmap)
-                        ).CopyTo(thisAllowedCharactersBitmap);
+                        )
+                            .CopyTo(thisAllowedCharactersBitmap);
                         definedCharsBitmapAsLittleEndian = definedCharsBitmapAsLittleEndian.Slice(
                             Vector<byte>.Count
                         );

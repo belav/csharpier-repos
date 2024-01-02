@@ -257,9 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return modifiers.Any(static modifier =>
                 modifier.IsOptional
-                && (
-                    (CSharpCustomModifier)modifier
-                ).ModifierSymbol.IsWellKnownTypeRequiresLocationAttribute()
+                && ((CSharpCustomModifier)modifier)
+                    .ModifierSymbol.IsWellKnownTypeRequiresLocationAttribute()
             );
         }
 

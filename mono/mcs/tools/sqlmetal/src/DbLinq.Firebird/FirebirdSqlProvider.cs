@@ -147,7 +147,8 @@ namespace DbLinq.Firebird
                     (
                         from outputExpression in outputExpressions
                         select outputExpression.Replace(".NextVal", ".CurrVal", true)
-                    ).ToArray()
+                    )
+                        .ToArray()
                 ),
                 SqlStatement.Join(", ", outputParameters.ToArray())
             );

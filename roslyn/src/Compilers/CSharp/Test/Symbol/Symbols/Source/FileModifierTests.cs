@@ -5287,9 +5287,10 @@ public partial class C
         Assert.True(type.IsFileLocal);
 
         var referencingMetadataComp = CreateCompilation("", new[] { comp.ToMetadataReference() });
-        type = ((Compilation)referencingMetadataComp).GetTypeByMetadataName(
-            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
-        )!;
+        type = ((Compilation)referencingMetadataComp)
+            .GetTypeByMetadataName(
+                "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+            )!;
         Assert.Equal("C@<tree 0>", type.ToTestDisplayString());
         identifier = type.GetSymbol()!.AssociatedFileIdentifier;
         Assert.NotNull(identifier);
@@ -5298,9 +5299,10 @@ public partial class C
         Assert.True(type.IsFileLocal);
 
         var referencingImageComp = CreateCompilation("", new[] { comp.EmitToImageReference() });
-        type = ((Compilation)referencingImageComp).GetTypeByMetadataName(
-            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
-        )!;
+        type = ((Compilation)referencingImageComp)
+            .GetTypeByMetadataName(
+                "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+            )!;
         Assert.Equal("C@<unknown>", type.ToTestDisplayString());
         identifier = type.GetSymbol()!.AssociatedFileIdentifier;
         Assert.NotNull(identifier);

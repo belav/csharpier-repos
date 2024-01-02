@@ -3332,10 +3332,8 @@ public static class FragmentHelper
     )
     {
         EnsureWriterCanFragment(writer);
-        ((IFragmentCapableXmlDictionaryWriter)writer).StartFragment(
-            stream,
-            generateSelfContainedText
-        );
+        ((IFragmentCapableXmlDictionaryWriter)writer)
+            .StartFragment(stream, generateSelfContainedText);
     }
 
     public static void End(XmlDictionaryWriter writer)

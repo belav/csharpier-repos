@@ -641,7 +641,8 @@ namespace System.Data.Objects.DataClasses
                                 ObjectContext.MetadataWorkspace.GetObjectSpaceType(
                                     (EnumType)parameterEdmType
                                 )
-                        ).ClrType;
+                        )
+                            .ClrType;
 
                     queryParam = new ObjectParameter(paramNameGen.Next(), parameterClrType);
                     // If any lookup value is null, the query cannot match any rows.
@@ -996,9 +997,8 @@ namespace System.Data.Objects.DataClasses
                     MergeOption.OverwriteChanges,
                     false /*setIsLoaded*/
                 );
-                ReferentialConstraint constraint = (
-                    (AssociationType)RelationMetadata
-                ).ReferentialConstraints.FirstOrDefault();
+                ReferentialConstraint constraint = ((AssociationType)RelationMetadata)
+                    .ReferentialConstraints.FirstOrDefault();
                 if (constraint != null)
                 {
                     ObjectStateManager stateManager = ObjectContext.ObjectStateManager;
@@ -1626,12 +1626,13 @@ namespace System.Data.Objects.DataClasses
                 if (this.IsDependentEndOfReferentialConstraint(false))
                 {
                     Debug.Assert(this is EntityReference, "Dependent end cannot be a collection.");
-                    ((EntityReference)this).UpdateForeignKeyValues(
-                        _wrappedOwner,
-                        wrappedTarget,
-                        changedFKs: null,
-                        forceChange: forceForeignKeyChanges
-                    );
+                    ((EntityReference)this)
+                        .UpdateForeignKeyValues(
+                            _wrappedOwner,
+                            wrappedTarget,
+                            changedFKs: null,
+                            forceChange: forceForeignKeyChanges
+                        );
                 }
                 else if (targetRelatedEnd.IsDependentEndOfReferentialConstraint(false))
                 {
@@ -1639,12 +1640,13 @@ namespace System.Data.Objects.DataClasses
                         targetRelatedEnd is EntityReference,
                         "Dependent end cannot be a collection."
                     );
-                    ((EntityReference)targetRelatedEnd).UpdateForeignKeyValues(
-                        wrappedTarget,
-                        _wrappedOwner,
-                        changedFKs: null,
-                        forceChange: forceForeignKeyChanges
-                    );
+                    ((EntityReference)targetRelatedEnd)
+                        .UpdateForeignKeyValues(
+                            wrappedTarget,
+                            _wrappedOwner,
+                            changedFKs: null,
+                            forceChange: forceForeignKeyChanges
+                        );
                 }
             }
 
@@ -1854,9 +1856,8 @@ namespace System.Data.Objects.DataClasses
                 // NOTE Referential constraints collection will usually contains 0 or 1 element,
                 // so performance shouldn't be an issue here
                 foreach (
-                    ReferentialConstraint constraint in (
-                        (AssociationType)this.RelationMetadata
-                    ).ReferentialConstraints
+                    ReferentialConstraint constraint in ((AssociationType)this.RelationMetadata)
+                        .ReferentialConstraints
                 )
                 {
                     if (constraint.ToRole == this.FromEndProperty)
@@ -1897,9 +1898,8 @@ namespace System.Data.Objects.DataClasses
                 // NOTE Referential constraints collection will usually contains 0 or 1 element,
                 // so performance shouldn't be an issue here
                 foreach (
-                    ReferentialConstraint constraint in (
-                        (AssociationType)_relationMetadata
-                    ).ReferentialConstraints
+                    ReferentialConstraint constraint in ((AssociationType)_relationMetadata)
+                        .ReferentialConstraints
                 )
                 {
                     if (constraint.FromRole == this._fromEndProperty)
@@ -2129,9 +2129,8 @@ namespace System.Data.Objects.DataClasses
                 IsForeignKey,
                 "cannot update foreign key values if the relationship is not a FK"
             );
-            ReferentialConstraint constraint = (
-                (AssociationType)RelationMetadata
-            ).ReferentialConstraints[0];
+            ReferentialConstraint constraint = ((AssociationType)RelationMetadata)
+                .ReferentialConstraints[0];
             Debug.Assert(constraint != null, "null constraint");
 
             EntityEntry dependentEntry = WrappedOwner.ObjectStateEntry;
@@ -2297,9 +2296,8 @@ namespace System.Data.Objects.DataClasses
             )
             {
                 foreach (
-                    ReferentialConstraint constraint in (
-                        (AssociationType)this.RelationMetadata
-                    ).ReferentialConstraints
+                    ReferentialConstraint constraint in ((AssociationType)this.RelationMetadata)
+                        .ReferentialConstraints
                 )
                 {
                     // Check properties in principals
@@ -2335,9 +2333,8 @@ namespace System.Data.Objects.DataClasses
                         }
                         else
                         {
-                            IEntityWrapper wrappedRelatedEntity = (
-                                (EntityReference)this
-                            ).ReferenceValue;
+                            IEntityWrapper wrappedRelatedEntity = ((EntityReference)this)
+                                .ReferenceValue;
                             // For Added entities, it doesn't matter what the key value is since it can't be trusted anyway.
                             if (
                                 wrappedRelatedEntity.ObjectStateEntry != null
@@ -3074,9 +3071,8 @@ namespace System.Data.Objects.DataClasses
                 bool foundFromRelationEnd = false;
                 bool foundToRelationEnd = false;
                 foreach (
-                    AssociationEndMember relationEnd in (
-                        (AssociationType)_relationMetadata
-                    ).AssociationEndMembers
+                    AssociationEndMember relationEnd in ((AssociationType)_relationMetadata)
+                        .AssociationEndMembers
                 ) //Only Association relationship is supported
                 {
                     if (relationEnd.Name == this._navigation.From)

@@ -1274,9 +1274,8 @@ namespace System.Workflow.Runtime
             {
                 foreach (object attribute in attributes)
                 {
-                    string previousTrackingService = (
-                        (PreviousTrackingServiceAttribute)attribute
-                    ).AssemblyQualifiedName;
+                    string previousTrackingService = ((PreviousTrackingServiceAttribute)attribute)
+                        .AssemblyQualifiedName;
                     if (_trackingServiceReplacement.ContainsKey(previousTrackingService))
                     {
                         _trackingServiceReplacement.Remove(previousTrackingService);

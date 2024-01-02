@@ -1277,9 +1277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             const int lineNumberParameterIndex = 1;
             const int characterNumberParameterIndex = 2;
 
-            var interceptorsNamespaces = (
-                (CSharpParseOptions)attributeSyntax.SyntaxTree.Options
-            ).InterceptorsPreviewNamespaces;
+            var interceptorsNamespaces = ((CSharpParseOptions)attributeSyntax.SyntaxTree.Options)
+                .InterceptorsPreviewNamespaces;
             var thisNamespaceNames = getNamespaceNames();
             var foundAnyMatch = interceptorsNamespaces.Any(ns =>
                 isDeclaredInNamespace(thisNamespaceNames, ns)

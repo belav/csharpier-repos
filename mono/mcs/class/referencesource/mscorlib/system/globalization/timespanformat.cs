@@ -155,10 +155,11 @@ namespace System.Globalization
                 {
                     sb.Append(literal.SecondFractionSep); // [.FFFFFFF]
                     sb.Append(
-                        (fraction).ToString(
-                            DateTimeFormat.fixedNumberFormats[effectiveDigits - 1],
-                            CultureInfo.InvariantCulture
-                        )
+                        (fraction)
+                            .ToString(
+                                DateTimeFormat.fixedNumberFormats[effectiveDigits - 1],
+                                CultureInfo.InvariantCulture
+                            )
                     );
                 }
             }
@@ -247,10 +248,11 @@ namespace System.Globalization
                         tmp /= (long)
                             Math.Pow(10, DateTimeFormat.MaxSecondsFractionDigits - tokenLen);
                         result.Append(
-                            (tmp).ToString(
-                                DateTimeFormat.fixedNumberFormats[tokenLen - 1],
-                                CultureInfo.InvariantCulture
-                            )
+                            (tmp)
+                                .ToString(
+                                    DateTimeFormat.fixedNumberFormats[tokenLen - 1],
+                                    CultureInfo.InvariantCulture
+                                )
                         );
                         break;
                     case 'F':
@@ -282,10 +284,11 @@ namespace System.Globalization
                         if (effectiveDigits > 0)
                         {
                             result.Append(
-                                (tmp).ToString(
-                                    DateTimeFormat.fixedNumberFormats[effectiveDigits - 1],
-                                    CultureInfo.InvariantCulture
-                                )
+                                (tmp)
+                                    .ToString(
+                                        DateTimeFormat.fixedNumberFormats[effectiveDigits - 1],
+                                        CultureInfo.InvariantCulture
+                                    )
                             );
                         }
                         break;

@@ -131,7 +131,7 @@ public class PropertyDiscoveryConvention
             UseAttributes,
             out mapping
         )
-        && ((Model)structuralType.Model).FindIsComplexConfigurationSource(
-            memberInfo.GetMemberType().UnwrapNullableType()
-        ) == null;
+        && ((Model)structuralType.Model)
+            .FindIsComplexConfigurationSource(memberInfo.GetMemberType().UnwrapNullableType())
+            == null;
 }

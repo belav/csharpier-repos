@@ -429,7 +429,8 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
 
                     var projection2 = (
                         (SelectExpression)projectionBindingExpression.QueryExpression
-                    ).GetProjection(projectionBindingExpression);
+                    )
+                        .GetProjection(projectionBindingExpression);
                     if (projection2 is JsonQueryExpression jsonQuery)
                     {
                         if (_indexBasedBinding)

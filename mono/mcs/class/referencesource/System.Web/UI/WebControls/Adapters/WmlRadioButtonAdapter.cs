@@ -94,14 +94,15 @@ namespace System.Web.UI.WebControls.Adapters
                     // GroupFormVariable is passed as the name & value becuase it is both the key
                     // for the postback data, and the WML client side var used to
                     // select an item in the list.
-                    ((WmlPageAdapter)PageAdapter).RegisterPostField(
-                        writer,
-                        GroupFormVariable,
-                        GroupFormVariable,
-                        true /*dynamic field*/
-                        ,
-                        false /*random*/
-                    );
+                    ((WmlPageAdapter)PageAdapter)
+                        .RegisterPostField(
+                            writer,
+                            GroupFormVariable,
+                            GroupFormVariable,
+                            true /*dynamic field*/
+                            ,
+                            false /*random*/
+                        );
                     group.RegisteredGroup = true;
                 }
                 if (group.RenderAsGroup)
@@ -111,12 +112,13 @@ namespace System.Web.UI.WebControls.Adapters
                     {
                         if (group.SelectedButton != null)
                         {
-                            ((WmlPageAdapter)PageAdapter).AddFormVariable(
-                                writer,
-                                GroupFormVariable,
-                                group.SelectedButton,
-                                false /*random*/
-                            );
+                            ((WmlPageAdapter)PageAdapter)
+                                .AddFormVariable(
+                                    writer,
+                                    GroupFormVariable,
+                                    group.SelectedButton,
+                                    false /*random*/
+                                );
                         }
                         writer.WriteBeginSelect(
                             GroupFormVariable,
@@ -142,19 +144,17 @@ namespace System.Web.UI.WebControls.Adapters
                     // selected radio button was posting back.
                     if (Control.AutoPostBack && !Control.Checked)
                     {
-                        ((WmlPageAdapter)PageAdapter).RenderSelectOptionAsAutoPostBack(
-                            writer,
-                            Control.Text,
-                            Control.UniqueID
-                        );
+                        ((WmlPageAdapter)PageAdapter)
+                            .RenderSelectOptionAsAutoPostBack(
+                                writer,
+                                Control.Text,
+                                Control.UniqueID
+                            );
                     }
                     else
                     {
-                        ((WmlPageAdapter)PageAdapter).RenderSelectOption(
-                            writer,
-                            Control.Text,
-                            Control.UniqueID
-                        );
+                        ((WmlPageAdapter)PageAdapter)
+                            .RenderSelectOption(writer, Control.Text, Control.UniqueID);
                     }
 
                     // Close, if list is finished
@@ -176,12 +176,13 @@ namespace System.Web.UI.WebControls.Adapters
                     string ivalue = Control.Checked ? "1" : null;
                     if (ivalue != null)
                     {
-                        ((WmlPageAdapter)PageAdapter).AddFormVariable(
-                            writer,
-                            iname,
-                            ivalue,
-                            false /*random*/
-                        );
+                        ((WmlPageAdapter)PageAdapter)
+                            .AddFormVariable(
+                                writer,
+                                iname,
+                                ivalue,
+                                false /*random*/
+                            );
                     }
 
                     writer.WriteBeginSelect(
@@ -194,20 +195,18 @@ namespace System.Web.UI.WebControls.Adapters
                     );
                     if (!Control.Checked)
                     {
-                        ((WmlPageAdapter)PageAdapter).RenderSelectOptionAsAutoPostBack(
-                            writer,
-                            Control.Text,
-                            GroupFormVariable,
-                            Control.UniqueID
-                        );
+                        ((WmlPageAdapter)PageAdapter)
+                            .RenderSelectOptionAsAutoPostBack(
+                                writer,
+                                Control.Text,
+                                GroupFormVariable,
+                                Control.UniqueID
+                            );
                     }
                     else
                     {
-                        ((WmlPageAdapter)PageAdapter).RenderSelectOption(
-                            writer,
-                            Control.Text,
-                            Control.UniqueID
-                        );
+                        ((WmlPageAdapter)PageAdapter)
+                            .RenderSelectOption(writer, Control.Text, Control.UniqueID);
                     }
                     writer.WriteEndSelect();
                 }

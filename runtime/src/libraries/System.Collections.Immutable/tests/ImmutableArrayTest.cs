@@ -2192,10 +2192,8 @@ namespace System.Collections.Immutable.Tests
                     );
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            ((IImmutableList<int>)immutableArray).RemoveRange(
-                                s_emptyDefault,
-                                comparer
-                            )
+                            ((IImmutableList<int>)immutableArray)
+                                .RemoveRange(s_emptyDefault, comparer)
                     );
 
                     // Struct overloads, both sides are default
@@ -2220,10 +2218,8 @@ namespace System.Collections.Immutable.Tests
                     );
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            ((IImmutableList<int>)s_emptyDefault).RemoveRange(
-                                s_emptyDefault,
-                                comparer
-                            )
+                            ((IImmutableList<int>)s_emptyDefault)
+                                .RemoveRange(s_emptyDefault, comparer)
                     );
 
                     // Enumerable overloads, rhs is null
@@ -2246,10 +2242,8 @@ namespace System.Collections.Immutable.Tests
                     AssertExtensions.Throws<ArgumentNullException>(
                         "items",
                         () =>
-                            ((IImmutableList<int>)immutableArray).RemoveRange(
-                                items: null,
-                                equalityComparer: comparer
-                            )
+                            ((IImmutableList<int>)immutableArray)
+                                .RemoveRange(items: null, equalityComparer: comparer)
                     );
 
                     // Enumerable overloads, lhs is default and rhs is null
@@ -2265,16 +2259,16 @@ namespace System.Collections.Immutable.Tests
                     );
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            ((IImmutableList<int>)s_emptyDefault).RemoveRange(
-                                items: null as IEnumerable<int>
-                            )
+                            ((IImmutableList<int>)s_emptyDefault)
+                                .RemoveRange(items: null as IEnumerable<int>)
                     );
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            ((IImmutableList<int>)s_emptyDefault).RemoveRange(
-                                items: null as IEnumerable<int>,
-                                equalityComparer: comparer
-                            )
+                            ((IImmutableList<int>)s_emptyDefault)
+                                .RemoveRange(
+                                    items: null as IEnumerable<int>,
+                                    equalityComparer: comparer
+                                )
                     );
 
                     // Array overloads, lhs is default and rhs is null
@@ -3202,10 +3196,8 @@ namespace System.Collections.Immutable.Tests
             // This was not fixed for compatibility reasons. See https://github.com/dotnet/runtime/issues/19265
             Assert.Throws<NullReferenceException>(
                 () =>
-                    ((IStructuralEquatable)ImmutableArray.Create(1, 2, 3)).Equals(
-                        ImmutableArray.Create(1, 2, 3),
-                        comparer: null
-                    )
+                    ((IStructuralEquatable)ImmutableArray.Create(1, 2, 3))
+                        .Equals(ImmutableArray.Create(1, 2, 3), comparer: null)
             );
             Assert.Throws<NullReferenceException>(
                 () => ((IStructuralEquatable)s_emptyDefault).Equals(other: null, comparer: null)
@@ -3422,10 +3414,8 @@ namespace System.Collections.Immutable.Tests
             {
                 Assert.Equal(
                     expected,
-                    ((IStructuralComparable)source.ToArray()).CompareTo(
-                        other ?? s_emptyDefault,
-                        comparer
-                    )
+                    ((IStructuralComparable)source.ToArray())
+                        .CompareTo(other ?? s_emptyDefault, comparer)
                 );
             }
         }

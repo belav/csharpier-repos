@@ -423,11 +423,13 @@ namespace System.Xml
             if (textWriter != null)
                 this.wrapped = (
                     (XmlWellFormedWriter)XmlWriter.Create(this.textWriter, this.writerSettings)
-                ).RawWriter;
+                )
+                    .RawWriter;
             else
                 this.wrapped = (
                     (XmlWellFormedWriter)XmlWriter.Create(this.strm, this.writerSettings)
-                ).RawWriter;
+                )
+                    .RawWriter;
 
             // Send cached events to the new writer
             this.eventCache.EndEvents();

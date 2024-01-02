@@ -1091,9 +1091,8 @@ namespace System.Threading.Tasks.Dataflow
                     // so that _taskForOutputProcessing will be visibly set in the task loop.
                     _taskForOutputProcessing = new Task(
                         static thisSourceCore =>
-                            (
-                                (BroadcastingSourceCore<TOutput>)thisSourceCore!
-                            ).OfferMessagesLoopCore(),
+                            ((BroadcastingSourceCore<TOutput>)thisSourceCore!)
+                                .OfferMessagesLoopCore(),
                         this,
                         Common.GetCreationOptionsForTask(isReplacementReplica)
                     );
@@ -1235,9 +1234,8 @@ namespace System.Threading.Tasks.Dataflow
                 // Run asynchronously to get out of the currently held locks
                 Task.Factory.StartNew(
                     static thisSourceCore =>
-                        (
-                            (BroadcastingSourceCore<TOutput>)thisSourceCore!
-                        ).CompleteBlockOncePossible(),
+                        ((BroadcastingSourceCore<TOutput>)thisSourceCore!)
+                            .CompleteBlockOncePossible(),
                     this,
                     CancellationToken.None,
                     Common.GetCreationOptionsForTask(),

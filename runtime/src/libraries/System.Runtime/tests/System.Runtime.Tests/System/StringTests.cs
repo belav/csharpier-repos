@@ -1607,11 +1607,8 @@ namespace System.Tests
             );
             Assert.Equal(
                 "abcdef",
-                ("abc" + ZeroWidthJoiner).Replace(
-                    ZeroWidthJoiner,
-                    "def",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                ("abc" + ZeroWidthJoiner)
+                    .Replace(ZeroWidthJoiner, "def", StringComparison.OrdinalIgnoreCase)
             );
         }
 
@@ -1623,20 +1620,13 @@ namespace System.Tests
         {
             Assert.Equal(
                 "abc" + ZeroWidthJoiner + "def",
-                ("abc" + ZeroWidthJoiner + "def").Replace(
-                    ZeroWidthJoiner,
-                    "xyz",
-                    StringComparison.CurrentCulture
-                )
+                ("abc" + ZeroWidthJoiner + "def")
+                    .Replace(ZeroWidthJoiner, "xyz", StringComparison.CurrentCulture)
             );
             Assert.Equal(
                 "abc" + ZeroWidthJoiner + "def",
-                ("abc" + ZeroWidthJoiner + "def").Replace(
-                    ZeroWidthJoiner,
-                    "xyz",
-                    true,
-                    CultureInfo.CurrentCulture
-                )
+                ("abc" + ZeroWidthJoiner + "def")
+                    .Replace(ZeroWidthJoiner, "xyz", true, CultureInfo.CurrentCulture)
             );
         }
 

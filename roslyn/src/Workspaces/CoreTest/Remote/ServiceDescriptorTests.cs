@@ -469,10 +469,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var hostServices = FeaturesTestCompositions
                 .Features.WithTestHostParts(Testing.TestHost.OutOfProcess)
                 .GetHostServices();
-            var callbackDispatchers = ((IMefHostExportProvider)hostServices).GetExports<
-                IRemoteServiceCallbackDispatcher,
-                RemoteServiceCallbackDispatcherRegistry.ExportMetadata
-            >();
+            var callbackDispatchers = ((IMefHostExportProvider)hostServices)
+                .GetExports<
+                    IRemoteServiceCallbackDispatcher,
+                    RemoteServiceCallbackDispatcherRegistry.ExportMetadata
+                >();
 
             var descriptorsWithCallbackServiceTypes = ServiceDescriptors
                 .Instance.GetTestAccessor()

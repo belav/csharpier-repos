@@ -63,9 +63,8 @@ namespace System.ServiceModel.Channels
                     this.receiver.Queue is MsmqSubqueueLockingQueue,
                     "Queue must be MsmqSubqueueLockingQueue"
                 );
-                this.lockQueueForReceive = (
-                    (MsmqSubqueueLockingQueue)this.receiver.Queue
-                ).LockQueueForReceive;
+                this.lockQueueForReceive = ((MsmqSubqueueLockingQueue)this.receiver.Queue)
+                    .LockQueueForReceive;
             }
 
             this.mainQueue = this.receiver.Queue;

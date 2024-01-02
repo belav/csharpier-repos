@@ -103,10 +103,11 @@ public class InternalNavigationBuilder
             }
             else
             {
-                ((IConventionNavigation)Metadata).SetIsEagerLoaded(
-                    autoInclude,
-                    configurationSource == ConfigurationSource.DataAnnotation
-                );
+                ((IConventionNavigation)Metadata)
+                    .SetIsEagerLoaded(
+                        autoInclude,
+                        configurationSource == ConfigurationSource.DataAnnotation
+                    );
             }
 
             return this;
@@ -153,10 +154,11 @@ public class InternalNavigationBuilder
             }
             else
             {
-                ((IConventionNavigation)Metadata).SetLazyLoadingEnabled(
-                    lazyLoadingEnabled,
-                    configurationSource == ConfigurationSource.DataAnnotation
-                );
+                ((IConventionNavigation)Metadata)
+                    .SetLazyLoadingEnabled(
+                        lazyLoadingEnabled,
+                        configurationSource == ConfigurationSource.DataAnnotation
+                    );
             }
 
             return this;

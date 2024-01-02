@@ -591,7 +591,8 @@ public abstract class TerminalData
             string.IsNullOrEmpty(EncodingCharset)
                 ? Encoding.Default
                 : Encoding.GetEncoding(EncodingCharset)
-        ).RemovePreamble();
+        )
+            .RemovePreamble();
 }
 
 // Below you can find test data recorded with https://github.com/adamsitnik/ReadKey

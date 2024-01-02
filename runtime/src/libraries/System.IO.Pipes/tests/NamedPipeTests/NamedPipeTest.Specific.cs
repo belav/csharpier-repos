@@ -292,24 +292,22 @@ namespace System.IO.Pipes.Tests
                     );
                 }
 
-                Task[] serverWaits = (
-                    from server in servers
-                    select server.WaitForConnectionAsync()
-                ).ToArray();
-                Task[] clientWaits = (
-                    from client in clients
-                    select client.ConnectAsync()
-                ).ToArray();
+                Task[] serverWaits = (from server in servers select server.WaitForConnectionAsync())
+                    .ToArray();
+                Task[] clientWaits = (from client in clients select client.ConnectAsync())
+                    .ToArray();
                 await serverWaits.Concat(clientWaits).ToArray().WhenAllOrAnyFailed();
 
                 Task[] serverSends = (
                     from server in servers
                     select server.WriteAsync(new byte[1], 0, 1)
-                ).ToArray();
+                )
+                    .ToArray();
                 Task<int>[] clientReceives = (
                     from client in clients
                     select client.ReadAsync(new byte[1], 0, 1)
-                ).ToArray();
+                )
+                    .ToArray();
                 await serverSends.Concat(clientReceives).ToArray().WhenAllOrAnyFailed();
             }
             finally

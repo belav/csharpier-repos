@@ -76,7 +76,8 @@ namespace MonoTests.System.Windows.Forms
                                 CultureInfo.CurrentCulture.TextInfo.ListSeparator
                             )
                         )
-                ).Start,
+                )
+                    .Start,
                 "N2"
             );
             Assert.AreEqual(
@@ -91,7 +92,8 @@ namespace MonoTests.System.Windows.Forms
                                 CultureInfo.CurrentCulture.TextInfo.ListSeparator
                             )
                         )
-                ).Start,
+                )
+                    .Start,
                 "N3"
             );
             Assert.AreEqual(
@@ -106,7 +108,8 @@ namespace MonoTests.System.Windows.Forms
                                 CultureInfo.CurrentCulture.TextInfo.ListSeparator
                             )
                         )
-                ).Start,
+                )
+                    .Start,
                 "N4"
             );
             Assert.AreEqual(
@@ -121,7 +124,8 @@ namespace MonoTests.System.Windows.Forms
                                 CultureInfo.CurrentCulture.TextInfo.ListSeparator
                             )
                         )
-                ).Length,
+                )
+                    .Length,
                 "N5"
             );
             Assert.AreEqual(
@@ -136,7 +140,8 @@ namespace MonoTests.System.Windows.Forms
                                 CultureInfo.CurrentCulture.TextInfo.ListSeparator
                             )
                         )
-                ).Length,
+                )
+                    .Length,
                 "N6"
             );
             Assert.AreEqual(
@@ -151,7 +156,8 @@ namespace MonoTests.System.Windows.Forms
                                 CultureInfo.CurrentCulture.TextInfo.ListSeparator
                             )
                         )
-                ).Length,
+                )
+                    .Length,
                 "N7"
             );
         }

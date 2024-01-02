@@ -232,7 +232,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                     var activityDictionary = (
                         scopeObjectList.FirstOrDefault()
                         as IEnumerable<KeyValuePair<string, object>>
-                    ).ToDictionary(x => x.Key, x => x.Value);
+                    )
+                        .ToDictionary(x => x.Key, x => x.Value);
                     switch (activity.IdFormat)
                     {
                         case ActivityIdFormat.Hierarchical:

@@ -269,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     foreach (
                         VariableDesignationSyntax nested in (
                             (ParenthesizedVariableDesignationSyntax)node
-                        ).Variables
+                        )
+                            .Variables
                     )
                     {
                         VisitPatternDesignation(nested);
@@ -474,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     foreach (
                         VariableDesignationSyntax nested in (
                             (ParenthesizedVariableDesignationSyntax)designation
-                        ).Variables
+                        )
+                            .Variables
                     )
                     {
                         VisitDeclarationExpressionDesignation(node, nested, argumentListSyntaxOpt);

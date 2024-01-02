@@ -55,9 +55,8 @@ namespace System.ServiceModel.Activities
                         "Something went wrong with our housekeeping."
                     );
 
-                    service = ((ExternalDataExchangeService)dataExchangeService).GetService(
-                        serviceType
-                    );
+                    service = ((ExternalDataExchangeService)dataExchangeService)
+                        .GetService(serviceType);
                 }
             }
 

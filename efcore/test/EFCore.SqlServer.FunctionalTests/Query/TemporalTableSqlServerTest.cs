@@ -286,7 +286,8 @@ ORDER BY [t0].[Id] DESC
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () => context.MainEntitiesDifferentTable.TemporalAll().ToListAsync()
                     )
-                ).Message
+                )
+                    .Message
                 : Assert
                     .Throws<InvalidOperationException>(
                         () => context.MainEntitiesDifferentTable.TemporalAll().ToList()

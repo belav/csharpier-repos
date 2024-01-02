@@ -272,10 +272,8 @@ namespace ILCompiler.Logging
 
                     if (
                         !attribute.FixedArguments[0].Type.IsString
-                        || !((string)(attribute.FixedArguments[0].Value)).Equals(
-                            "IsTrimmable",
-                            StringComparison.Ordinal
-                        )
+                        || !((string)(attribute.FixedArguments[0].Value))
+                            .Equals("IsTrimmable", StringComparison.Ordinal)
                     )
                         continue;
 

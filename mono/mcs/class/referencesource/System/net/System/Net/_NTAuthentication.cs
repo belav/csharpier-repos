@@ -412,9 +412,8 @@ namespace System.Net
             if (package == NtlmClient.AuthType || package == NegotiateClient.AuthType)
             {
                 m_UniqueUserId =
-                    (Interlocked.Increment(ref s_UniqueGroupId)).ToString(
-                        NumberFormatInfo.InvariantInfo
-                    ) + m_UniqueUserId;
+                    (Interlocked.Increment(ref s_UniqueGroupId))
+                        .ToString(NumberFormatInfo.InvariantInfo) + m_UniqueUserId;
             }
         }
 

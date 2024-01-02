@@ -1485,9 +1485,8 @@ namespace System.Web.UI.WebControls
 
                     button.Text = "...";
                     button.CommandName = DataGrid.PageCommandName;
-                    button.CommandArgument = (firstPage - 1).ToString(
-                        NumberFormatInfo.InvariantInfo
-                    );
+                    button.CommandArgument = (firstPage - 1)
+                        .ToString(NumberFormatInfo.InvariantInfo);
                     button.CausesValidation = false;
                     cell.Controls.Add(button);
 
@@ -1529,9 +1528,8 @@ namespace System.Web.UI.WebControls
 
                     button.Text = "...";
                     button.CommandName = DataGrid.PageCommandName;
-                    button.CommandArgument = (lastPage + 1).ToString(
-                        NumberFormatInfo.InvariantInfo
-                    );
+                    button.CommandArgument = (lastPage + 1)
+                        .ToString(NumberFormatInfo.InvariantInfo);
                     button.CausesValidation = false;
                     cell.Controls.Add(button);
                 }

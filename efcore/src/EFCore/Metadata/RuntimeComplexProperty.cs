@@ -82,9 +82,8 @@ public class RuntimeComplexProperty : RuntimePropertyBase, IComplexProperty
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     public override string ToString() =>
-        ((IReadOnlyComplexProperty)this).ToDebugString(
-            MetadataDebugStringOptions.SingleLineDefault
-        );
+        ((IReadOnlyComplexProperty)this)
+            .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,9 +96,8 @@ public class RuntimeComplexProperty : RuntimePropertyBase, IComplexProperty
         new(
             () => ((IReadOnlyComplexProperty)this).ToDebugString(),
             () =>
-                ((IReadOnlyComplexProperty)this).ToDebugString(
-                    MetadataDebugStringOptions.LongDefault
-                )
+                ((IReadOnlyComplexProperty)this)
+                    .ToDebugString(MetadataDebugStringOptions.LongDefault)
         );
 
     /// <inheritdoc />

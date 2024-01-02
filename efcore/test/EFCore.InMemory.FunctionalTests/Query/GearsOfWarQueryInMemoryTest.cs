@@ -38,7 +38,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Group_by_on_StartsWith_with_null_parameter_as_argument(bool async) =>
@@ -48,7 +49,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                 await Assert.ThrowsAsync<ArgumentNullException>(
                     () => base.Group_by_on_StartsWith_with_null_parameter_as_argument(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Group_by_with_having_StartsWith_with_null_parameter_as_argument(
@@ -61,7 +63,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                     () =>
                         base.Group_by_with_having_StartsWith_with_null_parameter_as_argument(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task OrderBy_StartsWith_with_null_parameter_as_argument(bool async) =>
@@ -71,7 +74,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                 await Assert.ThrowsAsync<ArgumentNullException>(
                     () => base.OrderBy_StartsWith_with_null_parameter_as_argument(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Select_StartsWith_with_null_parameter_as_argument(bool async) =>
@@ -81,7 +85,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                 await Assert.ThrowsAsync<ArgumentNullException>(
                     () => base.Select_StartsWith_with_null_parameter_as_argument(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
@@ -98,7 +103,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
@@ -115,7 +121,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
@@ -132,7 +139,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Correlated_collection_with_distinct_3_levels(bool async)
@@ -144,7 +152,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Correlated_collection_with_distinct_3_levels(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Projecting_correlated_collection_followed_by_Distinct(bool async)
@@ -156,7 +165,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Projecting_correlated_collection_followed_by_Distinct(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
@@ -173,7 +183,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override Task Include_after_SelectMany_throws(bool async) =>

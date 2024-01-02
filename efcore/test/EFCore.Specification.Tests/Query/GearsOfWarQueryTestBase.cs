@@ -1938,7 +1938,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             id2 = g.Nickname
                         }
                     select g
-                ).Include(g => g.Tag),
+                )
+                    .Include(g => g.Tag),
             elementAsserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<Officer>(o => o.Tag))
         );
 
@@ -1957,7 +1958,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             id2 = t.GearNickName
                         }
                     select g
-                ).Include(g => g.Tag),
+                )
+                    .Include(g => g.Tag),
             elementAsserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<Officer>(o => o.Tag))
         );
 
@@ -2818,11 +2820,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         AssertQueryScalar(
             async,
             ss =>
-                (
-                    from g in ss.Set<Gear>()
-                    where g.Tag.Note != "Foo"
-                    select g.HasSoulPatch
-                ).Distinct()
+                (from g in ss.Set<Gear>() where g.Tag.Note != "Foo" select g.HasSoulPatch)
+                    .Distinct()
         );
 
     [ConditionalTheory]
@@ -2999,7 +2998,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     where gear.HasSoulPatch
                     orderby tag.Note
                     select gear
-                ).AsTracking()
+                )
+                    .AsTracking()
                 orderby g.FullName
                 select g.FullName,
             assertOrder: true
@@ -3018,7 +3018,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     join tag in ss.Set<CogTag>() on gear.Nickname equals tag.GearNickName
                     orderby tag.Note
                     select gear
-                ).AsTracking()
+                )
+                    .AsTracking()
                 orderby g.Nickname
                 select g.Nickname,
             assertOrder: true
@@ -3040,7 +3041,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     from tag in grouping.DefaultIfEmpty()
                     orderby gear.Rank
                     select gear
-                ).AsTracking()
+                )
+                    .AsTracking()
                 orderby g.Nickname
                 select g.Nickname,
             assertOrder: true
@@ -3058,7 +3060,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     orderby tag.Note
                     where tag.GearNickName != "Cole Train"
                     select gear
-                ).AsTracking()
+                )
+                    .AsTracking()
                 join tag in ss.Set<CogTag>() on gear.Nickname equals tag.GearNickName
                 orderby gear.Nickname, tag.Id
                 select gear.Nickname,
@@ -3263,7 +3266,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         elementSorter: e => e.o + e.g
                     )
             )
-        ).Message;
+        )
+            .Message;
     }
 
     private static Weapon FavoriteWeapon(IEnumerable<Weapon> weapons) =>
@@ -3460,9 +3464,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         AssertQuery(
             async,
             ss =>
-                (from f in ss.Set<Faction>() where f is LocustHorde orderby f.Id select f).Include(
-                    f => f.Capital
-                ),
+                (from f in ss.Set<Faction>() where f is LocustHorde orderby f.Id select f)
+                    .Include(f => f.Capital),
             elementAsserter: (e, a) =>
                 AssertInclude(e, a, new ExpectedInclude<Faction>(e1 => e1.Capital)),
             assertOrder: true
@@ -3918,7 +3921,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => AssertQuery(async, ss => ss.Set<Gear>().Include("Reports.Foo"))
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Contains(
             CoreResources
@@ -3978,7 +3982,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     where g.Nickname != "Marcus"
                     orderby g.Nickname
                     select g.Weapons.ToList()
-                ).Select(e => e.Count),
+                )
+                    .Select(e => e.Count),
             assertOrder: true
         );
 
@@ -4005,11 +4010,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from g in ss.Set<Gear>()
                 where g.Nickname != "Marcus"
                 orderby g.Nickname
-                select (
-                    from w in g.Weapons
-                    where w.IsAutomatic || w.Name != "foo"
-                    select w
-                ).ToList(),
+                select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select w)
+                    .ToList(),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
@@ -4023,11 +4025,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from g in ss.Set<Gear>()
                 where g.Nickname != "Marcus"
                 orderby g.Nickname
-                select (
-                    from w in g.Weapons
-                    where w.IsAutomatic || w.Name != "foo"
-                    select w
-                ).ToList(),
+                select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select w)
+                    .ToList(),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
@@ -4041,11 +4040,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from g in ss.Set<Gear>()
                 where g.Nickname != "Marcus"
                 orderby g.Nickname
-                select (
-                    from w in g.Weapons
-                    where w.IsAutomatic || w.Name != "foo"
-                    select w
-                ).ToArray(),
+                select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select w)
+                    .ToArray(),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
@@ -4064,7 +4060,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     where w.IsAutomatic || w.Name != "foo"
                     orderby w.Name descending
                     select w
-                ).ToList(),
+                )
+                    .ToList(),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e, a, ordered: true)
         );
@@ -4084,7 +4081,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         from r in o.Reports
                         where !r.HasSoulPatch
                         select new { r.Nickname, r.FullName }
-                    ).ToArray()
+                    )
+                        .ToArray()
                 },
             elementSorter: e => e.Nickname,
             elementAsserter: (e, a) =>
@@ -4112,11 +4110,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from g in ss.Set<Gear>()
                 where g.Nickname != "Marcus"
                 orderby g.Nickname
-                select (
-                    from w in g.Weapons
-                    where w.IsAutomatic || w.Name != "foo"
-                    select w.Name
-                ).ToList(),
+                select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select w.Name)
+                    .ToList(),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
@@ -4130,11 +4125,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from g in ss.Set<Gear>()
                 where g.Nickname != "Marcus"
                 orderby g.Nickname
-                select (
-                    from w in g.Weapons
-                    where w.IsAutomatic || w.Name != "foo"
-                    select "BFG"
-                ).ToList(),
+                select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select "BFG")
+                    .ToList(),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
@@ -4148,11 +4140,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from g in ss.Set<Gear>()
                 where g.Nickname != "Marcus"
                 orderby g.Nickname
-                select (
-                    from w in g.Weapons
-                    where w.IsAutomatic || w.Name != "foo"
-                    select true
-                ).ToList(),
+                select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select true)
+                    .ToList(),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
@@ -4204,12 +4193,10 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 select (
                     from m in s.Missions
                     where m.MissionId < 42
-                    select (
-                        from ps in m.Mission.ParticipatingSquads
-                        where ps.SquadId < 7
-                        select ps
-                    ).ToList()
-                ).ToList(),
+                    select (from ps in m.Mission.ParticipatingSquads where ps.SquadId < 7 select ps)
+                        .ToList()
+                )
+                    .ToList(),
             elementSorter: e => e.Count(),
             elementAsserter: (e, a) =>
                 AssertCollection(
@@ -4230,11 +4217,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 select (
                     from m in s.Missions
                     where m.MissionId < 3
-                    select (
-                        from ps in m.Mission.ParticipatingSquads
-                        where ps.SquadId < 2
-                        select ps
-                    ).ToList()
+                    select (from ps in m.Mission.ParticipatingSquads where ps.SquadId < 2 select ps)
+                        .ToList()
                 ),
             elementSorter: e => e.Count(),
             elementAsserter: (e, a) =>
@@ -4257,7 +4241,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     from m in s.Missions
                     where m.MissionId < 42
                     select (from ps in m.Mission.ParticipatingSquads where ps.SquadId < 7 select ps)
-                ).ToList(),
+                )
+                    .ToList(),
             elementSorter: e => e.Count(),
             elementAsserter: (e, a) =>
                 AssertCollection(
@@ -4421,7 +4406,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         from www in o.Tag.Gear.Weapons
                         orderby www.IsAutomatic, www.Owner.Nickname descending
                         select www
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -4450,7 +4436,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         orderby www.IsAutomatic, www.Owner.Nickname descending
                         orderby www.IsAutomatic, www.Owner.Nickname descending
                         select www
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -4478,7 +4465,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         from www in o.Tag.Gear.Weapons
                         orderby www.Id descending, www.Owner.Weapons.Count
                         select www
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -4504,10 +4492,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         from r in o.Reports
                         where r.FullName != "Foo"
                         orderby r.Rank
-                        select new
-                        {
-                            r.FullName,
-                            InnerCollection = (
+                        select new { r.FullName, InnerCollection = (
                                 from w in r.Weapons
                                 where w.Name != "Bar"
                                 orderby w.IsAutomatic
@@ -4524,14 +4509,15 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                         .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                         .ToList()
                                 }
-                            ).ToList()
-                        }
-                    ).ToList(),
+                            ).ToList() }
+                    )
+                        .ToList(),
                     OuterCollection2 = (
                         from www in o.Tag.Gear.Weapons
                         orderby www.IsAutomatic, www.Owner.Nickname descending
                         select www
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -4642,9 +4628,11 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 from w in r.Weapons
                                 where w.Name != "Bar"
                                 select new { w.Name, r.Nickname }
-                            ).ToList()
+                            )
+                                .ToList()
                         }
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -5003,7 +4991,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                 .ToList()
                         }
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -5050,9 +5039,11 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                         .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                         .ToList()
                                 }
-                            ).ToList()
+                            )
+                                .ToList()
                         }
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -5104,7 +5095,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                 .ToList()
                         }
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -5154,9 +5146,11 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                         .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                         .ToList()
                                 }
-                            ).ToList()
+                            )
+                                .ToList()
                         }
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -5328,7 +5322,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         from t in ss.Set<CogTag>()
                         join g in ss.Set<Gear>() on o.FullName equals g.FullName
                         select t.Note
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e.Collection, a.Collection)
@@ -5348,7 +5343,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         from t in ss.Set<CogTag>()
                         join g in ss.Set<Gear>() on o.FullName equals o.Nickname
                         select t.Note
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e.Collection, a.Collection)
@@ -5369,7 +5365,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         join g in ss.Set<Gear>() on o.FullName equals g.FullName into grouping
                         from g in grouping.DefaultIfEmpty()
                         select t.Note
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e.Collection, a.Collection)
@@ -5395,7 +5392,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 )
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -7139,7 +7137,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             && t.Note != null
                             && null != t.Note
                         select g
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.key,
             elementAsserter: (e, a) =>
@@ -7451,7 +7450,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                     .Include(h => h.Commander)
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -7467,7 +7467,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             ss => ss.Set<Faction>().Select(f => f.Capital).Include(c => c.BornGears)
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -7483,7 +7484,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             ss => ss.Set<Faction>().Select(f => new { f }).Include(x => x.f.Capital)
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -8861,7 +8863,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     Collection = (
                         from r in o.Reports
                         select new { ReportName = r.FullName, OfficerName = o.FullName }
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -8981,7 +8984,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     where t.GearNickName == g.FullName
                     orderby t.Id
                     select t.IssueDate
-                ).FirstOrDefault()
+                )
+                    .FirstOrDefault()
                 where g.Tag.IssueDate > invalidTagIssueDate
                 select new { g.Nickname, invalidTagIssueDate }
         );
@@ -9967,10 +9971,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             select new { g.HasSoulPatch, g.CityOfBirthName }
                         )
                             .Distinct()
-                            .Select(xx => new
-                            {
-                                xx.HasSoulPatch,
-                                Subquery2 = (
+                            .Select(xx => new { xx.HasSoulPatch, Subquery2 = (
                                     from w in ss.Set<Weapon>()
                                     where w.OwnerFullName == xx.CityOfBirthName
                                     select new
@@ -9979,8 +9980,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                         x.Length,
                                         xx.HasSoulPatch
                                     }
-                                ).ToList()
-                            })
+                                ).ToList() })
                             .ToList()
                     }),
             elementSorter: e => e.Length,
@@ -10328,16 +10328,14 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             (l as LocustCommander).CommandingFaction,
                             IsNull = (l as LocustCommander).CommandingFaction == null,
                             Property = (int?)(l as LocustCommander).HighCommandId,
-                            PropertyAfterNavigation = (
-                                l as LocustCommander
-                            ).CommandingFaction.MaybeScalar(x => x.Eradicated),
+                            PropertyAfterNavigation = (l as LocustCommander)
+                                .CommandingFaction.MaybeScalar(x => x.Eradicated),
                             NestedInner = new
                             {
                                 (l as LocustCommander).HighCommand,
                                 IsNull = (l as LocustCommander).HighCommand == null,
-                                Property = (l as LocustCommander).MaybeScalar(x =>
-                                    x.DefeatedBySquadId
-                                ),
+                                Property = (l as LocustCommander)
+                                    .MaybeScalar(x => x.DefeatedBySquadId),
                                 PropertyAfterNavigation = (l as LocustCommander).HighCommand.Name
                             }
                         }

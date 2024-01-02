@@ -98,15 +98,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal override ImmutableArray<AliasAndExternAliasDirective> ExternAliases =>
-            ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace).GetExternAliases(
-                _declarationSyntax
-            );
+            ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace)
+                .GetExternAliases(_declarationSyntax);
 
         internal override ImmutableArray<AliasAndUsingDirective> UsingAliases =>
-            ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace).GetUsingAliases(
-                _declarationSyntax,
-                basesBeingResolved: null
-            );
+            ((SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace)
+                .GetUsingAliases(_declarationSyntax, basesBeingResolved: null);
 
         /// <summary>
         /// Get <see cref="QuickAttributeChecker"/> that can be used to quickly

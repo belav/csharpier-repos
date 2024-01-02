@@ -603,10 +603,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "first",
                 () =>
-                    ((ParallelQuery<int>)null).Except(
-                        ParallelEnumerable.Range(0, 1),
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .Except(ParallelEnumerable.Range(0, 1), EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "second",

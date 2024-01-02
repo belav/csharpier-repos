@@ -907,9 +907,8 @@ namespace System.Workflow.ComponentModel.Design
                 List<Activity> activities = new List<Activity>();
 
                 foreach (
-                    Activity containedActivity in (
-                        (CompositeActivity)parentDesigner.Activity
-                    ).Activities
+                    Activity containedActivity in ((CompositeActivity)parentDesigner.Activity)
+                        .Activities
                 )
                 {
                     if (!Helpers.IsAlternateFlowActivity(containedActivity))
@@ -2367,9 +2366,8 @@ namespace System.Workflow.ComponentModel.Design
             if (eventBindingService != null)
             {
                 if (methodDescriptor is DynamicPropertyDescriptor)
-                    methodDescriptor = (
-                        (DynamicPropertyDescriptor)methodDescriptor
-                    ).RealPropertyDescriptor;
+                    methodDescriptor = ((DynamicPropertyDescriptor)methodDescriptor)
+                        .RealPropertyDescriptor;
 
                 EventDescriptor eventDescriptor = eventBindingService.GetEvent(methodDescriptor);
                 if (eventDescriptor != null)

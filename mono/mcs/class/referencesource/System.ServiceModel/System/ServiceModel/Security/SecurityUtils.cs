@@ -2638,9 +2638,8 @@ namespace System.ServiceModel.Security
                 if (stp is SecureConversationSecurityTokenParameters)
                 {
                     SafeFreeCredentials result = GetCredentialsHandle(
-                        (
-                            (SecureConversationSecurityTokenParameters)stp
-                        ).BootstrapSecurityBindingElement,
+                        ((SecureConversationSecurityTokenParameters)stp)
+                            .BootstrapSecurityBindingElement,
                         clientCredentials
                     );
                     if (result != null)
@@ -2920,9 +2919,8 @@ namespace System.ServiceModel.Security
             int maxNegoMessageSize;
             if (transport is ConnectionOrientedTransportBindingElement)
             {
-                maxNegoMessageSize = (
-                    (ConnectionOrientedTransportBindingElement)transport
-                ).MaxBufferSize;
+                maxNegoMessageSize = ((ConnectionOrientedTransportBindingElement)transport)
+                    .MaxBufferSize;
             }
             else if (transport is HttpTransportBindingElement)
             {

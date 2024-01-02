@@ -149,13 +149,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         result.Append(".property ");
 
                         PropertyAttributes propertyAttrs;
-                        (
-                            (PEModuleSymbol)container.ContainingModule
-                        ).Module.GetPropertyDefPropsOrThrow(
-                            property.Handle,
-                            out propertyName,
-                            out propertyAttrs
-                        );
+                        ((PEModuleSymbol)container.ContainingModule)
+                            .Module.GetPropertyDefPropsOrThrow(
+                                property.Handle,
+                                out propertyName,
+                                out propertyAttrs
+                            );
                         if (MetadataSignatureHelper.AppendPropertyAttributes(result, propertyAttrs))
                         {
                             result.Append(" ");
@@ -198,12 +197,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         string eventName;
                         EventAttributes eventAttrs;
                         EntityHandle type;
-                        ((PEModuleSymbol)container.ContainingModule).Module.GetEventDefPropsOrThrow(
-                            evnt.Handle,
-                            out eventName,
-                            out eventAttrs,
-                            out type
-                        );
+                        ((PEModuleSymbol)container.ContainingModule)
+                            .Module.GetEventDefPropsOrThrow(
+                                evnt.Handle,
+                                out eventName,
+                                out eventAttrs,
+                                out type
+                            );
 
                         if (MetadataSignatureHelper.AppendEventAttributes(result, eventAttrs))
                         {

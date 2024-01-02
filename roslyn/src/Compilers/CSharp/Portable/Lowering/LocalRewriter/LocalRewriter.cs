@@ -467,9 +467,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     bool constraintsNeedNullableAttribute = typeParameters.Any(
                         static typeParameter =>
-                            (
-                                (SourceTypeParameterSymbolBase)typeParameter
-                            ).ConstraintsNeedNullableAttribute()
+                            ((SourceTypeParameterSymbolBase)typeParameter)
+                                .ConstraintsNeedNullableAttribute()
                     );
 
                     if (
@@ -1054,9 +1053,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray(array, Range)
 
                 Debug.Assert(node.Expression.Type is { TypeKind: TypeKind.Array });
-                var elementType = (
-                    (ArrayTypeSymbol)node.Expression.Type
-                ).ElementTypeWithAnnotations;
+                var elementType = ((ArrayTypeSymbol)node.Expression.Type)
+                    .ElementTypeWithAnnotations;
 
                 resultExpr = F.Call(
                     receiver: null,

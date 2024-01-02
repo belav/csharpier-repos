@@ -100,7 +100,8 @@ public class OkResultTests
                 PopulateMetadata<Ok>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

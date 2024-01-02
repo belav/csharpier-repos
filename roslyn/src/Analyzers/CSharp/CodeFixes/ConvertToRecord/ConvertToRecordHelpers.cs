@@ -1282,7 +1282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     testType = typeCondition.TypeOperand;
                     referencedParameter = (
                         typeCondition.ValueOperand as IParameterReferenceOperation
-                    )?.Parameter;
+                    )
+                        ?.Parameter;
                 }
             }
             else
@@ -1369,7 +1370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // each branch is followed by statements outside the branch either way
             var trueOps = (
                 (whenTrue as IBlockOperation)?.Operations ?? ImmutableArray.Create(whenTrue)
-            ).Concat(otherOps);
+            )
+                .Concat(otherOps);
             var falseOps = (
                 (whenFalse as IBlockOperation)?.Operations
                 ?? (
@@ -1377,7 +1379,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         ? ImmutableArray.Create(whenFalse)
                         : ImmutableArray<IOperation>.Empty
                 )
-            ).Concat(otherOps);
+            )
+                .Concat(otherOps);
 
             // We expect one of the true or false branch to have exactly one statement: return false.
             // If we don't find that, it indicates complex behavior such as

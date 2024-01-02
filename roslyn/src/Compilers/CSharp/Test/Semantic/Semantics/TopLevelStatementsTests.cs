@@ -999,9 +999,8 @@ System.Console.WriteLine(s);
             Assert.Equal("Program", local.ContainingSymbol.ContainingSymbol.Name);
             Assert.False(local.ContainingSymbol.ContainingSymbol.IsImplicitlyDeclared);
             Assert.True(
-                (
-                    (INamespaceSymbol)local.ContainingSymbol.ContainingSymbol.ContainingSymbol
-                ).IsGlobalNamespace
+                ((INamespaceSymbol)local.ContainingSymbol.ContainingSymbol.ContainingSymbol)
+                    .IsGlobalNamespace
             );
         }
 
@@ -5958,9 +5957,8 @@ void local()
             Assert.Equal(SymbolKind.NamedType, local.ContainingSymbol.ContainingSymbol.Kind);
             Assert.False(local.ContainingSymbol.ContainingSymbol.IsImplicitlyDeclared);
             Assert.True(
-                (
-                    (INamespaceSymbol)local.ContainingSymbol.ContainingSymbol.ContainingSymbol
-                ).IsGlobalNamespace
+                ((INamespaceSymbol)local.ContainingSymbol.ContainingSymbol.ContainingSymbol)
+                    .IsGlobalNamespace
             );
 
             VerifyFlowGraph(
@@ -6917,9 +6915,8 @@ label1: System.Console.WriteLine(""Hi!"");
             Assert.Equal(SymbolKind.NamedType, label.ContainingSymbol.ContainingSymbol.Kind);
             Assert.False(label.ContainingSymbol.ContainingSymbol.IsImplicitlyDeclared);
             Assert.True(
-                (
-                    (INamespaceSymbol)label.ContainingSymbol.ContainingSymbol.ContainingSymbol
-                ).IsGlobalNamespace
+                ((INamespaceSymbol)label.ContainingSymbol.ContainingSymbol.ContainingSymbol)
+                    .IsGlobalNamespace
             );
         }
 
@@ -7060,9 +7057,8 @@ args: System.Console.WriteLine(""Hi!"");
             Assert.Equal(SymbolKind.NamedType, label.ContainingSymbol.ContainingSymbol.Kind);
             Assert.False(label.ContainingSymbol.ContainingSymbol.IsImplicitlyDeclared);
             Assert.True(
-                (
-                    (INamespaceSymbol)label.ContainingSymbol.ContainingSymbol.ContainingSymbol
-                ).IsGlobalNamespace
+                ((INamespaceSymbol)label.ContainingSymbol.ContainingSymbol.ContainingSymbol)
+                    .IsGlobalNamespace
             );
         }
 

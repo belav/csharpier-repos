@@ -23,9 +23,8 @@ namespace Microsoft.Extensions.Configuration
             string? path
         )
         {
-            using ReferenceCountedProviders? reference = (
-                root as ConfigurationManager
-            )?.GetProvidersReference();
+            using ReferenceCountedProviders? reference = (root as ConfigurationManager)
+                ?.GetProvidersReference();
             IEnumerable<IConfigurationProvider> providers = reference?.Providers ?? root.Providers;
 
             IEnumerable<IConfigurationSection> children = providers

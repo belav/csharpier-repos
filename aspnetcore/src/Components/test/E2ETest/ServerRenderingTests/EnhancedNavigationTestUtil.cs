@@ -30,9 +30,8 @@ public static class EnhancedNavigationTestUtil
                 browser.Equal("Hello", () => browser.Exists(By.TagName("h1")).Text);
             }
 
-            ((IJavaScriptExecutor)browser).ExecuteScript(
-                "sessionStorage.setItem('suppress-enhanced-navigation', 'true')"
-            );
+            ((IJavaScriptExecutor)browser)
+                .ExecuteScript("sessionStorage.setItem('suppress-enhanced-navigation', 'true')");
         }
     }
 

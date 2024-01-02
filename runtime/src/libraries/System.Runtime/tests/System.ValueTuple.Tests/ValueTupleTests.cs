@@ -361,10 +361,8 @@ namespace System.Tests
                 Assert.Equal(expectedResult, ((IComparable)valueTuple).CompareTo(other.valueTuple));
                 Assert.Equal(
                     expectedStructuralResult,
-                    ((IStructuralComparable)valueTuple).CompareTo(
-                        other.valueTuple,
-                        DummyTestComparer.Instance
-                    )
+                    ((IStructuralComparable)valueTuple)
+                        .CompareTo(other.valueTuple, DummyTestComparer.Instance)
                 );
                 Assert.Equal(1, ((IComparable)valueTuple).CompareTo(null));
 
@@ -2463,16 +2461,12 @@ namespace System.Tests
             Assert.False(ValueTuple.Create(1).Equals(ValueTuple.Create(0)));
 
             Assert.True(
-                ((IStructuralEquatable)ValueTuple.Create(1)).Equals(
-                    ValueTuple.Create(1),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1))
+                    .Equals(ValueTuple.Create(1), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1)).Equals(
-                    ValueTuple.Create(0),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1))
+                    .Equals(ValueTuple.Create(0), TestEqualityComparer.Instance)
             );
 
             Assert.Equal(
@@ -2518,22 +2512,16 @@ namespace System.Tests
             Assert.False(ValueTuple.Create(1, 2).Equals(ValueTuple.Create(1, 0)));
 
             Assert.True(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2)).Equals(
-                    ValueTuple.Create(1, 2),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2))
+                    .Equals(ValueTuple.Create(1, 2), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2)).Equals(
-                    ValueTuple.Create(0, 2),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2))
+                    .Equals(ValueTuple.Create(0, 2), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2)).Equals(
-                    ValueTuple.Create(1, 0),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2))
+                    .Equals(ValueTuple.Create(1, 0), TestEqualityComparer.Instance)
             );
 
             Assert.Equal(
@@ -2583,28 +2571,20 @@ namespace System.Tests
             Assert.False(ValueTuple.Create(1, 2, 3).Equals(ValueTuple.Create(1, 2, 0)));
 
             Assert.True(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3)).Equals(
-                    ValueTuple.Create(1, 2, 3),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3))
+                    .Equals(ValueTuple.Create(1, 2, 3), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3)).Equals(
-                    ValueTuple.Create(0, 2, 3),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3))
+                    .Equals(ValueTuple.Create(0, 2, 3), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3)).Equals(
-                    ValueTuple.Create(1, 0, 3),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3))
+                    .Equals(ValueTuple.Create(1, 0, 3), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3)).Equals(
-                    ValueTuple.Create(1, 2, 0),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3))
+                    .Equals(ValueTuple.Create(1, 2, 0), TestEqualityComparer.Instance)
             );
 
             Assert.Equal(
@@ -2659,34 +2639,24 @@ namespace System.Tests
             Assert.False(ValueTuple.Create(1, 2, 3, 4).Equals(ValueTuple.Create(1, 2, 3, 0)));
 
             Assert.True(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4)).Equals(
-                    ValueTuple.Create(0, 2, 3, 4),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4))
+                    .Equals(ValueTuple.Create(0, 2, 3, 4), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4)).Equals(
-                    ValueTuple.Create(1, 0, 3, 4),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4))
+                    .Equals(ValueTuple.Create(1, 0, 3, 4), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4)).Equals(
-                    ValueTuple.Create(1, 2, 0, 4),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4))
+                    .Equals(ValueTuple.Create(1, 2, 0, 4), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4)).Equals(
-                    ValueTuple.Create(1, 2, 3, 0),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4))
+                    .Equals(ValueTuple.Create(1, 2, 3, 0), TestEqualityComparer.Instance)
             );
 
             Assert.Equal(
@@ -2745,40 +2715,28 @@ namespace System.Tests
             Assert.False(ValueTuple.Create(1, 2, 3, 4, 5).Equals(ValueTuple.Create(1, 2, 3, 4, 0)));
 
             Assert.True(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 5),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 5), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5)).Equals(
-                    ValueTuple.Create(0, 2, 3, 4, 5),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5))
+                    .Equals(ValueTuple.Create(0, 2, 3, 4, 5), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5)).Equals(
-                    ValueTuple.Create(1, 0, 3, 4, 5),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5))
+                    .Equals(ValueTuple.Create(1, 0, 3, 4, 5), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5)).Equals(
-                    ValueTuple.Create(1, 2, 0, 4, 5),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5))
+                    .Equals(ValueTuple.Create(1, 2, 0, 4, 5), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5)).Equals(
-                    ValueTuple.Create(1, 2, 3, 0, 5),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5))
+                    .Equals(ValueTuple.Create(1, 2, 3, 0, 5), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 0),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 0), TestEqualityComparer.Instance)
             );
 
             Assert.Equal(
@@ -2885,46 +2843,32 @@ namespace System.Tests
             );
 
             Assert.True(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 5, 6),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 5, 6), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6)).Equals(
-                    ValueTuple.Create(0, 2, 3, 4, 5, 6),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6))
+                    .Equals(ValueTuple.Create(0, 2, 3, 4, 5, 6), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6)).Equals(
-                    ValueTuple.Create(1, 0, 3, 4, 5, 6),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6))
+                    .Equals(ValueTuple.Create(1, 0, 3, 4, 5, 6), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6)).Equals(
-                    ValueTuple.Create(1, 2, 0, 4, 5, 6),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6))
+                    .Equals(ValueTuple.Create(1, 2, 0, 4, 5, 6), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6)).Equals(
-                    ValueTuple.Create(1, 2, 3, 0, 5, 6),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6))
+                    .Equals(ValueTuple.Create(1, 2, 3, 0, 5, 6), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 0, 6),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 0, 6), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 5, 0),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 5, 0), TestEqualityComparer.Instance)
             );
 
             Assert.Equal(
@@ -3058,52 +3002,36 @@ namespace System.Tests
             );
 
             Assert.True(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 5, 6, 7),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 5, 6, 7), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(0, 2, 3, 4, 5, 6, 7),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(0, 2, 3, 4, 5, 6, 7), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(1, 0, 3, 4, 5, 6, 7),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(1, 0, 3, 4, 5, 6, 7), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(1, 2, 0, 4, 5, 6, 7),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(1, 2, 0, 4, 5, 6, 7), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(1, 2, 3, 0, 5, 6, 7),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(1, 2, 3, 0, 5, 6, 7), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 0, 6, 7),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 0, 6, 7), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 5, 0, 7),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 5, 0, 7), TestEqualityComparer.Instance)
             );
             Assert.False(
-                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7)).Equals(
-                    ValueTuple.Create(1, 2, 3, 4, 5, 6, 0),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)ValueTuple.Create(1, 2, 3, 4, 5, 6, 7))
+                    .Equals(ValueTuple.Create(1, 2, 3, 4, 5, 6, 0), TestEqualityComparer.Instance)
             );
 
             Assert.Equal(
@@ -3338,76 +3266,67 @@ namespace System.Tests
             );
 
             Assert.True(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(0, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(0, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 0, 3, 4, 5, 6, 7, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 0, 3, 4, 5, 6, 7, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 2, 0, 4, 5, 6, 7, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 2, 0, 4, 5, 6, 7, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 2, 3, 0, 5, 6, 7, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 2, 3, 0, 5, 6, 7, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 2, 3, 4, 0, 6, 7, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 2, 3, 4, 0, 6, 7, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 2, 3, 4, 5, 0, 7, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 2, 3, 4, 5, 0, 7, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 2, 3, 4, 5, 6, 0, ValueTuple.Create(8)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 2, 3, 4, 5, 6, 0, ValueTuple.Create(8)),
+                        TestEqualityComparer.Instance
+                    )
             );
             Assert.False(
-                (
-                    (IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8))
-                ).Equals(
-                    CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(0)),
-                    TestEqualityComparer.Instance
-                )
+                ((IStructuralEquatable)CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(8)))
+                    .Equals(
+                        CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(0)),
+                        TestEqualityComparer.Instance
+                    )
             );
 
             // Notice that 0-tuple prints as empty position
@@ -3694,9 +3613,8 @@ namespace System.Tests
             // GetHashCode only tries to hash the first 7 elements when rest is not ITupleInternal
             Assert.Equal(ValueTuple.Create(1, 0, 0, 0, 0, 0, 0).GetHashCode(), d.GetHashCode());
             Assert.Equal(
-                ((IStructuralEquatable)ValueTuple.Create(1, 0, 0, 0, 0, 0, 0)).GetHashCode(
-                    TestEqualityComparer.Instance
-                ),
+                ((IStructuralEquatable)ValueTuple.Create(1, 0, 0, 0, 0, 0, 0))
+                    .GetHashCode(TestEqualityComparer.Instance),
                 ((IStructuralEquatable)d).GetHashCode(TestEqualityComparer.Instance)
             );
 

@@ -157,7 +157,8 @@ namespace Internal.Runtime.TypeLoader
                     {
                         Handle entryFieldHandle = (
                             ((int)HandleType.Field << 24) | (int)entryParser.GetUnsigned()
-                        ).AsHandle();
+                        )
+                            .AsHandle();
                         if (!fieldHandle.Equals(entryFieldHandle))
                             continue;
                     }

@@ -490,9 +490,8 @@ namespace System.ServiceModel.Dispatcher
                     CloseChannelState state = new CloseChannelState(this, channel);
                     if (channel is ISessionChannel<IDuplexSession>)
                     {
-                        IDuplexSession duplexSession = (
-                            (ISessionChannel<IDuplexSession>)channel
-                        ).Session;
+                        IDuplexSession duplexSession = ((ISessionChannel<IDuplexSession>)channel)
+                            .Session;
                         IAsyncResult result = duplexSession.BeginCloseOutputSession(
                             timeout,
                             Fx.ThunkCallback(new AsyncCallback(CloseOutputSessionCallback)),
@@ -586,9 +585,8 @@ namespace System.ServiceModel.Dispatcher
             CloseChannelState state = (CloseChannelState)result.AsyncState;
             try
             {
-                ((ISessionChannel<IDuplexSession>)state.Channel).Session.EndCloseOutputSession(
-                    result
-                );
+                ((ISessionChannel<IDuplexSession>)state.Channel)
+                    .Session.EndCloseOutputSession(result);
             }
             catch (Exception e)
             {

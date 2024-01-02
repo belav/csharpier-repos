@@ -983,12 +983,10 @@ namespace ILLink.Shared.TrimAnalysis
                             != baseMethodAnnotations.ParameterAnnotations[parameterIndex]
                         )
                             LogValidationWarning(
-                                (new MethodProxy(method)).GetParameter(
-                                    (ParameterIndex)parameterIndex
-                                ),
-                                (new MethodProxy(baseMethod)).GetParameter(
-                                    (ParameterIndex)parameterIndex
-                                ),
+                                (new MethodProxy(method))
+                                    .GetParameter((ParameterIndex)parameterIndex),
+                                (new MethodProxy(baseMethod))
+                                    .GetParameter((ParameterIndex)parameterIndex),
                                 method
                             );
                     }

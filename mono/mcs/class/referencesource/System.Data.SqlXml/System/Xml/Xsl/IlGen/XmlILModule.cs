@@ -395,12 +395,8 @@ namespace System.Xml.Xsl.IlGen
             symDoc = this.urlToSymWriter[fileName] as ISymbolDocumentWriter;
             if (symDoc == null)
             {
-                symDoc = ((ModuleBuilder)this.typeBldr.Module).DefineDocument(
-                    fileName,
-                    LanguageGuid,
-                    VendorGuid,
-                    Guid.Empty
-                );
+                symDoc = ((ModuleBuilder)this.typeBldr.Module)
+                    .DefineDocument(fileName, LanguageGuid, VendorGuid, Guid.Empty);
                 this.urlToSymWriter.Add(fileName, symDoc);
             }
 
@@ -428,7 +424,8 @@ namespace System.Xml.Xsl.IlGen
                 if (this.persistAsm)
                 {
                     // Persist the assembly to disk
-                    ((AssemblyBuilder)this.typeBldr.Module.Assembly).Save(this.modFile + ".dll");
+                    ((AssemblyBuilder)this.typeBldr.Module.Assembly)
+                        .Save(this.modFile + ".dll");
                 }
 
                 // Replace all MethodInfos in this.methods

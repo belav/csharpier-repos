@@ -1623,7 +1623,8 @@ class C
                 (
                     (ILocalSymbol)
                         model.GetDeclaredSymbol(usingStatement.Declaration.Variables.First())
-                ).Type,
+                )
+                    .Type,
                 typeInfo.Symbol
             );
         }

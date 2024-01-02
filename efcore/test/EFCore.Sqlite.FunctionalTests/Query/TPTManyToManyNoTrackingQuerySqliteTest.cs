@@ -18,7 +18,8 @@ public class TPTManyToManyNoTrackingQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Skip_navigation_order_by_single_or_default(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
@@ -33,7 +34,8 @@ public class TPTManyToManyNoTrackingQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_EF_Property(
@@ -48,6 +50,7 @@ public class TPTManyToManyNoTrackingQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 }

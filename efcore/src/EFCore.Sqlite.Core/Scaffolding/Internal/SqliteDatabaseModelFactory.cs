@@ -480,9 +480,8 @@ ORDER BY "cid"
             {
                 while (defaultValueSql.StartsWith('(') && defaultValueSql.EndsWith(')'))
                 {
-                    defaultValueSql = (
-                        defaultValueSql.Substring(1, defaultValueSql.Length - 2)
-                    ).Trim();
+                    defaultValueSql = (defaultValueSql.Substring(1, defaultValueSql.Length - 2))
+                        .Trim();
                 }
             }
         }

@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         typeOrDesignationSyntax is TypeSyntax typeSyntax
                                             ? typeSyntax.SkipScoped(out _).SkipRef()
                                             : typeOrDesignationSyntax
-                                    ).Location
+                                    )
+                                        .Location
                                 );
                             }
                         }

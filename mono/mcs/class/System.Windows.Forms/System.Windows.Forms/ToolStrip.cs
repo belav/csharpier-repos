@@ -1527,9 +1527,8 @@ namespace System.Windows.Forms
                 item.Owner.Items.RemoveNoOwnerOrLayout(item);
 
                 if (item.Owner is ToolStripOverflow)
-                    (item.Owner as ToolStripOverflow).ParentToolStrip.Items.RemoveNoOwnerOrLayout(
-                        item
-                    );
+                    (item.Owner as ToolStripOverflow)
+                        .ParentToolStrip.Items.RemoveNoOwnerOrLayout(item);
             }
 
             parent.Items.AddNoOwnerOrLayout(item);
@@ -1773,9 +1772,8 @@ namespace System.Windows.Forms
             foreach (ToolStripItem tsi2 in this.DisplayedItems)
                 if (tsi != tsi2)
                     if (tsi2 is ToolStripDropDownItem)
-                        (tsi2 as ToolStripDropDownItem).HideDropDown(
-                            ToolStripDropDownCloseReason.Keyboard
-                        );
+                        (tsi2 as ToolStripDropDownItem)
+                            .HideDropDown(ToolStripDropDownCloseReason.Keyboard);
 
             if (this.OverflowButton != null)
             {
@@ -1784,9 +1782,8 @@ namespace System.Windows.Forms
                 foreach (ToolStripItem tsi2 in tsic)
                     if (tsi != tsi2)
                         if (tsi2 is ToolStripDropDownItem)
-                            (tsi2 as ToolStripDropDownItem).HideDropDown(
-                                ToolStripDropDownCloseReason.Keyboard
-                            );
+                            (tsi2 as ToolStripDropDownItem)
+                                .HideDropDown(ToolStripDropDownCloseReason.Keyboard);
 
                 this.OverflowButton.HideDropDown();
             }
@@ -2017,9 +2014,8 @@ namespace System.Windows.Forms
             if (item.Parent != null && item.Parent != this)
             {
                 if (item.Parent is ToolStripOverflow)
-                    (item.Parent as ToolStripOverflow).ParentToolStrip.Items.RemoveNoOwnerOrLayout(
-                        item
-                    );
+                    (item.Parent as ToolStripOverflow)
+                        .ParentToolStrip.Items.RemoveNoOwnerOrLayout(item);
                 else
                     item.Parent.Items.RemoveNoOwnerOrLayout(item);
 

@@ -271,7 +271,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                             async () => await context.SaveChangesAsync()
                         )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
-                ).Message
+                )
+                    .Message
             );
         });
 
@@ -328,7 +329,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                                 async () => await context.SaveChangesAsync()
                             )
                             : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
-                    ).Message
+                    )
+                        .Message
                 );
             }
         });
@@ -387,7 +389,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                             async () => await context.SaveChangesAsync()
                         )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
-                ).Message
+                )
+                    .Message
             );
         });
 
@@ -731,7 +734,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                             async () => await context.SaveChangesAsync()
                         )
                         : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
-                ).Message
+                )
+                    .Message
             );
         });
 

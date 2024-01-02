@@ -3356,12 +3356,10 @@ namespace System.Net
                 byte[] byteContentLength = Encoding.Default.GetBytes("0");
                 fixed (byte* pContentLength = byteContentLength)
                 {
-                    (&httpResponse.Headers.KnownHeaders)[
-                        (int)HttpResponseHeader.ContentLength
-                    ].pRawValue = (sbyte*)pContentLength;
-                    (&httpResponse.Headers.KnownHeaders)[
-                        (int)HttpResponseHeader.ContentLength
-                    ].RawValueLength = (ushort)byteContentLength.Length;
+                    (&httpResponse.Headers.KnownHeaders)[(int)HttpResponseHeader.ContentLength]
+                        .pRawValue = (sbyte*)pContentLength;
+                    (&httpResponse.Headers.KnownHeaders)[(int)HttpResponseHeader.ContentLength]
+                        .RawValueLength = (ushort)byteContentLength.Length;
 
                     httpResponse.Headers.UnknownHeaderCount = checked(
                         (ushort)(challenges == null ? 0 : challenges.Count)

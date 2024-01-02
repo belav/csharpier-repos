@@ -697,9 +697,8 @@ namespace System.ServiceModel.Description
                 if (section.Metadata is MetadataSet)
                 {
                     foreach (
-                        MetadataSection innerSection in (
-                            (MetadataSet)section.Metadata
-                        ).MetadataSections
+                        MetadataSection innerSection in ((MetadataSet)section.Metadata)
+                            .MetadataSections
                     )
                     {
                         innerSection.SourceUrl = section.SourceUrl;
@@ -1538,9 +1537,8 @@ namespace System.ServiceModel.Description
                                 new InvalidOperationException(
                                     SR.GetString(
                                         SR.SFxBadMetadataReference,
-                                        (
-                                            (IClientChannel)metadataClient
-                                        ).RemoteAddress.Uri.ToString()
+                                        ((IClientChannel)metadataClient)
+                                            .RemoteAddress.Uri.ToString()
                                     )
                                 )
                             );

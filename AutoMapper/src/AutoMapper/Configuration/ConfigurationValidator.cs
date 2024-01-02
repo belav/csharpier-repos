@@ -55,7 +55,8 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
                 unmappedPropertyNames,
                 canConstruct
             )
-        ).ToArray();
+        )
+            .ToArray();
 
         if (badTypeMaps.Any())
         {

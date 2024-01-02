@@ -683,7 +683,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             (ILocalSymbol loopObject, ForToLoopOperationUserDefinedInfo userDefinedInfo) = (
                 (ForToLoopOperation)operation
-            ).Info;
+            )
+                .Info;
 
             if (userDefinedInfo != null)
             {

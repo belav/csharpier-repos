@@ -59,9 +59,8 @@ namespace ILCompiler.DependencyAnalysis
                 else if (method.IsArrayAddressMethod())
                 {
                     return new ScannedMethodNode(
-                        ((ArrayType)method.OwningType).GetArrayMethod(
-                            ArrayMethodKind.AddressWithHiddenArg
-                        )
+                        ((ArrayType)method.OwningType)
+                            .GetArrayMethod(ArrayMethodKind.AddressWithHiddenArg)
                     );
                 }
                 else if (method.HasCustomAttribute("System.Runtime", "RuntimeImportAttribute"))

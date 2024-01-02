@@ -210,9 +210,8 @@ namespace System.ServiceModel.Dispatcher
 
         public bool Contains(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(
-                item
-            );
+            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters)
+                .Contains(item);
         }
 
         public bool ContainsKey(MessageFilter filter)
@@ -222,10 +221,8 @@ namespace System.ServiceModel.Dispatcher
 
         public void CopyTo(KeyValuePair<MessageFilter, TFilterData>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).CopyTo(
-                array,
-                arrayIndex
-            );
+            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters)
+                .CopyTo(array, arrayIndex);
         }
 
         void CreateEmptyTables()
@@ -254,9 +251,8 @@ namespace System.ServiceModel.Dispatcher
 
         public IEnumerator<KeyValuePair<MessageFilter, TFilterData>> GetEnumerator()
         {
-            return (
-                (ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters
-            ).GetEnumerator();
+            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters)
+                .GetEnumerator();
         }
 
         public int GetPriority(MessageFilter filter)

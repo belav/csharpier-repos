@@ -42,7 +42,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 3
             select p.Id.IsDescendantOf(p.Id.GetAncestor(1))
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -61,7 +62,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 1
             select new HierarchyId("/1/1/11.1/").IsDescendantOf(p.Id)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -80,7 +82,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 0
             select p.Id.GetAncestor(0)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -99,7 +102,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 1
             select p.Id.GetAncestor(1)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -118,7 +122,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 2
             select p.Id.GetAncestor(2)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -137,7 +142,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 3
             select p.Id.GetAncestor(3)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -156,7 +162,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 0
             select p.Id.GetAncestor(1)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -175,7 +182,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 0
             select p.Id.GetDescendant(null, null)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -194,7 +202,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetLevel() == 0
             select p.Id.GetDescendant(null)
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -213,7 +222,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id == HierarchyId.Parse("/1/")
             select p.Name
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -232,7 +242,8 @@ public class QueryTests : IDisposable
             from p in _db.ConvertedPatriarchy
             where p.HierarchyId == HierarchyId.Parse("/1/").ToString()
             select p.Name
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -341,7 +352,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id.GetAncestor(p.Id.GetLevel()) == HierarchyId.GetRoot() // HierarchyId.Parse("/1/") // HierarchyId.Parse(p.Id.ToString()).GetAncestor(HierarchyId.Parse(p.Id.ToString()).GetLevel())
             select p.Name
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -360,11 +372,8 @@ public class QueryTests : IDisposable
     {
         var isaac = HierarchyId.Parse("/1/");
 
-        var results = (
-            from p in _db.Patriarchy
-            where isaac.IsDescendantOf(p.Id)
-            select p.Name
-        ).ToList();
+        var results = (from p in _db.Patriarchy where isaac.IsDescendantOf(p.Id) select p.Name)
+            .ToList();
 
         Assert.Equal(
             """
@@ -384,11 +393,8 @@ public class QueryTests : IDisposable
     [ConditionalFact]
     public void ToString_can_translate()
     {
-        var results = (
-            from p in _db.Patriarchy
-            where p.Id.GetLevel() == 1
-            select p.Id.ToString()
-        ).ToList();
+        var results = (from p in _db.Patriarchy where p.Id.GetLevel() == 1 select p.Id.ToString())
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -407,7 +413,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where EF.Functions.Like(p.Id.ToString(), "%/1/")
             select p.Name
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(
@@ -426,7 +433,8 @@ public class QueryTests : IDisposable
             from p in _db.Patriarchy
             where p.Id == HierarchyId.GetRoot()
             select HierarchyId.Parse(p.Id.ToString())
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(
             Condense(

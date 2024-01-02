@@ -82,7 +82,8 @@ public abstract class ManyToManyNoTrackingQueryTestBase<TFixture>
                                 )
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override Task Include_skip_navigation_then_include_inverse_works_for_tracking_query(

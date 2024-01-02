@@ -43,7 +43,8 @@ End Class",
 
             var completionItems = (
                 await TestServices.Editor.GetCompletionItemsAsync(HangMitigatingCancellationToken)
-            ).SelectAsArray(item => item.DisplayText);
+            )
+                .SelectAsArray(item => item.DisplayText);
             Assert.Contains("Application", completionItems);
             Assert.Contains("Computer", completionItems);
             Assert.Contains("Forms", completionItems);
@@ -58,7 +59,8 @@ End Class",
             await TestServices.Input.SendAsync("Forms.", HangMitigatingCancellationToken);
             completionItems = (
                 await TestServices.Editor.GetCompletionItemsAsync(HangMitigatingCancellationToken)
-            ).SelectAsArray(item => item.DisplayText);
+            )
+                .SelectAsArray(item => item.DisplayText);
             Assert.Contains("Form1", completionItems);
             Assert.DoesNotContain("Equals", completionItems);
             Assert.DoesNotContain("GetHashCode", completionItems);

@@ -1914,7 +1914,8 @@ WHERE ((c["Discriminator"] = "Customer") AND NOT((true = false)))
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     async () => await base.OrderBy_Take_Last_gives_correct_result(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -1928,7 +1929,8 @@ WHERE ((c["Discriminator"] = "Customer") AND NOT((true = false)))
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     async () => await base.OrderBy_Skip_Last_gives_correct_result(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();

@@ -3523,9 +3523,8 @@ public class InternalForeignKeyBuilder
             )!;
         }
 
-        var oldIsEagerLoadedConfigurationSource = (
-            (IConventionNavigation)oldNavigation
-        ).GetIsEagerLoadedConfigurationSource();
+        var oldIsEagerLoadedConfigurationSource = ((IConventionNavigation)oldNavigation)
+            .GetIsEagerLoadedConfigurationSource();
         if (
             oldIsEagerLoadedConfigurationSource.HasValue
             && builder.CanSetAutoInclude(
@@ -3540,9 +3539,8 @@ public class InternalForeignKeyBuilder
             )!;
         }
 
-        var oldLazyLoadingEnabledConfigurationSource = (
-            (IConventionNavigation)oldNavigation
-        ).GetLazyLoadingEnabledConfigurationSource();
+        var oldLazyLoadingEnabledConfigurationSource = ((IConventionNavigation)oldNavigation)
+            .GetLazyLoadingEnabledConfigurationSource();
         if (
             oldLazyLoadingEnabledConfigurationSource.HasValue
             && builder.CanSetLazyLoadingEnabled(

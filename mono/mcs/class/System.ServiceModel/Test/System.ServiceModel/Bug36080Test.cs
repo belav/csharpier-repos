@@ -485,9 +485,8 @@ public partial class HelloWorldServiceClient
 
     private object[] OnEndGetHelloData(System.IAsyncResult result)
     {
-        TestXamarin4WCFService.HelloWorldData retVal = ((IHelloWorldService)(this)).EndGetHelloData(
-            result
-        );
+        TestXamarin4WCFService.HelloWorldData retVal = ((IHelloWorldService)(this))
+            .EndGetHelloData(result);
         return new object[] { retVal };
     }
 

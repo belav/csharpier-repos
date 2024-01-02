@@ -797,9 +797,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
             case ProjectionBindingExpression projectionBindingExpression:
                 return Visit(
-                    ((SelectExpression)projectionBindingExpression.QueryExpression).GetProjection(
-                        projectionBindingExpression
-                    )
+                    ((SelectExpression)projectionBindingExpression.QueryExpression)
+                        .GetProjection(projectionBindingExpression)
                 );
 
             case ShapedQueryExpression shapedQueryExpression:
@@ -2855,9 +2854,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
         public StructuralTypeReferenceExpression(ShapedQueryExpression subquery)
         {
             Subquery = subquery;
-            StructuralType = (
-                (StructuralTypeShaperExpression)subquery.ShaperExpression
-            ).StructuralType;
+            StructuralType = ((StructuralTypeShaperExpression)subquery.ShaperExpression)
+                .StructuralType;
         }
 
         private StructuralTypeReferenceExpression(

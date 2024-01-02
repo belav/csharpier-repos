@@ -383,15 +383,13 @@ namespace System.Data.Metadata.Edm
                     itemCollectionType = "EdmItemCollection";
                     break;
                 case DataSpace.SSpace:
-                    versionToRegister = (
-                        (StoreItemCollection)itemCollectionToRegister
-                    ).StoreSchemaVersion;
+                    versionToRegister = ((StoreItemCollection)itemCollectionToRegister)
+                        .StoreSchemaVersion;
                     itemCollectionType = "StoreItemCollection";
                     break;
                 case DataSpace.CSSpace:
-                    versionToRegister = (
-                        (StorageMappingItemCollection)itemCollectionToRegister
-                    ).MappingVersion;
+                    versionToRegister = ((StorageMappingItemCollection)itemCollectionToRegister)
+                        .MappingVersion;
                     itemCollectionType = "StorageMappingItemCollection";
                     break;
                 default:
@@ -1027,12 +1025,8 @@ namespace System.Data.Metadata.Edm
             map = null;
             ItemCollection collection = GetItemCollection(mappingSpace, false);
             return (null != collection)
-                && ((MappingItemCollection)collection).TryGetMap(
-                    typeIdentity,
-                    typeSpace,
-                    ignoreCase,
-                    out map
-                );
+                && ((MappingItemCollection)collection)
+                    .TryGetMap(typeIdentity, typeSpace, ignoreCase, out map);
         }
 
         /// <summary>
@@ -1488,13 +1482,8 @@ namespace System.Data.Metadata.Edm
         )
         {
             ItemCollection collection = GetItemCollection(DataSpace.CSSpace, true);
-            return ((StorageMappingItemCollection)collection).TryGetGeneratedViewOfType(
-                this,
-                extent,
-                type,
-                includeSubtypes,
-                out generatedView
-            );
+            return ((StorageMappingItemCollection)collection)
+                .TryGetGeneratedViewOfType(this, extent, type, includeSubtypes, out generatedView);
         }
 
         /// <summary>
@@ -1584,9 +1573,8 @@ namespace System.Data.Metadata.Edm
                 ItemCollection collection = GetItemCollection(DataSpace.OCSpace, true);
 
                 // Get the OC map
-                Map map = ((DefaultObjectMappingItemCollection)collection).GetMap(
-                    edmSpaceTypeUsage.EdmType
-                );
+                Map map = ((DefaultObjectMappingItemCollection)collection)
+                    .GetMap(edmSpaceTypeUsage.EdmType);
                 clrType = ((ObjectTypeMapping)map).ClrType;
             }
 

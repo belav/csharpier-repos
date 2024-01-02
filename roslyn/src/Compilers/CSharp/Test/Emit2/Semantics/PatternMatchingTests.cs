@@ -1289,9 +1289,8 @@ True"
 
             Assert.Equal(
                 "System.Int32",
-                (
-                    (ILocalSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl[0])
-                ).Type.ToTestDisplayString()
+                ((ILocalSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl[0]))
+                    .Type.ToTestDisplayString()
             );
 
             CreateCompilationWithMscorlib45(
@@ -3911,9 +3910,8 @@ unsafe struct S
             var x1Decl = GetPatternDeclarations(tree, "x1").Single();
             var x1Ref = GetReferences(tree, "x1").Single();
             Assert.True(
-                (
-                    (ITypeSymbol)compilation.GetSemanticModel(tree).GetTypeInfo(x1Ref).Type
-                ).IsErrorType()
+                ((ITypeSymbol)compilation.GetSemanticModel(tree).GetTypeInfo(x1Ref).Type)
+                    .IsErrorType()
             );
             VerifyModelNotSupported(model, x1Decl, x1Ref);
 
@@ -3921,9 +3919,8 @@ unsafe struct S
             var x2Ref = GetReferences(tree, "x2").Single();
             VerifyModelNotSupported(model, x2Decl, x2Ref);
             Assert.True(
-                (
-                    (ITypeSymbol)compilation.GetSemanticModel(tree).GetTypeInfo(x2Ref).Type
-                ).IsErrorType()
+                ((ITypeSymbol)compilation.GetSemanticModel(tree).GetTypeInfo(x2Ref).Type)
+                    .IsErrorType()
             );
 
             compilation.VerifyDiagnostics(

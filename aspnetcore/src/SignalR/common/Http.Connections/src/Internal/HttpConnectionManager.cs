@@ -41,7 +41,8 @@ internal sealed partial class HttpConnectionManager
             (
                 connectionOptions.Value.DisconnectTimeout
                 ?? ConnectionOptionsSetup.DefaultDisconectTimeout
-            ).TotalMilliseconds;
+            )
+                .TotalMilliseconds;
         _metrics = metrics;
 
         // Register these last as the callbacks could run immediately

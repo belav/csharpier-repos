@@ -679,7 +679,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
             )
                 ? member!.GetMemberType()
                 : ClrType
-        ).GetDefaultValue();
+        )
+            .GetDefaultValue();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -791,7 +792,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         (
             FindAnnotation(CoreAnnotationNames.ValueGeneratorFactory)
             ?? FindAnnotation(CoreAnnotationNames.ValueGeneratorFactoryType)
-        )?.GetConfigurationSource();
+        )
+            ?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

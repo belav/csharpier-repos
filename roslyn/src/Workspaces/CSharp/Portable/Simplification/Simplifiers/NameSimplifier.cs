@@ -200,9 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         }
                     }
 
-                    replacementNode = ((SimpleNameSyntax)replacementNode).WithIdentifier(
-                        identifierToken
-                    );
+                    replacementNode = ((SimpleNameSyntax)replacementNode)
+                        .WithIdentifier(identifierToken);
                     issueSpan = name.Span;
 
                     // In case the alias name is the same as the last name of the alias target, we only include
@@ -412,17 +411,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             switch (name.Kind())
             {
                 case SyntaxKind.AliasQualifiedName:
-                    var simpleName = ((AliasQualifiedNameSyntax)name).Name.WithLeadingTrivia(
-                        name.GetLeadingTrivia()
-                    );
+                    var simpleName = ((AliasQualifiedNameSyntax)name)
+                        .Name.WithLeadingTrivia(name.GetLeadingTrivia());
 
                     simpleName = simpleName.ReplaceToken(
                         simpleName.Identifier,
-                        ((AliasQualifiedNameSyntax)name).Name.Identifier.CopyAnnotationsTo(
-                            simpleName.Identifier.WithLeadingTrivia(
-                                ((AliasQualifiedNameSyntax)name).Alias.Identifier.LeadingTrivia
+                        ((AliasQualifiedNameSyntax)name)
+                            .Name.Identifier.CopyAnnotationsTo(
+                                simpleName.Identifier.WithLeadingTrivia(
+                                    ((AliasQualifiedNameSyntax)name).Alias.Identifier.LeadingTrivia
+                                )
                             )
-                        )
                     );
 
                     replacementNode = simpleName;
@@ -432,9 +431,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     break;
 
                 case SyntaxKind.QualifiedName:
-                    replacementNode = ((QualifiedNameSyntax)name).Right.WithLeadingTrivia(
-                        name.GetLeadingTrivia()
-                    );
+                    replacementNode = ((QualifiedNameSyntax)name)
+                        .Right.WithLeadingTrivia(name.GetLeadingTrivia());
                     issueSpan = ((QualifiedNameSyntax)name).Left.Span;
 
                     break;

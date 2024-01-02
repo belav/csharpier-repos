@@ -3511,9 +3511,8 @@ class C
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
             var crefSyntax = (QualifiedCrefSyntax)GetCrefSyntaxes(compilation).Single();
 
-            var expectedTypeSymbol = (
-                (Compilation)compilation
-            ).GlobalNamespace.GetMember<INamedTypeSymbol>("C");
+            var expectedTypeSymbol = ((Compilation)compilation)
+                .GlobalNamespace.GetMember<INamedTypeSymbol>("C");
             var expectedMethodSymbol = expectedTypeSymbol.GetMember<IMethodSymbol>("M");
 
             var actualTypeSymbol = model.GetSymbolInfo(crefSyntax.Container).Symbol;
@@ -7207,7 +7206,8 @@ class X
 
             var returnTypeSyntax = (
                 (ConversionOperatorMemberCrefSyntax)(((QualifiedCrefSyntax)crefSyntax).Member)
-            ).Type;
+            )
+                .Type;
             var expectedReturnTypeSymbol = compilation
                 .GlobalNamespace.GetMember<INamedTypeSymbol>("X")
                 .GetMember<INamedTypeSymbol>("Y");
@@ -7987,9 +7987,8 @@ class Test
             Assert.Equal(SyntaxKind.InKeyword, parameter.RefKindKeyword.Kind());
             Assert.Equal(SyntaxKind.None, parameter.ReadOnlyKeyword.Kind());
 
-            var parameterSymbol = (
-                (IMethodSymbol)model.GetSymbolInfo(cref).Symbol
-            ).Parameters.Single();
+            var parameterSymbol = ((IMethodSymbol)model.GetSymbolInfo(cref).Symbol)
+                .Parameters.Single();
             Assert.Equal(RefKind.In, parameterSymbol.RefKind);
         }
 
@@ -8064,9 +8063,8 @@ class Test
                 Assert.Equal(SyntaxKind.RefKeyword, parameter.RefKindKeyword.Kind());
                 Assert.Equal(SyntaxKind.ReadOnlyKeyword, parameter.ReadOnlyKeyword.Kind());
 
-                var parameterSymbol = (
-                    (IMethodSymbol)model.GetSymbolInfo(cref).Symbol
-                ).Parameters.Single();
+                var parameterSymbol = ((IMethodSymbol)model.GetSymbolInfo(cref).Symbol)
+                    .Parameters.Single();
                 Assert.Equal(RefKind.RefReadOnlyParameter, parameterSymbol.RefKind);
             }
         }

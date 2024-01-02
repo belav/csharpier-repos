@@ -949,9 +949,8 @@ namespace System.Net
             if (bufferResult.IsWrite)
                 ((TlsStream)bufferResult.AsyncObject).m_Worker.SecureStream.EndWrite(result);
             else
-                readBytes = ((TlsStream)bufferResult.AsyncObject).m_Worker.SecureStream.EndRead(
-                    result
-                );
+                readBytes = ((TlsStream)bufferResult.AsyncObject)
+                    .m_Worker.SecureStream.EndRead(result);
 
             bufferResult.InvokeCallback(readBytes);
         }

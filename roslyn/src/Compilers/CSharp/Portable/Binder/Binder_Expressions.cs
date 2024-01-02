@@ -5208,17 +5208,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     TypeWithAnnotations parameterTypeWithAnnotations =
                         GetCorrespondingParameterTypeWithAnnotations(ref result, parameters, arg);
-                    arguments[arg] = (
-                        (OutVariablePendingInference)argument
-                    ).SetInferredTypeWithAnnotations(parameterTypeWithAnnotations, diagnostics);
+                    arguments[arg] = ((OutVariablePendingInference)argument)
+                        .SetInferredTypeWithAnnotations(parameterTypeWithAnnotations, diagnostics);
                 }
                 else if (argument.Kind == BoundKind.OutDeconstructVarPendingInference)
                 {
                     TypeWithAnnotations parameterTypeWithAnnotations =
                         GetCorrespondingParameterTypeWithAnnotations(ref result, parameters, arg);
-                    arguments[arg] = (
-                        (OutDeconstructVarPendingInference)argument
-                    ).SetInferredTypeWithAnnotations(parameterTypeWithAnnotations, success: true);
+                    arguments[arg] = ((OutDeconstructVarPendingInference)argument)
+                        .SetInferredTypeWithAnnotations(
+                            parameterTypeWithAnnotations,
+                            success: true
+                        );
                 }
                 else if (
                     argument.Kind == BoundKind.DiscardExpression
@@ -5228,9 +5229,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TypeWithAnnotations parameterTypeWithAnnotations =
                         GetCorrespondingParameterTypeWithAnnotations(ref result, parameters, arg);
                     Debug.Assert(parameterTypeWithAnnotations.HasType);
-                    arguments[arg] = (
-                        (BoundDiscardExpression)argument
-                    ).SetInferredTypeWithAnnotations(parameterTypeWithAnnotations);
+                    arguments[arg] = ((BoundDiscardExpression)argument)
+                        .SetInferredTypeWithAnnotations(parameterTypeWithAnnotations);
                 }
                 else if (argument.NeedsToBeConverted())
                 {
@@ -6418,11 +6418,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argumentListBinder = this.GetBinder(initializerArgumentListOpt);
             }
 
-            var result = (argumentListBinder ?? this).BindConstructorInitializerCore(
-                initializerArgumentListOpt,
-                constructor,
-                diagnostics
-            );
+            var result = (argumentListBinder ?? this)
+                .BindConstructorInitializerCore(
+                    initializerArgumentListOpt,
+                    constructor,
+                    diagnostics
+                );
 
             if (argumentListBinder != null)
             {

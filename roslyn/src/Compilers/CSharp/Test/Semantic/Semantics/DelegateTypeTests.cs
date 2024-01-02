@@ -1105,7 +1105,8 @@ class Program
                         .OfType<VariableDeclaratorSyntax>()
                         .Single()
                         .Initializer!.Value
-            ).Expression;
+            )
+                .Expression;
             var typeInfo = model.GetTypeInfo(expr);
             // https://github.com/dotnet/roslyn/issues/52874: GetTypeInfo() for method group should return inferred delegate type.
             Assert.Null(typeInfo.Type);
@@ -1388,7 +1389,8 @@ class Program
                         .OfType<VariableDeclaratorSyntax>()
                         .Single()
                         .Initializer!.Value
-            ).Expression;
+            )
+                .Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(expectedDisplayString, typeInfo.ConvertedType?.ToTestDisplayString());
@@ -1518,7 +1520,8 @@ class Program
                         .OfType<VariableDeclaratorSyntax>()
                         .Single()
                         .Initializer!.Value
-            ).Expression;
+            )
+                .Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             if (expectedType is null)
@@ -16371,9 +16374,8 @@ class Program
             string expectedInvokeMethod
         )
         {
-            var expectedBaseType = ((CSharpCompilation)model.Compilation).GetSpecialType(
-                SpecialType.System_MulticastDelegate
-            );
+            var expectedBaseType = ((CSharpCompilation)model.Compilation)
+                .GetSpecialType(SpecialType.System_MulticastDelegate);
 
             var local = (ILocalSymbol)model.GetDeclaredSymbol(variable)!;
             var delegateType = (INamedTypeSymbol)local.Type;

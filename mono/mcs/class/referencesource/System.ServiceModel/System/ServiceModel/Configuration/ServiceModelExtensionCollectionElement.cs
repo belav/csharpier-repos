@@ -496,7 +496,8 @@ namespace System.ServiceModel.Configuration
                 {
                     string childExtensionElementName = (
                         childExtensionElement as RemoveBehaviorElement
-                    ).Name;
+                    )
+                        .Name;
                     if (!string.IsNullOrEmpty(childExtensionElementName))
                     {
                         parentExtensionElements.RemoveAll(element =>

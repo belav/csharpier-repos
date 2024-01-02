@@ -218,9 +218,8 @@ namespace System.Web.Security
         private static string GetMachineName()
         {
             if (_MachineName == null)
-                _MachineName = (System.Environment.MachineName + "\\").ToLower(
-                    CultureInfo.InvariantCulture
-                );
+                _MachineName = (System.Environment.MachineName + "\\")
+                    .ToLower(CultureInfo.InvariantCulture);
             return _MachineName;
         }
 

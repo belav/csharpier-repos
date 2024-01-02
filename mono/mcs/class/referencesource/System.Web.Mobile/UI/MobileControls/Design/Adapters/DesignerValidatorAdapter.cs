@@ -65,12 +65,8 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             }
             else
             {
-                ((DesignerTextWriter)writer).WriteCssStyleText(
-                    Style,
-                    null,
-                    Control.ErrorMessage,
-                    true
-                );
+                ((DesignerTextWriter)writer)
+                    .WriteCssStyleText(Style, null, Control.ErrorMessage, true);
             }
 
             writer.WriteEndTag("div");

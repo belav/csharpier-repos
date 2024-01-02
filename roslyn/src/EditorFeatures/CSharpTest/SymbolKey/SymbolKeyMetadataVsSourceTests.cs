@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             // 'E'
             var member05 = (
                 typesym.GetMembers(WellKnownMemberNames.Indexer).Single() as IPropertySymbol
-            ).Type;
+            )
+                .Type;
 
             ResolveAndVerifySymbol(member03, originalSymbols[0], comp1, SymbolKeyComparison.None);
             ResolveAndVerifySymbol(member01, originalSymbols[1], comp1, SymbolKeyComparison.None);

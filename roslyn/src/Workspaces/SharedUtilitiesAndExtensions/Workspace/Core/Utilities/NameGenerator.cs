@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             using var nameSetPool = (
                 isCaseSensitive ? SharedPools.StringHashSet : SharedPools.StringIgnoreCaseHashSet
-            ).GetPooledObject();
+            )
+                .GetPooledObject();
             var nameSet = nameSetPool.Object;
 
             nameSet.AddRange(reservedNames);
@@ -100,14 +101,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             using var usedNamesPool = (
                 isCaseSensitive ? SharedPools.StringHashSet : SharedPools.StringIgnoreCaseHashSet
-            ).GetPooledObject();
+            )
+                .GetPooledObject();
             var usedNames = usedNamesPool.Object;
 
             using var collisionMapPool = (
                 isCaseSensitive
                     ? SharedPools.Default<Dictionary<string, bool>>()
                     : SharedPools.StringIgnoreCaseDictionary<bool>()
-            ).GetPooledObject();
+            )
+                .GetPooledObject();
             var collisionMap = collisionMapPool.Object;
 
             // Initial pass through names to determine which names are in collision

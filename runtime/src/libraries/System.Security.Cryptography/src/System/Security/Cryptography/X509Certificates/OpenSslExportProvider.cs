@@ -20,9 +20,8 @@ namespace System.Security.Cryptography.X509Certificates
         )
         {
             AsymmetricAlgorithm? alg = null;
-            SafeEvpPKeyHandle? privateKey = (
-                (OpenSslX509CertificateReader)certificatePal
-            ).PrivateKeyHandle;
+            SafeEvpPKeyHandle? privateKey = ((OpenSslX509CertificateReader)certificatePal)
+                .PrivateKeyHandle;
 
             try
             {

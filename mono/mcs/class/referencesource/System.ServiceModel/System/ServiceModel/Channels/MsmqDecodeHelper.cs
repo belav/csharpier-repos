@@ -564,7 +564,8 @@ namespace System.ServiceModel.Channels
         {
             MsmqMessageSerializationFormat serializationFormat = (
                 listener.ReceiveParameters as MsmqIntegrationReceiveParameters
-            ).SerializationFormat;
+            )
+                .SerializationFormat;
 
             switch (serializationFormat)
             {

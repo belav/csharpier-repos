@@ -77,12 +77,11 @@ namespace System.ServiceModel.Channels
             this.channelManager = channelManager;
             EndpointAddress filterTo = null;
 
-            this.securityProtocol = (
-                (IPeerFactory)channelManager
-            ).SecurityManager.CreateSecurityProtocol<ChannelInterfaceType>(
-                to,
-                ServiceDefaults.SendTimeout
-            );
+            this.securityProtocol = ((IPeerFactory)channelManager)
+                .SecurityManager.CreateSecurityProtocol<ChannelInterfaceType>(
+                    to,
+                    ServiceDefaults.SendTimeout
+                );
 
             if (typeof(IDuplexChannel).IsAssignableFrom(typeof(ChannelInterfaceType)))
                 filterTo = to;

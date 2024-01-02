@@ -187,7 +187,8 @@ class Driver
                 testIndex >= 0
                     ? available_tests[testIndex]
                     : available_tests[i % available_tests.Length]
-            ).Item1;
+            )
+                .Item1;
             var t = new Thread(() => dele(-1));
             t.Start();
             threads.Add(t);

@@ -424,10 +424,8 @@ namespace System.Runtime.InteropServices.Tests
             // Go through IConvertible to handle the case of "same size, different signedness" (e.g. int and uint)
             Assert.Equal(
                 valueToSet,
-                ((IConvertible)ComVariantMarshaller.ConvertToManaged(variant)).ToType(
-                    valueToSet.GetType(),
-                    null
-                )
+                ((IConvertible)ComVariantMarshaller.ConvertToManaged(variant))
+                    .ToType(valueToSet.GetType(), null)
             );
         }
     }

@@ -4130,10 +4130,8 @@ namespace System.Workflow.ComponentModel.Design
                             )
                         )
                         {
-                            ((IWorkflowDesignerMessageSink)PreviewDesigner).OnPaint(
-                                paintEventArgs,
-                                previewDesignerViewPort
-                            );
+                            ((IWorkflowDesignerMessageSink)PreviewDesigner)
+                                .OnPaint(paintEventArgs, previewDesignerViewPort);
                         }
                     }
                 }

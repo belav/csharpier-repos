@@ -402,7 +402,8 @@ public class ExecutionStrategyTest : IDisposable
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () => executeAsync(mockExecutionStrategy)
                     )
-                ).Message
+                )
+                    .Message
             );
         }
     }
@@ -435,7 +436,8 @@ public class ExecutionStrategyTest : IDisposable
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () => executeAsync(mockExecutionStrategy)
                     )
-                ).Message
+                )
+                    .Message
             );
         }
     }
@@ -469,7 +471,8 @@ public class ExecutionStrategyTest : IDisposable
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => executeAsync(mockExecutionStrategy)
                 )
-            ).Message
+            )
+                .Message
         );
     }
 

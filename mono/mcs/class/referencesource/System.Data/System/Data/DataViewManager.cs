@@ -360,9 +360,8 @@ namespace System.Data
 
             if (listAccessors == null || listAccessors.Length == 0)
             {
-                return (
-                    (ICustomTypeDescriptor)(new DataViewManagerListItemTypeDescriptor(this))
-                ).GetProperties();
+                return ((ICustomTypeDescriptor)(new DataViewManagerListItemTypeDescriptor(this)))
+                    .GetProperties();
             }
             else
             {

@@ -21,12 +21,14 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                     await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(
                         BindCallSampleCode
                     )
-                ).GenerationSpec;
+                )
+                    .GenerationSpec;
                 SourceGenerationSpec spec2 = (
                     await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(
                         BindCallSampleCode
                     )
-                ).GenerationSpec;
+                )
+                    .GenerationSpec;
 
                 Assert.NotSame(spec1, spec2);
                 GeneratorTestHelpers.AssertStructurallyEqual(spec1, spec2);

@@ -347,7 +347,8 @@ namespace MonoTests.System.ServiceModel
             SecurityTokenProvider p = def_c.CreateSecurityTokenProvider(r);
             Assert.IsNotNull(p, "#1");
             // non-standard provider, it looks similar to IssuedSecurityTokenProvider.
-            ((ICommunicationObject)p).Open();
+            ((ICommunicationObject)p)
+                .Open();
             p.GetToken(TimeSpan.FromSeconds(5));
         }
 

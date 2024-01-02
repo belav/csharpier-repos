@@ -780,14 +780,15 @@ namespace System.ServiceModel.Channels
 
                 ListenerExceptionStatus status = (
                     (IConnectionRegister)this.controlSessionWithListener
-                ).Register(
-                    version,
-                    myPid,
-                    this.baseAddress,
-                    this.queueId,
-                    this.token,
-                    this.securityEventName
-                );
+                )
+                    .Register(
+                        version,
+                        myPid,
+                        this.baseAddress,
+                        this.queueId,
+                        this.token,
+                        this.securityEventName
+                    );
 
                 Debug.Print("SharedListenerProxy.Register() Register returned status: " + status);
                 if (status != ListenerExceptionStatus.Success)
@@ -1185,7 +1186,8 @@ namespace System.ServiceModel.Channels
 
                         IAsyncResult asyncResult = (
                             (IConnectionRegisterAsync)this.proxy.controlSessionWithListener
-                        ).BeginValidateUriRoute(uri, address, port, onValidateUriRoute, this);
+                        )
+                            .BeginValidateUriRoute(uri, address, port, onValidateUriRoute, this);
 
                         if (asyncResult.CompletedSynchronously)
                         {
@@ -1267,7 +1269,8 @@ namespace System.ServiceModel.Channels
                 {
                     isValidUriRoute = (
                         (IConnectionRegisterAsync)this.proxy.controlSessionWithListener
-                    ).EndValidateUriRoute(result);
+                    )
+                        .EndValidateUriRoute(result);
                     return true;
                 }
 

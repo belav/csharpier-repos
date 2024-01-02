@@ -392,10 +392,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFrom_Base16_MinOverflow()
         {
-            string minOverflow = ((int)(byte.MinValue - 1)).ToString(
-                "x",
-                CultureInfo.CurrentCulture
-            );
+            string minOverflow = ((int)(byte.MinValue - 1))
+                .ToString("x", CultureInfo.CurrentCulture);
 
             try
             {
@@ -417,10 +415,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFrom_Base16_MinOverflow_Invariant()
         {
-            string minOverflow = ((int)(byte.MinValue - 1)).ToString(
-                "x",
-                CultureInfo.InvariantCulture
-            );
+            string minOverflow = ((int)(byte.MinValue - 1))
+                .ToString("x", CultureInfo.InvariantCulture);
 
             try
             {
@@ -442,10 +438,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFrom_Base16_MaxOverflow()
         {
-            string maxOverflow = ((int)(byte.MaxValue + 1)).ToString(
-                "x",
-                CultureInfo.CurrentCulture
-            );
+            string maxOverflow = ((int)(byte.MaxValue + 1))
+                .ToString("x", CultureInfo.CurrentCulture);
 
             try
             {
@@ -467,10 +461,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFrom_Base16_MaxOverflow_Invariant()
         {
-            string maxOverflow = ((int)(byte.MaxValue + 1)).ToString(
-                "x",
-                CultureInfo.InvariantCulture
-            );
+            string maxOverflow = ((int)(byte.MaxValue + 1))
+                .ToString("x", CultureInfo.InvariantCulture);
 
             try
             {
@@ -620,10 +612,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFromString_Base16_MinOverflow()
         {
-            string minOverflow = ((int)(byte.MinValue - 1)).ToString(
-                "x",
-                CultureInfo.CurrentCulture
-            );
+            string minOverflow = ((int)(byte.MinValue - 1))
+                .ToString("x", CultureInfo.CurrentCulture);
 
             try
             {
@@ -645,10 +635,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFromString_Base16_MinOverflow_Invariant()
         {
-            string minOverflow = ((int)(byte.MinValue - 1)).ToString(
-                "x",
-                CultureInfo.InvariantCulture
-            );
+            string minOverflow = ((int)(byte.MinValue - 1))
+                .ToString("x", CultureInfo.InvariantCulture);
 
             try
             {
@@ -670,10 +658,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFromString_Base16_MaxOverflow()
         {
-            string maxOverflow = ((int)(byte.MaxValue + 1)).ToString(
-                "x",
-                CultureInfo.CurrentCulture
-            );
+            string maxOverflow = ((int)(byte.MaxValue + 1))
+                .ToString("x", CultureInfo.CurrentCulture);
 
             try
             {
@@ -695,10 +681,8 @@ namespace MonoTests.System.ComponentModel
         [Test]
         public void ConvertFromString_Base16_MaxOverflow_Invariant()
         {
-            string maxOverflow = ((int)(byte.MaxValue + 1)).ToString(
-                "x",
-                CultureInfo.InvariantCulture
-            );
+            string maxOverflow = ((int)(byte.MaxValue + 1))
+                .ToString("x", CultureInfo.InvariantCulture);
 
             try
             {

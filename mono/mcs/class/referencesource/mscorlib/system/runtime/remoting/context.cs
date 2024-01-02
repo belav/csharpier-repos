@@ -621,9 +621,10 @@ namespace System.Runtime.Remoting.Contexts
                 errMsg = new ReturnMessage(e, mcm);
                 if (msg != null)
                 {
-                    ((ReturnMessage)errMsg).SetLogicalCallContext(
-                        (LogicalCallContext)msg.Properties[Message.CallContextKey]
-                    );
+                    ((ReturnMessage)errMsg)
+                        .SetLogicalCallContext(
+                            (LogicalCallContext)msg.Properties[Message.CallContextKey]
+                        );
                 }
             }
             return errMsg;

@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     DiagnosticsSquiggleTaggerProvider,
                     IErrorTag
                 >.GetDiagnosticsAndErrorSpans(workspace)
-            ).Item2;
+            )
+                .Item2;
 
             Assert.Equal(1, spans.Count());
             Assert.Equal(PredefinedErrorTypeNames.SyntaxError, spans.First().Tag.ErrorType);
@@ -538,7 +539,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     DiagnosticsSquiggleTaggerProvider,
                     IErrorTag
                 >.GetDiagnosticsAndErrorSpans(workspace)
-            ).Item2;
+            )
+                .Item2;
         }
 
         private sealed class ReportOnClassWithLink : DiagnosticAnalyzer

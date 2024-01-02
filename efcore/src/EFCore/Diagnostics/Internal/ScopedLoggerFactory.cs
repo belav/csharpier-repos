@@ -39,7 +39,8 @@ public class ScopedLoggerFactory : ILoggerFactory
     {
         var coreOptions = (
             contextOptions ?? internalServiceProvider.GetService<IDbContextOptions>()
-        )?.FindExtension<CoreOptionsExtension>();
+        )
+            ?.FindExtension<CoreOptionsExtension>();
 
         if (coreOptions != null)
         {

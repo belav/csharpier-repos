@@ -3543,10 +3543,8 @@ public static partial class DataContractSerializerTests
     {
         Assert.Throws<InvalidDataContractException>(() =>
         {
-            (new DataContractSerializer(typeof(RecursiveCollection))).WriteObject(
-                new MemoryStream(),
-                new RecursiveCollection()
-            );
+            (new DataContractSerializer(typeof(RecursiveCollection)))
+                .WriteObject(new MemoryStream(), new RecursiveCollection());
         });
     }
 
@@ -7466,10 +7464,11 @@ public static partial class DataContractSerializerTests
                 new DataContractSerializer(
                     typeof(TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
                 )
-            ).WriteObject(
-                new MemoryStream(),
-                new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
-            );
+            )
+                .WriteObject(
+                    new MemoryStream(),
+                    new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
+                );
         });
     }
 

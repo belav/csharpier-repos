@@ -675,7 +675,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] signature = (
                 "28DC05B452C8FC0E0BFE9DA067D11147D31B1F3C63E5CF95046A812417C64844868D04D3A1D23"
                 + "13E5DD07DE757B3A836E70A1C85DDC90CB62DE2E44746C760F2"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             using (DSA dsa = DSAFactory.Create())
             {

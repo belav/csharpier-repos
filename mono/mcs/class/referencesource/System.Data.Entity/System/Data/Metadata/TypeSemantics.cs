@@ -1174,9 +1174,8 @@ namespace System.Data.Metadata.Edm
             else if (fromType.EdmType.BuiltInTypeKind == BuiltInTypeKind.RefType)
             {
                 // Both are Reference Types, so compare the referenced Entity types
-                return ((RefType)fromType.EdmType).ElementType.EdmEquals(
-                    ((RefType)toType.EdmType).ElementType
-                );
+                return ((RefType)fromType.EdmType)
+                    .ElementType.EdmEquals(((RefType)toType.EdmType).ElementType);
             }
             else if (fromType.EdmType.BuiltInTypeKind == BuiltInTypeKind.RowType)
             {

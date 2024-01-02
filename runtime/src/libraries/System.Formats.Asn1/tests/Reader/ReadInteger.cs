@@ -283,7 +283,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 + "34E8440A48AB9D1F5DF89A502CEF6DFDBE790045BD45E0C94E5CA8ADD76A013E"
                 + "9C978440FC8A9E2A9A4940B2460819C3E302AA9C9F355AD754C86D3ED77DDAA3"
                 + "DA13810B4D"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             BigInteger expected = BigInteger.Parse(
                 "2075455505718444046766086325128514549301113944667492053189486607"
@@ -322,7 +323,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 + "34E8440A48AB9D1F5DF89A502CEF6DFDBE790045BD45E0C94E5CA8ADD76A013E"
                 + "9C978440FC8A9E2A9A4940B2460819C3E302AA9C9F355AD754C86D3ED77DDAA3"
                 + "DA13810B4D"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             BigInteger expected = BigInteger.Parse(
                 "-"
@@ -360,7 +362,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 + "34E8440A48AB9D1F5DF89A502CEF6DFDBE790045BD45E0C94E5CA8ADD76A013E"
                 + "9C978440FC8A9E2A9A4940B2460819C3E302AA9C9F355AD754C86D3ED77DDAA3"
                 + "DA13810B"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             BigInteger expected =
                 BigInteger.Parse(

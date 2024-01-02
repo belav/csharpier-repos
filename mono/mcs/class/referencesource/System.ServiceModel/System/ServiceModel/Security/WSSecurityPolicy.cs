@@ -829,15 +829,13 @@ namespace System.ServiceModel.Security
                                 );
                             if (binding is SymmetricSecurityBindingElement)
                             {
-                                (
-                                    (SymmetricSecurityBindingElement)binding
-                                ).RequireSignatureConfirmation = requireSignatureConfirmation;
+                                ((SymmetricSecurityBindingElement)binding)
+                                    .RequireSignatureConfirmation = requireSignatureConfirmation;
                             }
                             else if (binding is AsymmetricSecurityBindingElement)
                             {
-                                (
-                                    (AsymmetricSecurityBindingElement)binding
-                                ).RequireSignatureConfirmation = requireSignatureConfirmation;
+                                ((AsymmetricSecurityBindingElement)binding)
+                                    .RequireSignatureConfirmation = requireSignatureConfirmation;
                             }
                             result = true;
                             break;
@@ -1717,9 +1715,8 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                protectionOrder = (
-                    (AsymmetricSecurityBindingElement)binding
-                ).MessageProtectionOrder;
+                protectionOrder = ((AsymmetricSecurityBindingElement)binding)
+                    .MessageProtectionOrder;
             }
 
             if (
@@ -3066,9 +3063,8 @@ namespace System.ServiceModel.Security
                                     {
                                         if (section.Metadata is MetadataReference)
                                         {
-                                            issuerMetadata = (
-                                                (MetadataReference)section.Metadata
-                                            ).Address;
+                                            issuerMetadata = ((MetadataReference)section.Metadata)
+                                                .Address;
                                         }
                                     }
 

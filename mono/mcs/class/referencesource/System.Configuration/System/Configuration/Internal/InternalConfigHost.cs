@@ -362,12 +362,8 @@ namespace System.Configuration.Internal
             ref object writeContext
         )
         {
-            return ((IInternalConfigHost)this).OpenStreamForWrite(
-                streamName,
-                templateStreamName,
-                ref writeContext,
-                false
-            );
+            return ((IInternalConfigHost)this)
+                .OpenStreamForWrite(streamName, templateStreamName, ref writeContext, false);
         }
 
         Stream IInternalConfigHost.OpenStreamForWrite(

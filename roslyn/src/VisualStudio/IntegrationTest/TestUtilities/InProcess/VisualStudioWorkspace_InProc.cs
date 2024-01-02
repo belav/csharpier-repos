@@ -116,9 +116,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     "Failed to clean up listeners in a timely manner."
                 );
                 foreach (
-                    var token in (
-                        (AsynchronousOperationListenerProvider)listenerProvider
-                    ).GetTokens()
+                    var token in ((AsynchronousOperationListenerProvider)listenerProvider)
+                        .GetTokens()
                 )
                 {
                     messageBuilder.AppendLine().Append($"  {token}");

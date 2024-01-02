@@ -1505,7 +1505,8 @@ namespace System.Data.Linq
             return (
                 (IEnumerable<TEntity>)
                     this.context.Provider.Execute(Expression.Constant(this)).ReturnValue
-            ).GetEnumerator();
+            )
+                .GetEnumerator();
         }
 
         bool IListSource.ContainsListCollection

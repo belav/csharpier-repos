@@ -3896,7 +3896,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .Entry(rightEntities[0])
                             .Collection("UnidirectionalEntityOne1")
                             .CurrentValue!
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Single(
                 (IEnumerable<object>)

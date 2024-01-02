@@ -1994,7 +1994,8 @@ namespace Microsoft.CodeAnalysis
                 await session
                     .MergeDiffsAsync(mergeConflictHandler, cancellationToken)
                     .ConfigureAwait(false)
-            ).MergedSolution;
+            )
+                .MergedSolution;
         }
 
         internal ImmutableArray<DocumentId> GetRelatedDocumentIds(DocumentId documentId)

@@ -1751,7 +1751,8 @@ namespace System.Net.Sockets.Tests
                                 TaskCreationOptions.PreferFairness,
                                 TaskScheduler.Default
                             )
-                        ).ToArray();
+                        )
+                            .ToArray();
 
                         // Give a bit of time for the pool to start executing the receives.  It's possible this won't be enough,
                         // in which case the test we could get a false negative on the test, but we won't get spurious failures.

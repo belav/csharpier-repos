@@ -371,7 +371,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             var options = (
                 (IOptions<KestrelServerOptions>)
                     host.Services.GetService(typeof(IOptions<KestrelServerOptions>))
-            ).Value;
+            )
+                .Value;
             Assert.Single(options.GetListenOptions());
 
             var response = await HttpClientSlim.GetStringAsync(

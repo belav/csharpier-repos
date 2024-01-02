@@ -1331,7 +1331,8 @@ namespace Novell.Directory.Ldap.Rfc2251
                             toReturn = (
                                 (Asn1OctetString)
                                     ((Asn1Tagged)exMatch.get_Renamed(index++)).taggedValue()
-                            ).stringValue();
+                            )
+                                .stringValue();
                             if (index > 2)
                             {
                                 hasMore = false;

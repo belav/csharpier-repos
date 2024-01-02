@@ -462,7 +462,8 @@ namespace Internal.Reflection.Execution
                             reader,
                             methodHandle.Token
                         )
-                    ).ToIntPtr();
+                    )
+                        .ToIntPtr();
                 }
                 else
                 {
@@ -473,7 +474,8 @@ namespace Internal.Reflection.Execution
                             reader,
                             methodHandle.Token
                         )
-                    ).ToIntPtr();
+                    )
+                        .ToIntPtr();
                 }
             }
         }
@@ -1094,7 +1096,8 @@ namespace Internal.Reflection.Execution
 
                 MethodHandle nativeFormatMethodHandle = (
                     ((int)HandleType.Method << 24) | (int)entryMethodHandleOrNameAndSigRaw
-                ).AsMethodHandle();
+                )
+                    .AsMethodHandle();
 
                 methodHandle = new QMethodDefinition(
                     qTypeDefinition.NativeFormatReader,

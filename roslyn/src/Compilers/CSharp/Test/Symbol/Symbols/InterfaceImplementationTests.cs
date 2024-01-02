@@ -1188,7 +1188,8 @@ public class Derived : Base, Interface
                     .ForwardingMethods
                 orderby m.MethodKind
                 select m
-            ).ToArray();
+            )
+                .ToArray();
             Assert.Equal(3, synthesizedExplicitImpls.Length);
             Assert.True(
                 synthesizedExplicitImpls.All(s => ReferenceEquals(derivedClass, s.ContainingType))
@@ -1275,7 +1276,8 @@ class Class : CustomModifierOverridingD, Interface
                     .ForwardingMethods
                 orderby m.Name
                 select m
-            ).ToArray();
+            )
+                .ToArray();
             Assert.Equal(2, synthesizedExplicitImpls.Length);
 
             var synthesizedExplicitMethod1Impl = synthesizedExplicitImpls[0];

@@ -69,9 +69,8 @@ namespace System.Xml.Xsl
 
             // Convert Xsd union
             Debug.Assert(schemaType.DerivedBy == XmlSchemaDerivationMethod.Union);
-            XmlSchemaSimpleType[] baseMemberTypes = (
-                (XmlSchemaSimpleTypeUnion)schemaType.Content
-            ).BaseMemberTypes;
+            XmlSchemaSimpleType[] baseMemberTypes = ((XmlSchemaSimpleTypeUnion)schemaType.Content)
+                .BaseMemberTypes;
             XmlQueryType[] queryMemberTypes = new XmlQueryType[baseMemberTypes.Length];
 
             for (int i = 0; i < baseMemberTypes.Length; i++)

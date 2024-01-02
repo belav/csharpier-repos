@@ -22,6 +22,7 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryRelationalTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 }

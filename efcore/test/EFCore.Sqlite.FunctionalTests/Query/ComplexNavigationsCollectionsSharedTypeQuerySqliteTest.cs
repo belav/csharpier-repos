@@ -26,7 +26,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_after_different_filtered_include_different_level(
@@ -41,7 +42,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation(
@@ -56,7 +58,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_complex_three_level_with_middle_having_filter1(
@@ -69,7 +72,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                     () =>
                         base.Filtered_include_complex_three_level_with_middle_having_filter1(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only(
@@ -84,7 +88,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes(
@@ -99,7 +104,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_complex_three_level_with_middle_having_filter2(
@@ -112,7 +118,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                     () =>
                         base.Filtered_include_complex_three_level_with_middle_having_filter2(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Complex_query_with_let_collection_projection_FirstOrDefault(
@@ -124,7 +131,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Complex_query_with_let_collection_projection_FirstOrDefault(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Take_Select_collection_Take(bool async) =>
@@ -134,7 +142,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Take_Select_collection_Take(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Skip_Take_Select_collection_Skip_Take(bool async) =>
@@ -144,7 +153,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Skip_Take_Select_collection_Skip_Take(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_Take_with_another_Take_on_top_level(bool async) =>
@@ -154,7 +164,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Filtered_include_Take_with_another_Take_on_top_level(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_Skip_Take_with_another_Skip_Take_on_top_level(
@@ -166,7 +177,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Filtered_include_Skip_Take_with_another_Skip_Take_on_top_level(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Skip_Take_Distinct_on_grouping_element(bool async) =>
@@ -176,7 +188,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Skip_Take_Distinct_on_grouping_element(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Skip_Take_on_grouping_element_inside_collection_projection(
@@ -188,7 +201,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Skip_Take_on_grouping_element_inside_collection_projection(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Skip_Take_on_grouping_element_with_collection_include(bool async) =>
@@ -198,7 +212,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Skip_Take_on_grouping_element_with_collection_include(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Skip_Take_on_grouping_element_with_reference_include(bool async) =>
@@ -208,7 +223,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Skip_Take_on_grouping_element_with_reference_include(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_with_Take_without_order_by_followed_by_ThenInclude_and_FirstOrDefault_on_top_level(
@@ -223,7 +239,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Filtered_include_with_Take_without_order_by_followed_by_ThenInclude_and_unordered_Take_on_top_level(
@@ -238,7 +255,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task SelectMany_with_predicate_and_DefaultIfEmpty_projecting_root_collection_element_and_another_collection(
@@ -253,7 +271,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Projecting_collection_after_optional_reference_correlated_with_parent(
@@ -268,7 +287,8 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Projecting_collection_with_group_by_after_optional_reference_correlated_with_parent(
@@ -283,6 +303,7 @@ public class ComplexNavigationsCollectionsSharedTypeQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 }

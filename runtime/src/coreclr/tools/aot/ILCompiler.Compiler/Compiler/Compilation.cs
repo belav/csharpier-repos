@@ -437,9 +437,9 @@ namespace ILCompiler
                 if (
                     !type.IsRuntimeDeterminedType
                     || (
-                        !((RuntimeDeterminedType)type).CanonicalType.IsCanonicalDefinitionType(
-                            CanonicalFormKind.Universal
-                        ) && !((RuntimeDeterminedType)type).CanonicalType.IsNullable
+                        !((RuntimeDeterminedType)type)
+                            .CanonicalType.IsCanonicalDefinitionType(CanonicalFormKind.Universal)
+                        && !((RuntimeDeterminedType)type).CanonicalType.IsNullable
                     )
                 )
                 {

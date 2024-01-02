@@ -159,9 +159,8 @@ namespace System.DirectoryServices.AccountManagement
                     {
                         propertyMappingTableByWinNT[winNTAttributeLower] ??= new ArrayList();
 
-                        ((ArrayList)propertyMappingTableByWinNT[winNTAttributeLower]).Add(
-                            propertyEntry
-                        );
+                        ((ArrayList)propertyMappingTableByWinNT[winNTAttributeLower])
+                            .Add(propertyEntry);
                     }
                 }
             }
@@ -262,7 +261,8 @@ namespace System.DirectoryServices.AccountManagement
                 );
 
                 // Load in all the initial values from the store
-                ((DirectoryEntry)p.UnderlyingObject).RefreshCache();
+                ((DirectoryEntry)p.UnderlyingObject)
+                    .RefreshCache();
 
                 // Load in the StoreKey
                 Debug.Assert(p.Key == null); // since it was previously unpersisted
@@ -360,9 +360,8 @@ namespace System.DirectoryServices.AccountManagement
             {
                 case PrincipalAccessMask.ChangePassword:
 
-                    PropertyValueCollection values = (
-                        (DirectoryEntry)p.GetUnderlyingObject()
-                    ).Properties["UserFlags"];
+                    PropertyValueCollection values = ((DirectoryEntry)p.GetUnderlyingObject())
+                        .Properties["UserFlags"];
 
                     if (values.Count != 0)
                     {

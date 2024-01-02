@@ -315,7 +315,8 @@ namespace System.Threading
                         throughputErrorEstimate = (
                             GetWaveComponent(_samples, sampleCount, adjacentPeriod1)
                             / averageThroughput
-                        ).Abs();
+                        )
+                            .Abs();
                         if (adjacentPeriod2 <= sampleCount)
                         {
                             throughputErrorEstimate = Math.Max(
@@ -323,7 +324,8 @@ namespace System.Threading
                                 (
                                     GetWaveComponent(_samples, sampleCount, adjacentPeriod2)
                                     / averageThroughput
-                                ).Abs()
+                                )
+                                    .Abs()
                             );
                         }
 

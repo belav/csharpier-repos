@@ -2294,9 +2294,8 @@ class Program
                     .Parent;
 
             // Get TypeSymbol corresponding to above VariableDeclaratorSyntax.
-            ITypeSymbol targetType = (
-                (ILocalSymbol)model.GetDeclaredSymbol(variableDeclarator)
-            ).Type;
+            ITypeSymbol targetType = ((ILocalSymbol)model.GetDeclaredSymbol(variableDeclarator))
+                .Type;
 
             // Perform ClassifyConversion for expressions from within the above SyntaxTree.
             var sourceExpression1 = (ExpressionSyntax)

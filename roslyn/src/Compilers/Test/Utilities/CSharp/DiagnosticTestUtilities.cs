@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 select SyntaxFactory.ParseSyntaxTree(
                     SourceText.From(text, encoding: null, SourceHashAlgorithms.Default)
                 )
-            ).ToArray();
+            )
+                .ToArray();
 
             return VerifyErrorsAndGetCompilationWithMscorlib(synTrees, refs, expectedErrorDesp);
         }
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 from ee in expectedErrorDesp
                 orderby ee.Code, ee.Line, ee.Column
                 select ee
-            ).ToList();
+            )
+                .ToList();
 
             int idx = 0;
             // actual >= expected
@@ -262,11 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // allow actual errors contain more same errors, no line & column check
             Assert.InRange(expectedErrorDesp.Length, 0, actualErrors.Count());
 
-            var expectedCodes = (
-                from e in expectedErrorDesp
-                orderby e.Code
-                group e by e.Code
-            ).ToList();
+            var expectedCodes = (from e in expectedErrorDesp orderby e.Code group e by e.Code)
+                .ToList();
 
             var actualCodes = (from e in actualErrors orderby e.Code group e by e.Code).ToList();
 

@@ -600,7 +600,8 @@ namespace System.Numerics.Tensors
                 // If value is subnormal, remove unnecessary 1 on top of fraction bits.
                 Vector128<uint> absoluteValue = (
                     bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()
-                ).AsUInt32();
+                )
+                    .AsUInt32();
 
                 // Merge sign bit with rest
                 return (absoluteValue | sign).AsSingle();
@@ -657,7 +658,8 @@ namespace System.Numerics.Tensors
                 // If value is subnormal, remove unnecessary 1 on top of fraction bits.
                 Vector256<uint> absoluteValue = (
                     bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()
-                ).AsUInt32();
+                )
+                    .AsUInt32();
 
                 // Merge sign bit with rest
                 return (absoluteValue | sign).AsSingle();
@@ -714,7 +716,8 @@ namespace System.Numerics.Tensors
                 // If value is subnormal, remove unnecessary 1 on top of fraction bits.
                 Vector512<uint> absoluteValue = (
                     bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()
-                ).AsUInt32();
+                )
+                    .AsUInt32();
 
                 // Merge sign bit with rest
                 return (absoluteValue | sign).AsSingle();

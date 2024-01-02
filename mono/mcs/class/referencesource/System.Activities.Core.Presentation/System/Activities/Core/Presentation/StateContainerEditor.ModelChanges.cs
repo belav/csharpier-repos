@@ -288,7 +288,8 @@ namespace System.Activities.Core.Presentation
                     ModelItem stateModelItem = (
                         (VirtualizedContainerService.VirtualizingContainer)
                             destConnectionPoint.ParentDesigner
-                    ).ModelItem;
+                    )
+                        .ModelItem;
 
                     if (IsFinalState(stateModelItem))
                     {
@@ -392,9 +393,8 @@ namespace System.Activities.Core.Presentation
             }
             else if (view is VirtualizedContainerService.VirtualizingContainer)
             {
-                storageModelItem = (
-                    (VirtualizedContainerService.VirtualizingContainer)view
-                ).ModelItem;
+                storageModelItem = ((VirtualizedContainerService.VirtualizingContainer)view)
+                    .ModelItem;
             }
             StoreShapeLocationViewState(storageModelItem, newLocation);
         }

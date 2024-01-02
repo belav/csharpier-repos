@@ -267,7 +267,8 @@ namespace Mono.Terminal
                         terminfo_driver
                             ?.GetType()
                             ?.GetField("origPair", BindingFlags.Instance | BindingFlags.NonPublic)
-                    )?.GetValue(terminfo_driver) as string;
+                    )
+                        ?.GetValue(terminfo_driver) as string;
 
                 if (unix_reset_colors_str != null)
                     unix_reset_colors = Encoding.UTF8.GetBytes((string)unix_reset_colors_str);

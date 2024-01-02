@@ -653,7 +653,8 @@ internal sealed class HostingApplicationDiagnostics
                     httpContext.Request.PathBase.HasValue
                         ? httpContext.Request.PathBase + httpContext.Request.Path
                         : httpContext.Request.Path
-                ).ToString();
+                )
+                    .ToString();
             }
 
             public override string ToString()

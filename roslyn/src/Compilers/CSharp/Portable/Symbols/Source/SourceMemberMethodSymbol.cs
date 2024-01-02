@@ -301,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 return (
                     (NullableContextKind)((_flags >> NullableContextOffset) & NullableContextMask)
-                ).TryGetByte(out value);
+                )
+                    .TryGetByte(out value);
             }
 
             public bool SetNullableContext(byte? value)
@@ -764,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder result = (
                 binderFactoryOpt
                 ?? this.DeclaringCompilation.GetBinderFactory(contextNode.SyntaxTree)
-            ).GetBinder(contextNode);
+            )
+                .GetBinder(contextNode);
 #if DEBUG
             Binder current = result;
             do

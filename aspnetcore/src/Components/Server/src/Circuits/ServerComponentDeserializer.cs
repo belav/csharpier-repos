@@ -361,9 +361,8 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             Span<int> seenSsrComponentIds =
                 operations.Length <= 128
                     ? stackalloc int[operations.Length]
-                    : (
-                        seenComponentIdsStorage = ArrayPool<int>.Shared.Rent(operations.Length)
-                    ).AsSpan(0, operations.Length);
+                    : (seenComponentIdsStorage = ArrayPool<int>.Shared.Rent(operations.Length))
+                        .AsSpan(0, operations.Length);
             var currentSsrComponentIdIndex = 0;
             for (var i = 0; i < operations.Length; i++)
             {

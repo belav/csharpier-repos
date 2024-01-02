@@ -1921,7 +1921,8 @@ class C
                             .Single()
                             .ConstructorArguments.Single()
                             .Value
-                ).IsErrorType()
+                )
+                    .IsErrorType()
             );
             Assert.True(
                 (
@@ -1931,7 +1932,8 @@ class C
                             .Single()
                             .ConstructorArguments.Single()
                             .Value
-                ).IsErrorType()
+                )
+                    .IsErrorType()
             );
 
             CompileAndVerify(

@@ -68,7 +68,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                             ss => ss.Set<Order>().Include(o => o.Customer.CustomerID)
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -80,7 +81,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -671,7 +673,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                         .Skip(2)
                         .Take(2)
                     select new { c1, c2 }
-                ).Take(1),
+                )
+                    .Take(1),
             elementSorter: e => (e.c1.CustomerID, e.c2.CustomerID),
             elementAsserter: (e, a) =>
             {
@@ -693,7 +696,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                         .Take(2)
                     from c2 in ss.Set<Customer>().OrderBy(c => c.CustomerID).Skip(2).Take(2)
                     select new { c1, c2 }
-                ).Take(1),
+                )
+                    .Take(1),
             elementSorter: e => (e.c1.CustomerID, e.c2.CustomerID),
             elementAsserter: (e, a) =>
             {
@@ -1371,7 +1375,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                         .Where(c => c.ContactTitle == "Owner")
                         .OrderBy(c => c.CustomerID)
                     select new { Id = c.CustomerID, TotalOrders = c.Orders.Count }
-                ).Where(e => e.TotalOrders > 2)
+                )
+                    .Where(e => e.TotalOrders > 2)
         );
 
     [ConditionalTheory]
@@ -1445,7 +1450,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                                     .Include(t => t.Item1.Orders)
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -1754,7 +1760,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     where c.CustomerID.StartsWith("A")
                     orderby c.CustomerID
                     select new { c.CustomerID, Orders = c.Orders.ToList() }
-                ).Skip(1),
+                )
+                    .Skip(1),
             asserter: (e, a) =>
             {
                 AssertEqual(e.CustomerID, a.CustomerID);
@@ -1780,7 +1787,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     where c.CustomerID.StartsWith("A")
                     orderby c.CustomerID
                     select new { c.CustomerID, Orders = c.Orders.ToList() }
-                ).Take(1),
+                )
+                    .Take(1),
             asserter: (e, a) =>
             {
                 AssertEqual(e.CustomerID, a.CustomerID);
@@ -1857,7 +1865,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     from i in ss.Set<Order>().Include(o => o.Customer.Orders)
                     where i.OrderID < 10800
                     select i
-                ).AsNoTrackingWithIdentityResolution()
+                )
+                    .AsNoTrackingWithIdentityResolution()
         );
 
     [ConditionalTheory]
@@ -1872,7 +1881,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     from i in ss.Set<Order>().Include(o => o.Customer.Orders)
                     where i.OrderID < 10800
                     select i
-                ).AsTracking(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
+                )
+                    .AsTracking(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
         );
 
     [ConditionalTheory]

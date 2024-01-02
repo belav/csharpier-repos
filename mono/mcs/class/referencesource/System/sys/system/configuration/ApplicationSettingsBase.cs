@@ -514,9 +514,8 @@ namespace System.Configuration
                     }
                     else if (attr is SettingsProviderAttribute)
                     {
-                        string providerTypeName = (
-                            (SettingsProviderAttribute)attr
-                        ).ProviderTypeName;
+                        string providerTypeName = ((SettingsProviderAttribute)attr)
+                            .ProviderTypeName;
                         Type providerType = Type.GetType(providerTypeName);
                         if (providerType != null)
                         {
@@ -673,15 +672,13 @@ namespace System.Configuration
                                     {
                                         _context = new SettingsContext();
                                     }
-                                    _context["GroupName"] = (
-                                        (SettingsGroupNameAttribute)attr
-                                    ).GroupName;
+                                    _context["GroupName"] = ((SettingsGroupNameAttribute)attr)
+                                        .GroupName;
                                 }
                                 else if (attr is SettingsProviderAttribute)
                                 {
-                                    string providerTypeName = (
-                                        (SettingsProviderAttribute)attr
-                                    ).ProviderTypeName;
+                                    string providerTypeName = ((SettingsProviderAttribute)attr)
+                                        .ProviderTypeName;
                                     Type providerType = Type.GetType(providerTypeName);
                                     if (providerType != null)
                                     {
@@ -714,9 +711,8 @@ namespace System.Configuration
                                 }
                                 else if (attr is SettingsSerializeAsAttribute)
                                 {
-                                    _init.SerializeAs = (
-                                        (SettingsSerializeAsAttribute)attr
-                                    ).SerializeAs;
+                                    _init.SerializeAs = ((SettingsSerializeAsAttribute)attr)
+                                        .SerializeAs;
                                     _explicitSerializeOnClass = true;
                                 }
                                 else

@@ -106,11 +106,8 @@ namespace System.Runtime.Remoting.Channels.Ipc
             out string objectURI
         )
         {
-            return ((IChannelSender)_innerChannel).CreateMessageSink(
-                url,
-                remoteChannelData,
-                out objectURI
-            );
+            return ((IChannelSender)_innerChannel)
+                .CreateMessageSink(url, remoteChannelData, out objectURI);
         }
 
         public object ChannelData

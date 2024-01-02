@@ -3619,15 +3619,8 @@ namespace System.Data
                     break;
             }
 
-            return (comparer ?? this.CompareInfo).Compare(
-                s1,
-                0,
-                leng1,
-                s2,
-                0,
-                leng2,
-                _compareFlags
-            );
+            return (comparer ?? this.CompareInfo)
+                .Compare(s1, 0, leng1, s2, 0, leng2, _compareFlags);
         }
 
         internal int IndexOf(string s1, string s2)

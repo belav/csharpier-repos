@@ -787,9 +787,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var project = CreateWorkspace()
                 .CurrentSolution.AddProject("empty", "empty", LanguageNames.VisualBasic);
             project = project.WithCompilationOptions(
-                (
-                    (VisualBasic.VisualBasicCompilationOptions)project.CompilationOptions
-                ).WithParseOptions((VisualBasic.VisualBasicParseOptions)project.ParseOptions)
+                ((VisualBasic.VisualBasicCompilationOptions)project.CompilationOptions)
+                    .WithParseOptions((VisualBasic.VisualBasicParseOptions)project.ParseOptions)
             );
 
             var checksum = await project

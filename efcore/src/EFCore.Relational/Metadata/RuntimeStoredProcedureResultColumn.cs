@@ -47,9 +47,8 @@ public class RuntimeStoredProcedureResultColumn
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public override string ToString() =>
-        ((IStoredProcedureResultColumn)this).ToDebugString(
-            MetadataDebugStringOptions.SingleLineDefault
-        );
+        ((IStoredProcedureResultColumn)this)
+            .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,9 +61,8 @@ public class RuntimeStoredProcedureResultColumn
         new(
             () => ((IStoredProcedureResultColumn)this).ToDebugString(),
             () =>
-                ((IStoredProcedureResultColumn)this).ToDebugString(
-                    MetadataDebugStringOptions.LongDefault
-                )
+                ((IStoredProcedureResultColumn)this)
+                    .ToDebugString(MetadataDebugStringOptions.LongDefault)
         );
 
     /// <inheritdoc />

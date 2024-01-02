@@ -345,19 +345,20 @@ internal static class RouteUsageDetector
         // IEndpointRouteBuilder may be removed from symbol because the method is called as an extension method.
         // ReducedFrom includes the original IEndpointRouteBuilder parameter.
         if (
-            !(method.ReducedFrom ?? method).Parameters.Any(a =>
-                SymbolEqualityComparer.Default.Equals(
-                    a.Type,
-                    wellKnownTypes.Get(
-                        WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+            !(method.ReducedFrom ?? method)
+                .Parameters.Any(a =>
+                    SymbolEqualityComparer.Default.Equals(
+                        a.Type,
+                        wellKnownTypes.Get(
+                            WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+                        )
+                    )
+                    || a.Type.Implements(
+                        wellKnownTypes.Get(
+                            WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+                        )
                     )
                 )
-                || a.Type.Implements(
-                    wellKnownTypes.Get(
-                        WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
-                    )
-                )
-            )
         )
         {
             return null;

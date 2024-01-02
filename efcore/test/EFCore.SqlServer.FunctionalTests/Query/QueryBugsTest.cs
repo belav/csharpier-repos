@@ -795,7 +795,8 @@ LEFT JOIN [Customer] AS [c] ON [o].[CustomerFirstName] = [c].[FirstName] AND [o]
                 from t in ctx.Targaryens
                 join d in ctx.Dragons on t.Id equals d.MotherId
                 select d
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(3, dragons.Count());
         }
@@ -3860,7 +3861,8 @@ FROM [Prices] AS [p]
                 join d in context.EmployeeDevices on e.Id equals d.EmployeeId into grouping
                 from j in grouping.DefaultIfEmpty()
                 select new MyContext13025.Holder13025 { Name = e.Name, DeviceId = j.DeviceId }
-            ).ToList();
+            )
+                .ToList();
         }
     }
 
@@ -5966,7 +5968,8 @@ ORDER BY [e].[Id], [t0].[Id]
                     .Organisations.Where(o => o.OrganisationUsers.Any())
                     .DefaultIfEmpty()
                 select new { UserId = user.Id, OrgId = organisation.Id }
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(2, users.Count);
 
@@ -6143,7 +6146,8 @@ CROSS JOIN (
                     cs.Id,
                     Points = a.ActivityType.Points.Where(p => p.CompetitionSeason == cs)
                 }
-            ).ToList();
+            )
+                .ToList();
 
             AssertSql(
                 """
@@ -6909,7 +6913,8 @@ LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
                         )
                         where a.CustomerMembershipId != null && a.Id == e.CustomerId
                         select a
-                    ).Count() > 0
+                    )
+                        .Count() > 0
                 )
                 .HasKey(e => e.CustomerId);
 
@@ -7758,12 +7763,13 @@ FROM [Businesses] AS [b]
     public virtual async Task Thread_safety_in_relational_command_cache()
     {
         var contextFactory = await InitializeAsync<MyContext21666>(onConfiguring: options =>
-            ((IDbContextOptionsBuilderInfrastructure)options).AddOrUpdateExtension(
-                options
-                    .Options.FindExtension<SqlServerOptionsExtension>()
-                    .WithConnection(null)
-                    .WithConnectionString(SqlServerTestStore.CreateConnectionString(StoreName))
-            )
+            ((IDbContextOptionsBuilderInfrastructure)options)
+                .AddOrUpdateExtension(
+                    options
+                        .Options.FindExtension<SqlServerOptionsExtension>()
+                        .WithConnection(null)
+                        .WithConnectionString(SqlServerTestStore.CreateConnectionString(StoreName))
+                )
         );
 
         var ids = new[] { 1, 2, 3 };
@@ -8685,7 +8691,8 @@ ORDER BY [t].[Id] DESC, [t2].[Id], [t2].[Id0], [t2].[Id1]
                 from d in context.EqualAutos
                 where (d.Auto == a && d.AnotherAuto == b) || (d.Auto == b && d.AnotherAuto == a)
                 select d
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Single(equalQuery);
 
@@ -10901,11 +10908,8 @@ ORDER BY [t].[Id]
             from asof in context.GetPersonStatusAsOf(m.PersonId, m.Timestamp)
             select new
             {
-                Gender = (
-                    from g in context.Gender
-                    where g.Id == asof.GenderId
-                    select g.Description
-                ).Single()
+                Gender = (from g in context.Gender where g.Id == asof.GenderId select g.Description)
+                    .Single()
             };
 
         q2.ToList();
@@ -11056,7 +11060,8 @@ ORDER BY [t].[Id]
                 from c in context.Cars
                 from j in context.OpenJson(c.Json, "$.items")
                 select new { c, j }
-            ).ToListAsync();
+            )
+                .ToListAsync();
 
             AssertSql(
                 """

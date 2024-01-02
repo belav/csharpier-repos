@@ -525,9 +525,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (type0.IsTypeParameter())
                 {
-                    interfaces = (
-                        (TypeParameterSymbol)type0
-                    ).AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
+                    interfaces = ((TypeParameterSymbol)type0)
+                        .AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                 }
 
                 if (!interfaces.IsDefaultOrEmpty)

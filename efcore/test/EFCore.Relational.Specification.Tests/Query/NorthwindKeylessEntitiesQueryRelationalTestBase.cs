@@ -70,7 +70,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
                                 })
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(
             RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -86,7 +87,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => base.KeylessEntity_with_included_navs_multi_level(async)
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(
             RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -104,7 +106,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => base.KeylessEntity_with_defining_query_and_correlated_collection(async)
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(
             RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,

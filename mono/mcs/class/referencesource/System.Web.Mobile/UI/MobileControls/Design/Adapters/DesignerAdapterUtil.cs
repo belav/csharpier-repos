@@ -56,9 +56,8 @@ namespace System.Web.UI.Design.MobileControls.Adapters
 
             if (compSite != null)
             {
-                return ((IDesignerHost)compSite.GetService(typeof(IDesignerHost))).GetDesigner(
-                    component
-                );
+                return ((IDesignerHost)compSite.GetService(typeof(IDesignerHost)))
+                    .GetDesigner(component);
             }
             return null;
         }
@@ -383,9 +382,8 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                         else
                         {
                             htmlElement2 = (NativeMethods.IHTMLElement2)
-                                (
-                                    (MobileTemplatedControlDesigner)controlDesigner
-                                ).DesignTimeElementInternal;
+                                ((MobileTemplatedControlDesigner)controlDesigner)
+                                    .DesignTimeElementInternal;
                         }
 
                         if (null == htmlElement2)

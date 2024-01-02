@@ -1188,10 +1188,9 @@ namespace System.ServiceModel.Administration
                     if (val is DateTime)
                     {
                         val =
-                            ((DateTime)val).ToString(
-                                "yyyyMMddhhmmss.ffffff",
-                                CultureInfo.InvariantCulture
-                            ) + "+000";
+                            ((DateTime)val)
+                                .ToString("yyyyMMddhhmmss.ffffff", CultureInfo.InvariantCulture)
+                            + "+000";
                     }
                     else if (val is TimeSpan)
                     {

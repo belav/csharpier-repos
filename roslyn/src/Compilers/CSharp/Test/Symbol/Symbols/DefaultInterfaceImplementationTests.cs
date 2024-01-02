@@ -2736,13 +2736,14 @@ class Test1 : I2
                     Assert.True(i1.IsMetadataAbstract);
 
                     int rva;
-                    ((PEModuleSymbol)m).Module.GetMethodDefPropsOrThrow(
-                        result.Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    ((PEModuleSymbol)m)
+                        .Module.GetMethodDefPropsOrThrow(
+                            result.Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
 
                     var test1Result = m.GlobalNamespace.GetTypeMember("Test1");
@@ -12478,9 +12479,8 @@ class Test2 : I1
             var m1 = i1.GetMember<MethodSymbol>("M1");
 
             ValidateMethodModifiers_10(m1, accessibility, isStatic: isStatic);
-            var implementation = (
-                implementedByBase ? test1.BaseTypeNoUseSiteDiagnostics : test1
-            ).GetMember<MethodSymbol>((isExplicit ? "I1." : "") + "M1");
+            var implementation = (implementedByBase ? test1.BaseTypeNoUseSiteDiagnostics : test1)
+                .GetMember<MethodSymbol>((isExplicit ? "I1." : "") + "M1");
             Assert.NotNull(implementation);
             Assert.Same(implementation, test1.FindImplementationForInterfaceMember(m1));
 

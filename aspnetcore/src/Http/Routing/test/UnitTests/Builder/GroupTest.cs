@@ -188,14 +188,16 @@ public class GroupTest
         RoutePattern? outerPattern = null;
         RoutePattern? innerPattern = null;
 
-        ((IEndpointConventionBuilder)outer).Add(builder =>
-        {
-            outerPattern = ((RouteEndpointBuilder)builder).RoutePattern;
-        });
-        ((IEndpointConventionBuilder)inner).Add(builder =>
-        {
-            innerPattern = ((RouteEndpointBuilder)builder).RoutePattern;
-        });
+        ((IEndpointConventionBuilder)outer)
+            .Add(builder =>
+            {
+                outerPattern = ((RouteEndpointBuilder)builder).RoutePattern;
+            });
+        ((IEndpointConventionBuilder)inner)
+            .Add(builder =>
+            {
+                innerPattern = ((RouteEndpointBuilder)builder).RoutePattern;
+            });
 
         var dataSource = GetEndpointDataSource(builder);
         Assert.Single(dataSource.Endpoints);
@@ -215,10 +217,11 @@ public class GroupTest
 
         IServiceProvider? endpointBuilderServiceProvider = null;
 
-        ((IEndpointConventionBuilder)group).Add(builder =>
-        {
-            endpointBuilderServiceProvider = builder.ApplicationServices;
-        });
+        ((IEndpointConventionBuilder)group)
+            .Add(builder =>
+            {
+                endpointBuilderServiceProvider = builder.ApplicationServices;
+            });
 
         var dataSource = GetEndpointDataSource(builder);
         Assert.Single(dataSource.Endpoints);
@@ -246,10 +249,11 @@ public class GroupTest
 
         Endpoint? conventionBuiltEndpoint = null;
 
-        ((IEndpointConventionBuilder)group).Add(builder =>
-        {
-            conventionBuiltEndpoint = builder.Build();
-        });
+        ((IEndpointConventionBuilder)group)
+            .Add(builder =>
+            {
+                conventionBuiltEndpoint = builder.Build();
+            });
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -276,10 +280,11 @@ public class GroupTest
         var group = builder.MapGroup("/group");
         group.MapGet("/foo", () => "Hello World!");
 
-        ((IEndpointConventionBuilder)group).Add(builder =>
-        {
-            ((RouteEndpointBuilder)builder).RoutePattern = RoutePatternFactory.Parse("/bar");
-        });
+        ((IEndpointConventionBuilder)group)
+            .Add(builder =>
+            {
+                ((RouteEndpointBuilder)builder).RoutePattern = RoutePatternFactory.Parse("/bar");
+            });
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -307,20 +312,21 @@ public class GroupTest
             }
         );
 
-        ((IEndpointConventionBuilder)group).Add(builder =>
-        {
-            var originalRequestDelegate = builder.RequestDelegate!;
-
-            builder.DisplayName = $"Prefixed! {builder.DisplayName}";
-            builder.RequestDelegate = async ctx =>
+        ((IEndpointConventionBuilder)group)
+            .Add(builder =>
             {
-                replacementCalled = true;
-                await originalRequestDelegate(ctx);
-                await originalRequestDelegate(ctx);
-            };
+                var originalRequestDelegate = builder.RequestDelegate!;
 
-            ((RouteEndpointBuilder)builder).Order = 42;
-        });
+                builder.DisplayName = $"Prefixed! {builder.DisplayName}";
+                builder.RequestDelegate = async ctx =>
+                {
+                    replacementCalled = true;
+                    await originalRequestDelegate(ctx);
+                    await originalRequestDelegate(ctx);
+                };
+
+                ((RouteEndpointBuilder)builder).Order = 42;
+            });
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);

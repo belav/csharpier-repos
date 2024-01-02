@@ -5894,15 +5894,16 @@ namespace System
                     throw new NotImplementedException ();
 #else
             #region TransparentProxy case
-                    return ((MarshalByRefObject)target).InvokeMember(
-                        name,
-                        bindingFlags,
-                        binder,
-                        providedArgs,
-                        modifiers,
-                        culture,
-                        namedParams
-                    );
+                    return ((MarshalByRefObject)target)
+                        .InvokeMember(
+                            name,
+                            bindingFlags,
+                            binder,
+                            providedArgs,
+                            modifiers,
+                            culture,
+                            namedParams
+                        );
             #endregion
 #endif
                 }
@@ -6344,13 +6345,8 @@ namespace System
                 //if (useCache && argCnt == invokeMethod.GetParameters().Length)
                 //    AddMethodToCache(name, bindingFlags, argCnt, providedArgs, invokeMethod);
 
-                Object result = ((MethodInfo)invokeMethod).Invoke(
-                    target,
-                    bindingFlags,
-                    binder,
-                    providedArgs,
-                    culture
-                );
+                Object result = ((MethodInfo)invokeMethod)
+                    .Invoke(target, bindingFlags, binder, providedArgs, culture);
 
                 if (state != null)
                     binder.ReorderArgumentArray(ref providedArgs, state);
@@ -6831,12 +6827,8 @@ namespace System
                             else
                             {
 #endif
-                            server = ((ConstructorInfo)invokeMethod).Invoke(
-                                bindingAttr,
-                                binder,
-                                args,
-                                culture
-                            );
+                            server = ((ConstructorInfo)invokeMethod)
+                                .Invoke(bindingAttr, binder, args, culture);
 #if MONO && FEATURE_REMOTING
                             }
 #endif

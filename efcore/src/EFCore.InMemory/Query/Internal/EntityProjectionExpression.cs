@@ -201,9 +201,8 @@ public class EntityProjectionExpression : Expression, IPrintableExpression
             entityProjectionExpression._navigationExpressionsCache[navigation] =
                 new StructuralTypeShaperExpression(
                     entityShaperExpression.StructuralType,
-                    (
-                        (EntityProjectionExpression)entityShaperExpression.ValueBufferExpression
-                    ).Clone(),
+                    ((EntityProjectionExpression)entityShaperExpression.ValueBufferExpression)
+                        .Clone(),
                     entityShaperExpression.IsNullable
                 );
         }

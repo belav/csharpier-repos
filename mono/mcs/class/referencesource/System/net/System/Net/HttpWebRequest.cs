@@ -3862,13 +3862,14 @@ namespace System.Net
             using (GlobalLog.SetThreadKind(ThreadKinds.System))
             {
 #endif
-                ((HttpWebRequest)context).Abort(
-                    new WebException(
-                        NetRes.GetWebStatusString(WebExceptionStatus.Timeout),
-                        WebExceptionStatus.Timeout
-                    ),
-                    AbortState.Public
-                );
+                ((HttpWebRequest)context)
+                    .Abort(
+                        new WebException(
+                            NetRes.GetWebStatusString(WebExceptionStatus.Timeout),
+                            WebExceptionStatus.Timeout
+                        ),
+                        AbortState.Public
+                    );
 #if DEBUG
             }
 #endif
@@ -7447,9 +7448,8 @@ namespace System.Net
                                 "",
                                 SR.GetString(
                                     SR.net_log_server_response_error_code,
-                                    ((int)ResponseStatusCode).ToString(
-                                        NumberFormatInfo.InvariantInfo
-                                    )
+                                    ((int)ResponseStatusCode)
+                                        .ToString(NumberFormatInfo.InvariantInfo)
                                 )
                             );
                     }
@@ -8161,9 +8161,8 @@ namespace System.Net
         {
             get
             {
-                return (Interlocked.Increment(ref s_UniqueGroupId)).ToString(
-                    NumberFormatInfo.InvariantInfo
-                );
+                return (Interlocked.Increment(ref s_UniqueGroupId))
+                    .ToString(NumberFormatInfo.InvariantInfo);
             }
         }
 

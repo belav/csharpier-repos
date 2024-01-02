@@ -439,7 +439,8 @@ namespace System.ServiceModel.Channels
                     DiagnosticUtility.ShouldUseActivity
                         ? ((ActivityHolder)httpContextReceivedResult.AsyncState).context
                         : (HttpRequestContext)httpContextReceivedResult.AsyncState
-                ).Listener;
+                )
+                    .Listener;
 
                 return channelListener.EndHttpContextReceived(httpContextReceivedResult);
             }

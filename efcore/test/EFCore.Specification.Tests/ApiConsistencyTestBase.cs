@@ -44,7 +44,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
             )
             where method.ReturnType == typeof(void)
             select type.Name + "." + method.Name
-        ).ToList();
+        )
+            .ToList();
 
         Assert.False(
             voidMethods.Count > 0,
@@ -1257,7 +1258,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 && !type.DeclaringType.GetNestedTypes(BindingFlags.NonPublic)
                     .Any(t => t.BaseType == type)
             select type.FullName
-        ).ToList();
+        )
+            .ToList();
 
         Assert.False(
             nonSealedPrivates.Count > 0,
@@ -1285,7 +1287,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 && !method.Name.Equals("get_NodeType", StringComparison.Ordinal)
                 && (method.IsPublic || method.IsFamily || method.IsFamilyOrAssembly)
             select type.FullName + "." + method.Name
-        ).ToList();
+        )
+            .ToList();
 
         Assert.False(
             nonVirtualMethods.Count > 0,
@@ -1310,13 +1313,15 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 && (method.IsPublic || method.IsFamily || method.IsFamilyOrAssembly)
             where typeof(Task).IsAssignableFrom(method.ReturnType)
             select method
-        ).ToList();
+        )
+            .ToList();
 
         var asyncMethodsWithToken = (
             from method in asyncMethods
             where method.GetParameters().Any(pi => pi.ParameterType == typeof(CancellationToken))
             select method
-        ).ToList();
+        )
+            .ToList();
 
         var asyncMethodsWithoutToken = (
             from method in asyncMethods
@@ -1324,7 +1329,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 !NonCancellableAsyncMethods.Contains(method)
                 && method.GetParameters().All(pi => pi.ParameterType != typeof(CancellationToken))
             select method
-        ).ToList();
+        )
+            .ToList();
 
         var missingOverloads = (
             from methodWithoutToken in asyncMethodsWithoutToken
@@ -1374,7 +1380,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 parameter.ParameterType.UnwrapNullableType() == typeof(bool)
                 && prefixes.Any(p => parameter.Name.StartsWith(p, StringComparison.Ordinal))
             select $"{type.FullName}.{method.Name}[{parameter.Name}]"
-        ).ToList();
+        )
+            .ToList();
 
         Assert.False(
             parameters.Count > 0,

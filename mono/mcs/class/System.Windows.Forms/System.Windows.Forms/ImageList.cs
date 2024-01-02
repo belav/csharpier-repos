@@ -674,7 +674,8 @@ namespace System.Windows.Forms
                                 this.colorDepth < ColorDepth.Depth8Bit
                                     ? IndexedColorDepths.Palette4Bit
                                     : IndexedColorDepths.Palette8Bit
-                            ).Entries;
+                            )
+                                .Entries;
 
                             for (line = 0; line < height; line++)
                             {

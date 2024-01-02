@@ -578,9 +578,8 @@ namespace System.Web.UI.WebControls.WebParts
                 base.LoadViewState(myState[baseIndex]);
                 if (myState[emptyZoneTextStyleIndex] != null)
                 {
-                    ((IStateManager)EmptyZoneTextStyle).LoadViewState(
-                        myState[emptyZoneTextStyleIndex]
-                    );
+                    ((IStateManager)EmptyZoneTextStyle)
+                        .LoadViewState(myState[emptyZoneTextStyleIndex]);
                 }
                 if (myState[footerStyleIndex] != null)
                 {

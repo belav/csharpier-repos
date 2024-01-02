@@ -67,7 +67,8 @@ public class PrimitiveCollectionsQueryRelationalTestBase<TFixture>
                         async
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(
             RelationalStrings.SetOperationsRequireAtLeastOneSideWithValidTypeMapping("Union"),

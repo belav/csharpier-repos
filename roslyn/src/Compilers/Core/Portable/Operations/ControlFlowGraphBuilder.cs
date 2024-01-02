@@ -3361,7 +3361,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     lazyFallThrough!.GetSingletonPredecessorOrDefault() != null
                         ? condition.LeftOperand
                         : condition
-                ).Syntax;
+                )
+                    .Syntax;
                 AddStatement(
                     new FlowCaptureOperation(
                         captureId,
@@ -4403,7 +4404,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 SyntaxNode defaultValueSyntax = (
                     operation.Operation == testExpression ? testExpression : operation
-                ).Syntax;
+                )
+                    .Syntax;
 
                 Debug.Assert(operation.Type is not null);
                 AddStatement(
@@ -4835,7 +4837,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     ILocalSymbol local = (
                         (IVariableDeclaratorOperation)exceptionDeclarationOrExpression
-                    ).Symbol;
+                    )
+                        .Symbol;
                     exceptionTarget = new LocalReferenceOperation(
                         local,
                         isDeclaration: true,
@@ -6065,7 +6068,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             (ILocalSymbol loopObject, ForToLoopOperationUserDefinedInfo userDefinedInfo) = (
                 (ForToLoopOperation)operation
-            ).Info;
+            )
+                .Info;
             bool isObjectLoop = (loopObject != null);
             ImmutableArray<ILocalSymbol> locals = operation.Locals;
 
@@ -8397,9 +8401,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         ? new SpreadOperation(
                             operation,
                             elementType: spread.ElementType,
-                            elementConversion: (
-                                (SpreadOperation)spread
-                            ).ElementConversionConvertible,
+                            elementConversion: ((SpreadOperation)spread)
+                                .ElementConversionConvertible,
                             semanticModel: null,
                             spread.Syntax,
                             IsImplicit(spread)
@@ -10347,7 +10350,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     ?? _compilation.CommonGetWellKnownTypeMember(
                         WellKnownMember.System_InvalidOperationException__ctor
                     )
-                )?.GetISymbol();
+                )
+                    ?.GetISymbol();
             var makeException =
                 (matchFailureCtor is null)
                     ? MakeInvalidOperation(
@@ -10396,9 +10400,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             {
                 if (statement.Kind == OperationKind.LocalFunction)
                 {
-                    (localFunctionsBuilder ??= ArrayBuilder<IOperation>.GetInstance()).Add(
-                        statement
-                    );
+                    (localFunctionsBuilder ??= ArrayBuilder<IOperation>.GetInstance())
+                        .Add(statement);
                 }
                 else
                 {

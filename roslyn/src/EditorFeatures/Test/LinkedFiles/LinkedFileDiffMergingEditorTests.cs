@@ -85,9 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.LinkedFiles
             );
             Assert.Equal(
                 expectedMergedText,
-                (
-                    await workspace.CurrentSolution.GetDocument(linkedDocumentId).GetTextAsync()
-                ).ToString()
+                (await workspace.CurrentSolution.GetDocument(linkedDocumentId).GetTextAsync())
+                    .ToString()
             );
         }
 

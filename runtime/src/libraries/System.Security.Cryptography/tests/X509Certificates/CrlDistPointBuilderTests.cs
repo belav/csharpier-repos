@@ -60,7 +60,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 "304d304ba049a0478645687474703a2f2f63726c2e6d6963726f736f"
                 + "66742e636f6d2f706b692f63726c2f70726f64756374732f4d696343"
                 + "6f645369675043415f30382d33312d323031302e63726c"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             AssertExtensions.SequenceEqual(expected, ext.RawData);
         }
@@ -87,7 +88,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "6F6D2F736861322D65762D7365727665722D67312E63726C3034A032A030862E"
                 + "687474703A2F2F63726C342E64696769636572742E636F6D2F736861322D6576"
                 + "2D7365727665722D67312E63726C"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             AssertExtensions.SequenceEqual(expected, ext.RawData);
         }

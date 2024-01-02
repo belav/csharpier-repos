@@ -2371,10 +2371,8 @@ namespace System.ServiceModel.Channels
                         using (response)
                         {
                             if (
-                                ((IServerReliableChannelBinder)this.Binder).AddressResponse(
-                                    info.Message,
-                                    response
-                                )
+                                ((IServerReliableChannelBinder)this.Binder)
+                                    .AddressResponse(info.Message, response)
                             )
                                 this.Binder.Send(response, this.DefaultSendTimeout);
                         }

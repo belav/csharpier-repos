@@ -1032,9 +1032,8 @@ namespace System.IO.Hashing
             Vector256<ulong> product = Avx2.IsSupported
                 ? Avx2.Multiply(sourceKey, sourceKeyLow)
                 : (sourceKey & Vector256.Create(~0u, 0u, ~0u, 0u, ~0u, 0u, ~0u, 0u)).AsUInt64()
-                    * (
-                        sourceKeyLow & Vector256.Create(~0u, 0u, ~0u, 0u, ~0u, 0u, ~0u, 0u)
-                    ).AsUInt64();
+                    * (sourceKeyLow & Vector256.Create(~0u, 0u, ~0u, 0u, ~0u, 0u, ~0u, 0u))
+                        .AsUInt64();
 
             accVec = product + sum;
             return accVec;

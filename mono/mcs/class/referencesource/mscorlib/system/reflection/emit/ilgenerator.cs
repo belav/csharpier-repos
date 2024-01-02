@@ -224,11 +224,8 @@ namespace System.Reflection.Emit
             bool useMethodDef
         )
         {
-            return ((ModuleBuilder)m_methodBuilder.Module).GetMethodTokenInternal(
-                method,
-                optionalParameterTypes,
-                useMethodDef
-            );
+            return ((ModuleBuilder)m_methodBuilder.Module)
+                .GetMethodTokenInternal(method, optionalParameterTypes, useMethodDef);
         }
 
         [System.Security.SecurityCritical] // auto-generated
@@ -257,13 +254,14 @@ namespace System.Reflection.Emit
             int cGenericParameters
         )
         {
-            return ((ModuleBuilder)m_methodBuilder.Module).GetMemberRefSignature(
-                call,
-                returnType,
-                parameterTypes,
-                optionalParameterTypes,
-                cGenericParameters
-            );
+            return ((ModuleBuilder)m_methodBuilder.Module)
+                .GetMemberRefSignature(
+                    call,
+                    returnType,
+                    parameterTypes,
+                    optionalParameterTypes,
+                    cGenericParameters
+                );
         }
 
         internal byte[] BakeByteArray()

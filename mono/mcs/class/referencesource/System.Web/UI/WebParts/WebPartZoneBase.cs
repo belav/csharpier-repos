@@ -1051,9 +1051,8 @@ namespace System.Web.UI.WebControls.WebParts
                 base.LoadViewState(myState[baseIndex]);
                 if (myState[selectedPartChromeStyleIndex] != null)
                 {
-                    ((IStateManager)SelectedPartChromeStyle).LoadViewState(
-                        myState[selectedPartChromeStyleIndex]
-                    );
+                    ((IStateManager)SelectedPartChromeStyle)
+                        .LoadViewState(myState[selectedPartChromeStyleIndex]);
                 }
                 if (myState[closeVerbIndex] != null)
                 {
@@ -1097,15 +1096,13 @@ namespace System.Web.UI.WebControls.WebParts
                 }
                 if (myState[menuLabelHoverStyleIndex] != null)
                 {
-                    ((IStateManager)MenuLabelHoverStyle).LoadViewState(
-                        myState[menuLabelHoverStyleIndex]
-                    );
+                    ((IStateManager)MenuLabelHoverStyle)
+                        .LoadViewState(myState[menuLabelHoverStyleIndex]);
                 }
                 if (myState[menuCheckImageStyleIndex] != null)
                 {
-                    ((IStateManager)MenuCheckImageStyle).LoadViewState(
-                        myState[menuCheckImageStyleIndex]
-                    );
+                    ((IStateManager)MenuCheckImageStyle)
+                        .LoadViewState(myState[menuCheckImageStyleIndex]);
                 }
                 if (myState[menuVerbStyleIndex] != null)
                 {
@@ -1113,9 +1110,8 @@ namespace System.Web.UI.WebControls.WebParts
                 }
                 if (myState[menuVerbHoverStyleIndex] != null)
                 {
-                    ((IStateManager)MenuVerbHoverStyle).LoadViewState(
-                        myState[menuVerbHoverStyleIndex]
-                    );
+                    ((IStateManager)MenuVerbHoverStyle)
+                        .LoadViewState(myState[menuVerbHoverStyleIndex]);
                 }
                 if (myState[controlStyleIndex] != null)
                 {
@@ -1123,9 +1119,8 @@ namespace System.Web.UI.WebControls.WebParts
                 }
                 if (myState[titleBarVerbStyleIndex] != null)
                 {
-                    ((IStateManager)TitleBarVerbStyle).LoadViewState(
-                        myState[titleBarVerbStyleIndex]
-                    );
+                    ((IStateManager)TitleBarVerbStyle)
+                        .LoadViewState(myState[titleBarVerbStyleIndex]);
                 }
             }
         }

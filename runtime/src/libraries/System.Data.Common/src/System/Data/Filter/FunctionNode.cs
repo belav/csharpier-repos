@@ -548,10 +548,8 @@ namespace System.Data
                     if (argumentValues[1] is SqlString)
                         argumentValues[1] = ((SqlString)argumentValues[1]).Value;
 
-                    return ((string)argumentValues[1]).IndexOf(
-                        (string)argumentValues[0],
-                        StringComparison.Ordinal
-                    );
+                    return ((string)argumentValues[1])
+                        .IndexOf((string)argumentValues[0], StringComparison.Ordinal);
 
                 case FunctionId.Iif:
                     Debug.Assert(

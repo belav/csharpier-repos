@@ -404,7 +404,8 @@ namespace Microsoft.EntityFrameworkCore
                         context,
                         new object[] { 77 }
                     )
-                ).Foo
+                )
+                    .Foo
             );
         }
 
@@ -462,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore
                         context,
                         new object[] { "Cat" }
                     )
-                ).Foo
+                )
+                    .Foo
             );
         }
 
@@ -518,7 +520,8 @@ namespace Microsoft.EntityFrameworkCore
                         context,
                         new object[] { 77, "Dog" }
                     )
-                ).Foo
+                )
+                    .Foo
             );
         }
 
@@ -564,9 +567,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 "Baxter",
-                (
-                    await Finder.FindAsync<BaseType>(cancellationType, context, new object[] { 77 })
-                ).Foo
+                (await Finder.FindAsync<BaseType>(cancellationType, context, new object[] { 77 }))
+                    .Foo
             );
         }
 
@@ -724,13 +726,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 "Clippy",
-                (
-                    await Finder.FindAsync<ShadowKey>(
-                        cancellationType,
-                        context,
-                        new object[] { 77 }
-                    )
-                ).Foo
+                (await Finder.FindAsync<ShadowKey>(cancellationType, context, new object[] { 77 }))
+                    .Foo
             );
         }
 
@@ -815,7 +812,8 @@ namespace Microsoft.EntityFrameworkCore
                                 )
                                 .AsTask()
                     )
-                ).Message
+                )
+                    .Message
             );
         }
 
@@ -848,7 +846,8 @@ namespace Microsoft.EntityFrameworkCore
                                 )
                                 .AsTask()
                     )
-                ).Message
+                )
+                    .Message
             );
         }
 
@@ -870,7 +869,8 @@ namespace Microsoft.EntityFrameworkCore
                                 .FindAsync<IntKey>(cancellationType, context, new object[] { "77" })
                                 .AsTask()
                     )
-                ).Message
+                )
+                    .Message
             );
         }
 
@@ -896,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore
                                 )
                                 .AsTask()
                     )
-                ).Message
+                )
+                    .Message
             );
         }
 
@@ -918,7 +919,8 @@ namespace Microsoft.EntityFrameworkCore
                                 .FindAsync<Random>(cancellationType, context, new object[] { 77 })
                                 .AsTask()
                     )
-                ).Message
+                )
+                    .Message
             );
         }
 
@@ -948,7 +950,8 @@ namespace Microsoft.EntityFrameworkCore
                                 )
                                 .AsTask()
                     )
-                ).Message
+                )
+                    .Message
             );
         }
 

@@ -100,7 +100,8 @@ public class NotFoundResultTests
                 PopulateMetadata<NotFound>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

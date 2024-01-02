@@ -115,9 +115,8 @@ namespace System.Activities.Presentation
                 {
                     inputData.Clear();
                     foreach (
-                        Type i in (
-                            (TypeCollectionDesigner)editorWindow.Content
-                        ).UpdatedTypeCollection
+                        Type i in ((TypeCollectionDesigner)editorWindow.Content)
+                            .UpdatedTypeCollection
                     )
                     {
                         inputData.Add(i);

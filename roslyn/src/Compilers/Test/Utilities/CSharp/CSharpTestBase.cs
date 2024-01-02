@@ -775,9 +775,8 @@ namespace System.Diagnostics.CodeAnalysis
             NullableContextOptions nullableContextOptions
         )
         {
-            return (options ?? TestOptions.ReleaseDll).WithNullableContextOptions(
-                nullableContextOptions
-            );
+            return (options ?? TestOptions.ReleaseDll)
+                .WithNullableContextOptions(nullableContextOptions);
         }
 
         internal CompilationVerifier CompileAndVerifyWithMscorlib40(
@@ -1405,9 +1404,8 @@ namespace System.Diagnostics.CodeAnalysis
                 parseOptions != null
                     ? parseOptions.WithDocumentationMode(DocumentationMode.Diagnose)
                     : TestOptions.RegularWithDocumentationComments;
-            options = (options ?? TestOptions.ReleaseDll).WithXmlReferenceResolver(
-                XmlFileResolver.Default
-            );
+            options = (options ?? TestOptions.ReleaseDll)
+                .WithXmlReferenceResolver(XmlFileResolver.Default);
             return CreateCompilation(
                 source,
                 references,
@@ -1533,9 +1531,8 @@ namespace System.Diagnostics.CodeAnalysis
 
             if (experimentalFeature.HasValue)
             {
-                parseOptions = (parseOptions ?? TestOptions.RegularPreview).WithExperimental(
-                    experimentalFeature.Value
-                );
+                parseOptions = (parseOptions ?? TestOptions.RegularPreview)
+                    .WithExperimental(experimentalFeature.Value);
             }
 
             Func<CSharpCompilation> createCompilationLambda = () =>

@@ -323,9 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                             if (partnerStatement != null)
                             {
-                                partnerStatement = (
-                                    (VariableDeclarationSyntax)partnerStatement
-                                ).Variables.First();
+                                partnerStatement = ((VariableDeclarationSyntax)partnerStatement)
+                                    .Variables.First();
                             }
 
                             statementPart = DefaultStatementPart;
@@ -1241,7 +1240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             var ctorInitializer = (
                 (ConstructorDeclarationSyntax)
                     symbol.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken)
-            ).Initializer;
+            )
+                .Initializer;
             if (method.ContainingType.TypeKind == TypeKind.Struct)
             {
                 // constructor of a struct with implicit or this() initializer has member initializers:
@@ -1263,9 +1263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         {
             var syntaxRefs = type.DeclaringSyntaxReferences;
             return syntaxRefs.Length > 1
-                || ((BaseTypeDeclarationSyntax)syntaxRefs.Single().GetSyntax()).Modifiers.Any(
-                    SyntaxKind.PartialKeyword
-                );
+                || ((BaseTypeDeclarationSyntax)syntaxRefs.Single().GetSyntax())
+                    .Modifiers.Any(SyntaxKind.PartialKeyword);
         }
 
         protected override SyntaxNode? GetSymbolDeclarationSyntax(
@@ -1381,7 +1380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                             GetDeclaredSymbol(oldModel, oldVariable, cancellationToken),
                             GetDeclaredSymbol(newModel, newVariable, cancellationToken)
                         )
-                    ).ToImmutableArray()
+                    )
+                        .ToImmutableArray()
                 );
             }
 
@@ -2967,9 +2967,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.LocalDeclarationStatement:
                     if (
-                        ((LocalDeclarationStatementSyntax)node).UsingKeyword.IsKind(
-                            SyntaxKind.UsingKeyword
-                        )
+                        ((LocalDeclarationStatementSyntax)node)
+                            .UsingKeyword.IsKind(SyntaxKind.UsingKeyword)
                     )
                     {
                         return CSharpFeaturesResources.using_declaration;
@@ -2988,17 +2987,15 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 case SyntaxKind.ForEachStatement:
                     Debug.Assert(
-                        ((CommonForEachStatementSyntax)node).AwaitKeyword.IsKind(
-                            SyntaxKind.AwaitKeyword
-                        )
+                        ((CommonForEachStatementSyntax)node)
+                            .AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword)
                     );
                     return CSharpFeaturesResources.asynchronous_foreach_statement;
 
                 case SyntaxKind.VariableDeclarator:
                     RoslynDebug.Assert(
-                        ((LocalDeclarationStatementSyntax)node.Parent!.Parent!).AwaitKeyword.IsKind(
-                            SyntaxKind.AwaitKeyword
-                        )
+                        ((LocalDeclarationStatementSyntax)node.Parent!.Parent!)
+                            .AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword)
                     );
                     return CSharpFeaturesResources.asynchronous_using_declaration;
 

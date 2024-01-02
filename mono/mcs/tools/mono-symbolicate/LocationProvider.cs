@@ -126,7 +126,8 @@ namespace Mono
                     {
                         string state_machine = (
                             (TypeReference)async_method.ConstructorArguments[0].Value
-                        ).FullName;
+                        )
+                            .FullName;
                         return TryResolveLocation(
                             sfData.Relocate(state_machine, "MoveNext ()"),
                             seqPointInfo,

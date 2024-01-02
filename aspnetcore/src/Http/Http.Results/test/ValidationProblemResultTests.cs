@@ -129,7 +129,8 @@ public class ValidationProblemResultTests
                 PopulateMetadata<ValidationProblem>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

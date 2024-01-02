@@ -492,11 +492,12 @@ namespace System.ServiceModel.Routing
                 IAsyncResult result;
                 using (this.PrepareTransactionalCall(this.service.GetTransactionForSending(null)))
                 {
-                    result = ((ICommunicationObject)this.client).BeginClose(
-                        this.timeoutHelper.RemainingTime(),
-                        this.PrepareAsyncCompletion(channelCloseCallback),
-                        this
-                    );
+                    result = ((ICommunicationObject)this.client)
+                        .BeginClose(
+                            this.timeoutHelper.RemainingTime(),
+                            this.PrepareAsyncCompletion(channelCloseCallback),
+                            this
+                        );
                 }
 
                 if (this.CheckSyncContinue(result))

@@ -379,7 +379,8 @@ namespace System.Data.Odbc
                 {
                     value = (
                         BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
-                    ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                    )
+                        .GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
                 }
                 else if (retcode == ODBC32.SQLRETURN.ERROR)
                 {
@@ -493,7 +494,8 @@ namespace System.Data.Odbc
                 {
                     value = (
                         BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
-                    ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                    )
+                        .GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
                 }
                 else if (handleError)
                 {

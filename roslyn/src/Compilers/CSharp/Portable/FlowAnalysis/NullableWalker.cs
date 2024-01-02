@@ -2053,9 +2053,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
                 return compilation.SyntaxTrees.Any(static tree =>
-                    ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
-                        new Text.TextSpan(0, tree.Length)
-                    ) == true
+                    ((CSharpSyntaxTree)tree)
+                        .IsNullableAnalysisEnabled(new Text.TextSpan(0, tree.Length)) == true
                 );
             }
 #endif
@@ -3641,7 +3640,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var methodParameters = methodSymbol.Parameters;
             var signatureParameters = (
                 _useDelegateInvokeParameterTypes ? _delegateInvokeMethod! : methodSymbol
-            ).Parameters;
+            )
+                .Parameters;
 
             // save a state representing the possibility that parameter default values were not assigned to the parameters.
             var parameterDefaultsNotAssignedState = State.Clone();
@@ -3912,9 +3912,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (method.IsAsyncEffectivelyReturningGenericTask(compilation))
             {
-                type = (
-                    (NamedTypeSymbol)returnType.Type
-                ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
+                type = ((NamedTypeSymbol)returnType.Type)
+                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
                 annotations = FlowAnalysisAnnotations.None;
                 return true;
             }
@@ -6083,9 +6082,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 type = TypeWithAnnotations.Create(
-                    ((NamedTypeSymbol)node.Type).OriginalDefinition.Construct(
-                        ImmutableArray.Create(type)
-                    )
+                    ((NamedTypeSymbol)node.Type)
+                        .OriginalDefinition.Construct(ImmutableArray.Create(type))
                 );
             }
 
@@ -11120,9 +11118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 parameterOpt,
                                 reportTopLevelWarnings: reportWarnings,
                                 reportRemainingWarnings: reportWarnings,
-                                diagnosticLocation: (
-                                    conversionOpt ?? convertedNode
-                                ).Syntax.GetLocation()
+                                diagnosticLocation: (conversionOpt ?? convertedNode)
+                                    .Syntax.GetLocation()
                             );
                             int targetFieldSlot = GetOrCreateSlot(targetField, slot);
                             if (targetFieldSlot > 0)

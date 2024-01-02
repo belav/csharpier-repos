@@ -44,7 +44,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
                     Site = site,
                     ImportInfo = ContractHelpers.GetImportInfo(pi.PropertyType, attrs, site)
                 }
-            ).ToArray();
+            )
+                .ToArray();
 
             if (imports.Length == 0)
                 return NoDependencies;

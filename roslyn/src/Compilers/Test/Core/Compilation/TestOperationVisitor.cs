@@ -336,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             _ = operation.IsChecked;
             (ILocalSymbol loopObject, ForToLoopOperationUserDefinedInfo userDefinedInfo) = (
                 (ForToLoopOperation)operation
-            ).Info;
+            )
+                .Info;
 
             if (userDefinedInfo != null)
             {
@@ -1753,9 +1754,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     break;
             }
 
-            var designation = (
-                operation.Syntax as CSharp.Syntax.RecursivePatternSyntax
-            )?.Designation;
+            var designation = (operation.Syntax as CSharp.Syntax.RecursivePatternSyntax)
+                ?.Designation;
             if (designation.IsKind(CSharp.SyntaxKind.SingleVariableDesignation))
             {
                 Assert.NotNull(operation.DeclaredSymbol);

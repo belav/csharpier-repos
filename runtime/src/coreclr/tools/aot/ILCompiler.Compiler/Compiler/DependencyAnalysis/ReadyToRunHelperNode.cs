@@ -266,10 +266,11 @@ namespace ILCompiler.DependencyAnalysis
                         (MethodDesc)((ReadyToRunHelperNode)other)._target
                     );
                 case ReadyToRunHelperId.DelegateCtor:
-                    return ((DelegateCreationInfo)_target).CompareTo(
-                        (DelegateCreationInfo)((ReadyToRunHelperNode)other)._target,
-                        comparer
-                    );
+                    return ((DelegateCreationInfo)_target)
+                        .CompareTo(
+                            (DelegateCreationInfo)((ReadyToRunHelperNode)other)._target,
+                            comparer
+                        );
                 default:
                     throw new NotImplementedException();
             }

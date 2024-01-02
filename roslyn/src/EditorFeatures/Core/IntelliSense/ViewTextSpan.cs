@@ -139,9 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                 else if (sourceSpan.Snapshot is IProjectionSnapshot)
                 {
                     foreach (
-                        var s in (sourceSpan.Snapshot as IProjectionSnapshot).MapToSourceSnapshots(
-                            sourceSpan.Span
-                        )
+                        var s in (sourceSpan.Snapshot as IProjectionSnapshot)
+                            .MapToSourceSnapshots(sourceSpan.Span)
                     )
                     {
                         sourceSpans.Enqueue(s);

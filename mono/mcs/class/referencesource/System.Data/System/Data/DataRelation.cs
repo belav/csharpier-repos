@@ -521,16 +521,18 @@ namespace System.Data
                             (DataRelationCollection.DataTableRelationCollection)(
                                 ParentTable.ChildRelations
                             )
-                        ).OnRelationPropertyChanged(
-                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                        );
+                        )
+                            .OnRelationPropertyChanged(
+                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                            );
                         (
                             (DataRelationCollection.DataTableRelationCollection)(
                                 ChildTable.ParentRelations
                             )
-                        ).OnRelationPropertyChanged(
-                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                        );
+                        )
+                            .OnRelationPropertyChanged(
+                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                            );
                     }
                     else if (String.Compare(relationName, value, false, locale) != 0)
                     {
@@ -539,16 +541,18 @@ namespace System.Data
                             (DataRelationCollection.DataTableRelationCollection)(
                                 ParentTable.ChildRelations
                             )
-                        ).OnRelationPropertyChanged(
-                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                        );
+                        )
+                            .OnRelationPropertyChanged(
+                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                            );
                         (
                             (DataRelationCollection.DataTableRelationCollection)(
                                 ChildTable.ParentRelations
                             )
-                        ).OnRelationPropertyChanged(
-                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                        );
+                        )
+                            .OnRelationPropertyChanged(
+                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                            );
                     }
                 }
                 finally

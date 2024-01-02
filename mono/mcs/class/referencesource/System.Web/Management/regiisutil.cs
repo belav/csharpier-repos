@@ -101,7 +101,8 @@ namespace System.Web.Management
                                         webAssembly.FullName
                                     )
                                 )
-                            ).ToString()
+                            )
+                                .ToString()
                         );
                 }
                 else
@@ -115,7 +116,8 @@ namespace System.Web.Management
                                         webAssembly.FullName
                                     )
                                 )
-                            ).ToString()
+                            )
+                                .ToString()
                         );
                 }
             }
@@ -157,7 +159,8 @@ namespace System.Web.Management
                                         webAssembly.FullName
                                     )
                                 )
-                            ).ToString()
+                            )
+                                .ToString()
                         );
                     TypeLibConverter converter = new TypeLibConverter();
                     ConversionEventSink eventHandler = new ConversionEventSink();
@@ -183,7 +186,8 @@ namespace System.Web.Management
                                         webAssembly.FullName
                                     )
                                 )
-                            ).ToString()
+                            )
+                                .ToString()
                         );
 
                     try
@@ -328,9 +332,8 @@ namespace System.Web.Management
             if (exception is ConfigurationErrorsException)
             {
                 foreach (
-                    ConfigurationErrorsException e in (
-                        (ConfigurationErrorsException)exception
-                    ).Errors
+                    ConfigurationErrorsException e in ((ConfigurationErrorsException)exception)
+                        .Errors
                 )
                 {
                     sb.Append(e.Message);

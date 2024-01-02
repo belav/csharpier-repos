@@ -1597,9 +1597,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     break;
                                 case CSharp.SyntaxKind.CollectionExpression:
                                     if (
-                                        (
-                                            (CSharp.Syntax.CollectionExpressionSyntax)syntax
-                                        ).Elements.Any()
+                                        ((CSharp.Syntax.CollectionExpressionSyntax)syntax)
+                                            .Elements.Any()
                                     )
                                     {
                                         return true;
@@ -1692,9 +1691,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                                 case CSharp.SyntaxKind.SwitchExpression:
                                     if (
-                                        (
-                                            (CSharp.Syntax.SwitchExpressionSyntax)parent
-                                        ).GoverningExpression == syntax
+                                        ((CSharp.Syntax.SwitchExpressionSyntax)parent)
+                                            .GoverningExpression == syntax
                                     )
                                     {
                                         return true;
@@ -1758,9 +1756,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             {
                                 case VisualBasic.SyntaxKind.ForEachStatement:
                                     if (
-                                        (
-                                            (VisualBasic.Syntax.ForEachStatementSyntax)parent
-                                        ).Expression == syntax
+                                        ((VisualBasic.Syntax.ForEachStatementSyntax)parent)
+                                            .Expression == syntax
                                     )
                                     {
                                         return true;
@@ -1786,9 +1783,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                                 case VisualBasic.SyntaxKind.SyncLockStatement:
                                     if (
-                                        (
-                                            (VisualBasic.Syntax.SyncLockStatementSyntax)parent
-                                        ).Expression == syntax
+                                        ((VisualBasic.Syntax.SyncLockStatementSyntax)parent)
+                                            .Expression == syntax
                                     )
                                     {
                                         return true;
@@ -1817,9 +1813,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                                 case VisualBasic.SyntaxKind.SelectStatement:
                                     if (
-                                        (
-                                            (VisualBasic.Syntax.SelectStatementSyntax)parent
-                                        ).Expression == syntax
+                                        ((VisualBasic.Syntax.SelectStatementSyntax)parent)
+                                            .Expression == syntax
                                     )
                                     {
                                         return true;

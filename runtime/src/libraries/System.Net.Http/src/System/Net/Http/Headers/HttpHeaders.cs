@@ -326,7 +326,8 @@ namespace System.Net.Http.Headers
                 ? (
                     (IEnumerable<KeyValuePair<string, IEnumerable<string>>>)
                         Array.Empty<KeyValuePair<string, IEnumerable<string>>>()
-                ).GetEnumerator()
+                )
+                    .GetEnumerator()
                 : GetEnumeratorCore();
 
         private IEnumerator<KeyValuePair<string, IEnumerable<string>>> GetEnumeratorCore()

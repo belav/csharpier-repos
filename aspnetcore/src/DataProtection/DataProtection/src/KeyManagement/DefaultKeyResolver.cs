@@ -87,7 +87,8 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
             where key.ActivationDate <= now + _maxServerToServerClockSkew
             orderby key.ActivationDate descending, key.KeyId ascending
             select key
-        ).FirstOrDefault();
+        )
+            .FirstOrDefault();
 
         if (preferredDefaultKey != null)
         {
@@ -146,10 +147,12 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
                 where key.CreationDate <= now - _keyPropagationWindow
                 orderby key.CreationDate descending
                 select key
-            ).Concat(from key in allKeys orderby key.CreationDate ascending select key)
+            )
+                .Concat(from key in allKeys orderby key.CreationDate ascending select key)
             where !key.IsRevoked && CanCreateAuthenticatedEncryptor(key)
             select key
-        ).FirstOrDefault();
+        )
+            .FirstOrDefault();
 
         _logger.RepositoryContainsNoViableDefaultKey();
 

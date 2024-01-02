@@ -239,9 +239,8 @@ namespace System.Runtime
                     // AggregateExceptions have a collection of inner exceptions, which may themselves be other
                     // wrapping exceptions (including nested AggregateExceptions).  Recursively walk this
                     // hierarchy.  The (singular) InnerException is included in the collection.
-                    ReadOnlyCollection<Exception> innerExceptions = (
-                        (AggregateException)exception
-                    ).InnerExceptions;
+                    ReadOnlyCollection<Exception> innerExceptions = ((AggregateException)exception)
+                        .InnerExceptions;
                     foreach (Exception innerException in innerExceptions)
                     {
                         if (IsFatal(innerException))

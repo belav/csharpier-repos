@@ -28,7 +28,8 @@ public abstract class ApiConsistencyTestBase
                 && !method.Name.StartsWith("set_", StringComparison.Ordinal)
                 && !method.Name.Equals("Dispose")
             select type.Name + "." + method.Name
-        ).ToList();
+        )
+            .ToList();
 
         Assert.False(
             nonVirtualMethods.Any(),
@@ -46,7 +47,8 @@ public abstract class ApiConsistencyTestBase
             where GetBasestTypeInAssembly(method.DeclaringType) == type
             where typeof(Task).IsAssignableFrom(method.ReturnType)
             select method
-        ).ToList();
+        )
+            .ToList();
 
         var missingSuffixMethods = asyncMethods
             .Where(method => !method.Name.EndsWith("Async", StringComparison.Ordinal))

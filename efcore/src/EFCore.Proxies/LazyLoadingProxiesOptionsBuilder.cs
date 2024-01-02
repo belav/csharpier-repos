@@ -50,12 +50,13 @@ public class LazyLoadingProxiesOptionsBuilder
         Func<ProxiesOptionsExtension, ProxiesOptionsExtension> setAction
     )
     {
-        ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder).AddOrUpdateExtension(
-            setAction(
-                OptionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
-                    ?? new ProxiesOptionsExtension()
-            )
-        );
+        ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder)
+            .AddOrUpdateExtension(
+                setAction(
+                    OptionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
+                        ?? new ProxiesOptionsExtension()
+                )
+            );
 
         return this;
     }

@@ -1685,9 +1685,8 @@ namespace System.Web.Services.Description
                     CodeExpression value = new CodeArrayIndexerExpression();
                     ((CodeArrayIndexerExpression)value).TargetObject =
                         new CodeVariableReferenceExpression(resultsName);
-                    ((CodeArrayIndexerExpression)value).Indices.Add(
-                        new CodePrimitiveExpression(count++)
-                    );
+                    ((CodeArrayIndexerExpression)value)
+                        .Indices.Add(new CodePrimitiveExpression(count++));
                     value = new CodeCastExpression(
                         WebCodeGenerator.FullTypeName(
                             parameter.mapping,
@@ -1702,9 +1701,8 @@ namespace System.Web.Services.Description
                         value = new CodeArrayIndexerExpression();
                         ((CodeArrayIndexerExpression)value).TargetObject =
                             new CodeVariableReferenceExpression(resultsName);
-                        ((CodeArrayIndexerExpression)value).Indices.Add(
-                            new CodePrimitiveExpression(count++)
-                        );
+                        ((CodeArrayIndexerExpression)value)
+                            .Indices.Add(new CodePrimitiveExpression(count++));
                         value = new CodeCastExpression(typeof(bool).FullName, value);
                         codeMethod.Statements.Add(new CodeAssignStatement(target, value));
                     }

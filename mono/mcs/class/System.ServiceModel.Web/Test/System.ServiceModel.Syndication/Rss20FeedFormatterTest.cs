@@ -296,24 +296,27 @@ namespace MonoTests.System.ServiceModel.Syndication
         public void ReadXml_TitleOnly()
         {
             Rss20FeedFormatter f = new Rss20FeedFormatter();
-            ((IXmlSerializable)f).ReadXml(
-                CreateReader("<rss version='2.0'><channel><title>test</title></channel></rss>")
-            );
+            ((IXmlSerializable)f)
+                .ReadXml(
+                    CreateReader("<rss version='2.0'><channel><title>test</title></channel></rss>")
+                );
             Assert.IsNotNull(f.Feed.Title, "#1");
             Assert.AreEqual("test", f.Feed.Title.Text, "#2");
 
-            ((IXmlSerializable)f).ReadXml(
-                CreateReader("<dummy version='2.0'><channel><title>test</title></channel></dummy>")
-            ); // it is ok
+            ((IXmlSerializable)f)
+                .ReadXml(
+                    CreateReader(
+                        "<dummy version='2.0'><channel><title>test</title></channel></dummy>"
+                    )
+                ); // it is ok
         }
 
         [Test]
         [ExpectedException(typeof(XmlException))]
         public void ReadXmlFromContent()
         {
-            ((IXmlSerializable)new Rss20FeedFormatter()).ReadXml(
-                CreateReader("<channel version='2.0'><title>test</title></channel>")
-            );
+            ((IXmlSerializable)new Rss20FeedFormatter())
+                .ReadXml(CreateReader("<channel version='2.0'><title>test</title></channel>"));
         }
 
         [Test]

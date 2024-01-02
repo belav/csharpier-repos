@@ -163,9 +163,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
 
             protected override void InvokeMethodOnTarget()
             {
-                ReturnValue = (target as GenInterfaceWithGenericTypesImpl).Find<T>(
-                    (string)GetArgumentValue(0)
-                );
+                ReturnValue = (target as GenInterfaceWithGenericTypesImpl)
+                    .Find<T>((string)GetArgumentValue(0));
             }
         }
 
@@ -203,9 +202,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
 
             protected override void InvokeMethodOnTarget()
             {
-                ReturnValue = (target as GenInterfaceWithGenericTypesImpl).Find(
-                    (string[,])GetArgumentValue(0)
-                );
+                ReturnValue = (target as GenInterfaceWithGenericTypesImpl)
+                    .Find((string[,])GetArgumentValue(0));
             }
         }
 
@@ -243,9 +241,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
 
             protected override void InvokeMethodOnTarget()
             {
-                ReturnValue = (target as GenInterfaceWithGenericTypesImpl).Find(
-                    (string)GetArgumentValue(0)
-                );
+                ReturnValue = (target as GenInterfaceWithGenericTypesImpl)
+                    .Find((string)GetArgumentValue(0));
             }
         }
 

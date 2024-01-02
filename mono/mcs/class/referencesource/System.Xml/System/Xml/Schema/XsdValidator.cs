@@ -1074,7 +1074,8 @@ namespace System.Xml.Schema
                         // else
                         ConstraintStruct[] constraints = (
                             (ValidationState)this.validationStack[level]
-                        ).Constr;
+                        )
+                            .Constr;
                         for (int j = 0; j < constraints.Length; ++j)
                         {
                             if (
@@ -1413,7 +1414,8 @@ namespace System.Xml.Schema
             // current level's constraint struct
             ConstraintStruct[] vcs = (
                 (ValidationState)(this.validationStack[this.validationStack.Length - 1])
-            ).Constr;
+            )
+                .Constr;
             if (vcs != null)
             {
                 // validating all referencing tables...

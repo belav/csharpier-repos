@@ -181,7 +181,8 @@ namespace System.Threading.Channels.Tests
             await Assert.ThrowsAsync<InvalidOperationException>(() => readTask.AsTask());
 
             // 5- close the channel while waiting reading
-            ((WrapperChannelReader<int>)reader).ForceThrowing = false;
+            ((WrapperChannelReader<int>)reader)
+                .ForceThrowing = false;
             Assert.Equal(200, await reader.ReadAsync());
             readTask = reader.ReadAsync();
             channel.Writer.TryComplete();

@@ -123,7 +123,8 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             // We need to Assert ASP.NET Low permission because Request.ServerVariables
             // requires it.
-            (new AspNetHostingPermission(AspNetHostingPermissionLevel.Low)).Assert();
+            (new AspNetHostingPermission(AspNetHostingPermissionLevel.Low))
+                .Assert();
 
             String protocol = Page.Request.ServerVariables["SERVER_PROTOCOL"];
             return (protocol == "HTTP/1.0");

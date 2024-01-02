@@ -159,8 +159,7 @@ public class EventSourceTest
 
             if (async)
             {
-                Assert.IsType<ArgumentOutOfRangeException>(
-                    (
+                Assert.IsType<ArgumentOutOfRangeException>((
                         await Assert.ThrowsAsync<RetryLimitExceededException>(
                             () =>
                                 executionStrategyMock.ExecuteAsync(() =>
@@ -174,8 +173,7 @@ public class EventSourceTest
                                     return Task.FromResult(1);
                                 })
                         )
-                    ).InnerException
-                );
+                    ).InnerException);
             }
             else
             {

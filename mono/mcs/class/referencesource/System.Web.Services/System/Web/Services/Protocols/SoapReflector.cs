@@ -399,9 +399,8 @@ namespace System.Web.Services.Protocols
                     if (soapMethod.paramStyle == SoapParameterStyle.Default)
                     {
                         if (serviceAttr is SoapDocumentServiceAttribute)
-                            soapMethod.paramStyle = (
-                                (SoapDocumentServiceAttribute)serviceAttr
-                            ).ParameterStyle;
+                            soapMethod.paramStyle = ((SoapDocumentServiceAttribute)serviceAttr)
+                                .ParameterStyle;
                         if (soapMethod.paramStyle == SoapParameterStyle.Default)
                             soapMethod.paramStyle = SoapParameterStyle.Wrapped;
                     }

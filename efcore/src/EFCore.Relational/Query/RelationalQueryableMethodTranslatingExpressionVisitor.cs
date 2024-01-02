@@ -208,7 +208,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 var groupShapedQueryExpression = groupByShaperExpression.GroupingEnumerable;
                 var groupClonedSelectExpression = (
                     (SelectExpression)groupShapedQueryExpression.QueryExpression
-                ).Clone();
+                )
+                    .Clone();
                 return new ShapedQueryExpression(
                     groupClonedSelectExpression,
                     new QueryExpressionReplacingExpressionVisitor(
@@ -220,7 +221,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             case ShapedQueryExpression shapedQueryExpression:
                 var clonedSelectExpression = (
                     (SelectExpression)shapedQueryExpression.QueryExpression
-                ).Clone();
+                )
+                    .Clone();
                 return new ShapedQueryExpression(
                     clonedSelectExpression,
                     new QueryExpressionReplacingExpressionVisitor(
@@ -691,10 +693,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         ShapedQueryExpression source2
     )
     {
-        ((SelectExpression)source1.QueryExpression).ApplyUnion(
-            (SelectExpression)source2.QueryExpression,
-            distinct: false
-        );
+        ((SelectExpression)source1.QueryExpression)
+            .ApplyUnion((SelectExpression)source2.QueryExpression, distinct: false);
 
         return source1.UpdateShaperExpression(
             MatchShaperNullabilityForSetOperation(
@@ -864,10 +864,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         ShapedQueryExpression source2
     )
     {
-        ((SelectExpression)source1.QueryExpression).ApplyExcept(
-            (SelectExpression)source2.QueryExpression,
-            distinct: true
-        );
+        ((SelectExpression)source1.QueryExpression)
+            .ApplyExcept((SelectExpression)source2.QueryExpression, distinct: true);
 
         // Since except has result from source1, we don't need to change shaper
         return source1;
@@ -1045,10 +1043,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         ShapedQueryExpression source2
     )
     {
-        ((SelectExpression)source1.QueryExpression).ApplyIntersect(
-            (SelectExpression)source2.QueryExpression,
-            distinct: true
-        );
+        ((SelectExpression)source1.QueryExpression)
+            .ApplyIntersect((SelectExpression)source2.QueryExpression, distinct: true);
 
         // For intersect since result comes from both sides, if one of them is non-nullable then both are non-nullable
         return source1.UpdateShaperExpression(
@@ -1326,9 +1322,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             return null;
         }
 
-        ((SelectExpression)source.QueryExpression).ApplyOrdering(
-            new OrderingExpression(translation, ascending)
-        );
+        ((SelectExpression)source.QueryExpression)
+            .ApplyOrdering(new OrderingExpression(translation, ascending));
 
         return source;
     }
@@ -1601,9 +1596,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             return null;
         }
 
-        ((SelectExpression)source.QueryExpression).AppendOrdering(
-            new OrderingExpression(translation, ascending)
-        );
+        ((SelectExpression)source.QueryExpression)
+            .AppendOrdering(new OrderingExpression(translation, ascending));
 
         return source;
     }
@@ -1614,10 +1608,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         ShapedQueryExpression source2
     )
     {
-        ((SelectExpression)source1.QueryExpression).ApplyUnion(
-            (SelectExpression)source2.QueryExpression,
-            distinct: true
-        );
+        ((SelectExpression)source1.QueryExpression)
+            .ApplyUnion((SelectExpression)source2.QueryExpression, distinct: true);
 
         return source1.UpdateShaperExpression(
             MatchShaperNullabilityForSetOperation(

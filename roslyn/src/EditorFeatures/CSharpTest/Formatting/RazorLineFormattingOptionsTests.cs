@@ -43,9 +43,8 @@ public class RazorLineFormattingOptionsTests
 
         using var workspace = new AdhocWorkspace(hostServices);
 
-        var globalOptions = (
-            (IMefHostExportProvider)hostServices
-        ).GetExportedValue<IGlobalOptionService>();
+        var globalOptions = ((IMefHostExportProvider)hostServices)
+            .GetExportedValue<IGlobalOptionService>();
         globalOptions.SetGlobalOption(RazorLineFormattingOptionsStorage.UseTabs, true);
         globalOptions.SetGlobalOption(RazorLineFormattingOptionsStorage.TabSize, 10);
 

@@ -93,7 +93,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedReferenceRoot)
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(
             RelationalStrings.JsonEntityOrCollectionProjectedAtRootLevelInTrackingQuery(
@@ -115,7 +116,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         ss => ss.Set<JsonEntityBasic>().Select(x => x.OwnedCollectionRoot)
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(
             RelationalStrings.JsonEntityOrCollectionProjectedAtRootLevelInTrackingQuery(
@@ -644,8 +646,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Left_join_json_entities_complex_projection(bool async) =>
         AssertQuery(
             async,
-            ss =>
-                (
+            ss => (
                     from e1 in ss.Set<JsonEntitySingleOwned>()
                     join e2 in ss.Set<JsonEntityBasic>() on e1.Id equals e2.Id into g
                     from e2 in g.DefaultIfEmpty()
@@ -694,8 +695,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Left_join_json_entities_complex_projection_json_being_inner(bool async) =>
         AssertQuery(
             async,
-            ss =>
-                (
+            ss => (
                     from e1 in ss.Set<JsonEntityBasic>()
                     join e2 in ss.Set<JsonEntitySingleOwned>() on e1.Id equals e2.Id into g
                     from e2 in g.DefaultIfEmpty()
@@ -3265,11 +3265,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
         AssertQuery(
             async,
             ss =>
-                ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>()).FromSqlRaw(
-                    Fixture.TestStore.NormalizeDelimitersInRawString(
-                        "SELECT * FROM [JsonEntitiesBasic] AS j"
-                    )
-                ),
+                ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>())
+                    .FromSqlRaw(
+                        Fixture.TestStore.NormalizeDelimitersInRawString(
+                            "SELECT * FROM [JsonEntitiesBasic] AS j"
+                        )
+                    ),
             ss => ss.Set<JsonEntityBasic>()
         );
 
@@ -3315,11 +3316,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
         AssertQuery(
             async,
             ss =>
-                ((DbSet<JsonEntityInheritanceBase>)ss.Set<JsonEntityInheritanceBase>()).FromSqlRaw(
-                    Fixture.TestStore.NormalizeDelimitersInRawString(
-                        "SELECT * FROM [JsonEntitiesInheritance] AS j"
-                    )
-                ),
+                ((DbSet<JsonEntityInheritanceBase>)ss.Set<JsonEntityInheritanceBase>())
+                    .FromSqlRaw(
+                        Fixture.TestStore.NormalizeDelimitersInRawString(
+                            "SELECT * FROM [JsonEntitiesInheritance] AS j"
+                        )
+                    ),
             ss => ss.Set<JsonEntityInheritanceBase>()
         );
 
@@ -3329,13 +3331,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
         AssertQuery(
             async,
             ss =>
-                (
-                    (DbSet<JsonEntityInheritanceDerived>)ss.Set<JsonEntityInheritanceDerived>()
-                ).FromSqlRaw(
-                    Fixture.TestStore.NormalizeDelimitersInRawString(
-                        "SELECT * FROM [JsonEntitiesInheritance] AS j"
-                    )
-                ),
+                ((DbSet<JsonEntityInheritanceDerived>)ss.Set<JsonEntityInheritanceDerived>())
+                    .FromSqlRaw(
+                        Fixture.TestStore.NormalizeDelimitersInRawString(
+                            "SELECT * FROM [JsonEntitiesInheritance] AS j"
+                        )
+                    ),
             ss => ss.Set<JsonEntityInheritanceDerived>()
         );
 

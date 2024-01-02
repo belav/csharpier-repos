@@ -121,9 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 BindingDiagnosticBag diagnostics
             )
             {
-                AnonymousTypeManager manager = (
-                    (AnonymousTypeTemplateSymbol)this.ContainingType
-                ).Manager;
+                AnonymousTypeManager manager = ((AnonymousTypeTemplateSymbol)this.ContainingType)
+                    .Manager;
                 SyntheticBoundNodeFactory F = this.CreateBoundNodeFactory(
                     compilationState,
                     diagnostics
@@ -210,9 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 BindingDiagnosticBag diagnostics
             )
             {
-                AnonymousTypeManager manager = (
-                    (AnonymousTypeTemplateSymbol)this.ContainingType
-                ).Manager;
+                AnonymousTypeManager manager = ((AnonymousTypeTemplateSymbol)this.ContainingType)
+                    .Manager;
                 SyntheticBoundNodeFactory F = this.CreateBoundNodeFactory(
                     compilationState,
                     diagnostics
@@ -292,9 +290,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 BindingDiagnosticBag diagnostics
             )
             {
-                AnonymousTypeManager manager = (
-                    (AnonymousTypeTemplateSymbol)this.ContainingType
-                ).Manager;
+                AnonymousTypeManager manager = ((AnonymousTypeTemplateSymbol)this.ContainingType)
+                    .Manager;
                 SyntheticBoundNodeFactory F = this.CreateBoundNodeFactory(
                     compilationState,
                     diagnostics

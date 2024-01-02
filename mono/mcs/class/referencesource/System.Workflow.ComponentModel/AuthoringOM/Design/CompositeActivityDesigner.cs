@@ -1715,10 +1715,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 using (PaintEventArgs paintEventArgs = new PaintEventArgs(e.Graphics, e.ViewPort))
                 {
-                    ((IWorkflowDesignerMessageSink)activityDesigner).OnPaint(
-                        paintEventArgs,
-                        e.ViewPort
-                    );
+                    ((IWorkflowDesignerMessageSink)activityDesigner)
+                        .OnPaint(paintEventArgs, e.ViewPort);
                 }
             }
         }

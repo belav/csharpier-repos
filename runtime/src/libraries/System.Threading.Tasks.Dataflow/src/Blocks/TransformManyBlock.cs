@@ -142,9 +142,8 @@ namespace System.Threading.Tasks.Dataflow
             if (dataflowBlockOptions.BoundedCapacity > 0)
             {
                 onItemsRemoved = static (owningSource, count) =>
-                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target.ChangeBoundingCount(
-                        -count
-                    );
+                    ((TransformManyBlock<TInput, TOutput>)owningSource)
+                        ._target.ChangeBoundingCount(-count);
             }
 
             // Initialize source component
@@ -152,10 +151,8 @@ namespace System.Threading.Tasks.Dataflow
                 this,
                 dataflowBlockOptions,
                 static owningSource =>
-                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target.Complete(
-                        exception: null,
-                        dropPendingMessages: true
-                    ),
+                    ((TransformManyBlock<TInput, TOutput>)owningSource)
+                        ._target.Complete(exception: null, dropPendingMessages: true),
                 onItemsRemoved
             );
 
@@ -225,10 +222,8 @@ namespace System.Threading.Tasks.Dataflow
                 dataflowBlockOptions.CancellationToken,
                 Completion,
                 static (state, _) =>
-                    ((TargetCore<TInput>)state!).Complete(
-                        exception: null,
-                        dropPendingMessages: true
-                    ),
+                    ((TargetCore<TInput>)state!)
+                        .Complete(exception: null, dropPendingMessages: true),
                 target
             );
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;

@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                     var returnType = (
                         _semanticModel.GetSymbolInfo(lambdaExpression).Symbol as IMethodSymbol
-                    )?.ReturnType;
+                    )
+                        ?.ReturnType;
                     if (returnType != null)
                     {
                         return TryCastTo(
@@ -172,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         {
                             var returnType = (
                                 _semanticModel.GetSymbolInfo(parentLambda).Symbol as IMethodSymbol
-                            )?.ReturnType;
+                            )
+                                ?.ReturnType;
                             if (returnType != null)
                             {
                                 if (
@@ -522,9 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     return node.CopyAnnotationsTo(
                             SyntaxFactory
                                 .QualifiedCref(
-                                    (
-                                        (QualifiedNameSyntax)rewrittenname
-                                    ).Left.WithAdditionalAnnotations(Simplifier.Annotation),
+                                    ((QualifiedNameSyntax)rewrittenname)
+                                        .Left.WithAdditionalAnnotations(Simplifier.Annotation),
                                     SyntaxFactory
                                         .NameMemberCref(
                                             ((QualifiedNameSyntax)rewrittenname).Right,
@@ -619,9 +620,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             && IsTypeOfUnboundGenericType(_semanticModel, typeOfExpression)
                         )
                         {
-                            aliasTarget = (
-                                (INamedTypeSymbol)aliasTarget
-                            ).ConstructUnboundGenericType();
+                            aliasTarget = ((INamedTypeSymbol)aliasTarget)
+                                .ConstructUnboundGenericType();
                         }
 
                         if (aliasTarget is INamedTypeSymbol typeSymbol && typeSymbol.IsTupleType)

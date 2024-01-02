@@ -30,7 +30,8 @@ public abstract class DesignTimeTestBase<TFixture> : IClassFixture<TFixture>
                         throwOnError: true
                     )
                 )!
-        ).ConfigureDesignTimeServices(serviceCollection);
+        )
+            .ConfigureDesignTimeServices(serviceCollection);
         using var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
         var reverseEngineerScaffolder = services
@@ -57,7 +58,8 @@ public abstract class DesignTimeTestBase<TFixture> : IClassFixture<TFixture>
                         throwOnError: true
                     )
                 )!
-        ).ConfigureDesignTimeServices(serviceCollection);
+        )
+            .ConfigureDesignTimeServices(serviceCollection);
         using var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
         var migrationsScaffolder = services

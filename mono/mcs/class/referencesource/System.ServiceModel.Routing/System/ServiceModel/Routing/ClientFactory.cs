@@ -273,10 +273,8 @@ namespace System.ServiceModel.Routing
                         using (this.PrepareTransactionalCall(this.transaction))
                         {
                             //This will use the binding's OpenTimeout.
-                            asyncResult = ((ICommunicationObject)this.parent).BeginOpen(
-                                this.PrepareAsyncCompletion(openComplete),
-                                this
-                            );
+                            asyncResult = ((ICommunicationObject)this.parent)
+                                .BeginOpen(this.PrepareAsyncCompletion(openComplete), this);
                         }
                         if (this.SyncContinue(asyncResult))
                         {

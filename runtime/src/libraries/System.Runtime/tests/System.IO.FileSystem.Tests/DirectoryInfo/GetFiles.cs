@@ -40,7 +40,8 @@ namespace System.IO.Tests
                     new DirectoryInfo(path)
                         .GetFiles("*", SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -51,16 +52,16 @@ namespace System.IO.Tests
                     new DirectoryInfo(path)
                         .GetFiles(searchPattern, SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
         public override string[] GetEntries(string path, string searchPattern, SearchOption option)
         {
             return (
-                (
-                    new DirectoryInfo(path).GetFiles(searchPattern, option).Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).GetFiles(searchPattern, option).Select(x => x.FullName))
+                    .ToArray()
             );
         }
     }

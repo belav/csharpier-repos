@@ -548,12 +548,13 @@ namespace System.Text.Unicode
                 if (value is IUtf8SpanFormattable)
                 {
                     if (
-                        ((IUtf8SpanFormattable)value).TryFormat(
-                            _destination.Slice(_pos),
-                            out int bytesWritten,
-                            format: default,
-                            _provider
-                        )
+                        ((IUtf8SpanFormattable)value)
+                            .TryFormat(
+                                _destination.Slice(_pos),
+                                out int bytesWritten,
+                                format: default,
+                                _provider
+                            )
                     )
                     {
                         _pos += bytesWritten;
@@ -608,12 +609,13 @@ namespace System.Text.Unicode
                 if (value is IUtf8SpanFormattable)
                 {
                     if (
-                        ((IUtf8SpanFormattable)value).TryFormat(
-                            _destination.Slice(_pos),
-                            out int bytesWritten,
-                            format,
-                            _provider
-                        )
+                        ((IUtf8SpanFormattable)value)
+                            .TryFormat(
+                                _destination.Slice(_pos),
+                                out int bytesWritten,
+                                format,
+                                _provider
+                            )
                     )
                     {
                         _pos += bytesWritten;
@@ -813,12 +815,8 @@ namespace System.Text.Unicode
                 Debug.Assert(value is ISpanFormattable);
 
                 Span<char> utf16 = stackalloc char[256];
-                return ((ISpanFormattable)value).TryFormat(
-                    utf16,
-                    out int charsWritten,
-                    format,
-                    _provider
-                )
+                return ((ISpanFormattable)value)
+                    .TryFormat(utf16, out int charsWritten, format, _provider)
                     ? AppendFormatted(utf16.Slice(0, charsWritten))
                     : GrowAndAppendFormatted(
                         ref this,
@@ -856,12 +854,8 @@ namespace System.Text.Unicode
                         try
                         {
                             if (
-                                ((ISpanFormattable)value).TryFormat(
-                                    array,
-                                    out charsWritten,
-                                    format,
-                                    thisRef._provider
-                                )
+                                ((ISpanFormattable)value)
+                                    .TryFormat(array, out charsWritten, format, thisRef._provider)
                             )
                             {
                                 return thisRef.AppendFormatted(array.AsSpan(0, charsWritten));

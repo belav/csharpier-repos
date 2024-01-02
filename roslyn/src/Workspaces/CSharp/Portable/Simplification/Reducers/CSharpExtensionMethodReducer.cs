@@ -98,12 +98,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             newMemberAccess = SyntaxFactory.MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
                                 expression,
-                                (
-                                    (MemberAccessExpressionSyntax)invocationExpressionNodeExpression
-                                ).OperatorToken,
-                                (
-                                    (MemberAccessExpressionSyntax)invocationExpressionNodeExpression
-                                ).Name
+                                ((MemberAccessExpressionSyntax)invocationExpressionNodeExpression)
+                                    .OperatorToken,
+                                ((MemberAccessExpressionSyntax)invocationExpressionNodeExpression)
+                                    .Name
                             );
                         }
                         else if (node.Expression.Kind() == SyntaxKind.IdentifierName)

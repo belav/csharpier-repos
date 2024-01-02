@@ -317,26 +317,29 @@ namespace MonoTests.System.ServiceModel.Syndication
         public void ReadXml_TitleOnly()
         {
             Atom10FeedFormatter f = new Atom10FeedFormatter();
-            ((IXmlSerializable)f).ReadXml(
-                CreateReader("<feed xmlns='http://www.w3.org/2005/Atom'><title>test</title></feed>")
-            );
+            ((IXmlSerializable)f)
+                .ReadXml(
+                    CreateReader(
+                        "<feed xmlns='http://www.w3.org/2005/Atom'><title>test</title></feed>"
+                    )
+                );
             Assert.IsNotNull(f.Feed.Title, "#1");
             Assert.AreEqual("test", f.Feed.Title.Text, "#2");
 
-            ((IXmlSerializable)f).ReadXml(
-                CreateReader(
-                    "<dummy  xmlns='http://www.w3.org/2005/Atom'><title>test</title></dummy>"
-                )
-            ); // it is ok
+            ((IXmlSerializable)f)
+                .ReadXml(
+                    CreateReader(
+                        "<dummy  xmlns='http://www.w3.org/2005/Atom'><title>test</title></dummy>"
+                    )
+                ); // it is ok
         }
 
         [Test]
         [ExpectedException(typeof(XmlException))]
         public void ReadXmlFromContent()
         {
-            ((IXmlSerializable)new Atom10FeedFormatter()).ReadXml(
-                CreateReader("<title xmlns='http://www.w3.org/2005/Atom'>test</title>")
-            );
+            ((IXmlSerializable)new Atom10FeedFormatter())
+                .ReadXml(CreateReader("<title xmlns='http://www.w3.org/2005/Atom'>test</title>"));
         }
 
         [Test]

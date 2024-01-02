@@ -43,9 +43,8 @@ public class RuntimeRelationalPropertyOverrides : AnnotatableBase, IRelationalPr
 
     /// <inheritdoc />
     public override string ToString() =>
-        ((IRelationalPropertyOverrides)this).ToDebugString(
-            MetadataDebugStringOptions.SingleLineDefault
-        );
+        ((IRelationalPropertyOverrides)this)
+            .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,9 +57,8 @@ public class RuntimeRelationalPropertyOverrides : AnnotatableBase, IRelationalPr
         new(
             () => ((IRelationalPropertyOverrides)this).ToDebugString(),
             () =>
-                ((IRelationalPropertyOverrides)this).ToDebugString(
-                    MetadataDebugStringOptions.LongDefault
-                )
+                ((IRelationalPropertyOverrides)this)
+                    .ToDebugString(MetadataDebugStringOptions.LongDefault)
         );
 
     /// <inheritdoc />

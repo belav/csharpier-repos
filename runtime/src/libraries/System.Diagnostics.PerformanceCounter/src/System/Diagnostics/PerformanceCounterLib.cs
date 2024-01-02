@@ -575,9 +575,8 @@ namespace System.Diagnostics
                 for (int i = 0; i < creationData.Count; i++)
                 {
                     counters[i] = creationData[i].CounterName;
-                    counterTypes[i] = ((int)creationData[i].CounterType).ToString(
-                        CultureInfo.InvariantCulture
-                    );
+                    counterTypes[i] = ((int)creationData[i].CounterType)
+                        .ToString(CultureInfo.InvariantCulture);
                 }
 
                 string categoryLinkageKeyName = $"{categoryName}\\Linkage";
@@ -772,10 +771,11 @@ namespace System.Diagnostics
                                     PerformanceCounterLib.PerfShimName,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                                || ((string)systemDllName).EndsWith(
-                                    PerformanceCounterLib.PerfShimFullNameSuffix,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                || ((string)systemDllName)
+                                    .EndsWith(
+                                        PerformanceCounterLib.PerfShimFullNameSuffix,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                         )
                         {

@@ -2196,10 +2196,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
                 () =>
-                    ((OrderedParallelQuery<int>)null).ThenByDescending(
-                        x => x,
-                        Comparer<int>.Default
-                    )
+                    ((OrderedParallelQuery<int>)null)
+                        .ThenByDescending(x => x, Comparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "keySelector",

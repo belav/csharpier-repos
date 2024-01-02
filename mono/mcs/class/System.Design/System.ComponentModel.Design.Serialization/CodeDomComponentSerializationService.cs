@@ -242,12 +242,8 @@ namespace System.ComponentModel.Design.Serialization
                     bool addToContainer
                 )
                 {
-                    object instance = ((IDesignerSerializationManager)_manager).CreateInstance(
-                        type,
-                        arguments,
-                        name,
-                        addToContainer
-                    );
+                    object instance = ((IDesignerSerializationManager)_manager)
+                        .CreateInstance(type, arguments, name, addToContainer);
                     string newName = ((IDesignerSerializationManager)_manager).GetName(instance);
                     if (newName != name)
                     {
@@ -261,9 +257,8 @@ namespace System.ComponentModel.Design.Serialization
                 object IDesignerSerializationManager.GetInstance(string name)
                 {
                     if (_nameMap != null && _nameMap.ContainsKey(name))
-                        return ((IDesignerSerializationManager)_manager).GetInstance(
-                            _nameMap[name]
-                        );
+                        return ((IDesignerSerializationManager)_manager)
+                            .GetInstance(_nameMap[name]);
                     return ((IDesignerSerializationManager)_manager).GetInstance(name);
                 }
 
@@ -274,10 +269,8 @@ namespace System.ComponentModel.Design.Serialization
 
                 object IDesignerSerializationManager.GetSerializer(Type type, Type serializerType)
                 {
-                    return ((IDesignerSerializationManager)_manager).GetSerializer(
-                        type,
-                        serializerType
-                    );
+                    return ((IDesignerSerializationManager)_manager)
+                        .GetSerializer(type, serializerType);
                 }
 
                 string IDesignerSerializationManager.GetName(object instance)
@@ -382,19 +375,16 @@ namespace System.ComponentModel.Design.Serialization
                 //
                 InstanceRedirectorDesignerSerializationManager manager =
                     new InstanceRedirectorDesignerSerializationManager(provider, null, false);
-                ((IDesignerSerializationManager)manager).AddSerializationProvider(
-                    CodeDomSerializationProvider.Instance
-                );
+                ((IDesignerSerializationManager)manager)
+                    .AddSerializationProvider(CodeDomSerializationProvider.Instance);
                 IDisposable session = manager.CreateSession();
                 foreach (ObjectEntry objectEntry in _objects.Values)
                 {
                     if (objectEntry.IsEntireObject)
                     {
                         CodeDomSerializer serializer = (CodeDomSerializer)
-                            ((IDesignerSerializationManager)manager).GetSerializer(
-                                objectEntry.Type,
-                                typeof(CodeDomSerializer)
-                            );
+                            ((IDesignerSerializationManager)manager)
+                                .GetSerializer(objectEntry.Type, typeof(CodeDomSerializer));
                         if (serializer != null)
                         {
                             object serialized = null;
@@ -413,10 +403,8 @@ namespace System.ComponentModel.Design.Serialization
                         foreach (MemberEntry memberEntry in objectEntry.Members.Values)
                         {
                             CodeDomSerializer serializer = (CodeDomSerializer)
-                                ((IDesignerSerializationManager)manager).GetSerializer(
-                                    objectEntry.Type,
-                                    typeof(CodeDomSerializer)
-                                );
+                                ((IDesignerSerializationManager)manager)
+                                    .GetSerializer(objectEntry.Type, typeof(CodeDomSerializer));
                             if (serializer != null)
                             {
                                 object serialized = null;
@@ -531,9 +519,8 @@ namespace System.ComponentModel.Design.Serialization
                         container,
                         validateRecycledTypes
                     );
-                ((IDesignerSerializationManager)manager).AddSerializationProvider(
-                    CodeDomSerializationProvider.Instance
-                );
+                ((IDesignerSerializationManager)manager)
+                    .AddSerializationProvider(CodeDomSerializationProvider.Instance);
                 IDisposable session = manager.CreateSession();
                 foreach (ObjectEntry entry in _objects.Values)
                     objectInstances.Add(DeserializeEntry(manager, entry));

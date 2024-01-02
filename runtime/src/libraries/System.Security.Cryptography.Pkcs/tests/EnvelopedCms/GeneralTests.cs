@@ -64,7 +64,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
                 + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
                 + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyVersion0(encodedMessage);
         }
@@ -117,7 +118,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "006f007200690074007902100ae59b0cb8119f8942eda74163413a0204285aadd33713104d128c5e1d70d9281f7c0df6fa42"
                 + "64fd9fa77fcde800aaf8ea33d533b8572a1b9c4a302b06092a864886f70d010701301406082a864886f70d03070408fc6d30"
                 + "2f218ea61f8008de1137262232ceae"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyRecipients3(encodedMessage);
         }
@@ -194,7 +196,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
                 + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
                 + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
                 + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             Oid contentType = ContentInfo.GetContentType(encodedMessage);
             Assert.Equal(Oids.Pkcs7Enveloped, contentType.Value);
@@ -221,7 +224,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
                 + "eb64c3e093a628b257c0cfc183ecf11697ac84f2af882b8de0c793572af38dc15d1b6f3d8f2392ba1cc71210e177c146fd16"
                 + "b77a583b6411e801d7a2640d612f2fe99d87e9718e0e505a7ab9536d71dbde329da21816ce7da1416a74a3e0a112b86b33af"
                 + "336a2ba6ae2443d0ab"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             Oid contentType = ContentInfo.GetContentType(encodedMessage);
             Assert.Equal(Oids.Pkcs7Signed, contentType.Value);
@@ -245,7 +249,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
                 + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
                 + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
                 + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms cms = new EnvelopedCms();
 
@@ -444,7 +449,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
                 + "9E65281A8B63DFBCFB7180E6B54C6E38BECAF09624C6B6D2B3058F280FE8F0BF8EBA3"
                 + "57AECC1B9B177E98671A9659B034501AE3D58789302B06092A864886F70D010701301"
                 + "406082A864886F70D0307040810B222648FDC0DE38008036BB59C8B6A784B"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 

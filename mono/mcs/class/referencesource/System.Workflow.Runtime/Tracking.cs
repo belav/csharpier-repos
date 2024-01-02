@@ -493,7 +493,8 @@ namespace System.Workflow.Runtime
                     ContextActivityUtils
                         .ContextActivity(activity)
                         .GetValue(Activity.ActivityExecutionContextInfoProperty)
-            ).ContextGuid;
+            )
+                .ContextGuid;
         }
 
         private TrackingListener GetListener(

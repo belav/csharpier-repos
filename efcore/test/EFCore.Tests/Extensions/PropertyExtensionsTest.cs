@@ -207,7 +207,8 @@ public class PropertyExtensionsTest
                         .GetForeignKeys()
                         .Single()
                         .Properties[0]
-            ).FindGenerationProperty()
+            )
+                .FindGenerationProperty()
         );
 
         Assert.Equal(
@@ -219,7 +220,8 @@ public class PropertyExtensionsTest
                         .GetForeignKeys()
                         .Single()
                         .Properties[0]
-            ).FindGenerationProperty()
+            )
+                .FindGenerationProperty()
         );
 
         Assert.Equal(
@@ -231,7 +233,8 @@ public class PropertyExtensionsTest
                         .GetForeignKeys()
                         .Single()
                         .Properties[1]
-            ).FindGenerationProperty()
+            )
+                .FindGenerationProperty()
         );
 
         Assert.Equal(
@@ -243,7 +246,8 @@ public class PropertyExtensionsTest
                         .GetForeignKeys()
                         .Single()
                         .Properties[0]
-            ).FindGenerationProperty()
+            )
+                .FindGenerationProperty()
         );
     }
 
@@ -261,7 +265,8 @@ public class PropertyExtensionsTest
                         .GetForeignKeys()
                         .Single(k => k.Properties.First().Name == "OrderId")
                         .Properties[0]
-            ).FindGenerationProperty()
+            )
+                .FindGenerationProperty()
         );
 
         Assert.Equal(
@@ -273,7 +278,8 @@ public class PropertyExtensionsTest
                         .GetForeignKeys()
                         .Single(k => k.Properties.First().Name == "ProductId")
                         .Properties[0]
-            ).FindGenerationProperty()
+            )
+                .FindGenerationProperty()
         );
     }
 

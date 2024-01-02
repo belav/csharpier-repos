@@ -418,8 +418,7 @@ namespace System.Collections.Concurrent.Tests
         public void Concurrent_Clear_NoExceptions(int threadsCount, int itemsPerThread)
         {
             var q = new ConcurrentQueue<int>();
-            Task.WaitAll(
-                (
+            Task.WaitAll((
                     from i in Enumerable.Range(0, threadsCount)
                     select Task.Run(() =>
                     {
@@ -454,8 +453,7 @@ namespace System.Collections.Concurrent.Tests
                             }
                         }
                     })
-                ).ToArray()
-            );
+                ).ToArray());
         }
 
         /// <summary>Sets an event when finalized.</summary>

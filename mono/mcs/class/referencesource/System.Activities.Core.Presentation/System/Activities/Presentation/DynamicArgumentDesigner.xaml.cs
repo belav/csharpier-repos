@@ -641,9 +641,8 @@ namespace System.Activities.Presentation
                             )
                         )
                         {
-                            entry.Expression = (
-                                this.OwnerActivity as IModelTreeItem
-                            ).ModelTreeManager.WrapAsModelItem(newExpression);
+                            entry.Expression = (this.OwnerActivity as IModelTreeItem)
+                                .ModelTreeManager.WrapAsModelItem(newExpression);
                         }
                         else
                         {

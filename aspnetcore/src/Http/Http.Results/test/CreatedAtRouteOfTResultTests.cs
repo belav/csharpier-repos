@@ -151,7 +151,8 @@ public partial class CreatedAtRouteOfTResultTests
                 PopulateMetadata<CreatedAtRoute<object>>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

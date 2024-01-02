@@ -656,10 +656,8 @@ namespace System.Xml.Xsl.XsltOld
                             {
                                 Write("%");
                                 Write(
-                                    ((uint)_byteBuffer![j]).ToString(
-                                        "X2",
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    ((uint)_byteBuffer![j])
+                                        .ToString("X2", CultureInfo.InvariantCulture)
                                 );
                             }
                         }

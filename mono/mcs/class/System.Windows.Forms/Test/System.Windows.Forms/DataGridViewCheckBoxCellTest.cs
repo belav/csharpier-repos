@@ -819,11 +819,12 @@ namespace MonoTests.System.Windows.Forms
 
             Assert.AreEqual(
                 Rectangle.Empty,
-                (dgv.Rows[0].Cells[0] as BaseCell).PublicGetErrorIconBounds(
-                    g,
-                    dgv.Rows[0].Cells[0].InheritedStyle,
-                    dgv.Rows[0].Cells[0].RowIndex
-                ),
+                (dgv.Rows[0].Cells[0] as BaseCell)
+                    .PublicGetErrorIconBounds(
+                        g,
+                        dgv.Rows[0].Cells[0].InheritedStyle,
+                        dgv.Rows[0].Cells[0].RowIndex
+                    ),
                 "A2"
             );
             g.Dispose();
@@ -848,9 +849,8 @@ namespace MonoTests.System.Windows.Forms
 
             Assert.AreEqual(
                 string.Empty,
-                (dgv.Rows[0].Cells[0] as BaseCell).PublicGetErrorText(
-                    dgv.Rows[0].Cells[0].RowIndex
-                ),
+                (dgv.Rows[0].Cells[0] as BaseCell)
+                    .PublicGetErrorText(dgv.Rows[0].Cells[0].RowIndex),
                 "A2"
             );
             g.Dispose();

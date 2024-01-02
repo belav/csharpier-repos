@@ -306,9 +306,10 @@ namespace System.Data.Mapping
             //From this again filter the ones that have the specified EntitySet on atleast one end
             associationSetMappings = associationSetMappings.Where(associationSetMap =>
                 (
-                    (associationSetMap.Set as AssociationSet).AssociationSetEnds.Any(
-                        associationSetEnd => associationSetEnd.EntitySet == edmEntitySet
-                    )
+                    (associationSetMap.Set as AssociationSet)
+                        .AssociationSetEnds.Any(associationSetEnd =>
+                            associationSetEnd.EntitySet == edmEntitySet
+                        )
                 )
             );
             return associationSetMappings;

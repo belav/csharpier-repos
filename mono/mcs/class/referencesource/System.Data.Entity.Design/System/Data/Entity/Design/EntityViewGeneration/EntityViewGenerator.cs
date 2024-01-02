@@ -317,9 +317,8 @@ namespace System.Data.Entity.Design
                     {
                         if (functionImport.IsComposableAttribute)
                         {
-                            (
-                                (FunctionImportMappingComposable)functionImportMapping
-                            ).ValidateFunctionView(schemaErrors);
+                            ((FunctionImportMappingComposable)functionImportMapping)
+                                .ValidateFunctionView(schemaErrors);
                         }
                     }
                     else

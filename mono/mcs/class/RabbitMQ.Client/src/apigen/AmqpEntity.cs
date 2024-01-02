@@ -117,7 +117,8 @@ namespace RabbitMQ.Client.Apigen
                     + "\n</"
                     + tagname
                     + ">"
-                ).Replace("\n", "\n" + prefixSpaces + "/// ");
+                )
+                    .Replace("\n", "\n" + prefixSpaces + "/// ");
             }
             else
             {

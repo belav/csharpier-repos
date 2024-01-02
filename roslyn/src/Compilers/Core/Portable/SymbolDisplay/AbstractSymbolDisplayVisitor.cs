@@ -225,9 +225,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                         if (
                             containingSymbol.Kind == SymbolKind.Namespace
                             && containingSymbol.Name == "System"
-                            && (
-                                (INamespaceSymbol)containingSymbol.ContainingSymbol
-                            ).IsGlobalNamespace
+                            && ((INamespaceSymbol)containingSymbol.ContainingSymbol)
+                                .IsGlobalNamespace
                         )
                         {
                             return true;
@@ -324,9 +323,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                         AddSpace();
                     }
 
-                    ((IFieldSymbol)usedFieldsAndValues[i].IdentityOpt!).Accept(
-                        this.NotFirstVisitor
-                    );
+                    ((IFieldSymbol)usedFieldsAndValues[i].IdentityOpt!)
+                        .Accept(this.NotFirstVisitor);
                 }
             }
             else

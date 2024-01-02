@@ -61,9 +61,8 @@ public class StoredProcedureParameterMapping : ColumnMappingBase, IStoredProcedu
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public override string ToString() =>
-        ((IStoredProcedureParameterMapping)this).ToDebugString(
-            MetadataDebugStringOptions.SingleLineDefault
-        );
+        ((IStoredProcedureParameterMapping)this)
+            .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -75,9 +74,8 @@ public class StoredProcedureParameterMapping : ColumnMappingBase, IStoredProcedu
         new(
             () => ((IStoredProcedureParameterMapping)this).ToDebugString(),
             () =>
-                ((IStoredProcedureParameterMapping)this).ToDebugString(
-                    MetadataDebugStringOptions.LongDefault
-                )
+                ((IStoredProcedureParameterMapping)this)
+                    .ToDebugString(MetadataDebugStringOptions.LongDefault)
         );
 
     /// <inheritdoc />

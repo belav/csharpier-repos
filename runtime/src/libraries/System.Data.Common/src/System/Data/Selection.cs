@@ -413,9 +413,8 @@ namespace System.Data
             // if they're two records in the same row, we need to be able to distinguish them.
             if ((diff == 0) && (record1 != record2))
             {
-                diff = ((int)row1.GetRecordState(record1)).CompareTo(
-                    (int)row2.GetRecordState(record2)
-                );
+                diff = ((int)row1.GetRecordState(record1))
+                    .CompareTo((int)row2.GetRecordState(record2));
             }
             return diff;
         }

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             Assert.Single(actions);
             var nestedActionForOptionIndex = (
                 (AbstractConfigurationActionWithNestedActions)actions[0]
-            ).NestedCodeActions[OptionIndex];
+            )
+                .NestedCodeActions[OptionIndex];
             return base.MassageActions(ImmutableArray.Create(nestedActionForOptionIndex));
         }
 

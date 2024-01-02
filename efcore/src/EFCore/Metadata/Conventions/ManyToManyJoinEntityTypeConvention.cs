@@ -64,9 +64,8 @@ public class ManyToManyJoinEntityTypeConvention
             && navigation.ForeignKey?.DeclaringEntityType != joinEntityType
         )
         {
-            ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity(
-                (EntityType)joinEntityType
-            );
+            ((InternalModelBuilder)joinEntityType.Model.Builder)
+                .RemoveImplicitJoinEntity((EntityType)joinEntityType);
         }
     }
 
@@ -80,9 +79,8 @@ public class ManyToManyJoinEntityTypeConvention
         var joinEntityType = navigation.ForeignKey?.DeclaringEntityType;
         if (joinEntityType is not null && joinEntityType.IsInModel && navigation.IsCollection)
         {
-            ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity(
-                (EntityType)joinEntityType
-            );
+            ((InternalModelBuilder)joinEntityType.Model.Builder)
+                .RemoveImplicitJoinEntity((EntityType)joinEntityType);
         }
     }
 

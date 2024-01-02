@@ -223,7 +223,8 @@ namespace System.Data.Objects.ELinq
                         _funcletizer.RootContext.MetadataWorkspace.GetItemCollection(
                             DataSpace.SSpace
                         )
-                ).StoreProviderManifest;
+                )
+                    .StoreProviderManifest;
             }
         }
 
@@ -543,10 +544,8 @@ namespace System.Data.Objects.ELinq
             // For identity projection only, the Span is preserved
             if (
                 projection.ExpressionKind == DbExpressionKind.VariableReference
-                && ((DbVariableReferenceExpression)projection).VariableName.Equals(
-                    input.VariableName,
-                    StringComparison.Ordinal
-                )
+                && ((DbVariableReferenceExpression)projection)
+                    .VariableName.Equals(input.VariableName, StringComparison.Ordinal)
             )
             {
                 ApplySpanMapping(input.Expression, retExpr);
@@ -1181,9 +1180,8 @@ namespace System.Data.Objects.ELinq
                 // since LINQ expressions cannot indicate model types directly, we must
                 // consider types equivalent if they match on the given CLR equivalent
                 // types (consider the Xml and String primitive types)
-                return ((PrimitiveType)left.EdmType).ClrEquivalentType.Equals(
-                    ((PrimitiveType)right.EdmType).ClrEquivalentType
-                );
+                return ((PrimitiveType)left.EdmType)
+                    .ClrEquivalentType.Equals(((PrimitiveType)right.EdmType).ClrEquivalentType);
             }
 
             return false;

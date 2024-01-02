@@ -63,12 +63,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
                     // we could see the first ItemsUpdated event even though items don't change (but computation finished).
                     // If test attempts to assert state after seeing first event it would cause flakiness.
                     // Use SelectedItemProvider to wait for all pending work to be completed.
-                    var item = await (
-                        (ISelectedItemProvider)e.CompletionSession
-                    ).GetSelectedItemAsync(
-                        GetSelectedItemOptions.WaitForContextAndComputation,
-                        cancellationSource.Token
-                    );
+                    var item = await ((ISelectedItemProvider)e.CompletionSession)
+                        .GetSelectedItemAsync(
+                            GetSelectedItemOptions.WaitForContextAndComputation,
+                            cancellationSource.Token
+                        );
                     ReleaseToken();
                 },
                 cancellationSource.Token

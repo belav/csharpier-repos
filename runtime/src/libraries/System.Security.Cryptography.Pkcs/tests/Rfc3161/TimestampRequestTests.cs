@@ -235,7 +235,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "7387D504A5BF62427176AD06022A03020501234567890101FFA016300A06042A0304050402050"
                 + "030080602010204020400"
                 + PaddingHex
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             var dataRange = new ReadOnlyMemory<byte>(
                 inputBytes,

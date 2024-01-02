@@ -89,7 +89,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     "3bde39974a884c4ecbc7296063a2a96edc778435b7b277b594a0712dcc0ddcd00b2970473b2f1359c98535dbae41fe2fb9e7"
                     + "42f77e1849c9746fd05c58d2e3f06c7290d96bbe53882391d76a73fd5f0650f1e46d5a81c83e617f05203f9ad6416957d06e"
                     + "49fe98a3d97359a3b7c1b80593b75265daa1a670aabf287d31a2f441"
-                ).HexToByteArray();
+                )
+                    .HexToByteArray();
 
                 bool verified = rsa.VerifyHash(
                     hash,
@@ -111,7 +112,8 @@ namespace System.Security.Cryptography.Cng.Tests
                 + "671575032E31F206DCFC192C65E2D51089E5112D096F2882AFDB5B78CDB6572F"
                 + "D2F61DB390472232E3D9F5FADBD7F8A18B3A75A4F6DFAEE3426FD0FF8BAC74B6"
                 + "722DEFDF48144A6D88A780144FCEA66BDCDA50D6071C54E5D0DA5B"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             RSAParameters expected = System
                 .Security
@@ -157,7 +159,8 @@ namespace System.Security.Cryptography.Cng.Tests
                 + "784C4791ADA585ADB711D9300A3D52B450CC307F55D31E1217B9FFD7450D65C6"
                 + "0DE8B6F54A7756FD1CCBA76CE41EF446D024031EE9C5A40931B07336CFED35A8"
                 + "EE580E19DB8592CB0F266EC69028EB9E98E3E84FF1A459A8A26860A610F5"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             RSAParameters expected = System
                 .Security

@@ -373,7 +373,8 @@ namespace Novell.Directory.Ldap
                         }
                     }
                     // Throw an exception if not success
-                    ((LdapResponse)element).chkResultCode();
+                    ((LdapResponse)element)
+                        .chkResultCode();
                 }
                 else if (element is LdapException)
                 {

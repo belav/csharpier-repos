@@ -562,7 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         case SyntaxKind.ParenthesizedExpression:
                             expressionOfInvocation = (
                                 (ParenthesizedExpressionSyntax)expressionOfInvocation
-                            ).Expression;
+                            )
+                                .Expression;
                             continue;
                     }
 
@@ -1245,7 +1246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         foreach (
                             var typeParameter in (
                                 (TypeParameterListSyntax)currentTypeParameter.Parent!
-                            ).Parameters
+                            )
+                                .Parameters
                         )
                         {
                             if (
@@ -1417,9 +1419,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         {
                             case SyntaxKind.ForEachKeyword:
                                 return ImmutableArray.Create(
-                                    (
-                                        (CommonForEachStatementSyntax)token.Parent!
-                                    ).Expression.GetLocation()
+                                    ((CommonForEachStatementSyntax)token.Parent!)
+                                        .Expression.GetLocation()
                                 );
                             case SyntaxKind.AwaitKeyword:
                                 return ImmutableArray.Create(token.GetLocation());

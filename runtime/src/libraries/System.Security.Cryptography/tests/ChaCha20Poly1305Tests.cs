@@ -135,7 +135,8 @@ namespace System.Security.Cryptography.Tests
                 + "00144604b38e9645fb2d5f5893fc78871bd8f5fc91caaa013eac5f80397fd65c"
                 + "358c239f013f3c75da17ddbd14de01eb67f5204dfa787986fb27a098fe21b2c5"
                 + "07"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             byte[] expectedTag2 = "9877f87f29f68b5f9efb071c1351ccf6".HexToByteArray();
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
@@ -446,7 +447,8 @@ namespace System.Security.Cryptography.Tests
                     + "746865206675747572652c2073756e73"
                     + "637265656e20776f756c642062652069"
                     + "742e"
-                ).HexToByteArray(),
+                )
+                    .HexToByteArray(),
                 AssociatedData = "50515253c0c1c2c3c4c5c6c7".HexToByteArray(),
                 Ciphertext = (
                     "d31a8d34648e60db7b86afbc53ef7ec2"
@@ -457,7 +459,8 @@ namespace System.Security.Cryptography.Tests
                     + "fab324e4fad675945585808b4831d7bc"
                     + "3ff4def08e4b7a9de576d26586cec64b"
                     + "6116"
-                ).HexToByteArray(),
+                )
+                    .HexToByteArray(),
                 Tag = "1ae10b594f09e26a7e902ecbd0600691".HexToByteArray()
             },
             new AEADTest
@@ -485,7 +488,8 @@ namespace System.Security.Cryptography.Tests
                     + "6d206f74686572207468616e20617320"
                     + "2fe2809c776f726b20696e2070726f67"
                     + "726573732e2fe2809d"
-                ).HexToByteArray(),
+                )
+                    .HexToByteArray(),
                 AssociatedData = "f33388860000000000004e91".HexToByteArray(),
                 Ciphertext = (
                     "64a0861575861af460f062c79be643bd"
@@ -505,7 +509,8 @@ namespace System.Security.Cryptography.Tests
                     + "49e617d91d361094fa68f0ff77987130"
                     + "305beaba2eda04df997b714d6c6f2c29"
                     + "a6ad5cb4022b02709b"
-                ).HexToByteArray(),
+                )
+                    .HexToByteArray(),
                 Tag = "eead9d67890cbb22392336fea1851f38".HexToByteArray()
             }
         };

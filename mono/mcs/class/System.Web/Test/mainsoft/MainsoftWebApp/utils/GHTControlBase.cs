@@ -838,9 +838,8 @@ namespace GHTTests
             {
                 Label l_lDescriptionData = (Label)sender;
                 RepeaterItem l_riContainer = (RepeaterItem)l_lDescriptionData.NamingContainer;
-                l_lDescriptionData.Text = (
-                    DataBinder.Eval(l_riContainer.DataItem, "Description")
-                ).ToString();
+                l_lDescriptionData.Text = (DataBinder.Eval(l_riContainer.DataItem, "Description"))
+                    .ToString();
             }
         }
 
@@ -905,9 +904,8 @@ namespace GHTTests
             {
                 Label l_lDescriptionData = (Label)sender;
                 DataListItem l_dliContainer = (DataListItem)l_lDescriptionData.NamingContainer;
-                l_lDescriptionData.Text = (
-                    DataBinder.Eval(l_dliContainer.DataItem, "Description")
-                ).ToString();
+                l_lDescriptionData.Text = (DataBinder.Eval(l_dliContainer.DataItem, "Description"))
+                    .ToString();
             }
         }
     }

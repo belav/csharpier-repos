@@ -1172,9 +1172,8 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public IList<XPathItem> EndSequenceConstruction(out XmlQueryOutput output)
         {
-            IList<XPathItem> seq = (
-                (XmlCachedSequenceWriter)this.output.SequenceWriter
-            ).ResultSequence;
+            IList<XPathItem> seq = ((XmlCachedSequenceWriter)this.output.SequenceWriter)
+                .ResultSequence;
 
             // Restore previous XmlQueryOutput
             output = this.output = this.stkOutput.Pop();

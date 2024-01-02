@@ -182,9 +182,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(
                 2,
-                (
-                    await project.GetRequiredCompilationAsync(CancellationToken.None)
-                ).SyntaxTrees.Count()
+                (await project.GetRequiredCompilationAsync(CancellationToken.None))
+                    .SyntaxTrees.Count()
             );
 
             // And go back to one
@@ -219,9 +218,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(
                 2,
-                (
-                    await project.GetRequiredCompilationAsync(CancellationToken.None)
-                ).SyntaxTrees.Count()
+                (await project.GetRequiredCompilationAsync(CancellationToken.None))
+                    .SyntaxTrees.Count()
             );
 
             var generatedDocuments = (await project.GetSourceGeneratedDocumentsAsync()).ToList();

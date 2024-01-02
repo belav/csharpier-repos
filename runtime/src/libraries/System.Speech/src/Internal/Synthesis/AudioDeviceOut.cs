@@ -212,9 +212,8 @@ namespace System.Speech.Internal.Synthesis
                         {
                             System.Diagnostics.Debug.Assert(
                                 false,
-                                ((int)result).ToString(
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                )
+                                ((int)result)
+                                    .ToString(System.Globalization.CultureInfo.InvariantCulture)
                             );
                         }
                     }

@@ -561,7 +561,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         )
                             ((IChartMapArea)_common.ChartPicture.MapAreas[i]).Tag = (
                                 (IChartMapArea)point
-                            ).Tag;
+                            )
+                                .Tag;
                     }
                 }
             }
@@ -656,7 +657,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         )
                             ((IChartMapArea)_common.ChartPicture.MapAreas[i]).Tag = (
                                 (IChartMapArea)point
-                            ).Tag;
+                            )
+                                .Tag;
                     }
                 }
             }

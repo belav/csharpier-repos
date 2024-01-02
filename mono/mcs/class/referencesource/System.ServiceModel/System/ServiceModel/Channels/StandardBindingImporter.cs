@@ -42,7 +42,8 @@ namespace System.ServiceModel.Channels
             {
                 BindingElementCollection elements = (
                     (CustomBinding)endpointContext.Endpoint.Binding
-                ).Elements;
+                )
+                    .Elements;
 
                 Binding binding;
                 TransportBindingElement transport = elements.Find<TransportBindingElement>();

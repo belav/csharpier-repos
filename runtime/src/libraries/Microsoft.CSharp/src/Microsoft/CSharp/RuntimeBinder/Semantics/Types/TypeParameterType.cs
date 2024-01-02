@@ -61,9 +61,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             get =>
                 (
                     IsMethodTypeParameter
-                        ? (
-                            (MethodInfo)((MethodSymbol)OwningSymbol).AssociatedMemberInfo
-                        ).GetGenericArguments()
+                        ? ((MethodInfo)((MethodSymbol)OwningSymbol).AssociatedMemberInfo)
+                            .GetGenericArguments()
                         : ((AggregateSymbol)OwningSymbol).AssociatedSystemType.GetGenericArguments()
                 )[IndexInOwnParameters];
         }

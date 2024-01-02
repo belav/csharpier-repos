@@ -1447,19 +1447,13 @@ public class Cls
             );
             Assert.Equal(
                 conversion,
-                ((CSharpSemanticModel)model).ClassifyConversion(
-                    decl,
-                    model.Compilation.ObjectType,
-                    false
-                )
+                ((CSharpSemanticModel)model)
+                    .ClassifyConversion(decl, model.Compilation.ObjectType, false)
             );
             Assert.Equal(
                 conversion,
-                ((CSharpSemanticModel)model).ClassifyConversion(
-                    decl,
-                    model.Compilation.ObjectType,
-                    true
-                )
+                ((CSharpSemanticModel)model)
+                    .ClassifyConversion(decl, model.Compilation.ObjectType, true)
             );
             Assert.Equal(
                 conversion,
@@ -1471,21 +1465,13 @@ public class Cls
             );
             Assert.Equal(
                 conversion,
-                ((CSharpSemanticModel)model).ClassifyConversion(
-                    decl.Position,
-                    decl,
-                    model.Compilation.ObjectType,
-                    false
-                )
+                ((CSharpSemanticModel)model)
+                    .ClassifyConversion(decl.Position, decl, model.Compilation.ObjectType, false)
             );
             Assert.Equal(
                 conversion,
-                ((CSharpSemanticModel)model).ClassifyConversion(
-                    decl.Position,
-                    decl,
-                    model.Compilation.ObjectType,
-                    true
-                )
+                ((CSharpSemanticModel)model)
+                    .ClassifyConversion(decl.Position, decl, model.Compilation.ObjectType, true)
             );
 
             Assert.Null(model.GetDeclaredSymbol(decl));
@@ -1667,7 +1653,8 @@ public class Cls
                 {
                     var parent1 = (
                         (VariableDeclarationSyntax)((VariableDeclaratorSyntax)parent).Parent
-                    ).Parent;
+                    )
+                        .Parent;
                     switch (parent1.Kind())
                     {
                         case SyntaxKind.FixedStatement:
@@ -7078,7 +7065,8 @@ public class X
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                ).Type.ToTestDisplayString()
+                )
+                    .Type.ToTestDisplayString()
             );
         }
 
@@ -15275,7 +15263,8 @@ public class X
                             compilation
                                 .GetSemanticModel(tree)
                                 .GetDeclaredSymbol(GetVariableDesignation(yDecl))
-                    ).Type.ToTestDisplayString()
+                    )
+                        .Type.ToTestDisplayString()
                 );
             }
         }
@@ -21114,9 +21103,8 @@ public class Cls
 
             Assert.Equal(
                 "Cls.var",
-                (
-                    (ILocalSymbol)model.GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                ).Type.ToTestDisplayString()
+                ((ILocalSymbol)model.GetDeclaredSymbol(GetVariableDesignation(x1Decl)))
+                    .Type.ToTestDisplayString()
             );
         }
 
@@ -21594,7 +21582,8 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                ).Type.ToTestDisplayString()
+                )
+                    .Type.ToTestDisplayString()
             );
 
             CreateCompilation(
@@ -21687,7 +21676,8 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                ).Type.ToTestDisplayString()
+                )
+                    .Type.ToTestDisplayString()
             );
 
             CreateCompilation(
@@ -21757,7 +21747,8 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                ).Type.ToTestDisplayString()
+                )
+                    .Type.ToTestDisplayString()
             );
         }
 
@@ -21813,7 +21804,8 @@ public class Cls
                         compilation
                             .GetSemanticModel(tree)
                             .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
-                ).Type.ToTestDisplayString()
+                )
+                    .Type.ToTestDisplayString()
             );
         }
 
@@ -30991,7 +30983,8 @@ class H
                             compilation
                                 .GetSemanticModel(tree)
                                 .GetDeclaredSymbol(x1Decl.VariableDesignation())
-                    ).Type.ToTestDisplayString()
+                    )
+                        .Type.ToTestDisplayString()
                 );
 
                 var x2Decl = GetOutVarDeclarations(tree, "x2").Single();
@@ -31748,7 +31741,8 @@ class H
                             compilation
                                 .GetSemanticModel(tree)
                                 .GetDeclaredSymbol(x1Decl.VariableDesignation())
-                    ).Type.ToTestDisplayString()
+                    )
+                        .Type.ToTestDisplayString()
                 );
 
                 var x2Decl = GetOutVarDeclarations(tree, "x2").Single();

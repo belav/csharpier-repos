@@ -36,10 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             EmitContext context
         )
         {
-            bool result = ((Emit.PEModuleBuilder)context.Module).TryGetTranslatedImports(
-                this,
-                out ImmutableArray<Cci.UsedNamespaceOrType> imports
-            );
+            bool result = ((Emit.PEModuleBuilder)context.Module)
+                .TryGetTranslatedImports(this, out ImmutableArray<Cci.UsedNamespaceOrType> imports);
             // The imports should have been translated during code gen.
             Debug.Assert(result);
             Debug.Assert(!imports.IsDefault);
@@ -187,9 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && (object)containingAssembly != moduleBuilder.CommonCompilation.Assembly
             )
             {
-                var referenceManager = (
-                    (CSharpCompilation)moduleBuilder.CommonCompilation
-                ).GetBoundReferenceManager();
+                var referenceManager = ((CSharpCompilation)moduleBuilder.CommonCompilation)
+                    .GetBoundReferenceManager();
 
                 for (int i = 0; i < referenceManager.ReferencedAssemblies.Length; i++)
                 {

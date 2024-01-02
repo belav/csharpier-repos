@@ -131,7 +131,8 @@ namespace System.Runtime.Remoting.Messaging
                     latestCallContext.PropagateOutgoingHeadersToMessage(retMessage);
 
                     // Install call context back into Message (from the thread)
-                    ((StackBasedReturnMessage)retMessage).SetLogicalCallContext(latestCallContext);
+                    ((StackBasedReturnMessage)retMessage)
+                        .SetLogicalCallContext(latestCallContext);
                 }
                 else
                 {
@@ -276,9 +277,10 @@ namespace System.Runtime.Remoting.Messaging
                     if (replySink != null)
                     {
                         retMessage = new ReturnMessage(e, mcMsg);
-                        ((ReturnMessage)retMessage).SetLogicalCallContext(
-                            (LogicalCallContext)mcMsg.Properties[Message.CallContextKey]
-                        );
+                        ((ReturnMessage)retMessage)
+                            .SetLogicalCallContext(
+                                (LogicalCallContext)mcMsg.Properties[Message.CallContextKey]
+                            );
                     }
                 }
                 finally

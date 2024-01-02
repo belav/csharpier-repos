@@ -245,9 +245,8 @@ namespace System.ServiceModel.Channels
                         new SecurityOutputChannel(
                             this,
                             this.securityProtocolFactory,
-                            (
-                                (IChannelFactory<IOutputChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IOutputChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             address,
                             via
                         );
@@ -259,9 +258,8 @@ namespace System.ServiceModel.Channels
                         new SecurityOutputSessionChannel(
                             this,
                             this.securityProtocolFactory,
-                            (
-                                (IChannelFactory<IOutputSessionChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IOutputSessionChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             address,
                             via
                         );
@@ -273,9 +271,8 @@ namespace System.ServiceModel.Channels
                         new SecurityDuplexChannel(
                             this,
                             this.securityProtocolFactory,
-                            (
-                                (IChannelFactory<IDuplexChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IDuplexChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             address,
                             via
                         );
@@ -287,9 +284,8 @@ namespace System.ServiceModel.Channels
                         new SecurityDuplexSessionChannel(
                             this,
                             this.securityProtocolFactory,
-                            (
-                                (IChannelFactory<IDuplexSessionChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IDuplexSessionChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             address,
                             via
                         );
@@ -301,9 +297,8 @@ namespace System.ServiceModel.Channels
                         new SecurityRequestChannel(
                             this,
                             this.securityProtocolFactory,
-                            (
-                                (IChannelFactory<IRequestChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IRequestChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             address,
                             via
                         );
@@ -315,9 +310,8 @@ namespace System.ServiceModel.Channels
                     new SecurityRequestSessionChannel(
                         this,
                         this.securityProtocolFactory,
-                        (
-                            (IChannelFactory<IRequestSessionChannel>)this.InnerChannelFactory
-                        ).CreateChannel(address, via),
+                        ((IChannelFactory<IRequestSessionChannel>)this.InnerChannelFactory)
+                            .CreateChannel(address, via),
                         address,
                         via
                     );

@@ -29,9 +29,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             {
                 lock (s_bindLock)
                 {
-                    context = (
-                        (AggregateType)SymbolTable.GetCTypeFromType(contextType)
-                    ).OwningAggregate;
+                    context = ((AggregateType)SymbolTable.GetCTypeFromType(contextType))
+                        .OwningAggregate;
                 }
             }
             else

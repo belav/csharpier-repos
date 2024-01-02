@@ -25,7 +25,8 @@ public class NorthwindAggregateOperatorsQueryInMemoryTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Average_no_data_subquery(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Max_no_data_subquery(bool async) =>
@@ -35,7 +36,8 @@ public class NorthwindAggregateOperatorsQueryInMemoryTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Max_no_data_subquery(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Min_no_data_subquery(bool async) =>
@@ -45,7 +47,8 @@ public class NorthwindAggregateOperatorsQueryInMemoryTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Min_no_data_subquery(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Average_on_nav_subquery_in_projection(bool async) =>
@@ -55,7 +58,8 @@ public class NorthwindAggregateOperatorsQueryInMemoryTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Average_on_nav_subquery_in_projection(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override Task Collection_Last_member_access_in_projection_translated(bool async) =>

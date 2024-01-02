@@ -467,9 +467,8 @@ namespace System.Net.Http
                         {
                             timer = new Timer(
                                 static o =>
-                                    (
-                                        (Http3RequestStream)o!
-                                    )._expect100ContinueCompletionSource!.TrySetResult(true),
+                                    ((Http3RequestStream)o!)
+                                        ._expect100ContinueCompletionSource!.TrySetResult(true),
                                 this,
                                 _connection.Pool.Settings._expect100ContinueTimeout,
                                 Timeout.InfiniteTimeSpan

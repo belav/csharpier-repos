@@ -22,7 +22,8 @@ public abstract class ComplexNavigationsCollectionsSplitSharedTypeQueryRelationa
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     protected override Expression RewriteServerQueryExpression(Expression serverQueryExpression)

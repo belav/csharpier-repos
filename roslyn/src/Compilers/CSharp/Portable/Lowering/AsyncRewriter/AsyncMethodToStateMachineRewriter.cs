@@ -799,7 +799,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 useUnsafeOnCompleted
                     ? _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted
                     : _asyncMethodBuilderMemberCollection.AwaitOnCompleted
-            ).Construct(loweredAwaiterType, F.This().Type);
+            )
+                .Construct(loweredAwaiterType, F.This().Type);
             if (_asyncMethodBuilderMemberCollection.CheckGenericMethodConstraints)
             {
                 onCompleted.CheckConstraints(

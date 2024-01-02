@@ -2318,9 +2318,8 @@ namespace Internal.JitInterface
 
                 MethodDesc stub = _compilation.PInvokeILProvider.GetCalliStub(
                     methodSignature,
-                    (
-                        (MetadataType)HandleToObject(callSiteSig->scope).OwningMethod.OwningType
-                    ).Module
+                    ((MetadataType)HandleToObject(callSiteSig->scope).OwningMethod.OwningType)
+                        .Module
                 );
                 Debug.Assert(!IsPInvokeStubRequired(stub));
 #endif

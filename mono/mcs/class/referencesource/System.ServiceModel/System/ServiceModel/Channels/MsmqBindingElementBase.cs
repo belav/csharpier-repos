@@ -296,9 +296,8 @@ namespace System.ServiceModel.Channels
                     );
                 }
 
-                ((MsmqReceiveContextSettings)this.ReceiveContextSettings).SetValidityDuration(
-                    value
-                );
+                ((MsmqReceiveContextSettings)this.ReceiveContextSettings)
+                    .SetValidityDuration(value);
             }
         }
 

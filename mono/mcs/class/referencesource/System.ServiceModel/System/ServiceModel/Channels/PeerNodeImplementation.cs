@@ -456,9 +456,11 @@ namespace System.ServiceModel.Channels
                 {
                     using (Message filterMessage = messageBuffer.CreateMessage())
                     {
-                        propagateFlags = (
-                            (IPeerNodeMessageHandling)this
-                        ).DetermineMessagePropagation(filterMessage, PeerMessageOrigination.Local);
+                        propagateFlags = ((IPeerNodeMessageHandling)this)
+                            .DetermineMessagePropagation(
+                                filterMessage,
+                                PeerMessageOrigination.Local
+                            );
                     }
                 }
 

@@ -1659,7 +1659,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020100300D06096086480165030402010500300C06082B060105050706020500"
                 + "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02"
                 + "8674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded);
         }
@@ -1676,7 +1677,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020100300D06096086480165030402010500300C06082B0601050507060A0500"
                 + "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02"
                 + "8674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded, badOid: true);
         }
@@ -1690,7 +1692,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020101301C3017311530130603550403130C44756D6D79205369676E65720201"
                 + "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C"
                 + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded);
         }
@@ -1706,7 +1709,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020101301C3017311530130603550403130C44756D6D79205369676E65720201"
                 + "00300B0609608648016503040201300A06082B0601050507060A0420AF5F6F5C"
                 + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded, badOid: true);
         }
@@ -1722,7 +1726,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020101301C3017311530130603550403130C44756D6E79205369676E65720201"
                 + "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C"
                 + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             SignedCms cms = new SignedCms();
             cms.Decode(encoded);

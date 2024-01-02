@@ -103,7 +103,8 @@ FROM [OwnedPerson] FOR SYSTEM_TIME BETWEEN '1990-01-01T00:00:00.0000000' AND '22
                 () =>
                     context.Set<Star>().TemporalAll().Select(x => x.Planets.ToList()).ToListAsync()
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Equal(
             SqlServerStrings.TemporalNavigationExpansionOnlySupportedForAsOf("AsOf"),

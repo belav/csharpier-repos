@@ -601,9 +601,8 @@ ORDER BY ((c["UnitsInStock"] > 10) ? (c["ProductID"] > 40) : (c["ProductID"] <= 
     {
         Assert.Equal(
             CosmosStrings.OffsetRequiresLimit,
-            (
-                await Assert.ThrowsAsync<InvalidOperationException>(() => base.Skip_Distinct(async))
-            ).Message
+            (await Assert.ThrowsAsync<InvalidOperationException>(() => base.Skip_Distinct(async)))
+                .Message
         );
 
         AssertSql();
@@ -613,11 +612,8 @@ ORDER BY ((c["UnitsInStock"] > 10) ? (c["ProductID"] > 40) : (c["ProductID"] <= 
     {
         Assert.Equal(
             CosmosStrings.OffsetRequiresLimit,
-            (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Skip_no_orderby(async)
-                )
-            ).Message
+            (await Assert.ThrowsAsync<InvalidOperationException>(() => base.Skip_no_orderby(async)))
+                .Message
         );
 
         AssertSql();
@@ -1323,9 +1319,8 @@ OFFSET 0 LIMIT @__p_0
     {
         Assert.Equal(
             CosmosStrings.OffsetRequiresLimit,
-            (
-                await Assert.ThrowsAsync<InvalidOperationException>(() => base.Skip_Distinct(async))
-            ).Message
+            (await Assert.ThrowsAsync<InvalidOperationException>(() => base.Skip_Distinct(async)))
+                .Message
         );
 
         AssertSql();
@@ -1608,7 +1603,8 @@ ORDER BY c["Country"], c["City"]
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Where_subquery_expression(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql(
@@ -3023,7 +3019,8 @@ ORDER BY (c["CustomerID"] || c["City"])
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_with_orderby_skip_preserves_ordering(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -3769,7 +3766,8 @@ ORDER BY c["City"], c["CustomerID"]
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_primitive_select_subquery(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -3838,7 +3836,8 @@ WHERE (c["Discriminator"] = "Employee")
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Skip_orderby_const(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -4904,7 +4903,8 @@ WHERE (c["Discriminator"] = "Customer")
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_code_using_instance_method_throws(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -4921,7 +4921,8 @@ WHERE (c["Discriminator"] = "Customer")
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_code_using_instance_in_static_method(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();
@@ -4937,7 +4938,8 @@ WHERE (c["Discriminator"] = "Customer")
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_code_using_instance_in_anonymous_type(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();

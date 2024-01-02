@@ -1732,15 +1732,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 wellKnownData = new CommonAssemblyWellKnownAttributeData();
                             }
 
-                            forwardedTypes = (
-                                (CommonAssemblyWellKnownAttributeData)wellKnownData
-                            ).ForwardedTypes;
+                            forwardedTypes = ((CommonAssemblyWellKnownAttributeData)wellKnownData)
+                                .ForwardedTypes;
                             if (forwardedTypes == null)
                             {
                                 forwardedTypes = new HashSet<NamedTypeSymbol>();
-                                (
-                                    (CommonAssemblyWellKnownAttributeData)wellKnownData
-                                ).ForwardedTypes = forwardedTypes;
+                                ((CommonAssemblyWellKnownAttributeData)wellKnownData)
+                                    .ForwardedTypes = forwardedTypes;
                             }
                         }
 
@@ -2126,7 +2124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return (
                     (CommonAssemblyWellKnownAttributeData)
                         attributesBag.DecodedWellKnownAttributeData
-                )?.ForwardedTypes;
+                )
+                    ?.ForwardedTypes;
             }
 
             var allocate = t_forwardedTypesAttributesInProgress is null;

@@ -480,7 +480,8 @@ namespace System.Web.UI
                     IntPtr functionPtr = methodInfo.MethodHandle.GetFunctionPointer();
                     EventHandler handler = (
                         new CalliEventHandlerDelegateProxy(this, functionPtr, info.IsArgless)
-                    ).Handler;
+                    )
+                        .Handler;
 
                     // Adds the delegate to events list.
                     Events.AddHandler(_eventObjects[key], handler);

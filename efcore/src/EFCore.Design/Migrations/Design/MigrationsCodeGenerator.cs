@@ -259,7 +259,8 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
         (
             property.FindTypeMapping()
             ?? Dependencies.RelationalTypeMappingSource.FindMapping(property)
-        )?.Converter;
+        )
+            ?.Converter;
 
     private Type GetProviderType(IAnnotatable annotatable, Type valueType) =>
         annotatable is IProperty property

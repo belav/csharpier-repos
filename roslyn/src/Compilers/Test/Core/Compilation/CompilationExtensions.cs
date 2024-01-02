@@ -70,9 +70,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 if (MonoHelpers.IsRunningOnMono() || PathUtilities.IsUnixLikePlatform)
                 {
-                    options = (options ?? EmitOptions.Default).WithDebugInformationFormat(
-                        DebugInformationFormat.PortablePdb
-                    );
+                    options = (options ?? EmitOptions.Default)
+                        .WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
                 }
 
                 var discretePdb =
@@ -510,7 +509,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             (
                                 parameterInitializerOperation.Parameter.ContainingSymbol
                                 as IMethodSymbol
-                            )?.MethodKind
+                            )
+                                ?.MethodKind
                             is not (MethodKind.LocalFunction or MethodKind.AnonymousFunction)
                         )
                         {

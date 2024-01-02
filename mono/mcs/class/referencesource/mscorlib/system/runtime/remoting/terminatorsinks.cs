@@ -318,9 +318,8 @@ namespace System.Runtime.Remoting.Messaging
                     return errMsg;
                 }
 
-                replyMsg = ((IConstructionCallMessage)reqMsg).Activator.Activate(
-                    (IConstructionCallMessage)reqMsg
-                );
+                replyMsg = ((IConstructionCallMessage)reqMsg)
+                    .Activator.Activate((IConstructionCallMessage)reqMsg);
                 BCLDebug.Assert(replyMsg is IConstructionReturnMessage, "bad ctorRetMsg");
                 errMsg = ctx.NotifyActivatorProperties(
                     replyMsg,
@@ -622,9 +621,8 @@ namespace System.Runtime.Remoting.Messaging
                     return errMsg;
                 }
 
-                replyMsg = ((IConstructionCallMessage)reqMsg).Activator.Activate(
-                    (IConstructionCallMessage)reqMsg
-                );
+                replyMsg = ((IConstructionCallMessage)reqMsg)
+                    .Activator.Activate((IConstructionCallMessage)reqMsg);
                 BCLDebug.Assert(replyMsg is IConstructionReturnMessage, "bad ctorRetMsg");
                 errMsg = ctx.NotifyActivatorProperties(
                     replyMsg,

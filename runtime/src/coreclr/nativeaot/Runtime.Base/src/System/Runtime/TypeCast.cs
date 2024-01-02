@@ -988,9 +988,8 @@ namespace System.Runtime
             }
             if ((uint)index >= (uint)array.Length)
             {
-                throw ((MethodTable*)elementType)->GetClasslibException(
-                    ExceptionIDs.IndexOutOfRange
-                );
+                throw ((MethodTable*)elementType)
+                    ->GetClasslibException(ExceptionIDs.IndexOutOfRange);
             }
             ref object rawData = ref Unsafe.As<byte, object>(
                 ref Unsafe.As<RawArrayData>(array).Data

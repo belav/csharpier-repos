@@ -551,7 +551,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             iterationErrorExpression = (
                                 (BoundDiscardExpression)iterationErrorExpression
-                            ).FailInference(this, diagnosticsOpt: null);
+                            )
+                                .FailInference(this, diagnosticsOpt: null);
                         }
                         hasErrors = true;
 
@@ -1638,7 +1639,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     builder.ElementTypeWithAnnotations = (
                         (PropertySymbol)builder.CurrentPropertyGetter.AssociatedSymbol
-                    ).TypeWithAnnotations;
+                    )
+                        .TypeWithAnnotations;
 
                     GetDisposalInfoForEnumerator(
                         syntax,
@@ -2541,9 +2543,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // NOTE: accessor can be inherited from overridden property
-                MethodSymbol currentPropertyGetterCandidate = (
-                    (PropertySymbol)lookupSymbol
-                ).GetOwnOrInheritedGetMethod();
+                MethodSymbol currentPropertyGetterCandidate = ((PropertySymbol)lookupSymbol)
+                    .GetOwnOrInheritedGetMethod();
 
                 if ((object)currentPropertyGetterCandidate == null)
                 {

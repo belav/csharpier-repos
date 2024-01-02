@@ -416,9 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Debug.Assert(trivia.HasStructure);
-            SyntaxToken triviaToken = ((CSharpSyntaxNode)trivia.GetStructure()!).FindTokenInternal(
-                position
-            );
+            SyntaxToken triviaToken = ((CSharpSyntaxNode)trivia.GetStructure()!)
+                .FindTokenInternal(position);
 
             // CONSIDER: We might want to use the trivia token anywhere within a doc comment.
             // Otherwise, we'll fall back on the enclosing scope outside of name and cref

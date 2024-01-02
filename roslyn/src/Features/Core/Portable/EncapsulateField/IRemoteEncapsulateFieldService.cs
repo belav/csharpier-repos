@@ -53,8 +53,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             string language,
             CancellationToken cancellationToken
         ) =>
-            (
-                (RemoteOptionsProvider<CleanCodeGenerationOptions>)GetCallback(callbackId)
-            ).GetOptionsAsync(language, cancellationToken);
+            ((RemoteOptionsProvider<CleanCodeGenerationOptions>)GetCallback(callbackId))
+                .GetOptionsAsync(language, cancellationToken);
     }
 }

@@ -287,13 +287,15 @@ namespace System.Web.Profile
                 {
                     sp.Attributes["AllowAnonymous"] = (
                         (SettingsAllowAnonymousAttribute)attributes[i]
-                    ).Allow;
+                    )
+                        .Allow;
                 }
                 else if (attributes[i] is CustomProviderDataAttribute)
                 {
                     sp.Attributes["CustomProviderData"] = (
                         (CustomProviderDataAttribute)attributes[i]
-                    ).CustomProviderData;
+                    )
+                        .CustomProviderData;
                 }
                 else if (
                     attributes[i] is ApplicationScopedSettingAttribute

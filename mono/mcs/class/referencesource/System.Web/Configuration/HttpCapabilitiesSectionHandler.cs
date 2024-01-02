@@ -61,9 +61,8 @@ namespace System.Web.Configuration
             // Get the useragent string cachekey length
             if (parent != null)
             {
-                userAgentCacheKeyLength = (
-                    (HttpCapabilitiesDefaultProvider)parent
-                ).UserAgentCacheKeyLength;
+                userAgentCacheKeyLength = ((HttpCapabilitiesDefaultProvider)parent)
+                    .UserAgentCacheKeyLength;
             }
             HandlerBase.GetAndRemovePositiveIntegerAttribute(
                 section,
@@ -80,9 +79,8 @@ namespace System.Web.Configuration
             string browserCapabilitiesProviderType = null;
             if (parent != null)
             {
-                browserCapabilitiesProviderType = (
-                    (HttpCapabilitiesDefaultProvider)parent
-                ).BrowserCapabilitiesProviderType;
+                browserCapabilitiesProviderType = ((HttpCapabilitiesDefaultProvider)parent)
+                    .BrowserCapabilitiesProviderType;
             }
             HandlerBase.GetAndRemoveNonEmptyStringAttribute(
                 section,

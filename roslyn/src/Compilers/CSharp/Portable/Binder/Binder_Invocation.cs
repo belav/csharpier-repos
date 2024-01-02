@@ -387,9 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (argument.Kind == BoundKind.OutVariablePendingInference)
                 {
-                    analyzedArguments.Arguments[i] = (
-                        (OutVariablePendingInference)argument
-                    ).FailInference(this, diagnostics);
+                    analyzedArguments.Arguments[i] = ((OutVariablePendingInference)argument)
+                        .FailInference(this, diagnostics);
                 }
                 else if ((object)argument.Type == null && !argument.HasAnyErrors)
                 {
@@ -1261,15 +1260,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                         && (
                             typeArgumentsOpt.IsDefault
-                            || ((MethodSymbol)(object)result.Member).CheckConstraints(
-                                new ConstraintsHelper.CheckConstraintsArgs(
-                                    this.Compilation,
-                                    this.Conversions,
-                                    includeNullability: false,
-                                    syntax.Location,
-                                    candidateDiagnostics
+                            || ((MethodSymbol)(object)result.Member)
+                                .CheckConstraints(
+                                    new ConstraintsHelper.CheckConstraintsArgs(
+                                        this.Compilation,
+                                        this.Conversions,
+                                        includeNullability: false,
+                                        syntax.Location,
+                                        candidateDiagnostics
+                                    )
                                 )
-                            )
                         )
                     )
                     {
@@ -2871,36 +2871,31 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if ((object)candidateType == null)
                             {
-                                newArguments[i] = (
-                                    (OutVariablePendingInference)argument
-                                ).FailInference(this, null);
+                                newArguments[i] = ((OutVariablePendingInference)argument)
+                                    .FailInference(this, null);
                             }
                             else
                             {
-                                newArguments[i] = (
-                                    (OutVariablePendingInference)argument
-                                ).SetInferredTypeWithAnnotations(
-                                    TypeWithAnnotations.Create(candidateType),
-                                    null
-                                );
+                                newArguments[i] = ((OutVariablePendingInference)argument)
+                                    .SetInferredTypeWithAnnotations(
+                                        TypeWithAnnotations.Create(candidateType),
+                                        null
+                                    );
                             }
                         }
                         else if (argument.Kind == BoundKind.DiscardExpression)
                         {
                             if ((object)candidateType == null)
                             {
-                                newArguments[i] = ((BoundDiscardExpression)argument).FailInference(
-                                    this,
-                                    null
-                                );
+                                newArguments[i] = ((BoundDiscardExpression)argument)
+                                    .FailInference(this, null);
                             }
                             else
                             {
-                                newArguments[i] = (
-                                    (BoundDiscardExpression)argument
-                                ).SetInferredTypeWithAnnotations(
-                                    TypeWithAnnotations.Create(candidateType)
-                                );
+                                newArguments[i] = ((BoundDiscardExpression)argument)
+                                    .SetInferredTypeWithAnnotations(
+                                        TypeWithAnnotations.Create(candidateType)
+                                    );
                             }
                         }
 
@@ -2908,9 +2903,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     case BoundKind.OutDeconstructVarPendingInference:
                     {
-                        newArguments[i] = (
-                            (OutDeconstructVarPendingInference)argument
-                        ).FailInference(this);
+                        newArguments[i] = ((OutDeconstructVarPendingInference)argument)
+                            .FailInference(this);
                         break;
                     }
                     case BoundKind.Parameter:

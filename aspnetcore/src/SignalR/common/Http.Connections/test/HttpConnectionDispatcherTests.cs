@@ -3922,7 +3922,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                                         (
                                             (HttpRequestTimeoutFeature)
                                                 c.Features.Get<IHttpRequestTimeoutFeature>()
-                                        ).Enabled
+                                        )
+                                            .Enabled
                                     );
                                     return n(c);
                                 }
@@ -3996,31 +3997,27 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var context = MakeRequest("/foo", connection, services);
             context.Features.Set<IHttpRequestTimeoutFeature>(new HttpRequestTimeoutFeature());
             Assert.True(
-                (
-                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
-                ).Enabled
+                ((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>())
+                    .Enabled
             );
 
             // Initial poll will complete immediately
             await dispatcher.ExecuteAsync(context, options, app).DefaultTimeout();
             Assert.False(
-                (
-                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
-                ).Enabled
+                ((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>())
+                    .Enabled
             );
 
             context.Features.Set<IHttpRequestTimeoutFeature>(new HttpRequestTimeoutFeature());
             Assert.True(
-                (
-                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
-                ).Enabled
+                ((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>())
+                    .Enabled
             );
             var pollTask = dispatcher.ExecuteAsync(context, options, app);
             // disables on every poll
             Assert.False(
-                (
-                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
-                ).Enabled
+                ((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>())
+                    .Enabled
             );
 
             await connection.DisposeAsync().DefaultTimeout();

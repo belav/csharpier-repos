@@ -7653,7 +7653,8 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                         separateAssembly
                             ? module.ReferencedAssemblySymbols[1].GlobalNamespace
                             : module.GlobalNamespace
-                    ).GetTypeMember("Base");
+                    )
+                        .GetTypeMember("Base");
                     var baseM1 = @base.GetMethod("M1");
                     var baseM2 = @base.GetMethod("M2");
                     var baseM3 = @base.GetMethod("M3");

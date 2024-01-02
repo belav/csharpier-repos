@@ -2402,9 +2402,8 @@ public class RelationalModelValidator : ModelValidator
                     .Select(fk => fk.DeclaringEntityType)
                     .FirstOrDefault(owned =>
                         StoreObjectIdentifier.Create(owned, storeObjectType) == null
-                        && ((IConventionEntityType)owned).GetStoreObjectConfigurationSource(
-                            storeObjectType
-                        ) == null
+                        && ((IConventionEntityType)owned)
+                            .GetStoreObjectConfigurationSource(storeObjectType) == null
                         && !owned.IsMappedToJson()
                     );
                 if (

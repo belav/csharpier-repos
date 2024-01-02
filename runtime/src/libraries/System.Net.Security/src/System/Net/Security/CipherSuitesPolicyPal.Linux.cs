@@ -64,9 +64,8 @@ namespace System.Net.Security
                             }
 
                             _tlsCipherSuites.Add(cs);
-                            (isTls12OrLower ? cipherSuites : tls13CipherSuites).AllowCipherSuite(
-                                name
-                            );
+                            (isTls12OrLower ? cipherSuites : tls13CipherSuites)
+                                .AllowCipherSuite(name);
                         }
 
                         _cipherSuites = cipherSuites.GetOpenSslString();

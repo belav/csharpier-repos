@@ -4388,7 +4388,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>
             >)
                 builder.FilterFactories
-        ).AddRange(filterFactories);
+        )
+            .AddRange(filterFactories);
         return builder;
     }
 

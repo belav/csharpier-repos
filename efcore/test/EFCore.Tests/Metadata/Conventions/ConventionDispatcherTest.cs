@@ -44,10 +44,8 @@ public class ConventionDispatcherTest
             IConventionPropertyBuilder propertyBuilder,
             IConventionContext<IConventionPropertyBuilder> context
         ) =>
-            ((IMutableEntityType)propertyBuilder.Metadata.DeclaringType).AddProperty(
-                "TempProperty" + _count++,
-                typeof(int)
-            );
+            ((IMutableEntityType)propertyBuilder.Metadata.DeclaringType)
+                .AddProperty("TempProperty" + _count++, typeof(int));
     }
 
     [InlineData(false)]
@@ -4145,9 +4143,8 @@ public class ConventionDispatcherTest
         }
         else
         {
-            var result = ((IMutableEntityType)entityBuilder.Metadata).AddProperty(
-                Order.OrderIdProperty
-            );
+            var result = ((IMutableEntityType)entityBuilder.Metadata)
+                .AddProperty(Order.OrderIdProperty);
 
             Assert.Equal(!useScope, result == null);
         }
@@ -4876,9 +4873,8 @@ public class ConventionDispatcherTest
         }
         else
         {
-            var result = ((IMutableComplexType)complexBuilder.Metadata).AddProperty(
-                nameof(OrderDetails.Id)
-            );
+            var result = ((IMutableComplexType)complexBuilder.Metadata)
+                .AddProperty(nameof(OrderDetails.Id));
 
             Assert.Equal(!useScope, result == null);
         }
@@ -5331,10 +5327,8 @@ public class ConventionDispatcherTest
         }
         else
         {
-            var result = ((IMutableEntityType)entityBuilder.Metadata).AddComplexProperty(
-                Order.OtherOrderDetailsProperty,
-                collection: false
-            );
+            var result = ((IMutableEntityType)entityBuilder.Metadata)
+                .AddComplexProperty(Order.OtherOrderDetailsProperty, collection: false);
 
             Assert.Equal(!useScope, result == null);
         }
@@ -5387,9 +5381,8 @@ public class ConventionDispatcherTest
 
             if (_terminate)
             {
-                (
-                    (IConventionEntityType)propertyBuilder.Metadata.DeclaringType
-                ).RemoveComplexProperty(propertyBuilder.Metadata.Name);
+                ((IConventionEntityType)propertyBuilder.Metadata.DeclaringType)
+                    .RemoveComplexProperty(propertyBuilder.Metadata.Name);
                 context.StopProcessing();
             }
         }

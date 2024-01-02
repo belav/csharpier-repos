@@ -15,9 +15,8 @@ public class AppVerifier
     public static IDisposable Disable(ServerType serverType, int code)
     {
         // Set in SetupTestEnvironment.ps1
-        var enabledCodes = (
-            Environment.GetEnvironmentVariable("APPVERIFIER_ENABLED_CODES") ?? ""
-        ).Split(' ');
+        var enabledCodes = (Environment.GetEnvironmentVariable("APPVERIFIER_ENABLED_CODES") ?? "")
+            .Split(' ');
         string processName;
         switch (serverType)
         {

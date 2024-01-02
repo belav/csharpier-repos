@@ -762,7 +762,8 @@ WHERE [p].[ProductID] < 40
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Sum_over_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -785,7 +786,8 @@ FROM [Customers] AS [c]
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Sum_over_nested_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -811,7 +813,8 @@ FROM [Customers] AS [c]
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Sum_over_min_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -951,7 +954,8 @@ WHERE [p].[ProductID] < 40
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Average_over_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -974,7 +978,8 @@ FROM [Customers] AS [c]
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Average_over_nested_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -1006,7 +1011,8 @@ FROM (
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Average_over_max_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -1120,7 +1126,8 @@ WHERE [p].[ProductID] < 40
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Min_over_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -1143,7 +1150,8 @@ FROM [Customers] AS [c]
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Min_over_nested_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -1175,7 +1183,8 @@ FROM (
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Min_over_max_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -1244,7 +1253,8 @@ WHERE [p].[ProductID] < 40
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Max_over_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -1267,7 +1277,8 @@ FROM [Customers] AS [c]
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Max_over_nested_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(
@@ -1299,7 +1310,8 @@ FROM (
                 await Assert.ThrowsAsync<SqlException>(
                     async () => await base.Max_over_sum_subquery_is_client_eval(async)
                 )
-            ).Number
+            )
+                .Number
         );
 
         AssertSql(

@@ -220,10 +220,8 @@ namespace System.ComponentModel
                     Type underlyingType = Enum.GetUnderlyingType(type);
                     if (value is IConvertible)
                     {
-                        object convertedValue = ((IConvertible)value).ToType(
-                            underlyingType,
-                            culture
-                        );
+                        object convertedValue = ((IConvertible)value)
+                            .ToType(underlyingType, culture);
 
                         MethodInfo method = typeof(Enum).GetMethod(
                             "ToObject",

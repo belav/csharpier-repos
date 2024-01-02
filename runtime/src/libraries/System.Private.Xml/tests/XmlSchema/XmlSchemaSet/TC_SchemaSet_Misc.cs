@@ -1289,7 +1289,8 @@ namespace System.Xml.XmlSchemaTests
             //schema1 has some xs:includes in it. Since all schemas are string based, XmlSchema on its own cannot load automatically
             //load these included schemas. We will resolve these schema locations schema1 and make them point to the correct
             //in memory XmlSchema objects
-            ((XmlSchemaExternal)schema1.Includes[0]).Schema = schema3;
+            ((XmlSchemaExternal)schema1.Includes[0])
+                .Schema = schema3;
             ((XmlSchemaExternal)schema1.Includes[1]).Schema = schema2;
 
             XmlSchemaSet schemaSet = new XmlSchemaSet();

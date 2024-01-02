@@ -143,12 +143,13 @@ public class XmlKeyManagerTests
 
         // After the call to CreateNewKey, the first CT should be fired,
         // and we should've gotten a new CT.
-        var newKey = ((IInternalXmlKeyManager)keyManager).CreateNewKey(
-            keyId: keyId,
-            creationDate: creationDate,
-            activationDate: activationDate,
-            expirationDate: expirationDate
-        );
+        var newKey = ((IInternalXmlKeyManager)keyManager)
+            .CreateNewKey(
+                keyId: keyId,
+                creationDate: creationDate,
+                activationDate: activationDate,
+                expirationDate: expirationDate
+            );
         var secondCancellationToken = keyManager.GetCacheExpirationToken();
         Assert.True(firstCancellationToken.IsCancellationRequested);
         Assert.False(secondCancellationToken.IsCancellationRequested);
@@ -261,12 +262,13 @@ public class XmlKeyManagerTests
 
         // After the call to CreateNewKey, the first CT should be fired,
         // and we should've gotten a new CT.
-        var newKey = ((IInternalXmlKeyManager)keyManager).CreateNewKey(
-            keyId: keyId,
-            creationDate: creationDate,
-            activationDate: activationDate,
-            expirationDate: expirationDate
-        );
+        var newKey = ((IInternalXmlKeyManager)keyManager)
+            .CreateNewKey(
+                keyId: keyId,
+                creationDate: creationDate,
+                activationDate: activationDate,
+                expirationDate: expirationDate
+            );
         var secondCancellationToken = keyManager.GetCacheExpirationToken();
         Assert.True(firstCancellationToken.IsCancellationRequested);
         Assert.False(secondCancellationToken.IsCancellationRequested);
@@ -827,11 +829,12 @@ public class XmlKeyManagerTests
 
         // After the call to RevokeKey, the first CT should be fired,
         // and we should've gotten a new CT.
-        ((IInternalXmlKeyManager)keyManager).RevokeSingleKey(
-            keyId: new Guid("a11f35fc-1fed-4bd4-b727-056a63b70932"),
-            revocationDate: revocationDate,
-            reason: "Here's some reason text."
-        );
+        ((IInternalXmlKeyManager)keyManager)
+            .RevokeSingleKey(
+                keyId: new Guid("a11f35fc-1fed-4bd4-b727-056a63b70932"),
+                revocationDate: revocationDate,
+                reason: "Here's some reason text."
+            );
         var secondCancellationToken = keyManager.GetCacheExpirationToken();
         Assert.True(firstCancellationToken.IsCancellationRequested);
         Assert.False(secondCancellationToken.IsCancellationRequested);

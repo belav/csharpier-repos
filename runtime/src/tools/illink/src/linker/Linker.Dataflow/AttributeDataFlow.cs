@@ -74,9 +74,8 @@ namespace Mono.Linker.Dataflow
                 if (argument.Value is null)
                     return NullValue.Instance;
 
-                TypeDefinition? referencedType = (
-                    (TypeReference)argument.Value
-                ).ResolveToTypeDefinition(_context);
+                TypeDefinition? referencedType = ((TypeReference)argument.Value)
+                    .ResolveToTypeDefinition(_context);
                 return referencedType == null
                     ? UnknownValue.Instance
                     : new SystemTypeValue(referencedType);

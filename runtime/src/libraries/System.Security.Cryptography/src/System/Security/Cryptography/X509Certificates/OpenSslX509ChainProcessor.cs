@@ -716,9 +716,8 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 using (var storeCtx = new SafeX509StoreCtxHandle(ctx, ownsHandle: false))
                 {
-                    return (
-                        (WorkingChain*)Interop.Crypto.X509StoreCtxGetAppData(storeCtx)
-                    )->VerifyCallback(storeCtx);
+                    return ((WorkingChain*)Interop.Crypto.X509StoreCtxGetAppData(storeCtx))
+                        ->VerifyCallback(storeCtx);
                 }
             }
             catch

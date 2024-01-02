@@ -91,9 +91,8 @@ internal abstract class PropertyOrIndexerAccessorDeclarationBody : MemberBody
             );
 
             statementPart = AbstractEditAndContinueAnalyzer.DefaultStatementPart;
-            partnerStatement = (
-                (PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody
-            )?.HeaderActiveStatement;
+            partnerStatement = ((PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody)
+                ?.HeaderActiveStatement;
             return HeaderActiveStatement;
         }
 
@@ -107,9 +106,8 @@ internal abstract class PropertyOrIndexerAccessorDeclarationBody : MemberBody
         return CSharpEditAndContinueAnalyzer.FindStatementAndPartner(
             span,
             body: ExplicitBody,
-            partnerBody: (
-                (PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody
-            )?.ExplicitBody,
+            partnerBody: ((PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody)
+                ?.ExplicitBody,
             out partnerStatement,
             out statementPart
         );

@@ -52,9 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
 
         protected override TestParameters SetParameterDefaults(TestParameters parameters) =>
             parameters.WithCompilationOptions(
-                (
-                    parameters.compilationOptions ?? TestOptions.DebugDll
-                ).WithReportSuppressedDiagnostics(true)
+                (parameters.compilationOptions ?? TestOptions.DebugDll)
+                    .WithReportSuppressedDiagnostics(true)
             );
 
         protected sealed class UserDiagnosticAnalyzer : DiagnosticAnalyzer
@@ -187,9 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
                     get
                     {
                         var errorCodes = Enum.GetValues(typeof(ErrorCode));
-                        var supported = (
-                            (CSharpCompilerDiagnosticAnalyzer)OtherAnalyzers[0]
-                        ).GetSupportedErrorCodes();
+                        var supported = ((CSharpCompilerDiagnosticAnalyzer)OtherAnalyzers[0])
+                            .GetSupportedErrorCodes();
                         using var _ = ArrayBuilder<string>.GetInstance(out var builder);
                         foreach (int errorCode in errorCodes)
                         {

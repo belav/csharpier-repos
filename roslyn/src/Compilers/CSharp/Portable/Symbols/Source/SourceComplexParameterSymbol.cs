@@ -618,9 +618,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceOrdinaryMethodSymbol otherPart = sourceMethod.OtherPartOfPartial;
             if ((object)otherPart != null)
             {
-                otherAttributes = (
-                    (SourceParameterSymbol)otherPart.Parameters[this.Ordinal]
-                ).AttributeDeclarationList;
+                otherAttributes = ((SourceParameterSymbol)otherPart.Parameters[this.Ordinal])
+                    .AttributeDeclarationList;
             }
             else
             {

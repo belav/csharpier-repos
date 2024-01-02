@@ -1416,9 +1416,8 @@ namespace Microsoft.Win32
                     );
                     if (attrs != null && attrs.Length > 0)
                     {
-                        productVersion = (
-                            (AssemblyInformationalVersionAttribute)attrs[0]
-                        ).InformationalVersion;
+                        productVersion = ((AssemblyInformationalVersionAttribute)attrs[0])
+                            .InformationalVersion;
                     }
                 }
 

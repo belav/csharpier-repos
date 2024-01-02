@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             var operation = (
                 model.GetOperation(attributeSyntax, cancellationToken) as IAttributeOperation
-            )?.Operation;
+            )
+                ?.Operation;
             if (operation is not IObjectCreationOperation { Initializer: { } initializerOperation })
             {
                 namedAttributeArguments = ImmutableArray<(string name, IOperation value)>.Empty;

@@ -139,9 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             }
 
             throw Roslyn.Utilities.ExceptionUtilities.UnexpectedValue(
-                (
-                    (CannotChangeSignatureAnalyzedContext)context
-                ).CannotChangeSignatureReason.ToString()
+                ((CannotChangeSignatureAnalyzedContext)context)
+                    .CannotChangeSignatureReason.ToString()
             );
         }
 

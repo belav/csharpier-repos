@@ -418,9 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // It would be nice to handle VB NoPia symbols too, but it's not worth the effort.
 
-            NamedTypeSymbol? underlyingTypeSymbol = (
-                symbol as Symbols.PublicModel.NamedTypeSymbol
-            )?.UnderlyingNamedTypeSymbol;
+            NamedTypeSymbol? underlyingTypeSymbol = (symbol as Symbols.PublicModel.NamedTypeSymbol)
+                ?.UnderlyingNamedTypeSymbol;
             var illegalGenericInstantiationSymbol =
                 underlyingTypeSymbol as NoPiaIllegalGenericInstantiationSymbol;
 
@@ -658,7 +657,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 NamedTypeSymbol? underlyingTypeSymbol = (
                     symbol as Symbols.PublicModel.NamedTypeSymbol
-                )?.UnderlyingNamedTypeSymbol;
+                )
+                    ?.UnderlyingNamedTypeSymbol;
                 ImmutableArray<ImmutableArray<CustomModifier>> modifiers =
                     GetTypeArgumentsModifiers(underlyingTypeSymbol);
                 if (modifiers.IsDefault)

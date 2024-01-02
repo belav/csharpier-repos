@@ -188,12 +188,10 @@ namespace System.Data.Linq.SqlClient
                     case SqlNodeType.NE:
                     case SqlNodeType.NE2V:
                     {
-                        SqlDbType leftSqlDbType = (
-                            (SqlTypeSystem.SqlType)(bo.Left.SqlType)
-                        ).SqlDbType;
-                        SqlDbType rightSqlDbType = (
-                            (SqlTypeSystem.SqlType)(bo.Right.SqlType)
-                        ).SqlDbType;
+                        SqlDbType leftSqlDbType = ((SqlTypeSystem.SqlType)(bo.Left.SqlType))
+                            .SqlDbType;
+                        SqlDbType rightSqlDbType = ((SqlTypeSystem.SqlType)(bo.Right.SqlType))
+                            .SqlDbType;
                         if (leftSqlDbType == rightSqlDbType)
                             break;
 

@@ -165,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             _factory.WellKnownMember(
                                 WellKnownMember.System_ReadOnlySpan_T__ctor_Array
                             )
-                    ).AsMember(spanType);
+                    )
+                        .AsMember(spanType);
                     var rewrittenElements = elements.SelectAsArray(
                         static (element, rewriter) =>
                             rewriter.VisitExpression((BoundExpression)element),
@@ -213,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 ? WellKnownMember.System_Span_T__ctor_Array
                                 : WellKnownMember.System_ReadOnlySpan_T__ctor_Array
                         )!
-                ).AsMember(spanType);
+                )
+                    .AsMember(spanType);
             }
 
             BoundExpression array;
@@ -242,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         _compilation.GetWellKnownTypeMember(
                             WellKnownMember.System_Collections_Generic_List_T__ToArray
                         )!
-                ).AsMember((NamedTypeSymbol)list.Type);
+                )
+                    .AsMember((NamedTypeSymbol)list.Type);
                 array = _factory.Call(list, listToArray);
             }
 
@@ -853,13 +856,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                         _compilation.GetWellKnownTypeMember(
                             WellKnownMember.System_Runtime_InteropServices_CollectionsMarshal__SetCount_T
                         )
-                )?.Construct(typeArguments);
+                )
+                    ?.Construct(typeArguments);
                 asSpan = (
                     (MethodSymbol?)
                         _compilation.GetWellKnownTypeMember(
                             WellKnownMember.System_Runtime_InteropServices_CollectionsMarshal__AsSpan_T
                         )
-                )?.Construct(typeArguments);
+                )
+                    ?.Construct(typeArguments);
 
                 if (setCount is { } && asSpan is { })
                 {
@@ -876,7 +881,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         _factory.WellKnownMember(
                             WellKnownMember.System_Collections_Generic_List_T__ctorInt32
                         )
-                ).AsMember(collectionType);
+                )
+                    .AsMember(collectionType);
                 rewrittenReceiver = _factory.New(
                     constructor,
                     ImmutableArray.Create(
@@ -892,7 +898,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         _factory.WellKnownMember(
                             WellKnownMember.System_Collections_Generic_List_T__ctor
                         )
-                ).AsMember(collectionType);
+                )
+                    .AsMember(collectionType);
                 rewrittenReceiver = _factory.New(
                     constructor,
                     ImmutableArray<BoundExpression>.Empty
@@ -938,7 +945,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Populate the span.
                 var spanGetItem = (
                     (MethodSymbol)_factory.WellKnownMember(WellKnownMember.System_Span_T__get_Item)
-                ).AsMember((NamedTypeSymbol)spanTemp.Type);
+                )
+                    .AsMember((NamedTypeSymbol)spanTemp.Type);
 
                 // int index = 0;
                 BoundLocal indexTemp = _factory.StoreToTemp(
@@ -1004,7 +1012,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         _factory.WellKnownMember(
                             WellKnownMember.System_Collections_Generic_List_T__Add
                         )
-                ).AsMember(collectionType);
+                )
+                    .AsMember(collectionType);
                 AddCollectionExpressionElements(
                     elements,
                     listTemp,

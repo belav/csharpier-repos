@@ -129,7 +129,8 @@ public abstract class RuntimePropertyBase : RuntimeAnnotatableBase, IRuntimeProp
                     _ = (
                         (IRuntimeEntityType)
                             ((IRuntimeTypeBase)property.DeclaringType).ContainingEntityType
-                    ).Counts;
+                    )
+                        .Counts;
                 }
             );
         set => NonCapturingLazyInitializer.EnsureInitialized(ref _indexes, value);

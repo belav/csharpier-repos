@@ -1625,20 +1625,16 @@ namespace System.StubHelpers
                 case BackPropAction.StringBuilderAnsi:
                 {
                     sbyte* ptr = (sbyte*)pNativeHome.ToPointer();
-                    ((StringBuilder)pManagedHome).ReplaceBufferAnsiInternal(
-                        ptr,
-                        Win32Native.lstrlenA(pNativeHome)
-                    );
+                    ((StringBuilder)pManagedHome)
+                        .ReplaceBufferAnsiInternal(ptr, Win32Native.lstrlenA(pNativeHome));
                     break;
                 }
 
                 case BackPropAction.StringBuilderUnicode:
                 {
                     char* ptr = (char*)pNativeHome.ToPointer();
-                    ((StringBuilder)pManagedHome).ReplaceBufferInternal(
-                        ptr,
-                        Win32Native.lstrlenW(pNativeHome)
-                    );
+                    ((StringBuilder)pManagedHome)
+                        .ReplaceBufferInternal(ptr, Win32Native.lstrlenW(pNativeHome));
                     break;
                 }
 

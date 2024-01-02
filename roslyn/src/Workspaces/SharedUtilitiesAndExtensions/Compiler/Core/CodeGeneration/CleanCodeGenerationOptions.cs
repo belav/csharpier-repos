@@ -65,7 +65,8 @@ internal abstract class AbstractCleanCodeGenerationOptionsProvider
         (
             await GetCleanCodeGenerationOptionsAsync(languageServices, cancellationToken)
                 .ConfigureAwait(false)
-        ).CleanupOptions;
+        )
+            .CleanupOptions;
 
     ValueTask<CleanCodeGenerationOptions> OptionsProvider<CleanCodeGenerationOptions>.GetOptionsAsync(
         LanguageServices languageServices,
@@ -79,7 +80,8 @@ internal abstract class AbstractCleanCodeGenerationOptionsProvider
         (
             await GetCleanCodeGenerationOptionsAsync(languageServices, cancellationToken)
                 .ConfigureAwait(false)
-        ).CodeAndImportGenerationOptions;
+        )
+            .CodeAndImportGenerationOptions;
 
     async ValueTask<CodeGenerationOptions> OptionsProvider<CodeGenerationOptions>.GetOptionsAsync(
         LanguageServices languageServices,
@@ -88,7 +90,8 @@ internal abstract class AbstractCleanCodeGenerationOptionsProvider
         (
             await GetCleanCodeGenerationOptionsAsync(languageServices, cancellationToken)
                 .ConfigureAwait(false)
-        ).GenerationOptions;
+        )
+            .GenerationOptions;
 
     async ValueTask<NamingStylePreferences> OptionsProvider<NamingStylePreferences>.GetOptionsAsync(
         LanguageServices languageServices,

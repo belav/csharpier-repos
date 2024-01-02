@@ -122,7 +122,8 @@ namespace ILCompiler.Dataflow
             ModuleDesc? callingModule = (
                 (diagnosticContext.Origin.MemberDefinition as MethodDesc)?.OwningType
                 as MetadataType
-            )?.Module;
+            )
+                ?.Module;
 
             List<ModuleDesc> referencedModules = new();
             TypeDesc foundType = System.Reflection.TypeNameParser.ResolveType(

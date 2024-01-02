@@ -1332,12 +1332,8 @@ namespace System.Data.Odbc
                     return 0; // MDAC Bug 73298
 
                 if (isCharsBuffer)
-                    ((string)cachedObj).CopyTo(
-                        (int)dataIndex,
-                        (char[])buffer,
-                        bufferIndex,
-                        lengthOfCopy
-                    );
+                    ((string)cachedObj)
+                        .CopyTo((int)dataIndex, (char[])buffer, bufferIndex, lengthOfCopy);
                 else
                     Array.Copy(
                         (byte[])cachedObj,

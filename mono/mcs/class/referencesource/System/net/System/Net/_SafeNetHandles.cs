@@ -3025,7 +3025,8 @@ namespace System.Net
                                     errorCode == SocketError.SocketError
                                         ? (SocketError)Marshal.GetLastWin32Error()
                                         : errorCode
-                                ).ToString()
+                                )
+                                    .ToString()
                         );
 
                         // Now retry the ioctl.
@@ -3042,7 +3043,8 @@ namespace System.Net
                                     errorCode == SocketError.SocketError
                                         ? (SocketError)Marshal.GetLastWin32Error()
                                         : errorCode
-                                ).ToString()
+                                )
+                                    .ToString()
                         );
                     }
 
@@ -3120,7 +3122,8 @@ namespace System.Net
                             errorCode == SocketError.SocketError
                                 ? (SocketError)Marshal.GetLastWin32Error()
                                 : errorCode
-                        ).ToString()
+                        )
+                            .ToString()
                 );
 
                 return ret = errorCode == SocketError.Success;

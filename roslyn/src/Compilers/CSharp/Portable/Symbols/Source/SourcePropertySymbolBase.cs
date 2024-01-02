@@ -432,9 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     Debug.Assert(IsIndexer);
 
-                    var indexerNameAttributeLists = (
-                        (IndexerDeclarationSyntax)CSharpSyntaxNode
-                    ).AttributeLists;
+                    var indexerNameAttributeLists = ((IndexerDeclarationSyntax)CSharpSyntaxNode)
+                        .AttributeLists;
                     Debug.Assert(indexerNameAttributeLists.Count != 0);
                     Debug.Assert(!IsExplicitInterfaceImplementation);
 
@@ -1548,7 +1547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return (
                         (PropertyEarlyWellKnownAttributeData)
                             lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData
-                    )?.ObsoleteAttributeData;
+                    )
+                        ?.ObsoleteAttributeData;
                 }
 
                 return ObsoleteAttributeData.Uninitialized;

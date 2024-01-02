@@ -922,9 +922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         !isValueType
                         || (
                             RequiresAssignableVariable(valueKind)
-                            && (
-                                this.ContainingMemberOrLambda as MethodSymbol
-                            )?.IsEffectivelyReadOnly == true
+                            && (this.ContainingMemberOrLambda as MethodSymbol)
+                                ?.IsEffectivelyReadOnly == true
                         )
                     )
                     {
@@ -5585,9 +5584,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.CapturedReceiverPlaceholder:
                     // Equivalent to a non-ref local with the underlying receiver as an initializer provided at declaration
-                    BoundExpression underlyingReceiver = (
-                        (BoundCapturedReceiverPlaceholder)expr
-                    ).Receiver;
+                    BoundExpression underlyingReceiver = ((BoundCapturedReceiverPlaceholder)expr)
+                        .Receiver;
                     return CheckValEscape(
                         underlyingReceiver.Syntax,
                         underlyingReceiver,

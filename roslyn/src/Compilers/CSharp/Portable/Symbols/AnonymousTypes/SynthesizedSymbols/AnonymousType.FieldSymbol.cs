@@ -147,9 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
-                AnonymousTypeManager manager = (
-                    (AnonymousTypeTemplateSymbol)this.ContainingSymbol
-                ).Manager;
+                AnonymousTypeManager manager = ((AnonymousTypeTemplateSymbol)this.ContainingSymbol)
+                    .Manager;
 
                 AddSynthesizedAttribute(
                     ref attributes,

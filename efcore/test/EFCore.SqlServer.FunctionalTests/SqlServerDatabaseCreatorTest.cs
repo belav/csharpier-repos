@@ -440,9 +440,8 @@ public class SqlServerDatabaseCreatorHasTablesTest : SqlServerDatabaseCreatorTes
             async creator =>
             {
                 var errorNumber = async
-                    ? (
-                        await Assert.ThrowsAsync<SqlException>(() => creator.HasTablesAsyncBase())
-                    ).Number
+                    ? (await Assert.ThrowsAsync<SqlException>(() => creator.HasTablesAsyncBase()))
+                        .Number
                     : Assert.Throws<SqlException>(() => creator.HasTablesBase()).Number;
 
                 if (errorNumber != 233) // skip if no-process transient failure
@@ -604,7 +603,8 @@ public class SqlServerDatabaseCreatorCreateTablesTest : SqlServerDatabaseCreator
             await testDatabase.QueryAsync<string>(
                 "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"
             )
-        ).ToList();
+        )
+            .ToList();
         Assert.Single(tables);
         Assert.Equal("Blogs", tables.Single());
 
@@ -612,7 +612,8 @@ public class SqlServerDatabaseCreatorCreateTablesTest : SqlServerDatabaseCreator
             await testDatabase.QueryAsync<string>(
                 "SELECT TABLE_NAME + '.' + COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Blogs'"
             )
-        ).ToList();
+        )
+            .ToList();
         Assert.Equal(14, columns.Count);
         Assert.Contains(columns, c => c == "Blogs.Key1");
         Assert.Contains(columns, c => c == "Blogs.Key2");

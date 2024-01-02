@@ -28,9 +28,8 @@ public static class BindingContextExtensions
             parseResult.CommandResult.Command.Action = new DummyStateHoldingHandler();
         }
 
-        return ((BindingHandler)parseResult.CommandResult.Command.Action).GetBindingContext(
-            parseResult
-        );
+        return ((BindingHandler)parseResult.CommandResult.Command.Action)
+            .GetBindingContext(parseResult);
     }
 
     /// <summary>

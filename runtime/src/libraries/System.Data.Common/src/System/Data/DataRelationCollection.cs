@@ -946,12 +946,10 @@ namespace System.Data
                     if (relation == _relations[i])
                     {
                         _relations.RemoveAt(i);
-                        ((DataTableRelationCollection)(relation.ParentTable.ChildRelations)).Remove(
-                            relation
-                        ); // Remove Cache from ParentTable -> ChildRelations
-                        ((DataTableRelationCollection)(relation.ChildTable.ParentRelations)).Remove(
-                            relation
-                        ); // Removing Cache from ChildTable -> ParentRelations
+                        ((DataTableRelationCollection)(relation.ParentTable.ChildRelations))
+                            .Remove(relation); // Remove Cache from ParentTable -> ChildRelations
+                        ((DataTableRelationCollection)(relation.ChildTable.ParentRelations))
+                            .Remove(relation); // Removing Cache from ChildTable -> ParentRelations
                         if (relation.Nested)
                         {
                             relation.ChildTable.CacheNestedParent();

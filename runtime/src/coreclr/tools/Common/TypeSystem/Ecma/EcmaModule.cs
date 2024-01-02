@@ -369,9 +369,8 @@ namespace Internal.TypeSystem.Ecma
             )
             {
                 if (
-                    (
-                        currentModule._nameLookupCache ?? currentModule.CreateNameLookupCache()
-                    ).TryGetValue((name, nameSpace), out EntityHandle foundHandle)
+                    (currentModule._nameLookupCache ?? currentModule.CreateNameLookupCache())
+                        .TryGetValue((name, nameSpace), out EntityHandle foundHandle)
                 )
                 {
                     if (foundHandle.Kind == HandleKind.TypeDefinition)
@@ -707,11 +706,12 @@ namespace Internal.TypeSystem.Ecma
 
             if (resolutionScope is ModuleDesc)
             {
-                return ((ModuleDesc)(resolutionScope)).GetType(
-                    _metadataReader.GetString(typeReference.Namespace),
-                    _metadataReader.GetString(typeReference.Name),
-                    NotFoundBehavior.ReturnResolutionFailure
-                );
+                return ((ModuleDesc)(resolutionScope))
+                    .GetType(
+                        _metadataReader.GetString(typeReference.Namespace),
+                        _metadataReader.GetString(typeReference.Name),
+                        NotFoundBehavior.ReturnResolutionFailure
+                    );
             }
             else if (resolutionScope is MetadataType)
             {

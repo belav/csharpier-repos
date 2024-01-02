@@ -175,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             (
                                                 (SynthesizedRecordPropertySymbol)
                                                     fieldSymbol.AssociatedSymbol
-                                            ).BackingParameter
+                                            )
+                                                .BackingParameter
                                         ).MakeCompilerGenerated()
                                     )
                                 );

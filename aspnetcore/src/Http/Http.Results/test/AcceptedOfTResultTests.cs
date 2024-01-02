@@ -122,7 +122,8 @@ public class AcceptedOfTResultTests
                 PopulateMetadata<Accepted<object>>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

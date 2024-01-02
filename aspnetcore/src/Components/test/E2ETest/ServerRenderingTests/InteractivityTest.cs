@@ -390,9 +390,8 @@ public class InteractivityTest
         {
             browser.Navigate().GoToUrl($"{new Uri(_serverFixture.RootUri, ServerPathBase)}/");
         }
-        ((IJavaScriptExecutor)browser).ExecuteScript(
-            "sessionStorage.setItem('enable-classic-initializers', 'true')"
-        );
+        ((IJavaScriptExecutor)browser)
+            .ExecuteScript("sessionStorage.setItem('enable-classic-initializers', 'true')");
     }
 
     [Theory]
@@ -1046,7 +1045,8 @@ public class InteractivityTest
         Browser.Equal("True", () => Browser.FindElement(By.Id($"is-interactive-0")).Text);
 
         // This JS call works via .NET object reference to a counter component.
-        ((IJavaScriptExecutor)Browser).ExecuteScript("window.incrementCounter(0)");
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("window.incrementCounter(0)");
         Browser.Equal("1", () => Browser.FindElement(By.Id($"count-0")).Text);
 
         Browser.Click(By.Id($"remove-counter-link-0"));
@@ -1069,7 +1069,8 @@ public class InteractivityTest
         Browser.Equal("True", () => Browser.FindElement(By.Id($"is-interactive-0")).Text);
 
         // This JS call works via .NET object reference to a counter component.
-        ((IJavaScriptExecutor)Browser).ExecuteScript("window.incrementCounter(0)");
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("window.incrementCounter(0)");
         Browser.Equal("1", () => Browser.FindElement(By.Id($"count-0")).Text);
 
         Browser.Click(By.Id($"remove-counter-link-0"));
@@ -1174,14 +1175,12 @@ public class InteractivityTest
 
     private void BlockWebAssemblyResourceLoad()
     {
-        ((IJavaScriptExecutor)Browser).ExecuteScript(
-            "sessionStorage.setItem('block-load-boot-resource', 'true')"
-        );
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("sessionStorage.setItem('block-load-boot-resource', 'true')");
 
         // Clear caches so that we can block the resource load
-        ((IJavaScriptExecutor)Browser).ExecuteScript(
-            "caches.keys().then(keys => keys.forEach(key => caches.delete(key)))"
-        );
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("caches.keys().then(keys => keys.forEach(key => caches.delete(key)))");
     }
 
     private void UnblockWebAssemblyResourceLoad()
@@ -1191,23 +1190,24 @@ public class InteractivityTest
 
     private void UseLongWebAssemblyLoadTimeout()
     {
-        ((IJavaScriptExecutor)Browser).ExecuteScript(
-            "sessionStorage.setItem('use-long-auto-timeout', 'true')"
-        );
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("sessionStorage.setItem('use-long-auto-timeout', 'true')");
     }
 
     private void ForceWebAssemblyResourceCacheMiss(string resourceHash = null)
     {
         if (resourceHash is not null)
         {
-            ((IJavaScriptExecutor)Browser).ExecuteScript(
-                $"localStorage.setItem('blazor-resource-hash:Components.WasmMinimal', '{resourceHash}')"
-            );
+            ((IJavaScriptExecutor)Browser)
+                .ExecuteScript(
+                    $"localStorage.setItem('blazor-resource-hash:Components.WasmMinimal', '{resourceHash}')"
+                );
         }
         else
         {
             // Clear local storage so that the resource hash is not found
-            ((IJavaScriptExecutor)Browser).ExecuteScript("localStorage.clear()");
+            ((IJavaScriptExecutor)Browser)
+                .ExecuteScript("localStorage.clear()");
         }
     }
 

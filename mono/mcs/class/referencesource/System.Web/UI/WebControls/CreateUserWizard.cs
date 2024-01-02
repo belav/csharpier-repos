@@ -2020,12 +2020,14 @@ namespace System.Web.UI.WebControls
                     (BaseNavigationTemplateContainer)(
                         CreateUserStep.CustomNavigationTemplateContainer
                     )
-                ).NextButton = _defaultCreateUserNavigationTemplate.CreateUserButton;
+                )
+                    .NextButton = _defaultCreateUserNavigationTemplate.CreateUserButton;
                 (
                     (BaseNavigationTemplateContainer)(
                         CreateUserStep.CustomNavigationTemplateContainer
                     )
-                ).CancelButton = _defaultCreateUserNavigationTemplate.CancelButton;
+                )
+                    .CancelButton = _defaultCreateUserNavigationTemplate.CancelButton;
             }
 
             RequiredFieldValidator passwordRequired = _createUserStepContainer.PasswordRequired;
@@ -2269,9 +2271,8 @@ namespace System.Web.UI.WebControls
             );
 
             // Copy the styles from the StepStyle property if defined.
-            Table table = (
-                (CompleteStepContainer)(CompleteStep.ContentTemplateContainer)
-            ).LayoutTable;
+            Table table = ((CompleteStepContainer)(CompleteStep.ContentTemplateContainer))
+                .LayoutTable;
             table.Height = Height;
             table.Width = Width;
         }

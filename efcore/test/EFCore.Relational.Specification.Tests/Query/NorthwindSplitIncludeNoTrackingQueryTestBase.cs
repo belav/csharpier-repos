@@ -142,7 +142,8 @@ public abstract class NorthwindSplitIncludeNoTrackingQueryTestBase<TFixture>
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_with_last_no_orderby(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     protected override Expression RewriteServerQueryExpression(Expression serverQueryExpression)

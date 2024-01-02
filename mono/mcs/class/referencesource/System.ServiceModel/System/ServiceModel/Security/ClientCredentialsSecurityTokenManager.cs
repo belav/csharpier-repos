@@ -513,9 +513,8 @@ namespace System.ServiceModel
                 && (targetAddress.Identity.GetType() == typeof(X509CertificateEndpointIdentity))
             )
             {
-                targetServerCertificate = (
-                    (X509CertificateEndpointIdentity)targetAddress.Identity
-                ).Certificates[0];
+                targetServerCertificate = ((X509CertificateEndpointIdentity)targetAddress.Identity)
+                    .Certificates[0];
             }
             if (targetServerCertificate != null)
             {

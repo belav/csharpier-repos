@@ -258,12 +258,13 @@ namespace System.ServiceModel.Discovery
             using (var ocs = new OperationContextScope(InnerChannel))
             {
                 OperationContext.Current.OutgoingMessageHeaders.MessageId = new UniqueId();
-                return ((IAnnouncementCommon)client).BeginAnnounceOffline(
-                    discoveryMetadata,
-                    MessageSequenceGenerator.Next(),
-                    callback,
-                    state
-                );
+                return ((IAnnouncementCommon)client)
+                    .BeginAnnounceOffline(
+                        discoveryMetadata,
+                        MessageSequenceGenerator.Next(),
+                        callback,
+                        state
+                    );
             }
         }
 
@@ -276,12 +277,13 @@ namespace System.ServiceModel.Discovery
             using (var ocs = new OperationContextScope(InnerChannel))
             {
                 OperationContext.Current.OutgoingMessageHeaders.MessageId = new UniqueId();
-                return ((IAnnouncementCommon)client).BeginAnnounceOnline(
-                    discoveryMetadata,
-                    MessageSequenceGenerator.Next(),
-                    callback,
-                    state
-                );
+                return ((IAnnouncementCommon)client)
+                    .BeginAnnounceOnline(
+                        discoveryMetadata,
+                        MessageSequenceGenerator.Next(),
+                        callback,
+                        state
+                    );
             }
         }
 

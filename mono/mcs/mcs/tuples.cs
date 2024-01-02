@@ -690,10 +690,8 @@ namespace Mono.CSharp
                         variable.PrepareAssignmentAnalysis((BlockContext)rc);
                     }
 
-                    var element_target = (targetExprs[i] as SimpleName)?.LookupNameExpression(
-                        rc,
-                        MemberLookupRestrictions.None
-                    );
+                    var element_target = (targetExprs[i] as SimpleName)
+                        ?.LookupNameExpression(rc, MemberLookupRestrictions.None);
 
                     if (
                         element_target != null

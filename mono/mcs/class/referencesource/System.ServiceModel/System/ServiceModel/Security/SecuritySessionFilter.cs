@@ -263,7 +263,8 @@ namespace System.ServiceModel.Security
                 return (
                     (ICollection<KeyValuePair<MessageFilter, FilterData>>)
                         this.contextMappings.Values
-                ).GetEnumerator();
+                )
+                    .GetEnumerator();
             }
 
             public void Add(MessageFilter filter, FilterData data)

@@ -133,9 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             //to System.Runtime.WindowsRuntime
             Assert.Equal(
                 "System.Runtime.WindowsRuntime.dll",
-                (
-                    (PENamedTypeSymbol)((((PropertySymbol)(blk)).GetMethod).ReturnType)
-                ).ContainingModule.ToString()
+                ((PENamedTypeSymbol)((((PropertySymbol)(blk)).GetMethod).ReturnType))
+                    .ContainingModule.ToString()
             );
         }
 
@@ -194,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     (Microsoft.CodeAnalysis.CSharp.Symbols.ConstructedNamedTypeSymbol)(
                         ((Microsoft.CodeAnalysis.CSharp.Symbols.MethodSymbol)puint).ReturnType
                     )
-                ).ToString()
+                )
+                    .ToString()
             );
         }
 

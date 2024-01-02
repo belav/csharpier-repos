@@ -132,9 +132,8 @@ namespace System.Security.Policy
 
                 while (enumerator.MoveNext())
                 {
-                    CodeGroup matchingGroups = (
-                        (CodeGroup)enumerator.Current
-                    ).ResolveMatchingCodeGroups(evidence);
+                    CodeGroup matchingGroups = ((CodeGroup)enumerator.Current)
+                        .ResolveMatchingCodeGroups(evidence);
 
                     // If the child has a policy, we are done.
 

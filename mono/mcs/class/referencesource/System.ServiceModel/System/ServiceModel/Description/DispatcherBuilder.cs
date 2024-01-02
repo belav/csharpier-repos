@@ -235,32 +235,23 @@ namespace System.ServiceModel.Description
         void ValidateDescription(ServiceDescription description, ServiceHostBase serviceHost)
         {
             description.EnsureInvariants();
-            (PartialTrustValidationBehavior.Instance as IServiceBehavior).Validate(
-                description,
-                serviceHost
-            );
+            (PartialTrustValidationBehavior.Instance as IServiceBehavior)
+                .Validate(description, serviceHost);
 #pragma warning disable 0618
-            (PeerValidationBehavior.Instance as IServiceBehavior).Validate(
-                description,
-                serviceHost
-            );
+            (PeerValidationBehavior.Instance as IServiceBehavior)
+                .Validate(description, serviceHost);
 #pragma warning restore 0618
-            (TransactionValidationBehavior.Instance as IServiceBehavior).Validate(
-                description,
-                serviceHost
-            );
+            (TransactionValidationBehavior.Instance as IServiceBehavior)
+                .Validate(description, serviceHost);
             (
                 System.ServiceModel.MsmqIntegration.MsmqIntegrationValidationBehavior.Instance
                 as IServiceBehavior
-            ).Validate(description, serviceHost);
-            (SecurityValidationBehavior.Instance as IServiceBehavior).Validate(
-                description,
-                serviceHost
-            );
-            (new UniqueContractNameValidationBehavior() as IServiceBehavior).Validate(
-                description,
-                serviceHost
-            );
+            )
+                .Validate(description, serviceHost);
+            (SecurityValidationBehavior.Instance as IServiceBehavior)
+                .Validate(description, serviceHost);
+            (new UniqueContractNameValidationBehavior() as IServiceBehavior)
+                .Validate(description, serviceHost);
             for (int i = 0; i < description.Behaviors.Count; i++)
             {
                 IServiceBehavior iServiceBehavior = description.Behaviors[i];

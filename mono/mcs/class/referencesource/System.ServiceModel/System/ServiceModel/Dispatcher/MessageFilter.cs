@@ -299,9 +299,8 @@ namespace System.ServiceModel.Dispatcher
             KeyValuePair<MessageFilter, FilterData> item
         )
         {
-            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).Contains(
-                item
-            );
+            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters)
+                .Contains(item);
         }
 
         void ICollection<KeyValuePair<MessageFilter, FilterData>>.CopyTo(
@@ -309,19 +308,16 @@ namespace System.ServiceModel.Dispatcher
             int arrayIndex
         )
         {
-            ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).CopyTo(
-                array,
-                arrayIndex
-            );
+            ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters)
+                .CopyTo(array, arrayIndex);
         }
 
         bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Remove(
             KeyValuePair<MessageFilter, FilterData> item
         )
         {
-            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).Remove(
-                item
-            );
+            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters)
+                .Remove(item);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -333,9 +329,8 @@ namespace System.ServiceModel.Dispatcher
             KeyValuePair<MessageFilter, FilterData>
         >.GetEnumerator()
         {
-            return (
-                (ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters
-            ).GetEnumerator();
+            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters)
+                .GetEnumerator();
         }
 
         public bool TryGetValue(MessageFilter filter, out FilterData data)

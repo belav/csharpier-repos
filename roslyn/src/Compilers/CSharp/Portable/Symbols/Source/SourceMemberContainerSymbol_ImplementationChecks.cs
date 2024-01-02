@@ -1111,9 +1111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Symbol associatedPropertyOrEvent = null;
                     if (overridingMemberIsMethod)
                     {
-                        associatedPropertyOrEvent = (
-                            (MethodSymbol)overridingMember
-                        ).AssociatedSymbol;
+                        associatedPropertyOrEvent = ((MethodSymbol)overridingMember)
+                            .AssociatedSymbol;
                     }
 
                     if ((object)associatedPropertyOrEvent == null)
@@ -2561,9 +2560,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     switch (hidingMember.Kind)
                     {
                         case SymbolKind.Method:
-                            var associatedPropertyOrEvent = (
-                                (MethodSymbol)hidingMember
-                            ).AssociatedSymbol;
+                            var associatedPropertyOrEvent = ((MethodSymbol)hidingMember)
+                                .AssociatedSymbol;
                             if ((object)associatedPropertyOrEvent != null)
                             {
                                 //Dev10 reports that the property/event is doing the hiding, rather than the method

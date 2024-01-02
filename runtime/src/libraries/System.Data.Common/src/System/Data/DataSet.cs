@@ -1685,7 +1685,8 @@ namespace System.Data
             else
             {
                 // no skip schema support for typed datatable
-                (new XmlTreeGen(SchemaFormat.Remoting)).Save(table, writer);
+                (new XmlTreeGen(SchemaFormat.Remoting))
+                    .Save(table, writer);
             }
 
             return strWriter.ToString();

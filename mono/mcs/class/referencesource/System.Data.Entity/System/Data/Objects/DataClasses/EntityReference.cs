@@ -558,9 +558,8 @@ namespace System.Data.Objects.DataClasses
                 this.IsForeignKey,
                 "cannot update foreign key values if the relationship is not a FK"
             );
-            ReferentialConstraint constraint = (
-                (AssociationType)this.RelationMetadata
-            ).ReferentialConstraints[0];
+            ReferentialConstraint constraint = ((AssociationType)this.RelationMetadata)
+                .ReferentialConstraints[0];
             Debug.Assert(constraint != null, "null constraint");
 
             bool isUnchangedDependent =
@@ -720,9 +719,8 @@ namespace System.Data.Objects.DataClasses
                 this.IsForeignKey,
                 "cannot update foreign key values if the relationship is not a FK"
             );
-            ReferentialConstraint constraint = (
-                (AssociationType)this.RelationMetadata
-            ).ReferentialConstraints[0];
+            ReferentialConstraint constraint = ((AssociationType)this.RelationMetadata)
+                .ReferentialConstraints[0];
             Debug.Assert(constraint != null, "null constraint");
 
             ObjectStateManager stateManager = ObjectContext.ObjectStateManager;
@@ -807,9 +805,8 @@ namespace System.Data.Objects.DataClasses
                 && !transManager.IsRelatedEndAdd
             )
             {
-                ReferentialConstraint constraint = (
-                    (AssociationType)RelationMetadata
-                ).ReferentialConstraints.Single();
+                ReferentialConstraint constraint = ((AssociationType)RelationMetadata)
+                    .ReferentialConstraints.Single();
                 if (TargetRoleName == constraint.FromRole.Name) // Only do this on the dependent end
                 {
                     if (transManager.IsDetaching)

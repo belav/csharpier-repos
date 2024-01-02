@@ -154,11 +154,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             return SqlStatement.Join(
                 queryContext.DataContext.Vendor.SqlProvider.NewLine,
-                (
-                    from clause in clauses
-                    where clause.ToString() != string.Empty
-                    select clause
-                ).ToList()
+                (from clause in clauses where clause.ToString() != string.Empty select clause)
+                    .ToList()
             );
         }
 

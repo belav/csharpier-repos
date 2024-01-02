@@ -646,9 +646,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     )
                 )
                 {
-                    return ((VisualBasicParseOptions)parseOptions).WithLanguageVersion(
-                        languageVersion
-                    );
+                    return ((VisualBasicParseOptions)parseOptions)
+                        .WithLanguageVersion(languageVersion);
                 }
             }
 

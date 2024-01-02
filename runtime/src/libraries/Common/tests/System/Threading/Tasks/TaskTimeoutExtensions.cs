@@ -43,9 +43,8 @@ namespace System.Threading.Tasks
                 )
             )
             {
-                await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(
-                    false
-                );
+                await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false))
+                    .ConfigureAwait(false);
             }
         }
 
@@ -84,9 +83,8 @@ namespace System.Threading.Tasks
                 )
             )
             {
-                return await (
-                    await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)
-                ).ConfigureAwait(false);
+                return await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false))
+                    .ConfigureAwait(false);
             }
         }
         #endregion

@@ -168,12 +168,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // because this method is called by the ReferenceIndexer in the metadata-only case
                 // (and we specifically don't want to prevent metadata-only emit because of a bad
                 // constant).  If the constant value is bad, we'll end up exposing null to CCI.
-                return ((PEModuleBuilder)context.Module).CreateConstant(
-                    AdaptedFieldSymbol.Type,
-                    AdaptedFieldSymbol.ConstantValue,
-                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
-                    diagnostics: context.Diagnostics
-                );
+                return ((PEModuleBuilder)context.Module)
+                    .CreateConstant(
+                        AdaptedFieldSymbol.Type,
+                        AdaptedFieldSymbol.ConstantValue,
+                        syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                        diagnostics: context.Diagnostics
+                    );
             }
 
             return null;

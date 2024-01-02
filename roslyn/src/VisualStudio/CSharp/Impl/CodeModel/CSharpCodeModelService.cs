@@ -1057,35 +1057,38 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     return ((ParameterSyntax)node).WithIdentifier(newIdentifier);
                 case SyntaxKind.NamespaceDeclaration:
                 case SyntaxKind.FileScopedNamespaceDeclaration:
-                    return ((BaseNamespaceDeclarationSyntax)node).WithName(
-                        SyntaxFactory
-                            .ParseName(name)
-                            .WithLeadingTrivia(
-                                SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
-                            )
-                            .WithTrailingTrivia(
-                                SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
-                            )
-                    );
+                    return ((BaseNamespaceDeclarationSyntax)node)
+                        .WithName(
+                            SyntaxFactory
+                                .ParseName(name)
+                                .WithLeadingTrivia(
+                                    SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
+                                )
+                                .WithTrailingTrivia(
+                                    SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
+                                )
+                        );
                 case SyntaxKind.EnumMemberDeclaration:
                     return ((EnumMemberDeclarationSyntax)node).WithIdentifier(newIdentifier);
                 case SyntaxKind.VariableDeclarator:
                     return ((VariableDeclaratorSyntax)node).WithIdentifier(newIdentifier);
                 case SyntaxKind.Attribute:
-                    return ((AttributeSyntax)node).WithName(
-                        SyntaxFactory
-                            .ParseName(name)
-                            .WithLeadingTrivia(
-                                SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
-                            )
-                            .WithTrailingTrivia(
-                                SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
-                            )
-                    );
+                    return ((AttributeSyntax)node)
+                        .WithName(
+                            SyntaxFactory
+                                .ParseName(name)
+                                .WithLeadingTrivia(
+                                    SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
+                                )
+                                .WithTrailingTrivia(
+                                    SyntaxFactory.TriviaList(SyntaxFactory.ElasticMarker)
+                                )
+                        );
                 case SyntaxKind.AttributeArgument:
-                    return ((AttributeArgumentSyntax)node).WithNameEquals(
-                        SyntaxFactory.NameEquals(SyntaxFactory.IdentifierName(name))
-                    );
+                    return ((AttributeArgumentSyntax)node)
+                        .WithNameEquals(
+                            SyntaxFactory.NameEquals(SyntaxFactory.IdentifierName(name))
+                        );
                 default:
                     Debug.Fail("Invalid node kind: " + node.Kind());
                     throw new ArgumentException();
@@ -1100,16 +1103,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             {
                 if (member.Kind() == SyntaxKind.ConstructorDeclaration)
                 {
-                    var constructor = ((ConstructorDeclarationSyntax)member).WithIdentifier(
-                        newIdentifier
-                    );
+                    var constructor = ((ConstructorDeclarationSyntax)member)
+                        .WithIdentifier(newIdentifier);
                     typeNode = typeNode.ReplaceNode(member, constructor);
                 }
                 else if (member.Kind() == SyntaxKind.DestructorDeclaration)
                 {
-                    var destructor = ((DestructorDeclarationSyntax)member).WithIdentifier(
-                        newIdentifier
-                    );
+                    var destructor = ((DestructorDeclarationSyntax)member)
+                        .WithIdentifier(newIdentifier);
                     typeNode = typeNode.ReplaceNode(member, destructor);
                 }
             }

@@ -276,9 +276,8 @@ namespace System.Runtime.CompilerServices { class CreateNewOnMetadataUpdateAttri
             // If we are not testing a state machine method we only use the body to avoid updating positions in all existing tests.
             var bodyNode =
                 (kind != MethodKind.Regular)
-                    ? (
-                        (BaseMethodDeclarationSyntax)SyntaxFactory.SyntaxTree(declaration).GetRoot()
-                    ).Body
+                    ? ((BaseMethodDeclarationSyntax)SyntaxFactory.SyntaxTree(declaration).GetRoot())
+                        .Body
                     : (BlockSyntax)SyntaxFactory.SyntaxTree(declaration.Body!).GetRoot();
 
             return SyntaxUtilities.CreateSimpleBody(bodyNode)!;
@@ -319,16 +318,14 @@ namespace System.Runtime.CompilerServices { class CreateNewOnMetadataUpdateAttri
         )
         {
             var oldDeclaration = (MethodDeclarationSyntax)
-                (
-                    (ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.OldRoot).Members[0]
-                ).Members[0];
+                ((ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.OldRoot).Members[0])
+                    .Members[0];
             var oldBody = SyntaxUtilities.TryGetDeclarationBody(oldDeclaration, symbol: null);
             Contract.ThrowIfNull(oldBody);
 
             var newDeclaration = (MethodDeclarationSyntax)
-                (
-                    (ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.NewRoot).Members[0]
-                ).Members[0];
+                ((ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.NewRoot).Members[0])
+                    .Members[0];
             var newBody = SyntaxUtilities.TryGetDeclarationBody(newDeclaration, symbol: null);
             Contract.ThrowIfNull(newBody);
 

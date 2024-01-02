@@ -243,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 return (
                     (NullableContextKind)((_bits >> NullableContextOffset) & NullableContextMask)
-                ).TryGetByte(out value);
+                )
+                    .TryGetByte(out value);
             }
 
             public bool SetNullableContext(byte? value)
@@ -1756,9 +1757,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             foreach (var typeParam in TypeParameters)
             {
-                diag = ((PETypeParameterSymbol)typeParam).DeriveCompilerFeatureRequiredDiagnostic(
-                    decoder
-                );
+                diag = ((PETypeParameterSymbol)typeParam)
+                    .DeriveCompilerFeatureRequiredDiagnostic(decoder);
                 if (diag != null)
                 {
                     return diag;
@@ -1770,9 +1770,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private UseSiteInfo<AssemblySymbol> GetCachedUseSiteInfo()
         {
-            return (_uncommonFields?._lazyCachedUseSiteInfo ?? default).ToUseSiteInfo(
-                PrimaryDependency
-            );
+            return (_uncommonFields?._lazyCachedUseSiteInfo ?? default)
+                .ToUseSiteInfo(PrimaryDependency);
         }
 
         private UseSiteInfo<AssemblySymbol> InitializeUseSiteDiagnostic(

@@ -92,7 +92,8 @@ namespace System.ServiceModel.Configuration
                     ExtensionElementCollection extensions = (
                         (ExtensionsSection)
                             EvaluationContext.GetSection("system.serviceModel/extensions")
-                    ).EndpointExtensions;
+                    )
+                        .EndpointExtensions;
                     for (int i = 0; i < extensions.Count; i++)
                     {
                         ExtensionElement extension = extensions[i];

@@ -103,7 +103,8 @@ namespace System.Numerics
                     (uint)foldLength <= StackAllocThreshold
                         ? stackalloc uint[StackAllocThreshold]
                         : foldFromPool = ArrayPool<uint>.Shared.Rent(foldLength)
-                ).Slice(0, foldLength);
+                )
+                    .Slice(0, foldLength);
                 fold.Clear();
 
                 int coreLength = foldLength + foldLength;
@@ -112,7 +113,8 @@ namespace System.Numerics
                     (uint)coreLength <= StackAllocThreshold
                         ? stackalloc uint[StackAllocThreshold]
                         : coreFromPool = ArrayPool<uint>.Shared.Rent(coreLength)
-                ).Slice(0, coreLength);
+                )
+                    .Slice(0, coreLength);
                 core.Clear();
 
                 // ... compute z_a = a_1 + a_0 (call it fold...)
@@ -272,7 +274,8 @@ namespace System.Numerics
                         (uint)carryLength <= StackAllocThreshold
                             ? stackalloc uint[StackAllocThreshold]
                             : carryFromPool = ArrayPool<uint>.Shared.Rent(carryLength)
-                    ).Slice(0, carryLength);
+                    )
+                        .Slice(0, carryLength);
 
                     // ... compute low
                     Multiply(leftLow, rightLow, bitsLow);
@@ -295,7 +298,8 @@ namespace System.Numerics
                             (uint)upperRightLength <= StackAllocThreshold
                                 ? stackalloc uint[StackAllocThreshold]
                                 : upperRightFromPool = ArrayPool<uint>.Shared.Rent(upperRightLength)
-                        ).Slice(0, upperRightLength);
+                        )
+                            .Slice(0, upperRightLength);
                         upperRight.Clear();
 
                         Multiply(left, rightHigh, upperRight);
@@ -346,7 +350,8 @@ namespace System.Numerics
                         (uint)leftFoldLength <= StackAllocThreshold
                             ? stackalloc uint[StackAllocThreshold]
                             : leftFoldFromPool = ArrayPool<uint>.Shared.Rent(leftFoldLength)
-                    ).Slice(0, leftFoldLength);
+                    )
+                        .Slice(0, leftFoldLength);
                     leftFold.Clear();
 
                     int rightFoldLength = n + 1;
@@ -355,7 +360,8 @@ namespace System.Numerics
                         (uint)rightFoldLength <= StackAllocThreshold
                             ? stackalloc uint[StackAllocThreshold]
                             : rightFoldFromPool = ArrayPool<uint>.Shared.Rent(rightFoldLength)
-                    ).Slice(0, rightFoldLength);
+                    )
+                        .Slice(0, rightFoldLength);
                     rightFold.Clear();
 
                     int coreLength = leftFoldLength + rightFoldLength;
@@ -364,7 +370,8 @@ namespace System.Numerics
                         (uint)coreLength <= StackAllocThreshold
                             ? stackalloc uint[StackAllocThreshold]
                             : coreFromPool = ArrayPool<uint>.Shared.Rent(coreLength)
-                    ).Slice(0, coreLength);
+                    )
+                        .Slice(0, coreLength);
                     core.Clear();
 
                     Debug.Assert(bits.Length - n >= core.Length);
@@ -481,7 +488,8 @@ namespace System.Numerics
                     (uint)leftFoldLength <= StackAllocThreshold
                         ? stackalloc uint[StackAllocThreshold]
                         : leftFoldFromPool = ArrayPool<uint>.Shared.Rent(leftFoldLength)
-                ).Slice(0, leftFoldLength);
+                )
+                    .Slice(0, leftFoldLength);
                 leftFold.Clear();
 
                 int rightFoldLength = rightHigh.Length + 1;
@@ -490,7 +498,8 @@ namespace System.Numerics
                     (uint)rightFoldLength <= StackAllocThreshold
                         ? stackalloc uint[StackAllocThreshold]
                         : rightFoldFromPool = ArrayPool<uint>.Shared.Rent(rightFoldLength)
-                ).Slice(0, rightFoldLength);
+                )
+                    .Slice(0, rightFoldLength);
                 rightFold.Clear();
 
                 int coreLength = leftFoldLength + rightFoldLength;
@@ -499,7 +508,8 @@ namespace System.Numerics
                     (uint)coreLength <= StackAllocThreshold
                         ? stackalloc uint[StackAllocThreshold]
                         : coreFromPool = ArrayPool<uint>.Shared.Rent(coreLength)
-                ).Slice(0, coreLength);
+                )
+                    .Slice(0, coreLength);
                 core.Clear();
 
                 // ... compute z_a = a_1 + a_0 (call it fold...)

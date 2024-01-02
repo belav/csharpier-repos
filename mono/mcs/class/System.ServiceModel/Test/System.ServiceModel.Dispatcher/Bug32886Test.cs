@@ -595,9 +595,8 @@ public partial class TempConvertSoapClient
     )]
     private string EndFahrenheitToCelsius(System.IAsyncResult result)
     {
-        FahrenheitToCelsiusResponse retVal = ((TempConvertSoap)(this)).EndFahrenheitToCelsius(
-            result
-        );
+        FahrenheitToCelsiusResponse retVal = ((TempConvertSoap)(this))
+            .EndFahrenheitToCelsius(result);
         return retVal.Body.FahrenheitToCelsiusResult;
     }
 
@@ -708,9 +707,8 @@ public partial class TempConvertSoapClient
     )]
     private string EndCelsiusToFahrenheit(System.IAsyncResult result)
     {
-        CelsiusToFahrenheitResponse retVal = ((TempConvertSoap)(this)).EndCelsiusToFahrenheit(
-            result
-        );
+        CelsiusToFahrenheitResponse retVal = ((TempConvertSoap)(this))
+            .EndCelsiusToFahrenheit(result);
         return retVal.Body.CelsiusToFahrenheitResult;
     }
 

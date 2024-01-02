@@ -30,9 +30,8 @@ public class RelationalDatabaseFacadeExtensionsTest
         var dbConnection = new FakeDbConnection("A=B");
         var context = FakeRelationalTestHelpers.Instance.CreateContext();
 
-        ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-            dbConnection
-        );
+        ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+            .UseConnection(dbConnection);
 
         Assert.Same(dbConnection, context.Database.GetDbConnection());
     }
@@ -65,9 +64,8 @@ public class RelationalDatabaseFacadeExtensionsTest
         var dbConnection = new FakeDbConnection("A=B");
         var context = FakeRelationalTestHelpers.Instance.CreateContext();
 
-        ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-            dbConnection
-        );
+        ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+            .UseConnection(dbConnection);
 
         if (async)
         {
@@ -89,9 +87,8 @@ public class RelationalDatabaseFacadeExtensionsTest
         var dbConnection = new FakeDbConnection("A=B");
         var context = FakeRelationalTestHelpers.Instance.CreateContext();
 
-        ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-            dbConnection
-        );
+        ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+            .UseConnection(dbConnection);
 
         if (async)
         {
@@ -114,9 +111,8 @@ public class RelationalDatabaseFacadeExtensionsTest
     {
         var dbConnection = new FakeDbConnection("A=B");
         var context = FakeRelationalTestHelpers.Instance.CreateContext();
-        ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-            dbConnection
-        );
+        ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+            .UseConnection(dbConnection);
 
         var transaction = async
             ? await context.Database.BeginTransactionAsync(IsolationLevel.Chaos)
@@ -131,9 +127,8 @@ public class RelationalDatabaseFacadeExtensionsTest
     {
         var dbConnection = new FakeDbConnection("A=B");
         var context = FakeRelationalTestHelpers.Instance.CreateContext();
-        ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-            dbConnection
-        );
+        ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+            .UseConnection(dbConnection);
         var transaction = new FakeDbTransaction(dbConnection, IsolationLevel.Chaos);
 
         Assert.Same(transaction, context.Database.UseTransaction(transaction).GetDbTransaction());

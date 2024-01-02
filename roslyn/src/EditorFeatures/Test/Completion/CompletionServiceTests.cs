@@ -102,7 +102,8 @@ class Test {
             );
             var actualChange = (
                 await completionService.GetChangeAsync(document, item).ConfigureAwait(false)
-            ).TextChange;
+            )
+                .TextChange;
             Assert.Equal(expectedChange, actualChange);
         }
 

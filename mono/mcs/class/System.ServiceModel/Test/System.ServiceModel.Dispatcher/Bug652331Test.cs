@@ -324,17 +324,14 @@ namespace WebServiceMoonlightTest.ServiceReference1
             object asyncState
         )
         {
-            return ((WebServiceMoonlightTest.ServiceReference1.IService1)(this)).BeginGetData(
-                callback,
-                asyncState
-            );
+            return ((WebServiceMoonlightTest.ServiceReference1.IService1)(this))
+                .BeginGetData(callback, asyncState);
         }
 
         private object[] OnEndGetData(System.IAsyncResult result)
         {
-            object retVal = (
-                (WebServiceMoonlightTest.ServiceReference1.IService1)(this)
-            ).EndGetData(result);
+            object retVal = ((WebServiceMoonlightTest.ServiceReference1.IService1)(this))
+                .EndGetData(result);
             return new object[] { retVal };
         }
 
@@ -386,10 +383,8 @@ namespace WebServiceMoonlightTest.ServiceReference1
             object asyncState
         )
         {
-            return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(
-                callback,
-                asyncState
-            );
+            return ((System.ServiceModel.ICommunicationObject)(this))
+                .BeginOpen(callback, asyncState);
         }
 
         private object[] OnEndOpen(System.IAsyncResult result)
@@ -450,10 +445,8 @@ namespace WebServiceMoonlightTest.ServiceReference1
             object asyncState
         )
         {
-            return ((System.ServiceModel.ICommunicationObject)(this)).BeginClose(
-                callback,
-                asyncState
-            );
+            return ((System.ServiceModel.ICommunicationObject)(this))
+                .BeginClose(callback, asyncState);
         }
 
         private object[] OnEndClose(System.IAsyncResult result)

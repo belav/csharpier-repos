@@ -522,9 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                                         //  event backing fields do not show up in GetMembers
                                         {
-                                            FieldSymbol field = (
-                                                (EventSymbol)member
-                                            ).AssociatedField;
+                                            FieldSymbol field = ((EventSymbol)member)
+                                                .AssociatedField;
                                             if ((object)field != null)
                                             {
                                                 AddSymbolLocation(result, field);
@@ -1081,7 +1080,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     Compilation.GetWellKnownTypeMember(
                         WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__InitializeArrayArrayRuntimeFieldHandle
                     )
-            )?.GetCciAdapter();
+            )
+                ?.GetCciAdapter();
         }
 
         public sealed override bool IsPlatformType(

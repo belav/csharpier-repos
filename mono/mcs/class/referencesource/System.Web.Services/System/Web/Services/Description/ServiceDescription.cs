@@ -310,9 +310,8 @@ namespace System.Web.Services.Description
                 XmlSerializationWriter writer
             )
             {
-                ((ServiceDescriptionSerializationWriter)writer).Write125_definitions(
-                    objectToSerialize
-                );
+                ((ServiceDescriptionSerializationWriter)writer)
+                    .Write125_definitions(objectToSerialize);
             }
 
             protected override object Deserialize(XmlSerializationReader reader)

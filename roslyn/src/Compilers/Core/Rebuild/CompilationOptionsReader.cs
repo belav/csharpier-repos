@@ -279,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 let cdi = PdbReader.GetCustomDebugInformation(handle)
                 where PdbReader.GetGuid(cdi.Kind) == EmbeddedSourceGuid
                 select PdbReader.GetBlobBytes(cdi.Value)
-            ).SingleOrDefault();
+            )
+                .SingleOrDefault();
 
             if (bytes is null)
             {

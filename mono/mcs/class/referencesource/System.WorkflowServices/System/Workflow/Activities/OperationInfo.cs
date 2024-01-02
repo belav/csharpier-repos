@@ -308,7 +308,8 @@ namespace System.Workflow.Activities
                     {
                         string operationName = (
                             (OperationContractAttribute)operationContractAttribs[0]
-                        ).Name;
+                        )
+                            .Name;
 
                         if (
                             string.IsNullOrEmpty(operationName)

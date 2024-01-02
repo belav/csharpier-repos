@@ -95,9 +95,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                         string storeName = null;
 
                         // Values injected by JObjectInjectingExpressionVisitor
-                        var projectionExpression = (
-                            (UnaryExpression)binaryExpression.Right
-                        ).Operand;
+                        var projectionExpression = ((UnaryExpression)binaryExpression.Right)
+                            .Operand;
                         if (
                             projectionExpression
                             is ProjectionBindingExpression projectionBindingExpression
@@ -115,9 +114,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                         )
                         {
                             // Unwrap EntityProjectionExpression when the root entity is not projected
-                            projectionExpression = (
-                                (UnaryExpression)convertExpression.Operand
-                            ).Operand;
+                            projectionExpression = ((UnaryExpression)convertExpression.Operand)
+                                .Operand;
                         }
 
                         Expression innerAccessExpression;
@@ -192,7 +190,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                             var projection = (
                                 (UnaryExpression)
                                     ((UnaryExpression)newExpression.Arguments[0]).Operand
-                            ).Operand;
+                            )
+                                .Operand;
                             entityProjectionExpression = (EntityProjectionExpression)projection;
                         }
 

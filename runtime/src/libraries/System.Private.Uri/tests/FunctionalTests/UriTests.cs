@@ -1179,12 +1179,13 @@ namespace System.PrivateUri.Tests
                 // ISpanFormattable.TryFormat
                 Array.Clear(formatted);
                 Assert.True(
-                    ((ISpanFormattable)func()).TryFormat(
-                        formatted,
-                        out charsWritten,
-                        "asdfasdf",
-                        new CultureInfo("fr-FR")
-                    )
+                    ((ISpanFormattable)func())
+                        .TryFormat(
+                            formatted,
+                            out charsWritten,
+                            "asdfasdf",
+                            new CultureInfo("fr-FR")
+                        )
                 );
                 AssertExtensions.SequenceEqual(
                     expected,

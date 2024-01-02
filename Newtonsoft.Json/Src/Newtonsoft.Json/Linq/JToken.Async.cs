@@ -111,7 +111,8 @@ namespace Newtonsoft.Json.Linq
                         settings != null && settings.CommentHandling == CommentHandling.Ignore
                             ? reader.ReadAndMoveToContentAsync(cancellationToken)
                             : reader.ReadAsync(cancellationToken)
-                    ).ConfigureAwait(false)
+                    )
+                        .ConfigureAwait(false)
                 )
                 {
                     throw JsonReaderException.Create(

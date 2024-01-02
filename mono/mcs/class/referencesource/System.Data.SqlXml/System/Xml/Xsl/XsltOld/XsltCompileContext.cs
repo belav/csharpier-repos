@@ -1192,9 +1192,8 @@ namespace System.Xml.Xsl.XsltOld
                 XPathNavigator docContext
             )
             {
-                DecimalFormat formatInfo = ((XsltCompileContext)xsltContext).ResolveFormatName(
-                    args.Length == 3 ? ToString(args[2]) : null
-                );
+                DecimalFormat formatInfo = ((XsltCompileContext)xsltContext)
+                    .ResolveFormatName(args.Length == 3 ? ToString(args[2]) : null);
                 return DecimalFormatter.Format(ToNumber(args[0]), ToString(args[1]), formatInfo);
             }
         }

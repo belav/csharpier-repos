@@ -373,7 +373,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                                 new EntityTypeBuilder<TJoinEntity>(l.Metadata)
                                             )
                                         )
-                                ).ReferenceCollectionBuilder,
+                                )
+                                    .ReferenceCollectionBuilder,
                             r =>
                                 (
                                     (GenericTestReferenceCollectionBuilder<
@@ -385,7 +386,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                                 new EntityTypeBuilder<TJoinEntity>(r.Metadata)
                                             )
                                         )
-                                ).ReferenceCollectionBuilder
+                                )
+                                    .ReferenceCollectionBuilder
                         )
                         .Metadata
                 )
@@ -419,7 +421,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                                 new EntityTypeBuilder<TJoinEntity>(l.Metadata)
                                             )
                                         )
-                                ).ReferenceCollectionBuilder,
+                                )
+                                    .ReferenceCollectionBuilder,
                             r =>
                                 (
                                     (GenericTestReferenceCollectionBuilder<
@@ -431,7 +434,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                                 new EntityTypeBuilder<TJoinEntity>(r.Metadata)
                                             )
                                         )
-                                ).ReferenceCollectionBuilder
+                                )
+                                    .ReferenceCollectionBuilder
                         )
                         .Metadata
                 )
@@ -460,7 +464,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                         new EntityTypeBuilder<TJoinEntity>(l.Metadata)
                                     )
                                 )
-                        ).ReferenceCollectionBuilder,
+                        )
+                            .ReferenceCollectionBuilder,
                     r =>
                         (
                             (GenericTestReferenceCollectionBuilder<TRightEntity, TJoinEntity>)
@@ -469,7 +474,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                         new EntityTypeBuilder<TJoinEntity>(r.Metadata)
                                     )
                                 )
-                        ).ReferenceCollectionBuilder,
+                        )
+                            .ReferenceCollectionBuilder,
                     e =>
                         configureJoinEntityType(
                             new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
@@ -504,7 +510,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                         new EntityTypeBuilder<TJoinEntity>(l.Metadata)
                                     )
                                 )
-                        ).ReferenceCollectionBuilder,
+                        )
+                            .ReferenceCollectionBuilder,
                     r =>
                         (
                             (GenericTestReferenceCollectionBuilder<TRightEntity, TJoinEntity>)
@@ -513,7 +520,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                                         new EntityTypeBuilder<TJoinEntity>(r.Metadata)
                                     )
                                 )
-                        ).ReferenceCollectionBuilder,
+                        )
+                            .ReferenceCollectionBuilder,
                     e =>
                         configureJoinEntityType(
                             new GenericTypeTestEntityTypeBuilder<TJoinEntity>(

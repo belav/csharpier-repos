@@ -127,9 +127,8 @@ namespace System
                 return time;
             }
             Boolean isAmbiguousLocalDst = false;
-            Int64 offset = (
-                (CurrentSystemTimeZone)(TimeZone.CurrentTimeZone)
-            ).GetUtcOffsetFromUniversalTime(time, ref isAmbiguousLocalDst);
+            Int64 offset = ((CurrentSystemTimeZone)(TimeZone.CurrentTimeZone))
+                .GetUtcOffsetFromUniversalTime(time, ref isAmbiguousLocalDst);
             return new DateTime(time.Ticks + offset, DateTimeKind.Local, isAmbiguousLocalDst);
         }
 

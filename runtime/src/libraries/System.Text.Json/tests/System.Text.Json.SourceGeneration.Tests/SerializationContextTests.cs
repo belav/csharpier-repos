@@ -703,9 +703,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                 campaignSummary,
                 JsonSerializer.Deserialize(
                     campaignSummeryAsJsonElement.GetRawText(),
-                    (
-                        (ITestContext)MetadataWithPerTypeAttributeContext.Default
-                    ).CampaignSummaryViewModel
+                    ((ITestContext)MetadataWithPerTypeAttributeContext.Default)
+                        .CampaignSummaryViewModel
                 )
             );
         }
@@ -826,9 +825,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                 );
                 ClassWithEnumAndNullable actual = JsonSerializer.Deserialize(
                     json,
-                    (
-                        (ITestContext)MetadataWithPerTypeAttributeContext.Default
-                    ).ClassWithEnumAndNullable
+                    ((ITestContext)MetadataWithPerTypeAttributeContext.Default)
+                        .ClassWithEnumAndNullable
                 );
                 Assert.Equal(expected.Day, actual.Day);
                 Assert.Equal(expected.NullableDay, actual.NullableDay);
@@ -860,9 +858,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                 );
                 ClassWithNullableProperties actual = JsonSerializer.Deserialize(
                     json,
-                    (
-                        (ITestContext)MetadataWithPerTypeAttributeContext.Default
-                    ).ClassWithNullableProperties
+                    ((ITestContext)MetadataWithPerTypeAttributeContext.Default)
+                        .ClassWithNullableProperties
                 );
 
                 Assert.Equal(expected.Uri, actual.Uri);
@@ -903,9 +900,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                 );
                 ClassWithDateOnlyAndTimeOnlyValues actual = JsonSerializer.Deserialize(
                     json,
-                    (
-                        (ITestContext)MetadataWithPerTypeAttributeContext.Default
-                    ).ClassWithDateOnlyAndTimeOnlyValues
+                    ((ITestContext)MetadataWithPerTypeAttributeContext.Default)
+                        .ClassWithDateOnlyAndTimeOnlyValues
                 );
 
                 Assert.Equal(expected.DateOnly, actual.DateOnly);

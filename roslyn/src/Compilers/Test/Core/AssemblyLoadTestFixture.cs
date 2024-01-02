@@ -686,7 +686,8 @@ public class Analyzer : DiagnosticAnalyzer
                         NetStandard20.netstandard,
                         NetStandard20.SystemRuntime
                     }
-                ).Concat(additionalReferences),
+                )
+                    .Concat(additionalReferences),
                 options: options
             );
 

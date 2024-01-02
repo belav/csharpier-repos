@@ -193,10 +193,11 @@ namespace System.Workflow.ComponentModel.Compiler
                 string parseableValue = "";
                 bool firstValue = true;
                 foreach (
-                    string enumValue in (this.ArgumentValues[argumentIndex] as string).Split(
-                        new string[] { language == SupportedLanguages.CSharp ? "|" : "Or" },
-                        StringSplitOptions.RemoveEmptyEntries
-                    )
+                    string enumValue in (this.ArgumentValues[argumentIndex] as string)
+                        .Split(
+                            new string[] { language == SupportedLanguages.CSharp ? "|" : "Or" },
+                            StringSplitOptions.RemoveEmptyEntries
+                        )
                 )
                 {
                     if (!firstValue)

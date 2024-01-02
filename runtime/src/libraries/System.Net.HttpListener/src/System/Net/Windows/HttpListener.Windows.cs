@@ -1198,9 +1198,8 @@ namespace System.Net
                                                 }
                                                 if (disconnectResult != null)
                                                 {
-                                                    lock ((
-                                                        DisconnectResults as ICollection
-                                                    ).SyncRoot)
+                                                    lock ((DisconnectResults as ICollection)
+                                                        .SyncRoot)
                                                     {
                                                         if (UnsafeConnectionNtlmAuthentication)
                                                         {
@@ -1712,12 +1711,10 @@ namespace System.Net
                 ReadOnlySpan<byte> byteContentLength = "0"u8;
                 fixed (byte* pContentLength = byteContentLength)
                 {
-                    (&httpResponse.Headers.KnownHeaders)[
-                        (int)HttpResponseHeader.ContentLength
-                    ].pRawValue = (sbyte*)pContentLength;
-                    (&httpResponse.Headers.KnownHeaders)[
-                        (int)HttpResponseHeader.ContentLength
-                    ].RawValueLength = (ushort)byteContentLength.Length;
+                    (&httpResponse.Headers.KnownHeaders)[(int)HttpResponseHeader.ContentLength]
+                        .pRawValue = (sbyte*)pContentLength;
+                    (&httpResponse.Headers.KnownHeaders)[(int)HttpResponseHeader.ContentLength]
+                        .RawValueLength = (ushort)byteContentLength.Length;
 
                     httpResponse.Headers.UnknownHeaderCount = checked(
                         (ushort)(challenges == null ? 0 : challenges.Count)
@@ -1829,9 +1826,8 @@ namespace System.Net
         private static unsafe int GetTokenOffsetFromBlob(IntPtr blob)
         {
             Debug.Assert(blob != IntPtr.Zero);
-            IntPtr tokenPointer = (
-                (Interop.HttpApi.HTTP_REQUEST_CHANNEL_BIND_STATUS*)blob
-            )->ChannelToken;
+            IntPtr tokenPointer = ((Interop.HttpApi.HTTP_REQUEST_CHANNEL_BIND_STATUS*)blob)
+                ->ChannelToken;
 
             Debug.Assert(tokenPointer != IntPtr.Zero);
             return (int)((byte*)tokenPointer - (byte*)blob);

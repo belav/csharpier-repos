@@ -1036,9 +1036,8 @@ namespace System.Net
                             // made by the call site.
                             lock (s_tasks)
                             {
-                                ((ICollection<KeyValuePair<object, Task>>)s_tasks).Remove(
-                                    new KeyValuePair<object, Task>(key!, task!)
-                                );
+                                ((ICollection<KeyValuePair<object, Task>>)s_tasks)
+                                    .Remove(new KeyValuePair<object, Task>(key!, task!));
                             }
                         }
                     },
@@ -1057,9 +1056,8 @@ namespace System.Net
                         {
                             lock (s_tasks)
                             {
-                                ((ICollection<KeyValuePair<object, Task>>)s_tasks).Remove(
-                                    new KeyValuePair<object, Task>(key!, task)
-                                );
+                                ((ICollection<KeyValuePair<object, Task>>)s_tasks)
+                                    .Remove(new KeyValuePair<object, Task>(key!, task));
                             }
                         },
                         key,

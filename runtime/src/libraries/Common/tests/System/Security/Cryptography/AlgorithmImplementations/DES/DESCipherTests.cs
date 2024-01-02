@@ -185,7 +185,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         byte[] expectedCipher1 = (
                             "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745"
                             + "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D"
-                        ).HexToByteArray();
+                        )
+                            .HexToByteArray();
                         Assert.Equal<byte>(expectedCipher1, cipher1);
 
                         byte[] decrypted1 = decryptor.Transform(cipher1);
@@ -197,7 +198,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         byte[] expectedCipher2 = (
                             "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03EEB61CF5219D769C1"
                             + "ABF1A1FDE0EF87D3B3C4D567D9C8960DDA55DBE13341928FEF38B938E1F62FAD1D05E355E440E012A0FFAB00B7AEE64D"
-                        ).HexToByteArray();
+                        )
+                            .HexToByteArray();
                         Assert.Equal<byte>(expectedCipher2, cipher2);
 
                         byte[] decrypted2 = decryptor.Transform(cipher2);
@@ -227,7 +229,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     byte[] expectedCipher1 = (
                         "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745"
                         + "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D"
-                    ).HexToByteArray();
+                    )
+                        .HexToByteArray();
                     Assert.Equal<byte>(expectedCipher1, cipher1);
                 }
             }
@@ -252,7 +255,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     byte[] expectedCipher1 = (
                         "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE249C1EC3338BBAD41"
                         + "93A9B792205F345E22D45A9A996F21CE24697E5A45F600E8C6E71FC7114A3E96EC4EACC9F652DEBC679D22DE7141F67F"
-                    ).HexToByteArray();
+                    )
+                        .HexToByteArray();
                     Assert.Equal<byte>(expectedCipher1, cipher1);
                 }
             }

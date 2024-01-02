@@ -171,14 +171,12 @@ public class StatePersistenceTest
 
     private void BlockWebAssemblyResourceLoad()
     {
-        ((IJavaScriptExecutor)Browser).ExecuteScript(
-            "sessionStorage.setItem('block-load-boot-resource', 'true')"
-        );
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("sessionStorage.setItem('block-load-boot-resource', 'true')");
 
         // Clear caches so that we can block the resource load
-        ((IJavaScriptExecutor)Browser).ExecuteScript(
-            "caches.keys().then(keys => keys.forEach(key => caches.delete(key)))"
-        );
+        ((IJavaScriptExecutor)Browser)
+            .ExecuteScript("caches.keys().then(keys => keys.forEach(key => caches.delete(key)))");
     }
 
     private void UnblockWebAssemblyResourceLoad()

@@ -3855,7 +3855,8 @@ namespace System.Reflection.Metadata.Tests
             var otherAccessorNames = (
                 from methodHandle in eventAccessors.Others
                 select reader.GetString(reader.GetMethodDefinition(methodHandle).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 "add_Notification",
@@ -3970,22 +3971,26 @@ namespace System.Reflection.Metadata.Tests
             var methodNames = (
                 from m in reader.MethodDefinitions
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in reader.FieldDefinitions
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in reader.EventDefinitions
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in reader.PropertyDefinitions
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 new[]
@@ -4034,22 +4039,26 @@ namespace System.Reflection.Metadata.Tests
             var methodNames = (
                 from m in typeModule.GetMethods()
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in typeModule.GetFields()
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in typeModule.GetEvents()
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in typeModule.GetProperties()
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(new string[0], methodNames);
             Assert.Equal(new string[0], fieldNames);
@@ -4072,22 +4081,26 @@ namespace System.Reflection.Metadata.Tests
             var methodNames = (
                 from m in typeC.GetMethods()
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in typeC.GetFields()
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in typeC.GetEvents()
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in typeC.GetProperties()
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 new[]
@@ -4122,22 +4135,26 @@ namespace System.Reflection.Metadata.Tests
             var methodNames = (
                 from m in typeE.GetMethods()
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in typeE.GetFields()
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in typeE.GetEvents()
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in typeE.GetProperties()
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 new[] { "get_PE1", "set_PE1", "get_PE2", "set_PE2", ".ctor" },

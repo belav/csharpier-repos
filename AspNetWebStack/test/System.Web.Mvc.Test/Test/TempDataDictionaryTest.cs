@@ -221,9 +221,8 @@ namespace System.Web.Mvc.Test
             // Act
             tempData["Key1"] = "Value1";
             tempData.Add("Key2", "Value2");
-            ((ICollection<KeyValuePair<string, object>>)tempData).Add(
-                new KeyValuePair<string, object>("Key3", "Value3")
-            );
+            ((ICollection<KeyValuePair<string, object>>)tempData)
+                .Add(new KeyValuePair<string, object>("Key3", "Value3"));
 
             // Assert (IDictionary)
             Assert.Equal(3, tempData.Count);
@@ -246,9 +245,8 @@ namespace System.Web.Mvc.Test
             foreach (string key in tempData.Keys)
             {
                 Assert.True(
-                    ((ICollection<KeyValuePair<string, object>>)tempData).Contains(
-                        new KeyValuePair<string, object>(key, tempData[key])
-                    )
+                    ((ICollection<KeyValuePair<string, object>>)tempData)
+                        .Contains(new KeyValuePair<string, object>(key, tempData[key]))
                 );
             }
 
@@ -275,14 +273,14 @@ namespace System.Web.Mvc.Test
             Assert.False(((ICollection<KeyValuePair<string, object>>)tempData).IsReadOnly);
 
             Assert.False(
-                ((ICollection<KeyValuePair<string, object>>)tempData).Remove(
-                    new KeyValuePair<string, object>("Key5", "Value5")
-                )
+                ((ICollection<KeyValuePair<string, object>>)tempData)
+                    .Remove(new KeyValuePair<string, object>("Key5", "Value5"))
             );
 
             IEnumerator<KeyValuePair<string, object>> keyValuePairEnumerator = (
                 (ICollection<KeyValuePair<string, object>>)tempData
-            ).GetEnumerator();
+            )
+                .GetEnumerator();
             keyValuePairEnumerator.Reset();
             while (keyValuePairEnumerator.MoveNext())
             {

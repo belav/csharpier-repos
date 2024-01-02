@@ -826,11 +826,8 @@ namespace System.Web.SessionState
                 {
                     if (!newItem)
                     {
-                        ((SessionStateStoreProviderBase)this).ReleaseItemExclusive(
-                            context,
-                            id,
-                            lockId
-                        );
+                        ((SessionStateStoreProviderBase)this)
+                            .ReleaseItemExclusive(context, id, lockId);
                     }
                     throw;
                 }

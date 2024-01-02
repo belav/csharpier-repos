@@ -307,10 +307,8 @@ namespace System.Text.Json
 
             fixed (char* ptr = value)
             {
-                return (encoder ?? JavaScriptEncoder.Default).FindFirstCharacterToEncode(
-                    ptr,
-                    value.Length
-                );
+                return (encoder ?? JavaScriptEncoder.Default)
+                    .FindFirstCharacterToEncode(ptr, value.Length);
             }
         }
 

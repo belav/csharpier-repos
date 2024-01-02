@@ -151,7 +151,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     where od.Order.Customer.City == "Seattle"
                     orderby od.OrderID, od.ProductID
                     select od
-                ).Take(1)
+                )
+                    .Take(1)
         );
 
     [ConditionalTheory]
@@ -464,7 +465,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     where c.CustomerID.StartsWith("A")
                     orderby c.CustomerID
                     select new { c.CustomerID, c.Orders }
-                ).OrderBy(e => e.CustomerID),
+                )
+                    .OrderBy(e => e.CustomerID),
             elementAsserter: (e, a) =>
             {
                 Assert.Equal(e.CustomerID, a.CustomerID);
@@ -934,7 +936,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                                 select p
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -964,7 +967,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                                 select p
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory]
@@ -1002,7 +1006,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                         from od in ss.Set<OrderDetail>()
                         where o.Customer.Country == od.Order.Customer.Country
                         select od
-                    ).Count() > 0
+                    )
+                        .Count() > 0
                 where o.OrderID == 10643 || o.OrderID == 10692
                 select o
         );
@@ -1076,11 +1081,7 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Project_single_scalar_value_subquery_in_query_with_optional_navigation_works(
         bool async
-    ) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
+    ) => AssertQuery(async, ss => (
                     from o in ss.Set<Order>()
                     orderby o.OrderID
                     select new
@@ -1092,9 +1093,7 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                             .FirstOrDefault(),
                         o.Customer.City
                     }
-                ).Take(3),
-            assertOrder: true
-        );
+                ).Take(3), assertOrder: true);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

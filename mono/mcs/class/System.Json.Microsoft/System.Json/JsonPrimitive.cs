@@ -1389,10 +1389,8 @@ namespace System.Json
                     else if (valueType == typeof(DateTimeOffset))
                     {
                         jsonWriter.WriteValue(
-                            ((DateTimeOffset)value).ToString(
-                                DateTimeIsoFormat,
-                                CultureInfo.InvariantCulture
-                            )
+                            ((DateTimeOffset)value)
+                                .ToString(DateTimeIsoFormat, CultureInfo.InvariantCulture)
                         );
                     }
                     else

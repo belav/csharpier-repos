@@ -157,7 +157,8 @@ public class CreatedOfTResultTests
                 PopulateMetadata<Created<object>>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

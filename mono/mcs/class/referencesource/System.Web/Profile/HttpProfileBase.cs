@@ -560,15 +560,13 @@ namespace System.Web.Profile
                                 {
                                     if (attrib is SettingsSerializeAsAttribute)
                                     {
-                                        serializeAs = (
-                                            (SettingsSerializeAsAttribute)attrib
-                                        ).SerializeAs;
+                                        serializeAs = ((SettingsSerializeAsAttribute)attrib)
+                                            .SerializeAs;
                                     }
                                     else if (attrib is SettingsAllowAnonymousAttribute)
                                     {
-                                        allowAnonymous = (
-                                            (SettingsAllowAnonymousAttribute)attrib
-                                        ).Allow;
+                                        allowAnonymous = ((SettingsAllowAnonymousAttribute)attrib)
+                                            .Allow;
                                         if (!fAnonEnabled && allowAnonymous)
                                             throw new ConfigurationErrorsException(
                                                 SR.GetString(
@@ -587,9 +585,8 @@ namespace System.Web.Profile
                                     }
                                     else if (attrib is System.ComponentModel.ReadOnlyAttribute)
                                     {
-                                        readOnly = (
-                                            (System.ComponentModel.ReadOnlyAttribute)attrib
-                                        ).IsReadOnly;
+                                        readOnly = ((System.ComponentModel.ReadOnlyAttribute)attrib)
+                                            .IsReadOnly;
                                     }
                                     else if (attrib is DefaultSettingValueAttribute)
                                     {
@@ -597,9 +594,8 @@ namespace System.Web.Profile
                                     }
                                     else if (attrib is CustomProviderDataAttribute)
                                     {
-                                        customData = (
-                                            (CustomProviderDataAttribute)attrib
-                                        ).CustomProviderData;
+                                        customData = ((CustomProviderDataAttribute)attrib)
+                                            .CustomProviderData;
                                     }
                                     else if (hasLowTrust && attrib is ProfileProviderAttribute)
                                     {

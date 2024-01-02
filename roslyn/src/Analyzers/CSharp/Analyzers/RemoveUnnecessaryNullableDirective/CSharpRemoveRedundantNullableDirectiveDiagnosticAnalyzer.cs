@@ -49,9 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                 }
 
                 var compilationOptions = context.Compilation.Options;
-                var defaultNullableContext = (
-                    (CSharpCompilationOptions)compilationOptions
-                ).NullableContextOptions;
+                var defaultNullableContext = ((CSharpCompilationOptions)compilationOptions)
+                    .NullableContextOptions;
                 context.RegisterSyntaxTreeAction(context =>
                 {
                     if (ShouldSkipAnalysis(context, compilationOptions, notification: null))

@@ -1047,9 +1047,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 foreach (var param in Parameters)
                 {
-                    diag = ((PEParameterSymbol)param).DeriveCompilerFeatureRequiredDiagnostic(
-                        decoder
-                    );
+                    diag = ((PEParameterSymbol)param)
+                        .DeriveCompilerFeatureRequiredDiagnostic(decoder);
                     if (diag != null)
                     {
                         return diag;

@@ -109,7 +109,8 @@ public class ShoppingCart
                 .CartItems.Where(c => c.CartId == _shoppingCartId)
                 .Select(c => c.Album.Price * c.Count)
                 .ToListAsync()
-        ).Sum();
+        )
+            .Sum();
 
     public async Task CreateOrder(Order order)
     {

@@ -174,9 +174,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 group,
                 languageName,
                 isEditorConfigOption: true,
-                serializer: (serializerFactory ?? EditorConfigValueSerializer.CodeStyle).Invoke(
-                    defaultValue
-                )
+                serializer: (serializerFactory ?? EditorConfigValueSerializer.CodeStyle)
+                    .Invoke(defaultValue)
             );
             optionsBuilder.Add(option);
             return option;
@@ -220,9 +219,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 defaultValue,
                 group,
                 isEditorConfigOption: true,
-                serializer: (serializerFactory ?? EditorConfigValueSerializer.CodeStyle).Invoke(
-                    defaultValue
-                )
+                serializer: (serializerFactory ?? EditorConfigValueSerializer.CodeStyle)
+                    .Invoke(defaultValue)
             );
             optionsBuilder.Add(option);
             return option;

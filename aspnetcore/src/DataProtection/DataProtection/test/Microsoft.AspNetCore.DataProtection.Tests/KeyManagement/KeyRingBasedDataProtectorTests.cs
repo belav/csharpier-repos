@@ -601,12 +601,13 @@ public class KeyRingBasedDataProtectorTests
         );
 
         // Act
-        byte[] retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
-            protectedData,
-            ignoreRevocationErrors: true,
-            requiresMigration: out var requiresMigration,
-            wasRevoked: out var wasRevoked
-        );
+        byte[] retVal = ((IPersistedDataProtector)protector)
+            .DangerousUnprotect(
+                protectedData,
+                ignoreRevocationErrors: true,
+                requiresMigration: out var requiresMigration,
+                wasRevoked: out var wasRevoked
+            );
 
         // Assert
         Assert.Equal(expectedPlaintext, retVal);
@@ -665,12 +666,13 @@ public class KeyRingBasedDataProtectorTests
         Assert.Equal(expectedPlaintext, retVal);
 
         // Act & assert - IPersistedDataProtector
-        retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
-            protectedData,
-            ignoreRevocationErrors: false,
-            requiresMigration: out var requiresMigration,
-            wasRevoked: out var wasRevoked
-        );
+        retVal = ((IPersistedDataProtector)protector)
+            .DangerousUnprotect(
+                protectedData,
+                ignoreRevocationErrors: false,
+                requiresMigration: out var requiresMigration,
+                wasRevoked: out var wasRevoked
+            );
         Assert.Equal(expectedPlaintext, retVal);
         Assert.False(requiresMigration);
         Assert.False(wasRevoked);
@@ -736,12 +738,13 @@ public class KeyRingBasedDataProtectorTests
         Assert.Equal(expectedPlaintext, retVal);
 
         // Act & assert - IPersistedDataProtector
-        retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
-            protectedData,
-            ignoreRevocationErrors: false,
-            requiresMigration: out var requiresMigration,
-            wasRevoked: out var wasRevoked
-        );
+        retVal = ((IPersistedDataProtector)protector)
+            .DangerousUnprotect(
+                protectedData,
+                ignoreRevocationErrors: false,
+                requiresMigration: out var requiresMigration,
+                wasRevoked: out var wasRevoked
+            );
         Assert.Equal(expectedPlaintext, retVal);
         Assert.True(requiresMigration);
         Assert.False(wasRevoked);

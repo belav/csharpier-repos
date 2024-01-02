@@ -1621,7 +1621,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _tempBools[_currentRowNumber * _boolCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<bool>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1632,7 +1633,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _tempBools[_currentRowNumber * _boolCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<bool>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1644,7 +1646,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<byte>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1655,7 +1658,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<byte>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1667,7 +1671,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _chars[_currentRowNumber * _charCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<char>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1678,7 +1683,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _chars[_currentRowNumber * _charCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<char>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1690,7 +1696,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _dateTimes[_currentRowNumber * _dateTimeCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<DateTime>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1701,7 +1708,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _dateTimes[_currentRowNumber * _dateTimeCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<DateTime>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1736,7 +1744,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _decimals[_currentRowNumber * _decimalCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<decimal>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1747,7 +1756,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _decimals[_currentRowNumber * _decimalCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<decimal>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1759,7 +1769,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _doubles[_currentRowNumber * _doubleCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<double>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1770,7 +1781,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _doubles[_currentRowNumber * _doubleCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<double>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1782,7 +1794,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _floats[_currentRowNumber * _floatCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<float>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1793,7 +1806,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _floats[_currentRowNumber * _floatCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<float>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1805,7 +1819,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _guids[_currentRowNumber * _guidCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<Guid>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1816,7 +1831,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _guids[_currentRowNumber * _guidCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<Guid>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1828,7 +1844,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _shorts[_currentRowNumber * _shortCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<short>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1839,7 +1856,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _shorts[_currentRowNumber * _shortCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<short>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1851,7 +1869,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _ints[_currentRowNumber * _intCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<int>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1862,7 +1881,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _ints[_currentRowNumber * _intCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<int>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1874,7 +1894,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _longs[_currentRowNumber * _longCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<long>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1885,7 +1906,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _longs[_currentRowNumber * _longCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<long>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1897,7 +1919,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _sbytes[_currentRowNumber * _sbyteCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<sbyte>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1908,7 +1931,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _sbytes[_currentRowNumber * _sbyteCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<sbyte>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1920,7 +1944,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _ushorts[_currentRowNumber * _ushortCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<ushort>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1931,7 +1956,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _ushorts[_currentRowNumber * _ushortCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<ushort>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1943,7 +1969,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _uints[_currentRowNumber * _uintCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<uint>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1954,7 +1981,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _uints[_currentRowNumber * _uintCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<uint>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1966,7 +1994,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _ulongs[_currentRowNumber * _ulongCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<ulong>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -1977,7 +2006,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _ulongs[_currentRowNumber * _ulongCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<ulong>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 
@@ -1989,7 +2019,8 @@ public class BufferedDataReader : DbDataReader
                 {
                     _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]] = (
                         (ReaderColumn<object>)column
-                    ).GetFieldValue(reader, _indexMap);
+                    )
+                        .GetFieldValue(reader, _indexMap);
                 }
                 catch (Exception e)
                 {
@@ -2000,7 +2031,8 @@ public class BufferedDataReader : DbDataReader
             {
                 _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]] = (
                     (ReaderColumn<object>)column
-                ).GetFieldValue(reader, _indexMap);
+                )
+                    .GetFieldValue(reader, _indexMap);
             }
         }
 

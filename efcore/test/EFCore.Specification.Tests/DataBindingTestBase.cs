@@ -845,10 +845,11 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
 
         var bindingList = testDrivers.Local.ToBindingList();
 
-        ((IBindingList)bindingList).ApplySort(
-            TypeDescriptor.GetProperties(typeof(Driver))["Id"],
-            ListSortDirection.Ascending
-        );
+        ((IBindingList)bindingList)
+            .ApplySort(
+                TypeDescriptor.GetProperties(typeof(Driver))["Id"],
+                ListSortDirection.Ascending
+            );
 
         Assert.Equal(1, bindingList[0].Id);
         Assert.Equal(3, bindingList[1].Id);
@@ -865,10 +866,11 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
 
         var bindingList = context.Drivers.Local.ToBindingList();
 
-        ((IBindingList)bindingList).ApplySort(
-            TypeDescriptor.GetProperties(typeof(Driver))["Id"],
-            ListSortDirection.Ascending
-        );
+        ((IBindingList)bindingList)
+            .ApplySort(
+                TypeDescriptor.GetProperties(typeof(Driver))["Id"],
+                ListSortDirection.Ascending
+            );
 
         Assert.Equal(1, bindingList[0].Id);
         Assert.Equal(3, bindingList[1].Id);

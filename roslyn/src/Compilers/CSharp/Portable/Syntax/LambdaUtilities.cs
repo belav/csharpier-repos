@@ -500,7 +500,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             case SyntaxKind.ForStatement:
                                 SeparatedSyntaxList<ExpressionSyntax> incrementors = (
                                     (ForStatementSyntax)node.Parent
-                                ).Incrementors;
+                                )
+                                    .Incrementors;
                                 if (incrementors.FirstOrDefault() == node)
                                 {
                                     return true;

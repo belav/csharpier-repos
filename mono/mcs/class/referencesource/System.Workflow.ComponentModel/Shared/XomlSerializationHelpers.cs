@@ -442,9 +442,8 @@ namespace System.Workflow.ComponentModel.Serialization
                         if (childActivity is CompositeActivity)
                         {
                             foreach (
-                                Activity nestedChildActivity in (
-                                    (CompositeActivity)childActivity
-                                ).Activities
+                                Activity nestedChildActivity in ((CompositeActivity)childActivity)
+                                    .Activities
                             )
                             {
                                 childActivities.Enqueue(nestedChildActivity);

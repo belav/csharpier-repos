@@ -341,9 +341,8 @@ public class ForeignKeyPropertyDiscoveryConvention
                             }
 
                             foreignKeyProperties = null;
-                            (
-                                (ForeignKey)relationshipBuilder.Metadata
-                            ).SetPrincipalEndConfigurationSource(null);
+                            ((ForeignKey)relationshipBuilder.Metadata)
+                                .SetPrincipalEndConfigurationSource(null);
                         }
                     }
                 }

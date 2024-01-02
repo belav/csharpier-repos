@@ -1065,10 +1065,8 @@ namespace System.Workflow.ComponentModel.Serialization
                         string stringValue = String.Empty;
                         if (obj.GetType() == typeof(DateTime))
                         {
-                            stringValue = ((DateTime)obj).ToString(
-                                "o",
-                                CultureInfo.InvariantCulture
-                            );
+                            stringValue = ((DateTime)obj)
+                                .ToString("o", CultureInfo.InvariantCulture);
                         }
                         else
                         {
@@ -1126,9 +1124,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 {
                     if (
                         obj is DependencyObject
-                        && ((DependencyObject)obj).UserData.Contains(
-                            UserDataKeys.DesignTimeTypeNames
-                        )
+                        && ((DependencyObject)obj)
+                            .UserData.Contains(UserDataKeys.DesignTimeTypeNames)
                     )
                         designTimeTypeNames =
                             ((DependencyObject)obj).UserData[UserDataKeys.DesignTimeTypeNames]
@@ -2329,7 +2326,8 @@ namespace System.Workflow.ComponentModel.Serialization
                             || (
                                 (DesignerSerializationVisibilityAttribute)
                                     serializationVisibilityAttribute[0]
-                            ).Visibility != DesignerSerializationVisibility.Content
+                            )
+                                .Visibility != DesignerSerializationVisibility.Content
                         )
                         {
                             continue;
@@ -4504,9 +4502,8 @@ namespace System.Workflow.ComponentModel.Serialization
                     .GetType()
                     .GetCustomAttributes(typeof(ContentPropertyAttribute), true);
                 if (contentPropertyAttributes != null && contentPropertyAttributes.Length > 0)
-                    contentPropertyName = (
-                        (ContentPropertyAttribute)contentPropertyAttributes[0]
-                    ).Name;
+                    contentPropertyName = ((ContentPropertyAttribute)contentPropertyAttributes[0])
+                        .Name;
 
                 if (!String.IsNullOrEmpty(contentPropertyName))
                 {

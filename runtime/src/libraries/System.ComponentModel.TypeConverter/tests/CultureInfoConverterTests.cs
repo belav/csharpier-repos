@@ -221,7 +221,8 @@ namespace System.ComponentModel.Tests
                                         TypeDescriptor
                                             .GetConverter(typeof(System.Globalization.CultureInfo))
                                             .ConvertFrom(null, null, "(Default)")
-                                ).Name
+                                )
+                                    .Name
                             );
                         }
                     },

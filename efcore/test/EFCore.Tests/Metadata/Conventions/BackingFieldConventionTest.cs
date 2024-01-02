@@ -237,9 +237,8 @@ public class BackingFieldConventionTest
     [ConditionalFact]
     public void FieldInfo_set_by_annotation_is_used()
     {
-        var entityType = ((IConventionModel)CreateModel()).AddEntityType(
-            typeof(AlwaysLookOnTheBrightSideOfLife)
-        );
+        var entityType = ((IConventionModel)CreateModel())
+            .AddEntityType(typeof(AlwaysLookOnTheBrightSideOfLife));
         var property = entityType.AddProperty("OnTheRun", typeof(int));
 
         RunConvention((IMutableProperty)property);

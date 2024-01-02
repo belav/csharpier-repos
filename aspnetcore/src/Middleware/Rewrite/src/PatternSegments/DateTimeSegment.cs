@@ -63,9 +63,8 @@ internal sealed class DateTimeSegment : PatternSegment
             case DateTimePortion.Second:
                 return DateTimeOffset.UtcNow.Second.ToString(CultureInfo.InvariantCulture);
             case DateTimePortion.DayOfWeek:
-                return ((int)DateTimeOffset.UtcNow.DayOfWeek).ToString(
-                    CultureInfo.InvariantCulture
-                );
+                return ((int)DateTimeOffset.UtcNow.DayOfWeek)
+                    .ToString(CultureInfo.InvariantCulture);
             case DateTimePortion.Time:
                 return DateTimeOffset.UtcNow.ToString(CultureInfo.InvariantCulture);
             default:

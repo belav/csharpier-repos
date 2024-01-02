@@ -804,9 +804,8 @@ public class ControllerBinderDelegateProviderTest
                 {
                     BindingSource = BindingSource.Custom,
                     // Simulates [BindProperty] on a parameter
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
+                    RequestPredicate = ((IRequestPredicateProvider)new BindPropertyAttribute())
+                        .RequestPredicate,
                 },
                 ParameterType = typeof(string)
             }
@@ -820,9 +819,8 @@ public class ControllerBinderDelegateProviderTest
                 {
                     BindingSource = BindingSource.Custom,
                     // Simulates [BindProperty] on a property
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
+                    RequestPredicate = ((IRequestPredicateProvider)new BindPropertyAttribute())
+                        .RequestPredicate,
                 },
                 ParameterType = typeof(string)
             }
@@ -872,9 +870,8 @@ public class ControllerBinderDelegateProviderTest
                 {
                     BindingSource = BindingSource.Custom,
                     // Simulates [BindProperty] on a parameter
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
+                    RequestPredicate = ((IRequestPredicateProvider)new BindPropertyAttribute())
+                        .RequestPredicate,
                 },
                 ParameterType = typeof(string)
             }
@@ -888,9 +885,8 @@ public class ControllerBinderDelegateProviderTest
                 {
                     BindingSource = BindingSource.Custom,
                     // Simulates [BindProperty] on a property
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
+                    RequestPredicate = ((IRequestPredicateProvider)new BindPropertyAttribute())
+                        .RequestPredicate,
                 },
                 ParameterType = typeof(string)
             }

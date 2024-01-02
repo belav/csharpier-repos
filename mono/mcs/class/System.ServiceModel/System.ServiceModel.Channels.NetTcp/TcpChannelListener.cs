@@ -143,9 +143,8 @@ namespace System.ServiceModel.Channels.NetTcp
                 if (dch == null || dch.TcpClient == null && !dch.TcpClient.Connected)
                     continue;
                 if (
-                    ((IPEndPoint)dch.TcpClient.Client.RemoteEndPoint).Equals(
-                        client.Client.RemoteEndPoint
-                    )
+                    ((IPEndPoint)dch.TcpClient.Client.RemoteEndPoint)
+                        .Equals(client.Client.RemoteEndPoint)
                 )
                     // ... then it should be handled in another BeginTryReceive/EndTryReceive loop in ChannelDispatcher.
                     return AcceptTcpClient(timeout - (DateTime.UtcNow - start));

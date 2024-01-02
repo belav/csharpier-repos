@@ -138,29 +138,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 switch (member.Kind())
                 {
                     case SyntaxKind.DelegateDeclaration:
-                        return ((DelegateDeclarationSyntax)member).WithParameterList(
-                            (ParameterListSyntax)parameterList
-                        );
+                        return ((DelegateDeclarationSyntax)member)
+                            .WithParameterList((ParameterListSyntax)parameterList);
                     case SyntaxKind.MethodDeclaration:
-                        return ((MethodDeclarationSyntax)member).WithParameterList(
-                            (ParameterListSyntax)parameterList
-                        );
+                        return ((MethodDeclarationSyntax)member)
+                            .WithParameterList((ParameterListSyntax)parameterList);
                     case SyntaxKind.ConstructorDeclaration:
-                        return ((ConstructorDeclarationSyntax)member).WithParameterList(
-                            (ParameterListSyntax)parameterList
-                        );
+                        return ((ConstructorDeclarationSyntax)member)
+                            .WithParameterList((ParameterListSyntax)parameterList);
                     case SyntaxKind.IndexerDeclaration:
-                        return ((IndexerDeclarationSyntax)member).WithParameterList(
-                            (BracketedParameterListSyntax)parameterList
-                        );
+                        return ((IndexerDeclarationSyntax)member)
+                            .WithParameterList((BracketedParameterListSyntax)parameterList);
                     case SyntaxKind.OperatorDeclaration:
-                        return ((OperatorDeclarationSyntax)member).WithParameterList(
-                            (ParameterListSyntax)parameterList
-                        );
+                        return ((OperatorDeclarationSyntax)member)
+                            .WithParameterList((ParameterListSyntax)parameterList);
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)member).WithParameterList(
-                            (ParameterListSyntax)parameterList
-                        );
+                        return ((ConversionOperatorDeclarationSyntax)member)
+                            .WithParameterList((ParameterListSyntax)parameterList);
                 }
             }
 

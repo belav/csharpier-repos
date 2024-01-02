@@ -4627,7 +4627,8 @@ namespace System.Xml
                                     _tokDataPos,
                                     token == BinXmlToken.XSD_DECIMAL
                                 )
-                            ).ToDecimal(),
+                            )
+                                .ToDecimal(),
                             returnType,
                             namespaceResolver
                         );

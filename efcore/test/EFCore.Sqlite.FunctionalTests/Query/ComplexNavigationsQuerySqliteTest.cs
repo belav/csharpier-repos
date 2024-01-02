@@ -18,7 +18,8 @@ public class ComplexNavigationsQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Let_let_contains_from_outer_let(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Prune_does_not_throw_null_ref(bool async) =>
@@ -28,7 +29,8 @@ public class ComplexNavigationsQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Prune_does_not_throw_null_ref(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Join_with_result_selector_returning_queryable_throws_validation_error(
@@ -43,7 +45,8 @@ public class ComplexNavigationsQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
@@ -58,7 +61,8 @@ public class ComplexNavigationsQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override Task GroupJoin_client_method_in_OrderBy(bool async) =>
@@ -77,7 +81,8 @@ public class ComplexNavigationsQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.GroupJoin_with_subquery_on_inner(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(bool async) =>
@@ -87,6 +92,7 @@ public class ComplexNavigationsQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(async)
                 )
-            ).Message
+            )
+                .Message
         );
 }

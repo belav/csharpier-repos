@@ -88,12 +88,8 @@ public class TestClass : SecondInterface<int, string>
         if (ret != 100)
             return ret;
 
-        ret = (this as TwoArgBaseInterface<string, int>).SomeFunc1(
-            "test string",
-            0,
-            typeof(string),
-            typeof(int)
-        );
+        ret = (this as TwoArgBaseInterface<string, int>)
+            .SomeFunc1("test string", 0, typeof(string), typeof(int));
         if (ret != 100)
             return ret;
 

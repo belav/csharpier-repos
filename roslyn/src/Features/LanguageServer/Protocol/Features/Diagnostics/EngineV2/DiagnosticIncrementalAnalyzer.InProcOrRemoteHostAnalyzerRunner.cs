@@ -315,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var ideOptions = (
                 (WorkspaceAnalyzerOptions)compilationWithAnalyzers.AnalysisOptions.Options!
-            ).IdeOptions;
+            )
+                .IdeOptions;
 
             var analyzers =
                 documentAnalysisScope?.Analyzers

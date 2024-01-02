@@ -291,9 +291,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             && !_comment._parameterTexts.ContainsKey(name)
                         )
                         {
-                            (_parameterNamesBuilder ??= ImmutableArray.CreateBuilder<string>()).Add(
-                                name
-                            );
+                            (_parameterNamesBuilder ??= ImmutableArray.CreateBuilder<string>())
+                                .Add(name);
                             _comment._parameterTexts.Add(name, TrimEachLine(paramText));
                         }
                     }
@@ -307,10 +306,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             && !_comment._typeParameterTexts.ContainsKey(name)
                         )
                         {
-                            (
-                                _typeParameterNamesBuilder ??=
-                                    ImmutableArray.CreateBuilder<string>()
-                            ).Add(name);
+                            (_typeParameterNamesBuilder ??= ImmutableArray.CreateBuilder<string>())
+                                .Add(name);
                             _comment._typeParameterTexts.Add(name, TrimEachLine(typeParamText));
                         }
                     }
@@ -326,14 +323,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                 || !_exceptionTextBuilders.ContainsKey(type)
                             )
                             {
-                                (
-                                    _exceptionTypesBuilder ??=
-                                        ImmutableArray.CreateBuilder<string>()
-                                ).Add(type);
+                                (_exceptionTypesBuilder ??= ImmutableArray.CreateBuilder<string>())
+                                    .Add(type);
                                 (
                                     _exceptionTextBuilders ??=
                                         new Dictionary<string, ImmutableArray<string>.Builder>()
-                                ).Add(type, ImmutableArray.CreateBuilder<string>());
+                                )
+                                    .Add(type, ImmutableArray.CreateBuilder<string>());
                             }
 
                             _exceptionTextBuilders[type].Add(exceptionText);

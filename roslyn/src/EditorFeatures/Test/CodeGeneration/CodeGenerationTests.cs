@@ -429,10 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 CancellationToken.None
             );
             testContext.Result = testContext.Document.WithSyntaxRoot(
-                (await testContext.Document.GetSyntaxRootAsync()).ReplaceNode(
-                    oldMemberSyntax,
-                    newMemberSyntax
-                )
+                (await testContext.Document.GetSyntaxRootAsync())
+                    .ReplaceNode(oldMemberSyntax, newMemberSyntax)
             );
         }
 

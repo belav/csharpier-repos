@@ -184,10 +184,8 @@ namespace System.Net.Mime
             set
             {
                 SmtpDateTime date = new SmtpDateTime(value);
-                ((TrackingValidationObjectDictionary)Parameters).InternalSet(
-                    modificationDate,
-                    date
-                );
+                ((TrackingValidationObjectDictionary)Parameters)
+                    .InternalSet(modificationDate, date);
             }
         }
 
@@ -228,9 +226,8 @@ namespace System.Net.Mime
         {
             get
             {
-                object sizeValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(
-                    size
-                );
+                object sizeValue = ((TrackingValidationObjectDictionary)Parameters)
+                    .InternalGet(size);
                 if (sizeValue == null)
                     return -1;
                 else

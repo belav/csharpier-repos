@@ -189,9 +189,8 @@ namespace System.ServiceModel
             if (transport is WindowsStreamSecurityBindingElement)
             {
                 transportSecurity.ClientCredentialType = TcpClientCredentialType.Windows;
-                transportSecurity.ProtectionLevel = (
-                    (WindowsStreamSecurityBindingElement)transport
-                ).ProtectionLevel;
+                transportSecurity.ProtectionLevel = ((WindowsStreamSecurityBindingElement)transport)
+                    .ProtectionLevel;
                 return true;
             }
             else if (

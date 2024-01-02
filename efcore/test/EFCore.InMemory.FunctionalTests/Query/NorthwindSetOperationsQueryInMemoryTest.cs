@@ -28,7 +28,8 @@ public class NorthwindSetOperationsQueryInMemoryTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Collection_projection_before_set_operation_fails(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Client_eval_Union_FirstOrDefault(bool async)
@@ -40,6 +41,7 @@ public class NorthwindSetOperationsQueryInMemoryTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_eval_Union_FirstOrDefault(async)
                 )
-            ).Message
+            )
+                .Message
         );
 }

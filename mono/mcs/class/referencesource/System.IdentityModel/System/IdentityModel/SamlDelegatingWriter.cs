@@ -59,10 +59,8 @@ namespace System.IdentityModel
                 this.dictionary
             );
             this.effectiveWriter.StartCanonicalization(this.canonicalStream, false, null);
-            ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(
-                this.startFragment,
-                false
-            );
+            ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
+                .StartFragment(this.startFragment, false);
         }
 
         private void OnEndOfRootElement()
@@ -72,22 +70,19 @@ namespace System.IdentityModel
             {
                 // We still have to compute the signature. Write end element as a different fragment
                 // and end canonicalization. Call back SAML to compute the signature.
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).EndFragment();
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
+                    .EndFragment();
 
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(
-                    this.endFragment,
-                    false
-                );
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
+                    .StartFragment(this.endFragment, false);
                 this.effectiveWriter.WriteEndElement();
                 ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).EndFragment();
 
                 this.effectiveWriter.EndCanonicalization();
 
                 // Start the signature fragment.
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).StartFragment(
-                    this.signatureFragment,
-                    false
-                );
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
+                    .StartFragment(this.signatureFragment, false);
 
                 this.callback.OnEndOfRootElement(this);
             }
@@ -98,21 +93,20 @@ namespace System.IdentityModel
                 this.effectiveWriter.WriteEndElement();
                 ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).EndFragment();
 
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(
-                    this.startFragment.GetBuffer(),
-                    0,
-                    (int)this.startFragment.Length
-                );
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(
-                    this.signatureFragment.GetBuffer(),
-                    0,
-                    (int)this.signatureFragment.Length
-                );
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).WriteFragment(
-                    this.endFragment.GetBuffer(),
-                    0,
-                    (int)this.endFragment.Length
-                );
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
+                    .WriteFragment(
+                        this.startFragment.GetBuffer(),
+                        0,
+                        (int)this.startFragment.Length
+                    );
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
+                    .WriteFragment(
+                        this.signatureFragment.GetBuffer(),
+                        0,
+                        (int)this.signatureFragment.Length
+                    );
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
+                    .WriteFragment(this.endFragment.GetBuffer(), 0, (int)this.endFragment.Length);
 
                 this.startFragment.Close();
                 this.signatureFragment.Close();

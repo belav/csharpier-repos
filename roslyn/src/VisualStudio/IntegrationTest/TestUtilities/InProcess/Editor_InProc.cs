@@ -96,10 +96,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 return (null, hr);
             }
 
-            var hresult = ((IVsUserData)activeVsTextView).GetData(
-                IWpfTextViewId,
-                out var wpfTextViewHost
-            );
+            var hresult = ((IVsUserData)activeVsTextView)
+                .GetData(IWpfTextViewId, out var wpfTextViewHost);
             return ((IWpfTextViewHost)wpfTextViewHost, hresult);
         }
 

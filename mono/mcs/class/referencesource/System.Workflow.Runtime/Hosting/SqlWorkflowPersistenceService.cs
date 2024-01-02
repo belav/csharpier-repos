@@ -1504,7 +1504,8 @@ namespace System.Workflow.Runtime.Hosting
             item.StateId = (
                 (ActivityExecutionContextInfo)
                     completedScopeActivity.GetValue(Activity.ActivityExecutionContextInfoProperty)
-            ).ContextGuid;
+            )
+                .ContextGuid;
 
             WorkflowEnvironment.WorkBatch.Add(this, item);
         }

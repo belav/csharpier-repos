@@ -353,9 +353,8 @@ public class CacheControlHeaderValue
             AppendValueWithSeparatorIfRequired(sb, MaxAgeString);
             sb.Append('=');
             sb.Append(
-                ((int)_maxAge.GetValueOrDefault().TotalSeconds).ToString(
-                    NumberFormatInfo.InvariantInfo
-                )
+                ((int)_maxAge.GetValueOrDefault().TotalSeconds)
+                    .ToString(NumberFormatInfo.InvariantInfo)
             );
         }
 
@@ -364,9 +363,8 @@ public class CacheControlHeaderValue
             AppendValueWithSeparatorIfRequired(sb, SharedMaxAgeString);
             sb.Append('=');
             sb.Append(
-                ((int)_sharedMaxAge.GetValueOrDefault().TotalSeconds).ToString(
-                    NumberFormatInfo.InvariantInfo
-                )
+                ((int)_sharedMaxAge.GetValueOrDefault().TotalSeconds)
+                    .ToString(NumberFormatInfo.InvariantInfo)
             );
         }
 
@@ -377,9 +375,8 @@ public class CacheControlHeaderValue
             {
                 sb.Append('=');
                 sb.Append(
-                    ((int)_maxStaleLimit.GetValueOrDefault().TotalSeconds).ToString(
-                        NumberFormatInfo.InvariantInfo
-                    )
+                    ((int)_maxStaleLimit.GetValueOrDefault().TotalSeconds)
+                        .ToString(NumberFormatInfo.InvariantInfo)
                 );
             }
         }
@@ -389,9 +386,8 @@ public class CacheControlHeaderValue
             AppendValueWithSeparatorIfRequired(sb, MinFreshString);
             sb.Append('=');
             sb.Append(
-                ((int)_minFresh.GetValueOrDefault().TotalSeconds).ToString(
-                    NumberFormatInfo.InvariantInfo
-                )
+                ((int)_minFresh.GetValueOrDefault().TotalSeconds)
+                    .ToString(NumberFormatInfo.InvariantInfo)
             );
         }
 

@@ -44,9 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     return null;
                 }
                 else if (
-                    (
-                        (WorkspaceAnalyzerOptions)compilationWithAnalyzers.AnalysisOptions.Options!
-                    ).IdeOptions == ideOptions
+                    ((WorkspaceAnalyzerOptions)compilationWithAnalyzers.AnalysisOptions.Options!)
+                        .IdeOptions == ideOptions
                 )
                 {
                     // we have cached one, return that.

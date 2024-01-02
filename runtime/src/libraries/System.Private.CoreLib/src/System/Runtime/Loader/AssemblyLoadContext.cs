@@ -425,9 +425,8 @@ namespace System.Runtime.Loader
             {
                 if (
                     stream.GetType() == typeof(MemoryStream)
-                    && ((MemoryStream)stream).TryGetBuffer(
-                        out ArraySegment<byte> memoryStreamBuffer
-                    )
+                    && ((MemoryStream)stream)
+                        .TryGetBuffer(out ArraySegment<byte> memoryStreamBuffer)
                 )
                 {
                     int position = (int)stream.Position;

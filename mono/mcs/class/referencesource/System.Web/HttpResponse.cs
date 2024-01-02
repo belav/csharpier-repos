@@ -910,9 +910,8 @@ namespace System.Web
                 return null;
             }
 
-            double seconds = (
-                _cachePolicy.UtcGetAbsoluteExpiration() - DateTime.UtcNow
-            ).TotalSeconds;
+            double seconds = (_cachePolicy.UtcGetAbsoluteExpiration() - DateTime.UtcNow)
+                .TotalSeconds;
             if (seconds <= 0)
             {
                 return null;

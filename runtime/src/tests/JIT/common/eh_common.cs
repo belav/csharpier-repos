@@ -160,12 +160,10 @@ namespace TestUtil
             {
                 string newLine = this.testOut.NewLine;
                 string delimStr = newLine[0].ToString();
-                string[] actualLines = (
-                    (this.ActualOutput.Trim()).Replace(newLine, delimStr)
-                ).Split(delimStr.ToCharArray());
-                string[] expectedLines = (
-                    (this.ExpectedOutput.Trim()).Replace(newLine, delimStr)
-                ).Split(delimStr.ToCharArray());
+                string[] actualLines = ((this.ActualOutput.Trim()).Replace(newLine, delimStr))
+                    .Split(delimStr.ToCharArray());
+                string[] expectedLines = ((this.ExpectedOutput.Trim()).Replace(newLine, delimStr))
+                    .Split(delimStr.ToCharArray());
                 int commonLineCount =
                     actualLines.Length < expectedLines.Length
                         ? actualLines.Length

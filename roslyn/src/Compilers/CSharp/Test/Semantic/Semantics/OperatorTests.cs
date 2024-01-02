@@ -3546,9 +3546,7 @@ class C
                                 {
                                     "@operator"
                                         => ((BinaryOperatorSignature)child.Value).Kind.ToString(),
-                                    "leftConversion"
-                                    or "finalConversion"
-                                        => (
+                                    "leftConversion" or "finalConversion" => (
                                             child.Children.SingleOrDefault() is TreeDumperNode node
                                                 ? (
                                                     node.Text switch
@@ -8469,7 +8467,8 @@ class Module1
             var symbols1 = (
                 from node1 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -8481,7 +8480,8 @@ class Module1
             var symbols2 = (
                 from node2 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -9660,7 +9660,8 @@ class Module1
             var symbols1 = (
                 from node1 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -9672,7 +9673,8 @@ class Module1
             var symbols2 = (
                 from node2 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -9718,7 +9720,8 @@ class Module1
             var symbols1 = (
                 from node1 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -9732,7 +9735,8 @@ class Module1
             var symbols2 = (
                 from node2 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.False(symbol2.IsCheckedBuiltin);
@@ -9780,7 +9784,8 @@ class Module1
             var symbols1 = (
                 from node1 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -9794,7 +9799,8 @@ class Module1
             var symbols2 = (
                 from node2 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);

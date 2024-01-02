@@ -217,9 +217,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 lock (this.syncRoot)
                 {
-                    return (
-                        (ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table
-                    ).IsReadOnly;
+                    return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table)
+                        .IsReadOnly;
                 }
             }
         }
@@ -240,9 +239,8 @@ namespace System.ServiceModel.Dispatcher
         {
             lock (this.syncRoot)
             {
-                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).Contains(
-                    item
-                );
+                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table)
+                    .Contains(item);
             }
         }
 
@@ -253,10 +251,8 @@ namespace System.ServiceModel.Dispatcher
         {
             lock (this.syncRoot)
             {
-                ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).CopyTo(
-                    array,
-                    arrayIndex
-                );
+                ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table)
+                    .CopyTo(array, arrayIndex);
             }
         }
 
@@ -266,9 +262,8 @@ namespace System.ServiceModel.Dispatcher
         {
             lock (this.syncRoot)
             {
-                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).Remove(
-                    item
-                );
+                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table)
+                    .Remove(item);
             }
         }
 
@@ -286,9 +281,8 @@ namespace System.ServiceModel.Dispatcher
         {
             lock (this.syncRoot)
             {
-                return (
-                    (ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table
-                ).GetEnumerator();
+                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table)
+                    .GetEnumerator();
             }
         }
 

@@ -647,9 +647,8 @@ public class ElementType
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual ValueComparer? GetValueComparer() =>
-        (
-            (ValueComparer?)this[CoreAnnotationNames.ValueComparer] ?? TypeMapping?.Comparer
-        )?.ToNullableComparer(ClrType);
+        ((ValueComparer?)this[CoreAnnotationNames.ValueComparer] ?? TypeMapping?.Comparer)
+            ?.ToNullableComparer(ClrType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

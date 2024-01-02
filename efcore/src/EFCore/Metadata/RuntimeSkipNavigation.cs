@@ -125,9 +125,8 @@ public class RuntimeSkipNavigation : RuntimePropertyBase, IRuntimeSkipNavigation
         new(
             () => ((IReadOnlySkipNavigation)this).ToDebugString(),
             () =>
-                ((IReadOnlySkipNavigation)this).ToDebugString(
-                    MetadataDebugStringOptions.LongDefault
-                )
+                ((IReadOnlySkipNavigation)this)
+                    .ToDebugString(MetadataDebugStringOptions.LongDefault)
         );
 
     /// <inheritdoc />

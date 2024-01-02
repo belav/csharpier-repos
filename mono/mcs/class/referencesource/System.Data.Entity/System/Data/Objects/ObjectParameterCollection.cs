@@ -368,9 +368,8 @@ namespace System.Data.Objects
         /// </summary>
         IEnumerator<ObjectParameter> IEnumerable<ObjectParameter>.GetEnumerator()
         {
-            return (
-                (System.Collections.Generic.ICollection<ObjectParameter>)this._parameters
-            ).GetEnumerator();
+            return ((System.Collections.Generic.ICollection<ObjectParameter>)this._parameters)
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

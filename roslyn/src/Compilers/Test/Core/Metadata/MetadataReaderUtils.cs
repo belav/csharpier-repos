@@ -335,7 +335,8 @@ namespace Roslyn.Test.Utilities
                 let cdi = reader.GetCustomDebugInformation(handle)
                 where reader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
                 select reader.GetBlobContent(cdi.Value)
-            ).Single();
+            )
+                .Single();
         }
 
         public static SourceText GetEmbeddedSource(
@@ -348,7 +349,8 @@ namespace Roslyn.Test.Utilities
                 let cdi = reader.GetCustomDebugInformation(handle)
                 where reader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.EmbeddedSource
                 select reader.GetBlobBytes(cdi.Value)
-            ).SingleOrDefault();
+            )
+                .SingleOrDefault();
 
             if (bytes == null)
             {

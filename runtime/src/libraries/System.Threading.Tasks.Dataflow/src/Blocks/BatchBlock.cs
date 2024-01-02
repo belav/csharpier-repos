@@ -84,11 +84,12 @@ namespace System.Threading.Tasks.Dataflow
                 this,
                 dataflowBlockOptions,
                 static owningSource =>
-                    ((BatchBlock<T>)owningSource)._target.Complete(
-                        exception: null,
-                        dropPendingMessages: true,
-                        releaseReservedMessages: false
-                    ),
+                    ((BatchBlock<T>)owningSource)
+                        ._target.Complete(
+                            exception: null,
+                            dropPendingMessages: true,
+                            releaseReservedMessages: false
+                        ),
                 onItemsRemoved,
                 itemCountingFunc
             );
@@ -137,11 +138,12 @@ namespace System.Threading.Tasks.Dataflow
                 dataflowBlockOptions.CancellationToken,
                 _source.Completion,
                 static (state, _) =>
-                    ((BatchBlockTargetCore)state!).Complete(
-                        exception: null,
-                        dropPendingMessages: true,
-                        releaseReservedMessages: false
-                    ),
+                    ((BatchBlockTargetCore)state!)
+                        .Complete(
+                            exception: null,
+                            dropPendingMessages: true,
+                            releaseReservedMessages: false
+                        ),
                 _target
             );
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;

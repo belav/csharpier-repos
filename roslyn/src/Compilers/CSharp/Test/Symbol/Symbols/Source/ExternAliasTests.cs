@@ -536,9 +536,8 @@ class Test
             var usingTargetSyntax = (QualifiedNameSyntax)usingSyntax.Name;
             var aliasQualifiedNameSyntax = (AliasQualifiedNameSyntax)usingTargetSyntax.Left;
 
-            var aliasedGlobalNamespace = (
-                (IAssemblySymbol)comp.GetAssemblyOrModuleSymbol(libRef)
-            ).GlobalNamespace;
+            var aliasedGlobalNamespace = ((IAssemblySymbol)comp.GetAssemblyOrModuleSymbol(libRef))
+                .GlobalNamespace;
             var namespaceN = aliasedGlobalNamespace.GetMember<INamespaceSymbol>("N");
             var typeC = namespaceN.GetMember<INamedTypeSymbol>("C");
 

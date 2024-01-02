@@ -667,11 +667,10 @@ namespace Microsoft.Interop
                 )
                 .Where(p => p.ManagedToUnmanagedStub is GeneratedStubCodeContext)
                 .Select(ctx =>
-                    (
-                        (GeneratedStubCodeContext)ctx.ManagedToUnmanagedStub
-                    ).Stub.Node.WithExplicitInterfaceSpecifier(
-                        ExplicitInterfaceSpecifier(ParseName(definingType.FullTypeName))
-                    )
+                    ((GeneratedStubCodeContext)ctx.ManagedToUnmanagedStub)
+                        .Stub.Node.WithExplicitInterfaceSpecifier(
+                            ExplicitInterfaceSpecifier(ParseName(definingType.FullTypeName))
+                        )
                 );
             var inheritedStubs = interfaceGroup.ShadowingMethods.Select(m =>
                 m.UnreachableExceptionStub

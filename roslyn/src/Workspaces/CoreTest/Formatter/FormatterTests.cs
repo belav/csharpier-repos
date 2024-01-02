@@ -225,7 +225,8 @@ public class FormatterTests
                         updatedOptions,
                         CancellationToken.None
                     )
-                ).Syntax!
+                )
+                    .Syntax!
         );
         ValidateVisualBasicOptions(
             (VisualBasicSyntaxFormattingOptions)
@@ -235,7 +236,8 @@ public class FormatterTests
                         updatedOptions,
                         CancellationToken.None
                     )
-                ).Syntax!
+                )
+                    .Syntax!
         );
 
         // Validate that options are read from solution snapshot as a fallback (we have no editorconfig file, so all options should fall back):
@@ -262,7 +264,8 @@ public class FormatterTests
                         optionSet: null,
                         CancellationToken.None
                     )
-                ).Syntax!
+                )
+                    .Syntax!
         );
         ValidateVisualBasicOptions(
             (VisualBasicSyntaxFormattingOptions)
@@ -272,7 +275,8 @@ public class FormatterTests
                         optionSet: null,
                         CancellationToken.None
                     )
-                ).Syntax!
+                )
+                    .Syntax!
         );
         ValidateOrganizeImportsOptions(
             await Formatter.GetOrganizeImportsOptionsAsync(

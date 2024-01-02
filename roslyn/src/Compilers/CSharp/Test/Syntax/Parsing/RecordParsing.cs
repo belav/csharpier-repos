@@ -372,9 +372,8 @@ class C
 
             Assert.Empty(comp.GetTypeByMetadataName("P").GetMembers());
             Assert.Null(
-                (
-                    (SourceMemberContainerTypeSymbol)comp.GetTypeByMetadataName("P")
-                ).PrimaryConstructor
+                ((SourceMemberContainerTypeSymbol)comp.GetTypeByMetadataName("P"))
+                    .PrimaryConstructor
             );
 
             UsingNode(text);

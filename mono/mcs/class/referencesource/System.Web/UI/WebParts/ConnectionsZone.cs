@@ -997,10 +997,12 @@ namespace System.Web.UI.WebControls.WebParts
                         {
                             (
                                 (ITransformerConfigurationControl)_pendingTransformerConfigurationControl
-                            ).Cancelled += new EventHandler(OnConfigurationControlCancelled);
+                            )
+                                .Cancelled += new EventHandler(OnConfigurationControlCancelled);
                             (
                                 (ITransformerConfigurationControl)_pendingTransformerConfigurationControl
-                            ).Succeeded += new EventHandler(OnConfigurationControlSucceeded);
+                            )
+                                .Succeeded += new EventHandler(OnConfigurationControlSucceeded);
 
                             Controls.Add(_pendingTransformerConfigurationControl);
                         }
@@ -1036,10 +1038,12 @@ namespace System.Web.UI.WebControls.WebParts
                         {
                             (
                                 (ITransformerConfigurationControl)_pendingTransformerConfigurationControl
-                            ).Cancelled += new EventHandler(OnConfigurationControlCancelled);
+                            )
+                                .Cancelled += new EventHandler(OnConfigurationControlCancelled);
                             (
                                 (ITransformerConfigurationControl)_pendingTransformerConfigurationControl
-                            ).Succeeded += new EventHandler(OnConfigurationControlSucceeded);
+                            )
+                                .Succeeded += new EventHandler(OnConfigurationControlSucceeded);
 
                             Controls.Add(_pendingTransformerConfigurationControl);
                         }

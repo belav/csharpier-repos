@@ -2324,9 +2324,8 @@ namespace System.Workflow.Activities.Rules
                     {
                         // both specified
                         primaryExpr = new CodeArrayCreateExpression(type, size);
-                        ((CodeArrayCreateExpression)primaryExpr).Initializers.AddRange(
-                            initializers.ToArray()
-                        );
+                        ((CodeArrayCreateExpression)primaryExpr)
+                            .Initializers.AddRange(initializers.ToArray());
                     }
                 }
                 else

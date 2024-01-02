@@ -34,9 +34,8 @@ public class DiscriminatorConventionTest
 
         RunConvention(entityTypeBuilder, null);
 
-        var discriminator = (
-            (IReadOnlyEntityType)entityTypeBuilder.Metadata
-        ).FindDiscriminatorProperty();
+        var discriminator = ((IReadOnlyEntityType)entityTypeBuilder.Metadata)
+            .FindDiscriminatorProperty();
 
         Assert.NotNull(discriminator);
         Assert.Same(
@@ -98,9 +97,8 @@ public class DiscriminatorConventionTest
 
         RunConvention(entityTypeBuilder, null);
 
-        var discriminator = (
-            (IReadOnlyEntityType)entityTypeBuilder.Metadata
-        ).FindDiscriminatorProperty();
+        var discriminator = ((IReadOnlyEntityType)entityTypeBuilder.Metadata)
+            .FindDiscriminatorProperty();
         Assert.NotNull(discriminator);
         Assert.Same(
             discriminator,
@@ -122,9 +120,8 @@ public class DiscriminatorConventionTest
         RunConvention(entityTypeBuilder, baseTypeBuilder.Metadata);
 
         Assert.Null(((IReadOnlyEntityType)baseTypeBuilder.Metadata).FindDiscriminatorProperty());
-        discriminator = (
-            (IReadOnlyEntityType)entityTypeBuilder.Metadata
-        ).FindDiscriminatorProperty();
+        discriminator = ((IReadOnlyEntityType)entityTypeBuilder.Metadata)
+            .FindDiscriminatorProperty();
         Assert.NotNull(discriminator);
         Assert.Same(
             discriminator,
@@ -151,9 +148,8 @@ public class DiscriminatorConventionTest
 
         RunConvention(entityTypeBuilder, null);
 
-        var discriminator = (
-            (IReadOnlyEntityType)entityTypeBuilder.Metadata
-        ).FindDiscriminatorProperty();
+        var discriminator = ((IReadOnlyEntityType)entityTypeBuilder.Metadata)
+            .FindDiscriminatorProperty();
         Assert.NotNull(discriminator);
         Assert.Same(
             discriminator,
@@ -179,9 +175,8 @@ public class DiscriminatorConventionTest
 
         RunConvention(entityTypeBuilder, null);
 
-        var discriminator = (
-            (IReadOnlyEntityType)entityTypeBuilder.Metadata
-        ).FindDiscriminatorProperty();
+        var discriminator = ((IReadOnlyEntityType)entityTypeBuilder.Metadata)
+            .FindDiscriminatorProperty();
         Assert.NotNull(discriminator);
         Assert.Same(
             discriminator,

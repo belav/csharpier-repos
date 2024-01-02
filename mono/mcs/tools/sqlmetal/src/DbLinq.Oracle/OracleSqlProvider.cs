@@ -64,7 +64,8 @@ namespace DbLinq.Oracle
                     (
                         from outputExpression in outputExpressions
                         select outputExpression.Replace(".NextVal", ".CurrVal", true)
-                    ).ToArray()
+                    )
+                        .ToArray()
                 ),
                 SqlStatement.Join(", ", outputParameters.ToArray())
             );

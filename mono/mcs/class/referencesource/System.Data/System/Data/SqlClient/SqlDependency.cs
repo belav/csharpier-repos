@@ -297,9 +297,8 @@ namespace System.Data.SqlClient
         private static readonly string _assemblyName = (typeof(SqlDependencyProcessDispatcher))
             .Assembly
             .FullName;
-        private static readonly string _typeName = (
-            typeof(SqlDependencyProcessDispatcher)
-        ).FullName;
+        private static readonly string _typeName = (typeof(SqlDependencyProcessDispatcher))
+            .FullName;
 
         // -----------
         // BID members

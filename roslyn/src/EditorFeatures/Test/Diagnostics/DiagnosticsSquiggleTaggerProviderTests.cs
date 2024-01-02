@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
 
             // But dispose the first one. We still want the second one to work.
-            ((IDisposable)tagger1).Dispose();
+            ((IDisposable)tagger1)
+                .Dispose();
 
             using var disposable = tagger2 as IDisposable;
             await wrapper.WaitForTags();

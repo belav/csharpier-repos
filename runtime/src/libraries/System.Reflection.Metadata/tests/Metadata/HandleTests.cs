@@ -144,7 +144,8 @@ namespace System.Reflection.Metadata.Tests
                 (
                     (InterfaceImplementationHandle)
                         new Handle((byte)HandleType.InterfaceImpl, 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(
@@ -162,9 +163,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (MethodSpecificationHandle)new Handle((byte)HandleType.MethodSpec, 0x00ffffff)
-                ).RowId
+                ((MethodSpecificationHandle)new Handle((byte)HandleType.MethodSpec, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(1, ((TypeDefinitionHandle)new Handle((byte)HandleType.TypeDef, 1)).RowId);
@@ -236,9 +236,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (StandaloneSignatureHandle)new Handle((byte)HandleType.Signature, 0x00ffffff)
-                ).RowId
+                ((StandaloneSignatureHandle)new Handle((byte)HandleType.Signature, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -286,9 +285,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (GenericParameterHandle)new Handle((byte)HandleType.GenericParam, 0x00ffffff)
-                ).RowId
+                ((GenericParameterHandle)new Handle((byte)HandleType.GenericParam, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -296,14 +294,16 @@ namespace System.Reflection.Metadata.Tests
                 (
                     (GenericParameterConstraintHandle)
                         new Handle((byte)HandleType.GenericParamConstraint, 1)
-                ).RowId
+                )
+                    .RowId
             );
             Assert.Equal(
                 0x00ffffff,
                 (
                     (GenericParameterConstraintHandle)
                         new Handle((byte)HandleType.GenericParamConstraint, 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(
@@ -321,23 +321,22 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (CustomAttributeHandle)new Handle((byte)HandleType.CustomAttribute, 0x00ffffff)
-                ).RowId
+                ((CustomAttributeHandle)new Handle((byte)HandleType.CustomAttribute, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
                 1,
-                (
-                    (DeclarativeSecurityAttributeHandle)new Handle((byte)HandleType.DeclSecurity, 1)
-                ).RowId
+                ((DeclarativeSecurityAttributeHandle)new Handle((byte)HandleType.DeclSecurity, 1))
+                    .RowId
             );
             Assert.Equal(
                 0x00ffffff,
                 (
                     (DeclarativeSecurityAttributeHandle)
                         new Handle((byte)HandleType.DeclSecurity, 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(
@@ -346,10 +345,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (ManifestResourceHandle)
-                        new Handle((byte)HandleType.ManifestResource, 0x00ffffff)
-                ).RowId
+                ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(1, ((ConstantHandle)new Handle((byte)HandleType.Constant, 1)).RowId);
@@ -364,10 +361,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (ManifestResourceHandle)
-                        new Handle((byte)HandleType.ManifestResource, 0x00ffffff)
-                ).RowId
+                ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(1, ((AssemblyFileHandle)new Handle((byte)HandleType.File, 1)).RowId);
@@ -382,9 +377,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (MethodImplementationHandle)new Handle((byte)HandleType.MethodImpl, 0x00ffffff)
-                ).RowId
+                ((MethodImplementationHandle)new Handle((byte)HandleType.MethodImpl, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -393,9 +387,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (AssemblyReferenceHandle)new Handle((byte)HandleType.AssemblyRef, 0x00ffffff)
-                ).RowId
+                ((AssemblyReferenceHandle)new Handle((byte)HandleType.AssemblyRef, 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -404,9 +397,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (UserStringHandle)new Handle((byte)HandleType.UserString, 0x00ffffff)
-                ).GetHeapOffset()
+                ((UserStringHandle)new Handle((byte)HandleType.UserString, 0x00ffffff))
+                    .GetHeapOffset()
             );
 
             Assert.Equal(1, ((GuidHandle)new Handle((byte)HandleType.Guid, 1)).Index);
@@ -417,15 +409,13 @@ namespace System.Reflection.Metadata.Tests
 
             Assert.Equal(
                 1,
-                (
-                    (NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 1)
-                ).GetHeapOffset()
+                ((NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 1))
+                    .GetHeapOffset()
             );
             Assert.Equal(
                 0x1fffffff,
-                (
-                    (NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 0x1fffffff)
-                ).GetHeapOffset()
+                ((NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 0x1fffffff))
+                    .GetHeapOffset()
             );
 
             Assert.Equal(1, ((StringHandle)new Handle((byte)HandleType.String, 1)).GetHeapOffset());
@@ -459,23 +449,22 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (AssemblyDefinitionHandle)new EntityHandle(TokenTypeIds.Assembly | 0x00ffffff)
-                ).RowId
+                ((AssemblyDefinitionHandle)new EntityHandle(TokenTypeIds.Assembly | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
                 1,
-                (
-                    (InterfaceImplementationHandle)new EntityHandle(TokenTypeIds.InterfaceImpl | 1)
-                ).RowId
+                ((InterfaceImplementationHandle)new EntityHandle(TokenTypeIds.InterfaceImpl | 1))
+                    .RowId
             );
             Assert.Equal(
                 0x00ffffff,
                 (
                     (InterfaceImplementationHandle)
                         new EntityHandle(TokenTypeIds.InterfaceImpl | 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(
@@ -484,9 +473,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (MethodDefinitionHandle)new EntityHandle(TokenTypeIds.MethodDef | 0x00ffffff)
-                ).RowId
+                ((MethodDefinitionHandle)new EntityHandle(TokenTypeIds.MethodDef | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -495,10 +483,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (MethodSpecificationHandle)
-                        new EntityHandle(TokenTypeIds.MethodSpec | 0x00ffffff)
-                ).RowId
+                ((MethodSpecificationHandle)new EntityHandle(TokenTypeIds.MethodSpec | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -534,9 +520,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (TypeSpecificationHandle)new EntityHandle(TokenTypeIds.TypeSpec | 0x00ffffff)
-                ).RowId
+                ((TypeSpecificationHandle)new EntityHandle(TokenTypeIds.TypeSpec | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -572,9 +557,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff)
-                ).RowId
+                ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -583,9 +567,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (StandaloneSignatureHandle)new EntityHandle(TokenTypeIds.Signature | 0x00ffffff)
-                ).RowId
+                ((StandaloneSignatureHandle)new EntityHandle(TokenTypeIds.Signature | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -621,9 +604,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff)
-                ).RowId
+                ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(1, ((ParameterHandle)new EntityHandle(TokenTypeIds.ParamDef | 1)).RowId);
@@ -638,9 +620,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (GenericParameterHandle)new EntityHandle(TokenTypeIds.GenericParam | 0x00ffffff)
-                ).RowId
+                ((GenericParameterHandle)new EntityHandle(TokenTypeIds.GenericParam | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -648,14 +629,16 @@ namespace System.Reflection.Metadata.Tests
                 (
                     (GenericParameterConstraintHandle)
                         new EntityHandle(TokenTypeIds.GenericParamConstraint | 1)
-                ).RowId
+                )
+                    .RowId
             );
             Assert.Equal(
                 0x00ffffff,
                 (
                     (GenericParameterConstraintHandle)
                         new EntityHandle(TokenTypeIds.GenericParamConstraint | 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(
@@ -673,10 +656,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (CustomAttributeHandle)
-                        new EntityHandle(TokenTypeIds.CustomAttribute | 0x00ffffff)
-                ).RowId
+                ((CustomAttributeHandle)new EntityHandle(TokenTypeIds.CustomAttribute | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -684,14 +665,16 @@ namespace System.Reflection.Metadata.Tests
                 (
                     (DeclarativeSecurityAttributeHandle)
                         new EntityHandle(TokenTypeIds.DeclSecurity | 1)
-                ).RowId
+                )
+                    .RowId
             );
             Assert.Equal(
                 0x00ffffff,
                 (
                     (DeclarativeSecurityAttributeHandle)
                         new EntityHandle(TokenTypeIds.DeclSecurity | 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(
@@ -703,7 +686,8 @@ namespace System.Reflection.Metadata.Tests
                 (
                     (ManifestResourceHandle)
                         new EntityHandle(TokenTypeIds.ManifestResource | 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(1, ((ConstantHandle)new EntityHandle(TokenTypeIds.Constant | 1)).RowId);
@@ -721,7 +705,8 @@ namespace System.Reflection.Metadata.Tests
                 (
                     (ManifestResourceHandle)
                         new EntityHandle(TokenTypeIds.ManifestResource | 0x00ffffff)
-                ).RowId
+                )
+                    .RowId
             );
 
             Assert.Equal(1, ((AssemblyFileHandle)new EntityHandle(TokenTypeIds.File | 1)).RowId);
@@ -736,10 +721,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (MethodImplementationHandle)
-                        new EntityHandle(TokenTypeIds.MethodImpl | 0x00ffffff)
-                ).RowId
+                ((MethodImplementationHandle)new EntityHandle(TokenTypeIds.MethodImpl | 0x00ffffff))
+                    .RowId
             );
 
             Assert.Equal(
@@ -748,9 +731,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (AssemblyReferenceHandle)new EntityHandle(TokenTypeIds.AssemblyRef | 0x00ffffff)
-                ).RowId
+                ((AssemblyReferenceHandle)new EntityHandle(TokenTypeIds.AssemblyRef | 0x00ffffff))
+                    .RowId
             );
         }
 

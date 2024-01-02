@@ -891,9 +891,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
 
                     case SymbolKind.Property:
-                        var propertySymbol = (
-                            (PropertySymbol)namedArgumentNameSymbol
-                        ).GetLeastOverriddenProperty(this.ContainingType);
+                        var propertySymbol = ((PropertySymbol)namedArgumentNameSymbol)
+                            .GetLeastOverriddenProperty(this.ContainingType);
                         namedArgumentType = propertySymbol.Type;
                         invalidNamedArgument |= propertySymbol.IsReadOnly;
                         var getMethod = propertySymbol.GetMethod;
@@ -999,10 +998,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else if (
                         reorderedArgument.Kind == TypedConstantKind.Array
                         && parameter.Type.TypeKind == TypeKind.Array
-                        && !((TypeSymbol)reorderedArgument.TypeInternal!).Equals(
-                            parameter.Type,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        && !((TypeSymbol)reorderedArgument.TypeInternal!)
+                            .Equals(parameter.Type, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
                         // NOTE: As in dev11, we don't allow array covariance conversions (presumably, we don't have a way to

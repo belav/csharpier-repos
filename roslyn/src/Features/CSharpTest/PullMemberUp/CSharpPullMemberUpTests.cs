@@ -47,9 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PullMemberUp
         )
         {
             var service = new TestPullMemberUpService(null, null);
-            var parametersValue = (parameters ?? TestParameters.Default).WithFixProviderData(
-                service
-            );
+            var parametersValue = (parameters ?? TestParameters.Default)
+                .WithFixProviderData(service);
 
             using var workspace = CreateWorkspaceFromOptions(initialMarkup, parametersValue);
             var (actions, _) = await GetCodeActionsAsync(workspace, parametersValue);

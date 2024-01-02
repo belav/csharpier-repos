@@ -73,10 +73,8 @@ namespace System.Text.Json.Serialization.Metadata
                 if (typeDiscriminator is not null)
                 {
                     if (
-                        !(_discriminatorIdtoType ??= new()).TryAdd(
-                            typeDiscriminator,
-                            derivedJsonTypeInfo
-                        )
+                        !(_discriminatorIdtoType ??= new())
+                            .TryAdd(typeDiscriminator, derivedJsonTypeInfo)
                     )
                     {
                         ThrowHelper.ThrowInvalidOperationException_TypeDicriminatorIdIsAlreadySpecified(

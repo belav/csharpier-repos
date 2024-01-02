@@ -131,9 +131,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.True(
                 IsSame(
                     empty,
-                    (
-                        (System.Collections.Immutable.IImmutableList<GenericParameterHelper>)empty
-                    ).Clear()
+                    ((System.Collections.Immutable.IImmutableList<GenericParameterHelper>)empty)
+                        .Clear()
                 )
             );
             Assert.True(empty.IsEmpty);

@@ -694,19 +694,13 @@ null,
             charArray[0] = (char)0xEA;
             var propertyName = new string(charArray);
 
-            WritePropertyValueBothForms(
-                indented,
-                propertyName,
-                "42",
-                (
+            WritePropertyValueBothForms(indented, propertyName, "42", (
                     @"{
   ""\u00EA"
                     + propertyName.Substring(1)
                     + @""": 42
 }"
-                ).NormalizeLineEndings(),
-                $"{{\"\\u00EA{propertyName.Substring(1)}\":42}}"
-            );
+                ).NormalizeLineEndings(), $"{{\"\\u00EA{propertyName.Substring(1)}\":42}}");
         }
 
         [Theory]

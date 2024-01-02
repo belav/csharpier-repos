@@ -590,7 +590,8 @@ namespace System.Data.Linq
                             this.services.Context.Provider,
                             new object[] { keyValues }
                         ).ReturnValue
-                ).GetEnumerator();
+                )
+                    .GetEnumerator();
             }
 
             class DeferredSource : IEnumerable<T>, IEnumerable

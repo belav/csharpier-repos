@@ -82,7 +82,8 @@ namespace CoreXml.Test.XLinq
                                         parentDecls.IsNamespaceDeclaration
                                         && (string)parentDecls == (string)a
                                     select parentDecls
-                                ).Any()
+                                )
+                                    .Any()
                             )
                         select a
                     )

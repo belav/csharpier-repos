@@ -93,10 +93,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (result != 0)
                 return result;
 
-            result = ((ImportSectionNode)_containingImportSection).CompareToImpl(
-                (ImportSectionNode)otherNode._containingImportSection,
-                comparer
-            );
+            result = ((ImportSectionNode)_containingImportSection)
+                .CompareToImpl((ImportSectionNode)otherNode._containingImportSection, comparer);
             if (result != 0)
                 return result;
 

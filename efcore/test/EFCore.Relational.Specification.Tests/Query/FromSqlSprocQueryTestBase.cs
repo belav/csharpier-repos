@@ -141,7 +141,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -168,7 +169,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -233,7 +235,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -280,7 +283,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -326,7 +330,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -370,7 +375,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                     : Assert.Throws<InvalidOperationException>(
                         () => query.Min(mep => mep.UnitPrice)
                     )
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -409,7 +415,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -437,7 +444,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -465,7 +473,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             from b in results2
             where a.TenMostExpensiveProducts == b.TenMostExpensiveProducts
             select new { a, b }
-        ).ToArray();
+        )
+            .ToArray();
 
         Assert.Equal(10, actual.Length);
     }
@@ -494,7 +503,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -519,7 +529,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             from p in results2
             where mep.TenMostExpensiveProducts == p.ProductName
             select new { mep, p }
-        ).ToArray();
+        )
+            .ToArray();
 
         Assert.Equal(10, actual.Length);
     }
@@ -548,7 +559,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
                         () => query.ToArrayAsync()
                     )
                     : Assert.Throws<InvalidOperationException>(() => query.ToArray())
-            ).Message
+            )
+                .Message
         );
     }
 
@@ -574,7 +586,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
             from mep in results2
             where mep.TenMostExpensiveProducts == p.ProductName
             select new { mep, p }
-        ).ToArray();
+        )
+            .ToArray();
 
         Assert.Equal(10, actual.Length);
     }

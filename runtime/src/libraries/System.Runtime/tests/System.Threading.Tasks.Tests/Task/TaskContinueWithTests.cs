@@ -726,12 +726,13 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Future = {2}Future.CW(func, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => 5,
-                                                ct,
-                                                tco,
-                                                TaskScheduler.Default
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(
+                                                    _ => 5,
+                                                    ct,
+                                                    tco,
+                                                    TaskScheduler.Default
+                                                );
                                         }
                                         else
                                         {
@@ -749,12 +750,13 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Task = {2}Future.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
-                                                ct,
-                                                tco,
-                                                TaskScheduler.Default
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(
+                                                    _ => { },
+                                                    ct,
+                                                    tco,
+                                                    TaskScheduler.Default
+                                                );
                                         }
                                         else
                                         {
@@ -841,10 +843,8 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Future = {1}Future.CW(func, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => 5,
-                                                ct
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => 5, ct);
                                         }
                                         else
                                         {
@@ -857,10 +857,8 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Task = {1}Future.CW(action, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
-                                                ct
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => { }, ct);
                                         }
                                         else
                                         {
@@ -937,10 +935,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => 5,
-                                                tco
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => 5, tco);
                                         }
                                         else
                                         {
@@ -951,10 +947,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
-                                                tco
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => { }, tco);
                                         }
                                         else
                                         {

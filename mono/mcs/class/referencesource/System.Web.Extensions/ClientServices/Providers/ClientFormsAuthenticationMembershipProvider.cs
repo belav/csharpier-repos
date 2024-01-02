@@ -292,9 +292,8 @@ namespace System.Web.ClientServices.Providers
             {
                 if (!ConnectivityStatus.IsOffline)
                 {
-                    CookieContainer cookies = (
-                        (ClientFormsIdentity)p.Identity
-                    ).AuthenticationCookies;
+                    CookieContainer cookies = ((ClientFormsIdentity)p.Identity)
+                        .AuthenticationCookies;
 
                     if (_UsingWFCService)
                     {
@@ -435,9 +434,8 @@ namespace System.Web.ClientServices.Providers
                 && Thread.CurrentPrincipal.Identity.Name == username
             )
             {
-                cookies = (
-                    (ClientFormsIdentity)Thread.CurrentPrincipal.Identity
-                ).AuthenticationCookies;
+                cookies = ((ClientFormsIdentity)Thread.CurrentPrincipal.Identity)
+                    .AuthenticationCookies;
             }
 
             ///////////////////////////////////////////////////////////////
@@ -683,7 +681,8 @@ namespace System.Web.ClientServices.Providers
             ClientFormsAuthenticationCredentials creds = (
                 (IClientFormsAuthenticationCredentialsProvider)
                     Activator.CreateInstance(_GetCredentialsType)
-            ).GetCredentials();
+            )
+                .GetCredentials();
             if (creds == null)
                 return false;
             username = creds.UserName;

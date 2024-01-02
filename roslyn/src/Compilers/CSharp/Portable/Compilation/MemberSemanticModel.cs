@@ -1195,7 +1195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var bound = GetLowerBoundNode(node);
             BoundAwaitableInfo awaitableInfo = (
                 ((bound as BoundExpressionStatement)?.Expression ?? bound) as BoundAwaitExpression
-            )?.AwaitableInfo;
+            )
+                ?.AwaitableInfo;
             if (awaitableInfo == null)
             {
                 return default(AwaitExpressionInfo);
@@ -1277,7 +1278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 enumeratorInfoOpt.MoveNextInfo.Method.GetPublicSymbol(),
                 currentProperty: (
                     (PropertySymbol)enumeratorInfoOpt.CurrentPropertyGetter?.AssociatedSymbol
-                ).GetPublicSymbol(),
+                )
+                    .GetPublicSymbol(),
                 disposeMethod.GetPublicSymbol(),
                 enumeratorInfoOpt.ElementTypeWithAnnotations.GetPublicSymbol(),
                 BoundNode.GetConversion(
@@ -2300,9 +2302,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (boundInnerLambdaOrQuery.Kind)
             {
                 case BoundKind.UnboundLambda:
-                    boundInnerLambdaOrQuery = (
-                        (UnboundLambda)boundInnerLambdaOrQuery
-                    ).BindForErrorRecovery();
+                    boundInnerLambdaOrQuery = ((UnboundLambda)boundInnerLambdaOrQuery)
+                        .BindForErrorRecovery();
                     goto case BoundKind.Lambda;
                 case BoundKind.Lambda:
                     AssertPositionAdjusted(position);
@@ -2561,7 +2562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // and so the SnapshotManager can be null in these cases.
                 var parentSnapshotManagerOpt = (
                     (SpeculativeSemanticModelWithMemberModel)_containingPublicSemanticModel
-                ).ParentSnapshotManagerOpt;
+                )
+                    .ParentSnapshotManagerOpt;
                 if (parentSnapshotManagerOpt is null || !isNullableAnalysisEnabled)
                 {
                     rewriteAndCache();

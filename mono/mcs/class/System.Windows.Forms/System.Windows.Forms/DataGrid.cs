@@ -2956,9 +2956,8 @@ namespace System.Windows.Forms
                     {
                         CurrentTableStyle = (DataGridTableStyle)e.Element;
                         // force to auto detect columns in case the new style is completely empty
-                        ((DataGridTableStyle)e.Element).CreateColumnsForTable(
-                            CurrentTableStyle.GridColumnStyles.Count > 0
-                        );
+                        ((DataGridTableStyle)e.Element)
+                            .CreateColumnsForTable(CurrentTableStyle.GridColumnStyles.Count > 0);
                     }
                     break;
                 case CollectionChangeAction.Remove:

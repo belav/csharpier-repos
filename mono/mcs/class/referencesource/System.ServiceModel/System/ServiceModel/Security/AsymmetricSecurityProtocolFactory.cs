@@ -120,9 +120,8 @@ namespace System.ServiceModel.Security
             {
                 SecurityTokenRequirement requirement = CreateRecipientSecurityTokenRequirement();
                 this.AsymmetricTokenParameters.InitializeSecurityTokenRequirement(requirement);
-                return ((IEndpointIdentityProvider)this.SecurityTokenManager).GetIdentityOfSelf(
-                    requirement
-                );
+                return ((IEndpointIdentityProvider)this.SecurityTokenManager)
+                    .GetIdentityOfSelf(requirement);
             }
             else
             {
@@ -146,7 +145,8 @@ namespace System.ServiceModel.Security
                         (
                             (ISecurityContextSecurityTokenCacheProvider)
                                 this.recipientCryptoTokenAuthenticator
-                        ).TokenCache
+                        )
+                            .TokenCache
                     );
                 }
                 return (T)(object)(result);

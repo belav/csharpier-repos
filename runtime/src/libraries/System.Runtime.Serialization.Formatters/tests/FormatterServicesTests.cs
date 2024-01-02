@@ -248,14 +248,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 (
                     (ContextBoundSubclass)
                         FormatterServices.GetUninitializedObject(typeof(ContextBoundSubclass))
-                ).Value
+                )
+                    .Value
             );
             Assert.Equal(
                 0,
                 (
                     (ContextBoundSubclass)
                         FormatterServices.GetSafeUninitializedObject(typeof(ContextBoundSubclass))
-                ).Value
+                )
+                    .Value
             );
         }
 
@@ -275,7 +277,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterServices.GetUninitializedObject(
                             typeof(ObjectWithDefaultConstructor)
                         )
-                ).Value
+                )
+                    .Value
             );
             Assert.Equal(
                 0,
@@ -284,7 +287,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterServices.GetSafeUninitializedObject(
                             typeof(ObjectWithDefaultConstructor)
                         )
-                ).Value
+                )
+                    .Value
             );
         }
 
@@ -308,7 +312,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterServices.GetUninitializedObject(
                             typeof(ObjectWithStaticConstructor)
                         )
-                ).GetValue()
+                )
+                    .GetValue()
             );
         }
 
@@ -332,7 +337,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 (
                     (ObjectWithStaticField)
                         FormatterServices.GetUninitializedObject(typeof(ObjectWithStaticField))
-                ).GetValue()
+                )
+                    .GetValue()
             );
         }
 
@@ -371,7 +377,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterServices.GetUninitializedObject(
                             typeof(ObjectWithClassDefaultField)
                         )
-                ).Value
+                )
+                    .Value
             );
             Assert.Null(
                 (
@@ -379,7 +386,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterServices.GetSafeUninitializedObject(
                             typeof(ObjectWithClassDefaultField)
                         )
-                ).Value
+                )
+                    .Value
             );
         }
 
@@ -399,7 +407,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterServices.GetUninitializedObject(
                             typeof(ObjectWithStructDefaultField)
                         )
-                ).Value
+                )
+                    .Value
             );
             Assert.Equal(
                 0,
@@ -408,7 +417,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterServices.GetSafeUninitializedObject(
                             typeof(ObjectWithStructDefaultField)
                         )
-                ).Value
+                )
+                    .Value
             );
         }
 

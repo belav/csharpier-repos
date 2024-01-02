@@ -798,9 +798,12 @@ public class DbContextOptionsBuilder : IDbContextOptionsBuilderInfrastructure
         Func<CoreOptionsExtension, CoreOptionsExtension> withFunc
     )
     {
-        ((IDbContextOptionsBuilderInfrastructure)this).AddOrUpdateExtension(
-            withFunc(Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension())
-        );
+        ((IDbContextOptionsBuilderInfrastructure)this)
+            .AddOrUpdateExtension(
+                withFunc(
+                    Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
+                )
+            );
 
         return this;
     }

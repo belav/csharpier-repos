@@ -177,7 +177,8 @@ public class AcceptedAtRouteOfTResultTests
                 PopulateMetadata<AcceptedAtRoute<object>>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

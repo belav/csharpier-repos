@@ -31,7 +31,8 @@ public class NorthwindSplitIncludeNoTrackingQuerySqlServerTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_skip_take_no_order_by(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Include_collection_skip_no_order_by(bool async) =>
@@ -41,7 +42,8 @@ public class NorthwindSplitIncludeNoTrackingQuerySqlServerTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Include_collection_skip_no_order_by(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Include_reference_GroupBy_Select(bool async)

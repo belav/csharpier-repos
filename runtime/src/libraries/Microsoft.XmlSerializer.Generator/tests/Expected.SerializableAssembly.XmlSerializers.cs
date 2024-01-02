@@ -353,7 +353,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     WriteStartElement(@"ArrayOfDateTime", @"", null, false);
                     System.Collections.IEnumerator e = (
                         (System.Collections.Generic.IEnumerable<global::System.DateTime>)a
-                    ).GetEnumerator();
+                    )
+                        .GetEnumerator();
                     if (e != null)
                         while (e.MoveNext())
                         {
@@ -2952,7 +2953,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             {
                                 System.Collections.IEnumerator e = (
                                     (System.Collections.Generic.IEnumerable<global::System.DateTime>)a
-                                ).GetEnumerator();
+                                )
+                                    .GetEnumerator();
                                 if (e != null)
                                     while (e.MoveNext())
                                     {
@@ -3412,9 +3414,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.MoreChoices"
                     );
             }
@@ -3475,9 +3476,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.ItemChoiceType"
                     );
             }
@@ -3500,9 +3500,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.ULongEnum"
                     );
             }
@@ -3525,9 +3524,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.LongEnum"
                     );
             }
@@ -3550,9 +3548,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.UIntEnum"
                     );
             }
@@ -3575,9 +3572,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.SByteEnum"
                     );
             }
@@ -3600,9 +3596,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.ByteEnum"
                     );
             }
@@ -3625,9 +3620,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.ShortEnum"
                     );
             }
@@ -3650,9 +3644,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.IntEnum"
                     );
             }
@@ -3740,9 +3733,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"SerializationTypes.MyEnum"
                     );
             }
@@ -4060,9 +4052,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"DogBreed"
                     );
             }
@@ -5010,7 +5001,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 {
                     System.Collections.IEnumerator e = (
                         (System.Collections.Generic.IEnumerable<global::System.DateTime>)a
-                    ).GetEnumerator();
+                    )
+                        .GetEnumerator();
                     if (e != null)
                         while (e.MoveNext())
                         {
@@ -5063,7 +5055,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 {
                     System.Collections.IEnumerator e = (
                         (System.Collections.Generic.IEnumerable<global::System.DateTime>)a
-                    ).GetEnumerator();
+                    )
+                        .GetEnumerator();
                     if (e != null)
                         while (e.MoveNext())
                         {
@@ -25018,9 +25011,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write107_TypeWithXmlElementProperty(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write107_TypeWithXmlElementProperty(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -25043,9 +25035,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write108_TypeWithXmlDocumentProperty(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write108_TypeWithXmlDocumentProperty(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -25183,9 +25174,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write114_TypeWithXmlNodeArrayProperty(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write114_TypeWithXmlNodeArrayProperty(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -25921,9 +25911,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write146_TypeWithDateTimeStringProperty(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write146_TypeWithDateTimeStringProperty(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -25969,9 +25958,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write148_TypeWithGetSetArrayMembers(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write148_TypeWithGetSetArrayMembers(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -25994,9 +25982,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write149_TypeWithGetOnlyArrayProperties(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write149_TypeWithGetOnlyArrayProperties(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26272,9 +26259,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write161_TypeHasArrayOfASerializedAsB(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write161_TypeHasArrayOfASerializedAsB(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26320,9 +26306,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write163_BaseClassWithSamePropertyName(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write163_BaseClassWithSamePropertyName(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26345,9 +26330,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write164_DerivedClassWithSameProperty(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write164_DerivedClassWithSameProperty(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26370,9 +26354,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write165_DerivedClassWithSameProperty2(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write165_DerivedClassWithSameProperty2(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26418,9 +26401,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write167_TypeWithByteArrayAsXmlText(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write167_TypeWithByteArrayAsXmlText(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26860,9 +26842,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write186_KnownTypesThroughConstructor(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write186_KnownTypesThroughConstructor(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26931,9 +26912,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write189_TypeWithPropertyNameSpecified(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write189_TypeWithPropertyNameSpecified(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -26956,9 +26936,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write190_TypeWithXmlSchemaFormAttribute(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write190_TypeWithXmlSchemaFormAttribute(objectToSerialize);
         }
 
         protected override object Deserialize(
@@ -27188,9 +27167,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             System.Xml.Serialization.XmlSerializationWriter writer
         )
         {
-            ((XmlSerializationWriter1)writer).Write200_TypeWithShouldSerializeMethod(
-                objectToSerialize
-            );
+            ((XmlSerializationWriter1)writer)
+                .Write200_TypeWithShouldSerializeMethod(objectToSerialize);
         }
 
         protected override object Deserialize(

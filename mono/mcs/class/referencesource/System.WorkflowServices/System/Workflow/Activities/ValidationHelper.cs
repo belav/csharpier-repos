@@ -341,7 +341,8 @@ namespace System.Workflow.Activities
                                                     notImplementedServiceOperations[
                                                         currentContractType
                                                     ][operationName]
-                                            ).Name,
+                                            )
+                                                .Name,
                                             currentContractType.FullName
                                         ),
                                         WorkflowServicesErrorNumbers.Error_DuplicatedOperationName,
@@ -400,7 +401,8 @@ namespace System.Workflow.Activities
                                                     notImplementedServiceOperations[
                                                         currentContractType
                                                     ][operationName]
-                                            ).Name,
+                                            )
+                                                .Name,
                                             currentContractType.FullName
                                         ),
                                         WorkflowServicesErrorNumbers.Error_DuplicatedOperationName,
@@ -431,7 +433,8 @@ namespace System.Workflow.Activities
                                                 implementedServiceOperations[currentContractType][
                                                     operationName
                                                 ]
-                                        ).Name,
+                                        )
+                                            .Name,
                                         currentContractType.FullName
                                     ),
                                     WorkflowServicesErrorNumbers.Error_DuplicatedOperationName,
@@ -1422,7 +1425,8 @@ namespace System.Workflow.Activities
                         {
                             contractSessionMode = (
                                 (ServiceContractAttribute)serviceContractAttributes[0]
-                            ).SessionMode;
+                            )
+                                .SessionMode;
                         }
                         else if (serviceContractAttributes[0] is AttributeInfoAttribute)
                         {

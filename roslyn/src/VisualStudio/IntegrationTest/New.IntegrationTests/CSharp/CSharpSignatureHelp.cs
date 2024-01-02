@@ -326,7 +326,8 @@ class C
                     await TestServices.Editor.GetCurrentSignatureAsync(
                         HangMitigatingCancellationToken
                     )
-                ).Content
+                )
+                    .Content
             );
 
             await TestServices.Input.SendAsync(
@@ -340,7 +341,8 @@ class C
                     await TestServices.Editor.GetCurrentSignatureAsync(
                         HangMitigatingCancellationToken
                     )
-                ).Content
+                )
+                    .Content
             );
         }
     }

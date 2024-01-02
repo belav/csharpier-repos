@@ -266,14 +266,14 @@ public class C2
             );
             builder.Append(afterUsings);
 
-            LanguageVersion treeLanguageVersion = (
-                (CSharpParseOptions)tree.Options
-            ).LanguageVersion;
-            var parseOptions = ((CSharpParseOptions)tree.Options).WithLanguageVersion(
-                treeLanguageVersion > LanguageVersion.CSharp10
-                    ? treeLanguageVersion
-                    : LanguageVersion.CSharp10
-            );
+            LanguageVersion treeLanguageVersion = ((CSharpParseOptions)tree.Options)
+                .LanguageVersion;
+            var parseOptions = ((CSharpParseOptions)tree.Options)
+                .WithLanguageVersion(
+                    treeLanguageVersion > LanguageVersion.CSharp10
+                        ? treeLanguageVersion
+                        : LanguageVersion.CSharp10
+                );
             yield return (
                 comp.ReplaceSyntaxTree(
                     tree,

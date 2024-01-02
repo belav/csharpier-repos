@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping
         {
             var newLineBeforeOpenBraceDefault = (
                 (CSharpSyntaxFormattingOptions)fallbackOptions.CleanupOptions.FormattingOptions
-            ).NewLines.ToNewLineBeforeOpenBracePlacement();
+            )
+                .NewLines.ToNewLineBeforeOpenBracePlacement();
 
             return new(
                 new CSharpSyntaxFormattingOptions(

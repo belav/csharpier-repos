@@ -687,19 +687,16 @@ namespace System.Workflow.ComponentModel
                 object propValue = this.metaProperties[dependencyProperty];
                 if (propValue is DependencyObject)
                 {
-                    ((IDependencyObjectAccessor)propValue).InitializeActivatingInstanceForRuntime(
-                        this,
-                        workflowCoreRuntime
-                    );
+                    ((IDependencyObjectAccessor)propValue)
+                        .InitializeActivatingInstanceForRuntime(this, workflowCoreRuntime);
                     this.DependencyPropertyValues[dependencyProperty] = propValue;
                 }
                 else if (propValue is WorkflowParameterBindingCollection)
                 {
                     IList collection = propValue as IList;
                     for (int index2 = 0; index2 < collection.Count; index2++)
-                        (
-                            (IDependencyObjectAccessor)collection[index2]
-                        ).InitializeActivatingInstanceForRuntime(this, workflowCoreRuntime);
+                        ((IDependencyObjectAccessor)collection[index2])
+                            .InitializeActivatingInstanceForRuntime(this, workflowCoreRuntime);
                     this.DependencyPropertyValues[dependencyProperty] = propValue;
                 }
             }
@@ -736,9 +733,8 @@ namespace System.Workflow.ComponentModel
                 {
                     IList collection = propValue as IList;
                     for (int index2 = 0; index2 < collection.Count; index2++)
-                        (
-                            (IDependencyObjectAccessor)collection[index2]
-                        ).InitializeDefinitionForRuntime(this);
+                        ((IDependencyObjectAccessor)collection[index2])
+                            .InitializeDefinitionForRuntime(this);
                     this.DependencyPropertyValues[dependencyProperty] = propValue;
                 }
                 else if (propValue is ActivityBind)
@@ -781,9 +777,8 @@ namespace System.Workflow.ComponentModel
                     ];
                     if (keyValuePair.Value is DependencyObject)
                     {
-                        ((DependencyObject)keyValuePair.Value).FixUpMetaProperties(
-                            originalPropValue as DependencyObject
-                        );
+                        ((DependencyObject)keyValuePair.Value)
+                            .FixUpMetaProperties(originalPropValue as DependencyObject);
                     }
                     else if (keyValuePair.Value is WorkflowParameterBindingCollection)
                     {
@@ -791,9 +786,8 @@ namespace System.Workflow.ComponentModel
                         IList originalCollection = originalPropValue as IList;
                         for (int index = 0; index < collection.Count; index++)
                         {
-                            ((DependencyObject)collection[index]).FixUpMetaProperties(
-                                originalCollection[index] as DependencyObject
-                            );
+                            ((DependencyObject)collection[index])
+                                .FixUpMetaProperties(originalCollection[index] as DependencyObject);
                         }
                     }
                 }

@@ -841,10 +841,8 @@ namespace System.Resources
                 );
                 if (createIfNotExists && stream != null)
                 {
-                    rs = ((ManifestBasedResourceGroveler)resourceGroveler).CreateResourceSet(
-                        stream,
-                        MainAssembly
-                    );
+                    rs = ((ManifestBasedResourceGroveler)resourceGroveler)
+                        .CreateResourceSet(stream, MainAssembly);
                     AddResourceSet(localResourceSets, culture.Name, ref rs);
                     return rs;
                 }

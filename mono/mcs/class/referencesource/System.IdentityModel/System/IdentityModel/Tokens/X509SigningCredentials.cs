@@ -24,9 +24,8 @@ namespace System.IdentityModel.Tokens
             : this(
                 certificate,
                 new SecurityKeyIdentifier(
-                    (
-                        new X509SecurityToken(certificate)
-                    ).CreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>()
+                    (new X509SecurityToken(certificate))
+                        .CreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>()
                 )
             ) { }
 
@@ -58,9 +57,8 @@ namespace System.IdentityModel.Tokens
             : this(
                 new X509SecurityToken(certificate),
                 new SecurityKeyIdentifier(
-                    (
-                        new X509SecurityToken(certificate)
-                    ).CreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>()
+                    (new X509SecurityToken(certificate))
+                        .CreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>()
                 ),
                 signatureAlgorithm,
                 digestAlgorithm

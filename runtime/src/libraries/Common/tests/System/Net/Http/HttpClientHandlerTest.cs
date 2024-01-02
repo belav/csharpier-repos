@@ -663,7 +663,8 @@ namespace System.Net.Http.Functional.Tests
                                 request,
                                 HttpCompletionOption.ResponseHeadersRead
                             )
-                        ).Dispose();
+                        )
+                            .Dispose();
                     }
                 },
                 async server =>
@@ -3134,7 +3135,8 @@ namespace System.Net.Http.Functional.Tests
                                     Version = new Version(2, 0)
                                 }
                             )
-                        ).Dispose();
+                        )
+                            .Dispose();
                     }
                 },
                 async server =>

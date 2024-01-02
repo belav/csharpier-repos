@@ -452,9 +452,8 @@ namespace System.Web.UI.WebControls.WebParts
                     else
                     {
                         _value.Text = value.Value.ToString(CultureInfo.CurrentCulture);
-                        _type.SelectedValue = ((int)value.Type).ToString(
-                            CultureInfo.InvariantCulture
-                        );
+                        _type.SelectedValue = ((int)value.Type)
+                            .ToString(CultureInfo.InvariantCulture);
                     }
                 }
             }

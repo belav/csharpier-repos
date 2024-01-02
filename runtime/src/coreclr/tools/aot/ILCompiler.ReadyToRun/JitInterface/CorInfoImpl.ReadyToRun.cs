@@ -1798,9 +1798,8 @@ namespace Internal.JitInterface
             // If this is not a MethodIL backed by a physical method body, we need to remap the token.
             Debug.Assert(methodIL.GetMethodILScopeDefinition() is IEcmaMethodIL);
 
-            IEcmaModule metadataModule = (
-                (IEcmaMethodIL)methodIL.GetMethodILScopeDefinition()
-            ).Module;
+            IEcmaModule metadataModule = ((IEcmaMethodIL)methodIL.GetMethodILScopeDefinition())
+                .Module;
             ISymbolNode stringObject = _compilation.SymbolNodeFactory.StringLiteral(
                 new ModuleToken(metadataModule, metaTok)
             );
@@ -3945,9 +3944,8 @@ namespace Internal.JitInterface
                 return Marshaller.IsMarshallingRequired(
                     sig,
                     Array.Empty<ParameterMetadata>(),
-                    (
-                        (MetadataType)HandleToObject(callSiteSig->scope).OwningMethod.OwningType
-                    ).Module
+                    ((MetadataType)HandleToObject(callSiteSig->scope).OwningMethod.OwningType)
+                        .Module
                 );
             }
         }

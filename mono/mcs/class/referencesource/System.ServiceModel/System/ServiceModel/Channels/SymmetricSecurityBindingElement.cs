@@ -281,7 +281,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             sessionFactory.SecurityTokenParameters
-                    ).IssuerBindingContext = scIssuerBindingContext;
+                    )
+                        .IssuerBindingContext = scIssuerBindingContext;
                     sessionFactory.ApplyConfidentiality = true;
                     sessionFactory.RequireConfidentiality = true;
                     sessionFactory.ApplyIntegrity = true;
@@ -321,7 +322,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             sessionClientSettings.IssuedSecurityTokenParameters
-                    ).IssuerBindingContext = issuerBindingContext;
+                    )
+                        .IssuerBindingContext = issuerBindingContext;
                     sessionClientSettings.SecurityStandardsManager =
                         sessionFactory.StandardsManager;
                     sessionClientSettings.SessionProtocolFactory = sessionFactory;
@@ -340,7 +342,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             protocolFactory.SecurityTokenParameters
-                    ).IssuerBindingContext = scIssuerBindingContext;
+                    )
+                        .IssuerBindingContext = scIssuerBindingContext;
                     protocolFactory.ApplyConfidentiality = true;
                     protocolFactory.RequireConfidentiality = true;
                     protocolFactory.ApplyIntegrity = true;
@@ -449,7 +452,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             sessionFactory.SecurityTokenParameters
-                    ).IssuerBindingContext = scIssuerBindingContext;
+                    )
+                        .IssuerBindingContext = scIssuerBindingContext;
                     sessionFactory.ApplyConfidentiality = true;
                     sessionFactory.RequireConfidentiality = true;
                     sessionFactory.ApplyIntegrity = true;
@@ -493,7 +497,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             channelListener.SessionServerSettings.IssuedSecurityTokenParameters
-                    ).IssuerBindingContext = scIssuerBindingContext;
+                    )
+                        .IssuerBindingContext = scIssuerBindingContext;
                     channelListener.SessionServerSettings.SecurityStandardsManager =
                         sessionFactory.StandardsManager;
                     channelListener.SessionServerSettings.SessionProtocolFactory = sessionFactory;
@@ -526,7 +531,8 @@ namespace System.ServiceModel.Channels
                     (
                         (SecureConversationSecurityTokenParameters)
                             protocolFactory.SecurityTokenParameters
-                    ).IssuerBindingContext = scIssuerBindingContext;
+                    )
+                        .IssuerBindingContext = scIssuerBindingContext;
                     protocolFactory.ApplyConfidentiality = true;
                     protocolFactory.RequireConfidentiality = true;
                     protocolFactory.ApplyIntegrity = true;

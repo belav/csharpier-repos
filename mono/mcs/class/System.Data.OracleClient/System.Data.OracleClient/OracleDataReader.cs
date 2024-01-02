@@ -293,10 +293,8 @@ namespace System.Data.OracleClient
                 throw new InvalidOperationException("The value is null");
 
             OracleLob output = (OracleLob)
-                ((OciDefineHandle)statement.Values[i]).GetValue(
-                    command.Connection.SessionFormatProvider,
-                    command.Connection
-                );
+                ((OciDefineHandle)statement.Values[i])
+                    .GetValue(command.Connection.SessionFormatProvider, command.Connection);
             output.connection = command.Connection;
             return output;
         }
@@ -323,10 +321,8 @@ namespace System.Data.OracleClient
                 throw new InvalidOperationException("The value is null");
 
             OracleMonthSpan output = (OracleMonthSpan)
-                ((OciDefineHandle)statement.Values[i]).GetValue(
-                    command.Connection.SessionFormatProvider,
-                    command.Connection
-                );
+                ((OciDefineHandle)statement.Values[i])
+                    .GetValue(command.Connection.SessionFormatProvider, command.Connection);
             return output;
         }
 

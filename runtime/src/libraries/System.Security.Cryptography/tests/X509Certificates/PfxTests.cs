@@ -118,7 +118,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "84e57b5909dd5ddf5dbbba4a6498b9ca225b6e368b94913b"
                 + "fc24de6b2bd9a26b192b957304b89531e902ffc91b54b237"
                 + "bb228be8afcda26476"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             using (
                 var c = new X509Certificate2(

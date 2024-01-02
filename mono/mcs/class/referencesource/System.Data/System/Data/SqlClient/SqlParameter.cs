@@ -1494,9 +1494,8 @@ namespace System.Data.SqlClient
             else if (value is IEnumerable<SqlDataRecord>)
             {
                 // must grab the first record of the enumerator to get the metadata
-                IEnumerator<MSS.SqlDataRecord> enumerator = (
-                    (IEnumerable<MSS.SqlDataRecord>)value
-                ).GetEnumerator();
+                IEnumerator<MSS.SqlDataRecord> enumerator = ((IEnumerable<MSS.SqlDataRecord>)value)
+                    .GetEnumerator();
                 MSS.SqlDataRecord firstRecord = null;
                 try
                 {

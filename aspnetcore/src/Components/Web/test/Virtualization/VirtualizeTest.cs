@@ -103,7 +103,8 @@ public class VirtualizeTest
         Assert.NotNull(renderedVirtualize);
 
         // Simulate a JS spacer callback.
-        ((IVirtualizeJsCallbacks)renderedVirtualize).OnAfterSpacerVisible(10f, 50f, 100f);
+        ((IVirtualizeJsCallbacks)renderedVirtualize)
+            .OnAfterSpacerVisible(10f, 50f, 100f);
 
         // Validate that the exception is dispatched through the renderer.
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(

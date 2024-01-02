@@ -855,9 +855,8 @@ namespace System.Web.UI.MobileControls
 
             if (dataSource is ITypedList)
             {
-                propertyDescriptors = ((ITypedList)dataSource).GetItemProperties(
-                    new PropertyDescriptor[0]
-                );
+                propertyDescriptors = ((ITypedList)dataSource)
+                    .GetItemProperties(new PropertyDescriptor[0]);
             }
 
             if (propertyDescriptors == null)

@@ -104,10 +104,8 @@ namespace System.ServiceModel.Dispatcher
 
         public void CopyTo(KeyValuePair<MessageQuery, TItem>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary).CopyTo(
-                array,
-                arrayIndex
-            );
+            ((ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary)
+                .CopyTo(array, arrayIndex);
         }
 
         public IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(Message message)
@@ -134,9 +132,8 @@ namespace System.ServiceModel.Dispatcher
 
         public IEnumerator<KeyValuePair<MessageQuery, TItem>> GetEnumerator()
         {
-            return (
-                (ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary
-            ).GetEnumerator();
+            return ((ICollection<KeyValuePair<MessageQuery, TItem>>)this.dictionary)
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

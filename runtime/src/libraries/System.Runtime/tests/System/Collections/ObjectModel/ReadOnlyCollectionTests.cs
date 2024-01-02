@@ -109,10 +109,8 @@ namespace System.Collections.ObjectModel.Tests
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () =>
-                    ((ICollection)collection).CopyTo(
-                        new int[s_intArray.Length, s_intArray.Length],
-                        0
-                    )
+                    ((ICollection)collection)
+                        .CopyTo(new int[s_intArray.Length, s_intArray.Length], 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(intArray, -1));
             AssertExtensions.Throws<ArgumentException>(

@@ -74,9 +74,8 @@ namespace System.Security.Cryptography.X509Certificates
         public unsafe void Remove(ICertificatePal certificate)
         {
             using (
-                SafeCertContextHandle existingCertContext = (
-                    (CertificatePal)certificate
-                ).GetCertContext()
+                SafeCertContextHandle existingCertContext = ((CertificatePal)certificate)
+                    .GetCertContext()
             )
             {
                 SafeCertContextHandle? enumCertContext = null;

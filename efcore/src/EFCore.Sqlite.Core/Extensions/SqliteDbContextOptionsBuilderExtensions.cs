@@ -38,9 +38,8 @@ public static class SqliteDbContextOptionsBuilderExtensions
         Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
     )
     {
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-            GetOrCreateExtension(optionsBuilder)
-        );
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+            .AddOrUpdateExtension(GetOrCreateExtension(optionsBuilder));
 
         ConfigureWarnings(optionsBuilder);
 
@@ -265,8 +264,7 @@ public static class SqliteDbContextOptionsBuilderExtensions
             coreOptionsExtension
         );
 
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-            coreOptionsExtension
-        );
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+            .AddOrUpdateExtension(coreOptionsExtension);
     }
 }

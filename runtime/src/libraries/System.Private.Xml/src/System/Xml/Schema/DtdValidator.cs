@@ -638,7 +638,8 @@ namespace System.Xml.Schema
             {
                 IValidationEventHandling? eventHandling = (
                     (IDtdParserAdapterWithValidation)readerAdapter
-                ).ValidationEventHandling;
+                )
+                    .ValidationEventHandling;
                 if (eventHandling != null)
                 {
                     XmlSchemaException e = new XmlSchemaException(

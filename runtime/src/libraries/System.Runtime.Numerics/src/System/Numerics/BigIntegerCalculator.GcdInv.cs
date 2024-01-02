@@ -68,7 +68,8 @@ namespace System.Numerics
                 right.Length <= StackAllocThreshold
                     ? stackalloc uint[StackAllocThreshold]
                     : rightCopyFromPool = ArrayPool<uint>.Shared.Rent(right.Length)
-            ).Slice(0, right.Length);
+            )
+                .Slice(0, right.Length);
             right.CopyTo(rightCopy);
 
             Gcd(result, rightCopy);

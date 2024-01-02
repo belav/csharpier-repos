@@ -60,9 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                         if (
                             containingSymbol.Kind == SymbolKind.Namespace
                             && containingSymbol.Name == "System"
-                            && (
-                                (INamespaceSymbol)containingSymbol.ContainingSymbol
-                            ).IsGlobalNamespace
+                            && ((INamespaceSymbol)containingSymbol.ContainingSymbol)
+                                .IsGlobalNamespace
                         )
                         {
                             return true;

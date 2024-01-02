@@ -97,7 +97,8 @@ namespace DbLinq.Vendor.Implementation
                             from column in table.Type.Columns
                             where column.Member == localAssociation.Member
                             select column
-                        ).FirstOrDefault() != null
+                        )
+                            .FirstOrDefault() != null
                     )
                     {
                         association.Member = columnNamedAssociationRenamer(association);

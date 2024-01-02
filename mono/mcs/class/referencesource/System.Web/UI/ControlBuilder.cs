@@ -180,7 +180,8 @@ namespace System.Web.UI
                                     StringComparison.OrdinalIgnoreCase
                                 )
                             select (string)simplePropertyEntry.Value
-                        ).FirstOrDefault();
+                        )
+                            .FirstOrDefault();
                     }
                 }
                 return null;
@@ -1680,9 +1681,8 @@ namespace System.Web.UI
 
                     if (
                         (match = bindExpressionRegex.Match(codeBlockBuilder.Content, 0)).Success
-                        || (
-                            match = bindItemExpressionRegex.Match(codeBlockBuilder.Content, 0)
-                        ).Success
+                        || (match = bindItemExpressionRegex.Match(codeBlockBuilder.Content, 0))
+                            .Success
                     )
                     {
                         ControlBuilder currentBuilder = this;
@@ -3025,16 +3025,17 @@ namespace System.Web.UI
                     {
                         string expression =
                             entry.Expression == null ? String.Empty : entry.Expression.Trim();
-                        ((IExpressionsAccessor)obj).Expressions.Add(
-                            new ExpressionBinding(
-                                entry.Name,
-                                entry.Type,
-                                expressionPrefix,
-                                expression,
-                                entry.Generated,
-                                entry.ParsedExpressionData
-                            )
-                        );
+                        ((IExpressionsAccessor)obj)
+                            .Expressions.Add(
+                                new ExpressionBinding(
+                                    entry.Name,
+                                    entry.Type,
+                                    expressionPrefix,
+                                    expression,
+                                    entry.Generated,
+                                    entry.ParsedExpressionData
+                                )
+                            );
                     }
                 }
             }
@@ -3107,7 +3108,8 @@ namespace System.Web.UI
                 else
                 {
                     // no-compile Bind property handling
-                    ((Control)obj).DataBinding += new EventHandler(DataBindingMethod);
+                    ((Control)obj)
+                        .DataBinding += new EventHandler(DataBindingMethod);
                 }
             }
         }

@@ -501,9 +501,8 @@ namespace System.Xml.Serialization
                 object[] atts = field.GetCustomAttributes(typeof(SoapEnumAttribute), false);
                 if (atts.Length > 0)
                     xmlName = ((SoapEnumAttribute)atts[0]).Name;
-                long value = ((IConvertible)field.GetValue(null)).ToInt64(
-                    CultureInfo.InvariantCulture
-                );
+                long value = ((IConvertible)field.GetValue(null))
+                    .ToInt64(CultureInfo.InvariantCulture);
                 members[n] = new EnumMap.EnumMapMember(
                     XmlConvert.EncodeLocalName(xmlName),
                     names[n],

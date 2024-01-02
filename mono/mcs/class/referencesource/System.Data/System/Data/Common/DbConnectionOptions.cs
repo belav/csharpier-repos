@@ -1157,9 +1157,8 @@ namespace System.Data.Common
                 CaptureCollection keyvalues = match.Groups[ValueIndex].Captures;
                 foreach (Capture keypair in match.Groups[KeyIndex].Captures)
                 {
-                    string keyname = (
-                        firstKey ? keypair.Value : keypair.Value.Replace("==", "=")
-                    ).ToLower(CultureInfo.InvariantCulture);
+                    string keyname = (firstKey ? keypair.Value : keypair.Value.Replace("==", "="))
+                        .ToLower(CultureInfo.InvariantCulture);
                     string keyvalue = keyvalues[indexValue++].Value;
                     if (0 < keyvalue.Length)
                     {

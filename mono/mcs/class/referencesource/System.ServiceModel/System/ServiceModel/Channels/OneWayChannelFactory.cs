@@ -100,7 +100,8 @@ namespace System.ServiceModel.Channels
         {
             IRequestChannel innerChannel = (
                 (IChannelFactory<IRequestChannel>)this.InnerChannelFactory
-            ).CreateChannel(to, via);
+            )
+                .CreateChannel(to, via);
 
             return new RequestOutputChannel(this, innerChannel, this.packetRoutableHeader);
         }

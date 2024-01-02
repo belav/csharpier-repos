@@ -26,7 +26,8 @@ public abstract class ComplianceTestBase
                 && baseType != typeof(NonSharedModelTestBase)
                 && !concreteTests.Any(c => Implements(c, baseType))
             select baseType.FullName
-        ).ToList();
+        )
+            .ToList();
 
         Assert.False(
             nonImplementedBases.Count > 0,

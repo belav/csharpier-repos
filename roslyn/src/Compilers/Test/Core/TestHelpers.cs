@@ -59,10 +59,8 @@ namespace Roslyn.Test.Utilities
 
             if (valueType == typeof(DateTime))
             {
-                return ((DateTime)value).ToString(
-                    "M/d/yyyy h:mm:ss tt",
-                    CultureInfo.InvariantCulture
-                );
+                return ((DateTime)value)
+                    .ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
             }
 
             if (valueType == typeof(float))

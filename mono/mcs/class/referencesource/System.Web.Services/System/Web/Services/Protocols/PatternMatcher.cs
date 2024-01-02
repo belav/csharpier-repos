@@ -84,17 +84,16 @@ namespace System.Web.Services.Protocols
         internal void Match(object target, string text)
         {
             if (memberInfo is FieldInfo)
-                ((FieldInfo)memberInfo).SetValue(
-                    target,
-                    matchType == null ? MatchString(text) : MatchClass(text)
-                );
+                ((FieldInfo)memberInfo)
+                    .SetValue(target, matchType == null ? MatchString(text) : MatchClass(text));
             else if (memberInfo is PropertyInfo)
             {
-                ((PropertyInfo)memberInfo).SetValue(
-                    target,
-                    matchType == null ? MatchString(text) : MatchClass(text),
-                    new object[0]
-                );
+                ((PropertyInfo)memberInfo)
+                    .SetValue(
+                        target,
+                        matchType == null ? MatchString(text) : MatchClass(text),
+                        new object[0]
+                    );
             }
         }
 

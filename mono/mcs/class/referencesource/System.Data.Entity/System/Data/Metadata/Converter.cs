@@ -1425,18 +1425,14 @@ namespace System.Data.Metadata.Edm
             {
                 if (isModelFunction && somParameter != null && somParameter is Som.Parameter)
                 {
-                    ((Som.Parameter)somParameter).ResolveNestedTypeNames(
-                        convertedItemCache,
-                        newGlobalItems
-                    );
+                    ((Som.Parameter)somParameter)
+                        .ResolveNestedTypeNames(convertedItemCache, newGlobalItems);
                     return somParameter.TypeUsage;
                 }
                 else if (somParameter != null && somParameter is Som.ReturnType)
                 {
-                    ((Som.ReturnType)somParameter).ResolveNestedTypeNames(
-                        convertedItemCache,
-                        newGlobalItems
-                    );
+                    ((Som.ReturnType)somParameter)
+                        .ResolveNestedTypeNames(convertedItemCache, newGlobalItems);
                     return somParameter.TypeUsage;
                 }
                 else

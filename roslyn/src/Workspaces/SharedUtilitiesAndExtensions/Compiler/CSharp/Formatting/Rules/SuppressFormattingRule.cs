@@ -457,9 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     IsFormatDirective(trivia, SyntaxKind.RestoreKeyword)
                 );
                 var endToken = endDirective is null
-                    ? (
-                        (CompilationUnitSyntax)structure.SyntaxTree.GetRoot(CancellationToken.None)
-                    ).EndOfFileToken
+                    ? ((CompilationUnitSyntax)structure.SyntaxTree.GetRoot(CancellationToken.None))
+                        .EndOfFileToken
                     : endDirective.GetFirstToken(includeDirectives: true);
 
                 Debug.Assert(

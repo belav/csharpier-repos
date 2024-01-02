@@ -658,10 +658,8 @@ namespace System.Data.Linq.SqlClient
             }
             else if (
                 builder.ContainsKey("Data Source")
-                && ((string)builder["Data Source"]).EndsWith(
-                    ".sdf",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && ((string)builder["Data Source"])
+                    .EndsWith(".sdf", StringComparison.OrdinalIgnoreCase)
             )
             {
                 return (string)builder["Data Source"];

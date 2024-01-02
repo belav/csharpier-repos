@@ -541,9 +541,8 @@ IniKey1=IniValue2"
             {
                 Assert.Equal(
                     "NewValue",
-                    (provider as FileConfigurationProvider).Get(
-                        "CommonKey1:CommonKey2:CommonKey3:CommonKey4"
-                    )
+                    (provider as FileConfigurationProvider)
+                        .Get("CommonKey1:CommonKey2:CommonKey3:CommonKey4")
                 );
             }
 
@@ -560,9 +559,8 @@ IniKey1=IniValue2"
             {
                 Assert.Equal(
                     "NewValue",
-                    (provider as FileConfigurationProvider).Get(
-                        "CommonKey1:CommonKey2:CommonKey3:CommonKey4"
-                    )
+                    (provider as FileConfigurationProvider)
+                        .Get("CommonKey1:CommonKey2:CommonKey3:CommonKey4")
                 );
             }
 

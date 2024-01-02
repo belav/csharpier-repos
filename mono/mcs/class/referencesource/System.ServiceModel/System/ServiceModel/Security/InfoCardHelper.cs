@@ -673,9 +673,8 @@ namespace System.ServiceModel.Security
                 else if (param is SecureConversationSecurityTokenParameters)
                 {
                     IssuedSecurityTokenParameters istp = TryGetNextStsIssuedTokenParameters(
-                        (
-                            (SecureConversationSecurityTokenParameters)param
-                        ).BootstrapSecurityBindingElement
+                        ((SecureConversationSecurityTokenParameters)param)
+                            .BootstrapSecurityBindingElement
                     );
                     if ((istp != null) && (issuedSecurityTokenParameters != null))
                     {

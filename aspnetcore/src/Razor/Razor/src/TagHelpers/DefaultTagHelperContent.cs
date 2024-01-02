@@ -272,7 +272,8 @@ public class DefaultTagHelperContent : TagHelperContent
         }
 
         // Use NullHtmlEncoder to avoid treating encoded whitespace as non-whitespace e.g. "\t" as "&#x9;".
-        ((IHtmlContent)entry).WriteTo(writer, NullHtmlEncoder.Default);
+        ((IHtmlContent)entry)
+            .WriteTo(writer, NullHtmlEncoder.Default);
 
         return writer.IsEmptyOrWhiteSpace;
     }

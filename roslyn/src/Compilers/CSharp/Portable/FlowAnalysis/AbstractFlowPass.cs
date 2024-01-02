@@ -601,9 +601,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (Binder.AccessingAutoPropertyFromConstructor(access, _symbol))
                         {
-                            var backingField = (
-                                access.PropertySymbol as SourcePropertySymbolBase
-                            )?.BackingField;
+                            var backingField = (access.PropertySymbol as SourcePropertySymbolBase)
+                                ?.BackingField;
                             if (backingField != null)
                             {
                                 VisitFieldAccessInternal(access.ReceiverOpt, backingField);
@@ -630,10 +629,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.TupleLiteral:
                 case BoundKind.ConvertedTupleLiteral:
-                    ((BoundTupleExpression)node).VisitAllElements(
-                        (x, self) => self.VisitLvalue(x),
-                        this
-                    );
+                    ((BoundTupleExpression)node)
+                        .VisitAllElements((x, self) => self.VisitLvalue(x), this);
                     break;
 
                 case BoundKind.InlineArrayAccess:

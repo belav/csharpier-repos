@@ -117,9 +117,8 @@ internal sealed partial class CircuitFactory : ICircuitFactory
         Log.CreatedCircuit(_logger, circuitHost);
 
         // Initialize per - circuit data that services need
-        (
-            circuitHost.Services.GetRequiredService<ICircuitAccessor>() as DefaultCircuitAccessor
-        ).Circuit = circuitHost.Circuit;
+        (circuitHost.Services.GetRequiredService<ICircuitAccessor>() as DefaultCircuitAccessor)
+            .Circuit = circuitHost.Circuit;
         circuitHost.SetCircuitUser(user);
 
         return circuitHost;

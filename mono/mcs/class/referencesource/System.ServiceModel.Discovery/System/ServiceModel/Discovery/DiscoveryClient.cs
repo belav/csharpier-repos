@@ -346,11 +346,8 @@ namespace System.ServiceModel.Discovery
         )]
         IAsyncResult ICommunicationObject.BeginClose(AsyncCallback callback, object state)
         {
-            return ((ICommunicationObject)this).BeginClose(
-                DiscoveryClient.defaultCloseDuration,
-                callback,
-                state
-            );
+            return ((ICommunicationObject)this)
+                .BeginClose(DiscoveryClient.defaultCloseDuration, callback, state);
         }
 
         [Fx.Tag.InheritThrows(
@@ -748,11 +745,8 @@ namespace System.ServiceModel.Discovery
 
             if (postCompleted || findCompleted)
             {
-                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
-                    context.OperationId,
-                    false,
-                    null
-                );
+                ((IDiscoveryInnerClientResponse)this)
+                    .PostFindCompletedAndRemove(context.OperationId, false, null);
             }
         }
 
@@ -839,11 +833,8 @@ namespace System.ServiceModel.Discovery
 
             if (postCompleted)
             {
-                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
-                    context.OperationId,
-                    false,
-                    null
-                );
+                ((IDiscoveryInnerClientResponse)this)
+                    .PostResolveCompletedAndRemove(context.OperationId, false, null);
             }
         }
 
@@ -1049,11 +1040,8 @@ namespace System.ServiceModel.Discovery
             }
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
-                    context.OperationId,
-                    false,
-                    error
-                );
+                ((IDiscoveryInnerClientResponse)this)
+                    .PostFindCompletedAndRemove(context.OperationId, false, error);
             }
         }
 
@@ -1104,11 +1092,8 @@ namespace System.ServiceModel.Discovery
             }
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
-                    context.OperationId,
-                    false,
-                    error
-                );
+                ((IDiscoveryInnerClientResponse)this)
+                    .PostResolveCompletedAndRemove(context.OperationId, false, error);
             }
         }
 
@@ -1158,11 +1143,8 @@ namespace System.ServiceModel.Discovery
         void FindOperationTimeoutCallback(object state)
         {
             AsyncOperationContext context = (AsyncOperationContext)state;
-            ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
-                context.OperationId,
-                false,
-                null
-            );
+            ((IDiscoveryInnerClientResponse)this)
+                .PostFindCompletedAndRemove(context.OperationId, false, null);
         }
 
         void CompleteProbeOperation(IAsyncResult result)
@@ -1185,11 +1167,8 @@ namespace System.ServiceModel.Discovery
 
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
-                    context.OperationId,
-                    false,
-                    error
-                );
+                ((IDiscoveryInnerClientResponse)this)
+                    .PostFindCompletedAndRemove(context.OperationId, false, error);
             }
             else
             {
@@ -1269,11 +1248,8 @@ namespace System.ServiceModel.Discovery
         void ResolveOperationTimeoutCallback(object state)
         {
             AsyncOperationContext context = (AsyncOperationContext)state;
-            ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
-                context.OperationId,
-                false,
-                null
-            );
+            ((IDiscoveryInnerClientResponse)this)
+                .PostResolveCompletedAndRemove(context.OperationId, false, null);
         }
 
         void CompleteResolveOperation(IAsyncResult result)
@@ -1295,11 +1271,8 @@ namespace System.ServiceModel.Discovery
             }
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
-                    context.OperationId,
-                    false,
-                    error
-                );
+                ((IDiscoveryInnerClientResponse)this)
+                    .PostResolveCompletedAndRemove(context.OperationId, false, error);
             }
             else
             {

@@ -184,7 +184,8 @@ namespace System.Runtime.Remoting.Messaging
                 // A dictionary object already exists. This case occurs
                 // when we reuse the message object. Just remove all the
                 // entries from the dictionary object and reuse it.
-                ((IDictionary)_properties).Clear();
+                ((IDictionary)_properties)
+                    .Clear();
             }
         }
 
@@ -1528,9 +1529,8 @@ namespace System.Runtime.Remoting.Messaging
                     ((ConstructorCallMessage)_ccmsg).Uri = (String)value;
                     break;
                 case 1:
-                    ((ConstructorCallMessage)_ccmsg).SetLogicalCallContext(
-                        (LogicalCallContext)value
-                    );
+                    ((ConstructorCallMessage)_ccmsg)
+                        .SetLogicalCallContext((LogicalCallContext)value);
                     break;
                 default:
                     // We should not get here!

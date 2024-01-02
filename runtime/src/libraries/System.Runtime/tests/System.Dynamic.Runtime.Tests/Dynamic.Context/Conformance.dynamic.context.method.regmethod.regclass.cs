@@ -1143,7 +1143,8 @@ namespace System.Dynamic.Runtime.Tests
                     mc.Method_ReturnCharNullable(
                         new MyClass[] { myclass0, (MyClass)myclass1, myclass2 }
                     )
-            ).ToString();
+            )
+                .ToString();
 
             Assert.Equal("z", s);
         }
@@ -2040,9 +2041,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic index = 0;
             do
             {
-                result += (
-                    (MyEnum?)dy.Method_ReturnMyEnumNullable(new MyClass[0])
-                ).Value.GetHashCode();
+                result += ((MyEnum?)dy.Method_ReturnMyEnumNullable(new MyClass[0]))
+                    .Value.GetHashCode();
             } while (index++ < 2);
             if (result == 9)
                 return 0;

@@ -135,11 +135,8 @@ namespace System.IdentityModel
             }
             else
             {
-                ((IXmlTextWriterInitializer)this.utf8Writer).SetOutput(
-                    Stream.Null,
-                    Encoding.UTF8,
-                    false
-                );
+                ((IXmlTextWriterInitializer)this.utf8Writer)
+                    .SetOutput(Stream.Null, Encoding.UTF8, false);
             }
             return this.utf8Writer;
         }

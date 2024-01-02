@@ -39,7 +39,8 @@ namespace System.Web.UI.WebControls
             (Expression<MethodInvokerDispatcher>)(
                 (methodInfo, instance, args) => methodInfo.Invoke(instance, args)
             )
-        ).Compile();
+        )
+            .Compile();
 
         private ModelDataSource _owner;
         private MethodParametersDictionary _selectParameters;
@@ -1641,9 +1642,8 @@ namespace System.Web.UI.WebControls
                 }
                 if (valueProviderAttribute is IUnvalidatedValueProviderSource)
                 {
-                    validateRequest = (
-                        (IUnvalidatedValueProviderSource)valueProviderAttribute
-                    ).ValidateInput;
+                    validateRequest = ((IUnvalidatedValueProviderSource)valueProviderAttribute)
+                        .ValidateInput;
                 }
                 return valueProviderAttribute.GetValueProvider(modelBindingExecutionContext);
             }

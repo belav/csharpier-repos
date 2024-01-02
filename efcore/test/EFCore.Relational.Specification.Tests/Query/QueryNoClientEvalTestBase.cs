@@ -113,7 +113,8 @@ public abstract class QueryNoClientEvalTestBase<TFixture> : IClassFixture<TFixtu
                         .OrderBy(c => c.CustomerID)
                         .Take(5)
                     select c1
-                ).ToList(),
+                )
+                    .ToList(),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
         );
     }
@@ -126,7 +127,8 @@ public abstract class QueryNoClientEvalTestBase<TFixture> : IClassFixture<TFixtu
             from e1 in context.Employees
             join i in new uint[] { 1, 2, 3 } on e1.EmployeeID equals i into g
             select e1
-        ).ToList();
+        )
+            .ToList();
     }
 
     [ConditionalFact(Skip = "Issue#18923")]

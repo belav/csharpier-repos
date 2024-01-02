@@ -188,10 +188,11 @@ namespace System.Windows.Forms.Design
             _dragging = true;
             _firstMove = true;
             if (this.SelectionService.PrimarySelection != null)
-                ((Control)this.SelectionService.PrimarySelection).DoDragDrop(
-                    new ControlDataObject((Control)this.SelectionService.PrimarySelection),
-                    DragDropEffects.All
-                );
+                ((Control)this.SelectionService.PrimarySelection)
+                    .DoDragDrop(
+                        new ControlDataObject((Control)this.SelectionService.PrimarySelection),
+                        DragDropEffects.All
+                    );
         }
 
         // container cordinates

@@ -66,7 +66,8 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
                 .TagWith("Yanni")
             from o in context.Orders.OrderBy(o => o.OrderID).Take(5).TagWith("Laurel")
             select c
-        ).ToList();
+        )
+            .ToList();
 
         Assert.Equal(5, customers.Count);
     }

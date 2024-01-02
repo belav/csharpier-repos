@@ -507,9 +507,8 @@ ALTER TABLE dbo.Owners
                 extension = extension
                     .WithConnection(null)
                     .WithConnectionString(((SqlServerTestStore)TestStore).ConnectionString);
-                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                    extension
-                );
+                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                    .AddOrUpdateExtension(extension);
             }
 
             if (minBatchSize.HasValue)

@@ -58,7 +58,8 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () => AssertFilteredQuery(async, ss => ss.Set<Product>())
                     )
-                ).Message
+                )
+                    .Message
             )
         );
     }
@@ -203,7 +204,8 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
                                 ss => ss.Set<Product>().Include(p => p.OrderDetails)
                             )
                     )
-                ).Message
+                )
+                    .Message
             )
         );
     }

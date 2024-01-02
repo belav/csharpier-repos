@@ -149,11 +149,8 @@ namespace System.Threading.Tasks.Tests
 
             IAsyncResult asyncResult;
             if (_hasReturnType)
-                asyncResult = ((LongTask<int>)longTask).BeginDoTask(
-                    IntInput,
-                    TaskCompleted,
-                    longTask
-                );
+                asyncResult = ((LongTask<int>)longTask)
+                    .BeginDoTask(IntInput, TaskCompleted, longTask);
             else
                 asyncResult = longTask.BeginDoTask(TaskCompleted, longTask);
 

@@ -25,7 +25,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_with_client_eval(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task SelectMany_with_client_eval_with_collection_shaper(bool async) =>
@@ -35,7 +36,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_with_client_eval_with_collection_shaper(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task SelectMany_with_client_eval_with_collection_shaper_ignored(
@@ -47,7 +49,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_with_client_eval_with_collection_shaper_ignored(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task SelectMany_with_selecting_outer_entity(bool async) =>
@@ -57,7 +60,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_with_selecting_outer_entity(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task SelectMany_with_selecting_outer_element(bool async) =>
@@ -67,7 +71,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_with_selecting_outer_element(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task SelectMany_with_selecting_outer_entity_column_and_inner_column(
@@ -79,7 +84,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_with_selecting_outer_entity_column_and_inner_column(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Take_in_collection_projection_with_FirstOrDefault_on_top_level(
@@ -91,7 +97,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Take_in_collection_projection_with_FirstOrDefault_on_top_level(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task GroupJoin_as_final_operator(bool async) =>
@@ -101,7 +108,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.GroupJoin_as_final_operator(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Unflattened_GroupJoin_composed(bool async) =>
@@ -111,7 +119,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Unflattened_GroupJoin_composed(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Unflattened_GroupJoin_composed_2(bool async) =>
@@ -121,7 +130,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Unflattened_GroupJoin_composed_2(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task GroupJoin_SelectMany_subquery_with_filter_orderby(bool async) =>
@@ -131,7 +141,8 @@ public class NorthwindJoinQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.GroupJoin_SelectMany_subquery_with_filter_orderby(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task GroupJoin_SelectMany_subquery_with_filter_orderby_and_DefaultIfEmpty(
@@ -146,6 +157,7 @@ public class NorthwindJoinQuerySqliteTest
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 }

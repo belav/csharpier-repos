@@ -1231,9 +1231,8 @@ namespace System.Collections.Concurrent
                 if (typeof(TKey) == typeof(string))
                 {
                     if (
-                        (
-                            comparer as NonRandomizedStringEqualityComparer
-                        )?.GetUnderlyingEqualityComparer()
+                        (comparer as NonRandomizedStringEqualityComparer)
+                            ?.GetUnderlyingEqualityComparer()
                         is IEqualityComparer<string> ec
                     )
                     {

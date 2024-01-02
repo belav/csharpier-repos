@@ -80,9 +80,8 @@ public class StoreStoredProcedureParameter
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public override string ToString() =>
-        ((IStoreStoredProcedureParameter)this).ToDebugString(
-            MetadataDebugStringOptions.SingleLineDefault
-        );
+        ((IStoreStoredProcedureParameter)this)
+            .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -94,9 +93,8 @@ public class StoreStoredProcedureParameter
         new(
             () => ((IStoreStoredProcedureParameter)this).ToDebugString(),
             () =>
-                ((IStoreStoredProcedureParameter)this).ToDebugString(
-                    MetadataDebugStringOptions.LongDefault
-                )
+                ((IStoreStoredProcedureParameter)this)
+                    .ToDebugString(MetadataDebugStringOptions.LongDefault)
         );
 
     /// <inheritdoc />

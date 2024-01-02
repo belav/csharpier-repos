@@ -156,7 +156,8 @@ public class BadRequestOfTResultTests
                 PopulateMetadata<BadRequest<object>>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

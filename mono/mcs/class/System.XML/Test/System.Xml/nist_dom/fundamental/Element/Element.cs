@@ -1648,9 +1648,8 @@ namespace nist_dom.fundamental
                 //
                 entityNode = util.getEntity("ent4");
                 entityDesc = (System.Xml.XmlElement)entityNode.FirstChild;
-                oldAttribute = ((System.Xml.XmlElement)entityNode.FirstChild).GetAttributeNode(
-                    "attr1"
-                );
+                oldAttribute = ((System.Xml.XmlElement)entityNode.FirstChild)
+                    .GetAttributeNode("attr1");
                 //
                 // Attempt to set remove an attribute node from a readonly node (lastChild).
                 // Should raise an exception.

@@ -1372,9 +1372,8 @@ namespace System.Runtime.DurableInstancing
                 this.executionStack = new Stack<IEnumerator<InstancePersistenceCommand>>(2);
                 this.timeoutHelper = new TimeoutHelper(timeout);
 
-                this.currentExecution = (
-                    new List<InstancePersistenceCommand> { command }
-                ).GetEnumerator();
+                this.currentExecution = (new List<InstancePersistenceCommand> { command })
+                    .GetEnumerator();
             }
 
             internal InstancePersistenceCommand CurrentCommand { get; private set; }

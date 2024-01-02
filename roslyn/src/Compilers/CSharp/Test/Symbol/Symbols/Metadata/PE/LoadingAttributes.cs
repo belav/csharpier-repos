@@ -259,9 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             //Public Class InnerC1(of t1)
             Assert.Equal(
                 aNestedAttribute,
-                (
-                    (CSharpAttributeData)innerC1.GetAttributes(aNestedAttribute).Single()
-                ).AttributeClass
+                ((CSharpAttributeData)innerC1.GetAttributes(aNestedAttribute).Single())
+                    .AttributeClass
             );
 
             var innerC2 = innerC1.GetTypeMembers("InnerC2").Single();
@@ -1298,7 +1297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from a in foo.GetAttributes()
                 where a.AttributeConstructor.Equals((MethodSymbol)mctors[4])
                 select a
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(foo.GetAttributes().Length, attrs.Count());
             var count = 0;
@@ -1373,7 +1373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from a in mtd.GetAttributes()
                 where a.AttributeConstructor.Equals((MethodSymbol)mctors[2])
                 select a
-            ).ToList();
+            )
+                .ToList();
             ;
             Assert.Equal(1, attrs.Count);
             // [AllInheritMultiple(-008, 255)] ' p3 is optional
@@ -1387,7 +1388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from a in mtd.GetAttributes()
                 where a.AttributeConstructor.Equals((MethodSymbol)mctors[3])
                 select a
-            ).ToList();
+            )
+                .ToList();
             ;
             Assert.Equal(1, attrs.Count);
             // [AllInheritMultiple(+007, 256)] ' p3, p4 optional
@@ -1409,9 +1411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(1, attrSym.CommonNamedArguments.Length);
             Assert.Equal(
                 "AttributeUse.IFoo<System.Int16, System.UInt16>",
-                (attrSym.CommonConstructorArguments[0].Value as INamedTypeSymbol).ToDisplayString(
-                    SymbolDisplayFormat.TestFormat
-                )
+                (attrSym.CommonConstructorArguments[0].Value as INamedTypeSymbol)
+                    .ToDisplayString(SymbolDisplayFormat.TestFormat)
             );
             Assert.Equal(1, attrSym.CommonNamedArguments[0].Value.Value);
         }
@@ -1466,9 +1467,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 .GetAttribute(dbgProxyAttr);
             Assert.Equal(
                 "System.Linq.Expressions.Expression.BinaryExpressionProxy",
-                ((ITypeSymbol)attr1.CommonConstructorArguments[0].Value).ToDisplayString(
-                    SymbolDisplayFormat.TestFormat
-                )
+                ((ITypeSymbol)attr1.CommonConstructorArguments[0].Value)
+                    .ToDisplayString(SymbolDisplayFormat.TestFormat)
             );
 
             // [DebuggerTypeProxy(typeof(Expression.TypeBinaryExpressionProxy))]
@@ -1479,9 +1479,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 .GetAttribute(dbgProxyAttr);
             Assert.Equal(
                 "System.Linq.Expressions.Expression.TypeBinaryExpressionProxy",
-                ((ITypeSymbol)attr1.CommonConstructorArguments[0].Value).ToDisplayString(
-                    SymbolDisplayFormat.TestFormat
-                )
+                ((ITypeSymbol)attr1.CommonConstructorArguments[0].Value)
+                    .ToDisplayString(SymbolDisplayFormat.TestFormat)
             );
         }
 

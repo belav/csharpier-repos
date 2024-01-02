@@ -864,7 +864,8 @@ public class MigrationBuilder
             var addColumnOperation = (
                 (IInfrastructure<AddColumnOperation>)
                     property.GetMethod!.Invoke(columnsObject, null)!
-            ).Instance;
+            )
+                .Instance;
             addColumnOperation.Name ??= property.Name;
             // TODO: addColumnOperation.Validate();
 

@@ -191,9 +191,8 @@ namespace System.Text.Tests
             {
                 yield return new object[]
                 {
-                    (
-                        (GeneralTestData)obj[0]
-                    ).ScalarValue /* value */
+                    ((GeneralTestData)obj[0])
+                        .ScalarValue /* value */
                     ,
                     true /* isValid */
                 };

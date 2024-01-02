@@ -6335,10 +6335,11 @@ class UsePia5
                 (
                     (PEModuleSymbol)
                         compilation2.SourceModule.GetReferencedAssemblySymbols()[1].Modules[0]
-                ).LookupTopLevelMetadataTypeWithNoPiaLocalTypeUnification(
-                    ref fullName,
-                    out isNoPiaLocalType
                 )
+                    .LookupTopLevelMetadataTypeWithNoPiaLocalTypeUnification(
+                        ref fullName,
+                        out isNoPiaLocalType
+                    )
             );
             Assert.True(isNoPiaLocalType);
             Assert.Null(
@@ -6391,10 +6392,11 @@ class UsePia5
                 (
                     (PEModuleSymbol)
                         compilation4.SourceModule.GetReferencedAssemblySymbols()[1].Modules[0]
-                ).LookupTopLevelMetadataTypeWithNoPiaLocalTypeUnification(
-                    ref fullName,
-                    out isNoPiaLocalType
                 )
+                    .LookupTopLevelMetadataTypeWithNoPiaLocalTypeUnification(
+                        ref fullName,
+                        out isNoPiaLocalType
+                    )
             );
             Assert.True(isNoPiaLocalType);
             Assert.Null(

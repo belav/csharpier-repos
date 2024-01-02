@@ -163,19 +163,24 @@ namespace System.ServiceModel.Activities.Activation
 
             //The Description.Name and Description.NameSpace aren't included intentionally - because
             //in farm scenarios the sole and unique identifier is the service deployment URL
-            ((IDurableInstancingOptions)serviceHost.DurableInstancingOptions).SetScopeName(
-                XName.Get(
-                    XmlConvert.EncodeLocalName(
-                        VirtualPathUtility.GetFileName(ServiceHostingEnvironment.FullVirtualPath)
-                    ),
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "/{0}{1}",
-                        ServiceHostingEnvironment.SiteName,
-                        VirtualPathUtility.GetDirectory(ServiceHostingEnvironment.FullVirtualPath)
+            ((IDurableInstancingOptions)serviceHost.DurableInstancingOptions)
+                .SetScopeName(
+                    XName.Get(
+                        XmlConvert.EncodeLocalName(
+                            VirtualPathUtility.GetFileName(
+                                ServiceHostingEnvironment.FullVirtualPath
+                            )
+                        ),
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "/{0}{1}",
+                            ServiceHostingEnvironment.SiteName,
+                            VirtualPathUtility.GetDirectory(
+                                ServiceHostingEnvironment.FullVirtualPath
+                            )
+                        )
                     )
-                )
-            );
+                );
 
             return serviceHost;
         }

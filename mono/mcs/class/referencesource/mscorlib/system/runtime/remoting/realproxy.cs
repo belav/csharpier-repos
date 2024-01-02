@@ -287,7 +287,8 @@ namespace System.Runtime.Remoting.Proxies
                     IdOps.None
                 );
                 // Set the reference to the proxy in the identity object
-                ((Identity)_identity).RaceSetTransparentProxy(GetTransparentProxy());
+                ((Identity)_identity)
+                    .RaceSetTransparentProxy(GetTransparentProxy());
             }
         }
 

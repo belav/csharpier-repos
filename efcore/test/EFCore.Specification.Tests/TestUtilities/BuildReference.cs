@@ -33,7 +33,8 @@ public class BuildReference
             from r in l.ResolveReferencePaths()
             where IOPath.GetFileNameWithoutExtension(r) == name
             select MetadataReference.CreateFromFile(r)
-        ).ToList();
+        )
+            .ToList();
         if (references.Count == 0)
         {
             throw new InvalidOperationException(

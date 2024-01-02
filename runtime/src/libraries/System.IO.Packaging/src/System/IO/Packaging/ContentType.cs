@@ -354,14 +354,15 @@ namespace System.IO.Packaging
                     parameterStartIndex
                 );
 
-                (_parameterDictionary ??= new Dictionary<string, string>()).Add(
-                    ValidateToken(parameterAndValue.Slice(0, equalSignIndex).ToString()),
-                    ValidateQuotedStringOrToken(
-                        parameterAndValue
-                            .Slice(parameterStartIndex, parameterValueLength)
-                            .ToString()
-                    )
-                );
+                (_parameterDictionary ??= new Dictionary<string, string>())
+                    .Add(
+                        ValidateToken(parameterAndValue.Slice(0, equalSignIndex).ToString()),
+                        ValidateQuotedStringOrToken(
+                            parameterAndValue
+                                .Slice(parameterStartIndex, parameterValueLength)
+                                .ToString()
+                        )
+                    );
 
                 parameterAndValue = parameterAndValue
                     .Slice(parameterStartIndex + parameterValueLength)

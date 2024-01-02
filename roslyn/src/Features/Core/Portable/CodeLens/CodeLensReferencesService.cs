@@ -193,9 +193,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             }
 
             var position = location.SourceSpan.Start;
-            var token = (
-                await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
-            ).FindToken(position, true);
+            var token = (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false))
+                .FindToken(position, true);
             var node = GetEnclosingCodeElementNode(
                 document,
                 token,

@@ -859,9 +859,8 @@ public class DbFunctionTest
             Assert
                 .Throws<InvalidOperationException>(
                     () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty")
-                        )
+                        ((IConventionDbFunction)dbFunction)
+                            .SetTranslation(args => new SqlFragmentExpression("Empty"))
                 )
                 .Message
         );
@@ -871,10 +870,11 @@ public class DbFunctionTest
             Assert
                 .Throws<InvalidOperationException>(
                     () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty"),
-                            fromDataAnnotation: true
-                        )
+                        ((IConventionDbFunction)dbFunction)
+                            .SetTranslation(
+                                args => new SqlFragmentExpression("Empty"),
+                                fromDataAnnotation: true
+                            )
                 )
                 .Message
         );

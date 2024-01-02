@@ -63,10 +63,8 @@ namespace System.Workflow.ComponentModel.Serialization
             this.propInfo.SetValue(component, true, null);
             // Design time, allow changes
             if (component is CompositeActivity)
-                (component as CompositeActivity).SetValue(
-                    CompositeActivity.CustomActivityProperty,
-                    false
-                );
+                (component as CompositeActivity)
+                    .SetValue(CompositeActivity.CustomActivityProperty, false);
         }
 
         public override bool ShouldSerializeValue(object component)

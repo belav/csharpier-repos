@@ -785,9 +785,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!binderCache.TryGetValue(key, out resultBinder))
                 {
                     Binder outer = VisitCore(parent.Parent); // a binder for the body of the enclosing type or namespace
-                    var container = (
-                        (NamespaceOrTypeSymbol)outer.ContainingMemberOrLambda
-                    ).GetSourceTypeMember(parent);
+                    var container = ((NamespaceOrTypeSymbol)outer.ContainingMemberOrLambda)
+                        .GetSourceTypeMember(parent);
 
                     // NOTE: Members of the delegate type are in scope in the entire delegate declaration syntax.
                     // NOTE: Hence we can assume that we are in body of the delegate type and explicitly insert the InContainerBinder in the binder chain.
@@ -827,14 +826,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!binderCache.TryGetValue(key, out resultBinder))
                 {
                     Binder outer = VisitCore(parent.Parent); // a binder for the body of the type enclosing this type
-                    var container = (
-                        (NamespaceOrTypeSymbol)outer.ContainingMemberOrLambda
-                    ).GetSourceTypeMember(
-                        parent.Identifier.ValueText,
-                        0,
-                        SyntaxKind.EnumDeclaration,
-                        parent
-                    );
+                    var container = ((NamespaceOrTypeSymbol)outer.ContainingMemberOrLambda)
+                        .GetSourceTypeMember(
+                            parent.Identifier.ValueText,
+                            0,
+                            SyntaxKind.EnumDeclaration,
+                            parent
+                        );
 
                     resultBinder = new InContainerBinder(container, outer);
 
@@ -914,7 +912,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var typeSymbol = (
                             (NamespaceOrTypeSymbol)resultBinder.ContainingMemberOrLambda
-                        ).GetSourceTypeMember(parent);
+                        )
+                            .GetSourceTypeMember(parent);
 
                         if (extraInfo == NodeUsage.NamedTypeBaseListOrParameterList)
                         {
@@ -1555,7 +1554,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder outerBinder = VisitCore(memberSyntax);
                     SourceNamedTypeSymbol type = (
                         (NamespaceOrTypeSymbol)outerBinder.ContainingMemberOrLambda
-                    ).GetSourceTypeMember((TypeDeclarationSyntax)memberSyntax);
+                    )
+                        .GetSourceTypeMember((TypeDeclarationSyntax)memberSyntax);
                     var primaryConstructor = type.PrimaryConstructor;
 
                     if (
@@ -1600,7 +1600,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder outerBinder = VisitCore(memberSyntax.Parent);
                     SourceNamedTypeSymbol delegateType = (
                         (NamespaceOrTypeSymbol)outerBinder.ContainingMemberOrLambda
-                    ).GetSourceTypeMember((DelegateDeclarationSyntax)memberSyntax);
+                    )
+                        .GetSourceTypeMember((DelegateDeclarationSyntax)memberSyntax);
                     Debug.Assert((object)delegateType != null);
                     MethodSymbol invokeMethod = delegateType.DelegateInvokeMethod;
                     Debug.Assert((object)invokeMethod != null);
@@ -1647,7 +1648,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder outerBinder = VisitCore(memberSyntax.Parent);
                     SourceNamedTypeSymbol typeSymbol = (
                         (NamespaceOrTypeSymbol)outerBinder.ContainingMemberOrLambda
-                    ).GetSourceTypeMember(typeDeclSyntax);
+                    )
+                        .GetSourceTypeMember(typeDeclSyntax);
 
                     // NOTE: don't include anything else in the binder chain.
                     return new WithClassTypeParametersBinder(typeSymbol, nextBinder);
@@ -1669,7 +1671,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder outerBinder = VisitCore(memberSyntax.Parent);
                     SourceNamedTypeSymbol delegateType = (
                         (NamespaceOrTypeSymbol)outerBinder.ContainingMemberOrLambda
-                    ).GetSourceTypeMember((DelegateDeclarationSyntax)memberSyntax);
+                    )
+                        .GetSourceTypeMember((DelegateDeclarationSyntax)memberSyntax);
                     ImmutableArray<TypeParameterSymbol> typeParameters =
                         delegateType.TypeParameters;
                     if (typeParameters.Any())

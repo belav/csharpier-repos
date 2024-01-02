@@ -252,9 +252,8 @@ namespace System.Workflow.ComponentModel
             if (compositeActivity != null)
             {
                 foreach (
-                    Activity activity in (
-                        (ISupportAlternateFlow)compositeActivity
-                    ).AlternateFlowActivities
+                    Activity activity in ((ISupportAlternateFlow)compositeActivity)
+                        .AlternateFlowActivities
                 )
                 {
                     if (activity is FaultHandlersActivity)
@@ -274,9 +273,8 @@ namespace System.Workflow.ComponentModel
             if (compositeActivity != null)
             {
                 foreach (
-                    Activity activity in (
-                        (ISupportAlternateFlow)compositeActivity
-                    ).AlternateFlowActivities
+                    Activity activity in ((ISupportAlternateFlow)compositeActivity)
+                        .AlternateFlowActivities
                 )
                 {
                     if (activity is CancellationHandlerActivity)

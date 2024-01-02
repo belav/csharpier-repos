@@ -131,15 +131,12 @@ public class CompositeKeyEndToEndTest
 
         using (var context = new BronieContext(serviceProvider))
         {
-            var pony1 = (
-                await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 1" })
-            ).Entity;
-            var pony2 = (
-                await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 2" })
-            ).Entity;
-            var pony3 = (
-                await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 3" })
-            ).Entity;
+            var pony1 = (await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 1" }))
+                .Entity;
+            var pony2 = (await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 2" }))
+                .Entity;
+            var pony3 = (await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 3" }))
+                .Entity;
 
             await context.SaveChangesAsync();
 

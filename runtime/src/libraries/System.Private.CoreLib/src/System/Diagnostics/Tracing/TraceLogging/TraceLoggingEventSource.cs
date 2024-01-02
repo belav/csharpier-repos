@@ -70,9 +70,8 @@ namespace System.Diagnostics.Tracing
         )
             : this(
                 GenerateGuidFromName(
-                    (
-                        eventSourceName ?? throw new ArgumentNullException(nameof(eventSourceName))
-                    ).ToUpperInvariant()
+                    (eventSourceName ?? throw new ArgumentNullException(nameof(eventSourceName)))
+                        .ToUpperInvariant()
                 ),
                 eventSourceName,
                 config,

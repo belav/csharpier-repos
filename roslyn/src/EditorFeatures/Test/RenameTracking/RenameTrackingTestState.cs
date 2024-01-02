@@ -260,9 +260,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
             if (invokeAction)
             {
-                var operations = (
-                    await codeAction.GetOperationsAsync(CancellationToken.None)
-                ).ToArray();
+                var operations = (await codeAction.GetOperationsAsync(CancellationToken.None))
+                    .ToArray();
                 Assert.Equal(1, operations.Length);
 
                 await operations[0].TryApplyAsync(

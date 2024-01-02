@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDiagnostics
                     InlineDiagnosticsTaggerProvider,
                     InlineDiagnosticsTag
                 >.GetDiagnosticsAndErrorSpans(workspace)
-            ).Item2;
+            )
+                .Item2;
         }
     }
 }

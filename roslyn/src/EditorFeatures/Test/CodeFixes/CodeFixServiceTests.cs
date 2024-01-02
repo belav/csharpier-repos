@@ -1058,7 +1058,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
         {
             var fixes = (
                 await GetNuGetAndVsixCodeFixersCoreAsync(nugetFixer, vsixFixer, diagnosticAnalyzer)
-            ).SelectMany(fixCollection => fixCollection.Fixes);
+            )
+                .SelectMany(fixCollection => fixCollection.Fixes);
 
             var nugetFixerRegisteredActions = fixes.Where(f =>
                 f.Action.Title == nameof(NuGetCodeFixProvider)

@@ -40,12 +40,13 @@ namespace System.Web.UI.WebControls.Adapters
             // if so, set initial value.
             _ivalue = Control.Checked ? "1" : String.Empty;
 
-            ((WmlPageAdapter)PageAdapter).AddFormVariable(
-                writer,
-                Control.ClientID,
-                _ivalue,
-                false /* randomID */
-            );
+            ((WmlPageAdapter)PageAdapter)
+                .AddFormVariable(
+                    writer,
+                    Control.ClientID,
+                    _ivalue,
+                    false /* randomID */
+                );
             // does not render __ivalue if null or form variables written.
             writer.WriteBeginSelect(
                 null,
@@ -58,11 +59,8 @@ namespace System.Web.UI.WebControls.Adapters
 
             if (Control.AutoPostBack)
             {
-                ((WmlPageAdapter)PageAdapter).RenderSelectOptionAsAutoPostBack(
-                    writer,
-                    Control.Text,
-                    null
-                );
+                ((WmlPageAdapter)PageAdapter)
+                    .RenderSelectOptionAsAutoPostBack(writer, Control.Text, null);
             }
             else
             {

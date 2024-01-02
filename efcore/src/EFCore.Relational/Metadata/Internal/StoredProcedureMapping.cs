@@ -91,9 +91,8 @@ public class StoredProcedureMapping
         new(
             () => ((IStoredProcedureMapping)this).ToDebugString(),
             () =>
-                ((IStoredProcedureMapping)this).ToDebugString(
-                    MetadataDebugStringOptions.LongDefault
-                )
+                ((IStoredProcedureMapping)this)
+                    .ToDebugString(MetadataDebugStringOptions.LongDefault)
         );
 
     /// <inheritdoc />

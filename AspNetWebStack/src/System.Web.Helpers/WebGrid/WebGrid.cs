@@ -1202,10 +1202,8 @@ namespace System.Web.Helpers
             {
                 names = names.Except(exclusions);
             }
-            return (
-                from n in names
-                select new WebGridColumn { ColumnName = n, CanSort = true }
-            ).ToArray();
+            return (from n in names select new WebGridColumn { ColumnName = n, CanSort = true })
+                .ToArray();
         }
 
         // see: DataBoundControlHelper.IsBindableType

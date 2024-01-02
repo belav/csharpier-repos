@@ -1303,9 +1303,10 @@ namespace System.ServiceModel.Description
                             if (wsdlDoc != defaultWsdl) // don't count the WSDL at ?WSDL
                                 query +=
                                     "=wsdl"
-                                    + (i++).ToString(
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    );
+                                    + (i++)
+                                        .ToString(
+                                            System.Globalization.CultureInfo.InvariantCulture
+                                        );
 
                             docFromQueryInit.Add(query, wsdlDoc);
                             queryFromDocInit.Add(wsdlDoc, query);

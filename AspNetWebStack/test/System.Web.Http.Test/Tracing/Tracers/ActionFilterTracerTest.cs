@@ -139,11 +139,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Task<HttpResponseMessage> task = ((IActionFilter)tracer).ExecuteActionFilterAsync(
-                actionContext,
-                CancellationToken.None,
-                continuation
-            );
+            Task<HttpResponseMessage> task = ((IActionFilter)tracer)
+                .ExecuteActionFilterAsync(actionContext, CancellationToken.None, continuation);
 
             // Assert
             Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => task);

@@ -1048,9 +1048,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Services.Description.SoapBindingUse"
                     );
             }
@@ -1131,9 +1130,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Services.Description.SoapBindingUse"
                     );
             }
@@ -2543,9 +2541,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Services.Description.SoapBindingStyle"
                     );
             }
@@ -2668,9 +2665,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Web.Services.Description.SoapBindingStyle"
                     );
             }
@@ -4346,9 +4342,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Xml.Schema.XmlSchemaContentProcessing"
                     );
             }
@@ -6498,9 +6493,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Xml.Schema.XmlSchemaUse"
                     );
             }
@@ -6520,9 +6514,8 @@ namespace System.Web.Services.Description
                     break;
                 default:
                     throw CreateInvalidEnumValueException(
-                        ((System.Int64)v).ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        ),
+                        ((System.Int64)v)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture),
                         @"System.Xml.Schema.XmlSchemaForm"
                     );
             }
@@ -8219,10 +8212,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -8425,10 +8416,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -8578,10 +8567,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -9021,10 +9008,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -9205,10 +9190,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -9409,10 +9392,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -9845,10 +9826,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -11577,10 +11556,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -12605,10 +12582,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -12766,10 +12741,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -12947,10 +12920,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -13089,10 +13060,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -13231,10 +13200,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -13363,10 +13330,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -13531,10 +13496,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -13649,10 +13612,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -13860,10 +13821,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -14129,10 +14088,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -14321,10 +14278,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -14452,10 +14407,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -14600,10 +14553,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -14732,10 +14683,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -14884,10 +14833,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -15090,10 +15037,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -15258,10 +15203,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -15449,10 +15392,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -15627,10 +15568,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -15939,10 +15878,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -16090,10 +16027,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -16241,10 +16176,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -16392,10 +16325,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -16543,10 +16474,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -16694,10 +16623,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -16845,10 +16772,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -16996,10 +16921,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -17147,10 +17070,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -17298,10 +17219,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -17449,10 +17368,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -17600,10 +17517,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -17740,10 +17655,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -18110,10 +18023,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -18327,10 +18238,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -18496,10 +18405,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -18638,10 +18545,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -18806,10 +18711,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -19021,10 +18924,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -19278,10 +19179,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -19449,10 +19348,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -19677,10 +19574,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -19830,10 +19725,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -20066,10 +19959,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -20195,10 +20086,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -20364,10 +20253,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -20548,10 +20435,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -20884,10 +20769,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -21053,10 +20936,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -21279,10 +21160,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -21504,10 +21383,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -21705,10 +21582,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -21847,10 +21722,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -22053,10 +21926,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -22193,10 +22064,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {
@@ -22331,10 +22200,8 @@ namespace System.Web.Services.Description
                     if (o.@Namespaces == null)
                         o.@Namespaces =
                             new global::System.Xml.Serialization.XmlSerializerNamespaces();
-                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces).Add(
-                        Reader.Name.Length == 5 ? "" : Reader.LocalName,
-                        Reader.Value
-                    );
+                    ((global::System.Xml.Serialization.XmlSerializerNamespaces)o.@Namespaces)
+                        .Add(Reader.Name.Length == 5 ? "" : Reader.LocalName, Reader.Value);
                 }
                 else
                 {

@@ -407,10 +407,8 @@ namespace System.Collections.Immutable.Tests
             out TKey actualKey
         )
         {
-            return ((ImmutableDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(
-                equalKey,
-                out actualKey
-            );
+            return ((ImmutableDictionary<TKey, TValue>.Builder)dictionary)
+                .TryGetKey(equalKey, out actualKey);
         }
 
         protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
@@ -421,7 +419,8 @@ namespace System.Collections.Immutable.Tests
                 (ImmutableDictionary<TKey, TValue>)(
                     basis ?? GetEmptyImmutableDictionary<TKey, TValue>()
                 )
-            ).ToBuilder();
+            )
+                .ToBuilder();
         }
     }
 }

@@ -1436,9 +1436,8 @@ public partial class DbContextTest
 
         Assert.StartsWith(
             CoreStrings.ContextDisposed,
-            (
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => context.SaveChangesAsync())
-            ).Message
+            (await Assert.ThrowsAsync<ObjectDisposedException>(() => context.SaveChangesAsync()))
+                .Message
         );
 
         Assert.StartsWith(
@@ -1447,7 +1446,8 @@ public partial class DbContextTest
                 await Assert.ThrowsAsync<ObjectDisposedException>(
                     () => context.AddAsync(new object()).AsTask()
                 )
-            ).Message
+            )
+                .Message
         );
 
         Assert.StartsWith(
@@ -1456,7 +1456,8 @@ public partial class DbContextTest
                 await Assert.ThrowsAsync<ObjectDisposedException>(
                     () => context.FindAsync(typeof(Random), 77).AsTask()
                 )
-            ).Message
+            )
+                .Message
         );
 
         var methodCount = typeof(DbContext)

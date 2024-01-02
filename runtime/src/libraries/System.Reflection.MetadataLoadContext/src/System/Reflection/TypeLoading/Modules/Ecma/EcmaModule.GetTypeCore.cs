@@ -61,10 +61,8 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (!(et.Namespace.Equals(ns, reader)))
                     continue;
 
-                RoAssembly? assembly = ((AssemblyReferenceHandle)implementation).TryResolveAssembly(
-                    this,
-                    out e
-                );
+                RoAssembly? assembly = ((AssemblyReferenceHandle)implementation)
+                    .TryResolveAssembly(this, out e);
                 return assembly?.GetTypeCore(ns, name, ignoreCase: false, out e);
             }
 

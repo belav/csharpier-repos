@@ -66,9 +66,8 @@ namespace System.Web.UI.WebControls
             _wrapperList = new List<EntityDataSourceWrapper>();
 
             // get handles on the relevant workspaces
-            MetadataWorkspace csWorkspace = (
-                (EntityConnection)context.Connection
-            ).GetMetadataWorkspace();
+            MetadataWorkspace csWorkspace = ((EntityConnection)context.Connection)
+                .GetMetadataWorkspace();
             MetadataWorkspace ocWorkspace = context.MetadataWorkspace;
 
             // if no restricted type is given, we assume the entity set element type is exposed

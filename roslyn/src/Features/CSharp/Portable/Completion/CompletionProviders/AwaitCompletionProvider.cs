@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     => (
                         parenthesizedLambda.ReturnType as SyntaxNode
                         ?? parenthesizedLambda.ParameterList
-                    ).SpanStart,
+                    )
+                        .SpanStart,
                 SimpleLambdaExpressionSyntax simpleLambda => simpleLambda.Parameter.SpanStart,
                 _ => throw ExceptionUtilities.UnexpectedValue(declaration.Kind())
             };

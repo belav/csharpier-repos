@@ -970,9 +970,8 @@ namespace Microsoft.Interop.Analyzers
                         {
                             DiagnosticReporter marshallerTypeReporter =
                                 DiagnosticReporter.CreateForLocation(
-                                    (
-                                        (TypeOfExpressionSyntax)marshallerTypeOfOp.Syntax
-                                    ).Type.GetLocation(),
+                                    ((TypeOfExpressionSyntax)marshallerTypeOfOp.Syntax)
+                                        .Type.GetLocation(),
                                     context.ReportDiagnostic
                                 );
                             ITypeSymbol? marshallerTypeInAttribute = marshallerTypeOfOp.TypeOperand;
@@ -1373,9 +1372,8 @@ namespace Microsoft.Interop.Analyzers
                             diagnosticReporter.CreateAndReportDiagnostic(
                                 FirstParameterMustMatchReturnTypeRule,
                                 toManagedMethod.ToDisplayString(),
-                                (
-                                    methods.ToUnmanaged ?? methods.ToUnmanagedWithBuffer
-                                ).ToDisplayString()
+                                (methods.ToUnmanaged ?? methods.ToUnmanagedWithBuffer)
+                                    .ToDisplayString()
                             );
                         }
 

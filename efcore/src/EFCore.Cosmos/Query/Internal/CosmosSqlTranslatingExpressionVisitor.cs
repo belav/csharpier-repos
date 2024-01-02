@@ -437,9 +437,8 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
 
             case ProjectionBindingExpression projectionBindingExpression:
                 return projectionBindingExpression.ProjectionMember != null
-                    ? (
-                        (SelectExpression)projectionBindingExpression.QueryExpression
-                    ).GetMappedProjection(projectionBindingExpression.ProjectionMember)
+                    ? ((SelectExpression)projectionBindingExpression.QueryExpression)
+                        .GetMappedProjection(projectionBindingExpression.ProjectionMember)
                     : null;
 
             default:

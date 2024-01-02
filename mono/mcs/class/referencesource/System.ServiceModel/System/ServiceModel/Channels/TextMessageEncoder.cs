@@ -812,11 +812,8 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    ((IXmlTextWriterInitializer)xmlWriter).SetOutput(
-                        stream,
-                        this.writeEncoding,
-                        false
-                    );
+                    ((IXmlTextWriterInitializer)xmlWriter)
+                        .SetOutput(stream, this.writeEncoding, false);
                 }
                 return xmlWriter;
             }
@@ -889,12 +886,8 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    ((IXmlTextReaderInitializer)xmlReader).SetInput(
-                        stream,
-                        enc,
-                        this.readerQuotas,
-                        onStreamedReaderClose
-                    );
+                    ((IXmlTextReaderInitializer)xmlReader)
+                        .SetInput(stream, enc, this.readerQuotas, onStreamedReaderClose);
                 }
                 return xmlReader;
             }
@@ -1064,14 +1057,15 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        ((IXmlTextReaderInitializer)xmlReader).SetInput(
-                            buffer.Array,
-                            buffer.Offset,
-                            buffer.Count,
-                            this.encoding,
-                            this.Quotas,
-                            onClose
-                        );
+                        ((IXmlTextReaderInitializer)xmlReader)
+                            .SetInput(
+                                buffer.Array,
+                                buffer.Offset,
+                                buffer.Count,
+                                this.encoding,
+                                this.Quotas,
+                                onClose
+                            );
                     }
 
                     return xmlReader;
@@ -1124,11 +1118,8 @@ namespace System.ServiceModel.Channels
                         else
                         {
                             writer = null;
-                            ((IXmlTextWriterInitializer)returnedWriter).SetOutput(
-                                stream,
-                                messageEncoder.writeEncoding,
-                                false
-                            );
+                            ((IXmlTextWriterInitializer)returnedWriter)
+                                .SetOutput(stream, messageEncoder.writeEncoding, false);
                         }
                         return returnedWriter;
                     }

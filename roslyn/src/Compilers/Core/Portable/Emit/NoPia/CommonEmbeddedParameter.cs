@@ -342,9 +342,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             /// </remarks>
             public override string ToString()
             {
-                return ((ISymbol)UnderlyingParameter).ToDisplayString(
-                    SymbolDisplayFormat.ILVisualizationFormat
-                );
+                return ((ISymbol)UnderlyingParameter)
+                    .ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat);
             }
 
             public sealed override bool Equals(object obj)

@@ -458,13 +458,8 @@ namespace System.Reflection.Runtime.TypeInfos
                 //if (useCache && argCnt == invokeMethod.GetParameters().Length)
                 //    AddMethodToCache(name, bindingFlags, argCnt, providedArgs, invokeMethod);
 
-                object? result = ((MethodInfo)invokeMethod).Invoke(
-                    target,
-                    bindingFlags,
-                    binder,
-                    providedArgs,
-                    culture
-                );
+                object? result = ((MethodInfo)invokeMethod)
+                    .Invoke(target, bindingFlags, binder, providedArgs, culture);
 
                 if (state != null)
                     binder.ReorderArgumentArray(ref providedArgs, state);

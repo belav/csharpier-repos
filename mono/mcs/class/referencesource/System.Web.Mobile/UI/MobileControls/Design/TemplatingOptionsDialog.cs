@@ -435,9 +435,8 @@ namespace System.Web.UI.Design.MobileControls
             _cmbSchemas.Enabled =
                 (_cmbChoices.Items.Count > 1)
                 && (
-                    !((String)_cmbChoices.SelectedItem).Equals(
-                        SR.GetString(SR.DeviceFilter_NoChoice)
-                    )
+                    !((String)_cmbChoices.SelectedItem)
+                        .Equals(SR.GetString(SR.DeviceFilter_NoChoice))
                 );
         }
 

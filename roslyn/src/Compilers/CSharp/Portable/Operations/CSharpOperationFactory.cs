@@ -750,9 +750,8 @@ namespace Microsoft.CodeAnalysis.Operations
             {
                 case BoundKind.LocalDeclaration:
                 {
-                    BoundTypeExpression? declaredTypeOpt = (
-                        (BoundLocalDeclaration)declaration
-                    ).DeclaredTypeOpt;
+                    BoundTypeExpression? declaredTypeOpt = ((BoundLocalDeclaration)declaration)
+                        .DeclaredTypeOpt;
                     Debug.Assert(declaredTypeOpt != null);
                     return CreateFromArray<BoundExpression, IOperation>(
                         declaredTypeOpt.BoundDimensionsOpt
@@ -761,9 +760,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 case BoundKind.MultipleLocalDeclarations:
                 case BoundKind.UsingLocalDeclarations:
                 {
-                    var declarations = (
-                        (BoundMultipleLocalDeclarationsBase)declaration
-                    ).LocalDeclarations;
+                    var declarations = ((BoundMultipleLocalDeclarationsBase)declaration)
+                        .LocalDeclarations;
                     ImmutableArray<BoundExpression> dimensions;
                     if (declarations.Length > 0)
                     {
@@ -1462,9 +1460,8 @@ namespace Microsoft.CodeAnalysis.Operations
                         )
                         {
                             var children = CreateFromArray<BoundNode, IOperation>(
-                                (
-                                    (IBoundInvalidNode)boundObjectInitializerMember
-                                ).InvalidNodeChildren
+                                ((IBoundInvalidNode)boundObjectInitializerMember)
+                                    .InvalidNodeChildren
                             );
                             return new InvalidOperation(
                                 children,
@@ -2104,9 +2101,8 @@ namespace Microsoft.CodeAnalysis.Operations
                         return null;
                     case CollectionExpressionTypeKind.ImplementsIEnumerable:
                     case CollectionExpressionTypeKind.ImplementsIEnumerableT:
-                        return (
-                            expr.CollectionCreation as BoundObjectCreationExpression
-                        )?.Constructor;
+                        return (expr.CollectionCreation as BoundObjectCreationExpression)
+                            ?.Constructor;
                     case CollectionExpressionTypeKind.CollectionBuilder:
                         return expr.CollectionBuilderMethod;
                     case CollectionExpressionTypeKind.ImmutableArray:
@@ -2119,7 +2115,8 @@ namespace Microsoft.CodeAnalysis.Operations
                                 compilation.GetWellKnownTypeMember(
                                     WellKnownMember.System_Collections_Generic_List_T__ctor
                                 )
-                        )?.AsMember((NamedTypeSymbol)expr.Type);
+                        )
+                            ?.AsMember((NamedTypeSymbol)expr.Type);
                     default:
                         throw ExceptionUtilities.UnexpectedValue(expr.CollectionTypeKind);
                 }
@@ -2197,9 +2194,8 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             SyntaxNode syntax = boundDefaultExpression.Syntax;
             ITypeSymbol? type = boundDefaultExpression.GetPublicTypeSymbol();
-            ConstantValue? constantValue = (
-                (BoundExpression)boundDefaultExpression
-            ).ConstantValueOpt;
+            ConstantValue? constantValue = ((BoundExpression)boundDefaultExpression)
+                .ConstantValueOpt;
             bool isImplicit = boundDefaultExpression.WasCompilerGenerated;
             return new DefaultValueOperation(
                 _semanticModel,
@@ -3275,9 +3271,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 info = new ForEachLoopOperationInfo(
                     enumeratorInfoOpt.ElementType.GetPublicSymbol(),
                     enumeratorInfoOpt.GetEnumeratorInfo.Method.GetPublicSymbol(),
-                    (
-                        (PropertySymbol)enumeratorInfoOpt.CurrentPropertyGetter.AssociatedSymbol
-                    ).GetPublicSymbol(),
+                    ((PropertySymbol)enumeratorInfoOpt.CurrentPropertyGetter.AssociatedSymbol)
+                        .GetPublicSymbol(),
                     enumeratorInfoOpt.MoveNextInfo.Method.GetPublicSymbol(),
                     isAsynchronous: enumeratorInfoOpt.IsAsync,
                     inlineArrayConversion: enumeratorInfoOpt.InlineArraySpanType
@@ -3589,11 +3584,11 @@ namespace Microsoft.CodeAnalysis.Operations
                     (
                         _semanticModel.GetEnclosingSymbol(boundLockStatement.Syntax.SpanStart)
                         as IMethodSymbol
-                    ).GetSymbol(),
+                    )
+                        .GetSymbol(),
                     TypeWithAnnotations.Create(
-                        ((CSharpCompilation)_semanticModel.Compilation).GetSpecialType(
-                            SpecialType.System_Boolean
-                        )
+                        ((CSharpCompilation)_semanticModel.Compilation)
+                            .GetSpecialType(SpecialType.System_Boolean)
                     ),
                     SynthesizedLocalKind.LockTaken,
                     syntaxOpt: boundLockStatement.Argument.Syntax
@@ -4320,9 +4315,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 && boundDeclarationPattern.VariableAccess?.Kind == BoundKind.DiscardExpression
             )
             {
-                variable = (
-                    (BoundDiscardExpression)boundDeclarationPattern.VariableAccess
-                ).ExpressionSymbol.GetPublicSymbol();
+                variable = ((BoundDiscardExpression)boundDeclarationPattern.VariableAccess)
+                    .ExpressionSymbol.GetPublicSymbol();
             }
 
             ITypeSymbol inputType = boundDeclarationPattern.InputType.GetPublicSymbol();
@@ -4352,7 +4346,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ITypeSymbol matchedType = (
                 boundRecursivePattern.DeclaredType?.Type
                 ?? boundRecursivePattern.InputType.StrippedType()
-            ).GetPublicSymbol();
+            )
+                .GetPublicSymbol();
             ImmutableArray<IPatternOperation> deconstructionSubpatterns =
                 boundRecursivePattern.Deconstruction is { IsDefault: false } deconstructions
                     ? deconstructions.SelectAsArray(

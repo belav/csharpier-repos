@@ -1635,9 +1635,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             CustomAttribute attribute
         )
         {
-            return ((CustomAttributeArgument[])attribute.ConstructorArguments[0].Value)?.Select(
-                arg => arg.Value.ToString()!
-            );
+            return ((CustomAttributeArgument[])attribute.ConstructorArguments[0].Value)
+                ?.Select(arg => arg.Value.ToString()!);
         }
 
         private static IEnumerable<CustomAttribute> GetActiveKeptAttributes(

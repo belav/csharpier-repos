@@ -531,7 +531,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     submissionImports = (
                         (SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace
-                    ).GetImports(declarationSyntax, basesBeingResolved);
+                    )
+                        .GetImports(declarationSyntax, basesBeingResolved);
                 }
                 else
                 {
@@ -2429,9 +2430,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SymbolKind.Property:
 
                     {
-                        var property = ((PropertySymbol)symbol).GetLeastOverriddenProperty(
-                            this.ContainingType
-                        );
+                        var property = ((PropertySymbol)symbol)
+                            .GetLeastOverriddenProperty(this.ContainingType);
                         method1 = property.GetMethod;
                         method2 = property.SetMethod;
                     }
@@ -2439,9 +2439,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SymbolKind.Event:
 
                     {
-                        var @event = ((EventSymbol)symbol).GetLeastOverriddenEvent(
-                            this.ContainingType
-                        );
+                        var @event = ((EventSymbol)symbol)
+                            .GetLeastOverriddenEvent(this.ContainingType);
                         method1 = @event.AddMethod;
                         method2 = @event.RemoveMethod;
                     }

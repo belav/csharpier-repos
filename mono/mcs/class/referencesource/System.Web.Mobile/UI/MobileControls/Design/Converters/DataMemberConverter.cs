@@ -119,9 +119,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
 
                             if (designer is IDataSourceProvider)
                             {
-                                object dataSource = (
-                                    (IDataSourceProvider)designer
-                                ).GetSelectedDataSource();
+                                object dataSource = ((IDataSourceProvider)designer)
+                                    .GetSelectedDataSource();
 
                                 if (dataSource != null)
                                 {

@@ -343,7 +343,8 @@ namespace System.Formats.Asn1.Tests.Writer
                 + "AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF2B"
                 + "82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6D9"
                 + "FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD8847"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // Now it's padded little-endian.
             Array.Reverse(paddedBigEndianN);

@@ -704,9 +704,8 @@ namespace System.Buffers
         {
             // 'resultMask' encodes the input positions where at least one bucket may contain a match.
             // These positions are offset by 'matchStartOffset' places.
-            uint resultMask = (
-                ~Vector128.Equals(result, Vector128<byte>.Zero)
-            ).ExtractMostSignificantBits();
+            uint resultMask = (~Vector128.Equals(result, Vector128<byte>.Zero))
+                .ExtractMostSignificantBits();
 
             do
             {
@@ -770,9 +769,8 @@ namespace System.Buffers
         {
             // See comments in 'TryFindMatch' for Vector128<byte> above.
             // This method is the same, but checks the potential matches for 32 input positions.
-            uint resultMask = (
-                ~Vector256.Equals(result, Vector256<byte>.Zero)
-            ).ExtractMostSignificantBits();
+            uint resultMask = (~Vector256.Equals(result, Vector256<byte>.Zero))
+                .ExtractMostSignificantBits();
 
             do
             {
@@ -833,9 +831,8 @@ namespace System.Buffers
         {
             // See comments in 'TryFindMatch' for Vector128<byte> above.
             // This method is the same, but checks the potential matches for 64 input positions.
-            ulong resultMask = (
-                ~Vector512.Equals(result, Vector512<byte>.Zero)
-            ).ExtractMostSignificantBits();
+            ulong resultMask = (~Vector512.Equals(result, Vector512<byte>.Zero))
+                .ExtractMostSignificantBits();
 
             do
             {

@@ -49,12 +49,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         )
         {
             // NoPia method might come through here.
-            return ((PEModuleBuilder)context.Module).Translate(
-                UnderlyingMethod.OriginalDefinition,
-                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
-                diagnostics: context.Diagnostics,
-                needDeclaration: true
-            );
+            return ((PEModuleBuilder)context.Module)
+                .Translate(
+                    UnderlyingMethod.OriginalDefinition,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                    diagnostics: context.Diagnostics,
+                    needDeclaration: true
+                );
         }
 
         public override Cci.IGenericMethodInstanceReference AsGenericMethodInstanceReference

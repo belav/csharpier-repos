@@ -926,9 +926,8 @@ namespace System.ComponentModel
 
             if (!noCustomTypeDesc && component is ICustomTypeDescriptor)
             {
-                EventDescriptorCollection events = ((ICustomTypeDescriptor)component).GetEvents(
-                    attributes
-                );
+                EventDescriptorCollection events = ((ICustomTypeDescriptor)component)
+                    .GetEvents(attributes);
                 return GetEntry(component, component.GetType())
                     .FilterEvents(component, attributes, events);
             }
@@ -975,9 +974,8 @@ namespace System.ComponentModel
 
             if (!noCustomTypeDesc && component is ICustomTypeDescriptor)
             {
-                PropertyDescriptorCollection properties = (
-                    (ICustomTypeDescriptor)component
-                ).GetProperties();
+                PropertyDescriptorCollection properties = ((ICustomTypeDescriptor)component)
+                    .GetProperties();
                 return GetEntry(component, component.GetType())
                     .FilterProperties(component, null, properties);
             }
@@ -1049,9 +1047,8 @@ namespace System.ComponentModel
 
             if (!noCustomTypeDesc && component is ICustomTypeDescriptor)
             {
-                PropertyDescriptorCollection properties = (
-                    (ICustomTypeDescriptor)component
-                ).GetProperties(attributes);
+                PropertyDescriptorCollection properties = ((ICustomTypeDescriptor)component)
+                    .GetProperties(attributes);
                 return GetEntry(component, component.GetType())
                     .FilterProperties(component, attributes, properties);
             }
@@ -1730,7 +1727,8 @@ namespace System.ComponentModel
             {
                 string name = (
                     (DefaultEventAttribute)GetAttributes(component)[typeof(DefaultEventAttribute)]
-                ).Name;
+                )
+                    .Name;
                 if (name != null)
                 {
                     EventDescriptorCollection evts = GetEvents(component, null);
@@ -1752,7 +1750,8 @@ namespace System.ComponentModel
                 string name = (
                     (DefaultPropertyAttribute)
                         GetAttributes(component)[typeof(DefaultPropertyAttribute)]
-                ).Name;
+                )
+                    .Name;
                 if (name != null)
                 {
                     return GetProperties(component, null)[name];

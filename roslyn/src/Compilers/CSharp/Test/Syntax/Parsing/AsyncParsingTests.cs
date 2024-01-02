@@ -21,9 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return SyntaxFactory.ParseSyntaxTree(
                 text,
-                options: (options ?? TestOptions.Regular).WithLanguageVersion(
-                    LanguageVersion.CSharp5
-                )
+                options: (options ?? TestOptions.Regular)
+                    .WithLanguageVersion(LanguageVersion.CSharp5)
             );
         }
 
@@ -34,9 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return SyntaxFactory.ParseExpression(
                 text,
-                options: (options ?? TestOptions.Regular).WithLanguageVersion(
-                    LanguageVersion.CSharp5
-                )
+                options: (options ?? TestOptions.Regular)
+                    .WithLanguageVersion(LanguageVersion.CSharp5)
             );
         }
 

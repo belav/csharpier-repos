@@ -54,7 +54,8 @@ namespace MonoTests.System.Security.Principal
                 (
                     (NTAccount)
                         new SecurityIdentifier(wellKnownSidType, null).Translate(typeof(NTAccount))
-                ).Value
+                )
+                    .Value
             );
         }
 

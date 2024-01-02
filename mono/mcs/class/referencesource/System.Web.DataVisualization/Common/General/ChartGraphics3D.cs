@@ -348,17 +348,18 @@ namespace System.Web.UI.DataVisualization.Charting
                 obj is StripLine ? ChartElementType.StripLines : ChartElementType.Gridlines;
 
             // Draw strip line on the back/front wall
-            ((ChartGraphics)this).Draw3DLine(
-                area.matrix3D,
-                color,
-                width,
-                style,
-                new Point3D(point1.X, point1.Y, zPositon),
-                new Point3D(point2.X, point2.Y, zPositon),
-                common,
-                obj,
-                chartElementType
-            );
+            ((ChartGraphics)this)
+                .Draw3DLine(
+                    area.matrix3D,
+                    color,
+                    width,
+                    style,
+                    new Point3D(point1.X, point1.Y, zPositon),
+                    new Point3D(point2.X, point2.Y, zPositon),
+                    common,
+                    obj,
+                    chartElementType
+                );
 
             if (horizontal)
             {
@@ -372,34 +373,36 @@ namespace System.Web.UI.DataVisualization.Charting
                     point1.X = Math.Max(point1.X, point2.X);
                 }
 
-                ((ChartGraphics)this).Draw3DLine(
-                    area.matrix3D,
-                    color,
-                    width,
-                    style,
-                    new Point3D(point1.X, point1.Y, 0f),
-                    new Point3D(point1.X, point1.Y, area.areaSceneDepth),
-                    common,
-                    obj,
-                    chartElementType
-                );
+                ((ChartGraphics)this)
+                    .Draw3DLine(
+                        area.matrix3D,
+                        color,
+                        width,
+                        style,
+                        new Point3D(point1.X, point1.Y, 0f),
+                        new Point3D(point1.X, point1.Y, area.areaSceneDepth),
+                        common,
+                        obj,
+                        chartElementType
+                    );
             }
             else if (area.IsBottomSceneWallVisible())
             {
                 // Draw strip line on the bottom wall (if visible)
                 point1.Y = Math.Max(point1.Y, point2.Y);
 
-                ((ChartGraphics)this).Draw3DLine(
-                    area.matrix3D,
-                    color,
-                    width,
-                    style,
-                    new Point3D(point1.X, point1.Y, 0f),
-                    new Point3D(point1.X, point1.Y, area.areaSceneDepth),
-                    common,
-                    obj,
-                    chartElementType
-                );
+                ((ChartGraphics)this)
+                    .Draw3DLine(
+                        area.matrix3D,
+                        color,
+                        width,
+                        style,
+                        new Point3D(point1.X, point1.Y, 0f),
+                        new Point3D(point1.X, point1.Y, area.areaSceneDepth),
+                        common,
+                        obj,
+                        chartElementType
+                    );
             }
         }
 
@@ -455,13 +458,8 @@ namespace System.Web.UI.DataVisualization.Charting
             if (common.ProcessModePaint)
             {
                 // Draw 2D line in 3D space
-                ((ChartGraphics)this).DrawLineRel(
-                    color,
-                    width,
-                    style,
-                    points[0].PointF,
-                    points[1].PointF
-                );
+                ((ChartGraphics)this)
+                    .DrawLineRel(color, width, style, points[0].PointF, points[1].PointF);
             }
         }
 
@@ -5137,9 +5135,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                                 colorBlend.Positions[3] = 1.0f;
                                                 colorBlend.Positions[4] = 1.0f;
 
-                                                (
-                                                    (LinearGradientBrush)frontSurfaceBrush
-                                                ).InterpolationColors = colorBlend;
+                                                ((LinearGradientBrush)frontSurfaceBrush)
+                                                    .InterpolationColors = colorBlend;
                                             }
                                         }
                                     }

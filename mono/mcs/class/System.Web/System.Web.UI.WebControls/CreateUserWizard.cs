@@ -1568,9 +1568,8 @@ namespace System.Web.UI.WebControls
             if (states[12] != null)
                 ((IStateManager)MailDefinition).LoadViewState(states[12]);
 
-            (
-                (CreateUserStepContainer)CreateUserStep.ContentTemplateContainer
-            ).EnsureValidatorsState();
+            ((CreateUserStepContainer)CreateUserStep.ContentTemplateContainer)
+                .EnsureValidatorsState();
         }
 
         protected override object SaveViewState()

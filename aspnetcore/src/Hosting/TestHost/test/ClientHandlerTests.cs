@@ -751,10 +751,8 @@ public class ClientHandlerTests
 
         internal override void DisposeContext(object context, Exception exception)
         {
-            ((IHttpApplication<TestHostingContext>)this).DisposeContext(
-                (TestHostingContext)context,
-                exception
-            );
+            ((IHttpApplication<TestHostingContext>)this)
+                .DisposeContext((TestHostingContext)context, exception);
         }
 
         void IHttpApplication<TestHostingContext>.DisposeContext(
@@ -764,9 +762,8 @@ public class ClientHandlerTests
 
         internal override Task ProcessRequestAsync(object context)
         {
-            return ((IHttpApplication<TestHostingContext>)this).ProcessRequestAsync(
-                (TestHostingContext)context
-            );
+            return ((IHttpApplication<TestHostingContext>)this)
+                .ProcessRequestAsync((TestHostingContext)context);
         }
 
         Task IHttpApplication<TestHostingContext>.ProcessRequestAsync(TestHostingContext context)
@@ -802,10 +799,8 @@ public class ClientHandlerTests
 
         internal override void DisposeContext(object context, Exception exception)
         {
-            ((IHttpApplication<TestHostingContext>)this).DisposeContext(
-                (TestHostingContext)context,
-                exception
-            );
+            ((IHttpApplication<TestHostingContext>)this)
+                .DisposeContext((TestHostingContext)context, exception);
         }
 
         void IHttpApplication<TestHostingContext>.DisposeContext(
@@ -815,9 +810,8 @@ public class ClientHandlerTests
 
         internal override Task ProcessRequestAsync(object context)
         {
-            return ((IHttpApplication<TestHostingContext>)this).ProcessRequestAsync(
-                (TestHostingContext)context
-            );
+            return ((IHttpApplication<TestHostingContext>)this)
+                .ProcessRequestAsync((TestHostingContext)context);
         }
 
         Task IHttpApplication<TestHostingContext>.ProcessRequestAsync(TestHostingContext context)

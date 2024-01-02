@@ -225,7 +225,8 @@ namespace System.Text.Json.Serialization.Tests
                     Assert.IsType<MyClassCustomConverterFactory>(propertyInfo.CustomConverter);
                     expectedConverter = (
                         (MyClassCustomConverterFactory)propertyInfo.CustomConverter
-                    ).ConverterInstance;
+                    )
+                        .ConverterInstance;
                 }
             });
 

@@ -796,10 +796,8 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual("view_Selecting", eventsCalled[3], "view_Selecting");
             string[] expectedParams = new string[] { "String:@ID=p_ValueSelect1" };
-            string[] actualValues = ((string)eventsCalled[4]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[4])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -837,10 +835,8 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual("view_Inserting", eventsCalled[1], "view_Inserting");
             string[] expectedParams = new string[] { "String:@ID=n_1001" };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -878,10 +874,8 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual("view_Inserting", eventsCalled[1], "view_Inserting");
             string[] expectedParams = new string[] { "String:@ID=n_1001" };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -923,10 +917,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@oldvalue_ID=p_OldValueInsert1",
                 "String:@ID=n_1001"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -968,10 +960,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@oldvalue_ID=p_OldValueInsert1",
                 "String:@ID=n_1001"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1013,10 +1003,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@OtherValue=p_OtherValueInsert1",
                 "String:@ID=n_1001"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1058,10 +1046,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@oldvalue_ID=k_1001",
                 "String:@ID=n_1001"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1103,10 +1089,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@oldvalue_ID=ov_1001",
                 "String:@ID=n_1001"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1148,10 +1132,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@oldvalue_ID=k_1001",
                 "String:@ID=n_1001"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1193,10 +1175,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@oldvalue_ID=ov_1001",
                 "String:@ID=n_1001"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1239,10 +1219,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@ID=n_1001",
                 "String:@OtherValue=p_OtherValueUpdate1"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1280,10 +1258,8 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
             string[] expectedParams = new string[] { "String:@oldvalue_ID=k_1001", };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1321,10 +1297,8 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
             string[] expectedParams = new string[] { "String:@oldvalue_ID=ov_1001", };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1362,10 +1336,8 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
             string[] expectedParams = new string[] { "String:@oldvalue_ID=k_1001", };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1403,10 +1375,8 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
             string[] expectedParams = new string[] { "String:@oldvalue_ID=ov_1001", };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,
@@ -1448,10 +1418,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "String:@oldvalue_ID=k_1001",
                 "String:@OtherValue=p_OtherValueDelete1"
             };
-            string[] actualValues = ((string)eventsCalled[2]).Split(
-                new string[] { ", " },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            string[] actualValues = ((string)eventsCalled[2])
+                .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
             Assert.AreEqual(
                 expectedParams.Length,
                 actualValues.Length,

@@ -57,9 +57,8 @@ public class SqlServerCodeGeneratorTest
             )
         );
 
-        var result = ((IProviderConfigurationCodeGenerator)codeGenerator).GenerateUseProvider(
-            "Data Source=Test"
-        );
+        var result = ((IProviderConfigurationCodeGenerator)codeGenerator)
+            .GenerateUseProvider("Data Source=Test");
 
         Assert.Equal("UseSqlServer", result.Method);
         Assert.Collection(

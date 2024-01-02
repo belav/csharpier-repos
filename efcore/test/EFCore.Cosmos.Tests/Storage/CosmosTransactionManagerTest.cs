@@ -26,7 +26,8 @@ public class CosmosTransactionManagerTest
                 await Assert.ThrowsAsync<NotSupportedException>(
                     async () => await transactionManager.BeginTransactionAsync()
                 )
-            ).Message
+            )
+                .Message
         );
 
         Assert.Equal(
@@ -42,7 +43,8 @@ public class CosmosTransactionManagerTest
                 await Assert.ThrowsAsync<NotSupportedException>(
                     async () => await transactionManager.CommitTransactionAsync()
                 )
-            ).Message
+            )
+                .Message
         );
 
         Assert.Equal(
@@ -58,7 +60,8 @@ public class CosmosTransactionManagerTest
                 await Assert.ThrowsAsync<NotSupportedException>(
                     async () => await transactionManager.RollbackTransactionAsync()
                 )
-            ).Message
+            )
+                .Message
         );
 
         Assert.Null(transactionManager.CurrentTransaction);

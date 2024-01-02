@@ -81,9 +81,8 @@ namespace System.Workflow.ComponentModel.Design
             while (!currentDesigner.IsRootDesigner)
             {
                 if (
-                    !((CompositeActivityDesigner)parentDesigner).ContainedDesigners.Contains(
-                        currentDesigner
-                    )
+                    !((CompositeActivityDesigner)parentDesigner)
+                        .ContainedDesigners.Contains(currentDesigner)
                 )
                 {
                     return false;
@@ -126,9 +125,8 @@ namespace System.Workflow.ComponentModel.Design
             if (parentDesigner is ActivityPreviewDesigner)
             {
                 if (
-                    ((ActivityPreviewDesigner)parentDesigner).IsContainedDesignerVisible(
-                        currentDesigner
-                    )
+                    ((ActivityPreviewDesigner)parentDesigner)
+                        .IsContainedDesignerVisible(currentDesigner)
                 )
                 {
                     visible = true;

@@ -153,20 +153,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "E9E5E2F61345043B05D3519D88C021582CCEF808AF8F4B15BD901A310FEFD518"
                 + "AF90ABA6F85F6563DB47AE214A84D0B7740C9394AA8E3C7BFEF1BEEDD0DAFDA0"
                 + "79BF75B2AE4EDB7480C18B9CDFA22E68A06C0685785F5CFB09C2B80B1D05431D"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             byte[] expected_p = (
                 "871018CC42552D14A5A9286AF283F3CFBA959B8835EC2180511D0DCEB8B97928"
                 + "5708C800FC10CB15337A4AC1A48ED31394072015A7A6B525986B49E5E1139737"
                 + "A794833C1AA1E0EAAA7E9D4EFEB1E37A65DBC79F51269BA41E8F0763AA613E29"
                 + "C81C3B977AEEB3D3C3F6FEB25C270CDCB6AEE8CD205928DFB33C44D2F2DBE819"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             byte[] expected_q = "E241EDCF37C1C0E20AADB7B4E8FF7AA8FDE4E75D".HexToByteArray();
             byte[] expected_y = (
                 "089A43F439B924BEF3529D8D6206D1FCA56A55CAF52B41D6CE371EBF07BDA132"
                 + "C8EADC040007FCF4DA06C1F30504EBD8A77D301F5A4702F01F0D2A0707AC1DA3"
                 + "8DD3251883286E12456234DA62EDA0DF5FE2FA07CD5B16F3638BECCA7786312D"
                 + "A7D3594A4BB14E353884DA0E9AECB86E3C9BDB66FCA78EA85E1CC3F2F8BF0963"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             Assert.Equal(expected_g, dsaParameters.G);
             Assert.Equal(expected_p, dsaParameters.P);
@@ -187,7 +190,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801"
                 + "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643"
                 + "0b950005b14f6571c50203010001"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             PublicKey pk = GetTestRsaKey();
 
@@ -203,7 +207,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "ac1da38dd3251883286e12456234da62eda0df5fe2fa07cd5b16f3638becca77"
                 + "86312da7d3594a4bb14e353884da0e9aecb86e3c9bdb66fca78ea85e1cc3f2f8"
                 + "bf0963"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             PublicKey pk = GetTestDsaKey();
 
@@ -262,7 +267,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "EFD518AF90ABA6F85F6563DB47AE214A84D0B7740C9394AA8E3C7BFEF1BEEDD0"
                 + "DAFDA079BF75B2AE4EDB7480C18B9CDFA22E68A06C0685785F5CFB09C2B80B1D"
                 + "05431D"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             PublicKey pk = GetTestDsaKey();
             Assert.Equal(expectedParameters, pk.EncodedParameters.RawData);
@@ -312,7 +318,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "94579DFB4BD40E82DB388F12FEE3D67A748864E162C4252E2AAE9D181F0E1EB6"
                 + "C2AF24B40E50BCDE1C935C49A679B5B6DBCEF9707B280184B82A29CFBFA90505"
                 + "E1E00F714DFDAD5C238329EBC7C54AC8E82784D37EC6430B950005B14F6571C5"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedExponent = new byte[] { 0x01, 0x00, 0x01 };
 

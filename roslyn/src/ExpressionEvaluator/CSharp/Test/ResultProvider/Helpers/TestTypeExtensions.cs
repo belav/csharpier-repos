@@ -38,11 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 );
             }
             return escapeKeywordIdentifiers
-                ? ((IDkmClrFullNameProvider)formatter).GetClrTypeName(
-                    inspectionContext,
-                    clrType,
-                    typeInfo
-                )
+                ? ((IDkmClrFullNameProvider)formatter)
+                    .GetClrTypeName(inspectionContext, clrType, typeInfo)
                 : inspectionContext.GetTypeName(clrType, typeInfo, Formatter.NoFormatSpecifiers);
         }
     }

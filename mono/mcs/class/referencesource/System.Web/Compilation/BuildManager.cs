@@ -3125,9 +3125,8 @@ namespace System.Web.Compilation
             if (result is BuildResultCompileError)
             {
                 // Report the cached error from Callback interface.
-                HttpCompileException compileException = (
-                    (BuildResultCompileError)result
-                ).CompileException;
+                HttpCompileException compileException = ((BuildResultCompileError)result)
+                    .CompileException;
 
                 // But don't report it if we're doing precompilation, as that would cause it to be
                 // reported twice because we always try to compile everything that has failed

@@ -1469,9 +1469,8 @@ namespace MonoTests.System.Data
             al.Clear();
             foreach (DataRow dr in dt.Rows)
                 if (
-                    ((DateTime)dr["ChildDateTime"]).CompareTo(
-                        new DateTime(2005, 12, 03, 17, 06, 30)
-                    ) >= 0
+                    ((DateTime)dr["ChildDateTime"])
+                        .CompareTo(new DateTime(2005, 12, 03, 17, 06, 30)) >= 0
                     || ((DateTime)dr["ChildDateTime"]).CompareTo(new DateTime(1980, 11, 03)) <= 0
                 )
                     al.Add(dr);

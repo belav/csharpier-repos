@@ -335,10 +335,8 @@ namespace System
                     --count;
                     invocationList[count] = GetDelegate(de, maxindex - count);
                 }
-                return ((MulticastDelegate)invocationList[0]).NewMulticastDelegate(
-                    invocationList,
-                    invocationList.Length
-                );
+                return ((MulticastDelegate)invocationList[0])
+                    .NewMulticastDelegate(invocationList, invocationList.Length);
             }
         }
         #endregion

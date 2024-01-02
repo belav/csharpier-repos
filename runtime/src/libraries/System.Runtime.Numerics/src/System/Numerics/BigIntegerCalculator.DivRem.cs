@@ -104,7 +104,8 @@ namespace System.Numerics
                 left.Length <= StackAllocThreshold
                     ? stackalloc uint[StackAllocThreshold]
                     : leftCopyFromPool = ArrayPool<uint>.Shared.Rent(left.Length)
-            ).Slice(0, left.Length);
+            )
+                .Slice(0, left.Length);
             left.CopyTo(leftCopy);
 
             Divide(leftCopy, right, quotient);

@@ -660,9 +660,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return new BoundBinaryOperator(
                 syntax: node,
-                operatorKind: (
-                    hasError ? kind : kind.WithType(BinaryOperatorKind.Dynamic)
-                ).WithOverflowChecksIfApplicable(CheckOverflowAtRuntime),
+                operatorKind: (hasError ? kind : kind.WithType(BinaryOperatorKind.Dynamic))
+                    .WithOverflowChecksIfApplicable(CheckOverflowAtRuntime),
                 left: BindToNaturalType(left, diagnostics),
                 right: BindToNaturalType(right, diagnostics),
                 constantValueOpt: ConstantValue.NotAvailable,
@@ -732,9 +731,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     result.Kind == BoundKind.TypeExpression
-                    && !((ParenthesizedExpressionSyntax)current).Expression.IsKind(
-                        SyntaxKind.ParenthesizedExpression
-                    )
+                    && !((ParenthesizedExpressionSyntax)current)
+                        .Expression.IsKind(SyntaxKind.ParenthesizedExpression)
                 )
                 {
                     Error(diagnostics, ErrorCode.ERR_PossibleBadNegCast, node);
@@ -1832,9 +1830,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     t.IsInterface
                     && (signature.Method.IsAbstract || signature.Method.IsVirtual)
                     && SourceUserDefinedOperatorSymbol.IsSelfConstrainedTypeParameter(
-                        (
-                            definition = signature.Method.OriginalDefinition
-                        ).ReturnType.StrippedType(),
+                        (definition = signature.Method.OriginalDefinition)
+                            .ReturnType.StrippedType(),
                         definition.ContainingType
                     )
                 );
@@ -3721,9 +3718,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // a variable resulting from a... pointer_element_access of the form P[E] [is fixed] if P
                         // is not a fixed size buffer expression, or if the expression is a fixed size buffer
                         // member_access of the form E.I and E is a fixed variable
-                        BoundExpression underlyingExpr = (
-                            (BoundPointerElementAccess)expr
-                        ).Expression;
+                        BoundExpression underlyingExpr = ((BoundPointerElementAccess)expr)
+                            .Expression;
                         if (
                             underlyingExpr is BoundFieldAccess fieldAccess
                             && fieldAccess.FieldSymbol.IsFixedSizeBuffer
@@ -4416,9 +4412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out BoundTypeExpression typeExpression
                 )
                 && !wasUnderscore
-                && ((CSharpParseOptions)node.SyntaxTree.Options).IsFeatureEnabled(
-                    MessageID.IDS_FeaturePatternMatching
-                )
+                && ((CSharpParseOptions)node.SyntaxTree.Options)
+                    .IsFeatureEnabled(MessageID.IDS_FeaturePatternMatching)
             )
             {
                 // it did not bind as a type; try binding as a constant expression pattern
@@ -4508,9 +4503,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 wasUnderscore
-                && ((CSharpParseOptions)node.SyntaxTree.Options).IsFeatureEnabled(
-                    MessageID.IDS_FeatureRecursivePatterns
-                )
+                && ((CSharpParseOptions)node.SyntaxTree.Options)
+                    .IsFeatureEnabled(MessageID.IDS_FeatureRecursivePatterns)
             )
             {
                 diagnostics.Add(

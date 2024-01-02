@@ -112,12 +112,8 @@ namespace System.ServiceModel
             }
             else
             {
-                ((IXmlBinaryWriterInitializer)this.writer).SetOutput(
-                    stream,
-                    XD.Dictionary,
-                    null,
-                    true
-                );
+                ((IXmlBinaryWriterInitializer)this.writer)
+                    .SetOutput(stream, XD.Dictionary, null, true);
             }
             return this.writer;
         }

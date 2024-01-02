@@ -104,9 +104,8 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (implementation.Kind != HandleKind.AssemblyReference) // This check also weeds out nested types. This is intentional.
                     continue;
 
-                RoAssembly redirectedAssembly = (
-                    (AssemblyReferenceHandle)implementation
-                ).ResolveToAssemblyOrExceptionAssembly(GetEcmaManifestModule());
+                RoAssembly redirectedAssembly = ((AssemblyReferenceHandle)implementation)
+                    .ResolveToAssemblyOrExceptionAssembly(GetEcmaManifestModule());
                 ReadOnlySpan<byte> ns = exportedType.Namespace.AsReadOnlySpan(reader);
                 ReadOnlySpan<byte> name = exportedType.Name.AsReadOnlySpan(reader);
                 handler(redirectedAssembly, ns, name);

@@ -5280,7 +5280,8 @@ public unsafe class C
 
             var left = (
                 (MakeRefExpressionSyntax)((RefValueExpressionSyntax)assignment.Left).Expression
-            ).Expression;
+            )
+                .Expression;
             Assert.Equal(SpecialType.System_Int32, model.GetTypeInfo(left).Type.SpecialType);
 
             var right = ((RefExpressionSyntax)assignment.Right).Expression;

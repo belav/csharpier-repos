@@ -46,7 +46,8 @@ namespace System.Net.WebSockets.Client.Tests
                             new ArraySegment<byte>(receiveBuffer),
                             CancellationToken.None
                         )
-                    ).Count
+                    )
+                        .Count
                 );
                 Assert.Equal(42, receiveBuffer[0]);
 

@@ -695,7 +695,8 @@ namespace ILCompiler
                 {
                     FieldDefinitionHandle fieldDefHandle = (
                         (EcmaField)field.GetTypicalFieldDefinition()
-                    ).Handle;
+                    )
+                        .Handle;
                     FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
                         fieldDefHandle
                     );

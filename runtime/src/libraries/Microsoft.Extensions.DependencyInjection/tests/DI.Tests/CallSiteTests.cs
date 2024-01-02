@@ -130,9 +130,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var service1 = Invoke(callSite, scope);
             var service2 = compiledCallSite(scope);
-            var serviceEnumerator = (
-                (IEnumerable)compiledCollectionCallSite(scope)
-            ).GetEnumerator();
+            var serviceEnumerator = ((IEnumerable)compiledCollectionCallSite(scope))
+                .GetEnumerator();
 
             Assert.NotNull(service1);
             Assert.True(compare(service1, service2));

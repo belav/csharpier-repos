@@ -567,9 +567,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             stackGroupNameUsed = true;
 
             // Set Clip Region in rounded to a pixel coordinates
-            RectangleF areaPosition = ((ChartGraphics)graph).GetAbsoluteRectangle(
-                area.PlotAreaPosition.ToRectangleF()
-            );
+            RectangleF areaPosition = ((ChartGraphics)graph)
+                .GetAbsoluteRectangle(area.PlotAreaPosition.ToRectangleF());
             float right = (float)Math.Ceiling(areaPosition.Right);
             float bottom = (float)Math.Ceiling(areaPosition.Bottom);
             areaPosition.X = (float)Math.Floor(areaPosition.X);
@@ -588,7 +587,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ProcessChartType(false, graph, common, area, false, true, seriesToDraw);
 
             // Reset Clip Region
-            ((ChartGraphics)graph).ResetClip();
+            ((ChartGraphics)graph)
+                .ResetClip();
         }
 
         /// <summary>

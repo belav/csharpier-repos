@@ -147,9 +147,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         )]
         private void WriteToStaticPropertyExpressionValue()
         {
-            (
-                StaticPropertyWithPublicConstructor = GetTypeWithNonPublicConstructors()
-            ).RequiresAll();
+            (StaticPropertyWithPublicConstructor = GetTypeWithNonPublicConstructors())
+                .RequiresAll();
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]

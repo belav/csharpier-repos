@@ -484,7 +484,8 @@ namespace System.Runtime.Remoting
                     + "_"
                     + GetNextSeqNum().ToString(CultureInfo.InvariantCulture.NumberFormat)
                     + ".rem"
-                ).ToLower(CultureInfo.InvariantCulture);
+                )
+                    .ToLower(CultureInfo.InvariantCulture);
             }
             else
             {

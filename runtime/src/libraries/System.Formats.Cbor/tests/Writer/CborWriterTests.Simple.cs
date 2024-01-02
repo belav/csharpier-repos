@@ -66,7 +66,8 @@ namespace System.Formats.Cbor.Tests
             // float.NaN may differ across architectures, in particular it's negative on x86 and positive elsewhere
             byte[] expectedEncoding = (
                 "fa" + CborTestHelpers.SingleToInt32Bits(float.NaN).ToString("x4")
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             var writer = new CborWriter(CborConformanceMode.Ctap2Canonical);
             writer.WriteSingle(float.NaN);
             AssertHelper.HexEqual(expectedEncoding, writer.Encode());
@@ -134,7 +135,8 @@ namespace System.Formats.Cbor.Tests
             // double.NaN may differ across architectures, in particular it's negative on x86 and positive elsewhere
             byte[] expectedEncoding = (
                 "fb" + BitConverter.DoubleToInt64Bits(double.NaN).ToString("x8")
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             var writer = new CborWriter(CborConformanceMode.Ctap2Canonical);
             writer.WriteDouble(double.NaN);
             AssertHelper.HexEqual(expectedEncoding, writer.Encode());

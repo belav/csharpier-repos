@@ -577,12 +577,10 @@ namespace System.ServiceModel.Security
             this.ConfigureSessionSecurityProtocolFactory();
             this.sessionProtocolFactory.Open(false, timeoutHelper.RemainingTime());
             SetupSessionTokenAuthenticator();
-            (
-                (IIssuanceSecurityTokenAuthenticator)this.sessionTokenAuthenticator
-            ).IssuedSecurityTokenHandler = this.OnTokenIssued;
-            (
-                (IIssuanceSecurityTokenAuthenticator)this.sessionTokenAuthenticator
-            ).RenewedSecurityTokenHandler = this.OnTokenRenewed;
+            ((IIssuanceSecurityTokenAuthenticator)this.sessionTokenAuthenticator)
+                .IssuedSecurityTokenHandler = this.OnTokenIssued;
+            ((IIssuanceSecurityTokenAuthenticator)this.sessionTokenAuthenticator)
+                .RenewedSecurityTokenHandler = this.OnTokenRenewed;
             this.acceptNewWork = true;
             SecurityUtils.OpenTokenAuthenticatorIfRequired(
                 this.sessionTokenAuthenticator,
@@ -1457,16 +1455,14 @@ namespace System.ServiceModel.Security
                 this.currentSessionToken = sessionToken;
                 this.sessionId = sessionToken.ContextId;
                 this.futureSessionTokens = new List<SecurityContextSecurityToken>(1);
-                ((IAcceptorSecuritySessionProtocol)this.securityProtocol).SetOutgoingSessionToken(
-                    sessionToken
-                );
-                (
-                    (IAcceptorSecuritySessionProtocol)this.securityProtocol
-                ).SetSessionTokenAuthenticator(
-                    this.sessionId,
-                    this.settings.SessionTokenAuthenticator,
-                    this.settings.SessionTokenResolver
-                );
+                ((IAcceptorSecuritySessionProtocol)this.securityProtocol)
+                    .SetOutgoingSessionToken(sessionToken);
+                ((IAcceptorSecuritySessionProtocol)this.securityProtocol)
+                    .SetSessionTokenAuthenticator(
+                        this.sessionId,
+                        this.settings.SessionTokenAuthenticator,
+                        this.settings.SessionTokenResolver
+                    );
                 this.settingsLifetimeManager = settingsLifetimeManager;
                 this.receiveLock = new ThreadNeutralSemaphore(1);
             }
@@ -1501,9 +1497,8 @@ namespace System.ServiceModel.Security
                 this.securityProtocol.Open(timeout);
                 if (this.CanDoSecurityCorrelation)
                 {
-                    (
-                        (IAcceptorSecuritySessionProtocol)this.securityProtocol
-                    ).ReturnCorrelationState = true;
+                    ((IAcceptorSecuritySessionProtocol)this.securityProtocol)
+                        .ReturnCorrelationState = true;
                 }
                 lock (ThisLock)
                 {
@@ -1796,9 +1791,8 @@ namespace System.ServiceModel.Security
                                 );
                                 this.currentSessionToken = futureSessionTokens[i];
                                 futureSessionTokens.RemoveAt(i);
-                                (
-                                    (IAcceptorSecuritySessionProtocol)this.securityProtocol
-                                ).SetOutgoingSessionToken(this.currentSessionToken);
+                                ((IAcceptorSecuritySessionProtocol)this.securityProtocol)
+                                    .SetOutgoingSessionToken(this.currentSessionToken);
                                 changedCurrentSessionToken = true;
                                 break;
                             }
@@ -6018,19 +6012,13 @@ namespace System.ServiceModel.Security
                         IAsyncResult result = null;
                         if (faultContext is RequestContext)
                         {
-                            result = ((RequestContext)(object)faultContext).BeginReply(
-                                message,
-                                sendCallback,
-                                this
-                            );
+                            result = ((RequestContext)(object)faultContext)
+                                .BeginReply(message, sendCallback, this);
                         }
                         else
                         {
-                            result = ((IOutputChannel)faultContext).BeginSend(
-                                message,
-                                sendCallback,
-                                this
-                            );
+                            result = ((IOutputChannel)faultContext)
+                                .BeginSend(message, sendCallback, this);
                         }
                         throwing = false;
                         return result;

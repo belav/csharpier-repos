@@ -106,10 +106,8 @@ namespace Mono.CSharp
         public virtual void AddPartial(TypeDefinition next_part)
         {
             MemberCore mc;
-            (PartialContainer ?? this).defined_names.TryGetValue(
-                next_part.MemberName.Basename,
-                out mc
-            );
+            (PartialContainer ?? this)
+                .defined_names.TryGetValue(next_part.MemberName.Basename, out mc);
 
             AddPartial(next_part, mc as TypeDefinition);
         }

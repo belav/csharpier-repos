@@ -748,11 +748,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
                 () =>
-                    ((ParallelQuery<int>)null).GroupBy(
-                        i => i,
-                        i => i,
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .GroupBy(i => i, i => i, EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "keySelector",
@@ -787,11 +784,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
                 () =>
-                    ((ParallelQuery<int>)null).GroupBy(
-                        i => i,
-                        (i, j) => i,
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .GroupBy(i => i, (i, j) => i, EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "keySelector",
@@ -840,12 +834,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
                 () =>
-                    ((ParallelQuery<int>)null).GroupBy(
-                        i => i,
-                        i => i,
-                        (i, j) => i,
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .GroupBy(i => i, i => i, (i, j) => i, EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "keySelector",

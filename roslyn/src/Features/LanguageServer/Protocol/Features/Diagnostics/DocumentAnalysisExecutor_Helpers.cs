@@ -392,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     await analyzer
                         .AnalyzeProjectAsync(project, cancellationToken)
                         .ConfigureAwait(false)
-                ).NullToEmpty();
+                )
+                    .NullToEmpty();
 #if DEBUG
                 // since all ProjectDiagnosticAnalyzers are from internal users, we only do debug check. also this can be expensive at runtime
                 // since it requires await. if we find any offender through NFW, we should be able to fix those since all those should

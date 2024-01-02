@@ -1860,9 +1860,8 @@ namespace System.Xml.Serialization
                         if (ext != null)
                             exqname = ext.BaseTypeName;
                         else
-                            exqname = (
-                                (XmlSchemaComplexContentRestriction)sct.ContentModel.Content
-                            ).BaseTypeName;
+                            exqname = ((XmlSchemaComplexContentRestriction)sct.ContentModel.Content)
+                                .BaseTypeName;
                         if (exqname == qname)
                             ImportType(
                                 new XmlQualifiedName(sct.Name, schema.TargetNamespace),

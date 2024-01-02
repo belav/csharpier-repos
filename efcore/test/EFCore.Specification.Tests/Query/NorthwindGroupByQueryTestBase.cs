@@ -1601,7 +1601,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                     from o in ss.Set<Order>()
                     join c in ss.Set<Customer>() on o.CustomerID equals c.CustomerID
                     group o by c.CustomerID
-                ).Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
+                )
+                    .Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
             e => e.Key
         );
 
@@ -1635,7 +1636,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         .Take(50)
                         on o.CustomerID equals c.CustomerID
                     group o by c.CustomerID
-                ).Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
+                )
+                    .Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
             e => e.Key
         );
 
@@ -1774,7 +1776,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                     from o1 in ss.Set<Order>().Where(o => o.OrderID < 10400)
                     join o2 in ss.Set<Order>() on o1.OrderID equals o2.OrderID
                     group o2 by o1.CustomerID
-                ).Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
+                )
+                    .Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
             e => e.Key
         );
 
@@ -2626,11 +2629,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                     .Select(g => new
                     {
                         g.Key,
-                        Count = (
-                            from c in ss.Set<Customer>()
-                            where c.CustomerID == g.Key
-                            select c
-                        ).Count()
+                        Count = (from c in ss.Set<Customer>() where c.CustomerID == g.Key select c)
+                            .Count()
                     }),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
@@ -2794,7 +2794,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                             select o
                     )
             )
-        ).Message;
+        )
+            .Message;
 
         Assert.Contains(
             CoreStrings.TranslationFailedWithDetails("", CoreStrings.QuerySelectContainsGrouping)[
@@ -3033,13 +3034,15 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                     from o in ss.Set<Order>()
                     group o by new { o.CustomerID } into g
                     select g.Where(e => e.OrderID < 10300).Count()
-                ).LongCount(),
+                )
+                    .LongCount(),
             ss =>
                 (
                     from o in ss.Set<Order>()
                     group o by new { o.CustomerID } into g
                     select g.Where(e => e.OrderID < 10300).Count()
-                ).LongCountAsync(default)
+                )
+                    .LongCountAsync(default)
         );
 
     [ConditionalTheory]
@@ -3998,7 +4001,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         where c.CustomerID.Length < grouping.Min(x => x.OrderID / 100)
                         orderby c.CustomerID
                         select new { c.CustomerID, c.City }
-                    ).ToList()
+                    )
+                        .ToList()
                 },
             elementSorter: e => e.Sum,
             elementAsserter: (e, a) =>

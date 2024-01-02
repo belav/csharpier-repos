@@ -104,7 +104,8 @@ End Module";
             );
             var tags = (
                 await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken)
-            ).SelectAsArray(tag => tag.Span.Span.ToTextSpan());
+            )
+                .SelectAsArray(tag => tag.Span.Span.ToTextSpan());
             AssertEx.SetEqual(spans, tags);
 
             await TestServices.Input.SendAsync(
@@ -176,7 +177,8 @@ End Module";
             );
             var tags = (
                 await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken)
-            ).SelectAsArray(tag => tag.Span.Span.ToTextSpan());
+            )
+                .SelectAsArray(tag => tag.Span.Span.ToTextSpan());
             AssertEx.SetEqual(spans, tags);
         }
     }

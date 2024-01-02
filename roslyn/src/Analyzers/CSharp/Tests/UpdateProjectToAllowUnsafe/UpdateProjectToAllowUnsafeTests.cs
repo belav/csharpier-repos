@@ -40,9 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateProjectToAllowUns
                     operations
                 );
                 Assert.True(
-                    (
-                        (CSharpCompilationOptions)newSolution.Projects.Single().CompilationOptions!
-                    ).AllowUnsafe
+                    ((CSharpCompilationOptions)newSolution.Projects.Single().CompilationOptions!)
+                        .AllowUnsafe
                 );
             }
 

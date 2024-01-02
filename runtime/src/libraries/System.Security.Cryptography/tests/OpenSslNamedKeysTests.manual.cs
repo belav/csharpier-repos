@@ -54,7 +54,8 @@ namespace System.Security.Cryptography.Tests
             + "92C15ABA2A6FA9F111050E8175A0D58EAB219970BC3B02404DBF36E5DCBF027AD4ED572E6F5F8383"
             + "C08CD5838C0CAE16FA58EE5C5A388B287F9C58647D58609B03912A10D0C772A3259D39651CD1EEB3"
             + "A20C5F9AE58E18C0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         // PKCS#1 format
         private static readonly byte[] s_rsaPubKey = (
@@ -62,7 +63,8 @@ namespace System.Security.Cryptography.Tests
             + "2279F34A426D62F59D6C1056E36DC9F6EEA9AEB1B31F8122F583EE9CAE2A86A47144905DF05441B0"
             + "A5F29E03C5AC1888D93744D89638D83AC37774B339E4AFB349C714B12238B0F81A71380F051C585C"
             + "B27434FA544BDAC679E1E16581D0E90203010001"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         [ConditionalFact(
             typeof(PlatformDetection),

@@ -97,9 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                 if (
                     enclosingMethodBlock != null
-                    && ((MethodDeclarationSyntax)enclosingMethodBlock).Modifiers.Any(
-                        SyntaxKind.AsyncKeyword
-                    )
+                    && ((MethodDeclarationSyntax)enclosingMethodBlock)
+                        .Modifiers.Any(SyntaxKind.AsyncKeyword)
                 )
                 {
                     return token;

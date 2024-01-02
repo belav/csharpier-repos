@@ -214,7 +214,8 @@ namespace System.Text.Json.Serialization.Tests
                     await Serializer.DeserializeWrapper<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
                         json
                     )
-                ).MyString
+                )
+                    .MyString
             );
             Assert.Equal(
                 "Hello",
@@ -223,7 +224,8 @@ namespace System.Text.Json.Serialization.Tests
                         json,
                         options
                     )
-                ).MyString
+                )
+                    .MyString
             );
         }
 
@@ -259,7 +261,8 @@ namespace System.Text.Json.Serialization.Tests
                     await Serializer.DeserializeWrapper<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
                         json
                     )
-                ).MyString
+                )
+                    .MyString
             );
             Assert.Equal(
                 "Hello",
@@ -268,7 +271,8 @@ namespace System.Text.Json.Serialization.Tests
                         json,
                         options
                     )
-                ).MyString
+                )
+                    .MyString
             );
         }
 

@@ -1032,9 +1032,8 @@ namespace System.Text.Json.SourceGeneration
                 )
                 {
                     collectionType = CollectionType.ImmutableDictionary;
-                    ImmutableArray<ITypeSymbol> genericArgs = (
-                        (INamedTypeSymbol)type
-                    ).TypeArguments;
+                    ImmutableArray<ITypeSymbol> genericArgs = ((INamedTypeSymbol)type)
+                        .TypeArguments;
                     keyType = genericArgs[0];
                     valueType = genericArgs[1];
                 }

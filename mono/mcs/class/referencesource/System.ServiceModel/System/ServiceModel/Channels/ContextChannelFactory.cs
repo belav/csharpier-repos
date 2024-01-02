@@ -64,9 +64,8 @@ namespace System.ServiceModel.Channels
                     (object)
                         new ContextOutputChannel(
                             this,
-                            (
-                                (IChannelFactory<IOutputChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IOutputChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             this.contextExchangeMechanism,
                             this.callbackAddress,
                             this.contextManagementEnabled
@@ -78,9 +77,8 @@ namespace System.ServiceModel.Channels
                     (object)
                         new ContextOutputSessionChannel(
                             this,
-                            (
-                                (IChannelFactory<IOutputSessionChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IOutputSessionChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             this.contextExchangeMechanism,
                             this.callbackAddress,
                             this.contextManagementEnabled
@@ -92,9 +90,8 @@ namespace System.ServiceModel.Channels
                     (object)
                         new ContextRequestChannel(
                             this,
-                            (
-                                (IChannelFactory<IRequestChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IRequestChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             this.contextExchangeMechanism,
                             this.callbackAddress,
                             this.contextManagementEnabled
@@ -106,9 +103,8 @@ namespace System.ServiceModel.Channels
                     (object)
                         new ContextRequestSessionChannel(
                             this,
-                            (
-                                (IChannelFactory<IRequestSessionChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IRequestSessionChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             this.contextExchangeMechanism,
                             this.callbackAddress,
                             this.contextManagementEnabled
@@ -120,9 +116,8 @@ namespace System.ServiceModel.Channels
                     (object)
                         new ContextDuplexSessionChannel(
                             this,
-                            (
-                                (IChannelFactory<IDuplexSessionChannel>)this.InnerChannelFactory
-                            ).CreateChannel(address, via),
+                            ((IChannelFactory<IDuplexSessionChannel>)this.InnerChannelFactory)
+                                .CreateChannel(address, via),
                             this.contextExchangeMechanism,
                             via,
                             this.callbackAddress,

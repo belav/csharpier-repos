@@ -610,10 +610,11 @@ namespace System.ComponentModel.Design.Serialization
                     );
                     FieldInfo field = null;
                     if (fieldHolder is Type) // static field
-                        field = ((Type)fieldHolder).GetField(
-                            fieldRef.FieldName,
-                            BindingFlags.GetField | BindingFlags.Public | BindingFlags.Static
-                        );
+                        field = ((Type)fieldHolder)
+                            .GetField(
+                                fieldRef.FieldName,
+                                BindingFlags.GetField | BindingFlags.Public | BindingFlags.Static
+                            );
                     else // instance field
                         field = fieldHolder
                             .GetType()
@@ -648,10 +649,11 @@ namespace System.ComponentModel.Design.Serialization
                     bool found = false;
                     if (target is Type)
                     {
-                        PropertyInfo property = ((Type)target).GetProperty(
-                            propRef.PropertyName,
-                            BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Static
-                        );
+                        PropertyInfo property = ((Type)target)
+                            .GetProperty(
+                                propRef.PropertyName,
+                                BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Static
+                            );
                         if (property != null)
                         {
                             deserialized = property.GetValue(null, null);
@@ -660,10 +662,11 @@ namespace System.ComponentModel.Design.Serialization
 
                         // NRefactory seems to produce PropertyReferences to reference some fields and enums
                         //
-                        FieldInfo field = ((Type)target).GetField(
-                            propRef.PropertyName,
-                            BindingFlags.GetField | BindingFlags.Public | BindingFlags.Static
-                        );
+                        FieldInfo field = ((Type)target)
+                            .GetField(
+                                propRef.PropertyName,
+                                BindingFlags.GetField | BindingFlags.Public | BindingFlags.Static
+                            );
                         if (field != null)
                         {
                             deserialized = field.GetValue(null);
@@ -1333,10 +1336,13 @@ namespace System.ComponentModel.Design.Serialization
                     else
                     {
                         if (fieldHolder is Type) // static field
-                            field = ((Type)fieldHolder).GetField(
-                                fieldRef.FieldName,
-                                BindingFlags.GetField | BindingFlags.Public | BindingFlags.Static
-                            );
+                            field = ((Type)fieldHolder)
+                                .GetField(
+                                    fieldRef.FieldName,
+                                    BindingFlags.GetField
+                                        | BindingFlags.Public
+                                        | BindingFlags.Static
+                                );
                         else // instance field
                             field = fieldHolder
                                 .GetType()

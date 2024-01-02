@@ -2370,9 +2370,8 @@ namespace System.ServiceModel.Security
                     }
                     else if (requestorEntropyToken is WrappedKeySecurityToken)
                     {
-                        requestorEntropy = (
-                            (WrappedKeySecurityToken)requestorEntropyToken
-                        ).GetWrappedKey();
+                        requestorEntropy = ((WrappedKeySecurityToken)requestorEntropyToken)
+                            .GetWrappedKey();
                     }
                     else
                     {

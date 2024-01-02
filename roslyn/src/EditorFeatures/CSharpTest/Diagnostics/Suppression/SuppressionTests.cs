@@ -522,7 +522,8 @@ class Class
                             CodeActionOptions.DefaultProvider,
                             CancellationToken.None
                         )
-                    ).SelectMany(fixCollection => fixCollection.Fixes);
+                    )
+                        .SelectMany(fixCollection => fixCollection.Fixes);
 
                     var cs0219Fixes = allFixes
                         .Where(fix => fix.PrimaryDiagnostic.Id == "CS0219")

@@ -1912,9 +1912,8 @@ namespace System.Net
                         {
                             if (m_Aborted)
                             {
-                                ((ICloseEx)stream).CloseEx(
-                                    CloseExState.Abort | CloseExState.Silent
-                                );
+                                ((ICloseEx)stream)
+                                    .CloseEx(CloseExState.Abort | CloseExState.Silent);
                                 break;
                             }
                             m_Stream = stream;
@@ -2680,9 +2679,8 @@ namespace System.Net
                     CacheProtocol.ResponseStreamLength,
                     RequestUri,
                     UsePassive ? FtpStatusCode.DataAlreadyOpen : FtpStatusCode.OpeningData,
-                    (
-                        UsePassive ? FtpStatusCode.DataAlreadyOpen : FtpStatusCode.OpeningData
-                    ).ToString(),
+                    (UsePassive ? FtpStatusCode.DataAlreadyOpen : FtpStatusCode.OpeningData)
+                        .ToString(),
                     ctx.CacheEntry.LastModifiedUtc == DateTime.MinValue
                         ? DateTime.Now
                         : ctx.CacheEntry.LastModifiedUtc.ToLocalTime(),

@@ -33,9 +33,8 @@ namespace System.Text.Json.Serialization.Converters
             ref ReadStack state
         )
         {
-            ((List<Tuple<TKey, TValue>>)state.Current.ReturnValue!).Add(
-                new Tuple<TKey, TValue>(key, value)
-            );
+            ((List<Tuple<TKey, TValue>>)state.Current.ReturnValue!)
+                .Add(new Tuple<TKey, TValue>(key, value));
         }
 
         internal override bool CanHaveMetadata => false;

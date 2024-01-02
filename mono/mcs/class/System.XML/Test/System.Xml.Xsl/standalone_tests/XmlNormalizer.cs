@@ -302,7 +302,8 @@ namespace XmlNormalizer
                 string descr = (
                     pi.GetCustomAttributes(typeof(DescriptionAttribute), true)[0]
                     as DescriptionAttribute
-                ).Description;
+                )
+                    .Description;
                 h[option] = descr;
             }
             return h;

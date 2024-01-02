@@ -118,9 +118,8 @@ namespace System.Data.Common.Utils
             Debug.Assert(null != storeProviderCommand);
 
             storeProviderCommand.CommandTimeout = entityCommand.CommandTimeout;
-            storeProviderCommand.Connection = (
-                (EntityConnection)entityCommand.Connection
-            ).StoreConnection;
+            storeProviderCommand.Connection = ((EntityConnection)entityCommand.Connection)
+                .StoreConnection;
             storeProviderCommand.Transaction =
                 (null != entityTransaction) ? entityTransaction.StoreTransaction : null;
             storeProviderCommand.UpdatedRowSource = entityCommand.UpdatedRowSource;

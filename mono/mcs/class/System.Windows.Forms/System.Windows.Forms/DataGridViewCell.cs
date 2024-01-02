@@ -632,9 +632,8 @@ namespace System.Windows.Forms
             if (IsInEditMode)
             {
                 if (DataGridView.EditingControl != null)
-                    return (
-                        DataGridView.EditingControl as IDataGridViewEditingControl
-                    ).GetEditingControlFormattedValue(context);
+                    return (DataGridView.EditingControl as IDataGridViewEditingControl)
+                        .GetEditingControlFormattedValue(context);
                 else
                     return (this as IDataGridViewEditingCell).GetEditingCellFormattedValue(context);
             }

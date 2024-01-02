@@ -2432,7 +2432,8 @@ ORDER BY [t].[OrderDate], [t].[CustomerID]
                             async
                         )
                 )
-            ).Message
+            )
+                .Message
         );
 
         AssertSql();

@@ -43,10 +43,8 @@ namespace System.Web.Configuration
         internal static string GetErrorText(HttpContext context)
         {
             bool dontShowSensitiveInfo = context.IsCustomErrorEnabled;
-            return (new UrlAuthFailedErrorFormatter()).GetErrorMessage(
-                context,
-                dontShowSensitiveInfo
-            );
+            return (new UrlAuthFailedErrorFormatter())
+                .GetErrorMessage(context, dontShowSensitiveInfo);
         }
 
         protected override string ErrorTitle

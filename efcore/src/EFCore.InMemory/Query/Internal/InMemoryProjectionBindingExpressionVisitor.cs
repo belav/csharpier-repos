@@ -327,9 +327,8 @@ public class InMemoryProjectionBindingExpressionVisitor : ExpressionVisitor
             )
             {
                 entityProjectionExpression = (EntityProjectionExpression)
-                    (
-                        (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
-                    ).GetProjection(projectionBindingExpression);
+                    ((InMemoryQueryExpression)projectionBindingExpression.QueryExpression)
+                        .GetProjection(projectionBindingExpression);
             }
             else
             {

@@ -54,7 +54,6 @@ public class DestinationStructMapping : AutoMapperSpecBase
 
     [Fact]
     public void Should_work_with_object() =>
-        (
-            (Destination)Mapper.Map(new Source { Number = 23 }, typeof(Source), typeof(Destination))
-        ).Number.ShouldBe(23);
+        ((Destination)Mapper.Map(new Source { Number = 23 }, typeof(Source), typeof(Destination)))
+            .Number.ShouldBe(23);
 }

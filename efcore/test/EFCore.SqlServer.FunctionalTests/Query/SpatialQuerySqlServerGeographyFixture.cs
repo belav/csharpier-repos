@@ -51,7 +51,8 @@ public class SpatialQuerySqlServerGeographyFixture : SpatialQuerySqlServerFixtur
                                     CreateGeometryServices().CreateGeometryFactory()
                                 )
                             )
-                ).WithStoreTypeAndSize("geography", null)
+                )
+                    .WithStoreTypeAndSize("geography", null)
                 : base.FindMapping(mappingInfo);
     }
 }

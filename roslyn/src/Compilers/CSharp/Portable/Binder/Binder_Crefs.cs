@@ -1216,16 +1216,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (symbol.Kind == SymbolKind.Method)
                 {
-                    symbol = ((MethodSymbol)symbol).Construct(
-                        typeArgumentsWithAnnotations.ToImmutableAndFree()
-                    );
+                    symbol = ((MethodSymbol)symbol)
+                        .Construct(typeArgumentsWithAnnotations.ToImmutableAndFree());
                 }
                 else
                 {
                     Debug.Assert(symbol is NamedTypeSymbol);
-                    symbol = ((NamedTypeSymbol)symbol).Construct(
-                        typeArgumentsWithAnnotations.ToImmutableAndFree()
-                    );
+                    symbol = ((NamedTypeSymbol)symbol)
+                        .Construct(typeArgumentsWithAnnotations.ToImmutableAndFree());
                 }
             }
 

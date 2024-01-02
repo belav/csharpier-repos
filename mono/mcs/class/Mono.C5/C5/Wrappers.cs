@@ -235,9 +235,8 @@ namespace C5
         {
             add
             {
-                (
-                    eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue))
-                ).CollectionChanged += value;
+                (eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue)))
+                    .CollectionChanged += value;
             }
             remove
             {
@@ -253,9 +252,8 @@ namespace C5
         {
             add
             {
-                (
-                    eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue))
-                ).CollectionCleared += value;
+                (eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue)))
+                    .CollectionCleared += value;
             }
             remove
             {
@@ -271,9 +269,8 @@ namespace C5
         {
             add
             {
-                (
-                    eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue))
-                ).ItemsAdded += value;
+                (eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue)))
+                    .ItemsAdded += value;
             }
             remove
             {
@@ -289,9 +286,8 @@ namespace C5
         {
             add
             {
-                (
-                    eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue))
-                ).ItemInserted += value;
+                (eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue)))
+                    .ItemInserted += value;
             }
             remove
             {
@@ -307,9 +303,8 @@ namespace C5
         {
             add
             {
-                (
-                    eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue))
-                ).ItemsRemoved += value;
+                (eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue)))
+                    .ItemsRemoved += value;
             }
             remove
             {
@@ -325,9 +320,8 @@ namespace C5
         {
             add
             {
-                (
-                    eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue))
-                ).ItemRemovedAt += value;
+                (eventBlock ?? (eventBlock = new ProxyEventBlock<T>(this, collectionvalue)))
+                    .ItemRemovedAt += value;
             }
             remove
             {

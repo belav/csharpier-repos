@@ -157,15 +157,17 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                             (
                                 simpleNameOrMemberAccessExpression
                                 as ConditionalAccessExpressionSyntax
-                            )?.WhenNotNull as InvocationExpressionSyntax
-                        )?.Expression as MemberBindingExpressionSyntax
-                    )?.Name == simpleName
+                            )
+                                ?.WhenNotNull as InvocationExpressionSyntax
+                        )
+                            ?.Expression as MemberBindingExpressionSyntax
+                    )
+                        ?.Name == simpleName
                 )
                 {
                     invocationExpressionOpt = (InvocationExpressionSyntax)
-                        (
-                            (ConditionalAccessExpressionSyntax)simpleNameOrMemberAccessExpression
-                        ).WhenNotNull;
+                        ((ConditionalAccessExpressionSyntax)simpleNameOrMemberAccessExpression)
+                            .WhenNotNull;
                     isInConditionalAccessExpression = inConditionalMemberAccess;
                     return !invocationExpressionOpt.ArgumentList.CloseParenToken.IsMissing;
                 }

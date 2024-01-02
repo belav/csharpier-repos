@@ -603,9 +603,8 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        SecurityToken wrappingToken = (
-                            signingToken as WrappedKeySecurityToken
-                        ).WrappingToken;
+                        SecurityToken wrappingToken = (signingToken as WrappedKeySecurityToken)
+                            .WrappingToken;
                         ReadOnlyCollection<IAuthorizationPolicy> wrappingTokenPolicies =
                             this.initiatorTokenAuthenticator.ValidateToken(wrappingToken);
                         DoIdentityCheckAndAttachInitiatorSecurityProperty(

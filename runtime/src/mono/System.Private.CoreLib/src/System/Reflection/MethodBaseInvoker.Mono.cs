@@ -31,11 +31,8 @@ namespace System.Reflection
 
         internal unsafe object? InterpretedInvoke_Constructor(object? obj, IntPtr* args)
         {
-            object? o = ((RuntimeConstructorInfo)_method).InternalInvoke(
-                obj,
-                args,
-                out Exception? exc
-            );
+            object? o = ((RuntimeConstructorInfo)_method)
+                .InternalInvoke(obj, args, out Exception? exc);
 
             if (exc != null)
                 throw exc;

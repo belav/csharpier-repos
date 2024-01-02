@@ -675,9 +675,8 @@ namespace System.Collections.Frozen
             KeyValuePair<TKey, TValue>
         >.GetEnumerator() =>
             Count == 0
-                ? (
-                    (IList<KeyValuePair<TKey, TValue>>)Array.Empty<KeyValuePair<TKey, TValue>>()
-                ).GetEnumerator()
+                ? ((IList<KeyValuePair<TKey, TValue>>)Array.Empty<KeyValuePair<TKey, TValue>>())
+                    .GetEnumerator()
                 : GetEnumerator();
 
         /// <inheritdoc />

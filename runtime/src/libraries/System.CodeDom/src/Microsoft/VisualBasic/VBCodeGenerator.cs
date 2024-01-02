@@ -419,11 +419,12 @@ namespace Microsoft.VisualBasic
                 OutputIdentifier(arg.Name);
                 Output.Write(":=");
             }
-            ((ICodeGenerator)this).GenerateCodeFromExpression(
-                arg.Value,
-                ((ExposedTabStringIndentedTextWriter)Output).InnerWriter,
-                Options
-            );
+            ((ICodeGenerator)this)
+                .GenerateCodeFromExpression(
+                    arg.Value,
+                    ((ExposedTabStringIndentedTextWriter)Output).InnerWriter,
+                    Options
+                );
         }
 
         private void OutputAttributes(CodeAttributeDeclarationCollection attributes, bool inLine)

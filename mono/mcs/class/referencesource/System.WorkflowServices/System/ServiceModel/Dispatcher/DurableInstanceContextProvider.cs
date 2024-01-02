@@ -32,7 +32,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 serviceHostBase.ServiceThrottle.MaxConcurrentInstances = (
                     new ServiceThrottlingBehavior()
-                ).MaxConcurrentInstances;
+                )
+                    .MaxConcurrentInstances;
             }
             this.contextCache = new ContextCache();
             this.isPerCall = isPerCall;

@@ -389,9 +389,8 @@ namespace System.ServiceModel.Description
             {
                 if (o.@Metadata is global::System.Web.Services.Description.ServiceDescription)
                 {
-                    ((global::System.Web.Services.Description.ServiceDescription)o.@Metadata).Write(
-                        this.Writer
-                    );
+                    ((global::System.Web.Services.Description.ServiceDescription)o.@Metadata)
+                        .Write(this.Writer);
                 }
                 else if (o.@Metadata is global::System.Xml.Schema.XmlSchema)
                 {

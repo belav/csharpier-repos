@@ -1076,7 +1076,8 @@ namespace System.Web.UI.Design.MobileControls
                 Debug.Assert(_control is DeviceSpecific);
 
                 // Clear the choices if it is a DeviceSpecific control.
-                ((DeviceSpecific)_control).Choices.Clear();
+                ((DeviceSpecific)_control)
+                    .Choices.Clear();
             }
 
             if (null != CurrentChoice)

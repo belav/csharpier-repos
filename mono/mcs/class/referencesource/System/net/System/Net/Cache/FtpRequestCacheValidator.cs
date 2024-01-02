@@ -247,9 +247,8 @@ namespace System.Net.Cache
                     Logging.RequestCache,
                     SR.GetString(
                         SR.net_log_cache_no_max_age_use_default,
-                        ((int)(UnspecifiedMaxAge.TotalSeconds)).ToString(
-                            NumberFormatInfo.InvariantInfo
-                        )
+                        ((int)(UnspecifiedMaxAge.TotalSeconds))
+                            .ToString(NumberFormatInfo.InvariantInfo)
                     )
                 );
             if (UnspecifiedMaxAge >= age)
@@ -663,9 +662,8 @@ namespace System.Net.Cache
                         Logging.RequestCache,
                         SR.GetString(
                             SR.net_log_cache_update_not_supported_for_ftp_restart,
-                            ((FtpWebRequest)Request).ContentOffset.ToString(
-                                CultureInfo.InvariantCulture
-                            )
+                            ((FtpWebRequest)Request)
+                                .ContentOffset.ToString(CultureInfo.InvariantCulture)
                         )
                     );
                 if (

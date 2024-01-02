@@ -66,7 +66,8 @@ namespace System.Globalization
                     59,
                     999
                 )
-            ).Ticks + 9999
+            )
+                .Ticks + 9999
         );
 
         public override DateTime MinSupportedDateTime

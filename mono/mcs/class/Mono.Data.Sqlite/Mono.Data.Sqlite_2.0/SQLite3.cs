@@ -361,9 +361,9 @@ namespace Mono.Data.Sqlite
                             try
                             {
                                 ISQLiteSchemaExtensions ext =
-                                    ((IServiceProvider)SqliteFactory.Instance).GetService(
-                                        typeof(ISQLiteSchemaExtensions)
-                                    ) as ISQLiteSchemaExtensions;
+                                    ((IServiceProvider)SqliteFactory.Instance)
+                                        .GetService(typeof(ISQLiteSchemaExtensions))
+                                    as ISQLiteSchemaExtensions;
 
                                 if (ext != null)
                                     ext.BuildTempSchema(cnn);

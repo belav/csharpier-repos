@@ -260,10 +260,8 @@ namespace System.Activities.Runtime
             {
                 if (this.completedInstance.Activity == null)
                 {
-                    ((ActivityInstanceMap.IActivityReference)this.completedInstance).Load(
-                        activity,
-                        instanceMap
-                    );
+                    ((ActivityInstanceMap.IActivityReference)this.completedInstance)
+                        .Load(activity, instanceMap);
                 }
             }
         }

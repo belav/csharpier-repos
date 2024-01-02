@@ -59,9 +59,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             string language,
             CancellationToken cancellationToken
         ) =>
-            (
-                (RemoteOptionsProvider<CleanCodeGenerationOptions>)GetCallback(callbackId)
-            ).GetOptionsAsync(language, cancellationToken);
+            ((RemoteOptionsProvider<CleanCodeGenerationOptions>)GetCallback(callbackId))
+                .GetOptionsAsync(language, cancellationToken);
     }
 
     [DataContract]

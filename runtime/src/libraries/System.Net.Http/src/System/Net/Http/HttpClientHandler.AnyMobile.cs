@@ -526,7 +526,8 @@ namespace System.Net.Http
                     return (
                         _socketHandler!.SslOptions.RemoteCertificateValidationCallback?.Target
                         as ConnectHelper.CertificateCallbackMapper
-                    )?.FromHttpClientHandler;
+                    )
+                        ?.FromHttpClientHandler;
                 }
             }
             set

@@ -444,9 +444,8 @@ namespace System.Workflow.ComponentModel.Design
                         current != activeDesigner.Activity
                         && activeDesigner is CompositeActivityDesigner
                     )
-                        nextObject = (
-                            (CompositeActivityDesigner)activeDesigner
-                        ).GetNextSelectableObject(current, direction);
+                        nextObject = ((CompositeActivityDesigner)activeDesigner)
+                            .GetNextSelectableObject(current, direction);
                 }
                 else
                 {
@@ -749,10 +748,8 @@ namespace System.Workflow.ComponentModel.Design
                         PaintEventArgs paintEventArgs = new PaintEventArgs(e.Graphics, e.ViewPort)
                     )
                     {
-                        ((IWorkflowDesignerMessageSink)activityDesigner).OnPaint(
-                            paintEventArgs,
-                            e.ViewPort
-                        );
+                        ((IWorkflowDesignerMessageSink)activityDesigner)
+                            .OnPaint(paintEventArgs, e.ViewPort);
                     }
                 }
                 else

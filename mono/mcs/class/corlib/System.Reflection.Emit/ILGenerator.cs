@@ -1364,11 +1364,8 @@ namespace System.Reflection.Emit
                     var tokenInfo = new ILTokenInfo()
                     {
                         code_pos = pos,
-                        member = ((ModuleBuilder)module).ResolveOrGetRegisteredToken(
-                            token,
-                            null,
-                            null
-                        )
+                        member = ((ModuleBuilder)module)
+                            .ResolveOrGetRegisteredToken(token, null, null)
                     };
                     tokenInfos.Add(tokenInfo);
                 }

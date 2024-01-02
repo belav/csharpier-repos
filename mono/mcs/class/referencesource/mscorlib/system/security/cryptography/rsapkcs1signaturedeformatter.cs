@@ -87,11 +87,8 @@ namespace System.Security.Cryptography
                 // This path is kept around for desktop compat: in case someone is using this with a hash algorithm that's known to GetAlgIdFromOid but
                 // not from OidToHashAlgorithmName.
                 int calgHash = X509Utils.GetAlgIdFromOid(_strOID, OidGroup.HashAlgorithm);
-                return ((RSACryptoServiceProvider)_rsaKey).VerifyHash(
-                    rgbHash,
-                    calgHash,
-                    rgbSignature
-                );
+                return ((RSACryptoServiceProvider)_rsaKey)
+                    .VerifyHash(rgbHash, calgHash, rgbSignature);
             }
             else if (OverridesVerifyHash)
             {

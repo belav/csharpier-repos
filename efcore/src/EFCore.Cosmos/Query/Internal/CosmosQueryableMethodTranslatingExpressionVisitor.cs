@@ -894,9 +894,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
         var translation = TranslateLambdaExpression(source, keySelector);
         if (translation != null)
         {
-            ((SelectExpression)source.QueryExpression).ApplyOrdering(
-                new OrderingExpression(translation, ascending)
-            );
+            ((SelectExpression)source.QueryExpression)
+                .ApplyOrdering(new OrderingExpression(translation, ascending));
 
             return source;
         }
@@ -1146,9 +1145,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
         var translation = TranslateLambdaExpression(source, keySelector);
         if (translation != null)
         {
-            ((SelectExpression)source.QueryExpression).AppendOrdering(
-                new OrderingExpression(translation, ascending)
-            );
+            ((SelectExpression)source.QueryExpression)
+                .AppendOrdering(new OrderingExpression(translation, ascending));
 
             return source;
         }
@@ -1192,10 +1190,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
             var partitionKeyProperty = entityType.GetProperty(
                 entityType.GetPartitionKeyPropertyName()
             );
-            ((SelectExpression)source.QueryExpression).SetPartitionKey(
-                partitionKeyProperty,
-                partitionKeyValue
-            );
+            ((SelectExpression)source.QueryExpression)
+                .SetPartitionKey(partitionKeyProperty, partitionKeyValue);
 
             if (newPredicate == null)
             {

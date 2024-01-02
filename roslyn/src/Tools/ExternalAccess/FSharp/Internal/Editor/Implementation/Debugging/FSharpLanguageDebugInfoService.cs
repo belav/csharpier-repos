@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.Implement
                 await _service
                     .GetDataTipInfoAsync(document, position, cancellationToken)
                     .ConfigureAwait(false)
-            ).UnderlyingObject;
+            )
+                .UnderlyingObject;
 
         public async Task<DebugLocationInfo> GetLocationInfoAsync(
             Document document,
@@ -47,6 +48,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.Implement
                 await _service
                     .GetLocationInfoAsync(document, position, cancellationToken)
                     .ConfigureAwait(false)
-            ).UnderlyingObject;
+            )
+                .UnderlyingObject;
     }
 }

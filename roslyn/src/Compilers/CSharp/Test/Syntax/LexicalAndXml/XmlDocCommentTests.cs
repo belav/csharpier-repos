@@ -1908,7 +1908,8 @@ x
             var keyword = (
                 (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
                 as MethodDeclarationSyntax
-            ).ReturnType;
+            )
+                .ReturnType;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -1958,7 +1959,8 @@ x
             var keyword = (
                 (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
                 as MethodDeclarationSyntax
-            ).ReturnType;
+            )
+                .ReturnType;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -2008,7 +2010,8 @@ x
             var keyword = (
                 (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
                 as PropertyDeclarationSyntax
-            ).Type;
+            )
+                .Type;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -2058,7 +2061,8 @@ x
             var keyword = (
                 (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
                 as IndexerDeclarationSyntax
-            ).Type;
+            )
+                .Type;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -2154,9 +2158,8 @@ x
             );
 
             // we grab the open bracket for the Goo method decl
-            var typeParameter = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).TypeParameterList.Parameters.Single();
+            var typeParameter = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .TypeParameterList.Parameters.Single();
 
             var trivias = typeParameter.GetLeadingTrivia();
 
@@ -2208,7 +2211,8 @@ x
             var keyword = (
                 (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
                 as MethodDeclarationSyntax
-            ).ReturnType;
+            )
+                .ReturnType;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -2248,9 +2252,8 @@ x
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
-            var bracket = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).CloseBraceToken;
+            var bracket = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .CloseBraceToken;
 
             var trivias = bracket.GetLeadingTrivia();
 
@@ -2460,9 +2463,8 @@ class C{}";
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
@@ -2635,9 +2637,8 @@ class C{}";
             Assert.Equal(1, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
 
             // we get to the xml trivia
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             // we get the xmldoc comment
             var doc =
@@ -2670,9 +2671,8 @@ class C{}";
             Assert.Equal(1, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
 
             // we get to the xml trivia
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             // we get the xmldoc comment
             var doc =
@@ -2702,9 +2702,8 @@ class C{}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
@@ -2733,9 +2732,8 @@ class C{}";
             // we should get 1 warning
             Assert.Equal(1, tree.GetCompilationUnitRoot().Warnings().Length);
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
@@ -2765,9 +2763,8 @@ class C{}";
             // we should get 2 warnings
             Assert.Equal(2, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
@@ -2796,9 +2793,8 @@ class C{}";
             // we should get 2 warnings
             Assert.Equal(2, tree.GetCompilationUnitRoot().Warnings().Length);
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
@@ -2824,9 +2820,8 @@ class C{}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var trivias = classKeyword.LeadingTrivia;
 
@@ -2855,9 +2850,8 @@ class C{}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
@@ -2933,9 +2927,8 @@ class C{}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var doc =
                 classKeyword.GetLeadingTrivia()[0].GetStructure()
@@ -2956,9 +2949,8 @@ class C{}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
 
             var doc =
                 classKeyword.GetLeadingTrivia()[0].GetStructure()
@@ -3060,9 +3052,8 @@ class A {}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
             var trivias = classKeyword.GetLeadingTrivia();
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
@@ -3090,9 +3081,8 @@ class A
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).Keyword;
+            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .Keyword;
             var trivias = classKeyword.GetLeadingTrivia();
             var doc = trivias[1].GetStructure() as DocumentationCommentTriviaSyntax;
 
@@ -3713,12 +3703,14 @@ public class Program
                 from e in actual
                 orderby e.Code
                 select new TestError(e.Code, e.Severity == DiagnosticSeverity.Warning)
-            ).ToList();
+            )
+                .ToList();
             var expectedErrors = (
                 from e in expected
                 orderby e.ErrorCode
                 select new TestError(e.ErrorCode, e.IsWarning)
-            ).ToList();
+            )
+                .ToList();
 
             for (int i = 0; i < expected.Count; i++)
             {

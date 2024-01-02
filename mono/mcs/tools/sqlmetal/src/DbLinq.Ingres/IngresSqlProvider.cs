@@ -58,7 +58,8 @@ namespace DbLinq.Ingres
                     (
                         from outputExpression in outputExpressions
                         select outputExpression.Replace("next value", "current value", true)
-                    ).ToArray()
+                    )
+                        .ToArray()
                 )
             );
         }

@@ -30,9 +30,8 @@ namespace Microsoft.VisualBasic.Activities
 
                 if (boundExpression != null && boundExpression is ILocationReferenceWrapper)
                 {
-                    locationReference = (
-                        (ILocationReferenceWrapper)boundExpression
-                    ).LocationReference;
+                    locationReference = ((ILocationReferenceWrapper)boundExpression)
+                        .LocationReference;
 
                     if (locationReference != null)
                     {

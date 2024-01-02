@@ -104,10 +104,8 @@ namespace System
                 return time;
             }
             bool isAmbiguousLocalDst = false;
-            long offset = ((CurrentSystemTimeZone)(CurrentTimeZone)).GetUtcOffsetFromUniversalTime(
-                time,
-                ref isAmbiguousLocalDst
-            );
+            long offset = ((CurrentSystemTimeZone)(CurrentTimeZone))
+                .GetUtcOffsetFromUniversalTime(time, ref isAmbiguousLocalDst);
             return new DateTime(time.Ticks + offset, DateTimeKind.Local, isAmbiguousLocalDst);
         }
 

@@ -28,7 +28,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                     HangMitigatingCancellationToken
                 )
-            ).SelectAsArray(item => item.DisplayText);
+            )
+                .SelectAsArray(item => item.DisplayText);
             Assert.All(
                 [
                     "cls",
@@ -72,7 +73,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 await TestServices.InteractiveWindow.GetCompletionItemsAsync(
                     HangMitigatingCancellationToken
                 )
-            ).SelectAsArray(item => item.DisplayText);
+            )
+                .SelectAsArray(item => item.DisplayText);
             Assert.All(
                 [
                     "elif",

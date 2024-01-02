@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 case SyntaxKind.EnumDeclaration:
                 case SyntaxKind.DelegateDeclaration:
                     return ignoreDeclarationModifiers
-                        || !((MemberDeclarationSyntax)declaration).Modifiers.Any(
-                            SyntaxKind.FileKeyword
-                        );
+                        || !((MemberDeclarationSyntax)declaration)
+                            .Modifiers.Any(SyntaxKind.FileKeyword);
 
                 case SyntaxKind.FieldDeclaration:
                 case SyntaxKind.EventFieldDeclaration:
@@ -56,9 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 case SyntaxKind.ConstructorDeclaration:
                     // Static constructor can't have accessibility
                     return ignoreDeclarationModifiers
-                        || !((ConstructorDeclarationSyntax)declaration).Modifiers.Any(
-                            SyntaxKind.StaticKeyword
-                        );
+                        || !((ConstructorDeclarationSyntax)declaration)
+                            .Modifiers.Any(SyntaxKind.StaticKeyword);
 
                 case SyntaxKind.PropertyDeclaration:
                     return ((PropertyDeclarationSyntax)declaration).ExplicitInterfaceSpecifier
@@ -73,9 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                         == null;
 
                 case SyntaxKind.ConversionOperatorDeclaration:
-                    return (
-                            (ConversionOperatorDeclarationSyntax)declaration
-                        ).ExplicitInterfaceSpecifier == null;
+                    return ((ConversionOperatorDeclarationSyntax)declaration)
+                            .ExplicitInterfaceSpecifier == null;
 
                 case SyntaxKind.MethodDeclaration:
                     var method = (MethodDeclarationSyntax)declaration;

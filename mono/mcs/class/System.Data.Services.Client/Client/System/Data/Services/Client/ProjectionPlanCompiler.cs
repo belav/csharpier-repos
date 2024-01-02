@@ -614,9 +614,8 @@ namespace System.Data.Services.Client
 
                     entryPath.Add(nestedSegment);
 
-                    string[] names = (
-                        entryPath.Where(m => m.Member != null).Select(m => m.Member)
-                    ).ToArray();
+                    string[] names = (entryPath.Where(m => m.Member != null).Select(m => m.Member))
+                        .ToArray();
 
                     this.annotations.Add(
                         nestedEntryParameter,

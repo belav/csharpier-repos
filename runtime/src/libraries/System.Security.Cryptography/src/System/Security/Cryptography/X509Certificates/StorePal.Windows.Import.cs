@@ -239,9 +239,8 @@ namespace System.Security.Cryptography.X509Certificates
                 for (int i = 0; i < certificates.Count; i++)
                 {
                     using (
-                        SafeCertContextHandle certContext = (
-                            (CertificatePal)certificates[i].Pal!
-                        ).GetCertContext()
+                        SafeCertContextHandle certContext = ((CertificatePal)certificates[i].Pal!)
+                            .GetCertContext()
                     )
                     {
                         if (

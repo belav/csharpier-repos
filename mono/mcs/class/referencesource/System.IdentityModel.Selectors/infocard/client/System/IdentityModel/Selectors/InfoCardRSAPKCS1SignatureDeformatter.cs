@@ -48,11 +48,8 @@ namespace System.IdentityModel.Selectors
                 && m_rsaKey is InfoCardRSACryptoProvider
             )
             {
-                return ((InfoCardRSACryptoProvider)m_rsaKey).VerifyHash(
-                    rgbHash,
-                    m_strOID,
-                    rgbSignature
-                );
+                return ((InfoCardRSACryptoProvider)m_rsaKey)
+                    .VerifyHash(rgbHash, m_strOID, rgbSignature);
             }
             else
             {

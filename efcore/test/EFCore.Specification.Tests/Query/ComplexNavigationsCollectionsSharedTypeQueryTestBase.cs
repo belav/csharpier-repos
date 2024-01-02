@@ -17,7 +17,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Multiple_complex_includes_self_ref(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Multiple_complex_includes_self_ref_EF_Property(bool async) =>
@@ -27,7 +28,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Multiple_complex_includes_self_ref_EF_Property(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override Task Complex_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_with_other_query_operators_composed_on_top(

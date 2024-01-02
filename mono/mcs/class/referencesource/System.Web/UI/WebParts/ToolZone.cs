@@ -277,9 +277,8 @@ namespace System.Web.UI.WebControls.WebParts
                 }
                 if (myState[instructionTextStyleIndex] != null)
                 {
-                    ((IStateManager)InstructionTextStyle).LoadViewState(
-                        myState[instructionTextStyleIndex]
-                    );
+                    ((IStateManager)InstructionTextStyle)
+                        .LoadViewState(myState[instructionTextStyleIndex]);
                 }
                 if (myState[labelStyleIndex] != null)
                 {

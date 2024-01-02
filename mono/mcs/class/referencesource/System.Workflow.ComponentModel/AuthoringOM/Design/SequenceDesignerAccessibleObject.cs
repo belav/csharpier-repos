@@ -125,9 +125,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 get
                 {
-                    return (
-                        (SequentialActivityDesigner)this.connectorHitInfo.AssociatedDesigner
-                    ).InternalRectangleToScreen(this.connectorHitInfo.Bounds);
+                    return ((SequentialActivityDesigner)this.connectorHitInfo.AssociatedDesigner)
+                        .InternalRectangleToScreen(this.connectorHitInfo.Bounds);
                 }
             }
 
@@ -254,7 +253,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 object nextSelectableObj = (
                     (CompositeActivityDesigner)this.connectorHitInfo.AssociatedDesigner
-                ).GetNextSelectableObject(this.connectorHitInfo, navigate);
+                )
+                    .GetNextSelectableObject(this.connectorHitInfo, navigate);
                 if (nextSelectableObj is ConnectorHitTestInfo)
                 {
                     ConnectorHitTestInfo nextConnector = nextSelectableObj as ConnectorHitTestInfo;

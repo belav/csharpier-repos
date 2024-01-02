@@ -116,9 +116,8 @@ namespace System.ComponentModel.Design.Serialization
             {
                 if (_designerContainer == null)
                 {
-                    _designerContainer = (
-                        this.GetService(typeof(IDesignerHost)) as IDesignerHost
-                    ).Container;
+                    _designerContainer = (this.GetService(typeof(IDesignerHost)) as IDesignerHost)
+                        .Container;
                 }
                 return _designerContainer;
             }
@@ -283,9 +282,8 @@ namespace System.ComponentModel.Design.Serialization
                         null,
                         null
                     );
-                    ((IDesignerSerializationManager)this).AddSerializationProvider(
-                        (IDesignerSerializationProvider)provider
-                    );
+                    ((IDesignerSerializationManager)this)
+                        .AddSerializationProvider((IDesignerSerializationProvider)provider);
                 }
             }
 

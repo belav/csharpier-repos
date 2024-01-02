@@ -79,14 +79,14 @@ public class SharedTypeDbSetTest
                 await Assert.ThrowsAsync<ObjectDisposedException>(
                     () => set.AddAsync(new Category()).AsTask()
                 )
-            ).Message
+            )
+                .Message
         );
 
         Assert.StartsWith(
             CoreStrings.ContextDisposed,
-            (
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => set.FindAsync(77).AsTask())
-            ).Message
+            (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.FindAsync(77).AsTask()))
+                .Message
         );
 
         Assert.StartsWith(

@@ -3476,7 +3476,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 static byte[] GetResponse() =>
                     (
                         "HTTP/1.1 200 OK\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Length: 0\r\n\r\n"u8
-                    ).ToArray();
+                    )
+                        .ToArray();
 
                 while (!cancellationToken.IsCancellationRequested)
                 {

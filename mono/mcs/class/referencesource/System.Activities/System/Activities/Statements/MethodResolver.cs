@@ -356,10 +356,8 @@ namespace System.Activities.Statements
                 {
                     if (
                         !(oldMethodExecutor is AsyncPatternMethodExecutor)
-                        || !((AsyncPatternMethodExecutor)oldMethodExecutor).IsTheSame(
-                            this.beginMethod,
-                            this.endMethod
-                        )
+                        || !((AsyncPatternMethodExecutor)oldMethodExecutor)
+                            .IsTheSame(this.beginMethod, this.endMethod)
                     )
                     {
                         methodExecutor = new AsyncPatternMethodExecutor(
@@ -450,9 +448,8 @@ namespace System.Activities.Statements
                 {
                     if (
                         !(oldMethodExecutor is AsyncWaitCallbackMethodExecutor)
-                        || !((AsyncWaitCallbackMethodExecutor)oldMethodExecutor).IsTheSame(
-                            this.syncMethod
-                        )
+                        || !((AsyncWaitCallbackMethodExecutor)oldMethodExecutor)
+                            .IsTheSame(this.syncMethod)
                     )
                     {
                         methodExecutor = new AsyncWaitCallbackMethodExecutor(

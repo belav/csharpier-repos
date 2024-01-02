@@ -1278,10 +1278,8 @@ namespace System.StubHelpers
                         length = string.strlen((byte*)pNativeHome);
                     }
 
-                    ((StringBuilder)pManagedHome).ReplaceBufferAnsiInternal(
-                        (sbyte*)pNativeHome,
-                        length
-                    );
+                    ((StringBuilder)pManagedHome)
+                        .ReplaceBufferAnsiInternal((sbyte*)pNativeHome, length);
                     break;
                 }
 

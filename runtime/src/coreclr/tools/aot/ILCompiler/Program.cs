@@ -644,9 +644,8 @@ namespace ILCompiler
                 if (scanDgmlLogFileName != null)
                     scanResults.WriteDependencyLog(scanDgmlLogFileName);
 
-                metadataManager = (
-                    (UsageBasedMetadataManager)metadataManager
-                ).ToAnalysisBasedMetadataManager();
+                metadataManager = ((UsageBasedMetadataManager)metadataManager)
+                    .ToAnalysisBasedMetadataManager();
 
                 interopStubManager = scanResults.GetInteropStubManager(
                     interopStateManager,

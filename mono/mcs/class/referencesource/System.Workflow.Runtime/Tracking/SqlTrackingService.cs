@@ -3139,9 +3139,8 @@ namespace System.Workflow.Runtime.Tracking
                         switch (record.TrackingWorkflowEvent)
                         {
                             case TrackingWorkflowEvent.Terminated:
-                                e = (
-                                    (TrackingWorkflowTerminatedEventArgs)record.EventArgs
-                                ).Exception;
+                                e = ((TrackingWorkflowTerminatedEventArgs)record.EventArgs)
+                                    .Exception;
                                 if (null != e)
                                 {
                                     SerializeDataItem(e.ToString(), out data, out nonSerializable);
@@ -3149,9 +3148,8 @@ namespace System.Workflow.Runtime.Tracking
                                 }
                                 break;
                             case TrackingWorkflowEvent.Exception:
-                                e = (
-                                    (TrackingWorkflowExceptionEventArgs)record.EventArgs
-                                ).Exception;
+                                e = ((TrackingWorkflowExceptionEventArgs)record.EventArgs)
+                                    .Exception;
                                 if (null != e)
                                 {
                                     SerializeDataItem(e.ToString(), out data, out nonSerializable);
@@ -3464,9 +3462,8 @@ namespace System.Workflow.Runtime.Tracking
                 );
 
                 foreach (
-                    Activity secondaryFlowActivity in (
-                        (ISupportAlternateFlow)compositeActivity
-                    ).AlternateFlowActivities
+                    Activity secondaryFlowActivity in ((ISupportAlternateFlow)compositeActivity)
+                        .AlternateFlowActivities
                 )
                 {
                     if (!allActivities.Contains(secondaryFlowActivity))

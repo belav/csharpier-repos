@@ -257,7 +257,8 @@ namespace System.Net.Http.Functional.Tests
                             remoteServerExceptionWrapper,
                             url
                         )
-                    ).Dispose();
+                    )
+                        .Dispose();
                 }
             }
         }

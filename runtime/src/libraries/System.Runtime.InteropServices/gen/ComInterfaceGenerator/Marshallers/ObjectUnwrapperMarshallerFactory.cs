@@ -37,9 +37,8 @@ namespace Microsoft.Interop
             )
             {
                 Debug.Assert(info.MarshallingAttributeInfo is ObjectUnwrapperInfo);
-                TypeSyntax unwrapperType = (
-                    (ObjectUnwrapperInfo)info.MarshallingAttributeInfo
-                ).UnwrapperType;
+                TypeSyntax unwrapperType = ((ObjectUnwrapperInfo)info.MarshallingAttributeInfo)
+                    .UnwrapperType;
                 if (context.CurrentStage != StubCodeContext.Stage.Unmarshal)
                 {
                     yield break;

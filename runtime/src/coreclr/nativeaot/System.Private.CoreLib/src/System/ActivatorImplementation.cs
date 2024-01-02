@@ -155,12 +155,8 @@ namespace System
                 state = null;
             }
 
-            object result = ((ConstructorInfo)invokeMethod).Invoke(
-                bindingAttr,
-                binder,
-                args,
-                culture
-            );
+            object result = ((ConstructorInfo)invokeMethod)
+                .Invoke(bindingAttr, binder, args, culture);
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             if (state != null)
                 binder.ReorderArgumentArray(ref args, state);

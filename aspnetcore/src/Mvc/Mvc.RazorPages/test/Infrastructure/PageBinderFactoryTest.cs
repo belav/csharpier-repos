@@ -416,7 +416,8 @@ public class PageBinderFactoryTest
                         RequestPredicate = (
                             (IRequestPredicateProvider)
                                 new BindPropertyAttribute() { SupportsGet = true }
-                        ).RequestPredicate,
+                        )
+                            .RequestPredicate,
                     }
                 },
                 new PageBoundPropertyDescriptor()
@@ -479,7 +480,8 @@ public class PageBinderFactoryTest
                         RequestPredicate = (
                             (IRequestPredicateProvider)
                                 new BindPropertyAttribute() { SupportsGet = true }
-                        ).RequestPredicate,
+                        )
+                            .RequestPredicate,
                     }
                 },
                 new PageBoundPropertyDescriptor()

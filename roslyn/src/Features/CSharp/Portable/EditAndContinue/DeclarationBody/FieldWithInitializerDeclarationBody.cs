@@ -100,9 +100,8 @@ internal sealed class FieldWithInitializerDeclarationBody(
         CSharpEditAndContinueAnalyzer.FindStatementAndPartner(
             span,
             body: InitializerExpression,
-            partnerBody: (
-                (FieldWithInitializerDeclarationBody?)partnerDeclarationBody
-            )?.InitializerExpression,
+            partnerBody: ((FieldWithInitializerDeclarationBody?)partnerDeclarationBody)
+                ?.InitializerExpression,
             out partnerStatement,
             out statementPart
         );

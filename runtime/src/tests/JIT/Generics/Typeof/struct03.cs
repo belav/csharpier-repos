@@ -95,32 +95,20 @@ public class Test_struct03
     public static int TestEntryPoint()
     {
         Eval(
-            (new Gen<int, double, Guid>(new int(), new double(), new Guid())).InstVerify(
-                typeof(int),
-                typeof(double),
-                typeof(Guid)
-            )
+            (new Gen<int, double, Guid>(new int(), new double(), new Guid()))
+                .InstVerify(typeof(int), typeof(double), typeof(Guid))
         );
         Eval(
-            (new Gen<double, Guid, string>(new double(), new Guid(), "string")).InstVerify(
-                typeof(double),
-                typeof(Guid),
-                typeof(string)
-            )
+            (new Gen<double, Guid, string>(new double(), new Guid(), "string"))
+                .InstVerify(typeof(double), typeof(Guid), typeof(string))
         );
         Eval(
-            (new Gen<Guid, string, object>(new Guid(), "string", new object())).InstVerify(
-                typeof(Guid),
-                typeof(string),
-                typeof(object)
-            )
+            (new Gen<Guid, string, object>(new Guid(), "string", new object()))
+                .InstVerify(typeof(Guid), typeof(string), typeof(object))
         );
         Eval(
-            (new Gen<string, object, int[]>("string", new object(), new int[1])).InstVerify(
-                typeof(string),
-                typeof(object),
-                typeof(int[])
-            )
+            (new Gen<string, object, int[]>("string", new object(), new int[1]))
+                .InstVerify(typeof(string), typeof(object), typeof(int[]))
         );
         Eval(
             (
@@ -129,7 +117,8 @@ public class Test_struct03
                     new int[1],
                     new RefX1<ValX1<int>>()
                 )
-            ).InstVerify(typeof(object), typeof(int[]), typeof(RefX1<ValX1<int>>))
+            )
+                .InstVerify(typeof(object), typeof(int[]), typeof(RefX1<ValX1<int>>))
         );
         Eval(
             (
@@ -138,11 +127,12 @@ public class Test_struct03
                     new RefX1<ValX1<int>>(),
                     new ValX1<RefX2<int, double>>()
                 )
-            ).InstVerify(
-                typeof(int[]),
-                typeof(RefX1<ValX1<int>>),
-                typeof(ValX1<RefX2<int, double>>)
             )
+                .InstVerify(
+                    typeof(int[]),
+                    typeof(RefX1<ValX1<int>>),
+                    typeof(ValX1<RefX2<int, double>>)
+                )
         );
 
         if (result)

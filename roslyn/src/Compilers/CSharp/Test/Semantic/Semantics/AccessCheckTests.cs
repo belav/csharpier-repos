@@ -834,16 +834,18 @@ class ADerived2: A
             ITypeSymbol aptrType = (classA.GetMembers("aptr").Single() as IFieldSymbol).Type;
             ITypeSymbol kinreturnfuncptrType = (
                 classA.GetMembers("kinreturnfuncptr").Single() as IFieldSymbol
-            ).Type;
+            )
+                .Type;
             ITypeSymbol kinparamfuncptr1Type = (
                 classA.GetMembers("kinparamfuncptr1").Single() as IFieldSymbol
-            ).Type;
+            )
+                .Type;
             ITypeSymbol kinparamfuncptr2Type = (
                 classA.GetMembers("kinparamfuncptr2").Single() as IFieldSymbol
-            ).Type;
-            ITypeSymbol afuncptrType = (
-                classA.GetMembers("afuncptr").Single() as IFieldSymbol
-            ).Type;
+            )
+                .Type;
+            ITypeSymbol afuncptrType = (classA.GetMembers("afuncptr").Single() as IFieldSymbol)
+                .Type;
             ITypeSymbol kenumType = (classA.GetMembers("kenum").Single() as IFieldSymbol).Type;
             ITypeSymbol aenumType = (classA.GetMembers("aenum").Single() as IFieldSymbol).Type;
             var discards = tree.GetRoot()
@@ -853,9 +855,8 @@ class ADerived2: A
                 .ToArray();
             IDiscardSymbol kdiscard = (IDiscardSymbol)model.GetSymbolInfo(discards[0]).Symbol;
             IDiscardSymbol adiscard = (IDiscardSymbol)model.GetSymbolInfo(discards[1]).Symbol;
-            ITypeSymbol unknownType = (
-                classA.GetMembers("unknowntype").Single() as IFieldSymbol
-            ).Type;
+            ITypeSymbol unknownType = (classA.GetMembers("unknowntype").Single() as IFieldSymbol)
+                .Type;
 
             ISymbol nullSymbol = null;
             Assert.Throws<ArgumentNullException>(() =>

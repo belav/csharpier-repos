@@ -946,7 +946,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     // The last clause in query stack must be SelectClauseSyntax.
                     var lastSelectExpression = (
                         (SelectClauseSyntax)queryExpressionProcessingInfo.Stack.Peek()
-                    ).Expression;
+                    )
+                        .Expression;
                     if (
                         lastSelectExpression is IdentifierNameSyntax identifierName
                         && forEachStatement.Identifier.ValueText

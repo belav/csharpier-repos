@@ -3599,9 +3599,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                         )
                     )
                     {
-                        token = (
-                            (ArgumentListSyntax)parentMemberAccess.Parent.Parent!
-                        ).OpenParenToken;
+                        token = ((ArgumentListSyntax)parentMemberAccess.Parent.Parent!)
+                            .OpenParenToken;
                     }
                 }
 
@@ -3621,9 +3620,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                         )
                     )
                     {
-                        token = (
-                            (ArgumentListSyntax)parentQualifiedName.Parent.Parent!
-                        ).OpenParenToken;
+                        token = ((ArgumentListSyntax)parentQualifiedName.Parent.Parent!)
+                            .OpenParenToken;
                     }
                 }
             }

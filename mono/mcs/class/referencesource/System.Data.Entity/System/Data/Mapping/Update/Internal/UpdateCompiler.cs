@@ -648,9 +648,8 @@ namespace System.Data.Mapping.Update.Internal
                     );
                 }
 
-                var columnClrEquivalentType = (
-                    (PrimitiveType)propertyType.EdmType
-                ).ClrEquivalentType;
+                var columnClrEquivalentType = ((PrimitiveType)propertyType.EdmType)
+                    .ClrEquivalentType;
 
                 if (principalType != columnClrEquivalentType)
                 {

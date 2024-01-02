@@ -112,7 +112,8 @@ namespace System
                 {
                     typeOfFirstParameterIfInstanceDelegate = (
                         (OpenMethodResolver*)m_extraFunctionPointerOrData
-                    )->DeclaringType;
+                    )
+                        ->DeclaringType;
                     isOpenResolver = true;
                 }
                 return m_extraFunctionPointerOrData;

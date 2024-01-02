@@ -1680,7 +1680,8 @@ class P
             var rootExpr = "new C(3)";
             var actualProxyType = (
                 (DkmClrDebuggerTypeProxyAttribute)value.Type.GetEvalAttributes().First()
-            ).ProxyType;
+            )
+                .ProxyType;
             Assert.Equal(((TypeImpl)actualProxyType.GetLmrType()).Type, typeP);
             var evalResult = FormatResult(rootExpr, value);
             Verify(

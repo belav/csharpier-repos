@@ -426,7 +426,8 @@ namespace System.Web.Mvc.Html.Test
                 (
                     routeData.Values[ChildActionValueProvider.ChildActionValuesKey]
                     as DictionaryValueProvider<object>
-                ).GetValue("area")
+                )
+                    .GetValue("area")
             );
         }
 

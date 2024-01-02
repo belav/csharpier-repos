@@ -15509,7 +15509,8 @@ class MyAttribute : System.Attribute
                                     )
                                     .ConstructorArguments.Single()
                                     .ValueInternal
-                        ).GetMember<MethodSymbol>("MoveNext")
+                        )
+                            .GetMember<MethodSymbol>("MoveNext")
                     )
                 );
 
@@ -15544,7 +15545,8 @@ class MyAttribute : System.Attribute
                                     )
                                     .ConstructorArguments.Single()
                                     .ValueInternal
-                        ).GetMember<MethodSymbol>("MoveNext")
+                        )
+                            .GetMember<MethodSymbol>("MoveNext")
                     )
                 );
 

@@ -2191,9 +2191,8 @@ public class C : I { }
 ";
 
             var lib = CreateCompilation(libSource, assemblyName: "lib");
-            var refLib = ((MetadataImageReference)lib.EmitToImageReference()).WithEmbedInteropTypes(
-                true
-            );
+            var refLib = ((MetadataImageReference)lib.EmitToImageReference())
+                .WithEmbedInteropTypes(true);
             var main = CreateCompilation(mainSource, new[] { refLib }, assemblyName: "main");
 
             CompileAndVerify(

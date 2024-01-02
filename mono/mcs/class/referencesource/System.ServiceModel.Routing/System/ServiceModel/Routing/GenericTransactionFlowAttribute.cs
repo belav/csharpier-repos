@@ -24,10 +24,8 @@ namespace System.ServiceModel.Routing
             BindingParameterCollection bindingParameters
         )
         {
-            ((IOperationBehavior)this.transactionFlowAttribute).AddBindingParameters(
-                operationDescription,
-                bindingParameters
-            );
+            ((IOperationBehavior)this.transactionFlowAttribute)
+                .AddBindingParameters(operationDescription, bindingParameters);
         }
 
         void IOperationBehavior.ApplyClientBehavior(
@@ -35,10 +33,8 @@ namespace System.ServiceModel.Routing
             ClientOperation clientOperation
         )
         {
-            ((IOperationBehavior)this.transactionFlowAttribute).ApplyClientBehavior(
-                operationDescription,
-                clientOperation
-            );
+            ((IOperationBehavior)this.transactionFlowAttribute)
+                .ApplyClientBehavior(operationDescription, clientOperation);
         }
 
         void IOperationBehavior.ApplyDispatchBehavior(
@@ -46,10 +42,8 @@ namespace System.ServiceModel.Routing
             DispatchOperation dispatchOperation
         )
         {
-            ((IOperationBehavior)this.transactionFlowAttribute).ApplyDispatchBehavior(
-                operationDescription,
-                dispatchOperation
-            );
+            ((IOperationBehavior)this.transactionFlowAttribute)
+                .ApplyDispatchBehavior(operationDescription, dispatchOperation);
         }
 
         void IOperationBehavior.Validate(OperationDescription operationDescription)

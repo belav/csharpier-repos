@@ -118,10 +118,11 @@ public class SqlServerConnectionTest
     {
         var optionsBuilder = new DbContextOptionsBuilder();
 
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-            optionsExtension
-                ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
-        );
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+            .AddOrUpdateExtension(
+                optionsExtension
+                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
+            );
 
         return optionsBuilder.Options;
     }

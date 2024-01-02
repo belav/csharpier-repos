@@ -4299,10 +4299,8 @@ namespace System.Tests
         public static void ToString_Slice_ParseSpan_RoundtripsSuccessfully(string roundtripFormat)
         {
             string expectedString = DateTimeOffset.UtcNow.ToString(roundtripFormat);
-            ReadOnlySpan<char> expectedSpan = ("abcd" + expectedString + "1234").AsSpan(
-                "abcd".Length,
-                expectedString.Length
-            );
+            ReadOnlySpan<char> expectedSpan = ("abcd" + expectedString + "1234")
+                .AsSpan("abcd".Length, expectedString.Length);
 
             Assert.Equal(
                 expectedString,

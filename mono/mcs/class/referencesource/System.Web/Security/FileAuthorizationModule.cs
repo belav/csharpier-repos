@@ -359,9 +359,8 @@ namespace System.Web.Security
             if (!context.IsCustomErrorEnabled)
             {
                 context.Response.Write(
-                    (
-                        new FileAccessFailedErrorFormatter(context.Request.PhysicalPathInternal)
-                    ).GetErrorMessage(context, false)
+                    (new FileAccessFailedErrorFormatter(context.Request.PhysicalPathInternal))
+                        .GetErrorMessage(context, false)
                 );
             }
             else

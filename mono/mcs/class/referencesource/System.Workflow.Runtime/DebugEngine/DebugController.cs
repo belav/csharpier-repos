@@ -952,9 +952,8 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 if (args.WorkflowType != null)
                 {
-                    Activity rootActivity = (
-                        (WorkflowRuntime)sender
-                    ).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowType);
+                    Activity rootActivity = ((WorkflowRuntime)sender)
+                        .DefinitionDispenser.GetWorkflowDefinition(args.WorkflowType);
                     LoadExistingScheduleType(
                         GetScheduleTypeId(args.WorkflowType),
                         args.WorkflowType,
@@ -964,9 +963,8 @@ namespace System.Workflow.Runtime.DebugEngine
                 }
                 else
                 {
-                    Activity rootActivity = (
-                        (WorkflowRuntime)sender
-                    ).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowDefinitionHashCode);
+                    Activity rootActivity = ((WorkflowRuntime)sender)
+                        .DefinitionDispenser.GetWorkflowDefinition(args.WorkflowDefinitionHashCode);
                     LoadExistingScheduleType(
                         GetScheduleTypeId(args.WorkflowDefinitionHashCode),
                         rootActivity.GetType(),

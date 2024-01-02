@@ -556,5 +556,6 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             let contextTypeAttribute = t.GetCustomAttribute<DbContextAttribute>()
             where contextTypeAttribute != null && contextTypeAttribute.ContextType != _contextType
             select t
-        ).Any();
+        )
+            .Any();
 }

@@ -1443,9 +1443,8 @@ namespace Internal.Runtime
             get
             {
                 if (((nint)_pFirst & IsRelative) != 0)
-                    return (
-                        ((RelativePointer<MethodTable>*)((nint)_pFirst - IsRelative)) + index
-                    )->Value;
+                    return (((RelativePointer<MethodTable>*)((nint)_pFirst - IsRelative)) + index)
+                        ->Value;
 
                 return *((MethodTable**)_pFirst + index);
             }

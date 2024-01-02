@@ -245,7 +245,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                                         {
                                             IOperation advanceExpression = (
                                                 (IExpressionStatementOperation)advance
-                                            ).Operation;
+                                            )
+                                                .Operation;
 
                                             Optional<object> advanceIncrementOpt;
                                             BinaryOperatorKind? advanceOperationCode;

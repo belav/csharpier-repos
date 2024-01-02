@@ -2238,9 +2238,8 @@ namespace C5
                         switch (viewPosition(view))
                         {
                             case MutualViewPosition.ContainedIn:
-                                (
-                                    _positions ?? (_positions = new CircularQueue<Position>())
-                                ).Enqueue(new Position(view, true));
+                                (_positions ?? (_positions = new CircularQueue<Position>()))
+                                    .Enqueue(new Position(view, true));
                                 _positions.Enqueue(new Position(view, false));
                                 break;
                             case MutualViewPosition.Overlapping:

@@ -104,7 +104,8 @@ public class UnprocessableEntityResultTests
                 PopulateMetadata<UnprocessableEntity>(
                     (
                         (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
+                    )
+                        .GetMethodInfo(),
                     null
                 )
         );

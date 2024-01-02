@@ -1067,7 +1067,8 @@ namespace DbMetal.Generator
                                 from t in Context.ExtendedTypes.Values
                                 where t.Type.Name == name
                                 select t
-                            ).FirstOrDefault() == null
+                            )
+                                .FirstOrDefault() == null
                         )
                         {
                             extendedTypePair.Value.Type.Name = name;
@@ -1933,7 +1934,8 @@ namespace DbMetal.Generator
                 var childColumns = (
                     from ck in childKeys
                     select table.Type.Columns.Single(c => c.Member == ck)
-                ).ToArray();
+                )
+                    .ToArray();
                 var parentKeys = parent.OtherKeys.ToArray();
                 property.SetStatements.Add(
                     new CodeConditionStatement(

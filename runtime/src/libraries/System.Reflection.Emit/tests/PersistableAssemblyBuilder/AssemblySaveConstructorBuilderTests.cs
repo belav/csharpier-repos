@@ -201,10 +201,8 @@ namespace System.Reflection.Emit.Tests
             );
             constructor.GetILGenerator().Emit(OpCodes.Ret);
 
-            TypeBuilder type = ((ModuleBuilder)baseType.Module).DefineType(
-                "DerivedType",
-                TypeAttributes.Public | TypeAttributes.Class
-            );
+            TypeBuilder type = ((ModuleBuilder)baseType.Module)
+                .DefineType("DerivedType", TypeAttributes.Public | TypeAttributes.Class);
             type.SetParent(baseType);
             Assert.Throws<NotSupportedException>(
                 () => type.DefineDefaultConstructor(MethodAttributes.Public)
@@ -260,10 +258,8 @@ namespace System.Reflection.Emit.Tests
             );
             type1.DefineGenericParameters("T");
 
-            TypeBuilder type2 = ((ModuleBuilder)type1.Module).DefineType(
-                "TestType2",
-                TypeAttributes.Class | TypeAttributes.Public
-            );
+            TypeBuilder type2 = ((ModuleBuilder)type1.Module)
+                .DefineType("TestType2", TypeAttributes.Class | TypeAttributes.Public);
             type2.DefineGenericParameters("T");
 
             ConstructorBuilder ctor1 = type1.DefineDefaultConstructor(

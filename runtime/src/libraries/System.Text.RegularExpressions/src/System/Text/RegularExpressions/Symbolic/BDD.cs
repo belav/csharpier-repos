@@ -277,7 +277,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 else
                 {
                     // Non-terminals are grouped by their ordinal so that they can be sorted into a topological order.
-                    (nonterminals[node.Ordinal] ??= new List<BDD>()).Add(node);
+                    (nonterminals[node.Ordinal] ??= new List<BDD>())
+                        .Add(node);
 
                     if (visited.Add(node.Zero))
                         toVisit.Push(node.Zero);

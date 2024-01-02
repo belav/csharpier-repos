@@ -472,9 +472,8 @@ namespace System.Collections.Concurrent
             {
                 get
                 {
-                    return (
-                        (DynamicPartitionEnumerator_Abstract<TSource, TSourceReader>)this
-                    ).Current;
+                    return ((DynamicPartitionEnumerator_Abstract<TSource, TSourceReader>)this)
+                        .Current;
                 }
             }
 

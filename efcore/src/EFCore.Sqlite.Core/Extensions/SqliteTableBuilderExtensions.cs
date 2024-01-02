@@ -151,9 +151,8 @@ public static class SqliteTableBuilderExtensions
         where TOwnerEntity : class
         where TDependentEntity : class =>
         (OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>)
-            ((OwnedNavigationTableBuilder)tableBuilder).UseSqlReturningClause(
-                useSqlReturningClause
-            );
+            ((OwnedNavigationTableBuilder)tableBuilder)
+                .UseSqlReturningClause(useSqlReturningClause);
 
     private static void UseSqlReturningClause(
         IMutableEntityType entityType,

@@ -252,10 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     : ((ParameterSymbol)variable).Type;
             if (type.IsRestrictedType())
             {
-                (_lazyDisallowedCaptures ??= new MultiDictionary<Symbol, SyntaxNode>()).Add(
-                    variable,
-                    syntax
-                );
+                (_lazyDisallowedCaptures ??= new MultiDictionary<Symbol, SyntaxNode>())
+                    .Add(variable, syntax);
             }
             else
             {

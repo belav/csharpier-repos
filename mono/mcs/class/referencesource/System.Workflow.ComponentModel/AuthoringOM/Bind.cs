@@ -129,10 +129,8 @@ namespace System.Workflow.ComponentModel
                             return;
                         }
 
-                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(
-                            targetObject,
-                            null
-                        );
+                        targetObject = (eventArgs.MemberInfo as PropertyInfo)
+                            .GetValue(targetObject, null);
                         break;
 
                     case PathMemberKind.IndexedProperty:
@@ -143,21 +141,20 @@ namespace System.Workflow.ComponentModel
                             return;
                         }
 
-                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(
-                            targetObject,
-                            eventArgs.IndexParameters
-                        );
+                        targetObject = (eventArgs.MemberInfo as PropertyInfo)
+                            .GetValue(targetObject, eventArgs.IndexParameters);
                         break;
 
                     case PathMemberKind.Index: //
                         memberType = (eventArgs.MemberInfo as PropertyInfo).PropertyType;
-                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(
-                            targetObject,
-                            BindingFlags.GetProperty,
-                            null,
-                            eventArgs.IndexParameters,
-                            CultureInfo.InvariantCulture
-                        );
+                        targetObject = (eventArgs.MemberInfo as PropertyInfo)
+                            .GetValue(
+                                targetObject,
+                                BindingFlags.GetProperty,
+                                null,
+                                eventArgs.IndexParameters,
+                                CultureInfo.InvariantCulture
+                            );
                         break;
                 }
                 if (targetObject == null)
@@ -233,10 +230,8 @@ namespace System.Workflow.ComponentModel
 
                     case PathMemberKind.IndexedProperty:
                     case PathMemberKind.Index:
-                        obj = (eventArgs.MemberInfo as PropertyInfo).GetValue(
-                            parentObj,
-                            eventArgs.IndexParameters
-                        );
+                        obj = (eventArgs.MemberInfo as PropertyInfo)
+                            .GetValue(parentObj, eventArgs.IndexParameters);
                         args = eventArgs.IndexParameters;
                         break;
                 }
@@ -678,10 +673,8 @@ namespace System.Workflow.ComponentModel
                         runtimeValue is ActivityBind
                         && BindHelpers.GetMemberType(memberInfo) != typeof(ActivityBind)
                     )
-                        runtimeValue = ((ActivityBind)runtimeValue).GetRuntimeValue(
-                            referencedActivity,
-                            targetType
-                        );
+                        runtimeValue = ((ActivityBind)runtimeValue)
+                            .GetRuntimeValue(referencedActivity, targetType);
                 }
                 else
                 {
@@ -1017,7 +1010,8 @@ namespace System.Workflow.ComponentModel
             {
                 ITypeDescriptorContext outerPropertyContext = (
                     (ActivityBindPathPropertyDescriptor)context.PropertyDescriptor
-                ).OuterPropertyContext;
+                )
+                    .OuterPropertyContext;
                 if (outerPropertyContext != null)
                 {
                     Activity activity =
@@ -1219,13 +1213,11 @@ namespace System.Workflow.ComponentModel
                         if (eventDependencyProperty != null && value is DependencyObject)
                         {
                             if ((value as DependencyObject).IsBindingSet(eventDependencyProperty))
-                                value = (value as DependencyObject).GetBinding(
-                                    eventDependencyProperty
-                                );
+                                value = (value as DependencyObject)
+                                    .GetBinding(eventDependencyProperty);
                             else
-                                value = (value as DependencyObject).GetHandler(
-                                    eventDependencyProperty
-                                );
+                                value = (value as DependencyObject)
+                                    .GetHandler(eventDependencyProperty);
                         }
                         break;
 
@@ -1251,10 +1243,8 @@ namespace System.Workflow.ComponentModel
                         else
                             try
                             {
-                                value = (eventArgs.MemberInfo as PropertyInfo).GetValue(
-                                    value,
-                                    null
-                                );
+                                value = (eventArgs.MemberInfo as PropertyInfo)
+                                    .GetValue(value, null);
                             }
                             catch (Exception exception)
                             {
@@ -1278,13 +1268,14 @@ namespace System.Workflow.ComponentModel
                     case PathMemberKind.Index:
                         try
                         {
-                            value = (eventArgs.MemberInfo as PropertyInfo).GetValue(
-                                value,
-                                BindingFlags.GetProperty,
-                                null,
-                                eventArgs.IndexParameters,
-                                CultureInfo.InvariantCulture
-                            );
+                            value = (eventArgs.MemberInfo as PropertyInfo)
+                                .GetValue(
+                                    value,
+                                    BindingFlags.GetProperty,
+                                    null,
+                                    eventArgs.IndexParameters,
+                                    CultureInfo.InvariantCulture
+                                );
                         }
                         catch (Exception exception)
                         {

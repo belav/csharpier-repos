@@ -391,9 +391,8 @@ namespace System.DirectoryServices.AccountManagement
                         // specialized type instead of the generic InvalidOperationException
                         throw (
                             new PasswordException(
-                                (
-                                    (System.Runtime.InteropServices.COMException)e.InnerException
-                                ).Message,
+                                ((System.Runtime.InteropServices.COMException)e.InnerException)
+                                    .Message,
                                 (System.Runtime.InteropServices.COMException)e.InnerException
                             )
                         );
@@ -447,9 +446,8 @@ namespace System.DirectoryServices.AccountManagement
                         // specialized type instead of the generic InvalidOperationException
                         throw (
                             new PasswordException(
-                                (
-                                    (System.Runtime.InteropServices.COMException)e.InnerException
-                                ).Message,
+                                ((System.Runtime.InteropServices.COMException)e.InnerException)
+                                    .Message,
                                 (System.Runtime.InteropServices.COMException)e.InnerException
                             )
                         );

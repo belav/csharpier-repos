@@ -117,9 +117,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
         public static IEnumerable<object[]> AllMachineTypes()
         {
-            return ((Machine[])Enum.GetValues(typeof(Machine))).Select(m =>
-                new object[] { (object)m }
-            );
+            return ((Machine[])Enum.GetValues(typeof(Machine)))
+                .Select(m => new object[] { (object)m });
         }
 
         #endregion

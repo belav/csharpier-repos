@@ -27,9 +27,8 @@ public class ValidateBodyParameterAttribute : ActionFilterAttribute
                 {
                     var errorInfo = new ErrorInfo
                     {
-                        ActionName = (
-                            (ControllerActionDescriptor)context.ActionDescriptor
-                        ).ActionName,
+                        ActionName = ((ControllerActionDescriptor)context.ActionDescriptor)
+                            .ActionName,
                         ParameterName = bodyParameter.Name,
                         Errors = parameterBindingErrors.Select(x => x.ErrorMessage).ToList(),
                         Source = "filter"

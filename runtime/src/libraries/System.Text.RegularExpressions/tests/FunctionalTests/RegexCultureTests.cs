@@ -143,7 +143,8 @@ namespace System.Text.RegularExpressions.Tests
                             "\uD801\uDC00",
                             RegexOptions.IgnoreCase
                         )
-                    ).IsMatch("\uD801\uDC00")
+                    )
+                        .IsMatch("\uD801\uDC00")
                 );
                 Assert.True(
                     (
@@ -152,17 +153,16 @@ namespace System.Text.RegularExpressions.Tests
                             "\uD801\uDC00",
                             RegexOptions.IgnoreCase
                         )
-                    ).IsMatch("abcdefg\uD801\uDC00")
+                    )
+                        .IsMatch("abcdefg\uD801\uDC00")
                 );
                 Assert.True(
-                    (
-                        await RegexHelpers.GetRegexAsync(engine, "\uD801", RegexOptions.IgnoreCase)
-                    ).IsMatch("\uD801\uDC00")
+                    (await RegexHelpers.GetRegexAsync(engine, "\uD801", RegexOptions.IgnoreCase))
+                        .IsMatch("\uD801\uDC00")
                 );
                 Assert.True(
-                    (
-                        await RegexHelpers.GetRegexAsync(engine, "\uDC00", RegexOptions.IgnoreCase)
-                    ).IsMatch("\uD801\uDC00")
+                    (await RegexHelpers.GetRegexAsync(engine, "\uDC00", RegexOptions.IgnoreCase))
+                        .IsMatch("\uD801\uDC00")
                 );
             }
         }

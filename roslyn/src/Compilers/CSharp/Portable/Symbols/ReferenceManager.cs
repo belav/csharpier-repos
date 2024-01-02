@@ -550,7 +550,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // symbol hasn't been found in the cache, create a new one
                             bound.AssemblySymbol = (
                                 (AssemblyDataForMetadataOrCompilation)allAssemblyData[i]
-                            ).CreateAssemblySymbol();
+                            )
+                                .CreateAssemblySymbol();
                             newSymbols.Add(i);
                         }
 

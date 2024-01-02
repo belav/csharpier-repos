@@ -106,9 +106,8 @@ namespace System.Xml
             }
             else
             {
-                EncoderFallbackBuffer errorFallbackBuffer = (
-                    new EncoderExceptionFallback()
-                ).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknown, index);
                 return false;
             }
@@ -146,9 +145,8 @@ namespace System.Xml
             }
             else
             {
-                EncoderFallbackBuffer errorFallbackBuffer = (
-                    new EncoderExceptionFallback()
-                ).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknownHigh, charUnknownLow, index);
                 return false;
             }

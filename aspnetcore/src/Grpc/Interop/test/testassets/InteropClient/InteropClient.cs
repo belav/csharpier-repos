@@ -485,9 +485,8 @@ public class InteropClient : IDisposable
     )
     {
         Console.WriteLine("running oauth2_auth_token");
-        ITokenAccess credential = (
-            await GoogleCredential.GetApplicationDefaultAsync()
-        ).CreateScoped(new[] { oauthScope });
+        ITokenAccess credential = (await GoogleCredential.GetApplicationDefaultAsync())
+            .CreateScoped(new[] { oauthScope });
         string oauth2Token = await credential.GetAccessTokenForRequestAsync();
 
         var credentials = GoogleGrpcCredentials.FromAccessToken(oauth2Token);

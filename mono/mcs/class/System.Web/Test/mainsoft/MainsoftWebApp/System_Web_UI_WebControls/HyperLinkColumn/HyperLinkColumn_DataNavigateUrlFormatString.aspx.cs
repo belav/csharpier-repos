@@ -143,19 +143,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 ;
 
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.HyperLinkColumn)DataGrid3.Columns[0]
-                    ).DataNavigateUrlFormatString
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid3.Columns[0])
+                        .DataNavigateUrlFormatString
                 );
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.HyperLinkColumn)DataGrid3.Columns[1]
-                    ).DataNavigateUrlFormatString
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid3.Columns[1])
+                        .DataNavigateUrlFormatString
                 );
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.HyperLinkColumn)DataGrid3.Columns[2]
-                    ).DataNavigateUrlFormatString
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid3.Columns[2])
+                        .DataNavigateUrlFormatString
                 );
             }
             catch (Exception ex)
@@ -171,19 +168,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 ;
 
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.HyperLinkColumn)DataGrid4.Columns[0]
-                    ).DataNavigateUrlFormatString
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid4.Columns[0])
+                        .DataNavigateUrlFormatString
                 );
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.HyperLinkColumn)DataGrid4.Columns[1]
-                    ).DataNavigateUrlFormatString
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid4.Columns[1])
+                        .DataNavigateUrlFormatString
                 );
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.HyperLinkColumn)DataGrid4.Columns[2]
-                    ).DataNavigateUrlFormatString
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid4.Columns[2])
+                        .DataNavigateUrlFormatString
                 );
             }
             catch (Exception ex)

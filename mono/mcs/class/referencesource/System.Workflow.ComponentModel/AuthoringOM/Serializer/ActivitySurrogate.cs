@@ -304,9 +304,8 @@ namespace System.Workflow.ComponentModel.Serialization
                             WorkflowChanges.WorkflowChangeVersionProperty,
                             this.workflowChangeVersion
                         );
-                        (
-                            (IDependencyObjectAccessor)rootActivityDefinition
-                        ).InitializeDefinitionForRuntime(null);
+                        ((IDependencyObjectAccessor)rootActivityDefinition)
+                            .InitializeDefinitionForRuntime(null);
                     }
 
                     // assign it over to the thread static guy so others can access it as well.

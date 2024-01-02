@@ -17206,9 +17206,8 @@ record B(int X, int Y)
 }"
             );
 
-            var deconstruct = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>(
-                "B.Deconstruct"
-            );
+            var deconstruct = ((CSharpCompilation)verifier.Compilation)
+                .GetMember<MethodSymbol>("B.Deconstruct");
             Assert.Equal(2, deconstruct.ParameterCount);
 
             Assert.Equal(RefKind.Out, deconstruct.Parameters[0].RefKind);
@@ -26845,9 +26844,8 @@ partial record C
             Assert.Contains("X", model.LookupNames(x.SpanStart));
 
             Assert.Empty(
-                (
-                    (SynthesizedPrimaryConstructor)symbol.GetSymbol().ContainingSymbol
-                ).GetCapturedParameters()
+                ((SynthesizedPrimaryConstructor)symbol.GetSymbol().ContainingSymbol)
+                    .GetCapturedParameters()
             );
         }
 
@@ -27831,9 +27829,8 @@ True"
 }"
             );
 
-            var clone = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>(
-                "C." + WellKnownMemberNames.CloneMethodName
-            );
+            var clone = ((CSharpCompilation)verifier.Compilation)
+                .GetMember<MethodSymbol>("C." + WellKnownMemberNames.CloneMethodName);
             Assert.Equal(Accessibility.Public, clone.DeclaredAccessibility);
             Assert.False(clone.IsOverride);
             Assert.True(clone.IsVirtual);

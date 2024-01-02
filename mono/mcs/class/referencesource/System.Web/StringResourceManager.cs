@@ -35,9 +35,8 @@ namespace System.Web
             {
                 // Module.FullyQualifiedName was changed to check for FileIOPermission regardless of the name being an existing file or not.
                 // we need to Assert in order to succeed the Demand() (ASURT 121603)
-                (
-                    InternalSecurityPermissions.PathDiscovery(HttpRuntime.CodegenDirInternal)
-                ).Assert();
+                (InternalSecurityPermissions.PathDiscovery(HttpRuntime.CodegenDirInternal))
+                    .Assert();
             }
 
             string dllPath = t.Module.FullyQualifiedName;

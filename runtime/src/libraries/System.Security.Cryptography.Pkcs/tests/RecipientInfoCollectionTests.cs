@@ -204,7 +204,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "978ee2b2aab4c7b04183031d2685bf5ea32b8b48d8eef34743bdf14ba71cde56c97618d48692e59f529cd5a7922caff4ac02"
                 + "e5a856a5b28db681b0b508b9761b6fa05a5634742c3542986e4073e7932a302b06092a864886f70d010701301406082a8648"
                 + "86f70d030704081ddc958302db22518008d0f4f5bb03b69819"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
             return ecms.RecipientInfos;

@@ -1201,7 +1201,8 @@ public static class SqlServerPropertyExtensions
             ?? (
                 property.FindRelationalTypeMapping(storeObject)
                 ?? typeMappingSource?.FindMapping((IProperty)property)
-            )?.Converter;
+            )
+                ?.Converter;
 
         var type = (valueConverter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
 

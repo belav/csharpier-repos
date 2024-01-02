@@ -27,6 +27,7 @@ public class NorthwindSetOperationsQuerySqliteTest
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Client_eval_Union_FirstOrDefault(async)
                 )
-            ).Message
+            )
+                .Message
         );
 }

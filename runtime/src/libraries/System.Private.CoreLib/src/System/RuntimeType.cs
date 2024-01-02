@@ -766,13 +766,8 @@ namespace System
                 if (invokeMethod == null)
                     throw new MissingMethodException(FullName, name);
 
-                object? result = ((MethodInfo)invokeMethod).Invoke(
-                    target,
-                    bindingFlags,
-                    binder,
-                    providedArgs,
-                    culture
-                );
+                object? result = ((MethodInfo)invokeMethod)
+                    .Invoke(target, bindingFlags, binder, providedArgs, culture);
 
                 if (state != null)
                     binder.ReorderArgumentArray(ref providedArgs, state);

@@ -156,25 +156,19 @@ namespace System.Workflow.ComponentModel
                 );
 
             //work around !!!for conditions we do diff
-            object originalConditions = ((Activity)this.originalRootActivity).GetValue(
-                ConditionTypeConverter.DeclarativeConditionDynamicProp
-            );
-            object changedConditions = ((Activity)this.clonedRootActivity).GetValue(
-                ConditionTypeConverter.DeclarativeConditionDynamicProp
-            );
+            object originalConditions = ((Activity)this.originalRootActivity)
+                .GetValue(ConditionTypeConverter.DeclarativeConditionDynamicProp);
+            object changedConditions = ((Activity)this.clonedRootActivity)
+                .GetValue(ConditionTypeConverter.DeclarativeConditionDynamicProp);
             if (null != originalConditions)
                 this.modelChangeActions.AddRange(
-                    ((IWorkflowChangeDiff)originalConditions).Diff(
-                        originalConditions,
-                        changedConditions
-                    )
+                    ((IWorkflowChangeDiff)originalConditions)
+                        .Diff(originalConditions, changedConditions)
                 );
             else if (null != changedConditions)
                 this.modelChangeActions.AddRange(
-                    ((IWorkflowChangeDiff)changedConditions).Diff(
-                        originalConditions,
-                        changedConditions
-                    )
+                    ((IWorkflowChangeDiff)changedConditions)
+                        .Diff(originalConditions, changedConditions)
                 );
 
             // diff the process model
@@ -190,29 +184,23 @@ namespace System.Workflow.ComponentModel
 
             // cache the change actions into the new workflow definition
             ArrayList workflowChanges = (ArrayList)
-                ((Activity)this.clonedRootActivity).GetValue(
-                    WorkflowChanges.WorkflowChangeActionsProperty
-                );
+                ((Activity)this.clonedRootActivity)
+                    .GetValue(WorkflowChanges.WorkflowChangeActionsProperty);
             if (workflowChanges == null)
             {
                 workflowChanges = new ArrayList();
-                ((Activity)this.clonedRootActivity).SetValue(
-                    WorkflowChanges.WorkflowChangeActionsProperty,
-                    workflowChanges
-                );
+                ((Activity)this.clonedRootActivity)
+                    .SetValue(WorkflowChanges.WorkflowChangeActionsProperty, workflowChanges);
             }
 
             workflowChanges.AddRange(this.modelChangeActions);
-            ((Activity)this.clonedRootActivity).SetValue(
-                WorkflowChanges.WorkflowChangeVersionProperty,
-                Guid.NewGuid()
-            );
+            ((Activity)this.clonedRootActivity)
+                .SetValue(WorkflowChanges.WorkflowChangeVersionProperty, Guid.NewGuid());
             this.saved = true;
 
             // now initialize for runtime
-            ((IDependencyObjectAccessor)this.clonedRootActivity).InitializeDefinitionForRuntime(
-                null
-            );
+            ((IDependencyObjectAccessor)this.clonedRootActivity)
+                .InitializeDefinitionForRuntime(null);
         }
 
         internal void ApplyTo(Activity activity)
@@ -354,9 +342,8 @@ namespace System.Workflow.ComponentModel
                     }
                     // fixup meta properties and notify changes
                     // if the context activity is the one that's being removed, we do not fixup the meta properties.
-                    Activity clonedActivity = ((Activity)this.clonedRootActivity).GetActivityByName(
-                        contextActivity.QualifiedName
-                    );
+                    Activity clonedActivity = ((Activity)this.clonedRootActivity)
+                        .GetActivityByName(contextActivity.QualifiedName);
                     if (clonedActivity != null)
                         contextActivity.FixUpMetaProperties(clonedActivity);
                     NotifyChangesToChildExecutors(
@@ -464,9 +451,8 @@ namespace System.Workflow.ComponentModel
         {
             // check if the update is allowed on this root-activity.
             ActivityCondition dynamicUpdateCondition =
-                ((Activity)workflowCoreRuntime.RootActivity).GetValue(
-                    WorkflowChanges.ConditionProperty
-                ) as ActivityCondition;
+                ((Activity)workflowCoreRuntime.RootActivity)
+                    .GetValue(WorkflowChanges.ConditionProperty) as ActivityCondition;
             if (dynamicUpdateCondition != null)
             {
                 using (workflowCoreRuntime.SetCurrentActivity(workflowCoreRuntime.RootActivity))
@@ -787,9 +773,8 @@ namespace System.Workflow.ComponentModel
 
             // deserialize change history and apply it to new definition tree
             ArrayList workflowChanges = (ArrayList)
-                ((Activity)originalRootActivity).GetValue(
-                    WorkflowChanges.WorkflowChangeActionsProperty
-                );
+                ((Activity)originalRootActivity)
+                    .GetValue(WorkflowChanges.WorkflowChangeActionsProperty);
             if (workflowChanges != null)
             {
                 workflowChanges = CloneWorkflowChangeActions(workflowChanges, originalRootActivity);
@@ -801,10 +786,8 @@ namespace System.Workflow.ComponentModel
                         bool result = action.ApplyTo((Activity)clonedRootActivity);
                         Debug.Assert(result, "ApplyTo Failed");
                     }
-                    ((Activity)clonedRootActivity).SetValue(
-                        WorkflowChanges.WorkflowChangeActionsProperty,
-                        workflowChanges
-                    );
+                    ((Activity)clonedRootActivity)
+                        .SetValue(WorkflowChanges.WorkflowChangeActionsProperty, workflowChanges);
                 }
             }
             return clonedRootActivity;
@@ -1074,9 +1057,8 @@ namespace System.Workflow.ComponentModel
                         );
                 }
                 if (ownerActivity.WorkflowCoreRuntime != null)
-                    ((IDependencyObjectAccessor)clonedAddedActivity).InitializeInstanceForRuntime(
-                        ownerActivity.WorkflowCoreRuntime
-                    );
+                    ((IDependencyObjectAccessor)clonedAddedActivity)
+                        .InitializeInstanceForRuntime(ownerActivity.WorkflowCoreRuntime);
 
                 clonedAddedActivity.SetParent(null);
                 ownerActivity.Activities.Insert(this.index, clonedAddedActivity);

@@ -460,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             otherPartialClauses ??= ArrayBuilder<
                                 ImmutableArray<TypeParameterConstraintClause>
                             >.GetInstance()
-                        ).Add(constraints);
+                        )
+                            .Add(constraints);
                     }
                 }
 
@@ -580,7 +581,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             otherPartialClauses ??= ArrayBuilder<
                                 ImmutableArray<TypeParameterConstraintClause>
                             >.GetInstance()
-                        ).Add(constraints);
+                        )
+                            .Add(constraints);
                     }
                 }
 
@@ -2623,9 +2625,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     )
                                 )
                                 && Conversions.HasIdentityConversion(
-                                    ((NamedTypeSymbol)returnTypeOriginalDefinition).Construct(
-                                        ImmutableArray.Create(elementType)
-                                    ),
+                                    ((NamedTypeSymbol)returnTypeOriginalDefinition)
+                                        .Construct(ImmutableArray.Create(elementType)),
                                     returnType
                                 )
                             )

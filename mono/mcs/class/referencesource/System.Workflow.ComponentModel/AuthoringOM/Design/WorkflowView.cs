@@ -1115,10 +1115,8 @@ namespace System.Workflow.ComponentModel.Design
                     try
                     {
                         if (
-                            ((IWorkflowDesignerMessageSink)filter).OnPaintWorkflowAdornments(
-                                e,
-                                ViewPortRectangle
-                            )
+                            ((IWorkflowDesignerMessageSink)filter)
+                                .OnPaintWorkflowAdornments(e, ViewPortRectangle)
                         )
                             break;
                     }
@@ -1841,10 +1839,8 @@ namespace System.Workflow.ComponentModel.Design
                                 )
                             )
                             {
-                                ((IWorkflowDesignerMessageSink)workflowView.RootDesigner).OnPaint(
-                                    paintEventArgs,
-                                    viewPortData.LogicalViewPort
-                                );
+                                ((IWorkflowDesignerMessageSink)workflowView.RootDesigner)
+                                    .OnPaint(paintEventArgs, viewPortData.LogicalViewPort);
                             }
                         }
                         catch (Exception e)
@@ -1877,10 +1873,8 @@ namespace System.Workflow.ComponentModel.Design
                             try
                             {
                                 if (
-                                    ((IWorkflowDesignerMessageSink)filter).OnPaint(
-                                        paintArgs,
-                                        viewPortData.LogicalViewPort
-                                    )
+                                    ((IWorkflowDesignerMessageSink)filter)
+                                        .OnPaint(paintArgs, viewPortData.LogicalViewPort)
                                 )
                                     break;
                             }
@@ -2094,10 +2088,8 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         try
                         {
-                            ((IWorkflowDesignerMessageSink)filter).OnScroll(
-                                scrollBar,
-                                scrollBar.Value
-                            );
+                            ((IWorkflowDesignerMessageSink)filter)
+                                .OnScroll(scrollBar, scrollBar.Value);
                         }
                         catch (Exception ex)
                         {

@@ -918,9 +918,8 @@ namespace System.Xml.Serialization
                     xmlName = ((XmlEnumAttribute)atts[0]).Name;
                 if (xmlName == null)
                     xmlName = name;
-                long value = ((IConvertible)field.GetValue(null)).ToInt64(
-                    CultureInfo.InvariantCulture
-                );
+                long value = ((IConvertible)field.GetValue(null))
+                    .ToInt64(CultureInfo.InvariantCulture);
                 members.Add(new EnumMap.EnumMapMember(xmlName, name, value));
             }
 

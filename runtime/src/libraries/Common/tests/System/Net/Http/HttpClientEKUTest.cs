@@ -153,7 +153,8 @@ namespace System.Net.Http.Functional.Tests
                         options.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false),
                         server.Port
                     )
-                ).ToString();
+                )
+                    .ToString();
 
                 Console.WriteLine("[E2E testing] - Using hostname {0}", hostName);
                 return hostName;

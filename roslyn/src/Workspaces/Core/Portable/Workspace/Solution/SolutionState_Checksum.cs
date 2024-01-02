@@ -197,7 +197,8 @@ namespace Microsoft.CodeAnalysis
                             await FrozenSourceGeneratedDocumentState
                                 .GetStateChecksumsAsync(cancellationToken)
                                 .ConfigureAwait(false)
-                        ).Text;
+                        )
+                            .Text;
                     }
 
                     var analyzerReferenceChecksums = ChecksumCache.GetOrCreateChecksumCollection(

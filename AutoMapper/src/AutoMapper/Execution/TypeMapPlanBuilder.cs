@@ -340,7 +340,8 @@ public ref struct TypeMapPlanBuilder
         var destination = (
             (MemberExpression)
                 _configuration.ConvertReplaceParameters(pathMap.DestinationExpression, _destination)
-        ).Expression;
+        )
+            .Expression;
         var pathMapFunc = CreatePropertyMapFunc(pathMap, destination, pathMap.MemberPath.Last);
         _expressions.Clear();
         foreach (var member in destination.GetMemberExpressions())
@@ -950,11 +951,12 @@ public class ClassTypeConverter : TypeConverter
             openMapConfig.SourceType.IsGenericTypeDefinition
                 ? closedTypes.SourceType.GenericTypeArguments
                 : Type.EmptyTypes
-        ).Concat(
-            openMapConfig.DestinationType.IsGenericTypeDefinition
-                ? closedTypes.DestinationType.GenericTypeArguments
-                : Type.EmptyTypes
-        );
+        )
+            .Concat(
+                openMapConfig.DestinationType.IsGenericTypeDefinition
+                    ? closedTypes.DestinationType.GenericTypeArguments
+                    : Type.EmptyTypes
+            );
         var neededParameters = ConverterType.GenericParametersCount();
         ConverterType = ConverterType.MakeGenericType(typeParams.Take(neededParameters).ToArray());
     }

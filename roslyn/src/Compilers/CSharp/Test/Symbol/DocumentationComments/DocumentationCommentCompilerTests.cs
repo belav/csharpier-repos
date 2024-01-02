@@ -34,9 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 source,
                 references,
                 targetFramework: TargetFramework.Mscorlib40,
-                options: (options ?? TestOptions.ReleaseDll).WithXmlReferenceResolver(
-                    XmlFileResolver.Default
-                ),
+                options: (options ?? TestOptions.ReleaseDll)
+                    .WithXmlReferenceResolver(XmlFileResolver.Default),
                 parseOptions: TestOptions.RegularWithDocumentationComments,
                 assemblyName: assemblyName
             );

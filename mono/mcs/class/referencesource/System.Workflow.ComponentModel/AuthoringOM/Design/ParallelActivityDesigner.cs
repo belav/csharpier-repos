@@ -164,7 +164,8 @@ namespace System.Workflow.ComponentModel.Design
                 nextObject = (
                     (ActivityDesigner)
                         containedDesigners[(index > 0) ? index - 1 : containedDesigners.Count - 1]
-                ).Activity;
+                )
+                    .Activity;
             else if (
                 direction == DesignerNavigationDirection.Right
                 && index <= containedDesigners.Count - 1
@@ -172,7 +173,8 @@ namespace System.Workflow.ComponentModel.Design
                 nextObject = (
                     (ActivityDesigner)
                         containedDesigners[(index < containedDesigners.Count - 1) ? index + 1 : 0]
-                ).Activity;
+                )
+                    .Activity;
 
             return nextObject;
         }

@@ -93,9 +93,8 @@ namespace MonoTests.System.DirectoryServices
                 "Class"
             );
             ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnBarakTsabari.Properties["cn"].Value = "Barak Tsabari";
             cnBarakTsabari.Properties["facsimileTelephoneNumber"].Value = "+1 906 777 8853";
             ((PropertyValueCollection)cnBarakTsabari.Properties["ou"]).Add("Human Resources");
@@ -115,9 +114,8 @@ namespace MonoTests.System.DirectoryServices
 
             DirectoryEntry cnYossiCohen = ouRnD.Children.Add("cn=Yossi Cohen", "Class");
             ((PropertyValueCollection)cnYossiCohen.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnYossiCohen.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnYossiCohen.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnYossiCohen.Properties["cn"].Value = "Yossi Cohen";
             cnYossiCohen.Properties["facsimileTelephoneNumber"].Value = "+1 503 777 4498";
             ((PropertyValueCollection)cnYossiCohen.Properties["ou"]).Add("R&D");
@@ -128,9 +126,8 @@ namespace MonoTests.System.DirectoryServices
 
             DirectoryEntry cnUziCohen = ouRnD.Children.Add("cn=Uzi Cohen", "Class");
             ((PropertyValueCollection)cnUziCohen.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnUziCohen.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnUziCohen.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnUziCohen.Properties["cn"].Value = "Uzi Cohen";
             cnUziCohen.Properties["facsimileTelephoneNumber"].Value = "+1 602 333 1234";
             ((PropertyValueCollection)cnUziCohen.Properties["ou"]).Add("R&D");
@@ -141,9 +138,8 @@ namespace MonoTests.System.DirectoryServices
 
             DirectoryEntry cnDanielCohen = ouRnD.Children.Add("cn=Daniel Cohen", "Class");
             ((PropertyValueCollection)cnDanielCohen.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnDanielCohen.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnDanielCohen.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnDanielCohen.Properties["cn"].Value = "Daniel Cohen";
             cnDanielCohen.Properties["facsimileTelephoneNumber"].Value = "+1 602 333 1235";
             ((PropertyValueCollection)cnDanielCohen.Properties["ou"]).Add("R&D");
@@ -154,9 +150,8 @@ namespace MonoTests.System.DirectoryServices
 
             DirectoryEntry cnSaraCohen = ouRnD.Children.Add("cn=Sara Cohen", "Class");
             ((PropertyValueCollection)cnSaraCohen.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnSaraCohen.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnSaraCohen.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnSaraCohen.Properties["cn"].Value = "Sara Cohen";
             cnSaraCohen.Properties["facsimileTelephoneNumber"].Value = "+1 602 333 1244";
             ((PropertyValueCollection)cnSaraCohen.Properties["ou"]).Add("R&D");
@@ -176,9 +171,8 @@ namespace MonoTests.System.DirectoryServices
 
             DirectoryEntry cnDanielSmith = ouDevQA.Children.Add("cn=Daniel Smith", "Class");
             ((PropertyValueCollection)cnDanielSmith.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnDanielSmith.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnDanielSmith.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnDanielSmith.Properties["cn"].Value = "Daniel Smith";
             cnDanielSmith.Properties["facsimileTelephoneNumber"].Value = "+1 408 555 3372";
             cnDanielSmith.Properties["l"].Value = "Santa Clara";
@@ -190,9 +184,8 @@ namespace MonoTests.System.DirectoryServices
 
             DirectoryEntry cnDanielMorgan = ouDevQA.Children.Add("cn=Daniel Morgan", "Class");
             ((PropertyValueCollection)cnDanielMorgan.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnDanielMorgan.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnDanielMorgan.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnDanielMorgan.Properties["cn"].Value = "Daniel Morgan";
             cnDanielMorgan.Properties["facsimileTelephoneNumber"].Value = "+1 805 666 5645";
             ((PropertyValueCollection)cnDanielMorgan.Properties["ou"]).Add("DevQA");
@@ -213,9 +206,8 @@ namespace MonoTests.System.DirectoryServices
 
             DirectoryEntry cnUziCohen_ = cnManager.Children.Add("cn=Uzi Cohen", "Class");
             ((PropertyValueCollection)cnUziCohen_.Properties["objectClass"]).Add("person");
-            ((PropertyValueCollection)cnUziCohen_.Properties["objectClass"]).Add(
-                "organizationalPerson"
-            );
+            ((PropertyValueCollection)cnUziCohen_.Properties["objectClass"])
+                .Add("organizationalPerson");
             cnUziCohen_.Properties["cn"].Value = "Uzi Cohen";
             cnUziCohen_.Properties["facsimileTelephoneNumber"].Value = "+1 602 333 1234";
             ((PropertyValueCollection)cnUziCohen_.Properties["ou"]).Add("R&D");
@@ -477,9 +469,8 @@ namespace MonoTests.System.DirectoryServices
                     using (DirectoryEntry secondResultDE = secondResult.GetDirectoryEntry())
                     {
                         Assert.AreEqual(
-                            (
-                                (PropertyValueCollection)secondResultDE.Properties["description"]
-                            ).Value,
+                            ((PropertyValueCollection)secondResultDE.Properties["description"])
+                                .Value,
                             oldValue
                         );
 
@@ -508,9 +499,8 @@ namespace MonoTests.System.DirectoryServices
                         // LAMESPEC : according to documentation, the value retrieved should be the new one,
                         // but actually it is an old one
                         Assert.AreEqual(
-                            (
-                                (PropertyValueCollection)secondResultDE.Properties["description"]
-                            ).Value,
+                            ((PropertyValueCollection)secondResultDE.Properties["description"])
+                                .Value,
                             oldValue
                         );
 

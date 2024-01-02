@@ -374,9 +374,8 @@ namespace System.Web.Hosting
             //
             if (appHost is ISAPIApplicationHost && !ServerConfig.UseMetabase)
             {
-                string rootWebConfigPath = (
-                    (ISAPIApplicationHost)appHost
-                ).ResolveRootWebConfigPath();
+                string rootWebConfigPath = ((ISAPIApplicationHost)appHost)
+                    .ResolveRootWebConfigPath();
                 if (!String.IsNullOrEmpty(rootWebConfigPath))
                 {
                     Debug.Assert(File.Exists(rootWebConfigPath), "File.Exists(rootWebConfigPath)");
@@ -386,9 +385,8 @@ namespace System.Web.Hosting
                 // we need to explicit create a COM proxy in this app domain
                 // so we don't go back to the default domain or have lifetime issues
                 // remember support functions
-                IProcessHostSupportFunctions proxyFunctions = (
-                    (ISAPIApplicationHost)appHost
-                ).SupportFunctions;
+                IProcessHostSupportFunctions proxyFunctions = ((ISAPIApplicationHost)appHost)
+                    .SupportFunctions;
                 if (null != proxyFunctions)
                 {
                     _functions = Misc.CreateLocalSupportFunctions(proxyFunctions);

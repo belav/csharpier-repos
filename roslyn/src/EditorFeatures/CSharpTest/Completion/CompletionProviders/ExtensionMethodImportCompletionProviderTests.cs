@@ -55,15 +55,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
 
         public static IEnumerable<object[]> ReferenceTypeData =>
-            (new[] { ReferenceType.None, ReferenceType.Project, ReferenceType.Metadata }).Select(
-                refType => new[] { (object)refType }
-            );
+            (new[] { ReferenceType.None, ReferenceType.Project, ReferenceType.Metadata })
+                .Select(refType => new[] { (object)refType });
 
         public static IEnumerable<object[]> AllTypeKindsWithReferenceTypeData =>
             CombineWithReferenceTypeData(
-                (new[] { "class", "struct", "interface", "enum", "abstract class" }).Select(
-                    kind => new List<object>() { kind }
-                )
+                (new[] { "class", "struct", "interface", "enum", "abstract class" })
+                    .Select(kind => new List<object>() { kind })
             );
 
         private static IEnumerable<List<object>> BuiltInTypes
@@ -533,9 +531,8 @@ namespace Foo
 
         public static IEnumerable<object[]> TupleWithRefTypeData =>
             CombineWithReferenceTypeData(
-                (new[] { "(int, int)", "(int, (int, int))", "(string a, string b)" }).Select(
-                    tuple => new List<object>() { tuple }
-                )
+                (new[] { "(int, int)", "(int, (int, int))", "(string a, string b)" })
+                    .Select(tuple => new List<object>() { tuple })
             );
 
         [MemberData(nameof(TupleWithRefTypeData))]
@@ -579,10 +576,8 @@ namespace Baz
 
         public static IEnumerable<object[]> DerivableTypeKindsWithReferenceTypeData =>
             CombineWithReferenceTypeData(
-                (new[] { "class", "interface", "abstract class" }).Select(kind => new List<object>()
-                {
-                    kind
-                })
+                (new[] { "class", "interface", "abstract class" })
+                    .Select(kind => new List<object>() { kind })
             );
 
         [MemberData(nameof(DerivableTypeKindsWithReferenceTypeData))]
@@ -630,9 +625,8 @@ namespace Foo
 
         public static IEnumerable<object[]> BounedGenericTypeWithRefTypeData =>
             CombineWithReferenceTypeData(
-                (new[] { "IEnumerable<string>", "List<string>", "string[]" }).Select(
-                    tuple => new List<object>() { tuple }
-                )
+                (new[] { "IEnumerable<string>", "List<string>", "string[]" })
+                    .Select(tuple => new List<object>() { tuple })
             );
 
         [MemberData(nameof(BounedGenericTypeWithRefTypeData))]
@@ -678,9 +672,8 @@ namespace Baz
 
         public static IEnumerable<object[]> TypeParameterWithRefTypeData =>
             CombineWithReferenceTypeData(
-                (new[] { "IEnumerable<string>", "int", "Bat", "Bat" }).Select(
-                    tuple => new List<object>() { tuple }
-                )
+                (new[] { "IEnumerable<string>", "int", "Bat", "Bat" })
+                    .Select(tuple => new List<object>() { tuple })
             );
 
         [MemberData(nameof(TypeParameterWithRefTypeData))]

@@ -814,9 +814,8 @@ namespace System.Net.Mail
                     _host,
                     _connection._clientCertificates
                 );
-                IAsyncResult result = (
-                    (TlsStream)_connection._networkStream
-                ).BeginAuthenticateAsClient(TlsStreamAuthenticateCallback, this);
+                IAsyncResult result = ((TlsStream)_connection._networkStream)
+                    .BeginAuthenticateAsClient(TlsStreamAuthenticateCallback, this);
                 if (result.CompletedSynchronously)
                 {
                     ((TlsStream)_connection._networkStream).EndAuthenticateAsClient(result);

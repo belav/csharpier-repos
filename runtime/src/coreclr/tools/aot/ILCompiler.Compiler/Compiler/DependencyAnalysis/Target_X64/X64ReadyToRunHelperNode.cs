@@ -54,7 +54,8 @@ namespace ILCompiler.DependencyAnalysis
                             (
                                 (NativeSequencePoint[])
                                     ((INodeWithDebugInfo)this).GetNativeSequencePoints()
-                            )[1].NativeOffset == encoder.Builder.CountBytes
+                            )[1]
+                                .NativeOffset == encoder.Builder.CountBytes
                         );
 
                         AddrMode jmpAddrMode = new AddrMode(

@@ -1017,7 +1017,8 @@ namespace System.ServiceModel.WasHosting
                 {
                     string protocol = (
                         (string)binding[MetabaseSettingsIis7Constants.ProtocolAttributeName]
-                    ).ToLowerInvariant();
+                    )
+                        .ToLowerInvariant();
                     string bindingInformation = (string)
                         binding[MetabaseSettingsIis7Constants.BindingInfoAttributeName];
                     Debug.Print(

@@ -53,7 +53,8 @@ public class SpatialQuerySqlServerGeometryFixture : SpatialQuerySqlServerFixture
                     (RelationalTypeMapping)
                         base.FindMapping(typeof(Point))
                             .WithComposedConverter(new GeoPointConverter())
-                ).WithStoreTypeAndSize("geometry", null)
+                )
+                    .WithStoreTypeAndSize("geometry", null)
                 : base.FindMapping(mappingInfo);
     }
 }

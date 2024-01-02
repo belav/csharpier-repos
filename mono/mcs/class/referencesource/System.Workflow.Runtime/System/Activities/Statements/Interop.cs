@@ -414,7 +414,8 @@ namespace System.Activities.Statements
                 (
                     (System.Workflow.ComponentModel.IDependencyObjectAccessor)
                         this.ComponentModelActivity
-                ).InitializeDefinitionForRuntime(null);
+                )
+                    .InitializeDefinitionForRuntime(null);
             }
             if (!this.ComponentModelActivity.Enabled)
             {

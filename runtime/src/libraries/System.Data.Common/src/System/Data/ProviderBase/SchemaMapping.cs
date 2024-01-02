@@ -1317,9 +1317,8 @@ namespace System.Data.ProviderBase
                 object value = schemaRow[column];
                 if (DBNull.Value != value)
                 {
-                    targetColumn.AutoIncrementSeed = ((IConvertible)value).ToInt64(
-                        CultureInfo.InvariantCulture
-                    );
+                    targetColumn.AutoIncrementSeed = ((IConvertible)value)
+                        .ToInt64(CultureInfo.InvariantCulture);
                 }
             }
 
@@ -1329,9 +1328,8 @@ namespace System.Data.ProviderBase
                 object value = schemaRow[column];
                 if (DBNull.Value != value)
                 {
-                    targetColumn.AutoIncrementStep = ((IConvertible)value).ToInt64(
-                        CultureInfo.InvariantCulture
-                    );
+                    targetColumn.AutoIncrementStep = ((IConvertible)value)
+                        .ToInt64(CultureInfo.InvariantCulture);
                 }
             }
 
@@ -1352,9 +1350,8 @@ namespace System.Data.ProviderBase
                 object value = schemaRow[column];
                 if (DBNull.Value != value)
                 {
-                    targetColumn.Namespace = ((IConvertible)value).ToString(
-                        CultureInfo.InvariantCulture
-                    );
+                    targetColumn.Namespace = ((IConvertible)value)
+                        .ToString(CultureInfo.InvariantCulture);
                 }
             }
 
@@ -1364,9 +1361,8 @@ namespace System.Data.ProviderBase
                 object value = schemaRow[column];
                 if (DBNull.Value != value)
                 {
-                    targetColumn.Expression = ((IConvertible)value).ToString(
-                        CultureInfo.InvariantCulture
-                    );
+                    targetColumn.Expression = ((IConvertible)value)
+                        .ToString(CultureInfo.InvariantCulture);
                 }
             }
         }

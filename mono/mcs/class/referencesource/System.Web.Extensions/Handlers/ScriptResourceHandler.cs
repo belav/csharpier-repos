@@ -741,19 +741,20 @@ namespace System.Web.Handlers
                 bool zip
             )
             {
-                return ((IScriptResourceHandler)this).GetScriptResourceUrl(
-                    new List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>>()
-                    {
-                        new Tuple<Assembly, List<Tuple<string, CultureInfo>>>(
-                            assembly,
-                            new List<Tuple<string, CultureInfo>>()
-                            {
-                                new Tuple<string, CultureInfo>(resourceName, culture)
-                            }
-                        )
-                    },
-                    zip
-                );
+                return ((IScriptResourceHandler)this)
+                    .GetScriptResourceUrl(
+                        new List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>>()
+                        {
+                            new Tuple<Assembly, List<Tuple<string, CultureInfo>>>(
+                                assembly,
+                                new List<Tuple<string, CultureInfo>>()
+                                {
+                                    new Tuple<string, CultureInfo>(resourceName, culture)
+                                }
+                            )
+                        },
+                        zip
+                    );
             }
 
             string IScriptResourceHandler.GetScriptResourceUrl(

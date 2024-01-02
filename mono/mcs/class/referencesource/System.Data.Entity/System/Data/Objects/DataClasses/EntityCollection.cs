@@ -201,9 +201,8 @@ namespace System.Data.Objects.DataClasses
                         .AssociationSetEnds[this.ToEndMember.Name]
                         .EntitySet;
                     EntityType associationEndType = (EntityType)
-                        (
-                            (RefType)((AssociationEndMember)this.ToEndMember).TypeUsage.EdmType
-                        ).ElementType;
+                        ((RefType)((AssociationEndMember)this.ToEndMember).TypeUsage.EdmType)
+                            .ElementType;
                     EntityType entitySetType = singleEntitySet.ElementType;
 
                     // the type is constrained to be either the entitySet.ElementType or the end member type, whichever is most derived

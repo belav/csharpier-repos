@@ -347,9 +347,8 @@ namespace System.Data.OleDb
                     object activeConnection;
 
                     Bid.Trace("<oledb.Recordset15.get_ActiveConnection|API|ADODB>\n");
-                    activeConnection = (
-                        (UnsafeNativeMethods.Recordset15)adodb
-                    ).get_ActiveConnection();
+                    activeConnection = ((UnsafeNativeMethods.Recordset15)adodb)
+                        .get_ActiveConnection();
 
                     if (null == activeConnection)
                     {
@@ -395,10 +394,8 @@ namespace System.Data.OleDb
                         object nextresult;
 
                         Bid.Trace("<oledb.Recordset15.NextRecordset|API|ADODB>\n");
-                        OleDbHResult hr = ((UnsafeNativeMethods.Recordset15)adodb).NextRecordset(
-                            out recordsAffected,
-                            out nextresult
-                        ); // MDAC 78415
+                        OleDbHResult hr = ((UnsafeNativeMethods.Recordset15)adodb)
+                            .NextRecordset(out recordsAffected, out nextresult); // MDAC 78415
                         Bid.Trace(
                             "<oledb.Recordset15.NextRecordset|API|ADODB|RET> %08X{HRESULT}\n",
                             hr

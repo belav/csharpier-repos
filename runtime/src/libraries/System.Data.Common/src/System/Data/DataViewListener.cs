@@ -112,17 +112,15 @@ namespace System.Data
                 var handlerChildRelation = new CollectionChangeEventHandler(
                     ChildRelationCollectionChanged
                 );
-                (
-                    (DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)
-                ).RelationPropertyChanged += handlerChildRelation;
+                ((DataRelationCollection.DataTableRelationCollection)(table.ChildRelations))
+                    .RelationPropertyChanged += handlerChildRelation;
                 table.ChildRelations.CollectionChanged += handlerChildRelation;
 
                 var handlerParentRelation = new CollectionChangeEventHandler(
                     ParentRelationCollectionChanged
                 );
-                (
-                    (DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)
-                ).RelationPropertyChanged += handlerParentRelation;
+                ((DataRelationCollection.DataTableRelationCollection)(table.ParentRelations))
+                    .RelationPropertyChanged += handlerParentRelation;
                 table.ParentRelations.CollectionChanged += handlerParentRelation;
             }
         }
@@ -144,16 +142,14 @@ namespace System.Data
 
                 CollectionChangeEventHandler handlerChildRelation =
                     new CollectionChangeEventHandler(ChildRelationCollectionChanged);
-                (
-                    (DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)
-                ).RelationPropertyChanged -= handlerChildRelation;
+                ((DataRelationCollection.DataTableRelationCollection)(table.ChildRelations))
+                    .RelationPropertyChanged -= handlerChildRelation;
                 table.ChildRelations.CollectionChanged -= handlerChildRelation;
 
                 CollectionChangeEventHandler handlerParentRelation =
                     new CollectionChangeEventHandler(ParentRelationCollectionChanged);
-                (
-                    (DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)
-                ).RelationPropertyChanged -= handlerParentRelation;
+                ((DataRelationCollection.DataTableRelationCollection)(table.ParentRelations))
+                    .RelationPropertyChanged -= handlerParentRelation;
                 table.ParentRelations.CollectionChanged -= handlerParentRelation;
 
                 if (updateListeners)

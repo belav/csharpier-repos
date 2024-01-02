@@ -156,9 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 {
                                     size = int32Value;
 
-                                    TypeSymbol elementType = (
-                                        (PointerTypeSymbol)this.Type
-                                    ).PointedAtType;
+                                    TypeSymbol elementType = ((PointerTypeSymbol)this.Type)
+                                        .PointedAtType;
                                     int elementSize = elementType.FixedBufferElementSizeInBytes();
                                     long totalSize = elementSize * 1L * int32Value;
                                     if (totalSize > int.MaxValue)

@@ -610,7 +610,8 @@ WHERE EXISTS (
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Delete_with_cross_apply(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Delete_with_outer_apply(bool async) =>
@@ -620,7 +621,8 @@ WHERE EXISTS (
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Delete_with_outer_apply(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Update_Where_set_constant_TagWith(bool async)
@@ -1331,7 +1333,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Update_with_cross_apply_set_constant(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Update_with_outer_apply_set_constant(bool async) =>
@@ -1341,7 +1344,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Update_with_outer_apply_set_constant(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     [ConditionalTheory(Skip = "Issue#28886")]
@@ -1375,7 +1379,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Update_with_cross_join_cross_apply_set_constant(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Update_with_cross_join_outer_apply_set_constant(bool async) =>
@@ -1385,7 +1390,8 @@ WHERE "c"."CustomerID" LIKE 'F%'
                 await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Update_with_cross_join_outer_apply_set_constant(async)
                 )
-            ).Message
+            )
+                .Message
         );
 
     public override async Task Update_FromSql_set_constant(bool async)

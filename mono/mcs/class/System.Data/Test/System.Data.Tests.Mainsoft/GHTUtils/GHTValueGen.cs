@@ -751,19 +751,18 @@ namespace GHTUtils
                                     {
                                         if (isPrimitive(prmType1) && isPrimitive(prmType2))
                                         {
-                                            ((IDictionary)new_obj).Add(
-                                                GetRandomValue(prmType1),
-                                                GetRandomValue(prmType2)
-                                            );
+                                            ((IDictionary)new_obj)
+                                                .Add(
+                                                    GetRandomValue(prmType1),
+                                                    GetRandomValue(prmType2)
+                                                );
                                         }
                                         else
                                         {
                                             object prm_obj1 = Activator_CreateInstance(prmType1);
                                             object prm_obj2 = Activator_CreateInstance(prmType2);
-                                            ((IDictionary)new_obj).Add(
-                                                Generate(prm_obj1),
-                                                Generate(prm_obj2)
-                                            );
+                                            ((IDictionary)new_obj)
+                                                .Add(Generate(prm_obj1), Generate(prm_obj2));
                                         }
                                     }
                                 }
@@ -893,19 +892,18 @@ namespace GHTUtils
                                     {
                                         if (isPrimitive(prmType1) && isPrimitive(prmType2))
                                         {
-                                            ((IDictionary)new_obj).Add(
-                                                GetRandomValue(prmType1),
-                                                GetRandomValue(prmType2)
-                                            );
+                                            ((IDictionary)new_obj)
+                                                .Add(
+                                                    GetRandomValue(prmType1),
+                                                    GetRandomValue(prmType2)
+                                                );
                                         }
                                         else
                                         {
                                             object prm_obj1 = Activator_CreateInstance(prmType1);
                                             object prm_obj2 = Activator_CreateInstance(prmType2);
-                                            ((IDictionary)new_obj).Add(
-                                                Generate(prm_obj1),
-                                                Generate(prm_obj2)
-                                            );
+                                            ((IDictionary)new_obj)
+                                                .Add(Generate(prm_obj1), Generate(prm_obj2));
                                         }
                                     }
                                     prop.SetValue(obj, new_obj, null);
@@ -1118,7 +1116,8 @@ namespace GHTUtils
                         {
                             //object prm_obj = Activator_CreateInstance( prmType1 );
                             //((IList)new_obj).Add( Generate( prm_obj ) );
-                            ((IList)new_obj).Add(GHTTypeGenerator(prmType1));
+                            ((IList)new_obj)
+                                .Add(GHTTypeGenerator(prmType1));
                         }
                     }
                     return new_obj;
@@ -1132,10 +1131,8 @@ namespace GHTUtils
                         {
                             if (isPrimitive(prmType1) && isPrimitive(prmType2))
                             {
-                                ((IDictionary)new_obj).Add(
-                                    GetRandomValue(prmType1),
-                                    GetRandomValue(prmType2)
-                                );
+                                ((IDictionary)new_obj)
+                                    .Add(GetRandomValue(prmType1), GetRandomValue(prmType2));
                             }
                             else
                             {

@@ -234,15 +234,15 @@ namespace System.Security.Claims
 
                 if (((SamlNameIdentifierClaimResource)claim.Resource).Format != null)
                 {
-                    samlNameIdentifierFormat = (
-                        (SamlNameIdentifierClaimResource)claim.Resource
-                    ).Format;
+                    samlNameIdentifierFormat = ((SamlNameIdentifierClaimResource)claim.Resource)
+                        .Format;
                 }
                 if (((SamlNameIdentifierClaimResource)claim.Resource).NameQualifier != null)
                 {
                     samlNameIdentifierNameQualifier = (
                         (SamlNameIdentifierClaimResource)claim.Resource
-                    ).NameQualifier;
+                    )
+                        .NameQualifier;
                 }
             }
             else if (

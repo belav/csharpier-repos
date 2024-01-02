@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     let statement = token.GetAncestor<TStatementSyntax>()
                     where statement != null
                     select statement
-                ).ToSet();
+                )
+                    .ToSet();
 
                 if (referencingStatements.Count == 0)
                 {

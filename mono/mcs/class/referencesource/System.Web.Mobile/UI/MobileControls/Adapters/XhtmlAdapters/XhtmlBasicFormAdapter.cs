@@ -256,9 +256,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             Control ctl = control.Parent as MobileControl;
             while (ctl != null)
             {
-                String cssClass = ((IAttributeAccessor)ctl).GetAttribute(
-                    XhtmlConstants.CssClassCustomAttribute
-                );
+                String cssClass = ((IAttributeAccessor)ctl)
+                    .GetAttribute(XhtmlConstants.CssClassCustomAttribute);
                 if (cssClass != null && cssClass.Length > 0)
                 {
                     if ((String)Device["usePOverDiv"] == "true")

@@ -1473,7 +1473,8 @@ namespace Newtonsoft.Json
                 value == null
                     ? _writer.WriteAsync(JsonConvert.Null, cancellationToken)
                     : WriteEscapedStringAsync(value, true, cancellationToken)
-            ).ConfigureAwait(false);
+            )
+                .ConfigureAwait(false);
         }
 
         /// <summary>

@@ -48,7 +48,8 @@ public static class ObjectFactory
             let args = ctor.GetParameters()
             where args.All(p => p.IsOptional)
             select (ctor, args)
-        ).FirstOrDefault();
+        )
+            .FirstOrDefault();
         if (ctorWithOptionalArgs.args == null)
         {
             return InvalidType(

@@ -346,7 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 compilation.GetWellKnownTypeMember(
                                     WellKnownMember.System_Collections_IList__get_Item
                                 )!
-                        ).AssociatedSymbol,
+                        )
+                            .AssociatedSymbol,
                     generateIndexer,
                     generateNotSupportedException
                 )
@@ -451,7 +452,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetSpecialTypeMember(
                                 SpecialMember.System_Collections_Generic_IEnumerable_T__GetEnumerator
                             )!
-                    ).AsMember(iEnumerableT),
+                    )
+                        .AsMember(iEnumerableT),
                     generateGetEnumeratorT
                 )
             );
@@ -464,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_IReadOnlyCollection_T__Count
                             )!
-                    ).AsMember(iReadOnlyCollectionT),
+                    )
+                        .AsMember(iReadOnlyCollectionT),
                     generateCount
                 )
             );
@@ -479,8 +482,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     compilation.GetWellKnownTypeMember(
                                         WellKnownMember.System_Collections_Generic_IReadOnlyList_T__get_Item
                                     )!
-                            ).AssociatedSymbol
-                    ).AsMember(iReadOnlyListT),
+                            )
+                                .AssociatedSymbol
+                    )
+                        .AsMember(iReadOnlyListT),
                     generateIndexer
                 )
             );
@@ -493,7 +498,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_ICollection_T__Count
                             )!
-                    ).AsMember(iCollectionT),
+                    )
+                        .AsMember(iCollectionT),
                     generateCount
                 )
             );
@@ -506,7 +512,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_ICollection_T__IsReadOnly
                             )!
-                    ).AsMember(iCollectionT),
+                    )
+                        .AsMember(iCollectionT),
                     generateIsReadOnly
                 )
             );
@@ -518,7 +525,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_ICollection_T__Add
                             )!
-                    ).AsMember(iCollectionT),
+                    )
+                        .AsMember(iCollectionT),
                     generateNotSupportedException
                 )
             );
@@ -530,7 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_ICollection_T__Clear
                             )!
-                    ).AsMember(iCollectionT),
+                    )
+                        .AsMember(iCollectionT),
                     generateNotSupportedException
                 )
             );
@@ -542,7 +551,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_ICollection_T__Contains
                             )!
-                    ).AsMember(iCollectionT),
+                    )
+                        .AsMember(iCollectionT),
                     generateContains
                 )
             );
@@ -554,7 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_ICollection_T__CopyTo
                             )!
-                    ).AsMember(iCollectionT),
+                    )
+                        .AsMember(iCollectionT),
                     generateCopyTo
                 )
             );
@@ -566,7 +577,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_ICollection_T__Remove
                             )!
-                    ).AsMember(iCollectionT),
+                    )
+                        .AsMember(iCollectionT),
                     generateNotSupportedException
                 )
             );
@@ -581,8 +593,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     compilation.GetWellKnownTypeMember(
                                         WellKnownMember.System_Collections_Generic_IList_T__get_Item
                                     )!
-                            ).AssociatedSymbol
-                    ).AsMember(iListT),
+                            )
+                                .AssociatedSymbol
+                    )
+                        .AsMember(iListT),
                     generateIndexer,
                     generateNotSupportedException
                 )
@@ -595,7 +609,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_IList_T__IndexOf
                             )!
-                    ).AsMember(iListT),
+                    )
+                        .AsMember(iListT),
                     generateIndexOf
                 )
             );
@@ -607,7 +622,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_IList_T__Insert
                             )!
-                    ).AsMember(iListT),
+                    )
+                        .AsMember(iListT),
                     generateNotSupportedException
                 )
             );
@@ -619,7 +635,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             compilation.GetWellKnownTypeMember(
                                 WellKnownMember.System_Collections_Generic_IList_T__RemoveAt
                             )!
-                    ).AsMember(iListT),
+                    )
+                        .AsMember(iListT),
                     generateNotSupportedException
                 )
             );
@@ -830,7 +847,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 containingType.GetFieldTypeMember(
                                     WellKnownMember.System_Collections_Generic_List_T__get_Item
                                 )
-                        ).AssociatedSymbol;
+                        )
+                            .AssociatedSymbol;
                     return f.Return(f.Indexer(fieldReference, listMember, parameterReference));
                 }
             }
