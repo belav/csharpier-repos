@@ -284,8 +284,7 @@ public class WebHostBuilder : IWebHostBuilder
         );
 
         // Initialize the hosting environment
-        ((IWebHostEnvironment)_hostingEnvironment)
-            .Initialize(contentRootPath, _options);
+        ((IWebHostEnvironment)_hostingEnvironment).Initialize(contentRootPath, _options);
         _context.HostingEnvironment = _hostingEnvironment;
 
         var services = new ServiceCollection();

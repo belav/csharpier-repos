@@ -1154,8 +1154,7 @@ namespace System.Data.Objects
                     EntityUtil.CheckEntityKeyNull(targetKey);
 
                     // since endMember is not Many, relatedEnd must be an EntityReference
-                    ((EntityReference)relatedEnd)
-                        .DetachedEntityKey = targetKey;
+                    ((EntityReference)relatedEnd).DetachedEntityKey = targetKey;
                 }
             }
         }

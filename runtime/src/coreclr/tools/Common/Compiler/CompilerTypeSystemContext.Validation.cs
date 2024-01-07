@@ -288,8 +288,7 @@ namespace ILCompiler
                 TypeDesc parameterType = parameterizedType.ParameterType;
 
                 // Make sure type of the parameter is loadable.
-                ((CompilerTypeSystemContext)type.Context)
-                    .EnsureLoadableType(parameterType);
+                ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(parameterType);
 
                 // Validate we're not constructing a type over a ByRef
                 if (parameterType.IsByRef)

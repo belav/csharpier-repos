@@ -17,8 +17,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _arrayType = arrayType;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            ((CompilerTypeSystemContext)arrayType.Context)
-                .EnsureLoadableType(arrayType);
+            ((CompilerTypeSystemContext)arrayType.Context).EnsureLoadableType(arrayType);
         }
 
         public override int ClassCode => 815543321;

@@ -108,8 +108,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
         else if (DbType == System.Data.DbType.Date)
         {
             // Workaround for SqlClient issue: https://github.com/dotnet/runtime/issues/22386
-            ((SqlParameter)parameter)
-                .SqlDbType = SqlDbType.Date;
+            ((SqlParameter)parameter).SqlDbType = SqlDbType.Date;
         }
 
         if (Size.HasValue && Size.Value != -1)

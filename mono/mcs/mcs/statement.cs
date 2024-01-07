@@ -7797,8 +7797,7 @@ namespace Mono.CSharp
             //
             // Clear the pinned variable
             //
-            ((Emitter)decl.Initializer)
-                .EmitExit(ec);
+            ((Emitter)decl.Initializer).EmitExit(ec);
             if (decl.Declarators != null)
             {
                 foreach (var d in decl.Declarators)

@@ -1713,9 +1713,7 @@ namespace System.Configuration
                                 || (lockType == ConfigurationLockCollectionType.LockedAttributes)
                                 ||
                                 // If the collection type is not element then the lock is bogus
-                                (
-                                    lockType == ConfigurationLockCollectionType.LockedExceptionList
-                                )
+                                (lockType == ConfigurationLockCollectionType.LockedExceptionList)
                             )
                                 ReportInvalidLock(attribToLockTrim, lockType, value, null);
                             else

@@ -1087,8 +1087,7 @@ namespace System.Data.Odbc
             }
 
             // Tell the base class about our enlistment
-            ((OdbcConnectionOpen)InnerConnection)
-                .EnlistedTransaction = transaction;
+            ((OdbcConnectionOpen)InnerConnection).EnlistedTransaction = transaction;
         }
 
         internal string Open_GetServerVersion()

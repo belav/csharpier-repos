@@ -131,8 +131,7 @@ namespace System.Runtime.Remoting.Messaging
                     latestCallContext.PropagateOutgoingHeadersToMessage(retMessage);
 
                     // Install call context back into Message (from the thread)
-                    ((StackBasedReturnMessage)retMessage)
-                        .SetLogicalCallContext(latestCallContext);
+                    ((StackBasedReturnMessage)retMessage).SetLogicalCallContext(latestCallContext);
                 }
                 else
                 {

@@ -154,8 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private void ShowCaret()
         {
             // We actually want the caret visible even though the view isn't explicitly focused.
-            ((UIElement)_textView.Caret)
-                .Visibility = Visibility.Visible;
+            ((UIElement)_textView.Caret).Visibility = Visibility.Visible;
         }
 
         private void FocusElement(UIElement firstElement, Func<int, int> selector)

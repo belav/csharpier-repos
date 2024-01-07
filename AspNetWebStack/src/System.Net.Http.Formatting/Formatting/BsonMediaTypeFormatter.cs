@@ -227,8 +227,7 @@ namespace System.Net.Http.Formatting
             catch
             {
                 // Ensure instance is cleaned up in case of an issue
-                ((IDisposable)reader)
-                    .Dispose();
+                ((IDisposable)reader).Dispose();
                 throw;
             }
 

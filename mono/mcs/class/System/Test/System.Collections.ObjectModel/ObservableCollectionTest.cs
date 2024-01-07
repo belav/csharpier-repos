@@ -279,8 +279,7 @@ namespace MonoTests.System.Collections.ObjectModel
             };
 
             // Adding a PropertyChanged event handler
-            ((INotifyPropertyChanged)collection)
-                .PropertyChanged += pceh;
+            ((INotifyPropertyChanged)collection).PropertyChanged += pceh;
 
             collection.CollectionChanged += delegate(
                 object sender,
@@ -318,8 +317,7 @@ namespace MonoTests.System.Collections.ObjectModel
             );
 
             // Removing the PropertyChanged event handler should work as well:
-            ((INotifyPropertyChanged)collection)
-                .PropertyChanged -= pceh;
+            ((INotifyPropertyChanged)collection).PropertyChanged -= pceh;
         }
 
         //Private test class for protected members of ObservableCollection

@@ -1116,8 +1116,7 @@ namespace GHTUtils
                         {
                             //object prm_obj = Activator_CreateInstance( prmType1 );
                             //((IList)new_obj).Add( Generate( prm_obj ) );
-                            ((IList)new_obj)
-                                .Add(GHTTypeGenerator(prmType1));
+                            ((IList)new_obj).Add(GHTTypeGenerator(prmType1));
                         }
                     }
                     return new_obj;

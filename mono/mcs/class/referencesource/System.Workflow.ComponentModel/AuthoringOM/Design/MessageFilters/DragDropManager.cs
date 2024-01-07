@@ -646,8 +646,7 @@
             {
                 //We purposely consume application thrown exception which are result of user cancelling the action
                 //during dragdrop where we popup UI Wizards during drag drop. Ref: InvokeWebService
-                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner)
-                    .OnDragLeave();
+                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragLeave();
                 dragdropEventArgs.Effect = DragDropEffects.None;
 
                 string dragDropException = ex.Message;

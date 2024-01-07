@@ -668,8 +668,8 @@ namespace System.Activities.Core.Presentation
                     // If a child state was previously expanded, the container's min size would be set
                     // to its expanded size via ContainerService.GetHintSize in GetContainer() method.
                     // But if the item is a simple state, its min size should be reset to the default minimum.
-                    ((VirtualizedContainerService.VirtualizingContainer)element)
-                        .MinWidth = DefaultStateDesignerWidth;
+                    ((VirtualizedContainerService.VirtualizingContainer)element).MinWidth =
+                        DefaultStateDesignerWidth;
                     ((VirtualizedContainerService.VirtualizingContainer)element).MinHeight =
                         DefaultStateDesignerHeight;
                 }
@@ -1881,8 +1881,7 @@ namespace System.Activities.Core.Presentation
                     PopulateVirtualizingContainer(sourceState);
 
                     // Assign its destination State's View on the connector model item for copy/paste function.
-                    ((IModelTreeItem)connectorModelItem)
-                        .SetCurrentView(destinationState.View);
+                    ((IModelTreeItem)connectorModelItem).SetCurrentView(destinationState.View);
                 }
 
                 e.Handled = true;

@@ -57,8 +57,7 @@ namespace System.Web.UI.WebControls.Adapters
             }
 
             /* mode == LiteralMode.Transform */
-            ((WmlPageAdapter)PageAdapter)
-                .RenderTransformedText(writer, Control.Text);
+            ((WmlPageAdapter)PageAdapter).RenderTransformedText(writer, Control.Text);
         }
     }
 }

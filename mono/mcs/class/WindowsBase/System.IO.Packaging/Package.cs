@@ -114,8 +114,7 @@ namespace System.IO.Packaging
         public void Close()
         {
             // FIXME: Ensure that Flush is actually called before dispose
-            ((IDisposable)this)
-                .Dispose();
+            ((IDisposable)this).Dispose();
         }
 
         public PackagePart CreatePart(Uri partUri, string contentType)

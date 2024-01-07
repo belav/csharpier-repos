@@ -511,8 +511,7 @@ namespace System.Web.Services.Discovery
                         try
                         {
                             // Resolve discovery document references deeply
-                            ((DiscoveryDocumentReference)discoRef)
-                                .ResolveAll(true);
+                            ((DiscoveryDocumentReference)discoRef).ResolveAll(true);
                         }
                         catch (Exception e)
                         {

@@ -1650,8 +1650,7 @@ namespace System.Net.Security
                 if (obj is LazyAsyncResult)
                 {
                     // sync handshake is waiting on other thread.
-                    ((LazyAsyncResult)obj)
-                        .InvokeCallback();
+                    ((LazyAsyncResult)obj).InvokeCallback();
                 }
                 else
                 {
@@ -1759,8 +1758,7 @@ namespace System.Net.Security
                     if (obj is LazyAsyncResult)
                     {
                         // sync write is waiting on other thread.
-                        ((LazyAsyncResult)obj)
-                            .InvokeCallback();
+                        ((LazyAsyncResult)obj).InvokeCallback();
                     }
                     else
                     {

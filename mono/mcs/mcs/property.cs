@@ -1784,8 +1784,7 @@ namespace Mono.CSharp
             {
                 // Fill in already resolved event type to speed things up and
                 // avoid confusing duplicate errors
-                ((Parameter)parameters.FixedParameters[0])
-                    .Type = method.member_type;
+                ((Parameter)parameters.FixedParameters[0]).Type = method.member_type;
                 parameters.Types = new TypeSpec[] { method.member_type };
 
                 method_data = new MethodData(

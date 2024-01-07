@@ -167,8 +167,7 @@ namespace System.Xml.Xsl.XsltOld
             else
             {
                 // merge the attribute-sets
-                ((AttributeSetAction)_attributeSetTable[attributeSet.Name]!)
-                    .Merge(attributeSet);
+                ((AttributeSetAction)_attributeSetTable[attributeSet.Name]!).Merge(attributeSet);
             }
         }
 

@@ -2875,8 +2875,7 @@ namespace System.Windows.Forms
 
             // If we are here, it means we have a cell that does not have an editing control
             // and simply implements IDataGridViewEditingCell itself.
-            (cell as IDataGridViewEditingCell)
-                .PrepareEditingCellForEdit(selectAll);
+            (cell as IDataGridViewEditingCell).PrepareEditingCellForEdit(selectAll);
 
             return true;
         }

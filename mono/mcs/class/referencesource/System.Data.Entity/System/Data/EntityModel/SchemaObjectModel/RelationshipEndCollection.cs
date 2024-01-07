@@ -276,8 +276,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             public void Reset()
             {
                 // reset is implemented explicitly
-                ((IEnumerator)_Enumerator)
-                    .Reset();
+                ((IEnumerator)_Enumerator).Reset();
             }
 
             /// <summary>

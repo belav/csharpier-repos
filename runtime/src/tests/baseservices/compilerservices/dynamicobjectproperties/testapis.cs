@@ -617,8 +617,7 @@ public class TestAPIs
 
             //==============================================================
             // new tests for GetOrCreateValue
-            (new Driver<string, WithDefaultConstructor>())
-                .BasicGetOrCreateValue(stringArr);
+            (new Driver<string, WithDefaultConstructor>()).BasicGetOrCreateValue(stringArr);
             WithDefaultConstructor[] wvalues = new WithDefaultConstructor[stringArr.Length];
             for (int i = 0; i < wvalues.Length; i++)
                 wvalues[i] = new WithDefaultConstructor(stringArr[i]);

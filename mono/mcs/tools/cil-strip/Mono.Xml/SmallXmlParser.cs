@@ -158,8 +158,7 @@ namespace Mono.Xml
         {
             string[] arr = new string[elementNames.Count];
             // COMPACT FRAMEWORK NOTE: CopyTo is not visible through the Stack class
-            (elementNames as ICollection)
-                .CopyTo(arr, 0);
+            (elementNames as ICollection).CopyTo(arr, 0);
             return Error(
                 String.Format(
                     "Unexpected end of stream. Element stack content is {0}",

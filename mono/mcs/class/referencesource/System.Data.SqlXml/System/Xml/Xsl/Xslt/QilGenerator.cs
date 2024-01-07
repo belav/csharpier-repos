@@ -152,8 +152,7 @@ namespace System.Xml.Xsl.Xslt
             compiler.Scripts.CompileScripts();
 
             // Refactor huge templates into smaller ones (more JIT friendly)
-            (new XslAstRewriter())
-                .Rewrite(compiler);
+            (new XslAstRewriter()).Rewrite(compiler);
 
             if (!IsDebug)
             {

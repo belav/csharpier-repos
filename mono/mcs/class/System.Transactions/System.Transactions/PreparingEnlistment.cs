@@ -44,8 +44,7 @@ namespace System.Transactions
         {
             tx.Rollback(e, enlisted);
             /* See test RMFail2 */
-            ((ManualResetEvent)waitHandle)
-                .Set();
+            ((ManualResetEvent)waitHandle).Set();
         }
 
         [MonoTODO]
@@ -53,8 +52,7 @@ namespace System.Transactions
         {
             prepared = true;
             /* See test RMFail2 */
-            ((ManualResetEvent)waitHandle)
-                .Set();
+            ((ManualResetEvent)waitHandle).Set();
         }
 
         [MonoTODO]

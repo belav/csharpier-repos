@@ -193,9 +193,7 @@ namespace System.Text
         // How many characters left to output?
         public override int Remaining =>
             // Our count is 0 for 1 character left.
-            (_fallbackCount < 0)
-                ? 0
-                : _fallbackCount;
+            (_fallbackCount < 0) ? 0 : _fallbackCount;
 
         // Clear the buffer
         public override unsafe void Reset()

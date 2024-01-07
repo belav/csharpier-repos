@@ -423,8 +423,7 @@ public class InputBaseTest
             .Component;
 
         // Act: dispose, then update the field state in the EditContext and notify
-        ((IDisposable)component)
-            .Dispose();
+        ((IDisposable)component).Dispose();
         var messageStore = new ValidationMessageStore(rootComponent.EditContext);
         messageStore.Add(fieldIdentifier, "Some message");
         await renderer.Dispatcher.InvokeAsync(

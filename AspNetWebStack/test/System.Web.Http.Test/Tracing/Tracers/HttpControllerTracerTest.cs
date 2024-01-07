@@ -58,8 +58,7 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            ((IDisposable)tracer)
-                .Dispose();
+            ((IDisposable)tracer).Dispose();
 
             // Assert
             Assert.Equal(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
@@ -76,8 +75,7 @@ namespace System.Web.Http.Tracing.Tracers
             var tracer = new HttpControllerTracer(request, mockController.Object, traceWriter);
 
             // Act
-            ((IDisposable)tracer)
-                .Dispose();
+            ((IDisposable)tracer).Dispose();
 
             // Assert
             Assert.Empty(traceWriter.Traces);

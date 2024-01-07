@@ -3108,8 +3108,7 @@ namespace System.Web.UI
                 else
                 {
                     // no-compile Bind property handling
-                    ((Control)obj)
-                        .DataBinding += new EventHandler(DataBindingMethod);
+                    ((Control)obj).DataBinding += new EventHandler(DataBindingMethod);
                 }
             }
         }

@@ -224,8 +224,7 @@ namespace System.Runtime.Remoting.Messaging
             //   to be passed as parameters.
             //
 
-            ((ObjRef)obj)
-                .GetObjectData(info, context);
+            ((ObjRef)obj).GetObjectData(info, context);
             // add flag indicating the ObjRef was passed as a parameter
             info.AddValue("fIsMarshalled", 0);
         } // GetObjectData

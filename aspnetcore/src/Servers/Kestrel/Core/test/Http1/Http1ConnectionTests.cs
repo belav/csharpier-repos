@@ -679,8 +679,7 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
     public async Task WriteThrowsForNonBodyResponse()
     {
         // Arrange
-        ((IHttpResponseFeature)_http1Connection)
-            .StatusCode = StatusCodes.Status304NotModified;
+        ((IHttpResponseFeature)_http1Connection).StatusCode = StatusCodes.Status304NotModified;
 
         // Act/Assert
         await Assert.ThrowsAsync<InvalidOperationException>(

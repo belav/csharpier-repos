@@ -1480,8 +1480,7 @@ namespace System.Web
                     if (action == FileAction.Error)
                     {
                         // Stop monitoring.
-                        ((IDisposable)this)
-                            .Dispose();
+                        ((IDisposable)this).Dispose();
                     }
                 }
 

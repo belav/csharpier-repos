@@ -424,8 +424,7 @@ namespace System.Xml.Xsl.IlGen
                 if (this.persistAsm)
                 {
                     // Persist the assembly to disk
-                    ((AssemblyBuilder)this.typeBldr.Module.Assembly)
-                        .Save(this.modFile + ".dll");
+                    ((AssemblyBuilder)this.typeBldr.Module.Assembly).Save(this.modFile + ".dll");
                 }
 
                 // Replace all MethodInfos in this.methods

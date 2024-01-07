@@ -1045,8 +1045,7 @@ public class InteractivityTest
         Browser.Equal("True", () => Browser.FindElement(By.Id($"is-interactive-0")).Text);
 
         // This JS call works via .NET object reference to a counter component.
-        ((IJavaScriptExecutor)Browser)
-            .ExecuteScript("window.incrementCounter(0)");
+        ((IJavaScriptExecutor)Browser).ExecuteScript("window.incrementCounter(0)");
         Browser.Equal("1", () => Browser.FindElement(By.Id($"count-0")).Text);
 
         Browser.Click(By.Id($"remove-counter-link-0"));
@@ -1069,8 +1068,7 @@ public class InteractivityTest
         Browser.Equal("True", () => Browser.FindElement(By.Id($"is-interactive-0")).Text);
 
         // This JS call works via .NET object reference to a counter component.
-        ((IJavaScriptExecutor)Browser)
-            .ExecuteScript("window.incrementCounter(0)");
+        ((IJavaScriptExecutor)Browser).ExecuteScript("window.incrementCounter(0)");
         Browser.Equal("1", () => Browser.FindElement(By.Id($"count-0")).Text);
 
         Browser.Click(By.Id($"remove-counter-link-0"));
@@ -1206,8 +1204,7 @@ public class InteractivityTest
         else
         {
             // Clear local storage so that the resource hash is not found
-            ((IJavaScriptExecutor)Browser)
-                .ExecuteScript("localStorage.clear()");
+            ((IJavaScriptExecutor)Browser).ExecuteScript("localStorage.clear()");
         }
     }
 

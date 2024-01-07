@@ -334,9 +334,7 @@ public partial class RemoteAuthenticatorViewCore<
             (Navigation.HistoryEntryState != null && !ValidateSignOutRequestState())
             ||
             // For backcompat purposes, keep SignOutManager working, even though we now use the history.state for this.
-            (
-                Navigation.HistoryEntryState == null && !await SignOutManager.ValidateSignOutState()
-            )
+            (Navigation.HistoryEntryState == null && !await SignOutManager.ValidateSignOutState())
         )
         {
             Log.LogoutOperationInitiatedExternally(Logger);

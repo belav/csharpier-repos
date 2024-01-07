@@ -70,8 +70,7 @@ namespace System.IdentityModel
             {
                 // We still have to compute the signature. Write end element as a different fragment
                 // and end canonicalization. Call back SAML to compute the signature.
-                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
-                    .EndFragment();
+                ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter).EndFragment();
 
                 ((IFragmentCapableXmlDictionaryWriter)this.effectiveWriter)
                     .StartFragment(this.endFragment, false);

@@ -90,8 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             if (!isPullDiagnosticsEnabled)
             {
                 // Pull diagnostics isn't enabled, let the live share server provide pull diagnostics.
-                ((VSInternalServerCapabilities)defaultCapabilities)
-                    .SupportsDiagnosticRequests = true;
+                ((VSInternalServerCapabilities)defaultCapabilities).SupportsDiagnosticRequests =
+                    true;
             }
 
             return defaultCapabilities;

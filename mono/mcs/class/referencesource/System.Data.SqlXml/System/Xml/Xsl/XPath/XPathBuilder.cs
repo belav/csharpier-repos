@@ -465,8 +465,7 @@ namespace System.Xml.Xsl.XPath
             if (left.NodeType == QilNodeType.Sequence)
             {
                 // ToDo: drop this logic or move it to QilPatternFactory.Union()
-                ((QilList)left)
-                    .Add(right);
+                ((QilList)left).Add(right);
                 return left;
             }
             else

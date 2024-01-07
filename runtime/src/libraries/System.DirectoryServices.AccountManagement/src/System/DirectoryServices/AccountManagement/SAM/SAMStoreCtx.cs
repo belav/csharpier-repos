@@ -261,8 +261,7 @@ namespace System.DirectoryServices.AccountManagement
                 );
 
                 // Load in all the initial values from the store
-                ((DirectoryEntry)p.UnderlyingObject)
-                    .RefreshCache();
+                ((DirectoryEntry)p.UnderlyingObject).RefreshCache();
 
                 // Load in the StoreKey
                 Debug.Assert(p.Key == null); // since it was previously unpersisted

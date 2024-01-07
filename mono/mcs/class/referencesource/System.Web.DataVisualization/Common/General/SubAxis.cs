@@ -720,8 +720,7 @@ namespace System.Web.UI.DataVisualization.Charting
         protected override void OnRemoveComplete(int index, object value)
         {
             // Reset SubAxis parent axis reference
-            ((SubAxis)value)
-                .parentAxis = null;
+            ((SubAxis)value).parentAxis = null;
 
             this.Invalidate();
         }

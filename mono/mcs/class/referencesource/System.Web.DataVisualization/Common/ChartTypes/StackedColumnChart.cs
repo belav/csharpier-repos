@@ -587,8 +587,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ProcessChartType(false, graph, common, area, false, true, seriesToDraw);
 
             // Reset Clip Region
-            ((ChartGraphics)graph)
-                .ResetClip();
+            ((ChartGraphics)graph).ResetClip();
         }
 
         /// <summary>

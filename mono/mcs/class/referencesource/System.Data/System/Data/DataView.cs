@@ -1154,8 +1154,7 @@ namespace System.Data
             if (0 <= index)
             {
                 // must delegate to IList.RemoveAt
-                ((IList)this)
-                    .RemoveAt(index);
+                ((IList)this).RemoveAt(index);
             }
             else
             {

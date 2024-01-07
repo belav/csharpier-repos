@@ -467,8 +467,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ProcessChartType(false, graph, common, area, seriesToDraw);
 
             // Reset Clip Region
-            ((ChartGraphics)graph)
-                .ResetClip();
+            ((ChartGraphics)graph).ResetClip();
         }
 
         /// <summary>

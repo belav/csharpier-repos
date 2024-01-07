@@ -7990,9 +7990,7 @@ namespace Mono.CSharp
                         //
                         // Set underlying variable type based on parameter type
                         //
-                        ((DeclarationExpression)a.Expr)
-                            .Variable
-                            .Type = pt;
+                        ((DeclarationExpression)a.Expr).Variable.Type = pt;
                         continue;
                     }
 

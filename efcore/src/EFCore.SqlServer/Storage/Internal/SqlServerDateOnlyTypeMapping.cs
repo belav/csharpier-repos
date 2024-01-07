@@ -54,8 +54,7 @@ public class SqlServerDateOnlyTypeMapping : DateOnlyTypeMapping
         base.ConfigureParameter(parameter);
 
         // Workaround for SqlClient issue: https://github.com/dotnet/runtime/issues/22386
-        ((SqlParameter)parameter)
-            .SqlDbType = SqlDbType.Date;
+        ((SqlParameter)parameter).SqlDbType = SqlDbType.Date;
     }
 
     /// <summary>
