@@ -271,7 +271,8 @@ namespace HttpStress
                             (
                                 h.Key,
                                 new StringValues(
-                                    h.Value.SelectMany(v => v.Split(','))
+                                    h
+                                        .Value.SelectMany(v => v.Split(','))
                                         .Select(x => x.Trim())
                                         .ToArray()
                                 )

@@ -90,11 +90,9 @@ namespace Microsoft.Web.Mvc.Resources
             {
                 if (this.RequestFormatHandlers[i].CanDeserialize(requestFormat))
                 {
-                    model = this.RequestFormatHandlers[i].Deserialize(
-                        controllerContext,
-                        bindingContext,
-                        requestFormat
-                    );
+                    model = this
+                        .RequestFormatHandlers[i]
+                        .Deserialize(controllerContext, bindingContext, requestFormat);
                     return true;
                 }
             }
@@ -144,10 +142,9 @@ namespace Microsoft.Web.Mvc.Resources
             for (int i = 0; i < this.ResponseFormatHandlers.Count; ++i)
             {
                 if (
-                    this.ResponseFormatHandlers[i].TryMapFormatFriendlyName(
-                        formatName,
-                        out contentType
-                    )
+                    this
+                        .ResponseFormatHandlers[i]
+                        .TryMapFormatFriendlyName(formatName, out contentType)
                 )
                 {
                     return true;

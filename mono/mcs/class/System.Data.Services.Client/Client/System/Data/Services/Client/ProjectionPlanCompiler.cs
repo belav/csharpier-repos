@@ -839,9 +839,8 @@ namespace System.Data.Services.Client
 
             if (result != null)
             {
-                ConstructorInfo constructorInfo = nex.Type.GetConstructors(
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                ConstructorInfo constructorInfo = nex
+                    .Type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
                     .First(c =>
                         c.GetParameters().Length == 7
                         && c.GetParameters()[0].ParameterType == typeof(object)

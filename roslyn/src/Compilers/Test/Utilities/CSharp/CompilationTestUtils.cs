@@ -280,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 get
                 {
-                    return this.MemberGroup.WhereAsArray(s => s.Kind == SymbolKind.Method)
+                    return this
+                        .MemberGroup.WhereAsArray(s => s.Kind == SymbolKind.Method)
                         .SelectAsArray(s => (IMethodSymbol)s);
                 }
             }

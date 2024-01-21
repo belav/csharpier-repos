@@ -133,10 +133,8 @@ namespace Microsoft.Build.Execution
         {
             if (fromAttribute)
             {
-                var ret = xml.DefaultTargets.Split(
-                    item_target_sep,
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                var ret = xml
+                    .DefaultTargets.Split(item_target_sep, StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim())
                     .ToArray();
                 if (checkImports && ret.Length == 0)
@@ -174,10 +172,8 @@ namespace Microsoft.Build.Execution
             directory = string.IsNullOrWhiteSpace(xml.DirectoryPath)
                 ? System.IO.Directory.GetCurrentDirectory()
                 : xml.DirectoryPath;
-            InitialTargets = xml.InitialTargets.Split(
-                item_target_sep,
-                StringSplitOptions.RemoveEmptyEntries
-            )
+            InitialTargets = xml
+                .InitialTargets.Split(item_target_sep, StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
                 .ToList();
 
@@ -345,10 +341,11 @@ namespace Microsoft.Build.Execution
                         Func<string, ProjectItemInstance> creator = s => new ProjectItemInstance(
                             this,
                             p.ItemType,
-                            p.Metadata.Select(m => new KeyValuePair<string, string>(
-                                m.Name,
-                                m.Value
-                            ))
+                            p
+                                .Metadata.Select(m => new KeyValuePair<string, string>(
+                                    m.Name,
+                                    m.Value
+                                ))
                                 .ToList(),
                             s
                         );

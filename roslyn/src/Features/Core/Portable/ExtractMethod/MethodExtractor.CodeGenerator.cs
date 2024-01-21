@@ -187,10 +187,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 );
 
                 // Then insert the local-function/method into the updated document that contains the updated callsite.
-                var documentWithUpdatedCallSite = await this.SemanticDocument.WithSyntaxRootAsync(
-                    rootWithUpdatedCallSite,
-                    cancellationToken
-                )
+                var documentWithUpdatedCallSite = await this
+                    .SemanticDocument.WithSyntaxRootAsync(
+                        rootWithUpdatedCallSite,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
                 var finalRoot = LocalFunction ? InsertLocalFunction() : InsertNormalMethod();
 

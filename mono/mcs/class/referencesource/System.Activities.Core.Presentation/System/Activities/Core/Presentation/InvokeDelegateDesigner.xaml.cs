@@ -183,7 +183,8 @@ namespace System.Activities.Core.Presentation
                 .Properties["ItemsCollection"]
                 .Collection;
 
-            Type underlyingArgumentType = this.ModelItem.Properties[DelegateArgumentsPropertyName]
+            Type underlyingArgumentType = this
+                .ModelItem.Properties[DelegateArgumentsPropertyName]
                 .Value.GetCurrentValue()
                 .GetType()
                 .GetGenericArguments()[1];

@@ -220,10 +220,8 @@ internal class DefinitionContextTracker(
                         .ConfigureAwait(false)
                 )
                 {
-                    var text = await item.Document.GetTextAsync(
-                        document.Project.Solution,
-                        cancellationToken
-                    )
+                    var text = await item
+                        .Document.GetTextAsync(document.Project.Solution, cancellationToken)
                         .ConfigureAwait(false);
                     var linePositionSpan = text.Lines.GetLinePositionSpan(item.SourceSpan);
 

@@ -377,11 +377,13 @@ internal class TestApp
 
     private static int test_3_13(int num)
     {
-        return AA.aa_init[
-            num - 100,
-            (AA.aa_init[0, num - 1, num / 100].q | 1) - 2,
-            1 + AA.aa_zero[0, num - 1, num / 100].q
-        ].q;
+        return AA
+            .aa_init[
+                num - 100,
+                (AA.aa_init[0, num - 1, num / 100].q | 1) - 2,
+                1 + AA.aa_zero[0, num - 1, num / 100].q
+            ]
+            .q;
     }
 
     private static int test_3_14(int num)

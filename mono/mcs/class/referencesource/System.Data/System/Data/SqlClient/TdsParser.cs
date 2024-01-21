@@ -14245,7 +14245,8 @@ namespace System.Data.SqlClient
 
                 if (_asyncWrite)
                 {
-                    nRead = await feed._source.ReadBlockAsync(inBuff, 0, constTextBufferSize)
+                    nRead = await feed
+                        ._source.ReadBlockAsync(inBuff, 0, constTextBufferSize)
                         .ConfigureAwait(false);
                 }
                 else

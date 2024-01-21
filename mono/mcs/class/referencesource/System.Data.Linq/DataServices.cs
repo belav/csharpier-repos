@@ -586,10 +586,12 @@ namespace System.Data.Linq
                 }
                 return (
                     (IEnumerable<T>)
-                        this.query.Execute(
-                            this.services.Context.Provider,
-                            new object[] { keyValues }
-                        ).ReturnValue
+                        this
+                            .query.Execute(
+                                this.services.Context.Provider,
+                                new object[] { keyValues }
+                            )
+                            .ReturnValue
                 ).GetEnumerator();
             }
 
@@ -805,9 +807,9 @@ namespace System.Data.Linq
                 // no cached value, so query for it
                 target = (
                     (IEnumerable)
-                        this.context.Provider.Execute(
-                            this.GetObjectQuery(type, keyValues)
-                        ).ReturnValue
+                        this
+                            .context.Provider.Execute(this.GetObjectQuery(type, keyValues))
+                            .ReturnValue
                 )
                     .OfType<object>()
                     .SingleOrDefault();

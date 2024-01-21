@@ -269,7 +269,8 @@ namespace System.Data.Services.Client
 
         public void RemoveRelation(object source, string relation)
         {
-            Edge edge = this.graph.LookupVertex(source)
+            Edge edge = this
+                .graph.LookupVertex(source)
                 .OutgoingEdges.SingleOrDefault(e => e.Source.Item == source && e.Label == relation);
             if (edge != null)
             {
@@ -338,7 +339,8 @@ namespace System.Data.Services.Client
                 "Vertex corresponding to 'collection' must exist in the graph."
             );
 
-            this.graph.LookupVertex(collection)
+            this
+                .graph.LookupVertex(collection)
                 .GetEntityCollectionInfo(
                     out source,
                     out sourceProperty,

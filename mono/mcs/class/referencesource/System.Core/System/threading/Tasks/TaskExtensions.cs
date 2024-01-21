@@ -81,18 +81,19 @@ namespace System.Threading.Tasks
                                 // When task.Result completes, take some action to set the completion state of tcs.Task.
                                 else
                                 {
-                                    task.Result.ContinueWith(
-                                        _ =>
-                                        {
-                                            // Copy completion/cancellation/exception info from task.Result to tcs.Task.
-                                            result = tcs.TrySetFromTask(task.Result);
-                                            Contract.Assert(
-                                                result,
-                                                "Unwrap(Task<Task>): Expected TrySetFromTask #2 to succeed"
-                                            );
-                                        },
-                                        TaskContinuationOptions.ExecuteSynchronously
-                                    )
+                                    task
+                                        .Result.ContinueWith(
+                                            _ =>
+                                            {
+                                                // Copy completion/cancellation/exception info from task.Result to tcs.Task.
+                                                result = tcs.TrySetFromTask(task.Result);
+                                                Contract.Assert(
+                                                    result,
+                                                    "Unwrap(Task<Task>): Expected TrySetFromTask #2 to succeed"
+                                                );
+                                            },
+                                            TaskContinuationOptions.ExecuteSynchronously
+                                        )
                                         .ContinueWith(
                                             antecedent =>
                                             {
@@ -180,18 +181,19 @@ namespace System.Threading.Tasks
                                 // When task.Result completes, take some action to set the completion state of tcs.Task.
                                 else
                                 {
-                                    task.Result.ContinueWith(
-                                        _ =>
-                                        {
-                                            // Copy completion/cancellation/exception info from task.Result to tcs.Task.
-                                            result = tcs.TrySetFromTask(task.Result);
-                                            Contract.Assert(
-                                                result,
-                                                "Unwrap(Task<Task<T>>): Expected TrySetFromTask #2 to succeed"
-                                            );
-                                        },
-                                        TaskContinuationOptions.ExecuteSynchronously
-                                    )
+                                    task
+                                        .Result.ContinueWith(
+                                            _ =>
+                                            {
+                                                // Copy completion/cancellation/exception info from task.Result to tcs.Task.
+                                                result = tcs.TrySetFromTask(task.Result);
+                                                Contract.Assert(
+                                                    result,
+                                                    "Unwrap(Task<Task<T>>): Expected TrySetFromTask #2 to succeed"
+                                                );
+                                            },
+                                            TaskContinuationOptions.ExecuteSynchronously
+                                        )
                                         .ContinueWith(
                                             antecedent =>
                                             {

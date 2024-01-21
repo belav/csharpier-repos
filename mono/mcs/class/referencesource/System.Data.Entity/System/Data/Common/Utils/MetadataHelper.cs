@@ -377,9 +377,8 @@ namespace System.Data.Common.Utils
         {
             Debug.Assert(null != end);
             // there must be exactly one ("Single") other end that isn't ("Filter") this end
-            AssociationSetEnd otherEnd = end.ParentAssociationSet.AssociationSetEnds.Where(e =>
-                !e.EdmEquals(end)
-            )
+            AssociationSetEnd otherEnd = end
+                .ParentAssociationSet.AssociationSetEnds.Where(e => !e.EdmEquals(end))
                 .Single();
             return otherEnd;
         }

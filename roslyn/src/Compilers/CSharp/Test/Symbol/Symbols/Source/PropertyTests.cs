@@ -3301,7 +3301,8 @@ public interface IA
             Func<string[], Action<ModuleSymbol>> getValidator = expectedMembers =>
                 m =>
                 {
-                    var actualMembers = m.GlobalNamespace.GetMember<NamespaceSymbol>("Test")
+                    var actualMembers = m
+                        .GlobalNamespace.GetMember<NamespaceSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .ToArray();

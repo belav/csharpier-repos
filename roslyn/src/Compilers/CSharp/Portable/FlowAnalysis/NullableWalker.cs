@@ -9251,12 +9251,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 parameterAnnotationsOpt = arguments.SelectAsArray(
                     static (argument, i, arg) =>
-                        arg.self.GetCorrespondingParameter(
-                            i,
-                            arg.parametersOpt,
-                            arg.argsToParamsOpt,
-                            arg.expanded
-                        ).Annotations,
+                        arg
+                            .self.GetCorrespondingParameter(
+                                i,
+                                arg.parametersOpt,
+                                arg.argsToParamsOpt,
+                                arg.expanded
+                            )
+                            .Annotations,
                     (self: this, parametersOpt, argsToParamsOpt, expanded)
                 );
             }

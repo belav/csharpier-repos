@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                 var mainMethod = compilation.GetTopLevelStatementsMethod();
                 if (mainMethod is not null)
                 {
-                    var oldClassDeclaration = root.Members.OfType<ClassDeclarationSyntax>()
+                    var oldClassDeclaration = root
+                        .Members.OfType<ClassDeclarationSyntax>()
                         .FirstOrDefault(IsProgramClass);
 
                     var classDeclaration = await GenerateProgramClassAsync(

@@ -470,7 +470,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     {
                         return clientSocket.BeginConnect(remoteEP, callback, state);
                     };
-                    await Task.Factory.FromAsync(beginConnect, clientSocket.EndConnect, this)
+                    await Task
+                        .Factory.FromAsync(beginConnect, clientSocket.EndConnect, this)
                         .ConfigureAwait(false);
                 }
                 // When the socket is closed, the FromAsync logic will try to call EndAccept on the socket,

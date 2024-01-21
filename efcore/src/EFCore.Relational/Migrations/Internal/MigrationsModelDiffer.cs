@@ -1490,7 +1490,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             Remove,
             (s, t, c) =>
                 s.Name == t.Name
-                && s.Columns.Select(p => p.Name)
+                && s
+                    .Columns.Select(p => p.Name)
                     .SequenceEqual(t.Columns.Select(p => c.FindSource(p)?.Name))
                 && s.GetIsPrimaryKey() == t.GetIsPrimaryKey()
                 && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
@@ -1591,10 +1592,12 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             Remove,
             (s, t, context) =>
                 s.Name == t.Name
-                && s.Columns.Select(c => c.Name)
+                && s
+                    .Columns.Select(c => c.Name)
                     .SequenceEqual(t.Columns.Select(c => context.FindSource(c)?.Name))
                 && s.PrincipalTable == context.FindSource(t.PrincipalTable)
-                && s.PrincipalColumns.Select(c => c.Name)
+                && s
+                    .PrincipalColumns.Select(c => c.Name)
                     .SequenceEqual(t.PrincipalColumns.Select(c => context.FindSource(c)?.Name))
                 && s.OnDeleteAction == t.OnDeleteAction
                 && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())

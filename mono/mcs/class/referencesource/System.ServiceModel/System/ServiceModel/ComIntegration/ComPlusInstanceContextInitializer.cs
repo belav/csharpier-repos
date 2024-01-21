@@ -94,7 +94,8 @@ namespace System.ServiceModel.ComIntegration
             if (indexOfComma != -1)
             {
                 Guid assemblyGuid = Guid.Empty;
-                string assemblyGuidString = args.Name.Substring(0, indexOfComma)
+                string assemblyGuidString = args
+                    .Name.Substring(0, indexOfComma)
                     .Trim()
                     .ToLowerInvariant();
 

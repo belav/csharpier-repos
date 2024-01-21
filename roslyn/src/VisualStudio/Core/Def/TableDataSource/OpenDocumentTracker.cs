@@ -71,9 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             lock (_gate)
             {
                 foreach (
-                    var documentId in _map.Keys.Where(d =>
-                        projectId == null ? true : d.ProjectId == projectId
-                    )
+                    var documentId in _map
+                        .Keys.Where(d => projectId == null ? true : d.ProjectId == projectId)
                         .ToList()
                 )
                 {

@@ -61,8 +61,7 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
             {
                 _builder = PrincipalEntityType
                     .FindNavigation(_builder.Metadata.PrincipalToDependent!.Name)
-                    ?.ForeignKey
-                    .Builder!;
+                    ?.ForeignKey.Builder!;
             }
 
             return _builder;

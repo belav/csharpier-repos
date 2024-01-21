@@ -182,7 +182,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     {
         await using var c = CreateF1Context();
 
-        await c.Database.CreateExecutionStrategy()
+        await c
+            .Database.CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -309,7 +310,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     {
         await using var c = CreateF1Context();
 
-        await c.Database.CreateExecutionStrategy()
+        await c
+            .Database.CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -442,7 +444,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     public async Task Modifying_concurrency_token_only_is_noop()
     {
         using var c = CreateF1Context();
-        await c.Database.CreateExecutionStrategy()
+        await c
+            .Database.CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -491,7 +494,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     public async Task Database_concurrency_token_value_is_updated_for_all_sharing_entities()
     {
         using var c = CreateF1Context();
-        await c.Database.CreateExecutionStrategy()
+        await c
+            .Database.CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -540,7 +544,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     public async Task Original_concurrency_token_value_is_used_when_replacing_owned_instance()
     {
         using var c = CreateF1Context();
-        await c.Database.CreateExecutionStrategy()
+        await c
+            .Database.CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>

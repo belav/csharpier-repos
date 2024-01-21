@@ -744,17 +744,18 @@ namespace System.Threading.Tasks.Tests
                                                         Task.Factory.StartNew(
                                                             () =>
                                                             {
-                                                                Task.Factory.StartNew(
-                                                                    () =>
-                                                                    {
-                                                                        throw new InvalidOperationException(
-                                                                            errorString
-                                                                        );
-                                                                    },
-                                                                    CancellationToken.None,
-                                                                    TaskCreationOptions.AttachedToParent,
-                                                                    cesp.ExclusiveScheduler
-                                                                )
+                                                                Task
+                                                                    .Factory.StartNew(
+                                                                        () =>
+                                                                        {
+                                                                            throw new InvalidOperationException(
+                                                                                errorString
+                                                                            );
+                                                                        },
+                                                                        CancellationToken.None,
+                                                                        TaskCreationOptions.AttachedToParent,
+                                                                        cesp.ExclusiveScheduler
+                                                                    )
                                                                     .Wait();
                                                             },
                                                             CancellationToken.None,

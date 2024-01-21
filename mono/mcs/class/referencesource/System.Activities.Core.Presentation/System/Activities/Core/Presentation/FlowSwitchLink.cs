@@ -251,9 +251,13 @@ namespace System.Activities.Core.Presentation
                             }
 
                             this.flowSwitchModelItem.Properties["Default"].SetValue(null);
-                            this.flowSwitchModelItem.Properties[
-                                FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                            ].SetValue(FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue);
+                            this
+                                .flowSwitchModelItem.Properties[
+                                    FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                                ]
+                                .SetValue(
+                                    FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue
+                                );
 
                             this.internalChange = true;
                             if (typeof(string) != typeof(T))
@@ -461,9 +465,11 @@ namespace System.Activities.Core.Presentation
         {
             this.internalChange = true;
             this.DefaultCaseDisplayName = (string)
-                this.flowSwitchModelItem.Properties[
-                    FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                ].Value.GetCurrentValue();
+                this
+                    .flowSwitchModelItem.Properties[
+                        FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                    ]
+                    .Value.GetCurrentValue();
             this.internalChange = false;
         }
 
@@ -494,9 +500,11 @@ namespace System.Activities.Core.Presentation
                     )
                 )
                 {
-                    this.flowSwitchModelItem.Properties[
-                        FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                    ].SetValue(newValue);
+                    this
+                        .flowSwitchModelItem.Properties[
+                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                        ]
+                        .SetValue(newValue);
                     scope.Complete();
                 }
                 this.internalChange = false;

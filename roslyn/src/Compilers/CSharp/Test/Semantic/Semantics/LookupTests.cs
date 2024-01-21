@@ -2090,7 +2090,8 @@ class Program
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-            var ms = comp.GlobalNamespace.GetTypeMembers("Program")
+            var ms = comp
+                .GlobalNamespace.GetTypeMembers("Program")
                 .Single()
                 .GetMembers("M")
                 .OfType<MethodSymbol>();
@@ -2129,7 +2130,8 @@ class Program
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-            var m = comp.GlobalNamespace.GetTypeMembers("Program")
+            var m = comp
+                .GlobalNamespace.GetTypeMembers("Program")
                 .Single()
                 .GetMembers("M")
                 .Single();
@@ -2167,7 +2169,8 @@ class Program
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-            var m = comp.GlobalNamespace.GetTypeMembers("Program")
+            var m = comp
+                .GlobalNamespace.GetTypeMembers("Program")
                 .Single()
                 .GetMembers("M")
                 .Single();

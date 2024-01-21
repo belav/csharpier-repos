@@ -825,9 +825,13 @@ class MainClass
             );
 
             // create node with error that would place itself outside the tree.
-            var nodeWithBadError = node.Green.WithDiagnosticsGreen(
-                new DiagnosticInfo[] { new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass) }
-            )
+            var nodeWithBadError = node
+                .Green.WithDiagnosticsGreen(
+                    new DiagnosticInfo[]
+                    {
+                        new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass)
+                    }
+                )
                 .CreateRed();
 
             var tree = SyntaxFactory.SyntaxTree(nodeWithBadError);

@@ -196,9 +196,9 @@ namespace Microsoft.CodeAnalysis
         {
             // The attribute stores a SemVer2-formatted string: `A.B.C(-...)?(+...)?`
             // We remove the section after the + (if any is present)
-            return type.Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                ?.InformationalVersion
-                .Split('+')[0];
+            return type
+                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion.Split('+')[0];
         }
 
         private static string? GetShortCommitHash(Type type)
@@ -1055,7 +1055,8 @@ namespace Microsoft.CodeAnalysis
             if (this.GeneratorDriverCache is object && !disableCache)
             {
                 cacheKey = deriveCacheKey();
-                driver = this.GeneratorDriverCache.TryGetDriver(cacheKey)
+                driver = this
+                    .GeneratorDriverCache.TryGetDriver(cacheKey)
                     ?.WithUpdatedParseOptions(parseOptions)
                     .WithUpdatedAnalyzerConfigOptions(analyzerConfigOptionsProvider)
                     .ReplaceAdditionalTexts(additionalTexts);

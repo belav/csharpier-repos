@@ -508,7 +508,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 async i =>
                 {
                     using var ctx = new MyContext5456();
-                    var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .ToListAsync();
 
@@ -529,7 +530,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 i =>
                 {
                     using var ctx = new MyContext5456();
-                    var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .Include(x => x.Comments)
                         .ToList();
@@ -551,7 +553,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 async i =>
                 {
                     using var ctx = new MyContext5456();
-                    var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .Include(x => x.Comments)
                         .ToListAsync();
@@ -573,7 +576,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 i =>
                 {
                     using var ctx = new MyContext5456();
-                    var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .ThenInclude(b => b.Author)
                         .ToList();
@@ -595,7 +599,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 async i =>
                 {
                     using var ctx = new MyContext5456();
-                    var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .ThenInclude(b => b.Author)
                         .ToListAsync();
@@ -862,9 +867,11 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                         ) != null
                             ? new PageViewModel21768
                             {
-                                Uri = b.FrontCover.Illustrations.FirstOrDefault(i =>
-                                    i.State >= IllustrationState21768.Approved
-                                ).Uri
+                                Uri = b
+                                    .FrontCover.Illustrations.FirstOrDefault(i =>
+                                        i.State >= IllustrationState21768.Approved
+                                    )
+                                    .Uri
                             }
                             : null,
                 };
@@ -2029,11 +2036,12 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                             : new BDto18394
                             {
                                 Id = x.PropertyB.Id,
-                                PropertyCList = x.PropertyB.PropertyCList.Select(y => new CDto18394
-                                {
-                                    Id = y.Id,
-                                    SomeText = y.SomeText
-                                })
+                                PropertyCList = x
+                                    .PropertyB.PropertyCList.Select(y => new CDto18394
+                                    {
+                                        Id = y.Id,
+                                        SomeText = y.SomeText
+                                    })
                                     .ToList()
                             }
                 })

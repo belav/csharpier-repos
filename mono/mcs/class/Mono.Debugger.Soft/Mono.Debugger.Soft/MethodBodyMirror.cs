@@ -35,22 +35,23 @@ namespace Mono.Debugger.Soft
             get
             {
                 vm.CheckProtocolVersion(2, 18);
-                return info.clauses.Select(c =>
-                {
-                    var handler = new ILExceptionHandler(
-                        c.try_offset,
-                        c.try_length,
-                        (ILExceptionHandlerType)c.flags,
-                        c.handler_offset,
-                        c.handler_length
-                    );
-                    if (c.flags == ExceptionClauseFlags.None)
-                        handler.CatchType = vm.GetType(c.catch_type_id);
-                    else if (c.flags == ExceptionClauseFlags.Filter)
-                        handler.FilterOffset = c.filter_offset;
+                return info
+                    .clauses.Select(c =>
+                    {
+                        var handler = new ILExceptionHandler(
+                            c.try_offset,
+                            c.try_length,
+                            (ILExceptionHandlerType)c.flags,
+                            c.handler_offset,
+                            c.handler_length
+                        );
+                        if (c.flags == ExceptionClauseFlags.None)
+                            handler.CatchType = vm.GetType(c.catch_type_id);
+                        else if (c.flags == ExceptionClauseFlags.Filter)
+                            handler.FilterOffset = c.filter_offset;
 
-                    return handler;
-                })
+                        return handler;
+                    })
                     .ToList();
             }
         }

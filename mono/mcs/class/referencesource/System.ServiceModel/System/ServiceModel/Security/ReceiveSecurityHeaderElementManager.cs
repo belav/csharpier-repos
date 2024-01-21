@@ -60,15 +60,17 @@ namespace System.ServiceModel.Security
                 VerifyIdUniquenessInSecurityHeader(id);
             }
             EnsureCapacityToAdd();
-            this.elements[this.count++].SetElement(
-                elementCategory,
-                element,
-                bindingMode,
-                id,
-                false,
-                null,
-                supportingTokenTracker
-            );
+            this
+                .elements[this.count++]
+                .SetElement(
+                    elementCategory,
+                    element,
+                    bindingMode,
+                    id,
+                    false,
+                    null,
+                    supportingTokenTracker
+                );
         }
 
         public void AppendSignature(SignedXml signedXml)
@@ -392,15 +394,17 @@ namespace System.ServiceModel.Security
                 VerifyIdUniquenessInSecurityHeader(id);
             }
             this.elements[index].PreserveIdBeforeDecryption();
-            this.elements[index].SetElement(
-                elementCategory,
-                element,
-                bindingMode,
-                id,
-                true,
-                decryptedBuffer,
-                supportingTokenTracker
-            );
+            this
+                .elements[index]
+                .SetElement(
+                    elementCategory,
+                    element,
+                    bindingMode,
+                    id,
+                    true,
+                    decryptedBuffer,
+                    supportingTokenTracker
+                );
         }
 
         public void SetSignatureAfterDecryption(

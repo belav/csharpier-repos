@@ -1535,9 +1535,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     );
                     this.handle = null;
 
-                    IEnumerable<IPersistencePipelineModule> modules = this.context.GetInstance(
-                        null
-                    ).PipelineModules;
+                    IEnumerable<IPersistencePipelineModule> modules = this
+                        .context.GetInstance(null)
+                        .PipelineModules;
                     if (modules != null)
                     {
                         this.pipeline = new PersistencePipeline(modules);

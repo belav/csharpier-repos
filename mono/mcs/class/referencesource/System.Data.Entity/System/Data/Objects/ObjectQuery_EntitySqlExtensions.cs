@@ -416,7 +416,8 @@ namespace System.Data.Objects
             Type clrOfType = typeof(TResultType);
             EdmType ofType = null;
             if (
-                !this.QueryState.ObjectContext.MetadataWorkspace.GetItemCollection(DataSpace.OSpace)
+                !this
+                    .QueryState.ObjectContext.MetadataWorkspace.GetItemCollection(DataSpace.OSpace)
                     .TryGetType(clrOfType.Name, clrOfType.Namespace ?? string.Empty, out ofType)
                 || !(Helper.IsEntityType(ofType) || Helper.IsComplexType(ofType))
             )

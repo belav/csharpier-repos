@@ -234,9 +234,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             if (args.TextView.Selection.SelectedSpans.Count > 0)
             {
-                var selectedSpan = args.TextView.Selection.GetSnapshotSpansOnBuffer(
-                    args.SubjectBuffer
-                )
+                var selectedSpan = args
+                    .TextView.Selection.GetSnapshotSpansOnBuffer(args.SubjectBuffer)
                     .FirstOrNull();
 
                 originalPosition =

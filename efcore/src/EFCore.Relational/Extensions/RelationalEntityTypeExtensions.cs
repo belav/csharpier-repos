@@ -189,8 +189,7 @@ public static class RelationalEntityTypeExtensions
             .GetForeignKeys()
             .SelectMany(fk => fk.GetReferencingSkipNavigations())
             .FirstOrDefault(n => !n.IsOnDependent)
-            ?.DeclaringEntityType
-            .GetSchema();
+            ?.DeclaringEntityType.GetSchema();
         if (
             skipNavigationSchema != null
             && entityType

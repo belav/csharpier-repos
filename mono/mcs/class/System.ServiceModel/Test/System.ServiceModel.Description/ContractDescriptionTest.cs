@@ -564,7 +564,8 @@ namespace MonoTests.System.ServiceModel.Description
                 "#1"
             );
             Assert.AreEqual(cd.Operations.Count, 2);
-            OperationBehaviorAttribute op = cd.Operations.Find("HeyHey")
+            OperationBehaviorAttribute op = cd
+                .Operations.Find("HeyHey")
                 .Behaviors.Find<OperationBehaviorAttribute>();
             Assert.IsNotNull(op);
             Assert.AreEqual(op.ReleaseInstanceMode, ReleaseInstanceMode.None, "#2");
@@ -581,7 +582,8 @@ namespace MonoTests.System.ServiceModel.Description
             );
             Assert.AreEqual(cd.Operations.Count, 2, "#4");
             Assert.AreEqual(
-                cd.Operations.Find("HeyHey")
+                cd
+                    .Operations.Find("HeyHey")
                     .Behaviors.Find<OperationBehaviorAttribute>()
                     .ReleaseInstanceMode,
                 ReleaseInstanceMode.AfterCall,

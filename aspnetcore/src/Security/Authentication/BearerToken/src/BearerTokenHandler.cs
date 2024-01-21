@@ -100,9 +100,8 @@ internal sealed class BearerTokenHandler(
         var typeInfo =
             httpContext
                 .RequestServices.GetService<IOptions<JsonOptions>>()
-                ?.Value
-                ?.SerializerOptions
-                ?.GetTypeInfo(typeof(AccessTokenResponse)) as JsonTypeInfo<AccessTokenResponse>;
+                ?.Value?.SerializerOptions?.GetTypeInfo(typeof(AccessTokenResponse))
+            as JsonTypeInfo<AccessTokenResponse>;
         return typeInfo ?? BearerTokenJsonSerializerContext.Default.AccessTokenResponse;
     }
 

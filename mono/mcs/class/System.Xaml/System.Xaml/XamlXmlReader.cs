@@ -328,9 +328,10 @@ namespace System.Xaml
                     sti.Name,
                     sti.TypeName.TypeArguments == null
                         ? null
-                        : sti.TypeName.TypeArguments.Select<XamlTypeName, XamlType>(xxtn =>
-                            sctx.GetXamlType(xxtn)
-                        )
+                        : sti
+                            .TypeName.TypeArguments.Select<XamlTypeName, XamlType>(xxtn =>
+                                sctx.GetXamlType(xxtn)
+                            )
                             .ToArray(),
                     sctx
                 );

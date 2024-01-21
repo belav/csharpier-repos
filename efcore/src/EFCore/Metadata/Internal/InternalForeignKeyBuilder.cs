@@ -1099,9 +1099,9 @@ public class InternalForeignKeyBuilder
             && configurationSource == ConfigurationSource.Explicit
         )
         {
-            Metadata
-                .DeclaringEntityType.Model.ScopedModelDependencies?.Logger
-                .AmbiguousEndRequiredWarning(Metadata);
+            Metadata.DeclaringEntityType.Model.ScopedModelDependencies?.Logger.AmbiguousEndRequiredWarning(
+                Metadata
+            );
         }
 
         IConventionForeignKey? foreignKey = Metadata;
@@ -3467,12 +3467,10 @@ public class InternalForeignKeyBuilder
                         : navigationEntityType.FindSkipNavigation(skipNavigation.Name);
                 }
 
-                skipNavigation
-                    ?.Builder
-                    .HasForeignKey(
-                        newRelationshipBuilder.Metadata,
-                        referencingNavigationTuple.ConfigurationSource
-                    );
+                skipNavigation?.Builder.HasForeignKey(
+                    newRelationshipBuilder.Metadata,
+                    referencingNavigationTuple.ConfigurationSource
+                );
             }
         }
 
@@ -3628,8 +3626,7 @@ public class InternalForeignKeyBuilder
         var removedForeignKeys = new List<ForeignKey>();
         var referencingSkipNavigationName = Metadata
             .ReferencingSkipNavigations?.FirstOrDefault()
-            ?.Inverse
-            ?.Name;
+            ?.Inverse?.Name;
         if (!Metadata.IsInModel)
         {
             removedForeignKeys.Add(Metadata);

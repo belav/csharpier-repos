@@ -1301,7 +1301,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(0, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(0, constructor.Parameters.Length);
@@ -1321,7 +1322,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
@@ -1341,7 +1343,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
@@ -1361,7 +1364,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
@@ -1381,7 +1385,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(0, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(0, indexer.Parameters.Length);
@@ -1409,7 +1414,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
@@ -1437,7 +1443,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
@@ -1465,7 +1472,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);

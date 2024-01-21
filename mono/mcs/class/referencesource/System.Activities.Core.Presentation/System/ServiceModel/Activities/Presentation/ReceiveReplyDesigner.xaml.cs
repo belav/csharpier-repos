@@ -152,16 +152,17 @@ namespace System.ServiceModel.Activities.Presentation
                 ReceiveMessageContent messageContent =
                     ((ReceiveReply)this.ModelItem.GetCurrentValue()).Content
                     as ReceiveMessageContent;
-                this.ModelItem.Properties[DeclaredMessageType].SetValue(
-                    null == messageContent ? null : messageContent.Message.ArgumentType
-                );
+                this
+                    .ModelItem.Properties[DeclaredMessageType]
+                    .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }
 
         void OnDefineButtonClicked(object sender, RoutedEventArgs args)
         {
             using (
-                EditingScope scope = this.Context.Services.GetRequiredService<ModelTreeManager>()
+                EditingScope scope = this
+                    .Context.Services.GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(
                         StringResourceDictionary.Instance.GetString("editReceiveContent"),
                         true

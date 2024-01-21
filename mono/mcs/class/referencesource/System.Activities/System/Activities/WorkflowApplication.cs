@@ -6781,11 +6781,13 @@ namespace System.Activities
                     try
                     {
                         CreateTemporaryHandle(null);
-                        this.owner = this.store.Execute(
-                            this.temporaryHandle,
-                            GetCreateOwnerCommand(definitionIdentity),
-                            timeout
-                        ).InstanceOwner;
+                        this.owner = this
+                            .store.Execute(
+                                this.temporaryHandle,
+                                GetCreateOwnerCommand(definitionIdentity),
+                                timeout
+                            )
+                            .InstanceOwner;
                         this.ownerWasCreated = true;
                     }
                     finally

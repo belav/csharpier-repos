@@ -1596,9 +1596,9 @@ namespace System.Text.Json.Serialization.Tests
                             {
                                 Assert.Equal(2, jti.Properties.Count);
 
-                                jti.Properties[0].AttributeProvider = jti.Properties[
-                                    1
-                                ].AttributeProvider;
+                                jti.Properties[0].AttributeProvider = jti
+                                    .Properties[1]
+                                    .AttributeProvider;
                                 Assert.Same(
                                     jti.Properties[0].AttributeProvider,
                                     jti.Properties[1].AttributeProvider

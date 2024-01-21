@@ -62,8 +62,7 @@ internal sealed partial class RequestDecompressionMiddleware
             var sizeLimit =
                 context
                     .GetEndpoint()
-                    ?.Metadata
-                    ?.GetMetadata<IRequestSizeLimitMetadata>()
+                    ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>()
                     ?.MaxRequestBodySize
                 ?? context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize;
 

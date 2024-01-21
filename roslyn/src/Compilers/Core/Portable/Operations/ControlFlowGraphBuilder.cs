@@ -8742,9 +8742,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 #if DEBUG
             Debug.Assert(_evalStack[maxStackDepth + 1].frameOpt != null);
             if (
-                _currentInterpolatedStringHandlerArgumentContext
-                    ?.ApplicableCreationOperations
-                    .Contains(operation) == true
+                _currentInterpolatedStringHandlerArgumentContext?.ApplicableCreationOperations.Contains(
+                    operation
+                ) == true
             )
             {
                 for (

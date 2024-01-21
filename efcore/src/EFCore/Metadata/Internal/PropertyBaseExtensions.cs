@@ -382,8 +382,7 @@ public static class PropertyBaseExtensions
             .GetServiceProperties()
             .Any(p => typeof(ILazyLoader).IsAssignableFrom(p.ClrType))
         || ((EntityType)propertyBase.DeclaringType)
-            .ConstructorBinding?.ParameterBindings
-            .OfType<ServiceParameterBinding>()
+            .ConstructorBinding?.ParameterBindings.OfType<ServiceParameterBinding>()
             .Any(b => b.ServiceType == typeof(ILazyLoader)) == true
             ? CoreStrings.NoBackingFieldLazyLoading(
                 propertyBase.Name,

@@ -1254,7 +1254,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 type.IsNestedPrivate
                 && !type.IsSealed
                 && !type.IsAbstract
-                && !type.DeclaringType.GetNestedTypes(BindingFlags.NonPublic)
+                && !type
+                    .DeclaringType.GetNestedTypes(BindingFlags.NonPublic)
                     .Any(t => t.BaseType == type)
             select type.FullName
         ).ToList();

@@ -268,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Editing
                         .ReturnType.GetReferencedTypeParameters()
                         .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
                     || method.Parameters.Any(p =>
-                        p.Type.GetReferencedTypeParameters()
+                        p
+                            .Type.GetReferencedTypeParameters()
                             .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
                     );
             }

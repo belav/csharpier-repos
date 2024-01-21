@@ -61,9 +61,9 @@ namespace System.Activities.Core.Presentation
                 ModelItem item = itemsToCopy.First();
                 if (item != null && item.ItemType == typeof(Transition))
                 {
-                    ModelItem destinationState = item.Properties[
-                        TransitionDesigner.ToPropertyName
-                    ].Value;
+                    ModelItem destinationState = item
+                        .Properties[TransitionDesigner.ToPropertyName]
+                        .Value;
 
                     if (!modelItemToGuid.ContainsKey(destinationState))
                     {
@@ -125,14 +125,14 @@ namespace System.Activities.Core.Presentation
 
             HashSet<Connector> connectorsToDelete = new HashSet<Connector>();
             List<ModelItem> allStateModelItemsToDelete = new List<ModelItem>();
-            IEnumerable<ModelItem> selectedStateModelItems =
-                this.Context.Items.GetValue<Selection>()
-                    .SelectedObjects.Where<ModelItem>(
-                        (p) =>
-                        {
-                            return p.ItemType == typeof(State);
-                        }
-                    );
+            IEnumerable<ModelItem> selectedStateModelItems = this
+                .Context.Items.GetValue<Selection>()
+                .SelectedObjects.Where<ModelItem>(
+                    (p) =>
+                    {
+                        return p.ItemType == typeof(State);
+                    }
+                );
 
             foreach (ModelItem stateModelItem in itemsToDelete)
             {
@@ -206,8 +206,9 @@ namespace System.Activities.Core.Presentation
                 if (itemsToPaste.Count == 1 && itemsToPaste.First() is Transition)
                 {
                     string errorMessage;
-                    IEnumerable<ModelItem> selectedStateModelItems =
-                        this.Context.Items.GetValue<Selection>().SelectedObjects;
+                    IEnumerable<ModelItem> selectedStateModelItems = this
+                        .Context.Items.GetValue<Selection>()
+                        .SelectedObjects;
                     return selectedStateModelItems.All(item =>
                         CanPasteTransition(item, out errorMessage)
                     );
@@ -363,7 +364,8 @@ namespace System.Activities.Core.Presentation
 
                 this.PopulateVirtualizingContainer(destinationState);
 
-                ModelItem[] selectedItems = this.Context.Items.GetValue<Selection>()
+                ModelItem[] selectedItems = this
+                    .Context.Items.GetValue<Selection>()
                     .SelectedObjects.ToArray();
                 string errorMessage;
                 if (!CanPasteTransition(destinationState, out errorMessage, selectedItems))
@@ -394,9 +396,9 @@ namespace System.Activities.Core.Presentation
                             pastedTransition = (Transition)XamlServices.Load(reader);
                         }
 
-                        ModelItem transitionModelItem =
-                            this.Context.Services.GetRequiredService<ModelTreeManager>()
-                                .WrapAsModelItem(pastedTransition);
+                        ModelItem transitionModelItem = this
+                            .Context.Services.GetRequiredService<ModelTreeManager>()
+                            .WrapAsModelItem(pastedTransition);
                         ModelItem sourceState = selectedItem;
                         sourceState
                             .Properties[StateDesigner.TransitionsPropertyName]
@@ -471,9 +473,9 @@ namespace System.Activities.Core.Presentation
                     {
                         ModelItem stateModelItem =
                             (this.ModelItem.ItemType == typeof(StateMachine))
-                                ? this.ModelItem.Properties[
-                                    StateMachineDesigner.StatesPropertyName
-                                ].Collection.Add(state)
+                                ? this
+                                    .ModelItem.Properties[StateMachineDesigner.StatesPropertyName]
+                                    .Collection.Add(state)
                                 : GetStateMachineModelItem(this.ModelItem)
                                     .Properties[StateMachineDesigner.StatesPropertyName]
                                     .Collection.Add(state);

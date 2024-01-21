@@ -297,8 +297,7 @@ public class ForeignKeyPropertyDiscoveryConvention
                             || (
                                 foreignKey
                                     .DeclaringEntityType.FindPrimaryKey()
-                                    ?.Properties
-                                    .All(p => !p.IsShadowProperty()) ?? false
+                                    ?.Properties.All(p => !p.IsShadowProperty()) ?? false
                             )
                         )
                     )
@@ -930,7 +929,8 @@ public class ForeignKeyPropertyDiscoveryConvention
     {
         var key = keyBuilder.Metadata;
         foreach (
-            var foreignKey in key.DeclaringEntityType.GetDerivedTypesInclusive()
+            var foreignKey in key
+                .DeclaringEntityType.GetDerivedTypesInclusive()
                 .SelectMany(t => t.GetDeclaredForeignKeys())
                 .ToList()
         )
@@ -957,7 +957,8 @@ public class ForeignKeyPropertyDiscoveryConvention
             return;
         }
 
-        var foreignKeys = key.DeclaringEntityType.GetDerivedTypesInclusive()
+        var foreignKeys = key
+            .DeclaringEntityType.GetDerivedTypesInclusive()
             .SelectMany(t => t.GetDeclaredForeignKeys())
             .ToList();
         foreach (var foreignKey in foreignKeys)

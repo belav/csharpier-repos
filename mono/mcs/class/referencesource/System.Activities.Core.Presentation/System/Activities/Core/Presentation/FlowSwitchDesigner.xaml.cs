@@ -68,7 +68,8 @@ namespace System.Activities.Core.Presentation
                 SetupBinding();
 
                 if (
-                    this.Context.Services.GetService<DesignerConfigurationService>()
+                    this
+                        .Context.Services.GetService<DesignerConfigurationService>()
                         .TargetFrameworkName.IsLessThan45()
                 )
                 {
@@ -250,9 +251,11 @@ namespace System.Activities.Core.Presentation
                     IFlowSwitchDefaultLink link = (IFlowSwitchDefaultLink)
                         linkModelItem.GetCurrentValue();
                     string defaultDisplayName = (string)
-                        this.ModelItem.Properties[
-                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                        ].Value.GetCurrentValue();
+                        this
+                            .ModelItem.Properties[
+                                FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                            ]
+                            .Value.GetCurrentValue();
 
                     if (link.DefaultCaseDisplayName != defaultDisplayName)
                     {

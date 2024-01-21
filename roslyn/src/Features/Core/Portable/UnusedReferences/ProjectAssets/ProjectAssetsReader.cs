@@ -43,9 +43,7 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             // We keep a list of references that were automatically added by SDKs or other sources so that we can ignore them
             // since they can't be removed even if they were unused.
             var autoReferences = projectAssets
-                .Project?.Frameworks
-                ?.Values
-                .Where(framework => framework.Dependencies != null)
+                .Project?.Frameworks?.Values.Where(framework => framework.Dependencies != null)
                 .SelectMany(framework =>
                     framework.Dependencies!.Keys.Where(key =>
                         framework.Dependencies[key].AutoReferenced

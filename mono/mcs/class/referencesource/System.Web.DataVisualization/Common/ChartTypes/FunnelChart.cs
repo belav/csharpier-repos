@@ -1601,9 +1601,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 this._funnelNeckSize = GetFunnelNeckSize(series);
 
                 // Loop through all ponts in the data series
-                float currentLocation = this.Graph.GetAbsolutePoint(
-                    this.PlotAreaPosition.Location
-                ).Y;
+                float currentLocation = this
+                    .Graph.GetAbsolutePoint(this.PlotAreaPosition.Location)
+                    .Y;
                 if (this.isPyramid)
                 {
                     // Pyramid is drawn in reversed order.

@@ -103,11 +103,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             var cancellationToken = context.UserCancellationToken;
 
-            var document =
-                await args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+            var document = await args
+                .SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
                     context
                 )
-                    .ConfigureAwait(false);
+                .ConfigureAwait(false);
 
             if (document == null)
             {

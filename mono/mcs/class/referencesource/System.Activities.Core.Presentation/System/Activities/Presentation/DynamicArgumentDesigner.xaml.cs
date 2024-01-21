@@ -665,10 +665,10 @@ namespace System.Activities.Presentation
             }
             else
             {
-                var defaultNames = this.DynamicArguments.Select<
-                    DynamicArgumentWrapperObject,
-                    string
-                >(p => (string)p.Name)
+                var defaultNames = this
+                    .DynamicArguments.Select<DynamicArgumentWrapperObject, string>(p =>
+                        (string)p.Name
+                    )
                     .Where<string>(p =>
                         0
                         == string.Compare(

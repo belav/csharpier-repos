@@ -1782,9 +1782,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             foreach (SyntaxList<AttributeListSyntax> list in attributeLists)
             {
                 var syntaxTree = list.Node.SyntaxTree;
-                QuickAttributeChecker checker = this.DeclaringCompilation.GetBinderFactory(
-                    list.Node.SyntaxTree
-                )
+                QuickAttributeChecker checker = this
+                    .DeclaringCompilation.GetBinderFactory(list.Node.SyntaxTree)
                     .GetBinder(list.Node)
                     .QuickAttributeChecker;
 

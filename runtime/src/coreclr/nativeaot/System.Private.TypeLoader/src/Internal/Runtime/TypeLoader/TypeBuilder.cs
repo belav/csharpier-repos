@@ -773,7 +773,8 @@ namespace Internal.Runtime.TypeLoader
             type.RetrieveRuntimeTypeHandleIfPossible();
             unsafe
             {
-                RuntimeTypeHandle thBaseTypeTemplate = type.RuntimeTypeHandle.ToEETypePtr()
+                RuntimeTypeHandle thBaseTypeTemplate = type
+                    .RuntimeTypeHandle.ToEETypePtr()
                     ->BaseType->ToRuntimeTypeHandle();
                 if (thBaseTypeTemplate.IsNull())
                     return null;

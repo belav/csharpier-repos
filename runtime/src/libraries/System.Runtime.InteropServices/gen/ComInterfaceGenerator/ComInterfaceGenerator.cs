@@ -170,7 +170,8 @@ namespace Microsoft.Interop
             context.RegisterDiagnostics(
                 interfaceAndMethodsContexts.SelectMany(
                     (data, ct) =>
-                        data.DeclaredMethods.SelectMany(m => m.ManagedToUnmanagedStub.Diagnostics)
+                        data
+                            .DeclaredMethods.SelectMany(m => m.ManagedToUnmanagedStub.Diagnostics)
                             .Union(
                                 data.DeclaredMethods.SelectMany(m =>
                                     m.UnmanagedToManagedStub.Diagnostics

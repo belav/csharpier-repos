@@ -145,7 +145,8 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.WaitToReadAsync()
+            Task r = c
+                .Reader.WaitToReadAsync()
                 .AsTask()
                 .ContinueWith(
                     _ =>

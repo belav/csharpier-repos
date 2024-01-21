@@ -568,7 +568,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Include(c => c.Orders)
                     .Where(c => c.CustomerID == "ALFKI")
                     .OrderBy(c =>
-                        c.Orders.OrderBy(o => o.EmployeeID)
+                        c
+                            .Orders.OrderBy(o => o.EmployeeID)
                             .Select(o => o.OrderDate)
                             .FirstOrDefault()
                     ),

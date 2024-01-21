@@ -399,9 +399,9 @@ namespace System.Data.Mapping
                         ReferentialConstraint rc = aSet.ElementType.ReferentialConstraints.Single();
 
                         EntitySet dependentSet = aSet.AssociationSetEnds[rc.ToRole.Name].EntitySet;
-                        EntitySet principalSet = aSet.AssociationSetEnds[
-                            rc.FromRole.Name
-                        ].EntitySet;
+                        EntitySet principalSet = aSet
+                            .AssociationSetEnds[rc.FromRole.Name]
+                            .EntitySet;
 
                         DbExpression qView = dependentSet.Scan();
 

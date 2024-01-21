@@ -384,8 +384,7 @@ namespace ILLink.RoslynAnalyzer
         public static string GetUrlFromAttribute(AttributeData? requiresAttribute)
         {
             var url = requiresAttribute
-                ?.NamedArguments
-                .FirstOrDefault(na => na.Key == "Url")
+                ?.NamedArguments.FirstOrDefault(na => na.Key == "Url")
                 .Value.Value?.ToString();
             return MessageFormat.FormatRequiresAttributeUrlArg(url);
         }

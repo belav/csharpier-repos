@@ -202,14 +202,16 @@ namespace System.Data.Mapping
                             mapping.CMember
                         );
                 }
-                this.ColumnRenameMapping[mapping.CMember].AddRename(
-                    new FunctionImportReturnTypeStructuralTypeColumn(
-                        mapping.SColumn,
-                        entityType,
-                        isTypeOf,
-                        mapping.LineInfo
-                    )
-                );
+                this
+                    .ColumnRenameMapping[mapping.CMember]
+                    .AddRename(
+                        new FunctionImportReturnTypeStructuralTypeColumn(
+                            mapping.SColumn,
+                            entityType,
+                            isTypeOf,
+                            mapping.LineInfo
+                        )
+                    );
             }
         }
     }

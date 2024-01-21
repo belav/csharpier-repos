@@ -123,7 +123,8 @@ namespace System.CommandLine.Generator
                     var ctor in modelType.Constructors.OrderByDescending(x => x.Parameters.Length)
                 )
                 {
-                    var targetTypes = ctor.Parameters.Select(x => x.Type)
+                    var targetTypes = ctor
+                        .Parameters.Select(x => x.Type)
                         .Concat(delegateParameters.Skip(1))
                         .ToArray();
                     if (IsMatch(targetTypes, givenParameters, wellKnownTypes))

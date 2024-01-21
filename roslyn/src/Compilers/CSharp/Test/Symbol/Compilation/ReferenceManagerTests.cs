@@ -2101,7 +2101,8 @@ namespace System.Printing
             );
             comp.VerifyDiagnostics();
 
-            var method = comp.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+            var method = comp
+                .GlobalNamespace.GetMember<NamespaceSymbol>("System")
                 .GetMember<NamespaceSymbol>("Windows")
                 .GetMember<NamespaceSymbol>("Controls")
                 .GetMember<NamedTypeSymbol>("PrintDialog")

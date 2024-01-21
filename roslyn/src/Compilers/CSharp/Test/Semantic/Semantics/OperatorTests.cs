@@ -7540,14 +7540,17 @@ class Program
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
 
-            var expectedOperator = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S1")
+            var expectedOperator = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("S1")
                 .GetMembers(WellKnownMemberNames.EqualityOperatorName)
                 .OfType<MethodSymbol>()
                 .Single(m =>
-                    m.ParameterTypesWithAnnotations[0].Equals(
-                        m.ParameterTypesWithAnnotations[1],
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    m
+                        .ParameterTypesWithAnnotations[0]
+                        .Equals(
+                            m.ParameterTypesWithAnnotations[1],
+                            TypeCompareKind.ConsiderEverything
+                        )
                 );
 
             var tree = comp.SyntaxTrees.Single();

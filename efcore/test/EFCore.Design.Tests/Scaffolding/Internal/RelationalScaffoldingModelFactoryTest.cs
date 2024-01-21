@@ -489,7 +489,8 @@ public class RelationalScaffoldingModelFactoryTest
             }
         };
 
-        info.Tables.First()
+        info
+            .Tables.First()
             .Columns.Add(
                 new DatabaseColumn
                 {

@@ -216,7 +216,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // If we had a mix of exceptions, don't eat it
                     if (
                         ae.InnerExceptions.Any(e => e is not OperationCanceledException)
-                        || ae.InnerExceptions.Cast<OperationCanceledException>()
+                        || ae
+                            .InnerExceptions.Cast<OperationCanceledException>()
                             .Any(NotOurShutdownToken)
                     )
                     {

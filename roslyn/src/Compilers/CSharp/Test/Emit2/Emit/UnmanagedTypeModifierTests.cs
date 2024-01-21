@@ -1815,7 +1815,8 @@ public class Test
                     .WithLocation(10, 23)
             );
 
-            var typeParameter = c.GlobalNamespace.GetTypeMember("TestRef")
+            var typeParameter = c
+                .GlobalNamespace.GetTypeMember("TestRef")
                 .GetMethod("M")
                 .TypeParameters.Single();
             Assert.True(typeParameter.HasUnmanagedTypeConstraint);

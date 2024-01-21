@@ -752,7 +752,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
             // If this isn't working properly, we'll get the HTTPS endpoint defined in UseKestrel
             // instead of the HTTP endpoint defined in UseUrls.
-            var serverAddresses = host.Services.GetRequiredService<IServer>()
+            var serverAddresses = host
+                .Services.GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses;
             Assert.Equal(1, serverAddresses.Count);
@@ -819,7 +820,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
             // If this isn't working properly, we'll get the HTTP endpoint defined in UseUrls
             // instead of the HTTPS endpoint defined in UseKestrel.
-            var serverAddresses = host.Services.GetRequiredService<IServer>()
+            var serverAddresses = host
+                .Services.GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses;
             Assert.Equal(1, serverAddresses.Count);
@@ -875,7 +877,8 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             var port = host.GetPort();
 
             // If this isn't working properly, we'll not get the HTTPS endpoint defined in UseKestrel.
-            var serverAddresses = host.Services.GetRequiredService<IServer>()
+            var serverAddresses = host
+                .Services.GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses;
             Assert.Equal(1, serverAddresses.Count);

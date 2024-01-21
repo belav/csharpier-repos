@@ -41680,14 +41680,16 @@ I4.M1
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             var i1i2m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I2")
+                i1
+                    .OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I2")
                     .Single()
                     .ToDisplayString()
                     + "."
                     + name
             );
             var i1i4m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I4")
+                i1
+                    .OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I4")
                     .Single()
                     .ToDisplayString()
                     + "."
@@ -41726,14 +41728,16 @@ I4.M1
             var i3 = i1.ContainingNamespace.GetTypeMember("I3");
             i1 = i3.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             i1i2m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I2")
+                i1
+                    .OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I2")
                     .Single()
                     .ToDisplayString()
                     + "."
                     + name
             );
             i1i4m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I4")
+                i1
+                    .OriginalDefinition.AllInterfacesNoUseSiteDiagnostics.Where(i => i.Name == "I4")
                     .Single()
                     .ToDisplayString()
                     + "."
@@ -67609,7 +67613,8 @@ class Test1 : I3
                 var i3 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I3", i3.Name);
 
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -67837,7 +67842,8 @@ I3.set_P1
                 Assert.Equal("I3", i3.Name);
 
                 var i3p1 = i3.GetMembers().OfType<PropertySymbol>().Single();
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -68287,7 +68293,8 @@ class Test1 : I4
                 var test1 = m.GlobalNamespace.GetTypeMember("Test1");
                 var i4 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I4", i4.Name);
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -68477,7 +68484,8 @@ I4.set_P1
                 Assert.Equal("I4", i4.Name);
 
                 var i4p1 = i4.GetMembers().OfType<PropertySymbol>().Single();
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -73962,7 +73970,8 @@ class Test1 : I3
                 var i3 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I3", i3.Name);
 
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -74174,7 +74183,8 @@ I3.remove_P1
                 Assert.Equal("I3", i3.Name);
 
                 var i3p1 = i3.GetMembers().OfType<EventSymbol>().Single();
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -74587,7 +74597,8 @@ class Test1 : I4
                 var test1 = m.GlobalNamespace.GetTypeMember("Test1");
                 var i4 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I4", i4.Name);
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -74763,7 +74774,8 @@ I4.remove_P1
                 Assert.Equal("I4", i4.Name);
 
                 var i4p1 = i4.GetMembers().OfType<EventSymbol>().Single();
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4
+                    .ContainingNamespace.GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();

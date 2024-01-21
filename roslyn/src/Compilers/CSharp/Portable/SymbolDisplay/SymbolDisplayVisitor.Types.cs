@@ -108,9 +108,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                         )
                         && !type.IsValueType
-                        && (type as Symbols.PublicModel.TypeSymbol)
-                            ?.UnderlyingTypeSymbol
-                            .IsTypeParameterDisallowingAnnotationInCSharp8() != true
+                        && (
+                            type as Symbols.PublicModel.TypeSymbol
+                        )?.UnderlyingTypeSymbol.IsTypeParameterDisallowingAnnotationInCSharp8()
+                            != true
                     )
                     {
                         return true;

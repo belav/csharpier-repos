@@ -460,22 +460,18 @@ namespace System.Data
                         RaisePropertyChanging(nameof(ColumnName));
                         _columnName = value;
                         _encodedColumnName = null;
-                        _table
-                            ?.Columns
-                            .OnColumnPropertyChanged(
-                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                            );
+                        _table?.Columns.OnColumnPropertyChanged(
+                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                        );
                     }
                     else if (_columnName != value)
                     {
                         RaisePropertyChanging(nameof(ColumnName));
                         _columnName = value;
                         _encodedColumnName = null;
-                        _table
-                            ?.Columns
-                            .OnColumnPropertyChanged(
-                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                            );
+                        _table?.Columns.OnColumnPropertyChanged(
+                            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                        );
                     }
                 }
                 finally

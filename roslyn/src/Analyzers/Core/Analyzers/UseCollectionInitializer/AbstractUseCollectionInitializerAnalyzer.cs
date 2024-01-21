@@ -234,10 +234,9 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         if (this.HasExistingInvalidInitializerForCollection())
             return false;
 
-        var type = this.SemanticModel.GetTypeInfo(
-            _objectCreationExpression,
-            cancellationToken
-        ).Type;
+        var type = this
+            .SemanticModel.GetTypeInfo(_objectCreationExpression, cancellationToken)
+            .Type;
         if (type == null)
             return false;
 

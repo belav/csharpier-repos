@@ -697,7 +697,8 @@ namespace System.Data.Linq.SqlClient
                 {
                     if (!File.Exists(this.dbName))
                     {
-                        Type engineType = this.conManager.Connection.GetType()
+                        Type engineType = this
+                            .conManager.Connection.GetType()
                             .Module.GetType("System.Data.SqlServerCe.SqlCeEngine");
                         object engine = Activator.CreateInstance(
                             engineType,

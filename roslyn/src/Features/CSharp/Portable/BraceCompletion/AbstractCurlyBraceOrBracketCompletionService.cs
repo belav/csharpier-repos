@@ -197,9 +197,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             static TextLine GetLineBetweenCurlys(int closingPosition, SourceText text)
             {
-                var closingBraceLineNumber = text.Lines.GetLineFromPosition(
-                    closingPosition - 1
-                ).LineNumber;
+                var closingBraceLineNumber = text
+                    .Lines.GetLineFromPosition(closingPosition - 1)
+                    .LineNumber;
                 return text.Lines[closingBraceLineNumber - 1];
             }
 

@@ -545,9 +545,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
         private void VerifyInterfaces(TypeDefinition src, TypeDefinition linked)
         {
             var expectedInterfaces = new HashSet<string>(
-                src.CustomAttributes.Where(w =>
-                    w.AttributeType.Name == nameof(KeptInterfaceAttribute)
-                )
+                src
+                    .CustomAttributes.Where(w =>
+                        w.AttributeType.Name == nameof(KeptInterfaceAttribute)
+                    )
                     .Select(FormatBaseOrInterfaceAttributeValue)
             );
             if (expectedInterfaces.Count == 0)
@@ -2470,7 +2471,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             if (assemblyName.EndsWith(".exe") || assemblyName.EndsWith(".dll"))
                 cleanAssemblyName = System.IO.Path.GetFileNameWithoutExtension(assemblyName);
 
-            return this.linkedMembers.Where(e => GetModuleName(e.Value.Entity) == cleanAssemblyName)
+            return this
+                .linkedMembers.Where(e => GetModuleName(e.Value.Entity) == cleanAssemblyName)
                 .ToDictionary();
         }
 

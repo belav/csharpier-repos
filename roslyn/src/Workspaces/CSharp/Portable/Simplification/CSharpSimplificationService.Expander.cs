@@ -226,9 +226,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                         if (parameters.Length > 0 && parameters.Any(p => p.Type == null))
                         {
-                            var parameterSymbols = node.ParameterList.Parameters.Select(p =>
-                                _semanticModel.GetDeclaredSymbol(p, _cancellationToken)
-                            )
+                            var parameterSymbols = node
+                                .ParameterList.Parameters.Select(p =>
+                                    _semanticModel.GetDeclaredSymbol(p, _cancellationToken)
+                                )
                                 .ToArray();
 
                             if (parameterSymbols.All(p => p.Type?.ContainsAnonymousType() == false))

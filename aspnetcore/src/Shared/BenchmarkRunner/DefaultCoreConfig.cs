@@ -28,41 +28,52 @@ internal sealed class DefaultCoreConfig : ManualConfig
         AddValidator(JitOptimizationsValidator.FailOnError);
 
         AddJob(
-            Job.Default
+            Job
+                .Default
 #if NETCOREAPP2_1
-            .WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
+                .WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
 #elif NETCOREAPP3_0
-            .WithToolchain(
-                CsProjCoreToolchain.From(
-                    new NetCoreAppSettings("netcoreapp3.0", null, ".NET Core 3.0")
+                .WithToolchain(
+                    CsProjCoreToolchain.From(
+                        new NetCoreAppSettings("netcoreapp3.0", null, ".NET Core 3.0")
+                    )
                 )
-            )
 #elif NETCOREAPP3_1
-            .WithToolchain(
-                CsProjCoreToolchain.From(
-                    new NetCoreAppSettings("netcoreapp3.1", null, ".NET Core 3.1")
+                .WithToolchain(
+                    CsProjCoreToolchain.From(
+                        new NetCoreAppSettings("netcoreapp3.1", null, ".NET Core 3.1")
+                    )
                 )
-            )
 #elif NET5_0
-            .WithToolchain(
-                CsProjCoreToolchain.From(new NetCoreAppSettings("net5.0", null, ".NET Core 5.0"))
-            )
+                .WithToolchain(
+                    CsProjCoreToolchain.From(
+                        new NetCoreAppSettings("net5.0", null, ".NET Core 5.0")
+                    )
+                )
 #elif NET6_0
-            .WithToolchain(
-                CsProjCoreToolchain.From(new NetCoreAppSettings("net6.0", null, ".NET Core 6.0"))
-            )
+                .WithToolchain(
+                    CsProjCoreToolchain.From(
+                        new NetCoreAppSettings("net6.0", null, ".NET Core 6.0")
+                    )
+                )
 #elif NET7_0
-            .WithToolchain(
-                CsProjCoreToolchain.From(new NetCoreAppSettings("net7.0", null, ".NET Core 7.0"))
-            )
+                .WithToolchain(
+                    CsProjCoreToolchain.From(
+                        new NetCoreAppSettings("net7.0", null, ".NET Core 7.0")
+                    )
+                )
 #elif NET8_0
-            .WithToolchain(
-                CsProjCoreToolchain.From(new NetCoreAppSettings("net8.0", null, ".NET Core 8.0"))
-            )
+                .WithToolchain(
+                    CsProjCoreToolchain.From(
+                        new NetCoreAppSettings("net8.0", null, ".NET Core 8.0")
+                    )
+                )
 #elif NET9_0
-            .WithToolchain(
-                CsProjCoreToolchain.From(new NetCoreAppSettings("net9.0", null, ".NET Core 9.0"))
-            )
+                .WithToolchain(
+                    CsProjCoreToolchain.From(
+                        new NetCoreAppSettings("net9.0", null, ".NET Core 9.0")
+                    )
+                )
 #else
 #error Target frameworks need to be updated.
 #endif

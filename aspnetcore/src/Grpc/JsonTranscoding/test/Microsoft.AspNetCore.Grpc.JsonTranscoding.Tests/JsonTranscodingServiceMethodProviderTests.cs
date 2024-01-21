@@ -86,8 +86,7 @@ public class JsonTranscodingServiceMethodProviderTests
             "/v1/additional_bindings/{name}",
             additionalMethodModel
                 .Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()
-                ?.HttpRule
-                .Delete
+                ?.HttpRule.Delete
         );
         Assert.Equal("/v1/additional_bindings/{name}", additionalMethodModel.RoutePattern.RawText);
     }

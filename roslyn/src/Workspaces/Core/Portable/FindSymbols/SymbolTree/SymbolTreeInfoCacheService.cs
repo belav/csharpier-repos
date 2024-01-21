@@ -77,12 +77,13 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             Func<Task> createWorkAsync,
             CancellationToken cancellationToken
         ) =>
-            Task.Factory.StartNew(
-                createWorkAsync,
-                cancellationToken,
-                TaskCreationOptions.None,
-                _scheduler
-            )
+            Task
+                .Factory.StartNew(
+                    createWorkAsync,
+                    cancellationToken,
+                    TaskCreationOptions.None,
+                    _scheduler
+                )
                 .Unwrap();
 
         /// <summary>

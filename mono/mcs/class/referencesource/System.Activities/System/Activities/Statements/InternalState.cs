@@ -1022,14 +1022,16 @@ namespace System.Activities.Statements
 
         Activity<bool> GetCondition(int triggerIndex, int conditionIndex)
         {
-            return this.internalTransitions[triggerIndex]
+            return this
+                .internalTransitions[triggerIndex]
                 .TransitionDataList[conditionIndex]
                 .Condition;
         }
 
         string GetTo(int triggerIndex, int conditionIndex = 0)
         {
-            return this.internalTransitions[triggerIndex]
+            return this
+                .internalTransitions[triggerIndex]
                 .TransitionDataList[conditionIndex]
                 .To
                 .StateId;

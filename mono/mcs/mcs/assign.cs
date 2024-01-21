@@ -743,7 +743,8 @@ namespace Mono.CSharp
         protected override Expression DoResolve(ResolveContext rc)
         {
             target = new FieldExpr(field, loc);
-            source = rc.CurrentBlock.ParametersBlock.GetParameterInfo(parameter)
+            source = rc
+                .CurrentBlock.ParametersBlock.GetParameterInfo(parameter)
                 .CreateReferenceExpression(rc, loc);
             return base.DoResolve(rc);
         }

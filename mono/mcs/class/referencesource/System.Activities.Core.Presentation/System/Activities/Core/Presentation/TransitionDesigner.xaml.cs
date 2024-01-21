@@ -360,29 +360,30 @@ namespace System.Activities.Core.Presentation
                         EditingScope scope = (EditingScope)this.ModelItem.BeginEdit(SR.ReorderItems)
                     )
                     {
-                        ModelItem movedModelItem = this.TransitionsSharingTrigger[
-                            e.NewStartingIndex
-                        ].Item;
+                        ModelItem movedModelItem = this
+                            .TransitionsSharingTrigger[e.NewStartingIndex]
+                            .Item;
                         ModelItemCollection transitionsCollection = this.parentStateModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
                             .Collection;
                         // moving down
                         if (e.OldStartingIndex < e.NewStartingIndex)
                         {
-                            ModelItem nextModelItem = this.TransitionsSharingTrigger[
-                                e.OldStartingIndex
-                            ].Item;
+                            ModelItem nextModelItem = this
+                                .TransitionsSharingTrigger[e.OldStartingIndex]
+                                .Item;
                             SwapItems(transitionsCollection, movedModelItem, nextModelItem);
                         }
                         // moving up
                         else if (e.OldStartingIndex > e.NewStartingIndex)
                         {
-                            ModelItem previousModelItem = this.TransitionsSharingTrigger[
-                                e.OldStartingIndex
-                            ].Item;
+                            ModelItem previousModelItem = this
+                                .TransitionsSharingTrigger[e.OldStartingIndex]
+                                .Item;
                             SwapItems(transitionsCollection, previousModelItem, movedModelItem);
                         }
-                        this.Context.Services.GetService<ModelTreeManager>()
+                        this
+                            .Context.Services.GetService<ModelTreeManager>()
                             .AddToCurrentEditingScope(new TransitionReorderChange());
                         scope.Complete();
                     }
@@ -471,7 +472,8 @@ namespace System.Activities.Core.Presentation
 
         void OnCopyCommandExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Context.Services.GetService<DesignerPerfEventProvider>()
+            this
+                .Context.Services.GetService<DesignerPerfEventProvider>()
                 .WorkflowDesignerCopyStart();
             CutCopyPasteHelper.DoCopy(this.Context);
             e.Handled = true;
@@ -606,21 +608,21 @@ namespace System.Activities.Core.Presentation
                 ModelItem triggerModelItem = this.ModelItem.Properties[TriggerPropertyName].Value;
                 State toState = toStateModelItem.GetCurrentValue() as State;
 
-                ModelItem newTransitionItem = this.parentStateModelItem.Properties[
-                    StateDesigner.TransitionsPropertyName
-                ].Collection.Add(
-                    new Transition()
-                    {
-                        Trigger =
-                            null == triggerModelItem
-                                ? null
-                                : triggerModelItem.GetCurrentValue() as Activity,
-                        DisplayName = StateContainerEditor.GenerateTransitionName(
-                            stateMachineModelItem
-                        ),
-                        To = toState
-                    }
-                );
+                ModelItem newTransitionItem = this
+                    .parentStateModelItem.Properties[StateDesigner.TransitionsPropertyName]
+                    .Collection.Add(
+                        new Transition()
+                        {
+                            Trigger =
+                                null == triggerModelItem
+                                    ? null
+                                    : triggerModelItem.GetCurrentValue() as Activity,
+                            DisplayName = StateContainerEditor.GenerateTransitionName(
+                                stateMachineModelItem
+                            ),
+                            To = toState
+                        }
+                    );
 
                 this.ViewStateService.StoreViewState(newTransitionItem, ExpandViewStateKey, true);
 

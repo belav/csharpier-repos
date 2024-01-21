@@ -1820,7 +1820,8 @@ namespace System.Web
                                     + "; Target="
                                     + nqi.Callback.Target
                                     + "(HC="
-                                    + nqi.Callback.Target.GetHashCode()
+                                    + nqi
+                                        .Callback.Target.GetHashCode()
                                         .ToString("x", NumberFormatInfo.InvariantInfo)
                                     + ")"
                             );

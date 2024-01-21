@@ -1982,15 +1982,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // For async foreach, we don't do the runtime check in unsealed case
                 if (
                     (!enumeratorType.IsSealed && !isAsync)
-                    || this.Conversions.ClassifyImplicitConversionFromType(
-                        enumeratorType,
-                        isAsync
-                            ? this.Compilation.GetWellKnownType(
-                                WellKnownType.System_IAsyncDisposable
-                            )
-                            : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
-                        ref useSiteInfo
-                    ).IsImplicit
+                    || this
+                        .Conversions.ClassifyImplicitConversionFromType(
+                            enumeratorType,
+                            isAsync
+                                ? this.Compilation.GetWellKnownType(
+                                    WellKnownType.System_IAsyncDisposable
+                                )
+                                : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
+                            ref useSiteInfo
+                        )
+                        .IsImplicit
                 )
                 {
                     builder.NeedsDisposal = true;

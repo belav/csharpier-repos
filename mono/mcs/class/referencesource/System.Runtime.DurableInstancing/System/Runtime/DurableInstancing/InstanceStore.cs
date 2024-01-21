@@ -318,9 +318,8 @@ namespace System.Runtime.DurableInstancing
         {
             lock (ThisLock)
             {
-                return this.owners.Values.Select(weakReference =>
-                    (InstanceOwner)weakReference.Target
-                )
+                return this
+                    .owners.Values.Select(weakReference => (InstanceOwner)weakReference.Target)
                     .Where(owner => owner != null)
                     .ToArray();
             }

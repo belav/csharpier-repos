@@ -5077,7 +5077,8 @@ class C
             );
 
             var comp = CreateEmptyCompilation(source, WinRtRefs, TestOptions.ReleaseWinMD);
-            var eventSymbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var eventSymbol = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMember<EventSymbol>("E");
             Assert.True(eventSymbol.IsWindowsRuntimeEvent);
 
@@ -5467,7 +5468,8 @@ enum E2 // Identical to E1, but has [Flags]
 }
 ";
             var comp = CreateCompilation(source);
-            var method = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+            var method = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
                 .GetMember<MethodSymbol>("M");
 
             var memberFormat = new SymbolDisplayFormat(

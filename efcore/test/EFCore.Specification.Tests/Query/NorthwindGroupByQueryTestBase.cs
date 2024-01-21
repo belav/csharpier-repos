@@ -3837,7 +3837,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                         info.o.OrderID,
                         info.o.OrderDate,
                         HasOrderDetails = info.OrderDetails.Any(),
-                        HasMultipleProducts = info.OrderDetails.GroupBy(e => e.Product.ProductName)
+                        HasMultipleProducts = info
+                            .OrderDetails.GroupBy(e => e.Product.ProductName)
                             .Count() > 1
                     })
         );
@@ -3874,11 +3875,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                     .Select(c => new
                     {
                         Key = c.CustomerID,
-                        Subquery = c.Orders.Select(o => new
-                        {
-                            First = o.CustomerID,
-                            Second = o.OrderID
-                        })
+                        Subquery = c
+                            .Orders.Select(o => new { First = o.CustomerID, Second = o.OrderID })
                             .GroupBy(x => x.First)
                             .Select(g => new { Sum = g.Sum(x => x.Second) })
                             .ToList()
@@ -3901,11 +3899,8 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                     .Select(c => new
                     {
                         Key = c.CustomerID,
-                        Subquery = c.Orders.Select(o => new
-                        {
-                            First = o.CustomerID,
-                            Second = o.OrderID
-                        })
+                        Subquery = c
+                            .Orders.Select(o => new { First = o.CustomerID, Second = o.OrderID })
                             .GroupBy(x => x.First)
                             .Select(g => new
                             {
@@ -3960,11 +3955,12 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
                     .Select(c => new
                     {
                         Key = c.CustomerID,
-                        Subquery = c.Orders.Select(o => new
-                        {
-                            First = o.OrderID,
-                            Second = o.Customer.City + o.CustomerID
-                        })
+                        Subquery = c
+                            .Orders.Select(o => new
+                            {
+                                First = o.OrderID,
+                                Second = o.Customer.City + o.CustomerID
+                            })
                             .GroupBy(x => x.Second)
                             .Select(g => new
                             {

@@ -616,7 +616,8 @@ INSERT ZeroKey VALUES (NULL)"
         var contextFactory = await InitializeAsync<MyContext925>();
 
         using var ctx = contextFactory.CreateContext();
-        var query = ctx.Customers.Include(c => c.Orders)
+        var query = ctx
+            .Customers.Include(c => c.Orders)
             .OrderBy(c => c.FirstName)
             .ThenBy(c => c.LastName);
         var result = query.ToList();
@@ -907,7 +908,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using var ctx = contextFactory.CreateContext();
         var firstName = details.FirstName;
-        ctx.Customers.Where(c => c.FirstName == firstName && c.LastName == details.LastName)
+        ctx
+            .Customers.Where(c => c.FirstName == firstName && c.LastName == details.LastName)
             .ToList();
 
         // No AssertSQL since compiler generated variable names are different between local and CI
@@ -1616,7 +1618,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             i =>
             {
                 using var ctx = contextFactory.CreateContext();
-                var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                var result = ctx
+                    .Posts.Where(x => x.Blog.Id > 1)
                     .Include(x => x.Blog)
                     .Include(x => x.Comments)
                     .ToList();
@@ -1631,7 +1634,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             i =>
             {
                 using var ctx = contextFactory.CreateContext();
-                var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                var result = ctx
+                    .Posts.Where(x => x.Blog.Id > 1)
                     .Include(x => x.Blog)
                     .ThenInclude(b => b.Author)
                     .ToList();
@@ -1652,7 +1656,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 .Select(async i =>
                 {
                     using var ctx = contextFactory.CreateContext();
-                    var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .ToListAsync();
 
@@ -1666,7 +1671,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 .Select(async i =>
                 {
                     using var ctx = contextFactory.CreateContext();
-                    var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .Include(x => x.Comments)
                         .ToListAsync();
@@ -1681,7 +1687,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 .Select(async i =>
                 {
                     using var ctx = contextFactory.CreateContext();
-                    var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx
+                        .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .ThenInclude(b => b.Author)
                         .ToListAsync();
@@ -3728,7 +3735,8 @@ FROM [Prices] AS [p]
         {
             var query = context
                 .Employees.Select(e =>
-                    e.Devices.Where(d => d.Device != "foo")
+                    e
+                        .Devices.Where(d => d.Device != "foo")
                         .Cast<MyContext12582.IEmployeeDevice12582>()
                 )
                 .ToList();
@@ -4218,10 +4226,11 @@ END IN (
             var partners = context
                 .Partners.Select(x => new
                 {
-                    Addresses = x.Addresses.Select(y => new
-                    {
-                        Turnovers = y.Turnovers == null ? null : new { y.Turnovers.AmountIn }
-                    })
+                    Addresses = x
+                        .Addresses.Select(y => new
+                        {
+                            Turnovers = y.Turnovers == null ? null : new { y.Turnovers.AmountIn }
+                        })
                         .ToList()
                 })
                 .ToList();
@@ -6183,9 +6192,10 @@ ORDER BY [a].[Id], [a0].[Id], [t].[Id]
                     a.Activity,
                     CompetitionSeasonId = a.CompetitionSeason.Id,
                     Points = a.Activity.Points
-                        ?? a.Activity.ActivityType.Points.Where(p =>
-                            p.CompetitionSeason == a.CompetitionSeason
-                        )
+                        ?? a
+                            .Activity.ActivityType.Points.Where(p =>
+                                p.CompetitionSeason == a.CompetitionSeason
+                            )
                             .Select(p => p.Points)
                             .SingleOrDefault()
                 })
@@ -6276,7 +6286,8 @@ INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
                 .Trades.Select(x => new
                 {
                     x.Id,
-                    Assets = x.Assets.AsQueryable()
+                    Assets = x
+                        .Assets.AsQueryable()
                         .Select(y => new
                         {
                             y.Id,
@@ -7816,9 +7827,11 @@ FROM [Businesses] AS [b]
                     ) != null
                         ? new MyContext21768.PageViewModel21768
                         {
-                            Uri = b.FrontCover.Illustrations.FirstOrDefault(i =>
-                                i.State >= MyContext21768.IllustrationState21768.Approved
-                            ).Uri
+                            Uri = b
+                                .FrontCover.Illustrations.FirstOrDefault(i =>
+                                    i.State >= MyContext21768.IllustrationState21768.Approved
+                                )
+                                .Uri
                         }
                         : null,
             };
@@ -10382,15 +10395,17 @@ OUTPUT INSERTED.[Id], i._Position;
                 x.Hometown,
                 x.Bio,
                 x.AvatarUrl,
-                Images = x.Images.Select(i => new
-                {
-                    i.Id,
-                    i.ImageUrl,
-                    i.Height,
-                    i.Width
-                })
+                Images = x
+                    .Images.Select(i => new
+                    {
+                        i.Id,
+                        i.ImageUrl,
+                        i.Height,
+                        i.Width
+                    })
                     .ToList(),
-                KnownByFilms = x.Actor.Movies.Select(m => m.Movie)
+                KnownByFilms = x
+                    .Actor.Movies.Select(m => m.Movie)
                     .Union(x.Director.Movies.Select(m => m.Movie))
                     .Select(m => new
                     {
@@ -10683,7 +10698,8 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
             {
                 IdentityDocuments = o.IdentityDocuments.Select(id => new
                 {
-                    Images = o.IdentityDocuments.SelectMany(id => id.Images)
+                    Images = o
+                        .IdentityDocuments.SelectMany(id => id.Images)
                         .Select(i => new { i.Image }),
                 })
             })
@@ -11248,11 +11264,12 @@ ORDER BY [t].[Id]
             .Select(p => new ParentViewModel25225
             {
                 Id = p.Id,
-                Collection = p.Collection.Select(c => new CollectionViewModel25225
-                {
-                    Id = c.Id,
-                    ParentId = c.ParentId,
-                })
+                Collection = p
+                    .Collection.Select(c => new CollectionViewModel25225
+                    {
+                        Id = c.Id,
+                        ParentId = c.ParentId,
+                    })
                     .ToArray()
             });
 

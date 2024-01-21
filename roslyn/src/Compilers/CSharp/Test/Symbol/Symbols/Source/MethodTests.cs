@@ -2049,7 +2049,8 @@ class C
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            var staticConstructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var staticConstructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
 
             Assert.Equal(MethodKind.StaticConstructor, staticConstructor.MethodKind);
@@ -2075,7 +2076,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f").WithArguments("C.f")
             );
 
-            var staticConstructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var staticConstructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
 
             Assert.Equal(MethodKind.StaticConstructor, staticConstructor.MethodKind);
@@ -2242,7 +2244,8 @@ public class C
             var parenPos = source.IndexOf('(');
 
             var comp = CreateCompilation(source);
-            var symbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var symbol = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.UnaryPlusOperatorName)
                 .Single();
             var span = symbol.Locations.Single().SourceSpan;
@@ -2266,7 +2269,8 @@ public class C
             var parenPos = source.IndexOf('(');
 
             var comp = CreateCompilation(source);
-            var symbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var symbol = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.ExplicitConversionName)
                 .Single();
             var span = symbol.Locations.Single().SourceSpan;

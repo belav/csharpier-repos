@@ -3178,7 +3178,8 @@ class Test
 
             var pid = (
                 (NamedTypeSymbol)
-                    comp.GlobalNamespace.GetMembers()
+                    comp
+                        .GlobalNamespace.GetMembers()
                         .Single(s =>
                             s.Name.StartsWith(
                                 "<PrivateImplementationDetails>",

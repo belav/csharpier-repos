@@ -2514,7 +2514,8 @@ namespace ns1
                 char j = (char)0;
                 // Extension Methods
                 foreach (
-                    char i in ex.Message.Where((e) => j.ToString() != ex.Message + e.ToString())
+                    char i in ex
+                        .Message.Where((e) => j.ToString() != ex.Message + e.ToString())
                         .OrderBy((e) => e)
                 )
                     Console.WriteLine("    Item: " + i);

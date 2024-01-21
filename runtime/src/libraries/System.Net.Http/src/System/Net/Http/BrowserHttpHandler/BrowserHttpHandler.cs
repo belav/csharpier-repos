@@ -605,28 +605,26 @@ namespace System.Net.Http
                 return;
 
 #if FEATURE_WASM_THREADS
-            FetchResponse
-                ?.SynchronizationContext
-                .Send(
-                    static (WasmFetchResponse self) =>
+            FetchResponse?.SynchronizationContext.Send(
+                static (WasmFetchResponse self) =>
+                {
+                    lock (self.ThisLock)
                     {
-                        lock (self.ThisLock)
+                        if (self._isDisposed)
+                            return;
+                        self._isDisposed = true;
+                        self._abortRegistration.Dispose();
+                        self._abortController.Dispose();
+                        if (!self.FetchResponse!.IsDisposed)
                         {
-                            if (self._isDisposed)
-                                return;
-                            self._isDisposed = true;
-                            self._abortRegistration.Dispose();
-                            self._abortController.Dispose();
-                            if (!self.FetchResponse!.IsDisposed)
-                            {
-                                BrowserHttpInterop.AbortResponse(self.FetchResponse);
-                            }
-                            self.FetchResponse.Dispose();
-                            self.FetchResponse = null;
+                            BrowserHttpInterop.AbortResponse(self.FetchResponse);
                         }
-                    },
-                    this
-                );
+                        self.FetchResponse.Dispose();
+                        self.FetchResponse = null;
+                    }
+                },
+                this
+            );
 
 #else
             _isDisposed = true;

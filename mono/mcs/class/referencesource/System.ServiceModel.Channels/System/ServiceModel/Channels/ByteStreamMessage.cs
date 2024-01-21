@@ -658,9 +658,8 @@ namespace System.ServiceModel.Channels
                             ByteStreamMessageUtility.StreamElementName,
                             string.Empty
                         );
-                        IAsyncResult result = this.writer.WriteValueAsync(
-                            new ByteStreamStreamProvider(stream)
-                        )
+                        IAsyncResult result = this
+                            .writer.WriteValueAsync(new ByteStreamStreamProvider(stream))
                             .AsAsyncResult(PrepareAsyncCompletion(HandleWriteBodyContents), this);
                         bool completeSelf = SyncContinue(result);
 

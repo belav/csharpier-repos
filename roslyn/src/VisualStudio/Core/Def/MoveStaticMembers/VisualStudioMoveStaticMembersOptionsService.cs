@@ -230,10 +230,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                 {
                     // for partially declared classes, we may want multiple entries for a single type.
                     // filter to those actually in a real file, and that is not our current location.
-                    return t.Locations.Where(l =>
-                        l.IsInSource
-                        && (currentType.Name != t.Name || GetFile(l) != currentDocument.FilePath)
-                    )
+                    return t
+                        .Locations.Where(l =>
+                            l.IsInSource
+                            && (
+                                currentType.Name != t.Name || GetFile(l) != currentDocument.FilePath
+                            )
+                        )
                         .Select(l => new TypeNameItem(history.Contains(t), GetFile(l), t));
                 })
                 .ToImmutableArrayOrEmpty()

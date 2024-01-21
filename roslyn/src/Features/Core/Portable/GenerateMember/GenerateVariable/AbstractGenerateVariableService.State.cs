@@ -479,9 +479,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                                     || FieldIsReadOnly(nextAssignedSymbol);
                             }
 
-                            AfterThisLocation ??= previousAssignedSymbol
-                                ?.Locations
-                                .FirstOrDefault();
+                            AfterThisLocation ??=
+                                previousAssignedSymbol?.Locations.FirstOrDefault();
                             BeforeThisLocation ??= nextAssignedSymbol?.Locations.FirstOrDefault();
                         }
                     }
@@ -606,8 +605,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 {
                     var namedDelegateType = inferredType
                         .GetDelegateType(compilation)
-                        ?.DelegateInvokeMethod
-                        ?.ConvertToType(compilation);
+                        ?.DelegateInvokeMethod?.ConvertToType(compilation);
                     if (namedDelegateType != null)
                     {
                         inferredType = namedDelegateType;

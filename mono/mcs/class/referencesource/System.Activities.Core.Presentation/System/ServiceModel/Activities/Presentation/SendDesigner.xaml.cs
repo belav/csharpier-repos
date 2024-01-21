@@ -233,9 +233,9 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 SendMessageContent messageContent =
                     ((Send)this.ModelItem.GetCurrentValue()).Content as SendMessageContent;
-                this.ModelItem.Properties[DeclaredMessageType].SetValue(
-                    null == messageContent ? null : messageContent.Message.ArgumentType
-                );
+                this
+                    .ModelItem.Properties[DeclaredMessageType]
+                    .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }
 
@@ -327,9 +327,9 @@ namespace System.ServiceModel.Activities.Presentation
                         .GetVariableCollection();
                     if (null != variableScope)
                     {
-                        ModelItemCollection correlations = send.Properties[
-                            "CorrelationInitializers"
-                        ].Collection;
+                        ModelItemCollection correlations = send
+                            .Properties["CorrelationInitializers"]
+                            .Collection;
                         bool hasRequestReplyHandle = false;
                         foreach (ModelItem item in correlations)
                         {
@@ -401,7 +401,8 @@ namespace System.ServiceModel.Activities.Presentation
         void OnDefineButtonClicked(object sender, RoutedEventArgs args)
         {
             using (
-                EditingScope scope = this.Context.Services.GetRequiredService<ModelTreeManager>()
+                EditingScope scope = this
+                    .Context.Services.GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(
                         StringResourceDictionary.Instance.GetString("editSendContent"),
                         true

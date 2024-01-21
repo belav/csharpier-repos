@@ -114,9 +114,14 @@ namespace System.ServiceModel.Description
                     > entry in operationBindingAssertions
                 )
                 {
-                    this.operationBindingAssertions[entry.Key].AddRange(
-                        new MaxItemsEnumerable<XmlElement>(entry.Value, remainingAssertionsAllowed)
-                    );
+                    this
+                        .operationBindingAssertions[entry.Key]
+                        .AddRange(
+                            new MaxItemsEnumerable<XmlElement>(
+                                entry.Value,
+                                remainingAssertionsAllowed
+                            )
+                        );
                     remainingAssertionsAllowed -= this.operationBindingAssertions[entry.Key].Count;
                 }
 
@@ -127,9 +132,14 @@ namespace System.ServiceModel.Description
                     > entry in messageBindingAssertions
                 )
                 {
-                    this.messageBindingAssertions[entry.Key].AddRange(
-                        new MaxItemsEnumerable<XmlElement>(entry.Value, remainingAssertionsAllowed)
-                    );
+                    this
+                        .messageBindingAssertions[entry.Key]
+                        .AddRange(
+                            new MaxItemsEnumerable<XmlElement>(
+                                entry.Value,
+                                remainingAssertionsAllowed
+                            )
+                        );
                     remainingAssertionsAllowed -= this.messageBindingAssertions[entry.Key].Count;
                 }
 
@@ -140,9 +150,14 @@ namespace System.ServiceModel.Description
                     > entry in faultBindingAssertions
                 )
                 {
-                    this.faultBindingAssertions[entry.Key].AddRange(
-                        new MaxItemsEnumerable<XmlElement>(entry.Value, remainingAssertionsAllowed)
-                    );
+                    this
+                        .faultBindingAssertions[entry.Key]
+                        .AddRange(
+                            new MaxItemsEnumerable<XmlElement>(
+                                entry.Value,
+                                remainingAssertionsAllowed
+                            )
+                        );
                     remainingAssertionsAllowed -= this.faultBindingAssertions[entry.Key].Count;
                 }
             }

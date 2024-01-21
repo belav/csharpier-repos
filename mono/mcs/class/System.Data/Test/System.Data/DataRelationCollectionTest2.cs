@@ -518,13 +518,15 @@ namespace MonoTests.System.Data
         {
             DataSet ds = GetDataSet();
 
-            ds.Tables[1].ParentRelations.Add(
-                new DataRelation(
-                    "rel1",
-                    ds.Tables[0].Columns["ParentId"],
-                    ds.Tables[1].Columns["ParentId"]
-                )
-            );
+            ds
+                .Tables[1]
+                .ParentRelations.Add(
+                    new DataRelation(
+                        "rel1",
+                        ds.Tables[0].Columns["ParentId"],
+                        ds.Tables[1].Columns["ParentId"]
+                    )
+                );
 
             Assert.AreEqual(1, ds.Tables[0].ChildRelations.Count, "DRC80");
             Assert.AreEqual(1, ds.Tables[1].ParentRelations.Count, "DRC81");

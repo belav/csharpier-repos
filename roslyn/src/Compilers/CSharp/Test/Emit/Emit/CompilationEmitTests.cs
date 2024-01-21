@@ -5070,7 +5070,8 @@ using System;
                 sourceSymbolValidator: delegate(ModuleSymbol m)
                 {
                     string[] expectedGlobalMembers = { "C1", "B", "A1", "F", "G", "E", "D" };
-                    var actualGlobalMembers = m.GlobalNamespace.GetMembers()
+                    var actualGlobalMembers = m
+                        .GlobalNamespace.GetMembers()
                         .Where(member => !member.IsImplicitlyDeclared)
                         .ToArray();
                     for (
@@ -5202,7 +5203,8 @@ using System;
                         "M",
                     };
 
-                    var actualAMembers = m.GlobalNamespace.GetTypeMembers("A1")
+                    var actualAMembers = m
+                        .GlobalNamespace.GetTypeMembers("A1")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5210,7 +5212,8 @@ using System;
                     AssertEx.SetEqual(expectedAMembers, actualAMembers.Select(s => s.Name));
 
                     string[] expectedBMembers = { ".ctor", "BeginInvoke", "EndInvoke", "Invoke" };
-                    var actualBMembers = m.GlobalNamespace.GetTypeMembers("B")
+                    var actualBMembers = m
+                        .GlobalNamespace.GetTypeMembers("B")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5218,7 +5221,8 @@ using System;
                     AssertEx.SetEqual(expectedBMembers, actualBMembers.Select(s => s.Name));
 
                     string[] expectedCMembers = { "C", "B", "A", ".ctor", "F" };
-                    var actualCMembers = m.GlobalNamespace.GetTypeMembers("C1")
+                    var actualCMembers = m
+                        .GlobalNamespace.GetTypeMembers("C1")
                         .Single()
                         .GetMembers()
                         .ToArray();

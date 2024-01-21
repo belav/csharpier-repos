@@ -490,7 +490,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             var nextLineStartsWithDocComment =
                 text.Lines.Count > currentLine.LineNumber + 1
-                && text.Lines[currentLine.LineNumber + 1]
+                && text
+                    .Lines[currentLine.LineNumber + 1]
                     .ToString()
                     .Trim()
                     .StartsWith(ExteriorTriviaText, StringComparison.Ordinal);

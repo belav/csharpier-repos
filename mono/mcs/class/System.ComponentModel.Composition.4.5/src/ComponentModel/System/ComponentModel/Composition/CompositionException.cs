@@ -111,12 +111,13 @@ namespace System.ComponentModel.Composition
                 var data = new CompositionExceptionData();
                 if (this._errors != null)
                 {
-                    data._errors = this._errors.Select(error => new CompositionError(
-                        error.Id,
-                        error.Description,
-                        error.Element.ToSerializableElement(),
-                        error.Exception
-                    ))
+                    data._errors = this
+                        ._errors.Select(error => new CompositionError(
+                            error.Id,
+                            error.Description,
+                            error.Element.ToSerializableElement(),
+                            error.Exception
+                        ))
                         .ToArray();
                 }
                 else

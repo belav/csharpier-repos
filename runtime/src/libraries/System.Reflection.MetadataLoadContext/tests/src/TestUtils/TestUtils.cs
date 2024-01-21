@@ -75,13 +75,11 @@ namespace System.Reflection.Tests
             );
             Assert.NotNull(runtimeConstructor);
 
-            IList<CustomAttributeTypedArgument> runtimeCats = cad.ConstructorArguments.Select(ct =>
-                ct.ProjectBackToRuntime()
-            )
+            IList<CustomAttributeTypedArgument> runtimeCats = cad
+                .ConstructorArguments.Select(ct => ct.ProjectBackToRuntime())
                 .ToArray();
-            IList<CustomAttributeNamedArgument> runtimeCans = cad.NamedArguments.Select(cn =>
-                cn.ProjectBackToRuntime()
-            )
+            IList<CustomAttributeNamedArgument> runtimeCans = cad
+                .NamedArguments.Select(cn => cn.ProjectBackToRuntime())
                 .ToArray();
 
             return new TestCustomAttributeData(runtimeConstructor, runtimeCats, runtimeCans);

@@ -643,9 +643,8 @@ namespace IOperationGenerator
 
                     Outdent();
 
-                    List<Property> propsToInitialize = type.Properties.Where(p =>
-                        !p.SkipGeneration && !p.MakeAbstract
-                    )
+                    List<Property> propsToInitialize = type
+                        .Properties.Where(p => !p.SkipGeneration && !p.MakeAbstract)
                         .ToList();
 
                     if (propsToInitialize.Count == 0 && !hasType)
@@ -764,7 +763,8 @@ namespace IOperationGenerator
 
                     if (node.OperationKind?.Entries.Count > 0)
                     {
-                        return node.OperationKind.Entries.Where(e => e.EditorBrowsable != false)
+                        return node
+                            .OperationKind.Entries.Where(e => e.EditorBrowsable != false)
                             .Single()
                             .Name;
                     }
@@ -1245,9 +1245,8 @@ namespace IOperationGenerator
             bool includeSkipGenerationProperties = false
         )
         {
-            var properties = node.Properties.Where(p =>
-                !p.SkipGeneration || includeSkipGenerationProperties
-            )
+            var properties = node
+                .Properties.Where(p => !p.SkipGeneration || includeSkipGenerationProperties)
                 .ToList();
 
             AbstractNode? @base = node;
@@ -1304,7 +1303,8 @@ namespace IOperationGenerator
         }
 
         private static List<string> GetPropertyOrder(Node node) =>
-            node.ChildrenOrder?.Split(",", StringSplitOptions.RemoveEmptyEntries)
+            node
+                .ChildrenOrder?.Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
                 .ToList() ?? new List<string>();
 

@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             // statement.  That way the user can make the change anywhere in teh top level code.  Otherwise, just put
             // the diagnostic on the start of the first global statement.
             if (!isHidden)
-                return root.Members.OfType<GlobalStatementSyntax>()
+                return root
+                    .Members.OfType<GlobalStatementSyntax>()
                     .First()
                     .GetFirstToken()
                     .GetLocation();

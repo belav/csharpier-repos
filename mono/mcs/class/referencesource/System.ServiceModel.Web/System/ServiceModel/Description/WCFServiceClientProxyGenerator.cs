@@ -73,9 +73,9 @@ namespace System.ServiceModel.Description
             {
                 return null;
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement =
-                this.serviceEndpoint.Binding.CreateBindingElements()
-                    .Find<WebMessageEncodingBindingElement>();
+            WebMessageEncodingBindingElement webEncodingBindingElement = this
+                .serviceEndpoint.Binding.CreateBindingElements()
+                .Find<WebMessageEncodingBindingElement>();
             if (
                 webEncodingBindingElement != null
                 && webEncodingBindingElement.CrossDomainScriptAccessEnabled

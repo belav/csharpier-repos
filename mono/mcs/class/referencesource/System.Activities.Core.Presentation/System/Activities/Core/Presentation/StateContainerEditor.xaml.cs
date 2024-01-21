@@ -659,7 +659,8 @@ namespace System.Activities.Core.Presentation
             UIElement element;
             if (!this.modelItemToUIElement.TryGetValue(model, out element))
             {
-                element = this.Context.Services.GetService<VirtualizedContainerService>()
+                element = this
+                    .Context.Services.GetService<VirtualizedContainerService>()
                     .GetContainer(model, this);
                 if (element is VirtualizedContainerService.VirtualizingContainer)
                 {
@@ -2192,9 +2193,9 @@ namespace System.Activities.Core.Presentation
                     );
                 }
                 else if (
-                    !e.NewConnectorLocation[newEndConnectorPointIndex].Equals(
-                        movedConnector.Points[movedEndConnectorPointIndex]
-                    )
+                    !e
+                        .NewConnectorLocation[newEndConnectorPointIndex]
+                        .Equals(movedConnector.Points[movedEndConnectorPointIndex])
                 )
                 {
                     // destination moved
@@ -2616,7 +2617,8 @@ namespace System.Activities.Core.Presentation
                                 if (view == null)
                                 {
                                     view =
-                                        this.Context.Services.GetService<ViewService>()
+                                        this
+                                            .Context.Services.GetService<ViewService>()
                                             .GetView(droppedModelItem) as WorkflowViewElement;
                                     ViewUtilities.MeasureView(view as WorkflowViewElement, true);
                                 }
@@ -2828,7 +2830,9 @@ namespace System.Activities.Core.Presentation
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
                 foreach (
-                    ModelItem selectedModelItem in this.Context.Items.GetValue<Selection>().SelectedObjects
+                    ModelItem selectedModelItem in this
+                        .Context.Items.GetValue<Selection>()
+                        .SelectedObjects
                 )
                 {
                     UIElement shapeToMove = this.modelItemToUIElement[selectedModelItem];
@@ -3248,9 +3252,9 @@ namespace System.Activities.Core.Presentation
                 // auto-connect from the initial node
                 else if (sourceModelItem.ItemType == typeof(StartNode))
                 {
-                    this.ModelItem.Properties[
-                        StateMachineDesigner.InitialStatePropertyName
-                    ].SetValue(droppedModelItem);
+                    this
+                        .ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName]
+                        .SetValue(droppedModelItem);
                     return this.ModelItem;
                 }
             }
@@ -3586,7 +3590,8 @@ namespace System.Activities.Core.Presentation
                     // of the new transition from the dropped state. So the visual of the transition will be created twice. To solve that problem,
                     // we need to suppress adding connector when adding state visual (in the UI reaction for step 1).
                     // And to support redo, we must place the suppression in the undo stack.
-                    this.Context.Services.GetService<ModelTreeManager>()
+                    this
+                        .Context.Services.GetService<ModelTreeManager>()
                         .AddToCurrentEditingScope(
                             new SuppressAddingConnectorWhenAddingStateVisual()
                         );

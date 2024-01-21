@@ -95,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     vsProjectItems.AddFromFile(absoluteFilePath);
                 }
 
-                return this.State.ProjectCodeModelFactory.GetProjectCodeModel(_projectId)
+                return this
+                    .State.ProjectCodeModelFactory.GetProjectCodeModel(_projectId)
                     .GetOrCreateFileCodeModel(absoluteFilePath);
             }
 

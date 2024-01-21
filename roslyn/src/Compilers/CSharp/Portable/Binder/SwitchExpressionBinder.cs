@@ -212,11 +212,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 foreach (var @case in switchCases)
                 {
                     if (
-                        !this.Conversions.ClassifyImplicitConversionFromExpression(
-                            @case.Value,
-                            commonType,
-                            ref useSiteInfo
-                        ).Exists
+                        !this
+                            .Conversions.ClassifyImplicitConversionFromExpression(
+                                @case.Value,
+                                commonType,
+                                ref useSiteInfo
+                            )
+                            .Exists
                     )
                     {
                         commonType = null;

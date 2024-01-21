@@ -1070,7 +1070,8 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
             mb.Entity<AL>();
             mb.Entity<L>();
 
-            var mutableEntityTypes = mb.Model.GetEntityTypes()
+            var mutableEntityTypes = mb
+                .Model.GetEntityTypes()
                 .Where(e => e.ClrType == typeof(Q))
                 .ToList();
 

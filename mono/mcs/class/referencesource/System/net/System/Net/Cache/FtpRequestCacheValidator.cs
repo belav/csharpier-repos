@@ -391,7 +391,8 @@ namespace System.Net.Cache
                         Logging.RequestCache,
                         SR.GetString(
                             SR.net_log_cache_response_last_modified,
-                            resp.LastModified.ToUniversalTime()
+                            resp
+                                .LastModified.ToUniversalTime()
                                 .ToString("r", CultureInfo.InvariantCulture),
                             resp.ContentLength
                         )
@@ -682,7 +683,8 @@ namespace System.Net.Cache
                                     "r",
                                     CultureInfo.InvariantCulture
                                 ),
-                                resp.LastModified.ToUniversalTime()
+                                resp
+                                    .LastModified.ToUniversalTime()
                                     .ToString("r", CultureInfo.InvariantCulture)
                             )
                         );

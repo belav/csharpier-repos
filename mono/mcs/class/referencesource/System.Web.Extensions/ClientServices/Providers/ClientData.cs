@@ -427,10 +427,9 @@ namespace System.Web.ClientServices.Providers
                 for (int iter = 0; iter < cd.CookieNames.Length; iter++)
                 {
                     if (
-                        cd.CookieValues[iter].StartsWith(
-                            cookieName + "=",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        cd
+                            .CookieValues[iter]
+                            .StartsWith(cookieName + "=", StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         if (cd.CookieValues[iter] != cookieName + "=" + cookieValue)

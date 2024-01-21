@@ -159,7 +159,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 () =>
                 {
                     // ( ... AND var IS NOT NULL)
-                    DbExpression varIsNotNull = this.RestrictedMemberSlot.MemberPath.AsCqt(row)
+                    DbExpression varIsNotNull = this
+                        .RestrictedMemberSlot.MemberPath.AsCqt(row)
                         .IsNull()
                         .Not();
                     cqt = cqt != null ? cqt.And(varIsNotNull) : varIsNotNull;
@@ -168,7 +169,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 () =>
                 {
                     // (var IS NULL OR ...)
-                    DbExpression varIsNull = this.RestrictedMemberSlot.MemberPath.AsCqt(row)
+                    DbExpression varIsNull = this
+                        .RestrictedMemberSlot.MemberPath.AsCqt(row)
                         .IsNull();
                     cqt = cqt != null ? varIsNull.Or(cqt) : varIsNull;
                 },

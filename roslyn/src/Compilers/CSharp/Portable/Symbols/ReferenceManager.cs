@@ -486,8 +486,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // which would not match the previously created ones. As a result we would get duplicate PE types and conversion errors.
                     var implicitReferenceResolutions =
                         compilation
-                            .ScriptCompilationInfo?.PreviousScriptCompilation
-                            ?.GetBoundReferenceManager()
+                            .ScriptCompilationInfo?.PreviousScriptCompilation?.GetBoundReferenceManager()
                             .ImplicitReferenceResolutions
                         ?? ImmutableDictionary<
                             AssemblyIdentity,

@@ -2774,7 +2774,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 // #INDEX - point index
                 result = result.Replace(
                     KeywordName.Index,
-                    this.series.Points.IndexOf(this)
+                    this
+                        .series.Points.IndexOf(this)
                         .ToString(System.Globalization.CultureInfo.InvariantCulture)
                 );
 

@@ -314,7 +314,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
         protected Document GetThisDocument()
         {
-            var document = this.ContainedDocument.GetOpenTextContainer()
+            var document = this
+                .ContainedDocument.GetOpenTextContainer()
                 .CurrentText.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {

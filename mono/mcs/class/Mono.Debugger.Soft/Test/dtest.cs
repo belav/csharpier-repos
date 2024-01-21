@@ -4218,7 +4218,8 @@ namespace MonoTests
             Assert.AreEqual("NullReferenceException", (e as ExceptionEvent).Exception.Type.Name);
 
             var ex = (e as ExceptionEvent).Exception;
-            var tostring_method = vm.RootDomain.Corlib.GetType("System.Object")
+            var tostring_method = vm
+                .RootDomain.Corlib.GetType("System.Object")
                 .GetMethod("ToString");
             ex.InvokeMethod(e.Thread, tostring_method, null, InvokeOptions.SingleThreaded);
         }

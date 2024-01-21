@@ -249,7 +249,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
             // and then pass that out.  This should not be a problem in practice as PipeReader internally intelligently
             // uses and pools reasonable sized buffers, preventing us from exacerbating the GC or causing LOH
             // allocations.
-            return await pipe.Reader.AsPrebufferedStreamAsync(cancellationToken)
+            return await pipe
+                .Reader.AsPrebufferedStreamAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
 

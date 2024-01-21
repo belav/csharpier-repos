@@ -1493,13 +1493,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                     var oldSynthesizedAutoProperty = (IPropertySymbol?)
                         oldSymbol
-                            ?.ContainingType
-                            .GetMembers(oldSymbol.Name)
+                            ?.ContainingType.GetMembers(oldSymbol.Name)
                             .FirstOrDefault(m => m.IsSynthesizedAutoProperty());
                     var newSynthesizedAutoProperty = (IPropertySymbol?)
                         newSymbol
-                            ?.ContainingType
-                            .GetMembers(newSymbol.Name)
+                            ?.ContainingType.GetMembers(newSymbol.Name)
                             .FirstOrDefault(m => m.IsSynthesizedAutoProperty());
 
                     if (oldSynthesizedAutoProperty != null || newSynthesizedAutoProperty != null)

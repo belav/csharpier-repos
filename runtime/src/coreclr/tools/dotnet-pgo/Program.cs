@@ -1043,10 +1043,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             var histogramCallSites = new List<(MethodProfileData mpd, int ilOffset)>();
             foreach (var mpd in profiledMethods)
             {
-                var sites = mpd.SchemaData.Where(e =>
-                    e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
-                    || e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
-                )
+                var sites = mpd
+                    .SchemaData.Where(e =>
+                        e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                        || e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
+                    )
                     .Select(e => e.ILOffset)
                     .Distinct();
 
@@ -2361,17 +2362,15 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     var config = new MibcConfig();
 
                     // Look for OS and Arch, e.g. "Windows" and "x64"
-                    TraceEvent processInfo = p.EventsInProcess.Filter(t =>
-                        t.EventName == "ProcessInfo"
-                    )
+                    TraceEvent processInfo = p
+                        .EventsInProcess.Filter(t => t.EventName == "ProcessInfo")
                         .FirstOrDefault();
                     config.Os = processInfo?.PayloadByName("OSInformation")?.ToString();
                     config.Arch = processInfo?.PayloadByName("ArchInformation")?.ToString();
 
                     // Look for Sku, e.g. "CoreClr"
-                    TraceEvent runtimeStart = p.EventsInProcess.Filter(t =>
-                        t.EventName == "Runtime/Start"
-                    )
+                    TraceEvent runtimeStart = p
+                        .EventsInProcess.Filter(t => t.EventName == "Runtime/Start")
                         .FirstOrDefault();
                     config.Runtime = runtimeStart?.PayloadByName("Sku")?.ToString();
 

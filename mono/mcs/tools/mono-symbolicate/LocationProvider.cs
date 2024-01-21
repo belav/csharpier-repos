@@ -75,9 +75,11 @@ namespace Mono
                 var parensStart = sfData.MethodSignature.IndexOf('(');
                 var methodName = sfData.MethodSignature.Substring(0, parensStart).TrimEnd();
                 var methodParameters = sfData.MethodSignature.Substring(parensStart);
-                var methods = type.Methods.Where(m =>
-                    CompareName(m, methodName) && CompareParameters(m.Parameters, methodParameters)
-                )
+                var methods = type
+                    .Methods.Where(m =>
+                        CompareName(m, methodName)
+                        && CompareParameters(m.Parameters, methodParameters)
+                    )
                     .ToArray();
                 if (methods.Length == 0)
                 {

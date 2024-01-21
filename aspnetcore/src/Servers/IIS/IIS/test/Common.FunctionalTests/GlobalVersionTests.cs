@@ -253,8 +253,7 @@ public class GlobalVersionTests : IISFunctionalTestBase
                         element.Name == "add"
                         && element
                             .Attribute("name")
-                            ?.Value
-                            .StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true
+                            ?.Value.StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true
                         && element.Attribute("image") != null
                     );
 

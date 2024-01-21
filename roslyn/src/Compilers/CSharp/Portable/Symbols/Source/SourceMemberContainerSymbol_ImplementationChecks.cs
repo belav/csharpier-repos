@@ -509,9 +509,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // will fall back and use the first derived interface if exact interface is not present.
             // this is the similar logic as the VB implementation.
             Debug.Assert(
-                this.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics[
-                    implementedInterface
-                ].Contains(implementedInterface)
+                this
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics[implementedInterface]
+                    .Contains(implementedInterface)
             );
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
@@ -2819,9 +2819,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         implementingMethod.ContainingType.IsInterface
                         || implementingMethod.Equals(
-                            this.BaseTypeNoUseSiteDiagnostics?.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(
-                                interfaceMethod
-                            ).Symbol,
+                            this
+                                .BaseTypeNoUseSiteDiagnostics?.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(
+                                    interfaceMethod
+                                )
+                                .Symbol,
                             TypeCompareKind.CLRSignatureCompareOptions
                         )
                     )

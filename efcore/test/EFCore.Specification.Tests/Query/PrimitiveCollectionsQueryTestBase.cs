@@ -851,7 +851,8 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                     .Where(p =>
                         ints.Skip(1)
                             .Union(
-                                p.Ints.OrderBy(x => x)
+                                p
+                                    .Ints.OrderBy(x => x)
                                     .Skip(1)
                                     .Distinct()
                                     .OrderByDescending(x => x)
@@ -1062,7 +1063,8 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                         Ints = x.Ints.ToList(),
                         OrderedInts = x.Ints.OrderByDescending(xx => xx).ToList(),
                         FilteredDateTimes = x.DateTimes.Where(xx => xx.Day != 1).ToList(),
-                        FilteredDateTimes2 = x.DateTimes.Where(xx => xx > new DateTime(2000, 1, 1))
+                        FilteredDateTimes2 = x
+                            .DateTimes.Where(xx => xx > new DateTime(2000, 1, 1))
                             .ToList()
                     }),
             elementAsserter: (e, a) =>

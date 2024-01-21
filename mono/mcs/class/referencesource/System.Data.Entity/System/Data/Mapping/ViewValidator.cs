@@ -475,7 +475,8 @@ namespace System.Data.Mapping
                 DbVariableReferenceExpression expression
             )
             {
-                return this.variableScopes.Where(it => (it.Key == expression.VariableName))
+                return this
+                    .variableScopes.Where(it => (it.Key == expression.VariableName))
                     .Select(it => it.Value)
                     .FirstOrDefault();
             }

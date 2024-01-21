@@ -265,7 +265,8 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return this.entityDescriptors.Values.OrderBy(d => d.ChangeOrder)
+                return this
+                    .entityDescriptors.Values.OrderBy(d => d.ChangeOrder)
                     .ToList()
                     .AsReadOnly();
             }
@@ -1821,7 +1822,8 @@ namespace System.Data.Services.Client
             if (this.resolveName != null)
             {
                 Type entityType = descriptor.Entity.GetType();
-                var codegenAttr = this.resolveName.Method.GetCustomAttributes(false)
+                var codegenAttr = this
+                    .resolveName.Method.GetCustomAttributes(false)
                     .OfType<System.CodeDom.Compiler.GeneratedCodeAttribute>()
                     .FirstOrDefault();
                 if (codegenAttr == null || codegenAttr.Tool != Util.CodeGeneratorToolName)
@@ -4002,7 +4004,8 @@ namespace System.Data.Services.Client
             internal DataServiceResponse EndRequest()
             {
                 foreach (
-                    EntityDescriptor box in this.ChangedEntries.Where(e => e.IsResource)
+                    EntityDescriptor box in this
+                        .ChangedEntries.Where(e => e.IsResource)
                         .Cast<EntityDescriptor>()
                 )
                 {

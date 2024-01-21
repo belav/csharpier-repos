@@ -843,7 +843,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                             {
                                 d.Id,
                                 d.Name,
-                                Layouts = d.Layouts.Select(l => new { H = l.Height, W = l.Width })
+                                Layouts = d
+                                    .Layouts.Select(l => new { H = l.Height, W = l.Width })
                                     .ToList()
                             })
                             .ToList()

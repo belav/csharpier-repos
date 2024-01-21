@@ -69,10 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 item.TextVersion,
                 "This should only be called for locations the caller knows to be in the open file"
             );
-            return item.TextVersion.CreateTrackingSpan(
-                span.ToSpan(),
-                SpanTrackingMode.EdgeExclusive
-            )
+            return item
+                .TextVersion.CreateTrackingSpan(span.ToSpan(), SpanTrackingMode.EdgeExclusive)
                 .GetSpan(toVersion)
                 .ToTextSpan();
         }

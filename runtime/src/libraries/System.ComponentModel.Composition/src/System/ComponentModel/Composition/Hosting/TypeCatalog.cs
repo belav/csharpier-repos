@@ -367,9 +367,8 @@ namespace System.ComponentModel.Composition.Hosting
             foreach (var part in PartsInternal)
             {
                 foreach (
-                    string contractName in part.ExportDefinitions.Select(export =>
-                        export.ContractName
-                    )
+                    string contractName in part
+                        .ExportDefinitions.Select(export => export.ContractName)
                         .Distinct()
                 )
                 {

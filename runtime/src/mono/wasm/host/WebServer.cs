@@ -95,8 +95,9 @@ public static class ServerURLsProvider
             TaskCompletionSource<ServerURLs> tcs = realUrlsAvailableTcs;
             try
             {
-                ICollection<string>? addresses =
-                    app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
+                ICollection<string>? addresses = app
+                    .ServerFeatures.Get<IServerAddressesFeature>()
+                    ?.Addresses;
 
                 string? ipAddress = null;
                 string? ipAddressSecure = null;

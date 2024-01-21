@@ -3846,7 +3846,8 @@ class C<T>
                     )
             );
 
-            var destinationType = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var destinationType = comp
+                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
                 .Construct(comp.GetSpecialType(SpecialType.System_Int32));
             var conversionSymbols = destinationType
                 .GetMembers()

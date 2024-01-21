@@ -446,11 +446,9 @@ namespace System.ServiceModel.Dispatcher
                     if (
                         null
                         != (
-                            fun = this.functionLibraries[i].Bind(
-                                functionName.Name,
-                                functionName.Namespace,
-                                args
-                            )
+                            fun = this
+                                .functionLibraries[i]
+                                .Bind(functionName.Name, functionName.Namespace, args)
                         )
                     )
                     {

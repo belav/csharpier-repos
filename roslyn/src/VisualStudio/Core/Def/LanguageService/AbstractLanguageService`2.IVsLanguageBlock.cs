@@ -30,9 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             out int pfBlockAvailable
         )
         {
-            var snapshot = this.EditorAdaptersFactoryService.GetDataBuffer(
-                pTextLines
-            ).CurrentSnapshot;
+            var snapshot = this
+                .EditorAdaptersFactoryService.GetDataBuffer(pTextLines)
+                .CurrentSnapshot;
             var position = snapshot?.TryGetPosition(iCurrentLine, iCurrentChar);
             if (position == null)
             {

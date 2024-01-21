@@ -561,7 +561,8 @@ class Test : StaticModClass
 
             var comp = CreateCompilationWithILAndMscorlib40("", ilSource);
 
-            var stateMachineClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var stateMachineClass = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
                 .GetMembers()
                 .OfType<NamedTypeSymbol>()
                 .Single();

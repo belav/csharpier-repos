@@ -171,8 +171,7 @@ internal sealed class HostingApplicationDiagnostics
             {
                 var route = httpContext
                     .GetEndpoint()
-                    ?.Metadata
-                    .GetMetadata<IRouteDiagnosticsMetadata>()
+                    ?.Metadata.GetMetadata<IRouteDiagnosticsMetadata>()
                     ?.Route;
                 var customTags = context.MetricsTagsFeature?.TagsList;
 

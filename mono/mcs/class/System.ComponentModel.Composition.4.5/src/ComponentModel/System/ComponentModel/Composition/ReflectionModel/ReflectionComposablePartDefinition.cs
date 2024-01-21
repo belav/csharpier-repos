@@ -103,7 +103,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (this._metadata == null)
                 {
-                    IDictionary<string, object> metadata = this._creationInfo.GetMetadata()
+                    IDictionary<string, object> metadata = this
+                        ._creationInfo.GetMetadata()
                         .AsReadOnly();
                     lock (this._lock)
                     {

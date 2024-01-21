@@ -1288,9 +1288,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             RefKind expressionRefKind = RefKind.None;
-            value = initializer
-                ?.Value
-                .CheckAndUnwrapRefExpression(diagnostics, out expressionRefKind);
+            value = initializer?.Value.CheckAndUnwrapRefExpression(
+                diagnostics,
+                out expressionRefKind
+            );
             if (variableRefKind == RefKind.None)
             {
                 valueKind = BindValueKind.RValue;

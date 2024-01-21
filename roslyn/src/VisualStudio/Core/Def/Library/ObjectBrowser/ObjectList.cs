@@ -873,11 +873,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         .ConfigureAwait(false);
                     var symbol = symbolItem.ResolveSymbol(compilation);
 
-                    await this.LibraryManager.Workspace.TryGoToDefinitionAsync(
-                        symbol,
-                        project,
-                        cancellationToken
-                    )
+                    await this
+                        .LibraryManager.Workspace.TryGoToDefinitionAsync(
+                            symbol,
+                            project,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
             }

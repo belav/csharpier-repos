@@ -2051,9 +2051,9 @@ namespace System.Activities.Statements
                 if (e.Transaction.TransactionInformation.Status == TransactionStatus.Committed)
                 {
                     foreach (
-                        VolatileResourceManager rm in this.CommittedResourceManagers[
-                            e.Transaction
-                        ].Values
+                        VolatileResourceManager rm in this
+                            .CommittedResourceManagers[e.Transaction]
+                            .Values
                     )
                     {
                         rm.Complete();
@@ -2062,9 +2062,9 @@ namespace System.Activities.Statements
                 else
                 {
                     foreach (
-                        VolatileResourceManager rm in this.CommittedResourceManagers[
-                            e.Transaction
-                        ].Values
+                        VolatileResourceManager rm in this
+                            .CommittedResourceManagers[e.Transaction]
+                            .Values
                     )
                     {
                         rm.ClearAllBatchedWork();

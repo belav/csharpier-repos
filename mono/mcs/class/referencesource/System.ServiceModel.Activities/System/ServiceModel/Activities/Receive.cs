@@ -473,10 +473,9 @@ namespace System.ServiceModel.Activities
             {
                 for (int i = 0; i < this.followingFaults.Count; i++)
                 {
-                    this.followingFaults[i].SetFaultFormatter(
-                        faultFormatter,
-                        includeExceptionDetailInFaults
-                    );
+                    this
+                        .followingFaults[i]
+                        .SetFaultFormatter(faultFormatter, includeExceptionDetailInFaults);
                 }
             }
         }

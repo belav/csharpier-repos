@@ -621,10 +621,8 @@ namespace Microsoft.Build.Evaluation
         {
             if (fromAttribute)
             {
-                var ret = xml.DefaultTargets.Split(
-                    item_target_sep,
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                var ret = xml
+                    .DefaultTargets.Split(item_target_sep, StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim())
                     .ToArray();
                 if (checkImports && ret.Length == 0)

@@ -108,9 +108,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             int? indentationColumn = null;
             foreach (var span in spans)
             {
-                var startLineNumber = text.Lines.GetLineFromPosition(
-                    span.TextSpan.Start
-                ).LineNumber;
+                var startLineNumber = text
+                    .Lines.GetLineFromPosition(span.TextSpan.Start)
+                    .LineNumber;
                 var endLineNumber = text.Lines.GetLineFromPosition(span.TextSpan.End).LineNumber;
 
                 // If the span starts after the first non-whitespace of the first line, we'll
@@ -127,9 +127,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 //
                 // Without throwing out the first line in the example above, the indentation column
                 // used will be 4, rather than 8.
-                var startLineFirstNonWhitespace = text.Lines[
-                    startLineNumber
-                ].GetFirstNonWhitespacePosition();
+                var startLineFirstNonWhitespace = text
+                    .Lines[startLineNumber]
+                    .GetFirstNonWhitespacePosition();
                 if (
                     startLineFirstNonWhitespace.HasValue
                     && startLineFirstNonWhitespace.Value < span.TextSpan.Start

@@ -638,9 +638,9 @@ public class en_US
                     {
                         Assert.Equal(1, m.GetReferencedAssemblySymbols().Length);
 
-                        var naturalRef = m.ContainingAssembly.Modules[
-                            1
-                        ].GetReferencedAssemblySymbols()[1];
+                        var naturalRef = m
+                            .ContainingAssembly.Modules[1]
+                            .GetReferencedAssemblySymbols()[1];
                         Assert.True(naturalRef.IsMissing);
                         Assert.Equal(
                             "neutral, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",

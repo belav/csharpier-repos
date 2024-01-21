@@ -62,8 +62,7 @@ internal class SSRRenderModeBoundary : IComponent
     {
         var configuredRenderModesMetadata = httpContext
             .GetEndpoint()
-            ?.Metadata
-            .GetMetadata<ConfiguredRenderModesMetadata>();
+            ?.Metadata.GetMetadata<ConfiguredRenderModesMetadata>();
         if (configuredRenderModesMetadata is null)
         {
             // This is not a Razor Components endpoint. It might be that the app is using RazorComponentResult,

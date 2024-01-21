@@ -61,7 +61,8 @@ namespace System.ComponentModel.Composition.Factories
                     var addedExports = newExports
                         .Except(this._exports)
                         .Select(export => export.Definition);
-                    var removedExports = this._exports.Except(newExports)
+                    var removedExports = this
+                        ._exports.Except(newExports)
                         .Select(export => export.Definition);
 
                     this.OnExportsChanging(

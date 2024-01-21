@@ -28,7 +28,8 @@ internal sealed class FirstRequestConfig : ManualConfig
         AddValidator(JitOptimizationsValidator.FailOnError);
 
         AddJob(
-            Job.Default.WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
+            Job
+                .Default.WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
                 .WithGcMode(new GcMode { Server = true })
                 .WithIterationCount(10)
                 .WithInvocationCount(1)

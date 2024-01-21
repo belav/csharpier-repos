@@ -52,14 +52,16 @@ namespace System.Threading.Tasks.Tests
             Assert.Same(stateObject, ((IAsyncResult)t).AsyncState);
 
             // Exercise 2-arg void option
-            Task.Factory.FromAsync(fac.StartWrite, fac.EndWrite, "aaaabcdef", 4, stateObject)
+            Task
+                .Factory.FromAsync(fac.StartWrite, fac.EndWrite, "aaaabcdef", 4, stateObject)
                 .Wait();
             check = fac.ToString();
             Assert.Equal("1234aaaa", check);
             Assert.Same(stateObject, ((IAsyncResult)t).AsyncState);
 
             // Exercise 3-arg void option
-            Task.Factory.FromAsync(fac.StartWrite, fac.EndWrite, "abcdzzzz", 4, 4, stateObject)
+            Task
+                .Factory.FromAsync(fac.StartWrite, fac.EndWrite, "abcdzzzz", 4, 4, stateObject)
                 .Wait();
             check = fac.ToString();
             Assert.Equal("1234aaaazzzz", check);

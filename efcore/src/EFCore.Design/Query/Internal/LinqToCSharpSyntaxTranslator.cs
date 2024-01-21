@@ -1859,13 +1859,15 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         // instantiation expression.
         // TODO: Currently matching attributes by name since we target .NET 6.0. If/when we target .NET 7.0 and above, match the type.
         if (
-            node.Type.GetCustomAttributes(inherit: true)
+            node
+                .Type.GetCustomAttributes(inherit: true)
                 .Any(a =>
                     a.GetType().FullName
                     == "System.Runtime.CompilerServices.RequiredMemberAttribute"
                 )
             && node.Constructor is not null
-            && node.Constructor.GetCustomAttributes()
+            && node
+                .Constructor.GetCustomAttributes()
                 .Any(a =>
                     a.GetType().FullName
                     == "System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"
@@ -2231,7 +2233,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             if (node.Type == typeof(void))
             {
                 return (ConditionalExpression)(
-                    node.Cases.SelectMany(c => c.TestValues, (c, tv) => new { c.Body, Label = tv })
+                    node
+                        .Cases.SelectMany(c => c.TestValues, (c, tv) => new { c.Body, Label = tv })
                         .Reverse()
                         .Aggregate(
                             node.DefaultBody,
@@ -2253,7 +2256,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             );
 
             return (ConditionalExpression)
-                node.Cases.SelectMany(c => c.TestValues, (c, tv) => new { c.Body, Label = tv })
+                node
+                    .Cases.SelectMany(c => c.TestValues, (c, tv) => new { c.Body, Label = tv })
                     .Reverse()
                     .Aggregate(
                         node.DefaultBody,

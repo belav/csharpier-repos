@@ -2296,7 +2296,8 @@ unsafe class C
             );
             Assert.Equal(
                 "System.Runtime.InteropServices.OutAttribute[missing]",
-                ptr.Signature.Parameters.Single()
+                ptr
+                    .Signature.Parameters.Single()
                     .RefCustomModifiers.Single()
                     .Modifier.ToTestDisplayString()
             );
@@ -3032,12 +3033,14 @@ namespace System
                 {
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                        ptr1
+                            .NoRef.Signature.GetCallingConventionModifiers()
                             .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                     );
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                        ptr1
+                            .ByRef.Signature.GetCallingConventionModifiers()
                             .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                     );
                 }
@@ -3161,12 +3164,14 @@ namespace System
 
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                    ptr1
+                        .NoRef.Signature.GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                    ptr1
+                        .ByRef.Signature.GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
@@ -3295,12 +3300,14 @@ namespace System
 
                 Assert.Equal(
                     expectedTypeConventionEquality,
-                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                    ptr1
+                        .NoRef.Signature.GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedRefConventionEquality,
-                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                    ptr1
+                        .ByRef.Signature.GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );
 

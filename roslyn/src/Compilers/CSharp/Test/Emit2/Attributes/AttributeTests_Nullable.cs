@@ -1876,14 +1876,16 @@ class Program
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A?",
-                type.TypeParameters[0]
+                type
+                    .TypeParameters[0]
                     .ConstraintTypesNoUseSiteDiagnostics[0]
                     .ToTestDisplayString(true)
             );
             type = comp2.GetMember<NamedTypeSymbol>("D");
             Assert.Equal(
                 "A!",
-                type.TypeParameters[0]
+                type
+                    .TypeParameters[0]
                     .ConstraintTypesNoUseSiteDiagnostics[0]
                     .ToTestDisplayString(true)
             );
@@ -1945,7 +1947,8 @@ class Program
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A<System.Object>",
-                type.TypeParameters[0]
+                type
+                    .TypeParameters[0]
                     .ConstraintTypesNoUseSiteDiagnostics[0]
                     .ToTestDisplayString(true)
             );
@@ -2051,14 +2054,16 @@ public class C<T> where T : A<object>
             var type = comp2.GetMember<NamedTypeSymbol>("B");
             Assert.Equal(
                 "A<System.Object?>!",
-                type.TypeParameters[0]
+                type
+                    .TypeParameters[0]
                     .ConstraintTypesNoUseSiteDiagnostics[0]
                     .ToTestDisplayString(true)
             );
             type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A<System.Object!>!",
-                type.TypeParameters[0]
+                type
+                    .TypeParameters[0]
                     .ConstraintTypesNoUseSiteDiagnostics[0]
                     .ToTestDisplayString(true)
             );
@@ -2147,7 +2152,8 @@ public class C<T> where T : A<object>
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "T?",
-                type.TypeParameters[1]
+                type
+                    .TypeParameters[1]
                     .ConstraintTypesNoUseSiteDiagnostics[0]
                     .ToTestDisplayString(true)
             );

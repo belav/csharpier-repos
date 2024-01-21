@@ -148,9 +148,9 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             if (block == null || this.state != ScanState.InsertingOld)
                 return;
 
-            int count = this.subroutine.SubroutineFacade.MetaDataProvider.Parameters(
-                block.CalledMethod
-            ).Count;
+            int count = this
+                .subroutine.SubroutineFacade.MetaDataProvider.Parameters(block.CalledMethod)
+                .Count;
             if (!this.subroutine.SubroutineFacade.MetaDataProvider.IsStatic(block.CalledMethod))
                 ++count;
             if (count > 1)

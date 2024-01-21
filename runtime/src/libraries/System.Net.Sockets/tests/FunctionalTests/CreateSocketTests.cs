@@ -197,11 +197,12 @@ namespace System.Net.Sockets.Tests
                                         : acceptApi == 1
                                             ? listener.AcceptAsync().GetAwaiter().GetResult()
                                             : acceptApi == 2
-                                                ? Task.Factory.FromAsync(
-                                                    listener.BeginAccept,
-                                                    listener.EndAccept,
-                                                    null
-                                                )
+                                                ? Task
+                                                    .Factory.FromAsync(
+                                                        listener.BeginAccept,
+                                                        listener.EndAccept,
+                                                        null
+                                                    )
                                                     .GetAwaiter()
                                                     .GetResult()
                                                 : throw new Exception(

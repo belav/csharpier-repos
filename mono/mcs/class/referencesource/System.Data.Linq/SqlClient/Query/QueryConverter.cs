@@ -3849,9 +3849,9 @@ namespace System.Data.Linq.SqlClient
             try
             {
                 MetaTable metaTable = this.services.Model.GetTable(item.Type);
-                Expression source = this.services.Context.GetTable(
-                    metaTable.RowType.Type
-                ).Expression;
+                Expression source = this
+                    .services.Context.GetTable(metaTable.RowType.Type)
+                    .Expression;
                 Type rowType = metaTable.RowType.Type;
 
                 // construct identity predicate based on supplied item

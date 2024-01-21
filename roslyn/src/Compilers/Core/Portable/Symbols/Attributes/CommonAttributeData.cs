@@ -291,9 +291,9 @@ namespace Microsoft.CodeAnalysis
 
         internal ConstantValue DecodeDateTimeConstantValue()
         {
-            long value = this.CommonConstructorArguments[0].DecodeValue<long>(
-                SpecialType.System_Int64
-            );
+            long value = this
+                .CommonConstructorArguments[0]
+                .DecodeValue<long>(SpecialType.System_Int64);
 
             // if value is outside this range, DateTime would throw when constructed
             if (value < DateTime.MinValue.Ticks || value > DateTime.MaxValue.Ticks)

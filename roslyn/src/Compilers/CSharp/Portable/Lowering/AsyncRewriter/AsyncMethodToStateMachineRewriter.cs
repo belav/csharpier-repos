@@ -787,13 +787,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     : null;
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            var useUnsafeOnCompleted = F.Compilation.Conversions.ClassifyImplicitConversionFromType(
-                loweredAwaiterType,
-                F.Compilation.GetWellKnownType(
-                    WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
-                ),
-                ref discardedUseSiteInfo
-            ).IsImplicit;
+            var useUnsafeOnCompleted = F
+                .Compilation.Conversions.ClassifyImplicitConversionFromType(
+                    loweredAwaiterType,
+                    F.Compilation.GetWellKnownType(
+                        WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
+                    ),
+                    ref discardedUseSiteInfo
+                )
+                .IsImplicit;
 
             var onCompleted = (
                 useUnsafeOnCompleted

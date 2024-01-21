@@ -208,10 +208,12 @@ namespace System.ServiceModel.Description
                     )
                     {
                         string contentTypeStr = contentType.ToString();
-                        this.caches[operationName].AddOrUpdate(
-                            acceptHeader.ToUpperInvariant(),
-                            new FormatContentTypePair(format, contentTypeStr)
-                        );
+                        this
+                            .caches[operationName]
+                            .AddOrUpdate(
+                                acceptHeader.ToUpperInvariant(),
+                                new FormatContentTypePair(format, contentTypeStr)
+                            );
                         SetFormatAndContentType(format, contentTypeStr);
                         return true;
                     }
@@ -237,9 +239,9 @@ namespace System.ServiceModel.Description
                     {
                         ContentType responseContentType;
                         if (
-                            this.formatters[operationName].SupportsMessageFormat(
-                                mapping.MessageFormat
-                            )
+                            this
+                                .formatters[operationName]
+                                .SupportsMessageFormat(mapping.MessageFormat)
                             && mapping.CanFormatResponse(
                                 contentType,
                                 false,
@@ -275,10 +277,12 @@ namespace System.ServiceModel.Description
 
             if (!string.IsNullOrEmpty(acceptHeader))
             {
-                this.caches[operationName].AddOrUpdate(
-                    acceptHeader.ToUpperInvariant(),
-                    new FormatContentTypePair(format, null)
-                );
+                this
+                    .caches[operationName]
+                    .AddOrUpdate(
+                        acceptHeader.ToUpperInvariant(),
+                        new FormatContentTypePair(format, null)
+                    );
             }
 
             WebOperationContext.Current.OutgoingResponse.Format = format;

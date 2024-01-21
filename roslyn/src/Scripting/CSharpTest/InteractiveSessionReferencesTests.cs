@@ -199,7 +199,8 @@ F(new C())
 
             var m = s1.GetCompilation().Assembly.Modules.Single();
             Assert.False(m.ReferencedAssemblies.Any(a => a.Name == "libB"));
-            var missingB = m.ReferencedAssemblySymbols.Single(a => a.Name == "libA")
+            var missingB = m
+                .ReferencedAssemblySymbols.Single(a => a.Name == "libA")
                 .Modules.Single()
                 .ReferencedAssemblySymbols.Single(a => a.Name == "libB");
             Assert.IsType<MissingAssemblySymbol>(missingB.GetSymbol());

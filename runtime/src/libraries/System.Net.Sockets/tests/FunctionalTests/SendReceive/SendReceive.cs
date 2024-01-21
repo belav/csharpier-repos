@@ -1372,33 +1372,35 @@ namespace System.Net.Sockets.Tests
                 using (server)
                 using (var b = new Barrier(2))
                 {
-                    Task dispose = Task.Factory.StartNew(
-                        () =>
-                        {
-                            b.SignalAndWait();
-                            client.Dispose();
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    Task dispose = Task
+                        .Factory.StartNew(
+                            () =>
+                            {
+                                b.SignalAndWait();
+                                client.Dispose();
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                         .WaitAsync(TestSettings.PassingTestTimeout);
 
-                    Task send = Task.Factory.StartNew(
-                        () =>
-                        {
-                            SendAsync(server, new ArraySegment<byte>(new byte[1]))
-                                .GetAwaiter()
-                                .GetResult();
-                            b.SignalAndWait();
-                            ReceiveAsync(client, new ArraySegment<byte>(new byte[1]))
-                                .GetAwaiter()
-                                .GetResult();
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    Task send = Task
+                        .Factory.StartNew(
+                            () =>
+                            {
+                                SendAsync(server, new ArraySegment<byte>(new byte[1]))
+                                    .GetAwaiter()
+                                    .GetResult();
+                                b.SignalAndWait();
+                                ReceiveAsync(client, new ArraySegment<byte>(new byte[1]))
+                                    .GetAwaiter()
+                                    .GetResult();
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                         .WaitAsync(TestSettings.PassingTestTimeout);
 
                     await dispose;

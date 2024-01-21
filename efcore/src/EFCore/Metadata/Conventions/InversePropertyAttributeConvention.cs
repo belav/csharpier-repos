@@ -396,12 +396,10 @@ public class InversePropertyAttributeConvention
                     )!
                     .FindSkipNavigation(ambiguousInverse.Value.Item1);
 
-                existingAmbiguousNavigation
-                    ?.DeclaringEntityType
-                    .Builder.HasNoSkipNavigation(
-                        existingAmbiguousNavigation,
-                        fromDataAnnotation: true
-                    );
+                existingAmbiguousNavigation?.DeclaringEntityType.Builder.HasNoSkipNavigation(
+                    existingAmbiguousNavigation,
+                    fromDataAnnotation: true
+                );
 
                 remainingInverseNavigation = entityType
                     .FindSkipNavigation(navigationMemberInfo)
@@ -442,8 +440,7 @@ public class InversePropertyAttributeConvention
 
                 remainingInverseNavigation = entityType
                     .FindNavigation(navigationMemberInfo)
-                    ?.ForeignKey
-                    .Builder;
+                    ?.ForeignKey.Builder;
                 return true;
             }
         }

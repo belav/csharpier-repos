@@ -61,7 +61,8 @@ namespace System.Net.Http.Functional.Tests
                                                 .GetResult()
                                         )
                                         using (
-                                            Stream respStream = resp.Content.ReadAsStreamAsync()
+                                            Stream respStream = resp
+                                                .Content.ReadAsStreamAsync()
                                                 .GetAwaiter()
                                                 .GetResult()
                                         )

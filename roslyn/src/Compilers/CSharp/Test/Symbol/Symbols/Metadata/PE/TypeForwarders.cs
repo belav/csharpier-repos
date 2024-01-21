@@ -2019,9 +2019,10 @@ public class CF1
                         // Attributes should not actually be emitted.
                         Assert.Equal(
                             0,
-                            m.ContainingAssembly.GetAttributes(
-                                AttributeDescription.TypeForwardedToAttribute
-                            )
+                            m
+                                .ContainingAssembly.GetAttributes(
+                                    AttributeDescription.TypeForwardedToAttribute
+                                )
                                 .Count()
                         );
                     }
@@ -2093,9 +2094,10 @@ public class CF1
                         // Attributes should not actually be emitted.
                         Assert.Equal(
                             0,
-                            m.ContainingAssembly.GetAttributes(
-                                AttributeDescription.TypeForwardedToAttribute
-                            )
+                            m
+                                .ContainingAssembly.GetAttributes(
+                                    AttributeDescription.TypeForwardedToAttribute
+                                )
                                 .Count()
                         );
                     }

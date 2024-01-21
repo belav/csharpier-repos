@@ -57,12 +57,16 @@ public partial class Startup
 #if FORWARDCOMPAT
     private async Task ContentRootPath(HttpContext ctx) =>
         await ctx.Response.WriteAsync(
-            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().ContentRootPath
+            ctx
+                .RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>()
+                .ContentRootPath
         );
 
     private async Task WebRootPath(HttpContext ctx) =>
         await ctx.Response.WriteAsync(
-            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().WebRootPath
+            ctx
+                .RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>()
+                .WebRootPath
         );
 #else
     private async Task ContentRootPath(HttpContext ctx) =>
@@ -116,7 +120,8 @@ public partial class Startup
 #if !FORWARDCOMPAT
     private async Task IIISEnvironmentFeature(HttpContext ctx)
     {
-        var envFeature = ctx.RequestServices.GetService<IServer>()
+        var envFeature = ctx
+            .RequestServices.GetService<IServer>()
             .Features.Get<IIISEnvironmentFeature>();
 
         await ctx.Response.WriteAsync(
@@ -150,7 +155,8 @@ public partial class Startup
 
     private async Task ServerAddresses(HttpContext ctx)
     {
-        var serverAddresses = ctx.RequestServices.GetService<IServer>()
+        var serverAddresses = ctx
+            .RequestServices.GetService<IServer>()
             .Features.Get<IServerAddressesFeature>();
         await ctx.Response.WriteAsync(string.Join(",", serverAddresses.Addresses));
     }
@@ -1055,7 +1061,8 @@ public partial class Startup
     {
         await ctx.Response.WriteAsync("Shutting down");
 #if FORWARDCOMPAT
-        ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>()
+        ctx
+            .RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>()
             .StopApplication();
 #else
         ctx.RequestServices.GetService<IHostApplicationLifetime>().StopApplication();
@@ -1138,9 +1145,9 @@ public partial class Startup
 
     public Task BodyLimit(HttpContext ctx) =>
         ctx.Response.WriteAsync(
-            ctx.Features.Get<IHttpMaxRequestBodySizeFeature>()
-                ?.MaxRequestBodySize
-                ?.ToString(CultureInfo.InvariantCulture) ?? "null"
+            ctx
+                .Features.Get<IHttpMaxRequestBodySizeFeature>()
+                ?.MaxRequestBodySize?.ToString(CultureInfo.InvariantCulture) ?? "null"
         );
 
     public Task Anonymous(HttpContext context) =>

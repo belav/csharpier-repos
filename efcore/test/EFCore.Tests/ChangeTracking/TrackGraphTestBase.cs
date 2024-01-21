@@ -1628,7 +1628,8 @@ public abstract class TrackGraphTestBase
         }
 
         public virtual void TrackEntity(EntityEntryGraphNode node) =>
-            node.Entry.GetInfrastructure()
+            node
+                .Entry.GetInfrastructure()
                 .SetEntityState(DetermineState(node.Entry), acceptChanges: true);
 
         public virtual EntityState DetermineState(EntityEntry entry) =>

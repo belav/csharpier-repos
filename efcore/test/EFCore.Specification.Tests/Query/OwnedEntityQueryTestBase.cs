@@ -24,11 +24,13 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
                 .Select(e => new
                 {
                     e.Id,
-                    FirstChild = e.Children.Where(c => c.Type == 1)
+                    FirstChild = e
+                        .Children.Where(c => c.Type == 1)
                         .AsQueryable()
                         .Select(_project)
                         .FirstOrDefault(),
-                    SecondChild = e.Children.Where(c => c.Type == 2)
+                    SecondChild = e
+                        .Children.Where(c => c.Type == 2)
                         .AsQueryable()
                         .Select(_project)
                         .FirstOrDefault(),
@@ -230,7 +232,8 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
             .Warehouses.Select(x => new WarehouseModel
             {
                 WarehouseCode = x.WarehouseCode,
-                DestinationCountryCodes = x.DestinationCountries.Select(c => c.CountryCode)
+                DestinationCountryCodes = x
+                    .DestinationCountries.Select(c => c.CountryCode)
                     .ToArray()
             })
             .AsNoTracking();

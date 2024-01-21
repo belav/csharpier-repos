@@ -1384,7 +1384,8 @@ namespace System.ServiceModel.Configuration
                 property.ValueOrigin == PropertyValueOrigin.SetHere;
             if (
                 this.IsSecurityElementBootstrap
-                && !this.ElementInformation.Properties.OfType<PropertyInformation>()
+                && !this
+                    .ElementInformation.Properties.OfType<PropertyInformation>()
                     .Any(nontrivialProperty)
             )
             {

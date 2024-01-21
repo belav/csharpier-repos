@@ -165,31 +165,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             // complete, then issue the next notification to the controller.  When we try to
             // issue the notification, see if we're still at the end of the chain.  If we're not,
             // then we don't need to notify as a later task will do so.
-            _notifyControllerTask = Task.Factory.ContinueWhenAll(
-                new[] { _notifyControllerTask, nextTask },
-                async tasks =>
-                {
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        alwaysYield: true,
-                        _stopCancellationToken
-                    );
-
-                    if (tasks.All(t => t.Status == TaskStatus.RanToCompletion))
+            _notifyControllerTask = Task
+                .Factory.ContinueWhenAll(
+                    new[] { _notifyControllerTask, nextTask },
+                    async tasks =>
                     {
-                        _stopCancellationToken.ThrowIfCancellationRequested();
+                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                            alwaysYield: true,
+                            _stopCancellationToken
+                        );
 
-                        // Check if we're still the last task.  If so then we should update the
-                        // controller. Otherwise there's a pending task that should run.  We
-                        // don't need to update the controller (and the presenters) until our
-                        // chain is finished.
-                        updateController &= nextTask == _lastTask;
-                        OnModelUpdated(nextTask.Result, updateController);
-                    }
-                },
-                _stopCancellationToken,
-                TaskContinuationOptions.ExecuteSynchronously,
-                TaskScheduler.Default
-            )
+                        if (tasks.All(t => t.Status == TaskStatus.RanToCompletion))
+                        {
+                            _stopCancellationToken.ThrowIfCancellationRequested();
+
+                            // Check if we're still the last task.  If so then we should update the
+                            // controller. Otherwise there's a pending task that should run.  We
+                            // don't need to update the controller (and the presenters) until our
+                            // chain is finished.
+                            updateController &= nextTask == _lastTask;
+                            OnModelUpdated(nextTask.Result, updateController);
+                        }
+                    },
+                    _stopCancellationToken,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
                 .Unwrap();
 
             // When we've notified the controller of our result, we consider the async operation

@@ -8960,7 +8960,8 @@ namespace System.Xml
                                     int endPos = ParseQName(true, 1, out _);
                                     if (
                                         endPos - _ps.charPos - 1 == _curNode.localName.Length
-                                        && _ps.chars.AsSpan(_ps.charPos + 1)
+                                        && _ps
+                                            .chars.AsSpan(_ps.charPos + 1)
                                             .StartsWith(_curNode.localName)
                                         && (
                                             _ps.chars[endPos] == '>'

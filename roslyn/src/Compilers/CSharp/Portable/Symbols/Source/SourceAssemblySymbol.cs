@@ -2079,9 +2079,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool isPossibleAssemblySignatureKeyAttribute(AttributeSyntax node)
             {
-                QuickAttributeChecker checker = this.DeclaringCompilation.GetBinderFactory(
-                    node.SyntaxTree
-                )
+                QuickAttributeChecker checker = this
+                    .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
                     .GetBinder(node)
                     .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblySignatureKey);
@@ -2089,9 +2088,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool isPossibleAssemblyKeyNameAttribute(AttributeSyntax node)
             {
-                QuickAttributeChecker checker = this.DeclaringCompilation.GetBinderFactory(
-                    node.SyntaxTree
-                )
+                QuickAttributeChecker checker = this
+                    .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
                     .GetBinder(node)
                     .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblyKeyName);
@@ -2099,9 +2097,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool isPossibleAssemblyKeyFileAttribute(AttributeSyntax node)
             {
-                QuickAttributeChecker checker = this.DeclaringCompilation.GetBinderFactory(
-                    node.SyntaxTree
-                )
+                QuickAttributeChecker checker = this
+                    .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
                     .GetBinder(node)
                     .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblyKeyFile);
@@ -2176,9 +2173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private bool IsPossibleForwardedTypesAttribute(AttributeSyntax node)
         {
-            QuickAttributeChecker checker = this.DeclaringCompilation.GetBinderFactory(
-                node.SyntaxTree
-            )
+            QuickAttributeChecker checker = this
+                .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
                 .GetBinder(node)
                 .QuickAttributeChecker;
 

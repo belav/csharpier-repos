@@ -279,7 +279,8 @@ namespace System.Xaml
         {
             var args = type.GetConstructorArguments().ToArray();
             foreach (
-                var ci in type.UnderlyingType.GetConstructors()
+                var ci in type
+                    .UnderlyingType.GetConstructors()
                     .Where(c => c.GetParameters().Length == args.Length)
             )
             {

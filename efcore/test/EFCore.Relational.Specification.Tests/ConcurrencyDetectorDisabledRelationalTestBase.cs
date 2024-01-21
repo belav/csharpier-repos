@@ -20,11 +20,11 @@ public abstract class ConcurrencyDetectorDisabledRelationalTestBase<TFixture>
     public virtual Task FromSql(bool async) =>
         ConcurrencyDetectorTest(async c =>
             async
-                ? await c.Products.FromSqlRaw(
-                    NormalizeDelimitersInRawString("select * from [Products]")
-                )
+                ? await c
+                    .Products.FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
                     .ToListAsync()
-                : c.Products.FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
+                : c
+                    .Products.FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
                     .ToList()
         );
 }

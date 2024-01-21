@@ -189,10 +189,8 @@ namespace System.Data.Services.Client
                 lambda,
                 pb.ProjectionPaths.ToList()
             );
-            resource.ExpandPaths = pb.ExpandPaths.Union(
-                resource.ExpandPaths,
-                StringComparer.Ordinal
-            )
+            resource.ExpandPaths = pb
+                .ExpandPaths.Union(resource.ExpandPaths, StringComparer.Ordinal)
                 .ToList();
         }
 

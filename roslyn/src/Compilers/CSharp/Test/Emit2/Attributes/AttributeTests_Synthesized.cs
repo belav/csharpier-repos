@@ -170,7 +170,8 @@ class C
             );
 
             var pid = (NamedTypeSymbol)
-                comp.GlobalNamespace.GetMembers()
+                comp
+                    .GlobalNamespace.GetMembers()
                     .Where(s =>
                         s.Name.StartsWith(
                             "<PrivateImplementationDetails>",

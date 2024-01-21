@@ -2427,11 +2427,13 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             ConnectionDelegate connectionDelegate = async c =>
             {
                 await waitForMessageTcs1.Task.DefaultTimeout();
-                await c.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message1"))
+                await c
+                    .Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message1"))
                     .DefaultTimeout();
                 messageTcs1.TrySetResult();
                 await waitForMessageTcs2.Task.DefaultTimeout();
-                await c.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message2"))
+                await c
+                    .Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message2"))
                     .DefaultTimeout();
                 messageTcs2.TrySetResult();
             };
@@ -3583,7 +3585,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>()
+        var url = host
+            .Services.GetService<IServer>()
             .Features.Get<IServerAddressesFeature>()
             .Addresses.Single();
 
@@ -3664,7 +3667,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>()
+        var url = host
+            .Services.GetService<IServer>()
             .Features.Get<IServerAddressesFeature>()
             .Addresses.Single();
 
@@ -3794,7 +3798,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>()
+        var url = host
+            .Services.GetService<IServer>()
             .Features.Get<IServerAddressesFeature>()
             .Addresses.Single();
 
@@ -3851,7 +3856,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>()
+        var url = host
+            .Services.GetService<IServer>()
             .Features.Get<IServerAddressesFeature>()
             .Addresses.Single();
 
@@ -3940,7 +3946,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             host.Start();
 
             var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-            var url = host.Services.GetService<IServer>()
+            var url = host
+                .Services.GetService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.Single();
 
@@ -3969,8 +3976,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var feature = Assert.IsType<HttpRequestTimeoutFeature>(
                 context
                     .Features.Get<IHttpContextFeature>()
-                    ?.HttpContext
-                    .Features.Get<IHttpRequestTimeoutFeature>()
+                    ?.HttpContext.Features.Get<IHttpRequestTimeoutFeature>()
             );
             Assert.False(feature.Enabled);
 

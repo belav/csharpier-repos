@@ -1095,26 +1095,27 @@ namespace System.Threading.Tasks.Tests
                 }
             );
             c3 = v3.Unwrap();
-            c4 = Task.Factory.ContinueWhenAll(
-                new Task[] { taskRoot, futureRoot },
-                completedTasks =>
-                {
-                    int sum = 0;
-                    for (int i = 0; i < completedTasks.Length; i++)
+            c4 = Task
+                .Factory.ContinueWhenAll(
+                    new Task[] { taskRoot, futureRoot },
+                    completedTasks =>
                     {
-                        Task tmp = completedTasks[i];
-                        if (tmp is Task<int>)
-                            sum += ((Task<int>)tmp).Result;
-                    }
-                    return Task.Factory.StartNew(
-                        delegate
+                        int sum = 0;
+                        for (int i = 0; i < completedTasks.Length; i++)
                         {
-                            mres.WaitOne();
-                            return sum;
+                            Task tmp = completedTasks[i];
+                            if (tmp is Task<int>)
+                                sum += ((Task<int>)tmp).Result;
                         }
-                    );
-                }
-            )
+                        return Task.Factory.StartNew(
+                            delegate
+                            {
+                                mres.WaitOne();
+                                return sum;
+                            }
+                        );
+                    }
+                )
                 .Unwrap();
             c5 = taskRoot
                 .ContinueWith(
@@ -1154,18 +1155,19 @@ namespace System.Threading.Tasks.Tests
                 }
             );
             c7 = v7.Unwrap();
-            c8 = Task.Factory.ContinueWhenAny(
-                new Task[] { taskRoot, futureRoot },
-                winner =>
-                {
-                    return Task.Factory.StartNew(
-                        delegate
-                        {
-                            mres.WaitOne();
-                        }
-                    );
-                }
-            )
+            c8 = Task
+                .Factory.ContinueWhenAny(
+                    new Task[] { taskRoot, futureRoot },
+                    winner =>
+                    {
+                        return Task.Factory.StartNew(
+                            delegate
+                            {
+                                mres.WaitOne();
+                            }
+                        );
+                    }
+                )
                 .Unwrap();
 
             //Debug.WriteLine(" Testing that Unwrap() products do not complete before antecedent starts...");
@@ -1502,7 +1504,8 @@ namespace System.Threading.Tasks.Tests
             //
             // Exception handling
             //
-            var c = Task.Factory.StartNew(() => { })
+            var c = Task
+                .Factory.StartNew(() => { })
                 .ContinueWith(_ =>
                     Task.Factory.StartNew(() =>
                     {

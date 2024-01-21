@@ -242,9 +242,9 @@ namespace System.Data.Services.Client
                             {
                                 if (
                                     (null == keyPropertyDeclaredType)
-                                    || this.properties[i].DeclaringType.IsAssignableFrom(
-                                        keyPropertyDeclaredType
-                                    )
+                                    || this
+                                        .properties[i]
+                                        .DeclaringType.IsAssignableFrom(keyPropertyDeclaredType)
                                 )
                                 {
                                     keyPropertyDeclaredType = this.properties[i].DeclaringType;
@@ -779,7 +779,8 @@ namespace System.Data.Services.Client
         private void WireUpMimeTypeProperties()
         {
             MimeTypePropertyAttribute attribute = (MimeTypePropertyAttribute)
-                this.ElementType.GetCustomAttributes(typeof(MimeTypePropertyAttribute), true)
+                this
+                    .ElementType.GetCustomAttributes(typeof(MimeTypePropertyAttribute), true)
                     .SingleOrDefault();
             if (null != attribute)
             {

@@ -2680,7 +2680,8 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 if (!duplicate)
                 {
-                    MethodInfo mi = host.RootComponent.GetType()
+                    MethodInfo mi = host
+                        .RootComponent.GetType()
                         .GetMethod(uniqueName, bindingFlags, null, dti.ParameterTypes, null);
                     if (mi != null && !mi.IsPrivate)
                         duplicate = true;

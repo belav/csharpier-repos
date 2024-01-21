@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 m =>
                 {
                     {
-                        var actualMembers = m.GlobalNamespace.GetMember<NamespaceSymbol>("Test")
+                        var actualMembers = m
+                            .GlobalNamespace.GetMember<NamespaceSymbol>("Test")
                             .GetMember<NamedTypeSymbol>("voidDelegate")
                             .GetMembers()
                             .ToArray();

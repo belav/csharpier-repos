@@ -546,7 +546,8 @@ namespace CSharpSyntaxGenerator
 
         private void WriteContextualGreenFactories()
         {
-            var nodes = Tree.Types.Where(n => n is not PredefinedNode and not AbstractNode)
+            var nodes = Tree
+                .Types.Where(n => n is not PredefinedNode and not AbstractNode)
                 .ToList();
             WriteLine();
             WriteLine("internal partial class ContextAwareSyntax");
@@ -564,7 +565,8 @@ namespace CSharpSyntaxGenerator
 
         private void WriteStaticGreenFactories()
         {
-            var nodes = Tree.Types.Where(n => n is not PredefinedNode and not AbstractNode)
+            var nodes = Tree
+                .Types.Where(n => n is not PredefinedNode and not AbstractNode)
                 .ToList();
             WriteLine();
             WriteLine("internal static partial class SyntaxFactory");
@@ -1560,7 +1562,8 @@ namespace CSharpSyntaxGenerator
 
         private void WriteRedFactories()
         {
-            var nodes = Tree.Types.Where(n => n is not PredefinedNode and not AbstractNode)
+            var nodes = Tree
+                .Types.Where(n => n is not PredefinedNode and not AbstractNode)
                 .OfType<Node>()
                 .ToList();
             WriteLine();
@@ -1879,7 +1882,8 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "SyntaxKind kind" : "",
-                    nd.Fields.Where(factoryWithNoAutoCreatableTokenFields.Contains)
+                    nd
+                        .Fields.Where(factoryWithNoAutoCreatableTokenFields.Contains)
                         .Select(f => $"{GetRedPropertyType(f)} {CamelCase(f.Name)}")
                 )
             );
@@ -1985,7 +1989,8 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "SyntaxKind kind" : "",
-                    nd.Fields.Where(minimalFactoryfields.Contains)
+                    nd
+                        .Fields.Where(minimalFactoryfields.Contains)
                         .Select(f =>
                         {
                             var type = GetRedPropertyType(f);

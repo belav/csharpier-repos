@@ -39,7 +39,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc
+                            .ValueProvider.GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }

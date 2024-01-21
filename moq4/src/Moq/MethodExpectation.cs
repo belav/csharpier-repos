@@ -316,10 +316,9 @@ namespace Moq
             var parameterTypes = invocation.Method.GetParameterTypes();
             for (int i = 0, n = this.argumentMatchers.Length; i < n; ++i)
             {
-                this.argumentMatchers[i].SetupEvaluatedSuccessfully(
-                    arguments[i],
-                    parameterTypes[i]
-                );
+                this
+                    .argumentMatchers[i]
+                    .SetupEvaluatedSuccessfully(arguments[i], parameterTypes[i]);
 
                 /* Unmerged change from project 'Moq(netstandard2.0)'
                 Before:

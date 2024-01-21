@@ -1625,7 +1625,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                 Environment.NewLine,
                                 dependencyRecorder
                                     .Dependencies.Where(d =>
-                                        d.Target.ToLowerInvariant()
+                                        d
+                                            .Target.ToLowerInvariant()
                                             .Contains(expectedTarget.ToLowerInvariant())
                                     )
                                     .Select(d => "\t" + DependencyToString(d))
@@ -1634,7 +1635,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                 Environment.NewLine,
                                 dependencyRecorder
                                     .Dependencies.Where(d =>
-                                        d.Source.ToLowerInvariant()
+                                        d
+                                            .Source.ToLowerInvariant()
                                             .Contains(expectedSource.ToLowerInvariant())
                                     )
                                     .Select(d => "\t" + DependencyToString(d))
