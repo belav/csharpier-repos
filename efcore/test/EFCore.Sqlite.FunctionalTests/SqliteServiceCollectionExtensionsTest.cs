@@ -6,7 +6,5 @@ namespace Microsoft.EntityFrameworkCore;
 public class SqliteServiceCollectionExtensionsTest : RelationalServiceCollectionExtensionsTestBase
 {
     public SqliteServiceCollectionExtensionsTest()
-        : base(SqliteTestHelpers.Instance)
-    {
-    }
+        : base(SqliteTestHelpers.Instance) { }
 }

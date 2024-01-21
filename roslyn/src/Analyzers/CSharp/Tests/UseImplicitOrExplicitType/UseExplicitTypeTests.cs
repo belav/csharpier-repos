@@ -18,57 +18,62 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicitType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitType)]
-    public partial class UseExplicitTypeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseExplicitTypeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseExplicitTypeTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseExplicitTypeDiagnosticAnalyzer(), new UseExplicitTypeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpUseExplicitTypeDiagnosticAnalyzer(), new UseExplicitTypeCodeFixProvider());
 
-        private readonly CodeStyleOption2<bool> offWithSilent = new(false, NotificationOption2.Silent);
-        private readonly CodeStyleOption2<bool> onWithInfo = new(true, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> offWithInfo = new(false, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> offWithWarning = new(false, NotificationOption2.Warning);
-        private readonly CodeStyleOption2<bool> offWithError = new(false, NotificationOption2.Error);
+        private readonly CodeStyleOption2<bool> offWithSilent =
+            new(false, NotificationOption2.Silent);
+        private readonly CodeStyleOption2<bool> onWithInfo =
+            new(true, NotificationOption2.Suggestion);
+        private readonly CodeStyleOption2<bool> offWithInfo =
+            new(false, NotificationOption2.Suggestion);
+        private readonly CodeStyleOption2<bool> offWithWarning =
+            new(false, NotificationOption2.Warning);
+        private readonly CodeStyleOption2<bool> offWithError =
+            new(false, NotificationOption2.Error);
 
         // specify all options explicitly to override defaults.
-        private OptionsCollection ExplicitTypeEverywhere()
-            => new(GetLanguage())
+        private OptionsCollection ExplicitTypeEverywhere() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, offWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeExceptWhereApparent()
-            => new(GetLanguage())
+        private OptionsCollection ExplicitTypeExceptWhereApparent() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeForBuiltInTypesOnly()
-            => new(GetLanguage())
+        private OptionsCollection ExplicitTypeForBuiltInTypesOnly() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeEnforcements()
-            => new(GetLanguage())
+        private OptionsCollection ExplicitTypeEnforcements() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithWarning },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, offWithError },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeSilentEnforcement()
-            => new(GetLanguage())
+        private OptionsCollection ExplicitTypeSilentEnforcement() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithSilent },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, offWithSilent },
@@ -88,7 +93,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 {
                     [|var|] _myfield = 5;
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -102,14 +109,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 {
                     public event [|var|] _myevent;
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task OnAnonymousMethodExpression()
         {
-            var before =
-                """
+            var before = """
                 using System;
 
                 class Program
@@ -122,8 +130,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 """;
-            var after =
-                """
+            var after = """
                 using System;
 
                 class Program
@@ -137,15 +144,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 }
                 """;
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact]
         public async Task OnLambdaExpression()
         {
-            var before =
-                """
+            var before = """
                 using System;
 
                 class Program
@@ -156,8 +169,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 """;
-            var after =
-                """
+            var after = """
                 using System;
 
                 class Program
@@ -169,8 +181,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 }
                 """;
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact]
@@ -187,7 +206,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|var|] x = 5, y = x;
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -204,7 +225,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|var|] x;
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -225,7 +248,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     {
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -242,7 +267,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|Program|] p = new Program();
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/27221")]
@@ -260,7 +287,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     ref Program Ref() => throw null;
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -281,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 class var
                 {
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -298,7 +328,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|var|] x = new Goo();
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/29718")]
@@ -321,7 +353,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         }
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/29718")]
@@ -342,7 +376,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|var|] (key, value) = c;
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         #endregion
@@ -370,8 +406,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is apparent and not intrinsic
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeExceptWhereApparent()));
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeExceptWhereApparent())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -396,8 +438,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 }
                 """;
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent()); // preference for builtin types dominates
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            ); // preference for builtin types dominates
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -423,8 +473,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/42986")]
@@ -450,8 +508,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/42986")]
@@ -477,8 +543,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/27221")]
@@ -506,8 +580,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/27221")]
@@ -541,8 +623,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -568,8 +658,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -595,8 +693,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -626,8 +731,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -659,8 +771,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -690,8 +809,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -721,8 +847,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -752,8 +885,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -781,8 +921,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40925")]
@@ -814,8 +961,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -847,8 +1001,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -878,8 +1039,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -907,8 +1075,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -936,8 +1111,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -971,8 +1153,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -1004,8 +1193,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -1037,8 +1233,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/37491")]
@@ -1074,8 +1277,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/40477")]
@@ -1107,8 +1317,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -1134,8 +1351,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent()); // preference for builtin types dominates
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            ); // preference for builtin types dominates
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -1161,8 +1386,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 """;
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23893")]
@@ -1187,8 +1419,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                 }
                 """;
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact]
@@ -1205,7 +1445,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|dynamic|] x = 1;
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -1228,7 +1470,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         }
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23752")]
@@ -1245,7 +1489,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1255,7 +1500,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1272,7 +1519,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1282,7 +1530,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23752")]
@@ -1299,7 +1549,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1309,7 +1560,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23752")]
@@ -1326,7 +1579,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1336,7 +1590,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23752")]
@@ -1353,7 +1609,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1363,7 +1620,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23752")]
@@ -1380,7 +1639,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1390,7 +1650,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23752")]
@@ -1407,7 +1669,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1417,7 +1680,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out string s) { i = 1; s = "hello"; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23752")]
@@ -1434,7 +1699,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Error s) { i = 1; s = null; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class Program
                 {
@@ -1444,7 +1710,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                     void Deconstruct(out int i, out Error s) { i = 1; s = null; }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1484,7 +1752,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         }
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1501,7 +1771,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|var|] x = new { Amount = 108, Message = "Hello" };
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -1518,7 +1790,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         [|var|] x = new[] { new { name = "apple", diam = 4 }, new { name = "grape", diam = 1 } };
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -1545,7 +1819,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     public ConsoleColor Color { get; set; }
                     public int Price { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -1573,7 +1848,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         string s = "hello";
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1601,7 +1878,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         int s = 5;
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1629,7 +1908,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         List<int> c = new List<int>();
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1657,7 +1938,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         C c = new C();
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1685,7 +1968,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         C<int> c = new C<int>();
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1713,7 +1998,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         int[] n1 = new int[4] { 2, 4, 6, 8 };
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1741,7 +2028,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         int[] n1 = new[] { 2, 4, 6, 8 };
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1775,7 +2064,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         };
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1813,7 +2104,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         public string City { get; set; }
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1843,7 +2136,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         List<int> digits = new List<int> { 1, 2, 3 };
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1889,7 +2184,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         public string City { get; set; }
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1921,7 +2218,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         }
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -1957,7 +2256,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         }
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2007,7 +2308,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2055,7 +2358,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         }
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2083,7 +2388,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         string s = $"Hello, {name}"
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2113,7 +2420,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         int a = (int)x;
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2153,7 +2462,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         return this;
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2183,7 +2494,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         int intNumber = checked((int)number1);
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2223,7 +2536,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         return string.Empty;
                     }
                 }
-                """, options: ExplicitTypeEverywhere());
+                """,
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2251,7 +2566,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         int text = 1;
                     }
                 }
-                """, options: ExplicitTypeForBuiltInTypesOnly());
+                """,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
@@ -2283,7 +2600,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
 
                     public char GetChar() => 'c';
                 }
-                """, options: ExplicitTypeForBuiltInTypesOnly());
+                """,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
@@ -2313,7 +2632,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         string text = string.Empty;
                     }
                 }
-                """, options: ExplicitTypeForBuiltInTypesOnly());
+                """,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
@@ -2345,14 +2666,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                         object text = j;
                     }
                 }
-                """, options: ExplicitTypeForBuiltInTypesOnly());
+                """,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeNotificationLevelSilent()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -2362,17 +2684,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 """;
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeSilentEnforcement(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Hidden);
+                diagnosticSeverity: DiagnosticSeverity.Hidden
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeNotificationLevelInfo()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -2382,17 +2705,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 """;
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeEnforcements(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Info);
+                diagnosticSeverity: DiagnosticSeverity.Info
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
         public async Task SuggestExplicitTypeNotificationLevelWarning()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -2402,17 +2726,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 """;
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeEnforcements(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Warning);
+                diagnosticSeverity: DiagnosticSeverity.Warning
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeNotificationLevelError()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -2422,10 +2747,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 """;
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeEnforcements(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Error);
+                diagnosticSeverity: DiagnosticSeverity.Error
+            );
         }
 
         [WpfFact]
@@ -2450,7 +2777,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
                     }
                 }
                 """,
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2475,7 +2803,8 @@ options: ExplicitTypeEverywhere());
                     }
                 }
                 """,
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
@@ -2500,7 +2829,8 @@ options: ExplicitTypeEverywhere());
                     }
                 }
                 """,
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20437")]
@@ -2529,7 +2859,8 @@ options: ExplicitTypeEverywhere());
                     }
                 }
                 """,
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2546,7 +2877,9 @@ options: ExplicitTypeEverywhere());
                         [|String|] test = new String(' ', 4);
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2565,7 +2898,9 @@ options: ExplicitTypeEverywhere());
                         }
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2582,7 +2917,9 @@ options: ExplicitTypeEverywhere());
                         [|Int32[]|] array = new[] { 1, 2, 3 };
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2603,7 +2940,9 @@ options: ExplicitTypeEverywhere());
                         };
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2621,7 +2960,9 @@ options: ExplicitTypeEverywhere());
                         [|IEnumerable<Int32>|] a = new List<Int32> { 1, 2 }.Where(x => x > 1);
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2639,7 +2980,9 @@ options: ExplicitTypeEverywhere());
                         [|String|] s = $"Hello, {name}"
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2657,7 +3000,9 @@ options: ExplicitTypeEverywhere());
                         [|String|] s = (String) name;
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2680,7 +3025,9 @@ options: ExplicitTypeEverywhere());
                         return String.Empty;
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2698,7 +3045,9 @@ options: ExplicitTypeEverywhere());
                         Int32.TryParse(name, out [|Int32|] number)
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2717,7 +3066,9 @@ options: ExplicitTypeEverywhere());
                         }
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/20244")]
@@ -2735,7 +3086,9 @@ options: ExplicitTypeEverywhere());
                         [|List<Int32>|] a = new List<Int32> { 1, 2 };
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+                """,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/26923")]
@@ -2756,7 +3109,9 @@ options: ExplicitTypeEverywhere());
                         }
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -2772,7 +3127,9 @@ options: ExplicitTypeEverywhere());
                         const [|var|] v = 0;
                     }
                 }
-                """, new TestParameters(options: ExplicitTypeEverywhere()));
+                """,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -2798,8 +3155,15 @@ options: ExplicitTypeEverywhere());
                 """;
             // The type is not apparent and not intrinsic
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/23907")]
@@ -2815,9 +3179,18 @@ options: ExplicitTypeEverywhere());
                 }
                 """;
             // The type is apparent and not intrinsic
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeEverywhere()));
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeExceptWhereApparent()));
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeExceptWhereApparent())
+            );
         }
     }
 }

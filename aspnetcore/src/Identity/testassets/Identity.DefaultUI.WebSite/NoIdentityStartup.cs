@@ -24,7 +24,8 @@ public class NoIdentityStartup
             options.CheckConsentNeeded = context => true;
         });
 
-        services.AddMvc()
+        services
+            .AddMvc()
             .AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeFolder("/Areas/Identity/Pages/Account/Manage");

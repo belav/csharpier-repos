@@ -9,20 +9,30 @@ namespace System.Web.Razor.Test.Parser.Html
 {
     internal class HtmlParserTestUtils
     {
-        public static void RunSingleAtEscapeTest(Action<string, Block> testMethod, AcceptedCharacters lastSpanAcceptedCharacters = AcceptedCharacters.None)
+        public static void RunSingleAtEscapeTest(
+            Action<string, Block> testMethod,
+            AcceptedCharacters lastSpanAcceptedCharacters = AcceptedCharacters.None
+        )
         {
             var factory = SpanFactory.CreateCsHtml();
-            testMethod("<foo>@@bar</foo>",
+            testMethod(
+                "<foo>@@bar</foo>",
                 new MarkupBlock(
                     factory.Markup("<foo>"),
                     factory.Markup("@").Hidden(),
-                    factory.Markup("@bar</foo>").Accepts(lastSpanAcceptedCharacters)));
+                    factory.Markup("@bar</foo>").Accepts(lastSpanAcceptedCharacters)
+                )
+            );
         }
 
-        public static void RunMultiAtEscapeTest(Action<string, Block> testMethod, AcceptedCharacters lastSpanAcceptedCharacters = AcceptedCharacters.None)
+        public static void RunMultiAtEscapeTest(
+            Action<string, Block> testMethod,
+            AcceptedCharacters lastSpanAcceptedCharacters = AcceptedCharacters.None
+        )
         {
             var factory = SpanFactory.CreateCsHtml();
-            testMethod("<foo>@@@@@bar</foo>",
+            testMethod(
+                "<foo>@@@@@bar</foo>",
                 new MarkupBlock(
                     factory.Markup("<foo>"),
                     factory.Markup("@").Hidden(),
@@ -31,10 +41,14 @@ namespace System.Web.Razor.Test.Parser.Html
                     factory.Markup("@"),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("bar")
-                               .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup("</foo>").Accepts(lastSpanAcceptedCharacters)));
+                        factory
+                            .Code("bar")
+                            .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup("</foo>").Accepts(lastSpanAcceptedCharacters)
+                )
+            );
         }
     }
 }

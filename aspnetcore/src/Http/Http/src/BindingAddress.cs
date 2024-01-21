@@ -24,10 +24,14 @@ public class BindingAddress
     /// <summary>
     /// Initializes a new instance of <see cref="BindingAddress"/>.
     /// </summary>
-    [Obsolete("This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance.")]
+    [Obsolete(
+        "This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance."
+    )]
     public BindingAddress()
     {
-        throw new InvalidOperationException("This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance.");
+        throw new InvalidOperationException(
+            "This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance."
+        );
     }
 
     /// <summary>
@@ -109,7 +113,8 @@ public class BindingAddress
         return host.Substring(unixPipeHostPrefixLength);
     }
 
-    private static string GetNamedPipeName(string host) => host.Substring(NamedPipeHostPrefix.Length);
+    private static string GetNamedPipeName(string host) =>
+        host.Substring(NamedPipeHostPrefix.Length);
 
     /// <inheritdoc />
     public override string ToString()
@@ -120,7 +125,12 @@ public class BindingAddress
         }
         else
         {
-            return Scheme.ToLowerInvariant() + Uri.SchemeDelimiter + Host.ToLowerInvariant() + ":" + Port.ToString(CultureInfo.InvariantCulture) + PathBase;
+            return Scheme.ToLowerInvariant()
+                + Uri.SchemeDelimiter
+                + Host.ToLowerInvariant()
+                + ":"
+                + Port.ToString(CultureInfo.InvariantCulture)
+                + PathBase;
         }
     }
 
@@ -161,8 +171,12 @@ public class BindingAddress
         }
         var schemeDelimiterEnd = schemeDelimiterStart + Uri.SchemeDelimiter.Length;
 
-        var isUnixPipe = address.IndexOf(UnixPipeHostPrefix, schemeDelimiterEnd, StringComparison.Ordinal) == schemeDelimiterEnd;
-        var isNamedPipe = address.IndexOf(NamedPipeHostPrefix, schemeDelimiterEnd, StringComparison.Ordinal) == schemeDelimiterEnd;
+        var isUnixPipe =
+            address.IndexOf(UnixPipeHostPrefix, schemeDelimiterEnd, StringComparison.Ordinal)
+            == schemeDelimiterEnd;
+        var isNamedPipe =
+            address.IndexOf(NamedPipeHostPrefix, schemeDelimiterEnd, StringComparison.Ordinal)
+            == schemeDelimiterEnd;
 
         int pathDelimiterStart;
         int pathDelimiterEnd;
@@ -179,12 +193,20 @@ public class BindingAddress
                 }
             }
 
-            pathDelimiterStart = address.IndexOf(":", schemeDelimiterEnd + unixPipeHostPrefixLength, StringComparison.Ordinal);
+            pathDelimiterStart = address.IndexOf(
+                ":",
+                schemeDelimiterEnd + unixPipeHostPrefixLength,
+                StringComparison.Ordinal
+            );
             pathDelimiterEnd = pathDelimiterStart + ":".Length;
         }
         else if (isNamedPipe)
         {
-            pathDelimiterStart = address.IndexOf(":", schemeDelimiterEnd + NamedPipeHostPrefix.Length, StringComparison.Ordinal);
+            pathDelimiterStart = address.IndexOf(
+                ":",
+                schemeDelimiterEnd + NamedPipeHostPrefix.Length,
+                StringComparison.Ordinal
+            );
             pathDelimiterEnd = pathDelimiterStart + ":".Length;
         }
         else
@@ -205,17 +227,35 @@ public class BindingAddress
         var hasSpecifiedPort = false;
         if (!isUnixPipe)
         {
-            var portDelimiterStart = address.LastIndexOf(":", pathDelimiterStart - 1, pathDelimiterStart - schemeDelimiterEnd, StringComparison.Ordinal);
+            var portDelimiterStart = address.LastIndexOf(
+                ":",
+                pathDelimiterStart - 1,
+                pathDelimiterStart - schemeDelimiterEnd,
+                StringComparison.Ordinal
+            );
             if (portDelimiterStart >= 0)
             {
                 var portDelimiterEnd = portDelimiterStart + ":".Length;
 
-                var portString = address.Substring(portDelimiterEnd, pathDelimiterStart - portDelimiterEnd);
+                var portString = address.Substring(
+                    portDelimiterEnd,
+                    pathDelimiterStart - portDelimiterEnd
+                );
                 int portNumber;
-                if (int.TryParse(portString, NumberStyles.Integer, CultureInfo.InvariantCulture, out portNumber))
+                if (
+                    int.TryParse(
+                        portString,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out portNumber
+                    )
+                )
                 {
                     hasSpecifiedPort = true;
-                    host = address.Substring(schemeDelimiterEnd, portDelimiterStart - schemeDelimiterEnd);
+                    host = address.Substring(
+                        schemeDelimiterEnd,
+                        portDelimiterStart - schemeDelimiterEnd
+                    );
                     port = portNumber;
                 }
             }
@@ -245,7 +285,9 @@ public class BindingAddress
 
         if (isUnixPipe && !Path.IsPathRooted(GetUnixPipePath(host)))
         {
-            throw new FormatException($"Invalid url, unix socket path must be absolute: '{address}'");
+            throw new FormatException(
+                $"Invalid url, unix socket path must be absolute: '{address}'"
+            );
         }
 
         string pathBase;

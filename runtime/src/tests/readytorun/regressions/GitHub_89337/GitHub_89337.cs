@@ -5,11 +5,10 @@
 
 class GitHub_89337
 {
-    class Generic<T>
-    {
-    }
+    class Generic<T> { }
 
     class Derived : System.Xml.NameTable { }
+
     static Generic<Derived>? Passthru(Generic<Derived>? param)
     {
         return param;

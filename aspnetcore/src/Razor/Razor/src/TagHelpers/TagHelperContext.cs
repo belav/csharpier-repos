@@ -22,7 +22,9 @@ public class TagHelperContext
         string tagName,
         TagHelperAttributeList allAttributes,
         IDictionary<object, object> items,
-        string uniqueId) : this(allAttributes, items, uniqueId)
+        string uniqueId
+    )
+        : this(allAttributes, items, uniqueId)
     {
         ArgumentNullException.ThrowIfNull(tagName);
 
@@ -39,7 +41,8 @@ public class TagHelperContext
     public TagHelperContext(
         TagHelperAttributeList allAttributes,
         IDictionary<object, object> items,
-        string uniqueId)
+        string uniqueId
+    )
     {
         ArgumentNullException.ThrowIfNull(items);
         ArgumentNullException.ThrowIfNull(uniqueId);

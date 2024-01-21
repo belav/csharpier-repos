@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,272 +32,308 @@
 using System.ComponentModel;
 using System.Drawing.Text;
 
-namespace System.Drawing {
+namespace System.Drawing
+{
+    public sealed class StringFormat : MarshalByRefObject, IDisposable, ICloneable
+    {
+        //		private static StringFormat genericDefault;
+        private IntPtr nativeStrFmt = IntPtr.Zero;
+        private int language = GDIPlus.LANG_NEUTRAL;
 
-	public sealed class StringFormat : MarshalByRefObject, IDisposable, ICloneable
-	{
-//		private static StringFormat genericDefault;
-		private IntPtr nativeStrFmt = IntPtr.Zero;
-                private int language = GDIPlus.LANG_NEUTRAL;
-				
-		public StringFormat() : this (0, GDIPlus.LANG_NEUTRAL)
-		{					   
-		}		
-		
-		public StringFormat(StringFormatFlags options, int language)
-		{
-			Status status = GDIPlus.GdipCreateStringFormat (options, language, out nativeStrFmt);        			
-			GDIPlus.CheckStatus (status);
-		}
-		
-		internal StringFormat(IntPtr native)
-		{
-			nativeStrFmt = native;
-		}
-		
-		~StringFormat ()
-		{	
-			Dispose (false);
-		}
-		
-		public void Dispose ()
-		{	
-			Dispose (true);
-			System.GC.SuppressFinalize (this);
-		}
+        public StringFormat()
+            : this(0, GDIPlus.LANG_NEUTRAL) { }
 
-		void Dispose (bool disposing)
-		{
-			if (nativeStrFmt != IntPtr.Zero) {
-				Status status = GDIPlus.GdipDeleteStringFormat (nativeStrFmt);
-				nativeStrFmt = IntPtr.Zero;
-				GDIPlus.CheckStatus (status);
-			}
-		}
+        public StringFormat(StringFormatFlags options, int language)
+        {
+            Status status = GDIPlus.GdipCreateStringFormat(options, language, out nativeStrFmt);
+            GDIPlus.CheckStatus(status);
+        }
 
-		public StringFormat (StringFormat format)
-		{
-			if (format == null)
-				throw new ArgumentNullException ("format");
+        internal StringFormat(IntPtr native)
+        {
+            nativeStrFmt = native;
+        }
 
-			Status status = GDIPlus.GdipCloneStringFormat (format.NativeObject, out nativeStrFmt);
-			GDIPlus.CheckStatus (status);
-		}
+        ~StringFormat()
+        {
+            Dispose(false);
+        }
 
-		public StringFormat (StringFormatFlags options)
-		{
-			Status status = GDIPlus.GdipCreateStringFormat (options, GDIPlus.LANG_NEUTRAL, out nativeStrFmt);
-			GDIPlus.CheckStatus (status);			
-		}
-		
-		public StringAlignment Alignment {
-			get {
-                                StringAlignment align;
-				Status status = GDIPlus.GdipGetStringFormatAlign (nativeStrFmt, out align);
-				GDIPlus.CheckStatus (status);
+        public void Dispose()
+        {
+            Dispose(true);
+            System.GC.SuppressFinalize(this);
+        }
 
-        			return align;
-			}
+        void Dispose(bool disposing)
+        {
+            if (nativeStrFmt != IntPtr.Zero)
+            {
+                Status status = GDIPlus.GdipDeleteStringFormat(nativeStrFmt);
+                nativeStrFmt = IntPtr.Zero;
+                GDIPlus.CheckStatus(status);
+            }
+        }
 
-			set {
-				if ((value < StringAlignment.Near) || (value > StringAlignment.Far))
-					throw new InvalidEnumArgumentException ("Alignment");
+        public StringFormat(StringFormat format)
+        {
+            if (format == null)
+                throw new ArgumentNullException("format");
 
-				Status status = GDIPlus.GdipSetStringFormatAlign (nativeStrFmt, value);
-				GDIPlus.CheckStatus (status);
-			}
-		}
+            Status status = GDIPlus.GdipCloneStringFormat(format.NativeObject, out nativeStrFmt);
+            GDIPlus.CheckStatus(status);
+        }
 
-		public StringAlignment LineAlignment {
-			get {
-				StringAlignment align;
-				Status status = GDIPlus.GdipGetStringFormatLineAlign (nativeStrFmt, out align);
-				GDIPlus.CheckStatus (status);
+        public StringFormat(StringFormatFlags options)
+        {
+            Status status = GDIPlus.GdipCreateStringFormat(
+                options,
+                GDIPlus.LANG_NEUTRAL,
+                out nativeStrFmt
+            );
+            GDIPlus.CheckStatus(status);
+        }
 
-                                return align;
-			}
+        public StringAlignment Alignment
+        {
+            get
+            {
+                StringAlignment align;
+                Status status = GDIPlus.GdipGetStringFormatAlign(nativeStrFmt, out align);
+                GDIPlus.CheckStatus(status);
 
-			set {
-				if ((value < StringAlignment.Near) || (value > StringAlignment.Far))
-					throw new InvalidEnumArgumentException ("Alignment");
+                return align;
+            }
+            set
+            {
+                if ((value < StringAlignment.Near) || (value > StringAlignment.Far))
+                    throw new InvalidEnumArgumentException("Alignment");
 
-				Status status = GDIPlus.GdipSetStringFormatLineAlign (nativeStrFmt, value);
-				GDIPlus.CheckStatus (status);
-        		}
-		}
+                Status status = GDIPlus.GdipSetStringFormatAlign(nativeStrFmt, value);
+                GDIPlus.CheckStatus(status);
+            }
+        }
 
-		public StringFormatFlags FormatFlags {
-			get {				
-				StringFormatFlags flags;
-				Status status = GDIPlus.GdipGetStringFormatFlags (nativeStrFmt, out flags);
-				GDIPlus.CheckStatus (status);
+        public StringAlignment LineAlignment
+        {
+            get
+            {
+                StringAlignment align;
+                Status status = GDIPlus.GdipGetStringFormatLineAlign(nativeStrFmt, out align);
+                GDIPlus.CheckStatus(status);
 
-        			return flags;			
-			}
+                return align;
+            }
+            set
+            {
+                if ((value < StringAlignment.Near) || (value > StringAlignment.Far))
+                    throw new InvalidEnumArgumentException("Alignment");
 
-			set {
-				Status status = GDIPlus.GdipSetStringFormatFlags (nativeStrFmt, value);
-				GDIPlus.CheckStatus (status);
-			}
-		}
+                Status status = GDIPlus.GdipSetStringFormatLineAlign(nativeStrFmt, value);
+                GDIPlus.CheckStatus(status);
+            }
+        }
 
-		public HotkeyPrefix HotkeyPrefix {
-			get {				
-				HotkeyPrefix hotkeyPrefix;
-				Status status = GDIPlus.GdipGetStringFormatHotkeyPrefix (nativeStrFmt, out hotkeyPrefix);
-				GDIPlus.CheckStatus (status);
+        public StringFormatFlags FormatFlags
+        {
+            get
+            {
+                StringFormatFlags flags;
+                Status status = GDIPlus.GdipGetStringFormatFlags(nativeStrFmt, out flags);
+                GDIPlus.CheckStatus(status);
 
-               			return hotkeyPrefix;
-			}
+                return flags;
+            }
+            set
+            {
+                Status status = GDIPlus.GdipSetStringFormatFlags(nativeStrFmt, value);
+                GDIPlus.CheckStatus(status);
+            }
+        }
 
-			set {
-				if ((value < HotkeyPrefix.None) || (value > HotkeyPrefix.Hide))
-					throw new InvalidEnumArgumentException ("HotkeyPrefix");
+        public HotkeyPrefix HotkeyPrefix
+        {
+            get
+            {
+                HotkeyPrefix hotkeyPrefix;
+                Status status = GDIPlus.GdipGetStringFormatHotkeyPrefix(
+                    nativeStrFmt,
+                    out hotkeyPrefix
+                );
+                GDIPlus.CheckStatus(status);
 
-				Status status = GDIPlus.GdipSetStringFormatHotkeyPrefix (nativeStrFmt, value);
-				GDIPlus.CheckStatus (status);
-			}
-		}
+                return hotkeyPrefix;
+            }
+            set
+            {
+                if ((value < HotkeyPrefix.None) || (value > HotkeyPrefix.Hide))
+                    throw new InvalidEnumArgumentException("HotkeyPrefix");
 
+                Status status = GDIPlus.GdipSetStringFormatHotkeyPrefix(nativeStrFmt, value);
+                GDIPlus.CheckStatus(status);
+            }
+        }
 
-		public StringTrimming Trimming {
-			get {
-				StringTrimming trimming;
-				Status status = GDIPlus.GdipGetStringFormatTrimming (nativeStrFmt, out trimming);
-				GDIPlus.CheckStatus (status);
-        			return trimming;
-			}
+        public StringTrimming Trimming
+        {
+            get
+            {
+                StringTrimming trimming;
+                Status status = GDIPlus.GdipGetStringFormatTrimming(nativeStrFmt, out trimming);
+                GDIPlus.CheckStatus(status);
+                return trimming;
+            }
+            set
+            {
+                if ((value < StringTrimming.None) || (value > StringTrimming.EllipsisPath))
+                    throw new InvalidEnumArgumentException("Trimming");
 
-			set {
-				if ((value < StringTrimming.None) || (value > StringTrimming.EllipsisPath))
-					throw new InvalidEnumArgumentException ("Trimming");
+                Status status = GDIPlus.GdipSetStringFormatTrimming(nativeStrFmt, value);
+                GDIPlus.CheckStatus(status);
+            }
+        }
 
-				Status status = GDIPlus.GdipSetStringFormatTrimming (nativeStrFmt, value);
-				GDIPlus.CheckStatus (status);
-			}
-		}
+        public static StringFormat GenericDefault
+        {
+            get
+            {
+                IntPtr ptr;
 
-		public static StringFormat GenericDefault {
-			get {
-				IntPtr ptr;
-				
-				Status status = GDIPlus.GdipStringFormatGetGenericDefault (out ptr);
-				GDIPlus.CheckStatus (status);
-	
-				return new StringFormat (ptr);
-			}
-		}
-		
-		
-		public int DigitSubstitutionLanguage {
-			get{
-				return language;
-			}
-		}
+                Status status = GDIPlus.GdipStringFormatGetGenericDefault(out ptr);
+                GDIPlus.CheckStatus(status);
 
-		
-		public static StringFormat GenericTypographic {
-			get {
-				IntPtr ptr;
-						
-				Status status = GDIPlus.GdipStringFormatGetGenericTypographic (out ptr);
-				GDIPlus.CheckStatus (status);
-	
-				return new StringFormat (ptr);
-			}
-		}
+                return new StringFormat(ptr);
+            }
+        }
 
-                public StringDigitSubstitute  DigitSubstitutionMethod  {
-			get {
-                                StringDigitSubstitute substitute;
-                                
-                                Status status = GDIPlus.GdipGetStringFormatDigitSubstitution(nativeStrFmt, language, out substitute);
-				GDIPlus.CheckStatus (status);
+        public int DigitSubstitutionLanguage
+        {
+            get { return language; }
+        }
 
-                                return substitute;     
-			}
-		}
+        public static StringFormat GenericTypographic
+        {
+            get
+            {
+                IntPtr ptr;
 
+                Status status = GDIPlus.GdipStringFormatGetGenericTypographic(out ptr);
+                GDIPlus.CheckStatus(status);
 
-      		public void SetMeasurableCharacterRanges (CharacterRange [] ranges)
-		{					
-			Status status = GDIPlus.GdipSetStringFormatMeasurableCharacterRanges (nativeStrFmt, 
-				ranges.Length,	ranges);
-				
-			GDIPlus.CheckStatus (status);
-		}
-		
-		internal int GetMeasurableCharacterRangeCount () 
-		{
-			int cnt;		
-			Status status = GDIPlus.GdipGetStringFormatMeasurableCharacterRangeCount (nativeStrFmt, out cnt);
-				
-			GDIPlus.CheckStatus (status);			
-			return cnt;			
-		}			
-			
-		public object Clone()
-		{
-			IntPtr native;
-				
-			Status status = GDIPlus.GdipCloneStringFormat (nativeStrFmt, out native);
-			GDIPlus.CheckStatus (status);
-	
-			return new StringFormat (native);			
-		}
+                return new StringFormat(ptr);
+            }
+        }
 
-		public override string ToString()
-		{
-			return "[StringFormat, FormatFlags=" + this.FormatFlags.ToString() + "]";
-		}
-		
-		internal IntPtr NativeObject
-                {            
-			get{
-				return nativeStrFmt;
-			}
-			set	{
-				nativeStrFmt = value;
-			}
-		}
+        public StringDigitSubstitute DigitSubstitutionMethod
+        {
+            get
+            {
+                StringDigitSubstitute substitute;
 
-		// For CoreFX compat
-		internal IntPtr nativeFormat
-                {            
-			get{
-				return nativeStrFmt;
-			}
-		}
+                Status status = GDIPlus.GdipGetStringFormatDigitSubstitution(
+                    nativeStrFmt,
+                    language,
+                    out substitute
+                );
+                GDIPlus.CheckStatus(status);
 
-                public void SetTabStops(float firstTabOffset, float[] tabStops)
-                {
-			Status status = GDIPlus.GdipSetStringFormatTabStops(nativeStrFmt, firstTabOffset, tabStops.Length, tabStops);
-			GDIPlus.CheckStatus (status);
-                }
+                return substitute;
+            }
+        }
 
-                public void SetDigitSubstitution(int language,  StringDigitSubstitute substitute)
-                {
-			Status status = GDIPlus.GdipSetStringFormatDigitSubstitution(nativeStrFmt, this.language, substitute);
-			GDIPlus.CheckStatus (status);
-                }
+        public void SetMeasurableCharacterRanges(CharacterRange[] ranges)
+        {
+            Status status = GDIPlus.GdipSetStringFormatMeasurableCharacterRanges(
+                nativeStrFmt,
+                ranges.Length,
+                ranges
+            );
 
-                public float[] GetTabStops(out float firstTabOffset)
-                {
-                        int count = 0;
-                        firstTabOffset = 0;
-                        
-                        Status status = GDIPlus.GdipGetStringFormatTabStopCount(nativeStrFmt, out count);
-			GDIPlus.CheckStatus (status);
+            GDIPlus.CheckStatus(status);
+        }
 
-                        float[] tabStops = new float[count];                        
-                        
-                        if (count != 0) {                        
-                        	status = GDIPlus.GdipGetStringFormatTabStops(nativeStrFmt, count, out firstTabOffset, tabStops);
-				GDIPlus.CheckStatus (status);
-			}
-                        	
-                        return tabStops;                        
-                }
+        internal int GetMeasurableCharacterRangeCount()
+        {
+            int cnt;
+            Status status = GDIPlus.GdipGetStringFormatMeasurableCharacterRangeCount(
+                nativeStrFmt,
+                out cnt
+            );
 
-	}
+            GDIPlus.CheckStatus(status);
+            return cnt;
+        }
+
+        public object Clone()
+        {
+            IntPtr native;
+
+            Status status = GDIPlus.GdipCloneStringFormat(nativeStrFmt, out native);
+            GDIPlus.CheckStatus(status);
+
+            return new StringFormat(native);
+        }
+
+        public override string ToString()
+        {
+            return "[StringFormat, FormatFlags=" + this.FormatFlags.ToString() + "]";
+        }
+
+        internal IntPtr NativeObject
+        {
+            get { return nativeStrFmt; }
+            set { nativeStrFmt = value; }
+        }
+
+        // For CoreFX compat
+        internal IntPtr nativeFormat
+        {
+            get { return nativeStrFmt; }
+        }
+
+        public void SetTabStops(float firstTabOffset, float[] tabStops)
+        {
+            Status status = GDIPlus.GdipSetStringFormatTabStops(
+                nativeStrFmt,
+                firstTabOffset,
+                tabStops.Length,
+                tabStops
+            );
+            GDIPlus.CheckStatus(status);
+        }
+
+        public void SetDigitSubstitution(int language, StringDigitSubstitute substitute)
+        {
+            Status status = GDIPlus.GdipSetStringFormatDigitSubstitution(
+                nativeStrFmt,
+                this.language,
+                substitute
+            );
+            GDIPlus.CheckStatus(status);
+        }
+
+        public float[] GetTabStops(out float firstTabOffset)
+        {
+            int count = 0;
+            firstTabOffset = 0;
+
+            Status status = GDIPlus.GdipGetStringFormatTabStopCount(nativeStrFmt, out count);
+            GDIPlus.CheckStatus(status);
+
+            float[] tabStops = new float[count];
+
+            if (count != 0)
+            {
+                status = GDIPlus.GdipGetStringFormatTabStops(
+                    nativeStrFmt,
+                    count,
+                    out firstTabOffset,
+                    tabStops
+                );
+                GDIPlus.CheckStatus(status);
+            }
+
+            return tabStops;
+        }
+    }
 }

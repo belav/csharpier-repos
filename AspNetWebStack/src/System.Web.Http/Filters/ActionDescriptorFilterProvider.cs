@@ -22,7 +22,10 @@ namespace System.Web.Http.Filters
         /// <param name="configuration">The configuration. This value is not used.</param>
         /// <param name="actionDescriptor">The action descriptor.</param>
         /// <returns>A collection of filters.</returns>
-        public IEnumerable<FilterInfo> GetFilters(HttpConfiguration configuration, HttpActionDescriptor actionDescriptor)
+        public IEnumerable<FilterInfo> GetFilters(
+            HttpConfiguration configuration,
+            HttpActionDescriptor actionDescriptor
+        )
         {
             if (configuration == null)
             {
@@ -34,8 +37,12 @@ namespace System.Web.Http.Filters
                 throw Error.ArgumentNull("actionDescriptor");
             }
 
-            IEnumerable<FilterInfo> controllerFilters = actionDescriptor.ControllerDescriptor.GetFilters().Select(instance => new FilterInfo(instance, FilterScope.Controller));
-            IEnumerable<FilterInfo> actionFilters = actionDescriptor.GetFilters().Select(instance => new FilterInfo(instance, FilterScope.Action));
+            IEnumerable<FilterInfo> controllerFilters = actionDescriptor
+                .ControllerDescriptor.GetFilters()
+                .Select(instance => new FilterInfo(instance, FilterScope.Controller));
+            IEnumerable<FilterInfo> actionFilters = actionDescriptor
+                .GetFilters()
+                .Select(instance => new FilterInfo(instance, FilterScope.Action));
 
             return controllerFilters.Concat(actionFilters);
         }

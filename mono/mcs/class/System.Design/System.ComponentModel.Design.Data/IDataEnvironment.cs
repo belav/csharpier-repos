@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,31 +29,41 @@
 //
 
 
-using System.Windows.Forms;
 using System.CodeDom;
 using System.Collections;
 using System.Data;
 using System.Data.Common;
 using System.Security.Permissions;
+using System.Windows.Forms;
 
 namespace System.ComponentModel.Design.Data
 {
-	public interface IDataEnvironment
-	{
-		ICollection Connections { get; }
+    public interface IDataEnvironment
+    {
+        ICollection Connections { get; }
 
-		DesignerDataConnection BuildConnection (IWin32Window owner, DesignerDataConnection initialConnection);
+        DesignerDataConnection BuildConnection(
+            IWin32Window owner,
+            DesignerDataConnection initialConnection
+        );
 
-		string BuildQuery (IWin32Window owner, DesignerDataConnection connection, QueryBuilderMode mode, string initialQueryText);
+        string BuildQuery(
+            IWin32Window owner,
+            DesignerDataConnection connection,
+            QueryBuilderMode mode,
+            string initialQueryText
+        );
 
-		DesignerDataConnection ConfigureConnection (IWin32Window owner, DesignerDataConnection connection, string name);
+        DesignerDataConnection ConfigureConnection(
+            IWin32Window owner,
+            DesignerDataConnection connection,
+            string name
+        );
 
-		CodeExpression GetCodeExpression (DesignerDataConnection connection);
+        CodeExpression GetCodeExpression(DesignerDataConnection connection);
 
-		IDesignerDataSchema GetConnectionSchema (DesignerDataConnection connection);
+        IDesignerDataSchema GetConnectionSchema(DesignerDataConnection connection);
 
-		DbConnection GetDesignTimeConnection (DesignerDataConnection connection);
-
-	}
+        DbConnection GetDesignTimeConnection(DesignerDataConnection connection);
+    }
 }
-

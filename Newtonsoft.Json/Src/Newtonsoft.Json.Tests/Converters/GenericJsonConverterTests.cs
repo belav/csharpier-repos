@@ -26,14 +26,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using Newtonsoft.Json.Converters;
 #if !(NET20 || DNXCORE50)
 using System.Data.Linq;
 #endif
 #if !DNXCORE50
 using System.Data.SqlTypes;
 #endif
-using System.Text;
-using Newtonsoft.Json.Converters;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -50,12 +51,22 @@ namespace Newtonsoft.Json.Tests.Converters
     {
         public class TestGenericConverter : JsonConverter<string>
         {
-            public override void WriteJson(JsonWriter writer, string value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                string value,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteValue(value);
             }
 
-            public override string ReadJson(JsonReader reader, Type objectType, string existingValue, bool hasExistingValue, JsonSerializer serializer)
+            public override string ReadJson(
+                JsonReader reader,
+                Type objectType,
+                string existingValue,
+                bool hasExistingValue,
+                JsonSerializer serializer
+            )
             {
                 return (string)reader.Value + existingValue;
             }
@@ -93,10 +104,13 @@ namespace Newtonsoft.Json.Tests.Converters
 
             TestGenericConverter converter = new TestGenericConverter();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                converter.WriteJson(jsonWriter, 123, null);
-            }, "Converter cannot write specified value to JSON. System.String is required.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    converter.WriteJson(jsonWriter, 123, null);
+                },
+                "Converter cannot write specified value to JSON. System.String is required."
+            );
         }
 
         [Test]
@@ -147,10 +161,13 @@ namespace Newtonsoft.Json.Tests.Converters
 
             TestGenericConverter converter = new TestGenericConverter();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                converter.ReadJson(jsonReader, typeof(string), 12345, null);
-            }, "Converter cannot read JSON with the specified existing value. System.String is required.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    converter.ReadJson(jsonReader, typeof(string), 12345, null);
+                },
+                "Converter cannot read JSON with the specified existing value. System.String is required."
+            );
         }
     }
 }

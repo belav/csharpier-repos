@@ -26,7 +26,8 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
     /// </summary>
     public SqlServerSqlExpressionFactory(
         SqlExpressionFactoryDependencies dependencies,
-        ISqlServerSingletonOptions sqlServerSingletonOptions)
+        ISqlServerSingletonOptions sqlServerSingletonOptions
+    )
         : base(dependencies)
     {
         _typeMappingSource = dependencies.TypeMappingSource;
@@ -40,8 +41,11 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [return: NotNullIfNotNull("sqlExpression")]
-    public override SqlExpression? ApplyTypeMapping(SqlExpression? sqlExpression, RelationalTypeMapping? typeMapping)
-        => sqlExpression switch
+    public override SqlExpression? ApplyTypeMapping(
+        SqlExpression? sqlExpression,
+        RelationalTypeMapping? typeMapping
+    ) =>
+        sqlExpression switch
         {
             null or { TypeMapping: not null } => sqlExpression,
 
@@ -51,28 +55,39 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
             _ => base.ApplyTypeMapping(sqlExpression, typeMapping)
         };
 
-    private SqlExpression ApplyTypeMappingOnAtTimeZone(AtTimeZoneExpression atTimeZoneExpression, RelationalTypeMapping? typeMapping)
+    private SqlExpression ApplyTypeMappingOnAtTimeZone(
+        AtTimeZoneExpression atTimeZoneExpression,
+        RelationalTypeMapping? typeMapping
+    )
     {
         var operandTypeMapping = typeMapping is null
             ? null
             : atTimeZoneExpression.Operand.Type == typeof(DateTimeOffset)
                 ? typeMapping
                 : atTimeZoneExpression.Operand.Type == typeof(DateTime)
-                    ? _typeMappingSource.FindMapping(typeof(DateTime), "datetime2", precision: typeMapping.Precision)
+                    ? _typeMappingSource.FindMapping(
+                        typeof(DateTime),
+                        "datetime2",
+                        precision: typeMapping.Precision
+                    )
                     : null;
 
         return new AtTimeZoneExpression(
-            operandTypeMapping is null ? atTimeZoneExpression.Operand : ApplyTypeMapping(atTimeZoneExpression.Operand, operandTypeMapping),
+            operandTypeMapping is null
+                ? atTimeZoneExpression.Operand
+                : ApplyTypeMapping(atTimeZoneExpression.Operand, operandTypeMapping),
             atTimeZoneExpression.TimeZone,
             atTimeZoneExpression.Type,
-            typeMapping);
+            typeMapping
+        );
     }
 
     /// <inheritdoc />
     public override bool TryCreateLeast(
         IReadOnlyList<SqlExpression> expressions,
         Type resultType,
-        [NotNullWhen(true)] out SqlExpression? leastExpression)
+        [NotNullWhen(true)] out SqlExpression? leastExpression
+    )
     {
         if (_sqlServerCompatibilityLevel >= 160)
         {
@@ -87,7 +102,8 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
     public override bool TryCreateGreatest(
         IReadOnlyList<SqlExpression> expressions,
         Type resultType,
-        [NotNullWhen(true)] out SqlExpression? greatestExpression)
+        [NotNullWhen(true)] out SqlExpression? greatestExpression
+    )
     {
         if (_sqlServerCompatibilityLevel >= 160)
         {

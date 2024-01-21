@@ -39,14 +39,23 @@ internal sealed class HttpRequestStream : Stream
         set => throw new NotSupportedException();
     }
 
-    public override ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
+    public override ValueTask<int> ReadAsync(
+        Memory<byte> destination,
+        CancellationToken cancellationToken = default
+    )
     {
         return ReadAsyncWrapper(destination, cancellationToken);
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
-        return ReadAsyncWrapper(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+        return ReadAsyncWrapper(new Memory<byte>(buffer, offset, count), cancellationToken)
+            .AsTask();
     }
 
     public override int Read(byte[] buffer, int offset, int count)
@@ -59,14 +68,20 @@ internal sealed class HttpRequestStream : Stream
         return ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
     }
 
-    public override void Write(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => throw new NotSupportedException();
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
-        => throw new NotSupportedException();
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
     public override long Seek(long offset, SeekOrigin origin)
     {
@@ -78,16 +93,20 @@ internal sealed class HttpRequestStream : Stream
         throw new NotSupportedException();
     }
 
-    public override void Flush()
-    {
-    }
+    public override void Flush() { }
 
     public override Task FlushAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
     }
@@ -98,7 +117,10 @@ internal sealed class HttpRequestStream : Stream
         return TaskToApm.End<int>(asyncResult);
     }
 
-    private ValueTask<int> ReadAsyncWrapper(Memory<byte> destination, CancellationToken cancellationToken)
+    private ValueTask<int> ReadAsyncWrapper(
+        Memory<byte> destination,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -111,7 +133,10 @@ internal sealed class HttpRequestStream : Stream
     }
 
     [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-    private async ValueTask<int> ReadAsyncInternal(Memory<byte> destination, CancellationToken cancellationToken)
+    private async ValueTask<int> ReadAsyncInternal(
+        Memory<byte> destination,
+        CancellationToken cancellationToken
+    )
     {
         while (true)
         {
@@ -152,7 +177,11 @@ internal sealed class HttpRequestStream : Stream
     }
 
     /// <inheritdoc />
-    public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+    public override Task CopyToAsync(
+        Stream destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(destination);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(bufferSize);

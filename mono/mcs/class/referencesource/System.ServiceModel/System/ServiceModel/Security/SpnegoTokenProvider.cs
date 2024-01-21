@@ -4,7 +4,6 @@
 
 namespace System.ServiceModel.Security
 {
-
     using System;
     using System.Collections.ObjectModel;
     using System.Globalization;
@@ -15,11 +14,10 @@ namespace System.ServiceModel.Security
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
-    using System.ServiceModel.Description;
 
     class SpnegoTokenProvider : SspiNegotiationTokenProvider
     {
@@ -33,10 +31,12 @@ namespace System.ServiceModel.Security
         bool interactiveNegoExLogonEnabled = true;
 
         public SpnegoTokenProvider(SafeFreeCredentials credentialsHandle)
-            : this(credentialsHandle, null)
-        { }
+            : this(credentialsHandle, null) { }
 
-        public SpnegoTokenProvider(SafeFreeCredentials credentialsHandle, SecurityBindingElement securityBindingElement)
+        public SpnegoTokenProvider(
+            SafeFreeCredentials credentialsHandle,
+            SecurityBindingElement securityBindingElement
+        )
             : base(securityBindingElement)
         {
             this.credentialsHandle = credentialsHandle;
@@ -45,10 +45,7 @@ namespace System.ServiceModel.Security
         // settings
         public IdentityVerifier IdentityVerifier
         {
-            get
-            {
-                return this.identityVerifier;
-            }
+            get { return this.identityVerifier; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -58,10 +55,7 @@ namespace System.ServiceModel.Security
 
         public TokenImpersonationLevel AllowedImpersonationLevel
         {
-            get
-            {
-                return this.allowedImpersonationLevel;
-            }
+            get { return this.allowedImpersonationLevel; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -69,8 +63,15 @@ namespace System.ServiceModel.Security
                 TokenImpersonationLevelHelper.Validate(value);
                 if (value == TokenImpersonationLevel.None)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        String.Format(CultureInfo.InvariantCulture, SR.GetString(SR.SpnegoImpersonationLevelCannotBeSetToNone))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                SR.GetString(SR.SpnegoImpersonationLevelCannotBeSetToNone)
+                            )
+                        )
+                    );
                 }
                 this.allowedImpersonationLevel = value;
             }
@@ -78,10 +79,7 @@ namespace System.ServiceModel.Security
 
         public ICredentials ClientCredential
         {
-            get
-            {
-                return this.clientCredential;
-            }
+            get { return this.clientCredential; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -91,10 +89,7 @@ namespace System.ServiceModel.Security
 
         public bool AllowNtlm
         {
-            get
-            {
-                return this.allowNtlm;
-            }
+            get { return this.allowNtlm; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -104,10 +99,7 @@ namespace System.ServiceModel.Security
 
         public bool AuthenticateServer
         {
-            get
-            {
-                return this.authenticateServer;
-            }
+            get { return this.authenticateServer; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -117,23 +109,14 @@ namespace System.ServiceModel.Security
 
         public bool InteractiveNegoExLogonEnabled
         {
-            get
-            {
-                return this.interactiveNegoExLogonEnabled;
-            }
-            set
-            {
-                this.interactiveNegoExLogonEnabled = value;
-            }
+            get { return this.interactiveNegoExLogonEnabled; }
+            set { this.interactiveNegoExLogonEnabled = value; }
         }
 
         // overrides
         public override XmlDictionaryString NegotiationValueType
         {
-            get
-            {
-                return XD.TrustApr2004Dictionary.SpnegoValueTypeUri;
-            }
+            get { return XD.TrustApr2004Dictionary.SpnegoValueTypeUri; }
         }
 
         public override void OnOpening()
@@ -156,17 +139,29 @@ namespace System.ServiceModel.Security
                 NetworkCredential credential = null;
                 if (this.clientCredential != null)
                 {
-                    credential = this.clientCredential.GetCredential(this.TargetAddress.Uri, packageName);
+                    credential = this.clientCredential.GetCredential(
+                        this.TargetAddress.Uri,
+                        packageName
+                    );
                 }
 
                 // if OS is less than 2k3 !NTLM is not supported, Windows SE 142400
                 if (!this.allowNtlm && osIsGreaterThanXP)
                 {
-                    this.credentialsHandle = SecurityUtils.GetCredentialsHandle(packageName, credential, false, "!NTLM");
+                    this.credentialsHandle = SecurityUtils.GetCredentialsHandle(
+                        packageName,
+                        credential,
+                        false,
+                        "!NTLM"
+                    );
                 }
                 else
                 {
-                    this.credentialsHandle = SecurityUtils.GetCredentialsHandle(packageName, credential, false);
+                    this.credentialsHandle = SecurityUtils.GetCredentialsHandle(
+                        packageName,
+                        credential,
+                        false
+                    );
                 }
 
                 this.ownCredentialsHandle = true;
@@ -197,23 +192,46 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override bool CreateNegotiationStateCompletesSynchronously(EndpointAddress target, Uri via)
+        protected override bool CreateNegotiationStateCompletesSynchronously(
+            EndpointAddress target,
+            Uri via
+        )
         {
             return true;
         }
 
-        protected override IAsyncResult BeginCreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginCreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            SspiNegotiationTokenProviderState sspiState = this.CreateNegotiationState(target, via, timeout);
-            return new CompletedAsyncResult<SspiNegotiationTokenProviderState>(sspiState, callback, state);
+            SspiNegotiationTokenProviderState sspiState = this.CreateNegotiationState(
+                target,
+                via,
+                timeout
+            );
+            return new CompletedAsyncResult<SspiNegotiationTokenProviderState>(
+                sspiState,
+                callback,
+                state
+            );
         }
 
-        protected override SspiNegotiationTokenProviderState EndCreateNegotiationState(IAsyncResult result)
+        protected override SspiNegotiationTokenProviderState EndCreateNegotiationState(
+            IAsyncResult result
+        )
         {
             return CompletedAsyncResult<SspiNegotiationTokenProviderState>.End(result);
         }
 
-        protected override SspiNegotiationTokenProviderState CreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout)
+        protected override SspiNegotiationTokenProviderState CreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout
+        )
         {
             EnsureEndpointAddressDoesNotRequireEncryption(target);
 
@@ -234,10 +252,16 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                // if an SPN or UPN identity is configured (for example, in mixed mode SSPI), then 
+                // if an SPN or UPN identity is configured (for example, in mixed mode SSPI), then
                 // use that identity for Negotiate
                 Claim identityClaim = identity.IdentityClaim;
-                if (identityClaim != null && (identityClaim.ClaimType == ClaimTypes.Spn || identityClaim.ClaimType == ClaimTypes.Upn))
+                if (
+                    identityClaim != null
+                    && (
+                        identityClaim.ClaimType == ClaimTypes.Spn
+                        || identityClaim.ClaimType == ClaimTypes.Upn
+                    )
+                )
                 {
                     spn = identityClaim.Resource.ToString();
                 }
@@ -257,25 +281,40 @@ namespace System.ServiceModel.Security
                 packageName = "Negotiate";
             }
 
-            WindowsSspiNegotiation sspiNegotiation = new WindowsSspiNegotiation(packageName, this.credentialsHandle,
-                this.AllowedImpersonationLevel, spn, true, this.InteractiveNegoExLogonEnabled, this.allowNtlm);
+            WindowsSspiNegotiation sspiNegotiation = new WindowsSspiNegotiation(
+                packageName,
+                this.credentialsHandle,
+                this.AllowedImpersonationLevel,
+                spn,
+                true,
+                this.InteractiveNegoExLogonEnabled,
+                this.allowNtlm
+            );
             return new SspiNegotiationTokenProviderState(sspiNegotiation);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(ISspiNegotiation sspiNegotiation)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(
+            ISspiNegotiation sspiNegotiation
+        )
         {
             WindowsSspiNegotiation windowsNegotiation = (WindowsSspiNegotiation)sspiNegotiation;
             if (windowsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
+                );
             }
             if (this.AuthenticateServer && windowsNegotiation.IsMutualAuthFlag == false)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.CannotAuthenticateServer)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.CannotAuthenticateServer))
+                );
             }
             SecurityTraceRecordHelper.TraceClientSpnego(windowsNegotiation);
 
-            return SecurityUtils.CreatePrincipalNameAuthorizationPolicies(windowsNegotiation.ServicePrincipalName);
+            return SecurityUtils.CreatePrincipalNameAuthorizationPolicies(
+                windowsNegotiation.ServicePrincipalName
+            );
         }
     }
 }

@@ -17,10 +17,9 @@ public class CircuitContextTest : ServerTestBase<BasicTestAppServerSiteFixture<S
     public CircuitContextTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

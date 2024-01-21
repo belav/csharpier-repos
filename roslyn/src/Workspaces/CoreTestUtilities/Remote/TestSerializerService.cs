@@ -23,27 +23,53 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
 {
     internal sealed class TestSerializerService : SerializerService
     {
-        private static readonly ImmutableDictionary<MetadataReference, string> s_wellKnownReferenceNames = ImmutableDictionary.Create<MetadataReference, string>(ReferenceEqualityComparer.Instance)
+        private static readonly ImmutableDictionary<
+            MetadataReference,
+            string
+        > s_wellKnownReferenceNames = ImmutableDictionary
+            .Create<MetadataReference, string>(ReferenceEqualityComparer.Instance)
             .Add(TestBase.MscorlibRef_v46, nameof(TestBase.MscorlibRef_v46))
             .Add(TestBase.SystemRef_v46, nameof(TestBase.SystemRef_v46))
             .Add(TestBase.SystemCoreRef_v46, nameof(TestBase.SystemCoreRef_v46))
             .Add(TestBase.ValueTupleRef, nameof(TestBase.ValueTupleRef))
             .Add(TestBase.SystemRuntimeFacadeRef, nameof(TestBase.SystemRuntimeFacadeRef));
-        private static readonly ImmutableDictionary<string, MetadataReference> s_wellKnownReferences = ImmutableDictionary.Create<string, MetadataReference>()
-            .AddRange(s_wellKnownReferenceNames.Select(pair => KeyValuePairUtil.Create(pair.Value, pair.Key)));
+        private static readonly ImmutableDictionary<
+            string,
+            MetadataReference
+        > s_wellKnownReferences = ImmutableDictionary
+            .Create<string, MetadataReference>()
+            .AddRange(
+                s_wellKnownReferenceNames.Select(pair =>
+                    KeyValuePairUtil.Create(pair.Value, pair.Key)
+                )
+            );
 
-        private readonly ConcurrentDictionary<Guid, TestGeneratorReference> _sharedTestGeneratorReferences;
+        private readonly ConcurrentDictionary<
+            Guid,
+            TestGeneratorReference
+        > _sharedTestGeneratorReferences;
 
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-        public TestSerializerService(ConcurrentDictionary<Guid, TestGeneratorReference> sharedTestGeneratorReferences, SolutionServices workspaceServices)
+        public TestSerializerService(
+            ConcurrentDictionary<Guid, TestGeneratorReference> sharedTestGeneratorReferences,
+            SolutionServices workspaceServices
+        )
             : base(workspaceServices)
         {
             _sharedTestGeneratorReferences = sharedTestGeneratorReferences;
         }
 
-        public override void WriteMetadataReferenceTo(MetadataReference reference, ObjectWriter writer, SolutionReplicationContext context, CancellationToken cancellationToken)
+        public override void WriteMetadataReferenceTo(
+            MetadataReference reference,
+            ObjectWriter writer,
+            SolutionReplicationContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var wellKnownReferenceName = s_wellKnownReferenceNames.GetValueOrDefault(reference, null);
+            var wellKnownReferenceName = s_wellKnownReferenceNames.GetValueOrDefault(
+                reference,
+                null
+            );
             if (wellKnownReferenceName is not null)
             {
                 writer.WriteBoolean(true);
@@ -56,7 +82,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
             }
         }
 
-        public override MetadataReference ReadMetadataReferenceFrom(ObjectReader reader, CancellationToken cancellationToken)
+        public override MetadataReference ReadMetadataReferenceFrom(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             if (reader.ReadBoolean())
             {
@@ -69,7 +98,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
             }
         }
 
-        public override void WriteAnalyzerReferenceTo(AnalyzerReference reference, ObjectWriter writer, CancellationToken cancellationToken)
+        public override void WriteAnalyzerReferenceTo(
+            AnalyzerReference reference,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             if (reference is TestGeneratorReference generatorReference)
             {
@@ -84,13 +117,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
             }
         }
 
-        public override AnalyzerReference ReadAnalyzerReferenceFrom(ObjectReader reader, CancellationToken cancellationToken)
+        public override AnalyzerReference ReadAnalyzerReferenceFrom(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             var testGeneratorReferenceGuid = reader.ReadGuid();
 
             if (testGeneratorReferenceGuid != Guid.Empty)
             {
-                Contract.ThrowIfFalse(_sharedTestGeneratorReferences.TryGetValue(testGeneratorReferenceGuid, out var generatorReference));
+                Contract.ThrowIfFalse(
+                    _sharedTestGeneratorReferences.TryGetValue(
+                        testGeneratorReferenceGuid,
+                        out var generatorReference
+                    )
+                );
                 return generatorReference;
             }
             else
@@ -99,11 +140,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
             }
         }
 
-        [ExportWorkspaceServiceFactory(typeof(ISerializerService), layer: ServiceLayer.Test), Shared, PartNotDiscoverable]
+        [
+            ExportWorkspaceServiceFactory(typeof(ISerializerService), layer: ServiceLayer.Test),
+            Shared,
+            PartNotDiscoverable
+        ]
         [Export(typeof(Factory))]
         internal new sealed class Factory : IWorkspaceServiceFactory
         {
-            private ConcurrentDictionary<Guid, TestGeneratorReference> _sharedTestGeneratorReferences;
+            private ConcurrentDictionary<
+                Guid,
+                TestGeneratorReference
+            > _sharedTestGeneratorReferences;
 
             /// <summary>
             /// Gate to serialize reads/writes to <see cref="_sharedTestGeneratorReferences"/>.
@@ -122,12 +170,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
                 {
                     lock (_gate)
                     {
-                        _sharedTestGeneratorReferences ??= new ConcurrentDictionary<Guid, TestGeneratorReference>();
+                        _sharedTestGeneratorReferences ??=
+                            new ConcurrentDictionary<Guid, TestGeneratorReference>();
 
                         return _sharedTestGeneratorReferences;
                     }
                 }
-
                 set
                 {
                     lock (_gate)
@@ -137,8 +185,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
                         // the assignment earlier before we create the RemoteWorkspace was always the first assignment. However the
                         // ExportProviderCache.cs in our unit tests hands out the same MEF container multpile times instead of implementing the expected
                         // contract. See https://github.com/dotnet/roslyn/issues/25863 for further details.
-                        Contract.ThrowIfFalse(_sharedTestGeneratorReferences == null ||
-                            _sharedTestGeneratorReferences == value, "We already have a shared set of references, we shouldn't be getting another one.");
+                        Contract.ThrowIfFalse(
+                            _sharedTestGeneratorReferences == null
+                                || _sharedTestGeneratorReferences == value,
+                            "We already have a shared set of references, we shouldn't be getting another one."
+                        );
                         _sharedTestGeneratorReferences = value;
                     }
                 }
@@ -146,13 +197,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory()
-            {
-            }
+            public Factory() { }
 
             [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-                => new TestSerializerService(SharedTestGeneratorReferences, workspaceServices.SolutionServices);
+            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+                new TestSerializerService(
+                    SharedTestGeneratorReferences,
+                    workspaceServices.SolutionServices
+                );
         }
     }
 }

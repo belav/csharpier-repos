@@ -7,43 +7,47 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
-
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class LoggingTests : IISFunctionalTestBase
 {
-    public LoggingTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public LoggingTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels();
 
-    public static TestMatrix InprocessTestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix InprocessTestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithHostingModels(HostingModel.InProcess);
@@ -73,7 +77,10 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        var contents = Helpers.ReadAllTextFromFile(Helpers.GetExpectedLogName(deploymentResult, LogFolderPath), Logger);
+        var contents = Helpers.ReadAllTextFromFile(
+            Helpers.GetExpectedLogName(deploymentResult, LogFolderPath),
+            Logger
+        );
 
         Assert.Contains("TEST MESSAGE", contents);
         Assert.DoesNotContain("\r\n\r\n", contents);
@@ -88,9 +95,14 @@ public class LoggingTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
 
         deploymentParameters.WebConfigActionList.Add(
-            WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true")
+        );
         deploymentParameters.WebConfigActionList.Add(
-            WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogFile", Path.Combine("Q:", "std")));
+            WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                "stdoutLogFile",
+                Path.Combine("Q:", "std")
+            )
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -100,7 +112,12 @@ public class LoggingTests : IISFunctionalTestBase
         if (variant.HostingModel == HostingModel.InProcess)
         {
             // Error is getting logged twice, from shim and handler
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.CouldNotStartStdoutFileRedirection("Q:\\std", deploymentResult), Logger, allowMultiple: true);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.CouldNotStartStdoutFileRedirection("Q:\\std", deploymentResult),
+                Logger,
+                allowMultiple: true
+            );
         }
     }
 
@@ -137,7 +154,9 @@ public class LoggingTests : IISFunctionalTestBase
     [ConditionalTheory]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
     [MemberData(nameof(InprocessTestVariants))]
-    public async Task StartupMessagesAreLoggedIntoDefaultDebugLogFileWhenEnabledWithEnvVar(TestVariant variant)
+    public async Task StartupMessagesAreLoggedIntoDefaultDebugLogFileWhenEnabledWithEnvVar(
+        TestVariant variant
+    )
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
         deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG"] = "file";
@@ -153,7 +172,9 @@ public class LoggingTests : IISFunctionalTestBase
     [ConditionalTheory]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
     [MemberData(nameof(InprocessTestVariants))]
-    public async Task StartupMessagesLogFileSwitchedWhenLogFilePresentInWebConfig(TestVariant variant)
+    public async Task StartupMessagesLogFileSwitchedWhenLogFilePresentInWebConfig(
+        TestVariant variant
+    )
     {
         var firstTempFile = Path.GetTempFileName();
         var secondTempFile = Path.GetTempFileName();
@@ -161,7 +182,8 @@ public class LoggingTests : IISFunctionalTestBase
         try
         {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
-            deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG_FILE"] = firstTempFile;
+            deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG_FILE"] =
+                firstTempFile;
             deploymentParameters.AddDebugLogToWebConfig(secondTempFile);
 
             var deploymentResult = await DeployAsync(deploymentParameters);
@@ -190,7 +212,11 @@ public class LoggingTests : IISFunctionalTestBase
         deploymentParameters.HandlerSettings["debugLevel"] = "file,eventlog";
         var deploymentResult = await StartAsync(deploymentParameters);
         StopServer();
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, @"\[aspnetcorev2.dll\] Initializing logs for .*?Description: IIS ASP.NET Core Module V2", Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            @"\[aspnetcorev2.dll\] Initializing logs for .*?Description: IIS ASP.NET Core Module V2",
+            Logger
+        );
     }
 
     [ConditionalTheory]
@@ -200,7 +226,10 @@ public class LoggingTests : IISFunctionalTestBase
     {
         var path = "CheckConsoleFunctions";
 
-        var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite, variant.HostingModel);
+        var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+            Fixture.InProcessTestSite,
+            variant.HostingModel
+        );
         deploymentParameters.TransformArguments((a, _) => $"{a} {path}"); // For standalone this will need to remove space
 
         var logFolderPath = LogFolderPath + "\\彡⾔";
@@ -214,9 +243,16 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        var contents = Helpers.ReadAllTextFromFile(Helpers.GetExpectedLogName(deploymentResult, logFolderPath), Logger);
+        var contents = Helpers.ReadAllTextFromFile(
+            Helpers.GetExpectedLogName(deploymentResult, logFolderPath),
+            Logger
+        );
         Assert.Contains("彡⾔", contents);
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessThreadExitStdOut(deploymentResult, "12", "(.*)彡⾔(.*)"), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.InProcessThreadExitStdOut(deploymentResult, "12", "(.*)彡⾔(.*)"),
+            Logger
+        );
     }
 
     [ConditionalTheory]
@@ -232,7 +268,10 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        Assert.Single(Directory.GetFiles(LogFolderPath), Helpers.GetExpectedLogName(deploymentResult, LogFolderPath));
+        Assert.Single(
+            Directory.GetFiles(LogFolderPath),
+            Helpers.GetExpectedLogName(deploymentResult, LogFolderPath)
+        );
     }
 
     [ConditionalFact]
@@ -246,7 +285,11 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, "Wow!"), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, "Wow!"),
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -262,7 +305,11 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, ""), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, ""),
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -276,7 +323,11 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, new string('a', 30000)), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, new string('a', 30000)),
+            Logger
+        );
     }
 
     [ConditionalTheory]
@@ -314,12 +365,19 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        var aspnetcorev2Log = TestSink.Writes.First(w => w.Message.Contains("Description: IIS ASP.NET Core Module V2. Commit:"));
-        var aspnetcoreHandlerLog = TestSink.Writes.First(w => w.Message.Contains("Description: IIS ASP.NET Core Module V2 Request Handler. Commit:"));
+        var aspnetcorev2Log = TestSink.Writes.First(w =>
+            w.Message.Contains("Description: IIS ASP.NET Core Module V2. Commit:")
+        );
+        var aspnetcoreHandlerLog = TestSink.Writes.First(w =>
+            w.Message.Contains("Description: IIS ASP.NET Core Module V2 Request Handler. Commit:")
+        );
 
         var processIdPattern = new Regex("Process Id: (\\d+)\\.", RegexOptions.Singleline);
         var processIdMatch = processIdPattern.Match(aspnetcorev2Log.Message);
-        Assert.True(processIdMatch.Success, $"'{processIdPattern}' did not match '{aspnetcorev2Log}'");
+        Assert.True(
+            processIdMatch.Success,
+            $"'{processIdPattern}' did not match '{aspnetcorev2Log}'"
+        );
         var processId = int.Parse(processIdMatch.Groups[1].Value, CultureInfo.InvariantCulture);
 
         if (DeployerSelector.HasNewShim)
@@ -345,9 +403,15 @@ public class LoggingTests : IISFunctionalTestBase
     {
         var logContents = ReadLogs(logPath);
         Assert.Contains("[aspnetcorev2.dll]", logContents);
-        Assert.True(logContents.Contains("[aspnetcorev2_inprocess.dll]") || logContents.Contains("[aspnetcorev2_outofprocess.dll]"));
+        Assert.True(
+            logContents.Contains("[aspnetcorev2_inprocess.dll]")
+                || logContents.Contains("[aspnetcorev2_outofprocess.dll]")
+        );
         Assert.Contains("Description: IIS ASP.NET Core Module V2. Commit:", logContents);
-        Assert.Contains("Description: IIS ASP.NET Core Module V2 Request Handler. Commit:", logContents);
+        Assert.Contains(
+            "Description: IIS ASP.NET Core Module V2 Request Handler. Commit:",
+            logContents
+        );
     }
 
     private static void AssertTimestampAndPIDPrefix(int processId, string log)
@@ -356,7 +420,9 @@ public class LoggingTests : IISFunctionalTestBase
         var prefixMatch = prefixPattern.Match(log);
         Assert.True(prefixMatch.Success, $"'{prefixPattern}' did not match '{log}'");
 
-        var time = DateTime.Parse(prefixMatch.Groups[1].Value, CultureInfo.InvariantCulture).ToUniversalTime();
+        var time = DateTime
+            .Parse(prefixMatch.Groups[1].Value, CultureInfo.InvariantCulture)
+            .ToUniversalTime();
         var prefixProcessId = int.Parse(prefixMatch.Groups[2].Value, CultureInfo.InvariantCulture);
 
         Assert.Equal(processId, prefixProcessId);

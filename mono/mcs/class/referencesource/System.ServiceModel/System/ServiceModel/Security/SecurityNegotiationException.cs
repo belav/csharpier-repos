@@ -11,23 +11,15 @@ namespace System.ServiceModel.Security
     public class SecurityNegotiationException : CommunicationException
     {
         public SecurityNegotiationException()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityNegotiationException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SecurityNegotiationException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected SecurityNegotiationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

@@ -22,7 +22,8 @@ public class RuntimeConventionSetBuilder : IConventionSetBuilder
     /// </summary>
     public RuntimeConventionSetBuilder(
         IProviderConventionSetBuilder providerConventionSetBuilder,
-        IEnumerable<IConventionSetPlugin> plugins)
+        IEnumerable<IConventionSetPlugin> plugins
+    )
     {
         _conventionSetBuilder = providerConventionSetBuilder;
         _plugins = plugins.ToList();

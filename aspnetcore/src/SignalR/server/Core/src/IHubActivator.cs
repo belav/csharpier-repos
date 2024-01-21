@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.SignalR;
 /// A <see cref="Hub"/> activator abstraction.
 /// </summary>
 /// <typeparam name="THub">The hub type.</typeparam>
-public interface IHubActivator<THub> where THub : Hub
+public interface IHubActivator<THub>
+    where THub : Hub
 {
     /// <summary>
     /// Creates a hub.

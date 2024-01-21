@@ -35,11 +35,11 @@ namespace System.Xml.Xsl.Xslt
         public XsltSettings Settings;
         public bool IsDebug;
         public string? ScriptAssemblyPath;
-        public int Version;                // 0 - Auto; 1 - XSLT 1.0; 2 - XSLT 2.0
-        public string? inputTypeAnnotations;   // null - "unspecified"; "preserve"; "strip"
+        public int Version; // 0 - Auto; 1 - XSLT 1.0; 2 - XSLT 2.0
+        public string? inputTypeAnnotations; // null - "unspecified"; "preserve"; "strip"
 
-        public CompilerErrorCollection CompilerErrorColl;        // Results of the compilation
-        public int CurrentPrecedence;  // Decreases by 1 with each import
+        public CompilerErrorCollection CompilerErrorColl; // Results of the compilation
+        public int CurrentPrecedence; // Decreases by 1 with each import
         public XslNode? StartApplyTemplates;
         public RootLevel? Root;
         public Scripts Scripts;
@@ -53,7 +53,8 @@ namespace System.Xml.Xsl.Xslt
 
         public Dictionary<QilName, VarPar> AllGlobalVarPars = new Dictionary<QilName, VarPar>();
         public Dictionary<QilName, Template> NamedTemplates = new Dictionary<QilName, Template>();
-        public Dictionary<QilName, AttributeSet> AttributeSets = new Dictionary<QilName, AttributeSet>();
+        public Dictionary<QilName, AttributeSet> AttributeSets =
+            new Dictionary<QilName, AttributeSet>();
         public Dictionary<string, NsAlias> NsAliases = new Dictionary<string, NsAlias>();
 
         private readonly Dictionary<string, int> _moduleOrder = new Dictionary<string, int>();
@@ -70,7 +71,12 @@ namespace System.Xml.Xsl.Xslt
             Scripts = new Scripts(this);
         }
 
-        public CompilerErrorCollection Compile(object stylesheet, XmlResolver? xmlResolver, XmlResolver? origResolver, out QilExpression qil)
+        public CompilerErrorCollection Compile(
+            object stylesheet,
+            XmlResolver? xmlResolver,
+            XmlResolver? origResolver,
+            out QilExpression qil
+        )
         {
             Debug.Assert(stylesheet != null);
             Debug.Assert(Root == null, "Compiler cannot be reused");
@@ -110,14 +116,25 @@ namespace System.Xml.Xsl.Xslt
         }
 
         // Returns true in case of redefinition
-        public bool SetNsAlias(string ssheetNsUri, string resultNsUri, string? resultPrefix, int importPrecedence)
+        public bool SetNsAlias(
+            string ssheetNsUri,
+            string resultNsUri,
+            string? resultPrefix,
+            int importPrecedence
+        )
         {
             NsAlias? oldNsAlias;
             if (NsAliases.TryGetValue(ssheetNsUri, out oldNsAlias))
             {
                 // Namespace alias for this stylesheet namespace URI has already been defined
-                Debug.Assert(importPrecedence <= oldNsAlias.ImportPrecedence, "Stylesheets must be processed in the order of decreasing import precedence");
-                if (importPrecedence < oldNsAlias.ImportPrecedence || resultNsUri == oldNsAlias.ResultNsUri)
+                Debug.Assert(
+                    importPrecedence <= oldNsAlias.ImportPrecedence,
+                    "Stylesheets must be processed in the order of decreasing import precedence"
+                );
+                if (
+                    importPrecedence < oldNsAlias.ImportPrecedence
+                    || resultNsUri == oldNsAlias.ResultNsUri
+                )
                 {
                     // Either the identical definition or lower precedence - ignore it
                     return false;
@@ -160,7 +177,9 @@ namespace System.Xml.Xsl.Xslt
         {
             foreach (VarPar var in sheet.GlobalVarPars!)
             {
-                Debug.Assert(var.NodeType == XslNodeType.Variable || var.NodeType == XslNodeType.Param);
+                Debug.Assert(
+                    var.NodeType == XslNodeType.Variable || var.NodeType == XslNodeType.Param
+                );
                 if (!AllGlobalVarPars.ContainsKey(var.Name!))
                 {
                     if (var.NodeType == XslNodeType.Variable)
@@ -196,7 +215,12 @@ namespace System.Xml.Xsl.Xslt
             }
         }
 
-        public bool ParseQName(string qname, out string prefix, out string localName, IErrorHelper errorHelper)
+        public bool ParseQName(
+            string qname,
+            out string prefix,
+            out string localName,
+            IErrorHelper errorHelper
+        )
         {
             Debug.Assert(qname != null);
             try
@@ -206,14 +230,22 @@ namespace System.Xml.Xsl.Xslt
             }
             catch (XmlException e)
             {
-                errorHelper.ReportError(/*[XT_042]*/e.Message, null);
+                errorHelper.ReportError( /*[XT_042]*/
+                    e.Message,
+                    null
+                );
                 prefix = PhantomNCName;
                 localName = PhantomNCName;
                 return false;
             }
         }
 
-        public bool ParseNameTest(string nameTest, out string? prefix, out string? localName, IErrorHelper errorHelper)
+        public bool ParseNameTest(
+            string nameTest,
+            out string? prefix,
+            out string? localName,
+            IErrorHelper errorHelper
+        )
         {
             Debug.Assert(nameTest != null);
             try
@@ -223,7 +255,10 @@ namespace System.Xml.Xsl.Xslt
             }
             catch (XmlException e)
             {
-                errorHelper.ReportError(/*[XT_043]*/e.Message, null);
+                errorHelper.ReportError( /*[XT_043]*/
+                    e.Message,
+                    null
+                );
                 prefix = PhantomNCName;
                 localName = PhantomNCName;
                 return false;
@@ -236,13 +271,19 @@ namespace System.Xml.Xsl.Xslt
             try
             {
                 ValidateNames.ValidateNameThrow(
-                    /*prefix:*/string.Empty, /*localName:*/name, /*ns:*/string.Empty,
-                    XPathNodeType.ProcessingInstruction, ValidateNames.Flags.AllExceptPrefixMapping
+                    /*prefix:*/string.Empty, /*localName:*/
+                    name, /*ns:*/
+                    string.Empty,
+                    XPathNodeType.ProcessingInstruction,
+                    ValidateNames.Flags.AllExceptPrefixMapping
                 );
             }
             catch (XmlException e)
             {
-                errorHelper.ReportError(/*[XT_044]*/e.Message, null);
+                errorHelper.ReportError( /*[XT_044]*/
+                    e.Message,
+                    null
+                );
             }
         }
 
@@ -270,10 +311,7 @@ namespace System.Xml.Xsl.Xslt
 
         private int ErrorCount
         {
-            get
-            {
-                return CompilerErrorColl.Count;
-            }
+            get { return CompilerErrorColl.Count; }
             set
             {
                 Debug.Assert(value <= ErrorCount);
@@ -295,7 +333,10 @@ namespace System.Xml.Xsl.Xslt
         // Returns true if no errors were suppressed
         public bool ExitForwardsCompatible(bool fwdCompat)
         {
-            Debug.Assert(_savedErrorCount != -1, "ExitForwardsCompatible without EnterForwardsCompatible");
+            Debug.Assert(
+                _savedErrorCount != -1,
+                "ExitForwardsCompatible without EnterForwardsCompatible"
+            );
             if (fwdCompat && ErrorCount > _savedErrorCount)
             {
                 ErrorCount = _savedErrorCount;
@@ -306,11 +347,18 @@ namespace System.Xml.Xsl.Xslt
             return true;
         }
 
-        public CompilerError CreateError(ISourceLineInfo lineInfo, string res, params string?[]? args)
+        public CompilerError CreateError(
+            ISourceLineInfo lineInfo,
+            string res,
+            params string?[]? args
+        )
         {
             AddModule(lineInfo.Uri!);
             return new CompilerError(
-                lineInfo.Uri!, lineInfo.Start.Line, lineInfo.Start.Pos, /*errorNumber:*/string.Empty,
+                lineInfo.Uri!,
+                lineInfo.Start.Line,
+                lineInfo.Start.Pos, /*errorNumber:*/
+                string.Empty,
                 /*errorText:*/XslTransformException.CreateMessage(res, args)
             );
         }
@@ -332,7 +380,10 @@ namespace System.Xml.Xsl.Xslt
             CompilerError error = CreateError(lineInfo, res, args);
             if (Settings.TreatWarningsAsErrors)
             {
-                error.ErrorText = XslTransformException.CreateMessage(SR.Xslt_WarningAsError, error.ErrorText);
+                error.ErrorText = XslTransformException.CreateMessage(
+                    SR.Xslt_WarningAsError,
+                    error.ErrorText
+                );
                 CompilerErrorColl.Add(error);
             }
             else
@@ -445,9 +496,19 @@ namespace System.Xml.Xsl.Xslt
         public readonly string NanSymbol;
         public readonly char[] Characters;
 
-        public static DecimalFormatDecl Default = new DecimalFormatDecl(new XmlQualifiedName(), "Infinity", "NaN", ".,%\u20300#;-");
+        public static DecimalFormatDecl Default = new DecimalFormatDecl(
+            new XmlQualifiedName(),
+            "Infinity",
+            "NaN",
+            ".,%\u20300#;-"
+        );
 
-        public DecimalFormatDecl(XmlQualifiedName name, string infinitySymbol, string nanSymbol, string characters)
+        public DecimalFormatDecl(
+            XmlQualifiedName name,
+            string infinitySymbol,
+            string nanSymbol,
+            string characters
+        )
         {
             Debug.Assert(characters.Length == 8);
             this.Name = name;

@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Moq.Matchers
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class RefMatcher : IMatcher
@@ -28,7 +27,6 @@ namespace Moq.Matchers
         class RefMatcher : IMatcher
     */
     class RefMatcher : IMatcher
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly object reference;
@@ -67,8 +65,9 @@ namespace Moq.Matchers
 
         public bool Matches(object argument, Type parameterType)
         {
-            return this.referenceIsValueType ? object.Equals(this.reference, argument)
-                                             : object.ReferenceEquals(this.reference, argument);
+            return this.referenceIsValueType
+                ? object.Equals(this.reference, argument)
+                : object.ReferenceEquals(this.reference, argument);
         }
 
         public void SetupEvaluatedSuccessfully(object value, Type parameterType)

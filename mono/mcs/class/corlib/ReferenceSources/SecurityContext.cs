@@ -34,61 +34,59 @@ using System.Security.Permissions;
 using System.Security.Principal;
 using System.Threading;
 
-namespace System.Security {
+namespace System.Security
+{
+    public sealed class SecurityContext : IDisposable
+    {
+        private SecurityContext() { }
 
-	public sealed class SecurityContext : IDisposable
-	{
-		private SecurityContext ()
-		{
-		}
+        public SecurityContext CreateCopy()
+        {
+            return this;
+        }
 
-		public SecurityContext CreateCopy ()
-		{
-			return this;
-		}
+        public static SecurityContext Capture()
+        {
+            return new SecurityContext();
+        }
 
-		static public SecurityContext Capture ()
-		{
-			return new SecurityContext ();
-		}
-		
-		public void Dispose ()
-		{
-		}
+        public void Dispose() { }
 
-		static public bool IsFlowSuppressed ()
-		{
-			return false;
-		} 
+        public static bool IsFlowSuppressed()
+        {
+            return false;
+        }
 
-		static public bool IsWindowsIdentityFlowSuppressed ()
-		{
-			return false;
-		}
+        public static bool IsWindowsIdentityFlowSuppressed()
+        {
+            return false;
+        }
 
-		static public void RestoreFlow ()
-		{
-		}
+        public static void RestoreFlow() { }
 
-		// if you got the context then you can use it
-		[SecurityPermission (SecurityAction.Assert, ControlPrincipal = true)]
-		[SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
-		static public void Run (SecurityContext securityContext, ContextCallback callback, object state)
-		{
-			callback (state);
-		}
+        // if you got the context then you can use it
+        [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true)]
+        [SecurityPermission(SecurityAction.LinkDemand, Infrastructure = true)]
+        public static void Run(
+            SecurityContext securityContext,
+            ContextCallback callback,
+            object state
+        )
+        {
+            callback(state);
+        }
 
-		[SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
-		static public AsyncFlowControl SuppressFlow ()
-		{
-			throw new NotSupportedException ();
-		}
+        [SecurityPermission(SecurityAction.LinkDemand, Infrastructure = true)]
+        public static AsyncFlowControl SuppressFlow()
+        {
+            throw new NotSupportedException();
+        }
 
-		static public AsyncFlowControl SuppressFlowWindowsIdentity ()
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        public static AsyncFlowControl SuppressFlowWindowsIdentity()
+        {
+            throw new NotSupportedException();
+        }
+    }
 }
 
 #endif

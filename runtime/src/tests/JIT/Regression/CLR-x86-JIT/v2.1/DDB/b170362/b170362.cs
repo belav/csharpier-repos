@@ -9,7 +9,6 @@ public struct MyStruct
 {
     public byte x1;
     public int x2;
-
 }
 
 public class MainApp

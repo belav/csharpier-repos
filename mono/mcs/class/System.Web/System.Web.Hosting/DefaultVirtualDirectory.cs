@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,78 +33,92 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
+    sealed class DefaultVirtualDirectory : VirtualDirectory
+    {
+        string phys_dir;
+        string virtual_dir;
 
-	sealed class DefaultVirtualDirectory : VirtualDirectory
-	{
-		string phys_dir;
-		string virtual_dir;
+        internal DefaultVirtualDirectory(string virtualPath)
+            : base(virtualPath) { }
 
-		internal DefaultVirtualDirectory (string virtualPath)
-			: base (virtualPath)
-		{
-		}
+        void Init()
+        {
+            if (phys_dir == null)
+            {
+                string vpath = VirtualPath;
+                string path = HostingEnvironment.MapPath(vpath);
+                if (File.Exists(path))
+                {
+                    virtual_dir = VirtualPathUtility.GetDirectory(vpath);
+                    phys_dir = HostingEnvironment.MapPath(virtual_dir);
+                }
+                else
+                {
+                    virtual_dir = VirtualPathUtility.AppendTrailingSlash(vpath);
+                    phys_dir = path;
+                }
+            }
+        }
 
-		void Init ()
-		{
-			if (phys_dir == null) {
-				string vpath = VirtualPath;
-				string path = HostingEnvironment.MapPath (vpath);
-				if (File.Exists (path)) {
-					virtual_dir = VirtualPathUtility.GetDirectory (vpath);
-					phys_dir = HostingEnvironment.MapPath (virtual_dir);
-				} else {
-					virtual_dir = VirtualPathUtility.AppendTrailingSlash (vpath);
-					phys_dir = path;
-				}
-			}
-		}
+        List<VirtualFileBase> AddDirectories(List<VirtualFileBase> list, string dir)
+        {
+            if (String.IsNullOrEmpty(dir) || !Directory.Exists(dir))
+                return list;
 
-		List <VirtualFileBase> AddDirectories (List <VirtualFileBase> list, string dir)
-		{
-			if (String.IsNullOrEmpty (dir) || !Directory.Exists (dir))
-				return list;
-			
-			foreach (string name in Directory.GetDirectories (phys_dir))
-				list.Add (new DefaultVirtualDirectory (VirtualPathUtility.Combine (virtual_dir, Path.GetFileName (name))));
+            foreach (string name in Directory.GetDirectories(phys_dir))
+                list.Add(
+                    new DefaultVirtualDirectory(
+                        VirtualPathUtility.Combine(virtual_dir, Path.GetFileName(name))
+                    )
+                );
 
-			return list;
-		}
+            return list;
+        }
 
-		List <VirtualFileBase> AddFiles (List <VirtualFileBase> list, string dir)
-		{
-			if (String.IsNullOrEmpty (dir) || !Directory.Exists (dir))
-				return list;
-			
-			foreach (string name in Directory.GetFiles (phys_dir))
-				list.Add (new DefaultVirtualFile (VirtualPathUtility.Combine (virtual_dir, Path.GetFileName (name))));
+        List<VirtualFileBase> AddFiles(List<VirtualFileBase> list, string dir)
+        {
+            if (String.IsNullOrEmpty(dir) || !Directory.Exists(dir))
+                return list;
 
-			return list;
-		}
+            foreach (string name in Directory.GetFiles(phys_dir))
+                list.Add(
+                    new DefaultVirtualFile(
+                        VirtualPathUtility.Combine(virtual_dir, Path.GetFileName(name))
+                    )
+                );
 
-		public override IEnumerable Children {
-			get {
-				Init ();
-				var list = new List <VirtualFileBase> ();
-				AddDirectories (list, phys_dir);
-				return AddFiles (list, phys_dir);
-			}
-		}
+            return list;
+        }
 
-		public override IEnumerable Directories {
-			get {
-				Init ();
-				return AddDirectories (new List <VirtualFileBase> (), phys_dir);
-			}
-		}
-		
-		public override IEnumerable Files {
-			get {
-				Init ();
-				return AddFiles (new List <VirtualFileBase> (), phys_dir);
-			}
-		}
-	}
+        public override IEnumerable Children
+        {
+            get
+            {
+                Init();
+                var list = new List<VirtualFileBase>();
+                AddDirectories(list, phys_dir);
+                return AddFiles(list, phys_dir);
+            }
+        }
+
+        public override IEnumerable Directories
+        {
+            get
+            {
+                Init();
+                return AddDirectories(new List<VirtualFileBase>(), phys_dir);
+            }
+        }
+
+        public override IEnumerable Files
+        {
+            get
+            {
+                Init();
+                return AddFiles(new List<VirtualFileBase>(), phys_dir);
+            }
+        }
+    }
 }
-
-

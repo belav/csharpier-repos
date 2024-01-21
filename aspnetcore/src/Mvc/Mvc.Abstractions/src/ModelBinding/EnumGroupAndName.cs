@@ -30,9 +30,7 @@ public readonly struct EnumGroupAndName
     /// </summary>
     /// <param name="group">The group name.</param>
     /// <param name="name">A <see cref="Func{String}"/> which will return the name.</param>
-    public EnumGroupAndName(
-        string group,
-        Func<string> name)
+    public EnumGroupAndName(string group, Func<string> name)
     {
         ArgumentNullException.ThrowIfNull(group);
         ArgumentNullException.ThrowIfNull(name);

@@ -26,14 +26,14 @@ public class X
                 s += a[i];
             }
         }
-        
+
         if (x >= 3)
         {
-            T(x-3, a);
+            T(x - 3, a);
         }
         else if (x > 0)
         {
-            T(x-1, a);
+            T(x - 1, a);
         }
     }
 

@@ -20,13 +20,17 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         public AbstractClassificationTypeMap(
             IClassificationTypeRegistryService registryService,
-            ClassificationLayer classificationLayer)
+            ClassificationLayer classificationLayer
+        )
         {
             _registryService = registryService;
 
             // Prepopulate the identity map with the constant string values from ClassificationTypeNames
             var fields = typeof(ClassificationTypeNames).GetFields();
-            _identityMap = new Dictionary<string, IClassificationType>(fields.Length, ReferenceEqualityComparer.Instance);
+            _identityMap = new Dictionary<string, IClassificationType>(
+                fields.Length,
+                ReferenceEqualityComparer.Instance
+            );
 
             foreach (var field in fields)
             {
@@ -36,7 +40,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 var rawValue = (string?)field.GetValue(null);
                 Contract.ThrowIfNull(rawValue);
                 var value = string.Intern(rawValue);
-                _identityMap.Add(value, registryService.GetClassificationType(classificationLayer, value));
+                _identityMap.Add(
+                    value,
+                    registryService.GetClassificationType(classificationLayer, value)
+                );
             }
         }
 
@@ -45,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             var type = GetClassificationTypeWorker(name);
             if (type == null)
             {
-                FatalError.ReportAndCatch(new Exception($"classification type doesn't exist for {name}"));
+                FatalError.ReportAndCatch(
+                    new Exception($"classification type doesn't exist for {name}")
+                );
             }
 
             return type ?? GetClassificationTypeWorker(ClassificationTypeNames.Text);

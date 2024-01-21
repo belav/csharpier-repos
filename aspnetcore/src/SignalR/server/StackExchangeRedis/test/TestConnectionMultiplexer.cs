@@ -27,12 +27,24 @@ public class TestConnectionMultiplexer : IConnectionMultiplexer
 
     public long OperationCount => throw new NotImplementedException();
 
-    public bool PreserveAsyncOrder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool PreserveAsyncOrder
+    {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
 
     public bool IsConnected => true;
 
-    public bool IncludeDetailInExceptions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public int StormLogThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool IncludeDetailInExceptions
+    {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
+    public int StormLogThreshold
+    {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
 
     public bool IsConnecting => throw new NotImplementedException();
 
@@ -121,7 +133,10 @@ public class TestConnectionMultiplexer : IConnectionMultiplexer
         throw new NotImplementedException();
     }
 
-    public ProfiledCommandEnumerable FinishProfiling(object forContext, bool allowCleanupSweep = true)
+    public ProfiledCommandEnumerable FinishProfiling(
+        object forContext,
+        bool allowCleanupSweep = true
+    )
     {
         throw new NotImplementedException();
     }
@@ -241,10 +256,17 @@ public class TestConnectionMultiplexer : IConnectionMultiplexer
 
 public class TestRedisServer
 {
-    private readonly ConcurrentDictionary<RedisChannel, List<(int, Action<RedisChannel, RedisValue>)>> _subscriptions =
+    private readonly ConcurrentDictionary<
+        RedisChannel,
+        List<(int, Action<RedisChannel, RedisValue>)>
+    > _subscriptions =
         new ConcurrentDictionary<RedisChannel, List<(int, Action<RedisChannel, RedisValue>)>>();
 
-    public long Publish(RedisChannel channel, RedisValue message, CommandFlags flags = CommandFlags.None)
+    public long Publish(
+        RedisChannel channel,
+        RedisValue message,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         AssertRedisChannel(channel);
 
@@ -262,7 +284,11 @@ public class TestRedisServer
         return handlers != null ? handlers.Count : 0;
     }
 
-    public void Subscribe(ChannelMessageQueue messageQueue, int subscriberId, CommandFlags flags = CommandFlags.None)
+    public void Subscribe(
+        ChannelMessageQueue messageQueue,
+        int subscriberId,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         AssertRedisChannel(messageQueue.Channel);
 
@@ -270,21 +296,30 @@ public class TestRedisServer
         {
             // Workaround for https://github.com/StackExchange/StackExchange.Redis/issues/969
             // ChannelMessageQueue isn't mockable currently, this works around that by using private reflection
-            typeof(ChannelMessageQueue).GetMethod("Write", BindingFlags.NonPublic | BindingFlags.Instance)
-            .Invoke(messageQueue, new object[] { channel, value });
+            typeof(ChannelMessageQueue)
+                .GetMethod("Write", BindingFlags.NonPublic | BindingFlags.Instance)
+                .Invoke(messageQueue, new object[] { channel, value });
         };
 
-        _subscriptions.AddOrUpdate(messageQueue.Channel, _ => new List<(int, Action<RedisChannel, RedisValue>)> { (subscriberId, handler) }, (_, list) =>
-        {
-            lock (list)
+        _subscriptions.AddOrUpdate(
+            messageQueue.Channel,
+            _ => new List<(int, Action<RedisChannel, RedisValue>)> { (subscriberId, handler) },
+            (_, list) =>
             {
-                list.Add((subscriberId, handler));
+                lock (list)
+                {
+                    list.Add((subscriberId, handler));
+                }
+                return list;
             }
-            return list;
-        });
+        );
     }
 
-    public void Unsubscribe(RedisChannel channel, int subscriberId, CommandFlags flags = CommandFlags.None)
+    public void Unsubscribe(
+        RedisChannel channel,
+        int subscriberId,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         AssertRedisChannel(channel);
 
@@ -324,7 +359,10 @@ public class TestSubscriber : ISubscriber
         throw new NotImplementedException();
     }
 
-    public Task<EndPoint> IdentifyEndpointAsync(RedisChannel channel, CommandFlags flags = CommandFlags.None)
+    public Task<EndPoint> IdentifyEndpointAsync(
+        RedisChannel channel,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         throw new NotImplementedException();
     }
@@ -344,14 +382,22 @@ public class TestSubscriber : ISubscriber
         throw new NotImplementedException();
     }
 
-    public long Publish(RedisChannel channel, RedisValue message, CommandFlags flags = CommandFlags.None)
+    public long Publish(
+        RedisChannel channel,
+        RedisValue message,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         TestRedisServer.AssertRedisChannel(channel);
 
         return _server.Publish(channel, message, flags);
     }
 
-    public async Task<long> PublishAsync(RedisChannel channel, RedisValue message, CommandFlags flags = CommandFlags.None)
+    public async Task<long> PublishAsync(
+        RedisChannel channel,
+        RedisValue message,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         TestRedisServer.AssertRedisChannel(channel);
 
@@ -359,12 +405,20 @@ public class TestSubscriber : ISubscriber
         return Publish(channel, message, flags);
     }
 
-    public void Subscribe(RedisChannel channel, Action<RedisChannel, RedisValue> handler, CommandFlags flags = CommandFlags.None)
+    public void Subscribe(
+        RedisChannel channel,
+        Action<RedisChannel, RedisValue> handler,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         throw new NotImplementedException();
     }
 
-    public Task SubscribeAsync(RedisChannel channel, Action<RedisChannel, RedisValue> handler, CommandFlags flags = CommandFlags.None)
+    public Task SubscribeAsync(
+        RedisChannel channel,
+        Action<RedisChannel, RedisValue> handler,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         TestRedisServer.AssertRedisChannel(channel);
 
@@ -382,7 +436,11 @@ public class TestSubscriber : ISubscriber
         throw new NotImplementedException();
     }
 
-    public void Unsubscribe(RedisChannel channel, Action<RedisChannel, RedisValue> handler = null, CommandFlags flags = CommandFlags.None)
+    public void Unsubscribe(
+        RedisChannel channel,
+        Action<RedisChannel, RedisValue> handler = null,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         TestRedisServer.AssertRedisChannel(channel);
 
@@ -399,7 +457,11 @@ public class TestSubscriber : ISubscriber
         throw new NotImplementedException();
     }
 
-    public Task UnsubscribeAsync(RedisChannel channel, Action<RedisChannel, RedisValue> handler = null, CommandFlags flags = CommandFlags.None)
+    public Task UnsubscribeAsync(
+        RedisChannel channel,
+        Action<RedisChannel, RedisValue> handler = null,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         TestRedisServer.AssertRedisChannel(channel);
 
@@ -422,22 +484,33 @@ public class TestSubscriber : ISubscriber
         throw new NotImplementedException();
     }
 
-    public ChannelMessageQueue Subscribe(RedisChannel channel, CommandFlags flags = CommandFlags.None)
+    public ChannelMessageQueue Subscribe(
+        RedisChannel channel,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         TestRedisServer.AssertRedisChannel(channel);
 
         // Workaround for https://github.com/StackExchange/StackExchange.Redis/issues/969
-        var redisSubscriberType = typeof(RedisChannel).Assembly.GetType("StackExchange.Redis.RedisSubscriber");
-        var ctor = typeof(ChannelMessageQueue).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
+        var redisSubscriberType = typeof(RedisChannel).Assembly.GetType(
+            "StackExchange.Redis.RedisSubscriber"
+        );
+        var ctor = typeof(ChannelMessageQueue).GetConstructor(
+            BindingFlags.Instance | BindingFlags.NonPublic,
             binder: null,
-            new Type[] { typeof(RedisChannel).MakeByRefType(), redisSubscriberType }, modifiers: null);
+            new Type[] { typeof(RedisChannel).MakeByRefType(), redisSubscriberType },
+            modifiers: null
+        );
 
         var queue = (ChannelMessageQueue)ctor.Invoke(new object[] { channel, null });
         _server.Subscribe(queue, _id);
         return queue;
     }
 
-    public Task<ChannelMessageQueue> SubscribeAsync(RedisChannel channel, CommandFlags flags = CommandFlags.None)
+    public Task<ChannelMessageQueue> SubscribeAsync(
+        RedisChannel channel,
+        CommandFlags flags = CommandFlags.None
+    )
     {
         TestRedisServer.AssertRedisChannel(channel);
 

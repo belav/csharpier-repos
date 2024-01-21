@@ -14,13 +14,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         internal readonly RemoteCallback<T> UnderlyingObject;
 
-        public RazorRemoteCallbackWrapper(T callback)
-            => UnderlyingObject = new RemoteCallback<T>(callback);
+        public RazorRemoteCallbackWrapper(T callback) =>
+            UnderlyingObject = new RemoteCallback<T>(callback);
 
-        public ValueTask InvokeAsync(Func<T, CancellationToken, ValueTask> invocation, CancellationToken cancellationToken)
-            => UnderlyingObject.InvokeAsync(invocation, cancellationToken);
+        public ValueTask InvokeAsync(
+            Func<T, CancellationToken, ValueTask> invocation,
+            CancellationToken cancellationToken
+        ) => UnderlyingObject.InvokeAsync(invocation, cancellationToken);
 
-        public ValueTask<TResult> InvokeAsync<TResult>(Func<T, CancellationToken, ValueTask<TResult>> invocation, CancellationToken cancellationToken)
-            => UnderlyingObject.InvokeAsync(invocation, cancellationToken);
+        public ValueTask<TResult> InvokeAsync<TResult>(
+            Func<T, CancellationToken, ValueTask<TResult>> invocation,
+            CancellationToken cancellationToken
+        ) => UnderlyingObject.InvokeAsync(invocation, cancellationToken);
     }
 }

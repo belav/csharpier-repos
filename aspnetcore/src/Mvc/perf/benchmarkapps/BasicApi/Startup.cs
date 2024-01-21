@@ -3,9 +3,6 @@
 
 using System;
 using System.IO;
-#if GENERATE_SQL_SCRIPTS
-using System.Linq;
-#endif
 using System.Security.Cryptography;
 using BasicApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Npgsql;
+#if GENERATE_SQL_SCRIPTS
+using System.Linq;
+#endif
 
 namespace BasicApi
 {
@@ -38,16 +38,18 @@ namespace BasicApi
             var rsa = new RSACryptoServiceProvider(2048);
             var key = new RsaSecurityKey(rsa.ExportParameters(true));
 
-            services.AddSingleton(new SigningCredentials(
-                key,
-                SecurityAlgorithms.RsaSha256Signature));
+            services.AddSingleton(
+                new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
+            );
 
-            services.AddAuthentication().AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters.IssuerSigningKey = key;
-                options.TokenValidationParameters.ValidAudience = "Myself";
-                options.TokenValidationParameters.ValidIssuer = "BasicApi";
-            });
+            services
+                .AddAuthentication()
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters.IssuerSigningKey = key;
+                    options.TokenValidationParameters.ValidAudience = "Myself";
+                    options.TokenValidationParameters.ValidIssuer = "BasicApi";
+                });
 
             var connectionString = Configuration["ConnectionString"];
             var databaseType = Configuration["Database"];
@@ -59,7 +61,9 @@ namespace BasicApi
             }
             else if (string.IsNullOrEmpty(connectionString))
             {
-                throw new ArgumentException("Connection string must be specified for {databaseType}.");
+                throw new ArgumentException(
+                    "Connection string must be specified for {databaseType}."
+                );
             }
 
             switch (databaseType.ToUpperInvariant())
@@ -68,7 +72,9 @@ namespace BasicApi
                 case "MYSQL":
                     services
                         .AddEntityFrameworkMySql()
-                        .AddDbContextPool<BasicApiContext>(options => options.UseMySql(connectionString));
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseMySql(connectionString)
+                        );
                     break;
 #endif
 
@@ -76,7 +82,9 @@ namespace BasicApi
                     var settings = new NpgsqlConnectionStringBuilder(connectionString);
                     if (!settings.NoResetOnClose)
                     {
-                        throw new ArgumentException("No Reset On Close=true must be specified for Npgsql.");
+                        throw new ArgumentException(
+                            "No Reset On Close=true must be specified for Npgsql."
+                        );
                     }
                     if (settings.Enlist)
                     {
@@ -85,47 +93,62 @@ namespace BasicApi
 
                     services
                         .AddEntityFrameworkNpgsql()
-                        .AddDbContextPool<BasicApiContext>(options => options.UseNpgsql(connectionString));
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseNpgsql(connectionString)
+                        );
                     break;
 
                 case "SQLITE":
                     _isSQLite = true;
                     services
                         .AddEntityFrameworkSqlite()
-                        .AddDbContextPool<BasicApiContext>(options => options.UseSqlite("Data Source=BasicApi.db;Cache=Shared"));
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseSqlite("Data Source=BasicApi.db;Cache=Shared")
+                        );
                     break;
 
                 case "SQLSERVER":
                     services
                         .AddEntityFrameworkSqlServer()
-                        .AddDbContextPool<BasicApiContext>(options => options.UseSqlServer(connectionString));
+                        .AddDbContextPool<BasicApiContext>(options =>
+                            options.UseSqlServer(connectionString)
+                        );
                     break;
 
                 default:
-                    throw new ArgumentException($"Application does not support database type {databaseType}.");
+                    throw new ArgumentException(
+                        $"Application does not support database type {databaseType}."
+                    );
             }
 
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(
                     "pet-store-reader",
-                    builder => builder
-                        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                        .RequireAuthenticatedUser()
-                        .RequireClaim("scope", "pet-store-reader"));
+                    builder =>
+                        builder
+                            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                            .RequireAuthenticatedUser()
+                            .RequireClaim("scope", "pet-store-reader")
+                );
 
                 options.AddPolicy(
                     "pet-store-writer",
-                    builder => builder
-                        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                        .RequireAuthenticatedUser()
-                        .RequireClaim("scope", "pet-store-writer"));
+                    builder =>
+                        builder
+                            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                            .RequireAuthenticatedUser()
+                            .RequireClaim("scope", "pet-store-writer")
+                );
             });
 
             services
                 .AddMvcCore()
                 .AddAuthorization()
-                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ContractResolver =
+                        new CamelCasePropertyNamesContractResolver()
+                )
                 .AddDataAnnotations();
         }
 
@@ -142,18 +165,20 @@ namespace BasicApi
                 lifetime.ApplicationStopping.Register(() => DropDatabaseTables(services));
             }
 
-            app.Use(next => async context =>
-            {
-                try
+            app.Use(next =>
+                async context =>
                 {
-                    await next(context);
+                    try
+                    {
+                        await next(context);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        throw;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    throw;
-                }
-            });
+            );
 
             app.UseRouting();
 
@@ -168,15 +193,21 @@ namespace BasicApi
 
         private void CreateDatabaseTables(IServiceProvider services)
         {
-            using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (
+                var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            )
             {
-                using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>())
+                using (
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                )
                 {
 #if GENERATE_SQL_SCRIPTS
                     var migrator = dbContext.GetService<IMigrator>();
                     var script = migrator.GenerateScript(
                         fromMigration: Migration.InitialDatabase,
-                        toMigration: dbContext.Database.GetMigrations().LastOrDefault());
+                        toMigration: dbContext.Database.GetMigrations().LastOrDefault()
+                    );
                     Console.WriteLine("Create script:");
                     Console.WriteLine(script);
 #endif
@@ -189,15 +220,21 @@ namespace BasicApi
         // Don't leave SQLite's .db file behind.
         public static void DropDatabase(IServiceProvider services)
         {
-            using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (
+                var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            )
             {
-                using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>())
+                using (
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                )
                 {
 #if GENERATE_SQL_SCRIPTS
                     var migrator = dbContext.GetService<IMigrator>();
                     var script = migrator.GenerateScript(
                         fromMigration: dbContext.Database.GetAppliedMigrations().LastOrDefault(),
-                        toMigration: Migration.InitialDatabase);
+                        toMigration: Migration.InitialDatabase
+                    );
                     Console.WriteLine("Delete script:");
                     Console.WriteLine(script);
 #endif
@@ -209,15 +246,21 @@ namespace BasicApi
 
         private void DropDatabaseTables(IServiceProvider services)
         {
-            using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (
+                var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            )
             {
-                using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>())
+                using (
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                )
                 {
                     var migrator = dbContext.GetService<IMigrator>();
 #if GENERATE_SQL_SCRIPTS
                     var script = migrator.GenerateScript(
                         fromMigration: dbContext.Database.GetAppliedMigrations().LastOrDefault(),
-                        toMigration: Migration.InitialDatabase);
+                        toMigration: Migration.InitialDatabase
+                    );
                     Console.WriteLine("Delete script:");
                     Console.WriteLine(script);
 #endif
@@ -229,8 +272,7 @@ namespace BasicApi
 
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args)
-                .Build();
+            var host = CreateWebHostBuilder(args).Build();
 
             host.Run();
         }

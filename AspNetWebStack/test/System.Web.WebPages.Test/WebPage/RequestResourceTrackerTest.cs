@@ -34,7 +34,10 @@ namespace System.Web.WebPages.Test
             var disposable = new Mock<IDisposable>();
 
             // Act
-            Assert.ThrowsArgumentNull(() => HttpContextExtensions.RegisterForDispose(null, disposable.Object), "context");
+            Assert.ThrowsArgumentNull(
+                () => HttpContextExtensions.RegisterForDispose(null, disposable.Object),
+                "context"
+            );
         }
     }
 }

@@ -12,14 +12,16 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="bool"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<bool> BooleanConverter => s_booleanConverter ??= new BooleanConverter();
+        public static JsonConverter<bool> BooleanConverter =>
+            s_booleanConverter ??= new BooleanConverter();
         private static JsonConverter<bool>? s_booleanConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts byte array values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<byte[]?> ByteArrayConverter => s_byteArrayConverter ??= new ByteArrayConverter();
+        public static JsonConverter<byte[]?> ByteArrayConverter =>
+            s_byteArrayConverter ??= new ByteArrayConverter();
         private static JsonConverter<byte[]?>? s_byteArrayConverter;
 
         /// <summary>
@@ -40,14 +42,16 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="DateTime"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<DateTime> DateTimeConverter => s_dateTimeConverter ??= new DateTimeConverter();
+        public static JsonConverter<DateTime> DateTimeConverter =>
+            s_dateTimeConverter ??= new DateTimeConverter();
         private static JsonConverter<DateTime>? s_dateTimeConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="DateTimeOffset"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<DateTimeOffset> DateTimeOffsetConverter => s_dateTimeOffsetConverter ??= new DateTimeOffsetConverter();
+        public static JsonConverter<DateTimeOffset> DateTimeOffsetConverter =>
+            s_dateTimeOffsetConverter ??= new DateTimeOffsetConverter();
         private static JsonConverter<DateTimeOffset>? s_dateTimeOffsetConverter;
 
 #if NETCOREAPP
@@ -55,14 +59,16 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="DateOnly"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<DateOnly> DateOnlyConverter => s_dateOnlyConverter ??= new DateOnlyConverter();
+        public static JsonConverter<DateOnly> DateOnlyConverter =>
+            s_dateOnlyConverter ??= new DateOnlyConverter();
         private static JsonConverter<DateOnly>? s_dateOnlyConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="TimeOnly"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<TimeOnly> TimeOnlyConverter => s_timeOnlyConverter ??= new TimeOnlyConverter();
+        public static JsonConverter<TimeOnly> TimeOnlyConverter =>
+            s_timeOnlyConverter ??= new TimeOnlyConverter();
         private static JsonConverter<TimeOnly>? s_timeOnlyConverter;
 #endif
 
@@ -70,14 +76,16 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="decimal"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<decimal> DecimalConverter => s_decimalConverter ??= new DecimalConverter();
+        public static JsonConverter<decimal> DecimalConverter =>
+            s_decimalConverter ??= new DecimalConverter();
         private static JsonConverter<decimal>? s_decimalConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="double"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<double> DoubleConverter => s_doubleConverter ??= new DoubleConverter();
+        public static JsonConverter<double> DoubleConverter =>
+            s_doubleConverter ??= new DoubleConverter();
         private static JsonConverter<double>? s_doubleConverter;
 
         /// <summary>
@@ -91,21 +99,24 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="short"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<short> Int16Converter => s_int16Converter ??= new Int16Converter();
+        public static JsonConverter<short> Int16Converter =>
+            s_int16Converter ??= new Int16Converter();
         private static JsonConverter<short>? s_int16Converter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="int"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<int> Int32Converter => s_int32Converter ??= new Int32Converter();
+        public static JsonConverter<int> Int32Converter =>
+            s_int32Converter ??= new Int32Converter();
         private static JsonConverter<int>? s_int32Converter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="long"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<long> Int64Converter => s_int64Converter ??= new Int64Converter();
+        public static JsonConverter<long> Int64Converter =>
+            s_int64Converter ??= new Int64Converter();
         private static JsonConverter<long>? s_int64Converter;
 
 #if NET7_0_OR_GREATER
@@ -113,7 +124,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="Int128"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<Int128> Int128Converter => s_int128Converter ??= new Int128Converter();
+        public static JsonConverter<Int128> Int128Converter =>
+            s_int128Converter ??= new Int128Converter();
         private static JsonConverter<Int128>? s_int128Converter;
 
         /// <summary>
@@ -121,7 +133,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         [CLSCompliant(false)]
-        public static JsonConverter<UInt128> UInt128Converter => s_uint128Converter ??= new UInt128Converter();
+        public static JsonConverter<UInt128> UInt128Converter =>
+            s_uint128Converter ??= new UInt128Converter();
         private static JsonConverter<UInt128>? s_uint128Converter;
 #endif
 
@@ -129,63 +142,72 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="JsonArray"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<JsonArray?> JsonArrayConverter => s_jsonArrayConverter ??= new JsonArrayConverter();
+        public static JsonConverter<JsonArray?> JsonArrayConverter =>
+            s_jsonArrayConverter ??= new JsonArrayConverter();
         private static JsonConverter<JsonArray?>? s_jsonArrayConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="JsonElement"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<JsonElement> JsonElementConverter => s_jsonElementConverter ??= new JsonElementConverter();
+        public static JsonConverter<JsonElement> JsonElementConverter =>
+            s_jsonElementConverter ??= new JsonElementConverter();
         private static JsonConverter<JsonElement>? s_jsonElementConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="JsonNode"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<JsonNode?> JsonNodeConverter => s_jsonNodeConverter ??= new JsonNodeConverter();
+        public static JsonConverter<JsonNode?> JsonNodeConverter =>
+            s_jsonNodeConverter ??= new JsonNodeConverter();
         private static JsonConverter<JsonNode?>? s_jsonNodeConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="JsonObject"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<JsonObject?> JsonObjectConverter => s_jsonObjectConverter ??= new JsonObjectConverter();
+        public static JsonConverter<JsonObject?> JsonObjectConverter =>
+            s_jsonObjectConverter ??= new JsonObjectConverter();
         private static JsonConverter<JsonObject?>? s_jsonObjectConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="JsonArray"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<JsonValue?> JsonValueConverter => s_jsonValueConverter ??= new JsonValueConverter();
+        public static JsonConverter<JsonValue?> JsonValueConverter =>
+            s_jsonValueConverter ??= new JsonValueConverter();
         private static JsonConverter<JsonValue?>? s_jsonValueConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="JsonDocument"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<JsonDocument?> JsonDocumentConverter => s_jsonDocumentConverter ??= new JsonDocumentConverter();
+        public static JsonConverter<JsonDocument?> JsonDocumentConverter =>
+            s_jsonDocumentConverter ??= new JsonDocumentConverter();
         private static JsonConverter<JsonDocument?>? s_jsonDocumentConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="Memory{Byte}"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<Memory<byte>> MemoryByteConverter => s_memoryByteConverter ??= new MemoryByteConverter();
+        public static JsonConverter<Memory<byte>> MemoryByteConverter =>
+            s_memoryByteConverter ??= new MemoryByteConverter();
         private static JsonConverter<Memory<byte>>? s_memoryByteConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="ReadOnlyMemory{Byte}"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<ReadOnlyMemory<byte>> ReadOnlyMemoryByteConverter => s_readOnlyMemoryByteConverter ??= new ReadOnlyMemoryByteConverter();
+        public static JsonConverter<ReadOnlyMemory<byte>> ReadOnlyMemoryByteConverter =>
+            s_readOnlyMemoryByteConverter ??= new ReadOnlyMemoryByteConverter();
         private static JsonConverter<ReadOnlyMemory<byte>>? s_readOnlyMemoryByteConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="object"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<object?> ObjectConverter => s_objectConverter ??= new DefaultObjectConverter();
+        public static JsonConverter<object?> ObjectConverter =>
+            s_objectConverter ??= new DefaultObjectConverter();
         private static JsonConverter<object?>? s_objectConverter;
 
 #if NETCOREAPP
@@ -201,7 +223,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="float"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<float> SingleConverter => s_singleConverter ??= new SingleConverter();
+        public static JsonConverter<float> SingleConverter =>
+            s_singleConverter ??= new SingleConverter();
         private static JsonConverter<float>? s_singleConverter;
 
         /// <summary>
@@ -209,21 +232,24 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         [CLSCompliant(false)]
-        public static JsonConverter<sbyte> SByteConverter => s_sbyteConverter ??= new SByteConverter();
+        public static JsonConverter<sbyte> SByteConverter =>
+            s_sbyteConverter ??= new SByteConverter();
         private static JsonConverter<sbyte>? s_sbyteConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="string"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<string?> StringConverter => s_stringConverter ??= new StringConverter();
+        public static JsonConverter<string?> StringConverter =>
+            s_stringConverter ??= new StringConverter();
         private static JsonConverter<string?>? s_stringConverter;
 
         /// <summary>
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="TimeSpan"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<TimeSpan> TimeSpanConverter => s_timeSpanConverter ??= new TimeSpanConverter();
+        public static JsonConverter<TimeSpan> TimeSpanConverter =>
+            s_timeSpanConverter ??= new TimeSpanConverter();
         private static JsonConverter<TimeSpan>? s_timeSpanConverter;
 
         /// <summary>
@@ -231,7 +257,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         [CLSCompliant(false)]
-        public static JsonConverter<ushort> UInt16Converter => s_uint16Converter ??= new UInt16Converter();
+        public static JsonConverter<ushort> UInt16Converter =>
+            s_uint16Converter ??= new UInt16Converter();
         private static JsonConverter<ushort>? s_uint16Converter;
 
         /// <summary>
@@ -239,7 +266,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         [CLSCompliant(false)]
-        public static JsonConverter<uint> UInt32Converter => s_uint32Converter ??= new UInt32Converter();
+        public static JsonConverter<uint> UInt32Converter =>
+            s_uint32Converter ??= new UInt32Converter();
         private static JsonConverter<uint>? s_uint32Converter;
 
         /// <summary>
@@ -247,7 +275,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         [CLSCompliant(false)]
-        public static JsonConverter<ulong> UInt64Converter => s_uint64Converter ??= new UInt64Converter();
+        public static JsonConverter<ulong> UInt64Converter =>
+            s_uint64Converter ??= new UInt64Converter();
         private static JsonConverter<ulong>? s_uint64Converter;
 
         /// <summary>
@@ -261,7 +290,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// Returns a <see cref="JsonConverter{T}"/> instance that converts <see cref="Version"/> values.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<Version?> VersionConverter => s_versionConverter ??= new VersionConverter();
+        public static JsonConverter<Version?> VersionConverter =>
+            s_versionConverter ??= new VersionConverter();
         private static JsonConverter<Version?>? s_versionConverter;
 
         /// <summary>
@@ -270,8 +300,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// <typeparam name="T">The generic definition for the type.</typeparam>
         /// <returns>A <see cref="JsonConverter{T}"/> instance that throws <see cref="NotSupportedException"/></returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<T> GetUnsupportedTypeConverter<T>()
-            => new UnsupportedTypeConverter<T>();
+        public static JsonConverter<T> GetUnsupportedTypeConverter<T>() =>
+            new UnsupportedTypeConverter<T>();
 
         /// <summary>
         /// Creates a <see cref="JsonConverter{T}"/> instance that converts <typeparamref name="T"/> values.
@@ -280,7 +310,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="options">The <see cref="JsonSerializerOptions"/> to use for serialization and deserialization.</param>
         /// <returns>A <see cref="JsonConverter{T}"/> instance that converts <typeparamref name="T"/> values.</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<T> GetEnumConverter<T>(JsonSerializerOptions options) where T : struct, Enum
+        public static JsonConverter<T> GetEnumConverter<T>(JsonSerializerOptions options)
+            where T : struct, Enum
         {
             if (options is null)
             {
@@ -297,14 +328,17 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="underlyingTypeInfo">Serialization metadata for the underlying nullable type.</param>
         /// <returns>A <see cref="JsonConverter{T}"/> instance that converts <typeparamref name="T?"/> values</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<T?> GetNullableConverter<T>(JsonTypeInfo<T> underlyingTypeInfo) where T : struct
+        public static JsonConverter<T?> GetNullableConverter<T>(JsonTypeInfo<T> underlyingTypeInfo)
+            where T : struct
         {
             if (underlyingTypeInfo is null)
             {
                 ThrowHelper.ThrowArgumentNullException(nameof(underlyingTypeInfo));
             }
 
-            JsonConverter<T> underlyingConverter = GetTypedConverter<T>(underlyingTypeInfo.Converter);
+            JsonConverter<T> underlyingConverter = GetTypedConverter<T>(
+                underlyingTypeInfo.Converter
+            );
 
             return new NullableConverter<T>(underlyingConverter);
         }
@@ -316,14 +350,17 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="options">The <see cref="JsonSerializerOptions"/> to use for serialization and deserialization.</param>
         /// <returns>A <see cref="JsonConverter{T}"/> instance that converts <typeparamref name="T?"/> values</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonConverter<T?> GetNullableConverter<T>(JsonSerializerOptions options) where T : struct
+        public static JsonConverter<T?> GetNullableConverter<T>(JsonSerializerOptions options)
+            where T : struct
         {
             if (options is null)
             {
                 ThrowHelper.ThrowArgumentNullException(nameof(options));
             }
 
-            JsonConverter<T> underlyingConverter = GetTypedConverter<T>(options.GetConverterInternal(typeof(T)));
+            JsonConverter<T> underlyingConverter = GetTypedConverter<T>(
+                options.GetConverterInternal(typeof(T))
+            );
 
             return new NullableConverter<T>(underlyingConverter);
         }
@@ -333,7 +370,9 @@ namespace System.Text.Json.Serialization.Metadata
             JsonConverter<T>? typedConverter = converter as JsonConverter<T>;
             if (typedConverter == null)
             {
-                throw new InvalidOperationException(SR.Format(SR.SerializationConverterNotCompatible, typedConverter, typeof(T)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.SerializationConverterNotCompatible, typedConverter, typeof(T))
+                );
             }
 
             return typedConverter;

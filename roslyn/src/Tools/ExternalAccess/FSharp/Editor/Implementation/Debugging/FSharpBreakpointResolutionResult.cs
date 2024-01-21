@@ -12,18 +12,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.Implementation.Deb
     {
         internal readonly BreakpointResolutionResult UnderlyingObject;
 
-        private FSharpBreakpointResolutionResult(BreakpointResolutionResult result)
-            => UnderlyingObject = result;
+        private FSharpBreakpointResolutionResult(BreakpointResolutionResult result) =>
+            UnderlyingObject = result;
 
         public Document Document => UnderlyingObject.Document;
         public TextSpan TextSpan => UnderlyingObject.TextSpan;
         public string? LocationNameOpt => UnderlyingObject.LocationNameOpt;
         public bool IsLineBreakpoint => UnderlyingObject.IsLineBreakpoint;
 
-        public static FSharpBreakpointResolutionResult CreateSpanResult(Document document, TextSpan textSpan, string? locationNameOpt = null)
-            => new FSharpBreakpointResolutionResult(BreakpointResolutionResult.CreateSpanResult(document, textSpan, locationNameOpt));
+        public static FSharpBreakpointResolutionResult CreateSpanResult(
+            Document document,
+            TextSpan textSpan,
+            string? locationNameOpt = null
+        ) =>
+            new FSharpBreakpointResolutionResult(
+                BreakpointResolutionResult.CreateSpanResult(document, textSpan, locationNameOpt)
+            );
 
-        public static FSharpBreakpointResolutionResult CreateLineResult(Document document, string? locationNameOpt = null)
-            => new FSharpBreakpointResolutionResult(BreakpointResolutionResult.CreateLineResult(document, locationNameOpt));
+        public static FSharpBreakpointResolutionResult CreateLineResult(
+            Document document,
+            string? locationNameOpt = null
+        ) =>
+            new FSharpBreakpointResolutionResult(
+                BreakpointResolutionResult.CreateLineResult(document, locationNameOpt)
+            );
     }
 }

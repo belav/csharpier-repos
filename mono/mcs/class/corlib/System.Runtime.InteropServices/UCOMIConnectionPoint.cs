@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,17 +29,17 @@
 #if !FULL_AOT_RUNTIME
 namespace System.Runtime.InteropServices
 {
-	[Obsolete]
-	[ComImport]
-	[Guid ("b196b286-bab4-101a-b69c-00aa00341d07")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	public interface UCOMIConnectionPoint
-	{
-		void GetConnectionInterface (out Guid pIID);
-		void GetConnectionPointContainer (out UCOMIConnectionPointContainer ppCPC);
-		void Advise ([MarshalAs(UnmanagedType.Interface)] object pUnkSink, out int pdwCookie);
-		void Unadvise (int dwCookie);
-		void EnumConnections (out UCOMIEnumConnections ppEnum);
-	}
+    [Obsolete]
+    [ComImport]
+    [Guid("b196b286-bab4-101a-b69c-00aa00341d07")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface UCOMIConnectionPoint
+    {
+        void GetConnectionInterface(out Guid pIID);
+        void GetConnectionPointContainer(out UCOMIConnectionPointContainer ppCPC);
+        void Advise([MarshalAs(UnmanagedType.Interface)] object pUnkSink, out int pdwCookie);
+        void Unadvise(int dwCookie);
+        void EnumConnections(out UCOMIEnumConnections ppEnum);
+    }
 }
 #endif

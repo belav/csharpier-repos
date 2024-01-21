@@ -40,7 +40,11 @@ public class ExpressionMetadataProviderTest
         var viewData = new ViewDataDictionary<TestModel>(provider);
 
         // Act
-        var explorer = ExpressionMetadataProvider.FromLambdaExpression(m => m.SelectedCategory, viewData, provider);
+        var explorer = ExpressionMetadataProvider.FromLambdaExpression(
+            m => m.SelectedCategory,
+            viewData,
+            provider
+        );
 
         // Assert
         Assert.NotNull(explorer);
@@ -58,7 +62,11 @@ public class ExpressionMetadataProviderTest
         var viewData = new ViewDataDictionary<TestModel[]>(provider);
 
         // Act
-        var explorer = ExpressionMetadataProvider.FromLambdaExpression(m => m[23], viewData, provider);
+        var explorer = ExpressionMetadataProvider.FromLambdaExpression(
+            m => m[23],
+            viewData,
+            provider
+        );
 
         // Assert
         Assert.NotNull(explorer);
@@ -80,7 +88,8 @@ public class ExpressionMetadataProviderTest
         var explorer = ExpressionMetadataProvider.FromLambdaExpression(
             m => m[index].SelectedCategory.CategoryId,
             viewData,
-            provider);
+            provider
+        );
 
         // Assert
         Assert.NotNull(explorer);
@@ -103,7 +112,8 @@ public class ExpressionMetadataProviderTest
         var metadata = ExpressionMetadataProvider.FromLambdaExpression<TestModel, Category>(
             model => model.SelectedCategory,
             viewData,
-            provider);
+            provider
+        );
 
         // Assert
         Assert.Same(myModel, metadata.Container.Model);
@@ -117,14 +127,19 @@ public class ExpressionMetadataProviderTest
     public void FromStringExpression_GetsExpectedMetadata(
         string expression,
         ModelMetadataKind expectedKind,
-        Type expectedType)
+        Type expectedType
+    )
     {
         // Arrange
         var provider = new EmptyModelMetadataProvider();
         var viewData = new ViewDataDictionary<TestModel>(provider);
 
         // Act
-        var explorer = ExpressionMetadataProvider.FromStringExpression(expression, viewData, provider);
+        var explorer = ExpressionMetadataProvider.FromStringExpression(
+            expression,
+            viewData,
+            provider
+        );
 
         // Assert
         Assert.NotNull(explorer);
@@ -144,9 +159,11 @@ public class ExpressionMetadataProviderTest
         viewData["Object"] = myModel;
 
         // Act
-        var metadata = ExpressionMetadataProvider.FromStringExpression("Object.SelectedCategory",
-                                                                       viewData,
-                                                                       provider);
+        var metadata = ExpressionMetadataProvider.FromStringExpression(
+            "Object.SelectedCategory",
+            viewData,
+            provider
+        );
 
         // Assert
         Assert.Same(myModel, metadata.Container.Model);
@@ -165,7 +182,8 @@ public class ExpressionMetadataProviderTest
         var explorer = ExpressionMetadataProvider.FromLambdaExpression(
             m => m.PrivateProperty,
             viewData,
-            provider);
+            provider
+        );
 
         // Assert
         Assert.NotNull(explorer);
@@ -187,7 +205,8 @@ public class ExpressionMetadataProviderTest
         var explorer = ExpressionMetadataProvider.FromLambdaExpression(
             m => ExpressionMetadataProviderTest.StaticProperty,
             viewData,
-            provider);
+            provider
+        );
 
         // Assert
         Assert.NotNull(explorer);
@@ -209,7 +228,8 @@ public class ExpressionMetadataProviderTest
         var explorer = ExpressionMetadataProvider.FromLambdaExpression(
             m => m.Field,
             viewData,
-            provider);
+            provider
+        );
 
         // Assert
         Assert.NotNull(explorer);

@@ -38,7 +38,11 @@ internal readonly struct CSharpCodeFixOptionsProvider
     /// </summary>
     private readonly CodeActionOptionsProvider _fallbackOptions;
 
-    public CSharpCodeFixOptionsProvider(IOptionsReader options, CodeActionOptionsProvider fallbackOptions, HostLanguageServices languageServices)
+    public CSharpCodeFixOptionsProvider(
+        IOptionsReader options,
+        CodeActionOptionsProvider fallbackOptions,
+        HostLanguageServices languageServices
+    )
     {
         _options = options;
         _fallbackOptions = fallbackOptions;
@@ -47,80 +51,134 @@ internal readonly struct CSharpCodeFixOptionsProvider
 
     // LineFormattingOptions
 
-    public string NewLine => GetOption(FormattingOptions2.NewLine, FallbackLineFormattingOptions.NewLine);
+    public string NewLine =>
+        GetOption(FormattingOptions2.NewLine, FallbackLineFormattingOptions.NewLine);
 
     // SimplifierOptions
 
-    public CodeStyleOption2<bool> VarForBuiltInTypes => GetOption(CSharpCodeStyleOptions.VarForBuiltInTypes, FallbackSimplifierOptions.VarForBuiltInTypes);
-    public CodeStyleOption2<bool> VarElsewhere => GetOption(CSharpCodeStyleOptions.VarElsewhere, FallbackSimplifierOptions.VarElsewhere);
+    public CodeStyleOption2<bool> VarForBuiltInTypes =>
+        GetOption(
+            CSharpCodeStyleOptions.VarForBuiltInTypes,
+            FallbackSimplifierOptions.VarForBuiltInTypes
+        );
+    public CodeStyleOption2<bool> VarElsewhere =>
+        GetOption(CSharpCodeStyleOptions.VarElsewhere, FallbackSimplifierOptions.VarElsewhere);
 
-    public SimplifierOptions GetSimplifierOptions()
-        => new CSharpSimplifierOptions(_options, FallbackSimplifierOptions);
+    public SimplifierOptions GetSimplifierOptions() =>
+        new CSharpSimplifierOptions(_options, FallbackSimplifierOptions);
 
     // FormattingOptions
 
-    public CodeStyleOption2<NamespaceDeclarationPreference> NamespaceDeclarations => GetOption(CSharpCodeStyleOptions.NamespaceDeclarations, FallbackSyntaxFormattingOptions.NamespaceDeclarations);
-    public CodeStyleOption2<bool> PreferTopLevelStatements => GetOption(CSharpCodeStyleOptions.PreferTopLevelStatements, FallbackSyntaxFormattingOptions.PreferTopLevelStatements);
+    public CodeStyleOption2<NamespaceDeclarationPreference> NamespaceDeclarations =>
+        GetOption(
+            CSharpCodeStyleOptions.NamespaceDeclarations,
+            FallbackSyntaxFormattingOptions.NamespaceDeclarations
+        );
+    public CodeStyleOption2<bool> PreferTopLevelStatements =>
+        GetOption(
+            CSharpCodeStyleOptions.PreferTopLevelStatements,
+            FallbackSyntaxFormattingOptions.PreferTopLevelStatements
+        );
 
-    internal CSharpSyntaxFormattingOptions GetFormattingOptions()
-        => new(_options, FallbackSyntaxFormattingOptions);
+    internal CSharpSyntaxFormattingOptions GetFormattingOptions() =>
+        new(_options, FallbackSyntaxFormattingOptions);
 
     // AddImportPlacementOptions
 
-    public CodeStyleOption2<AddImportPlacement> UsingDirectivePlacement => GetOption(CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, FallbackAddImportPlacementOptions.UsingDirectivePlacement);
+    public CodeStyleOption2<AddImportPlacement> UsingDirectivePlacement =>
+        GetOption(
+            CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+            FallbackAddImportPlacementOptions.UsingDirectivePlacement
+        );
 
     // CodeStyleOptions
 
-    public CodeStyleOption2<string> PreferredModifierOrder => GetOption(CSharpCodeStyleOptions.PreferredModifierOrder, FallbackCodeStyleOptions.PreferredModifierOrder);
-    public CodeStyleOption2<AccessibilityModifiersRequired> AccessibilityModifiersRequired => GetOption(CodeStyleOptions2.AccessibilityModifiersRequired, FallbackCodeStyleOptions.AccessibilityModifiersRequired);
+    public CodeStyleOption2<string> PreferredModifierOrder =>
+        GetOption(
+            CSharpCodeStyleOptions.PreferredModifierOrder,
+            FallbackCodeStyleOptions.PreferredModifierOrder
+        );
+    public CodeStyleOption2<AccessibilityModifiersRequired> AccessibilityModifiersRequired =>
+        GetOption(
+            CodeStyleOptions2.AccessibilityModifiersRequired,
+            FallbackCodeStyleOptions.AccessibilityModifiersRequired
+        );
 
-    private TValue GetOption<TValue>(Option2<TValue> option, TValue defaultValue)
-        => _options.GetOption(option, defaultValue);
+    private TValue GetOption<TValue>(Option2<TValue> option, TValue defaultValue) =>
+        _options.GetOption(option, defaultValue);
 
-    private TValue GetOption<TValue>(PerLanguageOption2<TValue> option, TValue defaultValue)
-        => _options.GetOption(option, _languageServices.Language, defaultValue);
+    private TValue GetOption<TValue>(PerLanguageOption2<TValue> option, TValue defaultValue) =>
+        _options.GetOption(option, _languageServices.Language, defaultValue);
 
     private CSharpIdeCodeStyleOptions FallbackCodeStyleOptions
 #if CODE_STYLE
         => CSharpIdeCodeStyleOptions.Default;
 #else
-        => (CSharpIdeCodeStyleOptions)_fallbackOptions.GetOptions(_languageServices.LanguageServices).CodeStyleOptions;
+        =>
+        (CSharpIdeCodeStyleOptions)
+            _fallbackOptions.GetOptions(_languageServices.LanguageServices).CodeStyleOptions;
 #endif
 
     private CSharpSimplifierOptions FallbackSimplifierOptions
 #if CODE_STYLE
         => CSharpSimplifierOptions.Default;
 #else
-        => (CSharpSimplifierOptions)_fallbackOptions.GetOptions(_languageServices.LanguageServices).CleanupOptions.SimplifierOptions;
+        =>
+        (CSharpSimplifierOptions)
+            _fallbackOptions
+                .GetOptions(_languageServices.LanguageServices)
+                .CleanupOptions.SimplifierOptions;
 #endif
 
     private CSharpSyntaxFormattingOptions FallbackSyntaxFormattingOptions
 #if CODE_STYLE
-        => CSharpSyntaxFormattingOptions.Default;
+        =>
+        CSharpSyntaxFormattingOptions.Default;
 #else
-        => (CSharpSyntaxFormattingOptions)_fallbackOptions.GetOptions(_languageServices.LanguageServices).CleanupOptions.FormattingOptions;
+        =>
+        (CSharpSyntaxFormattingOptions)
+            _fallbackOptions
+                .GetOptions(_languageServices.LanguageServices)
+                .CleanupOptions.FormattingOptions;
 #endif
 
     private LineFormattingOptions FallbackLineFormattingOptions
 #if CODE_STYLE
         => LineFormattingOptions.Default;
 #else
-        => _fallbackOptions.GetOptions(_languageServices.LanguageServices).CleanupOptions.FormattingOptions.LineFormatting;
+        =>
+        _fallbackOptions
+            .GetOptions(_languageServices.LanguageServices)
+            .CleanupOptions.FormattingOptions.LineFormatting;
 #endif
 
     private AddImportPlacementOptions FallbackAddImportPlacementOptions
 #if CODE_STYLE
-        => AddImportPlacementOptions.Default;
+        =>
+        AddImportPlacementOptions.Default;
 #else
-        => _fallbackOptions.GetOptions(_languageServices.LanguageServices).CleanupOptions.AddImportOptions;
+        =>
+        _fallbackOptions
+            .GetOptions(_languageServices.LanguageServices)
+            .CleanupOptions.AddImportOptions;
 #endif
 }
 
 internal static class CSharpCodeFixOptionsProviders
 {
-    public static async ValueTask<CSharpCodeFixOptionsProvider> GetCSharpCodeFixOptionsProviderAsync(this Document document, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+    public static async ValueTask<CSharpCodeFixOptionsProvider> GetCSharpCodeFixOptionsProviderAsync(
+        this Document document,
+        CodeActionOptionsProvider fallbackOptions,
+        CancellationToken cancellationToken
+    )
     {
-        var configOptions = await document.GetAnalyzerConfigOptionsAsync(cancellationToken).ConfigureAwait(false);
-        return new CSharpCodeFixOptionsProvider(configOptions.GetOptionsReader(), fallbackOptions, document.Project.GetExtendedLanguageServices());
+        var configOptions = await document
+            .GetAnalyzerConfigOptionsAsync(cancellationToken)
+            .ConfigureAwait(false);
+        return new CSharpCodeFixOptionsProvider(
+            configOptions.GetOptionsReader(),
+            fallbackOptions,
+            document.Project.GetExtendedLanguageServices()
+        );
     }
 }

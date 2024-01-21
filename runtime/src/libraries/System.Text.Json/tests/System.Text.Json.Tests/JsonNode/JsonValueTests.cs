@@ -34,6 +34,7 @@ namespace System.Text.Json.Nodes.Tests
         }
 
         private class Polymorphic_Base { }
+
         private class Polymorphic_Derived : Polymorphic_Base { }
 
         [Fact]
@@ -56,8 +57,9 @@ namespace System.Text.Json.Nodes.Tests
         public static void QuotedNumbers_Deserialize()
         {
             var options = new JsonSerializerOptions();
-            options.NumberHandling = JsonNumberHandling.AllowReadingFromString |
-                JsonNumberHandling.AllowNamedFloatingPointLiterals;
+            options.NumberHandling =
+                JsonNumberHandling.AllowReadingFromString
+                | JsonNumberHandling.AllowNamedFloatingPointLiterals;
 
             JsonNode node = JsonSerializer.Deserialize<JsonNode>("\"42\"", options);
             Assert.IsAssignableFrom<JsonValue>(node);
@@ -68,8 +70,14 @@ namespace System.Text.Json.Nodes.Tests
 
             node = JsonSerializer.Deserialize<JsonNode>("\"NaN\"", options);
             Assert.IsAssignableFrom<JsonValue>(node);
-            Assert.Equal(double.NaN, JsonSerializer.Deserialize<double>(node.ToJsonString(), options));
-            Assert.Equal(float.NaN, JsonSerializer.Deserialize<float>(node.ToJsonString(), options));
+            Assert.Equal(
+                double.NaN,
+                JsonSerializer.Deserialize<double>(node.ToJsonString(), options)
+            );
+            Assert.Equal(
+                float.NaN,
+                JsonSerializer.Deserialize<float>(node.ToJsonString(), options)
+            );
         }
 
         [Fact]
@@ -283,7 +291,9 @@ namespace System.Text.Json.Nodes.Tests
         public static void FromElement_WrongNodeTypeThrows(string json)
         {
             using (JsonDocument document = JsonDocument.Parse(json))
-                Assert.Throws<InvalidOperationException>(() => JsonValue.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(
+                    () => JsonValue.Create(document.RootElement)
+                );
         }
 
         [Fact]
@@ -310,11 +320,7 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void DeepCloneNotTrimmable()
         {
-            var student = new Student()
-            {
-                Id = 1,
-                Name = "test"
-            };
+            var student = new Student() { Id = 1, Name = "test" };
             JsonValue jValue = JsonValue.Create(student);
 
             JsonNode clone = jValue.DeepClone();
@@ -349,11 +355,7 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void DeepEqualsComplexType()
         {
-            var student = new Student()
-            {
-                Id = 10,
-                Name = "test"
-            };
+            var student = new Student() { Id = 10, Name = "test" };
             JsonValue jValue = JsonValue.Create(student);
 
             var jObject = new JsonObject();
@@ -374,7 +376,10 @@ namespace System.Text.Json.Nodes.Tests
             JsonNodeTests.AssertDeepEqual(JsonValue.Create(10), JsonValue.Create((ushort)10));
 
             Guid guid = Guid.Empty;
-            JsonNodeTests.AssertDeepEqual(JsonValue.Create(guid), JsonValue.Create(guid.ToString()));
+            JsonNodeTests.AssertDeepEqual(
+                JsonValue.Create(guid),
+                JsonValue.Create(guid.ToString())
+            );
             JsonNodeTests.AssertNotDeepEqual(JsonValue.Create(10), JsonValue.Create("10"));
         }
 
@@ -420,8 +425,12 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void DeepEquals_EscapedString()
         {
-            JsonValue jsonValue = JsonValue.Create(JsonDocument.Parse("\"It\'s alright\"").RootElement);
-            JsonValue escapedJsonValue = JsonValue.Create(JsonDocument.Parse("\"It\\u0027s alright\"").RootElement);
+            JsonValue jsonValue = JsonValue.Create(
+                JsonDocument.Parse("\"It\'s alright\"").RootElement
+            );
+            JsonValue escapedJsonValue = JsonValue.Create(
+                JsonDocument.Parse("\"It\\u0027s alright\"").RootElement
+            );
             JsonNodeTests.AssertDeepEqual(escapedJsonValue, jsonValue);
         }
 

@@ -40,31 +40,36 @@ public class ByteArrayTypeMapping : RelationalTypeMapping
     public ByteArrayTypeMapping(
         string storeType,
         DbType? dbType = System.Data.DbType.Binary,
-        int? size = null)
+        int? size = null
+    )
         : base(
             new RelationalTypeMappingParameters(
                 new CoreTypeMappingParameters(
-                    typeof(byte[]), jsonValueReaderWriter: JsonByteArrayReaderWriter.Instance), storeType, StoreTypePostfix.None, dbType,
-                unicode: false, size))
-    {
-    }
+                    typeof(byte[]),
+                    jsonValueReaderWriter: JsonByteArrayReaderWriter.Instance
+                ),
+                storeType,
+                StoreTypePostfix.None,
+                dbType,
+                unicode: false,
+                size
+            )
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ByteArrayTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected ByteArrayTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new ByteArrayTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new ByteArrayTypeMapping(parameters);
 
     /// <summary>
     ///     Generates the SQL representation of a literal value.

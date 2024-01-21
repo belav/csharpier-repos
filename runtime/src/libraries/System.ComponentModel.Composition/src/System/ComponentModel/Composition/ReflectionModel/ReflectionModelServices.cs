@@ -18,10 +18,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Requires.NotNull(partDefinition, nameof(partDefinition));
 
-            ReflectionComposablePartDefinition? reflectionPartDefinition = partDefinition as ReflectionComposablePartDefinition;
+            ReflectionComposablePartDefinition? reflectionPartDefinition =
+                partDefinition as ReflectionComposablePartDefinition;
             if (reflectionPartDefinition == null)
             {
-                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(nameof(partDefinition), partDefinition.GetType());
+                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(
+                    nameof(partDefinition),
+                    partDefinition.GetType()
+                );
             }
 
             return reflectionPartDefinition.GetLazyPartType();
@@ -31,10 +35,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Requires.NotNull(partDefinition, nameof(partDefinition));
 
-            ReflectionComposablePartDefinition? reflectionPartDefinition = partDefinition as ReflectionComposablePartDefinition;
+            ReflectionComposablePartDefinition? reflectionPartDefinition =
+                partDefinition as ReflectionComposablePartDefinition;
             if (reflectionPartDefinition == null)
             {
-                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(nameof(partDefinition), partDefinition.GetType());
+                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(
+                    nameof(partDefinition),
+                    partDefinition.GetType()
+                );
             }
 
             return reflectionPartDefinition.IsDisposalRequired;
@@ -44,12 +52,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Requires.NotNull(exportDefinition, nameof(exportDefinition));
 
-            ReflectionMemberExportDefinition? reflectionExportDefinition = exportDefinition as ReflectionMemberExportDefinition;
+            ReflectionMemberExportDefinition? reflectionExportDefinition =
+                exportDefinition as ReflectionMemberExportDefinition;
             if (reflectionExportDefinition == null)
             {
                 throw new ArgumentException(
-                    SR.Format(SR.ReflectionModel_InvalidExportDefinition, exportDefinition.GetType()),
-                    nameof(exportDefinition));
+                    SR.Format(
+                        SR.ReflectionModel_InvalidExportDefinition,
+                        exportDefinition.GetType()
+                    ),
+                    nameof(exportDefinition)
+                );
             }
 
             return reflectionExportDefinition.ExportingLazyMember;
@@ -59,12 +72,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Requires.NotNull(importDefinition, nameof(importDefinition));
 
-            ReflectionMemberImportDefinition? reflectionMemberImportDefinition = importDefinition as ReflectionMemberImportDefinition;
+            ReflectionMemberImportDefinition? reflectionMemberImportDefinition =
+                importDefinition as ReflectionMemberImportDefinition;
             if (reflectionMemberImportDefinition == null)
             {
                 throw new ArgumentException(
-                    SR.Format(SR.ReflectionModel_InvalidMemberImportDefinition, importDefinition.GetType()),
-                    nameof(importDefinition));
+                    SR.Format(
+                        SR.ReflectionModel_InvalidMemberImportDefinition,
+                        importDefinition.GetType()
+                    ),
+                    nameof(importDefinition)
+                );
             }
 
             return reflectionMemberImportDefinition.ImportingLazyMember;
@@ -74,12 +92,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Requires.NotNull(importDefinition, nameof(importDefinition));
 
-            ReflectionParameterImportDefinition? reflectionParameterImportDefinition = importDefinition as ReflectionParameterImportDefinition;
+            ReflectionParameterImportDefinition? reflectionParameterImportDefinition =
+                importDefinition as ReflectionParameterImportDefinition;
             if (reflectionParameterImportDefinition == null)
             {
                 throw new ArgumentException(
-                    SR.Format(SR.ReflectionModel_InvalidParameterImportDefinition, importDefinition.GetType()),
-                    nameof(importDefinition));
+                    SR.Format(
+                        SR.ReflectionModel_InvalidParameterImportDefinition,
+                        importDefinition.GetType()
+                    ),
+                    nameof(importDefinition)
+                );
             }
 
             Debug.Assert(reflectionParameterImportDefinition.ImportingLazyParameter != null);
@@ -90,12 +113,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Requires.NotNull(importDefinition, nameof(importDefinition));
 
-            ReflectionImportDefinition? reflectionImportDefinition = importDefinition as ReflectionImportDefinition;
+            ReflectionImportDefinition? reflectionImportDefinition =
+                importDefinition as ReflectionImportDefinition;
             if (reflectionImportDefinition == null)
             {
                 throw new ArgumentException(
-                    SR.Format(SR.ReflectionModel_InvalidImportDefinition, importDefinition.GetType()),
-                    nameof(importDefinition));
+                    SR.Format(
+                        SR.ReflectionModel_InvalidImportDefinition,
+                        importDefinition.GetType()
+                    ),
+                    nameof(importDefinition)
+                );
             }
 
             return (importDefinition is ReflectionParameterImportDefinition);
@@ -108,16 +136,23 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return (importDefinition is IPartCreatorImportDefinition);
         }
 
-        public static ContractBasedImportDefinition GetExportFactoryProductImportDefinition(ImportDefinition importDefinition)
+        public static ContractBasedImportDefinition GetExportFactoryProductImportDefinition(
+            ImportDefinition importDefinition
+        )
         {
             Requires.NotNull(importDefinition, nameof(importDefinition));
 
-            IPartCreatorImportDefinition? partCreatorImportDefinition = importDefinition as IPartCreatorImportDefinition;
+            IPartCreatorImportDefinition? partCreatorImportDefinition =
+                importDefinition as IPartCreatorImportDefinition;
             if (partCreatorImportDefinition == null)
             {
                 throw new ArgumentException(
-                    SR.Format(SR.ReflectionModel_InvalidImportDefinition, importDefinition.GetType()),
-                    nameof(importDefinition));
+                    SR.Format(
+                        SR.ReflectionModel_InvalidImportDefinition,
+                        importDefinition.GetType()
+                    ),
+                    nameof(importDefinition)
+                );
             }
 
             return partCreatorImportDefinition.ProductImportDefinition;
@@ -129,7 +164,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Lazy<IEnumerable<ImportDefinition>>? imports,
             Lazy<IEnumerable<ExportDefinition>>? exports,
             Lazy<IDictionary<string, object?>>? metadata,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
             Requires.NotNull(partType, nameof(partType));
 
@@ -140,22 +176,34 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     imports,
                     exports,
                     metadata,
-                    origin));
+                    origin
+                )
+            );
         }
 
         public static ExportDefinition CreateExportDefinition(
             LazyMemberInfo exportingMember,
             string contractName,
             Lazy<IDictionary<string, object?>> metadata,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
-            Requires.IsInMembertypeSet(exportingMember.MemberType, nameof(exportingMember), MemberTypes.Field | MemberTypes.Property | MemberTypes.NestedType | MemberTypes.TypeInfo | MemberTypes.Method);
+            Requires.IsInMembertypeSet(
+                exportingMember.MemberType,
+                nameof(exportingMember),
+                MemberTypes.Field
+                    | MemberTypes.Property
+                    | MemberTypes.NestedType
+                    | MemberTypes.TypeInfo
+                    | MemberTypes.Method
+            );
 
             return new ReflectionMemberExportDefinition(
                 exportingMember,
                 new LazyExportDefinition(contractName, metadata),
-                origin);
+                origin
+            );
         }
 
         public static ContractBasedImportDefinition CreateImportDefinition(
@@ -166,9 +214,21 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ImportCardinality cardinality,
             bool isRecomposable,
             CreationPolicy requiredCreationPolicy,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
-            return CreateImportDefinition(importingMember, contractName, requiredTypeIdentity, requiredMetadata, cardinality, isRecomposable, requiredCreationPolicy, MetadataServices.EmptyMetadata, false, origin);
+            return CreateImportDefinition(
+                importingMember,
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                isRecomposable,
+                requiredCreationPolicy,
+                MetadataServices.EmptyMetadata,
+                false,
+                origin
+            );
         }
 
         public static ContractBasedImportDefinition CreateImportDefinition(
@@ -181,7 +241,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
             bool isExportFactory,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
             return CreateImportDefinition(
                 importingMember,
@@ -194,7 +255,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 requiredCreationPolicy,
                 metadata,
                 isExportFactory,
-                origin);
+                origin
+            );
         }
 
         public static ContractBasedImportDefinition CreateImportDefinition(
@@ -208,10 +270,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
             bool isExportFactory,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
-            Requires.IsInMembertypeSet(importingMember.MemberType, nameof(importingMember), MemberTypes.Property | MemberTypes.Field);
+            Requires.IsInMembertypeSet(
+                importingMember.MemberType,
+                nameof(importingMember),
+                MemberTypes.Property | MemberTypes.Field
+            );
 
             if (isExportFactory)
             {
@@ -226,7 +293,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         isRecomposable,
                         isPreRequisite,
                         CreationPolicy.NonShared,
-                        metadata));
+                        metadata
+                    )
+                );
             }
             else
             {
@@ -240,7 +309,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     isPreRequisite,
                     requiredCreationPolicy,
                     metadata,
-                    origin);
+                    origin
+                );
             }
         }
 
@@ -251,9 +321,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IEnumerable<KeyValuePair<string, Type>>? requiredMetadata,
             ImportCardinality cardinality,
             CreationPolicy requiredCreationPolicy,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
-            return CreateImportDefinition(parameter, contractName, requiredTypeIdentity, requiredMetadata, cardinality, requiredCreationPolicy, MetadataServices.EmptyMetadata, false, origin);
+            return CreateImportDefinition(
+                parameter,
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                requiredCreationPolicy,
+                MetadataServices.EmptyMetadata,
+                false,
+                origin
+            );
         }
 
         public static ContractBasedImportDefinition CreateImportDefinition(
@@ -265,7 +346,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
             bool isExportFactory,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
             Requires.NotNull(parameter, nameof(parameter));
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
@@ -283,7 +365,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         false,
                         true,
                         CreationPolicy.NonShared,
-                        metadata));
+                        metadata
+                    )
+                );
             }
             else
             {
@@ -295,22 +379,34 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     cardinality,
                     requiredCreationPolicy,
                     metadata,
-                    origin);
+                    origin
+                );
             }
         }
 
-        public static bool TryMakeGenericPartDefinition(ComposablePartDefinition partDefinition, IEnumerable<Type> genericParameters, [NotNullWhen(true)] out ComposablePartDefinition? specialization)
+        public static bool TryMakeGenericPartDefinition(
+            ComposablePartDefinition partDefinition,
+            IEnumerable<Type> genericParameters,
+            [NotNullWhen(true)] out ComposablePartDefinition? specialization
+        )
         {
             Requires.NotNull(partDefinition, nameof(partDefinition));
 
             specialization = null;
-            ReflectionComposablePartDefinition? reflectionPartDefinition = partDefinition as ReflectionComposablePartDefinition;
+            ReflectionComposablePartDefinition? reflectionPartDefinition =
+                partDefinition as ReflectionComposablePartDefinition;
             if (reflectionPartDefinition == null)
             {
-                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(nameof(partDefinition), partDefinition.GetType());
+                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(
+                    nameof(partDefinition),
+                    partDefinition.GetType()
+                );
             }
 
-            return reflectionPartDefinition.TryMakeGenericPartDefinition(genericParameters.ToArray(), out specialization);
+            return reflectionPartDefinition.TryMakeGenericPartDefinition(
+                genericParameters.ToArray(),
+                out specialization
+            );
         }
     }
 
@@ -330,7 +426,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Lazy<IEnumerable<ImportDefinition>>? imports,
             Lazy<IEnumerable<ExportDefinition>>? exports,
             Lazy<IDictionary<string, object?>>? metadata,
-            ICompositionElement? origin)
+            ICompositionElement? origin
+        )
         {
             ArgumentNullException.ThrowIfNull(partType);
 
@@ -370,7 +467,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 }
                 else if (constructors.Length == 0)
                 {
-                    _constructor = GetPartType().GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
+                    _constructor = GetPartType()
+                        .GetConstructor(
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                            null,
+                            Type.EmptyTypes,
+                            null
+                        );
                 }
             }
             return _constructor;
@@ -378,18 +481,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public bool IsDisposalRequired
         {
-            get
-            {
-                return _isDisposalRequired;
-            }
+            get { return _isDisposalRequired; }
         }
 
         public bool IsIdentityComparison
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public IDictionary<string, object?>? GetMetadata()
@@ -413,11 +510,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (ExportDefinition export in exports)
             {
-                ReflectionMemberExportDefinition? reflectionExport = export as ReflectionMemberExportDefinition;
+                ReflectionMemberExportDefinition? reflectionExport =
+                    export as ReflectionMemberExportDefinition;
                 if (reflectionExport == null)
                 {
                     throw new InvalidOperationException(
-                        SR.Format(SR.ReflectionModel_InvalidExportDefinition, export.GetType()));
+                        SR.Format(SR.ReflectionModel_InvalidExportDefinition, export.GetType())
+                    );
                 }
                 yield return reflectionExport;
             }
@@ -443,7 +542,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 if (reflectionImport == null)
                 {
                     throw new InvalidOperationException(
-                        SR.Format(SR.ReflectionModel_InvalidMemberImportDefinition, import.GetType()));
+                        SR.Format(
+                            SR.ReflectionModel_InvalidMemberImportDefinition,
+                            import.GetType()
+                        )
+                    );
                 }
                 yield return reflectionImport;
             }
@@ -464,7 +567,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
     {
         private readonly Lazy<IDictionary<string, object?>> _metadata;
 
-        public LazyExportDefinition(string contractName, Lazy<IDictionary<string, object?>> metadata)
+        public LazyExportDefinition(
+            string contractName,
+            Lazy<IDictionary<string, object?>> metadata
+        )
             : base(contractName, (IDictionary<string, object?>?)null)
         {
             _metadata = metadata;
@@ -472,10 +578,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override IDictionary<string, object?> Metadata
         {
-            get
-            {
-                return _metadata.Value ?? MetadataServices.EmptyMetadata;
-            }
+            get { return _metadata.Value ?? MetadataServices.EmptyMetadata; }
         }
     }
 }

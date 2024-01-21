@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,92 +39,106 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-	sealed class ApplicationFileParser : TemplateParser
-	{
-		static List <string> dependencies;
-		TextReader reader;
-		
-		public ApplicationFileParser (string fname, HttpContext context)
-		{
-			InputFile = fname;
-			Context = context;
-			VirtualPath = new VirtualPath ("/" + Path.GetFileName (fname));
-			LoadConfigDefaults ();
-		}
+    sealed class ApplicationFileParser : TemplateParser
+    {
+        static List<string> dependencies;
+        TextReader reader;
 
-		internal ApplicationFileParser (VirtualPath virtualPath, TextReader reader, HttpContext context)
-			: this (virtualPath, null, reader, context)
-		{
-		}
-		
-		internal ApplicationFileParser (VirtualPath virtualPath, string inputFile, TextReader reader, HttpContext context)
-		{
-			VirtualPath = virtualPath;
-			Context = context;
-			Reader = reader;
+        public ApplicationFileParser(string fname, HttpContext context)
+        {
+            InputFile = fname;
+            Context = context;
+            VirtualPath = new VirtualPath("/" + Path.GetFileName(fname));
+            LoadConfigDefaults();
+        }
 
-			if (String.IsNullOrEmpty (inputFile))
-				InputFile = virtualPath.PhysicalPath;
-			else
-				InputFile = inputFile;
-			
-			SetBaseType (null);
-			LoadConfigDefaults ();
-		}
-		
-		internal override Type CompileIntoType ()
-		{
-			return GlobalAsaxCompiler.CompileApplicationType (this);
-		}
+        internal ApplicationFileParser(
+            VirtualPath virtualPath,
+            TextReader reader,
+            HttpContext context
+        )
+            : this(virtualPath, null, reader, context) { }
 
-		internal static Type GetCompiledApplicationType (string inputFile, HttpContext context)
-		{
-			ApplicationFileParser parser = new ApplicationFileParser (inputFile, context);
-			AspGenerator generator = new AspGenerator (parser);
-			Type type = generator.GetCompiledType ();
-			dependencies = parser.Dependencies;
-			return type;
-		}
+        internal ApplicationFileParser(
+            VirtualPath virtualPath,
+            string inputFile,
+            TextReader reader,
+            HttpContext context
+        )
+        {
+            VirtualPath = virtualPath;
+            Context = context;
+            Reader = reader;
 
-		internal override void AddDirective (string directive, IDictionary atts)
-		{
-			if (String.Compare (directive, "application", true, Helpers.InvariantCulture) != 0 &&
-			    String.Compare (directive, "Import", true, Helpers.InvariantCulture) != 0 &&
-			    String.Compare (directive, "Assembly", true, Helpers.InvariantCulture) != 0)
-				ThrowParseException ("Invalid directive: " + directive);
+            if (String.IsNullOrEmpty(inputFile))
+                InputFile = virtualPath.PhysicalPath;
+            else
+                InputFile = inputFile;
 
-			base.AddDirective (directive, atts);
-		}
+            SetBaseType(null);
+            LoadConfigDefaults();
+        }
 
-		internal static List <string> FileDependencies {
-			get { return dependencies; }
-		}		
-		internal override Type DefaultBaseType {
-			get {
-				Type ret = PageParser.DefaultApplicationBaseType;
-				if (ret == null)
-					return base.DefaultBaseType;
+        internal override Type CompileIntoType()
+        {
+            return GlobalAsaxCompiler.CompileApplicationType(this);
+        }
 
-				return ret;
-			}
-		}
-		internal override string DefaultBaseTypeName {
-			get { return "System.Web.HttpApplication"; }
-		}
+        internal static Type GetCompiledApplicationType(string inputFile, HttpContext context)
+        {
+            ApplicationFileParser parser = new ApplicationFileParser(inputFile, context);
+            AspGenerator generator = new AspGenerator(parser);
+            Type type = generator.GetCompiledType();
+            dependencies = parser.Dependencies;
+            return type;
+        }
 
-		internal override string DefaultDirectiveName {
-			get { return "application"; }
-		}
+        internal override void AddDirective(string directive, IDictionary atts)
+        {
+            if (
+                String.Compare(directive, "application", true, Helpers.InvariantCulture) != 0
+                && String.Compare(directive, "Import", true, Helpers.InvariantCulture) != 0
+                && String.Compare(directive, "Assembly", true, Helpers.InvariantCulture) != 0
+            )
+                ThrowParseException("Invalid directive: " + directive);
 
-		internal override string BaseVirtualDir {
-			get { return Context.Request.ApplicationPath; }
-		}
-		
-		internal override TextReader Reader {
-                        get { return reader; }
-                        set { reader = value; }
-                }
-	}
+            base.AddDirective(directive, atts);
+        }
 
+        internal static List<string> FileDependencies
+        {
+            get { return dependencies; }
+        }
+        internal override Type DefaultBaseType
+        {
+            get
+            {
+                Type ret = PageParser.DefaultApplicationBaseType;
+                if (ret == null)
+                    return base.DefaultBaseType;
+
+                return ret;
+            }
+        }
+        internal override string DefaultBaseTypeName
+        {
+            get { return "System.Web.HttpApplication"; }
+        }
+
+        internal override string DefaultDirectiveName
+        {
+            get { return "application"; }
+        }
+
+        internal override string BaseVirtualDir
+        {
+            get { return Context.Request.ApplicationPath; }
+        }
+
+        internal override TextReader Reader
+        {
+            get { return reader; }
+            set { reader = value; }
+        }
+    }
 }
-

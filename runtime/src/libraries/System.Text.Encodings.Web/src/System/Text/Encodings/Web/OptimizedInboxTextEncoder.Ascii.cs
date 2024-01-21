@@ -4,7 +4,6 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 #if NETCOREAPP
 using System.Runtime.Intrinsics;
 #endif
@@ -53,7 +52,9 @@ namespace System.Text.Encodings.Web
                 return true;
             }
 
-            internal void PopulateAllowedCodePoints(in AllowedBmpCodePointsBitmap allowedBmpCodePoints)
+            internal void PopulateAllowedCodePoints(
+                in AllowedBmpCodePointsBitmap allowedBmpCodePoints
+            )
             {
                 this = default; // clear all existing data
 
@@ -83,11 +84,15 @@ namespace System.Text.Encodings.Web
         {
             private fixed ulong Data[128];
 
-            internal void PopulatePreescapedData(in AllowedBmpCodePointsBitmap allowedCodePointsBmp, ScalarEscaperBase innerEncoder)
+            internal void PopulatePreescapedData(
+                in AllowedBmpCodePointsBitmap allowedCodePointsBmp,
+                ScalarEscaperBase innerEncoder
+            )
             {
                 this = default; // clear all existing data
 
-                Span<char> tempBuffer = stackalloc char[8] { '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0' };
+                Span<char> tempBuffer =
+                    stackalloc char[8] { '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0' };
                 for (int i = 0; i < 128; i++)
                 {
                     ulong thisPreescapedData;
@@ -102,14 +107,20 @@ namespace System.Text.Encodings.Web
                     else
                     {
                         encodedCharCount = innerEncoder.EncodeUtf16(rune, tempBuffer.Slice(0, 6));
-                        Debug.Assert(encodedCharCount > 0 && encodedCharCount <= 6, "Inner encoder returned bad length.");
+                        Debug.Assert(
+                            encodedCharCount > 0 && encodedCharCount <= 6,
+                            "Inner encoder returned bad length."
+                        );
 
                         thisPreescapedData = 0;
                         tempBuffer.Slice(encodedCharCount).Clear();
                         for (int j = encodedCharCount - 1; j >= 0; j--)
                         {
                             uint thisChar = tempBuffer[j];
-                            Debug.Assert(thisChar <= 0x7F, "Inner encoder returned non-ASCII data.");
+                            Debug.Assert(
+                                thisChar <= 0x7F,
+                                "Inner encoder returned non-ASCII data."
+                            );
                             thisPreescapedData = (thisPreescapedData << 8) | thisChar;
                         }
                     }

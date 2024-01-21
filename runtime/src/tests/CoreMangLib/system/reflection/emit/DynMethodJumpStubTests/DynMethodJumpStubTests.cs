@@ -39,12 +39,14 @@ public static class DynamicMethodJumpStubTests
             // the precode, forcing the use of a jump stub.
             ReserveMemoryAround(
                 (RuntimeMethodHandle)
-                typeof(DynamicMethod).InvokeMember(
-                    "GetMethodDescriptor",
-                    BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic,
-                    null,
-                    dynamicMethod,
-                    null));
+                    typeof(DynamicMethod).InvokeMember(
+                        "GetMethodDescriptor",
+                        BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic,
+                        null,
+                        dynamicMethod,
+                        null
+                    )
+            );
         }
 
         // Call each dynamic method concurrently from several threads to validate jump stub usage
@@ -111,7 +113,8 @@ public static class DynamicMethodJumpStubTests
                 new UIntPtr(address),
                 new UIntPtr(AllocationGranularity),
                 AllocationType.RESERVE,
-                MemoryProtection.NOACCESS);
+                MemoryProtection.NOACCESS
+            );
 
             if (address + AllocationGranularity < address)
             {
@@ -154,5 +157,6 @@ public static class DynamicMethodJumpStubTests
         UIntPtr lpAddress,
         UIntPtr dwSize,
         AllocationType flAllocationType,
-        MemoryProtection flProtect);
+        MemoryProtection flProtect
+    );
 }

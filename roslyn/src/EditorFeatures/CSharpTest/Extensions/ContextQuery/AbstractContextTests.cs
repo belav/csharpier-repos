@@ -11,9 +11,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
 {
     public abstract class AbstractContextTests
     {
-        protected abstract void CheckResult(bool validLocation, int position, SyntaxTree syntaxTree);
+        protected abstract void CheckResult(
+            bool validLocation,
+            int position,
+            SyntaxTree syntaxTree
+        );
 
-        private void VerifyWorker(string markup, bool validLocation, CSharpParseOptions options = null)
+        private void VerifyWorker(
+            string markup,
+            bool validLocation,
+            CSharpParseOptions options = null
+        )
         {
             MarkupTestFile.GetPosition(markup, out var code, out int position);
 
@@ -21,7 +29,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             VerifyInFrontOfComment(code, position, validLocation, options: options);
             VerifyAtEndOfFile(code, position, validLocation, options: options);
             VerifyAtPosition_TypePartiallyWritten(code, position, validLocation, options: options);
-            VerifyInFrontOfComment_TypePartiallyWritten(code, position, validLocation, options: options);
+            VerifyInFrontOfComment_TypePartiallyWritten(
+                code,
+                position,
+                validLocation,
+                options: options
+            );
             VerifyAtEndOfFile_TypePartiallyWritten(code, position, validLocation, options: options);
         }
 
@@ -30,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             int position,
             bool validLocation,
             string insertText,
-            CSharpParseOptions options)
+            CSharpParseOptions options
+        )
         {
             text = text[..position] + insertText + "/**/" + text[position..];
 
@@ -41,18 +55,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             CheckResult(validLocation, position, tree);
         }
 
-        private void VerifyInFrontOfComment(string text, int position, bool validLocation, CSharpParseOptions options)
-            => VerifyInFrontOfComment(text, position, validLocation, string.Empty, options: options);
+        private void VerifyInFrontOfComment(
+            string text,
+            int position,
+            bool validLocation,
+            CSharpParseOptions options
+        ) => VerifyInFrontOfComment(text, position, validLocation, string.Empty, options: options);
 
-        private void VerifyInFrontOfComment_TypePartiallyWritten(string text, int position, bool validLocation, CSharpParseOptions options)
-            => VerifyInFrontOfComment(text, position, validLocation, "Str", options: options);
+        private void VerifyInFrontOfComment_TypePartiallyWritten(
+            string text,
+            int position,
+            bool validLocation,
+            CSharpParseOptions options
+        ) => VerifyInFrontOfComment(text, position, validLocation, "Str", options: options);
 
         private void VerifyAtPosition(
             string text,
             int position,
             bool validLocation,
             string insertText,
-            CSharpParseOptions options)
+            CSharpParseOptions options
+        )
         {
             text = text[..position] + insertText + text[position..];
 
@@ -62,18 +85,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             CheckResult(validLocation, position, tree);
         }
 
-        private void VerifyAtPosition(string text, int position, bool validLocation, CSharpParseOptions options)
-            => VerifyAtPosition(text, position, validLocation, string.Empty, options: options);
+        private void VerifyAtPosition(
+            string text,
+            int position,
+            bool validLocation,
+            CSharpParseOptions options
+        ) => VerifyAtPosition(text, position, validLocation, string.Empty, options: options);
 
-        private void VerifyAtPosition_TypePartiallyWritten(string text, int position, bool validLocation, CSharpParseOptions options)
-            => VerifyAtPosition(text, position, validLocation, "Str", options: options);
+        private void VerifyAtPosition_TypePartiallyWritten(
+            string text,
+            int position,
+            bool validLocation,
+            CSharpParseOptions options
+        ) => VerifyAtPosition(text, position, validLocation, "Str", options: options);
 
         private void VerifyAtEndOfFile(
             string text,
             int position,
             bool validLocation,
             string insertText,
-            CSharpParseOptions options)
+            CSharpParseOptions options
+        )
         {
             // only do this if the placeholder was at the end of the text.
             if (text.Length != position)
@@ -89,11 +121,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             CheckResult(validLocation, position, tree);
         }
 
-        private void VerifyAtEndOfFile(string text, int position, bool validLocation, CSharpParseOptions options)
-            => VerifyAtEndOfFile(text, position, validLocation, string.Empty, options: options);
+        private void VerifyAtEndOfFile(
+            string text,
+            int position,
+            bool validLocation,
+            CSharpParseOptions options
+        ) => VerifyAtEndOfFile(text, position, validLocation, string.Empty, options: options);
 
-        private void VerifyAtEndOfFile_TypePartiallyWritten(string text, int position, bool validLocation, CSharpParseOptions options)
-            => VerifyAtEndOfFile(text, position, validLocation, "Str", options: options);
+        private void VerifyAtEndOfFile_TypePartiallyWritten(
+            string text,
+            int position,
+            bool validLocation,
+            CSharpParseOptions options
+        ) => VerifyAtEndOfFile(text, position, validLocation, "Str", options: options);
 
         protected void VerifyTrue(string text)
         {
@@ -118,27 +158,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
 
         protected static string AddInsideMethod(string text)
         {
-            return
-                """
-                class C
-                {
-                  void F()
-                  {
-                """ + text +
-                """
-                  }
-                }
-                """;
+            return """
+                    class C
+                    {
+                      void F()
+                      {
+                    """
+                + text
+                + """
+                      }
+                    }
+                    """;
         }
 
         protected static string AddInsideClass(string text)
         {
-            return
-                """
-                class C
-                {
-                """ + text +
-@"}";
+            return """
+                    class C
+                    {
+                    """
+                + text
+                + @"}";
         }
     }
 }

@@ -7,11 +7,16 @@ using System.Runtime.InteropServices.Marshalling;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms686084(v=vs.85)
-[GeneratedComInterface, Guid("5433376A-414D-11d3-B206-00C04FC2F3EF"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    GeneratedComInterface,
+    Guid("5433376A-414D-11d3-B206-00C04FC2F3EF"),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal partial interface ITransactionVoterFactory2
 {
     void Create(
         [MarshalAs(UnmanagedType.Interface)] ITransaction pITransaction,
         [MarshalAs(UnmanagedType.Interface)] ITransactionVoterNotifyAsync2 pVoterNotify,
-        [MarshalAs(UnmanagedType.Interface)] out ITransactionVoterBallotAsync2 ppVoterBallot);
+        [MarshalAs(UnmanagedType.Interface)] out ITransactionVoterBallotAsync2 ppVoterBallot
+    );
 }

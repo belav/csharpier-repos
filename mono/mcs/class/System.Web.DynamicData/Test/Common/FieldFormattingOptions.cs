@@ -6,63 +6,67 @@ using System.Web.DynamicData;
 
 namespace MonoTests.Common
 {
-	class FieldFormattingOptions : IFieldFormattingOptions
-	{
-		Dictionary<string, object> propertyValues = new Dictionary<string, object> ();
+    class FieldFormattingOptions : IFieldFormattingOptions
+    {
+        Dictionary<string, object> propertyValues = new Dictionary<string, object>();
 
-		public bool ApplyFormatInEditMode
-		{
-			get { return GetProperty <bool> ("ApplyFormatInEditMode");  }
-		}
+        public bool ApplyFormatInEditMode
+        {
+            get { return GetProperty<bool>("ApplyFormatInEditMode"); }
+        }
 
-		public bool ConvertEmptyStringToNull
-		{
-			get { return GetProperty <bool> ("ConvertEmptyStringToNull"); }
-		}
+        public bool ConvertEmptyStringToNull
+        {
+            get { return GetProperty<bool>("ConvertEmptyStringToNull"); }
+        }
 
-		public string DataFormatString
-		{
-			get { return GetProperty <string> ("DataFormatString"); }
-		}
+        public string DataFormatString
+        {
+            get { return GetProperty<string>("DataFormatString"); }
+        }
 
-		public bool HtmlEncode
-		{
-			get { return GetProperty <bool> ("HtmlEncode"); }
-		}
+        public bool HtmlEncode
+        {
+            get { return GetProperty<bool>("HtmlEncode"); }
+        }
 
-		public string NullDisplayText
-		{
-			get { return GetProperty <string> ("NullDisplayText"); }
-		}
+        public string NullDisplayText
+        {
+            get { return GetProperty<string>("NullDisplayText"); }
+        }
 
-		T GetProperty<T> (string name)
-		{
-			if (String.IsNullOrEmpty (name))
-				throw new ArgumentNullException ("name");
-			
-			object v;
-			if (propertyValues.TryGetValue (name, out v)) {
-				if (v == null)
-					return default (T);
-				if (typeof (T).IsAssignableFrom (v.GetType ())) {
-					return (T) v;
-				}
+        T GetProperty<T>(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
 
-				throw new InvalidOperationException ("Invalid value type. Expected '" + typeof (T) + "' and got '" + v.GetType () + "'");
-			}
+            object v;
+            if (propertyValues.TryGetValue(name, out v))
+            {
+                if (v == null)
+                    return default(T);
+                if (typeof(T).IsAssignableFrom(v.GetType()))
+                {
+                    return (T)v;
+                }
 
-			return default (T);
-		}
+                throw new InvalidOperationException(
+                    "Invalid value type. Expected '" + typeof(T) + "' and got '" + v.GetType() + "'"
+                );
+            }
 
-		public void SetProperty (string name, object value)
-		{
-			if (String.IsNullOrEmpty (name))
-				return;
+            return default(T);
+        }
 
-			if (propertyValues.ContainsKey (name))
-				propertyValues[name] = value;
-			else
-				propertyValues.Add (name, value);
-		}
-	}
+        public void SetProperty(string name, object value)
+        {
+            if (String.IsNullOrEmpty(name))
+                return;
+
+            if (propertyValues.ContainsKey(name))
+                propertyValues[name] = value;
+            else
+                propertyValues.Add(name, value);
+        }
+    }
 }

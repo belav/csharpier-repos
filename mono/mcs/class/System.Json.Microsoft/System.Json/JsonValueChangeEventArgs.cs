@@ -23,7 +23,10 @@ namespace System.Json
         {
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException("index", RS.Format(Properties.Resources.ArgumentMustBeGreaterThanOrEqualTo, index, 0));
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    RS.Format(Properties.Resources.ArgumentMustBeGreaterThanOrEqualTo, index, 0)
+                );
             }
 
             this.child = child;

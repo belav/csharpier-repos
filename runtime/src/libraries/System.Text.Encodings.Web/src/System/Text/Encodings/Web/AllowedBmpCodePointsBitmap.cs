@@ -5,7 +5,6 @@ using System.Buffers.Binary;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Unicode;
-
 #if NETCOREAPP
 using System.Numerics;
 #endif
@@ -65,20 +64,37 @@ namespace System.Text.Encodings.Web
         {
             fixed (uint* pBitmap = Bitmap)
             {
-                ReadOnlySpan<byte> definedCharsBitmapAsLittleEndian = UnicodeHelpers.GetDefinedBmpCodePointsBitmapLittleEndian();
-                Span<uint> thisAllowedCharactersBitmap = new Span<uint>(pBitmap, BitmapLengthInDWords);
-                Debug.Assert(definedCharsBitmapAsLittleEndian.Length == thisAllowedCharactersBitmap.Length * sizeof(uint));
+                ReadOnlySpan<byte> definedCharsBitmapAsLittleEndian =
+                    UnicodeHelpers.GetDefinedBmpCodePointsBitmapLittleEndian();
+                Span<uint> thisAllowedCharactersBitmap = new Span<uint>(
+                    pBitmap,
+                    BitmapLengthInDWords
+                );
+                Debug.Assert(
+                    definedCharsBitmapAsLittleEndian.Length
+                        == thisAllowedCharactersBitmap.Length * sizeof(uint)
+                );
 
 #if NETCOREAPP
                 if (Vector.IsHardwareAccelerated && BitConverter.IsLittleEndian)
                 {
                     while (!definedCharsBitmapAsLittleEndian.IsEmpty)
                     {
-                        (new Vector<uint>(definedCharsBitmapAsLittleEndian) & new Vector<uint>(thisAllowedCharactersBitmap)).CopyTo(thisAllowedCharactersBitmap);
-                        definedCharsBitmapAsLittleEndian = definedCharsBitmapAsLittleEndian.Slice(Vector<byte>.Count);
-                        thisAllowedCharactersBitmap = thisAllowedCharactersBitmap.Slice(Vector<uint>.Count);
+                        (
+                            new Vector<uint>(definedCharsBitmapAsLittleEndian)
+                            & new Vector<uint>(thisAllowedCharactersBitmap)
+                        ).CopyTo(thisAllowedCharactersBitmap);
+                        definedCharsBitmapAsLittleEndian = definedCharsBitmapAsLittleEndian.Slice(
+                            Vector<byte>.Count
+                        );
+                        thisAllowedCharactersBitmap = thisAllowedCharactersBitmap.Slice(
+                            Vector<uint>.Count
+                        );
                     }
-                    Debug.Assert(thisAllowedCharactersBitmap.IsEmpty, "Both vectors should've been fully consumed.");
+                    Debug.Assert(
+                        thisAllowedCharactersBitmap.IsEmpty,
+                        "Both vectors should've been fully consumed."
+                    );
                     return;
                 }
 #endif
@@ -86,7 +102,9 @@ namespace System.Text.Encodings.Web
                 // Not Core, or not little-endian, or not SIMD-optimized.
                 for (int i = 0; i < thisAllowedCharactersBitmap.Length; i++)
                 {
-                    thisAllowedCharactersBitmap[i] &= BinaryPrimitives.ReadUInt32LittleEndian(definedCharsBitmapAsLittleEndian.Slice(i * sizeof(uint)));
+                    thisAllowedCharactersBitmap[i] &= BinaryPrimitives.ReadUInt32LittleEndian(
+                        definedCharsBitmapAsLittleEndian.Slice(i * sizeof(uint))
+                    );
                 }
             }
         }
@@ -99,8 +117,14 @@ namespace System.Text.Encodings.Web
         {
             // No bounds checks required: every char maps to a valid position in the bitmap
             _GetIndexAndOffset(value, out nuint index, out int offset);
-            if ((Bitmap[index] & (1u << offset)) != 0) { return true; }
-            else { return false; }
+            if ((Bitmap[index] & (1u << offset)) != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -109,10 +133,19 @@ namespace System.Text.Encodings.Web
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public readonly bool IsCodePointAllowed(uint value)
         {
-            if (!UnicodeUtility.IsBmpCodePoint(value)) { return false; } // we only understand BMP
+            if (!UnicodeUtility.IsBmpCodePoint(value))
+            {
+                return false;
+            } // we only understand BMP
             _GetIndexAndOffset(value, out nuint index, out int offset);
-            if ((Bitmap[index] & (1u << offset)) != 0) { return true; }
-            else { return false; }
+            if ((Bitmap[index] & (1u << offset)) != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

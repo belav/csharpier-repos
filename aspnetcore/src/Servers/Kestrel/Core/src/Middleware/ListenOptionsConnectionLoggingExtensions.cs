@@ -31,15 +31,24 @@ public static class ListenOptionsConnectionLoggingExtensions
     /// <returns>
     /// The <see cref="ListenOptions"/>.
     /// </returns>
-    public static ListenOptions UseConnectionLogging(this ListenOptions listenOptions, string? loggerName)
+    public static ListenOptions UseConnectionLogging(
+        this ListenOptions listenOptions,
+        string? loggerName
+    )
     {
-        var loggerFactory = listenOptions.KestrelServerOptions.ApplicationServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerName == null ? loggerFactory.CreateLogger<LoggingConnectionMiddleware>() : loggerFactory.CreateLogger(loggerName);
+        var loggerFactory =
+            listenOptions.KestrelServerOptions.ApplicationServices.GetRequiredService<ILoggerFactory>();
+        var logger =
+            loggerName == null
+                ? loggerFactory.CreateLogger<LoggingConnectionMiddleware>()
+                : loggerFactory.CreateLogger(loggerName);
 
         listenOptions.Use(next => new LoggingConnectionMiddleware(next, logger).OnConnectionAsync);
 
         IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
-        multiplexedConnectionBuilder.Use(next => new LoggingMultiplexedConnectionMiddleware(next, logger).OnConnectionAsync);
+        multiplexedConnectionBuilder.Use(next =>
+            new LoggingMultiplexedConnectionMiddleware(next, logger).OnConnectionAsync
+        );
 
         return listenOptions;
     }
