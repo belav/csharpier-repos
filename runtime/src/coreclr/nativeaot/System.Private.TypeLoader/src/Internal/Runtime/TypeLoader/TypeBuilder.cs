@@ -1201,9 +1201,12 @@ namespace Internal.Runtime.TypeLoader
 
             for (int i = 0; i < _typesThatNeedTypeHandles.Count; i++)
             {
-                _typesThatNeedTypeHandles[i].SetRuntimeTypeHandleUnsafe(
-                    _typesThatNeedTypeHandles[i].GetTypeBuilderState().HalfBakedRuntimeTypeHandle
-                );
+                _typesThatNeedTypeHandles[i]
+                    .SetRuntimeTypeHandleUnsafe(
+                        _typesThatNeedTypeHandles[i]
+                            .GetTypeBuilderState()
+                            .HalfBakedRuntimeTypeHandle
+                    );
 
                 TypeLoaderLogger.WriteLine(
                     "Successfully Registered type " + _typesThatNeedTypeHandles[i].ToString() + "."

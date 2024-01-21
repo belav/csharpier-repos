@@ -150,10 +150,8 @@ namespace Internal.TypeSystem
                     replacementTypes
                 );
                 for (int paramIndex = 0; paramIndex < oldSig.Length; paramIndex++)
-                    sigBuilder[paramIndex] = oldSig[paramIndex].ReplaceTypesInConstructionOfType(
-                        typesToReplace,
-                        replacementTypes
-                    );
+                    sigBuilder[paramIndex] = oldSig[paramIndex]
+                        .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
 
                 MethodSignature newSig = sigBuilder.ToSignature();
                 if (newSig != oldSig)

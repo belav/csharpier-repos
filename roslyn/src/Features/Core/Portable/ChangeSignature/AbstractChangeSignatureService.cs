@@ -749,9 +749,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             argumentsToPermute.Sort(
                 (a1, a2) =>
                 {
-                    return parameterToIndexMap[argumentToParameterMap[a1]].CompareTo(
-                        parameterToIndexMap[argumentToParameterMap[a2]]
-                    );
+                    return parameterToIndexMap[argumentToParameterMap[a1]]
+                        .CompareTo(parameterToIndexMap[argumentToParameterMap[a2]]);
                 }
             );
 

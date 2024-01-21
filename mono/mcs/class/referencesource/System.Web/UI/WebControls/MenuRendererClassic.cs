@@ -368,8 +368,7 @@ namespace System.Web.UI.WebControls
                         // Render the items themselves
                         for (int i = 0; i < Menu.Items.Count; i++)
                         {
-                            Menu
-                                .Items[i]
+                            Menu.Items[i]
                                 .RenderItem(writer, i, enabled, Menu.Orientation, staticOnly);
                             // And their static subitems
                             if (Menu.Items[i].ChildItems.Count != 0)
@@ -387,8 +386,7 @@ namespace System.Web.UI.WebControls
                         // Render the items themselves
                         for (int i = 0; i < Menu.Items.Count; i++)
                         {
-                            Menu
-                                .Items[i]
+                            Menu.Items[i]
                                 .RenderItem(writer, i, enabled, Menu.Orientation, staticOnly);
                             // And their static subitems
                             if (Menu.Items[i].ChildItems.Count != 0)

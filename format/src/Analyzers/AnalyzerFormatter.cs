@@ -485,9 +485,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 var analyzers = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
 
                 // Filter analyzers by project's language
-                var filteredAnalyzer = projectAnalyzersAndFixers[projectId].Analyzers.Where(
-                    analyzer => DoesAnalyzerSupportLanguage(analyzer, project.Language)
-                );
+                var filteredAnalyzer = projectAnalyzersAndFixers[projectId]
+                    .Analyzers.Where(analyzer =>
+                        DoesAnalyzerSupportLanguage(analyzer, project.Language)
+                    );
                 foreach (var analyzer in filteredAnalyzer)
                 {
                     // Filter by excluded diagnostics

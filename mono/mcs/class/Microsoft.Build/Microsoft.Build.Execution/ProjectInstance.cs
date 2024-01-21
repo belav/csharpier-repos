@@ -341,11 +341,10 @@ namespace Microsoft.Build.Execution
                         Func<string, ProjectItemInstance> creator = s => new ProjectItemInstance(
                             this,
                             p.ItemType,
-                            p
-                                .Metadata.Select(m => new KeyValuePair<string, string>(
-                                    m.Name,
-                                    m.Value
-                                ))
+                            p.Metadata.Select(m => new KeyValuePair<string, string>(
+                                m.Name,
+                                m.Value
+                            ))
                                 .ToList(),
                             s
                         );

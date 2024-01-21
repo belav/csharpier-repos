@@ -140,9 +140,8 @@ namespace ILCompiler
                     }
                 }
                 else if (
-                    t_typeLoadCheckInProgressStack[
-                        typeCheckDepth
-                    ].OtherTypesToMarkAsSuccessfullyLoaded.Contains(type)
+                    t_typeLoadCheckInProgressStack[typeCheckDepth]
+                        .OtherTypesToMarkAsSuccessfullyLoaded.Contains(type)
                 )
                 {
                     // We've found where the type will be marked as successfully loaded.

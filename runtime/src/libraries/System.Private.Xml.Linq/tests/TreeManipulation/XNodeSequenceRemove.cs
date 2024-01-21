@@ -1158,10 +1158,8 @@ namespace XLinqTests
 
                         // Compare the rest of the elements
                         TestLog.Compare(
-                            expectedNodesForParent[parent].EqualAll(
-                                parent.Nodes(),
-                                XNode.EqualityComparer
-                            ),
+                            expectedNodesForParent[parent]
+                                .EqualAll(parent.Nodes(), XNode.EqualityComparer),
                             "The rest of the nodes"
                         );
                     }

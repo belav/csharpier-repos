@@ -281,9 +281,8 @@ namespace XmlNormalizer
             _newLines = false;
             foreach (PropertyInfo pi in typeof(XmlNormalizer).GetProperties())
             {
-                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute), true)[
-                    0
-                ].ToString();
+                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute), true)[0]
+                    .ToString();
                 if (options.IndexOf(option) == -1)
                     continue;
                 pi.GetSetMethod().Invoke(this, new object[] { true });
@@ -296,9 +295,8 @@ namespace XmlNormalizer
 
             foreach (PropertyInfo pi in typeof(XmlNormalizer).GetProperties())
             {
-                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute), true)[
-                    0
-                ].ToString();
+                string option = pi.GetCustomAttributes(typeof(OptionLetterAttribute), true)[0]
+                    .ToString();
                 string descr = (
                     pi.GetCustomAttributes(typeof(DescriptionAttribute), true)[0]
                     as DescriptionAttribute

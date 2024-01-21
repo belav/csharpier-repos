@@ -2065,24 +2065,27 @@ Assert.Fail();
         public void Load_IncompatibleEHandlerT()
         {
             _fillErrCounter = 0;
-            _fillErr[0].init(
-                "LoadIncompatible",
-                1,
-                true,
-                "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double."
-            );
-            _fillErr[1].init(
-                "LoadIncompatible",
-                2,
-                true,
-                "Input string was not in a correct format.Couldn't store <mono 2> in name Column.  Expected type is Double."
-            );
-            _fillErr[2].init(
-                "LoadIncompatible",
-                3,
-                true,
-                "Input string was not in a correct format.Couldn't store <mono 3> in name Column.  Expected type is Double."
-            );
+            _fillErr[0]
+                .init(
+                    "LoadIncompatible",
+                    1,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double."
+                );
+            _fillErr[1]
+                .init(
+                    "LoadIncompatible",
+                    2,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 2> in name Column.  Expected type is Double."
+                );
+            _fillErr[2]
+                .init(
+                    "LoadIncompatible",
+                    3,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 3> in name Column.  Expected type is Double."
+                );
             LocalSetup();
             DataTable dtLoad = new DataTable("LoadIncompatible");
             dtLoad.Columns.Add("name", typeof(double));
@@ -2096,12 +2099,13 @@ Assert.Fail();
         public void Load_IncompatibleEHandlerF()
         {
             _fillErrCounter = 0;
-            _fillErr[0].init(
-                "LoadIncompatible",
-                1,
-                false,
-                "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double."
-            );
+            _fillErr[0]
+                .init(
+                    "LoadIncompatible",
+                    1,
+                    false,
+                    "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double."
+                );
             LocalSetup();
             DataTable dtLoad = new DataTable("LoadIncompatible");
             dtLoad.Columns.Add("name", typeof(double));
@@ -3269,15 +3273,13 @@ Assert.Fail();
             DataSet ds = new DataSet("ExampleDataSet");
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
-            ds
-                .Tables["ExampleDataTable"]
+            ds.Tables["ExampleDataTable"]
                 .Columns.Add(
                     new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
                 );
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
-            ds
-                .Tables["ExampleDataTable"]
+            ds.Tables["ExampleDataTable"]
                 .Constraints.Add(
                     "PK_ExampleDataTable",
                     ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
@@ -3486,8 +3488,7 @@ Assert.Fail();
             // Add MyType DataTable
             ds.Tables.Add("MyType");
 
-            ds
-                .Tables["MyType"]
+            ds.Tables["MyType"]
                 .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 

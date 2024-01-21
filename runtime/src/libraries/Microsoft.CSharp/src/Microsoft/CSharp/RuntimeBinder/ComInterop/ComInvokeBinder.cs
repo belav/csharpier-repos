@@ -350,9 +350,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             for (int i = 0, n = variants.Length; i < n; i++)
             {
-                Expression updateFromReturn = variants[i].UpdateFromReturn(
-                    parametersForUpdates[i + 1]
-                );
+                Expression updateFromReturn = variants[i]
+                    .UpdateFromReturn(parametersForUpdates[i + 1]);
                 if (updateFromReturn != null)
                 {
                     tryStatements.Add(updateFromReturn);

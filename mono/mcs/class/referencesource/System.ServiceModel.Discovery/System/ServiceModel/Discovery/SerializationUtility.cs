@@ -244,19 +244,18 @@ namespace System.ServiceModel.Discovery
                 for (int i = 0; i < uris.Count - 1; i++)
                 {
                     writer.WriteString(
-                        uris[i].GetComponents(
-                            UriComponents.SerializationInfoString,
-                            UriFormat.UriEscaped
-                        )
+                        uris[i]
+                            .GetComponents(
+                                UriComponents.SerializationInfoString,
+                                UriFormat.UriEscaped
+                            )
                     );
                     writer.WriteWhitespace(" ");
                 }
 
                 writer.WriteString(
-                    uris[uris.Count - 1].GetComponents(
-                        UriComponents.SerializationInfoString,
-                        UriFormat.UriEscaped
-                    )
+                    uris[uris.Count - 1]
+                        .GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped)
                 );
             }
         }

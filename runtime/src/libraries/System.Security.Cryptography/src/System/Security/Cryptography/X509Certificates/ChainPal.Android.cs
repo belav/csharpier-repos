@@ -281,10 +281,11 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         statuses[index] = errorsByIndex[index];
                         if (
-                            errorsByIndex[index].Exists(s =>
-                                s.Status == X509ChainStatusFlags.Revoked
-                                || s.Status == X509ChainStatusFlags.RevocationStatusUnknown
-                            )
+                            errorsByIndex[index]
+                                .Exists(s =>
+                                    s.Status == X509ChainStatusFlags.Revoked
+                                    || s.Status == X509ChainStatusFlags.RevocationStatusUnknown
+                                )
                         )
                         {
                             firstRevocationErrorIndex = Math.Max(index, firstRevocationErrorIndex);

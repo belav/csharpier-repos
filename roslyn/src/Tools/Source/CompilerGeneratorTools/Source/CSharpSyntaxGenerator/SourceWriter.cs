@@ -1882,8 +1882,7 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "SyntaxKind kind" : "",
-                    nd
-                        .Fields.Where(factoryWithNoAutoCreatableTokenFields.Contains)
+                    nd.Fields.Where(factoryWithNoAutoCreatableTokenFields.Contains)
                         .Select(f => $"{GetRedPropertyType(f)} {CamelCase(f.Name)}")
                 )
             );
@@ -1989,8 +1988,7 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "SyntaxKind kind" : "",
-                    nd
-                        .Fields.Where(minimalFactoryfields.Contains)
+                    nd.Fields.Where(minimalFactoryfields.Contains)
                         .Select(f =>
                         {
                             var type = GetRedPropertyType(f);

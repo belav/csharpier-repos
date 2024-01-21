@@ -658,12 +658,11 @@ namespace Internal.TypeSystem.Ecma
                                     ];
                                     for (int i = 0; i < newSubstitution.Length; i++)
                                     {
-                                        newSubstitutionTypes[i] = newSubstitution[
-                                            i
-                                        ].InstantiateSignature(
-                                            substitution,
-                                            default(Instantiation)
-                                        );
+                                        newSubstitutionTypes[i] = newSubstitution[i]
+                                            .InstantiateSignature(
+                                                substitution,
+                                                default(Instantiation)
+                                            );
                                     }
                                     newSubstitution = new Instantiation(newSubstitutionTypes);
                                 }

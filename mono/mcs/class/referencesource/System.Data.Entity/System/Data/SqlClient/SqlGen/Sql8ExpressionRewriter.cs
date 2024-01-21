@@ -292,9 +292,8 @@ namespace System.Data.SqlClient.SqlGen
             for (int i = 0; i < leftFlattenedProperties.Count; i++)
             {
                 //A.ai == B.bi
-                DbExpression equalsExpression = leftFlattenedProperties[i].Equal(
-                    rightFlattenedProperties[i]
-                );
+                DbExpression equalsExpression = leftFlattenedProperties[i]
+                    .Equal(rightFlattenedProperties[i]);
 
                 //A.ai is null AND B.bi is null
                 DbExpression leftIsNullExpression = leftFlattenedProperties[i].IsNull();

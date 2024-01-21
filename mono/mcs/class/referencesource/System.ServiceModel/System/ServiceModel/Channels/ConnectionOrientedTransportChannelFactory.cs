@@ -79,9 +79,8 @@ namespace System.ServiceModel.Channels
             {
                 this.upgrade = upgradeBindingElements[0].BuildClientStreamUpgradeProvider(context);
                 context.BindingParameters.Remove<StreamUpgradeBindingElement>();
-                this.securityCapabilities = upgradeBindingElements[
-                    0
-                ].GetProperty<ISecurityCapabilities>(context);
+                this.securityCapabilities = upgradeBindingElements[0]
+                    .GetProperty<ISecurityCapabilities>(context);
                 // flow the identity only if the channel factory supports impersonating during an async open AND
                 // there is the binding is configured with security
                 this.flowIdentity = supportsImpersonationDuringAsyncOpen;

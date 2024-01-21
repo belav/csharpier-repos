@@ -244,10 +244,8 @@ namespace System.Data.Objects
                 for (int i = 0; i < Navigations.Count; i++)
                 {
                     if (
-                        !Navigations[i].Equals(
-                            rhs.Navigations[i],
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !Navigations[i]
+                            .Equals(rhs.Navigations[i], StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         return false;

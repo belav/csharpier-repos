@@ -179,10 +179,8 @@ namespace System.Web.Script.Services
 
             bool found = false;
             for (int i = 0; !found && i < configuredProperties.Length; i++)
-                found = configuredProperties[i].Equals(
-                    propertyToCheck,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                found = configuredProperties[i]
+                    .Equals(propertyToCheck, StringComparison.OrdinalIgnoreCase);
 
             return found;
         }

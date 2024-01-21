@@ -1093,10 +1093,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 .ToList();
             for (int i = 0; i < expectedReferenceNames.Count; i++)
                 if (expectedReferenceNames[i].EndsWith(".dll"))
-                    expectedReferenceNames[i] = expectedReferenceNames[i].Substring(
-                        0,
-                        expectedReferenceNames[i].LastIndexOf(".")
-                    );
+                    expectedReferenceNames[i] = expectedReferenceNames[i]
+                        .Substring(0, expectedReferenceNames[i].LastIndexOf("."));
 
             Assert.That(
                 assembly.MainModule.AssemblyReferences.Select(asm => asm.Name),
@@ -1625,8 +1623,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                 Environment.NewLine,
                                 dependencyRecorder
                                     .Dependencies.Where(d =>
-                                        d
-                                            .Target.ToLowerInvariant()
+                                        d.Target.ToLowerInvariant()
                                             .Contains(expectedTarget.ToLowerInvariant())
                                     )
                                     .Select(d => "\t" + DependencyToString(d))
@@ -1635,8 +1632,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                 Environment.NewLine,
                                 dependencyRecorder
                                     .Dependencies.Where(d =>
-                                        d
-                                            .Source.ToLowerInvariant()
+                                        d.Source.ToLowerInvariant()
                                             .Contains(expectedSource.ToLowerInvariant())
                                     )
                                     .Select(d => "\t" + DependencyToString(d))

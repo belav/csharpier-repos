@@ -1143,8 +1143,7 @@ namespace System.ServiceModel.Syndication.Tests
                         Assert.Equal(5, item.ElementExtensions.Count);
                         Assert.Equal(
                             10,
-                            item
-                                .ElementExtensions[item.ElementExtensions.Count - 1]
+                            item.ElementExtensions[item.ElementExtensions.Count - 1]
                                 .GetObject<ExtensionObject>()
                                 .Value
                         );

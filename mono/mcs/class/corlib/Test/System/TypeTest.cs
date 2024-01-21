@@ -430,14 +430,12 @@ namespace MonoTests.System
                 BindingFlags.Instance | BindingFlags.NonPublic
             );
             Assert.IsTrue(
-                mi.GetParameters()[2].ParameterType.IsAssignableFrom(
-                    mi.GetParameters()[1].ParameterType
-                )
+                mi.GetParameters()[2]
+                    .ParameterType.IsAssignableFrom(mi.GetParameters()[1].ParameterType)
             );
             Assert.IsTrue(
-                mi.GetParameters()[1].ParameterType.IsAssignableFrom(
-                    mi.GetParameters()[1].ParameterType
-                )
+                mi.GetParameters()[1]
+                    .ParameterType.IsAssignableFrom(mi.GetParameters()[1].ParameterType)
             );
 
             // Tests for type parameters
@@ -446,9 +444,8 @@ namespace MonoTests.System
                 BindingFlags.Instance | BindingFlags.NonPublic
             );
             Assert.IsTrue(
-                mi.GetParameters()[0].ParameterType.IsAssignableFrom(
-                    mi.GetParameters()[0].ParameterType
-                )
+                mi.GetParameters()[0]
+                    .ParameterType.IsAssignableFrom(mi.GetParameters()[0].ParameterType)
             );
             Assert.IsFalse(mi.GetParameters()[0].ParameterType.IsAssignableFrom(typeof(int)));
 

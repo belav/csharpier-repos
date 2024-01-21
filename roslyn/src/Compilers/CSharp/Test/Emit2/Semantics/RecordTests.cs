@@ -4420,8 +4420,7 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword
@@ -4543,8 +4542,7 @@ public class Program
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword
@@ -4678,8 +4676,7 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword
@@ -4815,8 +4812,7 @@ public class Program
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword
@@ -4949,8 +4945,7 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword
@@ -5086,8 +5081,7 @@ public class Program
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword
@@ -5742,8 +5736,7 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword
@@ -5863,8 +5856,7 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp
-                    .GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace.GetTypeMember("A")
                     .ToDisplayString(
                         SymbolDisplayFormat.TestFormat.AddKindOptions(
                             SymbolDisplayKindOptions.IncludeTypeKeyword

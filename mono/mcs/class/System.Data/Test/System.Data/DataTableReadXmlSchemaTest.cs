@@ -555,8 +555,7 @@ namespace MonoTests.System.Data
         {
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("foo"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test005.xsd")
                 );
@@ -606,8 +605,7 @@ namespace MonoTests.System.Data
 
             ds = new DataSet();
             ds.Tables.Add(new DataTable("foo"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test006.xsd")
                 );
@@ -664,8 +662,7 @@ namespace MonoTests.System.Data
             // Nested simple type element
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("uno"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test007.xsd")
                 );
@@ -679,8 +676,7 @@ namespace MonoTests.System.Data
             // External simple type element
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("uno"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test008.xsd")
                 );
@@ -739,8 +735,7 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("e"));
             ds.Tables.Add(new DataTable("root"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test011.xsd")
                 );
@@ -806,8 +801,7 @@ namespace MonoTests.System.Data
                 false,
                 false
             );
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test011.xsd")
                 );
@@ -818,8 +812,7 @@ namespace MonoTests.System.Data
         {
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("e"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test013.xsd")
                 );
@@ -873,8 +866,7 @@ namespace MonoTests.System.Data
         {
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("Track"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test103.xsd")
                 );
@@ -887,13 +879,11 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("p"));
             ds.Tables.Add(new DataTable("c"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test101.xsd")
                 );
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test101.xsd")
                 );
@@ -963,13 +953,11 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("p"));
             ds.Tables.Add(new DataTable("c"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test102.xsd")
                 );
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test102.xsd")
                 );
@@ -1039,13 +1027,11 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("Foo"));
             ds.Tables.Add(new DataTable("Bar"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test012.xsd")
                 );
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test012.xsd")
                 );
@@ -1137,18 +1123,15 @@ namespace MonoTests.System.Data
             ds.Tables.Add(new DataTable("root"));
             ds.Tables.Add(new DataTable("x"));
             ds.Tables.Add(new DataTable("y"));
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test014.xsd")
                 );
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test014.xsd")
                 );
-            ds
-                .Tables[2]
+            ds.Tables[2]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test014.xsd")
                 );
@@ -1292,13 +1275,11 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable());
             ds.Tables.Add(new DataTable());
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test015.xsd")
                 );
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test015.xsd")
                 );
@@ -1315,13 +1296,11 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable());
             ds.Tables.Add(new DataTable());
-            ds
-                .Tables[0]
+            ds.Tables[0]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test016.xsd")
                 );
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ReadXmlSchema(
                     TestResourceHelper.GetFullPathOfResource("Test/System.Data/schemas/test016.xsd")
                 );

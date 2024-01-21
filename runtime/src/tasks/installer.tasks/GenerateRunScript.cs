@@ -71,10 +71,8 @@ namespace Microsoft.DotNet.Build.Tasks
             var setCommandsBuilder = new StringBuilder();
             for (int i = 0; i < SetCommands.Length; i++)
             {
-                string[] setCommandsSplit = SetCommands[i].Split(
-                    newlineSeparator,
-                    StringSplitOptions.None
-                );
+                string[] setCommandsSplit = SetCommands[i]
+                    .Split(newlineSeparator, StringSplitOptions.None);
                 for (int j = 0; j < setCommandsSplit.Length; j++)
                 {
                     setCommandsBuilder.Append(setCommandsSplit[j]);
@@ -92,10 +90,8 @@ namespace Microsoft.DotNet.Build.Tasks
             var runCommandsBuilder = new StringBuilder();
             for (int i = 0; i < RunCommands.Length; i++)
             {
-                string[] runCommandsSplit = RunCommands[i].Split(
-                    newlineSeparator,
-                    StringSplitOptions.None
-                );
+                string[] runCommandsSplit = RunCommands[i]
+                    .Split(newlineSeparator, StringSplitOptions.None);
                 for (int j = 0; j < runCommandsSplit.Length; j++)
                 {
                     runCommandsBuilder.Append(runCommandsSplit[j]);

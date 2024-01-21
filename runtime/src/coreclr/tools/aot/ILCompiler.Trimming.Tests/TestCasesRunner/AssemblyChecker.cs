@@ -545,10 +545,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
         private void VerifyInterfaces(TypeDefinition src, TypeDefinition linked)
         {
             var expectedInterfaces = new HashSet<string>(
-                src
-                    .CustomAttributes.Where(w =>
-                        w.AttributeType.Name == nameof(KeptInterfaceAttribute)
-                    )
+                src.CustomAttributes.Where(w =>
+                    w.AttributeType.Name == nameof(KeptInterfaceAttribute)
+                )
                     .Select(FormatBaseOrInterfaceAttributeValue)
             );
             if (expectedInterfaces.Count == 0)

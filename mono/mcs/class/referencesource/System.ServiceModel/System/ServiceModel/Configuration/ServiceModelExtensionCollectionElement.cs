@@ -535,8 +535,7 @@ namespace System.ServiceModel.Configuration
                 {
                     if (this.Properties.Contains(reader.Name))
                     {
-                        this[reader.Name] = this
-                            .Properties[reader.Name]
+                        this[reader.Name] = this.Properties[reader.Name]
                             .Converter.ConvertFromString(reader.Value);
                     }
                     else

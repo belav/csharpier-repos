@@ -127,8 +127,7 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 //
                 // Without throwing out the first line in the example above, the indentation column
                 // used will be 4, rather than 8.
-                var startLineFirstNonWhitespace = text
-                    .Lines[startLineNumber]
+                var startLineFirstNonWhitespace = text.Lines[startLineNumber]
                     .GetFirstNonWhitespacePosition();
                 if (
                     startLineFirstNonWhitespace.HasValue

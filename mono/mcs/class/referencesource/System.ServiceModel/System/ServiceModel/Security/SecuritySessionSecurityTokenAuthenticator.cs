@@ -1070,10 +1070,11 @@ namespace System.ServiceModel.Security
                 {
                     for (int j = 0; j < sctCaches.Count; ++j)
                     {
-                        sctCaches[j].RemoveContext(
-                            securityContextTokensToRemove[i].ContextId,
-                            securityContextTokensToRemove[i].KeyGeneration
-                        );
+                        sctCaches[j]
+                            .RemoveContext(
+                                securityContextTokensToRemove[i].ContextId,
+                                securityContextTokensToRemove[i].KeyGeneration
+                            );
                     }
                 }
             }

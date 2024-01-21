@@ -440,9 +440,8 @@ namespace R2RTest
                     }
                     else if (compilationProcess.Succeeded)
                     {
-                        skipCopying[(int)runner.Index].UnionWith(
-                            compilationProcess.Parameters.InputFileNames
-                        );
+                        skipCopying[(int)runner.Index]
+                            .UnionWith(compilationProcess.Parameters.InputFileNames);
                         AnalyzeCompilationLog(compilationProcess, runner.Index);
                     }
                     else

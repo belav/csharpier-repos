@@ -236,9 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 // to the last statement of the replacement statement list.
                 var last = _statementsBuilder.Count - 1;
                 var trailingTrivia = _localDeclarationStatement.SemicolonToken.GetAllTrivia();
-                _statementsBuilder[last] = _statementsBuilder[last].WithTrailingTrivia(
-                    trailingTrivia
-                );
+                _statementsBuilder[last] = _statementsBuilder[last]
+                    .WithTrailingTrivia(trailingTrivia);
 
                 // Replace the original local declaration statement with new statement list
                 // from _statementsBuilder.

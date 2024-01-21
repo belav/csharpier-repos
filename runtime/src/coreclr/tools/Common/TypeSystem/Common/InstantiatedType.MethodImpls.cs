@@ -22,9 +22,11 @@ namespace Internal.TypeSystem
             {
                 MethodDesc decl;
 
-                var implTypeInstantiated = uninstMethodImpls[
-                    i
-                ].Decl.OwningType.InstantiateSignature(this.Instantiation, default(Instantiation));
+                var implTypeInstantiated = uninstMethodImpls[i]
+                    .Decl.OwningType.InstantiateSignature(
+                        this.Instantiation,
+                        default(Instantiation)
+                    );
                 if (implTypeInstantiated is InstantiatedType)
                 {
                     decl = _typeDef.Context.GetMethodForInstantiatedType(

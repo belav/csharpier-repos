@@ -1048,10 +1048,8 @@ namespace System.Threading
                 {
                     if (tokens[i].CanBeCanceled)
                     {
-                        _linkingRegistrations[i] = tokens[i].UnsafeRegister(
-                            s_linkedTokenCancelDelegate,
-                            this
-                        );
+                        _linkingRegistrations[i] = tokens[i]
+                            .UnsafeRegister(s_linkedTokenCancelDelegate, this);
                     }
                     // Empty slots in the array will be default(CancellationTokenRegistration), which are nops to Dispose.
                     // Based on usage patterns, such occurrences should also be rare, such that it's not worth resizing

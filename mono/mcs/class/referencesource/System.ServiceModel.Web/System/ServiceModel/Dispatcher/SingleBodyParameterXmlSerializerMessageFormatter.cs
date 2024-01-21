@@ -105,9 +105,9 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (typeForSerializer == this.typeSerializerPairs[i].Type)
                             {
-                                this.cachedOutputSerializer = this
-                                    .typeSerializerPairs[i]
-                                    .Serializer;
+                                this.cachedOutputSerializer = this.typeSerializerPairs[
+                                    i
+                                ].Serializer;
                                 this.cachedOutputSerializerType = type;
                                 foundSerializer = true;
                                 break;

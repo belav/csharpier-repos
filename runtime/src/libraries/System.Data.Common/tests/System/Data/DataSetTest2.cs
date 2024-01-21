@@ -1580,8 +1580,7 @@ namespace System.Data.Tests
             ds.Tables["Parent"].Columns["String2"].Unique = true; //will not be merged
 
             //add Foreign Key
-            ds
-                .Tables["Child2"]
+            ds.Tables["Child2"]
                 .Constraints.Add(
                     "Child2_FK",
                     ds.Tables["Parent"].Columns["ParentId"],
@@ -1687,8 +1686,7 @@ namespace System.Data.Tests
             DataSet ds1 = ds.Copy();
 
             table2.Constraints.Add("fk", pcol, ccol);
-            ds1
-                .Tables[1]
+            ds1.Tables[1]
                 .Constraints.Add(
                     "fk",
                     ds1.Tables[0].Columns["col2"],
@@ -1867,8 +1865,7 @@ namespace System.Data.Tests
             {
                 DataSet ds1 = ds.Copy();
                 DataSet ds2 = ds.Copy();
-                ds2
-                    .Tables[0]
+                ds2.Tables[0]
                     .Constraints.Add("fk", ds2.Tables[0].Columns[0], ds2.Tables[1].Columns[0]);
                 ds1.Tables[0].Constraints.Add("uc", ds1.Tables[0].Columns[0], false);
                 ds1.Merge(ds2, true, MissingSchemaAction.Error);

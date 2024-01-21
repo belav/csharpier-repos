@@ -148,9 +148,8 @@ namespace System.Activities.Validation
                         if (disjointGroups != null && disjointGroups.Contains(groupName))
                         {
                             foreach (
-                                RuntimeArgument configuredArgument in overloadGroups[
-                                    groupName
-                                ].FindAll(checkIfArgumentIsBound)
+                                RuntimeArgument configuredArgument in overloadGroups[groupName]
+                                    .FindAll(checkIfArgumentIsBound)
                             )
                             {
                                 ActivityUtilities.Add(

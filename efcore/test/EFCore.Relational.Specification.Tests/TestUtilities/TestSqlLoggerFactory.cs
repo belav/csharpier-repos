@@ -82,10 +82,8 @@ public class TestSqlLoggerFactory : ListLoggerFactory
 
             var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
             var testName = methodCallLine.Substring(0, indexMethodEnding);
-            var parts = methodCallLine[indexMethodEnding..].Split(
-                " ",
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            var parts = methodCallLine[indexMethodEnding..]
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries);
             var fileName = parts[1][..^5];
             var lineNumber = int.Parse(parts[2]);
 

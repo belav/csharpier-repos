@@ -2241,8 +2241,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Where(l1 =>
-                        l1
-                            .OneToOne_Optional_FK1.OneToMany_Optional2.Distinct()
+                        l1.OneToOne_Optional_FK1.OneToMany_Optional2.Distinct()
                             .Select(l3 => l3.Id)
                             .Contains(6)
                     ),
@@ -2265,8 +2264,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Where(l1 =>
-                        l1
-                            .OneToOne_Optional_FK1.OneToMany_Optional2.Select(l3 => l3.Name.Length)
+                        l1.OneToOne_Optional_FK1.OneToMany_Optional2.Select(l3 => l3.Name.Length)
                             .Distinct()
                             .Contains(5)
                     ),
@@ -4213,8 +4211,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Select(l1 =>
-                        l1
-                            .OneToMany_Optional1.OrderBy(l2 => l2.Id)
+                        l1.OneToMany_Optional1.OrderBy(l2 => l2.Id)
                             .FirstOrDefault()
                             .OneToMany_Optional2.OrderBy(l3 => l3.Id)
                             .FirstOrDefault()
@@ -4223,12 +4220,10 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Select(l1 =>
-                        l1
-                            .OneToMany_Optional1.OrderBy(l2 => l2.Id)
+                        l1.OneToMany_Optional1.OrderBy(l2 => l2.Id)
                             .FirstOrDefault()
                             .Maybe(x =>
-                                x
-                                    .OneToMany_Optional2.OrderBy(l3 => l3.Id)
+                                x.OneToMany_Optional2.OrderBy(l3 => l3.Id)
                                     .FirstOrDefault()
                                     .Maybe(xx => xx.Name)
                             )
@@ -4459,11 +4454,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .SelectMany(l1 =>
-                        l1
-                            .OneToMany_Optional1.DefaultIfEmpty()
+                        l1.OneToMany_Optional1.DefaultIfEmpty()
                             .SelectMany(l2 =>
-                                l2
-                                    .OneToOne_Required_PK2.OneToMany_Optional3.DefaultIfEmpty()
+                                l2.OneToOne_Required_PK2.OneToMany_Optional3.DefaultIfEmpty()
                                     .Select(l4 => new
                                     {
                                         l1Name = l1.Name,

@@ -1973,11 +1973,12 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // We can trigger completion of the JoinBlock by completing one target.
                 // It doesn't matter which one. So we always complete the first one.
                 Debug.Assert(_targets.Length > 0, "A join must have targets.");
-                _targets[0].CompleteCore(
-                    exception,
-                    dropPendingMessages: true,
-                    releaseReservedMessages: true
-                );
+                _targets[0]
+                    .CompleteCore(
+                        exception,
+                        dropPendingMessages: true,
+                        releaseReservedMessages: true
+                    );
                 // The finally section will do the block completion.
             }
             finally

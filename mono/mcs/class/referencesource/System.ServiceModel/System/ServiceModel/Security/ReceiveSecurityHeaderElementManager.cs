@@ -60,8 +60,7 @@ namespace System.ServiceModel.Security
                 VerifyIdUniquenessInSecurityHeader(id);
             }
             EnsureCapacityToAdd();
-            this
-                .elements[this.count++]
+            this.elements[this.count++]
                 .SetElement(
                     elementCategory,
                     element,
@@ -394,8 +393,7 @@ namespace System.ServiceModel.Security
                 VerifyIdUniquenessInSecurityHeader(id);
             }
             this.elements[index].PreserveIdBeforeDecryption();
-            this
-                .elements[index]
+            this.elements[index]
                 .SetElement(
                     elementCategory,
                     element,

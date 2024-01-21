@@ -564,13 +564,14 @@ namespace System.Net.Mail
 
                         while ((int)info.StatusCode == 334)
                         {
-                            auth = authenticationModules[i].Authenticate(
-                                info.Line,
-                                null,
-                                this,
-                                this.client.TargetName,
-                                this.channelBindingToken
-                            );
+                            auth = authenticationModules[i]
+                                .Authenticate(
+                                    info.Line,
+                                    null,
+                                    this,
+                                    this.client.TargetName,
+                                    this.channelBindingToken
+                                );
                             if (auth == null)
                             {
                                 throw new SmtpException(SR.GetString(SR.SmtpAuthenticationFailed));

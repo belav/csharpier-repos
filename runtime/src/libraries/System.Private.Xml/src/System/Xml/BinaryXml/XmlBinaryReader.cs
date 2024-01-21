@@ -2763,18 +2763,17 @@ namespace System.Xml
             if (BinXmlToken.XmlDecl == PeekToken())
             {
                 _pos++;
-                _attributes[0].Set(
-                    new QName(string.Empty, _xnt.Add("version"), string.Empty),
-                    ParseText()
-                );
+                _attributes[0]
+                    .Set(new QName(string.Empty, _xnt.Add("version"), string.Empty), ParseText());
                 _attrCount = 1;
                 if (BinXmlToken.Encoding == PeekToken())
                 {
                     _pos++;
-                    _attributes[1].Set(
-                        new QName(string.Empty, _xnt.Add("encoding"), string.Empty),
-                        ParseText()
-                    );
+                    _attributes[1]
+                        .Set(
+                            new QName(string.Empty, _xnt.Add("encoding"), string.Empty),
+                            ParseText()
+                        );
                     _attrCount++;
                 }
 
@@ -2785,10 +2784,11 @@ namespace System.Xml
                         break;
                     case 1:
                     case 2:
-                        _attributes[_attrCount].Set(
-                            new QName(string.Empty, _xnt.Add("standalone"), string.Empty),
-                            (standalone == 1) ? "yes" : "no"
-                        );
+                        _attributes[_attrCount]
+                            .Set(
+                                new QName(string.Empty, _xnt.Add("standalone"), string.Empty),
+                                (standalone == 1) ? "yes" : "no"
+                            );
                         _attrCount++;
                         break;
                     default:
@@ -2958,10 +2958,8 @@ namespace System.Xml
             {
                 string localname,
                     namespaceUri;
-                int hash = _attributes[i].GetLocalnameAndNamespaceUriAndHash(
-                    out localname,
-                    out namespaceUri
-                );
+                int hash = _attributes[i]
+                    .GetLocalnameAndNamespaceUriAndHash(out localname, out namespaceUri);
                 int index = hash & (tblSize - 1);
                 int next = _attrHashTbl[index];
                 _attrHashTbl[index] = i + 1;
@@ -3371,18 +3369,14 @@ namespace System.Xml
             if (BinXmlToken.System == PeekToken())
             {
                 _pos++;
-                _attributes[_attrCount++].Set(
-                    new QName(string.Empty, _xnt.Add("SYSTEM"), string.Empty),
-                    ParseText()
-                );
+                _attributes[_attrCount++]
+                    .Set(new QName(string.Empty, _xnt.Add("SYSTEM"), string.Empty), ParseText());
             }
             if (BinXmlToken.Public == PeekToken())
             {
                 _pos++;
-                _attributes[_attrCount++].Set(
-                    new QName(string.Empty, _xnt.Add("PUBLIC"), string.Empty),
-                    ParseText()
-                );
+                _attributes[_attrCount++]
+                    .Set(new QName(string.Empty, _xnt.Add("PUBLIC"), string.Empty), ParseText());
             }
             if (BinXmlToken.Subset == PeekToken())
             {

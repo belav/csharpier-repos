@@ -177,12 +177,8 @@ namespace System.Reflection.Tests
 
             var args = new object[] { "101", "hello" };
             ClassWith3Constructors obj = (ClassWith3Constructors)
-                constructors[2].Invoke(
-                    BindingFlags.Default,
-                    new ConvertStringToIntBinder(),
-                    args,
-                    null
-                );
+                constructors[2]
+                    .Invoke(BindingFlags.Default, new ConvertStringToIntBinder(), args, null);
             Assert.Equal(101, obj.intValue);
             Assert.Equal("hello", obj.stringValue);
             Assert.True(args[0] is int);

@@ -369,9 +369,8 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             {
                 var operation = operations[i];
                 if (
-                    seenSsrComponentIds[0..currentSsrComponentIdIndex].Contains(
-                        operation.SsrComponentId
-                    )
+                    seenSsrComponentIds[0..currentSsrComponentIdIndex]
+                        .Contains(operation.SsrComponentId)
                 )
                 {
                     Log.InvalidRootComponentOperation(

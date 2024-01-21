@@ -582,8 +582,7 @@ namespace MonoTests.System.ServiceModel.Description
             );
             Assert.AreEqual(cd.Operations.Count, 2, "#4");
             Assert.AreEqual(
-                cd
-                    .Operations.Find("HeyHey")
+                cd.Operations.Find("HeyHey")
                     .Behaviors.Find<OperationBehaviorAttribute>()
                     .ReleaseInstanceMode,
                 ReleaseInstanceMode.AfterCall,

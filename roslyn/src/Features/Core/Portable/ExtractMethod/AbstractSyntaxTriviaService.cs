@@ -156,14 +156,14 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             );
             tokens[TriviaLocation.BeforeBeginningOfSpan] = tokens[
                 TriviaLocation.AfterBeginningOfSpan
-            ].GetPreviousToken(includeZeroWidth: true);
+            ]
+                .GetPreviousToken(includeZeroWidth: true);
             tokens[TriviaLocation.BeforeEndOfSpan] = root.FindTokenOnLeftOfPosition(
                 textSpan.End,
                 includeSkipped: false
             );
-            tokens[TriviaLocation.AfterEndOfSpan] = tokens[
-                TriviaLocation.BeforeEndOfSpan
-            ].GetNextToken(includeZeroWidth: true);
+            tokens[TriviaLocation.AfterEndOfSpan] = tokens[TriviaLocation.BeforeEndOfSpan]
+                .GetNextToken(includeZeroWidth: true);
             return tokens;
         }
 

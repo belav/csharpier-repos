@@ -556,9 +556,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     var mappedSpan = projectionBuffer
                         .CurrentSnapshot.MapFromSourceSnapshot(snapshotSpan)
                         .Single();
-                    mappedSpans[string.Empty] = mappedSpans[string.Empty].Add(
-                        mappedSpan.ToTextSpan()
-                    );
+                    mappedSpans[string.Empty] = mappedSpans[string.Empty]
+                        .Add(mappedSpan.ToTextSpan());
                 }
 
                 // Order unnamed spans as they would be ordered by the normal span finding
@@ -798,12 +797,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         spanIndex++;
                     }
 
-                    tempMappedMarkupSpans[key].Add(
-                        new TextSpan(
-                            spanStartLocation!.Value,
-                            spanEndLocationExclusive!.Value - spanStartLocation.Value
-                        )
-                    );
+                    tempMappedMarkupSpans[key]
+                        .Add(
+                            new TextSpan(
+                                spanStartLocation!.Value,
+                                spanEndLocationExclusive!.Value - spanStartLocation.Value
+                            )
+                        );
                 }
             }
 

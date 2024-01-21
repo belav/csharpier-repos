@@ -2736,10 +2736,8 @@ namespace System.Xml.Schema
                 {
                     // check selector from here
                     if (
-                        constraintStructures[j].axisSelector.MoveToStartElement(
-                            localName,
-                            namespaceUri
-                        )
+                        constraintStructures[j]
+                            .axisSelector.MoveToStartElement(localName, namespaceUri)
                     )
                     {
                         // selector selects new node, activate a new set of fields
@@ -2747,10 +2745,11 @@ namespace System.Xml.Schema
                         Debug.WriteLine($"Name: {localName}\t|\tURI: {namespaceUri}\n");
 
                         // in which axisFields got updated
-                        constraintStructures[j].axisSelector.PushKS(
-                            _positionInfo.LineNumber,
-                            _positionInfo.LinePosition
-                        );
+                        constraintStructures[j]
+                            .axisSelector.PushKS(
+                                _positionInfo.LineNumber,
+                                _positionInfo.LinePosition
+                            );
                     }
 
                     // axisFields is not null, but may be empty

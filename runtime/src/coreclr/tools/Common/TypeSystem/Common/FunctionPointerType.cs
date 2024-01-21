@@ -47,10 +47,8 @@ namespace Internal.TypeSystem
                 methodInstantiation
             );
             for (int i = 0; i < _signature.Length; i++)
-                sigBuilder[i] = _signature[i].InstantiateSignature(
-                    typeInstantiation,
-                    methodInstantiation
-                );
+                sigBuilder[i] = _signature[i]
+                    .InstantiateSignature(typeInstantiation, methodInstantiation);
 
             MethodSignature instantiatedSignature = sigBuilder.ToSignature();
             if (instantiatedSignature != _signature)

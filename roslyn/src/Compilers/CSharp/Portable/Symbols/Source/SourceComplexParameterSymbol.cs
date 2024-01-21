@@ -885,20 +885,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         var constructorArguments = attributeData.CommonConstructorArguments;
                         Debug.Assert(constructorArguments.Length == 1);
                         if (
-                            constructorArguments[0].TryDecodeValue(
-                                SpecialType.System_String,
-                                out string? parameterName
-                            )
+                            constructorArguments[0]
+                                .TryDecodeValue(
+                                    SpecialType.System_String,
+                                    out string? parameterName
+                                )
                         )
                         {
                             var parameters = ContainingSymbol.GetParameters();
                             for (int i = 0; i < parameters.Length; i++)
                             {
                                 if (
-                                    parameters[i].Name.Equals(
-                                        parameterName,
-                                        StringComparison.Ordinal
-                                    )
+                                    parameters[i]
+                                        .Name.Equals(parameterName, StringComparison.Ordinal)
                                 )
                                 {
                                     index = i;

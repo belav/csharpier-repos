@@ -667,9 +667,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 return;
             }
             contexts[workerSessionId] = new();
-            contexts[workerSessionId].Add(
-                context.CreateChildAsyncExecutionContext(workerSessionId)
-            );
+            contexts[workerSessionId]
+                .Add(context.CreateChildAsyncExecutionContext(workerSessionId));
         }
 
         public void DestroyContext(SessionId sessionId, int id)

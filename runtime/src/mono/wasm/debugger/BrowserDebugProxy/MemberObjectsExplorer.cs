@@ -586,9 +586,8 @@ namespace BrowserDebugProxy
                 );
                 if (
                     backingFieldForHiddenProp is null
-                    || backingFieldForHiddenProp[
-                        InternalUseFieldName.IsBackingField.Name
-                    ]?.Value<bool>() != true
+                    || backingFieldForHiddenProp[InternalUseFieldName.IsBackingField.Name]
+                        ?.Value<bool>() != true
                 )
                 {
                     // hiding with a non-auto property, so nothing to adjust

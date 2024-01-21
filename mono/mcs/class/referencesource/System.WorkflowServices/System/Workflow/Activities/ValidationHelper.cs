@@ -230,15 +230,12 @@ namespace System.Workflow.Activities
                     else
                     {
                         if (
-                            !implementedServiceOperations[contractType].ContainsKey(
-                                serviceOperation.Name
-                            )
+                            !implementedServiceOperations[contractType]
+                                .ContainsKey(serviceOperation.Name)
                         )
                         {
-                            implementedServiceOperations[contractType].Add(
-                                serviceOperation.Name,
-                                methodInfo
-                            );
+                            implementedServiceOperations[contractType]
+                                .Add(serviceOperation.Name, methodInfo);
                         }
                     }
                 }
@@ -326,9 +323,8 @@ namespace System.Workflow.Activities
                                 );
                             }
                             else if (
-                                notImplementedServiceOperations[currentContractType].ContainsKey(
-                                    operationName
-                                )
+                                notImplementedServiceOperations[currentContractType]
+                                    .ContainsKey(operationName)
                             )
                             {
                                 validationErrors.Add(
@@ -351,16 +347,13 @@ namespace System.Workflow.Activities
                             }
                             else
                             {
-                                notImplementedServiceOperations[currentContractType].Add(
-                                    operationName,
-                                    methodInfo
-                                );
+                                notImplementedServiceOperations[currentContractType]
+                                    .Add(operationName, methodInfo);
                             }
                         }
                         else if (
-                            !implementedServiceOperations[currentContractType].ContainsKey(
-                                operationName
-                            )
+                            !implementedServiceOperations[currentContractType]
+                                .ContainsKey(operationName)
                         )
                         {
                             validationErrors.Add(
@@ -385,9 +378,8 @@ namespace System.Workflow.Activities
                                 );
                             }
                             else if (
-                                notImplementedServiceOperations[currentContractType].ContainsKey(
-                                    operationName
-                                )
+                                notImplementedServiceOperations[currentContractType]
+                                    .ContainsKey(operationName)
                             )
                             {
                                 validationErrors.Add(
@@ -410,10 +402,8 @@ namespace System.Workflow.Activities
                             }
                             else
                             {
-                                notImplementedServiceOperations[currentContractType].Add(
-                                    operationName,
-                                    methodInfo
-                                );
+                                notImplementedServiceOperations[currentContractType]
+                                    .Add(operationName, methodInfo);
                             }
                         }
                         else if (
@@ -1217,20 +1207,17 @@ namespace System.Workflow.Activities
                     if (parameterBindings.Contains(parameterName))
                     {
                         if (
-                            parameterBindings[parameterName].IsBindingSet(
-                                WorkflowParameterBinding.ValueProperty
-                            )
+                            parameterBindings[parameterName]
+                                .IsBindingSet(WorkflowParameterBinding.ValueProperty)
                         )
                         {
-                            parameterValue = parameterBindings[parameterName].GetBinding(
-                                WorkflowParameterBinding.ValueProperty
-                            );
+                            parameterValue = parameterBindings[parameterName]
+                                .GetBinding(WorkflowParameterBinding.ValueProperty);
                         }
                         else
                         {
-                            parameterValue = parameterBindings[parameterName].GetValue(
-                                WorkflowParameterBinding.ValueProperty
-                            );
+                            parameterValue = parameterBindings[parameterName]
+                                .GetValue(WorkflowParameterBinding.ValueProperty);
                         }
 
                         if (parameterValue != null)

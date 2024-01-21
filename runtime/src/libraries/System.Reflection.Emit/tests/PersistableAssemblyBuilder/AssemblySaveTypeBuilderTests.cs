@@ -261,17 +261,17 @@ namespace System.Reflection.Emit.Tests
             GenericTypeParameterBuilder[] typeParams
         )
         {
-            typeParams[0].SetInterfaceConstraints(
-                new Type[] { typeof(IAccess), typeof(INoMethod) }
-            );
-            typeParams[1].SetCustomAttribute(
-                new CustomAttributeBuilder(
-                    typeof(DynamicallyAccessedMembersAttribute).GetConstructor(
-                        new Type[] { typeof(DynamicallyAccessedMemberTypes) }
-                    ),
-                    new object[] { DynamicallyAccessedMemberTypes.PublicProperties }
-                )
-            );
+            typeParams[0]
+                .SetInterfaceConstraints(new Type[] { typeof(IAccess), typeof(INoMethod) });
+            typeParams[1]
+                .SetCustomAttribute(
+                    new CustomAttributeBuilder(
+                        typeof(DynamicallyAccessedMembersAttribute).GetConstructor(
+                            new Type[] { typeof(DynamicallyAccessedMemberTypes) }
+                        ),
+                        new object[] { DynamicallyAccessedMemberTypes.PublicProperties }
+                    )
+                );
             typeParams[2].SetBaseTypeConstraint(typeof(EmptyTestClass));
             typeParams[2].SetGenericParameterAttributes(GenericParameterAttributes.VarianceMask);
         }
@@ -306,9 +306,8 @@ namespace System.Reflection.Emit.Tests
                     GenericParameterAttributes.VarianceMask,
                     genericTypeParams[2].GenericParameterAttributes
                 );
-                IList<CustomAttributeData> attributes = genericTypeParams[
-                    1
-                ].GetCustomAttributesData();
+                IList<CustomAttributeData> attributes = genericTypeParams[1]
+                    .GetCustomAttributesData();
                 Assert.Equal(1, attributes.Count);
                 Assert.Equal(
                     "DynamicallyAccessedMembersAttribute",
@@ -676,9 +675,8 @@ namespace System.Reflection.Emit.Tests
                 GenericTypeParameterBuilder[] typeParams = tb.DefineGenericParameters(
                     new string[] { "U", "T" }
                 );
-                typeParams[1].SetInterfaceConstraints(
-                    new[] { typeof(INoMethod), typeof(IOneMethod) }
-                );
+                typeParams[1]
+                    .SetInterfaceConstraints(new[] { typeof(INoMethod), typeof(IOneMethod) });
                 MethodBuilder m11 = tb.DefineMethod("TwoParameters", MethodAttributes.Public);
                 MethodBuilder m12 = tb.DefineMethod("FiveTypeParameters", MethodAttributes.Public);
                 MethodBuilder m13 = tb.DefineMethod("OneParameter", MethodAttributes.Public);

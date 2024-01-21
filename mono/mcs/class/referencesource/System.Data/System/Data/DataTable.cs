@@ -987,11 +987,8 @@ namespace System.Data
             Hashtable colErrors = new Hashtable();
             for (int i = 0; i < rowCount; i++)
             {
-                int recordsPerRow = Rows[i].CopyValuesIntoStore(
-                    storeList,
-                    nullbitList,
-                    recordsConsumed
-                );
+                int recordsPerRow = Rows[i]
+                    .CopyValuesIntoStore(storeList, nullbitList, recordsConsumed);
                 GetRowAndColumnErrors(i, rowErrors, colErrors);
                 recordsConsumed += recordsPerRow;
             }
@@ -4708,9 +4705,8 @@ namespace System.Data
                 {
                     if ((states & indexes[indexCount].RecordStates) != DataViewRowState.None)
                     {
-                        positionIndexes[indexCount] = indexes[indexCount].InsertRecordToIndex(
-                            recordNo
-                        );
+                        positionIndexes[indexCount] = indexes[indexCount]
+                            .InsertRecordToIndex(recordNo);
                     }
                     else
                     {

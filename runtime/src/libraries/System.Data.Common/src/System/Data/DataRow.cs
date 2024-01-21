@@ -1481,12 +1481,13 @@ namespace System.Data
                 //Copy original record for the row in Unchanged, Modified, Deleted state.
                 for (int i = 0; i < _columns.Count; i++)
                 {
-                    _columns[i].CopyValueIntoStore(
-                        _oldRecord,
-                        storeList[i]!,
-                        (BitArray)nullbitList[i]!,
-                        storeIndex
-                    );
+                    _columns[i]
+                        .CopyValueIntoStore(
+                            _oldRecord,
+                            storeList[i]!,
+                            (BitArray)nullbitList[i]!,
+                            storeIndex
+                        );
                 }
                 recordCount++;
                 storeIndex++;
@@ -1498,12 +1499,13 @@ namespace System.Data
                 //Copy current record for the row in Added, Modified state.
                 for (int i = 0; i < _columns.Count; i++)
                 {
-                    _columns[i].CopyValueIntoStore(
-                        _newRecord,
-                        storeList[i]!,
-                        (BitArray)nullbitList[i]!,
-                        storeIndex
-                    );
+                    _columns[i]
+                        .CopyValueIntoStore(
+                            _newRecord,
+                            storeList[i]!,
+                            (BitArray)nullbitList[i]!,
+                            storeIndex
+                        );
                 }
                 recordCount++;
                 storeIndex++;
@@ -1514,12 +1516,13 @@ namespace System.Data
                 //Copy temp record for the row in edit mode.
                 for (int i = 0; i < _columns.Count; i++)
                 {
-                    _columns[i].CopyValueIntoStore(
-                        _tempRecord,
-                        storeList[i]!,
-                        (BitArray)nullbitList[i]!,
-                        storeIndex
-                    );
+                    _columns[i]
+                        .CopyValueIntoStore(
+                            _tempRecord,
+                            storeList[i]!,
+                            (BitArray)nullbitList[i]!,
+                            storeIndex
+                        );
                 }
                 recordCount++;
             }

@@ -351,9 +351,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         statements[4]
                     ),
                     newExceptionRegions: ImmutableArray.Create(
-                        oldActiveStatements2[0].ExceptionRegions.Spans.SelectAsArray(es =>
-                            es.AddLineDelta(+1)
-                        ),
+                        oldActiveStatements2[0]
+                            .ExceptionRegions.Spans.SelectAsArray(es => es.AddLineDelta(+1)),
                         oldActiveStatements2[1].ExceptionRegions.Spans,
                         oldActiveStatements2[2].ExceptionRegions.Spans
                     )
@@ -501,9 +500,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     oldSpans: oldActiveStatements,
                     newStatements: ImmutableArray.Create(
                         baseActiveStatements[0],
-                        baseActiveStatements[1].WithFileSpan(
-                            baseActiveStatements[1].FileSpan.AddLineDelta(+1)
-                        )
+                        baseActiveStatements[1]
+                            .WithFileSpan(baseActiveStatements[1].FileSpan.AddLineDelta(+1))
                     ),
                     newExceptionRegions: ImmutableArray.Create(
                         oldActiveStatements[0].ExceptionRegions.Spans,
@@ -793,23 +791,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     oldSpans: oldActiveStatements,
                     newStatements: ImmutableArray.Create(
                         baseActiveStatements[0],
-                        baseActiveStatements[1].WithFileSpan(
-                            baseActiveStatements[1].FileSpan.AddLineDelta(-1)
-                        ),
+                        baseActiveStatements[1]
+                            .WithFileSpan(baseActiveStatements[1].FileSpan.AddLineDelta(-1)),
                         baseActiveStatements[2],
-                        baseActiveStatements[3].WithFileSpan(
-                            baseActiveStatements[3].FileSpan.AddLineDelta(+2)
-                        )
+                        baseActiveStatements[3]
+                            .WithFileSpan(baseActiveStatements[3].FileSpan.AddLineDelta(+2))
                     ),
                     newExceptionRegions: ImmutableArray.Create(
                         oldActiveStatements[0].ExceptionRegions.Spans,
-                        oldActiveStatements[1].ExceptionRegions.Spans.SelectAsArray(es =>
-                            es.AddLineDelta(-1)
-                        ),
+                        oldActiveStatements[1]
+                            .ExceptionRegions.Spans.SelectAsArray(es => es.AddLineDelta(-1)),
                         oldActiveStatements[2].ExceptionRegions.Spans,
-                        oldActiveStatements[3].ExceptionRegions.Spans.SelectAsArray(es =>
-                            es.AddLineDelta(+2)
-                        )
+                        oldActiveStatements[3]
+                            .ExceptionRegions.Spans.SelectAsArray(es => es.AddLineDelta(+2))
                     )
                 )
             );

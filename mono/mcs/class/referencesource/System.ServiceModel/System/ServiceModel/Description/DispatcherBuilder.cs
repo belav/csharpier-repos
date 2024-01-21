@@ -1038,9 +1038,8 @@ namespace System.ServiceModel.Description
                             new Collection<EndpointInfo>()
                         );
                     }
-                    endpointInfosPerEndpointAddress[endpoint.Address].Add(
-                        new EndpointInfo(endpoint, dispatcher, provider)
-                    );
+                    endpointInfosPerEndpointAddress[endpoint.Address]
+                        .Add(new EndpointInfo(endpoint, dispatcher, provider));
 
                     channelDispatcher.Endpoints.Add(dispatcher);
 
@@ -1805,9 +1804,8 @@ namespace System.ServiceModel.Description
                 {
                     if (!(elements[i] is ITransportTokenAssertionProvider))
                     {
-                        ISecurityCapabilities tmp = elements[
-                            i
-                        ].GetIndividualProperty<ISecurityCapabilities>();
+                        ISecurityCapabilities tmp = elements[i]
+                            .GetIndividualProperty<ISecurityCapabilities>();
                         if (tmp != null)
                         {
                             isc = tmp;

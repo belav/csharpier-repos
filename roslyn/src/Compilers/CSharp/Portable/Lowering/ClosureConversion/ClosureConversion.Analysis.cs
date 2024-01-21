@@ -424,9 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // which we should have already visited
                                 Debug.Assert(environmentsToScopes.ContainsKey(env));
 
-                                closuresCapturingScopeVariables[environmentsToScopes[env]].Add(
-                                    closure
-                                );
+                                closuresCapturingScopeVariables[environmentsToScopes[env]]
+                                    .Add(closure);
                             }
                         }
                     }

@@ -440,9 +440,8 @@ namespace Microsoft.Interop
                                                     or SpecialType.System_Enum
                                             }
                                             or EnumTypeInfo
-                                    && returnSwappedSignatureElements[
-                                        i
-                                    ].MarshallingAttributeInfo.Equals(NoMarshallingInfo.Instance)
+                                    && returnSwappedSignatureElements[i]
+                                        .MarshallingAttributeInfo.Equals(NoMarshallingInfo.Instance)
                                 )
                                 || (
                                     IsHResultLikeType(returnSwappedSignatureElements[i].ManagedType)

@@ -114,8 +114,7 @@ namespace System.ServiceModel.Description
                     > entry in operationBindingAssertions
                 )
                 {
-                    this
-                        .operationBindingAssertions[entry.Key]
+                    this.operationBindingAssertions[entry.Key]
                         .AddRange(
                             new MaxItemsEnumerable<XmlElement>(
                                 entry.Value,
@@ -132,8 +131,7 @@ namespace System.ServiceModel.Description
                     > entry in messageBindingAssertions
                 )
                 {
-                    this
-                        .messageBindingAssertions[entry.Key]
+                    this.messageBindingAssertions[entry.Key]
                         .AddRange(
                             new MaxItemsEnumerable<XmlElement>(
                                 entry.Value,
@@ -150,8 +148,7 @@ namespace System.ServiceModel.Description
                     > entry in faultBindingAssertions
                 )
                 {
-                    this
-                        .faultBindingAssertions[entry.Key]
+                    this.faultBindingAssertions[entry.Key]
                         .AddRange(
                             new MaxItemsEnumerable<XmlElement>(
                                 entry.Value,

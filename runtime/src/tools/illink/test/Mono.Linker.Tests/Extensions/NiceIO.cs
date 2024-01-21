@@ -221,9 +221,8 @@ namespace Mono.Linker.Tests.Extensions
                 WithDot(extension)
             );
             if (extension == string.Empty)
-                newElements[newElements.Length - 1] = newElements[newElements.Length - 1].TrimEnd(
-                    '.'
-                );
+                newElements[newElements.Length - 1] = newElements[newElements.Length - 1]
+                    .TrimEnd('.');
             return new NPath(newElements, _isRelative, _driveLetter);
         }
         #endregion construction

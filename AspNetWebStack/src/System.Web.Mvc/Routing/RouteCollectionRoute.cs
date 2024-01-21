@@ -87,9 +87,8 @@ namespace System.Web.Mvc.Routing
                 //
                 // Inside the DefaultControllerFactory we'll double check the route data and throw if we have
                 // multiple controller matches, but for now let's just use the controller of the first match.
-                ControllerDescriptor controllerDescriptor = matches[
-                    0
-                ].GetTargetControllerDescriptor();
+                ControllerDescriptor controllerDescriptor = matches[0]
+                    .GetTargetControllerDescriptor();
                 if (controllerDescriptor != null)
                 {
                     routeData.Values[RouteDataTokenKeys.Controller] =

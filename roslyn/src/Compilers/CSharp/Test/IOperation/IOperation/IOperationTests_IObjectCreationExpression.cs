@@ -819,8 +819,7 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Co
                 expectedDiagnostics
             );
 
-            var m1 = comp
-                .SyntaxTrees[0]
+            var m1 = comp.SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
@@ -1131,8 +1130,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 expectedDiagnostics
             );
 
-            var main = comp
-                .SyntaxTrees[0]
+            var main = comp.SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
@@ -1396,8 +1394,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 expectedDiagnostics
             );
 
-            var m1 = comp
-                .SyntaxTrees[0]
+            var m1 = comp.SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
@@ -1729,8 +1726,7 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
                 expectedDiagnostics
             );
 
-            var main = comp
-                .SyntaxTrees[0]
+            var main = comp.SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
@@ -2523,8 +2519,7 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                 expectedDiagnostics
             );
 
-            var m = comp
-                .SyntaxTrees[0]
+            var m = comp.SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
@@ -2663,8 +2658,7 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                 expectedDiagnostics
             );
 
-            var m = comp
-                .SyntaxTrees[0]
+            var m = comp.SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()

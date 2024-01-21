@@ -565,9 +565,8 @@ namespace System.Reflection
                     );
                     for (int i = 0; i < genericParameters.Length; i++)
                     {
-                        genericParameters[i].SetGenericParameterAttributes(
-                            ts[i].GenericParameterAttributes
-                        );
+                        genericParameters[i]
+                            .SetGenericParameterAttributes(ts[i].GenericParameterAttributes);
                     }
                 }
                 ILGenerator il = mdb.GetILGenerator();

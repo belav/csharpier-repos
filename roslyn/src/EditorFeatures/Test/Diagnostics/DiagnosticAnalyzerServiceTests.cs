@@ -1310,10 +1310,9 @@ class A
                 foreach (var e in eCollection)
                 {
                     diagnostics.AddRange(
-                        e
-                            .Diagnostics.Where(d =>
-                                d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
-                            )
+                        e.Diagnostics.Where(d =>
+                            d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
+                        )
                             .OrderBy(d => d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(text))
                     );
                 }

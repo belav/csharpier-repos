@@ -117,10 +117,11 @@ namespace System.Text.Json.Tests
                         );
                         float actual = float.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = floats[count].ToString(
-                            JsonTestHelper.SingleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = floats[count]
+                            .ToString(
+                                JsonTestHelper.SingleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
                         float expected = float.Parse(
                             roundTripExpected,
                             CultureInfo.InvariantCulture
@@ -141,10 +142,11 @@ namespace System.Text.Json.Tests
                         );
                         double actual = double.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = doubles[count].ToString(
-                            JsonTestHelper.DoubleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = doubles[count]
+                            .ToString(
+                                JsonTestHelper.DoubleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
                         double expected = double.Parse(
                             roundTripExpected,
                             CultureInfo.InvariantCulture
@@ -269,10 +271,11 @@ namespace System.Text.Json.Tests
                             );
                         float actual = float.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = floats[count].ToString(
-                            JsonTestHelper.SingleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = floats[count]
+                            .ToString(
+                                JsonTestHelper.SingleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
                         float expected = float.Parse(
                             roundTripExpected,
                             CultureInfo.InvariantCulture
@@ -293,10 +296,11 @@ namespace System.Text.Json.Tests
                             );
                         double actual = double.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = doubles[count].ToString(
-                            JsonTestHelper.DoubleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = doubles[count]
+                            .ToString(
+                                JsonTestHelper.DoubleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
                         double expected = double.Parse(
                             roundTripExpected,
                             CultureInfo.InvariantCulture

@@ -96,9 +96,8 @@ namespace System.ServiceModel.Channels
             }
             else if (messageEncoderBindingElements.Count == 1)
             {
-                this.messageEncoderFactory = messageEncoderBindingElements[
-                    0
-                ].CreateMessageEncoderFactory();
+                this.messageEncoderFactory = messageEncoderBindingElements[0]
+                    .CreateMessageEncoderFactory();
                 context.BindingParameters.Remove<MessageEncodingBindingElement>();
             }
             else

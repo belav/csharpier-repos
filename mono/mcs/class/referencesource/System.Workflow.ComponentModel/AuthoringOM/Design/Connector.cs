@@ -1549,8 +1549,7 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (
                     this.editPoints.Count < 2
-                    || !this
-                        .editPoints[this.editPoints.Count - 1]
+                    || !this.editPoints[this.editPoints.Count - 1]
                         .EditedConnectionPoint.Equals(Target)
                 )
                     editPoints.Add(new EditPoint(this, Target));
@@ -1796,9 +1795,9 @@ namespace System.Workflow.ComponentModel.Design
             if (sourceConnection == null || !sourceConnection.Equals(Source))
                 return false;
 
-            ConnectionPoint targetConnection = this
-                .editPoints[this.editPoints.Count - 1]
-                .EditedConnectionPoint;
+            ConnectionPoint targetConnection = this.editPoints[
+                this.editPoints.Count - 1
+            ].EditedConnectionPoint;
             if (targetConnection == null || !targetConnection.Equals(Target))
                 return false;
 

@@ -133,12 +133,10 @@ namespace System.Runtime.InteropServices.Marshalling
                             for (int i = 0; i < parameters.Length; i++)
                             {
                                 parameterTypes[i] = parameters[i].ParameterType;
-                                parameterOptionalModifiers[i] = parameters[
-                                    i
-                                ].GetOptionalCustomModifiers();
-                                parameterRequiredModifiers[i] = parameters[
-                                    i
-                                ].GetRequiredCustomModifiers();
+                                parameterOptionalModifiers[i] = parameters[i]
+                                    .GetOptionalCustomModifiers();
+                                parameterRequiredModifiers[i] = parameters[i]
+                                    .GetRequiredCustomModifiers();
                             }
                             MethodBuilder builder = implementation.DefineMethod(
                                 method.Name,

@@ -803,8 +803,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .OrderBy(c => c.CustomerID)
                     .Select(c =>
-                        c
-                            .Orders.OrderBy(o => o.OrderID)
+                        c.Orders.OrderBy(o => o.OrderID)
                             .FirstOrDefault()
                             .OrderDetails.OrderBy(od => od.ProductID)
                             .FirstOrDefault()
@@ -814,8 +813,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .OrderBy(c => c.CustomerID)
                     .Select(c =>
-                        c
-                            .Orders.OrderBy(o => o.OrderID)
+                        c.Orders.OrderBy(o => o.OrderID)
                             .FirstOrDefault()
                             .Maybe(x => x.OrderDetails)
                             .Maybe(xx => xx.OrderBy(od => od.ProductID).FirstOrDefault())
@@ -847,8 +845,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                     .Where(c => c.CustomerID.StartsWith("A"))
                     .OrderBy(c => c.CustomerID)
                     .Select(c =>
-                        c
-                            .Orders.OrderBy(o => o.OrderID)
+                        c.Orders.OrderBy(o => o.OrderID)
                             .FirstOrDefault()
                             .Maybe(x => x.OrderDetails)
                             .MaybeScalar(x =>

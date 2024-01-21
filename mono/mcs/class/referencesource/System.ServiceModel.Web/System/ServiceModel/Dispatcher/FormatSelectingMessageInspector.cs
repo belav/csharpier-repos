@@ -149,9 +149,8 @@ namespace System.ServiceModel.Description
                 "The calling method is responsible for ensuring that 'acceptHeader' is not null"
             );
 
-            FormatContentTypePair pair = caches[operationName].Lookup(
-                acceptHeader.ToUpperInvariant()
-            );
+            FormatContentTypePair pair = caches[operationName]
+                .Lookup(acceptHeader.ToUpperInvariant());
             if (pair != null)
             {
                 SetFormatAndContentType(pair.Format, pair.ContentType);
@@ -208,8 +207,7 @@ namespace System.ServiceModel.Description
                     )
                     {
                         string contentTypeStr = contentType.ToString();
-                        this
-                            .caches[operationName]
+                        this.caches[operationName]
                             .AddOrUpdate(
                                 acceptHeader.ToUpperInvariant(),
                                 new FormatContentTypePair(format, contentTypeStr)
@@ -239,8 +237,7 @@ namespace System.ServiceModel.Description
                     {
                         ContentType responseContentType;
                         if (
-                            this
-                                .formatters[operationName]
+                            this.formatters[operationName]
                                 .SupportsMessageFormat(mapping.MessageFormat)
                             && mapping.CanFormatResponse(
                                 contentType,
@@ -277,8 +274,7 @@ namespace System.ServiceModel.Description
 
             if (!string.IsNullOrEmpty(acceptHeader))
             {
-                this
-                    .caches[operationName]
+                this.caches[operationName]
                     .AddOrUpdate(
                         acceptHeader.ToUpperInvariant(),
                         new FormatContentTypePair(format, null)

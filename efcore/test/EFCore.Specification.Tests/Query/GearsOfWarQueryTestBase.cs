@@ -4952,8 +4952,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Weapon>()
                     .OrderBy(w => w.Name)
                     .Select(w =>
-                        w
-                            .Owner.Squad.Members.OrderByDescending(m => m.FullName)
+                        w.Owner.Squad.Members.OrderByDescending(m => m.FullName)
                             .Select(m => new
                             {
                                 Weapons = m
@@ -6011,14 +6010,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .OfType<Officer>()
                     .OrderBy(o =>
-                        o
-                            .Weapons.Where(w =>
-                                w.IsAutomatic
-                                == ss.Set<Gear>()
-                                    .Where(g => g.Nickname == "Marcus")
-                                    .Select(g => g.HasSoulPatch)
-                                    .FirstOrDefault()
-                            )
+                        o.Weapons.Where(w =>
+                            w.IsAutomatic
+                            == ss.Set<Gear>()
+                                .Where(g => g.Nickname == "Marcus")
+                                .Select(g => g.HasSoulPatch)
+                                .FirstOrDefault()
+                        )
                             .Count()
                     )
                     .ThenBy(g => g.Nickname)
@@ -6116,8 +6114,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Select(g =>
-                        g
-                            .Weapons.Where(w => w.Name == "BFG")
+                        g.Weapons.Where(w => w.Name == "BFG")
                             .OrderBy(w => w.Id)
                             .Select(w => w.IsAutomatic)
                             .FirstOrDefault()
@@ -6151,8 +6148,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .Where(g => g.HasSoulPatch)
                     .Select(g =>
-                        g
-                            .Weapons.Where(w => w.Name.Contains("Lancer"))
+                        g.Weapons.Where(w => w.Name.Contains("Lancer"))
                             .Distinct()
                             .Select(w => w.IsAutomatic)
                             .SingleOrDefault()
@@ -6169,8 +6165,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .Where(g => g.HasSoulPatch)
                     .Select(g =>
-                        g
-                            .Weapons.Where(w => w.Name.Contains("Lancer"))
+                        g.Weapons.Where(w => w.Name.Contains("Lancer"))
                             .Select(w => w.IsAutomatic)
                             .Distinct()
                             .SingleOrDefault()
@@ -6189,8 +6184,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .Where(g => g.HasSoulPatch)
                     .Select(g =>
-                        g
-                            .Weapons.Where(w => w.Name.Contains("Lancer"))
+                        g.Weapons.Where(w => w.Name.Contains("Lancer"))
                             .Distinct()
                             .SingleOrDefault()
                             .IsAutomatic
@@ -6207,8 +6201,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .Where(g => g.HasSoulPatch)
                     .Select(g =>
-                        g
-                            .Weapons.Where(w => w.Name == "BFG")
+                        g.Weapons.Where(w => w.Name == "BFG")
                             .Distinct()
                             .Select(w => w.IsAutomatic)
                             .SingleOrDefault()
@@ -6224,8 +6217,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .Where(g => g.HasSoulPatch)
                     .Select(g =>
-                        g
-                            .Weapons.Where(w => w.Name == "BFG")
+                        g.Weapons.Where(w => w.Name == "BFG")
                             .Select(w => w.IsAutomatic)
                             .Distinct()
                             .SingleOrDefault()
@@ -6263,18 +6255,17 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<City>()
                     .Where(c => c.Name == "Ephyra")
                     .Select(c =>
-                        c
-                            .StationedGears.Select(g => new Officer
-                            {
-                                CityOfBirthName = g.CityOfBirthName,
-                                FullName = g.FullName,
-                                HasSoulPatch = g.HasSoulPatch,
-                                LeaderNickname = g.LeaderNickname,
-                                LeaderSquadId = g.LeaderSquadId,
-                                Nickname = g.Nickname,
-                                Rank = g.Rank,
-                                SquadId = g.SquadId
-                            })
+                        c.StationedGears.Select(g => new Officer
+                        {
+                            CityOfBirthName = g.CityOfBirthName,
+                            FullName = g.FullName,
+                            HasSoulPatch = g.HasSoulPatch,
+                            LeaderNickname = g.LeaderNickname,
+                            LeaderSquadId = g.LeaderSquadId,
+                            Nickname = g.Nickname,
+                            Rank = g.Rank,
+                            SquadId = g.SquadId
+                        })
                             .ToList<Gear>()
                     ),
             assertOrder: true,
@@ -6290,8 +6281,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<City>()
                     .Where(c => c.Name == "Ephyra")
                     .Select(c =>
-                        c
-                            .StationedGears.OrderByDescending(g => g.Nickname)
+                        c.StationedGears.OrderByDescending(g => g.Nickname)
                             .Select(g => new Officer
                             {
                                 CityOfBirthName = g.CityOfBirthName,
@@ -9792,8 +9782,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .OrderBy(g => g.Nickname)
                     .Select(g =>
-                        g
-                            .Weapons.SelectMany(x => x.Owner.AssignedCity.BornGears)
+                        g.Weapons.SelectMany(x => x.Owner.AssignedCity.BornGears)
                             .Select(x => (bool?)x.HasSoulPatch)
                             .Distinct()
                             .ToList()
@@ -9802,10 +9791,9 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .OrderBy(g => g.Nickname)
                     .Select(g =>
-                        g
-                            .Weapons.SelectMany(x =>
-                                x.Owner.AssignedCity.Maybe(x => x.BornGears) ?? new List<Gear>()
-                            )
+                        g.Weapons.SelectMany(x =>
+                            x.Owner.AssignedCity.Maybe(x => x.BornGears) ?? new List<Gear>()
+                        )
                             .Select(x => (bool?)x.HasSoulPatch)
                             .Distinct()
                             .ToList()
@@ -10721,8 +10709,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .OrderBy(x => x.Nickname)
                     .Select(x =>
-                        x
-                            .Weapons.OrderBy(g => g.Id)
+                        x.Weapons.OrderBy(g => g.Id)
                             .Take(numbers.OrderBy(xx => xx).Skip(1).FirstOrDefault())
                     ),
             assertOrder: true,
@@ -10772,8 +10759,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .OrderBy(x => x.Nickname)
                     .Select(x =>
-                        x
-                            .Weapons.OrderBy(g => g.Id)
+                        x.Weapons.OrderBy(g => g.Id)
                             .Take(
                                 ss.Set<Gear>()
                                     .OrderBy(xx => xx.Nickname)

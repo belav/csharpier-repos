@@ -329,10 +329,8 @@ namespace System.ServiceModel.Activation
                 recyclingCompletedWaitHandle.Reset();
                 for (int i = 0; i < this.Count; i++)
                 {
-                    IAsyncResult result = this[i].BeginClose(
-                        collectibleNodeClosedCallback,
-                        this[i]
-                    );
+                    IAsyncResult result = this[i]
+                        .BeginClose(collectibleNodeClosedCallback, this[i]);
                     if (result == null)
                     {
                         DecrementCollectCount();

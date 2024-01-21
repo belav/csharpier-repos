@@ -157,9 +157,8 @@ namespace DebuggerTests
                             $"Expected to only pause because of an exception. {pause_location}"
                         );
 
-                        string actual_fn_name = pause_location["callFrames"]?[0]?[
-                            "functionName"
-                        ]?.Value<string>();
+                        string actual_fn_name = pause_location["callFrames"]
+                            ?[0]?["functionName"]?.Value<string>();
 
                         // return if we hit a managed exception, or an uncaught one
                         if (

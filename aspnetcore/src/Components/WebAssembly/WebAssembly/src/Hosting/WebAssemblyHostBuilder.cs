@@ -123,12 +123,13 @@ public sealed class WebAssemblyHostBuilder
                 false,
                 null
             );
-            registeredComponents[i].WriteWebAssemblyData(
-                assembly,
-                typeName,
-                serializedParameterDefinitions,
-                serializedParameterValues
-            );
+            registeredComponents[i]
+                .WriteWebAssemblyData(
+                    assembly,
+                    typeName,
+                    serializedParameterDefinitions,
+                    serializedParameterValues
+                );
             registeredComponents[i].PrerenderId = i.ToString(CultureInfo.InvariantCulture);
         }
 

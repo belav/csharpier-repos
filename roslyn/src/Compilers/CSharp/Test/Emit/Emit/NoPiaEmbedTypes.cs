@@ -4620,8 +4620,7 @@ class UsePia5 : ITest30
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
-                var attr = m1
-                    .Parameters[0]
+                var attr = m1.Parameters[0]
                     .GetAttributes(
                         "System.Runtime.InteropServices",
                         "DefaultParameterValueAttribute"
@@ -7687,8 +7686,7 @@ namespace NetImplNS
             {
                 Assert.Equal(
                     "void EventNS.IEvents.OnEvent01()",
-                    m
-                        .GlobalNamespace.GetMember<NamespaceSymbol>("EventNS")
+                    m.GlobalNamespace.GetMember<NamespaceSymbol>("EventNS")
                         .GetMember<NamedTypeSymbol>("IEvents")
                         .GetMember<MethodSymbol>("OnEvent01")
                         .ToTestDisplayString()

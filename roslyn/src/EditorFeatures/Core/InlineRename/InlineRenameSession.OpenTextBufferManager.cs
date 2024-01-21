@@ -324,8 +324,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     var singleTrackingSpanTouched = trackingSpansTouched.Single();
                     _activeSpan = _referenceSpanToLinkedRenameSpanMap
                         .Where(kvp =>
-                            kvp
-                                .Value.TrackingSpan.GetSpan(args.After)
+                            kvp.Value.TrackingSpan.GetSpan(args.After)
                                 .Contains(boundingIntersectionSpan)
                         )
                         .Single()

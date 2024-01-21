@@ -470,8 +470,7 @@ namespace DebuggerTests
                         res.Error["result"]?["description"]?.Value<string>(),
                         "wrong error message"
                     );
-                    var exceptionDetailsStack = res
-                        .Error["exceptionDetails"]
+                    var exceptionDetailsStack = res.Error["exceptionDetails"]
                         ?["stackTrace"]
                         ?["callFrames"]
                         ?[0];
@@ -486,8 +485,7 @@ namespace DebuggerTests
                         "DebuggerTests.EvaluateStaticFieldsInStaticClass.StaticProperty2",
                         expect_ok: false
                     );
-                    exceptionDetailsStack = res
-                        .Error["exceptionDetails"]
+                    exceptionDetailsStack = res.Error["exceptionDetails"]
                         ?["stackTrace"]
                         ?["callFrames"]
                         ?[0];

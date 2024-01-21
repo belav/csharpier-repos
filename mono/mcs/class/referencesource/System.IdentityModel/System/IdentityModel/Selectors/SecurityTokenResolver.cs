@@ -171,8 +171,7 @@ namespace System.IdentityModel.Selectors
                 key = null;
                 for (int i = 0; i < this.tokens.Count; ++i)
                 {
-                    SecurityKey securityKey = this
-                        .tokens[i]
+                    SecurityKey securityKey = this.tokens[i]
                         .ResolveKeyIdentifierClause(keyIdentifierClause);
                     if (securityKey != null)
                     {

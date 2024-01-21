@@ -28,12 +28,12 @@ namespace System.Reflection.Tests
             Assert.Equal(runtimeMethods.Length, ecmaMethods.Length);
             for (int i = 0; i < runtimeMethods.Length; i++)
             {
-                DllImportAttribute expected = runtimeMethods[
-                    i
-                ].GetCustomAttribute<DllImportAttribute>();
-                CustomAttributeData cad = ecmaMethods[i].CustomAttributes.Single(c =>
-                    c.AttributeType.Name == nameof(DllImportAttribute)
-                );
+                DllImportAttribute expected = runtimeMethods[i]
+                    .GetCustomAttribute<DllImportAttribute>();
+                CustomAttributeData cad = ecmaMethods[i]
+                    .CustomAttributes.Single(c =>
+                        c.AttributeType.Name == nameof(DllImportAttribute)
+                    );
                 DllImportAttribute actual = cad.UnprojectAndInstantiate<DllImportAttribute>();
                 AssertEqual(expected, actual);
             }

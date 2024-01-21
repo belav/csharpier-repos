@@ -265,12 +265,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
                 ).ToArray();
                 Assert.Equal(1, operations.Length);
 
-                await operations[0].TryApplyAsync(
-                    this.Workspace,
-                    this.Workspace.CurrentSolution,
-                    CodeAnalysisProgress.None,
-                    CancellationToken.None
-                );
+                await operations[0]
+                    .TryApplyAsync(
+                        this.Workspace,
+                        this.Workspace.CurrentSolution,
+                        CodeAnalysisProgress.None,
+                        CancellationToken.None
+                    );
             }
         }
 

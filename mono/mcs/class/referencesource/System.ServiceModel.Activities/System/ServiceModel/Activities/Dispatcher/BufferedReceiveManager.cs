@@ -85,8 +85,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                                         if (this.bufferedProperties.ContainsKey(instanceKey))
                                         {
                                             if (
-                                                this
-                                                    .bufferedProperties[instanceKey]
+                                                this.bufferedProperties[instanceKey]
                                                     .Remove(property)
                                             )
                                             {

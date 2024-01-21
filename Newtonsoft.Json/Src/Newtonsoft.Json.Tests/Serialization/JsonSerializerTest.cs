@@ -7432,22 +7432,21 @@ Path '', line 1, position 1."
             Assert.IsNotNull(o);
             Assert.AreEqual(4, errors.Count);
             Assert.IsTrue(
-                errors[0].StartsWith(
-                    "Required property 'NonAttributeProperty' not found in JSON. Path ''"
-                )
+                errors[0]
+                    .StartsWith(
+                        "Required property 'NonAttributeProperty' not found in JSON. Path ''"
+                    )
             );
             Assert.IsTrue(
                 errors[1].StartsWith("Required property 'UnsetProperty' not found in JSON. Path ''")
             );
             Assert.IsTrue(
-                errors[2].StartsWith(
-                    "Required property 'AllowNullProperty' not found in JSON. Path ''"
-                )
+                errors[2]
+                    .StartsWith("Required property 'AllowNullProperty' not found in JSON. Path ''")
             );
             Assert.IsTrue(
-                errors[3].StartsWith(
-                    "Required property 'AlwaysProperty' not found in JSON. Path ''"
-                )
+                errors[3]
+                    .StartsWith("Required property 'AlwaysProperty' not found in JSON. Path ''")
             );
         }
 
@@ -7472,19 +7471,22 @@ Path '', line 1, position 1."
             Assert.IsNotNull(o);
             Assert.AreEqual(3, errors.Count);
             Assert.IsTrue(
-                errors[0].StartsWith(
-                    "Required property 'NonAttributeProperty' expects a value but got null. Path ''"
-                )
+                errors[0]
+                    .StartsWith(
+                        "Required property 'NonAttributeProperty' expects a value but got null. Path ''"
+                    )
             );
             Assert.IsTrue(
-                errors[1].StartsWith(
-                    "Required property 'UnsetProperty' expects a value but got null. Path ''"
-                )
+                errors[1]
+                    .StartsWith(
+                        "Required property 'UnsetProperty' expects a value but got null. Path ''"
+                    )
             );
             Assert.IsTrue(
-                errors[2].StartsWith(
-                    "Required property 'AlwaysProperty' expects a value but got null. Path ''"
-                )
+                errors[2]
+                    .StartsWith(
+                        "Required property 'AlwaysProperty' expects a value but got null. Path ''"
+                    )
             );
         }
 

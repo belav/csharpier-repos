@@ -650,14 +650,10 @@ namespace System.ServiceModel.Routing.Configuration
                     );
                     break;
                 case FilterType.And:
-                    MessageFilter filter1 = filters[this.Filter1].CreateFilter(
-                        xmlNamespaces,
-                        filters
-                    );
-                    MessageFilter filter2 = filters[this.Filter2].CreateFilter(
-                        xmlNamespaces,
-                        filters
-                    );
+                    MessageFilter filter1 = filters[this.Filter1]
+                        .CreateFilter(xmlNamespaces, filters);
+                    MessageFilter filter2 = filters[this.Filter2]
+                        .CreateFilter(xmlNamespaces, filters);
                     filter = new StrictAndMessageFilter(filter1, filter2);
                     break;
                 case FilterType.EndpointName:

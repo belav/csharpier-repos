@@ -61,9 +61,9 @@ namespace System.Activities.Core.Presentation
                 ModelItem item = itemsToCopy.First();
                 if (item != null && item.ItemType == typeof(Transition))
                 {
-                    ModelItem destinationState = item
-                        .Properties[TransitionDesigner.ToPropertyName]
-                        .Value;
+                    ModelItem destinationState = item.Properties[
+                        TransitionDesigner.ToPropertyName
+                    ].Value;
 
                     if (!modelItemToGuid.ContainsKey(destinationState))
                     {

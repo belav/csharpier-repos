@@ -171,10 +171,11 @@ namespace ILLink.Tasks
                     );
                     int startIndex = "g_".Length;
                     // E.g., if namespaceDefElements [1] is "g_RuntimeNS", lhs is "Runtime".
-                    string lhs = namespaceDefElements[1].Substring(
-                        startIndex,
-                        namespaceDefElements[1].LastIndexOf('N') - startIndex
-                    );
+                    string lhs = namespaceDefElements[1]
+                        .Substring(
+                            startIndex,
+                            namespaceDefElements[1].LastIndexOf('N') - startIndex
+                        );
                     if (namespaceDefElements.Length == 3)
                     {
                         // E.G., #define g_SystemNS          "System"
@@ -185,10 +186,11 @@ namespace ILLink.Tasks
                     {
                         // E.g., #define g_RuntimeNS         g_SystemNS ".Runtime"
                         // "Runtime" --> "System.Runtime"
-                        string prefix = namespaceDefElements[2].Substring(
-                            startIndex,
-                            namespaceDefElements[2].LastIndexOf('N') - startIndex
-                        );
+                        string prefix = namespaceDefElements[2]
+                            .Substring(
+                                startIndex,
+                                namespaceDefElements[2].LastIndexOf('N') - startIndex
+                            );
                         namespaceDictionary[lhs] =
                             namespaceDictionary[prefix] + namespaceDefElements[3];
                     }

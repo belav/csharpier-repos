@@ -1634,10 +1634,8 @@ namespace System.ServiceModel.Description
                 );
                 if (
                     parameters.Length == 1
-                    && parameters[0].ParameterType.IsDefined(
-                        typeof(MessageContractAttribute),
-                        false
-                    )
+                    && parameters[0]
+                        .ParameterType.IsDefined(typeof(MessageContractAttribute), false)
                 )
                 {
                     messageDescription = CreateTypedMessageDescription(

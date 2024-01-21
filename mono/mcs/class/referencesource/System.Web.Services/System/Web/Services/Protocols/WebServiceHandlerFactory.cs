@@ -117,13 +117,8 @@ namespace System.Web.Services.Protocols
             {
                 try
                 {
-                    protocol = protocolFactories[i].Create(
-                        type,
-                        context,
-                        request,
-                        response,
-                        out abort
-                    );
+                    protocol = protocolFactories[i]
+                        .Create(type, context, request, response, out abort);
                     if (
                         (
                             protocol != null

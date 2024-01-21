@@ -3442,9 +3442,8 @@ public class Http2StreamTests : Http2TestBase
                 sem.Release();
                 await readTask;
 
-                _runningStreams[streamIdFeature.StreamId].TrySetException(
-                    new Exception("ReadAsync was expected to throw.")
-                );
+                _runningStreams[streamIdFeature.StreamId]
+                    .TrySetException(new Exception("ReadAsync was expected to throw."));
             }
             catch (IOException) // Expected failure
             {
@@ -3491,9 +3490,8 @@ public class Http2StreamTests : Http2TestBase
                 sem.Release();
                 await readTask;
 
-                _runningStreams[streamIdFeature.StreamId].TrySetException(
-                    new Exception("ReadAsync was expected to throw.")
-                );
+                _runningStreams[streamIdFeature.StreamId]
+                    .TrySetException(new Exception("ReadAsync was expected to throw."));
             }
             catch (IOException) // Expected failure
             {

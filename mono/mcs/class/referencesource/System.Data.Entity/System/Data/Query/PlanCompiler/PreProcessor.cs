@@ -1836,8 +1836,7 @@ namespace System.Data.Query.PlanCompiler
                 if (
                     rs != null
                     && rs.ElementType.EdmEquals(relProperty.Relationship)
-                    && rs
-                        .AssociationSetEnds[relProperty.FromEnd.Identity]
+                    && rs.AssociationSetEnds[relProperty.FromEnd.Identity]
                         .EntitySet.EdmEquals(entitySet)
                 )
                 {

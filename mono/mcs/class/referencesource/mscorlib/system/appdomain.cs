@@ -4820,9 +4820,8 @@ namespace System
                                 {
                                     if (propertyValues[i].Length > 0)
                                     {
-                                        setup.PartialTrustVisibleAssemblies = propertyValues[
-                                            i
-                                        ].Split(';');
+                                        setup.PartialTrustVisibleAssemblies = propertyValues[i]
+                                            .Split(';');
                                     }
                                     else
                                     {

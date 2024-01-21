@@ -444,9 +444,8 @@ namespace System.Xml.Schema
 
                             vsb.EnsureCapacity(zeroIdx + 1);
                             int nanoSpanLength = zeroIdx - len + 1;
-                            bool successCopy = tmpSpan[..nanoSpanLength].TryCopyTo(
-                                vsb.AppendSpan(nanoSpanLength)
-                            );
+                            bool successCopy = tmpSpan[..nanoSpanLength]
+                                .TryCopyTo(vsb.AppendSpan(nanoSpanLength));
                             Debug.Assert(successCopy);
                         }
                         vsb.Append('S');

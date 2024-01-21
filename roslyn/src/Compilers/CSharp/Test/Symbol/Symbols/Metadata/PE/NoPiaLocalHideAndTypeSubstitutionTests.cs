@@ -474,9 +474,8 @@ static class TypeSubstitution
 
             var localConsumerRefsAsm = localConsumer.Assembly.GetNoPiaResolutionAssemblies();
 
-            var canonicalType = localConsumerRefsAsm[0].GlobalNamespace.ChildNamespace(
-                "GeneralEventScenario"
-            );
+            var canonicalType = localConsumerRefsAsm[0]
+                .GlobalNamespace.ChildNamespace("GeneralEventScenario");
             var canonicalTypeInter = canonicalType.GetTypeMembers("EventHandler").Single();
 
             NamedTypeSymbol classLocalType = localConsumer

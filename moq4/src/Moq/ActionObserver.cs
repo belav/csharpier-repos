@@ -195,9 +195,8 @@ namespace Moq
                         }
 
                         if (
-                            parameterTypes[argumentIndex].IsAssignableFrom(
-                                defaultValue?.GetType() ?? defaultValueType
-                            )
+                            parameterTypes[argumentIndex]
+                                .IsAssignableFrom(defaultValue?.GetType() ?? defaultValueType)
                         )
                         {
                             // We found a potential match. (Matcher type is assignment-compatible to parameter type.)

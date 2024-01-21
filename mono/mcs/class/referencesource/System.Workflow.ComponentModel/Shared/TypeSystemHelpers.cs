@@ -185,19 +185,15 @@ namespace System.Workflow.ComponentModel.Compiler
 
                         // remove extra brackects if exist
                         if (parameters[loop][0] == '[')
-                            parameters[loop] = parameters[loop].Substring(
-                                1,
-                                parameters[loop].Length - 2
-                            );
+                            parameters[loop] = parameters[loop]
+                                .Substring(1, parameters[loop].Length - 2);
 
                         // remove the "Of " keyword form VB parameters
                         if (
                             (parseTypeNameLanguage == ParseTypeNameLanguage.VB)
                             && (
-                                parameters[loop].StartsWith(
-                                    "Of ",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                parameters[loop]
+                                    .StartsWith("Of ", StringComparison.OrdinalIgnoreCase)
                             )
                         )
                             parameters[loop] = parameters[loop].Substring(3).TrimStart();

@@ -1360,14 +1360,8 @@ namespace System.Xml
             }
             else
             {
-                _nsAttributes[index].Set(
-                    XmlNodeType.Attribute,
-                    localName,
-                    attrPrefix,
-                    name,
-                    _xmlnsUri,
-                    ns
-                );
+                _nsAttributes[index]
+                    .Set(XmlNodeType.Attribute, localName, attrPrefix, name, _xmlnsUri, ns);
             }
 
             Debug.Assert(

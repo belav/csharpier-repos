@@ -518,8 +518,7 @@ namespace MonoTests.System.Data
         {
             DataSet ds = GetDataSet();
 
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ParentRelations.Add(
                     new DataRelation(
                         "rel1",

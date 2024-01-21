@@ -337,10 +337,8 @@ namespace ILCompiler
                                 }
                                 if (!profileData[keyParts].ContainsKey(followingMethodList[index]))
                                 {
-                                    profileData[keyParts].Add(
-                                        followingMethodList[index],
-                                        methodCount.GetInt32()
-                                    );
+                                    profileData[keyParts]
+                                        .Add(followingMethodList[index], methodCount.GetInt32());
                                 }
                                 else
                                 {

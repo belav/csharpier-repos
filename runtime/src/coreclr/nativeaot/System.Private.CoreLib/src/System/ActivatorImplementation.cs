@@ -99,11 +99,12 @@ namespace System
             for (int i = 0; i < candidates.Length; i++)
             {
                 if (
-                    candidates[i].QualifiesBasedOnParameterCount(
-                        bindingAttr,
-                        CallingConventions.Any,
-                        argTypes
-                    )
+                    candidates[i]
+                        .QualifiesBasedOnParameterCount(
+                            bindingAttr,
+                            CallingConventions.Any,
+                            argTypes
+                        )
                 )
                     matches.Add(candidates[i]);
             }

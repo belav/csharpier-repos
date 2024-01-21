@@ -186,58 +186,64 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .OrderBy(e => e.Name)
                     .ToList();
 
-                rightEntities[0].CompositeKeySkipFull.Add(
-                    context.UnidirectionalEntityCompositeKeys.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
-                            e.Key2 = "7711";
-                            e.Key3 = new DateTime(7711, 1, 1);
-                            e.Name = "Z7711";
-                        }
-                    )
-                );
-                rightEntities[0].CompositeKeySkipFull.Add(
-                    context.UnidirectionalEntityCompositeKeys.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
-                            e.Key2 = "7712";
-                            e.Key3 = new DateTime(7712, 1, 1);
-                            e.Name = "Z7712";
-                        }
-                    )
-                );
-                rightEntities[0].CompositeKeySkipFull.Add(
-                    context.UnidirectionalEntityCompositeKeys.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
-                            e.Key2 = "7713";
-                            e.Key3 = new DateTime(7713, 1, 1);
-                            e.Name = "Z7713";
-                        }
-                    )
-                );
+                rightEntities[0]
+                    .CompositeKeySkipFull.Add(
+                        context.UnidirectionalEntityCompositeKeys.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                e.Key2 = "7711";
+                                e.Key3 = new DateTime(7711, 1, 1);
+                                e.Name = "Z7711";
+                            }
+                        )
+                    );
+                rightEntities[0]
+                    .CompositeKeySkipFull.Add(
+                        context.UnidirectionalEntityCompositeKeys.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                e.Key2 = "7712";
+                                e.Key3 = new DateTime(7712, 1, 1);
+                                e.Name = "Z7712";
+                            }
+                        )
+                    );
+                rightEntities[0]
+                    .CompositeKeySkipFull.Add(
+                        context.UnidirectionalEntityCompositeKeys.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                e.Key2 = "7713";
+                                e.Key3 = new DateTime(7713, 1, 1);
+                                e.Name = "Z7713";
+                            }
+                        )
+                    );
 
-                rightEntities[1].CompositeKeySkipFull.Remove(
-                    rightEntities[1].CompositeKeySkipFull.Single(e => e.Key2 == "3_1")
-                );
+                rightEntities[1]
+                    .CompositeKeySkipFull.Remove(
+                        rightEntities[1].CompositeKeySkipFull.Single(e => e.Key2 == "3_1")
+                    );
 
-                rightEntities[2].CompositeKeySkipFull.Remove(
-                    rightEntities[2].CompositeKeySkipFull.Single(e => e.Key2 == "8_3")
-                );
-                rightEntities[2].CompositeKeySkipFull.Add(
-                    context.UnidirectionalEntityCompositeKeys.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
-                            e.Key2 = "7714";
-                            e.Key3 = new DateTime(7714, 1, 1);
-                            e.Name = "Z7714";
-                        }
-                    )
-                );
+                rightEntities[2]
+                    .CompositeKeySkipFull.Remove(
+                        rightEntities[2].CompositeKeySkipFull.Single(e => e.Key2 == "8_3")
+                    );
+                rightEntities[2]
+                    .CompositeKeySkipFull.Add(
+                        context.UnidirectionalEntityCompositeKeys.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                e.Key2 = "7714";
+                                e.Key3 = new DateTime(7714, 1, 1);
+                                e.Name = "Z7714";
+                            }
+                        )
+                    );
 
                 if (RequiresDetectChanges)
                 {
@@ -899,9 +905,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 rightNav0.Add(composites[1]);
                 rightNav0.Add(composites[2]);
 
-                leftEntities[0].ThreeSkipFull.Remove(
-                    leftEntities[0].ThreeSkipFull.Single(e => e.Name == "EntityThree 2")
-                );
+                leftEntities[0]
+                    .ThreeSkipFull.Remove(
+                        leftEntities[0].ThreeSkipFull.Single(e => e.Name == "EntityThree 2")
+                    );
                 var rightNav1 =
                     (ICollection<UnidirectionalEntityCompositeKey>)
                         context
@@ -910,9 +917,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
                 rightNav1.Remove(rightNav1.Single(e => e.Name == "Composite 16"));
 
-                leftEntities[3].ThreeSkipFull.Remove(
-                    leftEntities[3].ThreeSkipFull.Single(e => e.Name == "EntityThree 7")
-                );
+                leftEntities[3]
+                    .ThreeSkipFull.Remove(
+                        leftEntities[3].ThreeSkipFull.Single(e => e.Name == "EntityThree 7")
+                    );
                 leftEntities[3].ThreeSkipFull.Add(threes[3]);
 
                 var rightNav2 =
@@ -1551,9 +1559,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 nav0.Add(twos[5]);
                 nav0.Add(twos[6]);
 
-                leftEntities[0].SelfSkipSharedRight.Remove(
-                    leftEntities[0].SelfSkipSharedRight.Single(e => e.Name == "EntityTwo 9")
-                );
+                leftEntities[0]
+                    .SelfSkipSharedRight.Remove(
+                        leftEntities[0].SelfSkipSharedRight.Single(e => e.Name == "EntityTwo 9")
+                    );
                 var nav1 =
                     (ICollection<UnidirectionalEntityTwo>)
                         context
@@ -1562,9 +1571,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
                 nav1.Remove(nav1.Single(e => e.Name == "EntityTwo 1"));
 
-                leftEntities[4].SelfSkipSharedRight.Remove(
-                    leftEntities[4].SelfSkipSharedRight.Single(e => e.Name == "EntityTwo 18")
-                );
+                leftEntities[4]
+                    .SelfSkipSharedRight.Remove(
+                        leftEntities[4].SelfSkipSharedRight.Single(e => e.Name == "EntityTwo 18")
+                    );
                 leftEntities[4].SelfSkipSharedRight.Add(twos[3]);
 
                 var nav5 =
@@ -1871,39 +1881,42 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .OrderBy(e => e.Name)
                     .ToList();
 
-                leftEntities[0].BranchSkip.Add(
-                    context
-                        .Set<UnidirectionalEntityBranch>()
-                        .CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        )
-                );
-                leftEntities[0].BranchSkip.Add(
-                    context
-                        .Set<UnidirectionalEntityBranch>()
-                        .CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        )
-                );
-                leftEntities[0].BranchSkip.Add(
-                    context
-                        .Set<UnidirectionalEntityBranch>()
-                        .CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        )
-                );
+                leftEntities[0]
+                    .BranchSkip.Add(
+                        context
+                            .Set<UnidirectionalEntityBranch>()
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                    e.Name = "Z7721";
+                                }
+                            )
+                    );
+                leftEntities[0]
+                    .BranchSkip.Add(
+                        context
+                            .Set<UnidirectionalEntityBranch>()
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                    e.Name = "Z7722";
+                                }
+                            )
+                    );
+                leftEntities[0]
+                    .BranchSkip.Add(
+                        context
+                            .Set<UnidirectionalEntityBranch>()
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                    e.Name = "Z7723";
+                                }
+                            )
+                    );
 
                 var rightNav0 =
                     (ICollection<UnidirectionalEntityOne>)
@@ -1940,9 +1953,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     )
                 );
 
-                leftEntities[1].BranchSkip.Remove(
-                    leftEntities[1].BranchSkip.Single(e => e.Name == "Branch 4")
-                );
+                leftEntities[1]
+                    .BranchSkip.Remove(
+                        leftEntities[1].BranchSkip.Single(e => e.Name == "Branch 4")
+                    );
                 var rightNav1 =
                     (ICollection<UnidirectionalEntityOne>)
                         context
@@ -1951,20 +1965,22 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
                 rightNav1.Remove(rightNav1.Single(e => e.Name == "EntityOne 9"));
 
-                leftEntities[4].BranchSkip.Remove(
-                    leftEntities[4].BranchSkip.Single(e => e.Name == "Branch 5")
-                );
-                leftEntities[2].BranchSkip.Add(
-                    context
-                        .Set<UnidirectionalEntityBranch>()
-                        .CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        )
-                );
+                leftEntities[4]
+                    .BranchSkip.Remove(
+                        leftEntities[4].BranchSkip.Single(e => e.Name == "Branch 5")
+                    );
+                leftEntities[2]
+                    .BranchSkip.Add(
+                        context
+                            .Set<UnidirectionalEntityBranch>()
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                    e.Name = "Z7724";
+                                }
+                            )
+                    );
 
                 var rightNav2 =
                     (ICollection<UnidirectionalEntityOne>)
@@ -2377,9 +2393,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .Collection("UnidirectionalEntityOne")
                             .CurrentValue!;
                 leftNav7.Remove(leftNav7.Single(e => e.Name == "EntityOne 6"));
-                rightEntities[11].SelfSkipPayloadLeft.Remove(
-                    rightEntities[11].SelfSkipPayloadLeft.Single(e => e.Name == "EntityOne 13")
-                );
+                rightEntities[11]
+                    .SelfSkipPayloadLeft.Remove(
+                        rightEntities[11].SelfSkipPayloadLeft.Single(e => e.Name == "EntityOne 13")
+                    );
 
                 var leftNav4 =
                     (ICollection<UnidirectionalEntityOne>)
@@ -2390,9 +2407,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 leftNav4.Remove(leftNav4.Single(e => e.Name == "EntityOne 18"));
                 leftNav4.Add(ones[3]);
 
-                rightEntities[4].SelfSkipPayloadLeft.Remove(
-                    rightEntities[4].SelfSkipPayloadLeft.Single(e => e.Name == "EntityOne 6")
-                );
+                rightEntities[4]
+                    .SelfSkipPayloadLeft.Remove(
+                        rightEntities[4].SelfSkipPayloadLeft.Single(e => e.Name == "EntityOne 6")
+                    );
                 rightEntities[4].SelfSkipPayloadLeft.Add(ones[7]);
 
                 if (RequiresDetectChanges)
@@ -2790,33 +2808,36 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .OrderBy(e => e.Name)
                     .ToList();
 
-                leftEntities[0].ThreeSkipPayloadFullShared.Add(
-                    context.UnidirectionalEntityThrees.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                            e.Name = "Z7721";
-                        }
-                    )
-                );
-                leftEntities[0].ThreeSkipPayloadFullShared.Add(
-                    context.UnidirectionalEntityThrees.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                            e.Name = "Z7722";
-                        }
-                    )
-                );
-                leftEntities[0].ThreeSkipPayloadFullShared.Add(
-                    context.UnidirectionalEntityThrees.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                            e.Name = "Z7723";
-                        }
-                    )
-                );
+                leftEntities[0]
+                    .ThreeSkipPayloadFullShared.Add(
+                        context.UnidirectionalEntityThrees.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                e.Name = "Z7721";
+                            }
+                        )
+                    );
+                leftEntities[0]
+                    .ThreeSkipPayloadFullShared.Add(
+                        context.UnidirectionalEntityThrees.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                e.Name = "Z7722";
+                            }
+                        )
+                    );
+                leftEntities[0]
+                    .ThreeSkipPayloadFullShared.Add(
+                        context.UnidirectionalEntityThrees.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                e.Name = "Z7723";
+                            }
+                        )
+                    );
 
                 var rightNav0 =
                     (ICollection<UnidirectionalEntityOne>)
@@ -2853,11 +2874,11 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     )
                 );
 
-                leftEntities[2].ThreeSkipPayloadFullShared.Remove(
-                    leftEntities[2].ThreeSkipPayloadFullShared.Single(e =>
-                        e.Name == "EntityThree 10"
-                    )
-                );
+                leftEntities[2]
+                    .ThreeSkipPayloadFullShared.Remove(
+                        leftEntities[2]
+                            .ThreeSkipPayloadFullShared.Single(e => e.Name == "EntityThree 10")
+                    );
                 var rightNav4 =
                     (ICollection<UnidirectionalEntityOne>)
                         context
@@ -2866,20 +2887,21 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
                 rightNav4.Remove(rightNav4.Single(e => e.Name == "EntityOne 6"));
 
-                leftEntities[3].ThreeSkipPayloadFullShared.Remove(
-                    leftEntities[3].ThreeSkipPayloadFullShared.Single(e =>
-                        e.Name == "EntityThree 17"
-                    )
-                );
-                leftEntities[3].ThreeSkipPayloadFullShared.Add(
-                    context.UnidirectionalEntityThrees.CreateInstance(
-                        (e, p) =>
-                        {
-                            e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                            e.Name = "Z7724";
-                        }
-                    )
-                );
+                leftEntities[3]
+                    .ThreeSkipPayloadFullShared.Remove(
+                        leftEntities[3]
+                            .ThreeSkipPayloadFullShared.Single(e => e.Name == "EntityThree 17")
+                    );
+                leftEntities[3]
+                    .ThreeSkipPayloadFullShared.Add(
+                        context.UnidirectionalEntityThrees.CreateInstance(
+                            (e, p) =>
+                            {
+                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                e.Name = "Z7724";
+                            }
+                        )
+                    );
 
                 var rightNav2 =
                     (ICollection<UnidirectionalEntityOne>)
@@ -3327,9 +3349,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 oneSkipNav0.Add(ones[1]);
                 oneSkipNav0.Add(ones[2]);
 
-                leftEntities[1].TwoSkipShared.Remove(
-                    leftEntities[1].TwoSkipShared.Single(e => e.Name == "EntityTwo 17")
-                );
+                leftEntities[1]
+                    .TwoSkipShared.Remove(
+                        leftEntities[1].TwoSkipShared.Single(e => e.Name == "EntityTwo 17")
+                    );
                 var oneSkipNav1 =
                     (ICollection<UnidirectionalEntityOne>)
                         context
@@ -3338,9 +3361,10 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
                 oneSkipNav1.Remove(oneSkipNav1.Single(e => e.Name == "EntityOne 3"));
 
-                leftEntities[2].TwoSkipShared.Remove(
-                    leftEntities[2].TwoSkipShared.Single(e => e.Name == "EntityTwo 18")
-                );
+                leftEntities[2]
+                    .TwoSkipShared.Remove(
+                        leftEntities[2].TwoSkipShared.Single(e => e.Name == "EntityTwo 18")
+                    );
                 leftEntities[2].TwoSkipShared.Add(twos[3]);
 
                 var oneSkipNav2 =

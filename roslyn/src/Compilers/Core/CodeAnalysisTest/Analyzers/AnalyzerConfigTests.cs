@@ -2403,11 +2403,12 @@ dotnet_diagnostic.cs001.severity = bar
                     .WithLocation(1, 1)
             );
 
-            options[1].Diagnostics.Verify(
-                Diagnostic("InvalidSeverityInAnalyzerConfig")
-                    .WithArguments("cs001", "bar", "<Global Config>")
-                    .WithLocation(1, 1)
-            );
+            options[1]
+                .Diagnostics.Verify(
+                    Diagnostic("InvalidSeverityInAnalyzerConfig")
+                        .WithArguments("cs001", "bar", "<Global Config>")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]

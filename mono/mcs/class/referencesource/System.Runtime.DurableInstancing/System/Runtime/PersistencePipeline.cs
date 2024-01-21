@@ -321,8 +321,7 @@ namespace System.Runtime
                     if (this.keys == null)
                     {
                         this.keys = new List<XName>(
-                            this
-                                .basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                            this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
                                 .Select(value => value.Key)
                         );
                     }
@@ -337,8 +336,7 @@ namespace System.Runtime
                     if (this.values == null)
                     {
                         this.values = new List<object>(
-                            this
-                                .basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                            this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
                                 .Select(value => value.Value.Value)
                         );
                     }

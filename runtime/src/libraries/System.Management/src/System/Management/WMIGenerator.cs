@@ -7420,9 +7420,8 @@ namespace System.Management
                             beginningExpression
                         )
                     );
-                    cmie2.Method.MethodName = PrivateNamesUsed[
-                        "ToDMTFTimeIntervalMethod"
-                    ].ToString();
+                    cmie2.Method.MethodName = PrivateNamesUsed["ToDMTFTimeIntervalMethod"]
+                        .ToString();
                     return cmie2;
 
                 case "System.Management.ManagementPath":

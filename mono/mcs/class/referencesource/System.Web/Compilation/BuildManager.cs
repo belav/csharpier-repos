@@ -3043,12 +3043,8 @@ namespace System.Web.Compilation
                 int i;
                 for (i = 0; i < _caches.Length; i++)
                 {
-                    result = _caches[i].GetBuildResult(
-                        cacheKey,
-                        virtualPath,
-                        hashCode,
-                        ensureIsUpToDate
-                    );
+                    result = _caches[i]
+                        .GetBuildResult(cacheKey, virtualPath, hashCode, ensureIsUpToDate);
 
                     // There might be changes in local resources for dependencies,
                     // so we need to make sure EnsureFirstTimeDirectoryInit gets called

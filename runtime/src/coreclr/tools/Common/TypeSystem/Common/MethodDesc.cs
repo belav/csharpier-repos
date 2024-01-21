@@ -103,10 +103,8 @@ namespace Internal.TypeSystem
 
             for (int i = 0; i < newParameters.Length; i++)
             {
-                TypeDesc newParameter = newParameters[i].InstantiateSignature(
-                    substitution,
-                    default(Instantiation)
-                );
+                TypeDesc newParameter = newParameters[i]
+                    .InstantiateSignature(substitution, default(Instantiation));
                 if (newParameter != newParameters[i])
                 {
                     if (!needsNewMethodSignature)

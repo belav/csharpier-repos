@@ -51,8 +51,7 @@ namespace System.Data.Services.Client
                 !ResourceBinder.PatternRules.MatchSingleArgumentLambda(le, out le)
                 || ClientType.CheckElementTypeIsEntity(le.Parameters[0].Type)
                 || !(
-                    le
-                        .Parameters[0]
+                    le.Parameters[0]
                         .Type.GetProperties()
                         .Any(p => p.PropertyType == proposedParameterType)
                 )

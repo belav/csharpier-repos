@@ -111,9 +111,8 @@ public class InversePropertyAttributeConvention
 
         if (
             inverseNavigationPropertyInfo == null
-            || !navigationCandidates[inverseNavigationPropertyInfo].Type.IsAssignableFrom(
-                entityType.ClrType
-            )
+            || !navigationCandidates[inverseNavigationPropertyInfo]
+                .Type.IsAssignableFrom(entityType.ClrType)
         )
         {
             throw new InvalidOperationException(

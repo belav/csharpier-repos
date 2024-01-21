@@ -35,10 +35,8 @@ public class QueryExpressionInterceptorAggregator
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                queryExpression = _interceptors[i].QueryCompilationStarting(
-                    queryExpression,
-                    eventData
-                );
+                queryExpression = _interceptors[i]
+                    .QueryCompilationStarting(queryExpression, eventData);
             }
 
             return queryExpression;

@@ -312,9 +312,8 @@ namespace System.Reflection
                                     == genericArguments.Length
                                 )
                                 {
-                                    MethodInfo candidateMethod = methods[i].MakeGenericMethod(
-                                        genericArguments
-                                    );
+                                    MethodInfo candidateMethod = methods[i]
+                                        .MakeGenericMethod(genericArguments);
 
                                     if (m_signature2 != null)
                                     {

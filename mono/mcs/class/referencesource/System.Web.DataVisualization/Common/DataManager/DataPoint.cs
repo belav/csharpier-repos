@@ -391,13 +391,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     int equalSignIndex = otherAttributeNames[index].IndexOf('=');
                     if (equalSignIndex > 0)
                     {
-                        otherFieldNames[index] = otherAttributeNames[index].Substring(
-                            equalSignIndex + 1
-                        );
-                        otherAttributeNames[index] = otherAttributeNames[index].Substring(
-                            0,
-                            equalSignIndex
-                        );
+                        otherFieldNames[index] = otherAttributeNames[index]
+                            .Substring(equalSignIndex + 1);
+                        otherAttributeNames[index] = otherAttributeNames[index]
+                            .Substring(0, equalSignIndex);
                     }
                     else
                     {
@@ -413,9 +410,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         && otherFieldNames[index][otherFieldNames[index].Length - 1] == '}'
                     )
                     {
-                        otherValueFormat[index] = otherFieldNames[index].Substring(
-                            bracketIndex + 1
-                        );
+                        otherValueFormat[index] = otherFieldNames[index]
+                            .Substring(bracketIndex + 1);
                         otherValueFormat[index] = otherValueFormat[index].Trim('{', '}');
                         otherFieldNames[index] = otherFieldNames[index].Substring(0, bracketIndex);
                     }
@@ -2774,8 +2770,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 // #INDEX - point index
                 result = result.Replace(
                     KeywordName.Index,
-                    this
-                        .series.Points.IndexOf(this)
+                    this.series.Points.IndexOf(this)
                         .ToString(System.Globalization.CultureInfo.InvariantCulture)
                 );
 

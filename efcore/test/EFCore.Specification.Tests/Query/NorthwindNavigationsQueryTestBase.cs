@@ -203,8 +203,7 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     .OrderBy(c => c.CustomerID)
                     .Take(2)
                     .Select(c =>
-                        c
-                            .Orders.OrderBy(o => o.OrderID)
+                        c.Orders.OrderBy(o => o.OrderID)
                             .Select(o => new { o.CustomerID, o.OrderID })
                             .FirstOrDefault()
                     ),
@@ -224,8 +223,7 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     .OrderBy(c => c.CustomerID)
                     .Take(2)
                     .Select(c =>
-                        c
-                            .Orders.OrderBy(o => o.OrderID)
+                        c.Orders.OrderBy(o => o.OrderID)
                             .Select(o => new
                             {
                                 o.CustomerID,

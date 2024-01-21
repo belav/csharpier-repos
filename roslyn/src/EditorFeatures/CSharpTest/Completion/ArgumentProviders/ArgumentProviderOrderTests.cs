@@ -93,9 +93,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                     // The last argument marker should be last; this is ensured by either the last "real" provider saying it comes before the
                     // marker, or the last argument marker comes after the last "real" provider.
                     if (
-                        !orderedCSharpArgumentProviders[i].Metadata.AfterTyped.Contains(
-                            orderedCSharpArgumentProviders[i - 1].Metadata.Name
-                        )
+                        !orderedCSharpArgumentProviders[i]
+                            .Metadata.AfterTyped.Contains(
+                                orderedCSharpArgumentProviders[i - 1].Metadata.Name
+                            )
                     )
                     {
                         // Make sure the last built-in provider comes before the marker

@@ -697,10 +697,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     for (int j = 0; j < originalConstraintTypes.Length; j++)
                     {
                         Debug.Assert(
-                            originalConstraintTypes[j].Equals(
-                                mergedConstraintTypes[j],
-                                TypeCompareKind.ObliviousNullableModifierMatchesAny
-                            )
+                            originalConstraintTypes[j]
+                                .Equals(
+                                    mergedConstraintTypes[j],
+                                    TypeCompareKind.ObliviousNullableModifierMatchesAny
+                                )
                         );
                     }
 #endif

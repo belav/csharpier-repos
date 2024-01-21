@@ -242,8 +242,7 @@ namespace System.Data.Services.Client
                             {
                                 if (
                                     (null == keyPropertyDeclaredType)
-                                    || this
-                                        .properties[i]
+                                    || this.properties[i]
                                         .DeclaringType.IsAssignableFrom(keyPropertyDeclaredType)
                                 )
                                 {

@@ -1764,19 +1764,26 @@ public class MonsterContext<
         var customer3 = toAdd[0].AddEx(new TCustomer { Name = "Tarquin Tiger" });
         var customer2 = toAdd[0].AddEx(new TCustomer { Name = "Sue Pandy", Husband = customer0 });
 
-        var product1 = toAdd[0].AddEx(
-            new TProduct
-            {
-                Description = "Mrs Koalie's Famous Waffles",
-                BaseConcurrency = "Pounds Sterling"
-            }
-        );
-        var product2 = toAdd[0].AddEx(
-            new TProduct { Description = "Chocolate Donuts", BaseConcurrency = "US Dollars" }
-        );
-        var product3 = toAdd[0].AddEx(
-            new TProduct { Description = "Assorted Dog Treats", BaseConcurrency = "Stuffy Money" }
-        );
+        var product1 = toAdd[0]
+            .AddEx(
+                new TProduct
+                {
+                    Description = "Mrs Koalie's Famous Waffles",
+                    BaseConcurrency = "Pounds Sterling"
+                }
+            );
+        var product2 = toAdd[0]
+            .AddEx(
+                new TProduct { Description = "Chocolate Donuts", BaseConcurrency = "US Dollars" }
+            );
+        var product3 = toAdd[0]
+            .AddEx(
+                new TProduct
+                {
+                    Description = "Assorted Dog Treats",
+                    BaseConcurrency = "Stuffy Money"
+                }
+            );
 
         product1.Dimensions = new TDimensions
         {
@@ -1797,15 +1804,12 @@ public class MonsterContext<
             Height = 4
         };
 
-        var barcode1 = toAdd[1].AddEx(
-            new TBarcode { Code = new byte[] { 1, 2, 3, 4 }, Text = "Barcode 1 2 3 4" }
-        );
-        var barcode2 = toAdd[1].AddEx(
-            new TBarcode { Code = new byte[] { 2, 2, 3, 4 }, Text = "Barcode 2 2 3 4" }
-        );
-        var barcode3 = toAdd[1].AddEx(
-            new TBarcode { Code = new byte[] { 3, 2, 3, 4 }, Text = "Barcode 3 2 3 4" }
-        );
+        var barcode1 = toAdd[1]
+            .AddEx(new TBarcode { Code = new byte[] { 1, 2, 3, 4 }, Text = "Barcode 1 2 3 4" });
+        var barcode2 = toAdd[1]
+            .AddEx(new TBarcode { Code = new byte[] { 2, 2, 3, 4 }, Text = "Barcode 2 2 3 4" });
+        var barcode3 = toAdd[1]
+            .AddEx(new TBarcode { Code = new byte[] { 3, 2, 3, 4 }, Text = "Barcode 3 2 3 4" });
 
         product1.InitializeCollections();
         product1.Barcodes.Add(barcode1);
@@ -1820,62 +1824,62 @@ public class MonsterContext<
         barcode1.Detail = barcodeDetails1;
         barcode2.Detail = barcodeDetails2;
 
-        var incorrectScan1 = toAdd[1].AddEx(
-            new TIncorrectScan
-            {
-                ScanDate = new DateTime(2014, 5, 28, 19, 9, 6),
-                Details = "Treats not Donuts",
-                ActualBarcode = barcode3
-            }
-        );
+        var incorrectScan1 = toAdd[1]
+            .AddEx(
+                new TIncorrectScan
+                {
+                    ScanDate = new DateTime(2014, 5, 28, 19, 9, 6),
+                    Details = "Treats not Donuts",
+                    ActualBarcode = barcode3
+                }
+            );
         barcode2.InitializeCollections();
         barcode2.BadScans.Add(incorrectScan1);
 
-        var incorrectScan2 = toAdd[1].AddEx(
-            new TIncorrectScan
-            {
-                ScanDate = new DateTime(2014, 5, 28, 19, 15, 31),
-                Details = "Wot no waffles?",
-                ActualBarcode = barcode2
-            }
-        );
+        var incorrectScan2 = toAdd[1]
+            .AddEx(
+                new TIncorrectScan
+                {
+                    ScanDate = new DateTime(2014, 5, 28, 19, 15, 31),
+                    Details = "Wot no waffles?",
+                    ActualBarcode = barcode2
+                }
+            );
         barcode1.InitializeCollections();
         barcode1.BadScans.Add(incorrectScan2);
 
-        var complaint1 = toAdd[1].AddEx(
-            new TComplaint
-            {
-                Customer = customer2,
-                AlternateId = 88,
-                Details = "Don't give coffee to Eeky!",
-                Logged = new DateTime(2014, 5, 27, 19, 22, 26)
-            }
-        );
+        var complaint1 = toAdd[1]
+            .AddEx(
+                new TComplaint
+                {
+                    Customer = customer2,
+                    AlternateId = 88,
+                    Details = "Don't give coffee to Eeky!",
+                    Logged = new DateTime(2014, 5, 27, 19, 22, 26)
+                }
+            );
 
-        var complaint2 = toAdd[1].AddEx(
-            new TComplaint
-            {
-                Customer = customer2,
-                AlternateId = 89,
-                Details = "Really! Don't give coffee to Eeky!",
-                Logged = new DateTime(2014, 5, 28, 19, 22, 26)
-            }
-        );
+        var complaint2 = toAdd[1]
+            .AddEx(
+                new TComplaint
+                {
+                    Customer = customer2,
+                    AlternateId = 89,
+                    Details = "Really! Don't give coffee to Eeky!",
+                    Logged = new DateTime(2014, 5, 28, 19, 22, 26)
+                }
+            );
 
-        var resolution = toAdd[2].AddEx(
-            new TResolution { Details = "Destroyed all coffee in Redmond area." }
-        );
+        var resolution = toAdd[2]
+            .AddEx(new TResolution { Details = "Destroyed all coffee in Redmond area." });
         complaint2.Resolution = resolution;
 
-        var login1 = toAdd[1].AddEx(
-            new TLogin { Username = "MrsKoalie73", AlternateUsername = "Sheila" }
-        );
-        var login2 = toAdd[1].AddEx(
-            new TLogin { Username = "MrsBossyPants", AlternateUsername = "Sue" }
-        );
-        var login3 = toAdd[1].AddEx(
-            new TLogin { Username = "TheStripedMenace", AlternateUsername = "Tarquin" }
-        );
+        var login1 = toAdd[1]
+            .AddEx(new TLogin { Username = "MrsKoalie73", AlternateUsername = "Sheila" });
+        var login2 = toAdd[1]
+            .AddEx(new TLogin { Username = "MrsBossyPants", AlternateUsername = "Sue" });
+        var login3 = toAdd[1]
+            .AddEx(new TLogin { Username = "TheStripedMenace", AlternateUsername = "Tarquin" });
 
         customer1.InitializeCollections();
         customer1.Logins.Add(login1);
@@ -1884,184 +1888,203 @@ public class MonsterContext<
         customer3.InitializeCollections();
         customer3.Logins.Add(login3);
 
-        var suspiciousActivity1 = toAdd[2].AddEx(
-            new TSuspiciousActivity
-            {
-                Activity = "Pig prints on keyboard",
-                Username = Entry(login3).Property(e => e.Username).CurrentValue
-            }
-        );
-        var suspiciousActivity2 = toAdd[2].AddEx(
-            new TSuspiciousActivity
-            {
-                Activity = "Crumbs in the cupboard",
-                Username = Entry(login3).Property(e => e.Username).CurrentValue
-            }
-        );
-        var suspiciousActivity3 = toAdd[2].AddEx(
-            new TSuspiciousActivity
-            {
-                Activity = "Donuts gone missing",
-                Username = Entry(login3).Property(e => e.Username).CurrentValue
-            }
-        );
+        var suspiciousActivity1 = toAdd[2]
+            .AddEx(
+                new TSuspiciousActivity
+                {
+                    Activity = "Pig prints on keyboard",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            );
+        var suspiciousActivity2 = toAdd[2]
+            .AddEx(
+                new TSuspiciousActivity
+                {
+                    Activity = "Crumbs in the cupboard",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            );
+        var suspiciousActivity3 = toAdd[2]
+            .AddEx(
+                new TSuspiciousActivity
+                {
+                    Activity = "Donuts gone missing",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            );
 
-        var rsaToken1 = toAdd[2].AddEx(
-            new TRsaToken
-            {
-                Issued = DateTime.Now,
-                Serial = "1234",
-                Login = login1
-            }
-        );
-        var rsaToken2 = toAdd[2].AddEx(
-            new TRsaToken
-            {
-                Issued = DateTime.Now,
-                Serial = "2234",
-                Login = login2
-            }
-        );
+        var rsaToken1 = toAdd[2]
+            .AddEx(
+                new TRsaToken
+                {
+                    Issued = DateTime.Now,
+                    Serial = "1234",
+                    Login = login1
+                }
+            );
+        var rsaToken2 = toAdd[2]
+            .AddEx(
+                new TRsaToken
+                {
+                    Issued = DateTime.Now,
+                    Serial = "2234",
+                    Login = login2
+                }
+            );
 
-        var smartCard1 = toAdd[2].AddEx(
-            new TSmartCard
-            {
-                Login = login1,
-                CardSerial = Entry(rsaToken1).Property(e => e.Serial).CurrentValue,
-                Issued = Entry(rsaToken1).Property(e => e.Issued).CurrentValue
-            }
-        );
-        var smartCard2 = toAdd[2].AddEx(
-            new TSmartCard
-            {
-                Login = login2,
-                CardSerial = Entry(rsaToken2).Property(e => e.Serial).CurrentValue,
-                Issued = Entry(rsaToken2).Property(e => e.Issued).CurrentValue
-            }
-        );
+        var smartCard1 = toAdd[2]
+            .AddEx(
+                new TSmartCard
+                {
+                    Login = login1,
+                    CardSerial = Entry(rsaToken1).Property(e => e.Serial).CurrentValue,
+                    Issued = Entry(rsaToken1).Property(e => e.Issued).CurrentValue
+                }
+            );
+        var smartCard2 = toAdd[2]
+            .AddEx(
+                new TSmartCard
+                {
+                    Login = login2,
+                    CardSerial = Entry(rsaToken2).Property(e => e.Serial).CurrentValue,
+                    Issued = Entry(rsaToken2).Property(e => e.Issued).CurrentValue
+                }
+            );
 
-        var reset1 = toAdd[2].AddEx(
-            new TPasswordReset
-            {
-                EmailedTo = "trent@example.com",
-                ResetNo = 1,
-                TempPassword = "Rent-A-Mole",
-                Login = login3
-            }
-        );
+        var reset1 = toAdd[2]
+            .AddEx(
+                new TPasswordReset
+                {
+                    EmailedTo = "trent@example.com",
+                    ResetNo = 1,
+                    TempPassword = "Rent-A-Mole",
+                    Login = login3
+                }
+            );
 
-        var pageView1 = toAdd[1].AddEx(
-            new TPageView
-            {
-                PageUrl = "somePage1",
-                Login = login1,
-                Viewed = DateTime.Now
-            }
-        );
-        var pageView2 = toAdd[1].AddEx(
-            new TPageView
-            {
-                PageUrl = "somePage2",
-                Login = login1,
-                Viewed = DateTime.Now
-            }
-        );
-        var pageView3 = toAdd[1].AddEx(
-            new TPageView
-            {
-                PageUrl = "somePage3",
-                Login = login1,
-                Viewed = DateTime.Now
-            }
-        );
+        var pageView1 = toAdd[1]
+            .AddEx(
+                new TPageView
+                {
+                    PageUrl = "somePage1",
+                    Login = login1,
+                    Viewed = DateTime.Now
+                }
+            );
+        var pageView2 = toAdd[1]
+            .AddEx(
+                new TPageView
+                {
+                    PageUrl = "somePage2",
+                    Login = login1,
+                    Viewed = DateTime.Now
+                }
+            );
+        var pageView3 = toAdd[1]
+            .AddEx(
+                new TPageView
+                {
+                    PageUrl = "somePage3",
+                    Login = login1,
+                    Viewed = DateTime.Now
+                }
+            );
 
-        var lastLogin1 = toAdd[2].AddEx(
-            new TLastLogin
-            {
-                LoggedIn = new DateTime(2014, 5, 27, 10, 22, 26),
-                LoggedOut = new DateTime(2014, 5, 27, 11, 22, 26)
-            }
-        );
+        var lastLogin1 = toAdd[2]
+            .AddEx(
+                new TLastLogin
+                {
+                    LoggedIn = new DateTime(2014, 5, 27, 10, 22, 26),
+                    LoggedOut = new DateTime(2014, 5, 27, 11, 22, 26)
+                }
+            );
 
         login1.LastLogin = lastLogin1;
         smartCard1.LastLogin = lastLogin1;
 
-        var lastLogin2 = toAdd[2].AddEx(
-            new TLastLogin
-            {
-                LoggedIn = new DateTime(2014, 5, 27, 12, 22, 26),
-                LoggedOut = new DateTime(2014, 5, 27, 13, 22, 26)
-            }
-        );
+        var lastLogin2 = toAdd[2]
+            .AddEx(
+                new TLastLogin
+                {
+                    LoggedIn = new DateTime(2014, 5, 27, 12, 22, 26),
+                    LoggedOut = new DateTime(2014, 5, 27, 13, 22, 26)
+                }
+            );
 
         login2.LastLogin = lastLogin2;
         smartCard2.LastLogin = lastLogin2;
 
-        var message1 = toAdd[2].AddEx(
-            new TMessage
-            {
-                Subject = "Tea?",
-                Body = "Fancy a cup of tea?",
-                Sent = DateTime.Now,
-                FromUsername = Entry(login1).Property(e => e.Username).CurrentValue
-            }
-        );
+        var message1 = toAdd[2]
+            .AddEx(
+                new TMessage
+                {
+                    Subject = "Tea?",
+                    Body = "Fancy a cup of tea?",
+                    Sent = DateTime.Now,
+                    FromUsername = Entry(login1).Property(e => e.Username).CurrentValue
+                }
+            );
 
         login1.InitializeCollections();
         login1.SentMessages.Add(message1);
         login2.InitializeCollections();
         login2.ReceivedMessages.Add(message1);
 
-        var message2 = toAdd[2].AddEx(
-            new TMessage
-            {
-                Subject = "Re: Tea?",
-                Body = "Love one!",
-                Sent = DateTime.Now,
-                FromUsername = Entry(login2).Property(e => e.Username).CurrentValue
-            }
-        );
+        var message2 = toAdd[2]
+            .AddEx(
+                new TMessage
+                {
+                    Subject = "Re: Tea?",
+                    Body = "Love one!",
+                    Sent = DateTime.Now,
+                    FromUsername = Entry(login2).Property(e => e.Username).CurrentValue
+                }
+            );
 
         login2.SentMessages.Add(message2);
         login1.ReceivedMessages.Add(message2);
 
-        var message3 = toAdd[2].AddEx(
-            new TMessage
-            {
-                Subject = "Re: Tea?",
-                Body = "I'll put the kettle on.",
-                Sent = DateTime.Now,
-                FromUsername = Entry(login1).Property(e => e.Username).CurrentValue
-            }
-        );
+        var message3 = toAdd[2]
+            .AddEx(
+                new TMessage
+                {
+                    Subject = "Re: Tea?",
+                    Body = "I'll put the kettle on.",
+                    Sent = DateTime.Now,
+                    FromUsername = Entry(login1).Property(e => e.Username).CurrentValue
+                }
+            );
 
         login1.SentMessages.Add(message3);
         login2.ReceivedMessages.Add(message3);
 
-        var order1 = toAdd[2].AddEx(
-            new TAnOrder
-            {
-                Customer = customer1,
-                Login = login1,
-                AlternateId = 77
-            }
-        );
-        var order2 = toAdd[2].AddEx(
-            new TAnOrder
-            {
-                Customer = customer2,
-                Login = login2,
-                AlternateId = 78
-            }
-        );
-        var order3 = toAdd[2].AddEx(
-            new TAnOrder
-            {
-                Customer = customer3,
-                Login = login3,
-                AlternateId = 79
-            }
-        );
+        var order1 = toAdd[2]
+            .AddEx(
+                new TAnOrder
+                {
+                    Customer = customer1,
+                    Login = login1,
+                    AlternateId = 77
+                }
+            );
+        var order2 = toAdd[2]
+            .AddEx(
+                new TAnOrder
+                {
+                    Customer = customer2,
+                    Login = login2,
+                    AlternateId = 78
+                }
+            );
+        var order3 = toAdd[2]
+            .AddEx(
+                new TAnOrder
+                {
+                    Customer = customer3,
+                    Login = login3,
+                    AlternateId = 79
+                }
+            );
 
         customer1.Orders.Add(order1);
         customer2.Orders.Add(order2);
@@ -2081,30 +2104,33 @@ public class MonsterContext<
         order1.Notes.Add(orderNote2);
         order1.Notes.Add(orderNote3);
 
-        var orderQualityCheck1 = toAdd[2].AddEx(
-            new TOrderQualityCheck
-            {
-                Order = order1,
-                CheckedBy = "Eeky Bear",
-                CheckedDateTime = DateTime.Now
-            }
-        );
-        var orderQualityCheck2 = toAdd[2].AddEx(
-            new TOrderQualityCheck
-            {
-                Order = order2,
-                CheckedBy = "Eeky Bear",
-                CheckedDateTime = DateTime.Now
-            }
-        );
-        var orderQualityCheck3 = toAdd[2].AddEx(
-            new TOrderQualityCheck
-            {
-                Order = order3,
-                CheckedBy = "Eeky Bear",
-                CheckedDateTime = DateTime.Now
-            }
-        );
+        var orderQualityCheck1 = toAdd[2]
+            .AddEx(
+                new TOrderQualityCheck
+                {
+                    Order = order1,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            );
+        var orderQualityCheck2 = toAdd[2]
+            .AddEx(
+                new TOrderQualityCheck
+                {
+                    Order = order2,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            );
+        var orderQualityCheck3 = toAdd[2]
+            .AddEx(
+                new TOrderQualityCheck
+                {
+                    Order = order3,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            );
 
         var orderLine1 = toAdd[3].AddEx(new TOrderLine { Product = product1, Quantity = 7 });
         var orderLine2 = toAdd[3].AddEx(new TOrderLine { Product = product2, Quantity = 1 });
@@ -2122,20 +2148,17 @@ public class MonsterContext<
         order3.InitializeCollections();
         order3.OrderLines.Add(orderLine6);
 
-        var productDetail1 = toAdd[0].AddEx(
-            new TProductDetail { Details = "A Waffle Cart specialty!" }
-        );
-        var productDetail2 = toAdd[0].AddEx(
-            new TProductDetail { Details = "Eeky Bear's favorite!" }
-        );
+        var productDetail1 = toAdd[0]
+            .AddEx(new TProductDetail { Details = "A Waffle Cart specialty!" });
+        var productDetail2 = toAdd[0]
+            .AddEx(new TProductDetail { Details = "Eeky Bear's favorite!" });
 
         product1.Detail = productDetail1;
         product2.Detail = productDetail2;
 
         var productReview1 = toAdd[0].AddEx(new TProductReview { Review = "Better than Tarqies!" });
-        var productReview2 = toAdd[0].AddEx(
-            new TProductReview { Review = "Good with maple syrup." }
-        );
+        var productReview2 = toAdd[0]
+            .AddEx(new TProductReview { Review = "Good with maple syrup." });
         var productReview3 = toAdd[0].AddEx(new TProductReview { Review = "Eeky says yes!" });
 
         product1.Reviews.Add(productReview1);
@@ -2150,18 +2173,16 @@ public class MonsterContext<
         product1.Photos.Add(productPhoto2);
         product3.Photos.Add(productPhoto3);
 
-        var productWebFeature1 = toAdd[0].AddEx(
-            new TProductWebFeature { Heading = "Waffle Style" }
-        );
+        var productWebFeature1 = toAdd[0]
+            .AddEx(new TProductWebFeature { Heading = "Waffle Style" });
 
         productPhoto1.InitializeCollections();
         productPhoto1.Features.Add(productWebFeature1);
         productReview1.InitializeCollections();
         productReview1.Features.Add(productWebFeature1);
 
-        var productWebFeature2 = toAdd[0].AddEx(
-            new TProductWebFeature { Heading = "What does the waffle say?" }
-        );
+        var productWebFeature2 = toAdd[0]
+            .AddEx(new TProductWebFeature { Heading = "What does the waffle say?" });
 
         productReview3.InitializeCollections();
         productReview3.Features.Add(productWebFeature2);
@@ -2173,15 +2194,12 @@ public class MonsterContext<
 
         supplier1.Logo = supplierLogo1;
 
-        var supplierInfo1 = toAdd[0].AddEx(
-            new TSupplierInfo { Supplier = supplier1, Information = "Seems a bit dodgy." }
-        );
-        var supplierInfo2 = toAdd[0].AddEx(
-            new TSupplierInfo { Supplier = supplier1, Information = "Orange fur?" }
-        );
-        var supplierInfo3 = toAdd[0].AddEx(
-            new TSupplierInfo { Supplier = supplier2, Information = "Very expensive!" }
-        );
+        var supplierInfo1 = toAdd[0]
+            .AddEx(new TSupplierInfo { Supplier = supplier1, Information = "Seems a bit dodgy." });
+        var supplierInfo2 = toAdd[0]
+            .AddEx(new TSupplierInfo { Supplier = supplier1, Information = "Orange fur?" });
+        var supplierInfo3 = toAdd[0]
+            .AddEx(new TSupplierInfo { Supplier = supplier2, Information = "Very expensive!" });
 
         var customerInfo1 = toAdd[0].AddEx(new TCustomerInfo { Information = "Really likes tea." });
         var customerInfo2 = toAdd[0].AddEx(new TCustomerInfo { Information = "Mrs Bossy Pants!" });
@@ -2192,62 +2210,64 @@ public class MonsterContext<
         var computer1 = toAdd[0].AddEx(new TComputer { Name = "markash420" });
         var computer2 = toAdd[0].AddEx(new TComputer { Name = "unicorns420" });
 
-        var computerDetail1 = toAdd[0].AddEx(
-            new TComputerDetail
-            {
-                Manufacturer = "Dell",
-                Model = "420",
-                PurchaseDate = new DateTime(2008, 4, 1),
-                Serial = "4201",
-                Specifications = "It's a Dell!"
-            }
-        );
+        var computerDetail1 = toAdd[0]
+            .AddEx(
+                new TComputerDetail
+                {
+                    Manufacturer = "Dell",
+                    Model = "420",
+                    PurchaseDate = new DateTime(2008, 4, 1),
+                    Serial = "4201",
+                    Specifications = "It's a Dell!"
+                }
+            );
 
         computer1.ComputerDetail = computerDetail1;
 
-        var computerDetail2 = toAdd[0].AddEx(
-            new TComputerDetail
-            {
-                Manufacturer = "Not A Dell",
-                Model = "Not 420",
-                PurchaseDate = new DateTime(2012, 4, 1),
-                Serial = "4202",
-                Specifications = "It's not a Dell!"
-            }
-        );
+        var computerDetail2 = toAdd[0]
+            .AddEx(
+                new TComputerDetail
+                {
+                    Manufacturer = "Not A Dell",
+                    Model = "Not 420",
+                    PurchaseDate = new DateTime(2012, 4, 1),
+                    Serial = "4202",
+                    Specifications = "It's not a Dell!"
+                }
+            );
 
         computer2.ComputerDetail = computerDetail2;
 
-        var driver1 = toAdd[0].AddEx(
-            new TDriver { BirthDate = new DateTime(2006, 9, 19), Name = "Eeky Bear" }
-        );
-        var driver2 = toAdd[0].AddEx(
-            new TDriver { BirthDate = new DateTime(2007, 9, 19), Name = "Splash Bear" }
-        );
+        var driver1 = toAdd[0]
+            .AddEx(new TDriver { BirthDate = new DateTime(2006, 9, 19), Name = "Eeky Bear" });
+        var driver2 = toAdd[0]
+            .AddEx(new TDriver { BirthDate = new DateTime(2007, 9, 19), Name = "Splash Bear" });
 
-        var license1 = toAdd[1].AddEx(
-            new TLicense
-            {
-                LicenseClass = "C",
-                LicenseNumber = "10",
-                Restrictions = "None",
-                State = LicenseState.Active,
-                ExpirationDate = new DateTime(2018, 9, 19)
-            }
-        );
+        var license1 = toAdd[1]
+            .AddEx(
+                new TLicense
+                {
+                    LicenseClass = "C",
+                    LicenseNumber = "10",
+                    Restrictions = "None",
+                    State = LicenseState.Active,
+                    ExpirationDate = new DateTime(2018, 9, 19)
+                }
+            );
 
         driver1.License = license1;
 
-        var license2 = toAdd[1].AddEx(
-            new TLicense
-            {
-                LicenseClass = "A",
-                LicenseNumber = "11",
-                Restrictions = "None",
-                State = LicenseState.Revoked,
-                ExpirationDate = new DateTime(2018, 9, 19)
-            }
-        );
+        var license2 = toAdd[1]
+            .AddEx(
+                new TLicense
+                {
+                    LicenseClass = "A",
+                    LicenseNumber = "11",
+                    Restrictions = "None",
+                    State = LicenseState.Revoked,
+                    ExpirationDate = new DateTime(2018, 9, 19)
+                }
+            );
         driver2.License = license2;
 
         foreach (var entity in toAdd.SelectMany(l => l))

@@ -386,13 +386,14 @@ namespace System
                 Type[] args = new Type[generic_params.Count];
                 for (int i = 0; i < args.Length; ++i)
                 {
-                    var tmp = generic_params[i].Resolve(
-                        assemblyResolver,
-                        typeResolver,
-                        throwOnError,
-                        ignoreCase,
-                        ref stackMark
-                    );
+                    var tmp = generic_params[i]
+                        .Resolve(
+                            assemblyResolver,
+                            typeResolver,
+                            throwOnError,
+                            ignoreCase,
+                            ref stackMark
+                        );
                     if (tmp == null)
                     {
                         if (throwOnError)

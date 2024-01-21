@@ -531,11 +531,12 @@ namespace System.Data
                     //Constraints
                     for (int i = 0; i < tableCount; i++)
                     {
-                        Tables[i].DeserializeConstraints(
-                            info, /* table index */
-                            i, /* serialize all constraints */
-                            true
-                        ); //
+                        Tables[i]
+                            .DeserializeConstraints(
+                                info, /* table index */
+                                i, /* serialize all constraints */
+                                true
+                            ); //
                     }
 
                     //Relations

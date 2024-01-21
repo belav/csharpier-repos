@@ -15300,8 +15300,7 @@ a = globalA"
                         (c, _) => c.SyntaxTrees.First()
                     );
                     ctx.RegisterSourceOutput(
-                        ctx
-                            .AnalyzerConfigOptionsProvider.Combine(syntaxTreeInput)
+                        ctx.AnalyzerConfigOptionsProvider.Combine(syntaxTreeInput)
                             .Select(
                                 (p, _) =>
                                 {

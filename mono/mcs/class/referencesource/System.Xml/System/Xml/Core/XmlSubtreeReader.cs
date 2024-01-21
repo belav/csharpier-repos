@@ -1330,25 +1330,20 @@ namespace System.Xml
             }
             if (prefix.Length == 0)
             {
-                nsAttributes[index].Set(
-                    XmlNodeType.Attribute,
-                    xmlns,
-                    string.Empty,
-                    xmlns,
-                    xmlnsUri,
-                    ns
-                );
+                nsAttributes[index]
+                    .Set(XmlNodeType.Attribute, xmlns, string.Empty, xmlns, xmlnsUri, ns);
             }
             else
             {
-                nsAttributes[index].Set(
-                    XmlNodeType.Attribute,
-                    prefix,
-                    xmlns,
-                    reader.NameTable.Add(string.Concat(xmlns, ":", prefix)),
-                    xmlnsUri,
-                    ns
-                );
+                nsAttributes[index]
+                    .Set(
+                        XmlNodeType.Attribute,
+                        prefix,
+                        xmlns,
+                        reader.NameTable.Add(string.Concat(xmlns, ":", prefix)),
+                        xmlnsUri,
+                        ns
+                    );
             }
 
             Debug.Assert(

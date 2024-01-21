@@ -81,9 +81,8 @@ namespace Microsoft.CodeAnalysis
                 for (int i = 0; i < _referencedAssemblyData.Length; i++)
                 {
                     Debug.Assert(
-                        assemblies[_referencedAssemblyData[i].Identity.Name].Contains(
-                            (_referencedAssemblyData[i], i + 1)
-                        )
+                        assemblies[_referencedAssemblyData[i].Identity.Name]
+                            .Contains((_referencedAssemblyData[i], i + 1))
                     );
                     boundReferences[i] = new AssemblyReferenceBinding(
                         _referencedAssemblyData[i].Identity,

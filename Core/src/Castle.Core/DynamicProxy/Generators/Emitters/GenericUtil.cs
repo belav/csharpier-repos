@@ -162,9 +162,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
                 {
                     // Doesn't matter
 
-                    newGenericParameters[i].SetGenericParameterAttributes(
-                        GenericParameterAttributes.None
-                    );
+                    newGenericParameters[i]
+                        .SetGenericParameterAttributes(GenericParameterAttributes.None);
                 }
             }
 

@@ -1450,10 +1450,11 @@ namespace System.Workflow.ComponentModel.Design
                                     //see if we need to get the properties on the parent node again...
                                     if (
                                         i > 0
-                                        && pathInfoList[i - 1].Path.Equals(
-                                            indexPropertyName,
-                                            StringComparison.Ordinal
-                                        )
+                                        && pathInfoList[i - 1]
+                                            .Path.Equals(
+                                                indexPropertyName,
+                                                StringComparison.Ordinal
+                                            )
                                     )
                                         node = node.Parent as WorkflowOutlineNode;
                                 }

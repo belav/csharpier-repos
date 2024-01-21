@@ -360,26 +360,26 @@ namespace System.Activities.Core.Presentation
                         EditingScope scope = (EditingScope)this.ModelItem.BeginEdit(SR.ReorderItems)
                     )
                     {
-                        ModelItem movedModelItem = this
-                            .TransitionsSharingTrigger[e.NewStartingIndex]
-                            .Item;
+                        ModelItem movedModelItem = this.TransitionsSharingTrigger[
+                            e.NewStartingIndex
+                        ].Item;
                         ModelItemCollection transitionsCollection = this.parentStateModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
                             .Collection;
                         // moving down
                         if (e.OldStartingIndex < e.NewStartingIndex)
                         {
-                            ModelItem nextModelItem = this
-                                .TransitionsSharingTrigger[e.OldStartingIndex]
-                                .Item;
+                            ModelItem nextModelItem = this.TransitionsSharingTrigger[
+                                e.OldStartingIndex
+                            ].Item;
                             SwapItems(transitionsCollection, movedModelItem, nextModelItem);
                         }
                         // moving up
                         else if (e.OldStartingIndex > e.NewStartingIndex)
                         {
-                            ModelItem previousModelItem = this
-                                .TransitionsSharingTrigger[e.OldStartingIndex]
-                                .Item;
+                            ModelItem previousModelItem = this.TransitionsSharingTrigger[
+                                e.OldStartingIndex
+                            ].Item;
                             SwapItems(transitionsCollection, previousModelItem, movedModelItem);
                         }
                         this

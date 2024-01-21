@@ -28,11 +28,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             else
             {
                 // Call the handler at the index, passing a continuation that will come back to here with index + 1
-                return formattingRules[index].GetAdjustNewLinesOperation(
-                    in previousToken,
-                    in currentToken,
-                    NextOperation
-                );
+                return formattingRules[index]
+                    .GetAdjustNewLinesOperation(in previousToken, in currentToken, NextOperation);
             }
         }
     }

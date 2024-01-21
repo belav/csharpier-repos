@@ -1658,10 +1658,8 @@ namespace System.Net
             {
                 if (
                     webHeaders[connectionHeader] == null
-                    || webHeaders[connectionHeader].IndexOf(
-                        "keep-alive",
-                        StringComparison.OrdinalIgnoreCase
-                    ) == -1
+                    || webHeaders[connectionHeader]
+                        .IndexOf("keep-alive", StringComparison.OrdinalIgnoreCase) == -1
                 )
                     webHeaders.ChangeInternal(connectionHeader, "keep-alive");
             }

@@ -7545,8 +7545,7 @@ class Program
                 .GetMembers(WellKnownMemberNames.EqualityOperatorName)
                 .OfType<MethodSymbol>()
                 .Single(m =>
-                    m
-                        .ParameterTypesWithAnnotations[0]
+                    m.ParameterTypesWithAnnotations[0]
                         .Equals(
                             m.ParameterTypesWithAnnotations[1],
                             TypeCompareKind.ConsiderEverything

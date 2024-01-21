@@ -1359,249 +1359,255 @@ namespace System.Workflow.ComponentModel.Design
             {
                 //Page path
                 pagePaths[0] = new GraphicsPath();
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top + pageFoldSize
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top,
-                    pageBounds.Right,
-                    pageBounds.Top
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Top,
-                    pageBounds.Right,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Bottom,
-                    pageBounds.Left,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Bottom,
-                    pageBounds.Left,
-                    pageBounds.Top + pageFoldSize
-                );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top + pageFoldSize
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top,
+                        pageBounds.Right,
+                        pageBounds.Top
+                    );
+                pagePaths[0]
+                    .AddLine(pageBounds.Right, pageBounds.Top, pageBounds.Right, pageBounds.Bottom);
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Bottom,
+                        pageBounds.Left,
+                        pageBounds.Bottom
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left,
+                        pageBounds.Bottom,
+                        pageBounds.Left,
+                        pageBounds.Top + pageFoldSize
+                    );
 
                 //Page fold path
                 pagePaths[1] = new GraphicsPath();
-                pagePaths[1].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top + pageFoldSize
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Top,
-                    pageBounds.Left,
-                    pageBounds.Top + pageFoldSize
-                );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Left,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top + pageFoldSize
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Top,
+                        pageBounds.Left,
+                        pageBounds.Top + pageFoldSize
+                    );
             }
             else if (foldAlignment == DesignerContentAlignment.BottomLeft)
             {
                 //Page path
                 pagePaths[0] = new GraphicsPath();
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Top,
-                    pageBounds.Right,
-                    pageBounds.Top
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Top,
-                    pageBounds.Right,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Bottom,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Left,
-                    pageBounds.Bottom - pageFoldSize
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Left,
-                    pageBounds.Top
-                );
+                pagePaths[0]
+                    .AddLine(pageBounds.Left, pageBounds.Top, pageBounds.Right, pageBounds.Top);
+                pagePaths[0]
+                    .AddLine(pageBounds.Right, pageBounds.Top, pageBounds.Right, pageBounds.Bottom);
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Bottom,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Left,
+                        pageBounds.Bottom - pageFoldSize
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Left,
+                        pageBounds.Top
+                    );
 
                 //Page fold path
                 pagePaths[1] = new GraphicsPath();
-                pagePaths[1].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Left,
-                    pageBounds.Bottom - pageFoldSize
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Left + pageFoldSize,
-                    pageBounds.Bottom
-                );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Left,
+                        pageBounds.Bottom - pageFoldSize
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Left,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Left + pageFoldSize,
+                        pageBounds.Bottom
+                    );
             }
             else if (foldAlignment == DesignerContentAlignment.TopRight)
             {
                 //Page path
                 pagePaths[0] = new GraphicsPath();
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Top,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top + pageFoldSize
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Right,
-                    pageBounds.Top + pageFoldSize
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Right,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Bottom,
-                    pageBounds.Left,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Bottom,
-                    pageBounds.Left,
-                    pageBounds.Top
-                );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Left,
+                        pageBounds.Top,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top + pageFoldSize
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Right,
+                        pageBounds.Top + pageFoldSize
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Right,
+                        pageBounds.Bottom
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Bottom,
+                        pageBounds.Left,
+                        pageBounds.Bottom
+                    );
+                pagePaths[0]
+                    .AddLine(pageBounds.Left, pageBounds.Bottom, pageBounds.Left, pageBounds.Top);
 
                 //Page fold path
                 pagePaths[1] = new GraphicsPath();
-                pagePaths[1].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top + pageFoldSize
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Right,
-                    pageBounds.Top + pageFoldSize
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Top + pageFoldSize,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Top
-                );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top + pageFoldSize
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Right,
+                        pageBounds.Top + pageFoldSize
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Top + pageFoldSize,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Top
+                    );
             }
             else if (foldAlignment == DesignerContentAlignment.BottomRight)
             {
                 //Page path
                 pagePaths[0] = new GraphicsPath();
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Top,
-                    pageBounds.Right,
-                    pageBounds.Top
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Top,
-                    pageBounds.Right,
-                    pageBounds.Bottom - pageFoldSize
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom,
-                    pageBounds.Left,
-                    pageBounds.Bottom
-                );
-                pagePaths[0].AddLine(
-                    pageBounds.Left,
-                    pageBounds.Bottom,
-                    pageBounds.Left,
-                    pageBounds.Top
-                );
+                pagePaths[0]
+                    .AddLine(pageBounds.Left, pageBounds.Top, pageBounds.Right, pageBounds.Top);
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Top,
+                        pageBounds.Right,
+                        pageBounds.Bottom - pageFoldSize
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom
+                    );
+                pagePaths[0]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom,
+                        pageBounds.Left,
+                        pageBounds.Bottom
+                    );
+                pagePaths[0]
+                    .AddLine(pageBounds.Left, pageBounds.Bottom, pageBounds.Left, pageBounds.Top);
 
                 //Page fold path
                 pagePaths[1] = new GraphicsPath();
-                pagePaths[1].AddLine(
-                    pageBounds.Right,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom - pageFoldSize,
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom
-                );
-                pagePaths[1].AddLine(
-                    pageBounds.Right - pageFoldSize,
-                    pageBounds.Bottom,
-                    pageBounds.Right,
-                    pageBounds.Bottom - pageFoldSize
-                );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Right,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom - pageFoldSize,
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom
+                    );
+                pagePaths[1]
+                    .AddLine(
+                        pageBounds.Right - pageFoldSize,
+                        pageBounds.Bottom,
+                        pageBounds.Right,
+                        pageBounds.Bottom - pageFoldSize
+                    );
             }
 
             return pagePaths;

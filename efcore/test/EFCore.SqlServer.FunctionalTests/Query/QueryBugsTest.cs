@@ -3735,8 +3735,7 @@ FROM [Prices] AS [p]
         {
             var query = context
                 .Employees.Select(e =>
-                    e
-                        .Devices.Where(d => d.Device != "foo")
+                    e.Devices.Where(d => d.Device != "foo")
                         .Cast<MyContext12582.IEmployeeDevice12582>()
                 )
                 .ToList();

@@ -3307,9 +3307,8 @@ namespace System
 #if MONO
                                 if (
                                     (object)argumentTypes[i] != null
-                                    && !argumentTypes[i].MatchesParameterTypeExactly(
-                                        parameterInfos[i]
-                                    )
+                                    && !argumentTypes[i]
+                                        .MatchesParameterTypeExactly(parameterInfos[i])
                                 )
 #else
                                 if (

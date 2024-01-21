@@ -783,11 +783,12 @@ namespace System.Data.SqlClient
                             // This invokes user-code which may throw exceptions.
                             // NOTE: this is intentionally outside of the lock, we don't want
                             // to invoke user-code while holding an internal lock.
-                            dependencies[i].Invalidate(
-                                SqlNotificationType.Change,
-                                SqlNotificationInfo.Error,
-                                SqlNotificationSource.Timeout
-                            );
+                            dependencies[i]
+                                .Invalidate(
+                                    SqlNotificationType.Change,
+                                    SqlNotificationInfo.Error,
+                                    SqlNotificationSource.Timeout
+                                );
                         }
                         catch (Exception e)
                         {

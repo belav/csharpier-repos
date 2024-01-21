@@ -335,70 +335,38 @@ namespace System.Workflow.ComponentModel.Serialization
                                     "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}",
                                     new object[]
                                     {
-                                        checksumBytes[0].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[1].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[2].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[3].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[4].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[5].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[6].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[7].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[8].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[9].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[10].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[11].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[12].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[13].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[14].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        ),
-                                        checksumBytes[15].ToString(
-                                            "X2",
-                                            CultureInfo.InvariantCulture
-                                        )
+                                        checksumBytes[0]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[1]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[2]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[3]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[4]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[5]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[6]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[7]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[8]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[9]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[10]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[11]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[12]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[13]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[14]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[15]
+                                            .ToString("X2", CultureInfo.InvariantCulture)
                                     }
                                 );
                                 CodeAttributeDeclaration xomlSourceAttribute =

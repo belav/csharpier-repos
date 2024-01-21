@@ -271,9 +271,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                         n => namedType.Name != n && !namedType.GetMembers(n).Any()
                     );
 
-                    var isWrittenTo = parameterReferences[parameter].Any(r =>
-                        r.IsWrittenTo(semanticModel, cancellationToken)
-                    );
+                    var isWrittenTo = parameterReferences[parameter]
+                        .Any(r => r.IsWrittenTo(semanticModel, cancellationToken));
                     var synthesizedField = CodeGenerationSymbolFactory.CreateFieldSymbol(
                         existingField,
                         modifiers: isWrittenTo

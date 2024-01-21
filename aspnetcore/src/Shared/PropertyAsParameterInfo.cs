@@ -92,9 +92,8 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
             }
 
             if (
-                parameters[i].CustomAttributes.Any(a =>
-                    a.AttributeType == typeof(AsParametersAttribute)
-                )
+                parameters[i]
+                    .CustomAttributes.Any(a => a.AttributeType == typeof(AsParametersAttribute))
             )
             {
                 // Initialize the list with all parameter already processed

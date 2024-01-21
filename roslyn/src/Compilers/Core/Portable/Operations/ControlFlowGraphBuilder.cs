@@ -244,9 +244,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             // Pass 3: Set the predecessors for the created basic blocks.
             foreach (BasicBlockBuilder blockBuilder in blockBuilders)
             {
-                builder[blockBuilder.Ordinal].SetPredecessors(
-                    blockBuilder.ConvertPredecessorsToBranches(builder)
-                );
+                builder[blockBuilder.Ordinal]
+                    .SetPredecessors(blockBuilder.ConvertPredecessorsToBranches(builder));
             }
 
             return builder.ToImmutableAndFree();

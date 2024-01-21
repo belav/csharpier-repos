@@ -933,10 +933,8 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < signatureConfirmations.Length; ++i)
                 {
-                    signatureConfirmations[i].Item.WriteTo(
-                        writer,
-                        ServiceModelDictionaryManager.Instance
-                    );
+                    signatureConfirmations[i]
+                        .Item.WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
             if (
@@ -955,10 +953,8 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < endorsingSignatures.Length; ++i)
                 {
-                    endorsingSignatures[i].Item.WriteTo(
-                        writer,
-                        ServiceModelDictionaryManager.Instance
-                    );
+                    endorsingSignatures[i]
+                        .Item.WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
             if (!this.SignThenEncrypt)
@@ -1298,12 +1294,11 @@ namespace System.ServiceModel.Security
                 for (int i = 0; i < endorsingTokens.Length; ++i)
                 {
                     SecurityToken source = endorsingTokens[i];
-                    SecurityKeyIdentifierClause sourceKeyClause = endorsingTokenParameters[
-                        i
-                    ].CreateKeyIdentifierClause(
-                        source,
-                        GetTokenReferenceStyle(endorsingTokenParameters[i])
-                    );
+                    SecurityKeyIdentifierClause sourceKeyClause = endorsingTokenParameters[i]
+                        .CreateKeyIdentifierClause(
+                            source,
+                            GetTokenReferenceStyle(endorsingTokenParameters[i])
+                        );
                     if (sourceKeyClause == null)
                     {
                         throw TraceUtility.ThrowHelperError(
@@ -1358,12 +1353,11 @@ namespace System.ServiceModel.Security
                 for (int i = 0; i < signedEndorsingSupportingTokens.Length; ++i)
                 {
                     SecurityToken source = signedEndorsingSupportingTokens[i];
-                    SecurityKeyIdentifierClause sourceKeyClause = signedEndorsingTokenParameters[
-                        i
-                    ].CreateKeyIdentifierClause(
-                        source,
-                        GetTokenReferenceStyle(signedEndorsingTokenParameters[i])
-                    );
+                    SecurityKeyIdentifierClause sourceKeyClause = signedEndorsingTokenParameters[i]
+                        .CreateKeyIdentifierClause(
+                            source,
+                            GetTokenReferenceStyle(signedEndorsingTokenParameters[i])
+                        );
                     if (sourceKeyClause == null)
                     {
                         throw TraceUtility.ThrowHelperError(

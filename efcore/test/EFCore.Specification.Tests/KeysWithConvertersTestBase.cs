@@ -51,9 +51,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new IntStructKeyOptionalDependent { Id = new IntStructKey(dependents[0].Id.Id), }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new IntStructKeyOptionalDependent
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -209,12 +213,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new ComparableIntStructKeyOptionalDependent
-                {
-                    Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new ComparableIntStructKeyOptionalDependent
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -384,12 +389,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new GenericComparableIntStructKeyOptionalDependent
-                {
-                    Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new GenericComparableIntStructKeyOptionalDependent
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -556,9 +562,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new IntStructKeyRequiredDependent { Id = new IntStructKey(dependents[0].Id.Id), }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new IntStructKeyRequiredDependent
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -723,12 +733,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new ComparableIntStructKeyRequiredDependent
-                {
-                    Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new ComparableIntStructKeyRequiredDependent
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -902,12 +913,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new GenericComparableIntStructKeyRequiredDependent
-                {
-                    Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new GenericComparableIntStructKeyRequiredDependent
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -1082,9 +1094,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new IntClassKeyOptionalDependent { Id = new IntClassKey(dependents[0].Id.Id), }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new IntClassKeyOptionalDependent { Id = new IntClassKey(dependents[0].Id.Id), }
+                );
 
             context.SaveChanges();
         }
@@ -1234,12 +1247,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new BareIntClassKeyOptionalDependent
-                {
-                    Id = new BareIntClassKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new BareIntClassKeyOptionalDependent
+                    {
+                        Id = new BareIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -1394,12 +1408,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new ComparableIntClassKeyOptionalDependent
-                {
-                    Id = new ComparableIntClassKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new ComparableIntClassKeyOptionalDependent
+                    {
+                        Id = new ComparableIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -1560,12 +1575,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new BytesStructKeyOptionalDependent
-                {
-                    Id = new BytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new BytesStructKeyOptionalDependent
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -1728,12 +1744,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new StructuralComparableBytesStructKeyOptionalDependent
-                {
-                    Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new StructuralComparableBytesStructKeyOptionalDependent
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -1922,12 +1939,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new ComparableBytesStructKeyOptionalDependent
-                {
-                    Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new ComparableBytesStructKeyOptionalDependent
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -2108,12 +2126,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new GenericComparableBytesStructKeyOptionalDependent
-                {
-                    Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new GenericComparableBytesStructKeyOptionalDependent
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -2290,12 +2309,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new BytesStructKeyRequiredDependent
-                {
-                    Id = new BytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new BytesStructKeyRequiredDependent
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -2471,12 +2491,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new ComparableBytesStructKeyRequiredDependent
-                {
-                    Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new ComparableBytesStructKeyRequiredDependent
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -2660,12 +2681,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new StructuralComparableBytesStructKeyRequiredDependent
-                {
-                    Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new StructuralComparableBytesStructKeyRequiredDependent
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -2866,12 +2888,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new GenericComparableBytesStructKeyRequiredDependent
-                {
-                    Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new GenericComparableBytesStructKeyRequiredDependent
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -3500,12 +3523,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new IntStructKeyOptionalDependentShadow
-                {
-                    Id = new IntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new IntStructKeyOptionalDependentShadow
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -3742,12 +3766,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new ComparableIntStructKeyOptionalDependentShadow
-                {
-                    Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new ComparableIntStructKeyOptionalDependentShadow
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -3990,12 +4015,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new GenericComparableIntStructKeyOptionalDependentShadow
-                {
-                    Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new GenericComparableIntStructKeyOptionalDependentShadow
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -4239,12 +4265,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new IntStructKeyRequiredDependentShadow
-                {
-                    Id = new IntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new IntStructKeyRequiredDependentShadow
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -4481,12 +4508,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new ComparableIntStructKeyRequiredDependentShadow
-                {
-                    Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new ComparableIntStructKeyRequiredDependentShadow
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -4727,12 +4755,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new GenericComparableIntStructKeyRequiredDependentShadow
-                {
-                    Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new GenericComparableIntStructKeyRequiredDependentShadow
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -4978,12 +5007,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new IntClassKeyOptionalDependentShadow
-                {
-                    Id = new IntClassKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new IntClassKeyOptionalDependentShadow
+                    {
+                        Id = new IntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -5208,12 +5238,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new BareIntClassKeyOptionalDependentShadow
-                {
-                    Id = new BareIntClassKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new BareIntClassKeyOptionalDependentShadow
+                    {
+                        Id = new BareIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -5446,12 +5477,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new ComparableIntClassKeyOptionalDependentShadow
-                {
-                    Id = new ComparableIntClassKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new ComparableIntClassKeyOptionalDependentShadow
+                    {
+                        Id = new ComparableIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -5692,12 +5724,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new BytesStructKeyOptionalDependentShadow
-                {
-                    Id = new BytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new BytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -5956,12 +5989,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new StructuralComparableBytesStructKeyOptionalDependentShadow
-                {
-                    Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new StructuralComparableBytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -6232,12 +6266,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new ComparableBytesStructKeyOptionalDependentShadow
-                {
-                    Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new ComparableBytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -6500,12 +6535,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].OptionalDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].OptionalDependents.Add(
-                new GenericComparableBytesStructKeyOptionalDependentShadow
-                {
-                    Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .OptionalDependents.Add(
+                    new GenericComparableBytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -6768,12 +6804,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new BytesStructKeyRequiredDependentShadow
-                {
-                    Id = new BytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new BytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -7027,12 +7064,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new ComparableBytesStructKeyRequiredDependentShadow
-                {
-                    Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new ComparableBytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -7306,12 +7344,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new StructuralComparableBytesStructKeyRequiredDependentShadow
-                {
-                    Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new StructuralComparableBytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -7600,12 +7639,13 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             principals[1].RequiredDependents.Clear();
 
             context.Remove(dependents[0]);
-            principals[0].RequiredDependents.Add(
-                new GenericComparableBytesStructKeyRequiredDependentShadow
-                {
-                    Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                }
-            );
+            principals[0]
+                .RequiredDependents.Add(
+                    new GenericComparableBytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
             context.SaveChanges();
         }

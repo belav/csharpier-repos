@@ -1824,15 +1824,13 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet("ExampleDataSet");
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
-            ds
-                .Tables["ExampleDataTable"]
+            ds.Tables["ExampleDataTable"]
                 .Columns.Add(
                     new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
                 );
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
-            ds
-                .Tables["ExampleDataTable"]
+            ds.Tables["ExampleDataTable"]
                 .Constraints.Add(
                     "PK_ExampleDataTable",
                     ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
@@ -2036,8 +2034,7 @@ namespace MonoTests.System.Data
             // Add MyType DataTable
             ds.Tables.Add("MyType");
 
-            ds
-                .Tables["MyType"]
+            ds.Tables["MyType"]
                 .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
@@ -2756,24 +2753,27 @@ namespace MonoTests.System.Data
         public void Load_TableConflictT()
         {
             fillErrCounter = 0;
-            fillErr[0].init(
-                "Table1",
-                1,
-                true,
-                "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
-            );
-            fillErr[1].init(
-                "Table1",
-                2,
-                true,
-                "Input string was not in a correct format.Couldn't store <mono 2> in name1 Column.  Expected type is Double."
-            );
-            fillErr[2].init(
-                "Table1",
-                3,
-                true,
-                "Input string was not in a correct format.Couldn't store <mono 3> in name1 Column.  Expected type is Double."
-            );
+            fillErr[0]
+                .init(
+                    "Table1",
+                    1,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
+                );
+            fillErr[1]
+                .init(
+                    "Table1",
+                    2,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 2> in name1 Column.  Expected type is Double."
+                );
+            fillErr[2]
+                .init(
+                    "Table1",
+                    3,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 3> in name1 Column.  Expected type is Double."
+                );
             localSetup();
             DataSet dsLoad = new DataSet("LoadTableConflict");
             DataTable table1 = new DataTable();
@@ -2790,12 +2790,13 @@ namespace MonoTests.System.Data
         public void Load_TableConflictF()
         {
             fillErrCounter = 0;
-            fillErr[0].init(
-                "Table1",
-                1,
-                false,
-                "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
-            );
+            fillErr[0]
+                .init(
+                    "Table1",
+                    1,
+                    false,
+                    "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
+                );
             localSetup();
             DataSet dsLoad = new DataSet("LoadTableConflict");
             DataTable table1 = new DataTable();

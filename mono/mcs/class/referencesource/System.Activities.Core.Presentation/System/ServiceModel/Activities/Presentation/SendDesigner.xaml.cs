@@ -327,9 +327,9 @@ namespace System.ServiceModel.Activities.Presentation
                         .GetVariableCollection();
                     if (null != variableScope)
                     {
-                        ModelItemCollection correlations = send
-                            .Properties["CorrelationInitializers"]
-                            .Collection;
+                        ModelItemCollection correlations = send.Properties[
+                            "CorrelationInitializers"
+                        ].Collection;
                         bool hasRequestReplyHandle = false;
                         foreach (ModelItem item in correlations)
                         {

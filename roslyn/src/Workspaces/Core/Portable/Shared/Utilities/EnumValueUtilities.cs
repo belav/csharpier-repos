@@ -131,12 +131,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     // If you only have two values, and they're 1 and 2, then don't assume this is a
                     // flags enum.  The person could have been trying to type, 1, 2, 3 instead.
                     if (
-                        existingConstants[0].Equals(
-                            Convert.ChangeType(2, existingConstants[0].GetType())
-                        )
-                        && existingConstants[1].Equals(
-                            Convert.ChangeType(1, existingConstants[1].GetType())
-                        )
+                        existingConstants[0]
+                            .Equals(Convert.ChangeType(2, existingConstants[0].GetType()))
+                        && existingConstants[1]
+                            .Equals(Convert.ChangeType(1, existingConstants[1].GetType()))
                     )
                     {
                         return false;

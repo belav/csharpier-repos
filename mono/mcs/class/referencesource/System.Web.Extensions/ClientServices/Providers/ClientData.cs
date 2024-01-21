@@ -427,8 +427,7 @@ namespace System.Web.ClientServices.Providers
                 for (int iter = 0; iter < cd.CookieNames.Length; iter++)
                 {
                     if (
-                        cd
-                            .CookieValues[iter]
+                        cd.CookieValues[iter]
                             .StartsWith(cookieName + "=", StringComparison.OrdinalIgnoreCase)
                     )
                     {

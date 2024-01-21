@@ -135,12 +135,13 @@ namespace Microsoft.CodeAnalysis
                                     try
                                     {
                                         _cancellationToken.ThrowIfCancellationRequested();
-                                        syntaxInputBuilders[i].builder.VisitTree(
-                                            root,
-                                            state,
-                                            model,
-                                            _cancellationToken
-                                        );
+                                        syntaxInputBuilders[i]
+                                            .builder.VisitTree(
+                                                root,
+                                                state,
+                                                model,
+                                                _cancellationToken
+                                            );
                                     }
                                     finally
                                     {
@@ -151,10 +152,10 @@ namespace Microsoft.CodeAnalysis
                                         {
                                             _syntaxTimes[syntaxInputNode] = _syntaxTimes[
                                                 syntaxInputNode
-                                            ].Subtract(elapsed);
-                                            _syntaxTimes[currentNode] = _syntaxTimes[
-                                                currentNode
-                                            ].Add(elapsed);
+                                            ]
+                                                .Subtract(elapsed);
+                                            _syntaxTimes[currentNode] = _syntaxTimes[currentNode]
+                                                .Add(elapsed);
                                         }
                                     }
                                 }

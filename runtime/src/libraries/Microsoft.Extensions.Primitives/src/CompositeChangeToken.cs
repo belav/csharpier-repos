@@ -109,10 +109,8 @@ namespace Microsoft.Extensions.Primitives
                 {
                     if (ChangeTokens[i].ActiveChangeCallbacks)
                     {
-                        IDisposable disposable = ChangeTokens[i].RegisterChangeCallback(
-                            _onChangeDelegate,
-                            this
-                        );
+                        IDisposable disposable = ChangeTokens[i]
+                            .RegisterChangeCallback(_onChangeDelegate, this);
                         if (_cancellationTokenSource.IsCancellationRequested)
                         {
                             disposable.Dispose();

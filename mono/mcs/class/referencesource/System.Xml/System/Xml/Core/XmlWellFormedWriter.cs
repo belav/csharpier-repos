@@ -741,11 +741,12 @@ namespace System.Xml
             else
             {
                 string defaultNs = predefinedNamespaces.LookupNamespace(string.Empty);
-                nsStack[2].Set(
-                    string.Empty,
-                    (defaultNs == null ? string.Empty : defaultNs),
-                    NamespaceKind.Implied
-                );
+                nsStack[2]
+                    .Set(
+                        string.Empty,
+                        (defaultNs == null ? string.Empty : defaultNs),
+                        NamespaceKind.Implied
+                    );
             }
             nsTop = 2;
 

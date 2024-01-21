@@ -310,13 +310,8 @@ namespace System.Net.Mail
 
                         while ((int)info.StatusCode == 334)
                         {
-                            auth = _authenticationModules[i].Authenticate(
-                                info.Line,
-                                null,
-                                this,
-                                _client.TargetName,
-                                null
-                            );
+                            auth = _authenticationModules[i]
+                                .Authenticate(info.Line, null, this, _client.TargetName, null);
                             if (auth == null)
                             {
                                 throw new SmtpException(SR.SmtpAuthenticationFailed);

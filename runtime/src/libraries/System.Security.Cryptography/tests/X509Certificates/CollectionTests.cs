@@ -916,10 +916,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     for (int i = 0; i < collection.Count; i++)
                     {
                         subjects[i] = collection[i].GetNameInfo(X509NameType.SimpleName, false);
-                        importedSubjects[i] = importedCollection[i].GetNameInfo(
-                            X509NameType.SimpleName,
-                            false
-                        );
+                        importedSubjects[i] = importedCollection[i]
+                            .GetNameInfo(X509NameType.SimpleName, false);
                     }
 
                     Assert.Equal(subjects, importedSubjects);

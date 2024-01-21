@@ -199,8 +199,7 @@ namespace System.ServiceModel.Diagnostics
         internal override void AuthenticationFailed()
         {
             this.counters[(int)PerfCounters.SecurityValidationAuthenticationFailures].Increment();
-            this
-                .counters[(int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond]
+            this.counters[(int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond]
                 .Increment();
         }
 

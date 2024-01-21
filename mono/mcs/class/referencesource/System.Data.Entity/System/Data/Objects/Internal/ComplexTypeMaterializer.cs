@@ -82,10 +82,8 @@ namespace System.Data.Objects.Internal
                 }
                 else
                 {
-                    properties[i].ClrProperty(
-                        result,
-                        ConvertDBNull(record.GetValue(properties[i].Ordinal))
-                    );
+                    properties[i]
+                        .ClrProperty(result, ConvertDBNull(record.GetValue(properties[i].Ordinal)));
                 }
             }
         }

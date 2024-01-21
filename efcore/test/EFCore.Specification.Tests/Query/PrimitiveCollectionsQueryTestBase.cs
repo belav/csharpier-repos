@@ -851,8 +851,7 @@ public abstract class PrimitiveCollectionsQueryTestBase<TFixture> : QueryTestBas
                     .Where(p =>
                         ints.Skip(1)
                             .Union(
-                                p
-                                    .Ints.OrderBy(x => x)
+                                p.Ints.OrderBy(x => x)
                                     .Skip(1)
                                     .Distinct()
                                     .OrderByDescending(x => x)

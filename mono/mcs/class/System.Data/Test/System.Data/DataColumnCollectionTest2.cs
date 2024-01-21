@@ -262,8 +262,7 @@ namespace MonoTests.System.Data
             ds.Tables["table1"].Columns.Add("col1");
             ds.Tables["table2"].Columns.Add("col1");
 
-            ds
-                .Tables[1]
+            ds.Tables[1]
                 .ParentRelations.Add(
                     "name1",
                     ds.Tables[0].Columns["col1"],

@@ -1134,8 +1134,7 @@ namespace System.Data.Query.InternalTrees
                     VarVec mappedKeyVec;
                     for (int i = 0; i < n.Children.Count; i++)
                     {
-                        ExtendedNodeInfo childNodeInfo = n
-                            .Children[i]
+                        ExtendedNodeInfo childNodeInfo = n.Children[i]
                             .GetExtendedNodeInfo(m_command);
                         if (!childNodeInfo.Keys.NoKeys && !childNodeInfo.Keys.KeyVars.IsEmpty)
                         {

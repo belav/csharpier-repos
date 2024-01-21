@@ -2033,9 +2033,8 @@ namespace System.Activities.Core.Presentation
                     && existingViewState.Count > 0
                     && movedConnector.Points.Count > 0
                     && existingViewState[0].Equals(movedConnector.Points[0])
-                    && existingViewState[existingViewState.Count - 1].Equals(
-                        movedConnector.Points[movedConnector.Points.Count - 1]
-                    )
+                    && existingViewState[existingViewState.Count - 1]
+                        .Equals(movedConnector.Points[movedConnector.Points.Count - 1])
                 )
                 {
                     isUndoableViewState = true;
@@ -2193,8 +2192,7 @@ namespace System.Activities.Core.Presentation
                     );
                 }
                 else if (
-                    !e
-                        .NewConnectorLocation[newEndConnectorPointIndex]
+                    !e.NewConnectorLocation[newEndConnectorPointIndex]
                         .Equals(movedConnector.Points[movedEndConnectorPointIndex])
                 )
                 {

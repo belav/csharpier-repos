@@ -719,8 +719,7 @@ public class ControllerActionDescriptorProviderTests
             var action = Assert.Single(
                 actions,
                 a =>
-                    a
-                        .ActionConstraints.OfType<HttpMethodActionConstraint>()
+                    a.ActionConstraints.OfType<HttpMethodActionConstraint>()
                         .SelectMany(c => c.HttpMethods)
                         .Contains(method)
             );

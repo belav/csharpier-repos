@@ -60,15 +60,13 @@ namespace Microsoft.Interop
             if (!fixedStatements.IsEmpty)
             {
                 int i = fixedStatements.Length - 1;
-                nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(
-                    WrapStatementInBlock(nestedStatement)
-                );
+                nestedStatement = fixedStatements[i]
+                    .AddStatementWithoutEmptyStatements(WrapStatementInBlock(nestedStatement));
                 i--;
                 for (; i >= 0; i--)
                 {
-                    nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(
-                        nestedStatement
-                    );
+                    nestedStatement = fixedStatements[i]
+                        .AddStatementWithoutEmptyStatements(nestedStatement);
                 }
             }
             return nestedStatement;

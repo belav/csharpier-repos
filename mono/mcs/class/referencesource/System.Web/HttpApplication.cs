@@ -657,10 +657,8 @@ namespace System.Web
             if (!isReentry)
             {
                 eventCount =
-                    ModuleContainers[nc.CurrentModuleIndex].GetEventCount(
-                        nc.CurrentNotification,
-                        nc.IsPostNotification
-                    ) - 1;
+                    ModuleContainers[nc.CurrentModuleIndex]
+                        .GetEventCount(nc.CurrentNotification, nc.IsPostNotification) - 1;
                 // Check if the optimistic read was consistent
                 if (object.ReferenceEquals(nc, Context.NotificationContext))
                 {

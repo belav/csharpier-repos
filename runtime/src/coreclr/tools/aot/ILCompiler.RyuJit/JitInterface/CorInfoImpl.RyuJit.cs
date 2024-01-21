@@ -1117,13 +1117,14 @@ namespace Internal.JitInterface
             {
                 uint varNumber = vars[i].varNumber;
                 if (varNumber < debugVarInfoBuilders.Length)
-                    debugVarInfoBuilders[varNumber].Add(
-                        new DebugVarRangeInfo(
-                            vars[i].startOffset,
-                            vars[i].endOffset,
-                            vars[i].varLoc
-                        )
-                    );
+                    debugVarInfoBuilders[varNumber]
+                        .Add(
+                            new DebugVarRangeInfo(
+                                vars[i].startOffset,
+                                vars[i].endOffset,
+                                vars[i].varLoc
+                            )
+                        );
             }
 
             var debugVarInfos = default(ArrayBuilder<DebugVarInfo>);

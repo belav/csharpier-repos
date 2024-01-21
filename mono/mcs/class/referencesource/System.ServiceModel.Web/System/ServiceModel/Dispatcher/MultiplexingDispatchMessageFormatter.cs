@@ -140,8 +140,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            Message message = this
-                .formatters[format]
+            Message message = this.formatters[format]
                 .SerializeReply(messageVersion, parameters, result);
 
             return message;
