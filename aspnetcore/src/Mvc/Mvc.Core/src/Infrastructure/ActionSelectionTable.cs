@@ -88,8 +88,7 @@ internal sealed class ActionSelectionTable<TItem>
             getRouteValue: (e, key) =>
             {
                 string? value = null;
-                e
-                    .Metadata.GetMetadata<ActionDescriptor>()
+                e.Metadata.GetMetadata<ActionDescriptor>()
                     ?.RouteValues?.TryGetValue(key, out value);
                 return Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty;
             }

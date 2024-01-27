@@ -409,13 +409,12 @@ namespace System.Threading.Tasks.Tests
 
                         case WorkloadType.RunWithUserScheduler:
                             TaskScheduler ts = new TaskRunSyncTaskScheduler(true);
-                            Task
-                                .Factory.StartNew(
-                                    () => { },
-                                    _cts.Token,
-                                    TaskCreationOptions.AttachedToParent,
-                                    ts
-                                )
+                            Task.Factory.StartNew(
+                                () => { },
+                                _cts.Token,
+                                TaskCreationOptions.AttachedToParent,
+                                ts
+                            )
                                 .ContinueWith(
                                     (task) => DisposeScheduler(ts),
                                     TaskScheduler.Default

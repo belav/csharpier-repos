@@ -80,8 +80,7 @@ namespace System.Runtime.CompilerServices
                 }
                 else
                 {
-                    Task
-                        .CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
+                    Task.CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
                         .GetAwaiter()
                         .OnCompleted(continuation);
                 }
@@ -114,8 +113,7 @@ namespace System.Runtime.CompilerServices
                 }
                 else
                 {
-                    Task
-                        .CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
+                    Task.CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
                         .GetAwaiter()
                         .UnsafeOnCompleted(continuation);
                 }
@@ -233,8 +231,7 @@ namespace System.Runtime.CompilerServices
                 }
                 else
                 {
-                    Task
-                        .CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
+                    Task.CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
                         .GetAwaiter()
                         .OnCompleted(continuation);
                 }
@@ -269,8 +266,7 @@ namespace System.Runtime.CompilerServices
                 }
                 else
                 {
-                    Task
-                        .CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
+                    Task.CompletedTask.ConfigureAwait(_value._continueOnCapturedContext)
                         .GetAwaiter()
                         .UnsafeOnCompleted(continuation);
                 }

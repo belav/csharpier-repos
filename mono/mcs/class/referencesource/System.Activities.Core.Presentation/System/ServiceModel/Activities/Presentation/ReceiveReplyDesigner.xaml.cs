@@ -152,8 +152,7 @@ namespace System.ServiceModel.Activities.Presentation
                 ReceiveMessageContent messageContent =
                     ((ReceiveReply)this.ModelItem.GetCurrentValue()).Content
                     as ReceiveMessageContent;
-                this
-                    .ModelItem.Properties[DeclaredMessageType]
+                this.ModelItem.Properties[DeclaredMessageType]
                     .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }

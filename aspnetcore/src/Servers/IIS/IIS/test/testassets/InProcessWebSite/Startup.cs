@@ -1057,8 +1057,7 @@ public partial class Startup
     {
         await ctx.Response.WriteAsync("Shutting down");
 #if FORWARDCOMPAT
-        ctx
-            .RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>()
+        ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>()
             .StopApplication();
 #else
         ctx.RequestServices.GetService<IHostApplicationLifetime>().StopApplication();

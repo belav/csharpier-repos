@@ -908,8 +908,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using var ctx = contextFactory.CreateContext();
         var firstName = details.FirstName;
-        ctx
-            .Customers.Where(c => c.FirstName == firstName && c.LastName == details.LastName)
+        ctx.Customers.Where(c => c.FirstName == firstName && c.LastName == details.LastName)
             .ToList();
 
         // No AssertSQL since compiler generated variable names are different between local and CI

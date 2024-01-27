@@ -85,107 +85,105 @@ namespace System.Threading.Tasks.Tests
 
             {
                 // Yield when there's a current TaskScheduler
-                Task
-                    .Factory.StartNew(
-                        () =>
+                Task.Factory.StartNew(
+                    () =>
+                    {
+                        try
                         {
+                            var ya = Task.Yield().GetAwaiter();
                             try
                             {
-                                var ya = Task.Yield().GetAwaiter();
-                                try
-                                {
-                                    ya.GetResult();
-                                }
-                                catch
-                                {
-                                    Assert.Fail(
-                                        string.Format(
-                                            "     > FAILURE. YieldAwaiter.GetResult threw inappropriately"
-                                        )
-                                    );
-                                }
-                                var mres = new ManualResetEventSlim();
-                                Assert.False(
-                                    ya.IsCompleted,
-                                    "     > FAILURE. YieldAwaiter.IsCompleted should always be false."
-                                );
-                                ya.OnCompleted(() =>
-                                {
-                                    Assert.True(
-                                        TaskScheduler.Current is QUWITaskScheduler,
-                                        "     > FAILURE. Expected to queue into target scheduler."
-                                    );
-                                    mres.Set();
-                                });
-                                mres.Wait();
                                 ya.GetResult();
                             }
                             catch
                             {
                                 Assert.Fail(
-                                    string.Format("     > FAILURE. Unexpected exception from Yield")
+                                    string.Format(
+                                        "     > FAILURE. YieldAwaiter.GetResult threw inappropriately"
+                                    )
                                 );
                             }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        new QUWITaskScheduler()
-                    )
+                            var mres = new ManualResetEventSlim();
+                            Assert.False(
+                                ya.IsCompleted,
+                                "     > FAILURE. YieldAwaiter.IsCompleted should always be false."
+                            );
+                            ya.OnCompleted(() =>
+                            {
+                                Assert.True(
+                                    TaskScheduler.Current is QUWITaskScheduler,
+                                    "     > FAILURE. Expected to queue into target scheduler."
+                                );
+                                mres.Set();
+                            });
+                            mres.Wait();
+                            ya.GetResult();
+                        }
+                        catch
+                        {
+                            Assert.Fail(
+                                string.Format("     > FAILURE. Unexpected exception from Yield")
+                            );
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    new QUWITaskScheduler()
+                )
                     .Wait();
             }
 
             {
                 // Yield when there's a current TaskScheduler and SynchronizationContext.Current is the base SynchronizationContext
-                Task
-                    .Factory.StartNew(
-                        () =>
+                Task.Factory.StartNew(
+                    () =>
+                    {
+                        SynchronizationContext.SetSynchronizationContext(
+                            new SynchronizationContext()
+                        );
+                        try
                         {
-                            SynchronizationContext.SetSynchronizationContext(
-                                new SynchronizationContext()
-                            );
+                            var ya = Task.Yield().GetAwaiter();
                             try
                             {
-                                var ya = Task.Yield().GetAwaiter();
-                                try
-                                {
-                                    ya.GetResult();
-                                }
-                                catch
-                                {
-                                    Assert.Fail(
-                                        string.Format(
-                                            "     > FAILURE. YieldAwaiter.GetResult threw inappropriately"
-                                        )
-                                    );
-                                }
-                                var mres = new ManualResetEventSlim();
-                                Assert.False(
-                                    ya.IsCompleted,
-                                    "     > FAILURE. YieldAwaiter.IsCompleted should always be false."
-                                );
-                                ya.OnCompleted(() =>
-                                {
-                                    Assert.True(
-                                        TaskScheduler.Current is QUWITaskScheduler,
-                                        "     > FAILURE. Expected to queue into target scheduler."
-                                    );
-                                    mres.Set();
-                                });
-                                mres.Wait();
                                 ya.GetResult();
                             }
                             catch
                             {
                                 Assert.Fail(
-                                    string.Format("     > FAILURE. Unexpected exception from Yield")
+                                    string.Format(
+                                        "     > FAILURE. YieldAwaiter.GetResult threw inappropriately"
+                                    )
                                 );
                             }
-                            SynchronizationContext.SetSynchronizationContext(null);
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        new QUWITaskScheduler()
-                    )
+                            var mres = new ManualResetEventSlim();
+                            Assert.False(
+                                ya.IsCompleted,
+                                "     > FAILURE. YieldAwaiter.IsCompleted should always be false."
+                            );
+                            ya.OnCompleted(() =>
+                            {
+                                Assert.True(
+                                    TaskScheduler.Current is QUWITaskScheduler,
+                                    "     > FAILURE. Expected to queue into target scheduler."
+                                );
+                                mres.Set();
+                            });
+                            mres.Wait();
+                            ya.GetResult();
+                        }
+                        catch
+                        {
+                            Assert.Fail(
+                                string.Format("     > FAILURE. Unexpected exception from Yield")
+                            );
+                        }
+                        SynchronizationContext.SetSynchronizationContext(null);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    new QUWITaskScheduler()
+                )
                     .Wait();
             }
 

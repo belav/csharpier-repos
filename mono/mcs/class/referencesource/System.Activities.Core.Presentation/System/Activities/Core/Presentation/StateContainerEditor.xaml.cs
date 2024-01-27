@@ -3249,8 +3249,7 @@ namespace System.Activities.Core.Presentation
                 // auto-connect from the initial node
                 else if (sourceModelItem.ItemType == typeof(StartNode))
                 {
-                    this
-                        .ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName]
+                    this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName]
                         .SetValue(droppedModelItem);
                     return this.ModelItem;
                 }
@@ -3587,8 +3586,7 @@ namespace System.Activities.Core.Presentation
                     // of the new transition from the dropped state. So the visual of the transition will be created twice. To solve that problem,
                     // we need to suppress adding connector when adding state visual (in the UI reaction for step 1).
                     // And to support redo, we must place the suppression in the undo stack.
-                    this
-                        .Context.Services.GetService<ModelTreeManager>()
+                    this.Context.Services.GetService<ModelTreeManager>()
                         .AddToCurrentEditingScope(
                             new SuppressAddingConnectorWhenAddingStateVisual()
                         );

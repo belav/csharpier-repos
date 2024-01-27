@@ -407,8 +407,7 @@ public abstract class TestHelpers
         where TContext : DbContext
     {
         using var c = createContext();
-        c
-            .Database.CreateExecutionStrategy()
+        c.Database.CreateExecutionStrategy()
             .Execute(
                 c,
                 context =>

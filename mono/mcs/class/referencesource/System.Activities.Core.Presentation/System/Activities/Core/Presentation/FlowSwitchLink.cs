@@ -251,10 +251,9 @@ namespace System.Activities.Core.Presentation
                             }
 
                             this.flowSwitchModelItem.Properties["Default"].SetValue(null);
-                            this
-                                .flowSwitchModelItem.Properties[
-                                    FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                                ]
+                            this.flowSwitchModelItem.Properties[
+                                FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                            ]
                                 .SetValue(
                                     FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue
                                 );
@@ -500,10 +499,9 @@ namespace System.Activities.Core.Presentation
                     )
                 )
                 {
-                    this
-                        .flowSwitchModelItem.Properties[
-                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                        ]
+                    this.flowSwitchModelItem.Properties[
+                        FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                    ]
                         .SetValue(newValue);
                     scope.Complete();
                 }

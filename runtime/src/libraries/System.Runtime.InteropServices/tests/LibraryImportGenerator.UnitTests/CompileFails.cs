@@ -1749,8 +1749,7 @@ namespace LibraryImportGenerator.UnitTests
                     TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
                 };
 
-            test
-                .TestState.AdditionalProjects[AdditionalProjectName]
+            test.TestState.AdditionalProjects[AdditionalProjectName]
                 .AdditionalReferences.AddRange(test.TestState.AdditionalReferences);
 
             // The errors should indicate the DisableRuntimeMarshalling is required.

@@ -1301,13 +1301,12 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunSynchronouslyTest()
         {
-            Task
-                .Factory.StartNew(
-                    delegate
-                    {
-                        CoreRunSynchronouslyTest();
-                    }
-                )
+            Task.Factory.StartNew(
+                delegate
+                {
+                    CoreRunSynchronouslyTest();
+                }
+            )
                 .Wait();
 
             // Executing RunSynchronously() on a task whose cancellationToken was previously signaled

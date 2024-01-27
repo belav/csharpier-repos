@@ -339,8 +339,7 @@ namespace System.Data.Services.Client
                 "Vertex corresponding to 'collection' must exist in the graph."
             );
 
-            this
-                .graph.LookupVertex(collection)
+            this.graph.LookupVertex(collection)
                 .GetEntityCollectionInfo(
                     out source,
                     out sourceProperty,
