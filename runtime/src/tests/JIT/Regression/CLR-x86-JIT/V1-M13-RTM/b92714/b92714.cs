@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public struct AA
 {
     [Fact]

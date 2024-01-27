@@ -7,9 +7,9 @@
 // Reduced from 168.4 KiB to 0.2 KiB in 00:05:13
 // Hits JIT assert in Release:
 // Assertion failed '!"Write to unaliased local overlaps outstanding read"' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Rationalize IR' (IL size 26)
-// 
+//
 //     File: D:\a\_work\1\s\src\coreclr\jit\lir.cpp Line: 1397
-// 
+//
 using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
@@ -18,6 +18,7 @@ using Xunit;
 public class Runtime_64883
 {
     public static uint s_29;
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -28,7 +29,7 @@ public class Runtime_64883
         mi.Invoke(null, new object[0]);
     }
 
-// Allow reflection lookup on public method
+    // Allow reflection lookup on public method
 #pragma warning disable xUnit1013
     public static void MainT()
     {
@@ -37,12 +38,10 @@ public class Runtime_64883
         uint vr6 = s_29;
     }
 #pragma warning restore xUnit1013
-    
+
     private class CollectibleALC : AssemblyLoadContext
     {
-        public CollectibleALC() : base(true)
-        {
-        }
+        public CollectibleALC()
+            : base(true) { }
     }
 }
-

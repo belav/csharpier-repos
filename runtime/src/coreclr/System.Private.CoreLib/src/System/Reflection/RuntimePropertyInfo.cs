@@ -29,7 +29,11 @@ namespace System.Reflection
 
         #region Constructor
         internal RuntimePropertyInfo(
-            int tkProperty, RuntimeType declaredType, RuntimeTypeCache reflectedTypeCache, out bool isPrivate)
+            int tkProperty,
+            RuntimeType declaredType,
+            RuntimeTypeCache reflectedTypeCache,
+            out bool isPrivate
+        )
         {
             Debug.Assert(declaredType != null);
             Debug.Assert(reflectedTypeCache != null);
@@ -43,20 +47,29 @@ namespace System.Reflection
 
             scope.GetPropertyProps(tkProperty, out m_utf8name, out m_flags, out _);
 
-            Associates.AssignAssociates(scope, tkProperty, declaredType, reflectedTypeCache.GetRuntimeType(),
-                out _, out _, out _,
-                out m_getterMethod, out m_setterMethod, out m_otherMethod,
-                out isPrivate, out m_bindingFlags);
+            Associates.AssignAssociates(
+                scope,
+                tkProperty,
+                declaredType,
+                reflectedTypeCache.GetRuntimeType(),
+                out _,
+                out _,
+                out _,
+                out m_getterMethod,
+                out m_setterMethod,
+                out m_otherMethod,
+                out isPrivate,
+                out m_bindingFlags
+            );
         }
         #endregion
 
         #region Internal Members
         internal override bool CacheEquals(object? o)
         {
-            return
-                o is RuntimePropertyInfo m &&
-                m.m_token == m_token &&
-                ReferenceEquals(m_declaringType, m.m_declaringType);
+            return o is RuntimePropertyInfo m
+                && m.m_token == m_token
+                && ReferenceEquals(m_declaringType, m.m_declaringType);
         }
 
         internal Signature Signature
@@ -65,16 +78,20 @@ namespace System.Reflection
             {
                 if (m_signature == null)
                 {
+                    GetRuntimeModule()
+                        .MetadataImport.GetPropertyProps(m_token, out _, out _, out ConstArray sig);
 
-                    GetRuntimeModule().MetadataImport.GetPropertyProps(
-                        m_token, out _, out _, out ConstArray sig);
-
-                    m_signature = new Signature(sig.Signature.ToPointer(), sig.Length, m_declaringType);
+                    m_signature = new Signature(
+                        sig.Signature.ToPointer(),
+                        sig.Length,
+                        m_declaringType
+                    );
                 }
 
                 return m_signature;
             }
         }
+
         internal bool EqualsSig(RuntimePropertyInfo target)
         {
             // @Asymmetry - Legacy policy is to remove duplicate properties, including hidden properties.
@@ -107,6 +124,7 @@ namespace System.Reflection
 
             return Signature.CompareSig(this.Signature, target.Signature);
         }
+
         internal BindingFlags BindingFlags => m_bindingFlags;
         #endregion
 
@@ -168,7 +186,8 @@ namespace System.Reflection
         public override string Name => m_name ??= new MdUtf8String(m_utf8name).ToString();
         public override Type? DeclaringType => m_declaringType;
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimePropertyInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimePropertyInfo>(other);
 
         public override Type? ReflectedType => ReflectedTypeInternal;
 
@@ -177,18 +196,32 @@ namespace System.Reflection
         public override int MetadataToken => m_token;
 
         public override Module Module => GetRuntimeModule();
-        internal RuntimeModule GetRuntimeModule() { return m_declaringType.GetRuntimeModule(); }
+
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return m_declaringType.GetRuntimeModule();
+        }
+
         public override bool IsCollectible => m_declaringType.IsCollectible;
 
         public override bool Equals(object? obj) =>
-            ReferenceEquals(this, obj) ||
-            (MetadataUpdater.IsSupported && obj is RuntimePropertyInfo rpi &&
-                rpi.m_token == m_token &&
-                ReferenceEquals(rpi.m_declaringType, m_declaringType) &&
-                ReferenceEquals(rpi.m_reflectedTypeCache.GetRuntimeType(), m_reflectedTypeCache.GetRuntimeType()));
+            ReferenceEquals(this, obj)
+            || (
+                MetadataUpdater.IsSupported
+                && obj is RuntimePropertyInfo rpi
+                && rpi.m_token == m_token
+                && ReferenceEquals(rpi.m_declaringType, m_declaringType)
+                && ReferenceEquals(
+                    rpi.m_reflectedTypeCache.GetRuntimeType(),
+                    m_reflectedTypeCache.GetRuntimeType()
+                )
+            );
 
         public override int GetHashCode() =>
-            HashCode.Combine(m_token.GetHashCode(), m_declaringType.GetUnderlyingNativeHandle().GetHashCode());
+            HashCode.Combine(
+                m_token.GetHashCode(),
+                m_declaringType.GetUnderlyingNativeHandle().GetHashCode()
+            );
         #endregion
 
         #region PropertyInfo Overrides
@@ -205,11 +238,17 @@ namespace System.Reflection
             return Signature.GetCustomModifiers(0, false);
         }
 
-        public override Type GetModifiedPropertyType() => ModifiedType.Create(PropertyType, Signature);
+        public override Type GetModifiedPropertyType() =>
+            ModifiedType.Create(PropertyType, Signature);
 
         internal object GetConstantValue(bool raw)
         {
-            object? defaultValue = MdConstant.GetValue(GetRuntimeModule().MetadataImport, m_token, PropertyType.TypeHandle, raw);
+            object? defaultValue = MdConstant.GetValue(
+                GetRuntimeModule().MetadataImport,
+                m_token,
+                PropertyType.TypeHandle,
+                raw
+            );
 
             if (defaultValue == DBNull.Value)
                 // Arg_EnumLitValueNotFound -> "Literal value was not found."
@@ -218,9 +257,15 @@ namespace System.Reflection
             return defaultValue!;
         }
 
-        public override object? GetConstantValue() { return GetConstantValue(false); }
+        public override object? GetConstantValue()
+        {
+            return GetConstantValue(false);
+        }
 
-        public override object? GetRawConstantValue() { return GetConstantValue(true); }
+        public override object? GetRawConstantValue()
+        {
+            return GetConstantValue(true);
+        }
 
         public override MethodInfo[] GetAccessors(bool nonPublic)
         {
@@ -261,8 +306,7 @@ namespace System.Reflection
             return m_setterMethod;
         }
 
-        public override ParameterInfo[] GetIndexParameters() =>
-            GetIndexParametersSpan().ToArray();
+        public override ParameterInfo[] GetIndexParameters() => GetIndexParametersSpan().ToArray();
 
         internal ReadOnlySpan<ParameterInfo> GetIndexParametersSpan()
         {
@@ -297,12 +341,14 @@ namespace System.Reflection
                 // Now copy over the parameter info's and change their
                 // owning member info to the current property info.
 
-                ParameterInfo[] propParams = numParams != 0 ?
-                    new ParameterInfo[numParams] :
-                    Array.Empty<ParameterInfo>();
+                ParameterInfo[] propParams =
+                    numParams != 0 ? new ParameterInfo[numParams] : Array.Empty<ParameterInfo>();
 
                 for (int i = 0; i < propParams.Length; i++)
-                    propParams[i] = new RuntimeParameterInfo((RuntimeParameterInfo)methParams![i], this);
+                    propParams[i] = new RuntimeParameterInfo(
+                        (RuntimeParameterInfo)methParams![i],
+                        this
+                    );
 
                 m_parameters = propParams;
             }
@@ -322,13 +368,27 @@ namespace System.Reflection
         [DebuggerHidden]
         public override object? GetValue(object? obj, object?[]? index)
         {
-            return GetValue(obj, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static,
-                null, index, null);
+            return GetValue(
+                obj,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static,
+                null,
+                index,
+                null
+            );
         }
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-        public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             RuntimeMethodInfo? m = GetGetMethod(true);
             if (m == null)
@@ -340,17 +400,29 @@ namespace System.Reflection
         [DebuggerHidden]
         public override void SetValue(object? obj, object? value, object?[]? index)
         {
-            SetValue(obj,
-                    value,
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static,
-                    null,
-                    index,
-                    null);
+            SetValue(
+                obj,
+                value,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static,
+                null,
+                index,
+                null
+            );
         }
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             RuntimeMethodInfo? m = GetSetMethod(true);
 

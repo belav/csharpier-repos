@@ -29,7 +29,10 @@ namespace System.IO.Tests
         {
             string message = "MessageConstructor";
             Exception innerException = new Exception();
-            InternalBufferOverflowException ide = new InternalBufferOverflowException(message, innerException);
+            InternalBufferOverflowException ide = new InternalBufferOverflowException(
+                message,
+                innerException
+            );
 
             Assert.Equal(message, ide.Message);
             Assert.Same(innerException, ide.InnerException);

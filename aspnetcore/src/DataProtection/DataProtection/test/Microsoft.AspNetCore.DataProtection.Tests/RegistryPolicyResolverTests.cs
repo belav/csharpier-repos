@@ -36,7 +36,12 @@ public class RegistryPolicyResolverTests
         // Arrange
         var registryEntries = new Dictionary<string, object>()
         {
-            ["KeyEscrowSinks"] = String.Join(" ;; ; ", new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(t => t.AssemblyQualifiedName))
+            ["KeyEscrowSinks"] = String.Join(
+                " ;; ; ",
+                new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(t =>
+                    t.AssemblyQualifiedName
+                )
+            )
         };
 
         // Act
@@ -54,17 +59,22 @@ public class RegistryPolicyResolverTests
     public void ResolvePolicy_MissingKeyEscrowSinks()
     {
         // Arrange
-        var typeName = typeof(MyKeyEscrowSink1).AssemblyQualifiedName.Replace("MyKeyEscrowSink1", "MyKeyEscrowSinkDontExist");
-        var registryEntries = new Dictionary<string, object>()
-        {
-            ["KeyEscrowSinks"] = typeName
-        };
+        var typeName = typeof(MyKeyEscrowSink1).AssemblyQualifiedName.Replace(
+            "MyKeyEscrowSink1",
+            "MyKeyEscrowSinkDontExist"
+        );
+        var registryEntries = new Dictionary<string, object>() { ["KeyEscrowSinks"] = typeName };
 
         // Act
-        var ex = ExceptionAssert.Throws<InvalidOperationException>(() => RunTestWithRegValues(registryEntries));
+        var ex = ExceptionAssert.Throws<InvalidOperationException>(
+            () => RunTestWithRegValues(registryEntries)
+        );
 
         // Assert
-        Assert.Equal($"Unable to load type '{typeName}'. If the app is published with trimming then this type may have been trimmed. Ensure the type's assembly is excluded from trimming.", ex.Message);
+        Assert.Equal(
+            $"Unable to load type '{typeName}'. If the app is published with trimming then this type may have been trimmed. Ensure the type's assembly is excluded from trimming.",
+            ex.Message
+        );
     }
 
     [ConditionalFact]
@@ -89,23 +99,33 @@ public class RegistryPolicyResolverTests
     public void ResolvePolicy_CngCbcEncryption_WithoutExplicitSettings()
     {
         // Arrange
-        var registryEntries = new Dictionary<string, object>()
-        {
-            ["EncryptionType"] = "cng-cbc"
-        };
+        var registryEntries = new Dictionary<string, object>() { ["EncryptionType"] = "cng-cbc" };
         var expectedConfiguration = new CngCbcAuthenticatedEncryptorConfiguration();
 
         // Act
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithm,
+            actualConfiguration.EncryptionAlgorithm
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmKeySize,
+            actualConfiguration.EncryptionAlgorithmKeySize
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmProvider,
+            actualConfiguration.EncryptionAlgorithmProvider
+        );
         Assert.Equal(expectedConfiguration.HashAlgorithm, actualConfiguration.HashAlgorithm);
-        Assert.Equal(expectedConfiguration.HashAlgorithmProvider, actualConfiguration.HashAlgorithmProvider);
+        Assert.Equal(
+            expectedConfiguration.HashAlgorithmProvider,
+            actualConfiguration.HashAlgorithmProvider
+        );
     }
 
     [ConditionalFact]
@@ -135,13 +155,26 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithm,
+            actualConfiguration.EncryptionAlgorithm
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmKeySize,
+            actualConfiguration.EncryptionAlgorithmKeySize
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmProvider,
+            actualConfiguration.EncryptionAlgorithmProvider
+        );
         Assert.Equal(expectedConfiguration.HashAlgorithm, actualConfiguration.HashAlgorithm);
-        Assert.Equal(expectedConfiguration.HashAlgorithmProvider, actualConfiguration.HashAlgorithmProvider);
+        Assert.Equal(
+            expectedConfiguration.HashAlgorithmProvider,
+            actualConfiguration.HashAlgorithmProvider
+        );
     }
 
     [ConditionalFact]
@@ -149,21 +182,28 @@ public class RegistryPolicyResolverTests
     public void ResolvePolicy_CngGcmEncryption_WithoutExplicitSettings()
     {
         // Arrange
-        var registryEntries = new Dictionary<string, object>()
-        {
-            ["EncryptionType"] = "cng-gcm"
-        };
+        var registryEntries = new Dictionary<string, object>() { ["EncryptionType"] = "cng-gcm" };
         var expectedConfiguration = new CngGcmAuthenticatedEncryptorConfiguration();
 
         // Act
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithm,
+            actualConfiguration.EncryptionAlgorithm
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmKeySize,
+            actualConfiguration.EncryptionAlgorithmKeySize
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmProvider,
+            actualConfiguration.EncryptionAlgorithmProvider
+        );
     }
 
     [ConditionalFact]
@@ -189,11 +229,21 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithm,
+            actualConfiguration.EncryptionAlgorithm
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmKeySize,
+            actualConfiguration.EncryptionAlgorithmKeySize
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmProvider,
+            actualConfiguration.EncryptionAlgorithmProvider
+        );
     }
 
     [ConditionalFact]
@@ -201,21 +251,28 @@ public class RegistryPolicyResolverTests
     public void ResolvePolicy_ManagedEncryption_WithoutExplicitSettings()
     {
         // Arrange
-        var registryEntries = new Dictionary<string, object>()
-        {
-            ["EncryptionType"] = "managed"
-        };
+        var registryEntries = new Dictionary<string, object>() { ["EncryptionType"] = "managed" };
         var expectedConfiguration = new ManagedAuthenticatedEncryptorConfiguration();
 
         // Act
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmType, actualConfiguration.EncryptionAlgorithmType);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-        Assert.Equal(expectedConfiguration.ValidationAlgorithmType, actualConfiguration.ValidationAlgorithmType);
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmType,
+            actualConfiguration.EncryptionAlgorithmType
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmKeySize,
+            actualConfiguration.EncryptionAlgorithmKeySize
+        );
+        Assert.Equal(
+            expectedConfiguration.ValidationAlgorithmType,
+            actualConfiguration.ValidationAlgorithmType
+        );
     }
 
     [ConditionalFact]
@@ -241,11 +298,21 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmType, actualConfiguration.EncryptionAlgorithmType);
-        Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-        Assert.Equal(expectedConfiguration.ValidationAlgorithmType, actualConfiguration.ValidationAlgorithmType);
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmType,
+            actualConfiguration.EncryptionAlgorithmType
+        );
+        Assert.Equal(
+            expectedConfiguration.EncryptionAlgorithmKeySize,
+            actualConfiguration.EncryptionAlgorithmKeySize
+        );
+        Assert.Equal(
+            expectedConfiguration.ValidationAlgorithmType,
+            actualConfiguration.ValidationAlgorithmType
+        );
     }
 
     private static RegistryPolicy RunTestWithRegValues(Dictionary<string, object> regValues)
@@ -259,7 +326,8 @@ public class RegistryPolicyResolverTests
 
             var policyResolver = new RegistryPolicyResolver(
                 registryKey,
-                activator: SimpleActivator.DefaultWithoutServices);
+                activator: SimpleActivator.DefaultWithoutServices
+            );
 
             return policyResolver.ResolvePolicy();
         });
@@ -298,7 +366,8 @@ public class RegistryPolicyResolverTests
 
     private class ConditionalRunTestOnlyIfHkcuRegistryAvailable : Attribute, ITestCondition
     {
-        public bool IsMet => (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LazyHkcuTempKey.Value != null);
+        public bool IsMet =>
+            (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LazyHkcuTempKey.Value != null);
 
         public string SkipReason { get; } = "HKCU registry couldn't be opened.";
     }

@@ -9,7 +9,10 @@ namespace CustomAuthorizationFailureResponse.Authorization.Handlers;
 
 public class SampleRequirementHandler : AuthorizationHandler<SampleRequirement>
 {
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SampleRequirement requirement)
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        SampleRequirement requirement
+    )
     {
         // assuming the requirement was not met
         return Task.CompletedTask;

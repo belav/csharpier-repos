@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -30,57 +30,61 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Microsoft.Build.BuildEngine {
-	public class UsingTaskCollection : ICollection, IEnumerable {
-	
-		//Project		parentProject;
-		object		syncRoot;
-		List <UsingTask>	usingTasks;
-		
-		internal UsingTaskCollection (Project parentProject)
-		{
-			//this.parentProject = parentProject;
-			this.syncRoot = new Object ();
-			this.usingTasks = new List <UsingTask> ();
-		}
-		
-		internal void Add (UsingTask usingTask)
-		{
-			if (usingTask == null)
-				throw new ArgumentNullException ("usingTask");
-			
-			if (usingTasks.Contains (usingTask))
-				throw new InvalidOperationException ("Task already registered.");
-			
-			usingTasks.Add (usingTask);
-		}
-		
-		public void CopyTo (Array array, int index)
-		{
-			usingTasks.CopyTo ((UsingTask[]) array, index);
-		}
-		
-		public void CopyTo (UsingTask[] array, int index)
-		{
-			usingTasks.CopyTo (array, index);
-		}
-		
-		public IEnumerator GetEnumerator ()
-		{
-			foreach (UsingTask ut in usingTasks)
-				yield return ut;
-		}
-		
-		public int Count {
-			get { return usingTasks.Count; }
-		}
-		
-		public bool IsSynchronized {
-			get { return false; }
-		}
-		
-		public object SyncRoot {
-			get { return syncRoot; }
-		}
-	}
+namespace Microsoft.Build.BuildEngine
+{
+    public class UsingTaskCollection : ICollection, IEnumerable
+    {
+        //Project		parentProject;
+        object syncRoot;
+        List<UsingTask> usingTasks;
+
+        internal UsingTaskCollection(Project parentProject)
+        {
+            //this.parentProject = parentProject;
+            this.syncRoot = new Object();
+            this.usingTasks = new List<UsingTask>();
+        }
+
+        internal void Add(UsingTask usingTask)
+        {
+            if (usingTask == null)
+                throw new ArgumentNullException("usingTask");
+
+            if (usingTasks.Contains(usingTask))
+                throw new InvalidOperationException("Task already registered.");
+
+            usingTasks.Add(usingTask);
+        }
+
+        public void CopyTo(Array array, int index)
+        {
+            usingTasks.CopyTo((UsingTask[])array, index);
+        }
+
+        public void CopyTo(UsingTask[] array, int index)
+        {
+            usingTasks.CopyTo(array, index);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            foreach (UsingTask ut in usingTasks)
+                yield return ut;
+        }
+
+        public int Count
+        {
+            get { return usingTasks.Count; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public object SyncRoot
+        {
+            get { return syncRoot; }
+        }
+    }
 }

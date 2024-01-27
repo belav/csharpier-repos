@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 {
     internal abstract class AbstractConvertForEachToForCodeRefactoringProvider<
         TStatementSyntax,
-        TForEachStatement> : CodeRefactoringProvider
+        TForEachStatement
+    > : CodeRefactoringProvider
         where TStatementSyntax : SyntaxNode
         where TForEachStatement : TStatementSyntax
     {
@@ -35,14 +36,24 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         private const string Count = nameof(IList.Count);
 
         private static readonly ImmutableArray<string> s_KnownInterfaceNames =
-            ImmutableArray.Create(typeof(IList<>).FullName!, typeof(IReadOnlyList<>).FullName!, typeof(IList).FullName!);
+            ImmutableArray.Create(
+                typeof(IList<>).FullName!,
+                typeof(IReadOnlyList<>).FullName!,
+                typeof(IList).FullName!
+            );
 
         protected bool IsForEachVariableWrittenInside { get; private set; }
         protected abstract string Title { get; }
         protected abstract bool ValidLocation(ForEachInfo foreachInfo);
-        protected abstract (SyntaxNode start, SyntaxNode end) GetForEachBody(TForEachStatement foreachStatement);
+        protected abstract (SyntaxNode start, SyntaxNode end) GetForEachBody(
+            TForEachStatement foreachStatement
+        );
         protected abstract void ConvertToForStatement(
-            SemanticModel model, ForEachInfo info, SyntaxEditor editor, CancellationToken cancellationToken);
+            SemanticModel model,
+            ForEachInfo info,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        );
         protected abstract bool IsValid(TForEachStatement foreachNode);
 
         /// <summary>
@@ -51,24 +62,39 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         /// VB: Nested foreach loops sharing a single Next statement, Next statements with multiple variables and next statements
         /// not using the loop variable are not supported.
         /// </summary>
-        protected abstract bool IsSupported(ILocalSymbol foreachVariable, IForEachLoopOperation forEachOperation, TForEachStatement foreachStatement);
+        protected abstract bool IsSupported(
+            ILocalSymbol foreachVariable,
+            IForEachLoopOperation forEachOperation,
+            TForEachStatement foreachStatement
+        );
 
-        protected static SyntaxAnnotation CreateWarningAnnotation()
-            => WarningAnnotation.Create(FeaturesResources.Warning_colon_semantics_may_change_when_converting_statement);
+        protected static SyntaxAnnotation CreateWarningAnnotation() =>
+            WarningAnnotation.Create(
+                FeaturesResources.Warning_colon_semantics_may_change_when_converting_statement
+            );
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, _, cancellationToken) = context;
-            var foreachStatement = await context.TryGetRelevantNodeAsync<TForEachStatement>().ConfigureAwait(false);
+            var foreachStatement = await context
+                .TryGetRelevantNodeAsync<TForEachStatement>()
+                .ConfigureAwait(false);
             if (foreachStatement == null || !IsValid(foreachStatement))
             {
                 return;
             }
 
-            var model = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var semanticFact = document.GetRequiredLanguageService<ISemanticFactsService>();
-            var foreachInfo = GetForeachInfo(semanticFact, model, foreachStatement, cancellationToken);
+            var foreachInfo = GetForeachInfo(
+                semanticFact,
+                model,
+                foreachStatement,
+                cancellationToken
+            );
             if (foreachInfo == null || !ValidLocation(foreachInfo))
             {
                 return;
@@ -78,31 +104,60 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 CodeAction.Create(
                     Title,
                     c => ConvertForeachToForAsync(document, foreachInfo, c),
-                    Title),
-                foreachStatement.Span);
+                    Title
+                ),
+                foreachStatement.Span
+            );
         }
 
         protected static SyntaxToken CreateUniqueName(
-            ISemanticFactsService semanticFacts, SemanticModel model, SyntaxNode location, string baseName, CancellationToken cancellationToken)
-            => semanticFacts.GenerateUniqueLocalName(model, location, container: null, baseName, cancellationToken);
+            ISemanticFactsService semanticFacts,
+            SemanticModel model,
+            SyntaxNode location,
+            string baseName,
+            CancellationToken cancellationToken
+        ) =>
+            semanticFacts.GenerateUniqueLocalName(
+                model,
+                location,
+                container: null,
+                baseName,
+                cancellationToken
+            );
 
         protected static SyntaxNode GetCollectionVariableName(
-            SemanticModel model, SyntaxGenerator generator,
-            ForEachInfo foreachInfo, SyntaxNode foreachCollectionExpression, CancellationToken cancellationToken)
+            SemanticModel model,
+            SyntaxGenerator generator,
+            ForEachInfo foreachInfo,
+            SyntaxNode foreachCollectionExpression,
+            CancellationToken cancellationToken
+        )
         {
             if (foreachInfo.RequireCollectionStatement)
             {
                 return generator.IdentifierName(
-                    CreateUniqueName(foreachInfo.SemanticFacts,
-                        model, foreachInfo.ForEachStatement, foreachInfo.CollectionNameSuggestion, cancellationToken));
+                    CreateUniqueName(
+                        foreachInfo.SemanticFacts,
+                        model,
+                        foreachInfo.ForEachStatement,
+                        foreachInfo.CollectionNameSuggestion,
+                        cancellationToken
+                    )
+                );
             }
 
-            return foreachCollectionExpression.WithoutTrivia().WithAdditionalAnnotations(Formatter.Annotation);
+            return foreachCollectionExpression
+                .WithoutTrivia()
+                .WithAdditionalAnnotations(Formatter.Annotation);
         }
 
         protected static void IntroduceCollectionStatement(
-            ForEachInfo foreachInfo, SyntaxEditor editor,
-            SyntaxNode type, SyntaxNode foreachCollectionExpression, SyntaxNode collectionVariable)
+            ForEachInfo foreachInfo,
+            SyntaxEditor editor,
+            SyntaxNode type,
+            SyntaxNode foreachCollectionExpression,
+            SyntaxNode collectionVariable
+        )
         {
             if (!foreachInfo.RequireCollectionStatement)
             {
@@ -113,27 +168,43 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             var generator = editor.Generator;
 
             // attach rename annotation to control variable
-            var collectionVariableToken = generator.Identifier(collectionVariable.ToString()).WithAdditionalAnnotations(RenameAnnotation.Create());
+            var collectionVariableToken = generator
+                .Identifier(collectionVariable.ToString())
+                .WithAdditionalAnnotations(RenameAnnotation.Create());
 
             // this expression is from user code. don't simplify this.
-            var expression = foreachCollectionExpression.WithoutAnnotations(SimplificationHelpers.DoNotSimplifyAnnotation);
+            var expression = foreachCollectionExpression.WithoutAnnotations(
+                SimplificationHelpers.DoNotSimplifyAnnotation
+            );
             var collectionStatement = generator.LocalDeclarationStatement(
                 type,
                 collectionVariableToken,
-                (foreachInfo.ExplicitCastInterface != null) ? generator.CastExpression(foreachInfo.ExplicitCastInterface, expression) : expression);
+                (foreachInfo.ExplicitCastInterface != null)
+                    ? generator.CastExpression(foreachInfo.ExplicitCastInterface, expression)
+                    : expression
+            );
 
             // attach trivia to right place
-            collectionStatement = collectionStatement.WithLeadingTrivia(foreachInfo.ForEachStatement.GetFirstToken().LeadingTrivia);
+            collectionStatement = collectionStatement.WithLeadingTrivia(
+                foreachInfo.ForEachStatement.GetFirstToken().LeadingTrivia
+            );
 
             editor.InsertBefore(foreachInfo.ForEachStatement, collectionStatement);
         }
 
         protected static TStatementSyntax AddItemVariableDeclaration(
-            SyntaxGenerator generator, SyntaxNode type, SyntaxToken foreachVariable,
-            ITypeSymbol castType, SyntaxNode collectionVariable, SyntaxToken indexVariable)
+            SyntaxGenerator generator,
+            SyntaxNode type,
+            SyntaxToken foreachVariable,
+            ITypeSymbol castType,
+            SyntaxNode collectionVariable,
+            SyntaxToken indexVariable
+        )
         {
             var memberAccess = generator.ElementAccessExpression(
-                    collectionVariable, generator.IdentifierName(indexVariable));
+                collectionVariable,
+                generator.IdentifierName(indexVariable)
+            );
 
             if (castType != null)
             {
@@ -141,16 +212,26 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             }
 
             var localDecl = generator.LocalDeclarationStatement(
-                type, foreachVariable, memberAccess);
+                type,
+                foreachVariable,
+                memberAccess
+            );
 
             return (TStatementSyntax)localDecl.WithAdditionalAnnotations(Formatter.Annotation);
         }
 
         private ForEachInfo? GetForeachInfo(
-            ISemanticFactsService semanticFact, SemanticModel model,
-            TForEachStatement foreachStatement, CancellationToken cancellationToken)
+            ISemanticFactsService semanticFact,
+            SemanticModel model,
+            TForEachStatement foreachStatement,
+            CancellationToken cancellationToken
+        )
         {
-            if (model.GetOperation(foreachStatement, cancellationToken) is not IForEachLoopOperation operation || operation.Locals.Length != 1)
+            if (
+                model.GetOperation(foreachStatement, cancellationToken)
+                    is not IForEachLoopOperation operation
+                || operation.Locals.Length != 1
+            )
             {
                 return null;
             }
@@ -168,7 +249,11 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 return null;
             }
 
-            IsForEachVariableWrittenInside = CheckIfForEachVariableIsWrittenInside(model, foreachVariable, foreachStatement);
+            IsForEachVariableWrittenInside = CheckIfForEachVariableIsWrittenInside(
+                model,
+                foreachVariable,
+                foreachStatement
+            );
 
             var foreachCollection = RemoveImplicitConversion(operation.Collection);
             if (foreachCollection == null)
@@ -176,8 +261,14 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 return null;
             }
 
-            GetInterfaceInfo(model, foreachVariable, foreachCollection,
-                out var explicitCastInterface, out var collectionNameSuggestion, out var countName);
+            GetInterfaceInfo(
+                model,
+                foreachVariable,
+                foreachCollection,
+                out var explicitCastInterface,
+                out var collectionNameSuggestion,
+                out var countName
+            );
             if (collectionNameSuggestion == null || countName == null)
             {
                 return null;
@@ -185,13 +276,24 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 
             var requireCollectionStatement = CheckRequireCollectionStatement(foreachCollection);
             return new ForEachInfo(
-                semanticFact, collectionNameSuggestion, countName, explicitCastInterface,
-                foreachVariable.Type, requireCollectionStatement, foreachStatement);
+                semanticFact,
+                collectionNameSuggestion,
+                countName,
+                explicitCastInterface,
+                foreachVariable.Type,
+                requireCollectionStatement,
+                foreachStatement
+            );
         }
 
         private static void GetInterfaceInfo(
-            SemanticModel model, ILocalSymbol foreachVariable, IOperation foreachCollection,
-            out ITypeSymbol? explicitCastInterface, out string? collectionNameSuggestion, out string? countName)
+            SemanticModel model,
+            ILocalSymbol foreachVariable,
+            IOperation foreachCollection,
+            out ITypeSymbol? explicitCastInterface,
+            out string? collectionNameSuggestion,
+            out string? countName
+        )
         {
             explicitCastInterface = null;
             collectionNameSuggestion = null;
@@ -250,8 +352,12 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 return;
             }
 
-            // check ImmutableArray case 
-            if (collectionType.OriginalDefinition.Equals(model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName!)))
+            // check ImmutableArray case
+            if (
+                collectionType.OriginalDefinition.Equals(
+                    model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName!)
+                )
+            )
             {
                 var indexer = GetInterfaceMember(collectionType, get_Item);
                 if (indexer != null)
@@ -269,18 +375,24 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             }
 
             // go through all known interfaces we support next.
-            var knownCollectionInterfaces = s_KnownInterfaceNames.Select(
-                model.Compilation.GetTypeByMetadataName).Where(t => !IsNullOrErrorType(t));
+            var knownCollectionInterfaces = s_KnownInterfaceNames
+                .Select(model.Compilation.GetTypeByMetadataName)
+                .Where(t => !IsNullOrErrorType(t));
 
             // for all interfaces, we suggest collection name as "list"
             collectionNameSuggestion = "list";
 
             // check type itself is interface case
-            if (collectionType.TypeKind == TypeKind.Interface && knownCollectionInterfaces.Contains(collectionType.OriginalDefinition))
+            if (
+                collectionType.TypeKind == TypeKind.Interface
+                && knownCollectionInterfaces.Contains(collectionType.OriginalDefinition)
+            )
             {
                 var indexer = GetInterfaceMember(collectionType, get_Item);
-                if (indexer != null &&
-                    IsExchangable(indexer.ReturnType, foreachType, model.Compilation))
+                if (
+                    indexer != null
+                    && IsExchangable(indexer.ReturnType, foreachType, model.Compilation)
+                )
                 {
                     explicitCastInterface = null;
                     countName = Count;
@@ -305,8 +417,12 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                     continue;
                 }
 
-                if (collectionType.FindImplementationForInterfaceMember(countSymbol) is not IMethodSymbol countImpl ||
-                    collectionType.FindImplementationForInterfaceMember(indexerSymbol) is not IMethodSymbol indexerImpl)
+                if (
+                    collectionType.FindImplementationForInterfaceMember(countSymbol)
+                        is not IMethodSymbol countImpl
+                    || collectionType.FindImplementationForInterfaceMember(indexerSymbol)
+                        is not IMethodSymbol indexerImpl
+                )
                 {
                     continue;
                 }
@@ -317,8 +433,10 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 }
 
                 // implicitly implemented!
-                if (countImpl.ExplicitInterfaceImplementations.IsEmpty &&
-                    indexerImpl.ExplicitInterfaceImplementations.IsEmpty)
+                if (
+                    countImpl.ExplicitInterfaceImplementations.IsEmpty
+                    && indexerImpl.ExplicitInterfaceImplementations.IsEmpty
+                )
                 {
                     explicitCastInterface = null;
                     countName = Count;
@@ -337,16 +455,22 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         }
 
         private static bool IsExchangable(
-            ITypeSymbol type1, ITypeSymbol type2, Compilation compilation)
+            ITypeSymbol type1,
+            ITypeSymbol type2,
+            Compilation compilation
+        )
         {
-            return compilation.HasImplicitConversion(type1, type2) ||
-                   compilation.HasImplicitConversion(type2, type1);
+            return compilation.HasImplicitConversion(type1, type2)
+                || compilation.HasImplicitConversion(type2, type1);
         }
 
-        private static bool IsNullOrErrorType([NotNullWhen(false)] ITypeSymbol? type)
-            => type is null or IErrorTypeSymbol;
+        private static bool IsNullOrErrorType([NotNullWhen(false)] ITypeSymbol? type) =>
+            type is null or IErrorTypeSymbol;
 
-        private static IMethodSymbol? GetInterfaceMember(ITypeSymbol interfaceType, string memberName)
+        private static IMethodSymbol? GetInterfaceMember(
+            ITypeSymbol interfaceType,
+            string memberName
+        )
         {
             foreach (var current in interfaceType.GetAllInterfacesIncludingThis())
             {
@@ -367,7 +491,7 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             // otherwise, we will introduce local variable for the expression first and then
             // do "foreach to for" refactoring
             //
-            // foreach(var a in new int[] {....}) 
+            // foreach(var a in new int[] {....})
             // to
             // var array = new int[] { ... }
             // foreach(var a in array)
@@ -387,10 +511,15 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         private static IOperation RemoveImplicitConversion(IOperation collection)
         {
             return (collection is IConversionOperation conversion && conversion.IsImplicit)
-                ? RemoveImplicitConversion(conversion.Operand) : collection;
+                ? RemoveImplicitConversion(conversion.Operand)
+                : collection;
         }
 
-        private bool CheckIfForEachVariableIsWrittenInside(SemanticModel semanticModel, ISymbol foreachVariable, TForEachStatement foreachStatement)
+        private bool CheckIfForEachVariableIsWrittenInside(
+            SemanticModel semanticModel,
+            ISymbol foreachVariable,
+            TForEachStatement foreachStatement
+        )
         {
             var (start, end) = GetForEachBody(foreachStatement);
             if (start == null || end == null)
@@ -413,9 +542,12 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         private async Task<Document> ConvertForeachToForAsync(
             Document document,
             ForEachInfo foreachInfo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var model = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var services = document.Project.Solution.Services;
             var editor = new SyntaxEditor(model.SyntaxTree.GetRoot(cancellationToken), services);
 
@@ -426,9 +558,14 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         }
 
         protected sealed class ForEachInfo(
-            ISemanticFactsService semanticFacts, string collectionNameSuggestion, string countName,
-            ITypeSymbol? explicitCastInterface, ITypeSymbol forEachElementType,
-            bool requireCollectionStatement, TForEachStatement forEachStatement)
+            ISemanticFactsService semanticFacts,
+            string collectionNameSuggestion,
+            string countName,
+            ITypeSymbol? explicitCastInterface,
+            ITypeSymbol forEachElementType,
+            bool requireCollectionStatement,
+            TForEachStatement forEachStatement
+        )
         {
             public ISemanticFactsService SemanticFacts { get; } = semanticFacts;
 
@@ -436,7 +573,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             public string CountName { get; } = countName;
             public ITypeSymbol? ExplicitCastInterface { get; } = explicitCastInterface;
             public ITypeSymbol ForEachElementType { get; } = forEachElementType;
-            public bool RequireCollectionStatement { get; } = requireCollectionStatement || (explicitCastInterface != null);
+            public bool RequireCollectionStatement { get; } =
+                requireCollectionStatement || (explicitCastInterface != null);
             public TForEachStatement ForEachStatement { get; } = forEachStatement;
         }
     }

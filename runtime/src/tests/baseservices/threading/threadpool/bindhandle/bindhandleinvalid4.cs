@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Microsoft.Win32.SafeHandles;
 using Xunit;
 
@@ -39,7 +39,9 @@ public class BindHandleInvalid3
                 }
                 else
                 {
-                    Console.WriteLine($"Got wrong error - HResult: 0x{ex.HResult:x}, Exception: {ex}");
+                    Console.WriteLine(
+                        $"Got wrong error - HResult: 0x{ex.HResult:x}, Exception: {ex}"
+                    );
                 }
             }
         }
@@ -53,6 +55,4 @@ public class BindHandleInvalid3
         Console.WriteLine("Didn't get argument null exception");
         return (99);
     }
-
-
 }

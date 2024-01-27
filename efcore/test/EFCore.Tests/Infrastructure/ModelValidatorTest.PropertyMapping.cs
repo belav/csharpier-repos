@@ -14,22 +14,30 @@ public partial class ModelValidatorTest
         var modelBuilder = CreateConventionlessModelBuilder();
         var entityTypeBuilder = modelBuilder.Entity(typeof(NonPrimitiveAsPropertyEntity));
         entityTypeBuilder.Property(
-            typeof(NavigationAsProperty), nameof(NonPrimitiveAsPropertyEntity.Property));
+            typeof(NavigationAsProperty),
+            nameof(NonPrimitiveAsPropertyEntity.Property)
+        );
 
         Assert.Equal(
             CoreStrings.PropertyNotMapped(
                 typeof(NavigationAsProperty).ShortDisplayName(),
                 typeof(NonPrimitiveAsPropertyEntity).ShortDisplayName(),
-                nameof(NonPrimitiveAsPropertyEntity.Property)),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                nameof(NonPrimitiveAsPropertyEntity.Property)
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
     public virtual void Does_not_throw_when_added_shadow_property_by_convention_is_not_of_primitive_type()
     {
         var modelBuilder = CreateConventionlessModelBuilder();
-        var entityTypeBuilder = modelBuilder.Entity(typeof(NonPrimitiveAsPropertyEntity)).HasNoKey();
-        entityTypeBuilder.GetInfrastructure().Property(typeof(NavigationAsProperty), "ShadowProperty");
+        var entityTypeBuilder = modelBuilder
+            .Entity(typeof(NonPrimitiveAsPropertyEntity))
+            .HasNoKey();
+        entityTypeBuilder
+            .GetInfrastructure()
+            .Property(typeof(NavigationAsProperty), "ShadowProperty");
         entityTypeBuilder.Ignore(nameof(NonPrimitiveAsPropertyEntity.Property));
 
         Validate(modelBuilder);
@@ -43,8 +51,12 @@ public partial class ModelValidatorTest
 
         Assert.Equal(
             CoreStrings.PropertyNotAdded(
-                typeof(PrimitivePropertyEntity).ShortDisplayName(), "Property", typeof(int).DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                typeof(PrimitivePropertyEntity).ShortDisplayName(),
+                "Property",
+                typeof(int).DisplayName()
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
@@ -55,15 +67,20 @@ public partial class ModelValidatorTest
 
         Assert.Equal(
             CoreStrings.PropertyNotAdded(
-                typeof(NonPrimitiveValueTypePropertyEntity).ShortDisplayName(), "Property", typeof(CancellationToken).Name),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                typeof(NonPrimitiveValueTypePropertyEntity).ShortDisplayName(),
+                "Property",
+                typeof(CancellationToken).Name
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
     public virtual void Does_not_throw_when_nonprimitive_value_type_property_type_is_ignored()
     {
-        var modelBuilder = CreateConventionlessModelBuilder(
-            configurationBuilder => configurationBuilder.IgnoreAny<CancellationToken>());
+        var modelBuilder = CreateConventionlessModelBuilder(configurationBuilder =>
+            configurationBuilder.IgnoreAny<CancellationToken>()
+        );
         modelBuilder.Entity(typeof(NonPrimitiveValueTypePropertyEntity)).HasNoKey();
 
         Validate(modelBuilder);
@@ -79,8 +96,10 @@ public partial class ModelValidatorTest
             CoreStrings.NavigationNotAdded(
                 typeof(NonPrimitiveReferenceTypePropertyEntity).ShortDisplayName(),
                 nameof(NonPrimitiveReferenceTypePropertyEntity.Property),
-                typeof(ICollection<Uri>).ShortDisplayName()),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                typeof(ICollection<Uri>).ShortDisplayName()
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
@@ -112,8 +131,12 @@ public partial class ModelValidatorTest
 
         Assert.Equal(
             CoreStrings.NavigationNotAdded(
-                typeof(NavigationEntity).ShortDisplayName(), "Navigation", typeof(PrimitivePropertyEntity).Name),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                typeof(NavigationEntity).ShortDisplayName(),
+                "Navigation",
+                typeof(PrimitivePropertyEntity).Name
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
@@ -126,8 +149,12 @@ public partial class ModelValidatorTest
 
         Assert.Equal(
             CoreStrings.NavigationNotAdded(
-                typeof(Dog).ShortDisplayName(), nameof(Dog.FavoritePerson), typeof(Person).Name),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                typeof(Dog).ShortDisplayName(),
+                nameof(Dog.FavoritePerson),
+                typeof(Person).Name
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
@@ -141,8 +168,14 @@ public partial class ModelValidatorTest
         referencedEntityTypeBuilder.Ignore("Property");
         referencedEntityTypeBuilder.Property<int>("Id");
         referencedEntityTypeBuilder.HasKey("Id");
-        entityTypeBuilder.GetInfrastructure().HasRelationship(
-            (IConventionEntityType)referencedEntityTypeBuilder.Metadata, "Navigation", null, setTargetAsPrincipal: true);
+        entityTypeBuilder
+            .GetInfrastructure()
+            .HasRelationship(
+                (IConventionEntityType)referencedEntityTypeBuilder.Metadata,
+                "Navigation",
+                null,
+                setTargetAsPrincipal: true
+            );
 
         Validate(modelBuilder);
     }
@@ -160,8 +193,9 @@ public partial class ModelValidatorTest
     [ConditionalFact]
     public virtual void Does_not_throw_when_navigation_type_is_ignored()
     {
-        var modelBuilder = CreateConventionlessModelBuilder(
-            configurationBuilder => configurationBuilder.IgnoreAny<PrimitivePropertyEntity>());
+        var modelBuilder = CreateConventionlessModelBuilder(configurationBuilder =>
+            configurationBuilder.IgnoreAny<PrimitivePropertyEntity>()
+        );
         modelBuilder.Entity(typeof(NavigationEntity)).HasNoKey();
 
         Validate(modelBuilder);
@@ -188,8 +222,13 @@ public partial class ModelValidatorTest
         entityTypeBuilder.HasKey("Id");
         referencedEntityTypeBuilder.Property<int>("Id");
         referencedEntityTypeBuilder.HasKey("Id");
-        entityTypeBuilder.GetInfrastructure().HasRelationship(
-            (IConventionEntityType)referencedEntityTypeBuilder.Metadata, "Navigation", null);
+        entityTypeBuilder
+            .GetInfrastructure()
+            .HasRelationship(
+                (IConventionEntityType)referencedEntityTypeBuilder.Metadata,
+                "Navigation",
+                null
+            );
 
         Validate(modelBuilder);
     }
@@ -204,15 +243,18 @@ public partial class ModelValidatorTest
             CoreStrings.InterfacePropertyNotAdded(
                 typeof(InterfaceNavigationEntity).ShortDisplayName(),
                 "Navigation",
-                typeof(IList<INavigationEntity>).ShortDisplayName()),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                typeof(IList<INavigationEntity>).ShortDisplayName()
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
     public virtual void Does_not_throw_when_interface_collection_type_property_type_is_ignored()
     {
-        var modelBuilder = CreateConventionlessModelBuilder(
-            configurationBuilder => configurationBuilder.IgnoreAny<INavigationEntity>());
+        var modelBuilder = CreateConventionlessModelBuilder(configurationBuilder =>
+            configurationBuilder.IgnoreAny<INavigationEntity>()
+        );
         modelBuilder.Entity(typeof(InterfaceNavigationEntity)).HasNoKey();
 
         Validate(modelBuilder);
@@ -221,8 +263,9 @@ public partial class ModelValidatorTest
     [ConditionalFact]
     public virtual void Does_not_throw_when_interface_generic_type_property_type_is_ignored()
     {
-        var modelBuilder = CreateConventionlessModelBuilder(
-            configurationBuilder => configurationBuilder.IgnoreAny(typeof(IList<>)));
+        var modelBuilder = CreateConventionlessModelBuilder(configurationBuilder =>
+            configurationBuilder.IgnoreAny(typeof(IList<>))
+        );
         modelBuilder.Entity(typeof(InterfaceNavigationEntity)).HasNoKey();
 
         Validate(modelBuilder);
@@ -231,8 +274,9 @@ public partial class ModelValidatorTest
     [ConditionalFact]
     public virtual void Does_not_throw_when_interface_base_type_property_type_is_ignored()
     {
-        var modelBuilder = CreateConventionlessModelBuilder(
-            configurationBuilder => configurationBuilder.IgnoreAny<IEnumerable<INavigationEntity>>());
+        var modelBuilder = CreateConventionlessModelBuilder(configurationBuilder =>
+            configurationBuilder.IgnoreAny<IEnumerable<INavigationEntity>>()
+        );
         modelBuilder.Entity(typeof(InterfaceNavigationEntity)).HasNoKey();
 
         Validate(modelBuilder);
@@ -247,21 +291,17 @@ public partial class ModelValidatorTest
         Validate(modelBuilder);
     }
 
-    protected virtual IModel Validate(TestHelpers.TestModelBuilder modelBuilder)
-        => modelBuilder.FinalizeModel(designTime: true);
+    protected virtual IModel Validate(TestHelpers.TestModelBuilder modelBuilder) =>
+        modelBuilder.FinalizeModel(designTime: true);
 
-    protected class NonPrimitiveNonNavigationAsPropertyEntity
-    {
-    }
+    protected class NonPrimitiveNonNavigationAsPropertyEntity { }
 
     protected class NonPrimitiveAsPropertyEntity
     {
         public NavigationAsProperty Property { get; set; }
     }
 
-    protected class NavigationAsProperty
-    {
-    }
+    protected class NavigationAsProperty { }
 
     protected class PrimitivePropertyEntity
     {
@@ -351,9 +391,7 @@ public partial class ModelValidatorTest
         public string FavoriteBreed { get; set; }
     }
 
-    protected class Employee : Person
-    {
-    }
+    protected class Employee : Person { }
 
     protected class Owner
     {

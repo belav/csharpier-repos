@@ -21,16 +21,28 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseExpressionBodyForLambda), Shared]
-    internal sealed class UseExpressionBodyForLambdaCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseExpressionBodyForLambda
+        ),
+        Shared
+    ]
+    internal sealed class UseExpressionBodyForLambdaCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseExpressionBodyForLambdaCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseExpressionBodyForLambdaCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(IDEDiagnosticIds.UseExpressionBodyForLambdaExpressionsDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(
+                IDEDiagnosticIds.UseExpressionBodyForLambdaExpressionsDiagnosticId
+            );
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -41,18 +53,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             var codeAction = CodeAction.Create(
                 title,
                 c => FixWithSyntaxEditorAsync(document, diagnostic, c),
-                title);
+                title
+            );
 
             context.RegisterCodeFix(codeAction, context.Diagnostics);
             return Task.CompletedTask;
         }
 
-        protected override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
-            => FixAllAsync(document, diagnostics, editor, cancellationToken);
+        protected override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        ) => FixAllAsync(document, diagnostics, editor, cancellationToken);
 
-        private static async Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CancellationToken cancellationToken)
+        private static async Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -60,20 +85,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             }
         }
 
-        private static Task<Document> FixWithSyntaxEditorAsync(Document document, Diagnostic diagnostic, CancellationToken cancellationToken)
-            => FixAllWithEditorAsync(
-                document, editor => FixAllAsync(document, ImmutableArray.Create(diagnostic), editor, cancellationToken), cancellationToken);
+        private static Task<Document> FixWithSyntaxEditorAsync(
+            Document document,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        ) =>
+            FixAllWithEditorAsync(
+                document,
+                editor =>
+                    FixAllAsync(
+                        document,
+                        ImmutableArray.Create(diagnostic),
+                        editor,
+                        cancellationToken
+                    ),
+                cancellationToken
+            );
 
         private static void AddEdits(
-            SyntaxEditor editor, SemanticModel semanticModel,
-            Diagnostic diagnostic, CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            SemanticModel semanticModel,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             var declarationLocation = diagnostic.AdditionalLocations[0];
-            var originalDeclaration = (LambdaExpressionSyntax)declarationLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
+            var originalDeclaration = (LambdaExpressionSyntax)
+                declarationLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
 
             editor.ReplaceNode(
                 originalDeclaration,
-                (current, _) => UseExpressionBodyForLambdaCodeActionHelpers.Update(semanticModel, originalDeclaration, (LambdaExpressionSyntax)current, cancellationToken));
+                (current, _) =>
+                    UseExpressionBodyForLambdaCodeActionHelpers.Update(
+                        semanticModel,
+                        originalDeclaration,
+                        (LambdaExpressionSyntax)current,
+                        cancellationToken
+                    )
+            );
         }
     }
 }

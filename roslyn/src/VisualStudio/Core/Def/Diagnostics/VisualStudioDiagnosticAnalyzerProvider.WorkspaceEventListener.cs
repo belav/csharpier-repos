@@ -23,7 +23,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         /// Loads VSIX analyzers into workspaces that provide <see cref="ISolutionAnalyzerSetterWorkspaceService"/> when they are loaded.
         /// </summary>
         [Export]
-        [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host, WorkspaceKind.Interactive), Shared]
+        [
+            ExportEventListener(
+                WellKnownEventListeners.Workspace,
+                WorkspaceKind.Host,
+                WorkspaceKind.Interactive
+            ),
+            Shared
+        ]
         internal sealed class WorkspaceEventListener : IEventListener<object>
         {
             private readonly IAsynchronousOperationListener _listener;
@@ -33,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
             public WorkspaceEventListener(
                 IAsynchronousOperationListenerProvider listenerProvider,
-                IVisualStudioDiagnosticAnalyzerProviderFactory providerFactory)
+                IVisualStudioDiagnosticAnalyzerProviderFactory providerFactory
+            )
             {
                 _listener = listenerProvider.GetListener(nameof(Workspace));
                 _providerFactory = providerFactory;
@@ -41,26 +49,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             public void StartListening(Workspace workspace, object serviceOpt)
             {
-                var setter = workspace.Services.GetService<ISolutionAnalyzerSetterWorkspaceService>();
+                var setter =
+                    workspace.Services.GetService<ISolutionAnalyzerSetterWorkspaceService>();
                 if (setter != null)
                 {
                     // fire and forget
                     var token = _listener.BeginAsyncOperation(nameof(InitializeWorkspaceAsync));
-                    _ = Task.Run(() => InitializeWorkspaceAsync(setter)).CompletesAsyncOperation(token);
+                    _ = Task.Run(() => InitializeWorkspaceAsync(setter))
+                        .CompletesAsyncOperation(token);
                 }
             }
 
-            private async Task InitializeWorkspaceAsync(ISolutionAnalyzerSetterWorkspaceService setter)
+            private async Task InitializeWorkspaceAsync(
+                ISolutionAnalyzerSetterWorkspaceService setter
+            )
             {
                 try
                 {
-                    var provider = await _providerFactory.GetOrCreateProviderAsync(CancellationToken.None).ConfigureAwait(false);
+                    var provider = await _providerFactory
+                        .GetOrCreateProviderAsync(CancellationToken.None)
+                        .ConfigureAwait(false);
 
                     var references = provider.GetAnalyzerReferencesInExtensions();
                     LogWorkspaceAnalyzerCount(references.Length);
-                    setter.SetAnalyzerReferences(references.SelectAsArray(referenceAndId => (AnalyzerReference)referenceAndId.reference));
+                    setter.SetAnalyzerReferences(
+                        references.SelectAsArray(referenceAndId =>
+                            (AnalyzerReference)referenceAndId.reference
+                        )
+                    );
                 }
-                catch (Exception e) when (FatalError.ReportAndPropagate(e, ErrorSeverity.Diagnostic))
+                catch (Exception e)
+                    when (FatalError.ReportAndPropagate(e, ErrorSeverity.Diagnostic))
                 {
                     throw ExceptionUtilities.Unreachable();
                 }
@@ -68,7 +87,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             private static void LogWorkspaceAnalyzerCount(int analyzerCount)
             {
-                Logger.Log(FunctionId.DiagnosticAnalyzerService_Analyzers, KeyValueLogMessage.Create(m => m["AnalyzerCount"] = analyzerCount, LogLevel.Debug));
+                Logger.Log(
+                    FunctionId.DiagnosticAnalyzerService_Analyzers,
+                    KeyValueLogMessage.Create(
+                        m => m["AnalyzerCount"] = analyzerCount,
+                        LogLevel.Debug
+                    )
+                );
             }
         }
     }

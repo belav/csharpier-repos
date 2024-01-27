@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel.Security.Tokens;
     using System.Net.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security.Tokens;
 
     public class SecurityMessageProperty : IMessageProperty, IDisposable
     {
@@ -50,14 +50,8 @@ namespace System.ServiceModel.Security
 
         public ReadOnlyCollection<IAuthorizationPolicy> ExternalAuthorizationPolicies
         {
-            get
-            {
-                return this.externalAuthorizationPolicies;
-            }
-            set
-            {
-                this.externalAuthorizationPolicies = value;
-            }
+            get { return this.externalAuthorizationPolicies; }
+            set { this.externalAuthorizationPolicies = value; }
         }
 
         public SecurityTokenSpecification ProtectionToken
@@ -116,13 +110,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-
         public string SenderIdPrefix
         {
-            get
-            {
-                return this.senderIdPrefix;
-            }
+            get { return this.senderIdPrefix; }
             set
             {
                 XmlHelper.ValidateIdPrefix(value);
@@ -135,7 +125,10 @@ namespace System.ServiceModel.Security
             get
             {
                 ThrowIfDisposed();
-                return ((this.incomingSupportingTokens != null) && (this.incomingSupportingTokens.Count > 0));
+                return (
+                    (this.incomingSupportingTokens != null)
+                    && (this.incomingSupportingTokens.Count > 0)
+                );
             }
         }
 
@@ -168,7 +161,10 @@ namespace System.ServiceModel.Security
         {
             get
             {
-                return ((this.outgoingSupportingTokens != null) && (this.outgoingSupportingTokens.Count > 0));
+                return (
+                    (this.outgoingSupportingTokens != null)
+                    && (this.outgoingSupportingTokens.Count > 0)
+                );
             }
         }
 
@@ -223,9 +219,16 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        void AddAuthorizationPolicies(SecurityTokenSpecification spec, Collection<IAuthorizationPolicy> policies)
+        void AddAuthorizationPolicies(
+            SecurityTokenSpecification spec,
+            Collection<IAuthorizationPolicy> policies
+        )
         {
-            if (spec != null && spec.SecurityTokenPolicies != null && spec.SecurityTokenPolicies.Count > 0)
+            if (
+                spec != null
+                && spec.SecurityTokenPolicies != null
+                && spec.SecurityTokenPolicies.Count > 0
+            )
             {
                 for (int i = 0; i < spec.SecurityTokenPolicies.Count; ++i)
                 {
@@ -239,17 +242,26 @@ namespace System.ServiceModel.Security
             return GetInitiatorTokenAuthorizationPolicies(true);
         }
 
-        internal ReadOnlyCollection<IAuthorizationPolicy> GetInitiatorTokenAuthorizationPolicies(bool includeTransportToken)
+        internal ReadOnlyCollection<IAuthorizationPolicy> GetInitiatorTokenAuthorizationPolicies(
+            bool includeTransportToken
+        )
         {
             return GetInitiatorTokenAuthorizationPolicies(includeTransportToken, null);
         }
-        
-        internal ReadOnlyCollection<IAuthorizationPolicy> GetInitiatorTokenAuthorizationPolicies(bool includeTransportToken, SecurityContextSecurityToken supportingSessionTokenToExclude)
+
+        internal ReadOnlyCollection<IAuthorizationPolicy> GetInitiatorTokenAuthorizationPolicies(
+            bool includeTransportToken,
+            SecurityContextSecurityToken supportingSessionTokenToExclude
+        )
         {
             // fast path
             if (!this.HasIncomingSupportingTokens)
             {
-                if (this.transportToken != null && this.initiatorToken == null && this.protectionToken == null)
+                if (
+                    this.transportToken != null
+                    && this.initiatorToken == null
+                    && this.protectionToken == null
+                )
                 {
                     if (includeTransportToken && this.transportToken.SecurityTokenPolicies != null)
                     {
@@ -260,13 +272,23 @@ namespace System.ServiceModel.Security
                         return EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
                     }
                 }
-                else if (this.transportToken == null && this.initiatorToken != null && this.protectionToken == null)
+                else if (
+                    this.transportToken == null
+                    && this.initiatorToken != null
+                    && this.protectionToken == null
+                )
                 {
-                    return this.initiatorToken.SecurityTokenPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
+                    return this.initiatorToken.SecurityTokenPolicies
+                        ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
                 }
-                else if (this.transportToken == null && this.initiatorToken == null && this.protectionToken != null)
+                else if (
+                    this.transportToken == null
+                    && this.initiatorToken == null
+                    && this.protectionToken != null
+                )
                 {
-                    return this.protectionToken.SecurityTokenPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
+                    return this.protectionToken.SecurityTokenPolicies
+                        ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
                 }
             }
 
@@ -283,19 +305,28 @@ namespace System.ServiceModel.Security
                 {
                     if (supportingSessionTokenToExclude != null)
                     {
-                        SecurityContextSecurityToken sct = this.incomingSupportingTokens[i].SecurityToken as SecurityContextSecurityToken;
-                        if (sct != null && sct.ContextId == supportingSessionTokenToExclude.ContextId)
+                        SecurityContextSecurityToken sct =
+                            this.incomingSupportingTokens[i].SecurityToken
+                            as SecurityContextSecurityToken;
+                        if (
+                            sct != null
+                            && sct.ContextId == supportingSessionTokenToExclude.ContextId
+                        )
                         {
                             continue;
                         }
                     }
-                    SecurityTokenAttachmentMode attachmentMode = this.incomingSupportingTokens[i].SecurityTokenAttachmentMode;
-                    // a safety net in case more attachment modes get added to the product without 
+                    SecurityTokenAttachmentMode attachmentMode = this.incomingSupportingTokens[
+                        i
+                    ].SecurityTokenAttachmentMode;
+                    // a safety net in case more attachment modes get added to the product without
                     // reviewing this code.
-                    if (attachmentMode == SecurityTokenAttachmentMode.Endorsing
+                    if (
+                        attachmentMode == SecurityTokenAttachmentMode.Endorsing
                         || attachmentMode == SecurityTokenAttachmentMode.Signed
                         || attachmentMode == SecurityTokenAttachmentMode.SignedEncrypted
-                        || attachmentMode == SecurityTokenAttachmentMode.SignedEndorsing)
+                        || attachmentMode == SecurityTokenAttachmentMode.SignedEndorsing
+                    )
                     {
                         AddAuthorizationPolicies(this.incomingSupportingTokens[i], policies);
                     }
@@ -317,7 +348,9 @@ namespace System.ServiceModel.Security
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
     }

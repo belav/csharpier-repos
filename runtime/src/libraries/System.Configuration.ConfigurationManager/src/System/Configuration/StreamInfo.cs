@@ -38,7 +38,6 @@ namespace System.Configuration
                 Version = Version
             };
 
-
             return clone;
         }
     }

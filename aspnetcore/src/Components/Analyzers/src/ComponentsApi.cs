@@ -19,7 +19,8 @@ internal static class ComponentsApi
 
     public static class CascadingParameterAttribute
     {
-        public const string FullTypeName = "Microsoft.AspNetCore.Components.CascadingParameterAttribute";
+        public const string FullTypeName =
+            "Microsoft.AspNetCore.Components.CascadingParameterAttribute";
         public const string MetadataName = FullTypeName;
     }
 

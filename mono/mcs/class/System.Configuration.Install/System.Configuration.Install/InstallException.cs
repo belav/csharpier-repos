@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,26 +33,23 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration.Install
 {
-	[Serializable]
-	public class InstallException : SystemException
-	{
-		private Exception innerException;
-		
-		public InstallException ()
-		{
-		}
+    [Serializable]
+    public class InstallException : SystemException
+    {
+        private Exception innerException;
 
-		public InstallException (string message) : base (message) 
-		{
-		} 
+        public InstallException() { }
 
-		protected InstallException (SerializationInfo info, StreamingContext context) : base (info, context)
-		{
-		}
+        public InstallException(string message)
+            : base(message) { }
 
-		public InstallException (string message, Exception innerException) : base (message)
-		{
-			this.innerException = innerException;
-		}		
-	}
+        protected InstallException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+
+        public InstallException(string message, Exception innerException)
+            : base(message)
+        {
+            this.innerException = innerException;
+        }
+    }
 }

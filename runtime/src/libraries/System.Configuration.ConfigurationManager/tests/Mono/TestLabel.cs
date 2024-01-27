@@ -27,15 +27,13 @@
 // THE SOFTWARE.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MonoTests.System.Configuration.Util
 {
-
     public class TestLabel
     {
-
         List<Scope> scopes;
         string delimiter;
         Style defaultStyle;
@@ -48,9 +46,7 @@ namespace MonoTests.System.Configuration.Util
         }
 
         public TestLabel(string prefix)
-            : this(prefix, ".", Style.Letter)
-        {
-        }
+            : this(prefix, ".", Style.Letter) { }
 
         public TestLabel(string prefix, string delimiter, Style style)
         {

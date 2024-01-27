@@ -95,7 +95,8 @@ namespace System.Web.Http.ExceptionHandling
         {
             Contract.Assert(services != null);
 
-            IExceptionHandler innerHandler = services.GetExceptionHandler() ?? new EmptyExceptionHandler();
+            IExceptionHandler innerHandler =
+                services.GetExceptionHandler() ?? new EmptyExceptionHandler();
             return new LastChanceExceptionHandler(innerHandler);
         }
     }

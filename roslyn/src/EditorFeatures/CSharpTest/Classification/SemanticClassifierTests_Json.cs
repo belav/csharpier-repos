@@ -42,9 +42,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Operator("-"),
                 Json.Keyword("Infinity"),
                 Json.Punctuation(","),
-                Json.PropertyName("""
+                Json.PropertyName(
+                    """
                     ""baz""
-                    """),
+                    """
+                ),
                 Json.Punctuation(":"),
                 Json.Keyword("true"),
                 Json.Object("}"),
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(","),
                 Json.String("'str'"),
                 Json.Array("]"),
-                Json.Comment("// comment"));
+                Json.Comment("// comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -126,9 +130,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Operator("-"),
                 Json.Keyword("Infinity"),
                 Json.Punctuation(","),
-                Json.PropertyName("""
+                Json.PropertyName(
+                    """
                     ""baz""
-                    """),
+                    """
+                ),
                 Json.Punctuation(":"),
                 Json.Keyword("true"),
                 Json.Punctuation(","),
@@ -146,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(","),
                 Json.String("'str'"),
                 Json.Array("]"),
-                Json.Comment("// comment"));
+                Json.Comment("// comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -161,9 +168,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """;
-            await TestAsync(input,
-                testHost,
-                Keyword("var"));
+            await TestAsync(input, testHost, Keyword("var"));
         }
 
         [Theory, CombinatorialData]
@@ -178,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """;
-            await TestAsync(input,
+            await TestAsync(
+                input,
                 testHost,
                 Keyword("var"),
                 Json.Array("["),
@@ -191,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Object("}"),
                 Json.Punctuation(","),
                 Json.Number("3"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -199,18 +206,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
+                    using System.Diagnostics.CodeAnalysis;
 
-                class Program
-                {
-                    [StringSyntax(StringSyntaxAttribute.Json)]
-                    private string field;
-                    void Goo()
+                    class Program
                     {
-                        [|this.field = @"[{ 'goo': 0}]";|]
+                        [StringSyntax(StringSyntaxAttribute.Json)]
+                        private string field;
+                        void Goo()
+                        {
+                            [|this.field = @"[{ 'goo': 0}]";|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Field("field"),
                 Json.Array("["),
@@ -219,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -227,18 +235,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
+                    using System.Diagnostics.CodeAnalysis;
 
-                class Program
-                {
-                    [StringSyntax(StringSyntaxAttribute.Json)]
-                    private string Prop { get; set; }
-                    void Goo()
+                    class Program
                     {
-                        [|this.Prop = @"[{ 'goo': 0}]";|]
+                        [StringSyntax(StringSyntaxAttribute.Json)]
+                        private string Prop { get; set; }
+                        void Goo()
+                        {
+                            [|this.Prop = @"[{ 'goo': 0}]";|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Property("Prop"),
                 Json.Array("["),
@@ -247,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -255,20 +264,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                using System.Diagnostics.CodeAnalysis;
+                    using System.Diagnostics.CodeAnalysis;
 
-                class Program
-                {
-                    private void M([StringSyntax(StringSyntaxAttribute.Json)] string p)
+                    class Program
                     {
-                    }
+                        private void M([StringSyntax(StringSyntaxAttribute.Json)] string p)
+                        {
+                        }
 
-                    void Goo()
-                    {
-                        [|M(@"[{ 'goo': 0}]");|]
+                        void Goo()
+                        {
+                            [|M(@"[{ 'goo': 0}]");|]
+                        }
                     }
-                }
-                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Json.Array("["),
@@ -277,31 +286,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Punctuation(":"),
                 Json.Number("0"),
                 Json.Object("}"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
         [WorkItem("https://github.com/dotnet/roslyn/issues/69237")]
-        public async Task TestJsonOnApiWithStringSyntaxAttribute_PropertyInitializer(TestHost testHost)
+        public async Task TestJsonOnApiWithStringSyntaxAttribute_PropertyInitializer(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """"
-                using System.Diagnostics.CodeAnalysis;
+                    using System.Diagnostics.CodeAnalysis;
 
-                public sealed record Foo
-                {
-                    [StringSyntax(StringSyntaxAttribute.Json)]
-                    public required string Bar { get; set; }
-                }
-
-                class Program
-                {
-                    void Goo()
+                    public sealed record Foo
                     {
-                        var f = new Foo { [|Bar = """[1, 2, 3]"""|] };
+                        [StringSyntax(StringSyntaxAttribute.Json)]
+                        public required string Bar { get; set; }
                     }
-                }
-                """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+
+                    class Program
+                    {
+                        void Goo()
+                        {
+                            var f = new Foo { [|Bar = """[1, 2, 3]"""|] };
+                        }
+                    }
+                    """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Property("Bar"),
                 Json.Array("["),
@@ -310,7 +322,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Number("2"),
                 Json.Punctuation(","),
                 Json.Number("3"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -319,23 +332,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                using System.Diagnostics.CodeAnalysis;
+                    using System.Diagnostics.CodeAnalysis;
 
-                public sealed record Foo
-                {
-                    [StringSyntax(StringSyntaxAttribute.Json)]
-                    public required string Bar { get; set; }
-                }
-
-                class Program
-                {
-                    void Goo()
+                    public sealed record Foo
                     {
-                        var f = new Foo { Bar =  "" };
-                        f = f with { [|Bar = """[1, 2, 3]"""|] };
+                        [StringSyntax(StringSyntaxAttribute.Json)]
+                        public required string Bar { get; set; }
                     }
-                }
-                """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+
+                    class Program
+                    {
+                        void Goo()
+                        {
+                            var f = new Foo { Bar =  "" };
+                            f = f with { [|Bar = """[1, 2, 3]"""|] };
+                        }
+                    }
+                    """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Property("Bar"),
                 Json.Array("["),
@@ -344,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Json.Number("2"),
                 Json.Punctuation(","),
                 Json.Number("3"),
-                Json.Array("]"));
+                Json.Array("]")
+            );
         }
     }
 }

@@ -229,17 +229,27 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InvalidNumberOfIndexes()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                dynamic d = new DynamicPageDataDictionary<dynamic>(new PageDataDictionary<dynamic>());
-                d[1, 2] = 3;
-            }, WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    dynamic d = new DynamicPageDataDictionary<dynamic>(
+                        new PageDataDictionary<dynamic>()
+                    );
+                    d[1, 2] = 3;
+                },
+                WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+            );
 
-            Assert.Throws<ArgumentException>(() =>
-            {
-                dynamic d = new DynamicPageDataDictionary<dynamic>(new PageDataDictionary<dynamic>());
-                var x = d[1, 2];
-            }, WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    dynamic d = new DynamicPageDataDictionary<dynamic>(
+                        new PageDataDictionary<dynamic>()
+                    );
+                    var x = d[1, 2];
+                },
+                WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+            );
         }
     }
 }

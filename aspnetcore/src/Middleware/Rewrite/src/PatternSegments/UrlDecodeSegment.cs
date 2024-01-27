@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
-internal sealed class UrlDecodeSegment: PatternSegment
+internal sealed class UrlDecodeSegment : PatternSegment
 {
     private readonly Pattern _pattern;
 
@@ -14,7 +14,11 @@ internal sealed class UrlDecodeSegment: PatternSegment
         _pattern = pattern;
     }
 
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var oldBuilder = context.Builder;
         // PERF

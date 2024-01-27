@@ -25,7 +25,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected readonly int arity;
         protected readonly bool mangleName;
 
-        private MissingMetadataTypeSymbol(string name, int arity, bool mangleName, TupleExtraData? tupleData = null)
+        private MissingMetadataTypeSymbol(
+            string name,
+            int arity,
+            bool mangleName,
+            TupleExtraData? tupleData = null
+        )
             : base(tupleData)
         {
             RoslynDebug.Assert(name != null);
@@ -42,10 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool MangleName
         {
-            get
-            {
-                return mangleName;
-            }
+            get { return mangleName; }
         }
 
         internal sealed override bool IsFileLocal => false;
@@ -65,7 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 AssemblySymbol containingAssembly = this.ContainingAssembly;
 
-                // The Dev10 C# compiler produces errors based on what it was trying to do when 
+                // The Dev10 C# compiler produces errors based on what it was trying to do when
                 // the type could not be found. For example, if it could not resolve a base class
                 // then it would report:
                 //
@@ -77,7 +79,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (containingAssembly?.IsMissing == true)
                 {
                     // error CS0012: The type 'Blah' is defined in an assembly that is not referenced. You must add a reference to assembly 'Goo'.
-                    return new CSDiagnosticInfo(ErrorCode.ERR_NoTypeDef, this, containingAssembly.Identity);
+                    return new CSDiagnosticInfo(
+                        ErrorCode.ERR_NoTypeDef,
+                        this,
+                        containingAssembly.Identity
+                    );
                 }
                 else
                 {
@@ -86,7 +92,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (containingModule?.IsMissing == true)
                     {
                         // It looks like required module wasn't added to the compilation.
-                        return new CSDiagnosticInfo(ErrorCode.ERR_NoTypeDefFromModule, this, containingModule.Name);
+                        return new CSDiagnosticInfo(
+                            ErrorCode.ERR_NoTypeDefFromModule,
+                            this,
+                            containingModule.Name
+                        );
                     }
 
                     // Both the containing assembly and the module were resolved, but the type isn't.
@@ -108,7 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             // The usage of C in Beta will be redirected to refer to the source assembly.
                             // If C is not in that source assembly then we give the following warning:
 
-                            // CS7068: Reference to type 'C' claims it is defined in this assembly, but it is not defined in source or any added modules 
+                            // CS7068: Reference to type 'C' claims it is defined in this assembly, but it is not defined in source or any added modules
                             return new CSDiagnosticInfo(ErrorCode.ERR_MissingTypeInSource, this);
                         }
                         else
@@ -118,7 +128,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             // lacks the type C:
 
                             // error CS7069: Reference to type 'C' claims it is defined in 'Alpha', but it could not be found
-                            return new CSDiagnosticInfo(ErrorCode.ERR_MissingTypeInAssembly, this, containingAssembly.Name);
+                            return new CSDiagnosticInfo(
+                                ErrorCode.ERR_MissingTypeInAssembly,
+                                this,
+                                containingAssembly.Name
+                            );
                         }
                     }
                     else if (ContainingType is ErrorTypeSymbol { ErrorInfo: { } info })
@@ -150,50 +164,102 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             /// </summary>
             private int _lazyTypeId;
 
-            public TopLevel(ModuleSymbol module, string @namespace, string name, int arity, bool mangleName)
-                : this(module, @namespace, name, arity, mangleName, errorInfo: null, isNativeInt: false, containingNamespace: null, typeId: -1, tupleData: null)
-            {
-            }
+            public TopLevel(
+                ModuleSymbol module,
+                string @namespace,
+                string name,
+                int arity,
+                bool mangleName
+            )
+                : this(
+                    module,
+                    @namespace,
+                    name,
+                    arity,
+                    mangleName,
+                    errorInfo: null,
+                    isNativeInt: false,
+                    containingNamespace: null,
+                    typeId: -1,
+                    tupleData: null
+                ) { }
 
-            public TopLevel(ModuleSymbol module, ref MetadataTypeName fullName, DiagnosticInfo? errorInfo = null)
-                : this(module, ref fullName, -1, errorInfo)
-            {
-            }
+            public TopLevel(
+                ModuleSymbol module,
+                ref MetadataTypeName fullName,
+                DiagnosticInfo? errorInfo = null
+            )
+                : this(module, ref fullName, -1, errorInfo) { }
 
-            public TopLevel(ModuleSymbol module, ref MetadataTypeName fullName, SpecialType specialType, DiagnosticInfo? errorInfo = null)
-                : this(module, ref fullName, (int)specialType, errorInfo)
-            {
-            }
+            public TopLevel(
+                ModuleSymbol module,
+                ref MetadataTypeName fullName,
+                SpecialType specialType,
+                DiagnosticInfo? errorInfo = null
+            )
+                : this(module, ref fullName, (int)specialType, errorInfo) { }
 
-            public TopLevel(ModuleSymbol module, ref MetadataTypeName fullName, WellKnownType wellKnownType, DiagnosticInfo? errorInfo = null)
-                : this(module, ref fullName, (int)wellKnownType, errorInfo)
-            {
-            }
+            public TopLevel(
+                ModuleSymbol module,
+                ref MetadataTypeName fullName,
+                WellKnownType wellKnownType,
+                DiagnosticInfo? errorInfo = null
+            )
+                : this(module, ref fullName, (int)wellKnownType, errorInfo) { }
 
-            private TopLevel(ModuleSymbol module, ref MetadataTypeName fullName, int typeId, DiagnosticInfo? errorInfo)
-                : this(module, ref fullName, fullName.ForcedArity == -1 || fullName.ForcedArity == fullName.InferredArity, errorInfo, typeId)
-            {
-            }
+            private TopLevel(
+                ModuleSymbol module,
+                ref MetadataTypeName fullName,
+                int typeId,
+                DiagnosticInfo? errorInfo
+            )
+                : this(
+                    module,
+                    ref fullName,
+                    fullName.ForcedArity == -1 || fullName.ForcedArity == fullName.InferredArity,
+                    errorInfo,
+                    typeId
+                ) { }
 
-            private TopLevel(ModuleSymbol module, ref MetadataTypeName fullName, bool mangleName, DiagnosticInfo? errorInfo, int typeId)
-                : this(module, fullName.NamespaceName,
-                       mangleName ? fullName.UnmangledTypeName : fullName.TypeName,
-                       mangleName ? fullName.InferredArity : fullName.ForcedArity,
-                       mangleName,
-                       isNativeInt: false,
-                       errorInfo,
-                       containingNamespace: null,
-                       typeId,
-                       tupleData: null)
-            {
-            }
+            private TopLevel(
+                ModuleSymbol module,
+                ref MetadataTypeName fullName,
+                bool mangleName,
+                DiagnosticInfo? errorInfo,
+                int typeId
+            )
+                : this(
+                    module,
+                    fullName.NamespaceName,
+                    mangleName ? fullName.UnmangledTypeName : fullName.TypeName,
+                    mangleName ? fullName.InferredArity : fullName.ForcedArity,
+                    mangleName,
+                    isNativeInt: false,
+                    errorInfo,
+                    containingNamespace: null,
+                    typeId,
+                    tupleData: null
+                ) { }
 
-            private TopLevel(ModuleSymbol module, string @namespace, string name, int arity, bool mangleName, bool isNativeInt, DiagnosticInfo? errorInfo, NamespaceSymbol? containingNamespace, int typeId, TupleExtraData? tupleData)
+            private TopLevel(
+                ModuleSymbol module,
+                string @namespace,
+                string name,
+                int arity,
+                bool mangleName,
+                bool isNativeInt,
+                DiagnosticInfo? errorInfo,
+                NamespaceSymbol? containingNamespace,
+                int typeId,
+                TupleExtraData? tupleData
+            )
                 : base(name, arity, mangleName, tupleData)
             {
                 RoslynDebug.Assert((object)module != null);
                 RoslynDebug.Assert(@namespace != null);
-                RoslynDebug.Assert(typeId == -1 || typeId == (int)SpecialType.None || arity == 0 || mangleName);
+                RoslynDebug.Assert(
+                    typeId == -1 || typeId == (int)SpecialType.None || arity == 0 || mangleName
+                );
 
                 _namespaceName = @namespace;
                 _containingModule = module;
@@ -205,7 +271,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
             {
-                return new TopLevel(_containingModule, _namespaceName, name, arity, mangleName, _isNativeInt, _lazyErrorInfo, _lazyContainingNamespace, _lazyTypeId, newData);
+                return new TopLevel(
+                    _containingModule,
+                    _namespaceName,
+                    name,
+                    arity,
+                    mangleName,
+                    _isNativeInt,
+                    _lazyErrorInfo,
+                    _lazyContainingNamespace,
+                    _lazyTypeId,
+                    newData
+                );
             }
 
             /// <summary>
@@ -219,18 +296,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override ModuleSymbol ContainingModule
             {
-                get
-                {
-                    return _containingModule;
-                }
+                get { return _containingModule; }
             }
 
             public override AssemblySymbol ContainingAssembly
             {
-                get
-                {
-                    return _containingModule.ContainingAssembly;
-                }
+                get { return _containingModule.ContainingAssembly; }
             }
 
             public override Symbol ContainingSymbol
@@ -250,7 +321,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             {
                                 NamespaceSymbol? newContainer = null;
 
-                                foreach (NamespaceOrTypeSymbol symbol in container.GetMembers(namespaces[i]))
+                                foreach (
+                                    NamespaceOrTypeSymbol symbol in container.GetMembers(
+                                        namespaces[i]
+                                    )
+                                )
                                 {
                                     if (symbol.Kind == SymbolKind.Namespace) // VB should also check name casing.
                                     {
@@ -291,10 +366,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         AssemblySymbol containingAssembly = _containingModule.ContainingAssembly;
 
-                        if ((Arity == 0 || MangleName) && (object)containingAssembly != null && ReferenceEquals(containingAssembly, containingAssembly.CorLibrary) && _containingModule.Ordinal == 0)
+                        if (
+                            (Arity == 0 || MangleName)
+                            && (object)containingAssembly != null
+                            && ReferenceEquals(containingAssembly, containingAssembly.CorLibrary)
+                            && _containingModule.Ordinal == 0
+                        )
                         {
-                            // Check the name 
-                            string emittedName = MetadataHelpers.BuildQualifiedName(_namespaceName, MetadataName);
+                            // Check the name
+                            string emittedName = MetadataHelpers.BuildQualifiedName(
+                                _namespaceName,
+                                MetadataName
+                            );
                             typeId = SpecialTypes.GetTypeFromMetadataName(emittedName);
                         }
 
@@ -310,7 +393,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get
                 {
                     int typeId = TypeId;
-                    return (typeId >= (int)WellKnownType.First) ? SpecialType.None : (SpecialType)_lazyTypeId;
+                    return (typeId >= (int)WellKnownType.First)
+                        ? SpecialType.None
+                        : (SpecialType)_lazyTypeId;
                 }
             }
 
@@ -320,9 +405,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (_lazyErrorInfo == null)
                     {
-                        var errorInfo = this.TypeId != (int)SpecialType.None ?
-                            new CSDiagnosticInfo(ErrorCode.ERR_PredefinedTypeNotFound, MetadataHelpers.BuildQualifiedName(_namespaceName, MetadataName)) :
-                            base.ErrorInfo;
+                        var errorInfo =
+                            this.TypeId != (int)SpecialType.None
+                                ? new CSDiagnosticInfo(
+                                    ErrorCode.ERR_PredefinedTypeNotFound,
+                                    MetadataHelpers.BuildQualifiedName(_namespaceName, MetadataName)
+                                )
+                                : base.ErrorInfo;
                         Interlocked.CompareExchange(ref _lazyErrorInfo, errorInfo, null);
                     }
                     return _lazyErrorInfo;
@@ -337,21 +426,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return (int)Microsoft.CodeAnalysis.SpecialType.System_Object;
                 }
 
-                return Hash.Combine(MetadataName, Hash.Combine(_containingModule, Hash.Combine(_namespaceName, arity)));
+                return Hash.Combine(
+                    MetadataName,
+                    Hash.Combine(_containingModule, Hash.Combine(_namespaceName, arity))
+                );
             }
 
-            internal sealed override NamedTypeSymbol AsNativeInteger() => AsNativeInteger(asNativeInt: true);
+            internal sealed override NamedTypeSymbol AsNativeInteger() =>
+                AsNativeInteger(asNativeInt: true);
 
             private TopLevel AsNativeInteger(bool asNativeInt)
             {
-                Debug.Assert(this.SpecialType == SpecialType.System_IntPtr || this.SpecialType == SpecialType.System_UIntPtr);
+                Debug.Assert(
+                    this.SpecialType == SpecialType.System_IntPtr
+                        || this.SpecialType == SpecialType.System_UIntPtr
+                );
 
                 if (asNativeInt == _isNativeInt)
                 {
                     return this;
                 }
 
-                var other = new TopLevel(_containingModule, _namespaceName, name, arity, mangleName, isNativeInt: asNativeInt, _lazyErrorInfo, _lazyContainingNamespace, _lazyTypeId, TupleData);
+                var other = new TopLevel(
+                    _containingModule,
+                    _namespaceName,
+                    name,
+                    arity,
+                    mangleName,
+                    isNativeInt: asNativeInt,
+                    _lazyErrorInfo,
+                    _lazyContainingNamespace,
+                    _lazyTypeId,
+                    TupleData
+                );
 
                 NativeIntegerTypeSymbol.VerifyEquality(this, other);
                 Debug.Assert(other.SpecialType == this.SpecialType);
@@ -361,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal sealed override bool IsNativeIntegerWrapperType => _isNativeInt;
 
-            internal sealed override NamedTypeSymbol? NativeIntegerUnderlyingType => _isNativeInt ? AsNativeInteger(asNativeInt: false) : null;
+            internal sealed override NamedTypeSymbol? NativeIntegerUnderlyingType =>
+                _isNativeInt ? AsNativeInteger(asNativeInt: false) : null;
 
             internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
             {
@@ -371,10 +479,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 // if ignoring dynamic, then treat dynamic the same as the type 'object'
-                if ((comparison & TypeCompareKind.IgnoreDynamic) != 0 &&
-                    (object)t2 != null &&
-                    t2.TypeKind == TypeKind.Dynamic &&
-                    this.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object)
+                if (
+                    (comparison & TypeCompareKind.IgnoreDynamic) != 0
+                    && (object)t2 != null
+                    && t2.TypeKind == TypeKind.Dynamic
+                    && this.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
+                )
                 {
                     return true;
                 }
@@ -385,16 +495,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return false;
                 }
 
-                if ((comparison & TypeCompareKind.IgnoreNativeIntegers) == 0 &&
-                    _isNativeInt != other._isNativeInt)
+                if (
+                    (comparison & TypeCompareKind.IgnoreNativeIntegers) == 0
+                    && _isNativeInt != other._isNativeInt
+                )
                 {
                     return false;
                 }
 
-                return string.Equals(MetadataName, other.MetadataName, StringComparison.Ordinal) &&
-                    arity == other.arity &&
-                    string.Equals(_namespaceName, other.NamespaceName, StringComparison.Ordinal) &&
-                    _containingModule.Equals(other._containingModule);
+                return string.Equals(MetadataName, other.MetadataName, StringComparison.Ordinal)
+                    && arity == other.arity
+                    && string.Equals(_namespaceName, other.NamespaceName, StringComparison.Ordinal)
+                    && _containingModule.Equals(other._containingModule);
             }
         }
 
@@ -414,24 +526,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             public Nested(NamedTypeSymbol containingType, ref MetadataTypeName emittedName)
-                : this(containingType, ref emittedName, emittedName.ForcedArity == -1 || emittedName.ForcedArity == emittedName.InferredArity)
-            {
-            }
+                : this(
+                    containingType,
+                    ref emittedName,
+                    emittedName.ForcedArity == -1
+                        || emittedName.ForcedArity == emittedName.InferredArity
+                ) { }
 
-            private Nested(NamedTypeSymbol containingType, ref MetadataTypeName emittedName, bool mangleName)
-                : this(containingType,
-                       mangleName ? emittedName.UnmangledTypeName : emittedName.TypeName,
-                       mangleName ? emittedName.InferredArity : emittedName.ForcedArity,
-                       mangleName)
-            {
-            }
+            private Nested(
+                NamedTypeSymbol containingType,
+                ref MetadataTypeName emittedName,
+                bool mangleName
+            )
+                : this(
+                    containingType,
+                    mangleName ? emittedName.UnmangledTypeName : emittedName.TypeName,
+                    mangleName ? emittedName.InferredArity : emittedName.ForcedArity,
+                    mangleName
+                ) { }
 
             public override Symbol ContainingSymbol
             {
-                get
-                {
-                    return _containingType;
-                }
+                get { return _containingType; }
             }
 
             public override SpecialType SpecialType
@@ -460,9 +576,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 var other = t2 as Nested;
-                return (object?)other != null && string.Equals(MetadataName, other.MetadataName, StringComparison.Ordinal) &&
-                    arity == other.arity &&
-                    _containingType.Equals(other._containingType, comparison);
+                return (object?)other != null
+                    && string.Equals(MetadataName, other.MetadataName, StringComparison.Ordinal)
+                    && arity == other.arity
+                    && _containingType.Equals(other._containingType, comparison);
             }
         }
     }

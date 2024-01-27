@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -22,7 +22,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="U"></typeparam>
     internal struct Pair<T, U>
     {
-
         // The first and second bits of data.
         internal T m_first;
         internal U m_second;
@@ -52,6 +51,5 @@ namespace System.Linq.Parallel
             get { return m_second; }
             set { m_second = value; }
         }
-
     }
 }

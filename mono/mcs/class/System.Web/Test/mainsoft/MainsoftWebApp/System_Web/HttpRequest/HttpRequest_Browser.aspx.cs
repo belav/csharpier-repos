@@ -35,114 +35,122 @@ using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpRequest_Browser
-		: GHTBaseWeb 
-	{
+    public class HttpRequest_Browser : GHTBaseWeb
+    {
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            // ===================================
+            // testing if the Browser object is set
+            // ===================================
+            this.GHTSubTestBegin("Request.Browser1");
+            try
+            {
+                if (this.Request.Browser == null)
+                {
+                    this.GHTSubTestAddResult("Failed");
+                }
+                else
+                {
+                    this.GHTSubTestAddResult("Success");
+                }
+            }
+            catch (Exception ex)
+            {
+                this.GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
+            this.GHTSubTestEnd();
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			// ===================================
-			// testing if the Browser object is set
-			// ===================================
-			this.GHTSubTestBegin("Request.Browser1");
-			try
-			{
-				if (this.Request.Browser == null)
-				{
-					this.GHTSubTestAddResult("Failed");
-				}
-				else
-				{
-					this.GHTSubTestAddResult("Success");
-				}
-			}
-			catch (Exception ex)
-			{
-				this.GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
-			this.GHTSubTestEnd();
+            // ===================================
+            // testing if the objects return is from the
+            // correct type
+            // ===================================
+            this.GHTSubTestBegin("Request.Browser2");
+            try
+            {
+                HttpBrowserCapabilities capabilities1 = this.Request.Browser;
+                this.GHTSubTestAddResult("success");
+            }
+            catch (Exception ex)
+            {
+                this.GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
+            this.GHTSubTestEnd();
 
-			// ===================================
-			// testing if the objects return is from the 
-			// correct type
-			// ===================================
-			this.GHTSubTestBegin("Request.Browser2");
-			try
-			{
-				HttpBrowserCapabilities capabilities1 = this.Request.Browser;
-				this.GHTSubTestAddResult("success");
-			}
-			catch (Exception ex)
-			{
-				this.GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
-			this.GHTSubTestEnd();
+            // ===================================
+            // testing if the Browser contains the
+            // right context. This is basic testing
+            // a more rigorous testing needs to be included
+            // in the HTTPBrowserCapabilities object
+            // ===================================
+            GHTSubTestBegin("Request.Browser3");
+            try
+            {
+                HttpBrowserCapabilities capabilities2 = this.Request.Browser;
+                this.GHTSubTestAddResult(capabilities2.Browser);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			// ===================================
-			// testing if the Browser contains the
-			// right context. This is basic testing
-			// a more rigorous testing needs to be included
-			// in the HTTPBrowserCapabilities object
-			// ===================================
-			GHTSubTestBegin("Request.Browser3");
-			try
-			{
-				HttpBrowserCapabilities capabilities2 = this.Request.Browser;
-				this.GHTSubTestAddResult(capabilities2.Browser);
-			}
-			catch (Exception ex)
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
+            GHTSubTestEnd();
 
-			GHTSubTestEnd();
+            // ===================================
+            // testing if the Browser contains the
+            // right context. This is basic testing
+            // a more rigorous testing needs to be included
+            // in the HTTPBrowserCapabilities object
+            // ===================================
+            GHTSubTestBegin("Request.Browser4");
+            try
+            {
+                HttpBrowserCapabilities brw = Request.Browser;
+                GHTSubTestAddResult(
+                    brw.MajorVersion.ToString() + "." + brw.MinorVersion.ToString()
+                );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			// ===================================
-			// testing if the Browser contains the
-			// right context. This is basic testing
-			// a more rigorous testing needs to be included
-			// in the HTTPBrowserCapabilities object
-			// ===================================
-			GHTSubTestBegin("Request.Browser4");
-			try
-			{
-				HttpBrowserCapabilities brw = Request.Browser;
-				GHTSubTestAddResult(brw.MajorVersion.ToString() + "." + brw.MinorVersion.ToString());
-			}
-			catch (Exception ex)
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
+            GHTSubTestEnd();
+            GHTTestEnd();
+        }
 
-			GHTSubTestEnd();
-			GHTTestEnd();
-		}
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e)
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+    }
 }

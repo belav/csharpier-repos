@@ -2,13 +2,17 @@
 
 using System;
 
-class EntryPoint {
-	delegate void EventHandler (object sender);
-	static event EventHandler FooEvent;
-	static void bar_f (object sender) {}
-	public static void Main () {
-		if (FooEvent != null)
-			FooEvent (null);
-		object bar = new EventHandler (bar_f);
-	}
+class EntryPoint
+{
+    delegate void EventHandler(object sender);
+    static event EventHandler FooEvent;
+
+    static void bar_f(object sender) { }
+
+    public static void Main()
+    {
+        if (FooEvent != null)
+            FooEvent(null);
+        object bar = new EventHandler(bar_f);
+    }
 }

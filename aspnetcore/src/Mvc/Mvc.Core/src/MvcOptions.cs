@@ -25,7 +25,8 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     internal const int DefaultMaxModelBindingCollectionSize = FormReader.DefaultValueCountLimit;
     internal const int DefaultMaxModelBindingRecursionDepth = 32;
 
-    private readonly IReadOnlyList<ICompatibilitySwitch> _switches = Array.Empty<ICompatibilitySwitch>();
+    private readonly IReadOnlyList<ICompatibilitySwitch> _switches =
+        Array.Empty<ICompatibilitySwitch>();
 
     private int _maxModelStateErrors = ModelStateDictionary.DefaultMaxAllowedErrors;
     private int _maxModelBindingCollectionSize = DefaultMaxModelBindingCollectionSize;
@@ -370,7 +371,8 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     /// <value>Defaults to <c>8192</c>.</value>
     public int MaxIAsyncEnumerableBufferLimit { get; set; } = 8192;
 
-    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() => _switches.GetEnumerator();
+    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() =>
+        _switches.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _switches.GetEnumerator();
 }

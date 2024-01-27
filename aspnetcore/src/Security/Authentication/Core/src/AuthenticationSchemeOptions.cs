@@ -19,8 +19,7 @@ public class AuthenticationSchemeOptions
     /// Checks that the options are valid for a specific scheme
     /// </summary>
     /// <param name="scheme">The scheme being validated.</param>
-    public virtual void Validate(string scheme)
-        => Validate();
+    public virtual void Validate(string scheme) => Validate();
 
     /// <summary>
     /// Gets or sets the issuer that should be used for any claims that are created

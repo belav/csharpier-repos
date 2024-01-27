@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-#pragma warning disable 436 // SuppressUnmanagedCodeSecurityAttribute defined in source and mscorlib 
+#pragma warning disable 436 // SuppressUnmanagedCodeSecurityAttribute defined in source and mscorlib
 
 using System;
 using System.Runtime.InteropServices;
@@ -16,7 +16,7 @@ namespace Microsoft.DiaSymReader
     [SuppressUnmanagedCodeSecurity]
     internal unsafe interface IMetadataEmit
     {
-        // SymWriter doesn't use any methods from this interface except for GetTokenFromSig, which is only called when 
+        // SymWriter doesn't use any methods from this interface except for GetTokenFromSig, which is only called when
         // DefineLocalVariable(2) and DefineConstant(2) don't specify signature token, or the token is nil.
 
         void __SetModuleProps();

@@ -23,7 +23,8 @@ internal static class TypeHelper
     {
         if (type is not null)
         {
-            return Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute)) || IsCompilerGeneratedType(type.DeclaringType);
+            return Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute))
+                || IsCompilerGeneratedType(type.DeclaringType);
         }
         return false;
     }
@@ -35,14 +36,18 @@ internal static class TypeHelper
     /// <returns><see langword="true" /> if <paramref name="method"/> is compiler generated.</returns>
     private static bool IsCompilerGeneratedMethod(MethodInfo method)
     {
-        return Attribute.IsDefined(method, typeof(CompilerGeneratedAttribute)) || IsCompilerGeneratedType(method.DeclaringType);
+        return Attribute.IsDefined(method, typeof(CompilerGeneratedAttribute))
+            || IsCompilerGeneratedType(method.DeclaringType);
     }
 
     /// <summary>
     /// Parses generated local function name out of a generated method name. This code is a stop-gap and exists to address the issues with extracting
     /// original method names from generated local functions. See https://github.com/dotnet/roslyn/issues/55651 for more info.
     /// </summary>
-    private static bool TryParseLocalFunctionName(string generatedName, [NotNullWhen(true)] out string? originalName)
+    private static bool TryParseLocalFunctionName(
+        string generatedName,
+        [NotNullWhen(true)] out string? originalName
+    )
     {
         originalName = null;
 
@@ -60,7 +65,10 @@ internal static class TypeHelper
     /// <summary>
     /// Tries to get non-compiler-generated name of function. This parses generated local function names out of a generated method name if possible.
     /// </summary>
-    internal static bool TryGetNonCompilerGeneratedMethodName(MethodInfo method, [NotNullWhen(true)] out string? originalName)
+    internal static bool TryGetNonCompilerGeneratedMethodName(
+        MethodInfo method,
+        [NotNullWhen(true)] out string? originalName
+    )
     {
         var methodName = method.Name;
 
@@ -73,4 +81,3 @@ internal static class TypeHelper
         return TryParseLocalFunctionName(methodName, out originalName);
     }
 }
-

@@ -29,9 +29,6 @@
 
 namespace System.Diagnostics.Tracing
 {
-	[AttributeUsageAttribute (AttributeTargets.Method)]
-	public sealed class NonEventAttribute : Attribute
-	{
-	}
+    [AttributeUsageAttribute(AttributeTargets.Method)]
+    public sealed class NonEventAttribute : Attribute { }
 }
-

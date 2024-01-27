@@ -73,7 +73,10 @@ namespace System.Linq
             return element;
         }
 
-        public static TSource? ElementAtOrDefault<TSource>(this IEnumerable<TSource> source, int index)
+        public static TSource? ElementAtOrDefault<TSource>(
+            this IEnumerable<TSource> source,
+            int index
+        )
         {
             if (source == null)
             {
@@ -104,7 +107,10 @@ namespace System.Linq
         /// <para>If the type of <paramref name="source" /> implements <see cref="IList{T}" />, that implementation is used to obtain the element at the specified index. Otherwise, this method obtains the specified element.</para>
         /// <para>The default value for reference and nullable types is <see langword="null" />.</para>
         /// </remarks>
-        public static TSource? ElementAtOrDefault<TSource>(this IEnumerable<TSource> source, Index index)
+        public static TSource? ElementAtOrDefault<TSource>(
+            this IEnumerable<TSource> source,
+            Index index
+        )
         {
             if (source == null)
             {
@@ -125,7 +131,11 @@ namespace System.Linq
             return element;
         }
 
-        private static bool TryGetElement<TSource>(IEnumerable<TSource> source, int index, [MaybeNullWhen(false)] out TSource element)
+        private static bool TryGetElement<TSource>(
+            IEnumerable<TSource> source,
+            int index,
+            [MaybeNullWhen(false)] out TSource element
+        )
         {
             Debug.Assert(source != null);
 
@@ -148,7 +158,11 @@ namespace System.Linq
             return false;
         }
 
-        private static bool TryGetElementFromEnd<TSource>(IEnumerable<TSource> source, int indexFromEnd, [MaybeNullWhen(false)] out TSource element)
+        private static bool TryGetElementFromEnd<TSource>(
+            IEnumerable<TSource> source,
+            int indexFromEnd,
+            [MaybeNullWhen(false)] out TSource element
+        )
         {
             Debug.Assert(source != null);
 

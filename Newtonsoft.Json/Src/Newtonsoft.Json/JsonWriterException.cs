@@ -47,9 +47,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonWriterException"/> class.
         /// </summary>
-        public JsonWriterException()
-        {
-        }
+        public JsonWriterException() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonWriterException"/> class
@@ -57,9 +55,7 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public JsonWriterException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonWriterException"/> class
@@ -68,9 +64,7 @@ namespace Newtonsoft.Json
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
         public JsonWriterException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
         /// <summary>
@@ -81,9 +75,7 @@ namespace Newtonsoft.Json
         /// <exception cref="ArgumentNullException">The <paramref name="info"/> parameter is <c>null</c>.</exception>
         /// <exception cref="SerializationException">The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).</exception>
         public JsonWriterException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 #endif
 
         /// <summary>

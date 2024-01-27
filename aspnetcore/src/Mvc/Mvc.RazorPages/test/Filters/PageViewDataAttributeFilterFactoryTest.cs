@@ -14,8 +14,8 @@ public class PageViewDataAttributeFilterFactoryTest
         // Arrange
         var properties = new LifecycleProperty[]
         {
-                new LifecycleProperty(),
-                new LifecycleProperty(),
+            new LifecycleProperty(),
+            new LifecycleProperty(),
         };
         var filterFactory = new PageViewDataAttributeFilterFactory(properties);
 

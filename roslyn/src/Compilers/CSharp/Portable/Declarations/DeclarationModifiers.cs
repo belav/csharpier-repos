@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         Virtual = 1 << 17, // used for method binding
         Override = 1 << 18, // used for method binding
 
-        Indexer = 1 << 19, // not a real modifier, but used to record that indexer syntax was used. 
+        Indexer = 1 << 19, // not a real modifier, but used to record that indexer syntax was used.
 
         Async = 1 << 20,
         Ref = 1 << 21, // used only for structs
@@ -42,6 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         All = (1 << 25) - 1, // all modifiers
         Unset = 1 << 25, // used when a modifiers value hasn't yet been computed
 
-        AccessibilityMask = PrivateProtected | Private | Protected | Internal | ProtectedInternal | Public,
+        AccessibilityMask =
+            PrivateProtected | Private | Protected | Internal | ProtectedInternal | Public,
     }
 }

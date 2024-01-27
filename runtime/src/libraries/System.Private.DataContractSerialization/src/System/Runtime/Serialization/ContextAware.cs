@@ -24,12 +24,16 @@ namespace System.Runtime.Serialization
             _keepAlive = new ConditionalWeakTable<Type, DataContract>();
         }
 
-        public DataContract? GetItem(int index) => _contracts[index].strong ?? (_contracts[index].weak?.TryGetTarget(out DataContract? ret) == true ? ret : null);
+        public DataContract? GetItem(int index) =>
+            _contracts[index].strong
+            ?? (_contracts[index].weak?.TryGetTarget(out DataContract? ret) == true ? ret : null);
 
         public void SetItem(int index, DataContract dataContract)
         {
             // Check for unloadability to decide how to store the value
-            AssemblyLoadContext? alc = AssemblyLoadContext.GetLoadContext(dataContract.UnderlyingType.Assembly);
+            AssemblyLoadContext? alc = AssemblyLoadContext.GetLoadContext(
+                dataContract.UnderlyingType.Assembly
+            );
             if (alc == null || !alc.IsCollectible)
             {
                 _contracts[index].strong = dataContract;
@@ -47,13 +51,16 @@ namespace System.Runtime.Serialization
         }
     }
 
-    internal sealed class ContextAwareDictionary<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TValue>
+    internal sealed class ContextAwareDictionary<
+        TKey,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TValue
+    >
         where TKey : Type
         where TValue : class?
     {
         private readonly ConcurrentDictionary<TKey, TValue> _fastDictionary = new();
         private readonly ConditionalWeakTable<TKey, TValue> _collectibleTable = new();
-
 
         internal TValue GetOrAdd(TKey t, Func<TKey, TValue> f)
         {
@@ -84,7 +91,6 @@ namespace System.Runtime.Serialization
                     }
                 }
             }
-
             // Collectible load contexts should use the ConditionalWeakTable so they can be unloaded
             else
             {

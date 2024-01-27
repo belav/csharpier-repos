@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,52 +31,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Mono.CodeContracts.Rewrite {
+namespace Mono.CodeContracts.Rewrite
+{
+    public class RewriterResults
+    {
+        internal static RewriterResults Warning(string warning)
+        {
+            return new RewriterResults(new[] { warning }, null);
+        }
 
-	public class RewriterResults {
+        internal static RewriterResults Error(string error)
+        {
+            return new RewriterResults(null, new[] { error });
+        }
 
-		internal static RewriterResults Warning (string warning)
-		{
-			return new RewriterResults (new [] { warning }, null);
-		}
+        internal RewriterResults(ICollection<string> warnings, ICollection<string> errors)
+        {
+            this.warnings = warnings;
+            this.errors = errors;
+        }
 
-		internal static RewriterResults Error (string error)
-		{
-			return new RewriterResults (null, new [] { error });
-		}
+        private ICollection<string> warnings,
+            errors;
 
-		internal RewriterResults (ICollection<string> warnings, ICollection<string> errors)
-		{
-			this.warnings = warnings;
-			this.errors = errors;
-		}
+        public bool AnyWarnings
+        {
+            get { return this.warnings != null && this.warnings.Count > 0; }
+        }
 
-		private ICollection<string> warnings, errors;
+        public bool AnyErrors
+        {
+            get { return this.errors != null && this.errors.Count > 0; }
+        }
 
-		public bool AnyWarnings {
-			get {
-				return this.warnings != null && this.warnings.Count > 0;
-			}
-		}
+        public IEnumerable<string> Warnings
+        {
+            get { return this.warnings ?? Enumerable.Empty<string>(); }
+        }
 
-		public bool AnyErrors {
-			get {
-				return this.errors != null && this.errors.Count > 0;
-			}
-		}
-
-		public IEnumerable<string> Warnings {
-			get {
-				return this.warnings ?? Enumerable.Empty<string> ();
-			}
-		}
-
-		public IEnumerable<string> Errors {
-			get {
-				return this.errors ?? Enumerable.Empty<string> ();
-			}
-		}
-
-	}
-
+        public IEnumerable<string> Errors
+        {
+            get { return this.errors ?? Enumerable.Empty<string>(); }
+        }
+    }
 }

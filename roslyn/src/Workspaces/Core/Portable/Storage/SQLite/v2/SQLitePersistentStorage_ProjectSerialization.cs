@@ -15,14 +15,37 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
     internal partial class SQLitePersistentStorage
     {
-        protected override Task<bool> ChecksumMatchesAsync(ProjectKey projectKey, Project? project, string name, Checksum checksum, CancellationToken cancellationToken)
-            => _projectAccessor.ChecksumMatchesAsync(projectKey, name, checksum, cancellationToken);
+        protected override Task<bool> ChecksumMatchesAsync(
+            ProjectKey projectKey,
+            Project? project,
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        ) => _projectAccessor.ChecksumMatchesAsync(projectKey, name, checksum, cancellationToken);
 
-        protected override Task<Stream?> ReadStreamAsync(ProjectKey projectKey, Project? project, string name, Checksum? checksum, CancellationToken cancellationToken)
-            => _projectAccessor.ReadStreamAsync(projectKey, name, checksum, cancellationToken);
+        protected override Task<Stream?> ReadStreamAsync(
+            ProjectKey projectKey,
+            Project? project,
+            string name,
+            Checksum? checksum,
+            CancellationToken cancellationToken
+        ) => _projectAccessor.ReadStreamAsync(projectKey, name, checksum, cancellationToken);
 
-        protected override Task<bool> WriteStreamAsync(ProjectKey projectKey, Project? project, string name, Stream stream, Checksum? checksum, CancellationToken cancellationToken)
-            => _projectAccessor.WriteStreamAsync(projectKey, name, stream, checksum, cancellationToken);
+        protected override Task<bool> WriteStreamAsync(
+            ProjectKey projectKey,
+            Project? project,
+            string name,
+            Stream stream,
+            Checksum? checksum,
+            CancellationToken cancellationToken
+        ) =>
+            _projectAccessor.WriteStreamAsync(
+                projectKey,
+                name,
+                stream,
+                checksum,
+                cancellationToken
+            );
 
         private readonly record struct ProjectPrimaryKey(int ProjectPathId, int ProjectNameId);
 
@@ -30,15 +53,24 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// <see cref="Accessor{TKey, TDatabaseId}"/> responsible for storing and
         /// retrieving data from <see cref="ProjectDataTableName"/>.
         /// </summary>
-        private sealed class ProjectAccessor(SQLitePersistentStorage storage) : Accessor<ProjectKey, ProjectPrimaryKey>(Table.Project,
-                  storage,
-                  (ProjectPathIdColumnName, SQLiteIntegerType),
-                  (ProjectNameIdColumnName, SQLiteIntegerType))
+        private sealed class ProjectAccessor(SQLitePersistentStorage storage)
+            : Accessor<ProjectKey, ProjectPrimaryKey>(
+                Table.Project,
+                storage,
+                (ProjectPathIdColumnName, SQLiteIntegerType),
+                (ProjectNameIdColumnName, SQLiteIntegerType)
+            )
         {
-            protected override ProjectPrimaryKey? TryGetDatabaseKey(SqlConnection connection, ProjectKey projectKey, bool allowWrite)
-                => Storage.TryGetProjectPrimaryKey(connection, projectKey, allowWrite);
+            protected override ProjectPrimaryKey? TryGetDatabaseKey(
+                SqlConnection connection,
+                ProjectKey projectKey,
+                bool allowWrite
+            ) => Storage.TryGetProjectPrimaryKey(connection, projectKey, allowWrite);
 
-            protected override void BindAccessorSpecificPrimaryKeyParameters(SqlStatement statement, ProjectPrimaryKey primaryKey)
+            protected override void BindAccessorSpecificPrimaryKeyParameters(
+                SqlStatement statement,
+                ProjectPrimaryKey primaryKey
+            )
             {
                 statement.BindInt64Parameter(parameterIndex: 1, primaryKey.ProjectPathId);
                 statement.BindInt64Parameter(parameterIndex: 2, primaryKey.ProjectNameId);

@@ -26,24 +26,43 @@ namespace System.Net.NetworkInformation
         private readonly GatewayIPAddressInformationCollection _gatewayAddresses;
         private readonly InternalIPAddressCollection _dhcpServers;
 
-        internal SystemIPInterfaceProperties(in Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses)
+        internal SystemIPInterfaceProperties(
+            in Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses
+        )
         {
             _adapterFlags = ipAdapterAddresses.flags;
             _dnsSuffix = ipAdapterAddresses.DnsSuffix;
             _dnsEnabled = HostInformationPal.GetEnableDns();
-            _dynamicDnsEnabled = ((ipAdapterAddresses.flags & Interop.IpHlpApi.AdapterFlags.DnsEnabled) > 0);
+            _dynamicDnsEnabled = (
+                (ipAdapterAddresses.flags & Interop.IpHlpApi.AdapterFlags.DnsEnabled) > 0
+            );
 
-            _multicastAddresses = SystemMulticastIPAddressInformation.ToMulticastIpAddressInformationCollection(
-                Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressInformationCollection(ipAdapterAddresses.firstMulticastAddress));
-            _dnsAddresses = Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(ipAdapterAddresses.firstDnsServerAddress);
-            _anycastAddresses = Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressInformationCollection(
-                ipAdapterAddresses.firstAnycastAddress);
-            _unicastAddresses = SystemUnicastIPAddressInformation.MarshalUnicastIpAddressInformationCollection(
-                ipAdapterAddresses.firstUnicastAddress);
+            _multicastAddresses =
+                SystemMulticastIPAddressInformation.ToMulticastIpAddressInformationCollection(
+                    Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressInformationCollection(
+                        ipAdapterAddresses.firstMulticastAddress
+                    )
+                );
+            _dnsAddresses = Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(
+                ipAdapterAddresses.firstDnsServerAddress
+            );
+            _anycastAddresses =
+                Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressInformationCollection(
+                    ipAdapterAddresses.firstAnycastAddress
+                );
+            _unicastAddresses =
+                SystemUnicastIPAddressInformation.MarshalUnicastIpAddressInformationCollection(
+                    ipAdapterAddresses.firstUnicastAddress
+                );
             _winsServersAddresses = Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(
-                ipAdapterAddresses.firstWinsServerAddress);
-            _gatewayAddresses = SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection(
-                Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(ipAdapterAddresses.firstGatewayAddress));
+                ipAdapterAddresses.firstWinsServerAddress
+            );
+            _gatewayAddresses =
+                SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection(
+                    Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(
+                        ipAdapterAddresses.firstGatewayAddress
+                    )
+                );
 
             _dhcpServers = new InternalIPAddressCollection();
             if (ipAdapterAddresses.dhcpv4Server.address != IntPtr.Zero)
@@ -63,14 +82,23 @@ namespace System.Net.NetworkInformation
 
             if ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.IPv6Enabled) != 0)
             {
-                _ipv6Properties = new SystemIPv6InterfaceProperties(ipAdapterAddresses.ipv6Index,
-                    ipAdapterAddresses.mtu, ipAdapterAddresses.ZoneIndices);
+                _ipv6Properties = new SystemIPv6InterfaceProperties(
+                    ipAdapterAddresses.ipv6Index,
+                    ipAdapterAddresses.mtu,
+                    ipAdapterAddresses.ZoneIndices
+                );
             }
         }
 
-        public override bool IsDnsEnabled { get { return _dnsEnabled; } }
+        public override bool IsDnsEnabled
+        {
+            get { return _dnsEnabled; }
+        }
 
-        public override bool IsDynamicDnsEnabled { get { return _dynamicDnsEnabled; } }
+        public override bool IsDynamicDnsEnabled
+        {
+            get { return _dynamicDnsEnabled; }
+        }
 
         public override IPv4InterfaceProperties GetIPv4Properties()
         {
@@ -94,71 +122,47 @@ namespace System.Net.NetworkInformation
 
         public override string DnsSuffix
         {
-            get
-            {
-                return _dnsSuffix;
-            }
+            get { return _dnsSuffix; }
         }
 
         // Returns the addresses specified by the address type.
         public override IPAddressInformationCollection AnycastAddresses
         {
-            get
-            {
-                return _anycastAddresses;
-            }
+            get { return _anycastAddresses; }
         }
 
         // Returns the addresses specified by the address type.
         public override UnicastIPAddressInformationCollection UnicastAddresses
         {
-            get
-            {
-                return _unicastAddresses;
-            }
+            get { return _unicastAddresses; }
         }
 
         // Returns the addresses specified by the address type.
         public override MulticastIPAddressInformationCollection MulticastAddresses
         {
-            get
-            {
-                return _multicastAddresses;
-            }
+            get { return _multicastAddresses; }
         }
 
         // Returns the addresses specified by the address type.
         public override IPAddressCollection DnsAddresses
         {
-            get
-            {
-                return _dnsAddresses;
-            }
+            get { return _dnsAddresses; }
         }
 
         /// IP Address of the default gateway.
         public override GatewayIPAddressInformationCollection GatewayAddresses
         {
-            get
-            {
-                return _gatewayAddresses;
-            }
+            get { return _gatewayAddresses; }
         }
 
         public override IPAddressCollection DhcpServerAddresses
         {
-            get
-            {
-                return _dhcpServers;
-            }
+            get { return _dhcpServers; }
         }
 
         public override IPAddressCollection WinsServersAddresses
         {
-            get
-            {
-                return _winsServersAddresses;
-            }
+            get { return _winsServersAddresses; }
         }
     }
 }

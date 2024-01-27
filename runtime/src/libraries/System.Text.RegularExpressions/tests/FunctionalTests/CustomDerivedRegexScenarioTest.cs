@@ -17,11 +17,16 @@ namespace System.Text.RegularExpressions.Tests
             Assert.True(regex.CallScanDirectly(regex, "3456", 0, 4, 0, -1, false).Success);
             Assert.False(regex.CallScanDirectly(regex, "456", 0, 3, 0, -1, false).Success);
             Assert.Equal("45", regex.CallScanDirectly(regex, "45456", 0, 5, 0, -1, false).Value);
-            Assert.Equal("896", regex.CallScanDirectly(regex, "45896456", 0, 8, 2, -1, false).Value);
-            Assert.Equal(Match.Empty, regex.CallScanDirectly(regex, "I dont match", 0, 12, 0, -1, false));
+            Assert.Equal(
+                "896",
+                regex.CallScanDirectly(regex, "45896456", 0, 8, 2, -1, false).Value
+            );
+            Assert.Equal(
+                Match.Empty,
+                regex.CallScanDirectly(regex, "I dont match", 0, 12, 0, -1, false)
+            );
             Assert.Null(regex.CallScanDirectly(regex, "3456", 0, 4, 0, -1, true));
         }
-
     }
 
     /// <summary>
@@ -40,12 +45,24 @@ namespace System.Text.RegularExpressions.Tests
             internalMatchTimeout = Timeout.InfiniteTimeSpan;
             factory = new CustomRegexRunnerFactory();
             capsize = 2;
-            MethodInfo createRunnerMethod = typeof(Regex).GetMethod("CreateRunner", BindingFlags.Instance | BindingFlags.NonPublic);
-            runner = createRunnerMethod.Invoke(this, new object[] { }) as CustomRegexRunnerFactory.CustomRegexRunner;
+            MethodInfo createRunnerMethod = typeof(Regex).GetMethod(
+                "CreateRunner",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
+            runner =
+                createRunnerMethod.Invoke(this, new object[] { })
+                as CustomRegexRunnerFactory.CustomRegexRunner;
         }
 
-        public Match? CallScanDirectly(Regex regex, string text, int textbeg, int textend, int textstart, int prevlen, bool quick)
-            => runner.CallScanDirectly(regex, text, textbeg, textend, textstart, prevlen, quick);
+        public Match? CallScanDirectly(
+            Regex regex,
+            string text,
+            int textbeg,
+            int textend,
+            int textstart,
+            int prevlen,
+            bool quick
+        ) => runner.CallScanDirectly(regex, text, textbeg, textend, textstart, prevlen, quick);
 
         internal class CustomRegexRunnerFactory : RegexRunnerFactory
         {
@@ -53,7 +70,15 @@ namespace System.Text.RegularExpressions.Tests
 
             internal class CustomRegexRunner : RegexRunner
             {
-                public Match? CallScanDirectly(Regex regex, string text, int textbeg, int textend, int textstart, int prevlen, bool quick)
+                public Match? CallScanDirectly(
+                    Regex regex,
+                    string text,
+                    int textbeg,
+                    int textend,
+                    int textstart,
+                    int prevlen,
+                    bool quick
+                )
 #pragma warning disable SYSLIB0052 // Type or member is obsolete
                     => Scan(regex, text, textbeg, textend, textstart, prevlen, quick);
 #pragma warning restore SYSLIB0052 // Type or member is obsolete
@@ -71,7 +96,8 @@ namespace System.Text.RegularExpressions.Tests
 
                 protected override bool FindFirstChar()
                 {
-                    int pos = runtextpos, end = runtextend;
+                    int pos = runtextpos,
+                        end = runtextend;
 
                     if (pos < end)
                     {
@@ -83,8 +109,8 @@ namespace System.Text.RegularExpressions.Tests
                         return true;
                     }
 
-                // No starting position found
-                NoStartingPositionFound:
+                    // No starting position found
+                    NoStartingPositionFound:
                     runtextpos = end;
                     return false;
                 }
@@ -92,10 +118,13 @@ namespace System.Text.RegularExpressions.Tests
                 protected override void Go()
                 {
                     ReadOnlySpan<char> inputSpan = runtext.AsSpan();
-                    int pos = base.runtextpos, end = base.runtextend;
+                    int pos = base.runtextpos,
+                        end = base.runtextend;
                     int original_pos = pos;
-                    int charloop_starting_pos = 0, charloop_ending_pos = 0;
-                    int loop_iteration = 0, loop_starting_pos = 0;
+                    int charloop_starting_pos = 0,
+                        charloop_ending_pos = 0;
+                    int loop_iteration = 0,
+                        loop_starting_pos = 0;
                     int stackpos = 0;
                     int start = base.runtextstart;
                     ReadOnlySpan<char> slice = inputSpan.Slice(pos, end - pos);
@@ -117,7 +146,11 @@ namespace System.Text.RegularExpressions.Tests
                     charloop_starting_pos = pos;
 
                     int iteration = 0;
-                    while (iteration < 3 && (uint)iteration < (uint)slice.Length && char.IsDigit(slice[iteration]))
+                    while (
+                        iteration < 3
+                        && (uint)iteration < (uint)slice.Length
+                        && char.IsDigit(slice[iteration])
+                    )
                     {
                         iteration++;
                     }
@@ -134,9 +167,14 @@ namespace System.Text.RegularExpressions.Tests
                     charloop_starting_pos++;
                     goto CharLoopEnd;
 
-                CharLoopBacktrack:
+                    CharLoopBacktrack:
                     UncaptureUntil(base.runstack![--stackpos]);
-                    StackPop2(base.runstack, ref stackpos, out charloop_ending_pos, out charloop_starting_pos);
+                    StackPop2(
+                        base.runstack,
+                        ref stackpos,
+                        out charloop_ending_pos,
+                        out charloop_starting_pos
+                    );
 
                     if (charloop_starting_pos >= charloop_ending_pos)
                     {
@@ -145,8 +183,14 @@ namespace System.Text.RegularExpressions.Tests
                     pos = --charloop_ending_pos;
                     slice = inputSpan.Slice(pos, end - pos);
 
-                CharLoopEnd:
-                    StackPush3(ref base.runstack!, ref stackpos, charloop_starting_pos, charloop_ending_pos, base.Crawlpos());
+                    CharLoopEnd:
+                    StackPush3(
+                        ref base.runstack!,
+                        ref stackpos,
+                        charloop_starting_pos,
+                        charloop_ending_pos,
+                        base.Crawlpos()
+                    );
                     //}
 
                     base.Capture(1, capture_starting_pos, pos);
@@ -154,11 +198,12 @@ namespace System.Text.RegularExpressions.Tests
                     StackPush1(ref base.runstack!, ref stackpos, capture_starting_pos);
                     goto SkipBacktrack;
 
-                CaptureBacktrack:
+                    CaptureBacktrack:
                     capture_starting_pos = base.runstack![--stackpos];
                     goto CharLoopBacktrack;
 
-                SkipBacktrack:;
+                    SkipBacktrack:
+                    ;
                     //}
 
                     // Zero-width positive lookahead assertion.
@@ -170,18 +215,26 @@ namespace System.Text.RegularExpressions.Tests
                         loop_iteration = 0;
                         loop_starting_pos = pos;
 
-                    LoopBody:
-                        StackPush3(ref base.runstack!, ref stackpos, base.Crawlpos(), loop_starting_pos, pos);
+                        LoopBody:
+                        StackPush3(
+                            ref base.runstack!,
+                            ref stackpos,
+                            base.Crawlpos(),
+                            loop_starting_pos,
+                            pos
+                        );
 
                         loop_starting_pos = pos;
                         loop_iteration++;
 
                         // Match a Unicode digit exactly 3 times.
                         {
-                            if ((uint)slice.Length < 3 ||
-                                !char.IsDigit(slice[0]) ||
-                                !char.IsDigit(slice[1]) ||
-                                !char.IsDigit(slice[2]))
+                            if (
+                                (uint)slice.Length < 3
+                                || !char.IsDigit(slice[0])
+                                || !char.IsDigit(slice[1])
+                                || !char.IsDigit(slice[2])
+                            )
                             {
                                 goto LoopIterationNoMatch;
                             }
@@ -195,7 +248,7 @@ namespace System.Text.RegularExpressions.Tests
                         }
                         goto LoopEnd;
 
-                    LoopIterationNoMatch:
+                        LoopIterationNoMatch:
                         loop_iteration--;
                         if (loop_iteration < 0)
                         {
@@ -212,7 +265,8 @@ namespace System.Text.RegularExpressions.Tests
                         {
                             goto CaptureBacktrack;
                         }
-                    LoopEnd:;
+                        LoopEnd:
+                        ;
                         //}
 
                         // Match if at a word boundary.
@@ -232,8 +286,8 @@ namespace System.Text.RegularExpressions.Tests
                     base.Capture(0, original_pos, pos);
                     return;
 
-                // The input didn't match.
-                NoMatch:
+                    // The input didn't match.
+                    NoMatch:
                     UncaptureUntil(0);
                     return;
 
@@ -273,7 +327,13 @@ namespace System.Text.RegularExpressions.Tests
 
                     // <summary>Push 3 values onto the backtracking stack.</summary>
                     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                    static void StackPush3(ref int[] stack, ref int pos, int arg0, int arg1, int arg2)
+                    static void StackPush3(
+                        ref int[] stack,
+                        ref int pos,
+                        int arg0,
+                        int arg1,
+                        int arg2
+                    )
                     {
                         // If there's space available for all 3 values, store them.
                         int[] s = stack;
@@ -292,7 +352,13 @@ namespace System.Text.RegularExpressions.Tests
 
                         // <summary>Resize the backtracking stack array and push 3 values onto the stack.</summary>
                         [MethodImpl(MethodImplOptions.NoInlining)]
-                        static void WithResize(ref int[] stack, ref int pos, int arg0, int arg1, int arg2)
+                        static void WithResize(
+                            ref int[] stack,
+                            ref int pos,
+                            int arg0,
+                            int arg1,
+                            int arg2
+                        )
                         {
                             Array.Resize(ref stack, (pos + 2) * 2);
                             StackPush3(ref stack, ref pos, arg0, arg1, arg2);

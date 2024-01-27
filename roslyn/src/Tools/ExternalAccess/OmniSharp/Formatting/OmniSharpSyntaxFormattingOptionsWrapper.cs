@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Formatting
             CleanupOptions = cleanupOptions;
         }
 
-        public static async ValueTask<OmniSharpSyntaxFormattingOptionsWrapper> FromDocumentAsync(Document document, OmniSharpLineFormattingOptions fallbackLineFormattingOptions, CancellationToken cancellationToken)
+        public static async ValueTask<OmniSharpSyntaxFormattingOptionsWrapper> FromDocumentAsync(
+            Document document,
+            OmniSharpLineFormattingOptions fallbackLineFormattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             var defaultOptions = CodeCleanupOptions.GetDefault(document.Project.Services);
             var fallbackOptions = defaultOptions with
@@ -38,7 +42,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Formatting
                 }
             };
 
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             return new OmniSharpSyntaxFormattingOptionsWrapper(cleanupOptions);
         }
     }

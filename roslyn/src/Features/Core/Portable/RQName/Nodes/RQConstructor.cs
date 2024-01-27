@@ -10,7 +10,6 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         RQUnconstructedType containingType,
         RQMethodPropertyOrEventName memberName,
         int typeParameterCount,
-        IList<RQParameter> parameters) : RQMethodBase(containingType, memberName, typeParameterCount, parameters)
-    {
-    }
+        IList<RQParameter> parameters
+    ) : RQMethodBase(containingType, memberName, typeParameterCount, parameters) { }
 }

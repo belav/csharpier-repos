@@ -9,9 +9,7 @@ namespace System.ServiceModel.Channels
         TimeSpan openTimeout;
 
         protected StreamUpgradeProvider()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         protected StreamUpgradeProvider(IDefaultCommunicationTimeouts timeouts)
         {
@@ -37,12 +35,16 @@ namespace System.ServiceModel.Channels
             get { return this.closeTimeout; }
         }
 
-        public virtual T GetProperty<T>() where T : class
+        public virtual T GetProperty<T>()
+            where T : class
         {
             return null;
         }
 
-        public abstract StreamUpgradeInitiator CreateUpgradeInitiator(EndpointAddress remoteAddress, Uri via);
+        public abstract StreamUpgradeInitiator CreateUpgradeInitiator(
+            EndpointAddress remoteAddress,
+            Uri via
+        );
         public abstract StreamUpgradeAcceptor CreateUpgradeAcceptor();
     }
 }

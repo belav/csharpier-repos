@@ -17,11 +17,7 @@ namespace IdeCoreBenchmarks;
 public class SwitchStatementBenchmarks
 {
     [Params(100, 1000, 5000, 10000)]
-    public int SwitchCount
-    {
-        get;
-        set;
-    }
+    public int SwitchCount { get; set; }
 
     private static string CreateSourceFile(int switchCount)
     {
@@ -34,14 +30,16 @@ public class SwitchStatementBenchmarks
               {
                 switch (arg)
                 {
-            """);
+            """
+        );
 
         for (var i = 0; i < switchCount; i++)
         {
             builder.AppendLine(
                 $"""
                       case "Text{i}": return {i};
-                """);
+                """
+            );
         }
 
         builder.AppendLine(
@@ -51,7 +49,8 @@ public class SwitchStatementBenchmarks
               }
             }
 
-            """);
+            """
+        );
 
         return builder.ToString();
     }
@@ -64,12 +63,23 @@ public class SwitchStatementBenchmarks
 
         using var workspace = new AdhocWorkspace();
 
-        var solution = workspace.CurrentSolution
-            .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
+        var solution = workspace
+            .CurrentSolution.AddProject(
+                projectId,
+                "ProjectName",
+                "AssemblyName",
+                LanguageNames.CSharp
+            )
             .AddDocument(documentId, "DocumentName", CreateSourceFile(SwitchCount));
 
-        solution = solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(object).Assembly.Location));
-        solution = solution.WithProjectCompilationOptions(projectId, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        solution = solution.AddMetadataReference(
+            projectId,
+            MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
+        );
+        solution = solution.WithProjectCompilationOptions(
+            projectId,
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+        );
 
         var project = solution.Projects.First();
         var compilation = project.GetCompilationAsync().Result;

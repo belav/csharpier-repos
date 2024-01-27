@@ -2,106 +2,107 @@ using System;
 
 namespace MonoVirtuals
 {
-	class X { }
-	class Y : X { }
+    class X { }
 
-	class A
-	{
-		public virtual int f (X o)
-		{
-			System.Console.WriteLine ("In A for X");
-			return 5;
-		}
+    class Y : X { }
 
-		public virtual int f (Y o)
-		{
-			System.Console.WriteLine ("In A for Y");
-			return 10;
-		}
+    class A
+    {
+        public virtual int f(X o)
+        {
+            System.Console.WriteLine("In A for X");
+            return 5;
+        }
 
-		public virtual int this[X o]
-		{
-			get
-			{
-				System.Console.WriteLine ("In A for X");
-				return 5;
-			}
-		}
+        public virtual int f(Y o)
+        {
+            System.Console.WriteLine("In A for Y");
+            return 10;
+        }
 
-		public virtual int this[Y o]
-		{
-			get
-			{
-				System.Console.WriteLine ("In A for Y");
-				return 10;
-			}
-		}
-	}
+        public virtual int this[X o]
+        {
+            get
+            {
+                System.Console.WriteLine("In A for X");
+                return 5;
+            }
+        }
 
-	class B : A
-	{
-		public override int f (X o)
-		{
-			base.f (o);
-			throw new ApplicationException ("should not be called");
-		}
+        public virtual int this[Y o]
+        {
+            get
+            {
+                System.Console.WriteLine("In A for Y");
+                return 10;
+            }
+        }
+    }
 
-		public override int this[X o]
-		{
-			get
-			{
-				base.f (o);
-				throw new ApplicationException ("should not be called");
-			}
-		}
-	}
+    class B : A
+    {
+        public override int f(X o)
+        {
+            base.f(o);
+            throw new ApplicationException("should not be called");
+        }
 
-	class C : B
-	{
-		public override int f (X o)
-		{
-			System.Console.WriteLine ("In C for X");
-			return base.f (o);
-		}
+        public override int this[X o]
+        {
+            get
+            {
+                base.f(o);
+                throw new ApplicationException("should not be called");
+            }
+        }
+    }
 
-		public override int f (Y o)
-		{
-			System.Console.WriteLine ("In C for Y");
-			return base.f (o);
-		}
+    class C : B
+    {
+        public override int f(X o)
+        {
+            System.Console.WriteLine("In C for X");
+            return base.f(o);
+        }
 
-		public override int this[X o]
-		{
-			get
-			{
-				System.Console.WriteLine ("In C for X");
-				return base.f (o);
-			}
-		}
+        public override int f(Y o)
+        {
+            System.Console.WriteLine("In C for Y");
+            return base.f(o);
+        }
 
-		public override int this[Y o]
-		{
-			get
-			{
-				System.Console.WriteLine ("In C for Y");
-				return base.f (o);
-			}
-		}
-	}
+        public override int this[X o]
+        {
+            get
+            {
+                System.Console.WriteLine("In C for X");
+                return base.f(o);
+            }
+        }
 
-	class MainClass
-	{
-		public static int Main ()
-		{
-			var o = new Y ();
-			var c = new C ();
-			if (c.f (o) != 10)
-				return 1;
+        public override int this[Y o]
+        {
+            get
+            {
+                System.Console.WriteLine("In C for Y");
+                return base.f(o);
+            }
+        }
+    }
 
-			if (c[o] != 10)
-				return 2;
+    class MainClass
+    {
+        public static int Main()
+        {
+            var o = new Y();
+            var c = new C();
+            if (c.f(o) != 10)
+                return 1;
 
-			return 0;
-		}
-	}
+            if (c[o] != 10)
+                return 2;
+
+            return 0;
+        }
+    }
 }

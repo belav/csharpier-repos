@@ -15,7 +15,8 @@ internal static partial class Interop
             long* aSegmentArray,
             int nNumberOfBytesToRead,
             IntPtr lpReserved,
-            NativeOverlapped* lpOverlapped);
+            NativeOverlapped* lpOverlapped
+        );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         internal static unsafe partial int WriteFileGather(
@@ -23,6 +24,7 @@ internal static partial class Interop
             long* aSegmentArray,
             int nNumberOfBytesToWrite,
             IntPtr lpReserved,
-            NativeOverlapped* lpOverlapped);
+            NativeOverlapped* lpOverlapped
+        );
     }
 }

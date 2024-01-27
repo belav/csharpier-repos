@@ -9,7 +9,7 @@ internal sealed class RoutingMetrics
 {
     public const string MeterName = "Microsoft.AspNetCore.Routing";
 
-     // Reuse boxed object for common values
+    // Reuse boxed object for common values
     private static readonly object BoxedTrue = true;
     private static readonly object BoxedFalse = false;
 
@@ -23,22 +23,30 @@ internal sealed class RoutingMetrics
         _matchAttemptsCounter = _meter.CreateCounter<long>(
             "aspnetcore.routing.match_attempts",
             unit: "{match_attempt}",
-            description: "Number of requests that were attempted to be matched to an endpoint.");
+            description: "Number of requests that were attempted to be matched to an endpoint."
+        );
     }
 
     public bool MatchSuccessCounterEnabled => _matchAttemptsCounter.Enabled;
 
     public void MatchSuccess(string route, bool isFallback)
     {
-        _matchAttemptsCounter.Add(1,
+        _matchAttemptsCounter.Add(
+            1,
             new KeyValuePair<string, object?>("http.route", route),
             new KeyValuePair<string, object?>("aspnetcore.routing.match_status", "success"),
-            new KeyValuePair<string, object?>("aspnetcore.routing.is_fallback", isFallback ? BoxedTrue : BoxedFalse));
+            new KeyValuePair<string, object?>(
+                "aspnetcore.routing.is_fallback",
+                isFallback ? BoxedTrue : BoxedFalse
+            )
+        );
     }
 
     public void MatchFailure()
     {
-        _matchAttemptsCounter.Add(1,
-            new KeyValuePair<string, object?>("aspnetcore.routing.match_status", "failure"));
+        _matchAttemptsCounter.Add(
+            1,
+            new KeyValuePair<string, object?>("aspnetcore.routing.match_status", "failure")
+        );
     }
 }

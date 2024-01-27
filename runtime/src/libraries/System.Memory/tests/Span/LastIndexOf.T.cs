@@ -79,7 +79,10 @@ namespace System.SpanTests
                 foreach (TInt elem in a)
                 {
                     int numCompares = log.CountCompares(elem.Value, 9999);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {elem.Value}.");
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {elem.Value}."
+                    );
                 }
             }
         }
@@ -90,12 +93,11 @@ namespace System.SpanTests
             const int GuardValue = 77777;
             const int GuardLength = 50;
 
-            Action<int, int> checkForOutOfRangeAccess =
-                delegate (int x, int y)
-                {
-                    if (x == GuardValue || y == GuardValue)
-                        throw new Exception("Detected out of range access in IndexOf()");
-                };
+            Action<int, int> checkForOutOfRangeAccess = delegate(int x, int y)
+            {
+                if (x == GuardValue || y == GuardValue)
+                    throw new Exception("Detected out of range access in IndexOf()");
+            };
 
             for (int length = 0; length < 100; length++)
             {

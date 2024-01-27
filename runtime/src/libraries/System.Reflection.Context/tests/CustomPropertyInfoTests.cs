@@ -26,9 +26,16 @@ namespace System.Reflection.Context.Tests
         {
             // CustomAttributesData operates on custom attributes themselves defined in code
             // that is loaded in the reflection-only context.
-            IList<CustomAttributeData> customAttributesData = _customProperty.GetCustomAttributesData();
-            Assert.All(customAttributesData,
-                cad => Assert.Equal(ProjectionConstants.ProjectingCustomAttributeData, cad.GetType().FullName));
+            IList<CustomAttributeData> customAttributesData =
+                _customProperty.GetCustomAttributesData();
+            Assert.All(
+                customAttributesData,
+                cad =>
+                    Assert.Equal(
+                        ProjectionConstants.ProjectingCustomAttributeData,
+                        cad.GetType().FullName
+                    )
+            );
         }
     }
 }

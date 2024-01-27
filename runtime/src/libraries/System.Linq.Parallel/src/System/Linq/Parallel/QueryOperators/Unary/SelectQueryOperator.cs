@@ -47,18 +47,27 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<TOutput> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<TOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
-            PartitionedStream<TOutput, TKey> outputStream =
-                new PartitionedStream<TOutput, TKey>(inputStream.PartitionCount, inputStream.KeyComparer, OrdinalIndexState);
+            PartitionedStream<TOutput, TKey> outputStream = new PartitionedStream<TOutput, TKey>(
+                inputStream.PartitionCount,
+                inputStream.KeyComparer,
+                OrdinalIndexState
+            );
             for (int i = 0; i < inputStream.PartitionCount; i++)
             {
-                outputStream[i] = new SelectQueryOperatorEnumerator<TKey>(inputStream[i], _selector);
+                outputStream[i] = new SelectQueryOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    _selector
+                );
             }
 
             recipient.Receive(outputStream);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Just opens the current operator, including opening the child and wrapping it with
@@ -68,7 +77,12 @@ namespace System.Linq.Parallel
         internal override QueryResults<TOutput> Open(QuerySettings settings, bool preferStriping)
         {
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
-            return SelectQueryOperatorResults.NewResults(childQueryResults, this, settings, preferStriping);
+            return SelectQueryOperatorResults.NewResults(
+                childQueryResults,
+                this,
+                settings,
+                preferStriping
+            );
         }
 
         internal override IEnumerable<TOutput> AsSequentialQuery(CancellationToken token)
@@ -90,16 +104,20 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for projecting elements as it is walked.
         //
 
-        private sealed class SelectQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TOutput, TKey>
+        private sealed class SelectQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TOutput, TKey>
         {
             private readonly QueryOperatorEnumerator<TInput, TKey> _source; // The data source to enumerate.
-            private readonly Func<TInput, TOutput> _selector;  // The actual select function.
+            private readonly Func<TInput, TOutput> _selector; // The actual select function.
 
             //---------------------------------------------------------------------------------------
             // Instantiates a new select enumerator.
             //
 
-            internal SelectQueryOperatorEnumerator(QueryOperatorEnumerator<TInput, TKey> source, Func<TInput, TOutput> selector)
+            internal SelectQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                Func<TInput, TOutput> selector
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
@@ -111,7 +129,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TOutput currentElement, [AllowNull] ref TKey currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TOutput currentElement,
+                [AllowNull] ref TKey currentKey
+            )
             {
                 // So long as the source has a next element, we have an element.
                 TInput element = default(TInput)!;
@@ -142,22 +163,38 @@ namespace System.Linq.Parallel
             private readonly int _childCount; // The number of elements in child results
 
             public static QueryResults<TOutput> NewResults(
-                QueryResults<TInput> childQueryResults, SelectQueryOperator<TInput, TOutput> op,
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TInput> childQueryResults,
+                SelectQueryOperator<TInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
             {
                 if (childQueryResults.IsIndexible)
                 {
-                    return new SelectQueryOperatorResults(childQueryResults, op, settings, preferStriping);
+                    return new SelectQueryOperatorResults(
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
                 else
                 {
-                    return new UnaryQueryOperatorResults(childQueryResults, op, settings, preferStriping);
+                    return new UnaryQueryOperatorResults(
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
             }
 
             private SelectQueryOperatorResults(
-                QueryResults<TInput> childQueryResults, SelectQueryOperator<TInput, TOutput> op,
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TInput> childQueryResults,
+                SelectQueryOperator<TInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
                 : base(childQueryResults, op, settings, preferStriping)
             {
                 Debug.Assert(op._selector != null);

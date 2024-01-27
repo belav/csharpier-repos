@@ -1,20 +1,21 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
 ** Class: ConsoleColor
 **
 **
-** Purpose: This enumeration represents the colors that can be used for 
+** Purpose: This enumeration represents the colors that can be used for
 **          console text foreground and background colors.
 **
 **
 =============================================================================*/
 
-namespace System {
+namespace System
+{
     [Serializable]
     public enum ConsoleColor
     {
