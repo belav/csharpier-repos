@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using NodeId = int;
 using Distance = int;
+using NodeId = int;
 
 namespace System.Collections.Tests
 {
