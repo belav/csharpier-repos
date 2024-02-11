@@ -16,10 +16,15 @@ namespace System.Diagnostics
             // First make sure it's a file we can actually read from.  Only regular files are relevant,
             // and attempting to open and read from a file such as a named pipe file could cause us to
             // stop responding (waiting for someone else to open and write to the file).
-            if (Interop.Sys.Stat(_fileName, out Interop.Sys.FileStatus fileStatus) != 0 ||
-                (fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) != Interop.Sys.FileTypes.S_IFREG)
+            if (
+                Interop.Sys.Stat(_fileName, out Interop.Sys.FileStatus fileStatus) != 0
+                || (fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) != Interop.Sys.FileTypes.S_IFREG
+            )
             {
-                throw new FileNotFoundException(SR.Format(SR.IO_FileNotFound_FileName, _fileName), _fileName);
+                throw new FileNotFoundException(
+                    SR.Format(SR.IO_FileNotFound_FileName, _fileName),
+                    _fileName
+                );
             }
 
             // For managed assemblies, read the file version information from the assembly's metadata.
@@ -81,8 +86,10 @@ namespace System.Diagnostics
             // Set the internal and original names based on the assembly name.  We avoid using the
             // current filename for determinism and better alignment with behavior on Windows.
             string assemblyName = metadataReader.GetString(assemblyDefinition.Name);
-            if (!assemblyName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) &&
-                !assemblyName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+            if (
+                !assemblyName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                && !assemblyName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 assemblyName += isExe ? ".exe" : ".dll";
             }
@@ -125,9 +132,16 @@ namespace System.Diagnostics
             foreach (CustomAttributeHandle attrHandle in assemblyDefinition.GetCustomAttributes())
             {
                 CustomAttribute attr = metadataReader.GetCustomAttribute(attrHandle);
-                StringHandle typeNamespaceHandle = default(StringHandle), typeNameHandle = default(StringHandle);
-                if (TryGetAttributeName(metadataReader, attr, out typeNamespaceHandle, out typeNameHandle) &&
-                    comparer.Equals(typeNamespaceHandle, "System.Reflection"))
+                StringHandle typeNamespaceHandle = default(StringHandle),
+                    typeNameHandle = default(StringHandle);
+                if (
+                    TryGetAttributeName(
+                        metadataReader,
+                        attr,
+                        out typeNamespaceHandle,
+                        out typeNameHandle
+                    ) && comparer.Equals(typeNamespaceHandle, "System.Reflection")
+                )
                 {
                     if (comparer.Equals(typeNameHandle, "AssemblyCompanyAttribute"))
                     {
@@ -144,12 +158,26 @@ namespace System.Diagnostics
                     else if (comparer.Equals(typeNameHandle, "AssemblyFileVersionAttribute"))
                     {
                         GetStringAttributeArgumentValue(metadataReader, attr, ref _fileVersion);
-                        ParseVersion(_fileVersion, out _fileMajor, out _fileMinor, out _fileBuild, out _filePrivate);
+                        ParseVersion(
+                            _fileVersion,
+                            out _fileMajor,
+                            out _fileMinor,
+                            out _fileBuild,
+                            out _filePrivate
+                        );
                     }
-                    else if (comparer.Equals(typeNameHandle, "AssemblyInformationalVersionAttribute"))
+                    else if (
+                        comparer.Equals(typeNameHandle, "AssemblyInformationalVersionAttribute")
+                    )
                     {
                         GetStringAttributeArgumentValue(metadataReader, attr, ref _productVersion);
-                        ParseVersion(_productVersion, out _productMajor, out _productMinor, out _productBuild, out _productPrivate);
+                        ParseVersion(
+                            _productVersion,
+                            out _productMajor,
+                            out _productMinor,
+                            out _productBuild,
+                            out _productPrivate
+                        );
                         sawAssemblyInformationalVersionAttribute = true;
                     }
                     else if (comparer.Equals(typeNameHandle, "AssemblyProductAttribute"))
@@ -188,7 +216,13 @@ namespace System.Diagnostics
         }
 
         /// <summary>Parses the version into its constituent parts.</summary>
-        private static void ParseVersion(string? versionString, out int major, out int minor, out int build, out int priv)
+        private static void ParseVersion(
+            string? versionString,
+            out int major,
+            out int minor,
+            out int build,
+            out int priv
+        )
         {
             // Relatively-forgiving parsing of a version:
             // - If there are more than four parts (separated by periods), all results are deemed 0
@@ -251,13 +285,20 @@ namespace System.Diagnostics
         /// <param name="typeNamespaceHandle">The namespace of the attribute.</param>
         /// <param name="typeNameHandle">The name of the attribute.</param>
         /// <returns>true if the name could be retrieved; otherwise, false.</returns>
-        private static bool TryGetAttributeName(MetadataReader reader, CustomAttribute attr, out StringHandle typeNamespaceHandle, out StringHandle typeNameHandle)
+        private static bool TryGetAttributeName(
+            MetadataReader reader,
+            CustomAttribute attr,
+            out StringHandle typeNamespaceHandle,
+            out StringHandle typeNameHandle
+        )
         {
             EntityHandle ctorHandle = attr.Constructor;
             switch (ctorHandle.Kind)
             {
                 case HandleKind.MemberReference:
-                    EntityHandle container = reader.GetMemberReference((MemberReferenceHandle)ctorHandle).Parent;
+                    EntityHandle container = reader
+                        .GetMemberReference((MemberReferenceHandle)ctorHandle)
+                        .Parent;
                     if (container.Kind == HandleKind.TypeReference)
                     {
                         TypeReference tr = reader.GetTypeReference((TypeReferenceHandle)container);
@@ -268,7 +309,9 @@ namespace System.Diagnostics
                     break;
 
                 case HandleKind.MethodDefinition:
-                    MethodDefinition md = reader.GetMethodDefinition((MethodDefinitionHandle)ctorHandle);
+                    MethodDefinition md = reader.GetMethodDefinition(
+                        (MethodDefinitionHandle)ctorHandle
+                    );
                     TypeDefinition td = reader.GetTypeDefinition(md.GetDeclaringType());
                     typeNamespaceHandle = td.Namespace;
                     typeNameHandle = td.Name;
@@ -285,17 +328,25 @@ namespace System.Diagnostics
         /// <param name="reader">The metadata reader.</param>
         /// <param name="attr">The attribute.</param>
         /// <param name="value">The value parsed from the attribute, if it could be retrieved; otherwise, the value is left unmodified.</param>
-        private static void GetStringAttributeArgumentValue(MetadataReader reader, CustomAttribute attr, ref string? value)
+        private static void GetStringAttributeArgumentValue(
+            MetadataReader reader,
+            CustomAttribute attr,
+            ref string? value
+        )
         {
             EntityHandle ctorHandle = attr.Constructor;
             BlobHandle signature;
             switch (ctorHandle.Kind)
             {
                 case HandleKind.MemberReference:
-                    signature = reader.GetMemberReference((MemberReferenceHandle)ctorHandle).Signature;
+                    signature = reader
+                        .GetMemberReference((MemberReferenceHandle)ctorHandle)
+                        .Signature;
                     break;
                 case HandleKind.MethodDefinition:
-                    signature = reader.GetMethodDefinition((MethodDefinitionHandle)ctorHandle).Signature;
+                    signature = reader
+                        .GetMethodDefinition((MethodDefinitionHandle)ctorHandle)
+                        .Signature;
                     break;
                 default:
                     // Unusual case, potentially invalid IL
@@ -310,17 +361,23 @@ namespace System.Diagnostics
             {
                 SignatureHeader header = signatureReader.ReadSignatureHeader();
                 int parameterCount;
-                if (header.Kind == SignatureKind.Method &&                               // attr ctor must be a method
-                    !header.IsGeneric &&                                                 // attr ctor must be non-generic
-                    signatureReader.TryReadCompressedInteger(out parameterCount) &&      // read parameter count
-                    parameterCount == 1 &&                                               // attr ctor must have 1 parameter
-                    signatureReader.ReadSignatureTypeCode() == SignatureTypeCode.Void && // attr ctor return type must be void
-                    signatureReader.ReadSignatureTypeCode() == SignatureTypeCode.String) // attr ctor first parameter must be string
+                if (
+                    header.Kind == SignatureKind.Method
+                    && // attr ctor must be a method
+                    !header.IsGeneric
+                    && // attr ctor must be non-generic
+                    signatureReader.TryReadCompressedInteger(out parameterCount)
+                    && // read parameter count
+                    parameterCount == 1
+                    && // attr ctor must have 1 parameter
+                    signatureReader.ReadSignatureTypeCode() == SignatureTypeCode.Void
+                    && // attr ctor return type must be void
+                    signatureReader.ReadSignatureTypeCode() == SignatureTypeCode.String
+                ) // attr ctor first parameter must be string
                 {
                     value = valueReader.ReadSerializedString();
                 }
             }
         }
-
     }
 }

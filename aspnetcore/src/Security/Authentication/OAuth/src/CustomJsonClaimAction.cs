@@ -17,7 +17,11 @@ public class CustomJsonClaimAction : ClaimAction
     /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
     /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
     /// <param name="resolver">The Func that will be called to select value from the given JSON user data.</param>
-    public CustomJsonClaimAction(string claimType, string valueType, Func<JsonElement, string?> resolver)
+    public CustomJsonClaimAction(
+        string claimType,
+        string valueType,
+        Func<JsonElement, string?> resolver
+    )
         : base(claimType, valueType)
     {
         Resolver = resolver;

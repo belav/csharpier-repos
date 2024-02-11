@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace ILCompiler.Sorting.Implementation
 {
-    internal static class MergeSortCore<T, TDataStructure, TDataStructureAccessor, TComparer, TCompareAsEqualAction>
-        where TDataStructureAccessor:ISortableDataStructureAccessor<T, TDataStructure>
-        where TComparer:IComparer<T>
+    internal static class MergeSortCore<
+        T,
+        TDataStructure,
+        TDataStructureAccessor,
+        TComparer,
+        TCompareAsEqualAction
+    >
+        where TDataStructureAccessor : ISortableDataStructureAccessor<T, TDataStructure>
+        where TComparer : IComparer<T>
         where TCompareAsEqualAction : ICompareAsEqualAction
     {
         internal const int ParallelSortThreshold = 4000; // Number empirically measured by compiling
-                                                         // a large composite binary
+
+        // a large composite binary
 
         public static void ParallelSortApi(TDataStructure arrayToSort, TComparer comparer)
         {
@@ -28,7 +35,12 @@ namespace ILCompiler.Sorting.Implementation
         }
 
         // Parallelized merge sort algorithm. Uses Task infrastructure to spread sort across available resources
-        private static async Task ParallelSort(TDataStructure arrayToSort, int index, int length, TComparer comparer)
+        private static async Task ParallelSort(
+            TDataStructure arrayToSort,
+            int index,
+            int length,
+            TComparer comparer
+        )
         {
             if (length < ParallelSortThreshold)
             {
@@ -39,11 +51,15 @@ namespace ILCompiler.Sorting.Implementation
                 TDataStructureAccessor accessor = default(TDataStructureAccessor);
                 int halfLen = length / 2;
 
-                Task rightSortTask = Task.Run(() => ParallelSort(arrayToSort, index + halfLen, length - halfLen, comparer));
+                Task rightSortTask = Task.Run(
+                    () => ParallelSort(arrayToSort, index + halfLen, length - halfLen, comparer)
+                );
 
                 T[] localCopyOfHalfOfArray = new T[halfLen];
                 accessor.Copy(arrayToSort, index, localCopyOfHalfOfArray, 0, halfLen);
-                await MergeSortCore<T, T[], ArrayAccessor<T>, TComparer, TCompareAsEqualAction>.ParallelSort(localCopyOfHalfOfArray, 0, halfLen, comparer).ConfigureAwait(false);
+                await MergeSortCore<T, T[], ArrayAccessor<T>, TComparer, TCompareAsEqualAction>
+                    .ParallelSort(localCopyOfHalfOfArray, 0, halfLen, comparer)
+                    .ConfigureAwait(false);
                 await rightSortTask.ConfigureAwait(false);
                 Merge(localCopyOfHalfOfArray, arrayToSort, index, halfLen, length, comparer);
             }
@@ -51,7 +67,12 @@ namespace ILCompiler.Sorting.Implementation
 
         // Normal non-parallel merge sort
         // Allocates length/2 in scratch space
-        private static void SequentialSort(TDataStructure arrayToSort, int index, int length, TComparer comparer)
+        private static void SequentialSort(
+            TDataStructure arrayToSort,
+            int index,
+            int length,
+            TComparer comparer
+        )
         {
             TDataStructureAccessor accessor = default(TDataStructureAccessor);
             T[] scratchSpace = new T[accessor.GetLength(arrayToSort) / 2];
@@ -60,7 +81,13 @@ namespace ILCompiler.Sorting.Implementation
 
         // Non-parallel merge sort, used once the region to be sorted is small enough
         // scratchSpace must be at least length/2 in size
-        private static void MergeSortHelper(TDataStructure arrayToSort, int index, int length, TComparer comparer, T[] scratchSpace)
+        private static void MergeSortHelper(
+            TDataStructure arrayToSort,
+            int index,
+            int length,
+            TComparer comparer,
+            T[] scratchSpace
+        )
         {
             if (length <= 1)
             {
@@ -69,7 +96,12 @@ namespace ILCompiler.Sorting.Implementation
             TDataStructureAccessor accessor = default(TDataStructureAccessor);
             if (length == 2)
             {
-                if (comparer.Compare(accessor.GetElement(arrayToSort, index), accessor.GetElement(arrayToSort, index + 1)) > 0)
+                if (
+                    comparer.Compare(
+                        accessor.GetElement(arrayToSort, index),
+                        accessor.GetElement(arrayToSort, index + 1)
+                    ) > 0
+                )
                 {
                     accessor.SwapElements(arrayToSort, index, index + 1);
                 }
@@ -84,7 +116,14 @@ namespace ILCompiler.Sorting.Implementation
         }
 
         // Shared merge algorithm used in both parallel and sequential variants of the mergesort
-        private static void Merge(T[] localCopyOfHalfOfArray, TDataStructure arrayToSort, int index, int halfLen, int length, TComparer comparer)
+        private static void Merge(
+            T[] localCopyOfHalfOfArray,
+            TDataStructure arrayToSort,
+            int index,
+            int halfLen,
+            int length,
+            TComparer comparer
+        )
         {
             TDataStructureAccessor accessor = default(TDataStructureAccessor);
             int leftHalfIndex = 0;
@@ -100,22 +139,39 @@ namespace ILCompiler.Sorting.Implementation
                 if (rightHalfIndex == rightHalfEnd)
                 {
                     // Copy remaining elements from the local copy
-                    accessor.Copy(localCopyOfHalfOfArray, leftHalfIndex, arrayToSort, index + i, length - i);
+                    accessor.Copy(
+                        localCopyOfHalfOfArray,
+                        leftHalfIndex,
+                        arrayToSort,
+                        index + i,
+                        length - i
+                    );
                     break;
                 }
 
-                int comparisonResult = comparer.Compare(localCopyOfHalfOfArray[leftHalfIndex], accessor.GetElement(arrayToSort, rightHalfIndex));
+                int comparisonResult = comparer.Compare(
+                    localCopyOfHalfOfArray[leftHalfIndex],
+                    accessor.GetElement(arrayToSort, rightHalfIndex)
+                );
                 if (comparisonResult == 0)
                 {
                     default(TCompareAsEqualAction).CompareAsEqual();
                 }
                 if (comparisonResult <= 0)
                 {
-                    accessor.SetElement(arrayToSort, i + index, localCopyOfHalfOfArray[leftHalfIndex++]);
+                    accessor.SetElement(
+                        arrayToSort,
+                        i + index,
+                        localCopyOfHalfOfArray[leftHalfIndex++]
+                    );
                 }
                 else
                 {
-                    accessor.SetElement(arrayToSort, i + index, accessor.GetElement(arrayToSort, rightHalfIndex++));
+                    accessor.SetElement(
+                        arrayToSort,
+                        i + index,
+                        accessor.GetElement(arrayToSort, rightHalfIndex++)
+                    );
                 }
             }
         }

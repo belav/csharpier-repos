@@ -1,8 +1,12 @@
 using System;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
-[assembly:ContractNamespace("http://special1.tempuri.org", ClrNamespace= "SerializableTypes.XsdDataContractExporterTests.More")]
+[assembly: ContractNamespace(
+    "http://special1.tempuri.org",
+    ClrNamespace = "SerializableTypes.XsdDataContractExporterTests.More"
+)]
+
 
 #if UseSeparateAssemblyNamespace
 namespace SerializableTypes.XsdDataContractExporterTests.More
@@ -24,17 +28,15 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
     {
         public GenericBasePOCO2<SimpleBaseDerivedPOCO, SimpleBaseDerivedPOCO2> GenericData;
         public object TestGenericBasePOCO;
-        public GenericContainerPOCO()
-        {
-        }
+
+        public GenericContainerPOCO() { }
     }
 
-
-    public class GenericBasePOCO<T> where T : new()
+    public class GenericBasePOCO<T>
+        where T : new()
     {
         public object genericData = new T();
     }
-
 
     public class GenericBasePOCO2<T, K>
         where T : new()
@@ -52,9 +54,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
 
         public List<SimpleBaseDerivedPOCO> Base2;
 
-        public SimpleBaseContainerPOCO()
-        {
-        }
+        public SimpleBaseContainerPOCO() { }
     }
 
     [KnownType(typeof(SimpleBaseDerivedPOCO))]
@@ -62,7 +62,6 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
     {
         public string BaseData = String.Empty;
     }
-
 
     public class SimpleBaseDerivedPOCO : SimpleBasePOCO
     {
@@ -81,19 +80,17 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
     {
         [DataMember]
         public GenericBaseDC2<SimpleBaseDerivedDC, SimpleBaseDerivedDC2> GenericData;
-        public GenericContainerDC()
-        {
-        }
+
+        public GenericContainerDC() { }
     }
 
-
     [DataContract]
-    public class GenericBaseDC<T> where T : new()
+    public class GenericBaseDC<T>
+        where T : new()
     {
         [DataMember]
         public object genericData = new T();
     }
-
 
     [DataContract]
     public class GenericBaseDC2<T, K>
@@ -117,8 +114,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
         [DataMember]
         public List<SimpleBaseDerivedDC> Base2;
 
-        public SimpleBaseContainerDC()
-        { }
+        public SimpleBaseContainerDC() { }
     }
 
     [DataContract]
@@ -128,7 +124,6 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
         [DataMember]
         public string BaseData = String.Empty;
     }
-
 
     [DataContract]
     public class SimpleBaseDerivedDC : SimpleBaseDC
@@ -154,20 +149,18 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     public class DataContractTypes
     {
         [DataContract]
-        public class Person1 
+        public class Person1
         {
             [DataMember]
             public string name;
-            
+
             [DataMember]
             public int age;
 
             [DataMember]
             float salary;
 
-            Person1()
-            {
-            }
+            Person1() { }
 
             public Person1(string init)
             {
@@ -178,27 +171,27 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
 
         // Unknown data does not affect the data contract of the class
-        [DataContract(Name="DataContractTypes.Person1")]
+        [DataContract(Name = "DataContractTypes.Person1")]
         public class Person2 : IExtensibleDataObject
         {
             public string firstName;
             public string lastName;
 
-            [DataMember(Name="name")]
-            internal string Name 
+            [DataMember(Name = "name")]
+            internal string Name
             {
                 get { return firstName + " " + lastName; }
-                private set 
-                { 
+                private set
+                {
                     int splitIndex = value.IndexOf(' ');
                     firstName = value.Substring(0, splitIndex);
-                    lastName = value.Substring(splitIndex+1);
+                    lastName = value.Substring(splitIndex + 1);
                 }
             }
-            
+
             protected int personAge;
 
-            [DataMember(Name="age")]
+            [DataMember(Name = "age")]
             public virtual int Age
             {
                 get { return personAge; }
@@ -208,9 +201,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             internal float salary;
 
-            protected Person2()
-            {
-            }
+            protected Person2() { }
 
             public Person2(string init)
             {
@@ -227,19 +218,19 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
         }
 
-        [DataContract(Name="PersonContract")]
+        [DataContract(Name = "PersonContract")]
         internal class Person3
         {
-            [DataMember(Name="Name")]
+            [DataMember(Name = "Name")]
             public string name;
-            
-            [DataMember(Name="Nickname")]
+
+            [DataMember(Name = "Nickname")]
             public string name2;
-            
-            [DataMember(Name="Age")]
+
+            [DataMember(Name = "Age")]
             public int age;
-            
-            [DataMember(Name="Salary")]
+
+            [DataMember(Name = "Salary")]
             float salary;
 
             [DataMember]
@@ -262,15 +253,15 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
         }
 
-        [DataContract(Name="Person")]
+        [DataContract(Name = "Person")]
         public struct Person4
         {
             [DataMember]
             public string name;
-            
+
             [DataMember]
             public int age;
-            
+
             [DataMember]
             float salary;
 
@@ -286,41 +277,42 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 age = 25;
                 salary = 100000;
                 address = new Address(null);
-                hireDate = new DateTimeOffset(new DateTime(1995, 01, 17, 5, 30, 0), new TimeSpan(1,15,120));
+                hireDate = new DateTimeOffset(
+                    new DateTime(1995, 01, 17, 5, 30, 0),
+                    new TimeSpan(1, 15, 120)
+                );
             }
         }
 
-        [DataContract(Name="Address")]
+        [DataContract(Name = "Address")]
         public class Address
         {
-            [DataMember(IsRequired=true)]
+            [DataMember(IsRequired = true)]
             public string street;
 
             string city;
 
             [DataMember(Name = "city", IsRequired = true)]
-            public string City 
-            { 
-                get { return city; } 
+            public string City
+            {
+                get { return city; }
                 set { city = value; }
             }
-            
-            [DataMember(IsRequired=true)]
+
+            [DataMember(IsRequired = true)]
             string state;
-            
+
             int zip;
 
             [DataMember(Name = "zip", IsRequired = true)]
-            int Zip 
-            { 
-                get { return zip; } 
-                set {zip = value; }
-            }
-            
-            public Address()
+            int Zip
             {
+                get { return zip; }
+                set { zip = value; }
             }
-            
+
+            public Address() { }
+
             public Address(string init)
             {
                 street = "One FooBar Avenue";
@@ -330,21 +322,24 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
         }
 
-        [DataContract(Name="Address", Namespace="http://schemas.datacontract.org/2004/07/schemaexport.suites")]
+        [DataContract(
+            Name = "Address",
+            Namespace = "http://schemas.datacontract.org/2004/07/schemaexport.suites"
+        )]
         public struct Address2
         {
             [DataMember]
             public string street;
-            
+
             [DataMember]
             string city;
 
             string state;
-            
-            [DataMember(Name="state")]
-            public string State 
-            { 
-                get { return state; } 
+
+            [DataMember(Name = "state")]
+            public string State
+            {
+                get { return state; }
                 set { state = value; }
             }
 
@@ -360,31 +355,31 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
         }
 
-        [DataContract(Namespace="http://invalid.org?query")]
+        [DataContract(Namespace = "http://invalid.org?query")]
         public class Child : Person2
         {
-            [DataMember(Name="age")]
+            [DataMember(Name = "age")]
             public override int Age
             {
                 get { return personAge; }
-                set 
-                { 
-                    if (personAge > 18) 
+                set
+                {
+                    if (personAge > 18)
                         throw new Exception("Children must be aged 18 or younger");
-                    personAge = value; 
+                    personAge = value;
                 }
             }
 
             [DataMember]
             Person2 mother;
+
             [DataMember]
             Person2 father;
 
-            Child(StreamingContext context)
-            {
-            }
+            Child(StreamingContext context) { }
 
-            public Child(string init) : base(init)
+            public Child(string init)
+                : base(init)
             {
                 personAge = 13;
                 mother = new Person2(null);
@@ -392,23 +387,24 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
         }
 
-        [DataContract(Name="DerivedAddress")]
+        [DataContract(Name = "DerivedAddress")]
         public class DerivedAddress : Address
-        { 
+        {
             [DataMember]
             string email;
-            
+
             [DataMember]
             string phone;
 
-            public DerivedAddress() : base(null)
+            public DerivedAddress()
+                : base(null)
             {
                 email = "neo@zion.net";
                 phone = "222-111-2222";
             }
         }
 
-        [DataContract(Name="Node")]
+        [DataContract(Name = "Node")]
         class Node
         {
             [DataMember]
@@ -417,12 +413,10 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node previousNode;
 
-            Node()
-            {
-            }
+            Node() { }
         }
 
-        [DataContract(Name="Node")]
+        [DataContract(Name = "Node")]
         class Node2
         {
             [DataMember]
@@ -431,12 +425,10 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node3 previousNode;
 
-            Node2()
-            {
-            }
+            Node2() { }
         }
 
-        [DataContract(Name="Node")]
+        [DataContract(Name = "Node")]
         class Node3
         {
             [DataMember]
@@ -445,12 +437,10 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node4 previousNode;
 
-            Node3()
-            {
-            }
+            Node3() { }
         }
 
-        [DataContract(Name="Node")]
+        [DataContract(Name = "Node")]
         class Node4
         {
             [DataMember]
@@ -459,9 +449,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             Node2 previousNode;
 
-            Node4()
-            {
-            }
+            Node4() { }
         }
 
         [DataContract]
@@ -470,9 +458,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             B member;
 
-            A()
-            {
-            }
+            A() { }
         }
 
         [DataContract]
@@ -480,14 +466,12 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         {
             [DataMember]
             A member;
-            
-            B() 
-            {
-            }
+
+            B() { }
         }
 
         [DataContract]
-        public class ClassWithInterfaceMember 
+        public class ClassWithInterfaceMember
         {
             [DataMember]
             ISampleInterface interfaceMember;
@@ -497,44 +481,47 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         {
             void InterfaceMethod();
         }
-        
-        [DataContract(Name="DerivedAddress2")]
+
+        [DataContract(Name = "DerivedAddress2")]
         public class DerivedAddress2 : DerivedAddress
-        { 
+        {
             [DataMember]
             byte[] extraData;
-            
-            public DerivedAddress2() : base()
-            {
-            }
+
+            public DerivedAddress2()
+                : base() { }
         }
 
         [DataContract]
         public class Foo
         {
-            [DataMember(IsRequired=false)]
-            int i=1;
-            [DataMember(IsRequired=true)]
-            int j=3;
-            [DataMember(Order=3)]
-            string a = "a";
-            [DataMember(Order=4, IsRequired=false)]
-            public int z = 32;
+            [DataMember(IsRequired = false)]
+            int i = 1;
 
+            [DataMember(IsRequired = true)]
+            int j = 3;
+
+            [DataMember(Order = 3)]
+            string a = "a";
+
+            [DataMember(Order = 4, IsRequired = false)]
+            public int z = 32;
         }
 
         [DataContract]
         public class Bar
         {
             [DataMember]
-            int i=1;
-            [DataMember(Order=4, IsRequired=true)]
-            int j=3;
-            [DataMember(Order=5)]
-            string a = "a";
-            [DataMember(Order=8)]
-            public int z = 32;
+            int i = 1;
 
+            [DataMember(Order = 4, IsRequired = true)]
+            int j = 3;
+
+            [DataMember(Order = 5)]
+            string a = "a";
+
+            [DataMember(Order = 8)]
+            public int z = 32;
         }
 
         [DataContract]
@@ -542,6 +529,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public class MixedDCSerializable
         {
             int serializableInt = 0;
+
             [DataMember]
             int dataContractInt = 0;
         }
@@ -550,6 +538,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public class SerializableOnly : MixedDCSerializable
         {
             string serializableString;
+
             [NonSerialized]
             int nonSerializedInt;
         }
@@ -559,26 +548,31 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public class DerivedMixedDCSerializable : SerializableOnly
         {
             public float serializableFloat = 0.0F;
+
             [DataMember]
             public float dataContractFloat = 0.0F;
         }
 
         [Serializable]
-        public class AllPrimitives 
-        { 
+        public class AllPrimitives
+        {
             public object objectMember;
             public char charMember;
             public bool boolMember;
             public byte unsignedByteMember;
+
             //[CLSCompliant(false)]
             public sbyte byteMember;
             public short shortMember;
+
             //[CLSCompliant(false)]
             public ushort unsignedShortMember;
             public int intMember;
+
             //[CLSCompliant(false)]
             public uint unsignedIntMember;
             public long longMember;
+
             //[CLSCompliant(false)]
             public ulong unsignedLongMember;
             public float floatMember;
@@ -595,13 +589,14 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         [DataContract]
         public class AllSpecialTypes
         {
-            [DataMember] System.Enum enumMember;
-            [DataMember] System.ValueType valueTypeMember;
-            [DataMember] System.Array arrayMember;
-        }
+            [DataMember]
+            System.Enum enumMember;
 
+            [DataMember]
+            System.ValueType valueTypeMember;
+
+            [DataMember]
+            System.Array arrayMember;
+        }
     }
 }
-
-
-

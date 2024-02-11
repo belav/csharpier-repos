@@ -12,7 +12,6 @@ internal struct VC
     public int x3;
 }
 
-
 public class A
 {
     [Fact]

@@ -17,13 +17,20 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
     {
         internal partial class ImplementInterfaceCodeAction
         {
-            private bool HasConflictingMember(ISymbol member, ArrayBuilder<ISymbol> implementedVisibleMembers)
+            private bool HasConflictingMember(
+                ISymbol member,
+                ArrayBuilder<ISymbol> implementedVisibleMembers
+            )
             {
                 // Checks if this member conflicts with an existing member in classOrStructType or with
                 // a method we've already implemented.  If so, we'll need to implement this one
                 // explicitly.
 
-                var allMembers = State.ClassOrStructType.GetAccessibleMembersInThisAndBaseTypes<ISymbol>(State.ClassOrStructType).Concat(implementedVisibleMembers);
+                var allMembers = State
+                    .ClassOrStructType.GetAccessibleMembersInThisAndBaseTypes<ISymbol>(
+                        State.ClassOrStructType
+                    )
+                    .Concat(implementedVisibleMembers);
 
                 var conflict1 = allMembers.Any(m => HasConflict(m, member));
                 var conflict2 = IsReservedName(member.Name);
@@ -36,7 +43,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // If either of these members are invisible explicit, then there is no conflict.
                 if (Service.HasHiddenExplicitImplementation)
                 {
-                    if (member1.ExplicitInterfaceImplementations().Any() || member2.ExplicitInterfaceImplementations().Any())
+                    if (
+                        member1.ExplicitInterfaceImplementations().Any()
+                        || member2.ExplicitInterfaceImplementations().Any()
+                    )
                     {
                         // explicit methods don't conflict with anything.
                         return false;
@@ -56,7 +66,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // At this point, we have two members of the same type with the same name.  If they
                 // have a different signature (for example, methods, or parameterized properties),
                 // then they do not conflict.
-                if (!SignatureComparer.Instance.HaveSameSignature(member1, member2, IsCaseSensitive))
+                if (
+                    !SignatureComparer.Instance.HaveSameSignature(member1, member2, IsCaseSensitive)
+                )
                     return false;
 
                 // Now we have to members with the same name, type and signature. If the language
@@ -70,8 +82,14 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // a) different return types
                 // b) different accessibility
                 // c) different constraints
-                if (member1.DeclaredAccessibility != member2.DeclaredAccessibility ||
-                    !SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(member1, member2, IsCaseSensitive))
+                if (
+                    member1.DeclaredAccessibility != member2.DeclaredAccessibility
+                    || !SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                        member1,
+                        member2,
+                        IsCaseSensitive
+                    )
+                )
                 {
                     return true;
                 }

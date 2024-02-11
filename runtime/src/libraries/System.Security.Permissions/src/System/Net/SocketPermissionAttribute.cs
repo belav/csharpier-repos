@@ -7,17 +7,50 @@ using System.Security.Permissions;
 namespace System.Net
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class SocketPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public SocketPermissionAttribute(SecurityAction action) : base(action) { }
-        public string Access { get { return null; } set { } }
-        public string Host { get { return null; } set { } }
-        public string Port { get { return null; } set { } }
-        public string Transport { get { return null; } set { } }
-        public override IPermission CreatePermission() { return null; }
+        public SocketPermissionAttribute(SecurityAction action)
+            : base(action) { }
+
+        public string Access
+        {
+            get { return null; }
+            set { }
+        }
+        public string Host
+        {
+            get { return null; }
+            set { }
+        }
+        public string Port
+        {
+            get { return null; }
+            set { }
+        }
+        public string Transport
+        {
+            get { return null; }
+            set { }
+        }
+
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

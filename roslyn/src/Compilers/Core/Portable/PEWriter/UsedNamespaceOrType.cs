@@ -24,7 +24,8 @@ namespace Microsoft.Cci
             IAssemblyReference? targetAssembly = null,
             INamespace? targetNamespace = null,
             ITypeReference? targetType = null,
-            string? targetXmlNamespace = null)
+            string? targetXmlNamespace = null
+        )
         {
             AliasOpt = alias;
             TargetAssemblyOpt = targetAssembly;
@@ -39,10 +40,18 @@ namespace Microsoft.Cci
             return new UsedNamespaceOrType(alias: aliasOpt, targetType: type);
         }
 
-        internal static UsedNamespaceOrType CreateNamespace(INamespace @namespace, IAssemblyReference? assemblyOpt = null, string? aliasOpt = null)
+        internal static UsedNamespaceOrType CreateNamespace(
+            INamespace @namespace,
+            IAssemblyReference? assemblyOpt = null,
+            string? aliasOpt = null
+        )
         {
             RoslynDebug.Assert(@namespace != null);
-            return new UsedNamespaceOrType(alias: aliasOpt, targetAssembly: assemblyOpt, targetNamespace: @namespace);
+            return new UsedNamespaceOrType(
+                alias: aliasOpt,
+                targetAssembly: assemblyOpt,
+                targetNamespace: @namespace
+            );
         }
 
         internal static UsedNamespaceOrType CreateExternAlias(string alias)
@@ -74,11 +83,19 @@ namespace Microsoft.Cci
 
         public override int GetHashCode()
         {
-            return Hash.Combine(AliasOpt,
-                   Hash.Combine((object?)TargetAssemblyOpt,
-                   Hash.Combine(GetHashCode(TargetNamespaceOpt),
-                   Hash.Combine(GetHashCode(TargetTypeOpt),
-                   Hash.Combine(TargetXmlNamespaceOpt, 0)))));
+            return Hash.Combine(
+                AliasOpt,
+                Hash.Combine(
+                    (object?)TargetAssemblyOpt,
+                    Hash.Combine(
+                        GetHashCode(TargetNamespaceOpt),
+                        Hash.Combine(
+                            GetHashCode(TargetTypeOpt),
+                            Hash.Combine(TargetXmlNamespaceOpt, 0)
+                        )
+                    )
+                )
+            );
         }
 
         private static bool Equals(ITypeReference? x, ITypeReference? y)

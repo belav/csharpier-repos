@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Threading;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
+using System.Text;
+using System.Threading;
 
 public class ArgInput
 {
@@ -32,17 +32,35 @@ public class ArgInput
 
     public static void DisplayUsage()
     {
-        Console.WriteLine("Usage: RunInContext.exe [options ...] <Assembly file name> [assembly command line options]");
+        Console.WriteLine(
+            "Usage: RunInContext.exe [options ...] <Assembly file name> [assembly command line options]"
+        );
         Console.WriteLine("    /v                        Verbose mode");
-        Console.WriteLine("    /collectstress:<n>        Emit in collectible assembly n times, checking for memory leaks(def:2000)");
-        Console.WriteLine("    /maxstressrestarts:<n>    Maximum allowed stress run restarts when memory usage increases (def:10)");
-        Console.WriteLine("    /iterationcount:<n>       Number of iterations in non-stress mode (def:1)");
-        Console.WriteLine("    /memorymonitor:<skip>     Monitor memory usage closely. skip: number of iterations to skip before monitoring memory.");
-        Console.WriteLine("    /referencespath:<path>    Path to resolve assemblies referenced by the main assembly");
-        Console.WriteLine("    /breakbeforerun           Break into debugger before executing the assembly");
-        Console.WriteLine("    /breakafterrun            Break into debugger after executing the assembly");
+        Console.WriteLine(
+            "    /collectstress:<n>        Emit in collectible assembly n times, checking for memory leaks(def:2000)"
+        );
+        Console.WriteLine(
+            "    /maxstressrestarts:<n>    Maximum allowed stress run restarts when memory usage increases (def:10)"
+        );
+        Console.WriteLine(
+            "    /iterationcount:<n>       Number of iterations in non-stress mode (def:1)"
+        );
+        Console.WriteLine(
+            "    /memorymonitor:<skip>     Monitor memory usage closely. skip: number of iterations to skip before monitoring memory."
+        );
+        Console.WriteLine(
+            "    /referencespath:<path>    Path to resolve assemblies referenced by the main assembly"
+        );
+        Console.WriteLine(
+            "    /breakbeforerun           Break into debugger before executing the assembly"
+        );
+        Console.WriteLine(
+            "    /breakafterrun            Break into debugger after executing the assembly"
+        );
         Console.WriteLine("    /breakonunloadfailure     Break into debugger on unload failure");
-        Console.WriteLine("    /delegateload             Delegate the AssemblyLoadContext.Load to a secondary AssemblyLoadContext");
+        Console.WriteLine(
+            "    /delegateload             Delegate the AssemblyLoadContext.Load to a secondary AssemblyLoadContext"
+        );
     }
 
     public ArgInput(String[] args)
@@ -124,12 +142,16 @@ public class ArgInput
 
         if (StressModeCount < 50)
         {
-            Console.WriteLine("The number of stress runs is less that the minimum (50). Defaulting to 50");
+            Console.WriteLine(
+                "The number of stress runs is less that the minimum (50). Defaulting to 50"
+            );
             StressModeCount = 50;
         }
         if (!MonitorMode && (MaxRestarts < 5))
         {
-            Console.WriteLine("The number of stress run restarts is less that the minimum (5). Defaulting to 5");
+            Console.WriteLine(
+                "The number of stress run restarts is less that the minimum (5). Defaulting to 5"
+            );
             MaxRestarts = 5;
         }
     }
@@ -137,14 +159,10 @@ public class ArgInput
 
 abstract class TestAssemblyLoadContextBase : AssemblyLoadContext
 {
-    public TestAssemblyLoadContextBase() : base(true)
-    {
+    public TestAssemblyLoadContextBase()
+        : base(true) { }
 
-    }
-    public virtual void Cleanup()
-    {
-
-    }
+    public virtual void Cleanup() { }
 }
 
 class TestAssemblyLoadContext : TestAssemblyLoadContextBase
@@ -153,7 +171,11 @@ class TestAssemblyLoadContext : TestAssemblyLoadContextBase
     string _assemblyDirectory;
     string _referencesDirectory;
 
-    public TestAssemblyLoadContext(string assemblyDirectory, string referencesDirectory, List<WeakReference> assemblyReferences)
+    public TestAssemblyLoadContext(
+        string assemblyDirectory,
+        string referencesDirectory,
+        List<WeakReference> assemblyReferences
+    )
     {
         _assemblyDirectory = assemblyDirectory;
         _referencesDirectory = referencesDirectory;
@@ -171,15 +193,19 @@ class TestAssemblyLoadContext : TestAssemblyLoadContextBase
         {
             try
             {
-                assembly = LoadFromAssemblyPath(Path.Combine(_assemblyDirectory, name.Name + ".dll"));
+                assembly = LoadFromAssemblyPath(
+                    Path.Combine(_assemblyDirectory, name.Name + ".dll")
+                );
             }
             catch (Exception)
             {
-                assembly = LoadFromAssemblyPath(Path.Combine(_assemblyDirectory, name.Name + ".exe"));
+                assembly = LoadFromAssemblyPath(
+                    Path.Combine(_assemblyDirectory, name.Name + ".exe")
+                );
             }
         }
 
-        lock(_assemblyReferences)
+        lock (_assemblyReferences)
         {
             _assemblyReferences.Add(new WeakReference(assembly));
         }
@@ -209,10 +235,7 @@ class TestAssemblyLoadContextDelegating : TestAssemblyLoadContextBase
     }
 }
 
-public class UnloadFailedException : Exception
-{
-
-}
+public class UnloadFailedException : Exception { }
 
 public class TestRunner
 {
@@ -259,7 +282,10 @@ public class TestRunner
 
         for (i = 1; i <= _input.StressModeCount; i++)
         {
-            if (!_input.MonitorMode && (((i * 1.0) / _input.StressModeCount) * 100 > lastProgressReport))
+            if (
+                !_input.MonitorMode
+                && (((i * 1.0) / _input.StressModeCount) * 100 > lastProgressReport)
+            )
             {
                 Console.WriteLine("Completed: {0}%...", lastProgressReport);
                 lastProgressReport += 10;
@@ -288,24 +314,35 @@ public class TestRunner
 
                 if (currentMemory > startMemory)
                 {
-                    Console.WriteLine($"\n\n +++ Memory usage increased by {currentMemory - startMemory} bytes at iteration {i}!!                                                 ");
+                    Console.WriteLine(
+                        $"\n\n +++ Memory usage increased by {currentMemory - startMemory} bytes at iteration {i}!!                                                 "
+                    );
                     if (i > _input.IterationsToSkip)
                     {
-                        leak = (long)((currentMemory - monitorStartMem) / ((i - _input.IterationsToSkip) * 1.0));
+                        leak = (long)(
+                            (currentMemory - monitorStartMem)
+                            / ((i - _input.IterationsToSkip) * 1.0)
+                        );
                     }
                     startMemory = currentMemory;
                 }
                 else if (currentMemory < startMemory)
                 {
-                    Console.WriteLine($"\n\n --- Memory usage decreased by {startMemory - currentMemory} bytes at iteration {i}                                                 ");
+                    Console.WriteLine(
+                        $"\n\n --- Memory usage decreased by {startMemory - currentMemory} bytes at iteration {i}                                                 "
+                    );
                     startMemory = currentMemory;
                 }
 
-                Console.Write($"Private Memory Size = {currentMemory / 1024}K after {i + 1} iterations.");
+                Console.Write(
+                    $"Private Memory Size = {currentMemory / 1024}K after {i + 1} iterations."
+                );
 
                 if (i > _input.IterationsToSkip)
                 {
-                    Console.Write($" Average leak: {leak} bytes/iteration. speed: {(int)currentSpeed} ms/type.");
+                    Console.Write(
+                        $" Average leak: {leak} bytes/iteration. speed: {(int)currentSpeed} ms/type."
+                    );
                 }
 
                 Console.WriteLine();
@@ -315,8 +352,12 @@ public class TestRunner
                 if (currentMemory > startMemory)
                 {
                     leak = (currentMemory - startMemory) / i;
-                    Console.WriteLine($"LOOP #{i}: Memory usage increased by {_input.MaxRestarts - restarts - 1} bytes! Restarting test... ({currentMemory - startMemory} restarts left)");
-                    Console.WriteLine($"    + Average leak over the last {i} iterations: {leak} bytes\n");
+                    Console.WriteLine(
+                        $"LOOP #{i}: Memory usage increased by {_input.MaxRestarts - restarts - 1} bytes! Restarting test... ({currentMemory - startMemory} restarts left)"
+                    );
+                    Console.WriteLine(
+                        $"    + Average leak over the last {i} iterations: {leak} bytes\n"
+                    );
 
                     restarts++;
                     if (restarts == _input.MaxRestarts)
@@ -345,7 +386,10 @@ public class TestRunner
         }
         if (_input.MonitorMode)
         {
-            leak = (long)((currentMemory - monitorStartMem) / ((_input.StressModeCount * 1.0) - _input.IterationsToSkip));
+            leak = (long)(
+                (currentMemory - monitorStartMem)
+                / ((_input.StressModeCount * 1.0) - _input.IterationsToSkip)
+            );
             startMemory = monitorStartMem;
         }
 
@@ -356,7 +400,9 @@ public class TestRunner
         Console.WriteLine($"Starting emission speed       : {startSpeed} milliseconds");
         Console.WriteLine($"Ending emission speed         : {currentSpeed} milliseconds");
         Console.WriteLine();
-        Console.WriteLine($"Memory leak                   : {currentMemory - startMemory} bytes ({leak} bytes per iteration).");
+        Console.WriteLine(
+            $"Memory leak                   : {currentMemory - startMemory} bytes ({leak} bytes per iteration)."
+        );
         if (currentMemory > startMemory)
         {
             throw new Exception("Memory leaked");
@@ -370,7 +416,8 @@ public class TestRunner
         int result = 0;
 
         object res;
-        object[] args = (entryPoint.GetParameters().Length != 0) ? new object[] { _input.EntryArgs } : null;
+        object[] args =
+            (entryPoint.GetParameters().Length != 0) ? new object[] { _input.EntryArgs } : null;
         string argsStr = (args == null) ? "" : _input.EntryArgStr.ToString();
 
         if (_input.Verbose)
@@ -380,16 +427,25 @@ public class TestRunner
 
         res = entryPoint.Invoke(null, args);
 
-        result = (entryPoint.ReturnType == typeof(void)) ? Environment.ExitCode : Convert.ToInt32(res);
+        result =
+            (entryPoint.ReturnType == typeof(void)) ? Environment.ExitCode : Convert.ToInt32(res);
 
         return result;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public int ExecuteAndUnload(List<WeakReference> assemblyReferences, out WeakReference testAlcWeakRef, out WeakReference testAlcWeakRefInner)
+    public int ExecuteAndUnload(
+        List<WeakReference> assemblyReferences,
+        out WeakReference testAlcWeakRef,
+        out WeakReference testAlcWeakRefInner
+    )
     {
         int result;
-        TestAssemblyLoadContextBase testAlc = new TestAssemblyLoadContext(_input.AssemblyPath, _input.ReferencesPath, assemblyReferences);
+        TestAssemblyLoadContextBase testAlc = new TestAssemblyLoadContext(
+            _input.AssemblyPath,
+            _input.ReferencesPath,
+            assemblyReferences
+        );
 
         if (_input.DelegateLoad)
         {
@@ -476,7 +532,11 @@ public class TestRunner
             Debugger.Break();
         }
 
-        int result = ExecuteAndUnload(assemblyReferences, out testAlcWeakRef, out testAlcWeakRefInner);
+        int result = ExecuteAndUnload(
+            assemblyReferences,
+            out testAlcWeakRef,
+            out testAlcWeakRefInner
+        );
 
         for (int i = 0; (testAlcWeakRef.IsAlive || testAlcWeakRefInner.IsAlive) && (i < 100); i++)
         {
@@ -562,8 +622,9 @@ public class RunInContext
 
     private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        Console.WriteLine($"RunInContext FAIL! Exiting due to unhandled exception in the test: {e.ExceptionObject}");
+        Console.WriteLine(
+            $"RunInContext FAIL! Exiting due to unhandled exception in the test: {e.ExceptionObject}"
+        );
         Environment.Exit(FailureExitCode);
     }
-
 }

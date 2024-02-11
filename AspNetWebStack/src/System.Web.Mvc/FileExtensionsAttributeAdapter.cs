@@ -6,12 +6,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace System.Web.Mvc
 {
-    internal class FileExtensionsAttributeAdapter : DataAnnotationsModelValidator<FileExtensionsAttribute>
+    internal class FileExtensionsAttributeAdapter
+        : DataAnnotationsModelValidator<FileExtensionsAttribute>
     {
-        public FileExtensionsAttributeAdapter(ModelMetadata metadata, ControllerContext context, FileExtensionsAttribute attribute)
-            : base(metadata, context, attribute)
-        {
-        }
+        public FileExtensionsAttributeAdapter(
+            ModelMetadata metadata,
+            ControllerContext context,
+            FileExtensionsAttribute attribute
+        )
+            : base(metadata, context, attribute) { }
 
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {

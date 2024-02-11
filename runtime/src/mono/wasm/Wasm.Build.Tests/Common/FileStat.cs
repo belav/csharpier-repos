@@ -6,4 +6,5 @@ using System;
 #nullable enable
 
 namespace Wasm.Build.Tests;
+
 public record FileStat(bool Exists, DateTime LastWriteTimeUtc, long Length, string FullPath);

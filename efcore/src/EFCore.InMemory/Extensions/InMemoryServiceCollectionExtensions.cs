@@ -33,7 +33,9 @@ public static class InMemoryServiceCollectionExtensions
     ///     The same service collection so that multiple calls can be chained.
     /// </returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static IServiceCollection AddEntityFrameworkInMemoryDatabase(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddEntityFrameworkInMemoryDatabase(
+        this IServiceCollection serviceCollection
+    )
     {
         var builder = new EntityFrameworkServicesBuilder(serviceCollection)
             .TryAdd<LoggingDefinitions, InMemoryLoggingDefinitions>()
@@ -46,16 +48,27 @@ public static class InMemoryServiceCollectionExtensions
             .TryAdd<IProviderConventionSetBuilder, InMemoryConventionSetBuilder>()
             .TryAdd<IModelValidator, InMemoryModelValidator>()
             .TryAdd<ITypeMappingSource, InMemoryTypeMappingSource>()
-            .TryAdd<IShapedQueryCompilingExpressionVisitorFactory, InMemoryShapedQueryCompilingExpressionVisitorFactory>()
-            .TryAdd<IQueryableMethodTranslatingExpressionVisitorFactory, InMemoryQueryableMethodTranslatingExpressionVisitorFactory>()
-            .TryAdd<IQueryTranslationPreprocessorFactory, InMemoryQueryTranslationPreprocessorFactory>()
-            .TryAdd<ISingletonOptions, IInMemorySingletonOptions>(p => p.GetRequiredService<IInMemorySingletonOptions>())
-            .TryAddProviderSpecificServices(
-                b => b
-                    .TryAddSingleton<IInMemorySingletonOptions, InMemorySingletonOptions>()
+            .TryAdd<
+                IShapedQueryCompilingExpressionVisitorFactory,
+                InMemoryShapedQueryCompilingExpressionVisitorFactory
+            >()
+            .TryAdd<
+                IQueryableMethodTranslatingExpressionVisitorFactory,
+                InMemoryQueryableMethodTranslatingExpressionVisitorFactory
+            >()
+            .TryAdd<
+                IQueryTranslationPreprocessorFactory,
+                InMemoryQueryTranslationPreprocessorFactory
+            >()
+            .TryAdd<ISingletonOptions, IInMemorySingletonOptions>(p =>
+                p.GetRequiredService<IInMemorySingletonOptions>()
+            )
+            .TryAddProviderSpecificServices(b =>
+                b.TryAddSingleton<IInMemorySingletonOptions, InMemorySingletonOptions>()
                     .TryAddSingleton<IInMemoryStoreCache, InMemoryStoreCache>()
                     .TryAddSingleton<IInMemoryTableFactory, InMemoryTableFactory>()
-                    .TryAddScoped<IInMemoryDatabase, InMemoryDatabase>());
+                    .TryAddScoped<IInMemoryDatabase, InMemoryDatabase>()
+            );
 
         builder.TryAddCoreServices();
 

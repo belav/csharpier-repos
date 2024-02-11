@@ -29,16 +29,20 @@ public class RequestDelegateGeneratorBenchmarks : RequestDelegateCreationTestBas
             innerSource += $"""app.MapGet("/route{i}", (int? id) => "Hello World!");""";
         }
         var source = GetMapActionString(innerSource);
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8)).Project;
+        project = project
+            .AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8))
+            .Project;
         _compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        _driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
+        _driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
     }
 
     [Benchmark]

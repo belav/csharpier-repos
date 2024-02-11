@@ -1,11 +1,11 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -13,22 +13,23 @@
  *
  * ***************************************************************************/
 
-using System.Security;
 using System;
+using System.Security;
 
-namespace Microsoft.Scripting {
-
+namespace Microsoft.Scripting
+{
     /// <summary>
-    /// This class holds onto internal debugging options used in this assembly. 
+    /// This class holds onto internal debugging options used in this assembly.
     /// These options can be set via environment variables DLR_{option-name}.
     /// Boolean options map "true" to true and other values to false.
-    /// 
+    ///
     /// These options are for internal debugging only, and should not be
     /// exposed through any public APIs.
     /// </summary>
-    internal static class DebugOptions {
-
-        private static bool ReadOption(string name) {
+    internal static class DebugOptions
+    {
+        private static bool ReadOption(string name)
+        {
 #if SILVERLIGHT
             return false;
 #else
@@ -37,8 +38,13 @@ namespace Microsoft.Scripting {
 #endif
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "name")]
-        private static bool ReadDebugOption(string name) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "name"
+        )]
+        private static bool ReadDebugOption(string name)
+        {
 #if DEBUG
             return ReadOption(name);
 #else
@@ -46,11 +52,15 @@ namespace Microsoft.Scripting {
 #endif
         }
 
-        private static string ReadString(string name) {
+        private static string ReadString(string name)
+        {
 #if FEATURE_PROCESS
-            try {
+            try
+            {
                 return Environment.GetEnvironmentVariable("DLR_" + name);
-            } catch (SecurityException) {
+            }
+            catch (SecurityException)
+            {
                 return null;
             }
 #else
@@ -58,8 +68,13 @@ namespace Microsoft.Scripting {
 #endif
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "name")]
-        private static string ReadDebugString(string name) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "name"
+        )]
+        private static string ReadDebugString(string name)
+        {
 #if DEBUG
             return ReadString(name);
 #else
@@ -67,9 +82,10 @@ namespace Microsoft.Scripting {
 #endif
         }
 
-        private readonly static bool _trackPerformance = ReadDebugOption("TrackPerformance");
+        private static readonly bool _trackPerformance = ReadDebugOption("TrackPerformance");
 
-        internal static bool TrackPerformance {
+        internal static bool TrackPerformance
+        {
             get { return _trackPerformance; }
         }
     }

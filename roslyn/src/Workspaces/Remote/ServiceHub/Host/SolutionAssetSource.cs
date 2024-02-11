@@ -20,18 +20,38 @@ internal sealed class SolutionAssetSource(ServiceBrokerClient client) : IAssetSo
         AssetHint assetHint,
         ImmutableArray<Checksum> checksums,
         ISerializerService serializerService,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses ConfigureAwait(true)
         await TaskScheduler.Default;
 
-        return await RemoteCallback<ISolutionAssetProvider>.InvokeServiceAsync(
-            _client,
-            SolutionAssetProvider.ServiceDescriptor,
-            (callback, cancellationToken) => callback.InvokeAsync(
-                (proxy, pipeWriter, cancellationToken) => proxy.WriteAssetsAsync(pipeWriter, solutionChecksum, assetHint, checksums, cancellationToken),
-                (pipeReader, cancellationToken) => RemoteHostAssetSerialization.ReadDataAsync(pipeReader, solutionChecksum, checksums.Length, serializerService, cancellationToken),
-                cancellationToken),
-            cancellationToken).ConfigureAwait(false);
+        return await RemoteCallback<ISolutionAssetProvider>
+            .InvokeServiceAsync(
+                _client,
+                SolutionAssetProvider.ServiceDescriptor,
+                (callback, cancellationToken) =>
+                    callback.InvokeAsync(
+                        (proxy, pipeWriter, cancellationToken) =>
+                            proxy.WriteAssetsAsync(
+                                pipeWriter,
+                                solutionChecksum,
+                                assetHint,
+                                checksums,
+                                cancellationToken
+                            ),
+                        (pipeReader, cancellationToken) =>
+                            RemoteHostAssetSerialization.ReadDataAsync(
+                                pipeReader,
+                                solutionChecksum,
+                                checksums.Length,
+                                serializerService,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 }

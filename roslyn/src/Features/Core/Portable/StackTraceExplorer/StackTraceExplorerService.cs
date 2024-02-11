@@ -22,11 +22,12 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public StackTraceExplorerService()
-        {
-        }
+        public StackTraceExplorerService() { }
 
-        public (Document? document, int line) GetDocumentAndLine(Solution solution, ParsedFrame frame)
+        public (Document? document, int line) GetDocumentAndLine(
+            Solution solution,
+            ParsedFrame frame
+        )
         {
             if (frame is ParsedStackFrame parsedFrame)
             {
@@ -42,20 +43,36 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             return default;
         }
 
-        public async Task<DefinitionItem?> TryFindDefinitionAsync(Solution solution, ParsedFrame frame, StackFrameSymbolPart symbolPart, CancellationToken cancellationToken)
+        public async Task<DefinitionItem?> TryFindDefinitionAsync(
+            Solution solution,
+            ParsedFrame frame,
+            StackFrameSymbolPart symbolPart,
+            CancellationToken cancellationToken
+        )
         {
             if (frame is not ParsedStackFrame parsedFrame)
             {
                 return null;
             }
 
-            var client = await RemoteHostClient.TryGetClientAsync(solution.Services, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(solution.Services, cancellationToken)
+                .ConfigureAwait(false);
             if (client is not null)
             {
-                var result = await client.TryInvokeAsync<IRemoteStackTraceExplorerService, SerializableDefinitionItem?>(
-                    solution,
-                    (service, solutionInfo, cancellationToken) => service.TryFindDefinitionAsync(solutionInfo, parsedFrame.ToString(), symbolPart, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var result = await client
+                    .TryInvokeAsync<IRemoteStackTraceExplorerService, SerializableDefinitionItem?>(
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.TryFindDefinitionAsync(
+                                solutionInfo,
+                                parsedFrame.ToString(),
+                                symbolPart,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (!result.HasValue)
                 {
@@ -68,13 +85,21 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                     return null;
                 }
 
-                return await serializedDefinition.Value.RehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
+                return await serializedDefinition
+                    .Value.RehydrateAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            return await StackTraceExplorerUtilities.GetDefinitionAsync(solution, parsedFrame.Root, symbolPart, cancellationToken).ConfigureAwait(false);
+            return await StackTraceExplorerUtilities
+                .GetDefinitionAsync(solution, parsedFrame.Root, symbolPart, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        private static ImmutableArray<Document> GetFileMatches(Solution solution, StackFrameCompilationUnit root, out int lineNumber)
+        private static ImmutableArray<Document> GetFileMatches(
+            Solution solution,
+            StackFrameCompilationUnit root,
+            out int lineNumber
+        )
         {
             lineNumber = 0;
             if (root.FileInformationExpression is null)
@@ -98,7 +123,6 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                     {
                         return ImmutableArray.Create(document);
                     }
-
                     else if (document.Name == documentName)
                     {
                         potentialMatches.Add(document);

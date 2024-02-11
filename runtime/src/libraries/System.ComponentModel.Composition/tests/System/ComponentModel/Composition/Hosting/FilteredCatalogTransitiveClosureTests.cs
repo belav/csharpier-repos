@@ -10,8 +10,11 @@ namespace System.ComponentModel.Composition.Hosting
     public class FilteredCatalogTransitiveClosureTests
     {
         public interface IContract1 { }
+
         public interface IContract2 { }
+
         public interface IContract3 { }
+
         public interface IOther { }
 
         [Fact]
@@ -22,7 +25,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter2),
                 typeof(Exporter2Import1),
                 typeof(Exporter3Import2),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -36,7 +40,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(Exporter1),
                 typeof(Exporter2Import1AsExportFactory),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -54,7 +59,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter1Import2),
                 typeof(Exporter3Import2),
                 typeof(Exporter2Import3),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
@@ -71,7 +77,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter2),
                 typeof(Exporter2Import1),
                 typeof(Exporter3Import2),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -90,7 +97,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter1Import2),
                 typeof(Exporter3Import2),
                 typeof(Exporter2Import3),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
@@ -107,11 +115,14 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter2),
                 typeof(Exporter2Import1),
                 typeof(Exporter3Import2),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependents(i => i.Cardinality == ImportCardinality.ZeroOrOne);
+            var dependentsCatalog = filteredCatalog.IncludeDependents(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
+            );
             Assert.Equal(2, dependentsCatalog.Parts.Count());
         }
 
@@ -126,11 +137,14 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter1Import2),
                 typeof(Exporter3Import2),
                 typeof(Exporter2Import3),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependents(i => i.Cardinality == ImportCardinality.ZeroOrOne);
+            var dependentsCatalog = filteredCatalog.IncludeDependents(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
+            );
             Assert.Equal(3, dependentsCatalog.Parts.Count());
         }
 
@@ -140,7 +154,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(OpenGenericExporter<,>),
                 typeof(OpenGenericImporter<,>),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Imports<IContract2>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -154,7 +169,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(OpenGenericExporter<,>),
                 typeof(OpenGenericImporterReverseOrder<,>),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Imports<IContract2>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -168,7 +184,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(OpenGenericExporter<,>),
                 typeof(ClosedGenericImporter),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Imports<IContract2>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -182,7 +199,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(SpecificGenericExporter),
                 typeof(ClosedGenericImporter),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Imports<IContract2>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -198,7 +216,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter2),
                 typeof(Exporter2Import1),
                 typeof(Exporter3Import2),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
@@ -212,7 +231,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(Exporter1),
                 typeof(Exporter2Import1AsExportFactory),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -230,7 +250,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter1Import2),
                 typeof(Exporter3Import2),
                 typeof(Exporter2Import3),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(3, filteredCatalog.Parts.Count());
 
@@ -248,7 +269,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter3),
                 typeof(Exporter2Import1),
                 typeof(Exporter3Import2),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
@@ -266,7 +288,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter3),
                 typeof(Exporter2Import1),
                 typeof(Exporter1Import2),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
@@ -284,11 +307,14 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter3),
                 typeof(Exporter2Import1),
                 typeof(Exporter1Import2),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(3, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependencies(i => i.Cardinality == ImportCardinality.ZeroOrOne);
+            var dependentsCatalog = filteredCatalog.IncludeDependencies(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
+            );
             Assert.Equal(4, dependentsCatalog.Parts.Count());
         }
 
@@ -302,11 +328,14 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter2),
                 typeof(Exporter3),
                 typeof(Exporter1Import2),
-                typeof(IOther));
+                typeof(IOther)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract2>());
             Assert.Equal(2, filteredCatalog.Parts.Count());
 
-            var dependentsCatalog = filteredCatalog.IncludeDependencies(i => i.Cardinality == ImportCardinality.ZeroOrOne);
+            var dependentsCatalog = filteredCatalog.IncludeDependencies(i =>
+                i.Cardinality == ImportCardinality.ZeroOrOne
+            );
             Assert.Equal(4, dependentsCatalog.Parts.Count());
         }
 
@@ -316,7 +345,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(OpenGenericExporter<,>),
                 typeof(OpenGenericImporter<,>),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract3>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -330,7 +360,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(OpenGenericExporter<,>),
                 typeof(OpenGenericImporterReverseOrder<,>),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract3>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -344,7 +375,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(OpenGenericExporter<,>),
                 typeof(ClosedGenericImporter),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -358,7 +390,8 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateCatalog(
                 typeof(SpecificGenericExporter),
                 typeof(ClosedGenericImporter),
-                typeof(Other));
+                typeof(Other)
+            );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract1>());
             Assert.Equal(1, filteredCatalog.Parts.Count());
 
@@ -374,19 +407,13 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [Export(typeof(IContract1))]
-        public class Exporter1 : IContract1
-        {
-        }
+        public class Exporter1 : IContract1 { }
 
         [Export(typeof(IContract2))]
-        public class Exporter2 : IContract2
-        {
-        }
+        public class Exporter2 : IContract2 { }
 
         [Export(typeof(IContract3))]
-        public class Exporter3 : IContract3
-        {
-        }
+        public class Exporter3 : IContract3 { }
 
         [Export(typeof(IContract2))]
         public class Exporter2Import1 : IContract2

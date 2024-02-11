@@ -18,7 +18,11 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly EcmaModule _module;
         private readonly EventDefinitionHandle _handle;
 
-        internal EcmaEvent(RoInstantiationProviderType declaringType, EventDefinitionHandle handle, Type reflectedType)
+        internal EcmaEvent(
+            RoInstantiationProviderType declaringType,
+            EventDefinitionHandle handle,
+            Type reflectedType
+        )
             : base(declaringType, reflectedType)
         {
             Debug.Assert(!handle.IsNil);
@@ -28,12 +32,15 @@ namespace System.Reflection.TypeLoading.Ecma
 
             _handle = handle;
             _module = (EcmaModule)(declaringType.Module);
-            _neverAccessThisExceptThroughEventDefinitionProperty = handle.GetEventDefinition(Reader);
+            _neverAccessThisExceptThroughEventDefinitionProperty = handle.GetEventDefinition(
+                Reader
+            );
         }
 
         internal sealed override RoModule GetRoModule() => _module;
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => EventDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            EventDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
 
         public sealed override int MetadataToken => _handle.GetToken();
 
@@ -54,11 +61,15 @@ namespace System.Reflection.TypeLoading.Ecma
             return true;
         }
 
-        public sealed override int GetHashCode() => _handle.GetHashCode() ^ DeclaringType.GetHashCode();
+        public sealed override int GetHashCode() =>
+            _handle.GetHashCode() ^ DeclaringType.GetHashCode();
 
         protected sealed override string ComputeName() => EventDefinition.Name.GetString(Reader);
+
         protected sealed override EventAttributes ComputeAttributes() => EventDefinition.Attributes;
-        protected sealed override Type ComputeEventHandlerType() => EventDefinition.Type.ResolveTypeDefRefOrSpec(_module, TypeContext);
+
+        protected sealed override Type ComputeEventHandlerType() =>
+            EventDefinition.Type.ResolveTypeDefRefOrSpec(_module, TypeContext);
 
         public sealed override MethodInfo[] GetOtherMethods(bool nonPublic)
         {
@@ -69,9 +80,14 @@ namespace System.Reflection.TypeLoading.Ecma
             for (int i = 0; i < count; i++)
             {
                 MethodDefinition def = others[i].GetMethodDefinition(reader);
-                if (nonPublic || (def.Attributes & MethodAttributes.MemberAccessMask) == MethodAttributes.Public)
+                if (
+                    nonPublic
+                    || (def.Attributes & MethodAttributes.MemberAccessMask)
+                        == MethodAttributes.Public
+                )
                 {
-                    MethodInfo methodInfo = others[i].ToMethod(GetRoDeclaringType(), GetRoDeclaringType());
+                    MethodInfo methodInfo = others[i]
+                        .ToMethod(GetRoDeclaringType(), GetRoDeclaringType());
                     results.Add(methodInfo);
                 }
             }
@@ -84,21 +100,37 @@ namespace System.Reflection.TypeLoading.Ecma
             if (disposedString != null)
                 return disposedString;
 
-            return
-                EventDefinition.Type.ToTypeString(TypeContext, Reader) +
-                " " +
-                Name;
+            return EventDefinition.Type.ToTypeString(TypeContext, Reader) + " " + Name;
         }
 
-        protected sealed override RoMethod? ComputeEventAddMethod() => EventDefinition.GetAccessors().Adder.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
-        protected sealed override RoMethod? ComputeEventRemoveMethod() => EventDefinition.GetAccessors().Remover.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
-        protected sealed override RoMethod? ComputeEventRaiseMethod() => EventDefinition.GetAccessors().Raiser.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+        protected sealed override RoMethod? ComputeEventAddMethod() =>
+            EventDefinition
+                .GetAccessors()
+                .Adder.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+
+        protected sealed override RoMethod? ComputeEventRemoveMethod() =>
+            EventDefinition
+                .GetAccessors()
+                .Remover.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+
+        protected sealed override RoMethod? ComputeEventRaiseMethod() =>
+            EventDefinition
+                .GetAccessors()
+                .Raiser.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
 
         private MetadataReader Reader => _module.Reader;
         private MetadataLoadContext Loader => GetRoModule().Loader;
 
-        private ref readonly EventDefinition EventDefinition { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughEventDefinitionProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly EventDefinition EventDefinition
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughEventDefinitionProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly EventDefinition _neverAccessThisExceptThroughEventDefinitionProperty;
     }
 }

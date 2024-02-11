@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -26,12 +26,13 @@ namespace System.Data.Services.Client
     {
         #region Private fields.
 
-        private readonly HashSet<ResourceExpression> referencedInputs = new HashSet<ResourceExpression>(EqualityComparer<ResourceExpression>.Default);
+        private readonly HashSet<ResourceExpression> referencedInputs =
+            new HashSet<ResourceExpression>(EqualityComparer<ResourceExpression>.Default);
 
         private readonly ResourceExpression input;
 
         private readonly ResourceSetExpression inputSet;
-        
+
         private readonly ParameterExpression inputParameter;
 
         #endregion Private fields.
@@ -43,7 +44,12 @@ namespace System.Data.Services.Client
             this.inputParameter = setReferenceParam;
         }
 
-        internal static Expression Bind(Expression e, ResourceExpression currentInput, ParameterExpression inputParameter, List<ResourceExpression> referencedInputs)
+        internal static Expression Bind(
+            Expression e,
+            ResourceExpression currentInput,
+            ParameterExpression inputParameter,
+            List<ResourceExpression> referencedInputs
+        )
         {
             Debug.Assert(e != null, "Expression cannot be null");
             Debug.Assert(currentInput != null, "A current input resource set is required");
@@ -55,11 +61,10 @@ namespace System.Data.Services.Client
             referencedInputs.AddRange(binder.referencedInputs);
             return result;
         }
-                
+
         internal override Expression VisitMemberAccess(MemberExpression m)
         {
-            if (this.inputSet == null ||
-                !this.inputSet.HasTransparentScope)
+            if (this.inputSet == null || !this.inputSet.HasTransparentScope)
             {
                 return base.VisitMemberAccess(m);
             }
@@ -67,9 +72,11 @@ namespace System.Data.Services.Client
             ParameterExpression innerParamRef = null;
             Stack<PropertyInfo> nestedAccesses = new Stack<PropertyInfo>();
             MemberExpression memberRef = m;
-            while (memberRef != null &&
-                   memberRef.Member.MemberType == MemberTypes.Property &&
-                   memberRef.Expression != null)
+            while (
+                memberRef != null
+                && memberRef.Member.MemberType == MemberTypes.Property
+                && memberRef.Expression != null
+            )
             {
                 nestedAccesses.Push((PropertyInfo)memberRef.Member);
 
@@ -99,7 +106,12 @@ namespace System.Data.Services.Client
 
                 PropertyInfo currentProp = nestedAccesses.Peek();
 
-                if (currentProp.Name.Equals(targetSet.TransparentScope.Accessor, StringComparison.Ordinal))
+                if (
+                    currentProp.Name.Equals(
+                        targetSet.TransparentScope.Accessor,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     target = targetSet;
                     nestedAccesses.Pop();
@@ -108,14 +120,22 @@ namespace System.Data.Services.Client
                 }
 
                 Expression source;
-                if (!targetSet.TransparentScope.SourceAccessors.TryGetValue(currentProp.Name, out source))
+                if (
+                    !targetSet.TransparentScope.SourceAccessors.TryGetValue(
+                        currentProp.Name,
+                        out source
+                    )
+                )
                 {
                     break;
                 }
 
                 transparentScopeTraversed = true;
                 nestedAccesses.Pop();
-                Debug.Assert(source != null, "source != null -- otherwise ResourceBinder created an accessor to nowhere");
+                Debug.Assert(
+                    source != null,
+                    "source != null -- otherwise ResourceBinder created an accessor to nowhere"
+                );
                 InputReferenceExpression sourceReference = source as InputReferenceExpression;
                 if (sourceReference == null)
                 {
@@ -148,8 +168,10 @@ namespace System.Data.Services.Client
 
         internal override Expression VisitParameter(ParameterExpression p)
         {
-            if ((this.inputSet == null || !this.inputSet.HasTransparentScope) &&
-               p == this.inputParameter)
+            if (
+                (this.inputSet == null || !this.inputSet.HasTransparentScope)
+                && p == this.inputParameter
+            )
             {
                 return this.CreateReference(this.input);
             }
@@ -166,4 +188,3 @@ namespace System.Data.Services.Client
         }
     }
 }
-

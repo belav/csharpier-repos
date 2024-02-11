@@ -28,8 +28,8 @@ namespace System.Runtime.Caching
 
         protected const int HISTORY_COUNT = 6;
 
-        protected int _pressureHigh;      // high pressure level
-        protected int _pressureLow;       // low pressure level - slow growth here
+        protected int _pressureHigh; // high pressure level
+        protected int _pressureLow; // low pressure level - slow growth here
 
         protected int _i0;
         protected int[] _pressureHist;
@@ -43,9 +43,18 @@ namespace System.Runtime.Caching
         internal static long TotalPhysical => s_totalPhysical;
         internal static long TotalVirtual => s_totalVirtual;
 
-        internal int PressureLast { get { return _pressureHist[_i0]; } }
-        internal int PressureHigh { get { return _pressureHigh; } }
-        internal int PressureLow { get { return _pressureLow; } }
+        internal int PressureLast
+        {
+            get { return _pressureHist[_i0]; }
+        }
+        internal int PressureHigh
+        {
+            get { return _pressureHigh; }
+        }
+        internal int PressureLow
+        {
+            get { return _pressureLow; }
+        }
 
         internal bool IsAboveHighPressure()
         {
@@ -82,10 +91,18 @@ namespace System.Runtime.Caching
             _pressureTotal += pressure;
             _pressureHist[_i0] = pressure;
 
-            Dbg.Trace("MemoryCacheStats", this.GetType().Name + ".Update: last=" + pressure
-                        + ",high=" + PressureHigh
-                        + ",low=" + PressureLow
-                        + " " + DateTime.Now.ToString("o", CultureInfo.InvariantCulture));
+            Dbg.Trace(
+                "MemoryCacheStats",
+                this.GetType().Name
+                    + ".Update: last="
+                    + pressure
+                    + ",high="
+                    + PressureHigh
+                    + ",low="
+                    + PressureLow
+                    + " "
+                    + DateTime.Now.ToString("o", CultureInfo.InvariantCulture)
+            );
         }
     }
 }

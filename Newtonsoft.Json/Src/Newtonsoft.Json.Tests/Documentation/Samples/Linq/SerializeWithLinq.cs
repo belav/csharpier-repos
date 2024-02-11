@@ -49,7 +49,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
     [TestFixture]
     public class SerializeWithLinq : TestFixtureBase
     {
-        #region Types
+#region Types
         public class BlogPost
         {
             public string Title { get; set; }
@@ -58,12 +58,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             public string Body { get; set; }
             public DateTime PostedDate { get; set; }
         }
-        #endregion
+#endregion
 
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             IList<BlogPost> blogPosts = new List<BlogPost>
             {
                 new BlogPost
@@ -81,16 +81,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 {
                     { "Title", p.Title },
                     {
-                        "Author", new JObject
-                        {
-                            { "Name", p.AuthorName },
-                            { "Twitter", p.AuthorTwitter }
-                        }
+                        "Author",
+                        new JObject { { "Name", p.AuthorName }, { "Twitter", p.AuthorTwitter } }
                     },
                     { "Date", p.PostedDate },
                     { "BodyHtml", HttpUtility.HtmlEncode(p.Body) },
                 })
-                );
+            );
 
             Console.WriteLine(blogPostsArray.ToString());
             // [
@@ -104,9 +101,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             //     "BodyHtml": "&lt;h3&gt;Title!&lt;/h3&gt;&lt;p&gt;Content!&lt;/p&gt;"
             //   }
             // ]
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Title"": ""Json.NET is awesome!"",
     ""Author"": {
@@ -116,7 +114,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
     ""Date"": ""2013-01-23T19:30:00"",
     ""BodyHtml"": ""&lt;h3&gt;Title!&lt;/h3&gt;&lt;p&gt;Content!&lt;/p&gt;""
   }
-]", blogPostsArray.ToString());
+]",
+                blogPostsArray.ToString()
+            );
         }
     }
 }

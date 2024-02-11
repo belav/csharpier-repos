@@ -21,22 +21,34 @@ namespace Microsoft.Interop.UnitTests.Verifiers
         /// related to nullability mapped to <see cref="ReportDiagnostic.Error"/>, which is then used to enable all
         /// of these warnings for default validation during analyzer and code fix tests.
         /// </summary>
-        internal static ImmutableDictionary<string, ReportDiagnostic> NullableWarnings { get; } = GetNullableWarningsFromCompiler();
+        internal static ImmutableDictionary<string, ReportDiagnostic> NullableWarnings { get; } =
+            GetNullableWarningsFromCompiler();
 
-        private static ImmutableDictionary<string, ReportDiagnostic> GetNullableWarningsFromCompiler()
+        private static ImmutableDictionary<
+            string,
+            ReportDiagnostic
+        > GetNullableWarningsFromCompiler()
         {
             string[] args = { "/warnaserror:nullable" };
-            var commandLineArguments = CSharpCommandLineParser.Default.Parse(args, baseDirectory: Environment.CurrentDirectory, sdkDirectory: Environment.CurrentDirectory);
+            var commandLineArguments = CSharpCommandLineParser.Default.Parse(
+                args,
+                baseDirectory: Environment.CurrentDirectory,
+                sdkDirectory: Environment.CurrentDirectory
+            );
             return commandLineArguments.CompilationOptions.SpecificDiagnosticOptions;
         }
 
-        internal static Func<Solution, ProjectId, Solution> GetAllDiagonsticsEnabledTransform(IEnumerable<DiagnosticAnalyzer> analyzers)
+        internal static Func<Solution, ProjectId, Solution> GetAllDiagonsticsEnabledTransform(
+            IEnumerable<DiagnosticAnalyzer> analyzers
+        )
         {
             return (solution, projectId) =>
             {
                 var project = solution.GetProject(projectId)!;
                 var compilationOptions = project.CompilationOptions!;
-                var diagnosticOptions = compilationOptions.SpecificDiagnosticOptions.SetItems(NullableWarnings);
+                var diagnosticOptions = compilationOptions.SpecificDiagnosticOptions.SetItems(
+                    NullableWarnings
+                );
 
                 // Explicitly enable diagnostics that are not enabled by default
                 var enableAnalyzersOptions = new Dictionary<string, ReportDiagnostic>();
@@ -63,53 +75,64 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                 }
 
                 compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                    compilationOptions.SpecificDiagnosticOptions
-                        .SetItems(NullableWarnings)
+                    compilationOptions
+                        .SpecificDiagnosticOptions.SetItems(NullableWarnings)
                         .AddRange(enableAnalyzersOptions)
-                        .AddRange(TestUtils.BindingRedirectWarnings));
+                        .AddRange(TestUtils.BindingRedirectWarnings)
+                );
                 solution = solution.WithProjectCompilationOptions(projectId, compilationOptions);
                 return solution;
             };
         }
 
-        internal static Func<Solution, ProjectId, Solution> GetTargetFrameworkAnalyzerOptionsProviderTransform(TestTargetFramework targetFramework)
+        internal static Func<
+            Solution,
+            ProjectId,
+            Solution
+        > GetTargetFrameworkAnalyzerOptionsProviderTransform(TestTargetFramework targetFramework)
         {
             return (solution, projectId) =>
             {
                 var project = solution.GetProject(projectId)!;
                 string tfmEditorConfig = targetFramework switch
                 {
-                    TestTargetFramework.Framework => """
-                        is_global = true
-                        build_property.TargetFrameworkIdentifier = .NETFramework
-                        build_property.TargetFrameworkVersion = v4.8
-                        """,
-                    TestTargetFramework.Standard => """
-                        is_global = true
-                        build_property.TargetFrameworkIdentifier = .NETStandard
-                        build_property.TargetFrameworkVersion = v2.0
-                        """,
-                    TestTargetFramework.Core => """
-                        is_global = true
-                        build_property.TargetFrameworkIdentifier = .NETCoreApp
-                        build_property.TargetFrameworkVersion = v3.1
-                        """,
-                    TestTargetFramework.Net6 => """
-                        is_global = true
-                        build_property.TargetFrameworkIdentifier = .NETCoreApp
-                        build_property.TargetFrameworkVersion = v6.0
-                        """,
+                    TestTargetFramework.Framework
+                        => """
+                            is_global = true
+                            build_property.TargetFrameworkIdentifier = .NETFramework
+                            build_property.TargetFrameworkVersion = v4.8
+                            """,
+                    TestTargetFramework.Standard
+                        => """
+                            is_global = true
+                            build_property.TargetFrameworkIdentifier = .NETStandard
+                            build_property.TargetFrameworkVersion = v2.0
+                            """,
+                    TestTargetFramework.Core
+                        => """
+                            is_global = true
+                            build_property.TargetFrameworkIdentifier = .NETCoreApp
+                            build_property.TargetFrameworkVersion = v3.1
+                            """,
+                    TestTargetFramework.Net6
+                        => """
+                            is_global = true
+                            build_property.TargetFrameworkIdentifier = .NETCoreApp
+                            build_property.TargetFrameworkVersion = v6.0
+                            """,
                     // Replicate the product case where we don't have these properties
                     // since we don't have a good mechanism to ship MSBuild files from dotnet/runtime
                     // in the SDK.
-                    TestTargetFramework.Net => string.Empty,
+                    TestTargetFramework.Net
+                        => string.Empty,
                     _ => throw new System.Diagnostics.UnreachableException()
                 };
                 return solution.AddAnalyzerConfigDocument(
                     DocumentId.CreateNewId(projectId),
                     "TargetFrameworkConfig.editorconfig",
                     SourceText.From(tfmEditorConfig, encoding: System.Text.Encoding.UTF8),
-                    filePath: "/TargetFrameworkConfig.editorconfig");
+                    filePath: "/TargetFrameworkConfig.editorconfig"
+                );
             };
         }
     }

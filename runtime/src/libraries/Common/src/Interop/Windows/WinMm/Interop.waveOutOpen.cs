@@ -20,7 +20,13 @@ internal static partial class Interop
         internal const uint CALLBACK_NULL = 0x00000000;
         internal const uint CALLBACK_FUNCTION = 0x00030000;
 
-        internal delegate void WaveOutProc(IntPtr hwo, MM_MSG uMsg, IntPtr dwInstance, IntPtr dwParam1, IntPtr dwParam2);
+        internal delegate void WaveOutProc(
+            IntPtr hwo,
+            MM_MSG uMsg,
+            IntPtr dwInstance,
+            IntPtr dwParam1,
+            IntPtr dwParam2
+        );
 
         /// <summary>
         /// This function opens a specified waveform output device for playback.
@@ -46,6 +52,13 @@ internal static partial class Interop
         /// <param name="fdwOpen">Flags for opening the device.</param>
         /// <returns>MMSYSERR</returns>
         [LibraryImport(Libraries.WinMM)]
-        internal static partial MMSYSERR waveOutOpen(ref IntPtr phwo, int uDeviceID, byte[] pwfx, WaveOutProc dwCallback, IntPtr dwInstance, uint fdwOpen);
+        internal static partial MMSYSERR waveOutOpen(
+            ref IntPtr phwo,
+            int uDeviceID,
+            byte[] pwfx,
+            WaveOutProc dwCallback,
+            IntPtr dwInstance,
+            uint fdwOpen
+        );
     }
 }

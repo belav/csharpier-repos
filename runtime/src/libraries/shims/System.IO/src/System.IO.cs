@@ -17,4 +17,6 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.StringWriter))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.TextReader))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.TextWriter))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.CodeDom.Compiler.IndentedTextWriter))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.CodeDom.Compiler.IndentedTextWriter)
+)]

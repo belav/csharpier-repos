@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,80 +32,65 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection {
+namespace System.Reflection
+{
+    [ComVisible(true)]
+    public class MethodBody
+    {
+        ExceptionHandlingClause[] clauses;
+        LocalVariableInfo[] locals;
+        byte[] il;
+        bool init_locals;
+        int sig_token;
+        int max_stack;
 
-	[ComVisible (true)]
-	public
-	class MethodBody {
-		ExceptionHandlingClause[] clauses;
-		LocalVariableInfo[] locals;
-		byte[] il;
-		bool init_locals;
-		int sig_token;
-		int max_stack;
+        protected MethodBody() { }
 
-		protected
-		MethodBody () {
-		}
+        internal MethodBody(
+            ExceptionHandlingClause[] clauses,
+            LocalVariableInfo[] locals,
+            byte[] il,
+            bool init_locals,
+            int sig_token,
+            int max_stack
+        )
+        {
+            this.clauses = clauses;
+            this.locals = locals;
+            this.il = il;
+            this.init_locals = init_locals;
+            this.sig_token = sig_token;
+            this.max_stack = max_stack;
+        }
 
-		internal MethodBody (ExceptionHandlingClause[] clauses, LocalVariableInfo[] locals,
-							 byte[] il, bool init_locals, int sig_token, int max_stack) {
-			this.clauses = clauses;
-			this.locals = locals;
-			this.il = il;
-			this.init_locals = init_locals;
-			this.sig_token = sig_token;
-			this.max_stack = max_stack;
-		}
+        public virtual IList<ExceptionHandlingClause> ExceptionHandlingClauses
+        {
+            get { return Array.AsReadOnly<ExceptionHandlingClause>(clauses); }
+        }
 
-		public
-	virtual
-		IList<ExceptionHandlingClause> ExceptionHandlingClauses {
-			get {
-				return Array.AsReadOnly<ExceptionHandlingClause> (clauses);
-			}
-		}
+        public virtual IList<LocalVariableInfo> LocalVariables
+        {
+            get { return Array.AsReadOnly<LocalVariableInfo>(locals); }
+        }
 
-		public
-		virtual
-		IList<LocalVariableInfo> LocalVariables {
-			get {
-				return Array.AsReadOnly<LocalVariableInfo> (locals);
-			}
-		}
+        public virtual bool InitLocals
+        {
+            get { return init_locals; }
+        }
 
-		public
-		virtual
-		bool InitLocals {
-			get {
-				return init_locals;
-			}
-		}
+        public virtual int LocalSignatureMetadataToken
+        {
+            get { return sig_token; }
+        }
 
-		public
-		virtual
-		int LocalSignatureMetadataToken {
-			get {
-				return sig_token;
-			}
-		}
+        public virtual int MaxStackSize
+        {
+            get { return max_stack; }
+        }
 
-
-		public
-		virtual
-		int MaxStackSize {
-			get {
-				return max_stack;
-			}
-		}
-
-		public
-		virtual
-		byte[] GetILAsByteArray () {
-			return il;
-		}
-	}
-
+        public virtual byte[] GetILAsByteArray()
+        {
+            return il;
+        }
+    }
 }
-
-

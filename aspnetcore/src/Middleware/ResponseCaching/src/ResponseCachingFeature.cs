@@ -11,10 +11,7 @@ public class ResponseCachingFeature : IResponseCachingFeature
     /// <inheritdoc />
     public string[]? VaryByQueryKeys
     {
-        get
-        {
-            return _varyByQueryKeys;
-        }
+        get { return _varyByQueryKeys; }
         set
         {
             if (value?.Length > 1)
@@ -23,7 +20,10 @@ public class ResponseCachingFeature : IResponseCachingFeature
                 {
                     if (string.IsNullOrEmpty(value[i]))
                     {
-                        throw new ArgumentException($"When {nameof(value)} contains more than one value, it cannot contain a null or empty value.", nameof(value));
+                        throw new ArgumentException(
+                            $"When {nameof(value)} contains more than one value, it cannot contain a null or empty value.",
+                            nameof(value)
+                        );
                     }
                 }
             }

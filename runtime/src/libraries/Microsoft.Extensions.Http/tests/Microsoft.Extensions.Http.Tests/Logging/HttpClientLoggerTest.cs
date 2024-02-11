@@ -33,10 +33,13 @@ namespace Microsoft.Extensions.Http.Logging
             var sink = new TestSink();
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
             serviceCollection.AddTransient<TestMessageHandler>();
 
-            serviceCollection.AddHttpClient("NoLoggers")
+            serviceCollection
+                .AddHttpClient("NoLoggers")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .RemoveAllLoggers();
 
@@ -55,17 +58,22 @@ namespace Microsoft.Extensions.Http.Logging
             var sink = new TestSink();
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
             serviceCollection.AddTransient<TestMessageHandler>();
 
-            serviceCollection.AddHttpClient("NoLoggers")
+            serviceCollection
+                .AddHttpClient("NoLoggers")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .RemoveAllLoggers();
 
-            serviceCollection.AddHttpClient("DefaultLogger")
+            serviceCollection
+                .AddHttpClient("DefaultLogger")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>();
 
-            serviceCollection.AddHttpClient("NoLoggersV2")
+            serviceCollection
+                .AddHttpClient("NoLoggersV2")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .RemoveAllLoggers();
 
@@ -96,14 +104,18 @@ namespace Microsoft.Extensions.Http.Logging
         public async Task CustomLogger_LogsCorrectEvents(bool requestSuccessful, bool async)
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(_ =>
-                new TestMessageHandler(_ => requestSuccessful
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                requestSuccessful
                     ? new HttpResponseMessage()
-                    : throw new HttpRequestException("expected")));
+                    : throw new HttpRequestException("expected")
+            ));
 
-            TestCountingLogger testLogger = async ? new TestCountingAsyncLogger() : new TestCountingLogger();
+            TestCountingLogger testLogger = async
+                ? new TestCountingAsyncLogger()
+                : new TestCountingLogger();
 
-            serviceCollection.AddHttpClient("TestCountingLogger")
+            serviceCollection
+                .AddHttpClient("TestCountingLogger")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .AddLogger(_ => testLogger);
 
@@ -135,14 +147,25 @@ namespace Microsoft.Extensions.Http.Logging
             AssertCounters(testLogger, requestCount: 2, requestSuccessful, async);
         }
 
-        private void AssertCounters(TestCountingLogger testLogger, int requestCount, bool requestSuccessful, bool async)
+        private void AssertCounters(
+            TestCountingLogger testLogger,
+            int requestCount,
+            bool requestSuccessful,
+            bool async
+        )
         {
             if (async)
             {
                 var asyncTestLogger = (TestCountingAsyncLogger)testLogger;
                 Assert.Equal(requestCount, asyncTestLogger.AsyncRequestStartLogCount);
-                Assert.Equal(requestSuccessful ? requestCount : 0, asyncTestLogger.AsyncRequestStopLogCount);
-                Assert.Equal(requestSuccessful ? 0 : requestCount, asyncTestLogger.AsyncRequestFailedLogCount);
+                Assert.Equal(
+                    requestSuccessful ? requestCount : 0,
+                    asyncTestLogger.AsyncRequestStopLogCount
+                );
+                Assert.Equal(
+                    requestSuccessful ? 0 : requestCount,
+                    asyncTestLogger.AsyncRequestFailedLogCount
+                );
 
                 Assert.Equal(0, testLogger.RequestStartLogCount);
                 Assert.Equal(0, testLogger.RequestStopLogCount);
@@ -152,7 +175,10 @@ namespace Microsoft.Extensions.Http.Logging
             {
                 Assert.Equal(requestCount, testLogger.RequestStartLogCount);
                 Assert.Equal(requestSuccessful ? requestCount : 0, testLogger.RequestStopLogCount);
-                Assert.Equal(requestSuccessful ? 0 : requestCount, testLogger.RequestFailedLogCount);
+                Assert.Equal(
+                    requestSuccessful ? 0 : requestCount,
+                    testLogger.RequestFailedLogCount
+                );
             }
         }
 
@@ -162,16 +188,21 @@ namespace Microsoft.Extensions.Http.Logging
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public async void CustomLogger_LogsCorrectEvents_Sync(bool requestSuccessful, bool asyncSecondCall)
+        public async void CustomLogger_LogsCorrectEvents_Sync(
+            bool requestSuccessful,
+            bool asyncSecondCall
+        )
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(_ =>
-                new TestMessageHandler(_ => requestSuccessful
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                requestSuccessful
                     ? new HttpResponseMessage()
-                    : throw new HttpRequestException("expected")));
+                    : throw new HttpRequestException("expected")
+            ));
 
             var testLogger = new TestCountingAsyncLogger();
-            serviceCollection.AddHttpClient("TestCountingLogger")
+            serviceCollection
+                .AddHttpClient("TestCountingLogger")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .AddLogger(_ => testLogger);
 
@@ -186,7 +217,9 @@ namespace Microsoft.Extensions.Http.Logging
             }
             else
             {
-                _ = Assert.Throws<HttpRequestException>(() => client.Send(new HttpRequestMessage(HttpMethod.Get, Url)));
+                _ = Assert.Throws<HttpRequestException>(
+                    () => client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
+                );
             }
 
             AssertCounters(testLogger, requestCount: 1, requestSuccessful, async: false);
@@ -199,7 +232,9 @@ namespace Microsoft.Extensions.Http.Logging
                 }
                 else
                 {
-                    _ = await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, Url)));
+                    _ = await Assert.ThrowsAsync<HttpRequestException>(
+                        () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, Url))
+                    );
                 }
 
                 Assert.Equal(1, testLogger.AsyncRequestStartLogCount);
@@ -218,7 +253,9 @@ namespace Microsoft.Extensions.Http.Logging
                 }
                 else
                 {
-                    _ = Assert.Throws<HttpRequestException>(() => client.Send(new HttpRequestMessage(HttpMethod.Get, Url)));
+                    _ = Assert.Throws<HttpRequestException>(
+                        () => client.Send(new HttpRequestMessage(HttpMethod.Get, Url))
+                    );
                 }
 
                 AssertCounters(testLogger, requestCount: 2, requestSuccessful, async: false);
@@ -232,13 +269,15 @@ namespace Microsoft.Extensions.Http.Logging
         public async Task CustomLogger_WithContext_LogsCorrectEvents(bool requestSuccessful)
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(_ =>
-                new TestMessageHandler(_ => requestSuccessful
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                requestSuccessful
                     ? new HttpResponseMessage()
-                    : throw new HttpRequestException("expected")));
+                    : throw new HttpRequestException("expected")
+            ));
 
             var testLogger = new TestContextCountingLogger();
-            serviceCollection.AddHttpClient("TestContextCountingLogger")
+            serviceCollection
+                .AddHttpClient("TestContextCountingLogger")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .AddLogger(_ => testLogger);
 
@@ -282,7 +321,9 @@ namespace Microsoft.Extensions.Http.Logging
             var sink = new TestSink();
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
             serviceCollection.AddTransient<TestMessageHandler>();
             serviceCollection.AddSingleton<TestILoggerCustomLogger>();
 
@@ -310,19 +351,30 @@ namespace Microsoft.Extensions.Http.Logging
 
             var customLoggerName = typeof(TestILoggerCustomLogger).FullName.Replace('+', '.');
             int customLoggerEventsPerRequest = 2;
-            int expectedEventsPerRequest = customLoggerEventsPerRequest + (removeDefaultLoggers ? 0 : DefaultLoggerEventsPerRequest);
+            int expectedEventsPerRequest =
+                customLoggerEventsPerRequest
+                + (removeDefaultLoggers ? 0 : DefaultLoggerEventsPerRequest);
 
             _ = await client.GetAsync(Url);
             Assert.Equal(expectedEventsPerRequest, sink.Writes.Count);
-            Assert.Equal(customLoggerEventsPerRequest, sink.Writes.Count(w => w.LoggerName == customLoggerName));
+            Assert.Equal(
+                customLoggerEventsPerRequest,
+                sink.Writes.Count(w => w.LoggerName == customLoggerName)
+            );
 
             _ = await client.GetAsync(Url);
             Assert.Equal(2 * expectedEventsPerRequest, sink.Writes.Count);
-            Assert.Equal(2 * customLoggerEventsPerRequest, sink.Writes.Count(w => w.LoggerName == customLoggerName));
+            Assert.Equal(
+                2 * customLoggerEventsPerRequest,
+                sink.Writes.Count(w => w.LoggerName == customLoggerName)
+            );
 
             _ = await client2.GetAsync(Url);
             Assert.Equal(3 * expectedEventsPerRequest, sink.Writes.Count);
-            Assert.Equal(3 * customLoggerEventsPerRequest, sink.Writes.Count(w => w.LoggerName == customLoggerName));
+            Assert.Equal(
+                3 * customLoggerEventsPerRequest,
+                sink.Writes.Count(w => w.LoggerName == customLoggerName)
+            );
         }
 
         [Fact]
@@ -331,15 +383,17 @@ namespace Microsoft.Extensions.Http.Logging
             var serviceCollection = new ServiceCollection();
 
             int counter = 1;
-            serviceCollection.AddTransient(_ =>
-                new TestMessageHandler(_ => ((counter++) % 3 == 0) // every 3rd request is successful
+            serviceCollection.AddTransient(_ => new TestMessageHandler(_ =>
+                ((counter++) % 3 == 0) // every 3rd request is successful
                     ? new HttpResponseMessage()
-                    : throw new HttpRequestException("expected")));
+                    : throw new HttpRequestException("expected")
+            ));
             serviceCollection.AddTransient<TestRetryingHandler>();
 
             var innerLogger = new TestCountingLogger();
             var outerLogger = new TestCountingLogger();
-            serviceCollection.AddHttpClient("WrapHandlerPipeline")
+            serviceCollection
+                .AddHttpClient("WrapHandlerPipeline")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .AddHttpMessageHandler<TestRetryingHandler>()
                 .AddLogger(_ => innerLogger, wrapHandlersPipeline: false)
@@ -381,12 +435,16 @@ namespace Microsoft.Extensions.Http.Logging
             services.AddSingleton<TestLoggerProvider>();
 
             services.AddLogging(b => b.SetMinimumLevel(LogLevel.Trace));
-            services.AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<TestLoggerProvider>());
-            services.AddHttpClient("TestLoggerProvider")
+            services.AddSingleton<ILoggerProvider>(sp =>
+                sp.GetRequiredService<TestLoggerProvider>()
+            );
+            services
+                .AddHttpClient("TestLoggerProvider")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .RemoveAllLoggers();
 
-            services.AddHttpClient("Production")
+            services
+                .AddHttpClient("Production")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>();
 
             var serviceProvider = services.BuildServiceProvider();
@@ -394,15 +452,31 @@ namespace Microsoft.Extensions.Http.Logging
             var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
             Assert.NotNull(loggerFactory);
 
-            var prodClient = serviceProvider.GetRequiredService<IHttpClientFactory>().CreateClient("Production");
+            var prodClient = serviceProvider
+                .GetRequiredService<IHttpClientFactory>()
+                .CreateClient("Production");
 
             _ = await prodClient.GetAsync(Url);
 
-            Assert.Equal(DefaultLoggerEventsPerRequest, sink.Writes.Count(w => w.LoggerName.StartsWith("System.Net.Http.HttpClient.Production")));
-            Assert.Equal(0, sink.Writes.Count(w => w.LoggerName.StartsWith("System.Net.Http.HttpClient.TestLoggerProvider")));
+            Assert.Equal(
+                DefaultLoggerEventsPerRequest,
+                sink.Writes.Count(w =>
+                    w.LoggerName.StartsWith("System.Net.Http.HttpClient.Production")
+                )
+            );
+            Assert.Equal(
+                0,
+                sink.Writes.Count(w =>
+                    w.LoggerName.StartsWith("System.Net.Http.HttpClient.TestLoggerProvider")
+                )
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         public async Task LoggerFactoryWithHttpClientFactory_NoCircularDependency_DebugLogging()
         {
             var sink = new TestSink();
@@ -412,17 +486,22 @@ namespace Microsoft.Extensions.Http.Logging
             services.AddSingleton<TestLoggerProvider>();
 
             services.AddLogging(b => b.SetMinimumLevel(LogLevel.Trace));
-            services.AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<TestLoggerProvider>());
-            services.AddHttpClient("TestLoggerProvider")
+            services.AddSingleton<ILoggerProvider>(sp =>
+                sp.GetRequiredService<TestLoggerProvider>()
+            );
+            services
+                .AddHttpClient("TestLoggerProvider")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>()
                 .RemoveAllLoggers();
 
-            services.AddHttpClient("Production")
+            services
+                .AddHttpClient("Production")
                 .ConfigurePrimaryHttpMessageHandler<TestMessageHandler>();
 
             var serviceProvider = services.BuildServiceProvider();
 
-            var httpClientFactory = (DefaultHttpClientFactory)serviceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClientFactory = (DefaultHttpClientFactory)
+                serviceProvider.GetRequiredService<IHttpClientFactory>();
             var prodClient = httpClientFactory.CreateClient("Production");
 
             _ = await prodClient.GetAsync(Url);
@@ -430,7 +509,10 @@ namespace Microsoft.Extensions.Http.Logging
             httpClientFactory.StartCleanupTimer(); // we need to create a timer instance before triggering cleanup; normally it happens after the first expiry
             httpClientFactory.CleanupTimer_Tick(); // trigger cleanup to write debug logs
 
-            Assert.Equal(2, sink.Writes.Count(w => w.LoggerName == typeof(DefaultHttpClientFactory).FullName));
+            Assert.Equal(
+                2,
+                sink.Writes.Count(w => w.LoggerName == typeof(DefaultHttpClientFactory).FullName)
+            );
         }
 
         private sealed class TestLoggerProvider : ILoggerProvider
@@ -466,12 +548,23 @@ namespace Microsoft.Extensions.Http.Logging
                 return null;
             }
 
-            public void LogRequestStop(object? context, HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed)
+            public void LogRequestStop(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage response,
+                TimeSpan elapsed
+            )
             {
                 RequestStopLogCount++;
             }
 
-            public void LogRequestFailed(object? context, HttpRequestMessage request, HttpResponseMessage? response, Exception exception, TimeSpan elapsed)
+            public void LogRequestFailed(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage? response,
+                Exception exception,
+                TimeSpan elapsed
+            )
             {
                 RequestFailedLogCount++;
             }
@@ -483,21 +576,35 @@ namespace Microsoft.Extensions.Http.Logging
             public int AsyncRequestStopLogCount { get; private set; }
             public int AsyncRequestFailedLogCount { get; private set; }
 
-            public ValueTask<object?> LogRequestStartAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
+            public ValueTask<object?> LogRequestStartAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken = default
+            )
             {
                 AsyncRequestStartLogCount++;
                 return new ValueTask<object?>((object?)null);
             }
 
-            public ValueTask LogRequestStopAsync(object? context, HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed,
-                CancellationToken cancellationToken = default)
+            public ValueTask LogRequestStopAsync(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage response,
+                TimeSpan elapsed,
+                CancellationToken cancellationToken = default
+            )
             {
                 AsyncRequestStopLogCount++;
                 return new ValueTask();
             }
 
-            public ValueTask LogRequestFailedAsync(object? context, HttpRequestMessage request, HttpResponseMessage? response, Exception exception,
-                TimeSpan elapsed, CancellationToken cancellationToken = default)
+            public ValueTask LogRequestFailedAsync(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage? response,
+                Exception exception,
+                TimeSpan elapsed,
+                CancellationToken cancellationToken = default
+            )
             {
                 AsyncRequestFailedLogCount++;
                 return new ValueTask();
@@ -514,7 +621,7 @@ namespace Microsoft.Extensions.Http.Logging
 
             public object? LogRequestStart(HttpRequestMessage request)
             {
-                var context = new Context(){ Id = Interlocked.Increment(ref s_nextId) };
+                var context = new Context() { Id = Interlocked.Increment(ref s_nextId) };
                 _idToContext[context.Id] = context;
 
                 Assert.False(RequestStartLogged.Contains(context));
@@ -523,7 +630,12 @@ namespace Microsoft.Extensions.Http.Logging
                 return context;
             }
 
-            public void LogRequestStop(object? context, HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed)
+            public void LogRequestStop(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage response,
+                TimeSpan elapsed
+            )
             {
                 Assert.NotNull(context);
                 var c = Assert.IsType<Context>(context);
@@ -534,7 +646,13 @@ namespace Microsoft.Extensions.Http.Logging
                 RequestStopLogged.Add(context);
             }
 
-            public void LogRequestFailed(object? context, HttpRequestMessage request, HttpResponseMessage? response, Exception exception, TimeSpan elapsed)
+            public void LogRequestFailed(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage? response,
+                Exception exception,
+                TimeSpan elapsed
+            )
             {
                 Assert.NotNull(context);
                 var c = Assert.IsType<Context>(context);
@@ -554,6 +672,7 @@ namespace Microsoft.Extensions.Http.Logging
         private class TestILoggerCustomLogger : IHttpClientLogger
         {
             private readonly ILogger _logger;
+
             public TestILoggerCustomLogger(ILoggerFactory loggerFactory)
             {
                 _logger = loggerFactory.CreateLogger<TestILoggerCustomLogger>();
@@ -565,18 +684,31 @@ namespace Microsoft.Extensions.Http.Logging
                 return null;
             }
 
-            public void LogRequestStop(object? context, HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed)
-                => _logger.LogInformation("LogRequestStop");
+            public void LogRequestStop(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage response,
+                TimeSpan elapsed
+            ) => _logger.LogInformation("LogRequestStop");
 
-            public void LogRequestFailed(object? context, HttpRequestMessage request, HttpResponseMessage? response, Exception exception,TimeSpan elapsed)
-                => _logger.LogInformation("LogRequestFailed");
+            public void LogRequestFailed(
+                object? context,
+                HttpRequestMessage request,
+                HttpResponseMessage? response,
+                Exception exception,
+                TimeSpan elapsed
+            ) => _logger.LogInformation("LogRequestFailed");
         }
 
         private class TestRetryingHandler : DelegatingHandler
         {
             private const int MaxRetries = 5;
 
-            private async Task<HttpResponseMessage> SendAsyncCore(HttpRequestMessage request, bool async, CancellationToken cancellationToken)
+            private async Task<HttpResponseMessage> SendAsyncCore(
+                HttpRequestMessage request,
+                bool async,
+                CancellationToken cancellationToken
+            )
             {
                 for (int i = 1; i <= MaxRetries; ++i)
                 {
@@ -606,12 +738,16 @@ namespace Microsoft.Extensions.Http.Logging
                 throw new NotImplementedException("unreachable");
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-                => SendAsyncCore(request, async: true, cancellationToken);
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) => SendAsyncCore(request, async: true, cancellationToken);
 
 #if NET5_0_OR_GREATER
-            protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
-                => SendAsyncCore(request, async: false, cancellationToken).GetAwaiter().GetResult();
+            protected override HttpResponseMessage Send(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) => SendAsyncCore(request, async: false, cancellationToken).GetAwaiter().GetResult();
 #endif
         }
     }

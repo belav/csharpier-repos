@@ -15,15 +15,18 @@ namespace System.Xml.Linq
         /// Initializes a new instance of the XCData class.
         /// </summary>
         /// <param name="value">The string that contains the value of the XCData node.</param>
-        public XCData(string value) : base(value) { }
+        public XCData(string value)
+            : base(value) { }
 
         /// <summary>
         /// Initializes a new instance of the XCData class from another XCData object.
         /// </summary>
         /// <param name="other">Text node to copy from</param>
-        public XCData(XCData other) : base(other) { }
+        public XCData(XCData other)
+            : base(other) { }
 
-        internal XCData(XmlReader r) : base(r) { }
+        internal XCData(XmlReader r)
+            : base(r) { }
 
         /// <summary>
         /// Gets the node type for this node.
@@ -33,10 +36,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.CDATA;
-            }
+            get { return XmlNodeType.CDATA; }
         }
 
         /// <summary>

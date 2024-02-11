@@ -12,12 +12,17 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
     internal interface IUnnecessaryImportsProvider<TSyntaxNode>
         where TSyntaxNode : SyntaxNode
     {
-        ImmutableArray<TSyntaxNode> GetUnnecessaryImports(SemanticModel model, TextSpan? span, CancellationToken cancellationToken);
+        ImmutableArray<TSyntaxNode> GetUnnecessaryImports(
+            SemanticModel model,
+            TextSpan? span,
+            CancellationToken cancellationToken
+        );
 
         ImmutableArray<TSyntaxNode> GetUnnecessaryImports(
             SemanticModel model,
             TextSpan? span,
             Func<SyntaxNode, bool>? predicate,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

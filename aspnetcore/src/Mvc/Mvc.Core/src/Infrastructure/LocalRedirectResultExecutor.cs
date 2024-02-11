@@ -23,7 +23,10 @@ public partial class LocalRedirectResultExecutor : IActionResultExecutor<LocalRe
     /// </summary>
     /// <param name="loggerFactory">Used to create loggers.</param>
     /// <param name="urlHelperFactory">Used to create url helpers.</param>
-    public LocalRedirectResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
+    public LocalRedirectResultExecutor(
+        ILoggerFactory loggerFactory,
+        IUrlHelperFactory urlHelperFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(loggerFactory);
         ArgumentNullException.ThrowIfNull(urlHelperFactory);
@@ -51,8 +54,9 @@ public partial class LocalRedirectResultExecutor : IActionResultExecutor<LocalRe
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else
@@ -65,7 +69,12 @@ public partial class LocalRedirectResultExecutor : IActionResultExecutor<LocalRe
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing LocalRedirectResult, redirecting to {Destination}.", EventName = "LocalRedirectResultExecuting")]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing LocalRedirectResult, redirecting to {Destination}.",
+            EventName = "LocalRedirectResultExecuting"
+        )]
         public static partial void LocalRedirectResultExecuting(ILogger logger, string destination);
     }
 }

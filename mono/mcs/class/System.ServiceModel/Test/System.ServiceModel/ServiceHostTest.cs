@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,456 +34,532 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class ServiceHostTest
-	{
-		class MyHost : ServiceHost
-		{
-			public MyHost (Type type, Uri uri)
-				: base (type, uri)
-			{
-			}
+    [TestFixture]
+    public class ServiceHostTest
+    {
+        class MyHost : ServiceHost
+        {
+            public MyHost(Type type, Uri uri)
+                : base(type, uri) { }
 
-			public IDictionary<string,ContractDescription> ExposedContracts {
-				get { return ImplementedContracts; }
-			}
-		}
+            public IDictionary<string, ContractDescription> ExposedContracts
+            {
+                get { return ImplementedContracts; }
+            }
+        }
 
-		[Test]
-		public void Ctor ()
-		{
-			MyHost host = new MyHost (typeof (Foo), new Uri ("http://localhost"));
-			Assert.IsNotNull (host.Description, "#1");
-			Assert.AreEqual (typeof (Foo), host.Description.ServiceType, "#1-2");
-			Assert.IsNotNull (host.BaseAddresses, "#2");
-			Assert.AreEqual (1, host.BaseAddresses.Count, "#3");
+        [Test]
+        public void Ctor()
+        {
+            MyHost host = new MyHost(typeof(Foo), new Uri("http://localhost"));
+            Assert.IsNotNull(host.Description, "#1");
+            Assert.AreEqual(typeof(Foo), host.Description.ServiceType, "#1-2");
+            Assert.IsNotNull(host.BaseAddresses, "#2");
+            Assert.AreEqual(1, host.BaseAddresses.Count, "#3");
 
-			Assert.IsNotNull (host.ChannelDispatchers, "#4");
-			Assert.AreEqual (0, host.ChannelDispatchers.Count, "#5");
-			Assert.IsNotNull (host.Authorization, "#6");
-			Assert.IsNotNull (host.ExposedContracts, "#7");
-			// Foo is already in the contracts.
-			Assert.AreEqual (1, host.ExposedContracts.Count, "#8");
-			// this loop iterates only once.
-			foreach (KeyValuePair<string,ContractDescription> e in host.ExposedContracts) {
-				// hmm... so, seems like the key is just the full name of the contract type.
-				Assert.AreEqual ("MonoTests.System.ServiceModel.ServiceHostTest+Foo", e.Key, "#9");
-				ContractDescription cd = e.Value;
-				Assert.AreEqual ("Foo", cd.Name, "#10");
-				Assert.AreEqual ("http://tempuri.org/", cd.Namespace, "#11");
-			}
-		}
+            Assert.IsNotNull(host.ChannelDispatchers, "#4");
+            Assert.AreEqual(0, host.ChannelDispatchers.Count, "#5");
+            Assert.IsNotNull(host.Authorization, "#6");
+            Assert.IsNotNull(host.ExposedContracts, "#7");
+            // Foo is already in the contracts.
+            Assert.AreEqual(1, host.ExposedContracts.Count, "#8");
+            // this loop iterates only once.
+            foreach (KeyValuePair<string, ContractDescription> e in host.ExposedContracts)
+            {
+                // hmm... so, seems like the key is just the full name of the contract type.
+                Assert.AreEqual("MonoTests.System.ServiceModel.ServiceHostTest+Foo", e.Key, "#9");
+                ContractDescription cd = e.Value;
+                Assert.AreEqual("Foo", cd.Name, "#10");
+                Assert.AreEqual("http://tempuri.org/", cd.Namespace, "#11");
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CtorNull ()
-		{
-			new ServiceHost (typeof (Foo), null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorNull()
+        {
+            new ServiceHost(typeof(Foo), null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CtorServiceTypeNotClass ()
-		{
-			new ServiceHost (typeof (IBar), new Uri ("http://localhost"));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CtorServiceTypeNotClass()
+        {
+            new ServiceHost(typeof(IBar), new Uri("http://localhost"));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CtorRelativeBaseAddress ()
-		{
-			new ServiceHost (typeof (Foo), new Uri ("test", UriKind.Relative));
-		}
-		
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CtorMultipleAddressPerScheme ()
-		{
-			new ServiceHost ( typeof (Foo), 
-					new Uri ("http://localhost", UriKind.Absolute),
-					new Uri ("http://someotherhost", UriKind.Absolute));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CtorRelativeBaseAddress()
+        {
+            new ServiceHost(typeof(Foo), new Uri("test", UriKind.Relative));
+        }
 
-		[Test]
-		public void AddServiceEndpoint ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Foo), new Uri ("http://localhost/echo"));
-			host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "rel");
-			host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "svc");
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CtorMultipleAddressPerScheme()
+        {
+            new ServiceHost(
+                typeof(Foo),
+                new Uri("http://localhost", UriKind.Absolute),
+                new Uri("http://someotherhost", UriKind.Absolute)
+            );
+        }
 
-			Assert.IsNotNull (host.Description, "#6");
-			Assert.IsNotNull (host.Description.Endpoints, "#7");
-			Assert.AreEqual (host.Description.Endpoints.Count, 2, "#8");
-			Assert.AreEqual ("http://localhost/echo/rel", host.Description.Endpoints [0].Address.Uri.AbsoluteUri,  "#9");
-		}
+        [Test]
+        public void AddServiceEndpoint()
+        {
+            ServiceHost host = new ServiceHost(typeof(Foo), new Uri("http://localhost/echo"));
+            host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "rel");
+            host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "svc");
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpoint1 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Foo), new Uri ("ftp://localhost/echo"));
-			// ftp does not match BasicHttpBinding
-			host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "rel");
-		}
+            Assert.IsNotNull(host.Description, "#6");
+            Assert.IsNotNull(host.Description.Endpoints, "#7");
+            Assert.AreEqual(host.Description.Endpoints.Count, 2, "#8");
+            Assert.AreEqual(
+                "http://localhost/echo/rel",
+                host.Description.Endpoints[0].Address.Uri.AbsoluteUri,
+                "#9"
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpoint2 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Foo), new Uri ("http://localhost/echo"));
-			host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "rel");
-			host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "rel"); // duplicate URI
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpoint1()
+        {
+            ServiceHost host = new ServiceHost(typeof(Foo), new Uri("ftp://localhost/echo"));
+            // ftp does not match BasicHttpBinding
+            host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "rel");
+        }
 
-			host.Open ();
-			host.Close (); // should not reach here. It is to make sure to close unexpectedly opened host.
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpoint2()
+        {
+            ServiceHost host = new ServiceHost(typeof(Foo), new Uri("http://localhost/echo"));
+            host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "rel");
+            host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "rel"); // duplicate URI
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpoint2_2 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Foo), new Uri ("http://localhost/echo"));
-			// same as above, but through Endpoints.Add()
-			host.Description.Endpoints.Add (new ServiceEndpoint (ContractDescription.GetContract (typeof (Foo)), new BasicHttpBinding (), new EndpointAddress ("http://localhost/echo/rel")));
-			host.Description.Endpoints.Add (new ServiceEndpoint (ContractDescription.GetContract (typeof (Foo)), new BasicHttpBinding (), new EndpointAddress ("http://localhost/echo/rel")));
+            host.Open();
+            host.Close(); // should not reach here. It is to make sure to close unexpectedly opened host.
+        }
 
-			host.Open ();
-			host.Close (); // should not reach here. It is to make sure to close unexpectedly opened host.
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpoint2_2()
+        {
+            ServiceHost host = new ServiceHost(typeof(Foo), new Uri("http://localhost/echo"));
+            // same as above, but through Endpoints.Add()
+            host.Description.Endpoints.Add(
+                new ServiceEndpoint(
+                    ContractDescription.GetContract(typeof(Foo)),
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost/echo/rel")
+                )
+            );
+            host.Description.Endpoints.Add(
+                new ServiceEndpoint(
+                    ContractDescription.GetContract(typeof(Foo)),
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost/echo/rel")
+                )
+            );
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpoint2_3 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (HogeFuga), new Uri ("http://localhost/echo"));
-			host.Description.Endpoints.Add (new ServiceEndpoint (ContractDescription.GetContract (typeof (IHoge)), new BasicHttpBinding (), new EndpointAddress ("http://localhost/echo")));
-			host.Description.Endpoints.Add (new ServiceEndpoint (ContractDescription.GetContract (typeof (IFuga)), new BasicHttpBinding (), new EndpointAddress ("http://localhost/echo")));
+            host.Open();
+            host.Close(); // should not reach here. It is to make sure to close unexpectedly opened host.
+        }
 
-			// Different contracts unlike previous two cases.
-			// If two or more endpoints are bound to the same listen
-			// URI, then they must share the same instance.
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpoint2_3()
+        {
+            ServiceHost host = new ServiceHost(typeof(HogeFuga), new Uri("http://localhost/echo"));
+            host.Description.Endpoints.Add(
+                new ServiceEndpoint(
+                    ContractDescription.GetContract(typeof(IHoge)),
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost/echo")
+                )
+            );
+            host.Description.Endpoints.Add(
+                new ServiceEndpoint(
+                    ContractDescription.GetContract(typeof(IFuga)),
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost/echo")
+                )
+            );
 
-			host.Open ();
-			host.Close (); // should not reach here. It is to make sure to close unexpectedly opened host.
-		}
+            // Different contracts unlike previous two cases.
+            // If two or more endpoints are bound to the same listen
+            // URI, then they must share the same instance.
 
-		[Test]
-		public void AddServiceEndpoint2_4 ()
-		{
-			var ep = "http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString();
-			ServiceHost host = new ServiceHost (typeof (HogeFuga), new Uri (ep));
-			var binding = new BasicHttpBinding ();
-			host.AddServiceEndpoint (typeof (IHoge), binding, new Uri (ep));
-			host.AddServiceEndpoint (typeof (IFuga), binding, new Uri (ep));
+            host.Open();
+            host.Close(); // should not reach here. It is to make sure to close unexpectedly opened host.
+        }
 
-			// Use the same binding, results in one ChannelDispatcher (actually two, for metadata/debug behavior).
-			host.Open ();
-			try {
-				Assert.AreEqual (2, host.ChannelDispatchers.Count, "#1");
-				foreach (ChannelDispatcher cd in host.ChannelDispatchers) {
-					if (cd.BindingName != binding.Name)
-						continue; // mex
-					Assert.AreEqual (2, cd.Endpoints.Count, "#2");
-				}
-			} finally {
-				host.Close ();
-			}
-		}
+        [Test]
+        public void AddServiceEndpoint2_4()
+        {
+            var ep = "http://" + NetworkHelpers.LocalEphemeralEndPoint().ToString();
+            ServiceHost host = new ServiceHost(typeof(HogeFuga), new Uri(ep));
+            var binding = new BasicHttpBinding();
+            host.AddServiceEndpoint(typeof(IHoge), binding, new Uri(ep));
+            host.AddServiceEndpoint(typeof(IFuga), binding, new Uri(ep));
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpoint3 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Foo), new Uri ("http://localhost/echo"));
-			host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "rel");
-			host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "http://localhost/echo/rel"); // duplicate URI when resolved
+            // Use the same binding, results in one ChannelDispatcher (actually two, for metadata/debug behavior).
+            host.Open();
+            try
+            {
+                Assert.AreEqual(2, host.ChannelDispatchers.Count, "#1");
+                foreach (ChannelDispatcher cd in host.ChannelDispatchers)
+                {
+                    if (cd.BindingName != binding.Name)
+                        continue; // mex
+                    Assert.AreEqual(2, cd.Endpoints.Count, "#2");
+                }
+            }
+            finally
+            {
+                host.Close();
+            }
+        }
 
-			host.Open ();
-			host.Close (); // should not reach here. It is to make sure to close unexpectedly opened host.
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpoint3()
+        {
+            ServiceHost host = new ServiceHost(typeof(Foo), new Uri("http://localhost/echo"));
+            host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "rel");
+            host.AddServiceEndpoint(
+                typeof(Foo),
+                new BasicHttpBinding(),
+                "http://localhost/echo/rel"
+            ); // duplicate URI when resolved
 
-		[Test]
-		public void Open ()
-		{
-			ServiceHost host = new ServiceHost (typeof (ZeroOperationsImpl));
-			host.AddServiceEndpoint (typeof (IHaveZeroOperarationsContract), new BasicHttpBinding (), "http://localhost/echo");
+            host.Open();
+            host.Close(); // should not reach here. It is to make sure to close unexpectedly opened host.
+        }
 
-			try {
-				host.Open ();
-				Assert.Fail ("InvalidOperationException expected");
-			} 
-			catch (InvalidOperationException e) {
-				//"ContractDescription 'IHaveZeroOperarationsContract' has zero operations; a contract must have at least one operation."
-				StringAssert.Contains ("IHaveZeroOperarationsContract", e.Message);
-			}
-			finally {
-				if (host.State == CommunicationState.Opened)
-					host.Close (); // It is to make sure to close unexpectedly opened host if the test fail.
-			}
-		}
+        [Test]
+        public void Open()
+        {
+            ServiceHost host = new ServiceHost(typeof(ZeroOperationsImpl));
+            host.AddServiceEndpoint(
+                typeof(IHaveZeroOperarationsContract),
+                new BasicHttpBinding(),
+                "http://localhost/echo"
+            );
 
-		[Test]
-		public void AddServiceEndpoint4 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Baz), new Uri ("http://localhost/echo"));
-			host.AddServiceEndpoint ("MonoTests.System.ServiceModel.ServiceHostTest+IBaz", new BasicHttpBinding (), "rel");
-		}
+            try
+            {
+                host.Open();
+                Assert.Fail("InvalidOperationException expected");
+            }
+            catch (InvalidOperationException e)
+            {
+                //"ContractDescription 'IHaveZeroOperarationsContract' has zero operations; a contract must have at least one operation."
+                StringAssert.Contains("IHaveZeroOperarationsContract", e.Message);
+            }
+            finally
+            {
+                if (host.State == CommunicationState.Opened)
+                    host.Close(); // It is to make sure to close unexpectedly opened host if the test fail.
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpoint5 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Baz), new Uri ("http://localhost/echo"));
+        [Test]
+        public void AddServiceEndpoint4()
+        {
+            ServiceHost host = new ServiceHost(typeof(Baz), new Uri("http://localhost/echo"));
+            host.AddServiceEndpoint(
+                "MonoTests.System.ServiceModel.ServiceHostTest+IBaz",
+                new BasicHttpBinding(),
+                "rel"
+            );
+        }
 
-			// Full type name is expected here (see AddServiceEndpoint4).
-			host.AddServiceEndpoint ("IBaz", new BasicHttpBinding (), "rel");
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpoint5()
+        {
+            ServiceHost host = new ServiceHost(typeof(Baz), new Uri("http://localhost/echo"));
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpoint6 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Foo), new Uri ("http://localhost/echo"));
-			host.AddServiceEndpoint ("ISuchTypeDoesNotExist", new BasicHttpBinding (), "rel");
-		}
+            // Full type name is expected here (see AddServiceEndpoint4).
+            host.AddServiceEndpoint("IBaz", new BasicHttpBinding(), "rel");
+        }
 
-		[Test]
-		public void AddServiceEndpoint7 ()
-		{
-			ServiceHost host = new ServiceHost (typeof (Foo), new Uri ("http://localhost/echo"));
-			var a = host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "a");
-			Console.WriteLine (a.Address);
-			Assert.AreEqual ("http", a.Address.Uri.Scheme, "#1");
-			Assert.AreEqual ("http://localhost/echo/a", a.Address.Uri.AbsoluteUri, "#2");
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpoint6()
+        {
+            ServiceHost host = new ServiceHost(typeof(Foo), new Uri("http://localhost/echo"));
+            host.AddServiceEndpoint("ISuchTypeDoesNotExist", new BasicHttpBinding(), "rel");
+        }
 
-			var b = host.AddServiceEndpoint (typeof (Foo), new BasicHttpBinding (), "/b");
-			Console.WriteLine (b.Address);
-			Assert.AreEqual ("http", b.Address.Uri.Scheme, "#3");
-			Assert.AreEqual ("http://localhost/echo/b", b.Address.Uri.AbsoluteUri, "#4");
-		}
-		
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpointMexWithNoImpl ()
-		{
-			var port = NetworkHelpers.FindFreePort ();
-			using (ServiceHost h = new ServiceHost (typeof (Foo), new Uri ("http://localhost:" + port))) {
-				// it expects ServiceMetadataBehavior
-				h.AddServiceEndpoint (ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexHttpBinding (), "mex");
-			}
-		}
+        [Test]
+        public void AddServiceEndpoint7()
+        {
+            ServiceHost host = new ServiceHost(typeof(Foo), new Uri("http://localhost/echo"));
+            var a = host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "a");
+            Console.WriteLine(a.Address);
+            Assert.AreEqual("http", a.Address.Uri.Scheme, "#1");
+            Assert.AreEqual("http://localhost/echo/a", a.Address.Uri.AbsoluteUri, "#2");
 
-		[Test]
-		public void AddServiceEndpointMetadataExchange ()
-		{
-			var port = NetworkHelpers.FindFreePort ();
-			// MyMetadataExchange implements IMetadataExchange
-			ServiceHost host = new ServiceHost (typeof (MyMetadataExchange));
-			host.AddServiceEndpoint ("IMetadataExchange",
-						 new BasicHttpBinding (),
-						 "http://localhost:" + port + "/");
-		}
+            var b = host.AddServiceEndpoint(typeof(Foo), new BasicHttpBinding(), "/b");
+            Console.WriteLine(b.Address);
+            Assert.AreEqual("http", b.Address.Uri.Scheme, "#3");
+            Assert.AreEqual("http://localhost/echo/b", b.Address.Uri.AbsoluteUri, "#4");
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddServiceEndpointMetadataExchangeFullNameFails ()
-		{
-			var port = NetworkHelpers.FindFreePort ();
-			ServiceHost host = new ServiceHost (typeof (MyMetadataExchange));
-			host.AddServiceEndpoint ("System.ServiceModel.Description.IMetadataExchange",
-						 new BasicHttpBinding (),
-						 "http://localhost:" + port);
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpointMexWithNoImpl()
+        {
+            var port = NetworkHelpers.FindFreePort();
+            using (
+                ServiceHost h = new ServiceHost(typeof(Foo), new Uri("http://localhost:" + port))
+            )
+            {
+                // it expects ServiceMetadataBehavior
+                h.AddServiceEndpoint(
+                    ServiceMetadataBehavior.MexContractName,
+                    MetadataExchangeBindings.CreateMexHttpBinding(),
+                    "mex"
+                );
+            }
+        }
 
-		[Test]
-		public void InstanceWithNonSingletonMode ()
-		{
-			var ep = NetworkHelpers.LocalEphemeralEndPoint().ToString();
-			ServiceHost host = new ServiceHost (
-				new NonSingletonService ());
-			Assert.IsNotNull (host.Description.Behaviors.Find<ServiceBehaviorAttribute> ().GetWellKnownSingleton (), "premise1");
-			host.AddServiceEndpoint (
-				typeof (NonSingletonService),
-				new BasicHttpBinding (),
-				new Uri ("http://" + ep + "/s1"));
+        [Test]
+        public void AddServiceEndpointMetadataExchange()
+        {
+            var port = NetworkHelpers.FindFreePort();
+            // MyMetadataExchange implements IMetadataExchange
+            ServiceHost host = new ServiceHost(typeof(MyMetadataExchange));
+            host.AddServiceEndpoint(
+                "IMetadataExchange",
+                new BasicHttpBinding(),
+                "http://localhost:" + port + "/"
+            );
+        }
 
-			// in case Open() didn't fail, we need to close the host.
-			// And even if Close() caused the expected exception,
-			// the test should still fail.
-			try {
-				host.Open ();
-				try {
-					if (host.State == CommunicationState.Opened)
-						host.Close ();
-				} catch (InvalidOperationException) {
-				}
-				Assert.Fail ("InstanceContextMode was not checked");
-			} catch (InvalidOperationException) {
-			}
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddServiceEndpointMetadataExchangeFullNameFails()
+        {
+            var port = NetworkHelpers.FindFreePort();
+            ServiceHost host = new ServiceHost(typeof(MyMetadataExchange));
+            host.AddServiceEndpoint(
+                "System.ServiceModel.Description.IMetadataExchange",
+                new BasicHttpBinding(),
+                "http://localhost:" + port
+            );
+        }
 
-
-		[Test]
-		public void InstanceWithSingletonMode ()
-		{
+        [Test]
+        public void InstanceWithNonSingletonMode()
+        {
             var ep = NetworkHelpers.LocalEphemeralEndPoint().ToString();
-			SingletonService instance = new SingletonService ();
-			ServiceHost host = new ServiceHost (instance);
-			Assert.IsNotNull (host.Description.Behaviors.Find<ServiceBehaviorAttribute> ().GetWellKnownSingleton (), "#1");
-			host.AddServiceEndpoint (
-				typeof (SingletonService),
-				new BasicHttpBinding (),
-				new Uri ("http://" + ep + "/s2"));
+            ServiceHost host = new ServiceHost(new NonSingletonService());
+            Assert.IsNotNull(
+                host.Description.Behaviors.Find<ServiceBehaviorAttribute>().GetWellKnownSingleton(),
+                "premise1"
+            );
+            host.AddServiceEndpoint(
+                typeof(NonSingletonService),
+                new BasicHttpBinding(),
+                new Uri("http://" + ep + "/s1")
+            );
 
-			// in case Open() didn't fail, we need to close the host.
-			// And even if Close() caused the expected exception,
-			// the test should still fail.
-			try {
-				host.Open ();
-				ChannelDispatcher cd = (ChannelDispatcher) host.ChannelDispatchers [0];
-				DispatchRuntime dr = cd.Endpoints [0].DispatchRuntime;
-				Assert.IsNotNull (dr.InstanceContextProvider, "#2");
-				InstanceContext ctx = dr.InstanceContextProvider.GetExistingInstanceContext (null, null);
-				Assert.IsNotNull (ctx, "#3");
-				Assert.AreEqual (instance, ctx.GetServiceInstance (), "#4");
-			} finally {
-				if (host.State == CommunicationState.Opened)
-					host.Close ();
-			}
-		}
+            // in case Open() didn't fail, we need to close the host.
+            // And even if Close() caused the expected exception,
+            // the test should still fail.
+            try
+            {
+                host.Open();
+                try
+                {
+                    if (host.State == CommunicationState.Opened)
+                        host.Close();
+                }
+                catch (InvalidOperationException) { }
+                Assert.Fail("InstanceContextMode was not checked");
+            }
+            catch (InvalidOperationException) { }
+        }
 
-		[Test]
-		public void InstanceWithSingletonMode_InheritServiceBehavior ()
-		{
-			// # 37035
+        [Test]
+        public void InstanceWithSingletonMode()
+        {
+            var ep = NetworkHelpers.LocalEphemeralEndPoint().ToString();
+            SingletonService instance = new SingletonService();
+            ServiceHost host = new ServiceHost(instance);
+            Assert.IsNotNull(
+                host.Description.Behaviors.Find<ServiceBehaviorAttribute>().GetWellKnownSingleton(),
+                "#1"
+            );
+            host.AddServiceEndpoint(
+                typeof(SingletonService),
+                new BasicHttpBinding(),
+                new Uri("http://" + ep + "/s2")
+            );
 
-			var ep = NetworkHelpers.LocalEphemeralEndPoint ().ToString ();
+            // in case Open() didn't fail, we need to close the host.
+            // And even if Close() caused the expected exception,
+            // the test should still fail.
+            try
+            {
+                host.Open();
+                ChannelDispatcher cd = (ChannelDispatcher)host.ChannelDispatchers[0];
+                DispatchRuntime dr = cd.Endpoints[0].DispatchRuntime;
+                Assert.IsNotNull(dr.InstanceContextProvider, "#2");
+                InstanceContext ctx = dr.InstanceContextProvider.GetExistingInstanceContext(
+                    null,
+                    null
+                );
+                Assert.IsNotNull(ctx, "#3");
+                Assert.AreEqual(instance, ctx.GetServiceInstance(), "#4");
+            }
+            finally
+            {
+                if (host.State == CommunicationState.Opened)
+                    host.Close();
+            }
+        }
 
-			ChildSingletonService instance = new ChildSingletonService ();
-			ServiceHost host = new ServiceHost (instance);
+        [Test]
+        public void InstanceWithSingletonMode_InheritServiceBehavior()
+        {
+            // # 37035
 
-			host.AddServiceEndpoint (typeof (SingletonService),
-						 new BasicHttpBinding (),
-						 new Uri ("http://" + ep + "/s3"));
+            var ep = NetworkHelpers.LocalEphemeralEndPoint().ToString();
 
-			try {
-				host.Open ();
-			} catch (InvalidOperationException ex) {
-				Assert.Fail ("InstanceContextMode was not inherited from parent, exception was: {0}", ex);
-			} finally {
-				host.Close ();
-			}
-		}
+            ChildSingletonService instance = new ChildSingletonService();
+            ServiceHost host = new ServiceHost(instance);
 
-		[ServiceContract]
-		interface IBar
-		{
-		}
+            host.AddServiceEndpoint(
+                typeof(SingletonService),
+                new BasicHttpBinding(),
+                new Uri("http://" + ep + "/s3")
+            );
 
-		[ServiceContract]
-		class Foo
-		{
-			[OperationContract]
-			public void SayWhat () { }
-		}
+            try
+            {
+                host.Open();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Assert.Fail(
+                    "InstanceContextMode was not inherited from parent, exception was: {0}",
+                    ex
+                );
+            }
+            finally
+            {
+                host.Close();
+            }
+        }
 
-		[ServiceContract]
-		interface IBaz
-		{
-			[OperationContract]
-			string Echo (string source);
-		}
-		
-		[ServiceContract]
-		interface IHoge
-		{
-			[OperationContract]
-			void DoX ();
-		}
+        [ServiceContract]
+        interface IBar { }
 
-		[ServiceContract]
-		interface IFuga
-		{
-			[OperationContract]
-			void DoY ();
-		}
+        [ServiceContract]
+        class Foo
+        {
+            [OperationContract]
+            public void SayWhat() { }
+        }
 
-		[ServiceContract]
-		interface IHaveZeroOperarationsContract
-		{
-			string Echo (string source);
-		}
+        [ServiceContract]
+        interface IBaz
+        {
+            [OperationContract]
+            string Echo(string source);
+        }
 
-		class ZeroOperationsImpl : IHaveZeroOperarationsContract
-		{
-			public string Echo(string source)
-			{
-				return null;
-			}
-		}
+        [ServiceContract]
+        interface IHoge
+        {
+            [OperationContract]
+            void DoX();
+        }
 
-		class HogeFuga : IHoge, IFuga
-		{
-			public void DoX () {}
-			public void DoY () {}
-		}
+        [ServiceContract]
+        interface IFuga
+        {
+            [OperationContract]
+            void DoY();
+        }
 
-		class Baz : IBaz
-		{
-			public string Echo (string source)
-			{
-				return source;
-			}
-		}
+        [ServiceContract]
+        interface IHaveZeroOperarationsContract
+        {
+            string Echo(string source);
+        }
 
-		class MyMetadataExchange : IMetadataExchange
-		{
-			public Message Get (Message req)
-			{
-				throw new NotImplementedException ();
-			}
+        class ZeroOperationsImpl : IHaveZeroOperarationsContract
+        {
+            public string Echo(string source)
+            {
+                return null;
+            }
+        }
 
-			public IAsyncResult BeginGet (Message request, AsyncCallback cb, object state)
-			{
-				throw new NotImplementedException ();
-			}
+        class HogeFuga : IHoge, IFuga
+        {
+            public void DoX() { }
 
-			public Message EndGet (IAsyncResult result)
-			{
-				throw new NotImplementedException ();
-			}
-		}
+            public void DoY() { }
+        }
 
-		[ServiceContract]
-		public class NonSingletonService
-		{
-			[OperationContract]
-			public void Process (string input)
-			{
-			}
-		}
+        class Baz : IBaz
+        {
+            public string Echo(string source)
+            {
+                return source;
+            }
+        }
 
-		[ServiceContract]
-		[ServiceBehavior (InstanceContextMode = InstanceContextMode.Single)]
-		public class SingletonService
-		{
-			[OperationContract]
-			public virtual void Process (string input)
-			{
-			}
-		}
+        class MyMetadataExchange : IMetadataExchange
+        {
+            public Message Get(Message req)
+            {
+                throw new NotImplementedException();
+            }
 
-		public class ChildSingletonService : SingletonService
-		{
-			public override void Process (string input)
-			{
-			}
-		}
-	}
+            public IAsyncResult BeginGet(Message request, AsyncCallback cb, object state)
+            {
+                throw new NotImplementedException();
+            }
+
+            public Message EndGet(IAsyncResult result)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [ServiceContract]
+        public class NonSingletonService
+        {
+            [OperationContract]
+            public void Process(string input) { }
+        }
+
+        [ServiceContract]
+        [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+        public class SingletonService
+        {
+            [OperationContract]
+            public virtual void Process(string input) { }
+        }
+
+        public class ChildSingletonService : SingletonService
+        {
+            public override void Process(string input) { }
+        }
+    }
 }
 #endif

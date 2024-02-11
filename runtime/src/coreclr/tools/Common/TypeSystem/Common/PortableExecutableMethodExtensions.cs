@@ -8,7 +8,9 @@ namespace Internal.TypeSystem
 {
     public static class PortableExecutableMethodExtensions
     {
-        public static ImmutableArray<DebugDirectoryEntry> SafeReadDebugDirectory(this PEReader peReader)
+        public static ImmutableArray<DebugDirectoryEntry> SafeReadDebugDirectory(
+            this PEReader peReader
+        )
         {
             int actualDbgDirSize = peReader.PEHeaders.PEHeader.DebugTableDirectory.Size;
 

@@ -21,9 +21,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpImmediate(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
@@ -31,13 +29,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.SolutionExplorer.CreateSolution(nameof(CSharpInteractive));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(testProj, WellKnownProjectTemplates.ConsoleApplication, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                testProj,
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/25814")]
         public void DumpLocalVariableValue()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -46,14 +49,21 @@ class Program
         int n2Var = 43;
     }
 }
-");
+"
+            );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.Debugger.SetBreakPoint("Program.cs", "}");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.ImmediateWindow.ShowImmediateWindow(clearAll: true);
             VisualStudio.SendKeys.Send("?n");
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.CompletionSet);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.CompletionSet
+            );
             VisualStudio.SendKeys.Send("1", VirtualKey.Tab, VirtualKey.Enter);
             Assert.Contains("?n1Var\r\n42", VisualStudio.ImmediateWindow.GetText());
         }

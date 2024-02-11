@@ -18,19 +18,27 @@ internal sealed class WebAssemblyJSObjectReferenceJsonConverter : JsonConverter<
 
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert == typeof(WebAssemblyJSObjectReference) ||
-            typeToConvert == typeof(IJSObjectReference) ||
-            typeToConvert == typeof(IJSInProcessObjectReference) ||
-            typeToConvert == typeof(IJSUnmarshalledObjectReference);
+        return typeToConvert == typeof(WebAssemblyJSObjectReference)
+            || typeToConvert == typeof(IJSObjectReference)
+            || typeToConvert == typeof(IJSInProcessObjectReference)
+            || typeToConvert == typeof(IJSUnmarshalledObjectReference);
     }
 
-    public override IJSObjectReference? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override IJSObjectReference? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var id = JSObjectReferenceJsonWorker.ReadJSObjectReferenceIdentifier(ref reader);
         return new WebAssemblyJSObjectReference(_jsRuntime, id);
     }
 
-    public override void Write(Utf8JsonWriter writer, IJSObjectReference value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        IJSObjectReference value,
+        JsonSerializerOptions options
+    )
     {
         JSObjectReferenceJsonWorker.WriteJSObjectReference(writer, (JSObjectReference)value);
     }

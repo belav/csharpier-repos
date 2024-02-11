@@ -3,28 +3,34 @@
 
 // <Area> Nullable - CastClass </Area>
 // <Title> Nullable type with castclass expr  </Title>
-// <Description>  
+// <Description>
 // checking type of ExplicitFieldOffsetStruct using cast expr
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
 {
     private static bool BoxUnboxToNQ(object o)
     {
-        return Helper.Compare((ExplicitFieldOffsetStruct)(ValueType)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+        return Helper.Compare(
+            (ExplicitFieldOffsetStruct)(ValueType)o,
+            Helper.Create(default(ExplicitFieldOffsetStruct))
+        );
     }
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((ExplicitFieldOffsetStruct?)(ValueType)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+        return Helper.Compare(
+            (ExplicitFieldOffsetStruct?)(ValueType)o,
+            Helper.Create(default(ExplicitFieldOffsetStruct))
+        );
     }
 
     [Fact]
@@ -38,5 +44,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

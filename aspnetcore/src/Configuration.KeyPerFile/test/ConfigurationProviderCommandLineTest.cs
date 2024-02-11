@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test;
 public class ConfigurationProviderCommandLineTest : ConfigurationProviderTestBase
 {
     protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
-        TestSection testConfig)
+        TestSection testConfig
+    )
     {
         var testFiles = new List<IFileInfo>();
         SectionToTestFiles(testFiles, "", testConfig);
@@ -22,12 +23,17 @@ public class ConfigurationProviderCommandLineTest : ConfigurationProviderTestBas
             {
                 Optional = true,
                 FileProvider = new TestFileProvider(testFiles.ToArray())
-            });
+            }
+        );
 
         return (provider, () => { });
     }
 
-    private void SectionToTestFiles(List<IFileInfo> testFiles, string sectionName, TestSection section)
+    private void SectionToTestFiles(
+        List<IFileInfo> testFiles,
+        string sectionName,
+        TestSection section
+    )
     {
         foreach (var tuple in section.Values.SelectMany(e => e.Value.Expand(e.Key)))
         {

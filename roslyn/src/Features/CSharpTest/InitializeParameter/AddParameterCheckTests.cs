@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -91,29 +92,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             {
                 LanguageVersion = LanguageVersion.CSharp6,
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s == null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s == null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47030")]
@@ -368,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -378,33 +381,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                using System;
+                    using System;
 
-                partial class C
-                {
-                    public partial void M(string s);
-
-                    public partial void M([||]string s)
+                    partial class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        public partial void M(string s);
 
-                partial class C
-                {
-                    public partial void M(string s);
-
-                    public partial void M(string s)
-                    {
-                        if (s is null)
+                        public partial void M([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    partial class C
+                    {
+                        public partial void M(string s);
+
+                        public partial void M(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -439,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     partial void M(string s);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -449,33 +453,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             {
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = """
-                using System;
+                    using System;
 
-                partial class C
-                {
-                    public partial void M([||]string s)
+                    partial class C
                     {
-                    }
-
-                    public partial void M(string s);
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                partial class C
-                {
-                    public partial void M(string s)
-                    {
-                        if (s is null)
+                        public partial void M([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
                         }
-                    }
 
-                    public partial void M(string s);
-                }
-                """
+                        public partial void M(string s);
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    partial class C
+                    {
+                        public partial void M(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+                        }
+
+                        public partial void M(string s);
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -508,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         _s = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -517,16 +522,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, string b, string c)
+                    class C
                     {
+                        public C([||]string a, string b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -561,7 +567,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -571,18 +579,19 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                #nullable enable
+                    #nullable enable
 
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, string b, string? c)
+                    class C
                     {
+                        public C([||]string a, string b, string? c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"#nullable enable
+                    """,
+                FixedCode =
+                    @$"#nullable enable
 
 using System;
 
@@ -610,7 +619,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -636,16 +647,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string a, [||]bool b, string c)
+                    class C
                     {
+                        public C(string a, [||]bool b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -671,7 +683,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -681,16 +695,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, bool b, string c)
+                    class C
                     {
+                        public C([||]string a, bool b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -716,7 +731,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -726,16 +743,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string a, object b, string c)
+                    class C
                     {
+                        public C([||]string a, object b, string c)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -766,7 +784,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -776,41 +796,43 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]object a, object b, object c)
+                    class C
                     {
+                        public C([||]object a, object b, object c)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object a, object b, object c)
+                    class C
                     {
-                        if (a is null)
+                        public C(object a, object b, object c)
                         {
-                            throw new ArgumentNullException(nameof(a));
-                        }
+                            if (a is null)
+                            {
+                                throw new ArgumentNullException(nameof(a));
+                            }
 
-                        if (b is null)
-                        {
-                            throw new ArgumentNullException(nameof(b));
-                        }
+                            if (b is null)
+                            {
+                                throw new ArgumentNullException(nameof(b));
+                            }
 
-                        if (c is null)
-                        {
-                            throw new ArgumentNullException(nameof(c));
+                            if (c is null)
+                            {
+                                throw new ArgumentNullException(nameof(c));
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -820,41 +842,43 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]int ? a, bool ? b, double ? c)
+                    class C
                     {
+                        public C([||]int ? a, bool ? b, double ? c)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(int ? a, bool ? b, double ? c)
+                    class C
                     {
-                        if (a is null)
+                        public C(int ? a, bool ? b, double ? c)
                         {
-                            throw new ArgumentNullException(nameof(a));
-                        }
+                            if (a is null)
+                            {
+                                throw new ArgumentNullException(nameof(a));
+                            }
 
-                        if (b is null)
-                        {
-                            throw new ArgumentNullException(nameof(b));
-                        }
+                            if (b is null)
+                            {
+                                throw new ArgumentNullException(nameof(b));
+                            }
 
-                        if (c is null)
-                        {
-                            throw new ArgumentNullException(nameof(c));
+                            if (c is null)
+                            {
+                                throw new ArgumentNullException(nameof(c));
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -887,7 +911,8 @@ class C
                         S = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -897,36 +922,36 @@ class C
             {
                 LanguageVersion = LanguageVersion.CSharp6,
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
-
-                    public C([||]string s)
+                    class C
                     {
-                        S = s;
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        private string S;
 
-                class C
-                {
-                    private string S;
-
-                    public C(string s)
-                    {
-                        if (s == null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
+                            S = s;
                         }
-
-                        S = s;
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        private string S;
+
+                        public C(string s)
+                        {
+                            if (s == null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            S = s;
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -936,39 +961,43 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    private string S;
-
-                    public C([||]string s)
+                    class C
                     {
-                        S = s;
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        private string S;
 
-                class C
-                {
-                    private string S;
-
-                    public C(string s)
-                    {
-                        if (s is null)
+                        public C([||]string s)
                         {
-                            throw new ArgumentNullException(nameof(s));
+                            S = s;
                         }
-
-                        S = s;
                     }
-                }
-                """,
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        private string S;
+
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            S = s;
+                        }
+                    }
+                    """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferThrowExpression, false, NotificationOption2.Silent }
+                    {
+                        CSharpCodeStyleOptions.PreferThrowExpression,
+                        false,
+                        NotificationOption2.Silent
+                    }
                 }
             }.RunAsync();
         }
@@ -998,7 +1027,8 @@ class C
                     public C(string s)
                         => S = s ?? throw new ArgumentNullException(nameof(s));
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1037,7 +1067,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1046,41 +1077,44 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
-                        => Init();
-
-                    private void Init()
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
+                        public C([||]string s)
+                            => Init();
 
-                class C
-                {
-                    public C(string s)
-                    {
-                        if (s is null)
+                        private void Init()
                         {
-                            throw new ArgumentNullException(nameof(s));
+                        }
+                    }
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(string s)
+                        {
+                            if (s is null)
+                            {
+                                throw new ArgumentNullException(nameof(s));
+                            }
+
+                            Init();
                         }
 
-                        Init();
+                        private void Init()
+                        {
+                        }
                     }
-
-                    private void Init()
-                    {
-                    }
-                }
-                """,
+                    """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement }
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                        CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -1122,7 +1156,8 @@ class C
 
                     private int Init() => 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1162,7 +1197,8 @@ class C
 
                     private int Init() => 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1202,7 +1238,8 @@ class C
                         int GetValue() => 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1242,7 +1279,8 @@ class C
                         void NoValue() { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1279,7 +1317,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1316,7 +1355,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1519,7 +1559,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1552,7 +1593,8 @@ class C
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1588,7 +1630,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1622,7 +1665,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1658,7 +1702,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1668,35 +1713,35 @@ class C
             {
                 LanguageVersion = LanguageVersion.CSharp11,
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C()
+                    class C
                     {
-                        Func<string, int> f = ([||]_) => { return 0; };
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C()
-                    {
-                        Func<string, int> f = (_) =>
+                        public C()
                         {
-                            if (_ is null)
-                            {
-                                throw new ArgumentNullException(nameof(_));
-                            }
-
-                            return 0;
-                        };
+                            Func<string, int> f = ([||]_) => { return 0; };
+                        }
                     }
-                }
-                """
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C()
+                        {
+                            Func<string, int> f = (_) =>
+                            {
+                                if (_ is null)
+                                {
+                                    throw new ArgumentNullException(nameof(_));
+                                }
+
+                                return 0;
+                            };
+                        }
+                    }
+                    """
             }.RunAsync();
         }
 
@@ -1755,7 +1800,8 @@ class C
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20983")]
@@ -1791,7 +1837,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1863,16 +1910,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1899,16 +1947,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1925,7 +1974,9 @@ class C
     }}
 }}",
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrWhiteSpace_check)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_string_IsNullOrWhiteSpace_check
+                )
             }.RunAsync();
         }
 
@@ -1936,16 +1987,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -1990,16 +2042,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class Program
-                {
-                    static void Main([||]String bar)
+                    class Program
                     {
+                        static void Main([||]String bar)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class Program
 {{
@@ -2019,7 +2072,10 @@ class Program
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrEmpty_check),
                 Options =
                 {
-                    { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, CodeStyleOption2.FalseWithSuggestionEnforcement }
+                    {
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -2032,29 +2088,35 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]string s)
+                    class C
                     {
+                        public C([||]string s)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(string s)
+                    class C
                     {
-                        if (s is null) throw new ArgumentNullException(nameof(s));
+                        public C(string s)
+                        {
+                            if (s is null) throw new ArgumentNullException(nameof(s));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferBraces, new CodeStyleOption2<PreferBracesPreference>((PreferBracesPreference)preferBraces, NotificationOption2.Silent) },
+                    {
+                        CSharpCodeStyleOptions.PreferBraces,
+                        new CodeStyleOption2<PreferBracesPreference>(
+                            (PreferBracesPreference)preferBraces,
+                            NotificationOption2.Silent
+                        )
+                    },
                 }
             }.RunAsync();
         }
@@ -2065,35 +2127,42 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
+                    class C
+                    {
+                        public C(string s[||])
+                    }
+                    """,
+                ExpectedDiagnostics =
                 {
-                    public C(string s[||])
-                }
-                """,
-                ExpectedDiagnostics = {
                     // /0/Test0.cs(6,12): error CS0501: 'C.C(string)' must declare a body because it is not marked abstract, extern, or partial
-                    DiagnosticResult.CompilerError("CS0501").WithLocation(5, 12).WithArguments("C.C(string)"),
+                    DiagnosticResult
+                        .CompilerError("CS0501")
+                        .WithLocation(5, 12)
+                        .WithArguments("C.C(string)"),
                     // /0/Test0.cs(6,23): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithLocation(5, 23),
                 },
                 FixedState =
                 {
-                    Sources = { """
-                        using System;
+                    Sources =
+                    {
+                        """
+                            using System;
 
-                        class C
-                        {
-                            public C(string s)
+                            class C
                             {
-                                if (s is null)
+                                public C(string s)
                                 {
-                                    throw new ArgumentNullException(nameof(s));
+                                    if (s is null)
+                                    {
+                                        throw new ArgumentNullException(nameof(s));
+                                    }
                                 }
                             }
-                        }
-                        """ },
+                            """
+                    },
                     InheritanceMode = StateInheritanceMode.Explicit
                 }
             }.RunAsync();
@@ -2133,7 +2202,8 @@ class Program
                             .Count();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21501")]
@@ -2170,7 +2240,8 @@ class Program
                             .Count(); /* Bar */
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21501")]
@@ -2251,7 +2322,8 @@ class Program
                             .Count();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29190")]
@@ -2281,7 +2353,8 @@ class Program
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29333")]
@@ -2298,17 +2371,23 @@ class Program
                     }
                 }
                 """;
-            await VerifyCS.VerifyRefactoringAsync(code,
+            await VerifyCS.VerifyRefactoringAsync(
+                code,
                 [
                     // /0/Test0.cs(7,12): error CS0103: The name 'x' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithSpan(7, 12, 7, 13).WithArguments("x"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithSpan(7, 12, 7, 13)
+                        .WithArguments("x"),
                     // /0/Test0.cs(7,13): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(7, 13, 7, 13),
                     // /0/Test0.cs(7,13): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(7, 13, 7, 13),
                     // /0/Test0.cs(7,13): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithSpan(7, 13, 7, 13),
-                ], code);
+                ],
+                code
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41824")]
@@ -2355,7 +2434,8 @@ class Program
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52385")]
@@ -2364,27 +2444,27 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null)
-                            throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null)
+                                throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2400,27 +2480,27 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null)
-                            throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null)
+                                throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2436,29 +2516,29 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C(object o)
-                    {
-                        if (o is null)
+                        public C($$object o)
                         {
-                            throw new ArgumentNullException(nameof(o));
                         }
                     }
-                }
-                """,
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(object o)
+                        {
+                            if (o is null)
+                            {
+                                throw new ArgumentNullException(nameof(o));
+                            }
+                        }
+                    }
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2474,26 +2554,26 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null) throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null) throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2509,26 +2589,26 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
+                        public C($$object o)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object o)
+                    class C
                     {
-                        if (o is null) throw new ArgumentNullException(nameof(o));
+                        public C(object o)
+                        {
+                            if (o is null) throw new ArgumentNullException(nameof(o));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2544,29 +2624,29 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$object o)
+                    class C
                     {
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-
-                class C
-                {
-                    public C(object o)
-                    {
-                        if (o is null)
+                        public C($$object o)
                         {
-                            throw new ArgumentNullException(nameof(o));
                         }
                     }
-                }
-                """,
+                    """,
+                FixedCode = """
+                    using System;
+
+                    class C
+                    {
+                        public C(object o)
+                        {
+                            if (o is null)
+                            {
+                                throw new ArgumentNullException(nameof(o));
+                            }
+                        }
+                    }
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2582,16 +2662,17 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = $@"using System;
+                    """,
+                FixedCode =
+                    $@"using System;
 
 class C
 {{
@@ -2622,16 +2703,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2648,7 +2730,7 @@ class C
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
-                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline},
+                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline },
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, false },
                 },
                 CodeActionIndex = 1,
@@ -2662,16 +2744,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2704,16 +2787,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2743,16 +2827,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2782,16 +2867,17 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C($$string s)
+                    class C
                     {
+                        public C($$string s)
+                        {
+                        }
                     }
-                }
-                """,
-                FixedCode = @$"using System;
+                    """,
+                FixedCode =
+                    @$"using System;
 
 class C
 {{
@@ -2824,28 +2910,28 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C([||]object a, object b, object c)
+                    class C
                     {
+                        public C([||]object a, object b, object c)
+                        {
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C
-                {
-                    public C(object a, object b, object c)
+                    class C
                     {
-                        if (a is null) throw new ArgumentNullException(nameof(a));
-                        if (b is null) throw new ArgumentNullException(nameof(b));
-                        if (c is null) throw new ArgumentNullException(nameof(c));
+                        public C(object a, object b, object c)
+                        {
+                            if (a is null) throw new ArgumentNullException(nameof(a));
+                            if (b is null) throw new ArgumentNullException(nameof(b));
+                            if (c is null) throw new ArgumentNullException(nameof(c));
+                        }
                     }
-                }
-                """,
+                    """,
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
@@ -2853,7 +2939,9 @@ class C
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, true },
                 },
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -2969,7 +3057,8 @@ class C
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38093")]
         public async Task TestReadBeforeAssignment()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
+            await VerifyCS.VerifyRefactoringAsync(
+                """
                 using System;
                 using System.IO;
 
@@ -2983,7 +3072,8 @@ class C
 
                     public Stream OutStream { get; }
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.IO;
 
@@ -3002,13 +3092,15 @@ class C
 
                     public Stream OutStream { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41140")]
         public async Task TestAfterComma1()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
+            await VerifyCS.VerifyRefactoringAsync(
+                """
                 using System;
 
                 class C
@@ -3019,7 +3111,8 @@ class C
 
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -3033,13 +3126,15 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41140")]
         public async Task TestAfterComma2()
         {
-            await VerifyCS.VerifyRefactoringAsync("""
+            await VerifyCS.VerifyRefactoringAsync(
+                """
                 using System;
 
                 class C
@@ -3051,7 +3146,8 @@ class C
 
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -3066,7 +3162,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

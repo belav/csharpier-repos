@@ -17,7 +17,15 @@ internal static class Rfc6238AuthenticationService
     private static readonly TimeSpan _timestep = TimeSpan.FromMinutes(3);
     private static readonly Encoding _encoding = new UTF8Encoding(false, true);
 #if NETSTANDARD2_0 || NETFRAMEWORK
-    private static readonly DateTime _unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    private static readonly DateTime _unixEpoch = new DateTime(
+        1970,
+        1,
+        1,
+        0,
+        0,
+        0,
+        DateTimeKind.Utc
+    );
 #endif
 
     internal static int ComputeTotp(
@@ -26,8 +34,7 @@ internal static class Rfc6238AuthenticationService
 #else
         HashAlgorithm hashAlgorithm,
 #endif
-        ulong timestepNumber,
-        byte[]? modifierBytes)
+        ulong timestepNumber, byte[]? modifierBytes)
     {
         // # of 0's = length of pin
         const int Mod = 1000000;
@@ -36,10 +43,15 @@ internal static class Rfc6238AuthenticationService
         // We can add an optional modifier
 #if NET6_0_OR_GREATER
         Span<byte> timestepAsBytes = stackalloc byte[sizeof(long)];
-        var res = BitConverter.TryWriteBytes(timestepAsBytes, IPAddress.HostToNetworkOrder((long)timestepNumber));
+        var res = BitConverter.TryWriteBytes(
+            timestepAsBytes,
+            IPAddress.HostToNetworkOrder((long)timestepNumber)
+        );
         Debug.Assert(res);
 #else
-        var timestepAsBytes = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((long)timestepNumber));
+        var timestepAsBytes = BitConverter.GetBytes(
+            IPAddress.HostToNetworkOrder((long)timestepNumber)
+        );
 #endif
 
 #if NET6_0_OR_GREATER
@@ -59,10 +71,11 @@ internal static class Rfc6238AuthenticationService
         // Generate DT string
         var offset = hash[hash.Length - 1] & 0xf;
         Debug.Assert(offset + 4 < hash.Length);
-        var binaryCode = (hash[offset] & 0x7f) << 24
-                            | (hash[offset + 1] & 0xff) << 16
-                            | (hash[offset + 2] & 0xff) << 8
-                            | (hash[offset + 3] & 0xff);
+        var binaryCode =
+            (hash[offset] & 0x7f) << 24
+            | (hash[offset + 1] & 0xff) << 16
+            | (hash[offset + 2] & 0xff) << 8
+            | (hash[offset + 3] & 0xff);
 
         return binaryCode % Mod;
     }
@@ -119,9 +132,17 @@ internal static class Rfc6238AuthenticationService
             for (var i = -2; i <= 2; i++)
             {
 #if NET6_0_OR_GREATER
-                var computedTotp = ComputeTotp(securityToken, (ulong)((long)currentTimeStep + i), modifierBytes);
+                var computedTotp = ComputeTotp(
+                    securityToken,
+                    (ulong)((long)currentTimeStep + i),
+                    modifierBytes
+                );
 #else
-                var computedTotp = ComputeTotp(hashAlgorithm, (ulong)((long)currentTimeStep + i), modifierBytes);
+                var computedTotp = ComputeTotp(
+                    hashAlgorithm,
+                    (ulong)((long)currentTimeStep + i),
+                    modifierBytes
+                );
 #endif
                 if (computedTotp == code)
                 {

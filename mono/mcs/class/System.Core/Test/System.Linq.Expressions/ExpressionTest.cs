@@ -28,225 +28,244 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Linq.Expressions;
-
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 
-namespace MonoTests.System.Linq.Expressions {
+namespace MonoTests.System.Linq.Expressions
+{
+    [TestFixture]
+    [Category("SRE")]
+    public class ExpressionTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetFuncTypeArgNull()
+        {
+            Expression.GetFuncType(null);
+        }
 
-	[TestFixture]
-	[Category("SRE")]
-	public class ExpressionTest {
+        static Type[] GetTestTypeArray(int length)
+        {
+            return Enumerable.Range(0, length - 1).Select(i => typeof(int)).ToArray();
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void GetFuncTypeArgNull ()
-		{
-			Expression.GetFuncType (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetFuncTypeArgEmpty()
+        {
+            Expression.GetFuncType(Type.EmptyTypes);
+        }
 
-		static Type [] GetTestTypeArray (int length)
-		{
-			return Enumerable.Range (0, length - 1)
-				.Select (i => typeof (int))
-				.ToArray ();
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetFuncTypeArgTooBig()
+        {
+            Expression.GetFuncType(GetTestTypeArray(64));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void GetFuncTypeArgEmpty ()
-		{
-			Expression.GetFuncType (Type.EmptyTypes);
-		}
+        [Test]
+        public void GetFuncTypeTest()
+        {
+            var func = Expression.GetFuncType(new[] { typeof(int) });
+            Assert.AreEqual(typeof(Func<int>), func);
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void GetFuncTypeArgTooBig ()
-		{
-			Expression.GetFuncType (GetTestTypeArray (64));
-		}
+            func = Expression.GetFuncType(new[] { typeof(int), typeof(int) });
+            Assert.AreEqual(typeof(Func<int, int>), func);
 
-		[Test]
-		public void GetFuncTypeTest ()
-		{
-			var func = Expression.GetFuncType (new [] {typeof (int)});
-			Assert.AreEqual (typeof (Func<int>), func);
+            func = Expression.GetFuncType(new[] { typeof(int), typeof(int), typeof(int) });
+            Assert.AreEqual(typeof(Func<int, int, int>), func);
 
-			func = Expression.GetFuncType (new [] {typeof (int), typeof (int)});
-			Assert.AreEqual (typeof (Func<int, int>), func);
+            func = Expression.GetFuncType(
+                new[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+            );
+            Assert.AreEqual(typeof(Func<int, int, int, int>), func);
 
-			func = Expression.GetFuncType (new [] {typeof (int), typeof (int), typeof (int)});
-			Assert.AreEqual (typeof (Func<int, int, int>), func);
+            func = Expression.GetFuncType(
+                new[] { typeof(int), typeof(int), typeof(int), typeof(int), typeof(int) }
+            );
+            Assert.AreEqual(typeof(Func<int, int, int, int, int>), func);
+        }
 
-			func = Expression.GetFuncType (new [] {typeof (int), typeof (int), typeof (int), typeof (int)});
-			Assert.AreEqual (typeof (Func<int, int, int, int>), func);
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetActionTypeArgNull()
+        {
+            Expression.GetActionType(null);
+        }
 
-			func = Expression.GetFuncType (new [] {typeof (int), typeof (int), typeof (int), typeof (int), typeof (int)});
-			Assert.AreEqual (typeof (Func<int, int, int, int, int>), func);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetActionTypeArgTooBig()
+        {
+            Expression.GetActionType(GetTestTypeArray(45));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void GetActionTypeArgNull ()
-		{
-			Expression.GetActionType (null);
-		}
+        [Test]
+        public void GetActionTypeTest()
+        {
+            var action = Expression.GetActionType(new Type[0]);
+            Assert.AreEqual(typeof(Action), action);
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void GetActionTypeArgTooBig ()
-		{
-			Expression.GetActionType (GetTestTypeArray (45));
-		}
+            action = Expression.GetActionType(new[] { typeof(int) });
+            Assert.AreEqual(typeof(Action<int>), action);
 
-		[Test]
-		public void GetActionTypeTest ()
-		{
-			var action = Expression.GetActionType (new Type [0]);
-			Assert.AreEqual (typeof (Action), action);
+            action = Expression.GetActionType(new[] { typeof(int), typeof(int) });
+            Assert.AreEqual(typeof(Action<int, int>), action);
 
-			action = Expression.GetActionType (new [] {typeof (int)});
-			Assert.AreEqual (typeof (Action<int>), action);
+            action = Expression.GetActionType(new[] { typeof(int), typeof(int), typeof(int) });
+            Assert.AreEqual(typeof(Action<int, int, int>), action);
 
-			action = Expression.GetActionType (new [] {typeof (int), typeof (int)});
-			Assert.AreEqual (typeof (Action<int, int>), action);
+            action = Expression.GetActionType(
+                new[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+            );
+            Assert.AreEqual(typeof(Action<int, int, int, int>), action);
+        }
 
-			action = Expression.GetActionType (new [] {typeof (int), typeof (int), typeof (int)});
-			Assert.AreEqual (typeof (Action<int, int, int>), action);
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ParameterNullType()
+        {
+            Expression.Parameter(null, "foo");
+        }
 
-			action = Expression.GetActionType (new [] {typeof (int), typeof (int), typeof (int), typeof (int)});
-			Assert.AreEqual (typeof (Action<int, int, int, int>), action);
-		}
+        [Test]
+        public void ParameterNullName()
+        {
+            var p = Expression.Parameter(typeof(string), null);
+            Assert.AreEqual(null, p.Name);
+            Assert.AreEqual(typeof(string), p.Type);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ParameterNullType ()
-		{
-			Expression.Parameter (null, "foo");
-		}
+        [Test]
+        public void ParameterEmptyName()
+        {
+            var p = Expression.Parameter(typeof(string), "");
+            Assert.AreEqual("", p.Name);
+            Assert.AreEqual(typeof(string), p.Type);
+        }
 
-		[Test]
-		public void ParameterNullName ()
-		{
-			var p = Expression.Parameter (typeof (string), null);
-			Assert.AreEqual (null, p.Name);
-			Assert.AreEqual (typeof (string), p.Type);
-		}
+        [Test]
+        public void Parameter()
+        {
+            var p = Expression.Parameter(typeof(string), "foo");
+            Assert.AreEqual("foo", p.Name);
+            Assert.AreEqual(typeof(string), p.Type);
+            Assert.AreEqual("foo", p.ToString());
+        }
 
-		[Test]
-		public void ParameterEmptyName ()
-		{
-			var p = Expression.Parameter (typeof (string), "");
-			Assert.AreEqual ("", p.Name);
-			Assert.AreEqual (typeof (string), p.Type);
-		}
+        [Test]
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void VoidParameter()
+        {
+            Expression.Parameter(typeof(void), "hello");
+        }
 
-		[Test]
-		public void Parameter ()
-		{
-			var p = Expression.Parameter (typeof (string), "foo");
-			Assert.AreEqual ("foo", p.Name);
-			Assert.AreEqual (typeof (string), p.Type);
-			Assert.AreEqual ("foo", p.ToString ());
-		}
+        static int buffer;
 
-		[Test]
-		[Category ("NotDotNet")]
-		[ExpectedException (typeof (ArgumentException))]
-		public void VoidParameter ()
-		{
-			Expression.Parameter (typeof (void), "hello");
-		}
+        public static int Identity(int i)
+        {
+            buffer = i;
+            return i;
+        }
 
-		static int buffer;
+        [Test]
+        public void CompileActionDiscardingRetValue()
+        {
+            var p = Expression.Parameter(typeof(int), "i");
+            var identity = GetType()
+                .GetMethod("Identity", BindingFlags.Static | BindingFlags.Public);
+            Assert.IsNotNull(identity);
 
-		public static int Identity (int i)
-		{
-			buffer = i;
-			return i;
-		}
+            var lambda = Expression.Lambda<Action<int>>(Expression.Call(identity, p), p);
 
-		[Test]
-		public void CompileActionDiscardingRetValue ()
-		{
-			var p = Expression.Parameter (typeof (int), "i");
-			var identity = GetType ().GetMethod ("Identity", BindingFlags.Static | BindingFlags.Public );
-			Assert.IsNotNull (identity);
+            var method = lambda.Compile();
 
-			var lambda = Expression.Lambda<Action<int>> (Expression.Call (identity, p), p);
+            buffer = 0;
 
-			var method = lambda.Compile ();
+            method(42);
+            Assert.AreEqual(42, buffer);
+        }
 
-			buffer = 0;
+        [Test]
+        public void ExpressionDelegateTarget()
+        {
+            var p = Expression.Parameter(typeof(string), "str");
+            var identity = Expression.Lambda<Func<string, string>>(p, p).Compile();
 
-			method (42);
-			Assert.AreEqual (42, buffer);
-		}
+            Assert.AreEqual(typeof(Func<string, string>), identity.GetType());
+            Assert.IsNotNull(identity.Target);
+        }
 
-		[Test]
-		public void ExpressionDelegateTarget ()
-		{
-			var p = Expression.Parameter (typeof (string), "str");
-			var identity = Expression.Lambda<Func<string, string>> (p, p).Compile ();
+        [Test]
+        public void SimpleHoistedParameter()
+        {
+            var p = Expression.Parameter(typeof(string), "s");
 
-			Assert.AreEqual (typeof (Func<string, string>), identity.GetType ());
-			Assert.IsNotNull (identity.Target);
-		}
+            var f = Expression
+                .Lambda<Func<string, Func<string>>>(
+                    Expression.Lambda<Func<string>>(p, new ParameterExpression[0]),
+                    p
+                )
+                .Compile();
 
-		[Test]
-		public void SimpleHoistedParameter ()
-		{
-			var p = Expression.Parameter (typeof (string), "s");
+            var f2 = f("x");
 
-			var f = Expression.Lambda<Func<string, Func<string>>> (
-				Expression.Lambda<Func<string>> (
-					p,
-					new ParameterExpression [0]),
-				p).Compile ();
+            Assert.AreEqual("x", f2());
+        }
 
-			var f2 = f ("x");
+        [Test]
+        public void TwoHoistingLevels()
+        {
+            var p1 = Expression.Parameter(typeof(string), "x");
+            var p2 = Expression.Parameter(typeof(string), "y");
 
-			Assert.AreEqual ("x", f2 ());
-		}
+            Expression<Func<string, Func<string, Func<string>>>> e = Expression.Lambda<
+                Func<string, Func<string, Func<string>>>
+            >(
+                Expression.Lambda<Func<string, Func<string>>>(
+                    Expression.Lambda<Func<string>>(
+                        Expression.Call(
+                            typeof(string).GetMethod(
+                                "Concat",
+                                new[] { typeof(string), typeof(string) }
+                            ),
+                            new[] { p1, p2 }
+                        ),
+                        new ParameterExpression[0]
+                    ),
+                    new[] { p2 }
+                ),
+                new[] { p1 }
+            );
 
-		[Test]
-		public void TwoHoistingLevels ()
-		{
-			var p1 = Expression.Parameter (typeof (string), "x");
-			var p2 = Expression.Parameter (typeof (string), "y");
+            var f = e.Compile();
+            var f2 = f("Hello ");
+            var f3 = f2("World !");
 
-			Expression<Func<string, Func<string, Func<string>>>> e =
-				Expression.Lambda<Func<string, Func<string, Func<string>>>> (
-					Expression.Lambda<Func<string, Func<string>>> (
-						Expression.Lambda<Func<string>> (
-							Expression.Call (
-								typeof (string).GetMethod ("Concat", new [] { typeof (string), typeof (string) }),
-								new [] { p1, p2 }),
-							new ParameterExpression [0]),
-						new [] { p2 }),
-					new [] { p1 });
+            Assert.AreEqual("Hello World !", f3());
+        }
 
-			var f = e.Compile ();
-			var f2 = f ("Hello ");
-			var f3 = f2 ("World !");
+        [Test]
+        public void HoistedParameter()
+        {
+            var i = Expression.Parameter(typeof(int), "i");
 
-			Assert.AreEqual ("Hello World !", f3 ());
-		}
+            var l = Expression
+                .Lambda<Func<int, string>>(
+                    Expression.Invoke(
+                        Expression.Lambda<Func<string>>(
+                            Expression.Call(i, typeof(int).GetMethod("ToString", Type.EmptyTypes))
+                        )
+                    ),
+                    i
+                )
+                .Compile();
 
-		[Test]
-		public void HoistedParameter ()
-		{
-			var i = Expression.Parameter (typeof (int), "i");
-
-			var l = Expression.Lambda<Func<int, string>> (
-				Expression.Invoke (
-					Expression.Lambda<Func<string>> (
-						Expression.Call (i, typeof (int).GetMethod ("ToString", Type.EmptyTypes)))), i).Compile ();
-
-			Assert.AreEqual ("42", l (42));
-		}
-	}
+            Assert.AreEqual("42", l(42));
+        }
+    }
 }

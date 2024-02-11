@@ -19,7 +19,8 @@ public class FileStreamResultTest : FileStreamResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         httpContext.RequestServices = new ServiceCollection()
             .AddSingleton<ILoggerFactory, NullLoggerFactory>()
@@ -88,5 +89,4 @@ public class FileStreamResultTest : FileStreamResultTestBase
         Assert.Equal(entityTag, result.EntityTag);
         Assert.Equal(expectedMediaType, result.ContentType);
     }
-
 }

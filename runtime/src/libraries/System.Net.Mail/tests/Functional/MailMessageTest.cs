@@ -27,7 +27,13 @@ namespace System.Net.Mail.Tests
             messageWithSubjectAndBody = new MailMessage("from@example.com", "to@example.com");
             messageWithSubjectAndBody.Subject = "the subject";
             messageWithSubjectAndBody.Body = "hello";
-            messageWithSubjectAndBody.AlternateViews.Add(AlternateView.CreateAlternateViewFromString("<html><body>hello</body></html>", null, "text/html"));
+            messageWithSubjectAndBody.AlternateViews.Add(
+                AlternateView.CreateAlternateViewFromString(
+                    "<html><body>hello</body></html>",
+                    null,
+                    "text/html"
+                )
+            );
             Attachment a = Attachment.CreateAttachmentFromString("blah blah", "AttachmentName");
             messageWithSubjectAndBody.Attachments.Add(a);
 
@@ -46,8 +52,12 @@ namespace System.Net.Mail.Tests
         public void TestForNullException()
         {
             Assert.Throws<ArgumentNullException>(() => new MailMessage("from@example.com", null));
-            Assert.Throws<ArgumentNullException>(() => new MailMessage(null, new MailAddress("to@example.com")));
-            Assert.Throws<ArgumentNullException>(() => new MailMessage(new MailAddress("from@example.com"), null));
+            Assert.Throws<ArgumentNullException>(
+                () => new MailMessage(null, new MailAddress("to@example.com"))
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new MailMessage(new MailAddress("from@example.com"), null)
+            );
             Assert.Throws<ArgumentNullException>(() => new MailMessage(null, "to@example.com"));
         }
 
@@ -149,10 +159,14 @@ namespace System.Net.Mail.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "Not passing as internal System.Net.Mail.MailWriter stripped from build")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "Not passing as internal System.Net.Mail.MailWriter stripped from build"
+        )]
         public void SendMailMessageTest()
         {
-            string expected = @"X-Sender: from@example.com
+            string expected =
+                @"X-Sender: from@example.com
 X-Receiver: to@example.com
 MIME-Version: 1.0
 From: from@example.com
@@ -202,7 +216,10 @@ blah blah
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "Not passing as internal System.Net.Mail.MailWriter stripped from build")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "Not passing as internal System.Net.Mail.MailWriter stripped from build"
+        )]
         public void SentSpecialLengthMailAttachment_Base64Decode_Success()
         {
             // The special length follows pattern: (3N - 1) * 0x4400 + 1
@@ -215,11 +232,18 @@ blah blah
 
             using (var tempFile = TempFile.Create(toBytes))
             {
-                var message = new MailMessage("sender@test.com", "user1@pop.local", "testSubject", "testBody");
+                var message = new MailMessage(
+                    "sender@test.com",
+                    "user1@pop.local",
+                    "testSubject",
+                    "testBody"
+                );
                 message.Attachments.Add(new Attachment(tempFile.Path));
 
                 string attachment = DecodeSentMailMessage(message).Attachment;
-                string decodedAttachment = Encoding.UTF8.GetString(Convert.FromBase64String(attachment));
+                string decodedAttachment = Encoding.UTF8.GetString(
+                    Convert.FromBase64String(attachment)
+                );
 
                 // Make sure last byte is not encoded twice.
                 Assert.Equal(specialLength, decodedAttachment.Length);
@@ -233,24 +257,32 @@ blah blah
             var stream = new MemoryStream();
             var mailWriterType = Type.GetType("System.Net.Mail.MailWriter, System.Net.Mail");
             var mailWriter = Activator.CreateInstance(
-                                type: mailWriterType,
-                                bindingAttr: BindingFlags.Instance | BindingFlags.NonPublic,
-                                binder: null,
-                                args: new object[] { stream, true },    // true to encode message for transport
-                                culture: null,
-                                activationAttributes: null);
+                type: mailWriterType,
+                bindingAttr: BindingFlags.Instance | BindingFlags.NonPublic,
+                binder: null,
+                args: new object[] { stream, true }, // true to encode message for transport
+                culture: null,
+                activationAttributes: null
+            );
 
             // Send the message.
             typeof(MailMessage).InvokeMember(
-                                name: "Send",
-                                invokeAttr: BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
-                                binder: null,
-                                target: mail,
-                                args: new object[] { mailWriter, true, true });
+                name: "Send",
+                invokeAttr: BindingFlags.Instance
+                    | BindingFlags.NonPublic
+                    | BindingFlags.InvokeMethod,
+                binder: null,
+                target: mail,
+                args: new object[] { mailWriter, true, true }
+            );
 
             // Decode contents.
             string result = Encoding.UTF8.GetString(stream.ToArray());
-            string attachment = result.Split(new[] { "attachment" }, StringSplitOptions.None)[1].Trim().Split('-')[0].Trim();
+            string attachment = result
+                .Split(new[] { "attachment" }, StringSplitOptions.None)[1]
+                .Trim()
+                .Split('-')[0]
+                .Trim();
 
             return (result, attachment);
         }

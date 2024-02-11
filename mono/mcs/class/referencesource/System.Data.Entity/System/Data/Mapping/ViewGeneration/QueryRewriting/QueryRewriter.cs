@@ -23,7 +23,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
     /// <summary>
     /// Uses query rewriting to determine the case statements, top-level WHERE clause, and the "used views"
     /// for a given type to be generated.
-    /// 
+    ///
     /// Step 1: Method "EnsureIsFullyMapped" goes through the (C) schema metadata and checks whether the query for each
     ///         entity shape can be rewritten from the C fragment queries.
     ///         This step tracks the "used views" which will later be passed to "basic view generation" (i.e., creation of the FOJ/LOJ/IJ/Union relational expressions)
@@ -48,8 +48,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         // Keeps track of statistics
         RewritingProcessor<Tile<FragmentQuery>> _qp;
+
         // Key attributes of the current extent in _extentPath
         List<MemberPath> _keyAttributes;
+
         // Fragment queries, one per LeftCellWrapper
         List<FragmentQuery> _fragmentQueries = new List<FragmentQuery>();
         List<Tile<FragmentQuery>> _views = new List<Tile<FragmentQuery>>();
@@ -60,7 +62,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         List<LeftCellWrapper> _usedCells = new List<LeftCellWrapper>();
         BoolExpression _topLevelWhereClause;
         CellTreeNode _basicView;
-        Dictionary<MemberPath, CaseStatement> _caseStatements = new Dictionary<MemberPath, CaseStatement>();
+        Dictionary<MemberPath, CaseStatement> _caseStatements =
+            new Dictionary<MemberPath, CaseStatement>();
         ErrorLog _errorLog = new ErrorLog();
         ViewGenMode _typesGenerationMode;
 
@@ -68,13 +71,19 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         #region Static variables
 
-        static Tile<FragmentQuery> TrueViewSurrogate = CreateTile(FragmentQuery.Create(BoolExpression.True));
+        static Tile<FragmentQuery> TrueViewSurrogate = CreateTile(
+            FragmentQuery.Create(BoolExpression.True)
+        );
 
         #endregion
 
         #region Constructor and main entry point
 
-        internal QueryRewriter(EdmType generatedType, ViewgenContext context, ViewGenMode typesGenerationMode)
+        internal QueryRewriter(
+            EdmType generatedType,
+            ViewgenContext context,
+            ViewGenMode typesGenerationMode
+        )
         {
             Debug.Assert(typesGenerationMode != ViewGenMode.GenerateAllViews);
 
@@ -84,9 +93,13 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             _domainMap = context.MemberMaps.LeftDomainMap;
             _config = context.Config;
             _identifiers = context.CqlIdentifiers;
-            _qp = new RewritingProcessor<Tile<FragmentQuery>>(new DefaultTileProcessor<FragmentQuery>(context.LeftFragmentQP));
+            _qp = new RewritingProcessor<Tile<FragmentQuery>>(
+                new DefaultTileProcessor<FragmentQuery>(context.LeftFragmentQP)
+            );
             _extentPath = new MemberPath(context.Extent);
-            _keyAttributes = new List<MemberPath>(MemberPath.GetKeyMembers(context.Extent, _domainMap));
+            _keyAttributes = new List<MemberPath>(
+                MemberPath.GetKeyMembers(context.Extent, _domainMap)
+            );
 
             // populate _fragmentQueries and _views
             foreach (LeftCellWrapper leftCellWrapper in _context.AllWrappersForExtent)
@@ -116,7 +129,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         {
             // make sure everything is mapped (for query views only)
             EnsureExtentIsFullyMapped(_usedViews);
-            
+
             // (1) case statements
             GenerateCaseStatements(_domainMap.ConditionMembers(_extentPath.Extent), _usedViews);
 
@@ -135,7 +148,11 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             // some tracing
             if (_context.ViewTarget == ViewTarget.QueryView)
             {
-                TraceVerbose("Used {0} views of {1} total for rewriting", _usedViews.Count, _views.Count);
+                TraceVerbose(
+                    "Used {0} views of {1} total for rewriting",
+                    _usedViews.Count,
+                    _views.Count
+                );
             }
             PrintStatistics(_qp);
 
@@ -144,13 +161,22 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
             // (4) construct basic view
             BasicViewGenerator basicViewGenerator = new BasicViewGenerator(
-                _context.MemberMaps.ProjectedSlotMap, _usedCells,
-                _domainQuery, _context, _domainMap, _errorLog, _config);
+                _context.MemberMaps.ProjectedSlotMap,
+                _usedCells,
+                _domainQuery,
+                _context,
+                _domainMap,
+                _errorLog,
+                _config
+            );
 
             _basicView = basicViewGenerator.CreateViewExpression();
 
             // a top-level WHERE clause is needed only if the simplifiedView still contains extra tuples
-            bool noWhereClauseNeeded = _context.LeftFragmentQP.IsContainedIn(_basicView.LeftFragmentQuery, _domainQuery);
+            bool noWhereClauseNeeded = _context.LeftFragmentQP.IsContainedIn(
+                _basicView.LeftFragmentQuery,
+                _domainQuery
+            );
             if (noWhereClauseNeeded)
             {
                 _topLevelWhereClause = BoolExpression.True;
@@ -206,7 +232,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         private IEnumerable<Constant> GetDomain(MemberPath currentPath)
         {
-            if (_context.ViewTarget == ViewTarget.QueryView && MemberPath.EqualityComparer.Equals(currentPath, _extentPath))
+            if (
+                _context.ViewTarget == ViewTarget.QueryView
+                && MemberPath.EqualityComparer.Equals(currentPath, _extentPath)
+            )
             {
                 IEnumerable<EdmType> types;
                 if (_typesGenerationMode == ViewGenMode.OfTypeOnlyViews)
@@ -218,7 +247,11 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 }
                 else
                 {
-                    types = MetadataHelper.GetTypeAndSubtypesOf(_generatedType, _context.EdmItemCollection, false /* don't include abstract types */);
+                    types = MetadataHelper.GetTypeAndSubtypesOf(
+                        _generatedType,
+                        _context.EdmItemCollection,
+                        false /* don't include abstract types */
+                    );
                 }
                 return GetTypeConstants(types);
             }
@@ -238,27 +271,33 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             switch (_context.ViewTarget)
             {
                 case ViewTarget.UpdateView:
+                {
+                    // materialize members in a list so we can modify _domainMap later on
+                    List<MemberPath> members = new List<MemberPath>(
+                        _domainMap.ConditionMembers(_extentPath.Extent)
+                    );
+                    foreach (MemberPath currentPath in members)
                     {
-                        // materialize members in a list so we can modify _domainMap later on
-                        List<MemberPath> members = new List<MemberPath>(_domainMap.ConditionMembers(_extentPath.Extent));
-                        foreach (MemberPath currentPath in members)
+                        // try to remove default value followed by negated value, in this order
+                        IEnumerable<Constant> oldDomain = _domainMap.GetDomain(currentPath);
+                        Constant defaultValue = oldDomain.FirstOrDefault(domainValue =>
+                            IsDefaultValue(domainValue, currentPath)
+                        );
+                        if (defaultValue != null)
                         {
-                            // try to remove default value followed by negated value, in this order
-                            IEnumerable<Constant> oldDomain = _domainMap.GetDomain(currentPath);
-                            Constant defaultValue = oldDomain.FirstOrDefault(domainValue => IsDefaultValue(domainValue, currentPath));
-                            if (defaultValue != null)
-                            {
-                                RemoveUnusedValueFromStoreDomain(defaultValue, currentPath);
-                            }
-                            oldDomain = _domainMap.GetDomain(currentPath); // is case has changed
-                            Constant negatedValue = oldDomain.FirstOrDefault(domainValue => domainValue is NegatedConstant);
-                            if (negatedValue != null)
-                            {
-                                RemoveUnusedValueFromStoreDomain(negatedValue, currentPath);
-                            }
+                            RemoveUnusedValueFromStoreDomain(defaultValue, currentPath);
                         }
-                        break;
+                        oldDomain = _domainMap.GetDomain(currentPath); // is case has changed
+                        Constant negatedValue = oldDomain.FirstOrDefault(domainValue =>
+                            domainValue is NegatedConstant
+                        );
+                        if (negatedValue != null)
+                        {
+                            RemoveUnusedValueFromStoreDomain(negatedValue, currentPath);
+                        }
                     }
+                    break;
+                }
             }
         }
 
@@ -267,24 +306,42 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             // construct WHERE clause for this value
             BoolExpression domainWhereClause = CreateMemberCondition(currentPath, domainValue);
 
-            // get a rewriting for CASE statements by not requesting any attributes beyond key 
+            // get a rewriting for CASE statements by not requesting any attributes beyond key
             Tile<FragmentQuery> caseRewriting;
             HashSet<FragmentQuery> outputUsedViews = new HashSet<FragmentQuery>();
             bool isUsedValue = false;
-            if (FindRewritingAndUsedViews(_keyAttributes, domainWhereClause, outputUsedViews, out caseRewriting))
+            if (
+                FindRewritingAndUsedViews(
+                    _keyAttributes,
+                    domainWhereClause,
+                    outputUsedViews,
+                    out caseRewriting
+                )
+            )
             {
                 // check whether this rewriting is indeed satisfiable using C-side fragment views
                 // If we wanted to force retention of all negated constants, we could use:
                 // if (domainValue is NegatedCellConstant) { isUsedValue = true; } else {...}
-                CellTreeNode cellTree = TileToCellTree((Tile<FragmentQuery>)caseRewriting, _context);
+                CellTreeNode cellTree = TileToCellTree(
+                    (Tile<FragmentQuery>)caseRewriting,
+                    _context
+                );
                 isUsedValue = !cellTree.IsEmptyRightFragmentQuery;
             }
 
             if (!isUsedValue)
             {
-                Set<Constant> newDomain = new Set<Constant>(_domainMap.GetDomain(currentPath), Constant.EqualityComparer);
+                Set<Constant> newDomain = new Set<Constant>(
+                    _domainMap.GetDomain(currentPath),
+                    Constant.EqualityComparer
+                );
                 newDomain.Remove(domainValue);
-                TraceVerbose("Shrunk domain of column {0} from {1} to {2}", currentPath, _domainMap.GetDomain(currentPath), newDomain);
+                TraceVerbose(
+                    "Shrunk domain of column {0} from {1} to {2}",
+                    currentPath,
+                    _domainMap.GetDomain(currentPath),
+                    newDomain
+                );
                 _domainMap.UpdateConditionMemberDomain(currentPath, newDomain);
                 // Update the WHERE clauses of all fragment queries
                 // Since these are pointers to the respective WHERE clauses in S-side cell queries, those get updated automatically
@@ -296,7 +353,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // determine the domain query, i.e., the query that returns all keys of the extent to be populated
-        internal FragmentQuery GetDomainQuery(IEnumerable<FragmentQuery> fragmentQueries, EdmType generatedType)
+        internal FragmentQuery GetDomainQuery(
+            IEnumerable<FragmentQuery> fragmentQueries,
+            EdmType generatedType
+        )
         {
             BoolExpression domainQueryCondition = null;
             if (_context.ViewTarget == ViewTarget.QueryView)
@@ -319,26 +379,44 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     }
                     else
                     {
-                        derivedTypes = MetadataHelper.GetTypeAndSubtypesOf(generatedType, _context.EdmItemCollection, false /* don't include abstract types */);
+                        derivedTypes = MetadataHelper.GetTypeAndSubtypesOf(
+                            generatedType,
+                            _context.EdmItemCollection,
+                            false /* don't include abstract types */
+                        );
                     }
 
-                    Domain typeDomain = new Domain(GetTypeConstants(derivedTypes), _domainMap.GetDomain(_extentPath));
-                    domainQueryCondition = BoolExpression.CreateLiteral(new TypeRestriction(new MemberProjectedSlot(_extentPath), typeDomain), _domainMap);
+                    Domain typeDomain = new Domain(
+                        GetTypeConstants(derivedTypes),
+                        _domainMap.GetDomain(_extentPath)
+                    );
+                    domainQueryCondition = BoolExpression.CreateLiteral(
+                        new TypeRestriction(new MemberProjectedSlot(_extentPath), typeDomain),
+                        _domainMap
+                    );
                 }
                 return FragmentQuery.Create(_keyAttributes, domainQueryCondition);
             }
             else // for update views, domain query = exposed tiles
             {
-                IEnumerable<BoolExpression> whereClauses = from fragmentQuery in fragmentQueries
-                                                           select fragmentQuery.Condition;
+                IEnumerable<BoolExpression> whereClauses =
+                    from fragmentQuery in fragmentQueries
+                    select fragmentQuery.Condition;
 
-                BoolExpression exposedRegionCondition = BoolExpression.CreateOr(whereClauses.ToArray());
+                BoolExpression exposedRegionCondition = BoolExpression.CreateOr(
+                    whereClauses.ToArray()
+                );
                 return FragmentQuery.Create(_keyAttributes, exposedRegionCondition);
             }
         }
 
         // returns true when the case statement is completed
-        private bool AddRewritingToCaseStatement(Tile<FragmentQuery> rewriting, CaseStatement caseStatement, MemberPath currentPath, Constant domainValue)
+        private bool AddRewritingToCaseStatement(
+            Tile<FragmentQuery> rewriting,
+            CaseStatement caseStatement,
+            MemberPath currentPath,
+            Constant domainValue
+        )
         {
             BoolExpression whenCondition = BoolExpression.True;
             // check whether the rewriting is always true or always false
@@ -383,10 +461,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         // make sure that we can find a rewriting for each possible entity shape appearing in an extent
         // Possible optimization for OfType view generation:
         // Cache "used views" for each (currentPath, domainValue) combination
-        private void EnsureConfigurationIsFullyMapped(MemberPath currentPath,
-                                                      BoolExpression currentWhereClause,
-                                                      HashSet<FragmentQuery> outputUsedViews,
-                                                      ErrorLog errorLog)
+        private void EnsureConfigurationIsFullyMapped(
+            MemberPath currentPath,
+            BoolExpression currentWhereClause,
+            HashSet<FragmentQuery> outputUsedViews,
+            ErrorLog errorLog
+        )
         {
             foreach (Constant domainValue in GetDomain(currentPath))
             {
@@ -397,13 +477,27 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 TraceVerbose("REWRITING FOR {0}={1}", currentPath, domainValue);
 
                 // construct WHERE clause for this value
-                BoolExpression domainAddedWhereClause = CreateMemberCondition(currentPath, domainValue);
+                BoolExpression domainAddedWhereClause = CreateMemberCondition(
+                    currentPath,
+                    domainValue
+                );
                 // AND the current where clause to it
-                BoolExpression domainWhereClause = BoolExpression.CreateAnd(currentWhereClause, domainAddedWhereClause);
+                BoolExpression domainWhereClause = BoolExpression.CreateAnd(
+                    currentWhereClause,
+                    domainAddedWhereClause
+                );
 
                 // first check whether we can recover instances of this type - don't care about the attributes - to produce a helpful error message
                 Tile<FragmentQuery> rewriting;
-                if (false == FindRewritingAndUsedViews(_keyAttributes, domainWhereClause, outputUsedViews, out rewriting))
+                if (
+                    false
+                    == FindRewritingAndUsedViews(
+                        _keyAttributes,
+                        domainWhereClause,
+                        outputUsedViews,
+                        out rewriting
+                    )
+                )
                 {
                     if (!ErrorPatternMatcher.FindMappingErrors(_context, _domainMap, _errorLog))
                     {
@@ -414,15 +508,28 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                         if (whereClause.RepresentsAllTypeConditions)
                         {
                             string tableString = Strings.ViewGen_Extent;
-                            builder.AppendLine(Strings.ViewGen_Cannot_Recover_Types(tableString, extentName));
+                            builder.AppendLine(
+                                Strings.ViewGen_Cannot_Recover_Types(tableString, extentName)
+                            );
                         }
                         else
                         {
                             string entitiesString = Strings.ViewGen_Entities;
-                            builder.AppendLine(Strings.ViewGen_Cannot_Disambiguate_MultiConstant(entitiesString, extentName));
+                            builder.AppendLine(
+                                Strings.ViewGen_Cannot_Disambiguate_MultiConstant(
+                                    entitiesString,
+                                    extentName
+                                )
+                            );
                         }
                         RewritingValidator.EntityConfigurationToUserString(whereClause, builder);
-                        ErrorLog.Record record = new ErrorLog.Record(true, ViewGenErrorCode.AmbiguousMultiConstants, builder.ToString(), _context.AllWrappersForExtent, String.Empty);
+                        ErrorLog.Record record = new ErrorLog.Record(
+                            true,
+                            ViewGenErrorCode.AmbiguousMultiConstants,
+                            builder.ToString(),
+                            _context.AllWrappersForExtent,
+                            String.Empty
+                        );
                         errorLog.AddEntry(record);
                     }
                 }
@@ -435,29 +542,76 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                         EdmType edmType = typeConstant.EdmType;
                         // If can recover the type, make sure can get all the necessary attributes (key is included for EntityTypes)
 
-                        List<MemberPath> nonConditionalAttributes = GetNonConditionalScalarMembers(edmType, currentPath, _domainMap).Union(GetNonConditionalComplexMembers(edmType, currentPath, _domainMap)).ToList();
+                        List<MemberPath> nonConditionalAttributes = GetNonConditionalScalarMembers(
+                                edmType,
+                                currentPath,
+                                _domainMap
+                            )
+                            .Union(
+                                GetNonConditionalComplexMembers(edmType, currentPath, _domainMap)
+                            )
+                            .ToList();
                         IEnumerable<MemberPath> notCoverdAttributes;
-                        if (nonConditionalAttributes.Count > 0 &&
-                            !FindRewritingAndUsedViews(nonConditionalAttributes, domainWhereClause, outputUsedViews, out rewriting, out notCoverdAttributes))
+                        if (
+                            nonConditionalAttributes.Count > 0
+                            && !FindRewritingAndUsedViews(
+                                nonConditionalAttributes,
+                                domainWhereClause,
+                                outputUsedViews,
+                                out rewriting,
+                                out notCoverdAttributes
+                            )
+                        )
                         {
                             //Error: No mapping specified for some attributes
                             // remove keys
-                            nonConditionalAttributes = new List<MemberPath>(nonConditionalAttributes.Where(a => !a.IsPartOfKey));
-                            Debug.Assert(nonConditionalAttributes.Count > 0, "Must have caught key-only case earlier");
+                            nonConditionalAttributes = new List<MemberPath>(
+                                nonConditionalAttributes.Where(a => !a.IsPartOfKey)
+                            );
+                            Debug.Assert(
+                                nonConditionalAttributes.Count > 0,
+                                "Must have caught key-only case earlier"
+                            );
 
-                            AddUnrecoverableAttributesError(notCoverdAttributes, domainAddedWhereClause, errorLog);
+                            AddUnrecoverableAttributesError(
+                                notCoverdAttributes,
+                                domainAddedWhereClause,
+                                errorLog
+                            );
                         }
                         else
                         {
                             // recurse into complex members
-                            foreach (MemberPath complexMember in GetConditionalComplexMembers(edmType, currentPath, _domainMap))
+                            foreach (
+                                MemberPath complexMember in GetConditionalComplexMembers(
+                                    edmType,
+                                    currentPath,
+                                    _domainMap
+                                )
+                            )
                             {
-                                EnsureConfigurationIsFullyMapped(complexMember, domainWhereClause, outputUsedViews, errorLog);
+                                EnsureConfigurationIsFullyMapped(
+                                    complexMember,
+                                    domainWhereClause,
+                                    outputUsedViews,
+                                    errorLog
+                                );
                             }
                             // recurse into scalar members
-                            foreach (MemberPath scalarMember in GetConditionalScalarMembers(edmType, currentPath, _domainMap))
+                            foreach (
+                                MemberPath scalarMember in GetConditionalScalarMembers(
+                                    edmType,
+                                    currentPath,
+                                    _domainMap
+                                )
+                            )
                             {
-                                EnsureConfigurationIsFullyMapped(scalarMember, domainWhereClause, outputUsedViews, errorLog);
+                                EnsureConfigurationIsFullyMapped(
+                                    scalarMember,
+                                    domainWhereClause,
+                                    outputUsedViews,
+                                    errorLog
+                                );
                             }
                         }
                     }
@@ -465,7 +619,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
         }
 
-        private static List<String> GetTypeBasedMemberPathList(IEnumerable<MemberPath> nonConditionalScalarAttributes)
+        private static List<String> GetTypeBasedMemberPathList(
+            IEnumerable<MemberPath> nonConditionalScalarAttributes
+        )
         {
             Debug.Assert(nonConditionalScalarAttributes != null);
             List<String> typeBasedMembers = new List<string>();
@@ -477,28 +633,47 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             return typeBasedMembers;
         }
 
-        private void AddUnrecoverableAttributesError(IEnumerable<MemberPath> attributes, BoolExpression domainAddedWhereClause, ErrorLog errorLog)
+        private void AddUnrecoverableAttributesError(
+            IEnumerable<MemberPath> attributes,
+            BoolExpression domainAddedWhereClause,
+            ErrorLog errorLog
+        )
         {
             StringBuilder builder = new StringBuilder();
             string extentName = StringUtil.FormatInvariant("{0}", _extentPath);
             string tableString = Strings.ViewGen_Extent;
-            string attributesString = StringUtil.ToCommaSeparatedString(GetTypeBasedMemberPathList(attributes));
-            builder.AppendLine(Strings.ViewGen_Cannot_Recover_Attributes(attributesString, tableString, extentName));
+            string attributesString = StringUtil.ToCommaSeparatedString(
+                GetTypeBasedMemberPathList(attributes)
+            );
+            builder.AppendLine(
+                Strings.ViewGen_Cannot_Recover_Attributes(attributesString, tableString, extentName)
+            );
             RewritingValidator.EntityConfigurationToUserString(domainAddedWhereClause, builder);
-            ErrorLog.Record record = new ErrorLog.Record(true, ViewGenErrorCode.AttributesUnrecoverable, builder.ToString(), _context.AllWrappersForExtent, String.Empty);
+            ErrorLog.Record record = new ErrorLog.Record(
+                true,
+                ViewGenErrorCode.AttributesUnrecoverable,
+                builder.ToString(),
+                _context.AllWrappersForExtent,
+                String.Empty
+            );
             errorLog.AddEntry(record);
         }
 
-
-        private void GenerateCaseStatements(IEnumerable<MemberPath> members,
-                                            HashSet<FragmentQuery> outputUsedViews)
+        private void GenerateCaseStatements(
+            IEnumerable<MemberPath> members,
+            HashSet<FragmentQuery> outputUsedViews
+        )
         {
             // Compute right domain query - non-simplified version of "basic view"
             // It is used below to check whether we need a default value in a case statement
-            IEnumerable<LeftCellWrapper> usedCells = _context.AllWrappersForExtent.Where(w => _usedViews.Contains(w.FragmentQuery));
+            IEnumerable<LeftCellWrapper> usedCells = _context.AllWrappersForExtent.Where(w =>
+                _usedViews.Contains(w.FragmentQuery)
+            );
             CellTreeNode rightDomainQuery = new OpCellTreeNode(
-                _context, CellTreeOpType.Union,
-                usedCells.Select(wrapper => new LeafCellTreeNode(_context, wrapper)).ToArray());
+                _context,
+                CellTreeOpType.Union,
+                usedCells.Select(wrapper => new LeafCellTreeNode(_context, wrapper)).ToArray()
+            );
 
             foreach (MemberPath currentPath in members)
             {
@@ -511,38 +686,63 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 // optimization for domain = {NULL, NOT_NULL}
                 // Create a single case: WHEN True THEN currentPath
                 // Reason: if the WHEN condition is not satisfied (say because of LOJ), then currentPath = NULL
-                bool needCaseStatement =
-                  !(domain.Count == 2 &&
-                    domain.Contains(Constant.Null, Constant.EqualityComparer) &&
-                    domain.Contains(Constant.NotNull, Constant.EqualityComparer));
+                bool needCaseStatement = !(
+                    domain.Count == 2
+                    && domain.Contains(Constant.Null, Constant.EqualityComparer)
+                    && domain.Contains(Constant.NotNull, Constant.EqualityComparer)
+                );
                 {
                     // go over the domain
                     foreach (Constant domainValue in domain)
                     {
-                        if (domainValue == Constant.Undefined && _context.ViewTarget == ViewTarget.QueryView)
+                        if (
+                            domainValue == Constant.Undefined
+                            && _context.ViewTarget == ViewTarget.QueryView
+                        )
                         {
                             // we cannot assume closed domain for query views;
                             // if obtaining undefined is possible, we need to account for that
-                            caseStatement.AddWhenThen(BoolExpression.False /* arbitrary condition */,
-                                                      new ConstantProjectedSlot(Constant.Undefined, currentPath));
+                            caseStatement.AddWhenThen(
+                                BoolExpression.False /* arbitrary condition */
+                                ,
+                                new ConstantProjectedSlot(Constant.Undefined, currentPath)
+                            );
                             continue;
                         }
                         TraceVerbose("CASE STATEMENT FOR {0}={1}", currentPath, domainValue);
 
                         // construct WHERE clause for this value
-                        FragmentQuery memberConditionQuery = CreateMemberConditionQuery(currentPath, domainValue);
+                        FragmentQuery memberConditionQuery = CreateMemberConditionQuery(
+                            currentPath,
+                            domainValue
+                        );
 
                         Tile<FragmentQuery> caseRewriting;
-                        if (FindRewritingAndUsedViews(memberConditionQuery.Attributes, memberConditionQuery.Condition, outputUsedViews, out caseRewriting))
+                        if (
+                            FindRewritingAndUsedViews(
+                                memberConditionQuery.Attributes,
+                                memberConditionQuery.Condition,
+                                outputUsedViews,
+                                out caseRewriting
+                            )
+                        )
                         {
                             if (_context.ViewTarget == ViewTarget.UpdateView)
                             {
-                                unionCaseRewriting = (unionCaseRewriting != null) ? _qp.Union(unionCaseRewriting, caseRewriting) : caseRewriting;
+                                unionCaseRewriting =
+                                    (unionCaseRewriting != null)
+                                        ? _qp.Union(unionCaseRewriting, caseRewriting)
+                                        : caseRewriting;
                             }
 
                             if (needCaseStatement)
                             {
-                                bool isAlwaysTrue = AddRewritingToCaseStatement(caseRewriting, caseStatement, currentPath, domainValue);
+                                bool isAlwaysTrue = AddRewritingToCaseStatement(
+                                    caseRewriting,
+                                    caseStatement,
+                                    currentPath,
+                                    domainValue
+                                );
                                 if (isAlwaysTrue)
                                 {
                                     break;
@@ -553,26 +753,58 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                         {
                             if (!IsDefaultValue(domainValue, currentPath))
                             {
-                                Debug.Assert(_context.ViewTarget == ViewTarget.UpdateView || !_config.IsValidationEnabled);
+                                Debug.Assert(
+                                    _context.ViewTarget == ViewTarget.UpdateView
+                                        || !_config.IsValidationEnabled
+                                );
 
-
-                                if (!ErrorPatternMatcher.FindMappingErrors(_context, _domainMap, _errorLog))
+                                if (
+                                    !ErrorPatternMatcher.FindMappingErrors(
+                                        _context,
+                                        _domainMap,
+                                        _errorLog
+                                    )
+                                )
                                 {
                                     StringBuilder builder = new StringBuilder();
-                                    string extentName = StringUtil.FormatInvariant("{0}", _extentPath);
-                                    string objectString = _context.ViewTarget == ViewTarget.QueryView ?
-                                        Strings.ViewGen_Entities : Strings.ViewGen_Tuples;
-                                    
+                                    string extentName = StringUtil.FormatInvariant(
+                                        "{0}",
+                                        _extentPath
+                                    );
+                                    string objectString =
+                                        _context.ViewTarget == ViewTarget.QueryView
+                                            ? Strings.ViewGen_Entities
+                                            : Strings.ViewGen_Tuples;
+
                                     if (_context.ViewTarget == ViewTarget.QueryView)
                                     {
-                                        builder.AppendLine(Strings.Viewgen_CannotGenerateQueryViewUnderNoValidation(extentName));
+                                        builder.AppendLine(
+                                            Strings.Viewgen_CannotGenerateQueryViewUnderNoValidation(
+                                                extentName
+                                            )
+                                        );
                                     }
                                     else
                                     {
-                                        builder.AppendLine(Strings.ViewGen_Cannot_Disambiguate_MultiConstant(objectString, extentName));
+                                        builder.AppendLine(
+                                            Strings.ViewGen_Cannot_Disambiguate_MultiConstant(
+                                                objectString,
+                                                extentName
+                                            )
+                                        );
                                     }
-                                    RewritingValidator.EntityConfigurationToUserString(memberConditionQuery.Condition, builder, _context.ViewTarget == ViewTarget.UpdateView);
-                                    ErrorLog.Record record = new ErrorLog.Record(true, ViewGenErrorCode.AmbiguousMultiConstants, builder.ToString(), _context.AllWrappersForExtent, String.Empty);
+                                    RewritingValidator.EntityConfigurationToUserString(
+                                        memberConditionQuery.Condition,
+                                        builder,
+                                        _context.ViewTarget == ViewTarget.UpdateView
+                                    );
+                                    ErrorLog.Record record = new ErrorLog.Record(
+                                        true,
+                                        ViewGenErrorCode.AmbiguousMultiConstants,
+                                        builder.ToString(),
+                                        _context.AllWrappersForExtent,
+                                        String.Empty
+                                    );
                                     _errorLog.AddEntry(record);
                                 }
                             }
@@ -586,7 +818,13 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     // which will ultimately be translated into a (possibly implicit) ELSE clause
                     if (_context.ViewTarget == ViewTarget.UpdateView && needCaseStatement)
                     {
-                        AddElseDefaultToCaseStatement(currentPath, caseStatement, domain, rightDomainQuery, unionCaseRewriting);
+                        AddElseDefaultToCaseStatement(
+                            currentPath,
+                            caseStatement,
+                            domain,
+                            rightDomainQuery,
+                            unionCaseRewriting
+                        );
                     }
 
                     if (caseStatement.Clauses.Count > 0)
@@ -598,33 +836,70 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
         }
 
-        private void AddElseDefaultToCaseStatement(MemberPath currentPath, CaseStatement caseStatement, List<Constant> domain,
-                                                   CellTreeNode rightDomainQuery, Tile<FragmentQuery> unionCaseRewriting)
+        private void AddElseDefaultToCaseStatement(
+            MemberPath currentPath,
+            CaseStatement caseStatement,
+            List<Constant> domain,
+            CellTreeNode rightDomainQuery,
+            Tile<FragmentQuery> unionCaseRewriting
+        )
         {
-            Debug.Assert(_context.ViewTarget == ViewTarget.UpdateView, "Used for update views only");
+            Debug.Assert(
+                _context.ViewTarget == ViewTarget.UpdateView,
+                "Used for update views only"
+            );
 
             Constant defaultValue;
-            bool hasDefaultValue = Domain.TryGetDefaultValueForMemberPath(currentPath, out defaultValue);
+            bool hasDefaultValue = Domain.TryGetDefaultValueForMemberPath(
+                currentPath,
+                out defaultValue
+            );
 
             if (false == hasDefaultValue || false == domain.Contains(defaultValue))
             {
-                Debug.Assert(unionCaseRewriting != null, "No union of rewritings for case statements");
+                Debug.Assert(
+                    unionCaseRewriting != null,
+                    "No union of rewritings for case statements"
+                );
                 CellTreeNode unionTree = TileToCellTree(unionCaseRewriting, _context);
-                FragmentQuery configurationNeedsDefault = _context.RightFragmentQP.Difference(rightDomainQuery.RightFragmentQuery, unionTree.RightFragmentQuery);
+                FragmentQuery configurationNeedsDefault = _context.RightFragmentQP.Difference(
+                    rightDomainQuery.RightFragmentQuery,
+                    unionTree.RightFragmentQuery
+                );
 
                 if (_context.RightFragmentQP.IsSatisfiable(configurationNeedsDefault))
                 {
                     if (hasDefaultValue)
                     {
-                        caseStatement.AddWhenThen(BoolExpression.True, new ConstantProjectedSlot(defaultValue, currentPath));
+                        caseStatement.AddWhenThen(
+                            BoolExpression.True,
+                            new ConstantProjectedSlot(defaultValue, currentPath)
+                        );
                     }
                     else
                     {
                         configurationNeedsDefault.Condition.ExpensiveSimplify();
                         StringBuilder builder = new StringBuilder();
-                        builder.AppendLine(Strings.ViewGen_No_Default_Value_For_Configuration(currentPath.PathToString(false /* for alias */)));
-                        RewritingValidator.EntityConfigurationToUserString(configurationNeedsDefault.Condition, builder);
-                        _errorLog.AddEntry(new ErrorLog.Record(true, ViewGenErrorCode.NoDefaultValue, builder.ToString(), _context.AllWrappersForExtent, String.Empty));
+                        builder.AppendLine(
+                            Strings.ViewGen_No_Default_Value_For_Configuration(
+                                currentPath.PathToString(
+                                    false /* for alias */
+                                )
+                            )
+                        );
+                        RewritingValidator.EntityConfigurationToUserString(
+                            configurationNeedsDefault.Condition,
+                            builder
+                        );
+                        _errorLog.AddEntry(
+                            new ErrorLog.Record(
+                                true,
+                                ViewGenErrorCode.NoDefaultValue,
+                                builder.ToString(),
+                                _context.AllWrappersForExtent,
+                                String.Empty
+                            )
+                        );
                     }
                 }
             }
@@ -640,7 +915,14 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 if (!_domainQuery.Condition.IsTrue)
                 {
                     Tile<FragmentQuery> topLevelRewriting;
-                    if (FindRewritingAndUsedViews(_keyAttributes, _domainQuery.Condition, outputUsedViews, out topLevelRewriting))
+                    if (
+                        FindRewritingAndUsedViews(
+                            _keyAttributes,
+                            _domainQuery.Condition,
+                            outputUsedViews,
+                            out topLevelRewriting
+                        )
+                    )
                     {
                         topLevelWhereClause = TileToBoolExpr(topLevelRewriting);
                         topLevelWhereClause.ExpensiveSimplify();
@@ -660,15 +942,18 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         {
             if (_context.ViewTarget == ViewTarget.QueryView && _config.IsValidationEnabled)
             {
-
                 // Run the check below for OfType views too so we can determine
                 // what views are used (low overhead due to caching of rewritings)
-                EnsureConfigurationIsFullyMapped(_extentPath, BoolExpression.True, outputUsedViews, _errorLog);
+                EnsureConfigurationIsFullyMapped(
+                    _extentPath,
+                    BoolExpression.True,
+                    outputUsedViews,
+                    _errorLog
+                );
                 if (_errorLog.Count > 0)
                 {
                     ExceptionHelpers.ThrowMappingException(_errorLog, _config);
                 }
-
             }
             else
             {
@@ -678,26 +963,56 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     foreach (MemberPath memberPath in _context.MemberMaps.ProjectedSlotMap.Members)
                     {
                         Constant defaultConstant;
-                        if (memberPath.IsScalarType() &&
-                            !memberPath.IsPartOfKey &&
-                            !_domainMap.IsConditionMember(memberPath) &&
-                            !Domain.TryGetDefaultValueForMemberPath(memberPath, out defaultConstant))
+                        if (
+                            memberPath.IsScalarType()
+                            && !memberPath.IsPartOfKey
+                            && !_domainMap.IsConditionMember(memberPath)
+                            && !Domain.TryGetDefaultValueForMemberPath(
+                                memberPath,
+                                out defaultConstant
+                            )
+                        )
                         {
-                            HashSet<MemberPath> attributes = new HashSet<MemberPath>(_keyAttributes);
+                            HashSet<MemberPath> attributes = new HashSet<MemberPath>(
+                                _keyAttributes
+                            );
                             attributes.Add(memberPath);
-                            foreach (LeftCellWrapper leftCellWrapper in _context.AllWrappersForExtent)
+                            foreach (
+                                LeftCellWrapper leftCellWrapper in _context.AllWrappersForExtent
+                            )
                             {
                                 FragmentQuery fragmentQuery = leftCellWrapper.FragmentQuery;
 
-                                FragmentQuery tileQuery = new FragmentQuery(fragmentQuery.Description, fragmentQuery.FromVariable,
-                                                                            attributes, fragmentQuery.Condition);
-                                Tile<FragmentQuery> noNullToAvoid = CreateTile(FragmentQuery.Create(_keyAttributes, BoolExpression.CreateNot(fragmentQuery.Condition)));
+                                FragmentQuery tileQuery = new FragmentQuery(
+                                    fragmentQuery.Description,
+                                    fragmentQuery.FromVariable,
+                                    attributes,
+                                    fragmentQuery.Condition
+                                );
+                                Tile<FragmentQuery> noNullToAvoid = CreateTile(
+                                    FragmentQuery.Create(
+                                        _keyAttributes,
+                                        BoolExpression.CreateNot(fragmentQuery.Condition)
+                                    )
+                                );
                                 Tile<FragmentQuery> noNullRewriting;
                                 IEnumerable<MemberPath> notCoveredAttributes;
-                                if (!RewriteQuery(CreateTile(tileQuery), noNullToAvoid, /*_views,*/ out noNullRewriting, out notCoveredAttributes, false /* isRelaxed */))
+                                if (
+                                    !RewriteQuery(
+                                        CreateTile(tileQuery),
+                                        noNullToAvoid, /*_views,*/
+                                        out noNullRewriting,
+                                        out notCoveredAttributes,
+                                        false /* isRelaxed */
+                                    )
+                                )
                                 {
                                     // force error
-                                    Domain.GetDefaultValueForMemberPath(memberPath, new LeftCellWrapper[] { leftCellWrapper }, _config);
+                                    Domain.GetDefaultValueForMemberPath(
+                                        memberPath,
+                                        new LeftCellWrapper[] { leftCellWrapper },
+                                        _config
+                                    );
                                 }
                             }
                         }
@@ -709,18 +1024,37 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 foreach (Tile<FragmentQuery> toFill in _views)
                 {
                     Tile<FragmentQuery> rewriting;
-                    Tile<FragmentQuery> toAvoid = CreateTile(FragmentQuery.Create(_keyAttributes, BoolExpression.CreateNot(toFill.Query.Condition)));
+                    Tile<FragmentQuery> toAvoid = CreateTile(
+                        FragmentQuery.Create(
+                            _keyAttributes,
+                            BoolExpression.CreateNot(toFill.Query.Condition)
+                        )
+                    );
                     IEnumerable<MemberPath> notCoveredAttributes;
-                    bool found = RewriteQuery(toFill, toAvoid, out rewriting, out notCoveredAttributes, true /* isRelaxed */);
+                    bool found = RewriteQuery(
+                        toFill,
+                        toAvoid,
+                        out rewriting,
+                        out notCoveredAttributes,
+                        true /* isRelaxed */
+                    );
 
                     //Must be able to find the rewriting since the query is one of the views
-                    // otherwise it means condition on the fragment is not satisfiable 
+                    // otherwise it means condition on the fragment is not satisfiable
                     if (!found)
                     {
-                        LeftCellWrapper fragment = _context.AllWrappersForExtent.First(lcr => lcr.FragmentQuery.Equals(toFill.Query));
+                        LeftCellWrapper fragment = _context.AllWrappersForExtent.First(lcr =>
+                            lcr.FragmentQuery.Equals(toFill.Query)
+                        );
                         Debug.Assert(fragment != null);
 
-                        ErrorLog.Record record = new ErrorLog.Record(true, ViewGenErrorCode.ImpopssibleCondition, Strings.Viewgen_QV_RewritingNotFound(fragment.RightExtent.ToString()), fragment.Cells, String.Empty);
+                        ErrorLog.Record record = new ErrorLog.Record(
+                            true,
+                            ViewGenErrorCode.ImpopssibleCondition,
+                            Strings.Viewgen_QV_RewritingNotFound(fragment.RightExtent.ToString()),
+                            fragment.Cells,
+                            String.Empty
+                        );
                         _errorLog.AddEntry(record);
                     }
                     else
@@ -728,9 +1062,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                         outputUsedViews.UnionWith(rewriting.GetNamedQueries());
                     }
                 }
-
             }
-
         }
 
         // Modifies _caseStatements and _topLevelWhereClause
@@ -740,7 +1072,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             // remap CellIdBooleans appearing in WHEN clauses and in topLevelWhereClause so the first used cell = 0, second = 1, etc.
             // This ordering is exploited in CQL generation
             int newNumber = 0;
-            Dictionary<BoolLiteral, BoolLiteral> literalRemap = new Dictionary<BoolLiteral, BoolLiteral>(BoolLiteral.EqualityIdentifierComparer);
+            Dictionary<BoolLiteral, BoolLiteral> literalRemap = new Dictionary<
+                BoolLiteral,
+                BoolLiteral
+            >(BoolLiteral.EqualityIdentifierComparer);
             foreach (LeftCellWrapper leftCellWrapper in _context.AllWrappersForExtent)
             {
                 if (_usedViews.Contains(leftCellWrapper.FragmentQuery))
@@ -749,7 +1084,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     int oldNumber = leftCellWrapper.OnlyInputCell.CellNumber;
                     if (newNumber != oldNumber)
                     {
-                        literalRemap[new CellIdBoolean(_identifiers, oldNumber)] = new CellIdBoolean(_identifiers, newNumber);
+                        literalRemap[new CellIdBoolean(_identifiers, oldNumber)] =
+                            new CellIdBoolean(_identifiers, newNumber);
                     }
                     newNumber++;
                 }
@@ -761,14 +1097,18 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 _topLevelWhereClause = _topLevelWhereClause.RemapLiterals(literalRemap);
 
                 // Remap _from literals in case statements
-                Dictionary<MemberPath, CaseStatement> newCaseStatements = new Dictionary<MemberPath, CaseStatement>();
+                Dictionary<MemberPath, CaseStatement> newCaseStatements =
+                    new Dictionary<MemberPath, CaseStatement>();
                 foreach (var entry in _caseStatements)
                 {
                     CaseStatement newCaseStatement = new CaseStatement(entry.Key);
                     Debug.Assert(entry.Value.ElseValue == null);
                     foreach (CaseStatement.WhenThen clause in entry.Value.Clauses)
                     {
-                        newCaseStatement.AddWhenThen(clause.Condition.RemapLiterals(literalRemap), clause.Value);
+                        newCaseStatement.AddWhenThen(
+                            clause.Condition.RemapLiterals(literalRemap),
+                            clause.Value
+                        );
                     }
                     newCaseStatements[entry.Key] = newCaseStatement;
                 }
@@ -780,7 +1120,11 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         // for backward compatibility: add (WHEN True THEN Type) for non-scalar types
         internal void AddTrivialCaseStatementsForConditionMembers()
         {
-            for (int memberNum = 0; memberNum < _context.MemberMaps.ProjectedSlotMap.Count; memberNum++)
+            for (
+                int memberNum = 0;
+                memberNum < _context.MemberMaps.ProjectedSlotMap.Count;
+                memberNum++
+            )
             {
                 MemberPath memberPath = _context.MemberMaps.ProjectedSlotMap[memberNum];
                 if (!memberPath.IsScalarType() && !_caseStatements.ContainsKey(memberPath))
@@ -788,7 +1132,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     Constant typeConstant = new TypeConstant(memberPath.EdmType);
                     {
                         CaseStatement caseStmt = new CaseStatement(memberPath);
-                        caseStmt.AddWhenThen(BoolExpression.True, new ConstantProjectedSlot(typeConstant, memberPath));
+                        caseStmt.AddWhenThen(
+                            BoolExpression.True,
+                            new ConstantProjectedSlot(typeConstant, memberPath)
+                        );
                         _caseStatements[memberPath] = caseStmt;
                     }
                 }
@@ -801,19 +1148,32 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         // Find rewriting for query SELECT <attributes> WHERE <whereClause> FROM _extentPath
         // and add view appearing in rewriting to outputUsedViews
-        private bool FindRewritingAndUsedViews(IEnumerable<MemberPath> attributes, BoolExpression whereClause,
-                                               HashSet<FragmentQuery> outputUsedViews, out Tile<FragmentQuery> rewriting)
+        private bool FindRewritingAndUsedViews(
+            IEnumerable<MemberPath> attributes,
+            BoolExpression whereClause,
+            HashSet<FragmentQuery> outputUsedViews,
+            out Tile<FragmentQuery> rewriting
+        )
         {
             IEnumerable<MemberPath> notCoveredAttributes;
-            return FindRewritingAndUsedViews(attributes, whereClause, outputUsedViews, out rewriting,
-                                               out notCoveredAttributes);
+            return FindRewritingAndUsedViews(
+                attributes,
+                whereClause,
+                outputUsedViews,
+                out rewriting,
+                out notCoveredAttributes
+            );
         }
 
         // Find rewriting for query SELECT <attributes> WHERE <whereClause> FROM _extentPath
         // and add view appearing in rewriting to outputUsedViews
-        private bool FindRewritingAndUsedViews(IEnumerable<MemberPath> attributes, BoolExpression whereClause,
-                                               HashSet<FragmentQuery> outputUsedViews, out Tile<FragmentQuery> rewriting,
-                                               out IEnumerable<MemberPath> notCoveredAttributes)
+        private bool FindRewritingAndUsedViews(
+            IEnumerable<MemberPath> attributes,
+            BoolExpression whereClause,
+            HashSet<FragmentQuery> outputUsedViews,
+            out Tile<FragmentQuery> rewriting,
+            out IEnumerable<MemberPath> notCoveredAttributes
+        )
         {
             if (FindRewriting(attributes, whereClause, out rewriting, out notCoveredAttributes))
             {
@@ -824,22 +1184,41 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // Find rewriting for query SELECT <attributes> WHERE <whereClause> FROM _extentPath
-        private bool FindRewriting(IEnumerable<MemberPath> attributes, BoolExpression whereClause,
-                                   out Tile<FragmentQuery> rewriting, out IEnumerable<MemberPath> notCoveredAttributes)
+        private bool FindRewriting(
+            IEnumerable<MemberPath> attributes,
+            BoolExpression whereClause,
+            out Tile<FragmentQuery> rewriting,
+            out IEnumerable<MemberPath> notCoveredAttributes
+        )
         {
             Tile<FragmentQuery> toFill = CreateTile(FragmentQuery.Create(attributes, whereClause));
             Debug.Assert(toFill.Query.Attributes.Count > 0, "Query has no attributes?");
-            Tile<FragmentQuery> toAvoid = CreateTile(FragmentQuery.Create(_keyAttributes, BoolExpression.CreateNot(whereClause)));
+            Tile<FragmentQuery> toAvoid = CreateTile(
+                FragmentQuery.Create(_keyAttributes, BoolExpression.CreateNot(whereClause))
+            );
 
             bool isRelaxed = (_context.ViewTarget == ViewTarget.UpdateView);
-            bool found = RewriteQuery(toFill, toAvoid, out rewriting, out notCoveredAttributes, isRelaxed);
-            Debug.Assert(!found || rewriting.GetNamedQueries().All(q => q != TrueViewSurrogate.Query),
-                         "TrueViewSurrogate should have been substituted");
+            bool found = RewriteQuery(
+                toFill,
+                toAvoid,
+                out rewriting,
+                out notCoveredAttributes,
+                isRelaxed
+            );
+            Debug.Assert(
+                !found || rewriting.GetNamedQueries().All(q => q != TrueViewSurrogate.Query),
+                "TrueViewSurrogate should have been substituted"
+            );
             return found;
         }
 
-        private bool RewriteQuery(Tile<FragmentQuery> toFill, Tile<FragmentQuery> toAvoid, out Tile<FragmentQuery> rewriting, out IEnumerable<MemberPath> notCoveredAttributes,
-            bool isRelaxed)
+        private bool RewriteQuery(
+            Tile<FragmentQuery> toFill,
+            Tile<FragmentQuery> toAvoid,
+            out Tile<FragmentQuery> rewriting,
+            out IEnumerable<MemberPath> notCoveredAttributes,
+            bool isRelaxed
+        )
         {
             notCoveredAttributes = new List<MemberPath>();
             // first, find a rewriting for WHERE clause only
@@ -851,17 +1230,40 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
 
             // Filter the relevant views. These may include a TrueSurrogate view
-            IEnumerable<Tile<FragmentQuery>> relevantViews = GetRelevantViews(toFillQuery, isRelaxed);
+            IEnumerable<Tile<FragmentQuery>> relevantViews = GetRelevantViews(
+                toFillQuery,
+                isRelaxed
+            );
             FragmentQuery originalToFillQuery = toFillQuery;
 
-            if (!RewriteQueryCached(CreateTile(FragmentQuery.Create(toFillQuery.Condition)), toAvoid, relevantViews, out rewriting))
+            if (
+                !RewriteQueryCached(
+                    CreateTile(FragmentQuery.Create(toFillQuery.Condition)),
+                    toAvoid,
+                    relevantViews,
+                    out rewriting
+                )
+            )
             {
                 if (isRelaxed)
                 {
                     // don't give up quite yet
-                    toFillQuery = FragmentQuery.Create(toFillQuery.Attributes, BoolExpression.CreateAndNot(toFillQuery.Condition, rewriting.Query.Condition));
-                    if (_qp.IsEmpty(CreateTile(toFillQuery)) ||
-                        !RewriteQueryCached(CreateTile(FragmentQuery.Create(toFillQuery.Condition)), toAvoid, relevantViews, out rewriting))
+                    toFillQuery = FragmentQuery.Create(
+                        toFillQuery.Attributes,
+                        BoolExpression.CreateAndNot(
+                            toFillQuery.Condition,
+                            rewriting.Query.Condition
+                        )
+                    );
+                    if (
+                        _qp.IsEmpty(CreateTile(toFillQuery))
+                        || !RewriteQueryCached(
+                            CreateTile(FragmentQuery.Create(toFillQuery.Condition)),
+                            toAvoid,
+                            relevantViews,
+                            out rewriting
+                        )
+                    )
                     {
                         return false; // finally give up
                     }
@@ -880,12 +1282,16 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
 
             // now we have the rewriting for WHERE
-            Dictionary<MemberPath, FragmentQuery> attributeConditions = new Dictionary<MemberPath, FragmentQuery>();
+            Dictionary<MemberPath, FragmentQuery> attributeConditions =
+                new Dictionary<MemberPath, FragmentQuery>();
             foreach (MemberPath attribute in NonKeys(toFillQuery.Attributes))
             {
                 attributeConditions[attribute] = toFillQuery;
             }
-            if (attributeConditions.Count == 0 || CoverAttributes(ref rewriting, toFillQuery, attributeConditions))
+            if (
+                attributeConditions.Count == 0
+                || CoverAttributes(ref rewriting, toFillQuery, attributeConditions)
+            )
             {
                 GetUsedViewsAndRemoveTrueSurrogate(ref rewriting);
                 _context.SetCachedRewriting(originalToFillQuery, rewriting);
@@ -899,7 +1305,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     FragmentQuery remainingCondition;
                     if (attributeConditions.TryGetValue(attribute, out remainingCondition))
                     {
-                        attributeConditions[attribute] = FragmentQuery.Create(BoolExpression.CreateAndNot(toFillQuery.Condition, remainingCondition.Condition));
+                        attributeConditions[attribute] = FragmentQuery.Create(
+                            BoolExpression.CreateAndNot(
+                                toFillQuery.Condition,
+                                remainingCondition.Condition
+                            )
+                        );
                     }
                     else
                     {
@@ -918,10 +1329,17 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // input views may contain TrueSurrogate
-        private bool RewriteQueryCached(Tile<FragmentQuery> toFill, Tile<FragmentQuery> toAvoid,
-                                        IEnumerable<Tile<FragmentQuery>> views, out Tile<FragmentQuery> rewriting)
+        private bool RewriteQueryCached(
+            Tile<FragmentQuery> toFill,
+            Tile<FragmentQuery> toAvoid,
+            IEnumerable<Tile<FragmentQuery>> views,
+            out Tile<FragmentQuery> rewriting
+        )
         {
-            Debug.Assert(toFill.Query.Attributes.Count == 0, "This method is used for attribute-less queries only");
+            Debug.Assert(
+                toFill.Query.Attributes.Count == 0,
+                "This method is used for attribute-less queries only"
+            );
 
             if (!_context.TryGetCachedRewriting(toFill.Query, out rewriting))
             {
@@ -937,11 +1355,16 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             return true;
         }
 
-        private bool CoverAttributes(ref Tile<FragmentQuery> rewriting, FragmentQuery toFillQuery,
-            Dictionary<MemberPath, FragmentQuery> attributeConditions)
+        private bool CoverAttributes(
+            ref Tile<FragmentQuery> rewriting,
+            FragmentQuery toFillQuery,
+            Dictionary<MemberPath, FragmentQuery> attributeConditions
+        )
         {
             // first, account for already used views
-            HashSet<FragmentQuery> usedViews = new HashSet<FragmentQuery>(rewriting.GetNamedQueries());
+            HashSet<FragmentQuery> usedViews = new HashSet<FragmentQuery>(
+                rewriting.GetNamedQueries()
+            );
             Debug.Assert(usedViews.Count > 0);
             //List<FragmentQuery> usedViewsList = new List<FragmentQuery>(usedViews);
             //usedViewsList.Sort(FragmentQuery.GetComparer(toFillQuery.Attributes));
@@ -964,7 +1387,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 {
                     if (CoverAttribute(projectedAttribute, view, attributeConditions, toFillQuery))
                     {
-                        attributeTile = (attributeTile == null) ? CreateTile(view) : _qp.Union(attributeTile, CreateTile(view));
+                        attributeTile =
+                            (attributeTile == null)
+                                ? CreateTile(view)
+                                : _qp.Union(attributeTile, CreateTile(view));
                     }
                 }
                 if (attributeConditions.Count == 0)
@@ -987,12 +1413,19 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // returns true if the view is useful for covering the projected attribute
-        private bool CoverAttribute(MemberPath projectedAttribute, FragmentQuery view, Dictionary<MemberPath, FragmentQuery> attributeConditions, FragmentQuery toFillQuery)
+        private bool CoverAttribute(
+            MemberPath projectedAttribute,
+            FragmentQuery view,
+            Dictionary<MemberPath, FragmentQuery> attributeConditions,
+            FragmentQuery toFillQuery
+        )
         {
             FragmentQuery currentAttributeCondition;
             if (attributeConditions.TryGetValue(projectedAttribute, out currentAttributeCondition))
             {
-                currentAttributeCondition = FragmentQuery.Create(BoolExpression.CreateAndNot(currentAttributeCondition.Condition, view.Condition));
+                currentAttributeCondition = FragmentQuery.Create(
+                    BoolExpression.CreateAndNot(currentAttributeCondition.Condition, view.Condition)
+                );
                 if (_qp.IsEmpty(CreateTile(currentAttributeCondition)))
                 {
                     // this attribute is covered! remove it from the list
@@ -1007,7 +1440,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             return false;
         }
 
-        private IEnumerable<Tile<FragmentQuery>> GetRelevantViews(FragmentQuery query, bool isRelaxed)
+        private IEnumerable<Tile<FragmentQuery>> GetRelevantViews(
+            FragmentQuery query,
+            bool isRelaxed
+        )
         {
             // Step 1:
             // Determine connected and directly/indirectly connected variables
@@ -1035,17 +1471,18 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 // so even if condition on Y is absent, the view would still be relevant
                 if (GetVariables(tile.Query).Overlaps(connectedVariables))
                 {
-                    unionOfConnectedViews = (unionOfConnectedViews == null) ? tile : _qp.Union(unionOfConnectedViews, tile);
+                    unionOfConnectedViews =
+                        (unionOfConnectedViews == null)
+                            ? tile
+                            : _qp.Union(unionOfConnectedViews, tile);
                     connectedViews.Add(tile);
                 }
                 else if (IsTrue(tile.Query) && firstTrueView == null)
                 {
                     firstTrueView = tile; // don't add True views; only one of them might be needed, if at all
                 }
-
             }
-            if (unionOfConnectedViews != null &&
-                IsTrue(unionOfConnectedViews.Query)) // the collected views give us "True"
+            if (unionOfConnectedViews != null && IsTrue(unionOfConnectedViews.Query)) // the collected views give us "True"
             {
                 return connectedViews;
             }
@@ -1055,7 +1492,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 Tile<FragmentQuery> unionTile = null;
                 foreach (FragmentQuery view in _fragmentQueries)
                 {
-                    unionTile = (unionTile == null) ? CreateTile(view) : _qp.Union(unionTile, CreateTile(view));
+                    unionTile =
+                        (unionTile == null)
+                            ? CreateTile(view)
+                            : _qp.Union(unionTile, CreateTile(view));
                     if (IsTrue(unionTile.Query))
                     {
                         // yes, we can; use a surrogate view - replace it later
@@ -1065,7 +1505,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 }
             }
 
-            if (firstTrueView != null) // the collected views don't give us True, but 
+            if (firstTrueView != null) // the collected views don't give us True, but
             {
                 connectedViews.Add(firstTrueView);
                 return connectedViews;
@@ -1080,9 +1520,13 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             return _views;
         }
 
-        private HashSet<FragmentQuery> GetUsedViewsAndRemoveTrueSurrogate(ref Tile<FragmentQuery> rewriting)
+        private HashSet<FragmentQuery> GetUsedViewsAndRemoveTrueSurrogate(
+            ref Tile<FragmentQuery> rewriting
+        )
         {
-            HashSet<FragmentQuery> usedViews = new HashSet<FragmentQuery>(rewriting.GetNamedQueries());
+            HashSet<FragmentQuery> usedViews = new HashSet<FragmentQuery>(
+                rewriting.GetNamedQueries()
+            );
             if (!usedViews.Contains(TrueViewSurrogate.Query))
             {
                 return usedViews; // no surrogate
@@ -1092,10 +1536,13 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
             // first, try to union usedViews to see whether we can get True
             Tile<FragmentQuery> unionTile = null;
-            IEnumerable<FragmentQuery> usedFollowedByUnusedViews = usedViews.Concat(_fragmentQueries);
+            IEnumerable<FragmentQuery> usedFollowedByUnusedViews = usedViews.Concat(
+                _fragmentQueries
+            );
             foreach (FragmentQuery view in usedFollowedByUnusedViews)
             {
-                unionTile = (unionTile == null) ? CreateTile(view) : _qp.Union(unionTile, CreateTile(view));
+                unionTile =
+                    (unionTile == null) ? CreateTile(view) : _qp.Union(unionTile, CreateTile(view));
                 usedViews.Add(view);
                 if (IsTrue(unionTile.Query))
                 {
@@ -1118,16 +1565,27 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             return FragmentQuery.CreateMemberCondition(path, domainValue, _domainMap);
         }
 
-        private FragmentQuery CreateMemberConditionQuery(MemberPath currentPath, Constant domainValue)
+        private FragmentQuery CreateMemberConditionQuery(
+            MemberPath currentPath,
+            Constant domainValue
+        )
         {
             return CreateMemberConditionQuery(currentPath, domainValue, _keyAttributes, _domainMap);
         }
 
-        internal static FragmentQuery CreateMemberConditionQuery(MemberPath currentPath, Constant domainValue,
-                                                                 IEnumerable<MemberPath> keyAttributes, MemberDomainMap domainMap)
+        internal static FragmentQuery CreateMemberConditionQuery(
+            MemberPath currentPath,
+            Constant domainValue,
+            IEnumerable<MemberPath> keyAttributes,
+            MemberDomainMap domainMap
+        )
         {
             // construct WHERE clause for this value
-            BoolExpression domainWhereClause = FragmentQuery.CreateMemberCondition(currentPath, domainValue, domainMap);
+            BoolExpression domainWhereClause = FragmentQuery.CreateMemberCondition(
+                currentPath,
+                domainValue,
+                domainMap
+            );
 
             // get a rewriting for CASE statements by not requesting any attributes beyond key
             IEnumerable<MemberPath> attributes = keyAttributes;
@@ -1152,24 +1610,76 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
         }
 
-        private static IEnumerable<MemberPath> GetNonConditionalScalarMembers(EdmType edmType, MemberPath currentPath, MemberDomainMap domainMap)
+        private static IEnumerable<MemberPath> GetNonConditionalScalarMembers(
+            EdmType edmType,
+            MemberPath currentPath,
+            MemberDomainMap domainMap
+        )
         {
-            return currentPath.GetMembers(edmType, true /* isScalar */, false /* isConditional */, null /* isPartOfKey */, domainMap);
+            return currentPath.GetMembers(
+                edmType,
+                true /* isScalar */
+                ,
+                false /* isConditional */
+                ,
+                null /* isPartOfKey */
+                ,
+                domainMap
+            );
         }
 
-        private static IEnumerable<MemberPath> GetConditionalComplexMembers(EdmType edmType, MemberPath currentPath, MemberDomainMap domainMap)
+        private static IEnumerable<MemberPath> GetConditionalComplexMembers(
+            EdmType edmType,
+            MemberPath currentPath,
+            MemberDomainMap domainMap
+        )
         {
-            return currentPath.GetMembers(edmType, false /* isScalar */, true /* isConditional */, null /* isPartOfKey */, domainMap);
+            return currentPath.GetMembers(
+                edmType,
+                false /* isScalar */
+                ,
+                true /* isConditional */
+                ,
+                null /* isPartOfKey */
+                ,
+                domainMap
+            );
         }
 
-        private static IEnumerable<MemberPath> GetNonConditionalComplexMembers(EdmType edmType, MemberPath currentPath, MemberDomainMap domainMap)
+        private static IEnumerable<MemberPath> GetNonConditionalComplexMembers(
+            EdmType edmType,
+            MemberPath currentPath,
+            MemberDomainMap domainMap
+        )
         {
-            return currentPath.GetMembers(edmType, false /* isScalar */, false /* isConditional */, null /* isPartOfKey */, domainMap);
+            return currentPath.GetMembers(
+                edmType,
+                false /* isScalar */
+                ,
+                false /* isConditional */
+                ,
+                null /* isPartOfKey */
+                ,
+                domainMap
+            );
         }
 
-        private static IEnumerable<MemberPath> GetConditionalScalarMembers(EdmType edmType, MemberPath currentPath, MemberDomainMap domainMap)
+        private static IEnumerable<MemberPath> GetConditionalScalarMembers(
+            EdmType edmType,
+            MemberPath currentPath,
+            MemberDomainMap domainMap
+        )
         {
-            return currentPath.GetMembers(edmType, true /* isScalar */, true /* isConditional */, null /* isPartOfKey */, domainMap);
+            return currentPath.GetMembers(
+                edmType,
+                true /* isScalar */
+                ,
+                true /* isConditional */
+                ,
+                null /* isPartOfKey */
+                ,
+                domainMap
+            );
         }
 
         private IEnumerable<MemberPath> NonKeys(IEnumerable<MemberPath> attributes)
@@ -1180,27 +1690,41 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         // allows us to check whether a found rewriting is satisfiable
         // by taking into account the "other side" of mapping constraints
         // (Ultimately, should produce a CQT and use general-purpose query containment)
-        internal static CellTreeNode TileToCellTree(Tile<FragmentQuery> tile, ViewgenContext context)
+        internal static CellTreeNode TileToCellTree(
+            Tile<FragmentQuery> tile,
+            ViewgenContext context
+        )
         {
             if (tile.OpKind == TileOpKind.Named)
             {
                 FragmentQuery view = ((TileNamed<FragmentQuery>)tile).NamedQuery;
-                LeftCellWrapper leftCellWrapper = context.AllWrappersForExtent.First(w => w.FragmentQuery == view);
+                LeftCellWrapper leftCellWrapper = context.AllWrappersForExtent.First(w =>
+                    w.FragmentQuery == view
+                );
                 return new LeafCellTreeNode(context, leftCellWrapper);
             }
             CellTreeOpType opType;
             switch (tile.OpKind)
             {
-                case TileOpKind.Join: opType = CellTreeOpType.IJ; break;
-                case TileOpKind.AntiSemiJoin: opType = CellTreeOpType.LASJ; break;
-                case TileOpKind.Union: opType = CellTreeOpType.Union; break;
+                case TileOpKind.Join:
+                    opType = CellTreeOpType.IJ;
+                    break;
+                case TileOpKind.AntiSemiJoin:
+                    opType = CellTreeOpType.LASJ;
+                    break;
+                case TileOpKind.Union:
+                    opType = CellTreeOpType.Union;
+                    break;
                 default:
                     Debug.Fail("unexpected");
                     return null;
             }
-            return new OpCellTreeNode(context, opType,
-                                      TileToCellTree(tile.Arg1, context),
-                                      TileToCellTree(tile.Arg2, context));
+            return new OpCellTreeNode(
+                context,
+                opType,
+                TileToCellTree(tile.Arg1, context),
+                TileToCellTree(tile.Arg2, context)
+            );
         }
 
         private static BoolExpression TileToBoolExpr(Tile<FragmentQuery> tile)
@@ -1219,11 +1743,20 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                         return view.FromVariable;
                     }
                 case TileOpKind.Join:
-                    return BoolExpression.CreateAnd(TileToBoolExpr(tile.Arg1), TileToBoolExpr(tile.Arg2));
+                    return BoolExpression.CreateAnd(
+                        TileToBoolExpr(tile.Arg1),
+                        TileToBoolExpr(tile.Arg2)
+                    );
                 case TileOpKind.AntiSemiJoin:
-                    return BoolExpression.CreateAnd(TileToBoolExpr(tile.Arg1), BoolExpression.CreateNot(TileToBoolExpr(tile.Arg2)));
+                    return BoolExpression.CreateAnd(
+                        TileToBoolExpr(tile.Arg1),
+                        BoolExpression.CreateNot(TileToBoolExpr(tile.Arg2))
+                    );
                 case TileOpKind.Union:
-                    return BoolExpression.CreateOr(TileToBoolExpr(tile.Arg1), TileToBoolExpr(tile.Arg2));
+                    return BoolExpression.CreateOr(
+                        TileToBoolExpr(tile.Arg1),
+                        TileToBoolExpr(tile.Arg2)
+                    );
                 default:
                     Debug.Fail("unexpected");
                     return null;
@@ -1251,16 +1784,24 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         {
             IEnumerable<MemberPath> memberVariables =
                 from domainConstraint in query.Condition.VariableConstraints
-                where domainConstraint.Variable.Identifier is MemberRestriction &&
-                      false == domainConstraint.Variable.Domain.All(constant => domainConstraint.Range.Contains(constant))
-                select ((MemberRestriction)domainConstraint.Variable.Identifier).RestrictedMemberSlot.MemberPath;
+                where
+                    domainConstraint.Variable.Identifier is MemberRestriction
+                    && false
+                        == domainConstraint.Variable.Domain.All(constant =>
+                            domainConstraint.Range.Contains(constant)
+                        )
+                select ((MemberRestriction)domainConstraint.Variable.Identifier)
+                    .RestrictedMemberSlot
+                    .MemberPath;
 
             return new Set<MemberPath>(memberVariables, MemberPath.EqualityComparer);
         }
 
         private bool IsTrue(FragmentQuery query)
         {
-            return !_context.LeftFragmentQP.IsSatisfiable(FragmentQuery.Create(BoolExpression.CreateNot(query.Condition)));
+            return !_context.LeftFragmentQP.IsSatisfiable(
+                FragmentQuery.Create(BoolExpression.CreateNot(query.Condition))
+            );
         }
 
         [Conditional("DEBUG")]
@@ -1271,10 +1812,21 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             int numDifference;
             int numUnion;
             int numErrors;
-            qp.GetStatistics(out numSATChecks, out numIntersection, out numUnion, out numDifference, out numErrors);
-            TraceVerbose("{0} containment checks, {4} set operations ({1} intersections + {2} unions + {3} differences)",
-                numSATChecks, numIntersection, numUnion, numDifference,
-                                numIntersection + numUnion + numDifference);
+            qp.GetStatistics(
+                out numSATChecks,
+                out numIntersection,
+                out numUnion,
+                out numDifference,
+                out numErrors
+            );
+            TraceVerbose(
+                "{0} containment checks, {4} set operations ({1} intersections + {2} unions + {3} differences)",
+                numSATChecks,
+                numIntersection,
+                numUnion,
+                numDifference,
+                numIntersection + numUnion + numDifference
+            );
             TraceVerbose("{0} errors", numErrors);
         }
 

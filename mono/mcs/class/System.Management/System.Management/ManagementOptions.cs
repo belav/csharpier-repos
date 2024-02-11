@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,36 +32,35 @@ using System.ComponentModel;
 
 namespace System.Management
 {
-	[TypeConverter (typeof (ExpandableObjectConverter))]
-	public abstract class ManagementOptions : ICloneable
-	{
-		public static readonly TimeSpan InfiniteTimeout = TimeSpan.MaxValue;
-		ManagementNamedValueCollection context;
-		TimeSpan timeout;
+    [TypeConverter(typeof(ExpandableObjectConverter))]
+    public abstract class ManagementOptions : ICloneable
+    {
+        public static readonly TimeSpan InfiniteTimeout = TimeSpan.MaxValue;
+        ManagementNamedValueCollection context;
+        TimeSpan timeout;
 
-		internal ManagementOptions ()
-			: this (null, InfiniteTimeout)
-		{
-		}
+        internal ManagementOptions()
+            : this(null, InfiniteTimeout) { }
 
-		internal ManagementOptions (ManagementNamedValueCollection context, TimeSpan timeout)
-		{
-			this.context = context;
-			this.timeout = timeout;
-		}
+        internal ManagementOptions(ManagementNamedValueCollection context, TimeSpan timeout)
+        {
+            this.context = context;
+            this.timeout = timeout;
+        }
 
-		[MonoTODO]
-		public abstract object Clone ();
+        [MonoTODO]
+        public abstract object Clone();
 
-		public ManagementNamedValueCollection Context {
-			get { return context; }
-			set { context = value; }
-		}
+        public ManagementNamedValueCollection Context
+        {
+            get { return context; }
+            set { context = value; }
+        }
 
-		public TimeSpan Timeout {
-			get { return timeout; }
-			set { timeout = value; }
-		}
-	}
+        public TimeSpan Timeout
+        {
+            get { return timeout; }
+            set { timeout = value; }
+        }
+    }
 }
-

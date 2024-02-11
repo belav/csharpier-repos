@@ -67,8 +67,7 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 #pragma warning disable PUB0001 // Pubternal type IActivator in public API
     public XmlKeyManager(IOptions<KeyManagementOptions> keyManagementOptions, IActivator activator)
 #pragma warning restore PUB0001 // Pubternal type IActivator in public API
-            : this(keyManagementOptions, activator, NullLoggerFactory.Instance)
-    { }
+        : this(keyManagementOptions, activator, NullLoggerFactory.Instance) { }
 
     /// <summary>
     /// Creates an <see cref="XmlKeyManager"/>.
@@ -77,20 +76,30 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     /// <param name="activator">The <see cref="IActivator"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
 #pragma warning disable PUB0001 // Pubternal type IActivator in public API
-    public XmlKeyManager(IOptions<KeyManagementOptions> keyManagementOptions, IActivator activator, ILoggerFactory loggerFactory)
+    public XmlKeyManager(
+        IOptions<KeyManagementOptions> keyManagementOptions,
+        IActivator activator,
+        ILoggerFactory loggerFactory
+    )
 #pragma warning restore PUB0001 // Pubternal type IActivator in public API
-            : this(keyManagementOptions, activator, loggerFactory, DefaultKeyStorageDirectories.Instance)
-    { }
+        : this(
+            keyManagementOptions,
+            activator,
+            loggerFactory,
+            DefaultKeyStorageDirectories.Instance
+        ) { }
 
     internal XmlKeyManager(
         IOptions<KeyManagementOptions> keyManagementOptions,
         IActivator activator,
         ILoggerFactory loggerFactory,
-        IDefaultKeyStorageDirectories keyStorageDirectories)
+        IDefaultKeyStorageDirectories keyStorageDirectories
+    )
     {
         _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         _logger = _loggerFactory.CreateLogger<XmlKeyManager>();
-        _keyStorageDirectories = keyStorageDirectories ?? throw new ArgumentNullException(nameof(keyStorageDirectories));
+        _keyStorageDirectories =
+            keyStorageDirectories ?? throw new ArgumentNullException(nameof(keyStorageDirectories));
 
         var keyRepository = keyManagementOptions.Value.XmlRepository;
         var keyEncryptor = keyManagementOptions.Value.XmlEncryptor;
@@ -107,7 +116,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         KeyRepository = keyRepository;
         KeyEncryptor = keyEncryptor;
 
-        _authenticatedEncryptorConfiguration = keyManagementOptions.Value.AuthenticatedEncryptorConfiguration!;
+        _authenticatedEncryptorConfiguration = keyManagementOptions
+            .Value
+            .AuthenticatedEncryptorConfiguration!;
 
         var escrowSinks = keyManagementOptions.Value.KeyEscrowSinks;
         _keyEscrowSink = escrowSinks.Count > 0 ? new AggregateKeyEscrowSink(escrowSinks) : null;
@@ -122,7 +133,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         IOptions<KeyManagementOptions> keyManagementOptions,
         IActivator activator,
         ILoggerFactory loggerFactory,
-        IInternalXmlKeyManager internalXmlKeyManager)
+        IInternalXmlKeyManager internalXmlKeyManager
+    )
         : this(keyManagementOptions, activator, loggerFactory)
     {
         _internalKeyManager = internalXmlKeyManager;
@@ -139,13 +151,17 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
             keyId: Guid.NewGuid(),
             creationDate: DateTimeOffset.UtcNow,
             activationDate: activationDate,
-            expirationDate: expirationDate);
+            expirationDate: expirationDate
+        );
     }
 
     private static string DateTimeOffsetToFilenameSafeString(DateTimeOffset dateTime)
     {
         // similar to the XML format for dates, but with punctuation stripped
-        return dateTime.UtcDateTime.ToString("yyyyMMddTHHmmssFFFFFFFZ", CultureInfo.InvariantCulture);
+        return dateTime.UtcDateTime.ToString(
+            "yyyyMMddTHHmmssFFFFFFFZ",
+            CultureInfo.InvariantCulture
+        );
     }
 
     /// <inheritdoc/>
@@ -190,7 +206,10 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
                 {
                     // all keys as of a certain date were revoked
                     DateTimeOffset thisMassRevocationDate = (DateTimeOffset)revocationInfo;
-                    if (!mostRecentMassRevocationDate.HasValue || mostRecentMassRevocationDate < thisMassRevocationDate)
+                    if (
+                        !mostRecentMassRevocationDate.HasValue
+                        || mostRecentMassRevocationDate < thisMassRevocationDate
+                    )
                     {
                         mostRecentMassRevocationDate = thisMassRevocationDate;
                     }
@@ -246,9 +265,14 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     /// <inheritdoc/>
     public CancellationToken GetCacheExpirationToken()
     {
-        Debug.Assert(_cacheExpirationTokenSource != null, $"{nameof(TriggerAndResetCacheExpirationToken)} must have been called first.");
+        Debug.Assert(
+            _cacheExpirationTokenSource != null,
+            $"{nameof(TriggerAndResetCacheExpirationToken)} must have been called first."
+        );
 
-        return Interlocked.CompareExchange<CancellationTokenSource?>(ref _cacheExpirationTokenSource, null, null).Token;
+        return Interlocked
+            .CompareExchange<CancellationTokenSource?>(ref _cacheExpirationTokenSource, null, null)
+            .Token;
     }
 
     private KeyBase? ProcessKeyElement(XElement keyElement)
@@ -259,9 +283,12 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         {
             // Read metadata and prepare the key for deferred instantiation
             Guid keyId = (Guid)keyElement.Attribute(IdAttributeName)!;
-            DateTimeOffset creationDate = (DateTimeOffset)keyElement.Element(CreationDateElementName)!;
-            DateTimeOffset activationDate = (DateTimeOffset)keyElement.Element(ActivationDateElementName)!;
-            DateTimeOffset expirationDate = (DateTimeOffset)keyElement.Element(ExpirationDateElementName)!;
+            DateTimeOffset creationDate = (DateTimeOffset)
+                keyElement.Element(CreationDateElementName)!;
+            DateTimeOffset activationDate = (DateTimeOffset)
+                keyElement.Element(ActivationDateElementName)!;
+            DateTimeOffset expirationDate = (DateTimeOffset)
+                keyElement.Element(ExpirationDateElementName)!;
 
             _logger.FoundKey(keyId);
 
@@ -272,7 +299,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
                 expirationDate: expirationDate,
                 keyManager: this,
                 keyElement: keyElement,
-                encryptorFactories: _encryptorFactories);
+                encryptorFactories: _encryptorFactories
+            );
         }
         catch (Exception ex)
         {
@@ -290,11 +318,13 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 
         try
         {
-            string keyIdAsString = (string)revocationElement.Element(KeyElementName)!.Attribute(IdAttributeName)!;
+            string keyIdAsString = (string)
+                revocationElement.Element(KeyElementName)!.Attribute(IdAttributeName)!;
             if (keyIdAsString == RevokeAllKeysValue)
             {
                 // this is a mass revocation of all keys as of the specified revocation date
-                DateTimeOffset massRevocationDate = (DateTimeOffset)revocationElement.Element(RevocationDateElementName)!;
+                DateTimeOffset massRevocationDate = (DateTimeOffset)
+                    revocationElement.Element(RevocationDateElementName)!;
                 _logger.FoundRevocationOfAllKeysCreatedPriorTo(massRevocationDate);
                 return massRevocationDate;
             }
@@ -327,13 +357,14 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 
         _logger.RevokingAllKeysAsOfForReason(revocationDate, reason);
 
-        var revocationElement = new XElement(RevocationElementName,
+        var revocationElement = new XElement(
+            RevocationElementName,
             new XAttribute(VersionAttributeName, 1),
             new XElement(RevocationDateElementName, revocationDate),
             new XComment(" All keys created before the revocation date are revoked. "),
-            new XElement(KeyElementName,
-                new XAttribute(IdAttributeName, RevokeAllKeysValue)),
-            new XElement(ReasonElementName, reason));
+            new XElement(KeyElementName, new XAttribute(IdAttributeName, RevokeAllKeysValue)),
+            new XElement(ReasonElementName, reason)
+        );
 
         // Persist it to the underlying repository and trigger the cancellation token
         string friendlyName = "revocation-" + DateTimeOffsetToFilenameSafeString(revocationDate);
@@ -347,17 +378,23 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         _internalKeyManager.RevokeSingleKey(
             keyId: keyId,
             revocationDate: DateTimeOffset.UtcNow,
-            reason: reason);
+            reason: reason
+        );
     }
 
-    private void TriggerAndResetCacheExpirationToken([CallerMemberName] string? opName = null, bool suppressLogging = false)
+    private void TriggerAndResetCacheExpirationToken(
+        [CallerMemberName] string? opName = null,
+        bool suppressLogging = false
+    )
     {
         if (!suppressLogging)
         {
             _logger.KeyCacheExpirationTokenTriggeredByOperation(opName!);
         }
 
-        Interlocked.Exchange(ref _cacheExpirationTokenSource, new CancellationTokenSource())?.Cancel();
+        Interlocked
+            .Exchange(ref _cacheExpirationTokenSource, new CancellationTokenSource())
+            ?.Cancel();
     }
 
     private void WriteKeyDeserializationErrorToLog(Exception error, XElement keyElement)
@@ -374,7 +411,12 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         _logger.AnExceptionOccurredWhileProcessingElementDebug(keyElement, error);
     }
 
-    IKey IInternalXmlKeyManager.CreateNewKey(Guid keyId, DateTimeOffset creationDate, DateTimeOffset activationDate, DateTimeOffset expirationDate)
+    IKey IInternalXmlKeyManager.CreateNewKey(
+        Guid keyId,
+        DateTimeOffset creationDate,
+        DateTimeOffset activationDate,
+        DateTimeOffset expirationDate
+    )
     {
         // <key id="{guid}" version="1">
         //   <creationDate>...</creationDate>
@@ -387,22 +429,35 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 
         _logger.CreatingKey(keyId, creationDate, activationDate, expirationDate);
 
-        var newDescriptor = _authenticatedEncryptorConfiguration.CreateNewDescriptor()
-            ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>("CreateNewDescriptor returned null.");
+        var newDescriptor =
+            _authenticatedEncryptorConfiguration.CreateNewDescriptor()
+            ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>(
+                "CreateNewDescriptor returned null."
+            );
         var descriptorXmlInfo = newDescriptor.ExportToXml();
 
-        _logger.DescriptorDeserializerTypeForKeyIs(keyId, descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!);
+        _logger.DescriptorDeserializerTypeForKeyIs(
+            keyId,
+            descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!
+        );
 
         // build the <key> element
-        var keyElement = new XElement(KeyElementName,
+        var keyElement = new XElement(
+            KeyElementName,
             new XAttribute(IdAttributeName, keyId),
             new XAttribute(VersionAttributeName, 1),
             new XElement(CreationDateElementName, creationDate),
             new XElement(ActivationDateElementName, activationDate),
             new XElement(ExpirationDateElementName, expirationDate),
-            new XElement(DescriptorElementName,
-                new XAttribute(DeserializerTypeAttributeName, descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!),
-                descriptorXmlInfo.SerializedDescriptorElement));
+            new XElement(
+                DescriptorElementName,
+                new XAttribute(
+                    DeserializerTypeAttributeName,
+                    descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!
+                ),
+                descriptorXmlInfo.SerializedDescriptorElement
+            )
+        );
 
         // If key escrow policy is in effect, write the *unencrypted* key now.
         if (_keyEscrowSink != null)
@@ -420,7 +475,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         {
             _logger.NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm(keyId);
         }
-        var possiblyEncryptedKeyElement = KeyEncryptor?.EncryptIfNecessary(keyElement) ?? keyElement;
+        var possiblyEncryptedKeyElement =
+            KeyEncryptor?.EncryptIfNecessary(keyElement) ?? keyElement;
 
         // Persist it to the underlying repository and trigger the cancellation token.
         var friendlyName = string.Format(CultureInfo.InvariantCulture, "key-{0:D}", keyId);
@@ -434,24 +490,36 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
             activationDate: activationDate,
             expirationDate: expirationDate,
             descriptor: newDescriptor,
-            encryptorFactories: _encryptorFactories);
+            encryptorFactories: _encryptorFactories
+        );
     }
 
-    IAuthenticatedEncryptorDescriptor IInternalXmlKeyManager.DeserializeDescriptorFromKeyElement(XElement keyElement)
+    IAuthenticatedEncryptorDescriptor IInternalXmlKeyManager.DeserializeDescriptorFromKeyElement(
+        XElement keyElement
+    )
     {
         try
         {
             // Figure out who will be deserializing this
             var descriptorElement = keyElement.Element(DescriptorElementName);
-            string descriptorDeserializerTypeName = (string)descriptorElement!.Attribute(DeserializerTypeAttributeName)!;
+            string descriptorDeserializerTypeName = (string)
+                descriptorElement!.Attribute(DeserializerTypeAttributeName)!;
 
             // Decrypt the descriptor element and pass it to the descriptor for consumption
-            var unencryptedInputToDeserializer = descriptorElement.Elements().Single().DecryptElement(_activator);
+            var unencryptedInputToDeserializer = descriptorElement
+                .Elements()
+                .Single()
+                .DecryptElement(_activator);
 
             var deserializerInstance = CreateDeserializer(descriptorDeserializerTypeName);
-            var descriptorInstance = deserializerInstance.ImportFromXml(unencryptedInputToDeserializer);
+            var descriptorInstance = deserializerInstance.ImportFromXml(
+                unencryptedInputToDeserializer
+            );
 
-            return descriptorInstance ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>("ImportFromXml returned null.");
+            return descriptorInstance
+                ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>(
+                    "ImportFromXml returned null."
+                );
         }
         catch (Exception ex)
         {
@@ -460,35 +528,64 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         }
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2057", Justification = "Type.GetType result is only useful with types that are referenced by DataProtection assembly.")]
-    private IAuthenticatedEncryptorDescriptorDeserializer CreateDeserializer(string descriptorDeserializerTypeName)
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2057",
+        Justification = "Type.GetType result is only useful with types that are referenced by DataProtection assembly."
+    )]
+    private IAuthenticatedEncryptorDescriptorDeserializer CreateDeserializer(
+        string descriptorDeserializerTypeName
+    )
     {
-        var resolvedTypeName = TypeForwardingActivator.TryForwardTypeName(descriptorDeserializerTypeName, out var forwardedTypeName)
+        var resolvedTypeName = TypeForwardingActivator.TryForwardTypeName(
+            descriptorDeserializerTypeName,
+            out var forwardedTypeName
+        )
             ? forwardedTypeName
             : descriptorDeserializerTypeName;
         var type = Type.GetType(resolvedTypeName, throwOnError: false);
 
         if (type == typeof(AuthenticatedEncryptorDescriptorDeserializer))
         {
-            return _activator.CreateInstance<AuthenticatedEncryptorDescriptorDeserializer>(descriptorDeserializerTypeName);
+            return _activator.CreateInstance<AuthenticatedEncryptorDescriptorDeserializer>(
+                descriptorDeserializerTypeName
+            );
         }
-        else if (type == typeof(CngCbcAuthenticatedEncryptorDescriptorDeserializer) && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        else if (
+            type == typeof(CngCbcAuthenticatedEncryptorDescriptorDeserializer)
+            && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+        )
         {
-            return _activator.CreateInstance<CngCbcAuthenticatedEncryptorDescriptorDeserializer>(descriptorDeserializerTypeName);
+            return _activator.CreateInstance<CngCbcAuthenticatedEncryptorDescriptorDeserializer>(
+                descriptorDeserializerTypeName
+            );
         }
-        else if (type == typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer) && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        else if (
+            type == typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer)
+            && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+        )
         {
-            return _activator.CreateInstance<CngGcmAuthenticatedEncryptorDescriptorDeserializer>(descriptorDeserializerTypeName);
+            return _activator.CreateInstance<CngGcmAuthenticatedEncryptorDescriptorDeserializer>(
+                descriptorDeserializerTypeName
+            );
         }
         else if (type == typeof(ManagedAuthenticatedEncryptorDescriptorDeserializer))
         {
-            return _activator.CreateInstance<ManagedAuthenticatedEncryptorDescriptorDeserializer>(descriptorDeserializerTypeName);
+            return _activator.CreateInstance<ManagedAuthenticatedEncryptorDescriptorDeserializer>(
+                descriptorDeserializerTypeName
+            );
         }
 
-        return _activator.CreateInstance<IAuthenticatedEncryptorDescriptorDeserializer>(descriptorDeserializerTypeName);
+        return _activator.CreateInstance<IAuthenticatedEncryptorDescriptorDeserializer>(
+            descriptorDeserializerTypeName
+        );
     }
 
-    void IInternalXmlKeyManager.RevokeSingleKey(Guid keyId, DateTimeOffset revocationDate, string? reason)
+    void IInternalXmlKeyManager.RevokeSingleKey(
+        Guid keyId,
+        DateTimeOffset revocationDate,
+        string? reason
+    )
     {
         // <revocation version="1">
         //   <revocationDate>...</revocationDate>
@@ -498,12 +595,13 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 
         _logger.RevokingKeyForReason(keyId, revocationDate, reason);
 
-        var revocationElement = new XElement(RevocationElementName,
+        var revocationElement = new XElement(
+            RevocationElementName,
             new XAttribute(VersionAttributeName, 1),
             new XElement(RevocationDateElementName, revocationDate),
-            new XElement(KeyElementName,
-                new XAttribute(IdAttributeName, keyId)),
-            new XElement(ReasonElementName, reason));
+            new XElement(KeyElementName, new XAttribute(IdAttributeName, keyId)),
+            new XElement(ReasonElementName, reason)
+        );
 
         // Persist it to the underlying repository and trigger the cancellation token
         var friendlyName = string.Format(CultureInfo.InvariantCulture, "revocation-{0:D}", keyId);
@@ -517,7 +615,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         IXmlEncryptor? encryptor = null;
 
         // If we're running in Azure Web Sites, the key repository goes in the %HOME% directory.
-        var azureWebSitesKeysFolder = _keyStorageDirectories.GetKeyStorageDirectoryForAzureWebSites();
+        var azureWebSitesKeysFolder =
+            _keyStorageDirectories.GetKeyStorageDirectoryForAzureWebSites();
         if (azureWebSitesKeysFolder != null)
         {
             _logger.UsingAzureAsKeyRepository(azureWebSitesKeysFolder.FullName);
@@ -540,7 +639,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
                     // Probe to see if protecting to local user is available, and use it as the default if so.
                     encryptor = new DpapiXmlEncryptor(
                         protectToLocalMachine: !DpapiSecretSerializerHelper.CanProtectToCurrentUserAccount(),
-                        loggerFactory: _loggerFactory);
+                        loggerFactory: _loggerFactory
+                    );
                 }
                 repository = new FileSystemXmlRepository(localAppDataKeysFolder, _loggerFactory);
 
@@ -568,7 +668,10 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
                     regKeyStorageKey = RegistryXmlRepository.DefaultRegistryKey;
 
                     // If the user profile isn't available, we can protect using DPAPI (to machine).
-                    encryptor = new DpapiXmlEncryptor(protectToLocalMachine: true, loggerFactory: _loggerFactory);
+                    encryptor = new DpapiXmlEncryptor(
+                        protectToLocalMachine: true,
+                        loggerFactory: _loggerFactory
+                    );
                     repository = new RegistryXmlRepository(regKeyStorageKey!, _loggerFactory);
 
                     _logger.UsingRegistryAsKeyRepositoryWithDPAPI(regKeyStorageKey!.Name);

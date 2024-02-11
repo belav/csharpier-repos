@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override ImmutableArray<LocalSymbol> BuildLocals()
         {
-            ArrayBuilder<LocalSymbol> locals = ArrayBuilder<LocalSymbol>.GetInstance(DefaultLocalSymbolArrayCapacity);
+            ArrayBuilder<LocalSymbol> locals = ArrayBuilder<LocalSymbol>.GetInstance(
+                DefaultLocalSymbolArrayCapacity
+            );
             BuildLocals(this, _statement, locals);
             return locals.ToImmutableAndFree();
         }
@@ -44,10 +46,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsLocalFunctionsScopeBinder
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override ImmutableArray<LabelSymbol> BuildLabels()
@@ -60,13 +59,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsLabelsScopeBinder
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {
@@ -78,13 +76,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override SyntaxNode ScopeDesignator
         {
-            get
-            {
-                return _statement;
-            }
+            get { return _statement; }
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {

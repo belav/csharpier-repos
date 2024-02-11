@@ -8,9 +8,12 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 {
     internal partial class InlineHintsDataTaggerProvider
     {
-        private sealed class InlineHintKeyProcessorEventSource(IInlineHintKeyProcessor? inlineHintKeyProcessor) : AbstractTaggerEventSource
+        private sealed class InlineHintKeyProcessorEventSource(
+            IInlineHintKeyProcessor? inlineHintKeyProcessor
+        ) : AbstractTaggerEventSource
         {
-            private readonly IInlineHintKeyProcessor? _inlineHintKeyProcessor = inlineHintKeyProcessor;
+            private readonly IInlineHintKeyProcessor? _inlineHintKeyProcessor =
+                inlineHintKeyProcessor;
 
             public override void Connect()
             {

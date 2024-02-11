@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,27 +25,28 @@
 
 using System;
 
-namespace System.Windows.Threading {
-	public sealed class DispatcherUnhandledExceptionEventArgs : DispatcherEventArgs
-	{
-		Exception exception;
-		bool handled;
+namespace System.Windows.Threading
+{
+    public sealed class DispatcherUnhandledExceptionEventArgs : DispatcherEventArgs
+    {
+        Exception exception;
+        bool handled;
 
-		internal DispatcherUnhandledExceptionEventArgs (Dispatcher dispatcher,
-								Exception exception)
-			: base (dispatcher)
-		{
-			this.exception = exception;
-		}
+        internal DispatcherUnhandledExceptionEventArgs(Dispatcher dispatcher, Exception exception)
+            : base(dispatcher)
+        {
+            this.exception = exception;
+        }
 
-		public Exception Exception {
-			get { return exception; }
-		}
+        public Exception Exception
+        {
+            get { return exception; }
+        }
 
-		public bool Handled {
-			get { return handled; }
-			set { handled = value; }
-		}
-
-	}
+        public bool Handled
+        {
+            get { return handled; }
+            set { handled = value; }
+        }
+    }
 }

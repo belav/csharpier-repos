@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,79 +25,88 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    [ClassInterfaceAttribute(ClassInterfaceType.AutoDispatch)]
+    [ComVisibleAttribute(true)]
+    public class DataGridViewComboBoxEditingControl : ComboBox, IDataGridViewEditingControl
+    {
+        //private bool tabStop;
+        private DataGridView editingControlDataGridView;
+        private object editingControlFormattedValue;
+        private int editingControlRowIndex;
+        private bool editingControlValueChanged;
 
-	[ClassInterfaceAttribute(ClassInterfaceType.AutoDispatch)]
-	[ComVisibleAttribute(true)]
-	public class DataGridViewComboBoxEditingControl : ComboBox, IDataGridViewEditingControl {
+        public DataGridViewComboBoxEditingControl()
+        {
+            //tabStop = false;
+            editingControlValueChanged = false;
+        }
 
-		//private bool tabStop;
-		private DataGridView editingControlDataGridView;
-		private object editingControlFormattedValue;
-		private int editingControlRowIndex;
-		private bool editingControlValueChanged;
+        public virtual DataGridView EditingControlDataGridView
+        {
+            get { return editingControlDataGridView; }
+            set { editingControlDataGridView = value; }
+        }
 
-		public DataGridViewComboBoxEditingControl () {
-			//tabStop = false;
-			editingControlValueChanged = false;
-		}
+        public virtual object EditingControlFormattedValue
+        {
+            get { return editingControlFormattedValue; }
+            set { editingControlFormattedValue = value; }
+        }
 
-		public virtual DataGridView EditingControlDataGridView {
-			get { return editingControlDataGridView; }
-			set { editingControlDataGridView = value; }
-		}
+        public virtual int EditingControlRowIndex
+        {
+            get { return editingControlRowIndex; }
+            set { editingControlRowIndex = value; }
+        }
 
-		public virtual object EditingControlFormattedValue {
-			get { return editingControlFormattedValue; }
-			set { editingControlFormattedValue = value; }
-		}
+        public virtual bool EditingControlValueChanged
+        {
+            get { return editingControlValueChanged; }
+            set { editingControlValueChanged = value; }
+        }
 
-		public virtual int EditingControlRowIndex {
-			get { return editingControlRowIndex; }
-			set { editingControlRowIndex = value; }
-		}
+        public virtual Cursor EditingPanelCursor
+        {
+            get { return Cursors.Default; }
+        }
 
-		public virtual bool EditingControlValueChanged {
-			get { return editingControlValueChanged; }
-			set { editingControlValueChanged = value; }
-		}
+        public virtual bool RepositionEditingControlOnValueChange
+        {
+            get { return false; }
+        }
 
-		public virtual Cursor EditingPanelCursor {
-			get { return Cursors.Default; }
-		}
+        public virtual void ApplyCellStyleToEditingControl(
+            DataGridViewCellStyle dataGridViewCellStyle
+        ) { }
 
-		public virtual bool RepositionEditingControlOnValueChange {
-			get { return false; }
-		}
+        public virtual bool EditingControlWantsInputKey(
+            Keys keyData,
+            bool dataGridViewWantsInputKey
+        )
+        {
+            // true if the specified key is a regular key that should be handled by the editing control; otherwise, false
+            return base.IsInputKey(keyData);
+        }
 
-		public virtual void ApplyCellStyleToEditingControl (DataGridViewCellStyle dataGridViewCellStyle) {
-			
-		}
+        public virtual object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context)
+        {
+            return Text;
+        }
 
-		public virtual bool EditingControlWantsInputKey (Keys keyData, bool dataGridViewWantsInputKey) {
-			// true if the specified key is a regular key that should be handled by the editing control; otherwise, false
-			return base.IsInputKey (keyData);
-		}
+        public virtual void PrepareEditingControlForEdit(bool selectAll) { }
 
-		public virtual object GetEditingControlFormattedValue (DataGridViewDataErrorContexts context) {
-			return Text;
-		}
+        protected override void OnSelectedIndexChanged(EventArgs e)
+        {
+            base.OnSelectedIndexChanged(e);
+        }
 
-		public virtual void PrepareEditingControlForEdit (bool selectAll) {
-			
-		}
-
-		protected override void OnSelectedIndexChanged (EventArgs e) {
-			base.OnSelectedIndexChanged (e);
-		}
-
-		// This internal method is needed by DataGridViewComboBoxCell
-		// to pass along user interaction with the cell.
-		internal void OnMouseDownInternal (DataGridViewCellMouseEventArgs e)
-		{
-			OnMouseDown (e);
-		}
-	}
-
+        // This internal method is needed by DataGridViewComboBoxCell
+        // to pass along user interaction with the cell.
+        internal void OnMouseDownInternal(DataGridViewCellMouseEventArgs e)
+        {
+            OnMouseDown(e);
+        }
+    }
 }
-

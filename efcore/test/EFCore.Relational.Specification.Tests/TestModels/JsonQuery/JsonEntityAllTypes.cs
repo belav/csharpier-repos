@@ -16,7 +16,8 @@ public class JsonEntityAllTypes
     private ObservableCollection<char> _testCharacterCollectionX = new();
     private ObservableCollection<int?> _testNullableInt32CollectionX = new() { 99 };
     private Collection<JsonEnum?> _testNullableEnumCollectionX = new();
-    private Collection<JsonEnum?> _testNullableEnumWithIntConverterCollectionX = new() { JsonEnum.Three };
+    private Collection<JsonEnum?> _testNullableEnumWithIntConverterCollectionX =
+        new() { JsonEnum.Three };
 
     public int Id { get; set; }
     public JsonOwnedAllTypes Reference { get; init; }

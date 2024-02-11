@@ -5,9 +5,9 @@
 namespace System.Activities
 {
     using System;
-    using System.Runtime;
-    using System.Collections.ObjectModel;
     using System.Activities.Validation;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
 
     public struct ActivityMetadata
     {
@@ -15,7 +15,11 @@ namespace System.Activities
         LocationReferenceEnvironment environment;
         bool createEmptyBindings;
 
-        internal ActivityMetadata(Activity activity, LocationReferenceEnvironment environment, bool createEmptyBindings)
+        internal ActivityMetadata(
+            Activity activity,
+            LocationReferenceEnvironment environment,
+            bool createEmptyBindings
+        )
         {
             this.activity = activity;
             this.environment = environment;
@@ -24,18 +28,12 @@ namespace System.Activities
 
         internal bool CreateEmptyBindings
         {
-            get
-            {
-                return this.createEmptyBindings;
-            }
+            get { return this.createEmptyBindings; }
         }
 
         public LocationReferenceEnvironment Environment
         {
-            get
-            {
-                return this.environment;
-            }
+            get { return this.environment; }
         }
 
         public bool HasViolations
@@ -61,7 +59,8 @@ namespace System.Activities
             }
 
             ActivityMetadata other = (ActivityMetadata)obj;
-            return other.activity == this.activity && other.Environment == this.Environment
+            return other.activity == this.activity
+                && other.Environment == this.Environment
                 && other.CreateEmptyBindings == this.CreateEmptyBindings;
         }
 
@@ -188,7 +187,10 @@ namespace System.Activities
             if (importedDelegate != null)
             {
                 this.activity.AddImportedDelegate(importedDelegate);
-                if (importedDelegate.Handler != null && importedDelegate.Handler.CacheId != this.activity.CacheId)
+                if (
+                    importedDelegate.Handler != null
+                    && importedDelegate.Handler.CacheId != this.activity.CacheId
+                )
                 {
                     importedDelegate.Handler.Origin = origin;
                 }
@@ -222,7 +224,10 @@ namespace System.Activities
                 if (variable.CacheId != this.activity.CacheId)
                 {
                     variable.Origin = origin;
-                    if (variable.Default != null && variable.Default.CacheId != this.activity.CacheId)
+                    if (
+                        variable.Default != null
+                        && variable.Default.CacheId != this.activity.CacheId
+                    )
                     {
                         variable.Default.Origin = origin;
                     }
@@ -274,7 +279,10 @@ namespace System.Activities
             }
             if (extensionType.IsValueType)
             {
-                throw FxTrace.Exception.Argument("extensionType", SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName));
+                throw FxTrace.Exception.Argument(
+                    "extensionType",
+                    SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName)
+                );
             }
             this.activity.RequireExtension(extensionType);
         }

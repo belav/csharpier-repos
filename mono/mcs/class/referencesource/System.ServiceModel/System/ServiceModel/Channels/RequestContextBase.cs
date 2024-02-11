@@ -22,7 +22,11 @@ namespace System.ServiceModel.Channels
         bool aborted;
         object thisLock = new object();
 
-        protected RequestContextBase(Message requestMessage, TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
+        protected RequestContextBase(
+            Message requestMessage,
+            TimeSpan defaultCloseTimeout,
+            TimeSpan defaultSendTimeout
+        )
         {
             this.defaultSendTimeout = defaultSendTimeout;
             this.defaultCloseTimeout = defaultCloseTimeout;
@@ -46,7 +50,9 @@ namespace System.ServiceModel.Channels
                 if (this.requestMessageException != null)
                 {
 #pragma warning suppress 56503 // Microsoft, see outcome of DCR 50092
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(this.requestMessageException);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        this.requestMessageException
+                    );
                 }
 
                 return requestMessage;
@@ -55,13 +61,19 @@ namespace System.ServiceModel.Channels
 
         protected void SetRequestMessage(Message requestMessage)
         {
-            Fx.Assert(this.requestMessageException == null, "Cannot have both a requestMessage and a requestException.");
+            Fx.Assert(
+                this.requestMessageException == null,
+                "Cannot have both a requestMessage and a requestException."
+            );
             this.requestMessage = requestMessage;
         }
 
         protected void SetRequestMessage(Exception requestMessageException)
         {
-            Fx.Assert(this.requestMessage == null, "Cannot have both a requestMessage and a requestException.");
+            Fx.Assert(
+                this.requestMessage == null,
+                "Cannot have both a requestMessage and a requestException."
+            );
             this.requestMessageException = requestMessageException;
         }
 
@@ -72,18 +84,12 @@ namespace System.ServiceModel.Channels
 
         protected object ThisLock
         {
-            get
-            {
-                return thisLock;
-            }
+            get { return thisLock; }
         }
 
         public bool Aborted
         {
-            get
-            {
-                return this.aborted;
-            }
+            get { return this.aborted; }
         }
 
         public TimeSpan DefaultCloseTimeout
@@ -110,8 +116,12 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.RequestContextAbort,
-                    SR.GetString(SR.TraceCodeRequestContextAbort), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.RequestContextAbort,
+                    SR.GetString(SR.TraceCodeRequestContextAbort),
+                    this
+                );
             }
 
             try
@@ -133,8 +143,13 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("timeout", timeout,
-                    SR.GetString(SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        timeout,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
 
             bool sendAck = false;
@@ -192,7 +207,12 @@ namespace System.ServiceModel.Channels
         protected abstract void OnAbort();
         protected abstract void OnClose(TimeSpan timeout);
         protected abstract void OnReply(Message message, TimeSpan timeout);
-        protected abstract IAsyncResult OnBeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract void OnEndReply(IAsyncResult result);
 
         protected void ThrowIfInvalidReply()
@@ -200,17 +220,25 @@ namespace System.ServiceModel.Channels
             if (state == CommunicationState.Closed || state == CommunicationState.Closing)
             {
                 if (aborted)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationObjectAbortedException(SR.GetString(SR.RequestContextAborted)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationObjectAbortedException(
+                            SR.GetString(SR.RequestContextAborted)
+                        )
+                    );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(this.GetType().FullName)
+                    );
             }
 
             if (this.replyInitiated)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ReplyAlreadySent)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ReplyAlreadySent))
+                );
         }
 
         /// <summary>
-        /// Attempts to initiate the reply. If a reply is not initiated already (and the object is opened), 
+        /// Attempts to initiate the reply. If a reply is not initiated already (and the object is opened),
         /// then it initiates the reply and returns true. Otherwise, it returns false.
         /// </summary>
         protected bool TryInitiateReply()
@@ -229,12 +257,21 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override IAsyncResult BeginReply(Message message, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.BeginReply(message, this.defaultSendTimeout, callback, state);
         }
 
-        public override IAsyncResult BeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             // "null" is a valid reply (signals a 202-style "ack"), so we don't have a null-check here
             lock (this.thisLock)
@@ -271,9 +308,9 @@ namespace System.ServiceModel.Channels
         }
 
         // This method is designed for WebSocket only, and will only be used once the WebSocket response was sent.
-        // For WebSocket, we never call HttpRequestContext.Reply to send the response back. 
-        // Instead we call AcceptWebSocket directly. So we need to set the replyInitiated and 
-        // replySent boolean to be true once the response was sent successfully. Otherwise when we 
+        // For WebSocket, we never call HttpRequestContext.Reply to send the response back.
+        // Instead we call AcceptWebSocket directly. So we need to set the replyInitiated and
+        // replySent boolean to be true once the response was sent successfully. Otherwise when we
         // are disposing the HttpRequestContext, we will see a bunch of warnings in trace log.
         protected void SetReplySent()
         {

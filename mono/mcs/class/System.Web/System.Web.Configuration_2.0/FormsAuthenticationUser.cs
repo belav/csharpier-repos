@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,54 +29,73 @@
 //
 
 
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class FormsAuthenticationUser : ConfigurationElement
-	{
-		static ConfigurationProperty nameProp;
-		static ConfigurationProperty passwordProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class FormsAuthenticationUser : ConfigurationElement
+    {
+        static ConfigurationProperty nameProp;
+        static ConfigurationProperty passwordProp;
+        static ConfigurationPropertyCollection properties;
 
-		static FormsAuthenticationUser ()
-		{
-			nameProp = new ConfigurationProperty ("name", typeof (string), "",
-							      new LowerCaseStringConverter (),
-							      PropertyHelper.DefaultValidator,
-							      ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			passwordProp = new ConfigurationProperty ("password", typeof (string), "", ConfigurationPropertyOptions.IsRequired);
+        static FormsAuthenticationUser()
+        {
+            nameProp = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                "",
+                new LowerCaseStringConverter(),
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            passwordProp = new ConfigurationProperty(
+                "password",
+                typeof(string),
+                "",
+                ConfigurationPropertyOptions.IsRequired
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (nameProp);
-			properties.Add (passwordProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(nameProp);
+            properties.Add(passwordProp);
+        }
 
-		public FormsAuthenticationUser (string name, string password)
-		{
-			this.Name = name;
-			this.Password = password;
-		}
+        public FormsAuthenticationUser(string name, string password)
+        {
+            this.Name = name;
+            this.Password = password;
+        }
 
-		[StringValidator]
-		[TypeConverter (typeof (LowerCaseStringConverter))]
-		[ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string) base[nameProp]; }
-			set { base[nameProp] = value; }
-		}
+        [StringValidator]
+        [TypeConverter(typeof(LowerCaseStringConverter))]
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base[nameProp]; }
+            set { base[nameProp] = value; }
+        }
 
-		[StringValidator]
-		[ConfigurationProperty ("password", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Password {
-			get { return (string) base[passwordProp]; }
-			set { base[passwordProp] = value; }
-		}
+        [StringValidator]
+        [ConfigurationProperty(
+            "password",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Password
+        {
+            get { return (string)base[passwordProp]; }
+            set { base[passwordProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

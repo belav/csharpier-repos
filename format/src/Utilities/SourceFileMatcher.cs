@@ -11,8 +11,8 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
     {
         private static string[] AllFilesList => new[] { @"**/*.*" };
 
-        public static SourceFileMatcher CreateMatcher(string[] include, string[] exclude)
-            => new SourceFileMatcher(include, exclude);
+        public static SourceFileMatcher CreateMatcher(string[] include, string[] exclude) =>
+            new SourceFileMatcher(include, exclude);
 
         private readonly Matcher _matcher = new Matcher(StringComparison.OrdinalIgnoreCase);
         private readonly bool _shouldMatchAll;
@@ -24,9 +24,8 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
         {
             _shouldMatchAll = include.Length == 0 && exclude.Length == 0;
 
-            Include = include.Length > 0
-                ? include.ToImmutableArray()
-                : AllFilesList.ToImmutableArray();
+            Include =
+                include.Length > 0 ? include.ToImmutableArray() : AllFilesList.ToImmutableArray();
             Exclude = exclude.ToImmutableArray();
 
             _matcher = new Matcher(StringComparison.OrdinalIgnoreCase);
@@ -34,10 +33,10 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
             _matcher.AddExcludePatterns(Exclude);
         }
 
-        public bool HasMatches(string filePath)
-            => _shouldMatchAll || _matcher.Match(filePath).HasMatches;
+        public bool HasMatches(string filePath) =>
+            _shouldMatchAll || _matcher.Match(filePath).HasMatches;
 
-        public IEnumerable<string> GetResultsInFullPath(string directoryPath)
-            => _matcher.GetResultsInFullPath(directoryPath);
+        public IEnumerable<string> GetResultsInFullPath(string directoryPath) =>
+            _matcher.GetResultsInFullPath(directoryPath);
     }
 }

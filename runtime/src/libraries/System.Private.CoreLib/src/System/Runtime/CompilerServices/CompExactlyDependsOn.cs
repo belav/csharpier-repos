@@ -5,7 +5,11 @@ namespace System.Runtime.CompilerServices
 {
     // Use this attribute to indicate that a function should only be compiled into a Ready2Run
     // binary if the associated type will always have a well defined value for its IsSupported property
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Constructor,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     internal sealed class CompExactlyDependsOnAttribute : Attribute
     {
         public CompExactlyDependsOnAttribute(Type intrinsicsTypeUsedInHelperFunction)

@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.IO;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Xunit;
+using System.IO;
+using System.Linq;
 using XmlCoreTest.Common;
+using Xunit;
 
 namespace System.Xml.Linq.Tests
 {
@@ -46,8 +46,10 @@ namespace System.Xml.Linq.Tests
             foreach (char c in GetRandomCharacters(testType, charType))
             {
                 string name = GetName(charType, c);
-                if (testType.Equals("Valid")) RunValidTests(nodeType, name);
-                else if (testType.Equals("InValid")) RunInValidTests(nodeType, name);
+                if (testType.Equals("Valid"))
+                    RunValidTests(nodeType, name);
+                else if (testType.Equals("InValid"))
+                    RunInValidTests(nodeType, name);
                 iterations++;
             }
         }
@@ -80,9 +82,14 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void varation3()
         {
-            string xml = @"<?xml version='1.9999'?>" + "<!-- an implausibly-versioned document -->" + "<foo/>";
+            string xml =
+                @"<?xml version='1.9999'?>"
+                + "<!-- an implausibly-versioned document -->"
+                + "<foo/>";
 
-            Assert.Throws<XmlException>(() => XDocument.Load(XmlReader.Create(new StringReader(xml))));
+            Assert.Throws<XmlException>(
+                () => XDocument.Load(XmlReader.Create(new StringReader(xml)))
+            );
         }
 
         /// <summary>
@@ -94,8 +101,10 @@ namespace System.Xml.Linq.Tests
         public IEnumerable GetRandomCharacters(string testType, string charType)
         {
             string chars = string.Empty;
-            if (testType.Equals("Valid")) chars = GetValidCharacters(charType);
-            else if (testType.Equals("InValid")) chars = GetInValidCharacters(charType);
+            if (testType.Equals("Valid"))
+                chars = GetValidCharacters(charType);
+            else if (testType.Equals("InValid"))
+                chars = GetInValidCharacters(charType);
 
             int count = chars.Length;
             int step = count < 1000 ? 1 : count / 1000;
@@ -124,10 +133,14 @@ namespace System.Xml.Linq.Tests
                     chars = UnicodeCharHelper.GetValidCharacters(CharType.NCNameChar);
                     break;
                 case "NameStartSurrogateHighChar":
-                    chars = UnicodeCharHelper.GetValidCharacters(CharType.NameStartSurrogateHighChar);
+                    chars = UnicodeCharHelper.GetValidCharacters(
+                        CharType.NameStartSurrogateHighChar
+                    );
                     break;
                 case "NameStartSurrogateLowChar":
-                    chars = UnicodeCharHelper.GetValidCharacters(CharType.NameStartSurrogateLowChar);
+                    chars = UnicodeCharHelper.GetValidCharacters(
+                        CharType.NameStartSurrogateLowChar
+                    );
                     break;
                 case "NameSurrogateHighChar":
                     chars = UnicodeCharHelper.GetValidCharacters(CharType.NameSurrogateHighChar);
@@ -158,10 +171,14 @@ namespace System.Xml.Linq.Tests
                     chars = UnicodeCharHelper.GetInvalidCharacters(CharType.NCNameChar);
                     break;
                 case "NameStartSurrogateHighChar":
-                    chars = UnicodeCharHelper.GetInvalidCharacters(CharType.NameStartSurrogateHighChar);
+                    chars = UnicodeCharHelper.GetInvalidCharacters(
+                        CharType.NameStartSurrogateHighChar
+                    );
                     break;
                 case "NameStartSurrogateLowChar":
-                    chars = UnicodeCharHelper.GetInvalidCharacters(CharType.NameStartSurrogateLowChar);
+                    chars = UnicodeCharHelper.GetInvalidCharacters(
+                        CharType.NameStartSurrogateLowChar
+                    );
                     break;
                 case "NameSurrogateHighChar":
                     chars = UnicodeCharHelper.GetInvalidCharacters(CharType.NameSurrogateHighChar);
@@ -174,7 +191,6 @@ namespace System.Xml.Linq.Tests
             }
             return chars;
         }
-
 
         /// <summary>
         /// Runs test for valid cases

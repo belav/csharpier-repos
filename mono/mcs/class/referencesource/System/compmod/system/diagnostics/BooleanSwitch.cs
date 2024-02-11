@@ -7,9 +7,10 @@
 /*
  */
 
-namespace System.Diagnostics {
-    using System.Diagnostics;
+namespace System.Diagnostics
+{
     using System;
+    using System.Diagnostics;
     using System.Security;
     using System.Security.Permissions;
 
@@ -18,39 +19,39 @@ namespace System.Diagnostics {
     ///       output.</para>
     /// </devdoc>
     [SwitchLevel(typeof(bool))]
-    public class BooleanSwitch : Switch {
+    public class BooleanSwitch : Switch
+    {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.BooleanSwitch'/>
         /// class.</para>
         /// </devdoc>
         public BooleanSwitch(string displayName, string description)
-            : base(displayName, description) {
-        }
+            : base(displayName, description) { }
 
-        public BooleanSwitch(string displayName, string description, string defaultSwitchValue) 
+        public BooleanSwitch(string displayName, string description, string defaultSwitchValue)
             : base(displayName, description, defaultSwitchValue) { }
 
         /// <devdoc>
         ///    <para>Specifies whether the switch is enabled
         ///       (<see langword='true'/>) or disabled (<see langword='false'/>).</para>
         /// </devdoc>
-        public bool Enabled {
-            get {
-                return (SwitchSetting == 0) ? false : true;
-            }
-            [SecurityPermission(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.UnmanagedCode)]
-            set {
-                SwitchSetting = value ? 1 : 0;
-            }
+        public bool Enabled
+        {
+            get { return (SwitchSetting == 0) ? false : true; }
+            [SecurityPermission(
+                SecurityAction.LinkDemand,
+                Flags = SecurityPermissionFlag.UnmanagedCode
+            )]
+            set { SwitchSetting = value ? 1 : 0; }
         }
 
-        protected override void OnValueChanged() {
+        protected override void OnValueChanged()
+        {
             bool b;
             if (Boolean.TryParse(Value, out b))
-                SwitchSetting = ( b ? 1 : 0);
+                SwitchSetting = (b ? 1 : 0);
             else
                 base.OnValueChanged();
         }
     }
 }
-

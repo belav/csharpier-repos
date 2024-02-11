@@ -4,7 +4,11 @@
 using Xunit;
 
 // Contract.ContractFailed is non-local; changes in one test will affect any others running concurrently
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true, MaxParallelThreads = 1)]
+[assembly: CollectionBehavior(
+    CollectionBehavior.CollectionPerAssembly,
+    DisableTestParallelization = true,
+    MaxParallelThreads = 1
+)]
 
 namespace System.Diagnostics.Contracts.Tests
 {
@@ -16,7 +20,9 @@ namespace System.Diagnostics.Contracts.Tests
             Assert.Equal("ContractException", exc.GetType().Name);
         }
 
-        internal static IDisposable WithContractFailed(EventHandler<ContractFailedEventArgs> handler)
+        internal static IDisposable WithContractFailed(
+            EventHandler<ContractFailedEventArgs> handler
+        )
         {
             Contract.ContractFailed += handler;
             return new UnregisterContractFailed { _handler = handler };
@@ -26,7 +32,10 @@ namespace System.Diagnostics.Contracts.Tests
         {
             internal EventHandler<ContractFailedEventArgs> _handler;
 
-            public void Dispose() { Contract.ContractFailed -= _handler; }
+            public void Dispose()
+            {
+                Contract.ContractFailed -= _handler;
+            }
         }
     }
 }

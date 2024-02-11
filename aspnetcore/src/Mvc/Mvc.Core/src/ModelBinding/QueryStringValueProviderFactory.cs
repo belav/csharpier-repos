@@ -24,7 +24,8 @@ public class QueryStringValueProviderFactory : IValueProviderFactory
             var valueProvider = new QueryStringValueProvider(
                 BindingSource.Query,
                 query,
-                CultureInfo.InvariantCulture);
+                CultureInfo.InvariantCulture
+            );
 
             context.ValueProviders.Add(valueProvider);
         }

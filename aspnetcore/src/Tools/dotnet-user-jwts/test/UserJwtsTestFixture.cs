@@ -14,7 +14,8 @@ public class UserJwtsTestFixture : IDisposable
     private Stack<Action> _disposables = new Stack<Action>();
     internal string TestSecretsId;
 
-    private const string ProjectTemplate = @"<Project Sdk=""Microsoft.NET.Sdk"">
+    private const string ProjectTemplate =
+        @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
@@ -23,7 +24,8 @@ public class UserJwtsTestFixture : IDisposable
   </PropertyGroup>
 </Project>";
 
-    private const string LaunchSettingsTemplate = @"
+    private const string LaunchSettingsTemplate =
+        @"
 {
   ""iisSettings"": {
     ""windowsAuthentication"": false,
@@ -64,25 +66,30 @@ public class UserJwtsTestFixture : IDisposable
 
     public string CreateProject(bool hasSecret = true)
     {
-        var projectPath = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "userjwtstest", Guid.NewGuid().ToString()));
+        var projectPath = Directory.CreateDirectory(
+            Path.Combine(Path.GetTempPath(), "userjwtstest", Guid.NewGuid().ToString())
+        );
         Directory.CreateDirectory(Path.Combine(projectPath.FullName, "Properties"));
         TestSecretsId = Guid.NewGuid().ToString("N");
         var prop = hasSecret ? $"<UserSecretsId>{TestSecretsId}</UserSecretsId>" : string.Empty;
         if (hasSecret)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId)));
+            Directory.CreateDirectory(
+                Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))
+            );
         }
 
         File.WriteAllText(
             Path.Combine(projectPath.FullName, "TestProject.csproj"),
-            string.Format(CultureInfo.InvariantCulture, ProjectTemplate, prop));
-
-        File.WriteAllText(Path.Combine(projectPath.FullName, "Properties", "launchSettings.json"),
-            LaunchSettingsTemplate);
+            string.Format(CultureInfo.InvariantCulture, ProjectTemplate, prop)
+        );
 
         File.WriteAllText(
-            Path.Combine(projectPath.FullName, "appsettings.Development.json"),
-            "{}");
+            Path.Combine(projectPath.FullName, "Properties", "launchSettings.json"),
+            LaunchSettingsTemplate
+        );
+
+        File.WriteAllText(Path.Combine(projectPath.FullName, "appsettings.Development.json"), "{}");
 
         if (hasSecret)
         {
@@ -90,7 +97,9 @@ public class UserJwtsTestFixture : IDisposable
             {
                 try
                 {
-                    var secretsDir = Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId));
+                    var secretsDir = Path.GetDirectoryName(
+                        PathHelper.GetSecretsPathFromSecretsId(TestSecretsId)
+                    );
                     TryDelete(TestSecretsId);
                 }
                 catch { }

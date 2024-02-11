@@ -14,69 +14,108 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
     private sealed partial class ShaperProcessingExpressionVisitor : ExpressionVisitor
     {
         private static readonly MethodInfo ThrowReadValueExceptionMethod =
-            typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(ThrowReadValueException))!;
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(ThrowReadValueException))!;
 
         private static readonly MethodInfo ThrowExtractJsonPropertyExceptionMethod =
-            typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(ThrowExtractJsonPropertyException))!;
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(ThrowExtractJsonPropertyException))!;
 
         // Performing collection materialization
-        private static readonly MethodInfo IncludeReferenceMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(IncludeReference))!;
+        private static readonly MethodInfo IncludeReferenceMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(IncludeReference))!;
 
-        private static readonly MethodInfo InitializeIncludeCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(InitializeIncludeCollection))!;
+        private static readonly MethodInfo InitializeIncludeCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(InitializeIncludeCollection))!;
 
-        private static readonly MethodInfo PopulateIncludeCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(PopulateIncludeCollection))!;
+        private static readonly MethodInfo PopulateIncludeCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(PopulateIncludeCollection))!;
 
-        private static readonly MethodInfo InitializeSplitIncludeCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(InitializeSplitIncludeCollection))!;
+        private static readonly MethodInfo InitializeSplitIncludeCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(InitializeSplitIncludeCollection))!;
 
-        private static readonly MethodInfo PopulateSplitIncludeCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(PopulateSplitIncludeCollection))!;
+        private static readonly MethodInfo PopulateSplitIncludeCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(PopulateSplitIncludeCollection))!;
 
-        private static readonly MethodInfo PopulateSplitIncludeCollectionAsyncMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(PopulateSplitIncludeCollectionAsync))!;
+        private static readonly MethodInfo PopulateSplitIncludeCollectionAsyncMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(PopulateSplitIncludeCollectionAsync))!;
 
-        private static readonly MethodInfo InitializeCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(InitializeCollection))!;
+        private static readonly MethodInfo InitializeCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(InitializeCollection))!;
 
-        private static readonly MethodInfo PopulateCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(PopulateCollection))!;
+        private static readonly MethodInfo PopulateCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(PopulateCollection))!;
 
-        private static readonly MethodInfo InitializeSplitCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(InitializeSplitCollection))!;
+        private static readonly MethodInfo InitializeSplitCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(InitializeSplitCollection))!;
 
-        private static readonly MethodInfo PopulateSplitCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(PopulateSplitCollection))!;
+        private static readonly MethodInfo PopulateSplitCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(PopulateSplitCollection))!;
 
-        private static readonly MethodInfo PopulateSplitCollectionAsyncMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(PopulateSplitCollectionAsync))!;
+        private static readonly MethodInfo PopulateSplitCollectionAsyncMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(PopulateSplitCollectionAsync))!;
 
-        private static readonly MethodInfo TaskAwaiterMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(TaskAwaiter))!;
+        private static readonly MethodInfo TaskAwaiterMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(TaskAwaiter))!;
 
-        private static readonly MethodInfo IncludeJsonEntityReferenceMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(IncludeJsonEntityReference))!;
+        private static readonly MethodInfo IncludeJsonEntityReferenceMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(IncludeJsonEntityReference))!;
 
-        private static readonly MethodInfo IncludeJsonEntityCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(IncludeJsonEntityCollection))!;
+        private static readonly MethodInfo IncludeJsonEntityCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(IncludeJsonEntityCollection))!;
 
-        private static readonly MethodInfo MaterializeJsonEntityMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(MaterializeJsonEntity))!;
+        private static readonly MethodInfo MaterializeJsonEntityMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(MaterializeJsonEntity))!;
 
-        private static readonly MethodInfo MaterializeJsonEntityCollectionMethodInfo
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(MaterializeJsonEntityCollection))!;
+        private static readonly MethodInfo MaterializeJsonEntityCollectionMethodInfo =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(MaterializeJsonEntityCollection))!;
 
-        private static readonly MethodInfo InverseCollectionFixupMethod
-            = typeof(ShaperProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(InverseCollectionFixup))!;
+        private static readonly MethodInfo InverseCollectionFixupMethod =
+            typeof(ShaperProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(InverseCollectionFixup))!;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TValue ThrowReadValueException<TValue>(
             Exception exception,
             object? value,
             Type expectedType,
-            IPropertyBase? property = null)
+            IPropertyBase? property = null
+        )
         {
             var actualType = value?.GetType();
 
@@ -91,20 +130,35 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     expectedType = property.ClrType;
                 }
 
-                message = exception is NullReferenceException
-                    || Equals(value, DBNull.Value)
-                        ? RelationalStrings.ErrorMaterializingPropertyNullReference(entityType, propertyName, expectedType)
+                message =
+                    exception is NullReferenceException || Equals(value, DBNull.Value)
+                        ? RelationalStrings.ErrorMaterializingPropertyNullReference(
+                            entityType,
+                            propertyName,
+                            expectedType
+                        )
                         : exception is InvalidCastException
-                            ? CoreStrings.ErrorMaterializingPropertyInvalidCast(entityType, propertyName, expectedType, actualType)
-                            : RelationalStrings.ErrorMaterializingProperty(entityType, propertyName);
+                            ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                                entityType,
+                                propertyName,
+                                expectedType,
+                                actualType
+                            )
+                            : RelationalStrings.ErrorMaterializingProperty(
+                                entityType,
+                                propertyName
+                            );
             }
             else
             {
-                message = exception is NullReferenceException
-                    || Equals(value, DBNull.Value)
+                message =
+                    exception is NullReferenceException || Equals(value, DBNull.Value)
                         ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
                         : exception is InvalidCastException
-                            ? RelationalStrings.ErrorMaterializingValueInvalidCast(expectedType, actualType)
+                            ? RelationalStrings.ErrorMaterializingValueInvalidCast(
+                                expectedType,
+                                actualType
+                            )
                             : RelationalStrings.ErrorMaterializingValue;
             }
 
@@ -112,14 +166,18 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TValue ThrowExtractJsonPropertyException<TValue>(Exception exception, IProperty property)
+        private static TValue ThrowExtractJsonPropertyException<TValue>(
+            Exception exception,
+            IProperty property
+        )
         {
             var entityType = property.DeclaringType.DisplayName();
             var propertyName = property.Name;
 
             throw new InvalidOperationException(
                 RelationalStrings.JsonErrorExtractingJsonProperty(entityType, propertyName),
-                exception);
+                exception
+            );
         }
 
         private static void IncludeReference<TEntity, TIncludingEntity, TIncludedEntity>(
@@ -129,15 +187,15 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             INavigationBase navigation,
             INavigationBase? inverseNavigation,
             Action<TIncludingEntity, TIncludedEntity> fixup,
-            bool trackingQuery)
+            bool trackingQuery
+        )
             where TEntity : class
             where TIncludingEntity : class, TEntity
             where TIncludedEntity : class
         {
             if (entity is TIncludingEntity includingEntity)
             {
-                if (trackingQuery
-                    && navigation.DeclaringEntityType.FindPrimaryKey() != null)
+                if (trackingQuery && navigation.DeclaringEntityType.FindPrimaryKey() != null)
                 {
                     // For non-null relatedEntity StateManager will set the flag
                     if (relatedEntity == null)
@@ -171,7 +229,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             INavigationBase navigation,
             IClrCollectionAccessor? clrCollectionAccessor,
             bool trackingQuery,
-            bool setLoaded)
+            bool setLoaded
+        )
             where TParent : class
             where TNavigationEntity : class, TParent
         {
@@ -196,9 +255,17 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             var parentKey = parentIdentifier(queryContext, dbDataReader);
             var outerKey = outerIdentifier(queryContext, dbDataReader);
 
-            var collectionMaterializationContext = new SingleQueryCollectionContext(entity, collection, parentKey, outerKey);
+            var collectionMaterializationContext = new SingleQueryCollectionContext(
+                entity,
+                collection,
+                parentKey,
+                outerKey
+            );
 
-            resultCoordinator.SetSingleQueryCollectionContext(collectionId, collectionMaterializationContext);
+            resultCoordinator.SetSingleQueryCollectionContext(
+                collectionId,
+                collectionMaterializationContext
+            );
         }
 
         private static void PopulateIncludeCollection<TIncludingEntity, TIncludedEntity>(
@@ -212,10 +279,17 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             IReadOnlyList<ValueComparer> parentIdentifierValueComparers,
             IReadOnlyList<ValueComparer> outerIdentifierValueComparers,
             IReadOnlyList<ValueComparer> selfIdentifierValueComparers,
-            Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, TIncludedEntity> innerShaper,
+            Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SingleQueryResultCoordinator,
+                TIncludedEntity
+            > innerShaper,
             INavigationBase? inverseNavigation,
             Action<TIncludingEntity, TIncludedEntity> fixup,
-            bool trackingQuery)
+            bool trackingQuery
+        )
             where TIncludingEntity : class
             where TIncludedEntity : class
         {
@@ -229,16 +303,24 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     return;
                 }
 
-                if (!CompareIdentifiers(
+                if (
+                    !CompareIdentifiers(
                         outerIdentifierValueComparers,
-                        outerIdentifier(queryContext, dbDataReader), collectionMaterializationContext.OuterIdentifier))
+                        outerIdentifier(queryContext, dbDataReader),
+                        collectionMaterializationContext.OuterIdentifier
+                    )
+                )
                 {
                     // Outer changed so collection has ended. Materialize last element.
                     GenerateCurrentElementIfPending();
                     // If parent also changed then this row is now pointing to element of next collection
-                    if (!CompareIdentifiers(
+                    if (
+                        !CompareIdentifiers(
                             parentIdentifierValueComparers,
-                            parentIdentifier(queryContext, dbDataReader), collectionMaterializationContext.ParentIdentifier))
+                            parentIdentifier(queryContext, dbDataReader),
+                            collectionMaterializationContext.ParentIdentifier
+                        )
+                    )
                     {
                         resultCoordinator.HasNext = true;
                     }
@@ -255,7 +337,13 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
                 if (collectionMaterializationContext.SelfIdentifier != null)
                 {
-                    if (CompareIdentifiers(selfIdentifierValueComparers, innerKey, collectionMaterializationContext.SelfIdentifier))
+                    if (
+                        CompareIdentifiers(
+                            selfIdentifierValueComparers,
+                            innerKey,
+                            collectionMaterializationContext.SelfIdentifier
+                        )
+                    )
                     {
                         // repeated row for current element
                         // If it is pending materialization then it may have nested elements
@@ -289,7 +377,11 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 var previousResultReady = resultCoordinator.ResultReady;
                 resultCoordinator.ResultReady = true;
                 var relatedEntity = innerShaper(
-                    queryContext, dbDataReader, collectionMaterializationContext.ResultContext, resultCoordinator);
+                    queryContext,
+                    dbDataReader,
+                    collectionMaterializationContext.ResultContext,
+                    resultCoordinator
+                );
                 if (resultCoordinator.ResultReady)
                 {
                     // related entity is materialized
@@ -329,7 +421,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             INavigationBase navigation,
             IClrCollectionAccessor? clrCollectionAccessor,
             bool trackingQuery,
-            bool setLoaded)
+            bool setLoaded
+        )
             where TParent : class
             where TNavigationEntity : class, TParent
         {
@@ -353,9 +446,16 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
             var parentKey = parentIdentifier(queryContext, parentDataReader);
 
-            var splitQueryCollectionContext = new SplitQueryCollectionContext(entity, collection, parentKey);
+            var splitQueryCollectionContext = new SplitQueryCollectionContext(
+                entity,
+                collection,
+                parentKey
+            );
 
-            resultCoordinator.SetSplitQueryCollectionContext(collectionId, splitQueryCollectionContext);
+            resultCoordinator.SetSplitQueryCollectionContext(
+                collectionId,
+                splitQueryCollectionContext
+            );
         }
 
         private static void PopulateSplitIncludeCollection<TIncludingEntity, TIncludedEntity>(
@@ -368,31 +468,54 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             SplitQueryResultCoordinator resultCoordinator,
             Func<QueryContext, DbDataReader, object[]> childIdentifier,
             IReadOnlyList<ValueComparer> identifierValueComparers,
-            Func<QueryContext, DbDataReader, ResultContext, SplitQueryResultCoordinator, TIncludedEntity> innerShaper,
-            Action<QueryContext, IExecutionStrategy, SplitQueryResultCoordinator>? relatedDataLoaders,
+            Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SplitQueryResultCoordinator,
+                TIncludedEntity
+            > innerShaper,
+            Action<
+                QueryContext,
+                IExecutionStrategy,
+                SplitQueryResultCoordinator
+            >? relatedDataLoaders,
             INavigationBase? inverseNavigation,
             Action<TIncludingEntity, TIncludedEntity> fixup,
-            bool trackingQuery)
+            bool trackingQuery
+        )
             where TIncludingEntity : class
             where TIncludedEntity : class
         {
-            if (resultCoordinator.DataReaders.Count <= collectionId
-                || resultCoordinator.DataReaders[collectionId] == null)
+            if (
+                resultCoordinator.DataReaders.Count <= collectionId
+                || resultCoordinator.DataReaders[collectionId] == null
+            )
             {
                 // Execute and fetch data reader
                 var dataReader = executionStrategy.Execute(
                     (queryContext, relationalCommandCache, readerColumns, detailedErrorsEnabled),
-                    ((RelationalQueryContext, RelationalCommandCache, IReadOnlyList<ReaderColumn?>?, bool) tup)
-                        => InitializeReader(tup.Item1, tup.Item2, tup.Item3, tup.Item4),
-                    verifySucceeded: null);
+                    (
+                        (
+                            RelationalQueryContext,
+                            RelationalCommandCache,
+                            IReadOnlyList<ReaderColumn?>?,
+                            bool
+                        ) tup
+                    ) => InitializeReader(tup.Item1, tup.Item2, tup.Item3, tup.Item4),
+                    verifySucceeded: null
+                );
 
                 static RelationalDataReader InitializeReader(
                     RelationalQueryContext queryContext,
                     RelationalCommandCache relationalCommandCache,
                     IReadOnlyList<ReaderColumn?>? readerColumns,
-                    bool detailedErrorsEnabled)
+                    bool detailedErrorsEnabled
+                )
                 {
-                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(queryContext);
+                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(
+                        queryContext
+                    );
 
                     return relationalCommand.ExecuteReader(
                         new RelationalCommandParameterObject(
@@ -401,7 +524,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                             readerColumns,
                             queryContext.Context,
                             queryContext.CommandLogger,
-                            detailedErrorsEnabled, CommandSource.LinqQuery));
+                            detailedErrorsEnabled,
+                            CommandSource.LinqQuery
+                        )
+                    );
                 }
 
                 resultCoordinator.SetDataReader(collectionId, dataReader);
@@ -414,9 +540,13 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             {
                 while (dataReaderContext.HasNext ?? dbDataReader.Read())
                 {
-                    if (!CompareIdentifiers(
+                    if (
+                        !CompareIdentifiers(
                             identifierValueComparers,
-                            splitQueryCollectionContext.ParentIdentifier, childIdentifier(queryContext, dbDataReader)))
+                            splitQueryCollectionContext.ParentIdentifier,
+                            childIdentifier(queryContext, dbDataReader)
+                        )
+                    )
                     {
                         dataReaderContext.HasNext = true;
 
@@ -426,10 +556,19 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     dataReaderContext.HasNext = null;
                     splitQueryCollectionContext.ResultContext.Values = null;
 
-                    innerShaper(queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                    innerShaper(
+                        queryContext,
+                        dbDataReader,
+                        splitQueryCollectionContext.ResultContext,
+                        resultCoordinator
+                    );
                     relatedDataLoaders?.Invoke(queryContext, executionStrategy, resultCoordinator);
                     var relatedEntity = innerShaper(
-                        queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                        queryContext,
+                        dbDataReader,
+                        splitQueryCollectionContext.ResultContext,
+                        resultCoordinator
+                    );
 
                     if (!trackingQuery)
                     {
@@ -442,7 +581,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             }
         }
 
-        private static async Task PopulateSplitIncludeCollectionAsync<TIncludingEntity, TIncludedEntity>(
+        private static async Task PopulateSplitIncludeCollectionAsync<
+            TIncludingEntity,
+            TIncludedEntity
+        >(
             int collectionId,
             RelationalQueryContext queryContext,
             IExecutionStrategy executionStrategy,
@@ -452,26 +594,59 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             SplitQueryResultCoordinator resultCoordinator,
             Func<QueryContext, DbDataReader, object[]> childIdentifier,
             IReadOnlyList<ValueComparer> identifierValueComparers,
-            Func<QueryContext, DbDataReader, ResultContext, SplitQueryResultCoordinator, TIncludedEntity> innerShaper,
-            Func<QueryContext, IExecutionStrategy, SplitQueryResultCoordinator, Task>? relatedDataLoaders,
+            Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SplitQueryResultCoordinator,
+                TIncludedEntity
+            > innerShaper,
+            Func<
+                QueryContext,
+                IExecutionStrategy,
+                SplitQueryResultCoordinator,
+                Task
+            >? relatedDataLoaders,
             INavigationBase? inverseNavigation,
             Action<TIncludingEntity, TIncludedEntity> fixup,
-            bool trackingQuery)
+            bool trackingQuery
+        )
             where TIncludingEntity : class
             where TIncludedEntity : class
         {
-            if (resultCoordinator.DataReaders.Count <= collectionId
-                || resultCoordinator.DataReaders[collectionId] == null)
+            if (
+                resultCoordinator.DataReaders.Count <= collectionId
+                || resultCoordinator.DataReaders[collectionId] == null
+            )
             {
                 // Execute and fetch data reader
-                var dataReader = await executionStrategy.ExecuteAsync(
-                        (queryContext, relationalCommandCache, readerColumns, detailedErrorsEnabled),
+                var dataReader = await executionStrategy
+                    .ExecuteAsync(
                         (
-                                (RelationalQueryContext, RelationalCommandCache, IReadOnlyList<ReaderColumn?>?, bool) tup,
-                                CancellationToken cancellationToken)
-                            => InitializeReaderAsync(tup.Item1, tup.Item2, tup.Item3, tup.Item4, cancellationToken),
+                            queryContext,
+                            relationalCommandCache,
+                            readerColumns,
+                            detailedErrorsEnabled
+                        ),
+                        (
+                            (
+                                RelationalQueryContext,
+                                RelationalCommandCache,
+                                IReadOnlyList<ReaderColumn?>?,
+                                bool
+                            ) tup,
+                            CancellationToken cancellationToken
+                        ) =>
+                            InitializeReaderAsync(
+                                tup.Item1,
+                                tup.Item2,
+                                tup.Item3,
+                                tup.Item4,
+                                cancellationToken
+                            ),
                         verifySucceeded: null,
-                        queryContext.CancellationToken)
+                        queryContext.CancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 static async Task<RelationalDataReader> InitializeReaderAsync(
@@ -479,11 +654,15 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     RelationalCommandCache relationalCommandCache,
                     IReadOnlyList<ReaderColumn?>? readerColumns,
                     bool detailedErrorsEnabled,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
-                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(queryContext);
+                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(
+                        queryContext
+                    );
 
-                    return await relationalCommand.ExecuteReaderAsync(
+                    return await relationalCommand
+                        .ExecuteReaderAsync(
                             new RelationalCommandParameterObject(
                                 queryContext.Connection,
                                 queryContext.ParameterValues,
@@ -491,8 +670,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                                 queryContext.Context,
                                 queryContext.CommandLogger,
                                 detailedErrorsEnabled,
-                                CommandSource.LinqQuery),
-                            cancellationToken)
+                                CommandSource.LinqQuery
+                            ),
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -504,11 +685,20 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             var dbDataReader = dataReaderContext.DataReader.DbDataReader;
             if (splitQueryCollectionContext.Parent is TIncludingEntity entity)
             {
-                while (dataReaderContext.HasNext ?? await dbDataReader.ReadAsync(queryContext.CancellationToken).ConfigureAwait(false))
+                while (
+                    dataReaderContext.HasNext
+                    ?? await dbDataReader
+                        .ReadAsync(queryContext.CancellationToken)
+                        .ConfigureAwait(false)
+                )
                 {
-                    if (!CompareIdentifiers(
+                    if (
+                        !CompareIdentifiers(
                             identifierValueComparers,
-                            splitQueryCollectionContext.ParentIdentifier, childIdentifier(queryContext, dbDataReader)))
+                            splitQueryCollectionContext.ParentIdentifier,
+                            childIdentifier(queryContext, dbDataReader)
+                        )
+                    )
                     {
                         dataReaderContext.HasNext = true;
 
@@ -518,14 +708,24 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     dataReaderContext.HasNext = null;
                     splitQueryCollectionContext.ResultContext.Values = null;
 
-                    innerShaper(queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                    innerShaper(
+                        queryContext,
+                        dbDataReader,
+                        splitQueryCollectionContext.ResultContext,
+                        resultCoordinator
+                    );
                     if (relatedDataLoaders != null)
                     {
-                        await relatedDataLoaders(queryContext, executionStrategy, resultCoordinator).ConfigureAwait(false);
+                        await relatedDataLoaders(queryContext, executionStrategy, resultCoordinator)
+                            .ConfigureAwait(false);
                     }
 
                     var relatedEntity = innerShaper(
-                        queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                        queryContext,
+                        dbDataReader,
+                        splitQueryCollectionContext.ResultContext,
+                        resultCoordinator
+                    );
 
                     if (!trackingQuery)
                     {
@@ -545,7 +745,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             SingleQueryResultCoordinator resultCoordinator,
             Func<QueryContext, DbDataReader, object[]> parentIdentifier,
             Func<QueryContext, DbDataReader, object[]> outerIdentifier,
-            IClrCollectionAccessor? clrCollectionAccessor)
+            IClrCollectionAccessor? clrCollectionAccessor
+        )
             where TCollection : class, ICollection<TElement>
         {
             var collection = clrCollectionAccessor?.Create() ?? new List<TElement>();
@@ -553,9 +754,17 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             var parentKey = parentIdentifier(queryContext, dbDataReader);
             var outerKey = outerIdentifier(queryContext, dbDataReader);
 
-            var collectionMaterializationContext = new SingleQueryCollectionContext(null, collection, parentKey, outerKey);
+            var collectionMaterializationContext = new SingleQueryCollectionContext(
+                null,
+                collection,
+                parentKey,
+                outerKey
+            );
 
-            resultCoordinator.SetSingleQueryCollectionContext(collectionId, collectionMaterializationContext);
+            resultCoordinator.SetSingleQueryCollectionContext(
+                collectionId,
+                collectionMaterializationContext
+            );
 
             return (TCollection)collection;
         }
@@ -571,7 +780,14 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             IReadOnlyList<ValueComparer> parentIdentifierValueComparers,
             IReadOnlyList<ValueComparer> outerIdentifierValueComparers,
             IReadOnlyList<ValueComparer> selfIdentifierValueComparers,
-            Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, TRelatedEntity> innerShaper)
+            Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SingleQueryResultCoordinator,
+                TRelatedEntity
+            > innerShaper
+        )
             where TRelatedEntity : TElement
             where TCollection : class, ICollection<TElement>
         {
@@ -589,16 +805,24 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 return;
             }
 
-            if (!CompareIdentifiers(
+            if (
+                !CompareIdentifiers(
                     outerIdentifierValueComparers,
-                    outerIdentifier(queryContext, dbDataReader), collectionMaterializationContext.OuterIdentifier))
+                    outerIdentifier(queryContext, dbDataReader),
+                    collectionMaterializationContext.OuterIdentifier
+                )
+            )
             {
                 // Outer changed so collection has ended. Materialize last element.
                 GenerateCurrentElementIfPending();
                 // If parent also changed then this row is now pointing to element of next collection
-                if (!CompareIdentifiers(
+                if (
+                    !CompareIdentifiers(
                         parentIdentifierValueComparers,
-                        parentIdentifier(queryContext, dbDataReader), collectionMaterializationContext.ParentIdentifier))
+                        parentIdentifier(queryContext, dbDataReader),
+                        collectionMaterializationContext.ParentIdentifier
+                    )
+                )
                 {
                     resultCoordinator.HasNext = true;
                 }
@@ -615,9 +839,13 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
             if (collectionMaterializationContext.SelfIdentifier != null)
             {
-                if (CompareIdentifiers(
+                if (
+                    CompareIdentifiers(
                         selfIdentifierValueComparers,
-                        innerKey, collectionMaterializationContext.SelfIdentifier))
+                        innerKey,
+                        collectionMaterializationContext.SelfIdentifier
+                    )
+                )
                 {
                     // repeated row for current element
                     // If it is pending materialization then it may have nested elements
@@ -650,7 +878,11 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 var previousResultReady = resultCoordinator.ResultReady;
                 resultCoordinator.ResultReady = true;
                 var element = innerShaper(
-                    queryContext, dbDataReader, collectionMaterializationContext.ResultContext, resultCoordinator);
+                    queryContext,
+                    dbDataReader,
+                    collectionMaterializationContext.ResultContext,
+                    resultCoordinator
+                );
                 if (resultCoordinator.ResultReady)
                 {
                     // related element is materialized
@@ -679,14 +911,22 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             DbDataReader parentDataReader,
             SplitQueryResultCoordinator resultCoordinator,
             Func<QueryContext, DbDataReader, object[]> parentIdentifier,
-            IClrCollectionAccessor? clrCollectionAccessor)
+            IClrCollectionAccessor? clrCollectionAccessor
+        )
             where TCollection : class, ICollection<TElement>
         {
             var collection = clrCollectionAccessor?.Create() ?? new List<TElement>();
             var parentKey = parentIdentifier(queryContext, parentDataReader);
-            var splitQueryCollectionContext = new SplitQueryCollectionContext(null, collection, parentKey);
+            var splitQueryCollectionContext = new SplitQueryCollectionContext(
+                null,
+                collection,
+                parentKey
+            );
 
-            resultCoordinator.SetSplitQueryCollectionContext(collectionId, splitQueryCollectionContext);
+            resultCoordinator.SetSplitQueryCollectionContext(
+                collectionId,
+                splitQueryCollectionContext
+            );
 
             return (TCollection)collection;
         }
@@ -701,28 +941,51 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             SplitQueryResultCoordinator resultCoordinator,
             Func<QueryContext, DbDataReader, object[]> childIdentifier,
             IReadOnlyList<ValueComparer> identifierValueComparers,
-            Func<QueryContext, DbDataReader, ResultContext, SplitQueryResultCoordinator, TRelatedEntity> innerShaper,
-            Action<QueryContext, IExecutionStrategy, SplitQueryResultCoordinator>? relatedDataLoaders)
+            Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SplitQueryResultCoordinator,
+                TRelatedEntity
+            > innerShaper,
+            Action<
+                QueryContext,
+                IExecutionStrategy,
+                SplitQueryResultCoordinator
+            >? relatedDataLoaders
+        )
             where TRelatedEntity : TElement
             where TCollection : class, ICollection<TElement>
         {
-            if (resultCoordinator.DataReaders.Count <= collectionId
-                || resultCoordinator.DataReaders[collectionId] == null)
+            if (
+                resultCoordinator.DataReaders.Count <= collectionId
+                || resultCoordinator.DataReaders[collectionId] == null
+            )
             {
                 // Execute and fetch data reader
                 var dataReader = executionStrategy.Execute(
                     (queryContext, relationalCommandCache, readerColumns, detailedErrorsEnabled),
-                    ((RelationalQueryContext, RelationalCommandCache, IReadOnlyList<ReaderColumn?>?, bool) tup)
-                        => InitializeReader(tup.Item1, tup.Item2, tup.Item3, tup.Item4),
-                    verifySucceeded: null);
+                    (
+                        (
+                            RelationalQueryContext,
+                            RelationalCommandCache,
+                            IReadOnlyList<ReaderColumn?>?,
+                            bool
+                        ) tup
+                    ) => InitializeReader(tup.Item1, tup.Item2, tup.Item3, tup.Item4),
+                    verifySucceeded: null
+                );
 
                 static RelationalDataReader InitializeReader(
                     RelationalQueryContext queryContext,
                     RelationalCommandCache relationalCommandCache,
                     IReadOnlyList<ReaderColumn?>? readerColumns,
-                    bool detailedErrorsEnabled)
+                    bool detailedErrorsEnabled
+                )
                 {
-                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(queryContext);
+                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(
+                        queryContext
+                    );
 
                     return relationalCommand.ExecuteReader(
                         new RelationalCommandParameterObject(
@@ -731,7 +994,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                             readerColumns,
                             queryContext.Context,
                             queryContext.CommandLogger,
-                            detailedErrorsEnabled, CommandSource.LinqQuery));
+                            detailedErrorsEnabled,
+                            CommandSource.LinqQuery
+                        )
+                    );
                 }
 
                 resultCoordinator.SetDataReader(collectionId, dataReader);
@@ -748,9 +1014,13 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
             while (dataReaderContext.HasNext ?? dbDataReader.Read())
             {
-                if (!CompareIdentifiers(
+                if (
+                    !CompareIdentifiers(
                         identifierValueComparers,
-                        splitQueryCollectionContext.ParentIdentifier, childIdentifier(queryContext, dbDataReader)))
+                        splitQueryCollectionContext.ParentIdentifier,
+                        childIdentifier(queryContext, dbDataReader)
+                    )
+                )
                 {
                     dataReaderContext.HasNext = true;
 
@@ -760,17 +1030,30 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 dataReaderContext.HasNext = null;
                 splitQueryCollectionContext.ResultContext.Values = null;
 
-                innerShaper(queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                innerShaper(
+                    queryContext,
+                    dbDataReader,
+                    splitQueryCollectionContext.ResultContext,
+                    resultCoordinator
+                );
                 relatedDataLoaders?.Invoke(queryContext, executionStrategy, resultCoordinator);
                 var relatedElement = innerShaper(
-                    queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                    queryContext,
+                    dbDataReader,
+                    splitQueryCollectionContext.ResultContext,
+                    resultCoordinator
+                );
                 ((TCollection)splitQueryCollectionContext.Collection).Add(relatedElement);
             }
 
             dataReaderContext.HasNext = false;
         }
 
-        private static async Task PopulateSplitCollectionAsync<TCollection, TElement, TRelatedEntity>(
+        private static async Task PopulateSplitCollectionAsync<
+            TCollection,
+            TElement,
+            TRelatedEntity
+        >(
             int collectionId,
             RelationalQueryContext queryContext,
             IExecutionStrategy executionStrategy,
@@ -780,23 +1063,56 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             SplitQueryResultCoordinator resultCoordinator,
             Func<QueryContext, DbDataReader, object[]> childIdentifier,
             IReadOnlyList<ValueComparer> identifierValueComparers,
-            Func<QueryContext, DbDataReader, ResultContext, SplitQueryResultCoordinator, TRelatedEntity> innerShaper,
-            Func<QueryContext, IExecutionStrategy, SplitQueryResultCoordinator, Task>? relatedDataLoaders)
+            Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SplitQueryResultCoordinator,
+                TRelatedEntity
+            > innerShaper,
+            Func<
+                QueryContext,
+                IExecutionStrategy,
+                SplitQueryResultCoordinator,
+                Task
+            >? relatedDataLoaders
+        )
             where TRelatedEntity : TElement
             where TCollection : class, ICollection<TElement>
         {
-            if (resultCoordinator.DataReaders.Count <= collectionId
-                || resultCoordinator.DataReaders[collectionId] == null)
+            if (
+                resultCoordinator.DataReaders.Count <= collectionId
+                || resultCoordinator.DataReaders[collectionId] == null
+            )
             {
                 // Execute and fetch data reader
-                var dataReader = await executionStrategy.ExecuteAsync(
-                        (queryContext, relationalCommandCache, readerColumns, detailedErrorsEnabled),
+                var dataReader = await executionStrategy
+                    .ExecuteAsync(
                         (
-                                (RelationalQueryContext, RelationalCommandCache, IReadOnlyList<ReaderColumn?>?, bool) tup,
-                                CancellationToken cancellationToken)
-                            => InitializeReaderAsync(tup.Item1, tup.Item2, tup.Item3, tup.Item4, cancellationToken),
+                            queryContext,
+                            relationalCommandCache,
+                            readerColumns,
+                            detailedErrorsEnabled
+                        ),
+                        (
+                            (
+                                RelationalQueryContext,
+                                RelationalCommandCache,
+                                IReadOnlyList<ReaderColumn?>?,
+                                bool
+                            ) tup,
+                            CancellationToken cancellationToken
+                        ) =>
+                            InitializeReaderAsync(
+                                tup.Item1,
+                                tup.Item2,
+                                tup.Item3,
+                                tup.Item4,
+                                cancellationToken
+                            ),
                         verifySucceeded: null,
-                        queryContext.CancellationToken)
+                        queryContext.CancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 static async Task<RelationalDataReader> InitializeReaderAsync(
@@ -804,11 +1120,15 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     RelationalCommandCache relationalCommandCache,
                     IReadOnlyList<ReaderColumn?>? readerColumns,
                     bool detailedErrorsEnabled,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
-                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(queryContext);
+                    var relationalCommand = relationalCommandCache.RentAndPopulateRelationalCommand(
+                        queryContext
+                    );
 
-                    return await relationalCommand.ExecuteReaderAsync(
+                    return await relationalCommand
+                        .ExecuteReaderAsync(
                             new RelationalCommandParameterObject(
                                 queryContext.Connection,
                                 queryContext.ParameterValues,
@@ -816,8 +1136,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                                 queryContext.Context,
                                 queryContext.CommandLogger,
                                 detailedErrorsEnabled,
-                                CommandSource.LinqQuery),
-                            cancellationToken)
+                                CommandSource.LinqQuery
+                            ),
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -833,11 +1155,20 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 return;
             }
 
-            while (dataReaderContext.HasNext ?? await dbDataReader.ReadAsync(queryContext.CancellationToken).ConfigureAwait(false))
+            while (
+                dataReaderContext.HasNext
+                ?? await dbDataReader
+                    .ReadAsync(queryContext.CancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
-                if (!CompareIdentifiers(
+                if (
+                    !CompareIdentifiers(
                         identifierValueComparers,
-                        splitQueryCollectionContext.ParentIdentifier, childIdentifier(queryContext, dbDataReader)))
+                        splitQueryCollectionContext.ParentIdentifier,
+                        childIdentifier(queryContext, dbDataReader)
+                    )
+                )
                 {
                     dataReaderContext.HasNext = true;
 
@@ -847,14 +1178,24 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 dataReaderContext.HasNext = null;
                 splitQueryCollectionContext.ResultContext.Values = null;
 
-                innerShaper(queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                innerShaper(
+                    queryContext,
+                    dbDataReader,
+                    splitQueryCollectionContext.ResultContext,
+                    resultCoordinator
+                );
                 if (relatedDataLoaders != null)
                 {
-                    await relatedDataLoaders(queryContext, executionStrategy, resultCoordinator).ConfigureAwait(false);
+                    await relatedDataLoaders(queryContext, executionStrategy, resultCoordinator)
+                        .ConfigureAwait(false);
                 }
 
                 var relatedElement = innerShaper(
-                    queryContext, dbDataReader, splitQueryCollectionContext.ResultContext, resultCoordinator);
+                    queryContext,
+                    dbDataReader,
+                    splitQueryCollectionContext.ResultContext,
+                    resultCoordinator
+                );
                 ((TCollection)splitQueryCollectionContext.Collection).Add(relatedElement);
             }
 
@@ -866,7 +1207,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             object[] keyPropertyValues,
             JsonReaderData? jsonReaderData,
             bool nullable,
-            Func<QueryContext, object[], JsonReaderData, TEntity> shaper)
+            Func<QueryContext, object[], JsonReaderData, TEntity> shaper
+        )
             where TEntity : class
         {
             if (jsonReaderData == null)
@@ -874,7 +1216,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 return nullable
                     ? null
                     : throw new InvalidOperationException(
-                        RelationalStrings.JsonRequiredEntityWithNullJson(typeof(TEntity).Name));
+                        RelationalStrings.JsonRequiredEntityWithNullJson(typeof(TEntity).Name)
+                    );
             }
 
             var manager = new Utf8JsonReaderManager(jsonReaderData, queryContext.QueryLogger);
@@ -885,13 +1228,15 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 return nullable
                     ? null
                     : throw new InvalidOperationException(
-                        RelationalStrings.JsonRequiredEntityWithNullJson(typeof(TEntity).Name));
+                        RelationalStrings.JsonRequiredEntityWithNullJson(typeof(TEntity).Name)
+                    );
             }
 
             if (tokenType != JsonTokenType.StartObject)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+                    CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString())
+                );
             }
 
             manager.CaptureState();
@@ -905,7 +1250,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             object[] keyPropertyValues,
             JsonReaderData? jsonReaderData,
             INavigationBase navigation,
-            Func<QueryContext, object[], JsonReaderData, TEntity> innerShaper)
+            Func<QueryContext, object[], JsonReaderData, TEntity> innerShaper
+        )
             where TEntity : class
         {
             if (jsonReaderData == null)
@@ -924,7 +1270,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             if (tokenType != JsonTokenType.StartArray)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+                    CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString())
+                );
             }
 
             var collectionAccessor = navigation.GetCollectionAccessor();
@@ -950,7 +1297,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     if (manager.CurrentReader.TokenType != JsonTokenType.EndObject)
                     {
                         throw new InvalidOperationException(
-                            CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+                            CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString())
+                        );
                     }
 
                     tokenType = manager.MoveNext();
@@ -958,7 +1306,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 else
                 {
                     throw new InvalidOperationException(
-                        CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+                        CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString())
+                    );
                 }
             }
 
@@ -974,7 +1323,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             TIncludingEntity entity,
             Func<QueryContext, object[], JsonReaderData, TIncludedEntity> innerShaper,
             Action<TIncludingEntity, TIncludedEntity> fixup,
-            bool trackingQuery)
+            bool trackingQuery
+        )
             where TIncludingEntity : class
             where TIncludedEntity : class
         {
@@ -991,7 +1341,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             }
         }
 
-        private static void IncludeJsonEntityCollection<TIncludingEntity, TIncludedCollectionElement>(
+        private static void IncludeJsonEntityCollection<
+            TIncludingEntity,
+            TIncludedCollectionElement
+        >(
             QueryContext queryContext,
             object[] keyPropertyValues,
             JsonReaderData? jsonReaderData,
@@ -999,7 +1352,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             Func<QueryContext, object[], JsonReaderData, TIncludedCollectionElement> innerShaper,
             Action<TIncludingEntity> getOrCreateCollectionObject,
             Action<TIncludingEntity, TIncludedCollectionElement> fixup,
-            bool trackingQuery)
+            bool trackingQuery
+        )
             where TIncludingEntity : class
             where TIncludedCollectionElement : class
         {
@@ -1014,7 +1368,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             if (tokenType != JsonTokenType.StartArray)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+                    CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString())
+                );
             }
 
             getOrCreateCollectionObject(entity);
@@ -1032,7 +1387,11 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 if (tokenType == JsonTokenType.StartObject)
                 {
                     manager.CaptureState();
-                    var resultElement = innerShaper(queryContext, newKeyPropertyValues, jsonReaderData);
+                    var resultElement = innerShaper(
+                        queryContext,
+                        newKeyPropertyValues,
+                        jsonReaderData
+                    );
 
                     if (!trackingQuery)
                     {
@@ -1043,7 +1402,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     if (manager.CurrentReader.TokenType != JsonTokenType.EndObject)
                     {
                         throw new InvalidOperationException(
-                            CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+                            CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString())
+                        );
                     }
 
                     tokenType = manager.MoveNext();
@@ -1051,7 +1411,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 else
                 {
                     throw new InvalidOperationException(
-                        CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString()));
+                        CoreStrings.JsonReaderInvalidTokenType(tokenType.ToString())
+                    );
                 }
             }
 
@@ -1066,7 +1427,11 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             }
         }
 
-        private static bool CompareIdentifiers(IReadOnlyList<ValueComparer> valueComparers, object[] left, object[] right)
+        private static bool CompareIdentifiers(
+            IReadOnlyList<ValueComparer> valueComparers,
+            object[] left,
+            object[] right
+        )
         {
             // Ignoring size check on all for perf as they should be same unless bug in code.
             for (var i = 0; i < left.Length; i++)

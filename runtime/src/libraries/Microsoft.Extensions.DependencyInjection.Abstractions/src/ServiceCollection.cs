@@ -27,10 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <inheritdoc />
         public ServiceDescriptor this[int index]
         {
-            get
-            {
-                return _descriptors[index];
-            }
+            get { return _descriptors[index]; }
             set
             {
                 CheckReadOnly();

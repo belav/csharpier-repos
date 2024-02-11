@@ -29,9 +29,12 @@ public partial class VectorTest
             Console.WriteLine("result3 : " + result3);
             Console.WriteLine("result4 : " + result4);
 
-            if (result2 != 2f * x * x) return Fail;
-            if (result3 != 3f * x * x) return Fail;
-            if (result4 != 4f * x * x) return Fail;
+            if (result2 != 2f * x * x)
+                return Fail;
+            if (result3 != 3f * x * x)
+                return Fail;
+            if (result4 != 4f * x * x)
+                return Fail;
 
             return returnVal;
         }
@@ -42,8 +45,8 @@ public partial class VectorTest
     {
         int returnVal = Pass;
 
-        if (VectorInitTest.VectorInit(2f) == Fail) returnVal = Fail;
+        if (VectorInitTest.VectorInit(2f) == Fail)
+            returnVal = Fail;
         return returnVal;
     }
 }
-

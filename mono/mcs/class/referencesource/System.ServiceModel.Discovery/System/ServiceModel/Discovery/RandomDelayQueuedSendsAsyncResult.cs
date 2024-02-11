@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Discovery
 {
+    using System.Collections.Generic;
     using System.Runtime;
     using System.Threading;
-    using System.Collections.Generic;
 
-    abstract class RandomDelayQueuedSendsAsyncResult<TItem> : 
-        IteratorAsyncResult<RandomDelayQueuedSendsAsyncResult<TItem>>
+    abstract class RandomDelayQueuedSendsAsyncResult<TItem>
+        : IteratorAsyncResult<RandomDelayQueuedSendsAsyncResult<TItem>>
         where TItem : class
     {
-        readonly InputQueue<TItem> itemQueue;        
+        readonly InputQueue<TItem> itemQueue;
         readonly Random random;
         readonly double maxRandomDelayInMillis;
         readonly int[] preCalculatedDelays;
@@ -27,13 +27,17 @@ namespace System.ServiceModel.Discovery
 
         public RandomDelayQueuedSendsAsyncResult(
             TimeSpan maxRandomDelay,
-            InputQueue<TItem> itemQueue,            
+            InputQueue<TItem> itemQueue,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(callback, state)
         {
-            Fx.Assert(maxRandomDelay >= TimeSpan.Zero, "The maxRandomDelay parameter must be non negative.");
-            Fx.Assert(itemQueue != null, "The itemQueue parameter must be non null.");            
+            Fx.Assert(
+                maxRandomDelay >= TimeSpan.Zero,
+                "The maxRandomDelay parameter must be non negative."
+            );
+            Fx.Assert(itemQueue != null, "The itemQueue parameter must be non null.");
 
             this.itemQueue = itemQueue;
 
@@ -90,7 +94,8 @@ namespace System.ServiceModel.Discovery
             TItem item,
             TimeSpan timeout,
             AsyncCallback callback,
-            object state);
+            object state
+        );
 
         protected abstract void OnEndSendItem(IAsyncResult result);
 
@@ -100,7 +105,8 @@ namespace System.ServiceModel.Discovery
             {
                 dequeueStep = RandomDelayQueuedSendsAsyncResult<TItem>.CallAsync(
                     (thisPtr, t, c, s) => thisPtr.itemQueue.BeginDequeue(TimeSpan.MaxValue, c, s),
-                    (thisPtr, r) => thisPtr.currentItem = thisPtr.itemQueue.EndDequeue(r));
+                    (thisPtr, r) => thisPtr.currentItem = thisPtr.itemQueue.EndDequeue(r)
+                );
             }
 
             return dequeueStep;
@@ -112,7 +118,8 @@ namespace System.ServiceModel.Discovery
             {
                 delayStep = RandomDelayQueuedSendsAsyncResult<TItem>.CallAsync(
                     (thisPtr, t, c, s) => thisPtr.BeginDelay(c, s),
-                    (thisPtr, r) => thisPtr.EndDelay(r));
+                    (thisPtr, r) => thisPtr.EndDelay(r)
+                );
             }
 
             return delayStep;
@@ -124,7 +131,8 @@ namespace System.ServiceModel.Discovery
             {
                 sendItemStep = RandomDelayQueuedSendsAsyncResult<TItem>.CallParallel(
                     (thisPtr, t, c, s) => thisPtr.OnBeginSendItem(thisPtr.currentItem, t, c, s),
-                    (thisPtr, r) => thisPtr.OnEndSendItem(r));
+                    (thisPtr, r) => thisPtr.OnEndSendItem(r)
+                );
             }
 
             return sendItemStep;
@@ -135,7 +143,9 @@ namespace System.ServiceModel.Discovery
             this.currentDelayIndex = 0;
             for (int i = 0; i < this.preCalculatedDelays.Length; i++)
             {
-                this.preCalculatedDelays[i] = (int)(this.random.NextDouble() * this.maxRandomDelayInMillis);
+                this.preCalculatedDelays[i] = (int)(
+                    this.random.NextDouble() * this.maxRandomDelayInMillis
+                );
             }
 
             Array.Sort<int>(this.preCalculatedDelays);
@@ -163,8 +173,9 @@ namespace System.ServiceModel.Discovery
                         this.currentDelayIndex = 1;
                     }
 
-                    delay = this.preCalculatedDelays[this.currentDelayIndex] -
-                        this.preCalculatedDelays[this.currentDelayIndex - 1];
+                    delay =
+                        this.preCalculatedDelays[this.currentDelayIndex]
+                        - this.preCalculatedDelays[this.currentDelayIndex - 1];
                 }
             }
 
@@ -179,7 +190,8 @@ namespace System.ServiceModel.Discovery
             public DelayAsyncResult(
                 RandomDelayQueuedSendsAsyncResult<TItem> parent,
                 AsyncCallback callback,
-                object state)
+                object state
+            )
                 : base(callback, state)
             {
                 int delay = parent.GetNextDelay();

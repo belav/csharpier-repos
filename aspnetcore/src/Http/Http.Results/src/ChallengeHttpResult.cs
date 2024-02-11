@@ -17,9 +17,7 @@ public sealed partial class ChallengeHttpResult : IResult
     /// Initializes a new instance of <see cref="ChallengeHttpResult"/>.
     /// </summary>
     internal ChallengeHttpResult()
-        : this(Array.Empty<string>())
-    {
-    }
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeHttpResult"/> with the
@@ -27,9 +25,7 @@ public sealed partial class ChallengeHttpResult : IResult
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     internal ChallengeHttpResult(IList<string> authenticationSchemes)
-        : this(authenticationSchemes, properties: null)
-    {
-    }
+        : this(authenticationSchemes, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeHttpResult"/> with the
@@ -39,9 +35,7 @@ public sealed partial class ChallengeHttpResult : IResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     internal ChallengeHttpResult(string authenticationScheme, AuthenticationProperties? properties)
-        : this(new[] { authenticationScheme }, properties)
-    {
-    }
+        : this(new[] { authenticationScheme }, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeHttpResult"/> with the
@@ -50,7 +44,10 @@ public sealed partial class ChallengeHttpResult : IResult
     /// <param name="authenticationSchemes">The authentication scheme to challenge.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
-    internal ChallengeHttpResult(IList<string> authenticationSchemes, AuthenticationProperties? properties)
+    internal ChallengeHttpResult(
+        IList<string> authenticationSchemes,
+        AuthenticationProperties? properties
+    )
     {
         AuthenticationSchemes = authenticationSchemes.AsReadOnly();
         Properties = properties;
@@ -59,7 +56,8 @@ public sealed partial class ChallengeHttpResult : IResult
     /// <summary>
     /// Gets the authentication schemes that are challenged.
     /// </summary>
-    public IReadOnlyList<string> AuthenticationSchemes { get; internal init; } = Array.Empty<string>();
+    public IReadOnlyList<string> AuthenticationSchemes { get; internal init; } =
+        Array.Empty<string>();
 
     /// <summary>
     /// Gets the <see cref="AuthenticationProperties"/> used to perform the sign-out operation.
@@ -92,7 +90,10 @@ public sealed partial class ChallengeHttpResult : IResult
 
     private static partial class Log
     {
-        public static void ChallengeResultExecuting(ILogger logger, IReadOnlyList<string> authenticationSchemes)
+        public static void ChallengeResultExecuting(
+            ILogger logger,
+            IReadOnlyList<string> authenticationSchemes
+        )
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -100,7 +101,13 @@ public sealed partial class ChallengeHttpResult : IResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing ChallengeResult with authentication schemes ({Schemes}).", EventName = "ChallengeResultExecuting", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing ChallengeResult with authentication schemes ({Schemes}).",
+            EventName = "ChallengeResultExecuting",
+            SkipEnabledCheck = true
+        )]
         private static partial void ChallengeResultExecuting(ILogger logger, string[] schemes);
     }
 }
