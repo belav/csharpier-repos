@@ -302,7 +302,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 }".Replace(
                 "Assembly: Merged",
                 "Assembly: Merged, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-            ).Replace("Assembly: Assem1", "Assembly: Assem1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").Replace("Assembly: Assem3", "Assembly: Assem3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+            ).Replace(
+                "Assembly: Assem1",
+                "Assembly: Assem1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+            ).Replace(
+                "Assembly: Assem3",
+                "Assembly: Assem3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+            );
 
             Assert.Equal(expected, DumpSymbol(merged));
 

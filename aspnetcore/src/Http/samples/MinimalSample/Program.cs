@@ -18,11 +18,11 @@ app.MapGet(
     "/",
     () =>
         $"""
-            Operating System: {Environment.OSVersion}
-            .NET version: {Environment.Version}
-            Username: {Environment.UserName}
-            Date and Time: {DateTime.Now}
-            """
+        Operating System: {Environment.OSVersion}
+        .NET version: {Environment.Version}
+        Username: {Environment.UserName}
+        Date and Time: {DateTime.Now}
+        """
 );
 var outer = app.MapGroup("/outer");
 var inner = outer.MapGroup("/inner");

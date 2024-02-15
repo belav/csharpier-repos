@@ -2212,27 +2212,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseImplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|ValueTuple<int, int>|] s = ValueTuple.Create(1, 1);
-                        }
+                        [|ValueTuple<int, int>|] s = ValueTuple.Create(1, 1);
                     }
-                    """ + trivial2uple,
+                }
+                """ + trivial2uple,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            var s = ValueTuple.Create(1, 1);
-                        }
+                        var s = ValueTuple.Create(1, 1);
                     }
-                    """ + trivial2uple,
+                }
+                """ + trivial2uple,
                 options: ImplicitTypeWhereApparent()
             );
         }
@@ -2242,27 +2242,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseImplicit
         {
             await TestInRegularAndScriptAsync(
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            [|(int, int)|] s = ValueTuple.Create(1, 1);
-                        }
+                        [|(int, int)|] s = ValueTuple.Create(1, 1);
                     }
-                    """ + trivial2uple,
+                }
+                """ + trivial2uple,
                 """
-                    using System;
+                using System;
 
-                    class C
+                class C
+                {
+                    static void M()
                     {
-                        static void M()
-                        {
-                            var s = ValueTuple.Create(1, 1);
-                        }
+                        var s = ValueTuple.Create(1, 1);
                     }
-                    """ + trivial2uple,
+                }
+                """ + trivial2uple,
                 options: ImplicitTypeWhereApparent()
             );
         }

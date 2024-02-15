@@ -645,21 +645,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System; 
-                    class C { 
-                        int this[Range range] => default; 
-                        int M(C arg1) => arg1[[||]1..^1]; 
-                    }
-                    """
+                using System; 
+                class C { 
+                    int this[Range range] => default; 
+                    int M(C arg1) => arg1[[||]1..^1]; 
+                }
+                """
                     + TestSources.Range
                     + TestSources.Index,
                 """
-                    using System; 
-                    class C { 
-                        int this[Range range] => default; 
-                        int M(C arg1) => arg1[range: 1..^1]; 
-                    }
-                    """
+                using System; 
+                class C { 
+                    int this[Range range] => default; 
+                    int M(C arg1) => arg1[range: 1..^1]; 
+                }
+                """
                     + TestSources.Range
                     + TestSources.Index
             );
@@ -670,19 +670,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
         {
             await VerifyCS.VerifyRefactoringAsync(
                 """
-                    using System; 
-                    class C { 
-                        int this[Index index] => default; 
-                        int M(C arg1) => arg1[[||]^1]; 
-                    }
-                    """ + TestSources.Index,
+                using System; 
+                class C { 
+                    int this[Index index] => default; 
+                    int M(C arg1) => arg1[[||]^1]; 
+                }
+                """ + TestSources.Index,
                 """
-                    using System; 
-                    class C { 
-                        int this[Index index] => default; 
-                        int M(C arg1) => arg1[index: ^1]; 
-                    }
-                    """ + TestSources.Index
+                using System; 
+                class C { 
+                    int this[Index index] => default; 
+                    int M(C arg1) => arg1[index: ^1]; 
+                }
+                """ + TestSources.Index
             );
         }
 

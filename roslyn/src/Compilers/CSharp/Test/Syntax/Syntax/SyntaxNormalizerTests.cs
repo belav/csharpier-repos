@@ -4408,16 +4408,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestNormalize(
                 tree.GetCompilationUnitRoot(),
                 """
-                    class c1
+                class c1
+                {
+                  void goo()
+                  {
                     {
-                      void goo()
-                      {
-                        {
-                          int i = 1;
-                        }
-                      }
+                      int i = 1;
                     }
-                    """.NormalizeLineEndings()
+                  }
+                }
+                """.NormalizeLineEndings()
             );
         }
 

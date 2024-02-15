@@ -10298,38 +10298,38 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is Blah { [|X|]: (y: 1, z: 2) })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is Blah { [|X|]: (y: 1, z: 2) })
                         {
                         }
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+
+                    class Blah
+                    {
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class C
+                class C
+                {
+                    void M2()
                     {
-                        void M2()
+                        object o = null;
+                        if (o is Blah { X: (y: 1, z: 2) })
                         {
-                            object o = null;
-                            if (o is Blah { X: (y: 1, z: 2) })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public (int y, int z) X { get; internal set; }
                         }
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    class Blah
+                    {
+                        public (int y, int z) X { get; internal set; }
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -10378,42 +10378,42 @@ class C
         {
             await TestInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    Blah SomeBlah { get; set; }
+
+                    void M2()
                     {
-                        Blah SomeBlah { get; set; }
-
-                        void M2()
-                        {
-                            object o = null;
-                            if (o is C { SomeBlah.[|X|]: (y: 1, z: 2) })
-                            {
-                            }
-                        }
-
-                        class Blah
+                        object o = null;
+                        if (o is C { SomeBlah.[|X|]: (y: 1, z: 2) })
                         {
                         }
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+
+                    class Blah
+                    {
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class C
+                class C
+                {
+                    Blah SomeBlah { get; set; }
+
+                    void M2()
                     {
-                        Blah SomeBlah { get; set; }
-
-                        void M2()
+                        object o = null;
+                        if (o is C { SomeBlah.X: (y: 1, z: 2) })
                         {
-                            object o = null;
-                            if (o is C { SomeBlah.X: (y: 1, z: 2) })
-                            {
-                            }
-                        }
-
-                        class Blah
-                        {
-                            public (int y, int z) X { get; internal set; }
                         }
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+
+                    class Blah
+                    {
+                        public (int y, int z) X { get; internal set; }
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     LanguageVersion.CSharp12
                 )
