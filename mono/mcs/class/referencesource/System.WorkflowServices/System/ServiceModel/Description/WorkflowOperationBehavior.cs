@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     class WorkflowOperationBehavior : IOperationBehavior, IWmiInstanceProvider
     {
@@ -14,39 +14,27 @@ namespace System.ServiceModel.Description
 
         public bool CanCreateInstance
         {
-            get
-            {
-                return this.canCreateInstance;
-            }
-            set
-            {
-                this.canCreateInstance = value;
-            }
+            get { return this.canCreateInstance; }
+            set { this.canCreateInstance = value; }
         }
 
         public ServiceAuthorizationManager ServiceAuthorizationManager
         {
-            get
-            {
-                return this.serviceAuthorizationManager;
-            }
-            set
-            {
-                this.serviceAuthorizationManager = value;
-            }
+            get { return this.serviceAuthorizationManager; }
+            set { this.serviceAuthorizationManager = value; }
         }
 
-        public void AddBindingParameters(OperationDescription description, BindingParameterCollection parameters)
-        {
+        public void AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        ) { }
 
-        }
+        public void ApplyClientBehavior(OperationDescription description, ClientOperation proxy) { }
 
-        public void ApplyClientBehavior(OperationDescription description, ClientOperation proxy)
-        {
-
-        }
-
-        public void ApplyDispatchBehavior(OperationDescription description, DispatchOperation dispatch)
+        public void ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        )
         {
             if (description == null)
             {
@@ -56,23 +44,37 @@ namespace System.ServiceModel.Description
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("dispatch");
             }
-            if (dispatch.Parent == null
+            if (
+                dispatch.Parent == null
                 || dispatch.Parent.ChannelDispatcher == null
                 || dispatch.Parent.ChannelDispatcher.Host == null
                 || dispatch.Parent.ChannelDispatcher.Host.Description == null
-                || dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors == null)
+                || dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors == null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.DispatchOperationInInvalidState)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.DispatchOperationInInvalidState)
+                    )
+                );
             }
 
-            WorkflowRuntimeBehavior workflowRuntimeBehavior = dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors.Find<WorkflowRuntimeBehavior>();
+            WorkflowRuntimeBehavior workflowRuntimeBehavior =
+                dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors.Find<WorkflowRuntimeBehavior>();
 
             if (workflowRuntimeBehavior == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.NoWorkflowRuntimeBehavior)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR2.GetString(SR2.NoWorkflowRuntimeBehavior))
+                );
             }
 
-            dispatch.Invoker = new WorkflowOperationInvoker(description, this, workflowRuntimeBehavior.WorkflowRuntime, dispatch.Parent);
+            dispatch.Invoker = new WorkflowOperationInvoker(
+                description,
+                this,
+                workflowRuntimeBehavior.WorkflowRuntime,
+                dispatch.Parent
+            );
         }
 
         void IWmiInstanceProvider.FillInstance(IWmiInstance wmiInstance)
@@ -85,9 +87,6 @@ namespace System.ServiceModel.Description
             return "WorkflowOperationBehavior";
         }
 
-        public void Validate(OperationDescription description)
-        {
-
-        }
+        public void Validate(OperationDescription description) { }
     }
 }

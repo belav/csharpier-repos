@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -13,25 +12,40 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_BothValuesNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => { new RangeItemHeaderValue(null, null); });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    new RangeItemHeaderValue(null, null);
+                }
+            );
         }
 
         [Fact]
         public void Ctor_FromValueNegative_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new RangeItemHeaderValue(-1, null); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeItemHeaderValue(-1, null);
+            });
         }
 
         [Fact]
         public void Ctor_FromGreaterThanToValue_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new RangeItemHeaderValue(2, 1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeItemHeaderValue(2, 1);
+            });
         }
 
         [Fact]
         public void Ctor_ToValueNegative_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new RangeItemHeaderValue(null, -1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeItemHeaderValue(null, -1);
+            });
         }
 
         [Fact]
@@ -120,7 +134,13 @@ namespace System.Net.Http.Tests
             // responsibility to determine if this is indeed a valid range
             CheckValidGetRangeItemLength(" 1--2", 1, 2, 1, null);
 
-            CheckValidGetRangeItemLength(" 684684 - 123456789012345 !", 1, 25, 684684, 123456789012345);
+            CheckValidGetRangeItemLength(
+                " 684684 - 123456789012345 !",
+                1,
+                25,
+                684684,
+                123456789012345
+            );
 
             // The separator doesn't matter. It only parses until the first non-whitespace
             CheckValidGetRangeItemLength(" 1 - 2 ,", 1, 6, 1, 2);
@@ -144,8 +164,14 @@ namespace System.Net.Http.Tests
         [Fact]
         public void GetRangeItemListLength_DifferentValidScenarios_AllReturnNonZero()
         {
-            CheckValidGetRangeItemListLength("x,,1-2, 3 -  , , -6 , ,,", 1, 23,
-                new Tuple<long?, long?>(1, 2), new Tuple<long?, long?>(3, null), new Tuple<long?, long?>(null, 6));
+            CheckValidGetRangeItemListLength(
+                "x,,1-2, 3 -  , , -6 , ,,",
+                1,
+                23,
+                new Tuple<long?, long?>(1, 2),
+                new Tuple<long?, long?>(3, null),
+                new Tuple<long?, long?>(null, 6)
+            );
             CheckValidGetRangeItemListLength("1-2,", 0, 4, new Tuple<long?, long?>(1, 2));
             CheckValidGetRangeItemListLength("1-", 0, 2, new Tuple<long?, long?>(1, null));
         }
@@ -169,14 +195,25 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string tag)
         {
-            Assert.Throws<FormatException>(() => { new EntityTagHeaderValue(tag); });
+            Assert.Throws<FormatException>(() =>
+            {
+                new EntityTagHeaderValue(tag);
+            });
         }
 
-        private static void CheckValidGetRangeItemLength(string input, int startIndex, int expectedLength,
-            long? expectedFrom, long? expectedTo)
+        private static void CheckValidGetRangeItemLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            long? expectedFrom,
+            long? expectedTo
+        )
         {
             RangeItemHeaderValue result = null;
-            Assert.Equal(expectedLength, RangeItemHeaderValue.GetRangeItemLength(input, startIndex, out result));
+            Assert.Equal(
+                expectedLength,
+                RangeItemHeaderValue.GetRangeItemLength(input, startIndex, out result)
+            );
             Assert.Equal(expectedFrom, result.From);
             Assert.Equal(expectedTo, result.To);
         }
@@ -188,11 +225,18 @@ namespace System.Net.Http.Tests
             Assert.Null(result);
         }
 
-        private static void CheckValidGetRangeItemListLength(string input, int startIndex, int expectedLength,
-            params Tuple<long?, long?>[] expectedRanges)
+        private static void CheckValidGetRangeItemListLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            params Tuple<long?, long?>[] expectedRanges
+        )
         {
             List<RangeItemHeaderValue> ranges = new List<RangeItemHeaderValue>();
-            Assert.Equal(expectedLength, RangeItemHeaderValue.GetRangeItemListLength(input, startIndex, ranges));
+            Assert.Equal(
+                expectedLength,
+                RangeItemHeaderValue.GetRangeItemListLength(input, startIndex, ranges)
+            );
 
             Assert.Equal<int>(expectedRanges.Length, ranges.Count);
 

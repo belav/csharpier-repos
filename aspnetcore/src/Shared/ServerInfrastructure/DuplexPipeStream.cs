@@ -42,22 +42,13 @@ internal class DuplexPipeStream : Stream
 
     public override long Length
     {
-        get
-        {
-            throw new NotSupportedException();
-        }
+        get { throw new NotSupportedException(); }
     }
 
     public override long Position
     {
-        get
-        {
-            throw new NotSupportedException();
-        }
-        set
-        {
-            throw new NotSupportedException();
-        }
+        get { throw new NotSupportedException(); }
+        set { throw new NotSupportedException(); }
     }
 
     public override long Seek(long offset, SeekOrigin origin)
@@ -73,17 +64,24 @@ internal class DuplexPipeStream : Stream
     public override int Read(byte[] buffer, int offset, int count)
     {
         ValueTask<int> vt = ReadAsyncInternal(new Memory<byte>(buffer, offset, count), default);
-        return vt.IsCompleted ?
-            vt.Result :
-            vt.AsTask().GetAwaiter().GetResult();
+        return vt.IsCompleted ? vt.Result : vt.AsTask().GetAwaiter().GetResult();
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken = default
+    )
     {
-        return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+        return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken)
+            .AsTask();
     }
 
-    public override ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
+    public override ValueTask<int> ReadAsync(
+        Memory<byte> destination,
+        CancellationToken cancellationToken = default
+    )
     {
         return ReadAsyncInternal(destination, cancellationToken);
     }
@@ -93,12 +91,20 @@ internal class DuplexPipeStream : Stream
         WriteAsync(buffer, offset, count).GetAwaiter().GetResult();
     }
 
-    public override Task WriteAsync(byte[]? buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[]? buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _output.WriteAsync(buffer.AsMemory(offset, count), cancellationToken).GetAsTask();
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         return _output.WriteAsync(source, cancellationToken).GetAsValueTask();
     }
@@ -114,7 +120,10 @@ internal class DuplexPipeStream : Stream
     }
 
     [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-    private async ValueTask<int> ReadAsyncInternal(Memory<byte> destination, CancellationToken cancellationToken)
+    private async ValueTask<int> ReadAsyncInternal(
+        Memory<byte> destination,
+        CancellationToken cancellationToken
+    )
     {
         while (true)
         {
@@ -150,7 +159,13 @@ internal class DuplexPipeStream : Stream
         }
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
     }
@@ -160,7 +175,13 @@ internal class DuplexPipeStream : Stream
         return TaskToApm.End<int>(asyncResult);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
     }

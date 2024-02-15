@@ -22,7 +22,12 @@ public class AuthenticationService : IAuthenticationService
     /// <param name="handlers">The <see cref="IAuthenticationHandlerProvider"/>.</param>
     /// <param name="transform">The <see cref="IClaimsTransformation"/>.</param>
     /// <param name="options">The <see cref="AuthenticationOptions"/>.</param>
-    public AuthenticationService(IAuthenticationSchemeProvider schemes, IAuthenticationHandlerProvider handlers, IClaimsTransformation transform, IOptions<AuthenticationOptions> options)
+    public AuthenticationService(
+        IAuthenticationSchemeProvider schemes,
+        IAuthenticationHandlerProvider handlers,
+        IClaimsTransformation transform,
+        IOptions<AuthenticationOptions> options
+    )
     {
         Schemes = schemes;
         Handlers = handlers;
@@ -56,7 +61,10 @@ public class AuthenticationService : IAuthenticationService
     /// <param name="context">The <see cref="HttpContext"/>.</param>
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <returns>The result.</returns>
-    public virtual async Task<AuthenticateResult> AuthenticateAsync(HttpContext context, string? scheme)
+    public virtual async Task<AuthenticateResult> AuthenticateAsync(
+        HttpContext context,
+        string? scheme
+    )
     {
         if (scheme == null)
         {
@@ -64,7 +72,9 @@ public class AuthenticationService : IAuthenticationService
             scheme = defaultScheme?.Name;
             if (scheme == null)
             {
-                throw new InvalidOperationException($"No authenticationScheme was specified, and there was no DefaultAuthenticateScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions).");
+                throw new InvalidOperationException(
+                    $"No authenticationScheme was specified, and there was no DefaultAuthenticateScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions)."
+                );
             }
         }
 
@@ -92,7 +102,13 @@ public class AuthenticationService : IAuthenticationService
                 principal = await Transform.TransformAsync(principal);
                 _transformCache.Add(principal);
             }
-            return AuthenticateResult.Success(new AuthenticationTicket(principal, result.Properties, result.Ticket!.AuthenticationScheme));
+            return AuthenticateResult.Success(
+                new AuthenticationTicket(
+                    principal,
+                    result.Properties,
+                    result.Ticket!.AuthenticationScheme
+                )
+            );
         }
         return result;
     }
@@ -104,7 +120,11 @@ public class AuthenticationService : IAuthenticationService
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <returns>A task.</returns>
-    public virtual async Task ChallengeAsync(HttpContext context, string? scheme, AuthenticationProperties? properties)
+    public virtual async Task ChallengeAsync(
+        HttpContext context,
+        string? scheme,
+        AuthenticationProperties? properties
+    )
     {
         if (scheme == null)
         {
@@ -112,7 +132,9 @@ public class AuthenticationService : IAuthenticationService
             scheme = defaultChallengeScheme?.Name;
             if (scheme == null)
             {
-                throw new InvalidOperationException($"No authenticationScheme was specified, and there was no DefaultChallengeScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions).");
+                throw new InvalidOperationException(
+                    $"No authenticationScheme was specified, and there was no DefaultChallengeScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions)."
+                );
             }
         }
 
@@ -132,7 +154,11 @@ public class AuthenticationService : IAuthenticationService
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <returns>A task.</returns>
-    public virtual async Task ForbidAsync(HttpContext context, string? scheme, AuthenticationProperties? properties)
+    public virtual async Task ForbidAsync(
+        HttpContext context,
+        string? scheme,
+        AuthenticationProperties? properties
+    )
     {
         if (scheme == null)
         {
@@ -140,7 +166,9 @@ public class AuthenticationService : IAuthenticationService
             scheme = defaultForbidScheme?.Name;
             if (scheme == null)
             {
-                throw new InvalidOperationException($"No authenticationScheme was specified, and there was no DefaultForbidScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions).");
+                throw new InvalidOperationException(
+                    $"No authenticationScheme was specified, and there was no DefaultForbidScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions)."
+                );
             }
         }
 
@@ -161,7 +189,12 @@ public class AuthenticationService : IAuthenticationService
     /// <param name="principal">The <see cref="ClaimsPrincipal"/> to sign in.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <returns>A task.</returns>
-    public virtual async Task SignInAsync(HttpContext context, string? scheme, ClaimsPrincipal principal, AuthenticationProperties? properties)
+    public virtual async Task SignInAsync(
+        HttpContext context,
+        string? scheme,
+        ClaimsPrincipal principal,
+        AuthenticationProperties? properties
+    )
     {
         ArgumentNullException.ThrowIfNull(principal);
 
@@ -169,11 +202,15 @@ public class AuthenticationService : IAuthenticationService
         {
             if (principal.Identity == null)
             {
-                throw new InvalidOperationException("SignInAsync when principal.Identity == null is not allowed when AuthenticationOptions.RequireAuthenticatedSignIn is true.");
+                throw new InvalidOperationException(
+                    "SignInAsync when principal.Identity == null is not allowed when AuthenticationOptions.RequireAuthenticatedSignIn is true."
+                );
             }
             if (!principal.Identity.IsAuthenticated)
             {
-                throw new InvalidOperationException("SignInAsync when principal.Identity.IsAuthenticated is false is not allowed when AuthenticationOptions.RequireAuthenticatedSignIn is true.");
+                throw new InvalidOperationException(
+                    "SignInAsync when principal.Identity.IsAuthenticated is false is not allowed when AuthenticationOptions.RequireAuthenticatedSignIn is true."
+                );
             }
         }
 
@@ -183,7 +220,9 @@ public class AuthenticationService : IAuthenticationService
             scheme = defaultScheme?.Name;
             if (scheme == null)
             {
-                throw new InvalidOperationException($"No authenticationScheme was specified, and there was no DefaultSignInScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions).");
+                throw new InvalidOperationException(
+                    $"No authenticationScheme was specified, and there was no DefaultSignInScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions)."
+                );
             }
         }
 
@@ -209,7 +248,11 @@ public class AuthenticationService : IAuthenticationService
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <returns>A task.</returns>
-    public virtual async Task SignOutAsync(HttpContext context, string? scheme, AuthenticationProperties? properties)
+    public virtual async Task SignOutAsync(
+        HttpContext context,
+        string? scheme,
+        AuthenticationProperties? properties
+    )
     {
         if (scheme == null)
         {
@@ -217,7 +260,9 @@ public class AuthenticationService : IAuthenticationService
             scheme = defaultScheme?.Name;
             if (scheme == null)
             {
-                throw new InvalidOperationException($"No authenticationScheme was specified, and there was no DefaultSignOutScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions).");
+                throw new InvalidOperationException(
+                    $"No authenticationScheme was specified, and there was no DefaultSignOutScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions)."
+                );
             }
         }
 
@@ -238,25 +283,37 @@ public class AuthenticationService : IAuthenticationService
 
     private async Task<Exception> CreateMissingHandlerException(string scheme)
     {
-        var schemes = string.Join(", ", (await Schemes.GetAllSchemesAsync()).Select(sch => sch.Name));
+        var schemes = string.Join(
+            ", ",
+            (await Schemes.GetAllSchemesAsync()).Select(sch => sch.Name)
+        );
 
-        var footer = $" Did you forget to call AddAuthentication().Add[SomeAuthHandler](\"{scheme}\",...)?";
+        var footer =
+            $" Did you forget to call AddAuthentication().Add[SomeAuthHandler](\"{scheme}\",...)?";
 
         if (string.IsNullOrEmpty(schemes))
         {
             return new InvalidOperationException(
-                $"No authentication handlers are registered." + footer);
+                $"No authentication handlers are registered." + footer
+            );
         }
 
         return new InvalidOperationException(
-            $"No authentication handler is registered for the scheme '{scheme}'. The registered schemes are: {schemes}." + footer);
+            $"No authentication handler is registered for the scheme '{scheme}'. The registered schemes are: {schemes}."
+                + footer
+        );
     }
 
     private async Task<string> GetAllSignInSchemeNames()
     {
-        return string.Join(", ", (await Schemes.GetAllSchemesAsync())
-            .Where(sch => typeof(IAuthenticationSignInHandler).IsAssignableFrom(sch.HandlerType))
-            .Select(sch => sch.Name));
+        return string.Join(
+            ", ",
+            (await Schemes.GetAllSchemesAsync())
+                .Where(sch =>
+                    typeof(IAuthenticationSignInHandler).IsAssignableFrom(sch.HandlerType)
+                )
+                .Select(sch => sch.Name)
+        );
     }
 
     private async Task<Exception> CreateMissingSignInHandlerException(string scheme)
@@ -269,34 +326,50 @@ public class AuthenticationService : IAuthenticationService
         if (string.IsNullOrEmpty(schemes))
         {
             return new InvalidOperationException(
-                $"No sign-in authentication handlers are registered." + footer);
+                $"No sign-in authentication handlers are registered." + footer
+            );
         }
 
         return new InvalidOperationException(
-            $"No sign-in authentication handler is registered for the scheme '{scheme}'. The registered sign-in schemes are: {schemes}." + footer);
+            $"No sign-in authentication handler is registered for the scheme '{scheme}'. The registered sign-in schemes are: {schemes}."
+                + footer
+        );
     }
 
-    private async Task<Exception> CreateMismatchedSignInHandlerException(string scheme, IAuthenticationHandler handler)
+    private async Task<Exception> CreateMismatchedSignInHandlerException(
+        string scheme,
+        IAuthenticationHandler handler
+    )
     {
         var schemes = await GetAllSignInSchemeNames();
 
-        var mismatchError = $"The authentication handler registered for scheme '{scheme}' is '{handler.GetType().Name}' which cannot be used for SignInAsync. ";
+        var mismatchError =
+            $"The authentication handler registered for scheme '{scheme}' is '{handler.GetType().Name}' which cannot be used for SignInAsync. ";
 
         if (string.IsNullOrEmpty(schemes))
         {
             // CookieAuth is the only implementation of sign-in.
-            return new InvalidOperationException(mismatchError
-                + $"Did you forget to call AddAuthentication().AddCookie(\"Cookies\") and SignInAsync(\"Cookies\",...)?");
+            return new InvalidOperationException(
+                mismatchError
+                    + $"Did you forget to call AddAuthentication().AddCookie(\"Cookies\") and SignInAsync(\"Cookies\",...)?"
+            );
         }
 
-        return new InvalidOperationException(mismatchError + $"The registered sign-in schemes are: {schemes}.");
+        return new InvalidOperationException(
+            mismatchError + $"The registered sign-in schemes are: {schemes}."
+        );
     }
 
     private async Task<string> GetAllSignOutSchemeNames()
     {
-        return string.Join(", ", (await Schemes.GetAllSchemesAsync())
-            .Where(sch => typeof(IAuthenticationSignOutHandler).IsAssignableFrom(sch.HandlerType))
-            .Select(sch => sch.Name));
+        return string.Join(
+            ", ",
+            (await Schemes.GetAllSchemesAsync())
+                .Where(sch =>
+                    typeof(IAuthenticationSignOutHandler).IsAssignableFrom(sch.HandlerType)
+                )
+                .Select(sch => sch.Name)
+        );
     }
 
     private async Task<Exception> CreateMissingSignOutHandlerException(string scheme)
@@ -308,26 +381,38 @@ public class AuthenticationService : IAuthenticationService
         if (string.IsNullOrEmpty(schemes))
         {
             // CookieAuth is the most common implementation of sign-out, but OpenIdConnect and WsFederation also support it.
-            return new InvalidOperationException($"No sign-out authentication handlers are registered." + footer);
+            return new InvalidOperationException(
+                $"No sign-out authentication handlers are registered." + footer
+            );
         }
 
         return new InvalidOperationException(
-            $"No sign-out authentication handler is registered for the scheme '{scheme}'. The registered sign-out schemes are: {schemes}." + footer);
+            $"No sign-out authentication handler is registered for the scheme '{scheme}'. The registered sign-out schemes are: {schemes}."
+                + footer
+        );
     }
 
-    private async Task<Exception> CreateMismatchedSignOutHandlerException(string scheme, IAuthenticationHandler handler)
+    private async Task<Exception> CreateMismatchedSignOutHandlerException(
+        string scheme,
+        IAuthenticationHandler handler
+    )
     {
         var schemes = await GetAllSignOutSchemeNames();
 
-        var mismatchError = $"The authentication handler registered for scheme '{scheme}' is '{handler.GetType().Name}' which cannot be used for {nameof(SignOutAsync)}. ";
+        var mismatchError =
+            $"The authentication handler registered for scheme '{scheme}' is '{handler.GetType().Name}' which cannot be used for {nameof(SignOutAsync)}. ";
 
         if (string.IsNullOrEmpty(schemes))
         {
             // CookieAuth is the most common implementation of sign-out, but OpenIdConnect and WsFederation also support it.
-            return new InvalidOperationException(mismatchError
-                + $"Did you forget to call AddAuthentication().AddCookie(\"Cookies\") and {nameof(SignOutAsync)}(\"Cookies\",...)?");
+            return new InvalidOperationException(
+                mismatchError
+                    + $"Did you forget to call AddAuthentication().AddCookie(\"Cookies\") and {nameof(SignOutAsync)}(\"Cookies\",...)?"
+            );
         }
 
-        return new InvalidOperationException(mismatchError + $"The registered sign-out schemes are: {schemes}.");
+        return new InvalidOperationException(
+            mismatchError + $"The registered sign-out schemes are: {schemes}."
+        );
     }
 }

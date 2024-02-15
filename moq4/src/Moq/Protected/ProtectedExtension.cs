@@ -6,9 +6,9 @@ using System.ComponentModel;
 namespace Moq.Protected
 {
     /// <summary>
-    /// Enables the <c>Protected()</c> method on <see cref="Mock{T}"/>, 
-    /// allowing setups to be set for protected members by using their 
-    /// name as a string, rather than strong-typing them which is not possible 
+    /// Enables the <c>Protected()</c> method on <see cref="Mock{T}"/>,
+    /// allowing setups to be set for protected members by using their
+    /// name as a string, rather than strong-typing them which is not possible
     /// due to their visibility.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]

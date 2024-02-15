@@ -53,27 +53,25 @@ namespace ConsoleApplication1
             switch (p)
             {
                 case Product.Client:
-                    {
-                        patchLevel = ClientLevel;
-                        break;
-                    }
+                {
+                    patchLevel = ClientLevel;
+                    break;
+                }
 
                 case Product.SDK:
-                    {
-                        patchLevel = SDKLevel;
-                        break;
-                    }
+                {
+                    patchLevel = SDKLevel;
+                    break;
+                }
 
                 case Product.SAG:
-                    {
-                        patchLevel = SAGLevel;
-                        break;
-                    }
-
+                {
+                    patchLevel = SAGLevel;
+                    break;
+                }
             }
 
             return patchLevel;
         }
     }
-
 }

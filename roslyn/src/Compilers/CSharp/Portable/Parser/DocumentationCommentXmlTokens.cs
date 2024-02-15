@@ -13,27 +13,65 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     internal static class DocumentationCommentXmlTokens
     {
         // Well-known tags that typically have no leading trivia
-        private static readonly SyntaxToken s_seeToken = Identifier(DocumentationCommentXmlNames.SeeElementName);
-        private static readonly SyntaxToken s_codeToken = Identifier(DocumentationCommentXmlNames.CodeElementName);
-        private static readonly SyntaxToken s_listToken = Identifier(DocumentationCommentXmlNames.ListElementName);
-        private static readonly SyntaxToken s_paramToken = Identifier(DocumentationCommentXmlNames.ParameterElementName);
-        private static readonly SyntaxToken s_valueToken = Identifier(DocumentationCommentXmlNames.ValueElementName);
-        private static readonly SyntaxToken s_exampleToken = Identifier(DocumentationCommentXmlNames.ExampleElementName);
-        private static readonly SyntaxToken s_includeToken = Identifier(DocumentationCommentXmlNames.IncludeElementName);
-        private static readonly SyntaxToken s_remarksToken = Identifier(DocumentationCommentXmlNames.RemarksElementName);
-        private static readonly SyntaxToken s_seealsoToken = Identifier(DocumentationCommentXmlNames.SeeAlsoElementName);
-        private static readonly SyntaxToken s_summaryToken = Identifier(DocumentationCommentXmlNames.SummaryElementName);
-        private static readonly SyntaxToken s_exceptionToken = Identifier(DocumentationCommentXmlNames.ExceptionElementName);
-        private static readonly SyntaxToken s_typeparamToken = Identifier(DocumentationCommentXmlNames.TypeParameterElementName);
-        private static readonly SyntaxToken s_permissionToken = Identifier(DocumentationCommentXmlNames.PermissionElementName);
-        private static readonly SyntaxToken s_typeparamrefToken = Identifier(DocumentationCommentXmlNames.TypeParameterReferenceElementName);
+        private static readonly SyntaxToken s_seeToken = Identifier(
+            DocumentationCommentXmlNames.SeeElementName
+        );
+        private static readonly SyntaxToken s_codeToken = Identifier(
+            DocumentationCommentXmlNames.CodeElementName
+        );
+        private static readonly SyntaxToken s_listToken = Identifier(
+            DocumentationCommentXmlNames.ListElementName
+        );
+        private static readonly SyntaxToken s_paramToken = Identifier(
+            DocumentationCommentXmlNames.ParameterElementName
+        );
+        private static readonly SyntaxToken s_valueToken = Identifier(
+            DocumentationCommentXmlNames.ValueElementName
+        );
+        private static readonly SyntaxToken s_exampleToken = Identifier(
+            DocumentationCommentXmlNames.ExampleElementName
+        );
+        private static readonly SyntaxToken s_includeToken = Identifier(
+            DocumentationCommentXmlNames.IncludeElementName
+        );
+        private static readonly SyntaxToken s_remarksToken = Identifier(
+            DocumentationCommentXmlNames.RemarksElementName
+        );
+        private static readonly SyntaxToken s_seealsoToken = Identifier(
+            DocumentationCommentXmlNames.SeeAlsoElementName
+        );
+        private static readonly SyntaxToken s_summaryToken = Identifier(
+            DocumentationCommentXmlNames.SummaryElementName
+        );
+        private static readonly SyntaxToken s_exceptionToken = Identifier(
+            DocumentationCommentXmlNames.ExceptionElementName
+        );
+        private static readonly SyntaxToken s_typeparamToken = Identifier(
+            DocumentationCommentXmlNames.TypeParameterElementName
+        );
+        private static readonly SyntaxToken s_permissionToken = Identifier(
+            DocumentationCommentXmlNames.PermissionElementName
+        );
+        private static readonly SyntaxToken s_typeparamrefToken = Identifier(
+            DocumentationCommentXmlNames.TypeParameterReferenceElementName
+        );
 
         // Well-known tags that typically have a single space in leading trivia
-        private static readonly SyntaxToken s_crefToken = IdentifierWithLeadingSpace(DocumentationCommentXmlNames.CrefAttributeName);
-        private static readonly SyntaxToken s_fileToken = IdentifierWithLeadingSpace(DocumentationCommentXmlNames.FileAttributeName);
-        private static readonly SyntaxToken s_nameToken = IdentifierWithLeadingSpace(DocumentationCommentXmlNames.NameAttributeName);
-        private static readonly SyntaxToken s_pathToken = IdentifierWithLeadingSpace(DocumentationCommentXmlNames.PathAttributeName);
-        private static readonly SyntaxToken s_typeToken = IdentifierWithLeadingSpace(DocumentationCommentXmlNames.TypeAttributeName);
+        private static readonly SyntaxToken s_crefToken = IdentifierWithLeadingSpace(
+            DocumentationCommentXmlNames.CrefAttributeName
+        );
+        private static readonly SyntaxToken s_fileToken = IdentifierWithLeadingSpace(
+            DocumentationCommentXmlNames.FileAttributeName
+        );
+        private static readonly SyntaxToken s_nameToken = IdentifierWithLeadingSpace(
+            DocumentationCommentXmlNames.NameAttributeName
+        );
+        private static readonly SyntaxToken s_pathToken = IdentifierWithLeadingSpace(
+            DocumentationCommentXmlNames.PathAttributeName
+        );
+        private static readonly SyntaxToken s_typeToken = IdentifierWithLeadingSpace(
+            DocumentationCommentXmlNames.TypeAttributeName
+        );
 
         private static SyntaxToken Identifier(string text)
         {
@@ -42,7 +80,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         private static SyntaxToken IdentifierWithLeadingSpace(string text)
         {
-            return SyntaxFactory.Identifier(SyntaxKind.None, SyntaxFactory.Space, text, text, trailing: null);
+            return SyntaxFactory.Identifier(
+                SyntaxKind.None,
+                SyntaxFactory.Space,
+                text,
+                text,
+                trailing: null
+            );
         }
 
         private static bool IsSingleSpaceTrivia(SyntaxListBuilder syntax)

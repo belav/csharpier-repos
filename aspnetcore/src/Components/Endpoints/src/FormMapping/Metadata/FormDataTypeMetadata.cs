@@ -19,9 +19,11 @@ internal class FormDataTypeMetadata(Type type)
 
     public ConstructorInfo? Constructor { get; set; }
 
-    public IList<FormDataParameterMetadata> ConstructorParameters { get; set; } = new List<FormDataParameterMetadata>();
+    public IList<FormDataParameterMetadata> ConstructorParameters { get; set; } =
+        new List<FormDataParameterMetadata>();
 
-    public IList<FormDataPropertyMetadata> Properties { get; set; } = new List<FormDataPropertyMetadata>();
+    public IList<FormDataPropertyMetadata> Properties { get; set; } =
+        new List<FormDataPropertyMetadata>();
 
     public bool IsRecursive { get; internal set; }
 }

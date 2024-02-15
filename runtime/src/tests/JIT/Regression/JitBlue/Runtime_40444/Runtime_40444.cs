@@ -1,11 +1,10 @@
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Xunit;
 
 public class Runtime_40444
@@ -15,13 +14,13 @@ public class Runtime_40444
     public static int t2_finished;
 
     public static int s_divisor;
-    
+
     static void Thread2()
     {
         t2_result++;
         t2_finished = 1;
     }
-    
+
     static int TestVolatileRead(ref int address)
     {
         int ret = address;
@@ -31,13 +30,13 @@ public class Runtime_40444
 
     static bool Test(ref bool result)
     {
-        int loc_finished;        
+        int loc_finished;
         t2_finished = 0;
 
         // Run Thread2() in a new thread
         new Thread(new ThreadStart(Thread2)).Start();
-        
-        // 
+
+        //
         //Wait for Thread2 to signal that it has a result by setting
         // t2_finished to 1.
         //
@@ -45,23 +44,23 @@ public class Runtime_40444
         //
         // It is important that we have no calls in the loop
         // and that the JIT inlines the method TestVolatileRead
-        // 
         //
-        int i = 0; 
+        //
+        int i = 0;
         int divisor = s_divisor;
         for (; ; )
         {
-            if (TestVolatileRead(ref t2_finished)==1)
+            if (TestVolatileRead(ref t2_finished) == 1)
             {
                 // The value was changed by Thread2
-                // We print out how many iterations we looped for and 
+                // We print out how many iterations we looped for and
                 // return true
                 Console.WriteLine("{0}: t2_result = {1}", i, t2_result);
                 result = true;
 
                 // The other thread has run and we just saw the value of
                 // t2_finished change so we return true and pass the test
-                //             
+                //
                 return true;
             }
 
@@ -74,10 +73,10 @@ public class Runtime_40444
             //
             if (((i / divisor) / divisor) == 1)
             {
-               divisor++;
+                divisor++;
             }
 
-            if (i == 1000000000)  // 1000 million
+            if (i == 1000000000) // 1000 million
             {
                 loc_finished = t2_finished;
                 break;
@@ -102,11 +101,16 @@ public class Runtime_40444
             // Without the fix to the JIT we hoisted the read out of
             // the loop and we would always reach here.
             //
-            Console.WriteLine("{0}: FAILED, t2_result = {1}, t2_finished is {2}", i, t2_result, t2_finished);
-            
+            Console.WriteLine(
+                "{0}: FAILED, t2_result = {1}, t2_finished is {2}",
+                i,
+                t2_result,
+                t2_finished
+            );
+
             // The other thread has run and we never saw the value of t2_finsihed change
             // so we return true and fail the test
-            //             
+            //
             result = false;
             return true;
         }
@@ -117,8 +121,8 @@ public class Runtime_40444
     {
         bool passes_test = false;
         bool test_result = false;
-        
-        for (int i=0; i<100; i++)
+
+        for (int i = 0; i < 100; i++)
         {
             t2_result = 0;
             s_divisor = 1000000;

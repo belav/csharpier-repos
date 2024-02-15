@@ -12,13 +12,9 @@ using Xunit;
 // Debug: Prints 0 line(s)
 // Release: Prints 1 line(s)
 
-public interface I1
-{
-}
+public interface I1 { }
 
-public interface I2
-{
-}
+public interface I2 { }
 
 public struct S0 : I2
 {
@@ -26,7 +22,9 @@ public struct S0 : I2
     public short F1;
     public uint F2;
     public uint F3;
-    public S0(ushort f0, short f1, uint f2, uint f3): this()
+
+    public S0(ushort f0, short f1, uint f2, uint f3)
+        : this()
     {
         F0 = f0;
         F1 = f1;
@@ -42,13 +40,13 @@ public class C0 : I1
 
 public class Runtime_85892
 {
-    public static I1[] s_17 = new I1[]{new C0()};
+    public static I1[] s_17 = new I1[] { new C0() };
     public static long[] s_107;
-    
+
     [Fact]
     public static int Test()
     {
-        int  ret = 100;
+        int ret = 100;
         bool vr2 = default(bool);
         long vr3 = 1234;
         bool vr4 = !!M51();
@@ -85,13 +83,9 @@ public class Runtime_85892
         return ret;
     }
 
-    static void M57(ref I1 arg2)
-    {
-    }
+    static void M57(ref I1 arg2) { }
 
-    static void M58(S0 argThis, I2 arg2)
-    {
-    }
+    static void M58(S0 argThis, I2 arg2) { }
 
     static bool M51()
     {

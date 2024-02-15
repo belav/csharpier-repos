@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestUnreachableEndPoint()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -33,8 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -61,8 +59,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestReachableEndPoint()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -72,8 +69,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -119,8 +115,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestElseBlock_01()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int {|#0:M|}(int i)
@@ -130,8 +125,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int {|#0:M|}(int i)
@@ -155,7 +149,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int)"),
+                        DiagnosticResult
+                            .CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int)"),
                     },
                 },
                 FixedState =
@@ -164,7 +161,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int)"),
+                        DiagnosticResult
+                            .CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int)"),
                     },
                 },
                 CodeActionValidationMode = CodeActionValidationMode.None,
@@ -174,8 +174,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestElseBlock_02()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int i)
@@ -193,8 +192,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int i)
@@ -225,8 +223,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMultipleCases_01()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -237,8 +234,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -274,8 +270,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMultipleCases_02_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(object o)
@@ -286,8 +281,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(object o)
@@ -318,8 +312,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMultipleCases_02_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(object o)
@@ -330,8 +323,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(object o)
@@ -362,8 +354,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestExpressionOrder()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -373,8 +364,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -401,8 +391,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestConstantExpression()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -413,8 +402,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -442,8 +430,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnNonConstantExpression()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -461,8 +448,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnDifferentOperands()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i, int j)
@@ -478,8 +464,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnSingleCase()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -495,10 +480,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Theory]
         [CombinatorialData]
         public async Task TestIsExpression(
-            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)] LanguageVersion languageVersion)
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
+        )
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(object o)
@@ -510,38 +496,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 """;
             var fixedSource = languageVersion switch
             {
-                LanguageVersion.CSharp8 =>
-                """
-                class C
-                {
-                    void M(object o)
-                    {
-                        switch (o)
+                LanguageVersion.CSharp8
+                    => """
+                        class C
                         {
-                            case int _:
-                            case string _:
-                            case C _:
-                                return;
+                            void M(object o)
+                            {
+                                switch (o)
+                                {
+                                    case int _:
+                                    case string _:
+                                    case C _:
+                                        return;
+                                }
+                            }
                         }
-                    }
-                }
-                """,
-                LanguageVersion.CSharp9 =>
-                """
-                class C
-                {
-                    void M(object o)
-                    {
-                        switch (o)
+                        """,
+                LanguageVersion.CSharp9
+                    => """
+                        class C
                         {
-                            case int:
-                            case string:
-                            case C:
-                                return;
+                            void M(object o)
+                            {
+                                switch (o)
+                                {
+                                    case int:
+                                    case string:
+                                    case C:
+                                        return;
+                                }
+                            }
                         }
-                    }
-                }
-                """,
+                        """,
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
@@ -584,14 +570,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestIsPatternExpression_02_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(object o)
@@ -603,8 +589,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(object o)
@@ -631,8 +616,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestIsPatternExpression_02_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(object o)
@@ -644,8 +628,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(object o)
@@ -699,7 +682,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -732,7 +716,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -774,14 +759,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMissingIfCaretDoesntIntersectWithTheIfKeyword()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -797,8 +782,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestKeepBlockIfThereIsVariableDeclaration()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -813,8 +797,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -845,8 +828,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnBreak_01()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -865,8 +847,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnBreak_02()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -884,14 +865,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 source,
                 // /0/Test0.cs(7,27): error CS0103: The name 'b' does not exist in the current context
                 DiagnosticResult.CompilerError("CS0103").WithLocation(0).WithArguments("b"),
-                source);
+                source
+            );
         }
 
         [Fact]
         public async Task TestNestedBreak()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -909,8 +890,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -941,8 +921,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSubsequentIfStatements_01()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int? i)
@@ -953,8 +932,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int? i)
@@ -983,8 +961,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSwitchExpression_01()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int? i)
@@ -995,8 +972,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int? i)
@@ -1023,8 +999,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSwitchExpression_02()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int? i)
@@ -1035,8 +1010,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int? i)
@@ -1063,8 +1037,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSubsequentIfStatements_02()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int? i)
@@ -1076,8 +1049,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int? i)
@@ -1106,8 +1078,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSubsequentIfStatements_03()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int {|#0:M|}(int? i)
@@ -1122,8 +1093,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int {|#0:M|}(int? i)
@@ -1153,7 +1123,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int?)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int?)"),
+                        DiagnosticResult
+                            .CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int?)"),
                     },
                 },
                 FixedState =
@@ -1162,7 +1135,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int?)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int?)"),
+                        DiagnosticResult
+                            .CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int?)"),
                     },
                 },
                 CodeActionValidationMode = CodeActionValidationMode.None,
@@ -1172,8 +1148,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSubsequentIfStatements_04()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     string M(object i)
@@ -1184,8 +1159,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     string M(object i)
@@ -1215,8 +1189,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSubsequentIfStatements_05()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int i)
@@ -1228,8 +1201,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int i)
@@ -1258,8 +1230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSubsequentIfStatements_06()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int i)
@@ -1280,8 +1251,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int i)
@@ -1313,8 +1283,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestSubsequentIfStatements_07()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int i)
@@ -1344,8 +1313,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int i)
@@ -1386,8 +1354,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21109")]
         public async Task TestTrivia1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int {|#0:M|}(int x, int z)
@@ -1407,8 +1374,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int {|#0:M|}(int x, int z)
@@ -1438,13 +1404,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int, int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int, int)"),
+                        DiagnosticResult
+                            .CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int, int)"),
                         // /0/Test0.cs(6,9): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(1).WithArguments("Console"),
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithLocation(1)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(11,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(2).WithArguments("Console"),
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithLocation(2)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(15,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(3).WithArguments("Console"),
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithLocation(3)
+                            .WithArguments("Console"),
                     },
                 },
                 FixedState =
@@ -1453,13 +1431,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int, int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int, int)"),
+                        DiagnosticResult
+                            .CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int, int)"),
                         // /0/Test0.cs(6,9): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(1).WithArguments("Console"),
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithLocation(1)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(11,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(2).WithArguments("Console"),
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithLocation(2)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(15,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(3).WithArguments("Console"),
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithLocation(3)
+                            .WithArguments("Console"),
                     },
                 },
                 CodeActionValidationMode = CodeActionValidationMode.None,
@@ -1469,8 +1459,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21101")]
         public async Task TestTrivia2()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int i, string[] args)
@@ -1482,8 +1471,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int i, string[] args)
@@ -1510,8 +1498,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd1_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1523,8 +1510,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1552,8 +1538,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd1_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1565,8 +1550,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1602,8 +1586,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd2_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1615,8 +1598,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1644,8 +1626,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd2_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1657,8 +1638,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1694,8 +1674,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd3_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1707,8 +1686,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1736,8 +1714,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd3_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1749,8 +1726,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1786,8 +1762,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd4()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1799,8 +1774,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1828,8 +1802,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd4_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1841,8 +1814,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1878,8 +1850,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd5()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1891,8 +1862,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1919,8 +1889,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd6()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1932,8 +1901,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -1960,8 +1928,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd7()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -1973,8 +1940,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2001,8 +1967,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2014,8 +1979,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2042,8 +2006,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2055,8 +2018,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2083,8 +2045,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd10()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2096,8 +2057,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2124,8 +2084,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd11()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2137,8 +2096,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2165,8 +2123,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd12()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2178,8 +2135,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2206,8 +2162,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd13()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2219,8 +2174,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2247,8 +2201,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd14()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2260,8 +2213,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2288,8 +2240,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd15()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2301,8 +2252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2329,8 +2279,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21360")]
         public async Task TestCompoundLogicalAnd16()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2342,8 +2291,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2401,14 +2349,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestRange_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2436,8 +2384,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestRange_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2453,8 +2400,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2481,8 +2427,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestComparison_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2506,8 +2451,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestComparison_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2519,8 +2463,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2546,8 +2489,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestComparison_SwitchExpression_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(int i)
@@ -2563,8 +2505,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     int M(int i)
@@ -2599,8 +2540,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestComplexIf_CSharp8()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2624,8 +2564,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestComplexIf_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2637,8 +2576,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2677,8 +2615,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestComplexIf_Precedence_CSharp9()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2690,8 +2627,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(int i)
@@ -2718,8 +2654,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestInequality()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(int i)
@@ -2732,21 +2667,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 }
                 """;
 
-            var fixedSource =
- """
- class C
- {
-     void M(int i)
-     {
-         switch (i)
-         {
-             case > 123 and < 456 when i != 0:
-             case 10:
-                 return;
-         }
-     }
- }
- """;
+            var fixedSource = """
+                class C
+                {
+                    void M(int i)
+                    {
+                        switch (i)
+                        {
+                            case > 123 and < 456 when i != 0:
+                            case 10:
+                                return;
+                        }
+                    }
+                }
+                """;
 
             await new VerifyCS.Test
             {
@@ -2807,7 +2741,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
 
             test.ExpectedDiagnostics.Add(
                 // /0/Test0.cs(2,1): error CS8805: Program using top-level statements must be an executable.
-                DiagnosticResult.CompilerError("CS8805").WithSpan(1, 1, 1, 19));
+                DiagnosticResult.CompilerError("CS8805").WithSpan(1, 1, 1, 19)
+            );
 
             await test.RunAsync();
         }
@@ -2871,8 +2806,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnImplicitCastInRelationalPattern()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(char c)
@@ -2894,8 +2828,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingExpressionOnImplicitCastInRelationalPattern()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     int M(char c)
@@ -2919,8 +2852,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnImplicitCastInRangePattern()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(char c)
@@ -2942,8 +2874,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestMissingOnImplicitCastInConstantPattern()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(char c)
@@ -2965,8 +2896,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact]
         public async Task TestExplicitCastInConstantPattern()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void M(char c)
@@ -2977,8 +2907,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 }
                 """;
 
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void M(char c)
@@ -3006,8 +2935,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41131")]
         public async Task MoveTriviaFromElse1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -3031,8 +2959,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
 
                 class C
@@ -3068,8 +2995,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41131")]
         public async Task MoveTriviaFromElse2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 class C
@@ -3094,8 +3020,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
 
                 class C

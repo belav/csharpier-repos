@@ -34,7 +34,7 @@ namespace System.Net
 
         public HybridWebProxyFinder(AutoWebProxyScriptEngine engine)
         {
-            this.engine = engine;            
+            this.engine = engine;
             this.winHttpFinder = new WinHttpWebProxyFinder(engine);
             this.currentFinder = winHttpFinder;
         }
@@ -51,7 +51,11 @@ namespace System.Net
                 return true;
             }
 
-            if (allowFallback && currentFinder.IsUnrecognizedScheme && (currentFinder == winHttpFinder))
+            if (
+                allowFallback
+                && currentFinder.IsUnrecognizedScheme
+                && (currentFinder == winHttpFinder)
+            )
             {
                 // If WinHttpWebProxyFinder failed because the script location has a != HTTP scheme,
                 // fall back to NetWebProxyFinder which supports also other schemes.
@@ -83,7 +87,7 @@ namespace System.Net
                 netFinder.Reset();
             }
 
-            // Some settings changed, so let's reset the current finder to WinHttpWebProxyFinder, since 
+            // Some settings changed, so let's reset the current finder to WinHttpWebProxyFinder, since
             // now it may work (if it didn't already before).
             currentFinder = winHttpFinder;
         }
@@ -121,25 +125,20 @@ namespace System.Net
                         object fallbackKeyValue = key.GetValue(allowFallbackValueName, null);
 
                         // Setting the value to 1 will enable fallback. All other values are ignored (i.e. no fallback).
-                        if ((fallbackKeyValue != null) && (key.GetValueKind(allowFallbackValueName) == RegistryValueKind.DWord))
+                        if (
+                            (fallbackKeyValue != null)
+                            && (key.GetValueKind(allowFallbackValueName) == RegistryValueKind.DWord)
+                        )
                         {
                             allowFallback = ((int)fallbackKeyValue) == 1;
                         }
                     }
-                    catch (UnauthorizedAccessException)
-                    {
-                    }
-                    catch (IOException)
-                    {
-                    }
+                    catch (UnauthorizedAccessException) { }
+                    catch (IOException) { }
                 }
             }
-            catch (SecurityException)
-            {
-            }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (SecurityException) { }
+            catch (ObjectDisposedException) { }
         }
     }
 }

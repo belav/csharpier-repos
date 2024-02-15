@@ -87,7 +87,9 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(15E+108, SqlDouble.Add(test1, test0).Value);
             Assert.Equal(1.5E+109, SqlDouble.Add(test1, test2).Value);
 
-            Assert.Throws<OverflowException>(() => SqlDouble.Add(SqlDouble.MaxValue, SqlDouble.MaxValue));
+            Assert.Throws<OverflowException>(
+                () => SqlDouble.Add(SqlDouble.MaxValue, SqlDouble.MaxValue)
+            );
 
             // Divide()
             Assert.Equal(3, SqlDouble.Divide(test1, test4));
@@ -101,11 +103,12 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Throws<OverflowException>(() => SqlDouble.Multiply(testMax, test1));
 
-
             // Subtract()
             Assert.Equal(1.5E+109, SqlDouble.Subtract(test1, test3).Value);
 
-            Assert.Throws<OverflowException>(() => SqlDouble.Subtract(SqlDouble.MinValue, SqlDouble.MaxValue));
+            Assert.Throws<OverflowException>(
+                () => SqlDouble.Subtract(SqlDouble.MinValue, SqlDouble.MaxValue)
+            );
         }
 
         [Fact]
@@ -447,6 +450,7 @@ namespace System.Data.Tests.SqlTypes
             SqlSingle TestSingle64 = new SqlSingle(64);
             Assert.Equal(64, ((SqlDouble)TestSingle64).Value);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {
@@ -454,9 +458,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal("double", qualifiedName.Name);
         }
 
-        internal void ReadWriteXmlTestInternal(string xml,
-                               double testval,
-                               string unit_test_id)
+        internal void ReadWriteXmlTestInternal(string xml, double testval, string unit_test_id)
         {
             SqlDouble test;
             SqlDouble test1;
@@ -486,9 +488,12 @@ namespace System.Data.Tests.SqlTypes
         //[Category ("MobileNotWorking")]
         public void ReadWriteXmlTest()
         {
-            string xml1 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><double>4556.99999999999999999988</double>";
-            string xml2 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><double>-6445.8888888888899999999</double>";
-            string xml3 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><double>0x455687AB3E4D56F</double>";
+            string xml1 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><double>4556.99999999999999999988</double>";
+            string xml2 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><double>-6445.8888888888899999999</double>";
+            string xml3 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><double>0x455687AB3E4D56F</double>";
             double test1 = 4556.99999999999999999988;
             double test2 = -6445.8888888888899999999;
             double test3 = 0x4F56;
@@ -496,8 +501,9 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml1, test1, "BA01");
             ReadWriteXmlTestInternal(xml2, test2, "BA02");
 
-            InvalidOperationException ex =
-                Assert.Throws<InvalidOperationException>(() => ReadWriteXmlTestInternal(xml3, test3, "BA03"));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => ReadWriteXmlTestInternal(xml3, test3, "BA03")
+            );
             Assert.Equal(typeof(FormatException), ex.InnerException.GetType());
         }
     }

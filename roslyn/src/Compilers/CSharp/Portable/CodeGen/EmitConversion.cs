@@ -65,25 +65,41 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             EmitPopIfUnused(used);
         }
 
-        private void EmitReadOnlySpanFromArrayExpression(BoundReadOnlySpanFromArray expression, bool used)
+        private void EmitReadOnlySpanFromArrayExpression(
+            BoundReadOnlySpanFromArray expression,
+            bool used
+        )
         {
             BoundExpression operand = expression.Operand;
             var typeTo = (NamedTypeSymbol)expression.Type;
 
-            Debug.Assert((operand.Type.IsArray()) &&
-                         this._module.Compilation.IsReadOnlySpanType(typeTo),
-                         "only special kinds of conversions involving ReadOnlySpan may be handled in emit");
+            Debug.Assert(
+                (operand.Type.IsArray()) && this._module.Compilation.IsReadOnlySpanType(typeTo),
+                "only special kinds of conversions involving ReadOnlySpan may be handled in emit"
+            );
 
-            if (!TryEmitReadonlySpanAsBlobWrapper(typeTo, operand, used, inPlaceTarget: null, avoidInPlace: out _))
+            if (
+                !TryEmitReadonlySpanAsBlobWrapper(
+                    typeTo,
+                    operand,
+                    used,
+                    inPlaceTarget: null,
+                    avoidInPlace: out _
+                )
+            )
             {
                 // there are several reasons that could prevent us from emitting a wrapper
-                // in such case we just emit the operand and then invoke the conversion method 
+                // in such case we just emit the operand and then invoke the conversion method
                 EmitExpression(operand, used);
                 if (used)
                 {
                     // consumes 1 argument (array) and produces one result (span)
                     _builder.EmitOpCode(ILOpCode.Call, stackAdjustment: 0);
-                    EmitSymbolToken(expression.ConversionMethod, expression.Syntax, optArgList: null);
+                    EmitSymbolToken(
+                        expression.ConversionMethod,
+                        expression.Syntax,
+                        optArgList: null
+                    );
                 }
             }
         }
@@ -102,14 +118,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 case ConversionKind.ImplicitReference:
                 case ConversionKind.Boxing:
                     // from IL perspective ImplicitReference and Boxing conversions are the same thing.
-                    // both force operand to be an object (O) - which may involve boxing 
+                    // both force operand to be an object (O) - which may involve boxing
                     // and then assume that result has the target type - which may involve unboxing.
                     EmitImplicitReferenceConversion(conversion);
                     break;
                 case ConversionKind.ExplicitReference:
                 case ConversionKind.Unboxing:
                     // from IL perspective ExplicitReference and UnBoxing conversions are the same thing.
-                    // both force operand to be an object (O) - which may involve boxing 
+                    // both force operand to be an object (O) - which may involve boxing
                     // and then reinterpret result as the target type - which may involve unboxing.
                     EmitExplicitReferenceConversion(conversion);
                     break;
@@ -145,8 +161,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 #if DEBUG
                     switch (fromPredefTypeKind)
                     {
-                        case Microsoft.Cci.PrimitiveTypeCode.IntPtr when !fromType.IsNativeIntegerType:
-                        case Microsoft.Cci.PrimitiveTypeCode.UIntPtr when !fromType.IsNativeIntegerType:
+                        case Microsoft.Cci.PrimitiveTypeCode.IntPtr
+                            when !fromType.IsNativeIntegerType:
+                        case Microsoft.Cci.PrimitiveTypeCode.UIntPtr
+                            when !fromType.IsNativeIntegerType:
                         case Microsoft.Cci.PrimitiveTypeCode.Pointer:
                         case Microsoft.Cci.PrimitiveTypeCode.FunctionPointer:
                             Debug.Assert(IsNumeric(toType));
@@ -154,19 +172,35 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         default:
                             Debug.Assert(IsNumeric(fromType));
                             Debug.Assert(
-                                (toPredefTypeKind == Microsoft.Cci.PrimitiveTypeCode.IntPtr || toPredefTypeKind == Microsoft.Cci.PrimitiveTypeCode.UIntPtr) && !toType.IsNativeIntegerWrapperType ||
-                                toPredefTypeKind == Microsoft.Cci.PrimitiveTypeCode.Pointer ||
-                                toPredefTypeKind == Microsoft.Cci.PrimitiveTypeCode.FunctionPointer ||
-                                (fromPredefTypeKind == Cci.PrimitiveTypeCode.IntPtr && conversion.Operand is BoundBinaryOperator { OperatorKind: BinaryOperatorKind.Division })); // pointer subtraction: see LocalRewriter.RewritePointerSubtraction()
+                                (
+                                    toPredefTypeKind == Microsoft.Cci.PrimitiveTypeCode.IntPtr
+                                    || toPredefTypeKind == Microsoft.Cci.PrimitiveTypeCode.UIntPtr
+                                ) && !toType.IsNativeIntegerWrapperType
+                                    || toPredefTypeKind == Microsoft.Cci.PrimitiveTypeCode.Pointer
+                                    || toPredefTypeKind
+                                        == Microsoft.Cci.PrimitiveTypeCode.FunctionPointer
+                                    || (
+                                        fromPredefTypeKind == Cci.PrimitiveTypeCode.IntPtr
+                                        && conversion.Operand
+                                            is BoundBinaryOperator
+                                            {
+                                                OperatorKind: BinaryOperatorKind.Division
+                                            }
+                                    )
+                            ); // pointer subtraction: see LocalRewriter.RewritePointerSubtraction()
                             break;
                     }
 #endif
 
-                    _builder.EmitNumericConversion(fromPredefTypeKind, toPredefTypeKind, conversion.Checked);
+                    _builder.EmitNumericConversion(
+                        fromPredefTypeKind,
+                        toPredefTypeKind,
+                        conversion.Checked
+                    );
                     break;
                 case ConversionKind.PinnedObjectToPointer:
                     // CLR allows unsafe conversion from(O) to native int/uint.
-                    // The conversion does not change the representation of the value, 
+                    // The conversion does not change the representation of the value,
                     // but the value will not be reported to subsequent GC operations (and therefore will not be updated by such operations)
                     _builder.EmitOpCode(ILOpCode.Conv_u);
                     break;
@@ -219,7 +253,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             var toPredefTypeKind = toType.PrimitiveTypeCode;
             Debug.Assert(IsNumeric(toType));
 
-            _builder.EmitNumericConversion(fromPredefTypeKind, toPredefTypeKind, conversion.Checked);
+            _builder.EmitNumericConversion(
+                fromPredefTypeKind,
+                toPredefTypeKind,
+                conversion.Checked
+            );
         }
 
         private void EmitImplicitReferenceConversion(BoundConversion conversion)
@@ -245,7 +283,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             else if (resultType.IsArray())
             {
                 // need a static cast here to satisfy verifier
-                // Example: Derived[] can be used in place of Base[] for all purposes except for LDELEMA <Base> 
+                // Example: Derived[] can be used in place of Base[] for all purposes except for LDELEMA <Base>
                 //          Even though it would be safe due to run time check, verifier requires that the static type of the array is Base[]
                 //          We do not know why we are casting, so to be safe, lets make the cast explicit. JIT elides such casts.
                 EmitStaticCast(conversion.Type, conversion.Syntax);
@@ -265,7 +303,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
 
             // here we have O(operandType) that could be compatible with O(targetType)
-            // 
+            //
             // if target type is verifiably a reference type, we can just do a type check otherwise
             // we unbox which will both do the type check and start tracking actual target type in
             // verifier.
@@ -305,10 +343,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             var toPredefTypeKind = toType.PrimitiveTypeCode;
             Debug.Assert(IsNumeric(toType));
 
-            _builder.EmitNumericConversion(fromPredefTypeKind, toPredefTypeKind, conversion.Checked);
+            _builder.EmitNumericConversion(
+                fromPredefTypeKind,
+                toPredefTypeKind,
+                conversion.Checked
+            );
         }
 
-        private void EmitDelegateCreation(BoundExpression node, BoundExpression receiver, bool isExtensionMethod, MethodSymbol method, TypeSymbol delegateType, bool used)
+        private void EmitDelegateCreation(
+            BoundExpression node,
+            BoundExpression receiver,
+            bool isExtensionMethod,
+            MethodSymbol method,
+            TypeSymbol delegateType,
+            bool used
+        )
         {
             var isStatic = receiver == null || (!isExtensionMethod && method.IsStatic);
             if (!used)
@@ -328,7 +377,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 if (method.IsAbstract || method.IsVirtual)
                 {
-                    if (receiver is not BoundTypeExpression { Type: { TypeKind: TypeKind.TypeParameter } })
+                    if (
+                        receiver
+                        is not BoundTypeExpression { Type: { TypeKind: TypeKind.TypeParameter } }
+                    )
                     {
                         throw ExceptionUtilities.Unreachable();
                     }
@@ -351,14 +403,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // Metadata Spec (II.14.6):
             //   Delegates shall be declared sealed.
             //   The Invoke method shall be virtual.
-            if (!method.IsStatic && method.IsMetadataVirtual() && !method.ContainingType.IsDelegateType() && !receiver.SuppressVirtualCalls)
+            if (
+                !method.IsStatic
+                && method.IsMetadataVirtual()
+                && !method.ContainingType.IsDelegateType()
+                && !receiver.SuppressVirtualCalls
+            )
             {
                 // NOTE: method.IsMetadataVirtual -> receiver != null
                 _builder.EmitOpCode(ILOpCode.Dup);
                 _builder.EmitOpCode(ILOpCode.Ldvirtftn);
 
                 //  substitute the method with original virtual method
-                method = method.GetConstructedLeastOverriddenMethod(_method.ContainingType, requireSameReturnType: true);
+                method = method.GetConstructedLeastOverriddenMethod(
+                    _method.ContainingType,
+                    requireSameReturnType: true
+                );
             }
             else
             {
@@ -371,18 +431,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             _builder.EmitOpCode(ILOpCode.Newobj, -1); // pop 2 args and push delegate object
 
             var ctor = DelegateConstructor(node.Syntax, delegateType);
-            if ((object)ctor != null) EmitSymbolToken(ctor, node.Syntax, null);
+            if ((object)ctor != null)
+                EmitSymbolToken(ctor, node.Syntax, null);
         }
 
         private MethodSymbol DelegateConstructor(SyntaxNode syntax, TypeSymbol delegateType)
         {
-            foreach (var possibleCtor in delegateType.GetMembers(WellKnownMemberNames.InstanceConstructorName))
+            foreach (
+                var possibleCtor in delegateType.GetMembers(
+                    WellKnownMemberNames.InstanceConstructorName
+                )
+            )
             {
                 var m = possibleCtor as MethodSymbol;
-                if ((object)m == null) continue;
+                if ((object)m == null)
+                    continue;
                 var parameters = m.Parameters;
-                if (parameters.Length != 2) continue;
-                if (parameters[0].Type.SpecialType != SpecialType.System_Object) continue;
+                if (parameters.Length != 2)
+                    continue;
+                if (parameters[0].Type.SpecialType != SpecialType.System_Object)
+                    continue;
                 var p1t = parameters[1].Type.SpecialType;
                 if (p1t == SpecialType.System_IntPtr || p1t == SpecialType.System_UIntPtr)
                 {

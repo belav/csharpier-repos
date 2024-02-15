@@ -12,7 +12,7 @@ namespace System.Security.Cryptography.X509Certificates
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct CMSG_SIGNER_INFO_Partial  // This is not the full definition of CMSG_SIGNER_INFO. Only defining the part we use.
+    internal struct CMSG_SIGNER_INFO_Partial // This is not the full definition of CMSG_SIGNER_INFO. Only defining the part we use.
     {
         public int dwVersion;
         public Interop.Crypt32.DATA_BLOB Issuer;
@@ -35,7 +35,7 @@ namespace System.Security.Cryptography.X509Certificates
         public const int CALG_RSA_KEYX = 0xa400;
         public const int CALG_RSA_SIGN = 0x2400;
         public const int CALG_DSS_SIGN = 0x2200;
-        public const int CALG_SHA1     = 0x8004;
+        public const int CALG_SHA1 = 0x8004;
     }
 
     internal enum CryptDecodeObjectStructType : int
@@ -127,54 +127,54 @@ namespace System.Security.Cryptography.X509Certificates
     [Flags]
     internal enum CertTrustErrorStatus : int
     {
-        CERT_TRUST_NO_ERROR                            = 0x00000000,
-        CERT_TRUST_IS_NOT_TIME_VALID                   = 0x00000001,
-        CERT_TRUST_IS_NOT_TIME_NESTED                  = 0x00000002,
-        CERT_TRUST_IS_REVOKED                          = 0x00000004,
-        CERT_TRUST_IS_NOT_SIGNATURE_VALID              = 0x00000008,
-        CERT_TRUST_IS_NOT_VALID_FOR_USAGE              = 0x00000010,
-        CERT_TRUST_IS_UNTRUSTED_ROOT                   = 0x00000020,
-        CERT_TRUST_REVOCATION_STATUS_UNKNOWN           = 0x00000040,
-        CERT_TRUST_IS_CYCLIC                           = 0x00000080,
+        CERT_TRUST_NO_ERROR = 0x00000000,
+        CERT_TRUST_IS_NOT_TIME_VALID = 0x00000001,
+        CERT_TRUST_IS_NOT_TIME_NESTED = 0x00000002,
+        CERT_TRUST_IS_REVOKED = 0x00000004,
+        CERT_TRUST_IS_NOT_SIGNATURE_VALID = 0x00000008,
+        CERT_TRUST_IS_NOT_VALID_FOR_USAGE = 0x00000010,
+        CERT_TRUST_IS_UNTRUSTED_ROOT = 0x00000020,
+        CERT_TRUST_REVOCATION_STATUS_UNKNOWN = 0x00000040,
+        CERT_TRUST_IS_CYCLIC = 0x00000080,
 
-        CERT_TRUST_INVALID_EXTENSION                   = 0x00000100,
-        CERT_TRUST_INVALID_POLICY_CONSTRAINTS          = 0x00000200,
-        CERT_TRUST_INVALID_BASIC_CONSTRAINTS           = 0x00000400,
-        CERT_TRUST_INVALID_NAME_CONSTRAINTS            = 0x00000800,
-        CERT_TRUST_HAS_NOT_SUPPORTED_NAME_CONSTRAINT   = 0x00001000,
-        CERT_TRUST_HAS_NOT_DEFINED_NAME_CONSTRAINT     = 0x00002000,
-        CERT_TRUST_HAS_NOT_PERMITTED_NAME_CONSTRAINT   = 0x00004000,
-        CERT_TRUST_HAS_EXCLUDED_NAME_CONSTRAINT        = 0x00008000,
+        CERT_TRUST_INVALID_EXTENSION = 0x00000100,
+        CERT_TRUST_INVALID_POLICY_CONSTRAINTS = 0x00000200,
+        CERT_TRUST_INVALID_BASIC_CONSTRAINTS = 0x00000400,
+        CERT_TRUST_INVALID_NAME_CONSTRAINTS = 0x00000800,
+        CERT_TRUST_HAS_NOT_SUPPORTED_NAME_CONSTRAINT = 0x00001000,
+        CERT_TRUST_HAS_NOT_DEFINED_NAME_CONSTRAINT = 0x00002000,
+        CERT_TRUST_HAS_NOT_PERMITTED_NAME_CONSTRAINT = 0x00004000,
+        CERT_TRUST_HAS_EXCLUDED_NAME_CONSTRAINT = 0x00008000,
 
-        CERT_TRUST_IS_OFFLINE_REVOCATION               = 0x01000000,
-        CERT_TRUST_NO_ISSUANCE_CHAIN_POLICY            = 0x02000000,
-        CERT_TRUST_IS_EXPLICIT_DISTRUST                = 0x04000000,
-        CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT      = 0x08000000,
-        CERT_TRUST_HAS_WEAK_SIGNATURE                  = 0x00100000,
+        CERT_TRUST_IS_OFFLINE_REVOCATION = 0x01000000,
+        CERT_TRUST_NO_ISSUANCE_CHAIN_POLICY = 0x02000000,
+        CERT_TRUST_IS_EXPLICIT_DISTRUST = 0x04000000,
+        CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT = 0x08000000,
+        CERT_TRUST_HAS_WEAK_SIGNATURE = 0x00100000,
 
         // These can be applied to chains only
-        CERT_TRUST_IS_PARTIAL_CHAIN                    = 0x00010000,
-        CERT_TRUST_CTL_IS_NOT_TIME_VALID               = 0x00020000,
-        CERT_TRUST_CTL_IS_NOT_SIGNATURE_VALID          = 0x00040000,
-        CERT_TRUST_CTL_IS_NOT_VALID_FOR_USAGE          = 0x00080000,
+        CERT_TRUST_IS_PARTIAL_CHAIN = 0x00010000,
+        CERT_TRUST_CTL_IS_NOT_TIME_VALID = 0x00020000,
+        CERT_TRUST_CTL_IS_NOT_SIGNATURE_VALID = 0x00040000,
+        CERT_TRUST_CTL_IS_NOT_VALID_FOR_USAGE = 0x00080000,
     }
 
     [Flags]
     internal enum CertTrustInfoStatus : int
     {
         // These can be applied to certificates only
-        CERT_TRUST_HAS_EXACT_MATCH_ISSUER      = 0x00000001,
-        CERT_TRUST_HAS_KEY_MATCH_ISSUER        = 0x00000002,
-        CERT_TRUST_HAS_NAME_MATCH_ISSUER       = 0x00000004,
-        CERT_TRUST_IS_SELF_SIGNED              = 0x00000008,
+        CERT_TRUST_HAS_EXACT_MATCH_ISSUER = 0x00000001,
+        CERT_TRUST_HAS_KEY_MATCH_ISSUER = 0x00000002,
+        CERT_TRUST_HAS_NAME_MATCH_ISSUER = 0x00000004,
+        CERT_TRUST_IS_SELF_SIGNED = 0x00000008,
 
         // These can be applied to certificates and chains
-        CERT_TRUST_HAS_PREFERRED_ISSUER        = 0x00000100,
-        CERT_TRUST_HAS_ISSUANCE_CHAIN_POLICY   = 0x00000200,
-        CERT_TRUST_HAS_VALID_NAME_CONSTRAINTS  = 0x00000400,
+        CERT_TRUST_HAS_PREFERRED_ISSUER = 0x00000100,
+        CERT_TRUST_HAS_ISSUANCE_CHAIN_POLICY = 0x00000200,
+        CERT_TRUST_HAS_VALID_NAME_CONSTRAINTS = 0x00000400,
 
         // These can be applied to chains only
-        CERT_TRUST_IS_COMPLEX_CHAIN            = 0x00010000,
+        CERT_TRUST_IS_COMPLEX_CHAIN = 0x00010000,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -212,7 +212,7 @@ namespace System.Security.Cryptography.X509Certificates
         // dwRevocationFreshnessTime is the largest time across all elements
         // checked.
         public int fHasRevocationFreshnessTime;
-        public int dwRevocationFreshnessTime;    // seconds
+        public int dwRevocationFreshnessTime; // seconds
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -235,7 +235,7 @@ namespace System.Security.Cryptography.X509Certificates
         // dwRevocationFreshnessTime is the largest time across all elements
         // checked.
         public int fHasRevocationFreshnessTime;
-        public int dwRevocationFreshnessTime;    // seconds
+        public int dwRevocationFreshnessTime; // seconds
 
         // Flags passed when created via CertGetCertificateChain
         public int dwCreateFlags;

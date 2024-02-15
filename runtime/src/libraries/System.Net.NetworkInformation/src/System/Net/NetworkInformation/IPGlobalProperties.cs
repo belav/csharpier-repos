@@ -69,7 +69,9 @@ namespace System.Net.NetworkInformation
             throw NotImplemented.ByDesignWithMessage(SR.net_MethodNotImplementedException);
         }
 
-        public virtual UnicastIPAddressInformationCollection EndGetUnicastAddresses(IAsyncResult asyncResult)
+        public virtual UnicastIPAddressInformationCollection EndGetUnicastAddresses(
+            IAsyncResult asyncResult
+        )
         {
             throw NotImplemented.ByDesignWithMessage(SR.net_MethodNotImplementedException);
         }

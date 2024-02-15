@@ -5,17 +5,20 @@ namespace System.Security.Cryptography.Xml
 {
     public sealed class DataReference : EncryptedReference
     {
-        public DataReference() : base()
+        public DataReference()
+            : base()
         {
             ReferenceType = "DataReference";
         }
 
-        public DataReference(string uri) : base(uri)
+        public DataReference(string uri)
+            : base(uri)
         {
             ReferenceType = "DataReference";
         }
 
-        public DataReference(string uri, TransformChain transformChain) : base(uri, transformChain)
+        public DataReference(string uri, TransformChain transformChain)
+            : base(uri, transformChain)
         {
             ReferenceType = "DataReference";
         }

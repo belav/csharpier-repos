@@ -14,9 +14,8 @@ namespace System.Data.Common
         internal bool _suppressStateChangeForReconnection;
 #pragma warning restore 649
 
-        protected DbConnection() : base()
-        {
-        }
+        protected DbConnection()
+            : base() { }
 
         [DefaultValue("")]
         [SettingsBindableAttribute(true)]
@@ -50,8 +49,7 @@ namespace System.Data.Common
 
         protected abstract DbTransaction BeginDbTransaction(IsolationLevel isolationLevel);
 
-        public DbTransaction BeginTransaction() =>
-            BeginDbTransaction(IsolationLevel.Unspecified);
+        public DbTransaction BeginTransaction() => BeginDbTransaction(IsolationLevel.Unspecified);
 
         public DbTransaction BeginTransaction(IsolationLevel isolationLevel)
         {
@@ -64,7 +62,10 @@ namespace System.Data.Common
         IDbTransaction IDbConnection.BeginTransaction(IsolationLevel isolationLevel) =>
             BeginDbTransaction(isolationLevel);
 
-        protected virtual ValueTask<DbTransaction> BeginDbTransactionAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken)
+        protected virtual ValueTask<DbTransaction> BeginDbTransactionAsync(
+            IsolationLevel isolationLevel,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -81,11 +82,14 @@ namespace System.Data.Common
             }
         }
 
-        public ValueTask<DbTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-            => BeginDbTransactionAsync(IsolationLevel.Unspecified, cancellationToken);
+        public ValueTask<DbTransaction> BeginTransactionAsync(
+            CancellationToken cancellationToken = default
+        ) => BeginDbTransactionAsync(IsolationLevel.Unspecified, cancellationToken);
 
-        public ValueTask<DbTransaction> BeginTransactionAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken = default)
-            => BeginDbTransactionAsync(isolationLevel, cancellationToken);
+        public ValueTask<DbTransaction> BeginTransactionAsync(
+            IsolationLevel isolationLevel,
+            CancellationToken cancellationToken = default
+        ) => BeginDbTransactionAsync(isolationLevel, cancellationToken);
 
         public abstract void Close();
 
@@ -110,7 +114,10 @@ namespace System.Data.Common
 
         public abstract void ChangeDatabase(string databaseName);
 
-        public virtual Task ChangeDatabaseAsync(string databaseName, CancellationToken cancellationToken = default)
+        public virtual Task ChangeDatabaseAsync(
+            string databaseName,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -258,7 +265,8 @@ namespace System.Data.Common
         /// <returns>A task representing the asynchronous operation.</returns>
         public virtual Task<DataTable> GetSchemaAsync(
             string collectionName,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -289,8 +297,11 @@ namespace System.Data.Common
         /// <param name="restrictionValues">Specifies a set of restriction values for the requested schema.</param>
         /// <param name="cancellationToken">The cancellation instruction.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public virtual Task<DataTable> GetSchemaAsync(string collectionName, string?[] restrictionValues,
-            CancellationToken cancellationToken = default)
+        public virtual Task<DataTable> GetSchemaAsync(
+            string collectionName,
+            string?[] restrictionValues,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {

@@ -18,7 +18,12 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new DefaultComponentActivator(), new TestRenderer());
 
         // Act
-        var instance = factory.InstantiateComponent(GetServiceProvider(), componentType, null, null);
+        var instance = factory.InstantiateComponent(
+            GetServiceProvider(),
+            componentType,
+            null,
+            null
+        );
 
         // Assert
         Assert.NotNull(instance);
@@ -33,8 +38,13 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new DefaultComponentActivator(), new TestRenderer());
 
         // Assert
-        var ex = Assert.Throws<ArgumentException>(() => factory.InstantiateComponent(GetServiceProvider(), componentType, null, null));
-        Assert.StartsWith($"The type {componentType.FullName} does not implement {nameof(IComponent)}.", ex.Message);
+        var ex = Assert.Throws<ArgumentException>(
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType, null, null)
+        );
+        Assert.StartsWith(
+            $"The type {componentType.FullName} does not implement {nameof(IComponent)}.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -42,10 +52,18 @@ public class ComponentFactoryTest
     {
         // Arrange
         var componentType = typeof(EmptyComponent);
-        var factory = new ComponentFactory(new CustomComponentActivator<ComponentWithInjectProperties>(), new TestRenderer());
+        var factory = new ComponentFactory(
+            new CustomComponentActivator<ComponentWithInjectProperties>(),
+            new TestRenderer()
+        );
 
         // Act
-        var instance = factory.InstantiateComponent(GetServiceProvider(), componentType, null, null);
+        var instance = factory.InstantiateComponent(
+            GetServiceProvider(),
+            componentType,
+            null,
+            null
+        );
 
         // Assert
         Assert.NotNull(instance);
@@ -66,8 +84,13 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new NullResultComponentActivator(), new TestRenderer());
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => factory.InstantiateComponent(GetServiceProvider(), componentType, null, null));
-        Assert.Equal($"The component activator returned a null value for a component of type {componentType.FullName}.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType, null, null)
+        );
+        Assert.Equal(
+            $"The component activator returned a null value for a component of type {componentType.FullName}.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -75,10 +98,18 @@ public class ComponentFactoryTest
     {
         // Arrange
         var componentType = typeof(DerivedComponent);
-        var factory = new ComponentFactory(new CustomComponentActivator<DerivedComponent>(), new TestRenderer());
+        var factory = new ComponentFactory(
+            new CustomComponentActivator<DerivedComponent>(),
+            new TestRenderer()
+        );
 
         // Act
-        var instance = factory.InstantiateComponent(GetServiceProvider(), componentType, null, null);
+        var instance = factory.InstantiateComponent(
+            GetServiceProvider(),
+            componentType,
+            null,
+            null
+        );
 
         // Assert
         Assert.NotNull(instance);
@@ -102,7 +133,12 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new DefaultComponentActivator(), new TestRenderer());
 
         // Act
-        var instance = factory.InstantiateComponent(GetServiceProvider(), componentType, null, null);
+        var instance = factory.InstantiateComponent(
+            GetServiceProvider(),
+            componentType,
+            null,
+            null
+        );
 
         // Assert
         Assert.NotNull(instance);
@@ -118,11 +154,17 @@ public class ComponentFactoryTest
         // Arrange
         var componentType = typeof(ComponentWithInjectProperties);
         var renderer = new RendererWithResolveComponentForRenderMode(
-            /* won't be used */ new ComponentWithRenderMode());
+            /* won't be used */new ComponentWithRenderMode()
+        );
         var factory = new ComponentFactory(new DefaultComponentActivator(), renderer);
 
         // Act
-        var instance = factory.InstantiateComponent(GetServiceProvider(), componentType, null, null);
+        var instance = factory.InstantiateComponent(
+            GetServiceProvider(),
+            componentType,
+            null,
+            null
+        );
 
         // Assert
         Assert.IsType<ComponentWithInjectProperties>(instance);
@@ -140,7 +182,8 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(componentActivator, renderer);
 
         // Act
-        var instance = (ComponentWithInjectProperties)factory.InstantiateComponent(GetServiceProvider(), componentType, null, 1234);
+        var instance = (ComponentWithInjectProperties)
+            factory.InstantiateComponent(GetServiceProvider(), componentType, null, 1234);
 
         // Assert
         Assert.True(renderer.ResolverWasCalled);
@@ -172,7 +215,8 @@ public class ComponentFactoryTest
 
         // Act/Assert
         Assert.Throws<AmbiguousMatchException>(
-            () => factory.InstantiateComponent(GetServiceProvider(), componentType, null, 1234));
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType, null, 1234)
+        );
     }
 
     [Fact]
@@ -189,7 +233,13 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(componentActivator, renderer);
 
         // Act
-        var instance = (ComponentWithInjectProperties)factory.InstantiateComponent(GetServiceProvider(), componentType, callSiteRenderMode, 1234);
+        var instance = (ComponentWithInjectProperties)
+            factory.InstantiateComponent(
+                GetServiceProvider(),
+                componentType,
+                callSiteRenderMode,
+                1234
+            );
 
         // Assert
         Assert.Same(resolvedComponent, instance);
@@ -215,9 +265,19 @@ public class ComponentFactoryTest
         var callsiteRenderMode = componentType.GetCustomAttribute<RenderModeAttribute>().Mode;
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            factory.InstantiateComponent(GetServiceProvider(), componentType, callsiteRenderMode, 1234));
-        Assert.Equal($"The component type '{componentType}' has a fixed rendermode of '{typeof(TestRenderMode)}', so it is not valid to specify any rendermode when using this component.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                factory.InstantiateComponent(
+                    GetServiceProvider(),
+                    componentType,
+                    callsiteRenderMode,
+                    1234
+                )
+        );
+        Assert.Equal(
+            $"The component type '{componentType}' has a fixed rendermode of '{typeof(TestRenderMode)}', so it is not valid to specify any rendermode when using this component.",
+            ex.Message
+        );
     }
 
     private const string KeyedServiceKey = "my-keyed-service";
@@ -301,10 +361,13 @@ public class ComponentFactoryTest
     }
 
     public class TestService1 { }
+
     public class TestService2 { }
+
     public class TestService3 { }
 
-    private class CustomComponentActivator<TResult> : IComponentActivator where TResult : IComponent, new()
+    private class CustomComponentActivator<TResult> : IComponentActivator
+        where TResult : IComponent, new()
     {
         public IComponent CreateInstance(Type componentType)
         {
@@ -321,6 +384,7 @@ public class ComponentFactoryTest
     }
 
     private class TestRenderMode : IComponentRenderMode { }
+
     private class DerivedComponentRenderMode : IComponentRenderMode { }
 
     [DerivedComponentRenderMode]
@@ -355,7 +419,8 @@ public class ComponentFactoryTest
     {
         private readonly IComponent _componentToReturn;
 
-        public RendererWithResolveComponentForRenderMode(IComponent componentToReturn) : base()
+        public RendererWithResolveComponentForRenderMode(IComponent componentToReturn)
+            : base()
         {
             _componentToReturn = componentToReturn;
         }
@@ -378,7 +443,12 @@ public class ComponentFactoryTest
             throw new NotImplementedException();
         }
 
-        protected internal override IComponent ResolveComponentForRenderMode(Type componentType, int? parentComponentId, IComponentActivator componentActivator, IComponentRenderMode renderMode)
+        protected internal override IComponent ResolveComponentForRenderMode(
+            Type componentType,
+            int? parentComponentId,
+            IComponentActivator componentActivator,
+            IComponentRenderMode renderMode
+        )
         {
             ResolverWasCalled = true;
             RequestedComponentType = componentType;

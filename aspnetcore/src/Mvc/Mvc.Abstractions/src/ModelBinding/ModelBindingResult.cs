@@ -72,9 +72,7 @@ public readonly struct ModelBindingResult : IEquatable<ModelBindingResult>
     /// <inheritdoc />
     public bool Equals(ModelBindingResult other)
     {
-        return
-            IsModelSet == other.IsModelSet &&
-            object.Equals(Model, other.Model);
+        return IsModelSet == other.IsModelSet && object.Equals(Model, other.Model);
     }
 
     /// <inheritdoc />

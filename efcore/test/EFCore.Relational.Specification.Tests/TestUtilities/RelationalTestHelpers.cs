@@ -3,6 +3,4 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-public abstract class RelationalTestHelpers : TestHelpers
-{
-}
+public abstract class RelationalTestHelpers : TestHelpers { }

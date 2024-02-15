@@ -6,7 +6,8 @@ namespace System.Configuration
     [ConfigurationCollection(typeof(NameValueConfigurationElement))]
     public sealed class NameValueConfigurationCollection : ConfigurationElementCollection
     {
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection();
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection();
 
         protected internal override ConfigurationPropertyCollection Properties => s_properties;
 
@@ -16,7 +17,9 @@ namespace System.Configuration
             set
             {
                 int index = -1; // append by default
-                NameValueConfigurationElement tempElement = (NameValueConfigurationElement)BaseGet(name);
+                NameValueConfigurationElement tempElement = (NameValueConfigurationElement)BaseGet(
+                    name
+                );
                 if (tempElement != null)
                 {
                     index = BaseIndexOf(tempElement);

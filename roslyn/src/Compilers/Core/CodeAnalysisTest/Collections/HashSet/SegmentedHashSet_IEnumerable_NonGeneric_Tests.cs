@@ -28,14 +28,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
-        protected override ModifyOperation ModifyEnumeratorThrows => base.ModifyEnumeratorAllowed & ~ModifyOperation.Remove;
+        protected override ModifyOperation ModifyEnumeratorThrows =>
+            base.ModifyEnumeratorAllowed & ~ModifyOperation.Remove;
 
-        protected override ModifyOperation ModifyEnumeratorAllowed => ModifyOperation.Overwrite | ModifyOperation.Remove;
+        protected override ModifyOperation ModifyEnumeratorAllowed =>
+            ModifyOperation.Overwrite | ModifyOperation.Remove;
 
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        )
         {
             if ((operations & ModifyOperation.Clear) == ModifyOperation.Clear)
             {

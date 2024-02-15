@@ -25,8 +25,4 @@ namespace System.ServiceModel.Configuration
         UserNameOverTransport,
         SspiNegotiatedOverTransport
     }
-
 }
-
-
-

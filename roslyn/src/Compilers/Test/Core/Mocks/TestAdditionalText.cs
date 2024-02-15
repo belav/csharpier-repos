@@ -19,10 +19,13 @@ namespace Roslyn.Test.Utilities
             _text = text;
         }
 
-        public TestAdditionalText(string text = "", Encoding? encoding = null, string path = "dummy", SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1)
-            : this(path, new StringText(text, encoding, checksumAlgorithm: checksumAlgorithm))
-        {
-        }
+        public TestAdditionalText(
+            string text = "",
+            Encoding? encoding = null,
+            string path = "dummy",
+            SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
+        )
+            : this(path, new StringText(text, encoding, checksumAlgorithm: checksumAlgorithm)) { }
 
         public override string Path { get; }
 

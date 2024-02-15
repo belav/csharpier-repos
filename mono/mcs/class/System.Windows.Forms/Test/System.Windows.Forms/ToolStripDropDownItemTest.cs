@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,39 +28,38 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class ToolStripDropDownItemTest
-	{
-		[Test]
-		public void FontTest ()
-		{
-			ToolStripDropDownItem dropdown_item = new ToolStripMenuItem ();
-			ToolStrip tool_strip = new ToolStrip ();
-			tool_strip.Items.Add (dropdown_item);
+    [TestFixture]
+    public class ToolStripDropDownItemTest
+    {
+        [Test]
+        public void FontTest()
+        {
+            ToolStripDropDownItem dropdown_item = new ToolStripMenuItem();
+            ToolStrip tool_strip = new ToolStrip();
+            tool_strip.Items.Add(dropdown_item);
 
-			Assert.AreEqual (tool_strip.Font, dropdown_item.Font, "#A1");
+            Assert.AreEqual(tool_strip.Font, dropdown_item.Font, "#A1");
 
-			tool_strip.Font = new Font (tool_strip.Font, FontStyle.Bold);
-			Assert.AreEqual (tool_strip.Font, dropdown_item.Font, "#B1");
+            tool_strip.Font = new Font(tool_strip.Font, FontStyle.Bold);
+            Assert.AreEqual(tool_strip.Font, dropdown_item.Font, "#B1");
 
-			// force the creation of our DropDown
-			ToolStripDropDown dropdown = dropdown_item.DropDown;
-			Assert.AreEqual (tool_strip.Font, dropdown.Font, "#C1");
+            // force the creation of our DropDown
+            ToolStripDropDown dropdown = dropdown_item.DropDown;
+            Assert.AreEqual(tool_strip.Font, dropdown.Font, "#C1");
 
-			tool_strip.Font = new Font (tool_strip.Font, FontStyle.Italic);
-			Assert.AreEqual (tool_strip.Font, dropdown_item.Font, "#D1");
-			Assert.AreEqual (tool_strip.Font, dropdown.Font, "#D2");
+            tool_strip.Font = new Font(tool_strip.Font, FontStyle.Italic);
+            Assert.AreEqual(tool_strip.Font, dropdown_item.Font, "#D1");
+            Assert.AreEqual(tool_strip.Font, dropdown.Font, "#D2");
 
-			dropdown_item.Font = new Font (dropdown_item.Font, FontStyle.Strikeout);
-			Assert.AreEqual (dropdown.Font, dropdown.Font, "#E1");
-		}
-	}
+            dropdown_item.Font = new Font(dropdown_item.Font, FontStyle.Strikeout);
+            Assert.AreEqual(dropdown.Font, dropdown.Font, "#E1");
+        }
+    }
 }
-

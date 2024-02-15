@@ -5,8 +5,8 @@ namespace System;
 
 internal static class TimeExtensions
 {
-    public static long ToTicks(this TimeSpan timeSpan, TimeProvider timeProvider)
-        => timeSpan.ToTicks(timeProvider.TimestampFrequency);
+    public static long ToTicks(this TimeSpan timeSpan, TimeProvider timeProvider) =>
+        timeSpan.ToTicks(timeProvider.TimestampFrequency);
 
     public static long ToTicks(this TimeSpan timeSpan, long tickFrequency)
     {
@@ -33,7 +33,11 @@ internal static class TimeExtensions
         return timeProvider.GetTimestamp(timeProvider.GetTimestamp(), timeSpan);
     }
 
-    public static long GetTimestamp(this TimeProvider timeProvider, long timeStamp, TimeSpan timeSpan)
+    public static long GetTimestamp(
+        this TimeProvider timeProvider,
+        long timeStamp,
+        TimeSpan timeSpan
+    )
     {
         return timeStamp + timeSpan.ToTicks(timeProvider);
     }

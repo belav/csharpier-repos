@@ -3,8 +3,8 @@
 
 using System.Buffers;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace System.MemoryTests
@@ -59,7 +59,6 @@ namespace System.MemoryTests
             }
         }
 
-
         [Theory]
         [InlineData(0)]
         [InlineData(3)]
@@ -77,7 +76,9 @@ namespace System.MemoryTests
                 {
                     unsafe
                     {
-                        void* pSpan = Unsafe.AsPointer(ref MemoryMarshal.GetReference(sp.Slice(elementIndex)));
+                        void* pSpan = Unsafe.AsPointer(
+                            ref MemoryMarshal.GetReference(sp.Slice(elementIndex))
+                        );
                         Assert.Equal((IntPtr)pSpan, ((IntPtr)newMemoryHandle.Pointer));
                     }
                 }
@@ -112,7 +113,9 @@ namespace System.MemoryTests
             {
                 unsafe
                 {
-                    void* pSpan = Unsafe.AsPointer(ref MemoryMarshal.GetReference(sp.Slice(elementIndex)));
+                    void* pSpan = Unsafe.AsPointer(
+                        ref MemoryMarshal.GetReference(sp.Slice(elementIndex))
+                    );
                     Assert.Equal((IntPtr)pSpan, ((IntPtr)newMemoryHandle.Pointer));
                 }
             }
@@ -150,17 +153,30 @@ namespace System.MemoryTests
                 IMemoryOwner<int> newBlock = pool.Rent(minBufferSize);
                 Memory<int> memory = newBlock.Memory;
                 Assert.True(memory.Length >= minBufferSize);
-                Assert.True(MemoryMarshal.TryGetArray(newBlock.Memory, out ArraySegment<int> newArraySegment));
+                Assert.True(
+                    MemoryMarshal.TryGetArray(
+                        newBlock.Memory,
+                        out ArraySegment<int> newArraySegment
+                    )
+                );
                 foreach (IMemoryOwner<int> prior in priorBlocks)
                 {
-                    Assert.True(MemoryMarshal.TryGetArray(prior.Memory, out ArraySegment<int> priorArraySegment));
+                    Assert.True(
+                        MemoryMarshal.TryGetArray(
+                            prior.Memory,
+                            out ArraySegment<int> priorArraySegment
+                        )
+                    );
                     using (MemoryHandle priorMemoryHandle = prior.Memory.Pin())
                     {
                         using (MemoryHandle newMemoryHandle = newBlock.Memory.Pin())
                         {
                             unsafe
                             {
-                                Assert.NotEqual((IntPtr)priorMemoryHandle.Pointer, (IntPtr)newMemoryHandle.Pointer);
+                                Assert.NotEqual(
+                                    (IntPtr)priorMemoryHandle.Pointer,
+                                    (IntPtr)newMemoryHandle.Pointer
+                                );
                             }
                         }
                     }
@@ -170,7 +186,9 @@ namespace System.MemoryTests
 
             foreach (IMemoryOwner<int> prior in priorBlocks)
             {
-                Assert.True(MemoryMarshal.TryGetArray(prior.Memory, out ArraySegment<int> priorArraySegment));
+                Assert.True(
+                    MemoryMarshal.TryGetArray(prior.Memory, out ArraySegment<int> priorArraySegment)
+                );
                 prior.Dispose();
             }
         }
@@ -186,7 +204,7 @@ namespace System.MemoryTests
             using (IMemoryOwner<int> block = MemoryPool<int>.Shared.Rent(minBufferSize: -1))
             {
                 Assert.True(block.Memory.Length >= 1);
-                block.Dispose();    // intentional double dispose
+                block.Dispose(); // intentional double dispose
             }
         }
 
@@ -213,7 +231,10 @@ namespace System.MemoryTests
             using (IMemoryOwner<int> block = MemoryPool<int>.Shared.Rent(42))
             {
                 Memory<int> memory = block.Memory;
-                bool success = MemoryMarshal.TryGetArray(memory, out ArraySegment<int> arraySegment);
+                bool success = MemoryMarshal.TryGetArray(
+                    memory,
+                    out ArraySegment<int> arraySegment
+                );
                 Assert.True(success);
                 Assert.Equal(memory.Length, arraySegment.Count);
                 unsafe

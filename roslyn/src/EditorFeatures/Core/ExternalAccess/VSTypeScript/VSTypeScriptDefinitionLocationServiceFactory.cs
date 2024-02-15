@@ -15,10 +15,18 @@ using Microsoft.CodeAnalysis.Navigation;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-[ExportLanguageServiceFactory(typeof(IDefinitionLocationService), InternalLanguageNames.TypeScript), Shared]
+[
+    ExportLanguageServiceFactory(
+        typeof(IDefinitionLocationService),
+        InternalLanguageNames.TypeScript
+    ),
+    Shared
+]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal sealed class VSTypeScriptDefinitionLocationServiceFactory(IVSTypeScriptGoToDefinitionServiceFactoryImplementation impl) : ILanguageServiceFactory
+internal sealed class VSTypeScriptDefinitionLocationServiceFactory(
+    IVSTypeScriptGoToDefinitionServiceFactoryImplementation impl
+) : ILanguageServiceFactory
 {
     public ILanguageService? CreateLanguageService(HostLanguageServices languageServices)
     {
@@ -26,16 +34,26 @@ internal sealed class VSTypeScriptDefinitionLocationServiceFactory(IVSTypeScript
         return service != null ? new VSTypeScriptDefinitionLocationService(service) : null;
     }
 
-    private sealed class VSTypeScriptDefinitionLocationService(IVSTypeScriptGoToDefinitionService service) : IDefinitionLocationService
+    private sealed class VSTypeScriptDefinitionLocationService(
+        IVSTypeScriptGoToDefinitionService service
+    ) : IDefinitionLocationService
     {
-        public Task<DefinitionLocation?> GetDefinitionLocationAsync(Document document, int position, CancellationToken cancellationToken)
-            => DefinitionLocationServiceHelpers.GetDefinitionLocationFromLegacyImplementationsAsync(
-                document, position,
+        public Task<DefinitionLocation?> GetDefinitionLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            DefinitionLocationServiceHelpers.GetDefinitionLocationFromLegacyImplementationsAsync(
+                document,
+                position,
                 async cancellationToken =>
                 {
-                    var items = await service.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+                    var items = await service
+                        .FindDefinitionsAsync(document, position, cancellationToken)
+                        .ConfigureAwait(false);
                     return items?.Select(i => (i.Document, i.SourceSpan));
                 },
-                cancellationToken);
+                cancellationToken
+            );
     }
 }

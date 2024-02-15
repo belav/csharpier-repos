@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -14,7 +15,8 @@ namespace DefaultNamespace
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };

@@ -15,53 +15,61 @@ public class ForwardedHeadersOptions
     /// Gets or sets the header used to retrieve the originating client IP. Defaults to the value specified by
     /// <see cref="ForwardedHeadersDefaults.XForwardedForHeaderName"/>.
     /// </summary>
-    public string ForwardedForHeaderName { get; set; } = ForwardedHeadersDefaults.XForwardedForHeaderName;
+    public string ForwardedForHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XForwardedForHeaderName;
 
     /// <summary>
     /// Gets or sets the header used to retrieve the original value of the Host header field.
     /// Defaults to the value specified by <see cref="ForwardedHeadersDefaults.XForwardedHostHeaderName"/>
     /// </summary>
-    public string ForwardedHostHeaderName { get; set; } = ForwardedHeadersDefaults.XForwardedHostHeaderName;
+    public string ForwardedHostHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XForwardedHostHeaderName;
 
     /// <summary>
     /// Gets or sets the header used to retrieve the value for the originating scheme (HTTP/HTTPS).
     /// Defaults to the value specified by <see cref="ForwardedHeadersDefaults.XForwardedProtoHeaderName"/>
     /// </summary>
-    public string ForwardedProtoHeaderName { get; set; } = ForwardedHeadersDefaults.XForwardedProtoHeaderName;
+    public string ForwardedProtoHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XForwardedProtoHeaderName;
 
     /// <summary>
     /// Gets or sets the header used to retrieve the value for the path base.
     /// Defaults to the value specified by <see cref="ForwardedHeadersDefaults.XForwardedPrefixHeaderName"/>
     /// </summary>
-    public string ForwardedPrefixHeaderName { get; set; } = ForwardedHeadersDefaults.XForwardedPrefixHeaderName;
+    public string ForwardedPrefixHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XForwardedPrefixHeaderName;
 
     /// <summary>
     /// Gets or sets the header used to store the original value of client IP before applying forwarded headers.
     /// Defaults to the value specified by <see cref="ForwardedHeadersDefaults.XOriginalForHeaderName"/>
     /// </summary>
     /// <seealso cref="ForwardedHeadersDefaults"/>
-    public string OriginalForHeaderName { get; set; } = ForwardedHeadersDefaults.XOriginalForHeaderName;
+    public string OriginalForHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XOriginalForHeaderName;
 
     /// <summary>
     /// Gets or sets the header used to store the original value of the Host header field before applying forwarded headers.
     /// Defaults to the value specified by <see cref="ForwardedHeadersDefaults.XOriginalHostHeaderName"/>
     /// </summary>
     /// <seealso cref="ForwardedHeadersDefaults"/>
-    public string OriginalHostHeaderName { get; set; } = ForwardedHeadersDefaults.XOriginalHostHeaderName;
+    public string OriginalHostHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XOriginalHostHeaderName;
 
     /// <summary>
     /// Gets or sets the header used to store the original scheme (HTTP/HTTPS) before applying forwarded headers.
     /// Defaults to the value specified by <see cref="ForwardedHeadersDefaults.XOriginalProtoHeaderName"/>
     /// </summary>
     /// <seealso cref="ForwardedHeadersDefaults"/>
-    public string OriginalProtoHeaderName { get; set; } = ForwardedHeadersDefaults.XOriginalProtoHeaderName;
+    public string OriginalProtoHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XOriginalProtoHeaderName;
 
     /// <summary>
     /// Gets or sets the header used to store the original path base before applying forwarded headers.
     /// Defaults to the value specified by <see cref="ForwardedHeadersDefaults.XOriginalPrefixHeaderName"/>
     /// </summary>
     /// <seealso cref="ForwardedHeadersDefaults"/>
-    public string OriginalPrefixHeaderName { get; set; } = ForwardedHeadersDefaults.XOriginalPrefixHeaderName;
+    public string OriginalPrefixHeaderName { get; set; } =
+        ForwardedHeadersDefaults.XOriginalPrefixHeaderName;
 
     /// <summary>
     /// Identifies which forwarders should be processed.
@@ -78,12 +86,14 @@ public class ForwardedHeadersOptions
     /// <summary>
     /// Addresses of known proxies to accept forwarded headers from.
     /// </summary>
-    public IList<IPAddress> KnownProxies { get; } = new List<IPAddress>() { IPAddress.IPv6Loopback };
+    public IList<IPAddress> KnownProxies { get; } =
+        new List<IPAddress>() { IPAddress.IPv6Loopback };
 
     /// <summary>
     /// Address ranges of known proxies to accept forwarded headers from.
     /// </summary>
-    public IList<IPNetwork> KnownNetworks { get; } = new List<IPNetwork>() { new IPNetwork(IPAddress.Loopback, 8) };
+    public IList<IPNetwork> KnownNetworks { get; } =
+        new List<IPNetwork>() { new IPNetwork(IPAddress.Loopback, 8) };
 
     /// <summary>
     /// The allowed values from x-forwarded-host. If the list is empty then all hosts are allowed.

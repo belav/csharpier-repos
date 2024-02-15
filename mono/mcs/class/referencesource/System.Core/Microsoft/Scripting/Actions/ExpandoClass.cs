@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -19,36 +19,40 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Text;
 
-namespace System.Dynamic {
+namespace System.Dynamic
+{
     /// <summary>
-    /// Represents a dynamically assigned class.  Expando objects which share the same 
+    /// Represents a dynamically assigned class.  Expando objects which share the same
     /// members will share the same class.  Classes are dynamically assigned as the
     /// expando object gains members.
     /// </summary>
-    internal class ExpandoClass {
-        private readonly string[] _keys;                            // list of names associated with each element in the data array, sorted
-        private readonly int _hashCode;                             // pre-calculated hash code of all the keys the class contains
-        private Dictionary<int, List<WeakReference>> _transitions;  // cached transitions
+    internal class ExpandoClass
+    {
+        private readonly string[] _keys; // list of names associated with each element in the data array, sorted
+        private readonly int _hashCode; // pre-calculated hash code of all the keys the class contains
+        private Dictionary<int, List<WeakReference>> _transitions; // cached transitions
 
-        private const int EmptyHashCode = 6551;                     // hash code of the empty ExpandoClass.
+        private const int EmptyHashCode = 6551; // hash code of the empty ExpandoClass.
 
-        internal static ExpandoClass Empty = new ExpandoClass();    // The empty Expando class - all Expando objects start off w/ this class.
-        
+        internal static ExpandoClass Empty = new ExpandoClass(); // The empty Expando class - all Expando objects start off w/ this class.
+
         /// <summary>
         /// Constructs the empty ExpandoClass.  This is the class used when an
         /// empty Expando object is initially constructed.
         /// </summary>
-        internal ExpandoClass() {
+        internal ExpandoClass()
+        {
             _hashCode = EmptyHashCode;
             _keys = new string[0];
         }
 
         /// <summary>
         /// Constructs a new ExpandoClass that can hold onto the specified keys.  The
-        /// keys must be sorted ordinally.  The hash code must be precalculated for 
+        /// keys must be sorted ordinally.  The hash code must be precalculated for
         /// the keys.
         /// </summary>
-        internal ExpandoClass(string[] keys, int hashCode) {
+        internal ExpandoClass(string[] keys, int hashCode)
+        {
             _hashCode = hashCode;
             _keys = keys;
         }
@@ -58,22 +62,33 @@ namespace System.Dynamic {
         /// in this ExpandoClass plus the new key to be added. Members in an
         /// ExpandoClass are always stored case sensitively.
         /// </summary>
-        internal ExpandoClass FindNewClass(string newKey) {
-            // just XOR the newKey hash code 
+        internal ExpandoClass FindNewClass(string newKey)
+        {
+            // just XOR the newKey hash code
             int hashCode = _hashCode ^ newKey.GetHashCode();
 
-            lock (this) {
+            lock (this)
+            {
                 List<WeakReference> infos = GetTransitionList(hashCode);
 
-                for (int i = 0; i < infos.Count; i++) {
+                for (int i = 0; i < infos.Count; i++)
+                {
                     ExpandoClass klass = infos[i].Target as ExpandoClass;
-                    if (klass == null) {
+                    if (klass == null)
+                    {
                         infos.RemoveAt(i);
                         i--;
                         continue;
                     }
 
-                    if (string.Equals(klass._keys[klass._keys.Length - 1], newKey, StringComparison.Ordinal)) {
+                    if (
+                        string.Equals(
+                            klass._keys[klass._keys.Length - 1],
+                            newKey,
+                            StringComparison.Ordinal
+                        )
+                    )
+                    {
                         // the new key is the key we added in this transition
                         return klass;
                     }
@@ -94,13 +109,16 @@ namespace System.Dynamic {
         /// Gets the lists of transitions that are valid from this ExpandoClass
         /// to an ExpandoClass whos keys hash to the apporopriate hash code.
         /// </summary>
-        private List<WeakReference> GetTransitionList(int hashCode) {
-            if (_transitions == null) {
+        private List<WeakReference> GetTransitionList(int hashCode)
+        {
+            if (_transitions == null)
+            {
                 _transitions = new Dictionary<int, List<WeakReference>>();
             }
 
             List<WeakReference> infos;
-            if (!_transitions.TryGetValue(hashCode, out infos)) {
+            if (!_transitions.TryGetValue(hashCode, out infos))
+            {
                 _transitions[hashCode] = infos = new List<WeakReference>();
             }
 
@@ -110,10 +128,14 @@ namespace System.Dynamic {
         /// <summary>
         /// Gets the index at which the value should be stored for the specified name.
         /// </summary>
-        internal int GetValueIndex(string name, bool caseInsensitive, ExpandoObject obj) {
-            if (caseInsensitive) {
+        internal int GetValueIndex(string name, bool caseInsensitive, ExpandoObject obj)
+        {
+            if (caseInsensitive)
+            {
                 return GetValueIndexCaseInsensitive(name, obj);
-            } else {
+            }
+            else
+            {
                 return GetValueIndexCaseSensitive(name);
             }
         }
@@ -122,12 +144,12 @@ namespace System.Dynamic {
         /// Gets the index at which the value should be stored for the specified name
         /// case sensitively. Returns the index even if the member is marked as deleted.
         /// </summary>
-        internal int GetValueIndexCaseSensitive(string name) {
-            for (int i = 0; i < _keys.Length; i++) {
-                if (string.Equals(
-                    _keys[i],
-                    name,
-                    StringComparison.Ordinal)) {
+        internal int GetValueIndexCaseSensitive(string name)
+        {
+            for (int i = 0; i < _keys.Length; i++)
+            {
+                if (string.Equals(_keys[i], name, StringComparison.Ordinal))
+                {
                     return i;
                 }
             }
@@ -146,19 +168,24 @@ namespace System.Dynamic {
         /// if there is exactly one member with case insensitive match, return it
         /// otherwise we throw AmbiguousMatchException.
         /// </returns>
-        private int GetValueIndexCaseInsensitive(string name, ExpandoObject obj) {
+        private int GetValueIndexCaseInsensitive(string name, ExpandoObject obj)
+        {
             int caseInsensitiveMatch = ExpandoObject.NoMatch; //the location of the case-insensitive matching member
-            lock (obj.LockObject) {
-                for (int i = _keys.Length - 1; i >= 0; i--) {
-                    if (string.Equals(
-                        _keys[i],
-                        name,
-                        StringComparison.OrdinalIgnoreCase)) {
+            lock (obj.LockObject)
+            {
+                for (int i = _keys.Length - 1; i >= 0; i--)
+                {
+                    if (string.Equals(_keys[i], name, StringComparison.OrdinalIgnoreCase))
+                    {
                         //if the matching member is deleted, continue searching
-                        if (!obj.IsDeletedMember(i)) {
-                            if (caseInsensitiveMatch == ExpandoObject.NoMatch) {
+                        if (!obj.IsDeletedMember(i))
+                        {
+                            if (caseInsensitiveMatch == ExpandoObject.NoMatch)
+                            {
                                 caseInsensitiveMatch = i;
-                            } else {
+                            }
+                            else
+                            {
                                 //Ambigous match, stop searching
                                 return ExpandoObject.AmbiguousMatchFound;
                             }
@@ -174,10 +201,9 @@ namespace System.Dynamic {
         /// Gets the names of the keys that can be stored in the Expando class.  The
         /// list is sorted ordinally.
         /// </summary>
-        internal string[] Keys {
-            get {
-                return _keys;
-            }
+        internal string[] Keys
+        {
+            get { return _keys; }
         }
     }
 }

@@ -10,16 +10,17 @@ namespace System.Web.Mvc
     public class WebFormView : BuildManagerCompiledView
     {
         public WebFormView(ControllerContext controllerContext, string viewPath)
-            : this(controllerContext, viewPath, null, null)
-        {
-        }
+            : this(controllerContext, viewPath, null, null) { }
 
         public WebFormView(ControllerContext controllerContext, string viewPath, string masterPath)
-            : this(controllerContext, viewPath, masterPath, null)
-        {
-        }
+            : this(controllerContext, viewPath, masterPath, null) { }
 
-        public WebFormView(ControllerContext controllerContext, string viewPath, string masterPath, IViewPageActivator viewPageActivator)
+        public WebFormView(
+            ControllerContext controllerContext,
+            string viewPath,
+            string masterPath,
+            IViewPageActivator viewPageActivator
+        )
             : base(controllerContext, viewPath, viewPageActivator)
         {
             MasterPath = masterPath ?? String.Empty;
@@ -27,7 +28,11 @@ namespace System.Web.Mvc
 
         public string MasterPath { get; private set; }
 
-        protected override void RenderView(ViewContext viewContext, TextWriter writer, object instance)
+        protected override void RenderView(
+            ViewContext viewContext,
+            TextWriter writer,
+            object instance
+        )
         {
             ViewPage viewPage = instance as ViewPage;
             if (viewPage != null)
@@ -47,7 +52,9 @@ namespace System.Web.Mvc
                 String.Format(
                     CultureInfo.CurrentCulture,
                     MvcResources.WebFormViewEngine_WrongViewBase,
-                    ViewPath));
+                    ViewPath
+                )
+            );
         }
 
         private void RenderViewPage(ViewContext context, ViewPage page)
@@ -65,7 +72,9 @@ namespace System.Web.Mvc
         {
             if (!String.IsNullOrEmpty(MasterPath))
             {
-                throw new InvalidOperationException(MvcResources.WebFormViewEngine_UserControlCannotHaveMaster);
+                throw new InvalidOperationException(
+                    MvcResources.WebFormViewEngine_UserControlCannotHaveMaster
+                );
             }
 
             control.ViewData = context.ViewData;

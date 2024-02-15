@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 using static System.Runtime.Intrinsics.X86.Avx;
-using System.Runtime.Intrinsics;
-using System.Runtime.CompilerServices;
 
 internal sealed class SpherePacket256 : ObjectPacket256
 {
@@ -13,7 +13,8 @@ internal sealed class SpherePacket256 : ObjectPacket256
     public Vector256<float> Radiuses;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public SpherePacket256(VectorPacket256 centers, Vector256<float> radiuses, Surface surface) : base(surface)
+    public SpherePacket256(VectorPacket256 centers, Vector256<float> radiuses, Surface surface)
+        : base(surface)
     {
         Centers = centers;
         Radiuses = radiuses;
@@ -30,9 +31,20 @@ internal sealed class SpherePacket256 : ObjectPacket256
         var v = VectorPacket256.DotProduct(eo, rayPacket256.Dirs);
         var zero = Vector256<float>.Zero;
         var vLessZeroMask = Compare(v, zero, FloatComparisonMode.OrderedLessThanNonSignaling);
-        var discs = Subtract(Multiply(Radiuses, Radiuses), Subtract(VectorPacket256.DotProduct(eo, eo), Multiply(v, v)));
-        var discLessZeroMask = Compare(discs, zero, FloatComparisonMode.OrderedLessThanNonSignaling);
-        var dists = BlendVariable(Subtract(v, Sqrt(discs)), zero, Or(vLessZeroMask, discLessZeroMask));
+        var discs = Subtract(
+            Multiply(Radiuses, Radiuses),
+            Subtract(VectorPacket256.DotProduct(eo, eo), Multiply(v, v))
+        );
+        var discLessZeroMask = Compare(
+            discs,
+            zero,
+            FloatComparisonMode.OrderedLessThanNonSignaling
+        );
+        var dists = BlendVariable(
+            Subtract(v, Sqrt(discs)),
+            zero,
+            Or(vLessZeroMask, discLessZeroMask)
+        );
         var isZero = Compare(dists, zero, FloatComparisonMode.OrderedEqualNonSignaling);
         return BlendVariable(dists, Intersections.NullDistance, isZero);
     }

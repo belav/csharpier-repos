@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,19 +44,16 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public const string Scheme = "ipc";
         public const string SchemeStart = "ipc://";
 
-        IpcChannelHelper()
-        {
-        }
+        IpcChannelHelper() { }
 
-        static readonly char[] InvalidPipeNameChars =
-            new char[] {'\\', '/'};
+        static readonly char[] InvalidPipeNameChars = new char[] { '\\', '/' };
 
         /// <summary>
         /// Validates a pipe name.
         /// </summary>
         /// <param name="pipeName">The pipe name.</param>
         /// <returns></returns>
-        public static bool IsValidPipeName(string pipeName) 
+        public static bool IsValidPipeName(string pipeName)
         {
             if (pipeName == null || pipeName.Trim() == "")
                 return false;
@@ -79,16 +76,16 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <returns>All but the object uri.</returns>
         public static string Parse(string url, out string pipeName, out string objectUri)
         {
-            if (url.StartsWith(SchemeStart)) 
+            if (url.StartsWith(SchemeStart))
             {
                 int i = url.IndexOf('/', SchemeStart.Length);
-                if (i >= 0) 
+                if (i >= 0)
                 {
                     pipeName = url.Substring(SchemeStart.Length, i - SchemeStart.Length);
                     objectUri = url.Substring(i);
                     return SchemeStart + pipeName;
                 }
-                else 
+                else
                 {
                     pipeName = url.Substring(SchemeStart.Length);
                     objectUri = null;
@@ -118,14 +115,14 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// </summary>
         /// <param name="input"></param>
         /// <param name="output"></param>
-        public static void Copy(Stream input, Stream output) 
+        public static void Copy(Stream input, Stream output)
         {
             MemoryStream ms = input as MemoryStream;
-	    if (ms != null)
-	    {
-	        ms.WriteTo (output);
-		return;
-	    }
+            if (ms != null)
+            {
+                ms.WriteTo(output);
+                return;
+            }
 
             // TODO: find out the optimal chunk size.
             const int size = 1024 * 1024;
@@ -137,7 +134,5 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
                 output.Write(buffer, 0, count);
             }
         }
-
     }
 }
-

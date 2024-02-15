@@ -1,11 +1,11 @@
-// 
+//
 // BranchNode.cs
-// 
+//
 // Authors:
 //	Alexander Chebaturkin (chebaturkin@gmail.com)
-// 
+//
 // Copyright (C) 2012 Alexander Chebaturkin
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,12 +13,12 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-//  
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
@@ -33,7 +33,7 @@ using System.Text;
 
 namespace Mono.CodeContracts.Static.DataStructures.Patricia
 {
-        public class BranchNode<T> : PatriciaTrieNode<T>
+    public class BranchNode<T> : PatriciaTrieNode<T>
     {
         private readonly int count;
 
@@ -42,16 +42,27 @@ namespace Mono.CodeContracts.Static.DataStructures.Patricia
         public readonly PatriciaTrieNode<T> Left;
         public readonly PatriciaTrieNode<T> Right;
 
-        public override int Key { get { return Prefix; } }
-        public override int Count { get { return count; } }
+        public override int Key
+        {
+            get { return Prefix; }
+        }
+        public override int Count
+        {
+            get { return count; }
+        }
 
-        public BranchNode(int prefix, int branchingBit, PatriciaTrieNode<T> left, PatriciaTrieNode<T> right)
+        public BranchNode(
+            int prefix,
+            int branchingBit,
+            PatriciaTrieNode<T> left,
+            PatriciaTrieNode<T> right
+        )
         {
             Prefix = prefix;
             BranchingBit = branchingBit;
             Left = left;
             Right = right;
-            
+
             count = left.Count + right.Count;
         }
 
@@ -71,9 +82,19 @@ namespace Mono.CodeContracts.Static.DataStructures.Patricia
                 return Join(new LeafNode<T>(key, value), this);
 
             if (IsZeroBitAt(key, BranchingBit))
-                return new BranchNode<T>(Prefix, BranchingBit, (PatriciaTrieNode<T>)Left.Add(key, value), Right);
-            
-            return new BranchNode<T>(Prefix, BranchingBit, Left, (PatriciaTrieNode<T>)Right.Add(key, value));
+                return new BranchNode<T>(
+                    Prefix,
+                    BranchingBit,
+                    (PatriciaTrieNode<T>)Left.Add(key, value),
+                    Right
+                );
+
+            return new BranchNode<T>(
+                Prefix,
+                BranchingBit,
+                Left,
+                (PatriciaTrieNode<T>)Right.Add(key, value)
+            );
         }
 
         public override IImmutableIntMap<T> Remove(int key)
@@ -85,8 +106,8 @@ namespace Mono.CodeContracts.Static.DataStructures.Patricia
                 left = (PatriciaTrieNode<T>)left.Remove(key);
                 if (left.Count == 0)
                     return right;
-            } 
-            else 
+            }
+            else
             {
                 right = (PatriciaTrieNode<T>)right.Remove(key);
                 if (right.Count == 0)
@@ -117,8 +138,7 @@ namespace Mono.CodeContracts.Static.DataStructures.Patricia
             {
                 child = IsZeroBitAt(key, current.BranchingBit) ? current.Left : current.Right;
                 current = child as BranchNode<T>;
-            }
-            while (current != null);
+            } while (current != null);
 
             return child.Lookup(key);
         }

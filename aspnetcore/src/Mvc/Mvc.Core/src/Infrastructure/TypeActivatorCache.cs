@@ -12,15 +12,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// </summary>
 internal sealed class TypeActivatorCache : ITypeActivatorCache
 {
-    private readonly Func<Type, ObjectFactory> _createFactory =
-        (type) => ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
+    private readonly Func<Type, ObjectFactory> _createFactory = (type) =>
+        ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
     private readonly ConcurrentDictionary<Type, ObjectFactory> _typeActivatorCache =
-           new ConcurrentDictionary<Type, ObjectFactory>();
+        new ConcurrentDictionary<Type, ObjectFactory>();
 
     /// <inheritdoc/>
     public TInstance CreateInstance<TInstance>(
         IServiceProvider serviceProvider,
-        Type implementationType)
+        Type implementationType
+    )
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
         ArgumentNullException.ThrowIfNull(implementationType);

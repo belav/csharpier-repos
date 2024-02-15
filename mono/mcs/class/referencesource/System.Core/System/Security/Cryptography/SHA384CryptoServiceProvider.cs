@@ -1,50 +1,62 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
 using System.Diagnostics.Contracts;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     /// <summary>
     ///     Wrapper around the CAPI implementation of the SHA-384 hashing algorithm
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class SHA384CryptoServiceProvider : SHA384 {
+    public sealed class SHA384CryptoServiceProvider : SHA384
+    {
         private CapiHashAlgorithm m_hashAlgorithm;
 
-        public SHA384CryptoServiceProvider() {
+        public SHA384CryptoServiceProvider()
+        {
             Contract.Ensures(m_hashAlgorithm != null);
 
-            m_hashAlgorithm = new CapiHashAlgorithm(CapiNative.ProviderNames.MicrosoftEnhancedRsaAes,
-                                                    CapiNative.ProviderType.RsaAes,
-                                                    CapiNative.AlgorithmId.Sha384);
+            m_hashAlgorithm = new CapiHashAlgorithm(
+                CapiNative.ProviderNames.MicrosoftEnhancedRsaAes,
+                CapiNative.ProviderType.RsaAes,
+                CapiNative.AlgorithmId.Sha384
+            );
         }
 
-        protected override void Dispose(bool disposing) {
-            try {
-                if (disposing) {
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (disposing)
+                {
                     m_hashAlgorithm.Dispose();
                 }
             }
-            finally {
+            finally
+            {
                 base.Dispose(disposing);
             }
         }
 
-        public override void Initialize() {
+        public override void Initialize()
+        {
             Contract.Assert(m_hashAlgorithm != null);
             m_hashAlgorithm.Initialize();
         }
 
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) {
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
             Contract.Assert(m_hashAlgorithm != null);
             m_hashAlgorithm.HashCore(array, ibStart, cbSize);
         }
 
-        protected override byte[] HashFinal() {
+        protected override byte[] HashFinal()
+        {
             Contract.Assert(m_hashAlgorithm != null);
             return m_hashAlgorithm.HashFinal();
         }

@@ -20,11 +20,16 @@ public class TestingInfrastructureInheritanceTests
         using var factory = new CustomizedFactory<BasicWebSite.StartupWithoutEndpointRouting>();
         using var customized = factory
             .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("Customization"))
-            .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization"));
+            .WithWebHostBuilder(builder =>
+                factory.ConfigureWebHostCalled.Add("FurtherCustomization")
+            );
         var client = customized.CreateClient();
 
         // Assert
-        Assert.Equal(new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" }, factory.ConfigureWebHostCalled.ToArray());
+        Assert.Equal(
+            new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" },
+            factory.ConfigureWebHostCalled.ToArray()
+        );
         Assert.True(factory.CreateServerCalled);
         Assert.True(factory.CreateWebHostBuilderCalled);
         // GetTestAssemblies is not called when reading content roots from MvcAppManifest
@@ -40,11 +45,16 @@ public class TestingInfrastructureInheritanceTests
         using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
         using var customized = factory
             .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("Customization"))
-            .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization"));
+            .WithWebHostBuilder(builder =>
+                factory.ConfigureWebHostCalled.Add("FurtherCustomization")
+            );
         var client = customized.CreateClient();
 
         // Assert
-        Assert.Equal(new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" }, factory.ConfigureWebHostCalled.ToArray());
+        Assert.Equal(
+            new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" },
+            factory.ConfigureWebHostCalled.ToArray()
+        );
         Assert.False(factory.GetTestAssembliesCalled);
         Assert.True(factory.CreateHostBuilderCalled);
         Assert.True(factory.CreateHostCalled);
@@ -70,8 +80,12 @@ public class TestingInfrastructureInheritanceTests
         using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
         var callbackCalled = false;
 
-        var lifetimeService = (IHostApplicationLifetime)factory.Services.GetService(typeof(IHostApplicationLifetime));
-        lifetimeService.ApplicationStopped.Register(() => { callbackCalled = true; });
+        var lifetimeService = (IHostApplicationLifetime)
+            factory.Services.GetService(typeof(IHostApplicationLifetime));
+        lifetimeService.ApplicationStopped.Register(() =>
+        {
+            callbackCalled = true;
+        });
         factory.Dispose();
 
         // Assert
@@ -82,7 +96,9 @@ public class TestingInfrastructureInheritanceTests
     public async Task TestingInfrastructure_GenericHost_HostDisposeAsync()
     {
         // Arrange
-        using var factory = new CustomizedFactory<GenericHostWebSite.Startup>().WithWebHostBuilder(ConfigureWebHostBuilder);
+        using var factory = new CustomizedFactory<GenericHostWebSite.Startup>().WithWebHostBuilder(
+            ConfigureWebHostBuilder
+        );
         var sink = factory.Services.GetRequiredService<DisposableService>();
 
         // Act
@@ -96,7 +112,9 @@ public class TestingInfrastructureInheritanceTests
     public void TestingInfrastructure_GenericHost_HostDispose()
     {
         // Arrange
-        using var factory = new CustomizedFactory<GenericHostWebSite.Startup>().WithWebHostBuilder(ConfigureWebHostBuilder);
+        using var factory = new CustomizedFactory<GenericHostWebSite.Startup>().WithWebHostBuilder(
+            ConfigureWebHostBuilder
+        );
         var sink = factory.Services.GetRequiredService<DisposableService>();
 
         // Act
@@ -107,12 +125,14 @@ public class TestingInfrastructureInheritanceTests
     }
 
     private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
-        builder.UseStartup<GenericHostWebSite.Startup>()
-        .ConfigureServices(s => s.AddScoped<DisposableService>());
+        builder
+            .UseStartup<GenericHostWebSite.Startup>()
+            .ConfigureServices(s => s.AddScoped<DisposableService>());
 
     private class DisposableService : IAsyncDisposable
     {
         public bool _asyncDisposed = false;
+
         public ValueTask DisposeAsync()
         {
             _asyncDisposed = true;
@@ -120,7 +140,8 @@ public class TestingInfrastructureInheritanceTests
         }
     }
 
-    private class CustomizedFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
+    private class CustomizedFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
+        where TEntryPoint : class
     {
         public bool GetTestAssembliesCalled { get; private set; }
         public bool CreateWebHostBuilderCalled { get; private set; }

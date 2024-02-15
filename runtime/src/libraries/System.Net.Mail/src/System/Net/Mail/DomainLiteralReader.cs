@@ -29,10 +29,21 @@ namespace System.Net.Mail
         // - A non-escaped character is encountered that is not valid in a domain literal, including Unicode.
         // - The final bracket is not found.
         //
-        internal static bool TryReadReverse(string data, int index, out int outIndex, bool throwExceptionIfFail)
+        internal static bool TryReadReverse(
+            string data,
+            int index,
+            out int outIndex,
+            bool throwExceptionIfFail
+        )
         {
-            Debug.Assert(0 <= index && index < data.Length, $"index was outside the bounds of the string: {index}");
-            Debug.Assert(data[index] == MailBnfHelper.EndSquareBracket, "data did not end with a square bracket");
+            Debug.Assert(
+                0 <= index && index < data.Length,
+                $"index was outside the bounds of the string: {index}"
+            );
+            Debug.Assert(
+                data[index] == MailBnfHelper.EndSquareBracket,
+                "data did not end with a square bracket"
+            );
 
             // Skip the end bracket
             index--;
@@ -40,7 +51,14 @@ namespace System.Net.Mail
             do
             {
                 // Check for valid whitespace
-                if (!WhitespaceReader.TryReadFwsReverse(data, index, out index, throwExceptionIfFail))
+                if (
+                    !WhitespaceReader.TryReadFwsReverse(
+                        data,
+                        index,
+                        out index,
+                        throwExceptionIfFail
+                    )
+                )
                 {
                     outIndex = default;
                     return false;
@@ -52,7 +70,15 @@ namespace System.Net.Mail
                 }
 
                 // Check for escaped characters
-                if (!QuotedPairReader.TryCountQuotedChars(data, index, false, out int quotedCharCount, throwExceptionIfFail))
+                if (
+                    !QuotedPairReader.TryCountQuotedChars(
+                        data,
+                        index,
+                        false,
+                        out int quotedCharCount,
+                        throwExceptionIfFail
+                    )
+                )
                 {
                     outIndex = default;
                     return false;
@@ -75,7 +101,9 @@ namespace System.Net.Mail
                 {
                     if (throwExceptionIfFail)
                     {
-                        throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                        throw new FormatException(
+                            SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index])
+                        );
                     }
                     else
                     {
@@ -88,14 +116,14 @@ namespace System.Net.Mail
                 {
                     index--;
                 }
-            }
-            while (index >= 0);
+            } while (index >= 0);
 
             if (throwExceptionIfFail)
             {
                 // We didn't find a matching '[', throw.
-                throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter,
-                    MailBnfHelper.EndSquareBracket));
+                throw new FormatException(
+                    SR.Format(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.EndSquareBracket)
+                );
             }
             else
             {

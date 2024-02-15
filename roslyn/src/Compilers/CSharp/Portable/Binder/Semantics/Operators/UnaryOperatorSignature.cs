@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly TypeSymbol ReturnType;
         public readonly UnaryOperatorKind Kind;
 
-        public UnaryOperatorSignature(UnaryOperatorKind kind, TypeSymbol operandType, TypeSymbol returnType)
+        public UnaryOperatorSignature(
+            UnaryOperatorKind kind,
+            TypeSymbol operandType,
+            TypeSymbol returnType
+        )
         {
             this.Kind = kind;
             this.OperandType = operandType;
@@ -29,7 +33,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.ConstrainedToTypeOpt = null;
         }
 
-        public UnaryOperatorSignature(UnaryOperatorKind kind, TypeSymbol operandType, TypeSymbol returnType, MethodSymbol method, TypeSymbol constrainedToTypeOpt)
+        public UnaryOperatorSignature(
+            UnaryOperatorKind kind,
+            TypeSymbol operandType,
+            TypeSymbol returnType,
+            MethodSymbol method,
+            TypeSymbol constrainedToTypeOpt
+        )
         {
             this.Kind = kind;
             this.OperandType = operandType;

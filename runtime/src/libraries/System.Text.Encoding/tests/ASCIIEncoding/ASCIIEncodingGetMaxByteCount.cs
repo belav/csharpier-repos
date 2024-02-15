@@ -17,8 +17,26 @@ namespace System.Text.Tests
 
             // Now test the input for an Encoding which has a zero or negative-length EncoderFallback.MaxCharCount.
 
-            Assert.Equal(charCount + 1, Encoding.GetEncoding("ascii", EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback).GetMaxByteCount(charCount));
-            Assert.Equal(charCount + 1, Encoding.GetEncoding("ascii", new CustomLengthEncoderFallback(-5), DecoderFallback.ExceptionFallback).GetMaxByteCount(charCount));
+            Assert.Equal(
+                charCount + 1,
+                Encoding
+                    .GetEncoding(
+                        "ascii",
+                        EncoderFallback.ExceptionFallback,
+                        DecoderFallback.ExceptionFallback
+                    )
+                    .GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                charCount + 1,
+                Encoding
+                    .GetEncoding(
+                        "ascii",
+                        new CustomLengthEncoderFallback(-5),
+                        DecoderFallback.ExceptionFallback
+                    )
+                    .GetMaxByteCount(charCount)
+            );
         }
 
         [Theory]
@@ -27,7 +45,11 @@ namespace System.Text.Tests
         [InlineData(10_000, 50_005)]
         public void GetMaxByteCount_WithLongEncoderFallback(int charCount, int expectedMaxByteCount)
         {
-            Encoding asciiEncoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback("abcde"), DecoderFallback.ExceptionFallback);
+            Encoding asciiEncoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback("abcde"),
+                DecoderFallback.ExceptionFallback
+            );
             Assert.Equal(expectedMaxByteCount, asciiEncoding.GetMaxByteCount(charCount));
         }
 
@@ -36,19 +58,32 @@ namespace System.Text.Tests
         [InlineData(int.MaxValue)]
         public void GetMaxByteCount_WithDefaultEncoder_InvalidArg(int charCount)
         {
-            Assert.Throws<ArgumentOutOfRangeException>("charCount", () => Encoding.ASCII.GetMaxByteCount(charCount));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "charCount",
+                () => Encoding.ASCII.GetMaxByteCount(charCount)
+            );
         }
 
         [Fact]
         public void GetMaxByteCount_Overflow_WithLongEncoderFallbackMaxCharCount()
         {
-            Encoding asciiEncoding = Encoding.GetEncoding("ascii", new CustomLengthEncoderFallback(1_000_000), DecoderFallback.ExceptionFallback);
-            Assert.Throws<ArgumentOutOfRangeException>("charCount", () => asciiEncoding.GetMaxByteCount(5_000_000));
+            Encoding asciiEncoding = Encoding.GetEncoding(
+                "ascii",
+                new CustomLengthEncoderFallback(1_000_000),
+                DecoderFallback.ExceptionFallback
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "charCount",
+                () => asciiEncoding.GetMaxByteCount(5_000_000)
+            );
         }
 
         private class CustomLengthEncoderFallback : EncoderFallback
         {
-            public CustomLengthEncoderFallback(int maxCharCount) { MaxCharCount = maxCharCount; }
+            public CustomLengthEncoderFallback(int maxCharCount)
+            {
+                MaxCharCount = maxCharCount;
+            }
 
             public override int MaxCharCount { get; }
 

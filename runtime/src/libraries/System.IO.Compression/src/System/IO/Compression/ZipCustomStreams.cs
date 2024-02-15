@@ -23,7 +23,12 @@ namespace System.IO.Compression
         internal WrappedStream(Stream baseStream, bool closeBaseStream)
             : this(baseStream, closeBaseStream, null, null) { }
 
-        private WrappedStream(Stream baseStream, bool closeBaseStream, ZipArchiveEntry? entry, Action<ZipArchiveEntry?>? onClosed)
+        private WrappedStream(
+            Stream baseStream,
+            bool closeBaseStream,
+            ZipArchiveEntry? entry,
+            Action<ZipArchiveEntry?>? onClosed
+        )
         {
             _baseStream = baseStream;
             _closeBaseStream = closeBaseStream;
@@ -32,7 +37,11 @@ namespace System.IO.Compression
             _isDisposed = false;
         }
 
-        internal WrappedStream(Stream baseStream, ZipArchiveEntry entry, Action<ZipArchiveEntry?>? onClosed)
+        internal WrappedStream(
+            Stream baseStream,
+            ZipArchiveEntry entry,
+            Action<ZipArchiveEntry?>? onClosed
+        )
             : this(baseStream, false, entry, onClosed) { }
 
         public override long Length
@@ -114,7 +123,12 @@ namespace System.IO.Compression
             return _baseStream.ReadByte();
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             ThrowIfCantRead();
@@ -122,7 +136,10 @@ namespace System.IO.Compression
             return _baseStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfDisposed();
             ThrowIfCantRead();
@@ -171,7 +188,12 @@ namespace System.IO.Compression
             _baseStream.WriteByte(value);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             ThrowIfCantWrite();
@@ -179,7 +201,10 @@ namespace System.IO.Compression
             return _baseStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfDisposed();
             ThrowIfCantWrite();
@@ -332,13 +357,21 @@ namespace System.IO.Compression
             return Read(new Span<byte>(ref b)) == 1 ? b : -1;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfDisposed();
             ThrowIfCantRead();
@@ -356,7 +389,9 @@ namespace System.IO.Compression
                     buffer = buffer.Slice(0, (int)(_endInSuperStream - _positionInSuperStream));
                 }
 
-                int ret = await _superStream.ReadAsync(buffer, cancellationToken).ConfigureAwait(false);
+                int ret = await _superStream
+                    .ReadAsync(buffer, cancellationToken)
+                    .ConfigureAwait(false);
 
                 _positionInSuperStream += ret;
                 return ret;
@@ -417,9 +452,17 @@ namespace System.IO.Compression
         private long _initialPosition;
         private readonly ZipArchiveEntry _zipArchiveEntry;
         private readonly EventHandler? _onClose;
+
         // Called when the stream is closed.
         // parameters are initialPosition, currentPosition, checkSum, baseBaseStream, zipArchiveEntry and onClose handler
-        private readonly Action<long, long, uint, Stream, ZipArchiveEntry, EventHandler?> _saveCrcAndSizes;
+        private readonly Action<
+            long,
+            long,
+            uint,
+            Stream,
+            ZipArchiveEntry,
+            EventHandler?
+        > _saveCrcAndSizes;
 
         // parameters to saveCrcAndSizes are
         // initialPosition (initialPosition in baseBaseStream),
@@ -428,9 +471,14 @@ namespace System.IO.Compression
         // baseBaseStream it's a backingStream, passed here so as to avoid closure allocation,
         // zipArchiveEntry passed here so as to avoid closure allocation,
         // onClose handler passed here so as to avoid closure allocation
-        public CheckSumAndSizeWriteStream(Stream baseStream, Stream baseBaseStream, bool leaveOpenOnClose,
-            ZipArchiveEntry entry, EventHandler? onClose,
-            Action<long, long, uint, Stream, ZipArchiveEntry, EventHandler?> saveCrcAndSizes)
+        public CheckSumAndSizeWriteStream(
+            Stream baseStream,
+            Stream baseBaseStream,
+            bool leaveOpenOnClose,
+            ZipArchiveEntry entry,
+            EventHandler? onClose,
+            Action<long, long, uint, Stream, ZipArchiveEntry, EventHandler?> saveCrcAndSizes
+        )
         {
             _baseStream = baseStream;
             _baseBaseStream = baseBaseStream;
@@ -541,25 +589,34 @@ namespace System.IO.Compression
             _position += source.Length;
         }
 
-        public override void WriteByte(byte value) =>
-            Write(new ReadOnlySpan<byte>(in value));
+        public override void WriteByte(byte value) => Write(new ReadOnlySpan<byte>(in value));
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
-            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfDisposed();
             Debug.Assert(CanWrite);
 
-            return !buffer.IsEmpty ?
-                Core(buffer, cancellationToken) :
-                default;
+            return !buffer.IsEmpty ? Core(buffer, cancellationToken) : default;
 
-            async ValueTask Core(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+            async ValueTask Core(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 if (!_everWritten)
                 {
@@ -599,7 +656,14 @@ namespace System.IO.Compression
                     _initialPosition = _baseBaseStream.Position;
                 if (!_leaveOpenOnClose)
                     _baseStream.Dispose(); // Close my super-stream (flushes the last data)
-                _saveCrcAndSizes?.Invoke(_initialPosition, Position, _checksum, _baseBaseStream, _zipArchiveEntry, _onClose);
+                _saveCrcAndSizes?.Invoke(
+                    _initialPosition,
+                    Position,
+                    _checksum,
+                    _baseBaseStream,
+                    _zipArchiveEntry,
+                    _onClose
+                );
                 _isDisposed = true;
             }
             base.Dispose(disposing);

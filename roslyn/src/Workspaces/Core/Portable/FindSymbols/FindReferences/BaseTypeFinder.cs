@@ -12,11 +12,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
 {
     internal static partial class BaseTypeFinder
     {
-        public static ImmutableArray<INamedTypeSymbol> FindBaseTypesAndInterfaces(INamedTypeSymbol type)
-            => FindBaseTypes(type).AddRange(type.AllInterfaces);
+        public static ImmutableArray<INamedTypeSymbol> FindBaseTypesAndInterfaces(
+            INamedTypeSymbol type
+        ) => FindBaseTypes(type).AddRange(type.AllInterfaces);
 
-        public static async ValueTask<ImmutableArray<ISymbol>> FindOverriddenAndImplementedMembersAsync(
-            ISymbol symbol, Solution solution, CancellationToken cancellationToken)
+        public static async ValueTask<
+            ImmutableArray<ISymbol>
+        > FindOverriddenAndImplementedMembersAsync(
+            ISymbol symbol,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             var results = ArrayBuilder<ISymbol>.GetInstance();
 
@@ -31,7 +37,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
                     cancellationToken.ThrowIfCancellationRequested();
 
                     // Add to results overridden members only. Do not add hidden members.
-                    if (await SymbolFinder.IsOverrideAsync(solution, symbol, member, cancellationToken).ConfigureAwait(false))
+                    if (
+                        await SymbolFinder
+                            .IsOverrideAsync(solution, symbol, member, cancellationToken)
+                            .ConfigureAwait(false)
+                    )
                     {
                         results.Add(member);
 
@@ -44,19 +54,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
                         //
                         // we should not find anything for B.M() because it does not implement the interface:
                         //
-                        // I i = new B(); i.M(); 
+                        // I i = new B(); i.M();
                         //
                         // will call the method from A.
-                        // However, if we change the code to 
+                        // However, if we change the code to
                         //
                         // class B : A, I { public new void M(); }
                         //
                         // then
                         //
-                        // I i = new B(); i.M(); 
+                        // I i = new B(); i.M();
                         //
                         // will call the method from B. We should find the base for B.M in this case.
-                        // And if we change 'new' to 'override' in the original code and add 'virtual' where needed, 
+                        // And if we change 'new' to 'override' in the original code and add 'virtual' where needed,
                         // we should find I.M as a base for B.M(). And the next line helps with this scenario.
                         results.AddRange(member.ExplicitOrImplicitInterfaceImplementations());
                     }

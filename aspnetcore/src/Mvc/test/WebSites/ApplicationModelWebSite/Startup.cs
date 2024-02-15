@@ -25,7 +25,10 @@ public class Startup
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(name: "areaRoute", pattern: "{area:exists}/{controller=Home}/{action=Index}");
+            endpoints.MapControllerRoute(
+                name: "areaRoute",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}"
+            );
             endpoints.MapControllerRoute(name: "default", pattern: "{controller}/{action}/{id?}");
 
             endpoints.MapRazorPages();
@@ -34,8 +37,7 @@ public class Startup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
@@ -47,4 +49,3 @@ public class Startup
             .UseKestrel()
             .UseIISIntegration();
 }
-

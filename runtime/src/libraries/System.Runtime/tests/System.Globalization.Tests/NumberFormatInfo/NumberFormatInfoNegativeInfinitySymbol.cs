@@ -37,13 +37,19 @@ namespace System.Globalization.Tests
         public void NegativeInfinitySymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "NegativeInfinitySymbol", () => format.NegativeInfinitySymbol = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "NegativeInfinitySymbol",
+                () => format.NegativeInfinitySymbol = null
+            );
         }
 
         [Fact]
         public void NegativeInfinitySymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.NegativeInfinitySymbol = "");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.NegativeInfinitySymbol = ""
+            );
         }
     }
 }
