@@ -51,7 +51,7 @@ public class BlazorTemplateTest : LoggedTest
         Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
     )]
     public Task BlazorWebTemplate_IndividualAuth(string[] args) =>
-        BlazorWebTemplate_Core([ArgConstants.IndividualAuth, ..args]);
+        BlazorWebTemplate_Core([ArgConstants.IndividualAuth, .. args]);
 
     [ConditionalTheory]
     [InlineData(false)]
