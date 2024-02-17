@@ -3016,38 +3016,38 @@ public class GenerateMethodTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScriptAsync(
             """
-            class C
-            {
-                async void M(ISomeInterface _someInterface)
+                class C
                 {
-                     await foreach (var item in _someInterface.[|GetItems|]())
-                     {
-                     }
+                    async void M(ISomeInterface _someInterface)
+                    {
+                         await foreach (var item in _someInterface.[|GetItems|]())
+                         {
+                         }
+                    }
                 }
-            }
 
-            interface ISomeInterface
-            {
-            }
+                interface ISomeInterface
+                {
+                }
 
-            """ + IAsyncEnumerable,
+                """ + IAsyncEnumerable,
             """
-            class C
-            {
-                async void M(ISomeInterface _someInterface)
+                class C
                 {
-                     await foreach (var item in _someInterface.GetItems())
-                     {
-                     }
+                    async void M(ISomeInterface _someInterface)
+                    {
+                         await foreach (var item in _someInterface.GetItems())
+                         {
+                         }
+                    }
                 }
-            }
 
-            interface ISomeInterface
-            {
-                System.Collections.Generic.IAsyncEnumerable<object> GetItems();
-            }
+                interface ISomeInterface
+                {
+                    System.Collections.Generic.IAsyncEnumerable<object> GetItems();
+                }
 
-            """ + IAsyncEnumerable
+                """ + IAsyncEnumerable
         );
     }
 
@@ -3056,38 +3056,38 @@ public class GenerateMethodTests(ITestOutputHelper logger)
     {
         await TestInRegularAndScriptAsync(
             """
-            class C
-            {
-                async void M(ISomeInterface _someInterface)
+                class C
                 {
-                     await foreach (string item in _someInterface.[|GetItems|]())
-                     {
-                     }
+                    async void M(ISomeInterface _someInterface)
+                    {
+                         await foreach (string item in _someInterface.[|GetItems|]())
+                         {
+                         }
+                    }
                 }
-            }
 
-            interface ISomeInterface
-            {
-            }
+                interface ISomeInterface
+                {
+                }
 
-            """ + IAsyncEnumerable,
+                """ + IAsyncEnumerable,
             """
-            class C
-            {
-                async void M(ISomeInterface _someInterface)
+                class C
                 {
-                     await foreach (string item in _someInterface.GetItems())
-                     {
-                     }
+                    async void M(ISomeInterface _someInterface)
+                    {
+                         await foreach (string item in _someInterface.GetItems())
+                         {
+                         }
+                    }
                 }
-            }
 
-            interface ISomeInterface
-            {
-                System.Collections.Generic.IAsyncEnumerable<string> GetItems();
-            }
+                interface ISomeInterface
+                {
+                    System.Collections.Generic.IAsyncEnumerable<string> GetItems();
+                }
 
-            """ + IAsyncEnumerable
+                """ + IAsyncEnumerable
         );
     }
 

@@ -16,8 +16,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Roslyn.Test.Utilities;
 using Xunit;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static Roslyn.Test.Utilities.AbstractLanguageServerProtocolTests;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace IdeBenchmarks.Lsp

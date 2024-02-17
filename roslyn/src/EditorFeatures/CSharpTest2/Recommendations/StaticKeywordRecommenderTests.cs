@@ -447,9 +447,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 declarationKind
                     + """
-                    C {
-                       abstract $$
-                    """
+                        C {
+                           abstract $$
+                        """
             );
         }
 
@@ -474,9 +474,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 declarationKind
                     + """
-                    C {
-                       virtual $$
-                    """
+                        C {
+                           virtual $$
+                        """
             );
         }
 
@@ -508,9 +508,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 declarationKind
                     + """
-                    C {
-                       override $$
-                    """
+                        C {
+                           override $$
+                        """
             );
         }
 
@@ -531,9 +531,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 declarationKind
                     + """
-                    C {
-                       static $$
-                    """
+                        C {
+                           static $$
+                        """
             );
         }
 
@@ -547,9 +547,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 declarationKind
                     + """
-                    C {
-                       sealed $$
-                    """
+                        C {
+                           sealed $$
+                        """
             );
         }
 

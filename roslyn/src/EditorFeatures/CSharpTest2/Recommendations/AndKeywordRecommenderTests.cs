@@ -346,10 +346,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        var result = e switch
-                        {
-                            1 $$
-                        """
+                            var result = e switch
+                            {
+                                1 $$
+                            """
                 )
             );
         }
@@ -382,10 +382,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        switch (e)
-                        {
-                            case 1 $$
-                        """
+                            switch (e)
+                            {
+                                case 1 $$
+                            """
                 )
             );
         }
@@ -397,10 +397,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        var result = e switch
-                        {
-                            (1 $$
-                        """
+                            var result = e switch
+                            {
+                                (1 $$
+                            """
                 )
             );
         }
@@ -433,10 +433,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        var result = e switch
-                        {
-                            (((1 $$
-                        """
+                            var result = e switch
+                            {
+                                (((1 $$
+                            """
                 )
             );
         }
@@ -469,10 +469,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        switch (e)
-                        {
-                            case (1 $$
-                        """
+                            switch (e)
+                            {
+                                case (1 $$
+                            """
                 )
             );
         }
@@ -484,10 +484,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        switch (e)
-                        {
-                            case (((1 $$
-                        """
+                            switch (e)
+                            {
+                                case (((1 $$
+                            """
                 )
             );
         }
@@ -581,10 +581,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        var result = e switch
-                        {
-                            $$
-                        """
+                            var result = e switch
+                            {
+                                $$
+                            """
                 )
             );
         }
@@ -596,10 +596,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        switch (e)
-                        {
-                            case $$
-                        """
+                            switch (e)
+                            {
+                                case $$
+                            """
                 )
             );
         }
@@ -631,11 +631,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                        var x = false;
-                        x = e switch
-                        {
-                            global::$$
-                        """
+                            var x = false;
+                            x = e switch
+                            {
+                                global::$$
+                            """
                 )
             );
         }

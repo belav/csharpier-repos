@@ -6733,35 +6733,35 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                namespace ANamespace
-                {
-                    public class TheAType { }
-                }
-
-                namespace N
-                {
-                    class Class
+                    namespace ANamespace
                     {
-                        [|TheAType|] a;
+                        public class TheAType { }
                     }
-                }
-                """.ReplaceLineEndings(sourceNewLine),
+
+                    namespace N
+                    {
+                        class Class
+                        {
+                            [|TheAType|] a;
+                        }
+                    }
+                    """.ReplaceLineEndings(sourceNewLine),
                 """
-                using ANamespace;
+                    using ANamespace;
 
-                namespace ANamespace
-                {
-                    public class TheAType { }
-                }
-
-                namespace N
-                {
-                    class Class
+                    namespace ANamespace
                     {
-                        TheAType a;
+                        public class TheAType { }
                     }
-                }
-                """.ReplaceLineEndings(sourceNewLine),
+
+                    namespace N
+                    {
+                        class Class
+                        {
+                            TheAType a;
+                        }
+                    }
+                    """.ReplaceLineEndings(sourceNewLine),
                 index: 0,
                 parameters: new TestParameters(
                     options: Option(FormattingOptions2.NewLine, configuredNewLine),
@@ -6785,50 +6785,50 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                using BNamespace;
+                    using BNamespace;
 
-                namespace ANamespace
-                {
-                    public class TheAType { }
-                }
-
-                namespace BNamespace
-                {
-                    public class TheBType { }
-                }
-
-                namespace N
-                {
-                    class Class
+                    namespace ANamespace
                     {
-                        [|TheAType|] a;
-                        TheBType b;
+                        public class TheAType { }
                     }
-                }
-                """.ReplaceLineEndings(sourceNewLine),
+
+                    namespace BNamespace
+                    {
+                        public class TheBType { }
+                    }
+
+                    namespace N
+                    {
+                        class Class
+                        {
+                            [|TheAType|] a;
+                            TheBType b;
+                        }
+                    }
+                    """.ReplaceLineEndings(sourceNewLine),
                 """
-                using ANamespace;
-                using BNamespace;
+                    using ANamespace;
+                    using BNamespace;
 
-                namespace ANamespace
-                {
-                    public class TheAType { }
-                }
-
-                namespace BNamespace
-                {
-                    public class TheBType { }
-                }
-
-                namespace N
-                {
-                    class Class
+                    namespace ANamespace
                     {
-                        TheAType a;
-                        TheBType b;
+                        public class TheAType { }
                     }
-                }
-                """.ReplaceLineEndings(sourceNewLine),
+
+                    namespace BNamespace
+                    {
+                        public class TheBType { }
+                    }
+
+                    namespace N
+                    {
+                        class Class
+                        {
+                            TheAType a;
+                            TheBType b;
+                        }
+                    }
+                    """.ReplaceLineEndings(sourceNewLine),
                 index: 0,
                 parameters: new TestParameters(
                     options: Option(FormattingOptions2.NewLine, configuredNewLine),
@@ -6848,50 +6848,50 @@ class Program
         {
             await TestInRegularAndScript1Async(
                 """
-                using ANamespace;
+                    using ANamespace;
 
-                namespace ANamespace
-                {
-                    public class TheAType { }
-                }
-
-                namespace BNamespace
-                {
-                    public class TheBType { }
-                }
-
-                namespace N
-                {
-                    class Class
+                    namespace ANamespace
                     {
-                        TheAType a;
-                        [|TheBType|] b;
+                        public class TheAType { }
                     }
-                }
-                """.ReplaceLineEndings(sourceNewLine),
+
+                    namespace BNamespace
+                    {
+                        public class TheBType { }
+                    }
+
+                    namespace N
+                    {
+                        class Class
+                        {
+                            TheAType a;
+                            [|TheBType|] b;
+                        }
+                    }
+                    """.ReplaceLineEndings(sourceNewLine),
                 """
-                using ANamespace;
-                using BNamespace;
+                    using ANamespace;
+                    using BNamespace;
 
-                namespace ANamespace
-                {
-                    public class TheAType { }
-                }
-
-                namespace BNamespace
-                {
-                    public class TheBType { }
-                }
-
-                namespace N
-                {
-                    class Class
+                    namespace ANamespace
                     {
-                        TheAType a;
-                        TheBType b;
+                        public class TheAType { }
                     }
-                }
-                """.ReplaceLineEndings(sourceNewLine),
+
+                    namespace BNamespace
+                    {
+                        public class TheBType { }
+                    }
+
+                    namespace N
+                    {
+                        class Class
+                        {
+                            TheAType a;
+                            TheBType b;
+                        }
+                    }
+                    """.ReplaceLineEndings(sourceNewLine),
                 index: 0,
                 parameters: new TestParameters(
                     options: Option(FormattingOptions2.NewLine, configuredNewLine),

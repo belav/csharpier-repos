@@ -1230,21 +1230,21 @@ public class EmitterTests
                 async (assemblyFullPath) =>
                 {
                     string source1 = """
-                    using Microsoft.Extensions.Options;
+                        using Microsoft.Extensions.Options;
 
-                    namespace MyAssembly;
+                        namespace MyAssembly;
 
-                    [OptionsValidator]
-                    public partial class MyOptionsValidator : IValidateOptions<MyOptions>
-                    {
-                    }
+                        [OptionsValidator]
+                        public partial class MyOptionsValidator : IValidateOptions<MyOptions>
+                        {
+                        }
 
-                    public class MyOptions
-                    {
-                        [ValidateObjectMembers]
-                        public AnotherAssembly.ClassInAnotherAssembly? TransitiveProperty { get; set; }
-                    }
-                    """;
+                        public class MyOptions
+                        {
+                            [ValidateObjectMembers]
+                            public AnotherAssembly.ClassInAnotherAssembly? TransitiveProperty { get; set; }
+                        }
+                        """;
 
                     Assembly assembly = Assembly.LoadFrom(assemblyFullPath);
 
@@ -1325,25 +1325,25 @@ public class EmitterTests
                     Assembly assembly = Assembly.LoadFrom(assemblyFullPath);
 
                     string source1 = """
-                        using Microsoft.Extensions.Options;
-                        using System.ComponentModel.DataAnnotations;
+                            using Microsoft.Extensions.Options;
+                            using System.ComponentModel.DataAnnotations;
 
-                        #nullable enable
+                            #nullable enable
 
-                        namespace ValidationTest
-                        {
-                            public class SecondOptions
+                            namespace ValidationTest
                             {
-                                [Required]
-                                public string? Prop { get; set; }
-                            }
+                                public class SecondOptions
+                                {
+                                    [Required]
+                                    public string? Prop { get; set; }
+                                }
 
-                            [OptionsValidator]
-                            internal sealed partial class SecondOptionsValidator : IValidateOptions<SecondOptions>
-                            {
+                                [OptionsValidator]
+                                internal sealed partial class SecondOptionsValidator : IValidateOptions<SecondOptions>
+                                {
+                                }
                             }
-                        }
-                    """;
+                        """;
 
                     var (diagnostics, generatedSources) = await RunGeneratorOnOptionsSource(
                         source1,
@@ -1487,34 +1487,34 @@ public class EmitterTests
                 async (assemblyFullPath) =>
                 {
                     string source0 = """
-                    using Microsoft.Extensions.Options;
-                    """;
+                        using Microsoft.Extensions.Options;
+                        """;
 
                     string source1 = """
-                    using System.ComponentModel.DataAnnotations;
+                        using System.ComponentModel.DataAnnotations;
 
-                    #nullable enable
-                    #pragma warning disable CS1591
+                        #nullable enable
+                        #pragma warning disable CS1591
 
-                    namespace ValidationTest
-                    {
-                        public class ExtOptions : BaseOptions
+                        namespace ValidationTest
                         {
-                            [Range(0, 10)]
-                            public int Prop3 { get; set; }
+                            public class ExtOptions : BaseOptions
+                            {
+                                [Range(0, 10)]
+                                public int Prop3 { get; set; }
+                            }
                         }
-                    }
-                    """;
+                        """;
 
                     string source2 = """
-                    namespace ValidationTest
-                    {
-                        [OptionsValidator]
-                        internal sealed partial class ExtOptionsValidator : IValidateOptions<ExtOptions>
+                        namespace ValidationTest
                         {
+                            [OptionsValidator]
+                            internal sealed partial class ExtOptionsValidator : IValidateOptions<ExtOptions>
+                            {
+                            }
                         }
-                    }
-                    """;
+                        """;
 
                     Assembly assembly = Assembly.LoadFrom(assemblyFullPath);
 

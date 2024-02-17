@@ -1727,36 +1727,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int, string) [||]getGoo()
+                    class C
                     {
-                    }
+                        (int, string) [||]getGoo()
+                        {
+                        }
 
-                    void setGoo((int, string) i)
-                    {
+                        void setGoo((int, string) i)
+                        {
+                        }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int, string) Goo
+                    class C
                     {
-                        get
+                        (int, string) Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 index: 1
             );
         }
@@ -1766,36 +1766,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
         {
             await TestWithAllCodeStyleOff(
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int a, string b) [||]getGoo()
+                    class C
                     {
-                    }
+                        (int a, string b) [||]getGoo()
+                        {
+                        }
 
-                    void setGoo((int a, string b) i)
-                    {
+                        void setGoo((int a, string b) i)
+                        {
+                        }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                using System;
+                    using System;
 
-                class C
-                {
-                    (int a, string b) Goo
+                    class C
                     {
-                        get
+                        (int a, string b) Goo
                         {
-                        }
+                            get
+                            {
+                            }
 
-                        set
-                        {
+                            set
+                            {
+                            }
                         }
                     }
-                }
-                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 index: 1
             );
         }

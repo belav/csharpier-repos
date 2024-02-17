@@ -197,8 +197,8 @@ namespace {DefaultNamespace}.a.b
                 directory: folder,
                 editorConfig: EditorConfig
                     + """
-                    dotnet_style_namespace_match_folder = false
-                    """
+                        dotnet_style_namespace_match_folder = false
+                        """
             );
         }
 
