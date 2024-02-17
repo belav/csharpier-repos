@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.CodeAnalysis.MSBuild.Logging;
-
 #if !DOTNET_BUILD_FROM_SOURCE
 using StreamJsonRpc;
 #endif
@@ -23,6 +22,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost;
 #endif
 internal interface IRemoteProjectFile : IDisposable
 {
-    Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(CancellationToken cancellationToken);
-    Task<ImmutableArray<DiagnosticLogItem>> GetDiagnosticLogItemsAsync(CancellationToken cancellationToken);
+    Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(
+        CancellationToken cancellationToken
+    );
+    Task<ImmutableArray<DiagnosticLogItem>> GetDiagnosticLogItemsAsync(
+        CancellationToken cancellationToken
+    );
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,43 +28,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class CodeSubDirectory : ConfigurationElement
-	{
-		static ConfigurationProperty directoryNameProp;
-		static ConfigurationPropertyCollection properties;
+    public sealed class CodeSubDirectory : ConfigurationElement
+    {
+        static ConfigurationProperty directoryNameProp;
+        static ConfigurationPropertyCollection properties;
 
-		static CodeSubDirectory ()
-		{
-			directoryNameProp = new ConfigurationProperty ("directoryName", typeof (string), "",
-								       PropertyHelper.WhiteSpaceTrimStringConverter,
-								       PropertyHelper.NonEmptyStringValidator,
-								       ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        static CodeSubDirectory()
+        {
+            directoryNameProp = new ConfigurationProperty(
+                "directoryName",
+                typeof(string),
+                "",
+                PropertyHelper.WhiteSpaceTrimStringConverter,
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (directoryNameProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(directoryNameProp);
+        }
 
-		public CodeSubDirectory (string directoryName)
-		{
-			this.DirectoryName = directoryName;
-		}
+        public CodeSubDirectory(string directoryName)
+        {
+            this.DirectoryName = directoryName;
+        }
 
-		[TypeConverter (typeof (WhiteSpaceTrimStringConverter))]
-		[ConfigurationProperty ("directoryName", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		// LAMESPEC: MS lists no validator here but provides one in Properties.
-		public string DirectoryName {
-			get { return (string) base[directoryNameProp]; }
-			set { base[directoryNameProp] = value; }
-		}
+        [TypeConverter(typeof(WhiteSpaceTrimStringConverter))]
+        [ConfigurationProperty(
+            "directoryName",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        // LAMESPEC: MS lists no validator here but provides one in Properties.
+        public string DirectoryName
+        {
+            get { return (string)base[directoryNameProp]; }
+            set { base[directoryNameProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_Jmp1
 {
     const int Pass = 100;
@@ -15,21 +16,23 @@ public class BringUpTest_Jmp1
     public static int Jmp1(int x)
     {
         goto L1;
-L2:
-        x = x+1;
+        L2:
+        x = x + 1;
         goto L3;
-L1:
-        x = x+1;
+        L1:
+        x = x + 1;
         goto L2;
-L3:
-        return x+1;
+        L3:
+        return x + 1;
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
         int y = Jmp1(1);
-        if (y == 4) return Pass;
-        else return Fail;
+        if (y == 4)
+            return Pass;
+        else
+            return Fail;
     }
 }

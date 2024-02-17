@@ -16,22 +16,31 @@ using System.Web.Http.Validation;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Parameter binding that will read from the body and invoke the formatters. 
+    /// Parameter binding that will read from the body and invoke the formatters.
     /// </summary>
     public class FormatterParameterBinding : HttpParameterBinding
     {
         // Magic key to pass cancellation token through the request property bag to maintain backward compat.
-        private const string CancellationTokenKey = "MS_FormatterParameterBinding_CancellationToken";
+        private const string CancellationTokenKey =
+            "MS_FormatterParameterBinding_CancellationToken";
 
         private IEnumerable<MediaTypeFormatter> _formatters;
         private string _errorMessage;
 
-        public FormatterParameterBinding(HttpParameterDescriptor descriptor, IEnumerable<MediaTypeFormatter> formatters, IBodyModelValidator bodyModelValidator)
+        public FormatterParameterBinding(
+            HttpParameterDescriptor descriptor,
+            IEnumerable<MediaTypeFormatter> formatters,
+            IBodyModelValidator bodyModelValidator
+        )
             : base(descriptor)
         {
             if (descriptor.IsOptional)
             {
-                _errorMessage = Error.Format(SRResources.OptionalBodyParameterNotSupported, descriptor.Prefix ?? descriptor.ParameterName, GetType().Name);
+                _errorMessage = Error.Format(
+                    SRResources.OptionalBodyParameterNotSupported,
+                    descriptor.Prefix ?? descriptor.ParameterName,
+                    GetType().Name
+                );
             }
             Formatters = formatters;
             BodyModelValidator = bodyModelValidator;
@@ -44,10 +53,7 @@ namespace System.Web.Http.ModelBinding
 
         public override string ErrorMessage
         {
-            get
-            {
-                return _errorMessage;
-            }
+            get { return _errorMessage; }
         }
 
         public IEnumerable<MediaTypeFormatter> Formatters
@@ -63,14 +69,14 @@ namespace System.Web.Http.ModelBinding
             }
         }
 
-        public IBodyModelValidator BodyModelValidator
-        {
-            get;
-            set;
-        }
+        public IBodyModelValidator BodyModelValidator { get; set; }
 
-        public virtual Task<object> ReadContentAsync(HttpRequestMessage request, Type type,
-            IEnumerable<MediaTypeFormatter> formatters, IFormatterLogger formatterLogger)
+        public virtual Task<object> ReadContentAsync(
+            HttpRequestMessage request,
+            Type type,
+            IEnumerable<MediaTypeFormatter> formatters,
+            IFormatterLogger formatterLogger
+        )
         {
             // Try to get the cancellation token if it is set earlier during the magic handshake
             // to maintain backward compatibility.
@@ -80,12 +86,27 @@ namespace System.Web.Http.ModelBinding
                 cancellationToken = CancellationToken.None;
             }
 
-            return ReadContentAsync(request, type, formatters, formatterLogger, (CancellationToken)cancellationToken);
+            return ReadContentAsync(
+                request,
+                type,
+                formatters,
+                formatterLogger,
+                (CancellationToken)cancellationToken
+            );
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Disposed later")]
-        public virtual Task<object> ReadContentAsync(HttpRequestMessage request, Type type,
-            IEnumerable<MediaTypeFormatter> formatters, IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Disposed later"
+        )]
+        public virtual Task<object> ReadContentAsync(
+            HttpRequestMessage request,
+            Type type,
+            IEnumerable<MediaTypeFormatter> formatters,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
             HttpContent content = request.Content;
             if (content == null)
@@ -108,33 +129,56 @@ namespace System.Web.Http.ModelBinding
             catch (UnsupportedMediaTypeException exception)
             {
                 // If there is no Content-Type header, provide a better error message
-                string errorFormat = content.Headers.ContentType == null ?
-                    SRResources.UnsupportedMediaTypeNoContentType :
-                    SRResources.UnsupportedMediaType;
+                string errorFormat =
+                    content.Headers.ContentType == null
+                        ? SRResources.UnsupportedMediaTypeNoContentType
+                        : SRResources.UnsupportedMediaType;
 
                 throw new HttpResponseException(
                     request.CreateErrorResponse(
                         HttpStatusCode.UnsupportedMediaType,
                         Error.Format(errorFormat, exception.MediaType.MediaType),
-                        exception));
+                        exception
+                    )
+                );
             }
         }
 
-        public override Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext,
-            CancellationToken cancellationToken)
+        public override Task ExecuteBindingAsync(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             HttpParameterDescriptor paramFromBody = this.Descriptor;
             Type type = paramFromBody.ParameterType;
             HttpRequestMessage request = actionContext.ControllerContext.Request;
-            IFormatterLogger formatterLogger = new ModelStateFormatterLogger(actionContext.ModelState, paramFromBody.ParameterName);
+            IFormatterLogger formatterLogger = new ModelStateFormatterLogger(
+                actionContext.ModelState,
+                paramFromBody.ParameterName
+            );
 
-            return ExecuteBindingAsyncCore(metadataProvider, actionContext, paramFromBody, type, request, formatterLogger, cancellationToken);
+            return ExecuteBindingAsyncCore(
+                metadataProvider,
+                actionContext,
+                paramFromBody,
+                type,
+                request,
+                formatterLogger,
+                cancellationToken
+            );
         }
 
         // Perf-sensitive - keeping the async method as small as possible
-        private async Task ExecuteBindingAsyncCore(ModelMetadataProvider metadataProvider, HttpActionContext actionContext,
-            HttpParameterDescriptor paramFromBody, Type type, HttpRequestMessage request, IFormatterLogger formatterLogger,
-            CancellationToken cancellationToken)
+        private async Task ExecuteBindingAsyncCore(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            HttpParameterDescriptor paramFromBody,
+            Type type,
+            HttpRequestMessage request,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
             // pass the cancellation token through the request as we cannot call the ReadContentAsync overload that takes
             // CancellationToken for backword compatibility reasons.
@@ -148,7 +192,13 @@ namespace System.Web.Http.ModelBinding
             // null indicates we want no body parameter validation
             if (BodyModelValidator != null)
             {
-                BodyModelValidator.Validate(model, type, metadataProvider, actionContext, paramFromBody.ParameterName);
+                BodyModelValidator.Validate(
+                    model,
+                    type,
+                    metadataProvider,
+                    actionContext,
+                    paramFromBody.ParameterName
+                );
             }
         }
     }

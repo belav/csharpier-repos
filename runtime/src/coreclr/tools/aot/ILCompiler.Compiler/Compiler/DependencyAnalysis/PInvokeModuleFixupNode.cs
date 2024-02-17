@@ -3,10 +3,8 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using InteropDataConstants = Internal.Runtime.InteropDataConstants;
 
@@ -29,12 +27,15 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append("__nativemodule_");
             _pInvokeModuleData.AppendMangledName(nameMangler, sb);
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -46,7 +47,9 @@ namespace ILCompiler.DependencyAnalysis
             builder.AddSymbol(this);
 
             ISymbolNode nameSymbol = factory.ConstantUtf8String(_pInvokeModuleData.ModuleName);
-            ISymbolNode moduleTypeSymbol = factory.NecessaryTypeSymbol(_pInvokeModuleData.DeclaringModule.GetGlobalModuleType());
+            ISymbolNode moduleTypeSymbol = factory.NecessaryTypeSymbol(
+                _pInvokeModuleData.DeclaringModule.GetGlobalModuleType()
+            );
 
             //
             // Emit a ModuleFixupCell struct
@@ -60,7 +63,9 @@ namespace ILCompiler.DependencyAnalysis
             if (_pInvokeModuleData.DllImportSearchPath.HasValue)
             {
                 dllImportSearchPath = (uint)_pInvokeModuleData.DllImportSearchPath.Value;
-                Debug.Assert((dllImportSearchPath & InteropDataConstants.HasDllImportSearchPath) == 0);
+                Debug.Assert(
+                    (dllImportSearchPath & InteropDataConstants.HasDllImportSearchPath) == 0
+                );
                 dllImportSearchPath |= InteropDataConstants.HasDllImportSearchPath;
             }
             builder.EmitInt((int)dllImportSearchPath);
@@ -72,7 +77,10 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _pInvokeModuleData.CompareTo(((PInvokeModuleFixupNode)other)._pInvokeModuleData, comparer);
+            return _pInvokeModuleData.CompareTo(
+                ((PInvokeModuleFixupNode)other)._pInvokeModuleData,
+                comparer
+            );
         }
     }
 
@@ -82,7 +90,11 @@ namespace ILCompiler.DependencyAnalysis
         public readonly DllImportSearchPath? DllImportSearchPath;
         public readonly ModuleDesc DeclaringModule;
 
-        public PInvokeModuleData(string moduleName, DllImportSearchPath? dllImportSearchPath, ModuleDesc declaringModule)
+        public PInvokeModuleData(
+            string moduleName,
+            DllImportSearchPath? dllImportSearchPath,
+            ModuleDesc declaringModule
+        )
         {
             ModuleName = moduleName;
             DllImportSearchPath = dllImportSearchPath;
@@ -91,9 +103,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public bool Equals(PInvokeModuleData other)
         {
-            return DeclaringModule == other.DeclaringModule &&
-                DllImportSearchPath == other.DllImportSearchPath &&
-                ModuleName == other.ModuleName;
+            return DeclaringModule == other.DeclaringModule
+                && DllImportSearchPath == other.DllImportSearchPath
+                && ModuleName == other.ModuleName;
         }
 
         public override bool Equals(object obj)
@@ -112,8 +124,10 @@ namespace ILCompiler.DependencyAnalysis
             if (result != 0)
                 return result;
 
-            result = comparer.Compare(DeclaringModule.GetGlobalModuleType(),
-                other.DeclaringModule.GetGlobalModuleType());
+            result = comparer.Compare(
+                DeclaringModule.GetGlobalModuleType(),
+                other.DeclaringModule.GetGlobalModuleType()
+            );
             if (result != 0)
                 return result;
 

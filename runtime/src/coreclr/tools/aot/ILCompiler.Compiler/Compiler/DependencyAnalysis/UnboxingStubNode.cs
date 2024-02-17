@@ -3,7 +3,6 @@
 
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -17,10 +16,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public override ObjectNodeSection GetSection(NodeFactory factory)
         {
-            return factory.Target.IsWindows ?
-                ObjectNodeSection.UnboxingStubWindowsContentSection :
-                ObjectNodeSection.UnboxingStubUnixContentSection;
+            return factory.Target.IsWindows
+                ? ObjectNodeSection.UnboxingStubWindowsContentSection
+                : ObjectNodeSection.UnboxingStubUnixContentSection;
         }
+
         public override bool IsShareable => true;
 
         public UnboxingStubNode(MethodDesc target)
@@ -46,7 +46,8 @@ namespace ILCompiler.DependencyAnalysis
             return "unbox_" + nameMangler.GetMangledMethodName(method);
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -1846923013;
 

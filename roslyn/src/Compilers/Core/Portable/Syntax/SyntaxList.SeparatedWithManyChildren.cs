@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.Syntax
         {
             private readonly ArrayElement<SyntaxNode?>[] _children;
 
-            internal SeparatedWithManyChildren(InternalSyntax.SyntaxList green, SyntaxNode? parent, int position)
+            internal SeparatedWithManyChildren(
+                InternalSyntax.SyntaxList green,
+                SyntaxNode? parent,
+                int position
+            )
                 : base(green, parent, position)
             {
                 _children = new ArrayElement<SyntaxNode?>[(green.SlotCount + 1) >> 1];
@@ -47,9 +51,11 @@ namespace Microsoft.CodeAnalysis.Syntax
                 // is a separator and separators are not cached. In those cases, when the index represents
                 // the last or next to last item, we still want to calculate the position from the end of
                 // the list rather than the start.
-                if (valueIndex > 1
+                if (
+                    valueIndex > 1
                     && GetCachedSlot(valueIndex - 2) is null
-                    && (valueIndex >= Green.SlotCount - 2 || GetCachedSlot(valueIndex + 2) is { }))
+                    && (valueIndex >= Green.SlotCount - 2 || GetCachedSlot(valueIndex + 2) is { })
+                )
                 {
                     return GetChildPositionFromEnd(index);
                 }

@@ -15,20 +15,27 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MetadataServiceFactory()
+        public MetadataServiceFactory() { }
+
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new Service(workspaceServices.GetService<IDocumentationProviderService>());
+
+        private sealed class Service(IDocumentationProviderService documentationService)
+            : IMetadataService
         {
-        }
+            private readonly MetadataReferenceCache _metadataCache = new MetadataReferenceCache(
+                (path, properties) =>
+                    MetadataReference.CreateFromFile(
+                        path,
+                        properties,
+                        documentationService.GetDocumentationProvider(path)
+                    )
+            );
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new Service(workspaceServices.GetService<IDocumentationProviderService>());
-
-        private sealed class Service(IDocumentationProviderService documentationService) : IMetadataService
-        {
-            private readonly MetadataReferenceCache _metadataCache = new MetadataReferenceCache((path, properties) =>
-                    MetadataReference.CreateFromFile(path, properties, documentationService.GetDocumentationProvider(path)));
-
-            public PortableExecutableReference GetReference(string resolvedPath, MetadataReferenceProperties properties)
-                => (PortableExecutableReference)_metadataCache.GetReference(resolvedPath, properties);
+            public PortableExecutableReference GetReference(
+                string resolvedPath,
+                MetadataReferenceProperties properties
+            ) => (PortableExecutableReference)_metadataCache.GetReference(resolvedPath, properties);
         }
     }
 }

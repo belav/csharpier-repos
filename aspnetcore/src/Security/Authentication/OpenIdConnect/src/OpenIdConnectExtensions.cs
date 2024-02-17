@@ -23,8 +23,8 @@ public static class OpenIdConnectExtensions
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddOpenIdConnect(this AuthenticationBuilder builder)
-        => builder.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, _ => { });
+    public static AuthenticationBuilder AddOpenIdConnect(this AuthenticationBuilder builder) =>
+        builder.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, _ => { });
 
     /// <summary>
     /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
@@ -37,8 +37,10 @@ public static class OpenIdConnectExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="configureOptions">A delegate to configure <see cref="OpenIdConnectOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddOpenIdConnect(this AuthenticationBuilder builder, Action<OpenIdConnectOptions> configureOptions)
-        => builder.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, configureOptions);
+    public static AuthenticationBuilder AddOpenIdConnect(
+        this AuthenticationBuilder builder,
+        Action<OpenIdConnectOptions> configureOptions
+    ) => builder.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, configureOptions);
 
     /// <summary>
     /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the specified scheme.
@@ -51,8 +53,16 @@ public static class OpenIdConnectExtensions
     /// <param name="authenticationScheme">The authentication scheme.</param>
     /// <param name="configureOptions">A delegate to configure <see cref="OpenIdConnectOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddOpenIdConnect(this AuthenticationBuilder builder, string authenticationScheme, Action<OpenIdConnectOptions> configureOptions)
-        => builder.AddOpenIdConnect(authenticationScheme, OpenIdConnectDefaults.DisplayName, configureOptions);
+    public static AuthenticationBuilder AddOpenIdConnect(
+        this AuthenticationBuilder builder,
+        string authenticationScheme,
+        Action<OpenIdConnectOptions> configureOptions
+    ) =>
+        builder.AddOpenIdConnect(
+            authenticationScheme,
+            OpenIdConnectDefaults.DisplayName,
+            configureOptions
+        );
 
     /// <summary>
     /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the specified scheme.
@@ -66,10 +76,29 @@ public static class OpenIdConnectExtensions
     /// <param name="displayName">A display name for the authentication handler.</param>
     /// <param name="configureOptions">A delegate to configure <see cref="OpenIdConnectOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddOpenIdConnect(this AuthenticationBuilder builder, string authenticationScheme, string? displayName, Action<OpenIdConnectOptions> configureOptions)
+    public static AuthenticationBuilder AddOpenIdConnect(
+        this AuthenticationBuilder builder,
+        string authenticationScheme,
+        string? displayName,
+        Action<OpenIdConnectOptions> configureOptions
+    )
     {
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<OpenIdConnectOptions>, OpenIdConnectConfigureOptions>());
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IPostConfigureOptions<OpenIdConnectOptions>, OpenIdConnectPostConfigureOptions>());
-        return builder.AddRemoteScheme<OpenIdConnectOptions, OpenIdConnectHandler>(authenticationScheme, displayName, configureOptions);
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<OpenIdConnectOptions>,
+                OpenIdConnectConfigureOptions
+            >()
+        );
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IPostConfigureOptions<OpenIdConnectOptions>,
+                OpenIdConnectPostConfigureOptions
+            >()
+        );
+        return builder.AddRemoteScheme<OpenIdConnectOptions, OpenIdConnectHandler>(
+            authenticationScheme,
+            displayName,
+            configureOptions
+        );
     }
 }

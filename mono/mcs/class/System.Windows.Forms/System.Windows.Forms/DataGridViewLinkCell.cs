@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,310 +26,409 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 using System.Drawing;
 using System.Security.Permissions;
-using System.ComponentModel;
+using System.Text;
 
 namespace System.Windows.Forms
 {
-	public class DataGridViewLinkCell : DataGridViewCell
-	{
+    public class DataGridViewLinkCell : DataGridViewCell
+    {
+        public DataGridViewLinkCell()
+        {
+            activeLinkColor = Color.Red;
+            linkColor = Color.FromArgb(0, 0, 255);
+            trackVisitedState = true;
+            visited_link_color = Color.FromArgb(128, 0, 128);
+        }
 
-		public DataGridViewLinkCell ()
-		{
-			activeLinkColor = Color.Red;
-			linkColor = Color.FromArgb (0, 0, 255);
-			trackVisitedState = true;
-			visited_link_color = Color.FromArgb (128, 0, 128);
-		}
+        #region Public Methods
 
-		#region Public Methods
+        public override object Clone()
+        {
+            DataGridViewLinkCell clone = (DataGridViewLinkCell)base.Clone();
 
-		public override object Clone ()
-		{
-			DataGridViewLinkCell clone = (DataGridViewLinkCell)base.Clone ();
-			
-			clone.activeLinkColor = this.activeLinkColor;
-			clone.linkColor = this.linkColor;
-			clone.linkVisited = this.linkVisited;
-			clone.linkBehavior = this.linkBehavior;
-			clone.visited_link_color = this.visited_link_color;
-			clone.trackVisitedState = this.trackVisitedState;
-			clone.useColumnTextForLinkValue = this.useColumnTextForLinkValue;
-			
-			return clone;
-		}
+            clone.activeLinkColor = this.activeLinkColor;
+            clone.linkColor = this.linkColor;
+            clone.linkVisited = this.linkVisited;
+            clone.linkBehavior = this.linkBehavior;
+            clone.visited_link_color = this.visited_link_color;
+            clone.trackVisitedState = this.trackVisitedState;
+            clone.useColumnTextForLinkValue = this.useColumnTextForLinkValue;
 
-		public override string ToString ()
-		{
-			return string.Format ("DataGridViewLinkCell {{ ColumnIndex={0}, RowIndex={1} }}", ColumnIndex, RowIndex);
-		}
+            return clone;
+        }
 
-		#endregion
+        public override string ToString()
+        {
+            return string.Format(
+                "DataGridViewLinkCell {{ ColumnIndex={0}, RowIndex={1} }}",
+                ColumnIndex,
+                RowIndex
+            );
+        }
 
-		#region Protected Methods
+        #endregion
 
-		protected override AccessibleObject CreateAccessibilityInstance ()
-		{
-			return new DataGridViewLinkCellAccessibleObject (this);
-		}
-		
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
-		{
-			if (DataGridView == null)
-				return Rectangle.Empty;
+        #region Protected Methods
 
-			object o = FormattedValue;
-			Size s = Size.Empty;
+        protected override AccessibleObject CreateAccessibilityInstance()
+        {
+            return new DataGridViewLinkCellAccessibleObject(this);
+        }
 
-			if (o != null) {
-				s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
-				s.Height += 3;
-			} else {
-				return new Rectangle (1, 10, 0, 0);
-			}
+        protected override Rectangle GetContentBounds(
+            Graphics graphics,
+            DataGridViewCellStyle cellStyle,
+            int rowIndex
+        )
+        {
+            if (DataGridView == null)
+                return Rectangle.Empty;
 
-			return new Rectangle (1, (OwningRow.Height - s.Height) / 2 - 1, s.Width, s.Height);
-		}
-		
-		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
-		{
-			if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
-				return Rectangle.Empty;
+            object o = FormattedValue;
+            Size s = Size.Empty;
 
-			Size error_icon = new Size (12, 11);
-			return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
-		}
-		
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
-		{
-			object o = FormattedValue;
+            if (o != null)
+            {
+                s = DataGridViewCell.MeasureTextSize(
+                    graphics,
+                    o.ToString(),
+                    cellStyle.Font,
+                    TextFormatFlags.Default
+                );
+                s.Height += 3;
+            }
+            else
+            {
+                return new Rectangle(1, 10, 0, 0);
+            }
 
-			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
-				s.Height = Math.Max (s.Height, 20);
-				s.Width += 4;
-				return s;
-			} else
-				return new Size (21, 20);
-		}
-		
-		protected override object GetValue (int rowIndex)
-		{
-			if (useColumnTextForLinkValue)
-				return (OwningColumn as DataGridViewLinkColumn).Text;
-				
-			return base.GetValue (rowIndex);
-		}
+            return new Rectangle(1, (OwningRow.Height - s.Height) / 2 - 1, s.Width, s.Height);
+        }
 
-		protected override bool KeyUpUnsharesRow (KeyEventArgs e, int rowIndex)
-		{
-			if (e.KeyCode != Keys.Space
-				&& trackVisitedState == true
-				&& linkVisited == false
-				&& !e.Shift 
-				&& !e.Control
-				&& !e.Alt)
-				return true;
+        protected override Rectangle GetErrorIconBounds(
+            Graphics graphics,
+            DataGridViewCellStyle cellStyle,
+            int rowIndex
+        )
+        {
+            if (DataGridView == null || string.IsNullOrEmpty(ErrorText))
+                return Rectangle.Empty;
 
-			return false;
-		}
-		
-		protected override bool MouseDownUnsharesRow (DataGridViewCellMouseEventArgs e)
-		{
-			return true;
-		}
-		
-		protected override bool MouseLeaveUnsharesRow (int rowIndex)
-		{
-			return (linkState != LinkState.Normal);
-		}
+            Size error_icon = new Size(12, 11);
+            return new Rectangle(
+                new Point(Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2),
+                error_icon
+            );
+        }
 
-		protected override bool MouseMoveUnsharesRow (DataGridViewCellMouseEventArgs e)
-		{
-			if (linkState == LinkState.Hover)
-				return true;
+        protected override Size GetPreferredSize(
+            Graphics graphics,
+            DataGridViewCellStyle cellStyle,
+            int rowIndex,
+            Size constraintSize
+        )
+        {
+            object o = FormattedValue;
 
-			return false;
-		}
+            if (o != null)
+            {
+                Size s = DataGridViewCell.MeasureTextSize(
+                    graphics,
+                    o.ToString(),
+                    cellStyle.Font,
+                    TextFormatFlags.Default
+                );
+                s.Height = Math.Max(s.Height, 20);
+                s.Width += 4;
+                return s;
+            }
+            else
+                return new Size(21, 20);
+        }
 
-		protected override bool MouseUpUnsharesRow (DataGridViewCellMouseEventArgs e)
-		{
-			return (linkState == LinkState.Hover);
-		}
-		
-		protected override void OnKeyUp (KeyEventArgs e, int rowIndex)
-		{
-			if ((e.KeyData & Keys.Space) == Keys.Space) {
-				linkState = LinkState.Normal;
-				DataGridView.InvalidateCell (this);
-			}
-		}
+        protected override object GetValue(int rowIndex)
+        {
+            if (useColumnTextForLinkValue)
+                return (OwningColumn as DataGridViewLinkColumn).Text;
 
-		protected override void OnMouseDown (DataGridViewCellMouseEventArgs e)
-		{
-			base.OnMouseDown (e);
-			
-			linkState = LinkState.Active;
-			DataGridView.InvalidateCell (this);
-		}
-		
-		protected override void OnMouseLeave (int rowIndex)
-		{
-			base.OnMouseLeave (rowIndex);
-			
-			linkState = LinkState.Normal;
-			DataGridView.InvalidateCell (this);
-			DataGridView.Cursor = parent_cursor;
-		}
-		
-		protected override void OnMouseMove (DataGridViewCellMouseEventArgs e)
-		{
-			base.OnMouseMove (e);
-			
-			if (linkState != LinkState.Hover) {
-				linkState = LinkState.Hover;
-				DataGridView.InvalidateCell (this);
-				parent_cursor = DataGridView.Cursor;
-				DataGridView.Cursor = Cursors.Hand;
-			}
-		}
-		
-		protected override void OnMouseUp (DataGridViewCellMouseEventArgs e)
-		{
-			base.OnMouseUp (e);
-			
-			linkState = LinkState.Hover;
-			LinkVisited = true;
-			DataGridView.InvalidateCell (this);
-		}
+            return base.GetValue(rowIndex);
+        }
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
-		{
-			base.Paint (graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
-		}
-		
-		internal override void PaintPartContent (Graphics graphics, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
-		{
-			Font font = cellStyle.Font;
+        protected override bool KeyUpUnsharesRow(KeyEventArgs e, int rowIndex)
+        {
+            if (
+                e.KeyCode != Keys.Space
+                && trackVisitedState == true
+                && linkVisited == false
+                && !e.Shift
+                && !e.Control
+                && !e.Alt
+            )
+                return true;
 
-			switch (LinkBehavior) {
-				case LinkBehavior.AlwaysUnderline:
-				case LinkBehavior.SystemDefault:
-					font = new Font (font, FontStyle.Underline);
-					break;
-				case LinkBehavior.HoverUnderline:
-					if (linkState == LinkState.Hover)
-						font = new Font (font, FontStyle.Underline);
-					break;
-			}
+            return false;
+        }
 
-			Color color;
-			
-			if (linkState == LinkState.Active)
-				color = ActiveLinkColor;
-			else if (linkVisited)
-				color = VisitedLinkColor;
-			else
-				color = LinkColor;
+        protected override bool MouseDownUnsharesRow(DataGridViewCellMouseEventArgs e)
+        {
+            return true;
+        }
 
-			TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter | TextFormatFlags.TextBoxControl;
+        protected override bool MouseLeaveUnsharesRow(int rowIndex)
+        {
+            return (linkState != LinkState.Normal);
+        }
 
-			cellBounds.Height -= 2;
-			cellBounds.Width -= 2;
+        protected override bool MouseMoveUnsharesRow(DataGridViewCellMouseEventArgs e)
+        {
+            if (linkState == LinkState.Hover)
+                return true;
 
-			if (formattedValue != null)
-				TextRenderer.DrawText (graphics, formattedValue.ToString (), font, cellBounds, color, flags);
-		}
-		#endregion
+            return false;
+        }
 
-		#region Private fields
+        protected override bool MouseUpUnsharesRow(DataGridViewCellMouseEventArgs e)
+        {
+            return (linkState == LinkState.Hover);
+        }
 
-		private Color activeLinkColor;
-		private LinkBehavior linkBehavior;
-		private Color linkColor;
-		private bool linkVisited;
-		private Cursor parent_cursor;
-		private bool trackVisitedState;
-		private bool useColumnTextForLinkValue;
-		private Color visited_link_color;
-		private LinkState linkState;
+        protected override void OnKeyUp(KeyEventArgs e, int rowIndex)
+        {
+            if ((e.KeyData & Keys.Space) == Keys.Space)
+            {
+                linkState = LinkState.Normal;
+                DataGridView.InvalidateCell(this);
+            }
+        }
 
-		#endregion
+        protected override void OnMouseDown(DataGridViewCellMouseEventArgs e)
+        {
+            base.OnMouseDown(e);
 
-		#region Public properties
+            linkState = LinkState.Active;
+            DataGridView.InvalidateCell(this);
+        }
 
-		public Color ActiveLinkColor {
-			get { return activeLinkColor; }
-			set { activeLinkColor = value; }
-		}
+        protected override void OnMouseLeave(int rowIndex)
+        {
+            base.OnMouseLeave(rowIndex);
 
-		[DefaultValue (LinkBehavior.SystemDefault)]
-		public LinkBehavior LinkBehavior {
-			get { return linkBehavior; }
-			set { linkBehavior = value; }
-		}
-		public Color LinkColor {
-			get { return linkColor; }
-			set { linkColor = value; }
-		}
-		public bool LinkVisited {
-			get { return linkVisited; }
-			set { linkVisited = value; }
-		}
-		[DefaultValue (true)]
-		public bool TrackVisitedState {
-			get { return trackVisitedState; }
-			set { trackVisitedState = value; }
-		}
-		[DefaultValue (false)]
-		public bool UseColumnTextForLinkValue {
-			get { return useColumnTextForLinkValue; }
-			set { useColumnTextForLinkValue = value; }
-		}
+            linkState = LinkState.Normal;
+            DataGridView.InvalidateCell(this);
+            DataGridView.Cursor = parent_cursor;
+        }
 
-		public Color VisitedLinkColor {
-			get { return visited_link_color; }
-			set { visited_link_color = value; }
-		}
+        protected override void OnMouseMove(DataGridViewCellMouseEventArgs e)
+        {
+            base.OnMouseMove(e);
 
-		public override Type ValueType {
-			get { return base.ValueType == null ? typeof (object) : base.ValueType; }
-		}
+            if (linkState != LinkState.Hover)
+            {
+                linkState = LinkState.Hover;
+                DataGridView.InvalidateCell(this);
+                parent_cursor = DataGridView.Cursor;
+                DataGridView.Cursor = Cursors.Hand;
+            }
+        }
 
-		public override Type EditType {
-			get { return null; }
-		}
-		public override Type FormattedValueType {
-			get { return typeof(string); }
-		}
+        protected override void OnMouseUp(DataGridViewCellMouseEventArgs e)
+        {
+            base.OnMouseUp(e);
 
-		#endregion
+            linkState = LinkState.Hover;
+            LinkVisited = true;
+            DataGridView.InvalidateCell(this);
+        }
 
-		protected class DataGridViewLinkCellAccessibleObject : DataGridViewCell.DataGridViewCellAccessibleObject
-		{
-			public DataGridViewLinkCellAccessibleObject (DataGridViewCell owner) : base(owner) 
-			{
-				//DO NOTHING
-			}
+        protected override void Paint(
+            Graphics graphics,
+            Rectangle clipBounds,
+            Rectangle cellBounds,
+            int rowIndex,
+            DataGridViewElementStates cellState,
+            object value,
+            object formattedValue,
+            string errorText,
+            DataGridViewCellStyle cellStyle,
+            DataGridViewAdvancedBorderStyle advancedBorderStyle,
+            DataGridViewPaintParts paintParts
+        )
+        {
+            base.Paint(
+                graphics,
+                clipBounds,
+                cellBounds,
+                rowIndex,
+                cellState,
+                value,
+                formattedValue,
+                errorText,
+                cellStyle,
+                advancedBorderStyle,
+                paintParts
+            );
+        }
 
-			[MonoTODO ("Stub, does nothing")]
-			[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-			public override void DoDefaultAction ()
-			{
-				//DataGridViewLinkCell cell = base.Owner as DataGridViewLinkCell;
-				//if (cell.DataGridView != null && cell.RowIndex == -1)
-				//        throw new InvalidOperationException ();
-			}
+        internal override void PaintPartContent(
+            Graphics graphics,
+            Rectangle cellBounds,
+            int rowIndex,
+            DataGridViewElementStates cellState,
+            DataGridViewCellStyle cellStyle,
+            object formattedValue
+        )
+        {
+            Font font = cellStyle.Font;
 
-			public override int GetChildCount ()
-			{
-				return -1;
-			}
+            switch (LinkBehavior)
+            {
+                case LinkBehavior.AlwaysUnderline:
+                case LinkBehavior.SystemDefault:
+                    font = new Font(font, FontStyle.Underline);
+                    break;
+                case LinkBehavior.HoverUnderline:
+                    if (linkState == LinkState.Hover)
+                        font = new Font(font, FontStyle.Underline);
+                    break;
+            }
 
-			public override string DefaultAction { get { return "Click"; } }
-		}
-		
-	}
+            Color color;
+
+            if (linkState == LinkState.Active)
+                color = ActiveLinkColor;
+            else if (linkVisited)
+                color = VisitedLinkColor;
+            else
+                color = LinkColor;
+
+            TextFormatFlags flags =
+                TextFormatFlags.EndEllipsis
+                | TextFormatFlags.VerticalCenter
+                | TextFormatFlags.TextBoxControl;
+
+            cellBounds.Height -= 2;
+            cellBounds.Width -= 2;
+
+            if (formattedValue != null)
+                TextRenderer.DrawText(
+                    graphics,
+                    formattedValue.ToString(),
+                    font,
+                    cellBounds,
+                    color,
+                    flags
+                );
+        }
+        #endregion
+
+        #region Private fields
+
+        private Color activeLinkColor;
+        private LinkBehavior linkBehavior;
+        private Color linkColor;
+        private bool linkVisited;
+        private Cursor parent_cursor;
+        private bool trackVisitedState;
+        private bool useColumnTextForLinkValue;
+        private Color visited_link_color;
+        private LinkState linkState;
+
+        #endregion
+
+        #region Public properties
+
+        public Color ActiveLinkColor
+        {
+            get { return activeLinkColor; }
+            set { activeLinkColor = value; }
+        }
+
+        [DefaultValue(LinkBehavior.SystemDefault)]
+        public LinkBehavior LinkBehavior
+        {
+            get { return linkBehavior; }
+            set { linkBehavior = value; }
+        }
+        public Color LinkColor
+        {
+            get { return linkColor; }
+            set { linkColor = value; }
+        }
+        public bool LinkVisited
+        {
+            get { return linkVisited; }
+            set { linkVisited = value; }
+        }
+
+        [DefaultValue(true)]
+        public bool TrackVisitedState
+        {
+            get { return trackVisitedState; }
+            set { trackVisitedState = value; }
+        }
+
+        [DefaultValue(false)]
+        public bool UseColumnTextForLinkValue
+        {
+            get { return useColumnTextForLinkValue; }
+            set { useColumnTextForLinkValue = value; }
+        }
+
+        public Color VisitedLinkColor
+        {
+            get { return visited_link_color; }
+            set { visited_link_color = value; }
+        }
+
+        public override Type ValueType
+        {
+            get { return base.ValueType == null ? typeof(object) : base.ValueType; }
+        }
+
+        public override Type EditType
+        {
+            get { return null; }
+        }
+        public override Type FormattedValueType
+        {
+            get { return typeof(string); }
+        }
+
+        #endregion
+
+        protected class DataGridViewLinkCellAccessibleObject
+            : DataGridViewCell.DataGridViewCellAccessibleObject
+        {
+            public DataGridViewLinkCellAccessibleObject(DataGridViewCell owner)
+                : base(owner)
+            {
+                //DO NOTHING
+            }
+
+            [MonoTODO("Stub, does nothing")]
+            [SecurityPermission(
+                SecurityAction.Demand,
+                Flags = SecurityPermissionFlag.UnmanagedCode
+            )]
+            public override void DoDefaultAction()
+            {
+                //DataGridViewLinkCell cell = base.Owner as DataGridViewLinkCell;
+                //if (cell.DataGridView != null && cell.RowIndex == -1)
+                //        throw new InvalidOperationException ();
+            }
+
+            public override int GetChildCount()
+            {
+                return -1;
+            }
+
+            public override string DefaultAction
+            {
+                get { return "Click"; }
+            }
+        }
+    }
 }

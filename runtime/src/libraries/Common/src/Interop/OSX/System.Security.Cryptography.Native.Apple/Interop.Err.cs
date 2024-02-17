@@ -17,10 +17,8 @@ internal static partial class Interop
         {
             return new AppleCommonCryptoCryptographicException(
                 errorCode,
-                SR.Format(
-                    SR.Cryptography_Unmapped_System_Typed_Error,
-                    errorCode,
-                    errorType));
+                SR.Format(SR.Cryptography_Unmapped_System_Typed_Error, errorCode, errorType)
+            );
         }
 
         internal static Exception CreateExceptionForCFError(SafeCFErrorHandle cfError)

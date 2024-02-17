@@ -39,16 +39,14 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <summary>
     ///     The internal builder being used to configure the property.
     /// </summary>
-    IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance
-        => Builder;
+    IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance => Builder;
 
     private InternalPropertyBuilder Builder { get; }
 
     /// <summary>
     ///     The property being configured.
     /// </summary>
-    public virtual IMutableProperty Metadata
-        => Builder.Metadata;
+    public virtual IMutableProperty Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -143,8 +141,10 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// </remarks>
     /// <typeparam name="TGenerator">A type that inherits from <see cref="ValueGenerator" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PrimitiveCollectionBuilder HasValueGenerator
-        <[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TGenerator>()
+    public virtual PrimitiveCollectionBuilder HasValueGenerator<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TGenerator
+    >()
         where TGenerator : ValueGenerator
     {
         Builder.HasValueGenerator(typeof(TGenerator), ConfigurationSource.Explicit);
@@ -179,7 +179,8 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PrimitiveCollectionBuilder HasValueGenerator(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? valueGeneratorType)
+            Type? valueGeneratorType
+    )
     {
         Builder.HasValueGenerator(valueGeneratorType, ConfigurationSource.Explicit);
 
@@ -212,10 +213,10 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// </remarks>
     /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PrimitiveCollectionBuilder HasValueGeneratorFactory
-        <[DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory>()
-        where TFactory : ValueGeneratorFactory
-        => HasValueGeneratorFactory(typeof(TFactory));
+    public virtual PrimitiveCollectionBuilder HasValueGeneratorFactory<
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory
+    >()
+        where TFactory : ValueGeneratorFactory => HasValueGeneratorFactory(typeof(TFactory));
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -245,7 +246,8 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PrimitiveCollectionBuilder HasValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactoryType)
+            Type? valueGeneratorFactoryType
+    )
     {
         Builder.HasValueGeneratorFactory(valueGeneratorFactoryType, ConfigurationSource.Explicit);
 
@@ -364,8 +366,7 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     ///     Configures the elements of this collection.
     /// </summary>
     /// <returns>A builder to configure the collection element type.</returns>
-    public virtual ElementTypeBuilder ElementType()
-        => new(Builder.Metadata.GetElementType()!);
+    public virtual ElementTypeBuilder ElementType() => new(Builder.Metadata.GetElementType()!);
 
     /// <summary>
     ///     Configures the elements of this collection.
@@ -396,7 +397,9 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PrimitiveCollectionBuilder UsePropertyAccessMode(PropertyAccessMode propertyAccessMode)
+    public virtual PrimitiveCollectionBuilder UsePropertyAccessMode(
+        PropertyAccessMode propertyAccessMode
+    )
     {
         Builder.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
 
@@ -410,8 +413,7 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -420,8 +422,7 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -429,8 +430,7 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

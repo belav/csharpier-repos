@@ -13,12 +13,14 @@ namespace System.Net.Http
     public static class HttpRequestMessageExtensions
     {
         /// <summary>
-        /// Gets the current <see cref="T:System.ServiceModel.Security.SecurityMessageProperty"/> 
+        /// Gets the current <see cref="T:System.ServiceModel.Security.SecurityMessageProperty"/>
         /// stored in <see cref="M:HttpRequestMessage.Properties"/> for the given request.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>The <see cref="SecurityMessageProperty"/>.</returns>
-        public static SecurityMessageProperty GetSecurityMessageProperty(this HttpRequestMessage request)
+        public static SecurityMessageProperty GetSecurityMessageProperty(
+            this HttpRequestMessage request
+        )
         {
             if (request == null)
             {

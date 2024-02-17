@@ -18,8 +18,10 @@ namespace System.Reflection.Context.Tests
         public const string CustomParameter = RootCustom + ".CustomParameterInfo";
 
         private const string RootProjection = Root + ".Projection";
-        public const string ProjectingCustomAttributeData = RootProjection + ".ProjectingCustomAttributeData";
-        public const string ProjectingManifestResourceInfo = RootProjection + ".ProjectingManifestResourceInfo";
+        public const string ProjectingCustomAttributeData =
+            RootProjection + ".ProjectingCustomAttributeData";
+        public const string ProjectingManifestResourceInfo =
+            RootProjection + ".ProjectingManifestResourceInfo";
 
         private const string RootVirtual = Root + ".Virtual";
         public const string VirtualPropertyInfo = RootVirtual + ".VirtualPropertyInfo";

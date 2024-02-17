@@ -3,20 +3,20 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Drawing.Design;
-    using System.Workflow.ComponentModel;
+    using System.Drawing.Drawing2D;
+    using System.Reflection;
     using System.Runtime.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
+    using System.Text;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
 
     #endregion
 
@@ -27,20 +27,19 @@ namespace System.Workflow.Activities
     [SRCategory(SR.Standard)]
     [ToolboxBitmap(typeof(IfElseActivity), "Resources.Decision.png")]
     [ActivityValidator(typeof(IfElseValidator))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class IfElseActivity : CompositeActivity, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class IfElseActivity
+        : CompositeActivity,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
-
         #region Constructors
 
-        public IfElseActivity()
-        {
-        }
+        public IfElseActivity() { }
 
         public IfElseActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
@@ -52,13 +51,18 @@ namespace System.Workflow.Activities
             return AddBranch(activities, null);
         }
 
-        public IfElseBranchActivity AddBranch(ICollection<Activity> activities, ActivityCondition branchCondition)
+        public IfElseBranchActivity AddBranch(
+            ICollection<Activity> activities,
+            ActivityCondition branchCondition
+        )
         {
             if (activities == null)
                 throw new ArgumentNullException("activities");
 
             if (!this.DesignMode)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ConditionalBranchUpdateAtRuntime));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ConditionalBranchUpdateAtRuntime)
+                );
 
             IfElseBranchActivity branchActivity = new IfElseBranchActivity();
 
@@ -71,7 +75,9 @@ namespace System.Workflow.Activities
             return branchActivity;
         }
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -109,7 +115,10 @@ namespace System.Workflow.Activities
                     executionContext.CancelActivity(childBranch);
                     break;
                 }
-                else if (childBranch.ExecutionStatus == ActivityExecutionStatus.Canceling || childBranch.ExecutionStatus == ActivityExecutionStatus.Faulting)
+                else if (
+                    childBranch.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    || childBranch.ExecutionStatus == ActivityExecutionStatus.Faulting
+                )
                 {
                     canCloseNow = false;
                     break;
@@ -118,7 +127,10 @@ namespace System.Workflow.Activities
             return canCloseNow ? ActivityExecutionStatus.Closed : ActivityExecutionStatus.Canceling;
         }
 
-        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(object sender, ActivityExecutionStatusChangedEventArgs e)
+        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+            object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
             if (sender == null)
                 throw new ArgumentNullException("sender");
@@ -128,7 +140,10 @@ namespace System.Workflow.Activities
             ActivityExecutionContext context = sender as ActivityExecutionContext;
 
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             context.CloseActivity();
         }
@@ -142,35 +157,60 @@ namespace System.Workflow.Activities
 
             IfElseActivity ifElse = obj as IfElseActivity;
             if (ifElse == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(IfElseActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(IfElseActivity).FullName),
+                    "obj"
+                );
 
             // Validate number of children
             if (ifElse.EnabledActivities.Count < 1)
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ConditionalLessThanOneChildren), ErrorNumbers.Error_IfElseLessThanOneChildren));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_ConditionalLessThanOneChildren),
+                        ErrorNumbers.Error_IfElseLessThanOneChildren
+                    )
+                );
 
             // all child activities must be IfElse branch
             foreach (Activity activity in ifElse.EnabledActivities)
             {
                 if (!(activity is IfElseBranchActivity))
                 {
-                    validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ConditionalDeclNotAllConditionalBranchDecl), ErrorNumbers.Error_IfElseNotAllIfElseBranchDecl));
+                    validationErrors.Add(
+                        new ValidationError(
+                            SR.GetString(SR.Error_ConditionalDeclNotAllConditionalBranchDecl),
+                            ErrorNumbers.Error_IfElseNotAllIfElseBranchDecl
+                        )
+                    );
                     break;
                 }
             }
             return validationErrors;
         }
 
-        public override ValidationError ValidateActivityChange(Activity activity, ActivityChangeAction action)
+        public override ValidationError ValidateActivityChange(
+            Activity activity,
+            ActivityChangeAction action
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
             if (action == null)
                 throw new ArgumentNullException("action");
 
-            if (activity.ExecutionStatus != ActivityExecutionStatus.Initialized &&
-                 activity.ExecutionStatus != ActivityExecutionStatus.Closed)
+            if (
+                activity.ExecutionStatus != ActivityExecutionStatus.Initialized
+                && activity.ExecutionStatus != ActivityExecutionStatus.Closed
+            )
             {
-                return new ValidationError(SR.GetString(SR.Error_DynamicActivity, activity.QualifiedName, Enum.GetName(typeof(ActivityExecutionStatus), activity.ExecutionStatus)), ErrorNumbers.Error_DynamicActivity);
+                return new ValidationError(
+                    SR.GetString(
+                        SR.Error_DynamicActivity,
+                        activity.QualifiedName,
+                        Enum.GetName(typeof(ActivityExecutionStatus), activity.ExecutionStatus)
+                    ),
+                    ErrorNumbers.Error_DynamicActivity
+                );
             }
             return null;
         }

@@ -6,11 +6,16 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RazorPagesNamespaceTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
+public class RazorPagesNamespaceTest
+    : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
 {
-    public RazorPagesNamespaceTest(MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture)
+    public RazorPagesNamespaceTest(
+        MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture
+    )
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -43,7 +48,9 @@ public class RazorPagesNamespaceTest : IClassFixture<MvcTestFixture<RazorPagesWe
     public async Task Page_OverrideNamespace_SetByPage()
     {
         // Arrange & Act
-        var content = await Client.GetStringAsync("http://localhost/Pages/Namespace/Nested/Override");
+        var content = await Client.GetStringAsync(
+            "http://localhost/Pages/Namespace/Nested/Override"
+        );
 
         // Assert
         Assert.Equal("Override", content.Trim());

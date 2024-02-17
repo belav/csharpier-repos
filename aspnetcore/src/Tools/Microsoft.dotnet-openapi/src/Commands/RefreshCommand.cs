@@ -17,7 +17,8 @@ internal sealed class RefreshCommand : BaseCommand
 
     private const string SourceURLArgName = "source-URL";
 
-    public RefreshCommand(Application parent, IHttpClientWrapper httpClient) : base(parent, CommandName, httpClient)
+    public RefreshCommand(Application parent, IHttpClientWrapper httpClient)
+        : base(parent, CommandName, httpClient)
     {
         _sourceFileArg = Argument(SourceURLArgName, "The OpenAPI reference to refresh.");
     }
@@ -50,7 +51,9 @@ internal sealed class RefreshCommand : BaseCommand
             }
         }
 
-        throw new ArgumentException("There was no OpenAPI reference to refresh with the given URL.");
+        throw new ArgumentException(
+            "There was no OpenAPI reference to refresh with the given URL."
+        );
     }
 
     protected override bool ValidateArguments()

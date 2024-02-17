@@ -9,7 +9,8 @@ namespace System.Web.WebPages
 {
     internal class HtmlAttributePropertyHelper : PropertyHelper
     {
-        private static ConcurrentDictionary<Type, PropertyHelper[]> _reflectionCache = new ConcurrentDictionary<Type, PropertyHelper[]>();
+        private static ConcurrentDictionary<Type, PropertyHelper[]> _reflectionCache =
+            new ConcurrentDictionary<Type, PropertyHelper[]>();
 
         public static new PropertyHelper[] GetProperties(object instance)
         {
@@ -22,21 +23,12 @@ namespace System.Web.WebPages
         }
 
         public HtmlAttributePropertyHelper(PropertyInfo property)
-            : base(property)
-        {
-        }
+            : base(property) { }
 
         public override string Name
         {
-            get
-            {
-                return base.Name;
-            }
-
-            protected set
-            {
-                base.Name = value == null ? null : value.Replace('_', '-');
-            }
+            get { return base.Name; }
+            protected set { base.Name = value == null ? null : value.Replace('_', '-'); }
         }
     }
 }

@@ -8,29 +8,30 @@
 //---------------------------------------------------------------------
 
 
-using System.Data.Common.Utils;
-using System.Data.Mapping.ViewGeneration.Structures;
 using System.Collections.Generic;
-using System.Data.Mapping.ViewGeneration.Validation;
-using System.Text;
-using System.Data.Mapping.Update.Internal;
 using System.Collections.ObjectModel;
+using System.Data.Common.Utils;
+using System.Data.Mapping.Update.Internal;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Data.Mapping.ViewGeneration.Validation;
 using System.Data.Metadata.Edm;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration
 {
-
     using CellGroup = Set<Cell>;
 
     // This class is responsible for partitioning cells into groups of cells
     // that are related and for which view generation needs to be done together
     internal class CellPartitioner : InternalBase
     {
-
         #region Constructor
         // effects: Creates a partitioner for cells with extra information
         // about foreign key constraints
-        internal CellPartitioner(IEnumerable<Cell> cells, IEnumerable<ForeignConstraint> foreignKeyConstraints)
+        internal CellPartitioner(
+            IEnumerable<Cell> cells,
+            IEnumerable<ForeignConstraint> foreignKeyConstraints
+        )
         {
             m_foreignKeyConstraints = foreignKeyConstraints;
             m_cells = cells;
@@ -78,7 +79,8 @@ namespace System.Data.Mapping.ViewGeneration
                     // * They have the same C or S extent
                     // * They are linked via a foreign key between the S extents
                     // * They are linked via a relationship
-                    bool sameExtent = secondCExtent.Equals(firstCExtent) || secondSExtent.Equals(firstSExtent);
+                    bool sameExtent =
+                        secondCExtent.Equals(firstCExtent) || secondSExtent.Equals(firstSExtent);
                     bool linkViaForeignKey = OverlapViaForeignKeys(cell, existingCell);
                     bool linkViaRelationship = AreCellsConnectedViaRelationship(cell, existingCell);
 
@@ -104,16 +106,23 @@ namespace System.Data.Mapping.ViewGeneration
         {
             AssociationSet cRelationSet1 = cell1.CQuery.Extent as AssociationSet;
             AssociationSet cRelationSet2 = cell2.CQuery.Extent as AssociationSet;
-            if (cRelationSet1 != null && MetadataHelper.IsExtentAtSomeRelationshipEnd(cRelationSet1, cell2.CQuery.Extent))
+            if (
+                cRelationSet1 != null
+                && MetadataHelper.IsExtentAtSomeRelationshipEnd(cRelationSet1, cell2.CQuery.Extent)
+            )
             {
                 return true;
             }
-            if (cRelationSet2 != null && MetadataHelper.IsExtentAtSomeRelationshipEnd(cRelationSet2, cell1.CQuery.Extent))
+            if (
+                cRelationSet2 != null
+                && MetadataHelper.IsExtentAtSomeRelationshipEnd(cRelationSet2, cell1.CQuery.Extent)
+            )
             {
                 return true;
             }
             return false;
         }
+
         // effects: Given a graph of cell groups, returns a list of cellgroup
         // such that each cellgroup contains all the cells that are in the
         // same connected component
@@ -141,8 +150,12 @@ namespace System.Data.Mapping.ViewGeneration
 
             foreach (ForeignConstraint constraint in m_foreignKeyConstraints)
             {
-                if (sExtent1.Equals(constraint.ParentTable) && sExtent2.Equals(constraint.ChildTable) ||
-                    sExtent2.Equals(constraint.ParentTable) && sExtent1.Equals(constraint.ChildTable))
+                if (
+                    sExtent1.Equals(constraint.ParentTable)
+                        && sExtent2.Equals(constraint.ChildTable)
+                    || sExtent2.Equals(constraint.ParentTable)
+                        && sExtent1.Equals(constraint.ChildTable)
+                )
                 {
                     return true;
                 }

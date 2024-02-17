@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Declarations
         public void DefaultBaseType1()
         {
             var text =
-@"
+                @"
 class X : object {}
 class Y {}
 ";
@@ -37,7 +37,7 @@ class Y {}
         public void DefaultBaseType2()
         {
             var text =
-@"
+                @"
 struct X {}
 ";
             var comp = CreateCompilation(text);
@@ -51,7 +51,7 @@ struct X {}
         public void DefaultBaseType3()
         {
             var text =
-@"
+                @"
 interface X {}
 class Y {}
 class Z {}
@@ -72,7 +72,7 @@ class Z {}
         public void MergedNamespaces()
         {
             var text =
-@"
+                @"
 namespace System {
   class A : Object {}
 }
@@ -108,7 +108,8 @@ namespace System {
         [Fact]
         public void Bug16199()
         {
-            var text1 = @"
+            var text1 =
+                @"
 namespace NS
 {
     namespace Name1 {}
@@ -118,7 +119,8 @@ namespace NS
     namespace Name5 {}
 }
 ";
-            var text2 = @"
+            var text2 =
+                @"
 namespace NS
 {
     namespace Name3 {}
@@ -126,7 +128,8 @@ namespace NS
     namespace Name5 {}
 }
 ";
-            var text3 = @"
+            var text3 =
+                @"
 namespace NS
 {
     struct Name4 {}
@@ -171,24 +174,31 @@ namespace NS
                 Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "Name5").WithArguments("Name5", "NS"),
                 // (4,12): error CS0101: The namespace 'NS' already contains a definition for 'Name4'
                 //     struct Name4 {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "Name4").WithArguments("Name4", "NS"));
+                Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "Name4").WithArguments("Name4", "NS")
+            );
         }
 
         [WorkItem(527531, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527531")]
         [Fact]
         public void InterfaceName()
         {
-            var text = @"
+            var text =
+                @"
     class BaseTypeSpecifierClass : global::System.IComparable
     {
         public int CompareTo(object o) { return 0; }
     }
 ";
             var compilation = CreateEmptyCompilation(text, new[] { MscorlibRef });
-            var srcSym = compilation.GlobalNamespace.GetTypeMembers("BaseTypeSpecifierClass").Single();
+            var srcSym = compilation
+                .GlobalNamespace.GetTypeMembers("BaseTypeSpecifierClass")
+                .Single();
 
             var ref2 = TestReferences.SymbolsTests.InheritIComparable;
-            var comp2 = CSharpCompilation.Create("Compilation2", references: new MetadataReference[] { ref2, MscorlibRef });
+            var comp2 = CSharpCompilation.Create(
+                "Compilation2",
+                references: new MetadataReference[] { ref2, MscorlibRef }
+            );
             var metaSym = comp2.GlobalNamespace.GetTypeMembers("BaseTypeSpecifierClass").First();
             Assert.Equal(srcSym.Interfaces()[0], metaSym.Interfaces()[0]);
         }
@@ -197,14 +207,18 @@ namespace NS
         [Fact]
         public void BaseTypeName()
         {
-            var text = @"
+            var text =
+                @"
     class FooAttribute : System.Attribute {}
 ";
             var compilation = CreateEmptyCompilation(text, new[] { MscorlibRef });
             var srcSym = compilation.GlobalNamespace.GetTypeMembers("FooAttribute").Single();
 
             var ref2 = TestReferences.SymbolsTests.InheritIComparable;
-            var comp2 = CSharpCompilation.Create("Compilation2", references: new MetadataReference[] { ref2, MscorlibRef });
+            var comp2 = CSharpCompilation.Create(
+                "Compilation2",
+                references: new MetadataReference[] { ref2, MscorlibRef }
+            );
             var metaSym = comp2.GlobalNamespace.GetTypeMembers("FooAttribute").First();
             Assert.Equal(srcSym.BaseType(), metaSym.BaseType());
         }
@@ -213,7 +227,8 @@ namespace NS
         [Fact]
         public void AccessibilityOfExplicitImpInterfaceMethod()
         {
-            var text = @"
+            var text =
+                @"
     interface I1
 {
     int Method();
@@ -232,7 +247,10 @@ class Test : I1
             var srcSym = classC.GetMembers("I1.Method").Single();
 
             var ref2 = TestReferences.SymbolsTests.InheritIComparable;
-            var comp2 = CSharpCompilation.Create("Compilation2", references: new MetadataReference[] { ref2, MscorlibRef });
+            var comp2 = CSharpCompilation.Create(
+                "Compilation2",
+                references: new MetadataReference[] { ref2, MscorlibRef }
+            );
             var metaType = comp2.GlobalNamespace.GetTypeMembers("Test").Single();
             var metaSym = metaType.GetMembers("I1.Method").First();
             Assert.Equal(srcSym.DeclaredAccessibility, metaSym.DeclaredAccessibility);
@@ -241,10 +259,14 @@ class Test : I1
         private void TestBuiltinType(string keyword, string systemTypeName)
         {
             var text =
-@"
+                @"
 class Box<T> {}
-class A : Box<" + keyword + @"> {}
-class B : Box<System." + systemTypeName + @"> {}
+class A : Box<"
+                + keyword
+                + @"> {}
+class B : Box<System."
+                + systemTypeName
+                + @"> {}
 ";
             var comp = CreateCompilation(text);
             var global = comp.GlobalNamespace;
@@ -265,25 +287,30 @@ class B : Box<System." + systemTypeName + @"> {}
         [Fact]
         public void MissingReturnType()
         {
-            var comp1 = CreateCompilation(@"public class C { }",
-                assemblyName: "C");
+            var comp1 = CreateCompilation(@"public class C { }", assemblyName: "C");
 
             var C = MetadataReference.CreateFromImage(comp1.EmitToArray());
 
-            var comp2 = CreateCompilation(@"public class B { public static C GetC() { return new C(); } }",
+            var comp2 = CreateCompilation(
+                @"public class B { public static C GetC() { return new C(); } }",
                 assemblyName: "B",
-                references: new[] { C });
+                references: new[] { C }
+            );
 
             var B = MetadataReference.CreateFromImage(comp2.EmitToArray());
 
-            var comp3 = CreateCompilation(@"public class A { public static void Main() { object o = B.GetC(); } }",
+            var comp3 = CreateCompilation(
+                @"public class A { public static void Main() { object o = B.GetC(); } }",
                 assemblyName: "A",
-                references: new[] { B });
+                references: new[] { B }
+            );
 
             comp3.VerifyDiagnostics(
                 // (1,57): error CS0012: The type 'C' is defined in an assembly that is not referenced.
                 // You must add a reference to assembly 'C, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "B.GetC").WithArguments("C", "C, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"));
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "B.GetC")
+                    .WithArguments("C", "C, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
+            );
         }
     }
 }

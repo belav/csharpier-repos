@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CustomAuthorizationFailureResponse.Authorization.Handlers;
 
-public class SampleWithCustomMessageRequirementHandler : AuthorizationHandler<SampleWithCustomMessageRequirement>
+public class SampleWithCustomMessageRequirementHandler
+    : AuthorizationHandler<SampleWithCustomMessageRequirement>
 {
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SampleWithCustomMessageRequirement requirement)
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        SampleWithCustomMessageRequirement requirement
+    )
     {
         // assuming the requirement was not met
         return Task.CompletedTask;

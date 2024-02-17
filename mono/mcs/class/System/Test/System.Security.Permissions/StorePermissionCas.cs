@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,70 +28,67 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Security.Permissions {
+namespace MonoCasTests.System.Security.Permissions
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class StorePermissionCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StorePermissionCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ConstructorLevel_Deny_Unrestricted()
+        {
+            StorePermission p = new StorePermission(StorePermissionFlags.AllFlags);
+            Assert.AreEqual(StorePermissionFlags.AllFlags, p.Flags, "Flags");
+            Assert.IsTrue(p.IsUnrestricted(), "IsUnrestricted");
+            Assert.IsNotNull(p.Copy(), "Copy");
+            SecurityElement se = p.ToXml();
+            Assert.IsNotNull(se, "ToXml");
+            p.FromXml(se);
+            Assert.IsNotNull(p.Intersect(p), "Intersect");
+            Assert.IsTrue(p.IsSubsetOf(p), "IsSubsetOf");
+            Assert.IsNotNull(p.Union(p), "Union");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ConstructorState_Deny_Unrestricted()
+        {
+            StorePermission p = new StorePermission(PermissionState.None);
+            Assert.AreEqual(StorePermissionFlags.NoFlags, p.Flags, "Flags");
+            Assert.IsFalse(p.IsUnrestricted(), "IsUnrestricted");
+            SecurityElement se = p.ToXml();
+            Assert.IsNotNull(se, "ToXml");
+            p.FromXml(se);
+            Assert.IsTrue(p.IsSubsetOf(p), "IsSubsetOf");
+            // strange behaviour of Copy under MS fx 2.0 (returns null for NoFlags)
+            p.Copy();
+            p.Intersect(p);
+            p.Union(p);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ConstructorLevel_Deny_Unrestricted ()
-		{
-			StorePermission p = new StorePermission (StorePermissionFlags.AllFlags);
-			Assert.AreEqual (StorePermissionFlags.AllFlags, p.Flags, "Flags");
-			Assert.IsTrue (p.IsUnrestricted (), "IsUnrestricted");
-			Assert.IsNotNull (p.Copy (), "Copy");
-			SecurityElement se = p.ToXml ();
-			Assert.IsNotNull (se, "ToXml");
-			p.FromXml (se);
-			Assert.IsNotNull (p.Intersect (p), "Intersect");
-			Assert.IsTrue (p.IsSubsetOf (p), "IsSubsetOf");
-			Assert.IsNotNull (p.Union (p), "Union");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ConstructorState_Deny_Unrestricted ()
-		{
-			StorePermission p = new StorePermission (PermissionState.None);
-			Assert.AreEqual (StorePermissionFlags.NoFlags, p.Flags, "Flags");
-			Assert.IsFalse (p.IsUnrestricted (), "IsUnrestricted");
-			SecurityElement se = p.ToXml ();
-			Assert.IsNotNull (se, "ToXml");
-			p.FromXml (se);
-			Assert.IsTrue (p.IsSubsetOf (p), "IsSubsetOf");
-			// strange behaviour of Copy under MS fx 2.0 (returns null for NoFlags)
-			p.Copy ();
-			p.Intersect (p);
-			p.Union (p);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (PermissionState) };
-			ConstructorInfo ci = typeof (StorePermission).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(PermissionState)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { PermissionState.None }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Type[] types = new Type[1] { typeof(PermissionState) };
+            ConstructorInfo ci = typeof(StorePermission).GetConstructor(types);
+            Assert.IsNotNull(ci, ".ctor(PermissionState)");
+            Assert.IsNotNull(ci.Invoke(new object[1] { PermissionState.None }), "invoke");
+        }
+    }
 }
-

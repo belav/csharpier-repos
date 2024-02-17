@@ -13,7 +13,9 @@ namespace System.Text.Json.Serialization.Converters
         : IEnumerableDefaultConverter<TCollection, TElement>
         where TCollection : IEnumerable<TElement>
     {
-        private readonly bool _isDeserializable = typeof(TCollection).IsAssignableFrom(typeof(List<TElement>));
+        private readonly bool _isDeserializable = typeof(TCollection).IsAssignableFrom(
+            typeof(List<TElement>)
+        );
 
         protected override void Add(in TElement value, ref ReadStack state)
         {
@@ -21,11 +23,20 @@ namespace System.Text.Json.Serialization.Converters
         }
 
         internal override bool SupportsCreateObjectDelegate => false;
-        protected override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state, JsonSerializerOptions options)
+
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             if (!_isDeserializable)
             {
-                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(Type, ref reader, ref state);
+                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                    Type,
+                    ref reader,
+                    ref state
+                );
             }
 
             state.Current.ReturnValue = new List<TElement>();

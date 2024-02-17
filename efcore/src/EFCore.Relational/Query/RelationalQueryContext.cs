@@ -27,7 +27,8 @@ public class RelationalQueryContext : QueryContext
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this class.</param>
     public RelationalQueryContext(
         QueryContextDependencies dependencies,
-        RelationalQueryContextDependencies relationalDependencies)
+        RelationalQueryContextDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -41,8 +42,8 @@ public class RelationalQueryContext : QueryContext
     /// <summary>
     ///     A factory for creating a readable query string from a <see cref="DbCommand" />
     /// </summary>
-    public virtual IRelationalQueryStringFactory RelationalQueryStringFactory
-        => RelationalDependencies.RelationalQueryStringFactory;
+    public virtual IRelationalQueryStringFactory RelationalQueryStringFactory =>
+        RelationalDependencies.RelationalQueryStringFactory;
 
     /// <summary>
     ///     Gets the active relational connection.
@@ -50,12 +51,11 @@ public class RelationalQueryContext : QueryContext
     /// <value>
     ///     The connection.
     /// </value>
-    public virtual IRelationalConnection Connection
-        => RelationalDependencies.RelationalConnection;
+    public virtual IRelationalConnection Connection => RelationalDependencies.RelationalConnection;
 
     /// <summary>
     ///     The command logger to use while executing the query.
     /// </summary>
-    public new virtual IRelationalCommandDiagnosticsLogger CommandLogger
-        => (IRelationalCommandDiagnosticsLogger)base.CommandLogger;
+    public new virtual IRelationalCommandDiagnosticsLogger CommandLogger =>
+        (IRelationalCommandDiagnosticsLogger)base.CommandLogger;
 }

@@ -77,7 +77,8 @@ internal sealed class MethodOptions
         int? maxReceiveMessageSize,
         bool? enableDetailedErrors,
         string? responseCompressionAlgorithm,
-        CompressionLevel? responseCompressionLevel)
+        CompressionLevel? responseCompressionLevel
+    )
     {
         CompressionProviders = compressionProviders;
         Interceptors = interceptors;
@@ -92,7 +93,9 @@ internal sealed class MethodOptions
         {
             if (!CompressionProviders.TryGetValue(ResponseCompressionAlgorithm, out var _))
             {
-                throw new InvalidOperationException($"The configured response compression algorithm '{ResponseCompressionAlgorithm}' does not have a matching compression provider.");
+                throw new InvalidOperationException(
+                    $"The configured response compression algorithm '{ResponseCompressionAlgorithm}' does not have a matching compression provider."
+                );
             }
         }
     }
@@ -108,7 +111,9 @@ internal sealed class MethodOptions
     {
         // This is required to get ensure that service methods without any explicit configuration
         // will continue to get the global configuration options
-        var resolvedCompressionProviders = new Dictionary<string, ICompressionProvider>(StringComparer.Ordinal);
+        var resolvedCompressionProviders = new Dictionary<string, ICompressionProvider>(
+            StringComparer.Ordinal
+        );
         var tempInterceptors = new List<InterceptorRegistration>();
         int? maxSendMessageSize = null;
         int? maxReceiveMessageSize = null;
@@ -133,8 +138,7 @@ internal sealed class MethodOptions
             interceptors.Add(interceptor);
         }
 
-        return new MethodOptions
-        (
+        return new MethodOptions(
             compressionProviders: resolvedCompressionProviders,
             interceptors: interceptors,
             maxSendMessageSize: maxSendMessageSize,
@@ -145,7 +149,10 @@ internal sealed class MethodOptions
         );
     }
 
-    private static void AddCompressionProviders(Dictionary<string, ICompressionProvider> resolvedProviders, IList<ICompressionProvider>? compressionProviders)
+    private static void AddCompressionProviders(
+        Dictionary<string, ICompressionProvider> resolvedProviders,
+        IList<ICompressionProvider>? compressionProviders
+    )
     {
         if (compressionProviders != null)
         {

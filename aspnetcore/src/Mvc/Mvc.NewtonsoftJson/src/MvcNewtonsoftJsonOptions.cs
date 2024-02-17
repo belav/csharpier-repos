@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc;
 /// </summary>
 public class MvcNewtonsoftJsonOptions : IEnumerable<ICompatibilitySwitch>
 {
-    private readonly IReadOnlyList<ICompatibilitySwitch> _switches = Array.Empty<ICompatibilitySwitch>();
+    private readonly IReadOnlyList<ICompatibilitySwitch> _switches =
+        Array.Empty<ICompatibilitySwitch>();
 
     /// <summary>
     /// Gets or sets a flag to determine whether error messages from JSON deserialization by the
@@ -36,7 +37,8 @@ public class MvcNewtonsoftJsonOptions : IEnumerable<ICompatibilitySwitch>
     /// <summary>
     /// Gets the <see cref="JsonSerializerSettings"/> that are used by this application.
     /// </summary>
-    public JsonSerializerSettings SerializerSettings { get; } = JsonSerializerSettingsProvider.CreateSerializerSettings();
+    public JsonSerializerSettings SerializerSettings { get; } =
+        JsonSerializerSettingsProvider.CreateSerializerSettings();
 
     /// <summary>
     /// Gets the maximum size to buffer in memory when <see cref="MvcOptions.SuppressInputFormatterBuffering"/> is not set.
@@ -67,7 +69,8 @@ public class MvcNewtonsoftJsonOptions : IEnumerable<ICompatibilitySwitch>
     /// <value>Defaults to 30Kb.</value>
     public int OutputFormatterMemoryBufferThreshold { get; set; } = 1024 * 30;
 
-    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() => _switches.GetEnumerator();
+    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() =>
+        _switches.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _switches.GetEnumerator();
 }

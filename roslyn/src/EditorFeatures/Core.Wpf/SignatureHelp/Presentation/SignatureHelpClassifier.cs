@@ -32,11 +32,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
         {
-            if (_subjectBuffer.Properties.TryGetProperty(typeof(ISignatureHelpSession), out ISignatureHelpSession session) &&
-                session.SelectedSignature is Signature)
+            if (
+                _subjectBuffer.Properties.TryGetProperty(
+                    typeof(ISignatureHelpSession),
+                    out ISignatureHelpSession session
+                )
+                && session.SelectedSignature is Signature
+            )
             {
                 var signature = (Signature)session.SelectedSignature;
-                if (!_subjectBuffer.Properties.TryGetProperty("UsePrettyPrintedContent", out bool usePrettyPrintedContent))
+                if (
+                    !_subjectBuffer.Properties.TryGetProperty(
+                        "UsePrettyPrintedContent",
+                        out bool usePrettyPrintedContent
+                    )
+                )
                 {
                     usePrettyPrintedContent = false;
                 }

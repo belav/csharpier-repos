@@ -16,15 +16,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public event EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>> DiagnosticsUpdated
         {
-            add
-            {
-                _eventMap.AddEventHandler(DiagnosticsUpdatedEventName, value);
-            }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(DiagnosticsUpdatedEventName, value);
-            }
+            add { _eventMap.AddEventHandler(DiagnosticsUpdatedEventName, value); }
+            remove { _eventMap.RemoveEventHandler(DiagnosticsUpdatedEventName, value); }
         }
 
         public event EventHandler DiagnosticsCleared
@@ -33,7 +26,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // don't do anything. this update source doesn't use cleared event
             }
-
             remove
             {
                 // don't do anything. this update source doesn't use cleared event
@@ -46,21 +38,35 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return;
 
             // all diagnostics events are serialized.
-            var ev = _eventMap.GetEventHandlers<EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>>(DiagnosticsUpdatedEventName);
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>
+            >(DiagnosticsUpdatedEventName);
             if (ev.HasHandlers)
             {
-                _eventQueue.ScheduleTask(nameof(RaiseDiagnosticsUpdated), () => ev.RaiseEvent(static (handler, arg) => handler(arg.self, arg.args), (self: this, args)), CancellationToken.None);
+                _eventQueue.ScheduleTask(
+                    nameof(RaiseDiagnosticsUpdated),
+                    () =>
+                        ev.RaiseEvent(
+                            static (handler, arg) => handler(arg.self, arg.args),
+                            (self: this, args)
+                        ),
+                    CancellationToken.None
+                );
             }
         }
 
-        internal void RaiseBulkDiagnosticsUpdated(Action<Action<ImmutableArray<DiagnosticsUpdatedArgs>>> eventAction)
+        internal void RaiseBulkDiagnosticsUpdated(
+            Action<Action<ImmutableArray<DiagnosticsUpdatedArgs>>> eventAction
+        )
         {
             // all diagnostics events are serialized.
-            var ev = _eventMap.GetEventHandlers<EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>>(DiagnosticsUpdatedEventName);
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>
+            >(DiagnosticsUpdatedEventName);
             if (ev.HasHandlers)
             {
                 // we do this bulk update to reduce number of tasks (with captured data) enqueued.
-                // we saw some "out of memory" due to us having long list of pending tasks in memory. 
+                // we saw some "out of memory" due to us having long list of pending tasks in memory.
                 // this is to reduce for such case to happen.
                 void raiseEvents(ImmutableArray<DiagnosticsUpdatedArgs> args)
                 {
@@ -69,21 +75,30 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     ev.RaiseEvent(
                         static (handler, arg) => handler(arg.self, arg.args),
-                        (self: this, args));
+                        (self: this, args)
+                    );
                 }
 
-                _eventQueue.ScheduleTask(nameof(RaiseDiagnosticsUpdated), () => eventAction(raiseEvents), CancellationToken.None);
+                _eventQueue.ScheduleTask(
+                    nameof(RaiseDiagnosticsUpdated),
+                    () => eventAction(raiseEvents),
+                    CancellationToken.None
+                );
             }
         }
 
-        internal void RaiseBulkDiagnosticsUpdated(Func<Action<ImmutableArray<DiagnosticsUpdatedArgs>>, Task> eventActionAsync)
+        internal void RaiseBulkDiagnosticsUpdated(
+            Func<Action<ImmutableArray<DiagnosticsUpdatedArgs>>, Task> eventActionAsync
+        )
         {
             // all diagnostics events are serialized.
-            var ev = _eventMap.GetEventHandlers<EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>>(DiagnosticsUpdatedEventName);
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>
+            >(DiagnosticsUpdatedEventName);
             if (ev.HasHandlers)
             {
                 // we do this bulk update to reduce number of tasks (with captured data) enqueued.
-                // we saw some "out of memory" due to us having long list of pending tasks in memory. 
+                // we saw some "out of memory" due to us having long list of pending tasks in memory.
                 // this is to reduce for such case to happen.
                 void raiseEvents(ImmutableArray<DiagnosticsUpdatedArgs> args)
                 {
@@ -93,23 +108,53 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             if (!arg.args.IsEmpty)
                                 handler(arg.self, arg.args);
                         },
-                        (self: this, args));
+                        (self: this, args)
+                    );
                 }
 
-                _eventQueue.ScheduleTask(nameof(RaiseDiagnosticsUpdated), () => eventActionAsync(raiseEvents), CancellationToken.None);
+                _eventQueue.ScheduleTask(
+                    nameof(RaiseDiagnosticsUpdated),
+                    () => eventActionAsync(raiseEvents),
+                    CancellationToken.None
+                );
             }
         }
 
         bool IDiagnosticUpdateSource.SupportGetDiagnostics => true;
 
-        ValueTask<ImmutableArray<DiagnosticData>> IDiagnosticUpdateSource.GetDiagnosticsAsync(Workspace workspace, ProjectId projectId, DocumentId documentId, object id, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
+        ValueTask<ImmutableArray<DiagnosticData>> IDiagnosticUpdateSource.GetDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId projectId,
+            DocumentId documentId,
+            object id,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        )
         {
             if (id != null)
             {
-                return new ValueTask<ImmutableArray<DiagnosticData>>(GetSpecificCachedDiagnosticsAsync(workspace, id, includeSuppressedDiagnostics, includeNonLocalDocumentDiagnostics: true, cancellationToken));
+                return new ValueTask<ImmutableArray<DiagnosticData>>(
+                    GetSpecificCachedDiagnosticsAsync(
+                        workspace,
+                        id,
+                        includeSuppressedDiagnostics,
+                        includeNonLocalDocumentDiagnostics: true,
+                        cancellationToken
+                    )
+                );
             }
 
-            return new ValueTask<ImmutableArray<DiagnosticData>>(GetCachedDiagnosticsAsync(workspace, projectId, documentId, includeSuppressedDiagnostics, includeLocalDocumentDiagnostics: true, includeNonLocalDocumentDiagnostics: true, cancellationToken));
+            return new ValueTask<ImmutableArray<DiagnosticData>>(
+                GetCachedDiagnosticsAsync(
+                    workspace,
+                    projectId,
+                    documentId,
+                    includeSuppressedDiagnostics,
+                    includeLocalDocumentDiagnostics: true,
+                    includeNonLocalDocumentDiagnostics: true,
+                    cancellationToken
+                )
+            );
         }
     }
 }

@@ -16,4 +16,3 @@ internal enum EnsureCertificateResult
     ExistingHttpsCertificateTrusted,
     NewHttpsCertificateTrusted
 }
-

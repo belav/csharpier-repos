@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,116 +31,125 @@
 using System;
 using System.Collections;
 
-namespace Mono.Data.Tds.Protocol {
-	public class TdsDataRow : IList, ICollection, IEnumerable
-	{
-		#region Fields
+namespace Mono.Data.Tds.Protocol
+{
+    public class TdsDataRow : IList, ICollection, IEnumerable
+    {
+        #region Fields
 
-		ArrayList list;
-		int bigDecimalIndex;
+        ArrayList list;
+        int bigDecimalIndex;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public TdsDataRow ()
-		{
-			list = new ArrayList ();
-			bigDecimalIndex = -1;
-		}
+        public TdsDataRow()
+        {
+            list = new ArrayList();
+            bigDecimalIndex = -1;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public int BigDecimalIndex {
-			get { return bigDecimalIndex; }
-			set { bigDecimalIndex = value; }
-		}
+        public int BigDecimalIndex
+        {
+            get { return bigDecimalIndex; }
+            set { bigDecimalIndex = value; }
+        }
 
-		public int Count {
-			get { return list.Count; }
-		}
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		public bool IsFixedSize {
-			get { return false; }
-		}
+        public bool IsFixedSize
+        {
+            get { return false; }
+        }
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
-	
-		public bool IsSynchronized {
-			get { return list.IsSynchronized; }
-		}
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
-		public object SyncRoot {
-			get { return list.SyncRoot; }
-		}
+        public bool IsSynchronized
+        {
+            get { return list.IsSynchronized; }
+        }
 
-		public object this[int index] {
-			get { 
-				if (index >= list.Count)
-					throw new IndexOutOfRangeException ();
-				return list[index]; 
-			}
-			set { list[index] = value; }
-		}
+        public object SyncRoot
+        {
+            get { return list.SyncRoot; }
+        }
 
-		#endregion // Properties
+        public object this[int index]
+        {
+            get
+            {
+                if (index >= list.Count)
+                    throw new IndexOutOfRangeException();
+                return list[index];
+            }
+            set { list[index] = value; }
+        }
 
-		#region Methods 
+        #endregion // Properties
 
-		public int Add (object value)
-		{
-			return list.Add (value);
-		}
+        #region Methods
 
-		public void Clear ()
-		{
-			list.Clear ();
-		}
+        public int Add(object value)
+        {
+            return list.Add(value);
+        }
 
-		public bool Contains (object value)
-		{
-			return list.Contains (value);
-		}
+        public void Clear()
+        {
+            list.Clear();
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			list.CopyTo (array, index);
-		}
+        public bool Contains(object value)
+        {
+            return list.Contains(value);
+        }
 
-		public void CopyTo (int index, Array array, int arrayIndex, int count)
-		{
-			list.CopyTo (index, array, arrayIndex, count);
-		}
+        public void CopyTo(Array array, int index)
+        {
+            list.CopyTo(array, index);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
+        public void CopyTo(int index, Array array, int arrayIndex, int count)
+        {
+            list.CopyTo(index, array, arrayIndex, count);
+        }
 
-		public int IndexOf (object value)
-		{
-			return list.IndexOf (value);
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
-		public void Insert (int index, object value)
-		{
-			list.Insert (index, value);
-		}
+        public int IndexOf(object value)
+        {
+            return list.IndexOf(value);
+        }
 
-		public void Remove (object value)
-		{
-			list.Remove (value);
-		}
+        public void Insert(int index, object value)
+        {
+            list.Insert(index, value);
+        }
 
-		public void RemoveAt (int index)
-		{
-			list.RemoveAt (index);
-		}
+        public void Remove(object value)
+        {
+            list.Remove(value);
+        }
 
-		#endregion // Methods
-	}
+        public void RemoveAt(int index)
+        {
+            list.RemoveAt(index);
+        }
+
+        #endregion // Methods
+    }
 }

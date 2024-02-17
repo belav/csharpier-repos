@@ -13,13 +13,13 @@ internal sealed class CodeLensResolveHandlerFactory : ILspServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CodeLensResolveHandlerFactory()
-    {
-    }
+    public CodeLensResolveHandlerFactory() { }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    )
     {
         return new CodeLensResolveHandler();
     }
 }
-

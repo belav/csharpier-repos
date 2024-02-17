@@ -1,14 +1,14 @@
 using System.ComponentModel;
 
-public class PropertySorter : ExpandableObjectConverter {
-}
+public class PropertySorter : ExpandableObjectConverter { }
 
 [TypeConverter(typeof(PathItemBase.TypeConverter))]
-class PathItemBase {
-	internal class TypeConverter : PropertySorter {
-	}
+class PathItemBase
+{
+    internal class TypeConverter : PropertySorter { }
 }
 
-class X {
-	public static void Main () {}
+class X
+{
+    public static void Main() { }
 }

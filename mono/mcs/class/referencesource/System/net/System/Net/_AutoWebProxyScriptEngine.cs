@@ -6,25 +6,25 @@
 
 namespace System.Net
 {
-    using System.IO;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.Threading;
-    using System.Text;
+    using System.Globalization;
+    using System.IO;
     using System.Net.Cache;
+    using System.Net.Configuration;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
 #if !FEATURE_PAL
     using System.Net.NetworkInformation;
     using System.Security.Principal;
 #endif
-    using System.Globalization;
-    using System.Net.Configuration;
-    using System.Security.Permissions;
-    using System.Collections.Generic;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
 
     // This class (and its helper classes implementing IWebRequestFinder interface) are responsible for
-    // determining the location of the PAC file, download and execute it, in order to retrieve proxy 
+    // determining the location of the PAC file, download and execute it, in order to retrieve proxy
     // information.
     // This class also monitors the Registry and re-reads proxy configuration settings, if the corresponding
     // Registry values change.
@@ -62,7 +62,10 @@ namespace System.Net
             m_AutoDetector = AutoDetector.CurrentAutoDetector;
             m_NetworkChangeStatus = m_AutoDetector.NetworkChangeStatus;
 
-            SafeRegistryHandle.RegOpenCurrentUser(UnsafeNclNativeMethods.RegistryHelper.KEY_READ, out hkcu);
+            SafeRegistryHandle.RegOpenCurrentUser(
+                UnsafeNclNativeMethods.RegistryHelper.KEY_READ,
+                out hkcu
+            );
             if (m_UseRegistry)
             {
                 ListenForRegistry();
@@ -110,7 +113,7 @@ namespace System.Net
                             Monitor.Wait(this);
                             if (syncStatus == SyncStatus.Aborted)
                             {
-                                Monitor.Pulse(this);  // This is to ensure that a Pulse meant to let someone take the lock isn't lost.
+                                Monitor.Pulse(this); // This is to ensure that a Pulse meant to let someone take the lock isn't lost.
                                 return;
                             }
                         }
@@ -162,16 +165,14 @@ namespace System.Net
                 }
             }
         }
+
         // End of locking helper methods.
 
 
         // The lock is always held while these three are modified.
         internal bool AutomaticallyDetectSettings
         {
-            get
-            {
-                return automaticallyDetectSettings;
-            }
+            get { return automaticallyDetectSettings; }
             set
             {
                 if (automaticallyDetectSettings != value)
@@ -184,10 +185,7 @@ namespace System.Net
 
         internal Uri AutomaticConfigurationScript
         {
-            get
-            {
-                return automaticConfigurationScript;
-            }
+            get { return automaticConfigurationScript; }
             set
             {
                 if (!object.Equals(automaticConfigurationScript, value))
@@ -200,10 +198,7 @@ namespace System.Net
 
         internal ICredentials Credentials
         {
-            get
-            {
-                return webProxy.Credentials;
-            }
+            get { return webProxy.Credentials; }
         }
 
         internal bool GetProxies(Uri destination, out IList<string> proxyList)
@@ -214,7 +209,9 @@ namespace System.Net
 
         internal bool GetProxies(Uri destination, out IList<string> proxyList, ref int syncStatus)
         {
-            GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::GetProxies()");
+            GlobalLog.Print(
+                "AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::GetProxies()"
+            );
 
             proxyList = null;
 
@@ -252,7 +249,12 @@ namespace System.Net
             finally
             {
                 ExitLock(ref syncStatus);
-                GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::GetProxies() proxies:" + ValidationHelper.ToString(proxyList));
+                GlobalLog.Print(
+                    "AutoWebProxyScriptEngine#"
+                        + ValidationHelper.HashString(this)
+                        + "::GetProxies() proxies:"
+                        + ValidationHelper.ToString(proxyList)
+                );
             }
         }
 
@@ -283,7 +285,11 @@ namespace System.Net
                 try
                 {
                     EnterLock(ref syncStatus);
-                    GlobalLog.Assert(syncStatus == SyncStatus.LockOwner, "AutoWebProxyScriptEngine#{0}::Close()|Failed to acquire lock.", ValidationHelper.HashString(this));
+                    GlobalLog.Assert(
+                        syncStatus == SyncStatus.LockOwner,
+                        "AutoWebProxyScriptEngine#{0}::Close()|Failed to acquire lock.",
+                        ValidationHelper.HashString(this)
+                    );
 
                     if (m_AutoDetector != null)
                     {
@@ -358,37 +364,74 @@ namespace System.Net
 
         internal void ListenForRegistry()
         {
-            GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry()");
+            GlobalLog.Print(
+                "AutoWebProxyScriptEngine#"
+                    + ValidationHelper.HashString(this)
+                    + "::ListenForRegistry()"
+            );
             if (!registrySuppress)
             {
                 if (registryChangeEvent == null)
                 {
-                    GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() hooking HKCU.");
-                    ListenForRegistryHelper(ref regKey, ref registryChangeEvent, IntPtr.Zero,
-                        RegBlobWebProxyDataBuilder.ProxyKey);
+                    GlobalLog.Print(
+                        "AutoWebProxyScriptEngine#"
+                            + ValidationHelper.HashString(this)
+                            + "::ListenForRegistry() hooking HKCU."
+                    );
+                    ListenForRegistryHelper(
+                        ref regKey,
+                        ref registryChangeEvent,
+                        IntPtr.Zero,
+                        RegBlobWebProxyDataBuilder.ProxyKey
+                    );
                 }
                 if (registryChangeEventLM == null)
                 {
-                    GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() hooking HKLM.");
-                    ListenForRegistryHelper(ref regKeyLM, ref registryChangeEventLM,
-                        UnsafeNclNativeMethods.RegistryHelper.HKEY_LOCAL_MACHINE, RegBlobWebProxyDataBuilder.ProxyKey);
+                    GlobalLog.Print(
+                        "AutoWebProxyScriptEngine#"
+                            + ValidationHelper.HashString(this)
+                            + "::ListenForRegistry() hooking HKLM."
+                    );
+                    ListenForRegistryHelper(
+                        ref regKeyLM,
+                        ref registryChangeEventLM,
+                        UnsafeNclNativeMethods.RegistryHelper.HKEY_LOCAL_MACHINE,
+                        RegBlobWebProxyDataBuilder.ProxyKey
+                    );
                 }
                 if (registryChangeEventPolicy == null)
                 {
-                    GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() hooking HKLM/Policies.");
-                    ListenForRegistryHelper(ref regKeyPolicy, ref registryChangeEventPolicy,
-                        UnsafeNclNativeMethods.RegistryHelper.HKEY_LOCAL_MACHINE, RegBlobWebProxyDataBuilder.PolicyKey);
+                    GlobalLog.Print(
+                        "AutoWebProxyScriptEngine#"
+                            + ValidationHelper.HashString(this)
+                            + "::ListenForRegistry() hooking HKLM/Policies."
+                    );
+                    ListenForRegistryHelper(
+                        ref regKeyPolicy,
+                        ref registryChangeEventPolicy,
+                        UnsafeNclNativeMethods.RegistryHelper.HKEY_LOCAL_MACHINE,
+                        RegBlobWebProxyDataBuilder.PolicyKey
+                    );
                 }
 
                 // If any succeeded, we should monitor it.
-                if (registryChangeEvent == null && registryChangeEventLM == null && registryChangeEventPolicy == null)
+                if (
+                    registryChangeEvent == null
+                    && registryChangeEventLM == null
+                    && registryChangeEventPolicy == null
+                )
                 {
                     registrySuppress = true;
                 }
             }
         }
 
-        private void ListenForRegistryHelper(ref SafeRegistryHandle key, ref AutoResetEvent changeEvent, IntPtr baseKey, string subKey)
+        private void ListenForRegistryHelper(
+            ref SafeRegistryHandle key,
+            ref AutoResetEvent changeEvent,
+            IntPtr baseKey,
+            string subKey
+        )
         {
             uint errorCode = 0;
 
@@ -398,11 +441,28 @@ namespace System.Net
                 if (baseKey == IntPtr.Zero)
                 {
                     // Impersonation requires extra effort.
-                    GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() RegOpenCurrentUser() using hkcu:" + hkcu.DangerousGetHandle().ToString("x"));
+                    GlobalLog.Print(
+                        "AutoWebProxyScriptEngine#"
+                            + ValidationHelper.HashString(this)
+                            + "::ListenForRegistry() RegOpenCurrentUser() using hkcu:"
+                            + hkcu.DangerousGetHandle().ToString("x")
+                    );
                     if (hkcu != null)
                     {
-                        errorCode = hkcu.RegOpenKeyEx(subKey, 0, UnsafeNclNativeMethods.RegistryHelper.KEY_READ, out key);
-                        GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() RegOpenKeyEx() returned errorCode:" + errorCode + " key:" + key.DangerousGetHandle().ToString("x"));
+                        errorCode = hkcu.RegOpenKeyEx(
+                            subKey,
+                            0,
+                            UnsafeNclNativeMethods.RegistryHelper.KEY_READ,
+                            out key
+                        );
+                        GlobalLog.Print(
+                            "AutoWebProxyScriptEngine#"
+                                + ValidationHelper.HashString(this)
+                                + "::ListenForRegistry() RegOpenKeyEx() returned errorCode:"
+                                + errorCode
+                                + " key:"
+                                + key.DangerousGetHandle().ToString("x")
+                        );
                     }
                     else
                     {
@@ -411,7 +471,13 @@ namespace System.Net
                 }
                 else
                 {
-                    errorCode = SafeRegistryHandle.RegOpenKeyEx(baseKey, subKey, 0, UnsafeNclNativeMethods.RegistryHelper.KEY_READ, out key);
+                    errorCode = SafeRegistryHandle.RegOpenKeyEx(
+                        baseKey,
+                        subKey,
+                        0,
+                        UnsafeNclNativeMethods.RegistryHelper.KEY_READ,
+                        out key
+                    );
                     //GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() RegOpenKeyEx() returned errorCode:" + errorCode + " key:" + key.DangerousGetHandle().ToString("x"));
                 }
                 if (errorCode == 0)
@@ -422,8 +488,18 @@ namespace System.Net
             if (errorCode == 0)
             {
                 // accessing Handle is protected by a link demand, OK for System.dll
-                errorCode = key.RegNotifyChangeKeyValue(true, UnsafeNclNativeMethods.RegistryHelper.REG_NOTIFY_CHANGE_LAST_SET, changeEvent.SafeWaitHandle, true);
-                GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() RegNotifyChangeKeyValue() returned errorCode:" + errorCode);
+                errorCode = key.RegNotifyChangeKeyValue(
+                    true,
+                    UnsafeNclNativeMethods.RegistryHelper.REG_NOTIFY_CHANGE_LAST_SET,
+                    changeEvent.SafeWaitHandle,
+                    true
+                );
+                GlobalLog.Print(
+                    "AutoWebProxyScriptEngine#"
+                        + ValidationHelper.HashString(this)
+                        + "::ListenForRegistry() RegNotifyChangeKeyValue() returned errorCode:"
+                        + errorCode
+                );
             }
             if (errorCode != 0)
             {
@@ -435,9 +511,15 @@ namespace System.Net
                     }
                     catch (Exception exception)
                     {
-                        if (NclUtilities.IsFatal(exception)) throw;
+                        if (NclUtilities.IsFatal(exception))
+                            throw;
                     }
-                    GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() RegCloseKey() returned errorCode:" + errorCode);
+                    GlobalLog.Print(
+                        "AutoWebProxyScriptEngine#"
+                            + ValidationHelper.HashString(this)
+                            + "::ListenForRegistry() RegCloseKey() returned errorCode:"
+                            + errorCode
+                    );
                 }
                 key = null;
                 if (changeEvent != null)
@@ -450,8 +532,16 @@ namespace System.Net
 
         private void RegistryChanged()
         {
-            GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::RegistryChanged()");
-            if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_proxy_system_setting_update));
+            GlobalLog.Print(
+                "AutoWebProxyScriptEngine#"
+                    + ValidationHelper.HashString(this)
+                    + "::RegistryChanged()"
+            );
+            if (Logging.On)
+                Logging.PrintWarning(
+                    Logging.Web,
+                    SR.GetString(SR.net_log_proxy_system_setting_update)
+                );
 
             // always refresh settings because they might have changed
             WebProxyData webProxyData;
@@ -464,8 +554,16 @@ namespace System.Net
 
         private void ConnectoidChanged()
         {
-            GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ConnectoidChanged()");
-            if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_proxy_update_due_to_ip_config_change));
+            GlobalLog.Print(
+                "AutoWebProxyScriptEngine#"
+                    + ValidationHelper.HashString(this)
+                    + "::ConnectoidChanged()"
+            );
+            if (Logging.On)
+                Logging.PrintWarning(
+                    Logging.Web,
+                    SR.GetString(SR.net_log_proxy_update_due_to_ip_config_change)
+                );
 
             // Get the new connectoid/detector.  Only do this after detecting a change, to avoid ----s with other people detecting changes.
             // (We don't want to end up using a detector/connectoid that doesn't match what we read from the registry.)
@@ -506,7 +604,7 @@ namespace System.Net
                     try
                     {
                         EnterLock(ref syncStatus);
-                        if (changed || needConnectoidUpdate)   // Make sure no one else took care of it before we got the lock.
+                        if (changed || needConnectoidUpdate) // Make sure no one else took care of it before we got the lock.
                         {
                             needConnectoidUpdate = syncStatus != SyncStatus.LockOwner;
                             if (!needConnectoidUpdate)
@@ -532,12 +630,15 @@ namespace System.Net
 
                 bool forReal = false;
                 AutoResetEvent tempEvent = registryChangeEvent;
-                if (registryChangeDeferred || (forReal = (tempEvent != null && tempEvent.WaitOne(0, false))))
+                if (
+                    registryChangeDeferred
+                    || (forReal = (tempEvent != null && tempEvent.WaitOne(0, false)))
+                )
                 {
                     try
                     {
                         EnterLock(ref syncStatus);
-                        if (forReal || registryChangeDeferred)  // Check if someone else handled it before I got the lock.
+                        if (forReal || registryChangeDeferred) // Check if someone else handled it before I got the lock.
                         {
                             registryChangeDeferred = syncStatus != SyncStatus.LockOwner;
                             if (!registryChangeDeferred && registryChangeEvent != null)
@@ -546,8 +647,12 @@ namespace System.Net
                                 {
                                     using (m_Identity.Impersonate())
                                     {
-                                        ListenForRegistryHelper(ref regKey, ref registryChangeEvent, IntPtr.Zero,
-                                            RegBlobWebProxyDataBuilder.ProxyKey);
+                                        ListenForRegistryHelper(
+                                            ref regKey,
+                                            ref registryChangeEvent,
+                                            IntPtr.Zero,
+                                            RegBlobWebProxyDataBuilder.ProxyKey
+                                        );
                                     }
                                 }
                                 catch
@@ -566,12 +671,15 @@ namespace System.Net
 
                 forReal = false;
                 tempEvent = registryChangeEventLM;
-                if (registryChangeLMDeferred || (forReal = (tempEvent != null && tempEvent.WaitOne(0, false))))
+                if (
+                    registryChangeLMDeferred
+                    || (forReal = (tempEvent != null && tempEvent.WaitOne(0, false)))
+                )
                 {
                     try
                     {
                         EnterLock(ref syncStatus);
-                        if (forReal || registryChangeLMDeferred)  // Check if someone else handled it before I got the lock.
+                        if (forReal || registryChangeLMDeferred) // Check if someone else handled it before I got the lock.
                         {
                             registryChangeLMDeferred = syncStatus != SyncStatus.LockOwner;
                             if (!registryChangeLMDeferred && registryChangeEventLM != null)
@@ -580,9 +688,14 @@ namespace System.Net
                                 {
                                     using (m_Identity.Impersonate())
                                     {
-                                        ListenForRegistryHelper(ref regKeyLM, ref registryChangeEventLM,
-                                            UnsafeNclNativeMethods.RegistryHelper.HKEY_LOCAL_MACHINE,
-                                            RegBlobWebProxyDataBuilder.ProxyKey);
+                                        ListenForRegistryHelper(
+                                            ref regKeyLM,
+                                            ref registryChangeEventLM,
+                                            UnsafeNclNativeMethods
+                                                .RegistryHelper
+                                                .HKEY_LOCAL_MACHINE,
+                                            RegBlobWebProxyDataBuilder.ProxyKey
+                                        );
                                     }
                                 }
                                 catch
@@ -601,12 +714,15 @@ namespace System.Net
 
                 forReal = false;
                 tempEvent = registryChangeEventPolicy;
-                if (registryChangePolicyDeferred || (forReal = (tempEvent != null && tempEvent.WaitOne(0, false))))
+                if (
+                    registryChangePolicyDeferred
+                    || (forReal = (tempEvent != null && tempEvent.WaitOne(0, false)))
+                )
                 {
                     try
                     {
                         EnterLock(ref syncStatus);
-                        if (forReal || registryChangePolicyDeferred)  // Check if someone else handled it before I got the lock.
+                        if (forReal || registryChangePolicyDeferred) // Check if someone else handled it before I got the lock.
                         {
                             registryChangePolicyDeferred = syncStatus != SyncStatus.LockOwner;
                             if (!registryChangePolicyDeferred && registryChangeEventPolicy != null)
@@ -615,9 +731,14 @@ namespace System.Net
                                 {
                                     using (m_Identity.Impersonate())
                                     {
-                                        ListenForRegistryHelper(ref regKeyPolicy, ref registryChangeEventPolicy,
-                                            UnsafeNclNativeMethods.RegistryHelper.HKEY_LOCAL_MACHINE,
-                                            RegBlobWebProxyDataBuilder.PolicyKey);
+                                        ListenForRegistryHelper(
+                                            ref regKeyPolicy,
+                                            ref registryChangeEventPolicy,
+                                            UnsafeNclNativeMethods
+                                                .RegistryHelper
+                                                .HKEY_LOCAL_MACHINE,
+                                            RegBlobWebProxyDataBuilder.PolicyKey
+                                        );
                                     }
                                 }
                                 catch
@@ -665,8 +786,8 @@ namespace System.Net
             private static volatile UnsafeNclNativeMethods.RasHelper s_RasHelper;
 
             private static int s_CurrentVersion = 0;
-            private volatile static AutoDetector s_CurrentAutoDetector;
-            private volatile static bool s_Initialized;
+            private static volatile AutoDetector s_CurrentAutoDetector;
+            private static volatile bool s_Initialized;
             private static object s_LockObject;
 
             static AutoDetector()
@@ -682,7 +803,10 @@ namespace System.Net
                     {
                         if (!s_Initialized)
                         {
-                            s_CurrentAutoDetector = new AutoDetector(UnsafeNclNativeMethods.RasHelper.GetCurrentConnectoid(), 1);
+                            s_CurrentAutoDetector = new AutoDetector(
+                                UnsafeNclNativeMethods.RasHelper.GetCurrentConnectoid(),
+                                1
+                            );
                             if (NetworkChange.CanListenForNetworkChanges)
                             {
                                 s_AddressChange = new NetworkAddressChangePolled();
@@ -722,7 +846,10 @@ namespace System.Net
                 if (changed)
                 {
                     int currentVersion = Interlocked.Increment(ref s_CurrentVersion);
-                    s_CurrentAutoDetector = new AutoDetector(UnsafeNclNativeMethods.RasHelper.GetCurrentConnectoid(), currentVersion);
+                    s_CurrentAutoDetector = new AutoDetector(
+                        UnsafeNclNativeMethods.RasHelper.GetCurrentConnectoid(),
+                        currentVersion
+                    );
                 }
             }
 
@@ -735,7 +862,6 @@ namespace System.Net
                 }
             }
 
-
             private readonly string m_Connectoid;
             private readonly int m_CurrentVersion;
 
@@ -747,18 +873,12 @@ namespace System.Net
 
             internal string Connectoid
             {
-                get
-                {
-                    return m_Connectoid;
-                }
+                get { return m_Connectoid; }
             }
 
             internal int NetworkChangeStatus
             {
-                get
-                {
-                    return m_CurrentVersion;
-                }
+                get { return m_CurrentVersion; }
             }
         }
 #endif

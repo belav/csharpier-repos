@@ -11,7 +11,9 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
-internal sealed partial class JsonTranscodingServiceMethodProvider<TService> : IServiceMethodProvider<TService> where TService : class
+internal sealed partial class JsonTranscodingServiceMethodProvider<TService>
+    : IServiceMethodProvider<TService>
+    where TService : class
 {
     private readonly ILogger<JsonTranscodingServiceMethodProvider<TService>> _logger;
     private readonly GrpcServiceOptions _globalOptions;
@@ -27,7 +29,8 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService> : I
         IOptions<GrpcServiceOptions<TService>> serviceOptions,
         IGrpcServiceActivator<TService> serviceActivator,
         IOptions<GrpcJsonTranscodingOptions> jsonTranscodingOptions,
-        DescriptorRegistry serviceDescriptorRegistry)
+        DescriptorRegistry serviceDescriptorRegistry
+    )
     {
         _logger = loggerFactory.CreateLogger<JsonTranscodingServiceMethodProvider<TService>>();
         _globalOptions = globalOptions.Value;
@@ -51,7 +54,9 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService> : I
             ServiceDescriptor? serviceDescriptor = null;
             try
             {
-                serviceDescriptor = ServiceDescriptorHelpers.GetServiceDescriptor(bindMethodInfo.DeclaringType!);
+                serviceDescriptor = ServiceDescriptorHelpers.GetServiceDescriptor(
+                    bindMethodInfo.DeclaringType!
+                );
             }
             catch (Exception ex)
             {
@@ -70,7 +75,8 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService> : I
                     _serviceOptions,
                     _loggerFactory,
                     _serviceActivator,
-                    _jsonTranscodingOptions);
+                    _jsonTranscodingOptions
+                );
 
                 try
                 {
@@ -78,7 +84,10 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService> : I
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Error binding gRPC service '{typeof(TService).Name}'.", ex);
+                    throw new InvalidOperationException(
+                        $"Error binding gRPC service '{typeof(TService).Name}'.",
+                        ex
+                    );
                 }
             }
         }
@@ -90,10 +99,24 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService> : I
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "Could not find bind method for {ServiceType}.", EventName = "BindMethodNotFound")]
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "Could not find bind method for {ServiceType}.",
+            EventName = "BindMethodNotFound"
+        )]
         public static partial void BindMethodNotFound(ILogger logger, Type serviceType);
 
-        [LoggerMessage(2, LogLevel.Warning, "Error getting service descriptor for {ServiceType}.", EventName = "ServiceDescriptorError")]
-        public static partial void ServiceDescriptorError(ILogger logger, Type serviceType, Exception ex);
+        [LoggerMessage(
+            2,
+            LogLevel.Warning,
+            "Error getting service descriptor for {ServiceType}.",
+            EventName = "ServiceDescriptorError"
+        )]
+        public static partial void ServiceDescriptorError(
+            ILogger logger,
+            Type serviceType,
+            Exception ex
+        );
     }
 }

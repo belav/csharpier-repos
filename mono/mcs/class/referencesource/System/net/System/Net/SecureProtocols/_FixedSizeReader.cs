@@ -18,21 +18,22 @@ Revision History:
 
 --*/
 
-namespace System.Net {
+namespace System.Net
+{
     using System;
     using System.IO;
     using System.Threading;
 
-
     //
     // Reads a fixed size packet from a stream, can disover EOF as 0 bytes read from stream
     //
-    internal class FixedSizeReader {
-        private static readonly AsyncCallback _ReadCallback  = new AsyncCallback(ReadCallback);
+    internal class FixedSizeReader
+    {
+        private static readonly AsyncCallback _ReadCallback = new AsyncCallback(ReadCallback);
 
-        private readonly Stream      _Transport;
+        private readonly Stream _Transport;
         private AsyncProtocolRequest _Request;
-        private int                  _TotalRead;
+        private int _TotalRead;
 
         public FixedSizeReader(Stream transport)
         {
@@ -46,21 +47,22 @@ namespace System.Net {
         public int ReadPacket(byte[] buffer, int offset, int count)
         {
             int tempCount = count;
-            do {
+            do
+            {
                 int bytes = _Transport.Read(buffer, offset, tempCount);
 
                 if (bytes == 0)
                 {
-                     if (tempCount != count)
-                     {
-                         throw new IOException(SR.GetString(SR.net_io_eof));
-                     }
-                     return 0;
+                    if (tempCount != count)
+                    {
+                        throw new IOException(SR.GetString(SR.net_io_eof));
+                    }
+                    return 0;
                 }
 
                 tempCount -= bytes;
                 offset += bytes;
-            }while (tempCount != 0);
+            } while (tempCount != 0);
 
             return count;
         }
@@ -75,6 +77,7 @@ namespace System.Net {
             _TotalRead = 0;
             StartReading();
         }
+
         //
         // Loops while subsequest completions are sync
         //
@@ -82,7 +85,13 @@ namespace System.Net {
         {
             while (true)
             {
-                IAsyncResult ar = _Transport.BeginRead(_Request.Buffer, _Request.Offset+_TotalRead, _Request.Count-_TotalRead, _ReadCallback, this);
+                IAsyncResult ar = _Transport.BeginRead(
+                    _Request.Buffer,
+                    _Request.Offset + _TotalRead,
+                    _Request.Count - _TotalRead,
+                    _ReadCallback,
+                    this
+                );
                 if (!ar.CompletedSynchronously)
                 {
 #if DEBUG
@@ -108,7 +117,7 @@ namespace System.Net {
             if (bytes == 0)
             {
                 // 0 bytes was requested or EOF in the beginning of a frame, the caller should decide whether it's OK
-                if(_TotalRead == 0)
+                if (_TotalRead == 0)
                 {
                     _Request.CompleteRequest(0);
                     return true;
@@ -117,9 +126,14 @@ namespace System.Net {
                 throw new IOException(SR.GetString(SR.net_io_eof));
             }
 
-            GlobalLog.Assert(_TotalRead + bytes <= _Request.Count, "FixedSizeReader::CheckCompletion()|State got out of range. Total:{0} Count:{1}", _TotalRead + bytes, _Request.Count);
+            GlobalLog.Assert(
+                _TotalRead + bytes <= _Request.Count,
+                "FixedSizeReader::CheckCompletion()|State got out of range. Total:{0} Count:{1}",
+                _TotalRead + bytes,
+                _Request.Count
+            );
 
-            if ((_TotalRead+=bytes) == _Request.Count)
+            if ((_TotalRead += bytes) == _Request.Count)
             {
                 _Request.CompleteRequest(_Request.Count);
                 return true;
@@ -127,13 +141,15 @@ namespace System.Net {
             return false;
         }
 
-
         //
         //
         //
         private static void ReadCallback(IAsyncResult transportResult)
         {
-            GlobalLog.Assert(transportResult.AsyncState is FixedSizeReader, "ReadCallback|State type is wrong, expected FixedSizeReader.");
+            GlobalLog.Assert(
+                transportResult.AsyncState is FixedSizeReader,
+                "ReadCallback|State type is wrong, expected FixedSizeReader."
+            );
             if (transportResult.CompletedSynchronously)
             {
                 return;
@@ -161,5 +177,4 @@ namespace System.Net {
             }
         }
     }
-
 }

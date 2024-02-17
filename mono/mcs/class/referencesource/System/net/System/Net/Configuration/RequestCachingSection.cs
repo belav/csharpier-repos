@@ -6,11 +6,11 @@
 
 namespace System.Net.Configuration
 {
-    using Microsoft.Win32;
     using System.Configuration;
     using System.Globalization;
     using System.Net.Cache;
     using System.Threading;
+    using Microsoft.Win32;
 
     public sealed class RequestCachingSection : ConfigurationSection
     {
@@ -36,7 +36,10 @@ namespace System.Net.Configuration
             get { return (FtpCachePolicyElement)this[this.defaultFtpCachePolicy]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DefaultPolicyLevel, DefaultValue=(RequestCacheLevel) RequestCacheLevel.BypassCache)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultPolicyLevel,
+            DefaultValue = (RequestCacheLevel)RequestCacheLevel.BypassCache
+        )]
         public RequestCacheLevel DefaultPolicyLevel
         {
             get { return (RequestCacheLevel)this[this.defaultPolicyLevel]; }
@@ -44,9 +47,9 @@ namespace System.Net.Configuration
         }
 
 #if !FEATURE_PAL // FEATURE_PAL - Caching is not supported by default
-        [ConfigurationProperty(ConfigurationStrings.DisableAllCaching, DefaultValue=false)]
+        [ConfigurationProperty(ConfigurationStrings.DisableAllCaching, DefaultValue = false)]
 #else // !FEATURE_PAL
-        [ConfigurationProperty(ConfigurationStrings.DisableAllCaching, DefaultValue=true)]
+        [ConfigurationProperty(ConfigurationStrings.DisableAllCaching, DefaultValue = true)]
 #endif // !FEATURE_PAL
         public bool DisableAllCaching
         {
@@ -54,14 +57,17 @@ namespace System.Net.Configuration
             set { this[this.disableAllCaching] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IsPrivateCache, DefaultValue=true)]
+        [ConfigurationProperty(ConfigurationStrings.IsPrivateCache, DefaultValue = true)]
         public bool IsPrivateCache
         {
             get { return (bool)this[this.isPrivateCache]; }
             set { this[this.isPrivateCache] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UnspecifiedMaximumAge, DefaultValue = "1.00:00:00")]
+        [ConfigurationProperty(
+            ConfigurationStrings.UnspecifiedMaximumAge,
+            DefaultValue = "1.00:00:00"
+        )]
         public TimeSpan UnspecifiedMaximumAge
         {
             get { return (TimeSpan)this[this.unspecifiedMaximumAge]; }
@@ -71,9 +77,11 @@ namespace System.Net.Configuration
         //
         // If DisableAllCaching is set once to true it will not change.
         //
-        protected override void DeserializeElement(System.Xml.XmlReader reader, bool serializeCollectionKey)
+        protected override void DeserializeElement(
+            System.Xml.XmlReader reader,
+            bool serializeCollectionKey
+        )
         {
-
             bool tempDisableAllCaching = this.DisableAllCaching;
 
             base.DeserializeElement(reader, serializeCollectionKey);
@@ -90,13 +98,19 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            try {
+            try
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
                 throw new ConfigurationErrorsException(
-                              SR.GetString(SR.net_config_section_permission, 
-                                           ConfigurationStrings.RequestCachingSectionName),
-                              exception);
+                    SR.GetString(
+                        SR.net_config_section_permission,
+                        ConfigurationStrings.RequestCachingSectionName
+                    ),
+                    exception
+                );
             }
         }
 
@@ -107,60 +121,68 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty defaultHttpCachePolicy =
-            new ConfigurationProperty(ConfigurationStrings.DefaultHttpCachePolicy, 
-                                      typeof(HttpCachePolicyElement), 
-                                      null,
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty defaultHttpCachePolicy = new ConfigurationProperty(
+            ConfigurationStrings.DefaultHttpCachePolicy,
+            typeof(HttpCachePolicyElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty defaultFtpCachePolicy =
-            new ConfigurationProperty(ConfigurationStrings.DefaultFtpCachePolicy, 
-                                      typeof(FtpCachePolicyElement), 
-                                      null,
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty defaultFtpCachePolicy = new ConfigurationProperty(
+            ConfigurationStrings.DefaultFtpCachePolicy,
+            typeof(FtpCachePolicyElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty defaultPolicyLevel =
-            new ConfigurationProperty(ConfigurationStrings.DefaultPolicyLevel, 
-                                      typeof(RequestCacheLevel), 
-                                      RequestCacheLevel.BypassCache,
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty defaultPolicyLevel = new ConfigurationProperty(
+            ConfigurationStrings.DefaultPolicyLevel,
+            typeof(RequestCacheLevel),
+            RequestCacheLevel.BypassCache,
+            ConfigurationPropertyOptions.None
+        );
 
         readonly ConfigurationProperty disableAllCaching =
 #if !FEATURE_PAL // FEATURE_PAL - Caching is not supported by default
-            new ConfigurationProperty(ConfigurationStrings.DisableAllCaching, 
-                                      typeof(bool), 
-                                      false,
-                                      ConfigurationPropertyOptions.None);
+        new ConfigurationProperty(
+            ConfigurationStrings.DisableAllCaching,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 #else // !FEATURE_PAL
-            new ConfigurationProperty(ConfigurationStrings.DisableAllCaching, 
-                                      typeof(bool), 
-                                      true,
-                                      ConfigurationPropertyOptions.None);
+        new ConfigurationProperty(
+            ConfigurationStrings.DisableAllCaching,
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 #endif // !FEATURE_PAL
 
-        readonly ConfigurationProperty isPrivateCache =
-            new ConfigurationProperty(ConfigurationStrings.IsPrivateCache, 
-                                      typeof(bool), 
-                                      true,
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty isPrivateCache = new ConfigurationProperty(
+            ConfigurationStrings.IsPrivateCache,
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty unspecifiedMaximumAge =
-            new ConfigurationProperty(ConfigurationStrings.UnspecifiedMaximumAge, 
-                                      typeof(TimeSpan), 
-                                      TimeSpan.FromDays(1),
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty unspecifiedMaximumAge = new ConfigurationProperty(
+            ConfigurationStrings.UnspecifiedMaximumAge,
+            typeof(TimeSpan),
+            TimeSpan.FromDays(1),
+            ConfigurationPropertyOptions.None
+        );
     }
 
     internal sealed class RequestCachingSectionInternal
     {
-
         private RequestCachingSectionInternal() { }
 
         internal RequestCachingSectionInternal(RequestCachingSection section)
         {
 #if !FEATURE_PAL // IE caching
-//ROTORTODO: Review // IE caching
-//CORIOLISTODO: Review // IE caching
+            //ROTORTODO: Review // IE caching
+            //CORIOLISTODO: Review // IE caching
             if (!section.DisableAllCaching)
             {
                 this.defaultCachePolicy = new RequestCachePolicy(section.DefaultPolicyLevel); // default should be RequestCacheLevel.BypassCache
@@ -172,13 +194,18 @@ namespace System.Net.Configuration
                 this.disableAllCaching = true;
             }
 
-            this.httpRequestCacheValidator = new HttpRequestCacheValidator(false, this.UnspecifiedMaximumAge);
-            this.ftpRequestCacheValidator  = new FtpRequestCacheValidator(false, this.UnspecifiedMaximumAge);
+            this.httpRequestCacheValidator = new HttpRequestCacheValidator(
+                false,
+                this.UnspecifiedMaximumAge
+            );
+            this.ftpRequestCacheValidator = new FtpRequestCacheValidator(
+                false,
+                this.UnspecifiedMaximumAge
+            );
             this.defaultCache = new Microsoft.Win32.WinInetCache(this.IsPrivateCache, true, true);
 
             if (section.DisableAllCaching)
                 return;
-
 
             HttpCachePolicyElement httpPolicy = section.DefaultHttpCachePolicy;
 
@@ -186,21 +213,37 @@ namespace System.Net.Configuration
             {
                 if (httpPolicy.PolicyLevel == HttpRequestCacheLevel.Default)
                 {
-                    HttpCacheAgeControl cacheAgeControl =
-                        (httpPolicy.MinimumFresh != TimeSpan.MinValue ? HttpCacheAgeControl.MaxAgeAndMinFresh : HttpCacheAgeControl.MaxAgeAndMaxStale);
+                    HttpCacheAgeControl cacheAgeControl = (
+                        httpPolicy.MinimumFresh != TimeSpan.MinValue
+                            ? HttpCacheAgeControl.MaxAgeAndMinFresh
+                            : HttpCacheAgeControl.MaxAgeAndMaxStale
+                    );
 
-                    this.defaultHttpCachePolicy = new HttpRequestCachePolicy(cacheAgeControl, httpPolicy.MaximumAge, (httpPolicy.MinimumFresh != TimeSpan.MinValue ? httpPolicy.MinimumFresh : httpPolicy.MaximumStale));
+                    this.defaultHttpCachePolicy = new HttpRequestCachePolicy(
+                        cacheAgeControl,
+                        httpPolicy.MaximumAge,
+                        (
+                            httpPolicy.MinimumFresh != TimeSpan.MinValue
+                                ? httpPolicy.MinimumFresh
+                                : httpPolicy.MaximumStale
+                        )
+                    );
                 }
                 else
                 {
-                    this.defaultHttpCachePolicy = new HttpRequestCachePolicy(httpPolicy.PolicyLevel);
+                    this.defaultHttpCachePolicy = new HttpRequestCachePolicy(
+                        httpPolicy.PolicyLevel
+                    );
                 }
             }
 #else //!FEATURE_PAL // IE caching
 #if CORIOLIS
             if (section.DisableAllCaching)
             {
-                this.httpRequestCacheValidator = new HttpRequestCacheValidator(false, this.UnspecifiedMaximumAge);
+                this.httpRequestCacheValidator = new HttpRequestCacheValidator(
+                    false,
+                    this.UnspecifiedMaximumAge
+                );
                 this.disableAllCaching = true;
             }
             else
@@ -211,7 +254,10 @@ namespace System.Net.Configuration
                 throw new NotImplementedException("ROTORTODO - RequestCaching - IE caching");
             }
 #else // CORIOLIS
-            this.httpRequestCacheValidator = new HttpRequestCacheValidator(false, this.UnspecifiedMaximumAge);
+            this.httpRequestCacheValidator = new HttpRequestCacheValidator(
+                false,
+                this.UnspecifiedMaximumAge
+            );
             this.disableAllCaching = true;
 #endif
 #endif //!FEATURE_PAL // IE caching
@@ -222,7 +268,6 @@ namespace System.Net.Configuration
             {
                 this.defaultFtpCachePolicy = new RequestCachePolicy(ftpPolicy.PolicyLevel);
             }
-
         }
 
         internal static object ClassSyncObject
@@ -283,11 +328,14 @@ namespace System.Net.Configuration
             get { return this.ftpRequestCacheValidator; }
         }
 
-        static internal RequestCachingSectionInternal GetSection()
+        internal static RequestCachingSectionInternal GetSection()
         {
             lock (RequestCachingSectionInternal.ClassSyncObject)
             {
-                RequestCachingSection section = PrivilegedConfigurationManager.GetSection(ConfigurationStrings.RequestCachingSectionPath) as RequestCachingSection;
+                RequestCachingSection section =
+                    PrivilegedConfigurationManager.GetSection(
+                        ConfigurationStrings.RequestCachingSectionPath
+                    ) as RequestCachingSection;
                 if (section == null)
                     return null;
 
@@ -297,9 +345,13 @@ namespace System.Net.Configuration
                 }
                 catch (Exception exception)
                 {
-                    if (NclUtilities.IsFatal(exception)) throw;
+                    if (NclUtilities.IsFatal(exception))
+                        throw;
 
-                    throw new ConfigurationErrorsException(SR.GetString(SR.net_config_requestcaching), exception);
+                    throw new ConfigurationErrorsException(
+                        SR.GetString(SR.net_config_requestcaching),
+                        exception
+                    );
                 }
             }
         }
@@ -311,7 +363,7 @@ namespace System.Net.Configuration
         RequestCachePolicy defaultCachePolicy;
         bool disableAllCaching;
         HttpRequestCacheValidator httpRequestCacheValidator;
-        FtpRequestCacheValidator  ftpRequestCacheValidator;
+        FtpRequestCacheValidator ftpRequestCacheValidator;
         bool isPrivateCache;
         TimeSpan unspecifiedMaximumAge;
     }

@@ -20,5 +20,6 @@ public interface ICompiledModelCodeGenerator : ILanguageBasedService
     /// <returns>The generated model metadata files.</returns>
     IReadOnlyCollection<ScaffoldedFile> GenerateModel(
         IModel model,
-        CompiledModelCodeGenerationOptions options);
+        CompiledModelCodeGenerationOptions options
+    );
 }

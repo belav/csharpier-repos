@@ -27,7 +27,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
-
 using Xunit;
 
 namespace System.Data.Tests
@@ -137,7 +136,8 @@ namespace System.Data.Tests
         public void EqualsTest()
         {
             DataTable myTable = new DataTable("myTable");
-            DataRow dr1, dr2;
+            DataRow dr1,
+                dr2;
             dr1 = myTable.NewRow();
             dr2 = myTable.NewRow();
 
@@ -153,8 +153,10 @@ namespace System.Data.Tests
         public void GetChildRows_ByDataRealtion()
         {
             DataRow dr;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
 
             //Create tables
@@ -167,7 +169,11 @@ namespace System.Data.Tests
             dr = dtParent.Rows[0];
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
             //Get Excepted result
             drArrExcepted = dtChild.Select("ParentId=" + dr["ParentId"]);
@@ -182,8 +188,10 @@ namespace System.Data.Tests
         public void GetChildRows_ByDataRealtionDataRowVersion()
         {
             DataRow drParent;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -192,28 +200,44 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             drParent = dtParent.Rows[0];
 
             // Teting: DateTime.Now.ToShortTimeString()
             //Get Excepted result
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows(dRel, DataRowVersion.Current);
             Assert.Equal(drArrExcepted, drArrResult);
 
             // Teting: DataRow.GetParentRows_D_D
             //Get Excepted result
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.OriginalRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.OriginalRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows(dRel, DataRowVersion.Original);
             Assert.Equal(drArrExcepted, drArrResult);
 
             // Teting: DataRow.GetParentRows_D_D
             //Get Excepted result, in this case Current = Default
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows(dRel, DataRowVersion.Default);
             Assert.Equal(drArrExcepted, drArrResult);
@@ -222,7 +246,11 @@ namespace System.Data.Tests
             drParent.BeginEdit();
             drParent["String1"] = "Value";
             //Get Excepted result
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows(dRel, DataRowVersion.Proposed);
             Assert.Equal(drArrExcepted, drArrResult);
@@ -232,8 +260,10 @@ namespace System.Data.Tests
         public void GetChildRows_ByName()
         {
             DataRow dr;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
 
             //Create tables
@@ -246,7 +276,11 @@ namespace System.Data.Tests
             dr = dtParent.Rows[0];
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
             //Get Excepted result
             drArrExcepted = dtChild.Select("ParentId=" + dr["ParentId"]);
@@ -261,8 +295,10 @@ namespace System.Data.Tests
         public void GetChildRows_ByNameDataRowVersion()
         {
             DataRow drParent;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -271,28 +307,44 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             drParent = dtParent.Rows[0];
 
             // GetChildRows_SD 1
             //Get Excepted result
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows("Parent-Child", DataRowVersion.Current);
             Assert.Equal(drArrExcepted, drArrResult);
 
             // GetChildRows_SD 2
             //Get Excepted result
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.OriginalRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.OriginalRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows("Parent-Child", DataRowVersion.Original);
             Assert.Equal(drArrExcepted, drArrResult);
 
             // GetParentRows_SD 3
             //Get Excepted result, in this case Current = Default
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows("Parent-Child", DataRowVersion.Default);
             Assert.Equal(drArrExcepted, drArrResult);
@@ -301,7 +353,11 @@ namespace System.Data.Tests
             drParent.BeginEdit();
             drParent["String1"] = "Value";
             //Get Excepted result
-            drArrExcepted = dtChild.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtChild.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drParent.GetChildRows("Parent-Child", DataRowVersion.Proposed);
             Assert.Equal(drArrExcepted, drArrResult);
@@ -398,7 +454,7 @@ namespace System.Data.Tests
 
             iHashCode = dr.GetHashCode();
             for (int i = 0; i < 10; i++)
-            {   //must return the same value each time
+            { //must return the same value each time
                 // GetHashCode #" + i
                 Assert.Equal(dr.GetHashCode(), iHashCode);
             }
@@ -407,8 +463,11 @@ namespace System.Data.Tests
         [Fact]
         public void GetParentRow_ByDataRelation()
         {
-            DataRow drExcepted, drResult, drChild;
-            DataTable dtChild, dtParent;
+            DataRow drExcepted,
+                drResult,
+                drChild;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
 
             //Create tables
@@ -420,7 +479,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtParent);
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             //Excepted result
@@ -437,9 +500,12 @@ namespace System.Data.Tests
         [Fact]
         public void GetParentRow_ByDataRelationDataRowVersion()
         {
-            DataRow drParent, drChild;
-            DataRow drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow drParent,
+                drChild;
+            DataRow drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -448,7 +514,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             drParent = dtParent.Rows[0];
@@ -488,8 +558,11 @@ namespace System.Data.Tests
         [Fact]
         public void GetParentRow_ByName()
         {
-            DataRow drExcepted, drResult, drChild;
-            DataTable dtChild, dtParent;
+            DataRow drExcepted,
+                drResult,
+                drChild;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
 
             //Create tables
@@ -501,7 +574,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtParent);
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             //Excepted result
@@ -518,9 +595,12 @@ namespace System.Data.Tests
         [Fact]
         public void GetParentRow_ByNameDataRowVersion()
         {
-            DataRow drParent, drChild;
-            DataRow drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow drParent,
+                drChild;
+            DataRow drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -529,7 +609,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             drParent = dtParent.Rows[0];
@@ -570,8 +654,10 @@ namespace System.Data.Tests
         public void GetParentRows_ByDataRelation()
         {
             DataRow dr;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
 
             //Create tables
@@ -589,7 +675,12 @@ namespace System.Data.Tests
             dtParent.ImportRow(dr);
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"], false);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"],
+                false
+            );
             ds.Relations.Add(dRel);
             //Get Excepted result
             drArrExcepted = dtParent.Select("ParentId=" + dr["ParentId"]);
@@ -605,8 +696,10 @@ namespace System.Data.Tests
         public void GetParentRows_ByName()
         {
             DataRow dr;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
 
             //Create tables
@@ -624,7 +717,12 @@ namespace System.Data.Tests
             dtParent.ImportRow(dr);
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"], false);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"],
+                false
+            );
             ds.Relations.Add(dRel);
             //Get Excepted result
             drArrExcepted = dtParent.Select("ParentId=" + dr["ParentId"]);
@@ -639,9 +737,12 @@ namespace System.Data.Tests
         [Fact]
         public void GetParentRows_ByNameDataRowVersion()
         {
-            DataRow drParent, drChild;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow drParent,
+                drChild;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -650,16 +751,21 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"], false);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"],
+                false
+            );
             ds.Relations.Add(dRel);
 
             //Create several copies of the first row
-            drParent = dtParent.Rows[0];    //row[0] has versions: Default,Current,Original
-            dtParent.ImportRow(drParent);   //row[1] has versions: Default,Current,Original
-            dtParent.ImportRow(drParent);   //row[2] has versions: Default,Current,Original
-            dtParent.ImportRow(drParent);   //row[3] has versions: Default,Current,Original
-            dtParent.ImportRow(drParent);   //row[4] has versions: Default,Current,Original
-            dtParent.ImportRow(drParent);   //row[5] has versions: Default,Current,Original
+            drParent = dtParent.Rows[0]; //row[0] has versions: Default,Current,Original
+            dtParent.ImportRow(drParent); //row[1] has versions: Default,Current,Original
+            dtParent.ImportRow(drParent); //row[2] has versions: Default,Current,Original
+            dtParent.ImportRow(drParent); //row[3] has versions: Default,Current,Original
+            dtParent.ImportRow(drParent); //row[4] has versions: Default,Current,Original
+            dtParent.ImportRow(drParent); //row[5] has versions: Default,Current,Original
             dtParent.AcceptChanges();
 
             //Get the first child row for drParent
@@ -673,19 +779,31 @@ namespace System.Data.Tests
 
             // Check DataRowVersion.Current
             //Check DataRowVersion.Current
-            drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtParent.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             drArrResult = drChild.GetParentRows("Parent-Child", DataRowVersion.Current);
             Assert.Equal(drArrExcepted, drArrResult);
 
             //Check DataRowVersion.Current
             // Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Original
-            drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.OriginalRows);
+            drArrExcepted = dtParent.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.OriginalRows
+            );
             drArrResult = drChild.GetParentRows("Parent-Child", DataRowVersion.Original);
             Assert.Equal(drArrExcepted, drArrResult);
 
             //Check DataRowVersion.Default
             // Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Default
-            drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtParent.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             drArrResult = drChild.GetParentRows("Parent-Child", DataRowVersion.Default);
             Assert.Equal(drArrExcepted, drArrResult);
 
@@ -1020,7 +1138,9 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(() => dr[new DataColumn("ZZZ")]);
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(
+                () => dr[new DataColumn("ZZZ")]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1064,12 +1184,16 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() => dr[(DataColumn)null]);
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(
+                () => dr[(DataColumn)null]
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("column", ex1.ParamName);
 
-            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() => dr[(DataColumn)null] = personB);
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(
+                () => dr[(DataColumn)null] = personB
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("column", ex2.ParamName);
@@ -1117,7 +1241,6 @@ namespace System.Data.Tests
             // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex.Message);
             Assert.Matches(@"\b" + "DBNull" + @"\b", ex.Message);
-
 
             Assert.Equal(1, _eventsFired.Count);
             Assert.Equal(addressA, dr[dc0]);
@@ -1200,7 +1323,6 @@ namespace System.Data.Tests
             Assert.Same(dc1, colChangeArgs.Column);
             Assert.Null(colChangeArgs.ProposedValue);
             Assert.Same(dt.Rows[0], colChangeArgs.Row);
-
 
             evt = _eventsFired[index++];
             Assert.Equal("ColumnChanged", evt.Name);
@@ -1483,7 +1605,9 @@ namespace System.Data.Tests
             Assert.Matches(@"\b" + "Persons" + @"\b", ex1.Message);
             Assert.Null(ex1.ParamName);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(() => dr[string.Empty] = personB);
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(
+                () => dr[string.Empty] = personB
+            );
             // Column '' does not belong to table Persons
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1512,12 +1636,16 @@ namespace System.Data.Tests
 
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() => dr[(string)null]);
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(
+                () => dr[(string)null]
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("name", ex1.ParamName);
 
-            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() => dr[(string)null] = personB);
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(
+                () => dr[(string)null] = personB
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("name", ex2.ParamName);
@@ -1714,7 +1842,9 @@ namespace System.Data.Tests
             dtA.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dtA.Rows[0];
 
-            ArgumentException ex1 = Assert.Throws<ArgumentException>(() => dr[dcB1, DataRowVersion.Default]);
+            ArgumentException ex1 = Assert.Throws<ArgumentException>(
+                () => dr[dcB1, DataRowVersion.Default]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
@@ -1724,7 +1854,9 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(() => dr[new DataColumn("ZZZ"), DataRowVersion.Default]);
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(
+                () => dr[new DataColumn("ZZZ"), DataRowVersion.Default]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1736,7 +1868,9 @@ namespace System.Data.Tests
 
             dtA.Columns.Remove(dcA2);
 
-            ArgumentException ex3 = Assert.Throws<ArgumentException>(() => dr[dcA2, DataRowVersion.Default]);
+            ArgumentException ex3 = Assert.Throws<ArgumentException>(
+                () => dr[dcA2, DataRowVersion.Default]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex3.InnerException);
             Assert.NotNull(ex3.Message);
@@ -1763,7 +1897,9 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => dr[(DataColumn)null, DataRowVersion.Default]);
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
+                () => dr[(DataColumn)null, DataRowVersion.Default]
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("column", ex.ParamName);
@@ -1808,13 +1944,17 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            VersionNotFoundException ex1 = Assert.Throws<VersionNotFoundException>(() => dr[dc0, DataRowVersion.Original]);
+            VersionNotFoundException ex1 = Assert.Throws<VersionNotFoundException>(
+                () => dr[dc0, DataRowVersion.Original]
+            );
             // There is no Original data to access
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Contains("Original", ex1.Message);
 
-            VersionNotFoundException ex2 = Assert.Throws<VersionNotFoundException>(() => dr[dc0, DataRowVersion.Proposed]);
+            VersionNotFoundException ex2 = Assert.Throws<VersionNotFoundException>(
+                () => dr[dc0, DataRowVersion.Proposed]
+            );
             // There is no Proposed data to access
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1894,7 +2034,10 @@ namespace System.Data.Tests
             Assert.True(dr.IsNull(1));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void IsNull_ByName()
         {
             DataTable dt = new DataTable();
@@ -2147,9 +2290,12 @@ namespace System.Data.Tests
         [Fact]
         public void SetParentRow_ByDataRow()
         {
-            DataRow drParent, drChild;
-            DataRow drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow drParent,
+                drChild;
+            DataRow drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -2158,7 +2304,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             drParent = dtParent.Rows[0];
@@ -2200,9 +2350,12 @@ namespace System.Data.Tests
         [Fact]
         public void SetParentRow_ByDataRowDataRelation()
         {
-            DataRow drParent, drChild;
-            DataRow drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow drParent,
+                drChild;
+            DataRow drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -2211,7 +2364,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
 
             drParent = dtParent.Rows[0];
@@ -2231,7 +2388,8 @@ namespace System.Data.Tests
         [Fact]
         public void Table()
         {
-            DataTable dt1, dt2;
+            DataTable dt1,
+                dt2;
             dt2 = new DataTable("myTable");
             DataRow dr = dt2.NewRow();
             dt1 = dr.Table;
@@ -2305,8 +2463,14 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "col1" + @"[\p{Pf}\p{Po}]", table.Rows[0].RowError);
             Assert.Matches(@"\b" + Regex.Escape("DBNull.Value") + @"\b", table.Rows[0].RowError);
 
-            Assert.Matches(@"[\p{Pi}\p{Po}]" + "col2" + @"\p{Po}\s*" + "col3" + @"[\p{Pf}\p{Po}]", table.Rows[1].RowError);
-            Assert.Matches(@"[\p{Pi}\p{Po}]" + "1" + @"\p{Po}\s*" + "1" + @"[\p{Pf}\p{Po}]", table.Rows[1].RowError);
+            Assert.Matches(
+                @"[\p{Pi}\p{Po}]" + "col2" + @"\p{Po}\s*" + "col3" + @"[\p{Pf}\p{Po}]",
+                table.Rows[1].RowError
+            );
+            Assert.Matches(
+                @"[\p{Pi}\p{Po}]" + "1" + @"\p{Po}\s*" + "1" + @"[\p{Pf}\p{Po}]",
+                table.Rows[1].RowError
+            );
 
             Assert.Equal(table.Rows[0].RowError, table.Rows[0].GetColumnError(0));
             Assert.Equal(table.Rows[1].RowError, table.Rows[0].GetColumnError(1));
@@ -2346,8 +2510,10 @@ namespace System.Data.Tests
         public void GetChildRows_DataRelation()
         {
             DataRow dr;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
 
             //Create tables
@@ -2360,7 +2526,11 @@ namespace System.Data.Tests
             dr = dtParent.Rows[0];
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(dRel);
             //Get Excepted result
             drArrExcepted = dtChild.Select("ParentId=" + dr["ParentId"]);
@@ -2373,9 +2543,12 @@ namespace System.Data.Tests
         [Fact]
         public void GetParentRows_DataRelation_DataRowVersion()
         {
-            DataRow drParent, drChild;
-            DataRow[] drArrExcepted, drArrResult;
-            DataTable dtChild, dtParent;
+            DataRow drParent,
+                drChild;
+            DataRow[] drArrExcepted,
+                drArrResult;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -2393,23 +2566,40 @@ namespace System.Data.Tests
             dtParent.ImportRow(drParent);
 
             //Add Relation
-            DataRelation dRel = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"], false);
+            DataRelation dRel = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"],
+                false
+            );
             ds.Relations.Add(dRel);
 
             //Get Excepted result
-            drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtParent.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drChild.GetParentRows(dRel, DataRowVersion.Current);
             Assert.Equal(drArrExcepted, drArrResult);
 
             //Get Excepted result
-            drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.OriginalRows);
+            drArrExcepted = dtParent.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.OriginalRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drChild.GetParentRows(dRel, DataRowVersion.Original);
             Assert.Equal(drArrExcepted, drArrResult);
 
             //Get Excepted result, in this case Current = Default
-            drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"], "", DataViewRowState.CurrentRows);
+            drArrExcepted = dtParent.Select(
+                "ParentId=" + drParent["ParentId"],
+                "",
+                DataViewRowState.CurrentRows
+            );
             //Get Result DataRowVersion.Current
             drArrResult = drChild.GetParentRows(dRel, DataRowVersion.Default);
             Assert.Equal(drArrExcepted, drArrResult);
@@ -2419,7 +2609,11 @@ namespace System.Data.Tests
                 DataTable dtOtherParent = DataProvider.CreateParentDataTable();
                 DataTable dtOtherChild = DataProvider.CreateChildDataTable();
 
-                DataRelation drl = new DataRelation("newRelation", dtOtherParent.Columns[0], dtOtherChild.Columns[0]);
+                DataRelation drl = new DataRelation(
+                    "newRelation",
+                    dtOtherParent.Columns[0],
+                    dtOtherChild.Columns[0]
+                );
                 drChild.GetParentRows(drl, DataRowVersion.Current);
             });
         }
@@ -2445,10 +2639,13 @@ namespace System.Data.Tests
             Assert.Equal(2, (int)dr.ItemArray[0]);
             Assert.Equal("Oren", (string)dr.ItemArray[1]);
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                dt.Rows[0].ItemArray = new object[] { 2, "Oren", "some1else" };
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    dt.Rows[0].ItemArray = new object[] { 2, "Oren", "some1else" };
+                }
+            );
         }
 
         [Fact]
@@ -2515,7 +2712,7 @@ namespace System.Data.Tests
             {
                 ds.Tables[0].BeginLoadData();
                 ds.Tables[0].Rows[0][0] = 10; //Foreign constraint violation
-                                              //ds.Tables[0].AcceptChanges();
+                //ds.Tables[0].AcceptChanges();
                 ds.Tables[0].EndLoadData();
             });
             Assert.Equal(3, ds.Tables[1].GetErrors().Length);
@@ -2648,6 +2845,7 @@ namespace System.Data.Tests
             table.RejectChanges();
             Assert.Equal(DataRowState.Unchanged, row.RowState);
         }
+
         [Fact]
         public void DataRowExpressionDefaultValueTest()
         {

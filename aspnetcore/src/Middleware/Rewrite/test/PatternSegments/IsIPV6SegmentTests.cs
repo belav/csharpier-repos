@@ -30,7 +30,9 @@ public class IsIPV6SegmentTests
         // Arrange
         var segement = new IsIPV6Segment();
         var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
-        context.HttpContext.Connection.RemoteIpAddress = IPAddress.Parse("2001:0db8:85a3:0000:0000:8a2e:0370:7334");
+        context.HttpContext.Connection.RemoteIpAddress = IPAddress.Parse(
+            "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+        );
 
         // Act
         var results = segement.Evaluate(context, null, null);

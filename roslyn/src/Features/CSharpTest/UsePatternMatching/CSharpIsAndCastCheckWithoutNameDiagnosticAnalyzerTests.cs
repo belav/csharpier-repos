@@ -17,15 +17,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineTypeCheck)]
-    public partial class CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzerTests(ITestOutputHelper logger)
-             : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer(), new CSharpIsAndCastCheckWithoutNameCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer(),
+                new CSharpIsAndCastCheckWithoutNameCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestBinaryExpression()
@@ -50,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return obj is TestFile {|Rename:file|} && file.i > 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -66,7 +71,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return [||]obj is TestFile && ((TestFile)obj).i > 0;
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                """,
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -81,7 +92,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         => [||]obj is TestFile && ((TestFile)obj).i > 0;
                 }
                 """,
-
                 """
                 class TestFile
                 {
@@ -89,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     bool M(object obj)
                         => obj is TestFile {|Rename:file|} && file.i > 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -105,7 +116,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     bool M = [||]obj is TestFile && ((TestFile)obj).i > 0;
                 }
                 """,
-
                 """
                 class TestFile
                 {
@@ -114,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                     bool M = obj is TestFile {|Rename:file|} && file.i > 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -146,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     bool M(object obj)
                         => Goo(() => obj is TestFile {|Rename:file|} && file.i > 0, () => obj is TestFile && ((TestFile)obj).i > 0);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -190,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -234,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -252,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -270,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -287,7 +303,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     }
                 }
                 """,
-
                 """
                 class TestFile
                 {
@@ -297,7 +312,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return M(null) is TestFile {|Rename:file|} && file.i > 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -314,7 +330,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     }
                 }
                 """,
-
                 """
                 class TestFile
                 {
@@ -324,7 +339,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return obj is TestFile {|Rename:file|} && /*before*/ file /*after*/.i > 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -341,7 +357,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     }
                 }
                 """,
-
                 """
                 class TestFile
                 {
@@ -351,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return ((TestFile)obj).i > 0 && obj is TestFile {|Rename:file|} && file.i > 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -368,7 +384,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     }
                 }
                 """,
-
                 """
                 class TestFile
                 {
@@ -378,7 +393,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return obj is int[] {|Rename:v|} && v > 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -396,7 +412,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                     }
                 }
                 """,
-
                 """
                 class TestFile
                 {
@@ -407,7 +422,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         return obj is TestFile {|Rename:file1|} && file1.i > 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -441,7 +457,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -475,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -509,7 +527,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -547,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -585,7 +605,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51340")]
@@ -610,7 +631,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 {
                     public SpecificThingType Prop { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58558")]
@@ -622,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 object? o = null;
                 Expression<Func<bool>> test = () => [||]o is int && (int)o > 5;
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58558")]
@@ -640,7 +663,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                         Expression<Func<bool>> test = () => [||]o is int && (int)o > 5;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

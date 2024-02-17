@@ -2,15 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.IO;
 using Xunit;
 
 public class bug
 {
     [Fact]
-    public static void TestEntryPoint()
-    {
-    }
+    public static void TestEntryPoint() { }
 }

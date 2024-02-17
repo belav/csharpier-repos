@@ -1,26 +1,26 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.IO;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Collections;
-    using System.Xml;
-    using System.Xml.Serialization;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
     using System.Globalization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Design;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Collections.ObjectModel;
-    using System.Drawing;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     #region Class WorkflowMarkupSerializationManager
     public class WorkflowMarkupSerializationManager : IDesignerSerializationManager
@@ -28,6 +28,7 @@ namespace System.Workflow.ComponentModel.Serialization
         private Assembly localAssembly = null;
         private int writerDepth = 0;
         private ContextStack workflowMarkupStack = new ContextStack();
+
         // Stack to keep a list of objects being serialized, to avoid stack overflow
         private Stack serializationStack = new Stack();
         private IDesignerSerializationManager serializationManager;
@@ -35,11 +36,18 @@ namespace System.Workflow.ComponentModel.Serialization
         internal event EventHandler<WorkflowMarkupElementEventArgs> FoundDefTag;
 
         //These are temporary variables for speedy lookup
-        private Dictionary<int, WorkflowMarkupSerializerMapping> clrNamespaceBasedMappings = new Dictionary<int, WorkflowMarkupSerializerMapping>();
-        private Dictionary<string, List<WorkflowMarkupSerializerMapping>> xmlNamespaceBasedMappings = new Dictionary<string, List<WorkflowMarkupSerializerMapping>>();
-        private Dictionary<string, List<WorkflowMarkupSerializerMapping>> prefixBasedMappings = new Dictionary<string, List<WorkflowMarkupSerializerMapping>>();
+        private Dictionary<int, WorkflowMarkupSerializerMapping> clrNamespaceBasedMappings =
+            new Dictionary<int, WorkflowMarkupSerializerMapping>();
+        private Dictionary<
+            string,
+            List<WorkflowMarkupSerializerMapping>
+        > xmlNamespaceBasedMappings =
+            new Dictionary<string, List<WorkflowMarkupSerializerMapping>>();
+        private Dictionary<string, List<WorkflowMarkupSerializerMapping>> prefixBasedMappings =
+            new Dictionary<string, List<WorkflowMarkupSerializerMapping>>();
         private List<WorkflowMarkupSerializer> extendedPropertiesProviders;
-        private Dictionary<XmlQualifiedName, Type> cachedXmlQualifiedNameTypes = new Dictionary<XmlQualifiedName, Type>();
+        private Dictionary<XmlQualifiedName, Type> cachedXmlQualifiedNameTypes =
+            new Dictionary<XmlQualifiedName, Type>();
 
         public WorkflowMarkupSerializationManager(IDesignerSerializationManager manager)
         {
@@ -62,18 +70,12 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public ContextStack Context
         {
-            get
-            {
-                return this.serializationManager.Context;
-            }
+            get { return this.serializationManager.Context; }
         }
 
         internal Stack SerializationStack
         {
-            get
-            {
-                return this.serializationStack;
-            }
+            get { return this.serializationStack; }
         }
 
         public void ReportError(object errorInformation)
@@ -86,15 +88,13 @@ namespace System.Workflow.ComponentModel.Serialization
 
         protected internal IDesignerSerializationManager SerializationManager
         {
-            get
-            {
-                return this.serializationManager;
-            }
-
+            get { return this.serializationManager; }
             set
             {
                 this.serializationManager = value;
-                this.serializationManager.AddSerializationProvider(new WellKnownTypeSerializationProvider());
+                this.serializationManager.AddSerializationProvider(
+                    new WellKnownTypeSerializationProvider()
+                );
             }
         }
 
@@ -116,14 +116,8 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public Assembly LocalAssembly
         {
-            get
-            {
-                return this.localAssembly;
-            }
-            set
-            {
-                this.localAssembly = value;
-            }
+            get { return this.localAssembly; }
+            set { this.localAssembly = value; }
         }
 
         #region Public Methods
@@ -133,22 +127,42 @@ namespace System.Workflow.ComponentModel.Serialization
                 throw new ArgumentNullException("type");
 
             string typeNamespace = (type.Namespace != null) ? type.Namespace : String.Empty;
-            string assemblyName = (type.Assembly != null && type.Assembly != this.localAssembly) ? type.Assembly.FullName : String.Empty;
+            string assemblyName =
+                (type.Assembly != null && type.Assembly != this.localAssembly)
+                    ? type.Assembly.FullName
+                    : String.Empty;
 
             WorkflowMarkupSerializerMapping mappingForType = null;
             int key = typeNamespace.GetHashCode() ^ assemblyName.GetHashCode();
             if (!this.clrNamespaceBasedMappings.TryGetValue(key, out mappingForType))
             {
                 IList<WorkflowMarkupSerializerMapping> collectedMappings = null;
-                WorkflowMarkupSerializerMapping.GetMappingFromType(this, type, out mappingForType, out collectedMappings);
-                AddMappings(new List<WorkflowMarkupSerializerMapping>(new WorkflowMarkupSerializerMapping[] { mappingForType }));
+                WorkflowMarkupSerializerMapping.GetMappingFromType(
+                    this,
+                    type,
+                    out mappingForType,
+                    out collectedMappings
+                );
+                AddMappings(
+                    new List<WorkflowMarkupSerializerMapping>(
+                        new WorkflowMarkupSerializerMapping[] { mappingForType }
+                    )
+                );
                 AddMappings(collectedMappings);
             }
 
             string typeName = WorkflowMarkupSerializer.EnsureMarkupExtensionTypeName(type);
 
             //Make sure that while writting the workflow namespaces will always be the default
-            prefix = (mappingForType.Prefix.Equals(StandardXomlKeys.WorkflowPrefix, StringComparison.Ordinal)) ? String.Empty : mappingForType.Prefix;
+            prefix =
+                (
+                    mappingForType.Prefix.Equals(
+                        StandardXomlKeys.WorkflowPrefix,
+                        StringComparison.Ordinal
+                    )
+                )
+                    ? String.Empty
+                    : mappingForType.Prefix;
             return new XmlQualifiedName(typeName, mappingForType.XmlNamespace);
         }
 
@@ -158,17 +172,23 @@ namespace System.Workflow.ComponentModel.Serialization
                 throw new ArgumentNullException("xmlQualifiedName");
 
             string xmlns = xmlQualifiedName.Namespace;
-            string typeName = WorkflowMarkupSerializer.EnsureMarkupExtensionTypeName(xmlQualifiedName);
+            string typeName = WorkflowMarkupSerializer.EnsureMarkupExtensionTypeName(
+                xmlQualifiedName
+            );
 
             Type resolvedType = null;
 
-            // first check our cache 
+            // first check our cache
             cachedXmlQualifiedNameTypes.TryGetValue(xmlQualifiedName, out resolvedType);
 
             if (resolvedType == null)
             {
                 // lookup in well known types
-                resolvedType = WorkflowMarkupSerializerMapping.ResolveWellKnownTypes(this, xmlns, typeName);
+                resolvedType = WorkflowMarkupSerializerMapping.ResolveWellKnownTypes(
+                    this,
+                    xmlns,
+                    typeName
+                );
             }
 
             if (resolvedType == null)
@@ -179,7 +199,12 @@ namespace System.Workflow.ComponentModel.Serialization
                 {
                     IList<WorkflowMarkupSerializerMapping> matchingMappings = null;
                     IList<WorkflowMarkupSerializerMapping> collectedMappings = null;
-                    WorkflowMarkupSerializerMapping.GetMappingsFromXmlNamespace(this, xmlns, out matchingMappings, out collectedMappings);
+                    WorkflowMarkupSerializerMapping.GetMappingsFromXmlNamespace(
+                        this,
+                        xmlns,
+                        out matchingMappings,
+                        out collectedMappings
+                    );
                     AddMappings(matchingMappings);
                     AddMappings(collectedMappings);
 
@@ -197,7 +222,12 @@ namespace System.Workflow.ComponentModel.Serialization
                         fullTypeName = clrNamespace + "." + xmlQualifiedName.Name;
 
                     // Work around  for component model assembly
-                    if (assemblyName.Equals(Assembly.GetExecutingAssembly().FullName, StringComparison.Ordinal))
+                    if (
+                        assemblyName.Equals(
+                            Assembly.GetExecutingAssembly().FullName,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         resolvedType = Assembly.GetExecutingAssembly().GetType(fullTypeName);
                     }
@@ -219,16 +249,19 @@ namespace System.Workflow.ComponentModel.Serialization
                         }
                         catch
                         {
-                            // 
-
-
-
+                            //
                         }
 
                         if (resolvedType == null)
                         {
                             resolvedType = GetType(fullTypeName);
-                            if (resolvedType != null && !resolvedType.AssemblyQualifiedName.Equals(assemblyQualifiedName, StringComparison.Ordinal))
+                            if (
+                                resolvedType != null
+                                && !resolvedType.AssemblyQualifiedName.Equals(
+                                    assemblyQualifiedName,
+                                    StringComparison.Ordinal
+                                )
+                            )
                                 resolvedType = null;
                         }
                     }
@@ -252,8 +285,12 @@ namespace System.Workflow.ComponentModel.Serialization
             return serializationManager.GetSerializer(objectType, serializerType);
         }
 
-
-        [SuppressMessage("Microsoft.Globalization", "CA1307:SpecifyStringComparison", MessageId = "System.String.IndexOf(System.String)", Justification = "Not a security threat since it is called in design time scenarios")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1307:SpecifyStringComparison",
+            MessageId = "System.String.IndexOf(System.String)",
+            Justification = "Not a security threat since it is called in design time scenarios"
+        )]
         public virtual Type GetType(string typeName)
         {
             if (typeName == null)
@@ -261,7 +298,6 @@ namespace System.Workflow.ComponentModel.Serialization
 
             // try serialization manager
             Type type = null;
-
 
             if (this.designMode)
             {
@@ -278,11 +314,11 @@ namespace System.Workflow.ComponentModel.Serialization
             if (type == null)
             {
                 // If this is a design time type, we need to get it from our type provider.
-                ITypeProvider typeProvider = this.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                ITypeProvider typeProvider =
+                    this.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (typeProvider != null)
                     type = typeProvider.GetType(typeName, false);
             }
-
 
             if (type != null)
                 return type;
@@ -309,9 +345,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     }
                     catch
                     {
-                        // 
-
-
+                        //
                     }
                 }
 
@@ -328,22 +362,13 @@ namespace System.Workflow.ComponentModel.Serialization
         #region Helpers
         internal int WriterDepth
         {
-            get
-            {
-                return this.writerDepth;
-            }
-            set
-            {
-                this.writerDepth = value;
-            }
+            get { return this.writerDepth; }
+            set { this.writerDepth = value; }
         }
 
         internal ContextStack WorkflowMarkupStack
         {
-            get
-            {
-                return this.workflowMarkupStack;
-            }
+            get { return this.workflowMarkupStack; }
         }
 
         internal void FireFoundDefTag(WorkflowMarkupElementEventArgs args)
@@ -354,26 +379,20 @@ namespace System.Workflow.ComponentModel.Serialization
 
         internal IDictionary<int, WorkflowMarkupSerializerMapping> ClrNamespaceBasedMappings
         {
-            get
-            {
-                return this.clrNamespaceBasedMappings;
-            }
+            get { return this.clrNamespaceBasedMappings; }
         }
 
-        internal IDictionary<string, List<WorkflowMarkupSerializerMapping>> XmlNamespaceBasedMappings
+        internal IDictionary<
+            string,
+            List<WorkflowMarkupSerializerMapping>
+        > XmlNamespaceBasedMappings
         {
-            get
-            {
-                return this.xmlNamespaceBasedMappings;
-            }
+            get { return this.xmlNamespaceBasedMappings; }
         }
 
         internal Dictionary<string, List<WorkflowMarkupSerializerMapping>> PrefixBasedMappings
         {
-            get
-            {
-                return this.prefixBasedMappings;
-            }
+            get { return this.prefixBasedMappings; }
         }
 
         internal void AddMappings(IList<WorkflowMarkupSerializerMapping> mappingsToAdd)
@@ -384,7 +403,12 @@ namespace System.Workflow.ComponentModel.Serialization
                     this.clrNamespaceBasedMappings.Add(mapping.GetHashCode(), mapping);
 
                 List<WorkflowMarkupSerializerMapping> xmlnsMappings = null;
-                if (!this.xmlNamespaceBasedMappings.TryGetValue(mapping.XmlNamespace, out xmlnsMappings))
+                if (
+                    !this.xmlNamespaceBasedMappings.TryGetValue(
+                        mapping.XmlNamespace,
+                        out xmlnsMappings
+                    )
+                )
                 {
                     xmlnsMappings = new List<WorkflowMarkupSerializerMapping>();
                     this.xmlNamespaceBasedMappings.Add(mapping.XmlNamespace, xmlnsMappings);
@@ -421,7 +445,12 @@ namespace System.Workflow.ComponentModel.Serialization
         #endregion
 
         #region IDesignerSerializationManager Implementation
-        object IDesignerSerializationManager.CreateInstance(Type type, ICollection arguments, string name, bool addToContainer)
+        object IDesignerSerializationManager.CreateInstance(
+            Type type,
+            ICollection arguments,
+            string name,
+            bool addToContainer
+        )
         {
             return this.serializationManager.CreateInstance(type, arguments, name, addToContainer);
         }
@@ -441,9 +470,17 @@ namespace System.Workflow.ComponentModel.Serialization
             get { return this.serializationManager.Properties; }
         }
 
-        event ResolveNameEventHandler IDesignerSerializationManager.ResolveName { add { } remove { } }
+        event ResolveNameEventHandler IDesignerSerializationManager.ResolveName
+        {
+            add { }
+            remove { }
+        }
 
-        event EventHandler IDesignerSerializationManager.SerializationComplete { add { } remove { } }
+        event EventHandler IDesignerSerializationManager.SerializationComplete
+        {
+            add { }
+            remove { }
+        }
 
         void IDesignerSerializationManager.SetName(object instance, string name)
         {
@@ -467,11 +504,20 @@ namespace System.Workflow.ComponentModel.Serialization
         private sealed class WellKnownTypeSerializationProvider : IDesignerSerializationProvider
         {
             #region IDesignerSerializationProvider Members
-            object IDesignerSerializationProvider.GetSerializer(IDesignerSerializationManager manager, object currentSerializer, Type objectType, Type serializerType)
+            object IDesignerSerializationProvider.GetSerializer(
+                IDesignerSerializationManager manager,
+                object currentSerializer,
+                Type objectType,
+                Type serializerType
+            )
             {
                 if (serializerType == typeof(WorkflowMarkupSerializer) && objectType != null)
                 {
-                    if (TypeProvider.IsAssignable(typeof(ICollection<string>), objectType) && TypeProvider.IsAssignable(objectType, typeof(List<string>)) && !TypeProvider.IsAssignable(typeof(Array), objectType))
+                    if (
+                        TypeProvider.IsAssignable(typeof(ICollection<string>), objectType)
+                        && TypeProvider.IsAssignable(objectType, typeof(List<string>))
+                        && !TypeProvider.IsAssignable(typeof(Array), objectType)
+                    )
                         return new StringCollectionMarkupSerializer();
                     else if (typeof(Color).IsAssignableFrom(objectType))
                         return new ColorMarkupSerializer();
@@ -490,6 +536,4 @@ namespace System.Workflow.ComponentModel.Serialization
         #endregion
     }
     #endregion
-
 }
-
