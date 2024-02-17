@@ -206,18 +206,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    using System.Diagnostics.CodeAnalysis;
+                using System.Diagnostics.CodeAnalysis;
 
-                    class Program
+                class Program
+                {
+                    [StringSyntax(StringSyntaxAttribute.Json)]
+                    private string field;
+                    void Goo()
                     {
-                        [StringSyntax(StringSyntaxAttribute.Json)]
-                        private string field;
-                        void Goo()
-                        {
-                            [|this.field = @"[{ 'goo': 0}]";|]
-                        }
+                        [|this.field = @"[{ 'goo': 0}]";|]
                     }
-                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                }
+                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Field("field"),
                 Json.Array("["),
@@ -235,18 +235,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    using System.Diagnostics.CodeAnalysis;
+                using System.Diagnostics.CodeAnalysis;
 
-                    class Program
+                class Program
+                {
+                    [StringSyntax(StringSyntaxAttribute.Json)]
+                    private string Prop { get; set; }
+                    void Goo()
                     {
-                        [StringSyntax(StringSyntaxAttribute.Json)]
-                        private string Prop { get; set; }
-                        void Goo()
-                        {
-                            [|this.Prop = @"[{ 'goo': 0}]";|]
-                        }
+                        [|this.Prop = @"[{ 'goo': 0}]";|]
                     }
-                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                }
+                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Property("Prop"),
                 Json.Array("["),
@@ -264,20 +264,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """
-                    using System.Diagnostics.CodeAnalysis;
+                using System.Diagnostics.CodeAnalysis;
 
-                    class Program
+                class Program
+                {
+                    private void M([StringSyntax(StringSyntaxAttribute.Json)] string p)
                     {
-                        private void M([StringSyntax(StringSyntaxAttribute.Json)] string p)
-                        {
-                        }
-
-                        void Goo()
-                        {
-                            [|M(@"[{ 'goo': 0}]");|]
-                        }
                     }
-                    """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+
+                    void Goo()
+                    {
+                        [|M(@"[{ 'goo': 0}]");|]
+                    }
+                }
+                """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Method("M"),
                 Json.Array("["),
@@ -298,22 +298,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                    using System.Diagnostics.CodeAnalysis;
+                using System.Diagnostics.CodeAnalysis;
 
-                    public sealed record Foo
-                    {
-                        [StringSyntax(StringSyntaxAttribute.Json)]
-                        public required string Bar { get; set; }
-                    }
+                public sealed record Foo
+                {
+                    [StringSyntax(StringSyntaxAttribute.Json)]
+                    public required string Bar { get; set; }
+                }
 
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var f = new Foo { [|Bar = """[1, 2, 3]"""|] };
-                        }
+                        var f = new Foo { [|Bar = """[1, 2, 3]"""|] };
                     }
-                    """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                }
+                """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Property("Bar"),
                 Json.Array("["),
@@ -332,23 +332,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             await TestAsync(
                 """"
-                    using System.Diagnostics.CodeAnalysis;
+                using System.Diagnostics.CodeAnalysis;
 
-                    public sealed record Foo
-                    {
-                        [StringSyntax(StringSyntaxAttribute.Json)]
-                        public required string Bar { get; set; }
-                    }
+                public sealed record Foo
+                {
+                    [StringSyntax(StringSyntaxAttribute.Json)]
+                    public required string Bar { get; set; }
+                }
 
-                    class Program
+                class Program
+                {
+                    void Goo()
                     {
-                        void Goo()
-                        {
-                            var f = new Foo { Bar =  "" };
-                            f = f with { [|Bar = """[1, 2, 3]"""|] };
-                        }
+                        var f = new Foo { Bar =  "" };
+                        f = f with { [|Bar = """[1, 2, 3]"""|] };
                     }
-                    """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
+                }
+                """" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
                 testHost,
                 Property("Bar"),
                 Json.Array("["),

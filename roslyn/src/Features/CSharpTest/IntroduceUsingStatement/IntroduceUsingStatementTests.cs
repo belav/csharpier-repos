@@ -49,16 +49,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(System.IDisposable disposable)
                     {
-                        void M(System.IDisposable disposable)
-                        {
-                    """
+                """
                     + declaration
                     + """
-                            }
                         }
-                        """,
+                    }
+                    """,
                 """
                 class C
                 {
@@ -78,16 +78,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestAsync(
                 """
-                    class C
-                    {
-                        void M(System.IDisposable disposable)
-                        {                             [|
-                    """
+                class C
+                {
+                    void M(System.IDisposable disposable)
+                    {                             [|
+                """
                     + """
-                                var name = disposable;    |]
-                            }
+                            var name = disposable;    |]
                         }
-                        """,
+                    }
+                    """,
                 """
                 class C
                 {
@@ -228,16 +228,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(System.IDisposable disposable)
                     {
-                        void M(System.IDisposable disposable)
-                        {
-                    """
+                """
                     + declaration
                     + """
-                            }
                         }
-                        """
+                    }
+                    """
             );
         }
 
@@ -284,16 +284,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-                    class C
+                class C
+                {
+                    void M(System.IDisposable disposable)
                     {
-                        void M(System.IDisposable disposable)
-                        {
-                    """
+                """
                     + declaration
                     + """
-                            }
                         }
-                        """
+                    }
+                    """
             );
         }
 

@@ -98,13 +98,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                         g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -964,12 +964,12 @@ class Bad : Bad
                 .AddBaseline(
                     source: common
                         + """
-                            class C
-                            {
-                                [A1]
-                                static void F() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A1]
+                            static void F() { }
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifyCustomAttributes(
@@ -998,12 +998,12 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            class C
-                            {
-                                [A2]
-                                static void F() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A2]
+                            static void F() { }
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
@@ -1039,13 +1039,13 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            [A5]
-                            class C
-                            {
-                                [A3, A4]
-                                static void F() { }
-                            }
-                            """,
+                        [A5]
+                        class C
+                        {
+                            [A3, A4]
+                            static void F() { }
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("C")),
@@ -1110,13 +1110,13 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            [A5]
-                            class C
-                            {
-                                [A6, A3, A4]
-                                static void F() { }
-                            }
-                            """,
+                        [A5]
+                        class C
+                        {
+                            [A6, A3, A4]
+                            static void F() { }
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
@@ -1188,19 +1188,19 @@ class Bad : Bad
                 .AddBaseline(
                     common
                         + """
-                            [A1]
-                            class C
-                            {
-                                [A3]
-                                static void F() {}
-                            }
-                            [A2]
-                            class D
-                            {
-                                [A4]
-                                static void G() {}
-                            }
-                            """,
+                        [A1]
+                        class C
+                        {
+                            [A3]
+                            static void F() {}
+                        }
+                        [A2]
+                        class D
+                        {
+                            [A4]
+                            static void G() {}
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifyCustomAttributes(
@@ -1244,19 +1244,19 @@ class Bad : Bad
                 .AddGeneration(
                     common
                         + """
-                            [A1]
-                            class C
-                            {
-                                [A3, A5, A6]
-                                static void F() {}
-                            }
-                            [A2]
-                            class D
-                            {
-                                [A4, A7]
-                                static void G() {}
-                            }
-                            """,
+                        [A1]
+                        class C
+                        {
+                            [A3, A5, A6]
+                            static void F() {}
+                        }
+                        [A2]
+                        class D
+                        {
+                            [A4, A7]
+                            static void G() {}
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("C.F")),
@@ -1765,13 +1765,13 @@ class Bad : Bad
                 .AddBaseline(
                     source: common
                         + """
-                            class C
-                            {
-                                [A1, A2]void F() { }
-                                [A3]void G() { }
-                                [A5, A6]void H() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A1, A2]void F() { }
+                            [A3]void G() { }
+                            [A5, A6]void H() { }
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifyCustomAttributes(
@@ -1818,13 +1818,13 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            class C
-                            {
-                                [A2]void F() { }
-                                [A4, A3]void G() { }
-                                [A7]void H() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A2]void F() { }
+                            [A4, A3]void G() { }
+                            [A7]void H() { }
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("C.F")),
@@ -1918,13 +1918,13 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            class C
-                            {
-                                [A2]void F() { }
-                                void G() { }
-                                [A5, A6, A7, A8]void H() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A2]void F() { }
+                            void G() { }
+                            [A5, A6, A7, A8]void H() { }
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("C.G")),
@@ -2015,13 +2015,13 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            class C
-                            {
-                                [A2]void F() { }
-                                void G() { }
-                                void H() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A2]void F() { }
+                            void G() { }
+                            void H() { }
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.H")), },
                     validator: g =>
                     {
@@ -2101,12 +2101,12 @@ class Bad : Bad
                 .AddBaseline(
                     source: common
                         + """
-                            class C
-                            {
-                                void F() { }
-                                void G() { }
-                            }
-                            """,
+                        class C
+                        {
+                            void F() { }
+                            void G() { }
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifyCustomAttributes(
@@ -2130,12 +2130,12 @@ class Bad : Bad
                 .AddGeneration( // add attribute to G
                     source: common
                         + """
-                            class C
-                            {
-                                void F() { }
-                                [A1] void G() { }
-                            }
-                            """,
+                        class C
+                        {
+                            void F() { }
+                            [A1] void G() { }
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.G")), },
                     validator: g =>
                     {
@@ -2170,12 +2170,12 @@ class Bad : Bad
                 .AddGeneration( // add attribute to F
                     source: common
                         + """
-                            class C
-                            {
-                                [A1] void F() { }
-                                [A2] void G() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A1] void F() { }
+                            [A2] void G() { }
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
                     validator: g =>
                     {
@@ -2210,12 +2210,12 @@ class Bad : Bad
                 .AddGeneration( // update attributes of both F and G
                     source: common
                         + """
-                            class C
-                            {
-                                [A3] void F() { }
-                                [A4] void G() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A3] void F() { }
+                            [A4] void G() { }
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("C.F")),
@@ -2276,11 +2276,11 @@ class Bad : Bad
                 .AddBaseline(
                     source: common
                         + """
-                            class C
-                            {
-                                [A1] void F() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A1] void F() { }
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifyCustomAttributes(
@@ -2309,11 +2309,11 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            class C
-                            {
-                                [A2, A3] void F() { }
-                            }
-                            """,
+                        class C
+                        {
+                            [A2, A3] void F() { }
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
                     validator: g =>
                     {
@@ -2358,11 +2358,11 @@ class Bad : Bad
                 .AddGeneration(
                     source: common
                         + """
-                            class C
-                            {
-                                void F() { }
-                            }
-                            """,
+                        class C
+                        {
+                            void F() { }
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
                     validator: g =>
                     {
@@ -4058,19 +4058,19 @@ delegate void D([A]int x);
                 .AddBaseline(
                     source: common
                         + """
-                            enum E
-                            {
-                                A
-                            }
+                        enum E
+                        {
+                            A
+                        }
 
-                            class C
-                            {
-                                private int _x;
-                                public int X { get; }
-                            }
+                        class C
+                        {
+                            private int _x;
+                            public int X { get; }
+                        }
 
-                            delegate int D(int x);
-                            """,
+                        delegate int D(int x);
+                        """,
                     validator: g =>
                     {
                         g.VerifyCustomAttributes(
@@ -4107,25 +4107,25 @@ delegate void D([A]int x);
                     source: common
                         + """
 
-                            [A1]
-                            enum E
-                            {
-                                [A2]
-                                A
-                            }
+                        [A1]
+                        enum E
+                        {
+                            [A2]
+                            A
+                        }
 
-                            [A3]
-                            class C
-                            {
-                                [A4]
-                                private int _x;
-                                [A5]
-                                public int X { get; }
-                            }
+                        [A3]
+                        class C
+                        {
+                            [A4]
+                            private int _x;
+                            [A5]
+                            public int X { get; }
+                        }
 
-                            [A6]
-                            delegate int D(int x);
-                            """,
+                        [A6]
+                        delegate int D(int x);
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("E")),
@@ -4235,25 +4235,25 @@ delegate void D([A]int x);
                 .AddGeneration(
                     source: common
                         + """
-                            [A7]
-                            enum E
-                            {
-                                [A8]
-                                A
-                            }
+                        [A7]
+                        enum E
+                        {
+                            [A8]
+                            A
+                        }
 
-                            [A9]
-                            class C
-                            {
-                                [A10]
-                                private int _x;
-                                [A11]
-                                public int X { get; }
-                            }
+                        [A9]
+                        class C
+                        {
+                            [A10]
+                            private int _x;
+                            [A11]
+                            public int X { get; }
+                        }
 
-                            [A12]
-                            delegate int D(int x);
-                            """,
+                        [A12]
+                        delegate int D(int x);
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("E")),
@@ -5181,13 +5181,13 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000007
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000007
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5248,22 +5248,22 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000001
-                              IL_0006:  ret
-                            }
-                            {
-                              // Code size        8 (0x8)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldarg.1
-                              IL_0002:  stfld      0x04000001
-                              IL_0007:  ret
-                            }
-                            """;
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000001
+                          IL_0006:  ret
+                        }
+                        {
+                          // Code size        8 (0x8)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldarg.1
+                          IL_0002:  stfld      0x04000001
+                          IL_0007:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5336,13 +5336,13 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5423,22 +5423,22 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000001
-                              IL_0006:  ret
-                            }
-                            {
-                              // Code size        8 (0x8)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldarg.1
-                              IL_0002:  stfld      0x04000001
-                              IL_0007:  ret
-                            }
-                            """;
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000001
+                          IL_0006:  ret
+                        }
+                        {
+                          // Code size        8 (0x8)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldarg.1
+                          IL_0002:  stfld      0x04000001
+                          IL_0007:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5511,13 +5511,13 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5575,23 +5575,23 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size       11 (0xb)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldstr      0x7000000D
-                              IL_0006:  stloc.0
-                              IL_0007:  br.s       IL_0009
-                              IL_0009:  ldloc.0
-                              IL_000a:  ret
-                            }
-                            {
-                              // Code size        2 (0x2)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ret
-                            }
-                            """;
+                        {
+                          // Code size       11 (0xb)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldstr      0x7000000D
+                          IL_0006:  stloc.0
+                          IL_0007:  br.s       IL_0009
+                          IL_0009:  ldloc.0
+                          IL_000a:  ret
+                        }
+                        {
+                          // Code size        2 (0x2)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5648,13 +5648,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5711,23 +5711,23 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size       11 (0xb)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldstr      0x7000000D
-                              IL_0006:  stloc.0
-                              IL_0007:  br.s       IL_0009
-                              IL_0009:  ldloc.0
-                              IL_000a:  ret
-                            }
-                            {
-                              // Code size        2 (0x2)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ret
-                            }
-                            """;
+                        {
+                          // Code size       11 (0xb)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldstr      0x7000000D
+                          IL_0006:  stloc.0
+                          IL_0007:  br.s       IL_0009
+                          IL_0009:  ldloc.0
+                          IL_000a:  ret
+                        }
+                        {
+                          // Code size        2 (0x2)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5858,28 +5858,28 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000009
-                              IL_0005:  throw
-                            }
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000002
-                              IL_0006:  ret
-                            }
-                            {
-                              // Code size        8 (0x8)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldarg.1
-                              IL_0002:  stfld      0x04000002
-                              IL_0007:  ret
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000009
+                          IL_0005:  throw
+                        }
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000002
+                          IL_0006:  ret
+                        }
+                        {
+                          // Code size        8 (0x8)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldarg.1
+                          IL_0002:  stfld      0x04000002
+                          IL_0007:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5967,28 +5967,28 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000001
-                              IL_0006:  ret
-                            }
-                            {
-                              // Code size        8 (0x8)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldarg.1
-                              IL_0002:  stfld      0x04000001
-                              IL_0007:  ret
-                            }
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A00000C
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000001
+                          IL_0006:  ret
+                        }
+                        {
+                          // Code size        8 (0x8)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldarg.1
+                          IL_0002:  stfld      0x04000001
+                          IL_0007:  ret
+                        }
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A00000C
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6119,28 +6119,28 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000009
-                              IL_0005:  throw
-                            }
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000002
-                              IL_0006:  ret
-                            }
-                            {
-                              // Code size        8 (0x8)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldarg.1
-                              IL_0002:  stfld      0x04000002
-                              IL_0007:  ret
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000009
+                          IL_0005:  throw
+                        }
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000002
+                          IL_0006:  ret
+                        }
+                        {
+                          // Code size        8 (0x8)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldarg.1
+                          IL_0002:  stfld      0x04000002
+                          IL_0007:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6228,28 +6228,28 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000001
-                              IL_0006:  ret
-                            }
-                            {
-                              // Code size        8 (0x8)
-                              .maxstack  8
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldarg.1
-                              IL_0002:  stfld      0x04000001
-                              IL_0007:  ret
-                            }
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A00000C
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000001
+                          IL_0006:  ret
+                        }
+                        {
+                          // Code size        8 (0x8)
+                          .maxstack  8
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldarg.1
+                          IL_0002:  stfld      0x04000001
+                          IL_0007:  ret
+                        }
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A00000C
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6323,13 +6323,13 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000006
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000006
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6418,23 +6418,23 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000007
-                              IL_0005:  throw
-                            }
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldc.i4.2
-                              IL_0002:  stloc.0
-                              IL_0003:  br.s       IL_0005
-                              IL_0005:  ldloc.0
-                              IL_0006:  ret
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000007
+                          IL_0005:  throw
+                        }
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldc.i4.2
+                          IL_0002:  stloc.0
+                          IL_0003:  br.s       IL_0005
+                          IL_0005:  ldloc.0
+                          IL_0006:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6492,23 +6492,23 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldc.i4.2
-                              IL_0002:  stloc.0
-                              IL_0003:  br.s       IL_0005
-                              IL_0005:  ldloc.0
-                              IL_0006:  ret
-                            }
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000009
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldc.i4.2
+                          IL_0002:  stloc.0
+                          IL_0003:  br.s       IL_0005
+                          IL_0005:  ldloc.0
+                          IL_0006:  ret
+                        }
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000009
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6567,17 +6567,17 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldc.i4.3
-                              IL_0002:  stloc.0
-                              IL_0003:  br.s       IL_0005
-                              IL_0005:  ldloc.0
-                              IL_0006:  ret
-                            }
-                            """;
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldc.i4.3
+                          IL_0002:  stloc.0
+                          IL_0003:  br.s       IL_0005
+                          IL_0005:  ldloc.0
+                          IL_0006:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6883,13 +6883,13 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A00000A
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A00000A
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -7019,61 +7019,61 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A00000C
-                              IL_0005:  throw
-                            }
-                            {
-                              // Code size       41 (0x29)
-                              .maxstack  3
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000002
-                              IL_0006:  stloc.0
-                              IL_0007:  ldloc.0
-                              IL_0008:  stloc.1
-                              IL_0009:  ldloc.1
-                              IL_000a:  ldarg.1
-                              IL_000b:  call       0x0A00000D
-                              IL_0010:  castclass  0x0100000D
-                              IL_0015:  stloc.2
-                              IL_0016:  ldarg.0
-                              IL_0017:  ldflda     0x04000002
-                              IL_001c:  ldloc.2
-                              IL_001d:  ldloc.1
-                              IL_001e:  call       0x2B000002
-                              IL_0023:  stloc.0
-                              IL_0024:  ldloc.0
-                              IL_0025:  ldloc.1
-                              IL_0026:  bne.un.s   IL_0007
-                              IL_0028:  ret
-                            }
-                            {
-                              // Code size       41 (0x29)
-                              .maxstack  3
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000002
-                              IL_0006:  stloc.0
-                              IL_0007:  ldloc.0
-                              IL_0008:  stloc.1
-                              IL_0009:  ldloc.1
-                              IL_000a:  ldarg.1
-                              IL_000b:  call       0x0A00000F
-                              IL_0010:  castclass  0x0100000D
-                              IL_0015:  stloc.2
-                              IL_0016:  ldarg.0
-                              IL_0017:  ldflda     0x04000002
-                              IL_001c:  ldloc.2
-                              IL_001d:  ldloc.1
-                              IL_001e:  call       0x2B000002
-                              IL_0023:  stloc.0
-                              IL_0024:  ldloc.0
-                              IL_0025:  ldloc.1
-                              IL_0026:  bne.un.s   IL_0007
-                              IL_0028:  ret
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A00000C
+                          IL_0005:  throw
+                        }
+                        {
+                          // Code size       41 (0x29)
+                          .maxstack  3
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000002
+                          IL_0006:  stloc.0
+                          IL_0007:  ldloc.0
+                          IL_0008:  stloc.1
+                          IL_0009:  ldloc.1
+                          IL_000a:  ldarg.1
+                          IL_000b:  call       0x0A00000D
+                          IL_0010:  castclass  0x0100000D
+                          IL_0015:  stloc.2
+                          IL_0016:  ldarg.0
+                          IL_0017:  ldflda     0x04000002
+                          IL_001c:  ldloc.2
+                          IL_001d:  ldloc.1
+                          IL_001e:  call       0x2B000002
+                          IL_0023:  stloc.0
+                          IL_0024:  ldloc.0
+                          IL_0025:  ldloc.1
+                          IL_0026:  bne.un.s   IL_0007
+                          IL_0028:  ret
+                        }
+                        {
+                          // Code size       41 (0x29)
+                          .maxstack  3
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000002
+                          IL_0006:  stloc.0
+                          IL_0007:  ldloc.0
+                          IL_0008:  stloc.1
+                          IL_0009:  ldloc.1
+                          IL_000a:  ldarg.1
+                          IL_000b:  call       0x0A00000F
+                          IL_0010:  castclass  0x0100000D
+                          IL_0015:  stloc.2
+                          IL_0016:  ldarg.0
+                          IL_0017:  ldflda     0x04000002
+                          IL_001c:  ldloc.2
+                          IL_001d:  ldloc.1
+                          IL_001e:  call       0x2B000002
+                          IL_0023:  stloc.0
+                          IL_0024:  ldloc.0
+                          IL_0025:  ldloc.1
+                          IL_0026:  bne.un.s   IL_0007
+                          IL_0028:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -7163,61 +7163,61 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size       41 (0x29)
-                              .maxstack  3
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000001
-                              IL_0006:  stloc.0
-                              IL_0007:  ldloc.0
-                              IL_0008:  stloc.1
-                              IL_0009:  ldloc.1
-                              IL_000a:  ldarg.1
-                              IL_000b:  call       0x0A000012
-                              IL_0010:  castclass  0x01000015
-                              IL_0015:  stloc.2
-                              IL_0016:  ldarg.0
-                              IL_0017:  ldflda     0x04000001
-                              IL_001c:  ldloc.2
-                              IL_001d:  ldloc.1
-                              IL_001e:  call       0x2B000003
-                              IL_0023:  stloc.0
-                              IL_0024:  ldloc.0
-                              IL_0025:  ldloc.1
-                              IL_0026:  bne.un.s   IL_0007
-                              IL_0028:  ret
-                            }
-                            {
-                              // Code size       41 (0x29)
-                              .maxstack  3
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      0x04000001
-                              IL_0006:  stloc.0
-                              IL_0007:  ldloc.0
-                              IL_0008:  stloc.1
-                              IL_0009:  ldloc.1
-                              IL_000a:  ldarg.1
-                              IL_000b:  call       0x0A000014
-                              IL_0010:  castclass  0x01000015
-                              IL_0015:  stloc.2
-                              IL_0016:  ldarg.0
-                              IL_0017:  ldflda     0x04000001
-                              IL_001c:  ldloc.2
-                              IL_001d:  ldloc.1
-                              IL_001e:  call       0x2B000003
-                              IL_0023:  stloc.0
-                              IL_0024:  ldloc.0
-                              IL_0025:  ldloc.1
-                              IL_0026:  bne.un.s   IL_0007
-                              IL_0028:  ret
-                            }
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000015
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size       41 (0x29)
+                          .maxstack  3
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000001
+                          IL_0006:  stloc.0
+                          IL_0007:  ldloc.0
+                          IL_0008:  stloc.1
+                          IL_0009:  ldloc.1
+                          IL_000a:  ldarg.1
+                          IL_000b:  call       0x0A000012
+                          IL_0010:  castclass  0x01000015
+                          IL_0015:  stloc.2
+                          IL_0016:  ldarg.0
+                          IL_0017:  ldflda     0x04000001
+                          IL_001c:  ldloc.2
+                          IL_001d:  ldloc.1
+                          IL_001e:  call       0x2B000003
+                          IL_0023:  stloc.0
+                          IL_0024:  ldloc.0
+                          IL_0025:  ldloc.1
+                          IL_0026:  bne.un.s   IL_0007
+                          IL_0028:  ret
+                        }
+                        {
+                          // Code size       41 (0x29)
+                          .maxstack  3
+                          IL_0000:  ldarg.0
+                          IL_0001:  ldfld      0x04000001
+                          IL_0006:  stloc.0
+                          IL_0007:  ldloc.0
+                          IL_0008:  stloc.1
+                          IL_0009:  ldloc.1
+                          IL_000a:  ldarg.1
+                          IL_000b:  call       0x0A000014
+                          IL_0010:  castclass  0x01000015
+                          IL_0015:  stloc.2
+                          IL_0016:  ldarg.0
+                          IL_0017:  ldflda     0x04000001
+                          IL_001c:  ldloc.2
+                          IL_001d:  ldloc.1
+                          IL_001e:  call       0x2B000003
+                          IL_0023:  stloc.0
+                          IL_0024:  ldloc.0
+                          IL_0025:  ldloc.1
+                          IL_0026:  bne.un.s   IL_0007
+                          IL_0028:  ret
+                        }
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000015
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -7719,24 +7719,24 @@ class C
             using var _ = new EditAndContinueTest()
                 .AddBaseline(
                     source: $$"""
-                        using System;
+                    using System;
 
-                        class C
+                    class C
+                    {
+                        class D
                         {
-                            class D
-                            {
-                                void M()
-                                {
-                                    Console.WriteLine("1");
-                                }
-                            }
-
-                            void N()
+                            void M()
                             {
                                 Console.WriteLine("1");
                             }
                         }
-                        """ + MetadataUpdateOriginalTypeAttributeSource,
+
+                        void N()
+                        {
+                            Console.WriteLine("1");
+                        }
+                    }
+                    """ + MetadataUpdateOriginalTypeAttributeSource,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -7757,24 +7757,24 @@ class C
                 )
                 .AddGeneration(
                     source: """
-                        using System;
+                    using System;
 
-                        class C
+                    class C
+                    {
+                        class D
                         {
-                            class D
-                            {
-                                void M()
-                                {
-                                    Console.WriteLine("2");
-                                }
-                            }
-
-                            void N()
+                            void M()
                             {
                                 Console.WriteLine("2");
                             }
                         }
-                        """ + MetadataUpdateOriginalTypeAttributeSource,
+
+                        void N()
+                        {
+                            Console.WriteLine("2");
+                        }
+                    }
+                    """ + MetadataUpdateOriginalTypeAttributeSource,
                     edits: new[]
                     {
                         // Note: Nested type edit needs to be seen first to repro the bug. Real world scenario requires the nested
@@ -14989,13 +14989,13 @@ public interface IB
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20364,13 +20364,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20428,13 +20428,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        2 (0x2)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ret
-                            }
-                            """;
+                        {
+                          // Code size        2 (0x2)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20465,13 +20465,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20527,13 +20527,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20560,16 +20560,16 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        9 (0x9)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ldc.i4.1
-                              IL_0002:  call       0x0A000006
-                              IL_0007:  nop
-                              IL_0008:  ret
-                            }
-                            """;
+                        {
+                          // Code size        9 (0x9)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ldc.i4.1
+                          IL_0002:  call       0x0A000006
+                          IL_0007:  nop
+                          IL_0008:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20640,13 +20640,13 @@ class C
                         g.VerifyCustomAttributes();
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000006
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000006
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20722,13 +20722,13 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        2 (0x2)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ret
-                            }
-                            """;
+                        {
+                          // Code size        2 (0x2)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20796,17 +20796,17 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldnull
-                              IL_0002:  stloc.0
-                              IL_0003:  br.s       IL_0005
-                              IL_0005:  ldloc.0
-                              IL_0006:  ret
-                            }
-                            """;
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldnull
+                          IL_0002:  stloc.0
+                          IL_0003:  br.s       IL_0005
+                          IL_0005:  ldloc.0
+                          IL_0006:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20840,13 +20840,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef), });
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000005
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000005
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20886,20 +20886,20 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size       14 (0xe)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldc.i4.1
-                              IL_0002:  call       0x0A000006
-                              IL_0007:  nop
-                              IL_0008:  ldnull
-                              IL_0009:  stloc.0
-                              IL_000a:  br.s       IL_000c
-                              IL_000c:  ldloc.0
-                              IL_000d:  ret
-                            }
-                            """;
+                        {
+                          // Code size       14 (0xe)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldc.i4.1
+                          IL_0002:  call       0x0A000006
+                          IL_0007:  nop
+                          IL_0008:  ldnull
+                          IL_0009:  stloc.0
+                          IL_000a:  br.s       IL_000c
+                          IL_000c:  ldloc.0
+                          IL_000d:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -21239,15 +21239,15 @@ class C
                 .AddBaseline(
                     source: common
                         + """
-                            class C<T>
-                            {
-                                ref readonly S F<[A]S>([A]T a, ref readonly S b) where S : struct
-                                <N:0>{</N:0>
-                                    _ = new Action<int>(<N:1>x => Console.WriteLine(1)</N:1>);
-                                    return ref b;
-                                }
+                        class C<T>
+                        {
+                            ref readonly S F<[A]S>([A]T a, ref readonly S b) where S : struct
+                            <N:0>{</N:0>
+                                _ = new Action<int>(<N:1>x => Console.WriteLine(1)</N:1>);
+                                return ref b;
                             }
-                            """,
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifySynthesizedMembers();
@@ -21256,16 +21256,16 @@ class C
                 .AddGeneration(
                     source: common
                         + """
-                            class C<T>
-                            {
-                                ref readonly S F<[A]S>([A]T a, ref readonly S b) where S : struct
-                                <N:0>{</N:0>
-                                    _ = new Action<int>(<N:1>q => Console.WriteLine(1)</N:1>);
-                                    _ = new Action<S>(<N:2>s => Console.WriteLine(2)</N:2>);
-                                    return ref b;
-                                }
+                        class C<T>
+                        {
+                            ref readonly S F<[A]S>([A]T a, ref readonly S b) where S : struct
+                            <N:0>{</N:0>
+                                _ = new Action<int>(<N:1>q => Console.WriteLine(1)</N:1>);
+                                _ = new Action<S>(<N:2>s => Console.WriteLine(2)</N:2>);
+                                return ref b;
                             }
-                            """,
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(
@@ -21288,17 +21288,17 @@ class C
                 .AddGeneration(
                     source: common
                         + """
-                            class C<T>
-                            {
-                                ref readonly S F<[A]S>([A]T a, ref readonly S b) where S : struct
-                                <N:0>{</N:0>
-                                    _ = new Action<int>(<N:1>q => Console.WriteLine(1)</N:1>);
-                                    _ = new Action<S>(<N:2>s => Console.WriteLine(2)</N:2>);
-                                    _ = new Action<T>(<N:3>t => Console.WriteLine(3)</N:3>);
-                                    return ref b;
-                                }
+                        class C<T>
+                        {
+                            ref readonly S F<[A]S>([A]T a, ref readonly S b) where S : struct
+                            <N:0>{</N:0>
+                                _ = new Action<int>(<N:1>q => Console.WriteLine(1)</N:1>);
+                                _ = new Action<S>(<N:2>s => Console.WriteLine(2)</N:2>);
+                                _ = new Action<T>(<N:3>t => Console.WriteLine(3)</N:3>);
+                                return ref b;
                             }
-                            """,
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(
@@ -21321,10 +21321,10 @@ class C
                 .AddGeneration(
                     source: common
                         + """
-                            class C<T>
-                            {
-                            }
-                            """,
+                        class C<T>
+                        {
+                        }
+                        """,
                     edits: _ =>
                         new[]
                         {
@@ -21387,14 +21387,14 @@ class C
                     // Add deleted method back with another lambda
                     source: common
                         + """
-                            class C<T>
+                        class C<T>
+                        {
+                            void F<[A]S>([A]T a, S b) where S : struct
                             {
-                                void F<[A]S>([A]T a, S b) where S : struct
-                                {
-                                    _ = new Action<T>(r => Console.WriteLine(4));
-                                }
+                                _ = new Action<T>(r => Console.WriteLine(4));
                             }
-                            """,
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")), },
                     validator: g =>
                     {
@@ -21473,10 +21473,10 @@ class C
                     // Delete the method again.
                     source: common
                         + """
-                            class C<T>
-                            {
-                            }
-                            """,
+                        class C<T>
+                        {
+                        }
+                        """,
                     edits: _ =>
                         new[]
                         {
@@ -21557,15 +21557,15 @@ class C
                 .AddBaseline(
                     source: common
                         + """
-                            class C<T>
-                            {
-                                void F(T x, ref readonly int b)
-                                <N:0>{</N:0>
-                                    <N:1>ref readonly S L<[A]S>([A]T a, ref readonly S b) where S : struct => ref b;</N:1>
-                                    _ = L(x, b);
-                                }
+                        class C<T>
+                        {
+                            void F(T x, ref readonly int b)
+                            <N:0>{</N:0>
+                                <N:1>ref readonly S L<[A]S>([A]T a, ref readonly S b) where S : struct => ref b;</N:1>
+                                _ = L(x, b);
                             }
-                            """,
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifySynthesizedMembers();
@@ -21574,17 +21574,17 @@ class C
                 .AddGeneration(
                     source: common
                         + """
-                            class C<T>
-                            {
-                                void F(T x, ref readonly int b)
-                                <N:0>{</N:0>
-                                    <N:1>ref readonly S L<[A]S>([A]T a, ref readonly S b) where S : struct => ref b;</N:1>
-                                    <N:2>void M<[A]S>(T a) { Console.WriteLine(2); }</N:2>
-                                    _ = L(x, b);
-                                    M<T>(x);
-                                }
+                        class C<T>
+                        {
+                            void F(T x, ref readonly int b)
+                            <N:0>{</N:0>
+                                <N:1>ref readonly S L<[A]S>([A]T a, ref readonly S b) where S : struct => ref b;</N:1>
+                                <N:2>void M<[A]S>(T a) { Console.WriteLine(2); }</N:2>
+                                _ = L(x, b);
+                                M<T>(x);
                             }
-                            """,
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(
@@ -21603,10 +21603,10 @@ class C
                 .AddGeneration(
                     source: common
                         + """
-                            class C<T>
-                            {
-                            }
-                            """,
+                        class C<T>
+                        {
+                        }
+                        """,
                     edits: _ =>
                         new[]
                         {
@@ -21661,20 +21661,20 @@ class C
                     // Add deleted method back with another local function and lambda
                     source: common
                         + """
-                            class C<T>
+                        class C<T>
+                        {
+                            void F(T x, ref readonly int b)
                             {
-                                void F(T x, ref readonly int b)
+                                ref readonly T O(ref readonly T b)
                                 {
-                                    ref readonly T O(ref readonly T b)
-                                    {
-                                        T N(T z) => z;
-                                        _ = new Func<T>(() => N(x));
-                                        return ref b;
-                                    }
-                                    _ = O(x);
+                                    T N(T z) => z;
+                                    _ = new Func<T>(() => N(x));
+                                    return ref b;
                                 }
+                                _ = O(x);
                             }
-                            """,
+                        }
+                        """,
                     edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")), },
                     validator: g =>
                     {
@@ -21765,10 +21765,10 @@ class C
                     // Delete the method again.
                     source: common
                         + """
-                            class C<T>
-                            {
-                            }
-                            """,
+                        class C<T>
+                        {
+                        }
+                        """,
                     edits: _ =>
                         new[]
                         {
@@ -21969,22 +21969,22 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000006
-                              IL_0005:  throw
-                            }
-                            {
-                              // Code size       10 (0xa)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ldarga.s   V_1
-                              IL_0003:  call       0x0A000007
-                              IL_0008:  pop
-                              IL_0009:  ret
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000006
+                          IL_0005:  throw
+                        }
+                        {
+                          // Code size       10 (0xa)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ldarga.s   V_1
+                          IL_0003:  call       0x0A000007
+                          IL_0008:  pop
+                          IL_0009:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -22045,22 +22045,22 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size       10 (0xa)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ldarga.s   V_1
-                              IL_0003:  call       0x0A000008
-                              IL_0008:  pop
-                              IL_0009:  ret
-                            }
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000009
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size       10 (0xa)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ldarga.s   V_1
+                          IL_0003:  call       0x0A000008
+                          IL_0008:  pop
+                          IL_0009:  ret
+                        }
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000009
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -22145,23 +22145,23 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000006
-                              IL_0005:  throw
-                            }
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldarg.1
-                              IL_0002:  stloc.0
-                              IL_0003:  br.s       IL_0005
-                              IL_0005:  ldloc.0
-                              IL_0006:  ret
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000006
+                          IL_0005:  throw
+                        }
+                        {
+                          // Code size        7 (0x7)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldarg.1
+                          IL_0002:  stloc.0
+                          IL_0003:  br.s       IL_0005
+                          IL_0005:  ldloc.0
+                          IL_0006:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -22224,24 +22224,24 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size       13 (0xd)
-                              .maxstack  1
-                              IL_0000:  nop
-                              IL_0001:  ldarga.s   V_1
-                              IL_0003:  call       0x0A000007
-                              IL_0008:  stloc.0
-                              IL_0009:  br.s       IL_000b
-                              IL_000b:  ldloc.0
-                              IL_000c:  ret
-                            }
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000008
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size       13 (0xd)
+                          .maxstack  1
+                          IL_0000:  nop
+                          IL_0001:  ldarga.s   V_1
+                          IL_0003:  call       0x0A000007
+                          IL_0008:  stloc.0
+                          IL_0009:  br.s       IL_000b
+                          IL_000b:  ldloc.0
+                          IL_000c:  ret
+                        }
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000008
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -22321,22 +22321,22 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000006
-                              IL_0005:  throw
-                            }
-                            {
-                              // Code size       10 (0xa)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ldarga.s   V_1
-                              IL_0003:  call       0x0A000007
-                              IL_0008:  pop
-                              IL_0009:  ret
-                            }
-                            """;
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000006
+                          IL_0005:  throw
+                        }
+                        {
+                          // Code size       10 (0xa)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ldarga.s   V_1
+                          IL_0003:  call       0x0A000007
+                          IL_0008:  pop
+                          IL_0009:  ret
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -22391,22 +22391,22 @@ class C
                         );
 
                         var expectedIL = """
-                            {
-                              // Code size       10 (0xa)
-                              .maxstack  8
-                              IL_0000:  nop
-                              IL_0001:  ldarga.s   V_1
-                              IL_0003:  call       0x0A000008
-                              IL_0008:  pop
-                              IL_0009:  ret
-                            }
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  8
-                              IL_0000:  newobj     0x0A000009
-                              IL_0005:  throw
-                            }
-                            """;
+                        {
+                          // Code size       10 (0xa)
+                          .maxstack  8
+                          IL_0000:  nop
+                          IL_0001:  ldarga.s   V_1
+                          IL_0003:  call       0x0A000008
+                          IL_0008:  pop
+                          IL_0009:  ret
+                        }
+                        {
+                          // Code size        6 (0x6)
+                          .maxstack  8
+                          IL_0000:  newobj     0x0A000009
+                          IL_0005:  throw
+                        }
+                        """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -23623,11 +23623,11 @@ file class C
                 .AddBaseline(
                     source: commonSource
                         + """
-                            class C
-                            {
-                                static MyCollection<object> F() => [0, 1, 2];
-                            }
-                            """,
+                        class C
+                        {
+                            static MyCollection<object> F() => [0, 1, 2];
+                        }
+                        """,
                     validator: g =>
                     {
                         g.VerifyTypeDefNames(
@@ -23657,11 +23657,11 @@ file class C
                 .AddGeneration(
                     commonSource
                         + """
-                            class C
-                            {
-                                static MyCollection<object> F() => [0, 1, 2, 3];
-                            }
-                            """,
+                        class C
+                        {
+                            static MyCollection<object> F() => [0, 1, 2, 3];
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),
@@ -23773,11 +23773,11 @@ file class C
                 .AddGeneration(
                     commonSource
                         + """
-                            class C
-                            {
-                                static MyCollection<object> F() => [0, 10, 20, 30];
-                            }
-                            """,
+                        class C
+                        {
+                            static MyCollection<object> F() => [0, 10, 20, 30];
+                        }
+                        """,
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, symbolProvider: c => c.GetMember("C.F")),

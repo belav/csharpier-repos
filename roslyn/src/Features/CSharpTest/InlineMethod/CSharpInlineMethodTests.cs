@@ -3050,35 +3050,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
         public Task TestPreExpression(string op) =>
             TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
-                    public class TestClass
+                public class TestClass
+                {
+                    public void Caller()
                     {
-                        public void Caller()
-                        {
-                            int i = 1;
-                            Cal[||]lee(i);
-                        }
-
-                        private int Callee(int i)
-                        {
-                            return (op)i;
-                        }
+                        int i = 1;
+                        Cal[||]lee(i);
                     }
-                    """.Replace("(op)", op),
-                """
-                    public class TestClass
+
+                    private int Callee(int i)
                     {
-                        public void Caller()
-                        {
-                            int i = 1;
-                            (op)i;
-                        }
-                    ##
-                        private int Callee(int i)
-                        {
-                            return (op)i;
-                        }
-                    ##}
-                    """.Replace("(op)", op)
+                        return (op)i;
+                    }
+                }
+                """.Replace("(op)", op),
+                """
+                public class TestClass
+                {
+                    public void Caller()
+                    {
+                        int i = 1;
+                        (op)i;
+                    }
+                ##
+                    private int Callee(int i)
+                    {
+                        return (op)i;
+                    }
+                ##}
+                """.Replace("(op)", op)
             );
 
         [Fact]
@@ -3120,35 +3120,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
         public Task TestPostExpression(string op) =>
             TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
-                    public class TestClass
+                public class TestClass
+                {
+                    public void Caller()
                     {
-                        public void Caller()
-                        {
-                            int i = 1;
-                            Cal[||]lee(i);
-                        }
-
-                        private int Callee(int i)
-                        {
-                            return i(op);
-                        }
+                        int i = 1;
+                        Cal[||]lee(i);
                     }
-                    """.Replace("(op)", op),
-                """
-                    public class TestClass
+
+                    private int Callee(int i)
                     {
-                        public void Caller()
-                        {
-                            int i = 1;
-                            i(op);
-                        }
-                    ##
-                        private int Callee(int i)
-                        {
-                            return i(op);
-                        }
-                    ##}
-                    """.Replace("(op)", op)
+                        return i(op);
+                    }
+                }
+                """.Replace("(op)", op),
+                """
+                public class TestClass
+                {
+                    public void Caller()
+                    {
+                        int i = 1;
+                        i(op);
+                    }
+                ##
+                    private int Callee(int i)
+                    {
+                        return i(op);
+                    }
+                ##}
+                """.Replace("(op)", op)
             );
 
         [Fact]

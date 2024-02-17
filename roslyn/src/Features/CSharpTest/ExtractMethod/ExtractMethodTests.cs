@@ -1340,30 +1340,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|(int, int) x = (1, 2);|]
-                            System.Console.WriteLine(x.Item1);
-                        }
+                        [|(int, int) x = (1, 2);|]
+                        System.Console.WriteLine(x.Item1);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int, int) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.Item1);
-                        }
-
-                        private static (int, int) NewMethod()
-                        {
-                            return (1, 2);
-                        }
+                        (int, int) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.Item1);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int, int) NewMethod()
+                    {
+                        return (1, 2);
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1373,30 +1373,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|(int a, int b) x = (1, 2);|]
-                            System.Console.WriteLine(x.a);
-                        }
+                        [|(int a, int b) x = (1, 2);|]
+                        System.Console.WriteLine(x.a);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int a, int b) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.a);
-                        }
-
-                        private static (int a, int b) NewMethod()
-                        {
-                            return (1, 2);
-                        }
+                        (int a, int b) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.a);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int a, int b) NewMethod()
+                    {
+                        return (1, 2);
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1406,30 +1406,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|(int a, int) x = (1, 2);|]
-                            System.Console.WriteLine(x.a);
-                        }
+                        [|(int a, int) x = (1, 2);|]
+                        System.Console.WriteLine(x.a);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int a, int) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.a);
-                        }
-
-                        private static (int a, int) NewMethod()
-                        {
-                            return (1, 2);
-                        }
+                        (int a, int) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.a);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int a, int) NewMethod()
+                    {
+                        return (1, 2);
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1439,32 +1439,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            ValueTuple<int> y = ValueTuple.Create(1);
-                            [|y.Item1.ToString();|]
-                        }
+                        ValueTuple<int> y = ValueTuple.Create(1);
+                        [|y.Item1.ToString();|]
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    using System;
-                    class Program
+                using System;
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            ValueTuple<int> y = ValueTuple.Create(1);
-                            {|Rename:NewMethod|}(y);
-                        }
-
-                        private static void NewMethod(ValueTuple<int> y)
-                        {
-                            y.Item1.ToString();
-                        }
+                        ValueTuple<int> y = ValueTuple.Create(1);
+                        {|Rename:NewMethod|}(y);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static void NewMethod(ValueTuple<int> y)
+                    {
+                        y.Item1.ToString();
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1474,30 +1474,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|(int, int) x = (a: 1, b: 2);|]
-                            System.Console.WriteLine(x.Item1);
-                        }
+                        [|(int, int) x = (a: 1, b: 2);|]
+                        System.Console.WriteLine(x.Item1);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int, int) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.Item1);
-                        }
-
-                        private static (int, int) NewMethod()
-                        {
-                            return (a: 1, b: 2);
-                        }
+                        (int, int) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.Item1);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int, int) NewMethod()
+                    {
+                        return (a: 1, b: 2);
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1507,30 +1507,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|(int a, int b) x = (c: 1, d: 2);|]
-                            System.Console.WriteLine(x.a);
-                        }
+                        [|(int a, int b) x = (c: 1, d: 2);|]
+                        System.Console.WriteLine(x.a);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int a, int b) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.a);
-                        }
-
-                        private static (int a, int b) NewMethod()
-                        {
-                            return (c: 1, d: 2);
-                        }
+                        (int a, int b) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.a);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int a, int b) NewMethod()
+                    {
+                        return (c: 1, d: 2);
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1540,30 +1540,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|var x = (c: 1, d: 2);|]
-                            System.Console.WriteLine(x.c);
-                        }
+                        [|var x = (c: 1, d: 2);|]
+                        System.Console.WriteLine(x.c);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int c, int d) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.c);
-                        }
-
-                        private static (int c, int d) NewMethod()
-                        {
-                            return (c: 1, d: 2);
-                        }
+                        (int c, int d) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.c);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int c, int d) NewMethod()
+                    {
+                        return (c: 1, d: 2);
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1607,30 +1607,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
             // This is not the best refactoring, but this is an edge case
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            [|var x = new System.ValueTuple<int, int, int, int, int, int, int, (string a, string b)>(1, 2, 3, 4, 5, 6, 7, (a: "hello", b: "world"));|]
-                            System.Console.WriteLine(x.c);
-                        }
+                        [|var x = new System.ValueTuple<int, int, int, int, int, int, int, (string a, string b)>(1, 2, 3, 4, 5, 6, 7, (a: "hello", b: "world"));|]
+                        System.Console.WriteLine(x.c);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            (int, int, int, int, int, int, int, string, string) x = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x.c);
-                        }
-
-                        private static (int, int, int, int, int, int, int, string, string) NewMethod()
-                        {
-                            return new System.ValueTuple<int, int, int, int, int, int, int, (string a, string b)>(1, 2, 3, 4, 5, 6, 7, (a: "hello", b: "world"));
-                        }
+                        (int, int, int, int, int, int, int, string, string) x = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x.c);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int, int, int, int, int, int, int, string, string) NewMethod()
+                    {
+                        return new System.ValueTuple<int, int, int, int, int, int, int, (string a, string b)>(1, 2, 3, 4, 5, 6, 7, (a: "hello", b: "world"));
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1639,30 +1639,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var (x, y) = [|(1, 2)|];
-                            System.Console.WriteLine(x);
-                        }
+                        var (x, y) = [|(1, 2)|];
+                        System.Console.WriteLine(x);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var (x, y) = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(x);
-                        }
-
-                        private static (int, int) NewMethod()
-                        {
-                            return (1, 2);
-                        }
+                        var (x, y) = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(x);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static (int, int) NewMethod()
+                    {
+                        return (1, 2);
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -1671,32 +1671,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
         {
             await TestInRegularAndScript1Async(
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var (x, y) = (1, 2);
-                            var z = [|3;|]
-                            System.Console.WriteLine(z);
-                        }
+                        var (x, y) = (1, 2);
+                        var z = [|3;|]
+                        System.Console.WriteLine(z);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
                 """
-                    class Program
+                class Program
+                {
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            var (x, y) = (1, 2);
-                            int z = {|Rename:NewMethod|}();
-                            System.Console.WriteLine(z);
-                        }
-
-                        private static int NewMethod()
-                        {
-                            return 3;
-                        }
+                        var (x, y) = (1, 2);
+                        int z = {|Rename:NewMethod|}();
+                        System.Console.WriteLine(z);
                     }
-                    """ + TestResources.NetFX.ValueTuple.tuplelib_cs
+
+                    private static int NewMethod()
+                    {
+                        return 3;
+                    }
+                }
+                """ + TestResources.NetFX.ValueTuple.tuplelib_cs
             );
         }
 
@@ -2632,14 +2632,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
             await TestInRegularAndScript1Async(
                 TestSources.Index
                     + """
-                        class Program
+                    class Program
+                    {
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                System.Console.WriteLine([|^1|]);
-                            }
+                            System.Console.WriteLine([|^1|]);
                         }
-                        """,
+                    }
+                    """,
                 TestSources.Index
                     + """
 class Program
@@ -2665,14 +2665,14 @@ class Program
                 TestSources.Index
                     + TestSources.Range
                     + """
-                        class Program
+                    class Program
+                    {
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                System.Console.WriteLine([|..|]);
-                            }
+                            System.Console.WriteLine([|..|]);
                         }
-                        """,
+                    }
+                    """,
                 TestSources.Index
                     + TestSources.Range
                     + """
@@ -2699,14 +2699,14 @@ class Program
                 TestSources.Index
                     + TestSources.Range
                     + """
-                        class Program
+                    class Program
+                    {
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                System.Console.WriteLine([|..1|]);
-                            }
+                            System.Console.WriteLine([|..1|]);
                         }
-                        """,
+                    }
+                    """,
                 TestSources.Index
                     + TestSources.Range
                     + """
@@ -2733,14 +2733,14 @@ class Program
                 TestSources.Index
                     + TestSources.Range
                     + """
-                        class Program
+                    class Program
+                    {
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                System.Console.WriteLine([|1..|]);
-                            }
+                            System.Console.WriteLine([|1..|]);
                         }
-                        """,
+                    }
+                    """,
                 TestSources.Index
                     + TestSources.Range
                     + """
@@ -2767,14 +2767,14 @@ class Program
                 TestSources.Index
                     + TestSources.Range
                     + """
-                        class Program
+                    class Program
+                    {
+                        static void Main(string[] args)
                         {
-                            static void Main(string[] args)
-                            {
-                                System.Console.WriteLine([|1..2|]);
-                            }
+                            System.Console.WriteLine([|1..2|]);
                         }
-                        """,
+                    }
+                    """,
                 TestSources.Index
                     + TestSources.Range
                     + """

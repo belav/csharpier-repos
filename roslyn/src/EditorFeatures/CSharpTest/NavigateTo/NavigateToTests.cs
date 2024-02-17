@@ -2821,15 +2821,15 @@ class C
                 sourceGeneratedFiles: new[]
                 {
                     """
-                        public partial class C
-                        {
-                        }
-                        """,
+                    public partial class C
+                    {
+                    }
+                    """,
                     """
-                        public partial class C
-                        {
-                        }
-                        """,
+                    public partial class C
+                    {
+                    }
+                    """,
                 },
                 composition: DefaultComposition
             );

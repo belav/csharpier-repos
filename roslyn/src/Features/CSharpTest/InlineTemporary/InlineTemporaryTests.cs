@@ -452,18 +452,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """,
                 """
-                    class C
+                class C
+                {
+                    void F()
                     {
-                        void F()
-                        {
-                            int? y = true ?
-                    """
+                        int? y = true ?
+                """
                     + expectedSubstitution
                     + """
-                         : null;
-                            }
+                     : null;
                         }
-                        """,
+                    }
+                    """,
                 parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
             );
         }
